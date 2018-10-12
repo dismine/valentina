@@ -11,8 +11,8 @@ RESOURCES=`find . -regextype sed -regex ".*/measurements_p[0-9]\{1,2\}\.ts"`
 cd ../../scripts
 
 # Empty means unstable branch
-MEASUREMENTS_BRANCH='' # For example _05x
-VALENTINA_BRANCH=''    # for example 05x
+MEASUREMENTS_BRANCH='_06x' # For example _05x
+VALENTINA_BRANCH='06x'    # for example 05x
 
 NUMBER=( $RESOURCES )
 NUMBER=${#NUMBER[@]}
