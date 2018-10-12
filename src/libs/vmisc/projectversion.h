@@ -40,7 +40,7 @@ extern const QString APP_VERSION_STR;
 /*
    APP_VERSION is (major << 16) + (minor << 8) + patch.
 */
-#define APP_VERSION 0x000600
+#define APP_VERSION 0x000601
 
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
