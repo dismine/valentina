@@ -25,13 +25,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="214"/>
         <source>height_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>długość_pleców</translation>
+        <translation>wysokość_karku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="216"/>
         <source>Height: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Długość pleców</translation>
+        <translation>Wysokość: do karku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="217"/>
@@ -43,13 +43,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="221"/>
         <source>height_scapula</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>wysokość_do_łopatki</translation>
+        <translation>wysokość_łopatki</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="223"/>
         <source>Height: Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation>Wysokość: łopatka</translation>
+        <translation>Wysokość: do łopatki</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="224"/>
@@ -385,7 +385,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="355"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>dlugosc_plecow</translation>
+        <translation>długość_pleców</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="357"/>

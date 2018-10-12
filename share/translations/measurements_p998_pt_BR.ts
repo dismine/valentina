@@ -241,7 +241,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="298"/>
         <source>height_bustpoint</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>altura_ápice_do seio</translation>
+        <translation>altura_ápice_do_seio</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="300"/>
@@ -2946,7 +2946,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1484"/>
         <source>shoulder_tip_to_waist_b_1in_offset</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>ponta_ombro_para_cintura_c_deslocamento_1in</translation>
+        <translation>ombro_ponta_para_c_1_deslocamento</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1486"/>
@@ -4033,7 +4033,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1954"/>
         <source>waist_to_natural_waist_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>cintura_para_cintura_natural_c</translation>
+        <translation>cintura_para_cintura_natural_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1956"/>

@@ -834,7 +834,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="607"/>
         <source>neck_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>neck_circ</translation>
+        <translation>neck_size</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="609"/>
@@ -870,7 +870,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
         <source>bust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bust_circ</translation>
+        <translation>bust</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="624"/>
@@ -924,7 +924,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="644"/>
         <source>waist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>waist_circ</translation>
+        <translation>waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="646"/>
@@ -936,7 +936,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="652"/>
         <source>highhip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>highhip_circ</translation>
+        <translation>low_waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="654"/>
@@ -984,7 +984,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>hip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hip_circ</translation>
+        <translation>hips</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="662"/>
@@ -1056,13 +1056,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="689"/>
         <source>size</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>size</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="691"/>
         <source>Size</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Size</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="692"/>
@@ -1758,7 +1758,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="986"/>
         <source>neck_side_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>neck_side_to_waist_f</translation>
+        <translation>neck_s</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="988"/>
@@ -2010,7 +2010,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1085"/>
         <source>neck_back_to_waist_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>neck_back_to_waist_b</translation>
+        <translation>nape_to_waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1087"/>
@@ -2046,7 +2046,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1099"/>
         <source>neck_back_to_highbust_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>neck_back_to_highbust_b</translation>
+        <translation>armscye_depth</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1101"/>
@@ -2442,7 +2442,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1264"/>
         <source>shoulder_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>shoulder_length</translation>
+        <translation>shoulder</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1266"/>
@@ -2478,7 +2478,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1277"/>
         <source>across_chest_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>across_chest_f</translation>
+        <translation>chest</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1279"/>
@@ -2568,7 +2568,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1314"/>
         <source>across_back_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>across_back_b</translation>
+        <translation>back_width</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1316"/>
@@ -3108,7 +3108,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1560"/>
         <source>arm_shoulder_tip_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>arm_shoulder_tip_to_wrist_bent</translation>
+        <translation>sleeve_length</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1562"/>
@@ -3288,7 +3288,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1633"/>
         <source>arm_upper_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>arm_upper_circ</translation>
+        <translation>top_arm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1635"/>
@@ -3360,7 +3360,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1658"/>
         <source>arm_wrist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>arm_wrist_circ</translation>
+        <translation>wrist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1660"/>
@@ -3528,7 +3528,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1862"/>
         <source>rise_length_side_sitting</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>rise_length_side_sitting</translation>
+        <translation>body_rise</translation>
     </message>
     <message>
         <source>Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface</source>
@@ -3664,7 +3664,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1777"/>
         <source>leg_ankle_high_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>leg_ankle_high_circ</translation>
+        <translation>high_ankle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1779"/>
@@ -3682,7 +3682,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1785"/>
         <source>leg_ankle_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>leg_ankle_circ</translation>
+        <translation>ankle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1787"/>
@@ -4399,7 +4399,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2129"/>
         <source>dart_width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>dart_width_shoulder</translation>
+        <translation>dart</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2131"/>

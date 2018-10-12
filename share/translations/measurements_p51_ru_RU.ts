@@ -7,13 +7,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="207"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>рост</translation>
+        <translation>высота</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="209"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Рост</translation>
+        <translation>Рост: общий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
@@ -25,85 +25,85 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="214"/>
         <source>height_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Вшт</translation>
+        <translation>рост_шея_сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="216"/>
         <source>Height: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота точки основания шеи сзади</translation>
+        <translation>Рост: шея сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="217"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №10. Расстояние по вертикали от пола до точки основания шеи сзади.</translation>
+        <translation>Вертикальное расстояние от шеи сзади (шейный позвонок) до пола.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="221"/>
         <source>height_scapula</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Влоп</translation>
+        <translation>рост_лопаточной_точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="223"/>
         <source>Height: Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота лопаточной точки</translation>
+        <translation>Рост: лопаточной точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="224"/>
         <source>Vertical distance from the Scapula (Blade point) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №87. Расстояние по вертикали от пола до лопаточной точки.</translation>
+        <translation>Номер размерного признака в стандарте №87. Вертикальное расстояние от пола до лопаточной точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="228"/>
         <source>height_armpit</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Взу</translation>
+        <translation>рост_подмышки_сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="230"/>
         <source>Height: Armpit</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота заднего угла подмышечной впадины</translation>
+        <translation>Рост: заднего угла подмышечной впадины</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="231"/>
         <source>Vertical distance from the Armpit to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №11. Расстояние по вертикали от пола до заднего угла подмышечной впадины. Уровень заднего угла подмышечной впадины переносят отметкой на позвоночник с помощью антропометра.</translation>
+        <translation>Номер размерного признака в стандарте №11. Вертикальное расстояние от пола до заднего угла подмышечной впадины. Уровень заднего угла подмышечной впадины переносят отметкой на позвоночник с помощью антропометра.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="235"/>
         <source>height_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Влт</translation>
+        <translation>рост_талии_сбоку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="237"/>
         <source>Height: Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота линии талии</translation>
+        <translation>Рост: до линии талии</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №7. Расстояние по вертикали от пола до точки уровня талии. Уровень талии переносят отметками с помощью антропометра на позвоночник и середину передней поверхности тела.</translation>
+        <translation>Номер размерного признака в стандарте №7. Вертикальное расстояние от пола до точки уровня талии. Уровень талии переносят отметками с помощью антропометра на позвоночник и середину передней поверхности тела.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="242"/>
         <source>height_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_бедра</translation>
+        <translation>рост_бедра</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="244"/>
         <source>Height: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: бедро</translation>
+        <translation>Рост: до бедра</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="245"/>
@@ -115,31 +115,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="249"/>
         <source>height_gluteal_fold</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Впс</translation>
+        <translation>рост_до_ягодиц</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="251"/>
         <source>Height: Gluteal Fold</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота подъягодичной складки</translation>
+        <translation>Рост: до складки между ягодицами и бедром</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="252"/>
         <source>Vertical distance from the Gluteal fold, where the Gluteal muscle meets the top of the back thigh, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №12. Расстояние по вертикали от пола до середины подъягодичной складки.</translation>
+        <translation>Номер размерного признака в стандарте №12. Вертикальное расстояние от складки.между ягодицами и бедром до пола</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="256"/>
         <source>height_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Вк</translation>
+        <translation>рост_до_колена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="258"/>
         <source>Height: Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота коленной точки</translation>
+        <translation>Рост: коленной точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="259"/>
@@ -151,13 +151,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="263"/>
         <source>height_calf</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_икры</translation>
+        <translation>рост_икры</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="265"/>
         <source>Height: Calf</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: икры</translation>
+        <translation>рост: икры</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="266"/>
@@ -169,13 +169,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="270"/>
         <source>height_ankle_high</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_лодыжки_сверху</translation>
+        <translation>рост_лодыжки_сверху</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="272"/>
         <source>Height: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: щиколотка</translation>
+        <translation>Рост: щиколотка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="273"/>
@@ -187,13 +187,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="277"/>
         <source>height_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_лодыжки</translation>
+        <translation>рост_лодыжки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="279"/>
         <source>Height: Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: лодыжка</translation>
+        <translation>Рост: лодыжка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="280"/>
@@ -205,32 +205,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="284"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Вопт</translation>
+        <translation>рост_обхват_бедер</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="286"/>
         <source>Height: Highhip</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота остисто - подвздошной передней точки.</translation>
+        <translation>Рост: до  остисто - подвздошной передней точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="287"/>
         <source>Vertical distance from the Highhip level, where front abdomen is most prominent, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №8.
-Измеряют по вертикали расстояние от пола до остисто - подвздошной передней точки.</translation>
+        <translation>Вертикальное расстояние от пупка до пола. Измеряются  от пола до остисто-подвздошной передней точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="291"/>
         <source>height_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Дсп</translation>
+        <translation>рост_талии_спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="293"/>
         <source>Height: Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Расстояние от линии талии до пола спереди</translation>
+        <translation>Рост: Расстояние от линии талии до пола спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="294"/>
@@ -242,49 +241,49 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="298"/>
         <source>height_bustpoint</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Вст</translation>
+        <translation>рост_бюста</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="300"/>
         <source>Height: Bustpoint</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота сосковой точки</translation>
+        <translation>Рос: до середины бюста</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="301"/>
         <source>Vertical distance from Bustpoint to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №6. Расстояние по вертикали от пола до сосковой точки.</translation>
+        <translation>Номер размерного признака в стандарте №6. Вертикальное расстояние от пола до сосковой точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="305"/>
         <source>height_shoulder_tip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Впт</translation>
+        <translation>рост_до_плеча</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="307"/>
         <source>Height: Shoulder Tip</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота плечевой точки</translation>
+        <translation>Рост: плечевой точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="308"/>
         <source>Vertical distance from the Shoulder Tip to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №5. Расстояние по вертикали от пола до плечевой точки.</translation>
+        <translation>Номер размерного признака в стандарте №5. Вертикальное расстояние от пола до плечевой точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="312"/>
         <source>height_neck_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_шеи_спереди</translation>
+        <translation>рост_шеи_спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="314"/>
         <source>Height: Neck Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота точки основания шеи спереди до пола</translation>
+        <translation>Рост: точки основания шеи спереди до пола</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
@@ -296,13 +295,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="319"/>
         <source>height_neck_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Втош</translation>
+        <translation>рост_шеи_сбоку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="321"/>
         <source>Height: Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота точки основания шеи сбоку</translation>
+        <translation>Рост: точки основания шеи сбоку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="322"/>
@@ -314,67 +313,67 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="326"/>
         <source>height_neck_back_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Дшк</translation>
+        <translation>рост_шея_к_колену</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="328"/>
         <source>Height: Neck Back to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Расстояние от шейной точки до колена</translation>
+        <translation>Рост: расстояние от шейной точки до колена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="329"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Определяют как разность размерных признаков №9 и №10.</translation>
+        <translation>Вертикальное расстояние от шеи (шейный позвонок) до . Определяют как разность размерных признаков №9 и №10.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="333"/>
         <source>height_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_талии_сбоку_до_колена</translation>
+        <translation>рост_талии_сбоку_до_колена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="335"/>
         <source>Height: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: Талия Сбоку до Колена</translation>
+        <translation>Рост: Талия Сбоку до Колена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="336"/>
         <source>Vertical distance from the Waist Side to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Расстояние по вертикали от талии до сгиба колена на задней стороне ноги.</translation>
+        <translation>Вертикальное расстояние от талии до сгиба колена на задней стороне ноги.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="341"/>
         <source>height_waist_side_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Высота_боковая_талия_бедра</translation>
+        <translation>рост_боковая_талия_бедра</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="343"/>
         <source>Height: Waist Side to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: боковая от талии до бедер </translation>
+        <translation>Рост: боковое расстояние от талии до бедер </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="344"/>
         <source>Vertical distance from the Waist Side to the Hip level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Расстояние от линии талии до віступающей точки ягодицы</translation>
+        <translation>Вертикальное расстояние  от линии талии до выступающей точки ягодицы</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="348"/>
         <source>height_knee_to_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_от_колена_до_лодыжки</translation>
+        <translation>рост_от_колена_до_лодыжки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="350"/>
         <source>Height: Knee to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота от колена до лодыжки</translation>
+        <translation>Рост: от колена до лодыжки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="351"/>
@@ -386,19 +385,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="355"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>расстояние_от_шеи_сзади_к_талии_сбоку</translation>
+        <translation>рост_шея_к_талии_сбоку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="357"/>
         <source>Height: Neck Back to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Расстояние по вертикали от пола до точки основания шеи сзади.</translation>
+        <translation>Рост: Расстояние по вертикали от пола до точки основания шеи сзади.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="358"/>
         <source>Vertical distance from Neck Back to Waist Side. (&apos;Height: Neck Back&apos; - &apos;Height: Waist Side&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Расстояние от шеи до талии (&quot;А02.высота_шеи_сзади&quot; - &quot;А05.высота_талии_сбоку&quot;)</translation>
+        <translation>Вертикальное расстояние от шеи до талии (&quot;А02.рост_шеи_сзади&quot; - &quot;А05.рост_талии_сбоку&quot;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="381"/>
@@ -494,13 +493,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
         <source>indent_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Пкор</translation>
+        <translation>положение_корпуса</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="430"/>
         <source>Indent: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Положение корпуса</translation>
+        <translation>Отступ: Положение корпуса</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="431"/>
@@ -512,13 +511,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="435"/>
         <source>indent_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>прогиб_талии_сзади</translation>
+        <translation>отступ_талии_сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="437"/>
         <source>Indent: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>прогиб_талии_сзади</translation>
+        <translation>Отступ: прогиб талии сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="438"/>
@@ -530,13 +529,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="442"/>
         <source>indent_ankle_high</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>отступ_лодыжки</translation>
+        <translation>отступ_лодыжки_наибольший</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="444"/>
         <source>Indent: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation>Отступ: Лодыжки</translation>
+        <translation>Отступ: Лодыжки наибольший</translation>
     </message>
     <message>
         <source>Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
@@ -547,7 +546,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="461"/>
         <source>hand_palm_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>длина_ладони</translation>
+        <translation>рука_длина_ладони</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="463"/>
@@ -571,7 +570,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="470"/>
         <source>Hand: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>Вертикальный диаметр руки</translation>
+        <translation>Рука: Вертикальный диаметр </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="471"/>
@@ -619,13 +618,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="487"/>
         <source>hand_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Окис</translation>
+        <translation>рука_обхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="489"/>
         <source>Hand: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват кисти</translation>
+        <translation>Рука: обхват кисти</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="490"/>
@@ -637,13 +636,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="506"/>
         <source>foot_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>foot_width</translation>
+        <translation>ширина_ноги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="508"/>
         <source>Foot: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>Нога: Ширина</translation>
+        <translation>Ступня: Ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="509"/>
@@ -655,13 +654,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="512"/>
         <source>foot_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>foot_length</translation>
+        <translation>нога_длина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="514"/>
         <source>Foot: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>Нога: Длина</translation>
+        <translation>Ступня: Длина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="515"/>
@@ -673,13 +672,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="519"/>
         <source>foot_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>обхват_ступни</translation>
+        <translation>нога_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="521"/>
         <source>Foot: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Нога: обхват ступни</translation>
+        <translation>Ступня: обхват ступни</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="522"/>
@@ -691,13 +690,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="526"/>
         <source>foot_instep_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Ос</translation>
+        <translation>нога_обхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="528"/>
         <source>Foot: Instep circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват подъема стопы</translation>
+        <translation>Нога: Обхват подъема стопы</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="529"/>
@@ -709,13 +708,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="545"/>
         <source>head_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Огол</translation>
+        <translation>голова_обхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="547"/>
         <source>Head: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват головы</translation>
+        <translation>Голова: Обхват </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="548"/>
@@ -727,13 +726,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="552"/>
         <source>head_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Вгол</translation>
+        <translation>голова_высота</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="554"/>
         <source>Head: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота головы</translation>
+        <translation>Голова: высота</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="555"/>
@@ -781,7 +780,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="573"/>
         <source>head_crown_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>от_макушки_до_шеи_сзади</translation>
+        <translation>голова_макушка_до_шеи_сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="575"/>
@@ -793,37 +792,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="576"/>
         <source>Vertical distance from Crown to Neck Back. (&apos;Height: Total&apos; - &apos;Height: Neck Back&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Вертикальное расстояние от макушки до шеи сзади. (&apos;Высота: Общая&apos; - &apos;Высота: Шея Сзади&apos;).</translation>
+        <translation>Вертикальное расстояние от макушки до шеи сзади. (&apos;Рост: Общий&apos; - &apos;Рост: Шея Сзади&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="580"/>
         <source>head_chin_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Дшош</translation>
+        <translation>голова_до_основания_шеи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="582"/>
         <source>Head: Chin to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
+        <translation>Голова: Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="583"/>
         <source>Vertical distance from Chin to Neck Back. (&apos;Height&apos; - &apos;Height: Neck Back&apos; - &apos;Head: Length&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation>Вертикальное расстояние от подбородка до точки основания шеи сзади по линии измерения обхвата шеи. (&apos;Высота&apos; - &apos;Высота: Шея Сзади&apos; - &apos;Голова: Длина&apos;)</translation>
+        <translation>Вертикальное расстояние от подбородка до точки основания шеи сзади по линии измерения обхвата шеи. (&apos;Рост&apos; - &apos;Рост: Шея Сзади&apos; - &apos;Голова: Длина&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="600"/>
         <source>neck_mid_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Сш1</translation>
+        <translation>шея_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="602"/>
         <source>Neck circumference, midsection</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват шеи для сорочек</translation>
+        <translation>Шея: Полуобхват шеи для сорочек</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="603"/>
@@ -835,13 +834,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="607"/>
         <source>neck_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Ош</translation>
+        <translation>шея_обхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="609"/>
         <source>Neck circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват шеи</translation>
+        <translation>Шея: Обхват шеи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="610"/>
@@ -853,13 +852,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="615"/>
         <source>highbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>ОгI</translation>
+        <translation>бюст_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="617"/>
         <source>Highbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват груди первый</translation>
+        <translation>Бюст: Обхват груди первый</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="618"/>
@@ -871,13 +870,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
         <source>bust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>ОгII</translation>
+        <translation>бюст_обхват_II</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="624"/>
         <source>Bust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват груди второй</translation>
+        <translation>Бюст: Обхват груди второй</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="625"/>
@@ -889,13 +888,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="629"/>
         <source>lowbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>ОгIII</translation>
+        <translation>бюст_обхват_III</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="631"/>
         <source>Lowbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват груди третий</translation>
+        <translation>Бюст: Обхват груди третий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="632"/>
@@ -913,7 +912,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="638"/>
         <source>Rib circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Окружность рёбер</translation>
+        <translation>Ребра: Окружность рёбер</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="639"/>
@@ -955,19 +954,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="362"/>
         <source>height_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>высота_талии_сзади</translation>
+        <translation>рост_талии_сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="364"/>
         <source>Height: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота: Талия Сзади</translation>
+        <translation>Рост: Талия Сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Вертикальное расстояние от талии сзади до пола. (&apos;Высота: Талия Спереди&apos;&apos; - &apos;Нога: от промежности до пола&apos;&apos;).</translation>
+        <translation>Вертикальное расстояние от талии сзади до пола. (&apos;Рост: Талия Спереди&apos;&apos; - &apos;Нога: от промежности до пола&apos;&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>
@@ -1003,13 +1002,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="668"/>
         <source>neck_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Сш</translation>
+        <translation>шея_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="670"/>
         <source>Neck arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват шеи</translation>
+        <translation>Шея: Полуобхват шеи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="671"/>
@@ -1021,13 +1020,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="675"/>
         <source>highbust_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>СгI</translation>
+        <translation>бюст_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="677"/>
         <source>Highbust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват груди первый</translation>
+        <translation>Бюст: Полуобхват груди первый</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="678"/>
@@ -1040,13 +1039,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="682"/>
         <source>bust_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>СгII</translation>
+        <translation>бюст_полуобхват_II</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="684"/>
         <source>Bust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват груди второй</translation>
+        <translation>Бюст: Полуобхват груди второй</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="685"/>
@@ -1076,13 +1075,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="696"/>
         <source>lowbust_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>СгIII</translation>
+        <translation>бюст_полуобхват_III</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="698"/>
         <source>Lowbust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват груди третий</translation>
+        <translation>Бюст: Полуобхват груди третий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="699"/>
@@ -1094,13 +1093,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="703"/>
         <source>rib_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>дуга_ребра_спереди</translation>
+        <translation>ширина_ребер_спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="705"/>
         <source>Rib arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Дуга ребра, спереди</translation>
+        <translation>Ребро: Дуга ребра, спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="706"/>
@@ -1112,13 +1111,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="710"/>
         <source>waist_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Ст</translation>
+        <translation>талия_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="712"/>
         <source>Waist arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват талии</translation>
+        <translation>Талия: Полуобхват талии</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="713"/>
@@ -1130,13 +1129,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="717"/>
         <source>highhip_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>дуга_бедер_спереди</translation>
+        <translation>шир1_бед_пер</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="719"/>
         <source>Highhip arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Дуга верхней части бёдер, спереди</translation>
+        <translation>Бедро: Дуга верхней части бёдер, спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="720"/>
@@ -1148,55 +1147,57 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="724"/>
         <source>hip_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>СбI</translation>
+        <translation>бедро_полуобхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="726"/>
         <source>Hip arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Полуобхват бедер без учета выступания живота</translation>
+        <translation>Бедро: Полуобхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="727"/>
         <source>From Hip Side to Hip Side across Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Ленту накладывают горизонтально вокруг туловища на уровне ягодичных точек и замыкают на правой стороне туловища. Мерка записывается в половинном размере.</translation>
+        <translation>Размерный признак №20. Ленту накладывают на ягодичные точки. Лента должна проходить горизонтально вокруг туловища и замыкаться на правой стороне туловища. Мерка записывается в половинном размере.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="731"/>
         <source>neck_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>шея_дуга_половина_спереди</translation>
+        <translation>пол_шир_шеи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="733"/>
         <source>Neck arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Дуга передней половины шеи</translation>
+        <translation>Шея: Дуга передней половины шеи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="734"/>
         <source>Half of &apos;Neck arc, front&apos;. (&apos;Neck arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Половина от  &apos;Дуга шеи, спереди&apos;. (&apos;Дуга шеи, спереди&apos; / 2).</translation>
+        <translation>Половина от  &apos;Ширины шеи, спереди&apos;. (&apos;Ширина шеи, спереди&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="738"/>
         <source>highbust_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Шг1</translation>
+        <translation>бюст_полуобхват_II_половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="740"/>
         <source>Highbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота груди по дуге, половина, спереди</translation>
+        <translation>Бюст: Высота груди по дуге, половина, спереди
+(четверть_обхвата_груди_первого_спереди)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="741"/>
         <source>Half of &apos;Highbust arc, front&apos;. From Highbust Front to Highbust Side. (&apos;Highbust arc,  front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Половина от  &apos;Высота груди, спереди&apos;. От Высоты груди спереди до бока.  (&apos;Высота груди дуга, спереди&apos; / 2).</translation>
+        <translation>Половина от  &apos;Ширина груди первая, спереди&apos;. От середины груди спереди до бока.  (&apos;Ширина груди первая, спереди&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="746"/>
@@ -1208,25 +1209,25 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="748"/>
         <source>Bust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Дуга груди, спереди, половина</translation>
+        <translation>Бюст: Дуга груди, спереди, половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="749"/>
         <source>Half of &apos;Bust arc, front&apos;. (&apos;Bust arc, front&apos;/2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Половина от &apos;Дуга груди, спереди&apos;. (&apos;Дуга груди, спереди&apos;/2).</translation>
+        <translation>Половина от &apos;Ширины груди второй, спереди&apos;. (&apos;Ширина груди вторая, спереди&apos;/2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="753"/>
         <source>lowbust_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Шг3_пол</translation>
+        <translation>бюст_ширина_III_половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="755"/>
         <source>Lowbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Ширина груди третья, половина</translation>
+        <translation>Бюст: Ширина груди третья, половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="756"/>
@@ -1238,13 +1239,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="760"/>
         <source>rib_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>ребро_полуобхват_половина</translation>
+        <translation>ребра_полуобхват_половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="762"/>
         <source>Rib arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Ширина ребер спереди, половина</translation>
+        <translation>Ребра: Ширина ребер спереди, половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="763"/>
@@ -1262,7 +1263,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="769"/>
         <source>Waist arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Ширина талии, перед, половина</translation>
+        <translation>Талия: Ширина талии, перед, половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="770"/>
@@ -1274,13 +1275,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="774"/>
         <source>highhip_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>бедро_щирина_половина</translation>
+        <translation>бедро_ширина_половина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="776"/>
         <source>Highhip arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Ширина бедер первая, спереди</translation>
+        <translation>Бедро: Ширина бедер первая, спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="777"/>
@@ -1298,7 +1299,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="783"/>
         <source>Hip arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Половинный передний полуобхват бедер второй</translation>
+        <translation>Бедра: Половинный передний полуобхват бедер второй</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="784"/>
@@ -1310,13 +1311,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="788"/>
         <source>neck_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>полуобхват_шеи_задний</translation>
+        <translation>шея_полуобхват_задний</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="790"/>
         <source>Neck arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Задний полуобхват шеи </translation>
+        <translation>Шея: Задний полуобхват шеи </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="791"/>
@@ -1394,7 +1395,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="822"/>
         <source>From Rib Side to Rib side across back. (&apos;Rib circumference&apos; - &apos;Rib arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>От одной стороны ребер до другой, обхватывая лентойсзади. (&apos;Обхват ребер&apos; - &apos;Ширина ребер спереди&apos;)</translation>
+        <translation>От одной стороны ребер до другой, обхватывая лентой сзади. (&apos;Обхват ребер&apos; - &apos;Ширина ребер спереди&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="827"/>
@@ -1610,7 +1611,8 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="912"/>
         <source>Curve stiff paper around front of abdomen, tape at sides. Measure from Hip Side to Hip Side over paper across front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Ленту накладывают на ягодичные точки. Лента должна проходить горизонтально вокруг туловища, спереди - по гибкой пластине, приложенной вертикально к животу для учета выступа живота, и замыкаться на правой стороне туловища. Мерка записывается в половинном размере.</translation>
+        <translation>Ленту накладывают на ягодичные точки. Лента должна проходить горизонтально вокруг туловища, спереди - по гибкой пластине, приложенной вертикально к животу для учета выступа живота, и замыкаться на правой стороне туловища. Мерка записывается в половинном размере.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="917"/>
@@ -2558,7 +2560,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1309"/>
         <source>Shoulder Tip to Shoulder Tip, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Дуга плечевого пояса сзади</translation>
+        <translation>Ширина плечевого пояса сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1310"/>
@@ -3542,7 +3544,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2148"/>
         <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation>Эта информация использована из шаблона в таких системах раскроя, как Уилфред Алдрич &quot;Метод конструирования и моделирования&quot;</translation>
+        <translation>Эта информация взята для выкроек в таких системах раскроя, как Уилфред Алдрич &quot;Метод конструирования и моделирования&quot;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1736"/>
@@ -3692,13 +3694,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1792"/>
         <source>leg_knee_circ_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Окс</translation>
+        <translation>ноги_колено_обхват</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1794"/>
         <source>Leg: Knee circumference, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Обхват колена в согнутом положении ноги</translation>
+        <translation>Ноги: Обхват колена в согнутом положении ноги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1795"/>
@@ -3764,13 +3766,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1819"/>
         <source>leg_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Дтк</translation>
+        <translation>ноги_от_талии_к_колену</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1821"/>
         <source>Leg: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Расстояние от линии талии до колена</translation>
+        <translation>Ноги: Расстояние от линии талии до колена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
@@ -4363,7 +4365,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
         <source>armscye_arc</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Дп</translation>
+        <translation>дуга_через_плечо</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2112"/>
@@ -4406,7 +4408,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2139"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation>Ширина вытачки: Грудь (бюст)</translation>
+        <translation>Ширина вытачки: Грудь</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2145"/>

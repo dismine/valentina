@@ -19,7 +19,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
         <source>Vertical distance from crown of head to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od najwyższego punktu głowy do podłogi.</translation>
+        <translation>Pionowa odległość od najwyższego punktu głowy do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="214"/>
@@ -73,7 +73,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="231"/>
         <source>Vertical distance from the Armpit to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od pachy do podłogi.</translation>
+        <translation>Pionowa odległość od pachy do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="235"/>
@@ -91,7 +91,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od linii talii do podłogi.</translation>
+        <translation>Pionowa odległość od linii talii do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="242"/>
@@ -109,7 +109,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="245"/>
         <source>Vertical distance from the Hip level to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od linii bioder do podłogi.</translation>
+        <translation>Pionowa odległość od linii bioder do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="249"/>

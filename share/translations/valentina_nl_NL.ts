@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Author:</source>
-        <translation type="vanished">Auteursnaam:</translation>
+        <translation type="vanished">Auteur:</translation>
     </message>
     <message>
         <source>Book:</source>
@@ -318,14 +318,14 @@
     <name>DelTool</name>
     <message>
         <source>delete tool</source>
-        <translation>verwijder gereedschap</translation>
+        <translation>Verwijder hulpmiddel</translation>
     </message>
 </context>
 <context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation type="vanished">verwijder gereedschap</translation>
+        <translation type="vanished">Verwijder hulpmiddel</translation>
     </message>
 </context>
 <context>
@@ -381,7 +381,7 @@
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Website: %1</translation>
+        <translation>Web site: %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -499,7 +499,7 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -543,11 +543,11 @@
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -570,7 +570,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -594,19 +594,19 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecteer middelste punt van boog</translation>
+        <translation type="vanished">Selecteer het middelste punt van boog</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Angles equal</source>
-        <translation type="vanished">Gelijke zijden</translation>
+        <translation type="vanished">Gelijke hoeken</translation>
     </message>
     <message>
         <source>Color</source>
@@ -618,11 +618,11 @@
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation>Verander eerste hoek</translation>
+        <translation>Bewerk eerste hoek</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation>Verander tweede hoek</translation>
+        <translation>Bewerk tweede hoek</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -693,7 +693,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -717,7 +717,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecteer middelste punt van boog</translation>
+        <translation type="vanished">Selecteer het middelste punt van boog</translation>
     </message>
     <message>
         <source>Color</source>
@@ -737,11 +737,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -773,7 +773,7 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Gecentreerde punt:</translation>
+        <translation>Middelste punt:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -860,7 +860,7 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -884,7 +884,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -1029,7 +1029,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -1101,7 +1101,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1113,7 +1113,7 @@
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -1128,7 +1128,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1152,7 +1152,7 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1180,7 +1180,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1203,7 +1203,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1227,7 +1227,7 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1255,7 +1255,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1278,7 +1278,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1302,7 +1302,7 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1330,7 +1330,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1376,7 +1376,7 @@
     </message>
     <message>
         <source>Bias Y</source>
-        <translation type="vanished">Richting Y</translation>
+        <translation type="vanished">Inslag Y</translation>
     </message>
     <message>
         <source>Options</source>
@@ -1388,7 +1388,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="vanished">Naadtoeslag</translation>
+        <translation type="vanished">Naad toeslag</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1400,7 +1400,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Verwijderen</translation>
+        <translation type="vanished">Verwijder</translation>
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
@@ -1408,7 +1408,7 @@
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="vanished">Omgekeerde</translation>
+        <translation type="vanished">Keer om</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -1440,19 +1440,19 @@
     </message>
     <message>
         <source>First point can not equal the last point!</source>
-        <translation type="vanished">Eerste punt is niet gelijk aan het laatste punt!</translation>
+        <translation type="vanished">Eerste punt kan niet gelijk zijn aan het laatste punt!</translation>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="vanished">Je hebt dubble punten!</translation>
+        <translation type="vanished">Je hebt punten dubbel!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="vanished">Je moet punten kiezen in de &apos;met de klok mee&apos; richting!</translation>
+        <translation type="vanished">Je moet de punten met de klok mee kiezen!</translation>
     </message>
     <message>
         <source>Bias X:</source>
-        <translation type="vanished">Richting X:</translation>
+        <translation type="vanished">Inslag X:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
@@ -1468,7 +1468,7 @@
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="vanished">Eerste punt is niet gelijk aan het laatste punt!</translation>
+        <translation type="vanished">Het eerste punt mag niet gelijk zijn aan het laatste punt!</translation>
     </message>
     <message>
         <source>General</source>
@@ -1476,7 +1476,7 @@
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="vanished">Patroondeel data</translation>
+        <translation type="vanished">Gegevens van patroondeel</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -1516,7 +1516,7 @@
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Zichtbare patroon label</translation>
+        <translation type="vanished">Patroonlabel zichtbaar</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1540,11 +1540,11 @@
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="vanished">Knip op vouw</translation>
+        <translation type="vanished">Knip op de vouw</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="vanished">Knip %1 van %2%3</translation>
+        <translation type="vanished">Knip %1 of %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
@@ -1604,7 +1604,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1923,7 +1923,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -2015,7 +2015,7 @@
     </message>
     <message>
         <source>Formula:</source>
-        <translation>Formule:</translation>
+        <translation>`Formule:</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2070,7 +2070,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
@@ -2094,11 +2094,11 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Middelpunt:</translation>
+        <translation>Middelste punt:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation>Kies middelpunt van boog</translation>
+        <translation>Selecteer het middelste punt van de boog</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2106,7 +2106,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
@@ -2153,7 +2153,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -2197,7 +2197,7 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -2229,7 +2229,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2241,7 +2241,7 @@
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -2364,7 +2364,7 @@
     </message>
     <message>
         <source>measurement</source>
-        <translation>Maten</translation>
+        <translation>maten</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2411,7 +2411,7 @@
     </message>
     <message>
         <source>Axis type:</source>
-        <translation>As-type:</translation>
+        <translation>As punt:</translation>
     </message>
     <message>
         <source>Select origin point</source>
@@ -2423,7 +2423,7 @@
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Vertikale as</translation>
+        <translation>Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
@@ -2442,7 +2442,7 @@
     </message>
     <message>
         <source>First line point:</source>
-        <translation>Eerste punt van de lijn:</translation>
+        <translation>Eerste lijnpunt:</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -2450,7 +2450,7 @@
     </message>
     <message>
         <source>Second line point:</source>
-        <translation>Tweede punt van de lijn:</translation>
+        <translation>Tweede lijnpunt:</translation>
     </message>
     <message>
         <source>Select first line point</source>
@@ -2548,7 +2548,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2572,7 +2572,7 @@
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -2750,7 +2750,7 @@
     </message>
     <message>
         <source>The calculated value</source>
-        <translation>Berekende waarde</translation>
+        <translation>De berekende waarde</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -2834,11 +2834,11 @@
     </message>
     <message>
         <source>Formula:</source>
-        <translation>Formule:</translation>
+        <translation>`Formule:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2846,7 +2846,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -2971,7 +2971,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="vanished">Verscheidene werkstukken zijn niet geordend en geen daarvan past op een papierformaat</translation>
+        <translation type="vanished">Verscheidene werkstukken zijn niet geordend en geen enkele past op papier</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -3050,7 +3050,7 @@
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimiters</translation>
+        <translation>Millimeters</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3094,23 +3094,23 @@
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="vanished">Papierrol van 24 inches = 60,96 cm</translation>
+        <translation type="vanished">Roll 24Inch</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="vanished">Papierrol van 30 inches = 76,20 cm</translation>
+        <translation type="vanished">Roll 30inch</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="vanished">Papierrol 36 inches = 91,44 cm</translation>
+        <translation type="vanished">Roll 36inch</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="vanished">Papierrol 42 inches = 106,68 cm</translation>
+        <translation type="vanished">Roll 42inch</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="vanished">Papierrol 44 inches = 111,76 cm</translation>
+        <translation type="vanished">Roll 44inch</translation>
     </message>
     <message>
         <source>
@@ -3126,7 +3126,7 @@
     </message>
     <message>
         <source>Paper format</source>
-        <translation>Papier Formaat</translation>
+        <translation>Papier formaat</translation>
     </message>
     <message>
         <source>Fields</source>
@@ -3142,11 +3142,11 @@
     </message>
     <message>
         <source>Top:</source>
-        <translation>Top:</translation>
+        <translation>Bovenaan:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation>Bodem:</translation>
+        <translation>Onderaan:</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
@@ -3296,7 +3296,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -3343,7 +3343,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3370,7 +3370,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -3414,7 +3414,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>As punt</translation>
+        <translation>As Punt</translation>
     </message>
     <message>
         <source>Second point of line</source>
@@ -3462,7 +3462,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3474,7 +3474,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -3621,7 +3621,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3633,11 +3633,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Bewerk de hoek</translation>
+        <translation>Verander de hoek</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Bewerk de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3766,7 +3766,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3814,7 +3814,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3862,7 +3862,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -4306,7 +4306,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Naadtoeslag</translation>
+        <translation>Naad toeslag</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -4326,7 +4326,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -4562,15 +4562,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
+        <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Toon de tweede pasmarkering op de naadlijn</translation>
+        <translation>Toon de tweede pasmarkering op de naadlijn</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Uitgezonderd</translation>
+        <translation>Uitgezonderd</translation>
     </message>
 </context>
 <context>
@@ -4585,7 +4585,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Piece:</source>
-        <translation>Stuk:</translation>
+        <translation>Onderdeel:</translation>
     </message>
     <message>
         <source>Pin</source>
@@ -4735,7 +4735,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecteer middelste punt van boog</translation>
+        <translation type="vanished">Selecteer het middelste punt van boog</translation>
     </message>
     <message>
         <source>Take</source>
@@ -4751,7 +4751,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -4782,7 +4782,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4794,7 +4794,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecteer middelste punt van boog</translation>
+        <translation type="vanished">Selecteer het middelste punt van boog</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -4814,11 +4814,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -4842,7 +4842,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -4873,7 +4873,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4885,7 +4885,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Selecteer middelste punt van boog</translation>
+        <translation>Selecteer het middelste punt van boog</translation>
     </message>
     <message>
         <source>Top of the line</source>
@@ -4929,7 +4929,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -4984,7 +4984,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -5015,7 +5015,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="vanished">Selecteer boog</translation>
+        <translation type="vanished">Geselecteerde boog</translation>
     </message>
     <message>
         <source>Second arc</source>
@@ -5035,7 +5035,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -5070,7 +5070,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -5110,11 +5110,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Radius of the first circle:</source>
@@ -5142,7 +5142,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -5185,7 +5185,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -5212,7 +5212,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Configuratie</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -5254,7 +5254,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Origin Point:</source>
@@ -5270,7 +5270,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select origin point</source>
-        <translation>Selecteer het beginpunt</translation>
+        <translation>Selecteer het draaipunt</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -5511,7 +5511,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Verwerkingsfout: %1</translation>
+        <translation>Fout bij uitpakken: %1</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5519,15 +5519,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation>Bewerk zoombreedte</translation>
+        <translation>Bewerk naadtoeslag</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation>Bewerk vorige zoombreedte</translation>
+        <translation>Bewerk vorige naadtoeslag</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation>Bewerk huidige zoombreedte</translation>
+        <translation>Bewerk huidige naad</translation>
     </message>
     <message>
         <source>You need more points!</source>
@@ -5583,7 +5583,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -5591,7 +5591,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Bewerk hoek</translation>
+        <translation>Verander de hoek</translation>
     </message>
     <message>
         <source>Edit height</source>
@@ -5686,7 +5686,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -5730,7 +5730,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -5754,7 +5754,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -5778,7 +5778,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
 </context>
 <context>
@@ -5809,7 +5809,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -5912,7 +5912,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -5932,7 +5932,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
@@ -5983,7 +5983,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>List of points</source>
-        <translation>Lijst van punten</translation>
+        <translation>Puntenlijst</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -6051,7 +6051,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -6071,7 +6071,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
@@ -6106,7 +6106,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Configuratie</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -6117,7 +6117,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Empty field</source>
@@ -6256,7 +6256,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -6371,7 +6371,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -6402,7 +6402,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Stop</translation>
+        <translation>&amp;Annuleren</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
@@ -6507,7 +6507,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Fout</translation>
+        <translation type="vanished">Error</translation>
     </message>
     <message>
         <source>Information</source>
@@ -6621,7 +6621,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is ingeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
+        <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
     </message>
 </context>
 <context>
@@ -6936,7 +6936,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Selecteer middelste punt van boog</translation>
+        <translation>Selecteer het middelste punt van boog</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
@@ -7016,11 +7016,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Fout. Lege parameter.</translation>
+        <translation>Fout lege parameter.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation>Fout. Verkeerde id.</translation>
+        <translation>Fout verkeerde ID.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -7205,7 +7205,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point from circle and tangent</source>
-        <translation>Kruispunt van cirkel en raaklijn</translation>
+        <translation>Punt van cirkel en raaklijn</translation>
     </message>
     <message>
         <source>Point from arc and tangent</source>
@@ -8159,7 +8159,7 @@ Do you want to save your changes?</source>
     <name>MoveLabel</name>
     <message>
         <source>move point label</source>
-        <translation>verplaats punt label</translation>
+        <translation>verzet punt label</translation>
     </message>
 </context>
 <context>
@@ -8194,14 +8194,14 @@ Do you want to save your changes?</source>
     <name>OperationShowLabel</name>
     <message>
         <source>toggle label</source>
-        <translation>schakel label</translation>
+        <translation>sluit label</translation>
     </message>
 </context>
 <context>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Open Directory</translation>
+        <translation type="vanished">Open Map</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -8209,7 +8209,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Standaardwaarde</translation>
+        <translation type="vanished">Standaard</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -8315,7 +8315,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Automatisch opgeslagen van veranderd patroon</translation>
+        <translation>Automatisch opslaan na aanpassing patroon</translation>
     </message>
     <message>
         <source>Interval:</source>
@@ -8485,7 +8485,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standaardwaarde</translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -8767,7 +8767,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Verkeerde naam label &apos; %1&apos;.</translation>
+        <translation>Verkeerde label naam &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -8791,7 +8791,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>United detail</source>
-        <translation>Samengevoegd detail</translation>
+        <translation>Samenvoegend detail</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -9083,14 +9083,14 @@ This option will take an affect after restart.</source>
     <name>RotationMoveLabel</name>
     <message>
         <source>move point label</source>
-        <translation type="vanished">verplaats punt label</translation>
+        <translation type="vanished">verzet punt label</translation>
     </message>
 </context>
 <context>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
-        <translation type="vanished">sla details optie op</translation>
+        <translation type="vanished">bewaar opties van detail</translation>
     </message>
 </context>
 <context>
@@ -9179,11 +9179,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Formula:</source>
-        <translation>Formule:</translation>
+        <translation>`Formule:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -9211,7 +9211,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation>Bereken waarde:</translation>
+        <translation>Berekende waarde:</translation>
     </message>
     <message>
         <source>Full name:</source>
@@ -9223,7 +9223,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Soort:</translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Measurement type</source>
@@ -9383,7 +9383,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>measurements</source>
-        <translation>Maten</translation>
+        <translation>maten</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
@@ -9411,7 +9411,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -9887,7 +9887,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;oont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -9954,7 +9954,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -10136,7 +10136,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation>Het stuk kan niet gespiegeld worden in de opmaak modus.</translation>
+        <translation>Het deel spiegelen is in de opmaak modus niet toegestaan.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -10148,7 +10148,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Naadtoeslag</translation>
+        <translation>Naad toeslag</translation>
     </message>
     <message>
         <source>Automatic</source>
@@ -10172,7 +10172,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -10286,11 +10286,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Pas toe</translation>
+        <translation type="vanished">Toepassen</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Stop</translation>
+        <translation type="vanished">&amp;Annuleren</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -10298,11 +10298,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configureer dialoog</translation>
+        <translation type="vanished">Instellingen Dialoog</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="vanished">Configuratie</translation>
+        <translation type="vanished">Instellingen</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -10333,11 +10333,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Decimale gescheiden delen</translation>
+        <translation type="vanished">Decimaal scheidingsteken</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation type="vanished">Met OS opties (%1)</translation>
+        <translation type="vanished">Volgens besturingssysteem (%1)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -10368,7 +10368,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Open Directory</translation>
+        <translation type="vanished">Open Map</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -10376,7 +10376,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Standaardwaarde</translation>
+        <translation type="vanished">Standaard</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -10482,7 +10482,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standaardwaarde</translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -10509,7 +10509,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>ToggleDetailInLayout</name>
     <message>
         <source>detail in layout list</source>
-        <translation type="vanished">detail in opmaak lijst</translation>
+        <translation type="vanished">detail in de opmaak-lijst</translation>
     </message>
 </context>
 <context>
@@ -10716,7 +10716,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>New group</source>
-        <translation>Nieuwe naam</translation>
+        <translation>Nieuwe groep</translation>
     </message>
     <message>
         <source>measurement</source>
@@ -11034,7 +11034,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>Pagina breedte in huidige eenheden zoals 12.0 ( kan niet gebruikt worden met &quot;%1&quot;, export modus).</translation>
+        <translation>Pagina hoogte in huidige eenheden zoals 12.0 ( kan niet gebruikt worden met &quot;%1&quot;, export modus).</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
@@ -11070,7 +11070,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation>Top pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
+        <translation>Bovenste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
@@ -11394,19 +11394,19 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="vanished">Kan niet omzetten naar UInt parameter</translation>
+        <translation type="vanished">Kan parameter toUlnt niet converteren</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="vanished">Kan niet omzetten naar toBool parameter</translation>
+        <translation type="vanished">Kan de parameter toBool niet converteren</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="vanished">Heeft een lege parameter</translation>
+        <translation type="vanished">Kreeg een lege parameter</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="vanished">Kan niet omzetten naar toDouble parameter</translation>
+        <translation type="vanished">Kan niet naar toDouble parameter converteren</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -11438,7 +11438,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Krijg de verkeerde parameter ID. Gebruik alleen ID &gt; 0.</translation>
+        <translation type="vanished">Kreeg de verkeerde parameter id. Alleen nodig id&gt;0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -11469,7 +11469,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation type="vanished">Verander verkeerde formule</translation>
+        <translation type="vanished">Wijzig verkeerde formule</translation>
     </message>
     <message>
         <source>Options</source>
@@ -11477,7 +11477,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Verwijderen</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Show label</source>
@@ -11503,7 +11503,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VFormula</name>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
 </context>
 <context>
@@ -11539,11 +11539,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VNodePoint</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>In opmaak</translation>
     </message>
     <message>
         <source>Show label</source>
@@ -11555,7 +11555,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -11628,7 +11628,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Fout kan waarde niet omzetten.</translation>
+        <translation>Fout. Kan waarde niet omzetten.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
@@ -11935,7 +11935,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="vanished">Knip</translation>
+        <translation type="vanished">Knippen</translation>
     </message>
     <message>
         <source>cut</source>
@@ -12086,15 +12086,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Verwijderen</translation>
+        <translation type="vanished">Verwijder</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="vanished">verplaats patroon deel label</translation>
+        <translation type="vanished">verplaats patroondeel label</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="vanished">vergroot/verkein patroon deel label</translation>
+        <translation type="vanished">wijzig grootte van patroondeel label</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
@@ -12106,7 +12106,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="vanished">vergroot/verklein patroon informatie label</translation>
+        <translation type="vanished"> wijzig grootte patroon informatie label</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
@@ -12114,7 +12114,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="vanished">In layout</translation>
+        <translation type="vanished">In opmaak</translation>
     </message>
     <message>
         <source>move grainline</source>
@@ -12122,7 +12122,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="vanished">vergroot/verklein recht-van-draad</translation>
+        <translation type="vanished">wijzig grootte recht-van-draad</translation>
     </message>
     <message>
         <source>rotate grainline</source>
@@ -12174,11 +12174,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolFlippingByLine</name>
     <message>
         <source>First line point</source>
-        <translation type="unfinished">Eerste lijnpunt</translation>
+        <translation>Eerste lijnpunt</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation type="unfinished">Tweede lijnpunt</translation>
+        <translation>Tweede lijnpunt</translation>
     </message>
 </context>
 <context>
@@ -12256,7 +12256,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolMove</name>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoek van draaiing</translation>
     </message>
     <message>
         <source>Length</source>
@@ -12291,7 +12291,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Punt  op afstand en hoek</translation>
+        <translation>Punt op afstand en hoek</translation>
     </message>
     <message>
         <source>Line type</source>
@@ -12872,7 +12872,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoek van draaiing</translation>
     </message>
 </context>
 <context>
@@ -13974,12 +13974,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation>som</translation>
+        <translation>sum</translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation>gemiddeld</translation>
+        <translation>avg</translation>
     </message>
     <message>
         <source>fmod</source>
@@ -14019,7 +14019,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation>Vvk_</translation>
+        <translation>Vvk__</translation>
     </message>
     <message>
         <source>SplPath</source>
@@ -14530,7 +14530,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation>KRITISCH:</translation>
+        <translation>KRITIEK:</translation>
     </message>
     <message>
         <source>FATAL:</source>
@@ -14585,7 +14585,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation>KRITISCH:</translation>
+        <translation>KRITIEK:</translation>
     </message>
     <message>
         <source>FATAL:</source>

@@ -535,7 +535,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
 </context>
 <context>
@@ -868,11 +868,11 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -1164,11 +1164,11 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1239,7 +1239,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1314,7 +1314,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2213,11 +2213,11 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2532,11 +2532,11 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -2798,7 +2798,7 @@
     </message>
     <message>
         <source>Details</source>
-        <translation>Detaily</translation>
+        <translation>Podrobnosti</translation>
     </message>
     <message>
         <source>Move measurement up</source>
@@ -2846,7 +2846,7 @@
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Chyba zpracování: %1</translation>
+        <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -3278,11 +3278,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -3309,7 +3309,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Axis point</source>
-        <translation type="vanished">Bod osy</translation>
+        <translation type="vanished">Bod osy střihu</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -3341,7 +3341,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select axis point</source>
-        <translation>Vybrat bod osy</translation>
+        <translation>Vybrat bod osy střihu</translation>
     </message>
     <message>
         <source>Point intersect line and axis</source>
@@ -3349,7 +3349,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>Bod osy</translation>
+        <translation>Bod osy střihu</translation>
     </message>
     <message>
         <source>Second point of line</source>
@@ -3397,11 +3397,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -3717,7 +3717,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation type="vanished">Dodatečné stupně úhlu</translation>
+        <translation type="vanished">Dodatečné úhlové stupně</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -3773,11 +3773,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -4365,7 +4365,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Osa souměrnosti úhlu</translation>
     </message>
     <message>
         <source>Passmark</source>
@@ -4674,11 +4674,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
@@ -4753,11 +4753,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
@@ -4840,11 +4840,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
@@ -4895,11 +4895,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
@@ -4934,11 +4934,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>First arc:</source>
@@ -5021,11 +5021,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -5064,11 +5064,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
@@ -5181,7 +5181,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="vanished">Procházet…</translation>
+        <translation type="vanished">Procházet...</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -5618,11 +5618,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -5673,11 +5673,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
 </context>
 <context>
@@ -5989,7 +5989,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Chyba zpracování: %1</translation>
+        <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6112,11 +6112,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -6199,11 +6199,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>Neopakující se popisek</translation>
+        <translation>Jednoznačné označení</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Zvolte neopakující se popisek.</translation>
+        <translation>Zvolte jednoznačné označení.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
@@ -6460,7 +6460,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Bod podél pravého úhlu</translation>
+        <translation>Bod podél v pravém úhlu</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -6612,7 +6612,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Details</source>
-        <translation>Detaily</translation>
+        <translation>Podrobnosti</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -6954,7 +6954,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation>Bod průsečíku oblouku a čáry</translation>
+        <translation>Bod průsečíku mezi křivkou a osou</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -8775,7 +8775,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Details</source>
-        <translation>Detaily</translation>
+        <translation>Podrobnosti</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -9011,7 +9011,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Chyba zpracování: %1</translation>
+        <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
         <source>Standard measurements</source>
@@ -9608,7 +9608,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Osa souměrnosti úhlu</translation>
     </message>
     <message>
         <source>Marks</source>
@@ -10132,7 +10132,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Chyba. Žádný jedinečný identifikátor.</translation>
+        <translation>Chyba. Není jedinečný identifikátor.</translation>
     </message>
     <message>
         <source>Could not change version.</source>

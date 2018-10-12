@@ -7,13 +7,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="207"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur</translation>
+        <translation>taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="209"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Totale</translation>
+        <translation>Hauteur : Totale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
@@ -31,7 +31,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="216"/>
         <source>Height: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Encolure Dos</translation>
+        <translation>Hauteur : Nuque</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="217"/>
@@ -49,7 +49,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="223"/>
         <source>Height: Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Omoplate</translation>
+        <translation>Hauteur : Omoplate</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="224"/>
@@ -67,7 +67,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="230"/>
         <source>Height: Armpit</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Aisselle</translation>
+        <translation>Hauteur : Aisselle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="231"/>
@@ -85,7 +85,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="237"/>
         <source>Height: Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Taille côté</translation>
+        <translation>Hauteur : Taille côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
@@ -103,7 +103,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="244"/>
         <source>Height: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Hanche</translation>
+        <translation>Hauteur des hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="245"/>
@@ -121,7 +121,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="251"/>
         <source>Height: Gluteal Fold</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Sous fesses</translation>
+        <translation>Hauteur : Sous fesses</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="252"/>
@@ -139,7 +139,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="258"/>
         <source>Height: Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Genou</translation>
+        <translation>Hauteur : Genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="259"/>
@@ -157,7 +157,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="265"/>
         <source>Height: Calf</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Mollet</translation>
+        <translation>Hauteur : Mollet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="266"/>
@@ -175,7 +175,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="272"/>
         <source>Height: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Haut cheville</translation>
+        <translation>Hauteur : Haut cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="273"/>
@@ -193,7 +193,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="279"/>
         <source>Height: Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cheville</translation>
+        <translation>Hauteur : Cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="280"/>
@@ -205,13 +205,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="284"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_petitehanche</translation>
+        <translation>hauteur_hanche_haute</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="286"/>
         <source>Height: Highhip</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Petites hanches</translation>
+        <translation>Hauteur : Petites hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="287"/>
@@ -229,7 +229,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="293"/>
         <source>Height: Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Taille devant</translation>
+        <translation>Hauteur : Taille devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="294"/>
@@ -247,7 +247,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="300"/>
         <source>Height: Bustpoint</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Poitrine</translation>
+        <translation>Hauteur : Poitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="301"/>
@@ -265,7 +265,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="307"/>
         <source>Height: Shoulder Tip</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Pointe d&apos;Épaule</translation>
+        <translation>Hauteur : Bout d&apos;épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="308"/>
@@ -283,7 +283,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="314"/>
         <source>Height: Neck Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Encolure devant</translation>
+        <translation>Hauteur : Cou devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
@@ -361,13 +361,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="344"/>
         <source>Vertical distance from the Waist Side to the Hip level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du côté de la taille aux hanches.</translation>
+        <translation>Distance latérale tour de taille au tour de hanches.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="348"/>
         <source>height_knee_to_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_genou_a_cheville</translation>
+        <translation>hauteur_genou_cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="350"/>
@@ -427,13 +427,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="390"/>
         <source>Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur: Buste</translation>
+        <translation>Largeur : Buste</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="391"/>
         <source>Horizontal distance from Bust Side to Bust Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur horizontale d&apos;un côté du buste à l&apos;autre.</translation>
+        <translation>Largeur horizontale d&apos;un côté du buste à l&apos;autre.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="395"/>
@@ -445,13 +445,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="397"/>
         <source>Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur: Taille</translation>
+        <translation>Largeur : Taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="398"/>
         <source>Horizontal distance from Waist Side to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur horizontale d&apos;un côté de la taille à l&apos;autre.</translation>
+        <translation>Largeur horizontale d&apos;un côté de la taille à l&apos;autre.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="402"/>
@@ -463,13 +463,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="404"/>
         <source>Width: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur: Hanche</translation>
+        <translation>Largeur : Hanche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="405"/>
         <source>Horizontal distance from Hip Side to Hip Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur horizontale d&apos;un côté des hanches à l&apos;autre.</translation>
+        <translation>Longueur horizontale d&apos;un côté de hanches à l&apos;autre.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="409"/>
@@ -552,31 +552,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="463"/>
         <source>Hand: Palm length</source>
         <comment>Full measurement name.</comment>
-        <translation>Main: Longueur paume</translation>
+        <translation>Main : Longueur paume</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="464"/>
         <source>Length from Wrist line to base of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur du poignet à la base du majeur.</translation>
+        <translation>Distance du poignet à la base du majeur.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="468"/>
         <source>hand_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Longueur_main</translation>
+        <translation>main_longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="470"/>
         <source>Hand: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>Main: Longueur</translation>
+        <translation>Main : Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="471"/>
         <source>Length from Wrist line to end of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur du poignet au bout du majeur.</translation>
+        <translation>distance du poignet au bout du majeur.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="475"/>
@@ -588,7 +588,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="477"/>
         <source>Hand: Palm width</source>
         <comment>Full measurement name.</comment>
-        <translation>Main: Largeur paume</translation>
+        <translation>Main : Largeur paume</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="478"/>
@@ -606,7 +606,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="483"/>
         <source>Hand: Palm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Main: Circonférence paume</translation>
+        <translation>Main : Circonférence paume</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="484"/>
@@ -624,7 +624,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="489"/>
         <source>Hand: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Main: Circonférence</translation>
+        <translation>Main : Circonférence</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="490"/>
@@ -642,7 +642,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="508"/>
         <source>Foot: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>Pied: Largeur</translation>
+        <translation>Pied : Largeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="509"/>
@@ -660,13 +660,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="514"/>
         <source>Foot: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>Pied: Longueur</translation>
+        <translation>Pied : Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="515"/>
         <source>Measure from back of heel to end of longest toe.</source>
         <comment>Full measurement description.</comment>
-        <translation>Mesurer du derrière du talon au bout du plus grand orteil.</translation>
+        <translation>Mesure du derrière du talon au bout du plus grand orteil.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="519"/>
@@ -678,7 +678,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="521"/>
         <source>Foot: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Pied: Circonférence</translation>
+        <translation>Pied : Circonférence</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="522"/>
@@ -714,7 +714,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="547"/>
         <source>Head: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête: Circonférence</translation>
+        <translation>Tête : Circonférence</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="548"/>
@@ -750,7 +750,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="561"/>
         <source>Head: Depth</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête: Profondeur</translation>
+        <translation>Tête : Profondeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="562"/>
@@ -780,7 +780,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="573"/>
         <source>head_crown_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>haut_tete_a_nuque</translation>
+        <translation>tete_haut_a_nuque</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="575"/>
@@ -792,7 +792,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="576"/>
         <source>Vertical distance from Crown to Neck Back. (&apos;Height: Total&apos; - &apos;Height: Neck Back&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du sommet du crâne à la nuque. (&apos;Hauteur: Totale&apos; - &apos;Hauteur: Nuque&apos;)</translation>
+        <translation>Longueur verticale du sommet du crâne à la nuque. (&apos;Hauteur : Totale&apos; - &apos;Hauteur : Nuque&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="580"/>
@@ -822,7 +822,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="602"/>
         <source>Neck circumference, midsection</source>
         <comment>Full measurement name.</comment>
-        <translation>Circonférence du cou, au milieu</translation>
+        <translation>Tour de cou, au milieu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="603"/>
@@ -834,19 +834,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="607"/>
         <source>neck_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>cou_circ</translation>
+        <translation>tour_de_cou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="609"/>
         <source>Neck circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Circonférence du cou</translation>
+        <translation>Encolure</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="610"/>
         <source>Neck circumference at base of Neck, touching Neck Back, Neck Sides, and Neck Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du cou à la base, en passant par le point de la nuque, de côtés et de devant.</translation>
+        <translation>Tour de cou à la base, en passant par la 7eme cervicale, de côtés et de devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="615"/>
@@ -870,7 +870,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
         <source>bust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>poitrine_circ</translation>
+        <translation>tour_de_poitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="624"/>
@@ -918,13 +918,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="639"/>
         <source>Circumference around Ribs at level of the lowest rib at the side, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Tour de la cage thoracique au niveau des cotes flottantes, parallèle au sol.</translation>
+        <translation>Tour de la cage thoracique au niveau des côtes flottantes, parallèle au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="644"/>
         <source>waist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_circ</translation>
+        <translation>tour_de_taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="646"/>
@@ -936,7 +936,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="652"/>
         <source>highhip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>petites_hanches_circ</translation>
+        <translation>tour_petite_hanche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="654"/>
@@ -948,7 +948,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="647"/>
         <source>Circumference around Waist, following natural contours. Waists are  typically higher in back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de la taille, en suivant les lignes du corps. En général la taille est plus haute dans le dos.</translation>
+        <translation>Tour de taille, en suivant les lignes du corps. En général la taille est plus haute dans le dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="362"/>
@@ -978,13 +978,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="655"/>
         <source>Circumference around Highhip, where Abdomen protrusion is  greatest, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence des petites hanches, là où l&apos;abdomen est le plus fort, parallèle au sol.</translation>
+        <translation>Circonférence du bassin, là où le ventre est le plus fort, parallèle au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>hip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hanches_circ</translation>
+        <translation>tour_de_hanche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="662"/>
@@ -996,7 +996,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="663"/>
         <source>Circumference around Hip where Hip protrusion is greatest, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence des hanches, où elles sont le plus larges, parallèle au sol.</translation>
+        <translation>Tour de hanches, où elles sont le plus larges, parallèle au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="668"/>
@@ -1008,7 +1008,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="670"/>
         <source>Neck arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure devant</translation>
+        <translation>Demie encolure devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="671"/>
@@ -1038,13 +1038,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="682"/>
         <source>bust_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>poitrine_dev</translation>
+        <translation>demi_poitrine_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="684"/>
         <source>Bust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Ligne de poitrine, devant</translation>
+        <translation>Arc de poitrine, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="685"/>
@@ -1074,13 +1074,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="696"/>
         <source>lowbust_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>sous_poitrine_dev</translation>
+        <translation>demi_sous_mammaire_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="698"/>
         <source>Lowbust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Sous-poitrine, devant</translation>
+        <translation>Arc sous-mammaire, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="699"/>
@@ -1092,13 +1092,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="703"/>
         <source>rib_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>cage_devant</translation>
+        <translation>demi_thorax_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="705"/>
         <source>Rib arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-cage thoracique, devant.</translation>
+        <translation>Demi-thorax, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="706"/>
@@ -1110,13 +1110,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="710"/>
         <source>waist_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_taille_dev</translation>
+        <translation>demi_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="712"/>
         <source>Waist arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-taille, devant.</translation>
+        <translation>Arc taille, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="713"/>
@@ -1146,13 +1146,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="724"/>
         <source>hip_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_hanche_dev</translation>
+        <translation>demi_hanche_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="726"/>
         <source>Hip arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-hanches, devant.</translation>
+        <translation>Arc hanches, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="727"/>
@@ -1260,7 +1260,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="769"/>
         <source>Waist arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-tour de taille, devant.</translation>
+        <translation>Moitié du demi-tour de taille, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="770"/>
@@ -1598,13 +1598,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="909"/>
         <source>hip_with_abdomen_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hanche_avec_ventre_dev</translation>
+        <translation>hanche_avec_ventre_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="911"/>
         <source>Hip arc with Abdomen, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Segment de hanche, devant passant par les fesses.</translation>
+        <translation>Arc de hanche avec abdomen, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="912"/>
@@ -1688,25 +1688,25 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="959"/>
         <source>neck_front_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_taille_dev</translation>
+        <translation>encolure_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="961"/>
         <source>Neck Front to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Distance entre l&apos;encolure et la taille , devant</translation>
+        <translation>Distance entre l&apos;encolure et la taille, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="962"/>
         <source>From Neck Front, over tape between Breastpoints, down to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;encolure devant à la taille devant, en passant entre les seins.</translation>
+        <translation>Distance de l&apos;encolure devant à la taille devant, en passant par le tour de poitrine.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="966"/>
         <source>neck_front_to_waist_flat_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_taille_plat_dev</translation>
+        <translation>encolure_taille_plat_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="968"/>
@@ -1718,13 +1718,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="969"/>
         <source>From Neck Front down between breasts to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;encolure devant à la taille devant, en passant entre les seins.</translation>
+        <translation>Distance de l&apos;encolure devant à la taille devant, en passant entre les seins.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="973"/>
         <source>armpit_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>aisselle_taille_latéral</translation>
+        <translation>aisselle_taille_cote</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="975"/>
@@ -1736,31 +1736,31 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="976"/>
         <source>From Armpit down to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>De sous l&apos;aisselle à la taille en latéral.</translation>
+        <translation>Distance de sous l&apos;aisselle à la taille en latéral.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="979"/>
         <source>shoulder_tip_to_waist_side_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>epaule_taille_lateral</translation>
+        <translation>epaule_taille_cote_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="981"/>
         <source>Shoulder Tip to Waist Side, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Point d&apos;épaule à la taille, latéral, devant</translation>
+        <translation>Point d&apos;épaule à la taille en latéral, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="982"/>
         <source>From Shoulder Tip, curving around Armscye Front, then down to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du point d&apos;épaule, en contournant l&apos;emmanchure par devant, descendant à la taille en latéral.</translation>
+        <translation>Du point d&apos;épaule, en contournant l&apos;emmanchure par devant, en descendant à la taille en latéral.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="986"/>
         <source>neck_side_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_lateral_taille</translation>
+        <translation>encolure_cote_taille_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="988"/>
@@ -1772,13 +1772,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="989"/>
         <source>From Neck Side straight down front to Waist level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du point d&apos;encolure latéral à la taille devant.</translation>
+        <translation>Distance du point d&apos;encolure latéral à la taille devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="993"/>
         <source>neck_side_to_waist_bustpoint_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_lateral_taille_par_pointe_sein</translation>
+        <translation>encolure_cote_taille_par_pointe_sein_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="995"/>
@@ -1790,13 +1790,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="996"/>
         <source>From Neck Side over Bustpoint to Waist level, forming a straight line.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du point d&apos;encolure latéral, passant par la pointe de sein, jusqu&apos;à la taille.</translation>
+        <translation>Distance du point d&apos;encolure latéral, passant par la pointe de sein, jusqu&apos;à la taille.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1000"/>
         <source>neck_front_to_highbust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_sur_pointrine_dev</translation>
+        <translation>encolure_sur_pointrine_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1002"/>
@@ -1808,13 +1808,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1003"/>
         <source>Neck Front down to Highbust Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Point d&apos;encolure au milieu devant à la ligne de sur-poitrine, vertical.</translation>
+        <translation>Distance du point d&apos;encolure au milieu devant à la ligne de sur-poitrine, vertical.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1006"/>
         <source>highbust_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>sur_poitrine_taille_dev</translation>
+        <translation>sur_poitrine_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1008"/>
@@ -1826,13 +1826,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1009"/>
         <source>From Highbust Front to Waist Front. Use tape to bridge gap between Bustpoints. (&apos;Neck Front to Waist Front&apos; - &apos;Neck Front to Highbust Front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Du milieu de la ligne de sur-poitrine devant à la ligne de taille , devant, vertical. On utilise un bloduc entre les pointes de sein. (&apos;Distance entre l&apos;encolure et la taille , devant&apos; - &apos;Encolure devant à ligne sur-poitrinaire, devant&apos;).</translation>
+        <translation>Du milieu de la ligne de sur-poitrine devant à la ligne de taille , devant, vertical. On utilise un bolduc entre les pointes de sein. (&apos;Distance entre l&apos;encolure et la taille , devant&apos; - &apos;Encolure devant à ligne sur-poitrinaire, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1014"/>
         <source>neck_front_to_bust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_poitrine_dev</translation>
+        <translation>encolure_poitrine_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1016"/>
@@ -1844,13 +1844,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1017"/>
         <source>From Neck Front down to Bust Front. Requires tape to cover gap between Bustpoints.</source>
         <comment>Full measurement description.</comment>
-        <translation>Point d&apos;encolure au milieu devant à la ligne de sur-poitrine, vertical. On utilise un bolduc entre les pointes de sein.</translation>
+        <translation>Distance du point d&apos;encolure au milieu devant à la ligne de sur-poitrine, vertical. On utilise un bolduc entre les pointes de sein.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1022"/>
         <source>bust_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>poitrine_taille_dev</translation>
+        <translation>poitrine_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1024"/>
@@ -1868,7 +1868,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1030"/>
         <source>lowbust_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>sous_mammaire_taille_dev</translation>
+        <translation>sous_mammaire_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1032"/>
@@ -1886,7 +1886,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1036"/>
         <source>rib_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>thorax_taille_lateral</translation>
+        <translation>thorax_taille_cote</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1038"/>
@@ -1898,37 +1898,37 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1039"/>
         <source>From lowest rib at side down to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la ligne de thorax passant par la dernière cote flottante et la taille, en latéral.</translation>
+        <translation>De la ligne de thorax passant par la dernière côte flottante et la taille, en latéral.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1043"/>
         <source>shoulder_tip_to_armfold_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>emmanchure_dev</translation>
+        <translation>emmanchure_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1045"/>
         <source>Shoulder Tip to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe d&apos;épaule à pli du bras</translation>
+        <translation>Pointe d&apos;épaule à pli du bras, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1046"/>
         <source>From Shoulder Tip around Armscye down to Armfold Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Mesure de l&apos;emmanchure de la pointe d&apos;épaule au point de pli du bras.</translation>
+        <translation>Mesure de l&apos;emmanchure du point d&apos;épaule au point de pli du bras, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1050"/>
         <source>neck_side_to_bust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_poitrine</translation>
+        <translation>encolure_cote_poitrine_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1052"/>
         <source>Neck Side to Bust level, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Du point d&apos;encolure latéral a la ligne de poitrine</translation>
+        <translation>Du point d&apos;encolure latéral a la ligne de poitrine, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1053"/>
@@ -1940,7 +1940,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1057"/>
         <source>neck_side_to_highbust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_sur_poitrine_dev</translation>
+        <translation>encolure_cote_sur_poitrine_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1059"/>
@@ -1958,19 +1958,19 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1064"/>
         <source>shoulder_center_to_highbust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>centre_epaule_sur_poitrine_dev</translation>
+        <translation>centre_epaule_sur_poitrine_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1066"/>
         <source>Shoulder center to Highbust level, front</source>
         <comment>Full measurement name.</comment>
-        <translation>de centre épaule à sur-poitrine, devant</translation>
+        <translation>De centre de l&apos;épaule à la ligne de sur-poitrine, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1067"/>
         <source>From mid-Shoulder down front to Highbust level, aimed at Bustpoint.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du centre de l&apos;épaule devant à la ligne de sur-poitrine, à l&apos;opposé de la pointe de sein.</translation>
+        <translation>Distance du centre de l&apos;épaule devant à la ligne de sur-poitrine, en direction de la pointe du sein.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1071"/>
@@ -2030,19 +2030,19 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1091"/>
         <source>neck_side_to_waist_scapula_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_taille_homoplate</translation>
+        <translation>encolure_cote_taille_omoplate</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1093"/>
         <source>Neck Side to Waist level, through Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation>Point d&apos;encolure latéral à la taille par l&apos;homoplate</translation>
+        <translation>Point d&apos;encolure latéral à la taille par l&apos;omoplate</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1094"/>
         <source>From Neck Side across Scapula down to Waist level, forming a straight line.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du point d&apos;encolure latéral, passant par lhomoplate, jusqu&apos;à la taille.</translation>
+        <translation>Distance du point d&apos;encolure latéral, passant par l&apos;omoplate, jusqu&apos;à la taille.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1099"/>
@@ -2060,7 +2060,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1102"/>
         <source>From Neck Back down to Highbust Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du point d&apos;encolure dos à la ligne de sur poitrine, dos.</translation>
+        <translation>Distance du point d&apos;encolure dos à la ligne de sur-poitrine, dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1105"/>
@@ -2114,7 +2114,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1122"/>
         <source>From Bust Back down to Waist level. (&apos;Neck Back to Waist Back&apos; - &apos;Neck Back to Bust Back&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance de la ligne de poitrine, dos à la ligne de poitrine, dos (&apos;Encolure dos à taille dos&apos; - &apos;Encolure dos àpoitrine dos&apos;).</translation>
+        <translation>Distance de la ligne de poitrine, dos à la ligne de poitrine, dos (&apos;Encolure dos à taille dos&apos; - &apos;Encolure dos à poitrine dos&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1127"/>
@@ -2162,7 +2162,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1142"/>
         <source>Neck Side to Bust level, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure latéral a poitrine, dos</translation>
+        <translation>Encolure latéral à poitrine, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1143"/>
@@ -2180,13 +2180,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1149"/>
         <source>Neck Side to Highbust level, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Du point d&apos;encolure latéral à la ligne de sur-poirtrine, dos</translation>
+        <translation>Point d&apos;encolure latéral à la ligne de sur-poirtrine, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1150"/>
         <source>From Neck Side straight down back to Highbust level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du point d&apos;encolure latéral à la ligne de sur-poitrine, dos, vertical.</translation>
+        <translation>Distance du point d&apos;encolure latéral à la ligne de sur-poitrine, dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1154"/>
@@ -2204,13 +2204,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1157"/>
         <source>From mid-Shoulder down back to Highbust level, aimed through Scapula.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du centre de l&apos;épaule dos à la ligne de sur-poitrine, en passant par l&apos;homoplate.</translation>
+        <translation>Distance du centre de l&apos;épaule dos à la ligne de sur-poitrine, en passant par l&apos;omoplate.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1161"/>
         <source>waist_to_highhip_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_bassin_dev</translation>
+        <translation>taille_bassin_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1163"/>
@@ -2222,13 +2222,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1164"/>
         <source>From Waist Front to Highhip Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance de la ligne de taille devant à la ligne d ebassin bassin devant.</translation>
+        <translation>Distance de la ligne de taille devant à la ligne de bassin bassin devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1167"/>
         <source>waist_to_hip_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_hanches_dev</translation>
+        <translation>taille_hanches_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1169"/>
@@ -2240,7 +2240,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1170"/>
         <source>From Waist Front to Hip Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance de la ligne de taille devant à la ligne de hanches devant</translation>
+        <translation>Distance de la ligne de taille devant à la ligne de hanches devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1173"/>
@@ -2252,7 +2252,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1175"/>
         <source>Waist Side to Highhip Side</source>
         <comment>Full measurement name.</comment>
-        <translation>taille latéral à sur-poitrine latéral</translation>
+        <translation>Taille latéral à sur-poitrine latéral</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1176"/>
@@ -2288,7 +2288,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1187"/>
         <source>Waist Back to Hip Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Distance de la ligne de taille dans le dos à la ligne de hanches dos.</translation>
+        <translation>Taille dos aux hanches dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1188"/>
@@ -2306,7 +2306,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1195"/>
         <source>Waist Side to Hip Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Taille au hanches en lateral</translation>
+        <translation>Taille aux hanches en lateral</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1196"/>
@@ -2318,13 +2318,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1199"/>
         <source>shoulder_slope_neck_side_angle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pente_epaule_encolure_cote</translation>
+        <translation>angle_pente_epaule_encolure_cote</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1201"/>
         <source>Shoulder Slope Angle from Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Pente d&apos;épaule à l&apos;encolure laterale</translation>
+        <translation>Pente d&apos;épaule à l&apos;encolure latérale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1202"/>
@@ -2342,25 +2342,25 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1209"/>
         <source>Shoulder Slope length from Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur pente d&apos;épaule à l&apos;encolure laterale</translation>
+        <translation>Hauteur pente d&apos;épaule à l&apos;encolure latérale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1210"/>
         <source>Vertical distance between Neck Side and Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance verticale entre la base latérale du cou jusqu&apos;à l’extrémité de l&apos;épaule.</translation>
+        <translation>Distance verticale entre la base latérale de l&apos;encolure jusqu&apos;au point d&apos;épaule.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1214"/>
         <source>shoulder_slope_neck_back_angle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pente_epaule_encolure_dos</translation>
+        <translation>angle_pente_epaule_encolure_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1216"/>
         <source>Shoulder Slope Angle from Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur pente d&apos;épaule à l&apos;encolure laterale</translation>
+        <translation>Hauteur pente d&apos;épaule à l&apos;encolure latérale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1217"/>
@@ -2402,7 +2402,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1233"/>
         <source>Angle formed by line from Neck Side to Shoulder Tip and vertical line at Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>L&apos;angle formé par la ligne qui passe par la base latérale du cou et l&apos;extrémité de l&apos;épaule, et la ligne verticale passant par l&apos;extrémité de l&apos;épaule.</translation>
+        <translation>Angle formé par la ligne qui passe par la base latérale de l&apos;encolure et l&apos;extrémité de l&apos;épaule, et la ligne verticale passant par l&apos;extrémité de l&apos;épaule.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1238"/>
@@ -2420,7 +2420,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1241"/>
         <source>From neck back, down to level of Across Back measurement.</source>
         <comment>Full measurement description.</comment>
-        <translation>mesure du point d&apos;encolure dos à la carrure dos</translation>
+        <translation>Mesure du point d&apos;encolure dos à la ligne de carrure dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1245"/>
@@ -2438,7 +2438,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1248"/>
         <source>From middle of Across Back down to Waist back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du milieu de la carrure dos à la ligne de taille en vertical</translation>
+        <translation>Distance du milieu de la carrure dos à la ligne de taille dos en vertical</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1264"/>
@@ -2456,13 +2456,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1267"/>
         <source>From Neck Side to Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la base latérale du cou jusqu&apos;à l&apos;extrémité de l&apos;épaule.</translation>
+        <translation>Distance de la base latérale de l&apos;encolure jusqu&apos;à l&apos;extrémité de l&apos;épaule.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1270"/>
         <source>shoulder_tip_to_shoulder_tip_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bout_epaule_a_bout_epaule_dev</translation>
+        <translation>bout_epaule_a_bout_epaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1272"/>
@@ -2480,7 +2480,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1277"/>
         <source>across_chest_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>carrure_dev</translation>
+        <translation>carrure_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1279"/>
@@ -2492,7 +2492,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1280"/>
         <source>From Armscye to Armscye at narrowest width across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation>Largeur d&apos;un coté à l&apos;autre des emmanchure, à lendroit le plus étroit.</translation>
+        <translation>Largeur d&apos;un coté à l&apos;autre des emmanchures, à l&apos;endroit le plus étroit.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1284"/>
@@ -2504,7 +2504,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1286"/>
         <source>Armfold to Armfold, front</source>
         <comment>Full measurement name.</comment>
-        <translation>D&apos;un coté à l&apos;autre des pli du bras, devant</translation>
+        <translation>D&apos;un coté à l&apos;autre des plis du bras, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1287"/>
@@ -2516,13 +2516,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1292"/>
         <source>shoulder_tip_to_shoulder_tip_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demie_distance_entre_les_deux_points_dépaule_devant</translation>
+        <translation>demi_distance_entre_les_deux_points_dépaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1294"/>
         <source>Shoulder Tip to Shoulder Tip, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>demie_distance_entre_les_deux_points_dépaule_devant</translation>
+        <translation>demi_distance_entre_les_deux_points_dépaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1295"/>
@@ -2534,13 +2534,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1300"/>
         <source>across_chest_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_carrure_dev</translation>
+        <translation>demi_carrure_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1302"/>
         <source>Across Chest, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demie carrure, devant</translation>
+        <translation>Demi carrure, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1303"/>
@@ -2552,7 +2552,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1307"/>
         <source>shoulder_tip_to_shoulder_tip_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>entre_epaule_dos</translation>
+        <translation>entre_epaules_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1309"/>
@@ -2600,7 +2600,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1324"/>
         <source>From Armfold to Armfold across the back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance du pli du bars dos à l&apos;autre, le long de la carrure.</translation>
+        <translation>Distance du pli du bras à l&apos;autre le long de la carrure dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1328"/>
@@ -2612,13 +2612,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1330"/>
         <source>Shoulder Tip to Shoulder Tip, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demie distance entre les deux points d&apos;épaule, dos</translation>
+        <translation>Demi distance entre les deux points d&apos;épaule, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1331"/>
         <source>Half of &apos;Shoulder Tip to Shoulder Tip, back&apos;. (&apos;Shoulder Tip to Shoulder Tip,  back&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié de la distance entre les deux points d&apos;épaule, devant (&apos;point d&apos;épaule à point d&apos;épaule&apos; / 2).</translation>
+        <translation>Moitié de la distance entre les deux points d&apos;épaule, dos (&apos;point d&apos;épaule à point d&apos;épaule&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1336"/>
@@ -2630,7 +2630,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1338"/>
         <source>Across Back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demie-carrure dos</translation>
+        <translation>Demi-carrure dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1339"/>
@@ -2642,7 +2642,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1343"/>
         <source>neck_front_to_shoulder_tip_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_epaule_dev</translation>
+        <translation>encolure_epaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1345"/>
@@ -2654,7 +2654,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1346"/>
         <source>From Neck Front to Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du point d&apos;encolure devant jusqu&apos;au point d&apos;épaule.</translation>
+        <translation>Distance du point d&apos;encolure devant jusqu&apos;au point d&apos;épaule.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1349"/>
@@ -2696,13 +2696,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1375"/>
         <source>bustpoint_to_bustpoint</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>point_de_poitrine_a_point_de_poitrine</translation>
+        <translation>entre_pointe_de_seins</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1377"/>
         <source>Bustpoint to Bustpoint</source>
         <comment>Full measurement name.</comment>
-        <translation>D&apos;une pointe à l&apos;autre</translation>
+        <translation>D&apos;une pointe de sein à l&apos;autre</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1378"/>
@@ -2744,7 +2744,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1390"/>
         <source>From Bustpoint down to Lowbust level, following curve of bust or chest.</source>
         <comment>Full measurement description.</comment>
-        <translation>Mesure de la courbe allant de la pointe de sein à la ligne sous-mammaire.</translation>
+        <translation>Mesure de la courbe allant de la pointe du sein à la ligne sous-mammaire.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1394"/>
@@ -2762,7 +2762,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1397"/>
         <source>From Bustpoint to straight down to Waist level, forming a straight line (not curving along the body).</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance allant de la pointe de sein vers la ligne de taille, en ligne droite (sans suivre le corps)</translation>
+        <translation>Distance allant de la pointe de sein vers la ligne de taille, en ligne droite (sans suivre le corps).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1402"/>
@@ -2792,31 +2792,31 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1411"/>
         <source>Bustpoint, Neck Side to Waist level</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe de sein, encolure latéral à la taille </translation>
+        <translation>Pointe de sein, encolure latérale à la taille </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1412"/>
         <source>From Neck Side to Bustpoint, then straight down to Waist level. (&apos;Neck Side to Bustpoint&apos; + &apos;Bustpoint to Waist level&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;encolure latéral à la taille en passant par la pointe de sein. (&apos;De la pointe de sein à l&apos;encolure, latéral&apos; + &apos;De la pointe de sein à la taille&apos;).</translation>
+        <translation>De l&apos;encolure latérale à la taille en passant par la pointe de sein. (&apos;De la pointe de sein à l&apos;encolure, latéral&apos; + &apos;De la pointe de sein à la taille&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1417"/>
         <source>bustpoint_to_shoulder_tip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pointe_de_sein_pointe_epaule</translation>
+        <translation>pointe_du_sein_pointe_épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1419"/>
         <source>Bustpoint to Shoulder Tip</source>
         <comment>Full measurement name.</comment>
-        <translation>De la pointe de sein au point d&apos;épaule</translation>
+        <translation>Pointe du sein au point d&apos;épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1420"/>
         <source>From Bustpoint to Shoulder tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la pointe de sein à la pointe épaule</translation>
+        <translation>De la pointe du sein à la pointe épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1423"/>
@@ -2828,13 +2828,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1425"/>
         <source>Bustpoint to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe de sein a la taille</translation>
+        <translation>Pointe du sein à la taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1426"/>
         <source>From Bustpoint to Waist Front, in a straight line, not following the curves of the body.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la pointe de sein jusqu&apos;à la taille, en ligne droite, sans suivre les courbes du corps.</translation>
+        <translation>De la pointe du sein jusqu&apos;à la taille, en ligne droite, sans suivre les courbes du corps.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1431"/>
@@ -2846,163 +2846,163 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1433"/>
         <source>Bustpoint to Bustpoint Halter</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe de sein à pointe de sein par encolure</translation>
+        <translation>De la pointe du sein à l&apos;autre pointe du sein par l&apos;encolure</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1434"/>
         <source>From Bustpoint around Neck Back down to other Bustpoint.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la Pointe de sein passant par le bas de l&apos;Encolure Dos à l&apos;autre Pointe de sein</translation>
+        <translation>De la pointe du sein passant par le bas de l&apos;encolure dos à l&apos;autre pointe du sein</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1438"/>
         <source>bustpoint_to_shoulder_center</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Pointe_sein_au_milieu_epaule</translation>
+        <translation>Pointe_sein_au_milieu_épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1440"/>
         <source>Bustpoint to Shoulder Center</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe de sein au Milieu épaule</translation>
+        <translation>Pointe du sein au milieu d&apos;épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1441"/>
         <source>From center of Shoulder to Bustpoint.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du milieu Epaule à la Pointe de sein</translation>
+        <translation>Du milieu d&apos;épaule à la pointe du sein</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1456"/>
         <source>shoulder_tip_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pointe_epaule_a_taille_devant</translation>
+        <translation>pointe_épaule_à_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1458"/>
         <source>Shoulder Tip to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe d&apos;épaule à la Taille devant</translation>
+        <translation>Pointe d&apos;épaule à la taille devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1459"/>
         <source>From Shoulder Tip diagonal to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de la Pointe d&apos;épaule à la taille devant.</translation>
+        <translation>Diagonale partant de la pointe d&apos;épaule à la taille devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1463"/>
         <source>neck_front_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_devant_a_taille_cote</translation>
+        <translation>encolure_devant_à_taille_côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1465"/>
         <source>Neck Front to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure devant à la Taille Côté</translation>
+        <translation>Encolure devant à la taille côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1466"/>
         <source>From Neck Front diagonal to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;encolure jusqu&apos;à la Taille Côté</translation>
+        <translation>Diagonale partant de l&apos;encolure jusqu&apos;à la taille côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1470"/>
         <source>neck_side_to_waist_side_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_a_taille_cote_devant</translation>
+        <translation>encolure_côté_à_taille_côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1472"/>
         <source>Neck Side to Waist Side, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure côté à la Taille Côté, devant</translation>
+        <translation>Encolure côté à la taille côté, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1473"/>
         <source>From Neck Side diagonal across front to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;Encolure côté arrivant à la Taille côté en passant par le devant.</translation>
+        <translation>Diagonale partant de l&apos;encolure côté arrivant à la taille côté en passant par le devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1477"/>
         <source>shoulder_tip_to_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pointe_epaule_a_taille_dos</translation>
+        <translation>pointe_épaule_à_taille_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1479"/>
         <source>Shoulder Tip to Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe d&apos;épaule à la Taille Dos</translation>
+        <translation>Pointe d&apos;épaule à la taille dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1480"/>
         <source>From Shoulder Tip diagonal to Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de la Pointe épaule arrivant à la Taille Dos</translation>
+        <translation>Diagonale partant de la pointe d&apos;épaule arrivant à la taille dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1484"/>
         <source>shoulder_tip_to_waist_b_1in_offset</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pointe_epaule_a_taille_d_1in_decale</translation>
+        <translation>pointe_épaule_à_taille_d_1in_ajusté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1486"/>
         <source>Shoulder Tip to Waist Back, with 1in (2.54cm) offset</source>
         <comment>Full measurement name.</comment>
-        <translation>Pointe d&apos;épaule à la Taille Dos, avec 1in (2.54cm) de décalage</translation>
+        <translation>Pointe d&apos;épaule à la taille dos, avec 1 in (2.54 cm) de décalage</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1488"/>
         <source>Mark 1in (2.54cm) outward from Waist Back along Waist level. Measure from Shoulder Tip diagonal to mark.</source>
         <comment>Full measurement description.</comment>
-        <translation>En partant de la Taille Dos, pointer 1in (2.54cm) de décalage par rapport au niveau de la Taille. Mesurer à partir de la pointe d&apos;épaule à cette marque en diagonale.</translation>
+        <translation>En partant de la taille dos, pointer 1 in (2.54 cm) de décalage par rapport au niveau de la taille. Mesurer à partir de la pointe d&apos;épaule à cette marque en diagonale.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1492"/>
         <source>neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_dos_a_taille_cote</translation>
+        <translation>encolure_dos_à_taille_côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1494"/>
         <source>Neck Back to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Dos à la Taille Côté</translation>
+        <translation>Encolure dos à la taille côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1495"/>
         <source>From Neck Back diagonal across back to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;Encolure Dos passant par le dos jusqu&apos;à la Taille Côté.</translation>
+        <translation>Diagonale partant de l&apos;encolure dos passant par le dos jusqu&apos;à la taille côté.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1499"/>
         <source>neck_side_to_waist_side_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_a_taile_cote_dos</translation>
+        <translation>encolure_côté_à_taile_côté_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1501"/>
         <source>Neck Side to Waist Side, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Côté à la Taille Côté, dos</translation>
+        <translation>Encolure côté à la taille côté, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1502"/>
         <source>From Neck Side diagonal across back to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;Encolure Côté passant par le dos jusqu&apos;à la Taille Côté.</translation>
+        <translation>Diagonale partant de l&apos;encolure côté passant par le dos jusqu&apos;à la taille côté.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1506"/>
         <source>neck_side_to_armfold_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>coté_cou_au_pli_de_bras_devant</translation>
+        <translation>ecolure_coté_au_pli_de_bras_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1508"/>
@@ -3020,7 +3020,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1513"/>
         <source>neck_side_to_armpit_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_a_aisselle_dvt</translation>
+        <translation>encolure_cote_a_aisselle_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1515"/>
@@ -3032,13 +3032,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1516"/>
         <source>From Neck Side diagonal across front to Highbust Side (Armpit).</source>
         <comment>Full measurement description.</comment>
-        <translation>Diragonale partant de l&apos;Encolure Côté passant sur le devant jusqu&apos;au plus haut du côté (aisselle).</translation>
+        <translation>De la diagonale du côté du cou en traversant l&apos;avant jusqu&apos;au côté du haut-buste (aisselle).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1520"/>
         <source>neck_side_to_bust_side_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_a_carrure_cote_dvt</translation>
+        <translation>encolure_cote_a_carrure_cote_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1522"/>
@@ -3056,7 +3056,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1527"/>
         <source>neck_side_to_armfold_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_bas_aiselle_d</translation>
+        <translation>encolure_cote_au_pli_coude_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1529"/>
@@ -3092,7 +3092,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1541"/>
         <source>neck_side_to_bust_side_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_au_buste_cote_d</translation>
+        <translation>encolure_cote_au_buste_cote_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1543"/>
@@ -3110,13 +3110,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1560"/>
         <source>arm_shoulder_tip_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pointe_epaule_au_poignet_plie</translation>
+        <translation>bras_pointe_epaule_au_poignet_plie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1562"/>
         <source>Arm: Shoulder Tip to Wrist, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Pointe d&apos;épaule au Poignet, plié</translation>
+        <translation>Bras : Pointe d&apos;épaule au Poignet, plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1563"/>
@@ -3128,13 +3128,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1567"/>
         <source>arm_shoulder_tip_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>pointe_epaule_au_coude_plie</translation>
+        <translation>bras_pointe_epaule_au_coude_plie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1569"/>
         <source>Arm: Shoulder Tip to Elbow, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Pointe épaule au Coude, plié</translation>
+        <translation>Bras : Pointe épaule au Coude, plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1570"/>
@@ -3152,7 +3152,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1576"/>
         <source>Arm: Elbow to Wrist, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Coude au Poignet, plié</translation>
+        <translation>Bras : Coude au Poignet, plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1577"/>
@@ -3170,7 +3170,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1585"/>
         <source>Arm: Elbow circumference, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Circonférence du Coude, plié</translation>
+        <translation>Bras : Circonférence du Coude, plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1586"/>
@@ -3188,7 +3188,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1591"/>
         <source>Arm: Shoulder Tip to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Pointe épaule au Poignet</translation>
+        <translation>Bras : Pointe épaule au Poignet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1592"/>
@@ -3206,7 +3206,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1598"/>
         <source>Arm: Shoulder Tip to Elbow</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Pointe épaule au Coude</translation>
+        <translation>Bras : Pointe épaule au Coude</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1599"/>
@@ -3224,7 +3224,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1605"/>
         <source>Arm: Elbow to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Coude au Poignet</translation>
+        <translation>Bras : Coude au Poignet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1606"/>
@@ -3260,7 +3260,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1620"/>
         <source>Arm: Armpit to Elbow, inside</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Aisselle au Coude, par l&apos;intérieur</translation>
+        <translation>Bras : Aisselle au Coude, par l&apos;intérieur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1621"/>
@@ -3278,7 +3278,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1627"/>
         <source>Arm: Elbow to Wrist, inside</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Coude au Poignet, intérieur</translation>
+        <translation>Bras : Coude au Poignet, intérieur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1628"/>
@@ -3296,7 +3296,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1635"/>
         <source>Arm: Upper Arm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: circonférence de la partie Supérieur du Bras</translation>
+        <translation>Bras : circonférence de la partie Supérieure du Bras</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1636"/>
@@ -3314,7 +3314,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1641"/>
         <source>Arm: Above Elbow circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Circonférence au-dessus du Coude</translation>
+        <translation>Bras : Circonférence au-dessus du Coude</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1642"/>
@@ -3332,7 +3332,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1647"/>
         <source>Arm: Elbow circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Circonférence du Coude</translation>
+        <translation>Bras : Circonférence du Coude</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1648"/>
@@ -3350,7 +3350,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1653"/>
         <source>Arm: Lower Arm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Circonférence de l&apos;Avant-Bras</translation>
+        <translation>Bras : Circonférence de l&apos;Avant-Bras</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1654"/>
@@ -3368,7 +3368,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1660"/>
         <source>Arm: Wrist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Circonférence du Poignet</translation>
+        <translation>Bras : Circonférence du Poignet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1661"/>
@@ -3386,7 +3386,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1666"/>
         <source>Arm: Shoulder Tip to Armfold line</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Pointe d&apos;Épaule à la ligne basse de l&apos;Aisselle</translation>
+        <translation>Bras : Pointe d&apos;Épaule à la ligne basse de l&apos;Aisselle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1667"/>
@@ -3404,7 +3404,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1672"/>
         <source>Arm: Neck Side to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Encolure Côté au Poignet</translation>
+        <translation>Bras : Encolure Côté au Poignet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1673"/>
@@ -3422,7 +3422,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1680"/>
         <source>Arm: Neck Side to Finger Tip</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Encolure Côté à l&apos;Extrémité Doigt</translation>
+        <translation>Bras : Encolure Côté à l&apos;Extrémité Doigt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1681"/>
@@ -3458,13 +3458,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1697"/>
         <source>Armscye: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>emmanchure : Hauteur</translation>
+        <translation>Emmanchure : hauteur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1698"/>
         <source>Vertical distance from Shoulder Tip to Armpit.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance entre l&apos;épaule et l&apos;aisselle </translation>
+        <translation>Distance entre l&apos;épaule et l&apos;aisselle.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1702"/>
@@ -3476,13 +3476,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1704"/>
         <source>Armscye: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>emmanchure : largeur</translation>
+        <translation>Emmanchure : largeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1705"/>
         <source>Horizontal distance between Armscye Front and Armscye Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance entre l&apos;emmanchure devant et l&apos;emmanchure dos</translation>
+        <translation>Distance entre l&apos;emmanchure devant et l&apos;emmanchure dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1709"/>
@@ -3500,31 +3500,31 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1712"/>
         <source>From Neck Side over Shoulder Tip down to Elbow. (Shoulder length + Arm: Shoulder Tip to Elbow).</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;encolure coté jusqu&apos;a l&apos;exterieur du coude. ( Y compris la logueur d&apos;épaule )</translation>
+        <translation>De l&apos;encolure coté jusqu&apos;à l&apos;extérieur du coude. (Y compris la longueur d&apos;épaule).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1728"/>
         <source>leg_crotch_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_entrejambe_au_sol</translation>
+        <translation>hauteur_entrejambe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1730"/>
         <source>Leg: Crotch to floor</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: hauteur d&apos;entrejambe</translation>
+        <translation>Jambe : hauteur d&apos;entrejambe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1731"/>
         <source>Stand feet close together. Measure from crotch level (touching body, no extra space) down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Les jambes serrés. Mesurer de l&apos;entrejambe jusqu&apos;aux sol.</translation>
+        <translation>Les jambes serrées. Mesurer de l&apos;entrejambe  (toucher le corps, sans espace supplémentaire) jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1822"/>
         <source>From Waist Side along curve to Hip level then straight down to  Knee level. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height Knee&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Du Côté de la Taille le long de la courbe de la Hanche et jusqu&apos;au genou. (&apos;Jambe : Coté de la Taille jusqu&apos;au genou&apos; - &apos;Genou&apos;).</translation>
+        <translation>Du Côté de la Taille le long de la courbe de la Hanche et jusqu&apos;au genou. (&apos;Jambe : Côté de la Taille jusqu&apos;au genou&apos; - &apos;Genou&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1862"/>
@@ -3535,12 +3535,12 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
     <message>
         <source>Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface</source>
         <comment>Full measurement name.</comment>
-        <translation type="vanished">Assis sur une surface dure. Hauteur du Montant sur le côté, mesuré de la taille au dessus de la courbure des hanches jusqu&apos;au sol</translation>
+        <translation type="vanished">Assis sur une surface dure. Hauteur du Montant, sur le côté, mesurer de la taille au-dessus de la courbure des hanches jusqu&apos;au sol.</translation>
     </message>
     <message>
         <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">Du Côté de la Taille le long de la courbe des hanches jusqu&apos;à la surface, en étant assis sur une surface dure</translation>
+        <translation type="vanished">Du Côté de la Taille, le long de la courbe des hanches jusqu&apos;à la surface, en étant assis sur une surface dure.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1895"/>
@@ -3552,7 +3552,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2148"/>
         <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation>Cette information provient de tableaux de certains systèmes de patronage, ex: Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
+        <translation>Cette information provient de tableaux de certains systèmes de patronage, ex : Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1736"/>
@@ -3564,7 +3564,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1738"/>
         <source>Leg: Waist Side to floor</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: du Côté de la Taille au sol</translation>
+        <translation>Jambe : du Côté de la Taille au sol</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1739"/>
@@ -3582,7 +3582,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1745"/>
         <source>Leg: Thigh Upper circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: circonférence Haut de Cuisse</translation>
+        <translation>Jambe : circonférence Haut de Cuisse</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1746"/>
@@ -3600,7 +3600,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1753"/>
         <source>Leg: Thigh Middle circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: Circonférence Milieu de la Cuisse</translation>
+        <translation>Jambe : circonférence cuisse mi-distance fourche et genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1754"/>
@@ -3618,7 +3618,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1760"/>
         <source>Leg: Knee circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: circonférence Genou</translation>
+        <translation>Jambe : circonférence Genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1761"/>
@@ -3636,7 +3636,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1766"/>
         <source>Leg: Knee Small circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: Petite circonférence du Genou</translation>
+        <translation>Jambe : Petite circonférence du Genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1767"/>
@@ -3654,7 +3654,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1772"/>
         <source>Leg: Calf circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: circonférence Mollet</translation>
+        <translation>Jambe : circonférence Mollet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1773"/>
@@ -3672,7 +3672,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1779"/>
         <source>Leg: Ankle High circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: circonférence du Haut de la Cheville</translation>
+        <translation>Jambe : circonférence du Haut de la Cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1780"/>
@@ -3690,7 +3690,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1787"/>
         <source>Leg: Ankle circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: circonférence Cheville</translation>
+        <translation>Jambe : circonférence Cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1788"/>
@@ -3708,7 +3708,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1794"/>
         <source>Leg: Knee circumference, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: circonférence Genou, plié</translation>
+        <translation>Jambe : circonférence Genou, plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1795"/>
@@ -3726,7 +3726,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1800"/>
         <source>Leg: Ankle diagonal circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: Circonférence Cheville en diagonale</translation>
+        <translation>Jambe : Circonférence Cheville en diagonale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1801"/>
@@ -3744,13 +3744,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1807"/>
         <source>Leg: Crotch to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: Fourche à la Cheville</translation>
+        <translation>Jambe : Fourche à la Cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1808"/>
         <source>From Crotch to Ankle. (&apos;Leg: Crotch to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de la fourche jusqu&apos;à la Cheville. (&apos;Jambe: Fourche jusqu&apos;au Sol&apos; - &apos;Hauteur: Cheville&apos;).</translation>
+        <translation>A partir de la fourche jusqu&apos;à la Cheville. (&apos;Jambe : Fourche jusqu&apos;au Sol&apos; - &apos;Hauteur : Cheville&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1812"/>
@@ -3762,13 +3762,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1814"/>
         <source>Leg: Waist Side to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: Taille Côté à la Cheville</translation>
+        <translation>Jambe : Taille Côté à la Cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1815"/>
         <source>From Waist Side to Ankle. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de la Taille Côté jusqu&apos;à la cheville. (&apos;Jambe: Taille Côté jusqu&apos;au Sol&apos; - &apos;Hauteur: Cheville&apos;).</translation>
+        <translation>A partir de la Taille Côté jusqu&apos;à la cheville. (&apos;Jambe : Taille Côté jusqu&apos;au Sol&apos; - &apos;Hauteur : Cheville&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1819"/>
@@ -3780,7 +3780,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1821"/>
         <source>Leg: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe: Taille Côté au Genou</translation>
+        <translation>Jambe : Taille Côté au Genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
@@ -3798,7 +3798,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
         <source>Put tape across gap between buttocks at Hip level. Measure from Waist Front down betwen legs and up to Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Faire passer le Ruban sur le creux des Fesses se dessinant au niveau de Hanches. Mesurer de la Taille Devant, en descendant par l&apos;entrejambe et en remontant jusqu&apos;à la Taille Dos.</translation>
+        <translation>Faire passer le Ruban sur le creux des Fesses en commençant au niveau de Hanches. Mesurer de la Taille Devant, en descendant par l&apos;entrejambe et en remontant jusqu&apos;à la Taille Dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1846"/>
@@ -3822,7 +3822,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>crotch_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>entrejambe_longueur_dvt</translation>
+        <translation>entrejambe_longueur_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
@@ -3852,13 +3852,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1881"/>
         <source>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance verticale à partir de la Taille Dos jusqu&apos;au niveau de Fourche. (&apos;Hauteur: Taille Dos&apos; - &apos;Jambe: Fourche jusqu&apos;au Sol&apos;)</translation>
+        <translation>Distance verticale à partir de la Taille Dos jusqu&apos;au niveau de Fourche. (&apos;Hauteur : Taille Dos&apos; - &apos;Jambe : Fourche jusqu&apos;au Sol&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1888"/>
         <source>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance verticale à partir de la Taille Devant jusqu&apos;au niveau de Fourche. (&apos;Hauteur: Taille Devant&apos; - &apos;Jambe: Fourche jusqu&apos;au Sol&apos;)</translation>
+        <translation>Distance verticale à partir de la Taille Devant jusqu&apos;au niveau de Fourche. (&apos;Hauteur : Taille Devant&apos; - &apos;Jambe : Fourche jusqu&apos;au Sol&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1892"/>
@@ -3910,13 +3910,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
     <message>
         <source>Vertical distance from Waist Back to Crotch level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">Distance Verticale à partir de la Taille Dos jusqu&apos;au au niveau de Fourche.</translation>
+        <translation type="vanished">Distance Verticale à partir de la Taille Dos jusqu&apos;au niveau de Fourche.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1885"/>
         <source>rise_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>montant_longueur_dvt</translation>
+        <translation>montant_longueur_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1887"/>
@@ -3981,13 +3981,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1928"/>
         <source>Torso circumference at men&apos;s natural side Abdominal Obliques indentation, if Oblique indentation isn&apos;t found then just below the Navel level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du tronc au commencement de l&apos;Échancrure des Obliques Abdominales naturelles masculin, si l&apos;Échancrure de l&apos;oblique ne peut être trouvée alors mesurer juste en dessous du niveau du Nombril.</translation>
+        <translation>Circonférence du tronc au commencement de l&apos;Échancrure des Obliques Abdominales naturelles masculin, si l&apos;Échancrure de l&apos;oblique ne peut être trouvée alors mesurer juste en-dessous du niveau du Nombril.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1933"/>
         <source>waist_natural_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_naturel_arc_dvt</translation>
+        <translation>demi_taille_naturel_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1935"/>
@@ -4017,13 +4017,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1943"/>
         <source>From Side to Side at Natural Waist level, across the back. Calculate as ( Natural Waist circumference  - Natural Waist arc (front) ).</source>
         <comment>Full measurement description.</comment>
-        <translation>Au niveau de la Taille Naturelle, mesurer du côté jusqu&apos;à l&apos;autre en passant par le dos. Vérifier en calculant (Circonférence Taille Naturelle - Arc Taille Naturel (devant) ).</translation>
+        <translation>Au niveau de la Taille Naturelle, mesurer du côté jusqu&apos;à l&apos;autre en passant par le dos. Vérifier en calculant (Circonférence Taille Naturelle - Arc Taille Naturelle (devant) ).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1947"/>
         <source>waist_to_natural_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_a_taille_naturelle_dvt</translation>
+        <translation>taille_a_taille_naturelle_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1949"/>
@@ -4065,7 +4065,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1963"/>
         <source>Arm: Neck Back to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Encolure Dos au Coude, complètement plié</translation>
+        <translation>Bras : Encolure Dos au Coude, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1964"/>
@@ -4083,7 +4083,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1971"/>
         <source>Arm: Neck Back to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Encolure Dos au Poignet, complètement plié</translation>
+        <translation>Bras : Encolure Dos au Poignet, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1972"/>
@@ -4101,7 +4101,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1978"/>
         <source>Arm: Neck Side to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Encolure Côté au Coude, complètement plié</translation>
+        <translation>Bras : Encolure Côté au Coude, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1979"/>
@@ -4119,7 +4119,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1985"/>
         <source>Arm: Neck Side to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Encolure Côté au Poignet, complètement plié</translation>
+        <translation>Bras : Encolure Côté au Poignet, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1986"/>
@@ -4137,7 +4137,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1993"/>
         <source>Arm: Across Back Center to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Centrer sur le Milieu Dos jusqu&apos;au Coude, complètement plié</translation>
+        <translation>Bras : Sur le Milieu Dos jusqu&apos;au Coude, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1994"/>
@@ -4155,7 +4155,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2001"/>
         <source>Arm: Across Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Centrer sur le Milieu Dos au Poignet, complètement plié</translation>
+        <translation>Bras : Centrer sur le Milieu Dos au Poignet, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2002"/>
@@ -4173,7 +4173,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2009"/>
         <source>Arm: Armscye Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras: Centre de l&apos;Emmanchure Dos au Poignet, complètement plié</translation>
+        <translation>Bras : Centre de l&apos;Emmanchure Dos au Poignet, complètement plié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2010"/>
@@ -4245,7 +4245,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2050"/>
         <source>Highbust Back, over Shoulder, to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Du haut buste dos, en passant sur l&apos;épaule, arriver à l&apos;aisselle devant</translation>
+        <translation>Milieu buste dos, passer sur épaule, arriver aisselle devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2051"/>
@@ -4299,7 +4299,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2072"/>
         <source>Across Back Center, circled around Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation>Au milieu du dos, entouré autour de l&apos;épaule</translation>
+        <translation>Au milieu du centre dos, entourant l&apos;épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2073"/>
@@ -4347,7 +4347,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
         <source>armfold_to_bust_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bras_croisés_devant_la_poitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2096"/>
@@ -4438,7 +4438,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2147"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur de pince.</translation>
+        <translation>Largeur de pince de taille</translation>
     </message>
 </context>
 </TS>

@@ -1666,7 +1666,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Edit</translation>
+        <translation>Edit</translation>
     </message>
     <message>
         <source>Bold</source>
@@ -1736,7 +1736,7 @@
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Could not save file</translation>
+        <translation>Could not save file</translation>
     </message>
     <message>
         <source>Import template</source>
@@ -1748,7 +1748,7 @@
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">File error.</translation>
+        <translation>File error.</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1788,11 +1788,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Size</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Height</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Fabric</translation>
+        <translation>Fabric</translation>
     </message>
     <message>
         <source>Material: Lining</source>
@@ -1844,7 +1844,7 @@
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished">Lining</translation>
+        <translation>Lining</translation>
     </message>
     <message>
         <source>Material: Interfacing</source>
@@ -1852,7 +1852,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished">Interfacing</translation>
+        <translation>Interfacing</translation>
     </message>
     <message>
         <source>Material: Interlining</source>
@@ -1860,7 +1860,7 @@
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished">Interlining</translation>
+        <translation>Interlining</translation>
     </message>
     <message>
         <source>Word: Cut</source>
@@ -1868,7 +1868,7 @@
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Cut</translation>
+        <translation>Cut</translation>
     </message>
     <message>
         <source>Word: on fold</source>
@@ -1876,7 +1876,7 @@
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished">on fold</translation>
+        <translation>on fold</translation>
     </message>
     <message>
         <source>User material</source>
@@ -2304,63 +2304,63 @@
     </message>
     <message>
         <source>Find:</source>
-        <translation type="unfinished">Find:</translation>
+        <translation>Find:</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Search</translation>
+        <translation>Search</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">The calculated value</translation>
+        <translation>The calculated value</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Details</translation>
+        <translation>Details</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation type="unfinished">Calculated value:</translation>
+        <translation>Calculated value:</translation>
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished">Formula:</translation>
+        <translation>Formula:</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calculation</translation>
+        <translation>Calculation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Description:</translation>
+        <translation>Description:</translation>
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation type="unfinished">Move measurement up</translation>
+        <translation>Move measurement up</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation type="unfinished">Move measurement down</translation>
+        <translation>Move measurement down</translation>
     </message>
     <message>
         <source>measurement</source>
@@ -2368,31 +2368,31 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Empty field.</source>
-        <translation type="unfinished">Empty field.</translation>
+        <translation>Empty field.</translation>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation type="unfinished">Edit measurement</translation>
+        <translation>Edit measurement</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished">Empty field</translation>
+        <translation>Empty field</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished">Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
+        <translation>Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Parser error: %1</translation>
+        <translation>Parser error: %1</translation>
     </message>
 </context>
 <context>
@@ -3867,7 +3867,7 @@ Apply settings anyway?</source>
     <name>DialogPatternMaterials</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>Placeholder</source>
@@ -3875,7 +3875,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
 </context>
 <context>
@@ -4058,7 +4058,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Pattern</translation>
+        <translation>Pattern</translation>
     </message>
     <message>
         <source>For technical notes</source>
@@ -4560,15 +4560,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</translation>
+        <translation>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Show the second passmark on seam line</translation>
+        <translation>Show the second passmark on seam line</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Excluded</translation>
+        <translation>Excluded</translation>
     </message>
 </context>
 <context>
@@ -4598,31 +4598,31 @@ Apply settings anyway?</source>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Width:</translation>
+        <translation>Width:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calculation</translation>
+        <translation>Calculation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Height:</translation>
+        <translation>Height:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>0</source>
@@ -4630,15 +4630,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Point:</translation>
+        <translation>Point:</translation>
     </message>
     <message>
         <source>Piece:</source>
-        <translation type="unfinished">Piece:</translation>
+        <translation>Piece:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Type:</translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Edit rectangle width</source>
@@ -4646,7 +4646,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished">Edit angle</translation>
+        <translation>Edit angle</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -5347,23 +5347,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Right:</translation>
+        <translation>Right:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Left:</translation>
+        <translation>Left:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Top:</translation>
+        <translation>Top:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Bottom:</translation>
+        <translation>Bottom:</translation>
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished">Paper format</translation>
+        <translation>Paper format</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -5371,7 +5371,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -8080,15 +8080,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Pattern</translation>
+        <translation>Pattern</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
@@ -8112,7 +8112,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Description</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
@@ -8571,7 +8571,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Seam allowance</translation>
+        <translation>Seam allowance</translation>
     </message>
     <message>
         <source>Default value:</source>
@@ -8794,27 +8794,27 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Fabric</translation>
+        <translation>Fabric</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished">Lining</translation>
+        <translation>Lining</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished">Interfacing</translation>
+        <translation>Interfacing</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished">Interlining</translation>
+        <translation>Interlining</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Cut</translation>
+        <translation>Cut</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished">on fold</translation>
+        <translation>on fold</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
@@ -9779,7 +9779,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Customer name:</translation>
+        <translation>Customer name:</translation>
     </message>
     <message>
         <source>Open individual …</source>
@@ -9997,7 +9997,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished">on fold</translation>
+        <translation>on fold</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -10013,7 +10013,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotation:</translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <source>Tilt:</source>
@@ -10278,7 +10278,7 @@ Do you want to save your changes?</translation>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
 </context>
 <context>
@@ -10649,35 +10649,35 @@ Do you want to save your changes?</translation>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation type="unfinished">Letter</translation>
+        <translation>Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="unfinished">Roll 24in</translation>
+        <translation>Roll 24in</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="unfinished">Roll 30in</translation>
+        <translation>Roll 30in</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="unfinished">Roll 36in</translation>
+        <translation>Roll 36in</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="unfinished">Roll 42in</translation>
+        <translation>Roll 42in</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="unfinished">Roll 44in</translation>
+        <translation>Roll 44in</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Custom</translation>
+        <translation>Custom</translation>
     </message>
     <message>
         <source>Roll 48in</source>
@@ -10700,7 +10700,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
 </context>
 <context>
@@ -10733,7 +10733,7 @@ Do you want to save your changes?</translation>
     <name>VAbstractSpline</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Label</source>
@@ -11538,11 +11538,11 @@ Do you want to save your changes?</translation>
     <name>VNodePoint</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Options</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished">In layout</translation>
+        <translation>In layout</translation>
     </message>
     <message>
         <source>Show label</source>
@@ -11554,7 +11554,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Delete</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -11949,11 +11949,11 @@ Do you want to save your changes?</translation>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
@@ -11964,11 +11964,11 @@ Do you want to save your changes?</translation>
     <name>VToolArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -11987,11 +11987,11 @@ Do you want to save your changes?</translation>
     <name>VToolArcWithLength</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -12024,7 +12024,7 @@ Do you want to save your changes?</translation>
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Arc</translation>
+        <translation>Arc</translation>
     </message>
     <message>
         <source>length</source>
@@ -12051,7 +12051,7 @@ Do you want to save your changes?</translation>
     <name>VToolCutSpline</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Curve</translation>
+        <translation>Curve</translation>
     </message>
     <message>
         <source>length</source>
@@ -12066,7 +12066,7 @@ Do you want to save your changes?</translation>
     <name>VToolCutSplinePath</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Curve</translation>
+        <translation>Curve</translation>
     </message>
     <message>
         <source>length</source>
@@ -12139,11 +12139,11 @@ Do you want to save your changes?</translation>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -12173,22 +12173,22 @@ Do you want to save your changes?</translation>
     <name>VToolFlippingByLine</name>
     <message>
         <source>First line point</source>
-        <translation type="unfinished">First line point</translation>
+        <translation>First line point</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation type="unfinished">Second line point</translation>
+        <translation>Second line point</translation>
     </message>
 </context>
 <context>
     <name>VToolHeight</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12199,11 +12199,11 @@ Do you want to save your changes?</translation>
     <name>VToolLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
 </context>
 <context>
@@ -12221,11 +12221,11 @@ Do you want to save your changes?</translation>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12240,11 +12240,11 @@ Do you want to save your changes?</translation>
     <name>VToolLinePoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12259,7 +12259,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -12827,11 +12827,11 @@ Do you want to save your changes?</translation>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12949,11 +12949,11 @@ Do you want to save your changes?</translation>
     <name>VToolShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Length</translation>
+        <translation>Length</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
