@@ -420,6 +420,9 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
+    const qreal size = UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit());
+    const qreal height = UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit());
+
     try
     {
         qApp->setPatternType(m->Type());
@@ -429,7 +432,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         ToolBarOption();
         pattern->ClearVariables(VarType::Measurement);
-        m->ReadMeasurements();
+        m->ReadMeasurements(height, size);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -444,8 +447,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        pattern->SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
-        pattern->SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+        pattern->SetSize(size);
+        pattern->SetHeight(height);
 
         doc->SetPatternWasChanged(true);
         emit doc->UpdatePatternLabel();
@@ -481,7 +484,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     try
     {
         pattern->ClearVariables(VarType::Measurement);
-        m->ReadMeasurements();
+        m->ReadMeasurements(height, size);
         if (m->Type() == MeasurementsType::Individual)
         {
             qApp->SetCustomerName(m->Customer());
@@ -2668,6 +2671,7 @@ void MainWindow::ActionLayout(bool checked)
  */
 bool MainWindow::SaveAs()
 {
+    const QString oldFilePath = qApp->GetPatternPath();
     QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
     QString dir;
     if (qApp->GetPatternPath().isEmpty())
@@ -2752,6 +2756,14 @@ bool MainWindow::SaveAs()
 
         RemoveTempDir();
         return result;
+    }
+    else if (not oldFilePath.isEmpty())
+    {
+        qCDebug(vMainWindow, "Updating restore file list.");
+        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
+        restoreFiles.removeAll(oldFilePath);
+        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
+        QFile::remove(oldFilePath + *autosavePrefix);
     }
 
     patternReadOnly = false;
@@ -2914,6 +2926,8 @@ void MainWindow::Clear()
         watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
     }
     doc->clear();
+    UpdateVisibilityGroups();
+    detailsWidget->UpdateList();
     qCDebug(vMainWindow, "Clearing scenes.");
     sceneDraw->clear();
     sceneDetails->clear();

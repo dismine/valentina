@@ -473,6 +473,19 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2)
+{
+    if (not VFuzzyComparePoints(p1, p2))
+    {
+        return VGObject::ClosestPoint(QLineF(p1, p2), t);
+    }
+    else
+    {
+        return t;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IsPointOnLineviaPDP use the perp dot product (PDP) way.
  *

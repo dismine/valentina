@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Proxy user</source>
-        <translation type="vanished">Пользователь Proxy</translation>
+        <translation type="vanished">Пользователь прокси-сервера</translation>
     </message>
     <message>
         <source>Proxy pass</source>
@@ -145,11 +145,11 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="vanished">&amp;Ок</translation>
+        <translation type="vanished">&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Диалог параметров</translation>
+        <translation type="vanished">Диалог настройки</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="vanished">Автосохранение измененной выкройки</translation>
+        <translation type="vanished">Автосохранение измененного лекала</translation>
     </message>
     <message>
         <source>min</source>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="vanished">Язык метки:</translation>
+        <translation type="vanished">Язык метки точки:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -318,14 +318,14 @@
     <name>DelTool</name>
     <message>
         <source>delete tool</source>
-        <translation>инструмент удаления</translation>
+        <translation>удалить инструмент</translation>
     </message>
 </context>
 <context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation type="vanished">инструмент удаления</translation>
+        <translation type="vanished">удалить инструмент</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation type="vanished">Материал</translation>
+        <translation type="vanished">Ткань основная</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="vanished">Создано %3 в %4</translation>
+        <translation type="vanished">Собрано на %3 %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -428,7 +428,7 @@
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Веб-сайт: %1</translation>
+        <translation>Веб сайт : %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в отдельном окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -491,7 +491,7 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Точка вдоль линии</translation>
+        <translation>Инструмент точка вдоль линии</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -515,7 +515,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -570,7 +570,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -618,11 +618,11 @@
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation>Редактировать первый угол</translation>
+        <translation>Изменить первый угол</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation>Редактировать второй угол</translation>
+        <translation>Изменить второй угол</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -646,7 +646,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Second angle:</source>
@@ -658,7 +658,7 @@
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <translation>Выберите центральную точку дуги</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -693,7 +693,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в отдельном окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -725,7 +725,7 @@
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Изменить радиус</translation>
+        <translation>Редактировать радиус</translation>
     </message>
     <message>
         <source>Edit the first angle</source>
@@ -761,7 +761,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -852,7 +852,7 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Точка вдоль биссектрисы</translation>
+        <translation>Инструмент точка биссектрисы</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -876,7 +876,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -927,7 +927,7 @@
     </message>
     <message>
         <source>First point:</source>
-        <translation>Начальная точка:</translation>
+        <translation>Первая точка:</translation>
     </message>
     <message>
         <source>Second point:</source>
@@ -1029,7 +1029,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -1069,7 +1069,7 @@
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -1085,7 +1085,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Axis point:</source>
@@ -1128,7 +1128,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1168,7 +1168,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Arc:</source>
@@ -1203,7 +1203,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1243,7 +1243,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Curve:</source>
@@ -1278,7 +1278,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1294,7 +1294,7 @@
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Разделить сложною кривую</translation>
+        <translation>Разделение сложной кривой</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1318,7 +1318,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Curve:</source>
@@ -1380,7 +1380,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="vanished">Параметры</translation>
+        <translation type="vanished">Опции</translation>
     </message>
     <message>
         <source>Name of detail</source>
@@ -1416,7 +1416,7 @@
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">Все объекты контура должны следовать в направлении по часовой стрелке.</translation>
+        <translation type="vanished">Все объекты в контуре должны следовать в направлении по часовой стрелке.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
@@ -1520,7 +1520,7 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="vanished">Материал</translation>
+        <translation type="vanished">Ткань основная</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -1600,11 +1600,11 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="vanished">Расчёт</translation>
+        <translation type="vanished">Вычисление</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет во всплывающем окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1907,7 +1907,7 @@
     <name>DialogEditWrongFormula</name>
     <message>
         <source>Edit formula</source>
-        <translation>Редактировать формулу</translation>
+        <translation>Изменить формулу</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1923,7 +1923,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -2023,7 +2023,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Name</source>
@@ -2070,7 +2070,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет во всплывающем окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
@@ -2082,7 +2082,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Second angle:</source>
@@ -2153,7 +2153,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -2185,7 +2185,7 @@
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Точка на конце отрезка</translation>
+        <translation>Инструмент точка на конце отрезка</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -2193,7 +2193,7 @@
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -2213,7 +2213,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -2392,7 +2392,7 @@
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Ошибка синтаксического анализа: %1</translation>
+        <translation>Ошибка синтаксического анализатора: %1</translation>
     </message>
 </context>
 <context>
@@ -2746,7 +2746,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation>Обозначение</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -2818,11 +2818,11 @@
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation>Переместить мерку выше</translation>
+        <translation>Переместить мерку вверх</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation>Переместить мерку ниже</translation>
+        <translation>Переместить мерку вниз</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2830,7 +2830,7 @@
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation>Вычисленное значение:</translation>
+        <translation>Рассчитанное значение:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -2878,7 +2878,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2902,7 +2902,7 @@
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчёты.</translation>
     </message>
     <message>
         <source>Refresh a pattern with all changes you made</source>
@@ -3038,7 +3038,7 @@
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation>Три групы: большие, средние, малые</translation>
+        <translation>Три группы: большие, средние, малые</translation>
     </message>
     <message>
         <source>Two groups: big, small</source>
@@ -3086,7 +3086,7 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation type="vanished">Буква/символ</translation>
+        <translation type="vanished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
@@ -3154,7 +3154,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation type="vanished">Пользовательский</translation>
+        <translation type="vanished">Клиент</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -3166,7 +3166,7 @@
 Apply settings anyway?</source>
         <translation type="vanished">Поля выходят за границы печати.
 
-Всеравно применить настройки?</translation>
+Все равно применить настройки?</translation>
     </message>
     <message>
         <source>
@@ -3221,7 +3221,7 @@ Apply settings anyway?</source>
     <message>
         <source>None</source>
         <comment>Printer</comment>
-        <translation>Ничего</translation>
+        <translation>Произвольное</translation>
     </message>
     <message>
         <source>Text</source>
@@ -3370,7 +3370,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -3426,7 +3426,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3442,7 +3442,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Axis point:</source>
@@ -3621,7 +3621,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет во всплывающем окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3633,15 +3633,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Изменить угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation>Изменить длину</translation>
+        <translation>Редактировать длину</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Move</source>
@@ -3766,7 +3766,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3830,7 +3830,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -3916,7 +3916,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Размер и рост по умолчанию</translation>
+        <translation>Рост и размер по умолчанию</translation>
     </message>
     <message>
         <source>From standard measurements</source>
@@ -3924,7 +3924,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Пользовательские</translation>
+        <translation>Клиент</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -4000,7 +4000,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation>Файл не был записан.</translation>
+        <translation>Файл ещё не был сохранен.</translation>
     </message>
     <message>
         <source>Show in Finder</source>
@@ -4123,7 +4123,7 @@ Apply settings anyway?</source>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation type="vanished">XML редактор</translation>
+        <translation type="vanished">XML-редактор</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -4215,7 +4215,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Node Name</source>
-        <translation type="vanished">Имя Узла</translation>
+        <translation type="vanished">Имя узла</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4274,7 +4274,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path</source>
-        <translation>Контур</translation>
+        <translation>Путь</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4322,11 +4322,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -4378,11 +4378,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation>Редактировать ширину припуска на шов до</translation>
+        <translation>Редактировать ширину припуска на швы до узла</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation>Редактировать ширину припуска на шов после</translation>
+        <translation>Редактировать ширину припуска на швы после узла</translation>
     </message>
     <message>
         <source>Internal path</source>
@@ -4478,7 +4478,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
-        <translation>Выбрать, если необходимо обозначить угловую точку как надсечку. Показать только левую надсечку.</translation>
+        <translation>Выбрать, если необходимо обозначить угловую точку как надсечку. Показывать только левую надсечку.</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
@@ -4558,19 +4558,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation>Список пуст. Пожалуйста, сначала создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
+        <translation>Список пуст. Пожалуйста, создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Эта опция имеет эффект только если вторая надсечка на линии шва включена в глобальных настройках. Опция позволяет отключать вторую надсечку только для этой надсечки.</translation>
+        <translation>Эта опция имеет эффект только если вторая надсечка на линии шва включена в глобальных настройках. Опция позволяет отключать вторую надсечку только для этой надсечки.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Показать вторую надсечку на линии шва</translation>
+        <translation>Показать вторую надсечку на линии шва</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Исключенный</translation>
+        <translation>Исключенный</translation>
     </message>
 </context>
 <context>
@@ -4593,7 +4593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation>Список пуст. Пожалуйста, сначала создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
+        <translation>Список пуст. Пожалуйста, создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
     </message>
 </context>
 <context>
@@ -4708,7 +4708,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation>Список пуст. Пожалуйста, сначала создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
+        <translation>Список пуст. Пожалуйста, создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
     </message>
     <message>
         <source>Control visibility</source>
@@ -4810,7 +4810,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Изменить радиус</translation>
+        <translation>Редактировать радиус</translation>
     </message>
     <message>
         <source>Error</source>
@@ -4818,7 +4818,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Значение радиуса не может быть отрицательным</translation>
+        <translation>Радиус не может быть отрицательным</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -4834,7 +4834,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -4873,7 +4873,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4921,7 +4921,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -5070,7 +5070,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -5114,7 +5114,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Значение радиуса не может быть отрицательным</translation>
+        <translation>Радиус не может быть отрицательным</translation>
     </message>
     <message>
         <source>Radius of the first circle:</source>
@@ -5130,7 +5130,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Radius of the second circle:</source>
@@ -5224,10 +5224,10 @@ Apply settings anyway?</source>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Следующий %n параметр требует перезапуск, чтобы вступить в силу: %1.</numerusform>
-            <numerusform>Следующие %n параметры требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
-            <numerusform>Следующие %n параметров требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -5255,7 +5255,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Origin Point:</source>
@@ -5267,7 +5267,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Изменить угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Select origin point</source>
@@ -5279,7 +5279,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
 </context>
 <context>
@@ -5496,7 +5496,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation>Параметры</translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
@@ -5592,7 +5592,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Edit height</source>
@@ -5604,7 +5604,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Контуры</translation>
+        <translation>Пути</translation>
     </message>
     <message>
         <source>Excluded</source>
@@ -5687,7 +5687,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -5747,7 +5747,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -5869,7 +5869,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Начальная точка:</translation>
+        <translation>Первая точка:</translation>
     </message>
     <message>
         <source>Control point</source>
@@ -5913,7 +5913,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -5941,7 +5941,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6052,7 +6052,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -6084,7 +6084,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6190,7 +6190,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчёты.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
@@ -6316,7 +6316,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation type="vanished">Показать линию от второй точки в этой точке</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Third dart point</source>
@@ -6526,27 +6526,27 @@ Apply settings anyway?</source>
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Ошибка разбора файла. Работа программы будет завершена.</translation>
+        <translation>Ошибка парсинга файла. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Ошибка идентификатора. Работа программы будет завершена.</translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation>Ошибка преобразования значения. Работа программы будет завершена.</translation>
+        <translation>Ошибка, невозможно преобразовать значение. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустого параметра. Работа программы будет завершена.</translation>
+        <translation>Ошибка, пустой параметр. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильного идентификатора. Работа программы будет завершена.</translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation>Что-то не так!</translation>
+        <translation>Что-то не так!!!</translation>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
@@ -6598,7 +6598,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation>Укажите один входной файл.</translation>
+        <translation>Необходимо указать один входной файл.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -6745,7 +6745,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New</source>
-        <translation>Новое</translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -6981,7 +6981,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="vanished">Размеры: </translation>
+        <translation type="vanished">Размер:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
@@ -7001,7 +7001,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation>Не удалось сохранить файл</translation>
+        <translation>Невозможно сохранить файл</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -7082,7 +7082,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation>Валентина не была закрыта корректно. Вы хотите восстановить файлы (%1) которые былы открыты раньше?</translation>
+        <translation>Валентина не была закрыта корректно. Вы хотите восстановить файлы (%1) которые были открыты раньше?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
@@ -7322,12 +7322,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation type="vanished">Показать мерки</translation>
+        <translation type="vanished">Показать метки</translation>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation type="vanished">Синхронизировать
-мерки</translation>
+        <translation type="vanished">Согласовать мерки</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
@@ -7516,7 +7515,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Блокировка файла</translation>
+        <translation>Файл блокировки</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -7532,7 +7531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает прав доступа.</translation>
+        <translation>Файл блокировки не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
@@ -7820,7 +7819,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -8039,7 +8038,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Невозможно подготовить данные для создания раскладки</translation>
+        <translation>Не удалось подготовить данные для создания раскладки</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -8203,11 +8202,11 @@ Do you want to save your changes?</source>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Открыть директорию</translation>
+        <translation type="vanished">Открыть каталог</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="vanished">Путь, что использует Валентина</translation>
+        <translation type="vanished">Путь, используемый программой Валентина</translation>
     </message>
     <message>
         <source>Default</source>
@@ -8235,7 +8234,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation type="vanished">Стандартная таблица мерок</translation>
+        <translation type="vanished">Стандартные мерки</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -8294,7 +8293,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Workpiece</source>
-        <translation type="vanished">Заготовки деталей</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -8495,7 +8494,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation>Открыть директорию</translation>
+        <translation>Открыть каталог</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -9150,7 +9149,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -9178,7 +9177,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Имя:</translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -9186,7 +9185,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -9206,11 +9205,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation>Переместить мерку выше</translation>
+        <translation>Переместить мерку вверх</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation>Переместить мерку ниже</translation>
+        <translation>Переместить мерку вниз</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -9242,7 +9241,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation>Показать в файловом менеджере</translation>
+        <translation>Показать в проводнике</translation>
     </message>
     <message>
         <source>Base size:</source>
@@ -9326,7 +9325,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>О &amp;Qt</translation>
+        <translation>Про &amp;Qt</translation>
     </message>
     <message>
         <source>About Tape</source>
@@ -9366,7 +9365,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>Настройки</translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <source>untitled %1</source>
@@ -9386,7 +9385,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>measurements</source>
-        <translation>мерки</translation>
+        <translation>Мерки</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
@@ -9406,7 +9405,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation>Изменить мерку</translation>
+        <translation>Редактировать мерку</translation>
     </message>
     <message>
         <source>M_%1</source>
@@ -9442,15 +9441,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">безымянный</translation>
+        <translation type="vanished">без названия</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="vanished">&lt;Пусто&gt;</translation>
+        <translation type="vanished">&lt;Empty&gt;</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation>Не сохранённые изменения</translation>
+        <translation>Несохранённые изменения</translation>
     </message>
     <message>
         <source>Measurements have been modified.
@@ -9532,7 +9531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Полное имя</translation>
+        <translation>Полное название</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -9695,11 +9694,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает прав доступа.</translation>
+        <translation>Файл блокировки не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись lock файла.</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки.</translation>
     </message>
     <message>
         <source>Export to CSV</source>
@@ -9771,7 +9770,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчёты.</translation>
     </message>
     <message>
         <source>Empty</source>
@@ -9886,11 +9885,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -9953,11 +9952,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -10171,11 +10170,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчёт</translation>
+        <translation>Вычисление</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -10187,7 +10186,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Before:</source>
-        <translation>Перед:</translation>
+        <translation>До узла:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -10199,7 +10198,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation>После:</translation>
+        <translation>После узла:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -10207,7 +10206,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Пользовательская</translation>
+        <translation>Клиент</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10336,7 +10335,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Разделитель десятичной части</translation>
+        <translation type="vanished">Разделитель дробной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -10375,7 +10374,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="vanished">Путь для использования Valentin&apos;ой</translation>
+        <translation type="vanished">Путь, используемый программой Валентина</translation>
     </message>
     <message>
         <source>Default</source>
@@ -10383,7 +10382,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="vanished">Изменить</translation>
+        <translation type="vanished">Редактировать</translation>
     </message>
     <message>
         <source>Type</source>
@@ -11397,7 +11396,7 @@ Do you want to save your changes?</source>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="vanished">Невозможно преобразовать параметр toUInt</translation>
+        <translation type="vanished">Не могу конвертировать toUInt параметр</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
@@ -11409,7 +11408,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="vanished">Невозможно преобразовать параметр toDouble</translation>
+        <translation type="vanished">Не могу конвертировать toDouble параметр</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -11441,7 +11440,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Получен неправильный параметр id. Допустимы только id &gt; 0.</translation>
+        <translation type="vanished">Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -11476,7 +11475,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation>Параметры</translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -11623,7 +11622,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка, не уникальный id.</translation>
+        <translation type="vanished">Ошибка, неуникальный id.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -11874,7 +11873,7 @@ Do you want to save your changes?</source>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Неожиданная версия &quot;%1&quot;.</translation>
+        <translation type="vanished">Неизвестная версия &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -12085,7 +12084,7 @@ Do you want to save your changes?</source>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation type="vanished">Параметры</translation>
+        <translation type="vanished">Опции</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -12374,7 +12373,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Специальная точка на плечо</translation>
+        <translation>Специальная точка на плече</translation>
     </message>
     <message>
         <source>Curve tool</source>
@@ -12922,7 +12921,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation>Параметры</translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -13792,7 +13791,7 @@ Do you want to save your changes?</source>
     <message>
         <source>None</source>
         <comment>System name</comment>
-        <translation>Внутреняя</translation>
+        <translation>Произвольное</translation>
     </message>
     <message>
         <source>Valentina team</source>
@@ -13972,7 +13971,7 @@ Do you want to save your changes?</source>
     <message>
         <source>min</source>
         <comment>min of all arguments</comment>
-        <translation>min</translation>
+        <translation>мин</translation>
     </message>
     <message>
         <source>max</source>
@@ -14092,7 +14091,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation>Рост</translation>
+        <translation>высота</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
@@ -14374,22 +14373,22 @@ Do you want to save your changes?</source>
     <name>VVITConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Неожиданная версия «%1».</translation>
+        <translation type="vanished">Неизвестная версия &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation type="vanished">Ошибка восстановления из резервного файла: %1.</translation>
+        <translation type="vanished">Ошибка востановления из резервного файла: %1.</translation>
     </message>
 </context>
 <context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Неожиданная версия «%1».</translation>
+        <translation type="vanished">Неизвестная версия &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation type="vanished">Ошибка восстановления из резервного файла: %1.</translation>
+        <translation type="vanished">Ошибка востановления из резервного файла: %1.</translation>
     </message>
 </context>
 <context>
@@ -14539,11 +14538,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation>КРИТИЧЕСКИ:</translation>
+        <translation>КРИТИЧЕСКАЯ:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation>ФАТАЛЬНО:</translation>
+        <translation>ФАТАЛЬНАЯ:</translation>
     </message>
     <message>
         <source>INFO:</source>

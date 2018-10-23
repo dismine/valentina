@@ -13,7 +13,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="209"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Altezza: Total</translation>
+        <translation>Altezza: Totale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
@@ -79,37 +79,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="235"/>
         <source>height_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>altezza_vita_fianco</translation>
+        <translation>altezza_vita</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="237"/>
         <source>Height: Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Altezza: Vita Fianco</translation>
+        <translation>Altezza: Vita </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanza verticale dal Fianco Vita al pavimento.</translation>
+        <translation>Distanza verticale dalla Vita al pavimento.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="242"/>
         <source>height_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>altezza_anca</translation>
+        <translation>altezza_fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="244"/>
         <source>Height: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Altezza: Anca</translation>
+        <translation>Altezza: Fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="245"/>
         <source>Vertical distance from the Hip level to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanza verticale dal livello Anca al pavimento.</translation>
+        <translation>Distanza verticale dal livello Fianco al pavimento.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="249"/>
@@ -205,19 +205,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="284"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>altezza_ancasuperiore</translation>
+        <translation>altezza_fiancosuperiore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="286"/>
         <source>Height: Highhip</source>
         <comment>Full measurement name.</comment>
-        <translation>Altezza: Anca superiore</translation>
+        <translation>Altezza: Fianco superiore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="287"/>
         <source>Vertical distance from the Highhip level, where front abdomen is most prominent, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanza verticale dal livello superiore Anca, dove l&apos;addome anteriore è più sporgente, al pavimento.</translation>
+        <translation>Distanza verticale dal livello superiore Fianco, dove l&apos;addome anteriore è più sporgente, al pavimento.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="291"/>
@@ -457,31 +457,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="402"/>
         <source>width_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>larghezza_anca</translation>
+        <translation>larghezza_fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="404"/>
         <source>Width: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Larghezza: Anca</translation>
+        <translation>Larghezza: Fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="405"/>
         <source>Horizontal distance from Hip Side to Hip Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanza orizzontale dal Fianco a Fianco dell&apos;Anca.</translation>
+        <translation>Distanza orizzontale dal Fianco a Fianco </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="409"/>
         <source>width_abdomen_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>larghezza_ventre_a_anca</translation>
+        <translation>larghezzada_addome_a_fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="411"/>
         <source>Width: Abdomen to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Larghezza:Ventre ad Anca</translation>
+        <translation>Larghezza: da Addome a Fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="412"/>
@@ -762,7 +762,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="566"/>
         <source>head_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>altezza_larghezza</translation>
+        <translation>testa_larghezza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="568"/>
@@ -786,7 +786,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="575"/>
         <source>Head: Crown to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Testa: Sommità al Collo Dietro</translation>
+        <translation>Testa: Sommità della testa al Collo Dietro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="576"/>
@@ -798,13 +798,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="580"/>
         <source>head_chin_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>testa_mento_al_collo_dietro</translation>
+        <translation>testada_mento_al_collo_dietro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="582"/>
         <source>Head: Chin to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Testa: Mento al Collo Dietro</translation>
+        <translation>Testa: da Mento al Collo Dietro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="583"/>
@@ -936,19 +936,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="652"/>
         <source>highhip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>fiancoalto_circ</translation>
+        <translation>Partealtafianco_circ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="654"/>
         <source>Highhip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Circonferenza parte alta delle anche</translation>
+        <translation>Circonferenza parte alta del fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="647"/>
         <source>Circumference around Waist, following natural contours. Waists are  typically higher in back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonferenza attorno alle anche, seguendo il contorno naturale. Le anche di solito sono più alte dietro.</translation>
+        <translation>Circonferenza attorno al girovita, seguendo il contorno naturale. Il girovita di solito è più alto dietro.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="362"/>
@@ -960,7 +960,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="364"/>
         <source>Height: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Altezza: Anca Posteriore</translation>
+        <translation>Altezza: Girovita Dietro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
@@ -984,13 +984,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>hip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>anche_circ</translation>
+        <translation>fianco_circ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="662"/>
         <source>Hip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Circonferenza anche</translation>
+        <translation>Circonferenza fianco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="663"/>
@@ -1062,7 +1062,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="691"/>
         <source>Size</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="692"/>

@@ -19,7 +19,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
         <source>Vertical distance from crown of head to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od najwyższego punktu głowy do podłogi.</translation>
+        <translation>Pionowa odległość od najwyższego punktu głowy do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="214"/>
@@ -43,19 +43,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="221"/>
         <source>height_scapula</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>wysokość_do_łopatki</translation>
+        <translation>wysokość_łopatki</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="223"/>
         <source>Height: Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation>Wysokość: łopatka</translation>
+        <translation>Wysokość: do łopatki</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="224"/>
         <source>Vertical distance from the Scapula (Blade point) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od podłogi do dolnej części łopatki.</translation>
+        <translation>Pionowa odległość od dolnej części łopatki (kąt dolny) do podłogi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="228"/>
@@ -73,7 +73,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="231"/>
         <source>Vertical distance from the Armpit to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od pachy do podłogi.</translation>
+        <translation>Pionowa odległość od pachy do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="235"/>
@@ -91,7 +91,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od linii talii do podłogi.</translation>
+        <translation>Pionowa odległość od linii talii do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="242"/>
@@ -109,7 +109,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="245"/>
         <source>Vertical distance from the Hip level to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Pionowa odległość od linii bioder do podłogi.</translation>
+        <translation>Pionowa odległość od linii bioder do ziemi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="249"/>
@@ -385,7 +385,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="355"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>dlugosc_plecow</translation>
+        <translation>długość_pleców</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="357"/>

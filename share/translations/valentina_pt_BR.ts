@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation type="vanished">Adicionar detalhe</translation>
+        <translation type="vanished">adicionar detalhe</translation>
     </message>
 </context>
 <context>
@@ -26,7 +26,7 @@
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation>Adicionar molde %1</translation>
+        <translation>adicionar padrão de peça %1</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Paths</source>
-        <translation type="vanished">Paths</translation>
+        <translation type="vanished">Caminhos</translation>
     </message>
 </context>
 <context>
@@ -292,7 +292,7 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">A unidade padrão foi atuaizada e será usada como padrão para o próximo molde criado.</translation>
+        <translation type="vanished">A unidade padrão foi atualizada e será usada como padrão para o próximo molde criado.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -389,7 +389,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Versão revista:</translation>
+        <translation>Criar revisão:</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -412,7 +412,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Versão revista:</translation>
+        <translation>Criar revisão:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -507,7 +507,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -551,7 +551,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Escolher etiqueta única.</translation>
+        <translation>Selecione etiqueta única.</translation>
     </message>
 </context>
 <context>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -753,7 +753,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -800,7 +800,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -888,7 +888,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Escolha etiqueta única.</translation>
+        <translation>Selecione etiqueta única.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -1049,7 +1049,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostras linha do primeiro ponto até este ponto</translation>
+        <translation type="vanished">Mostrar linha do primeiro ponto até este ponto</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -1077,7 +1077,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1105,7 +1105,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Escolher etiqueta única.</translation>
+        <translation>Selecione etiqueta única.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1124,7 +1124,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1160,7 +1160,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1184,7 +1184,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Escolher etiqueta única.</translation>
+        <translation>Selecione etiqueta única.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1199,7 +1199,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1235,7 +1235,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1259,7 +1259,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Escolher etiqueta única.</translation>
+        <translation>Selecione etiqueta única.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1274,7 +1274,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1310,7 +1310,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1334,7 +1334,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Escolher etiqueta única.</translation>
+        <translation>Selecione etiqueta única.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1408,7 +1408,7 @@
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="vanished">Reverso</translation>
+        <translation type="vanished">Inverter</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -1516,7 +1516,7 @@
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Rótulo do padrão visível</translation>
+        <translation type="vanished">Rótulo do molde visível</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1532,7 +1532,7 @@
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="vanished">Forro interno</translation>
+        <translation type="vanished">Manta</translation>
     </message>
     <message>
         <source>None</source>
@@ -1540,7 +1540,7 @@
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="vanished">Cortar e dobrar</translation>
+        <translation type="vanished">Cortar na dobra</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
@@ -1860,7 +1860,7 @@
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation>Manta</translation>
     </message>
     <message>
         <source>Word: Cut</source>
@@ -1967,11 +1967,11 @@
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Altura:</translation>
+        <translation type="vanished">Altura</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="vanished">Tamanho:</translation>
+        <translation type="vanished">Tamanho</translation>
     </message>
     <message>
         <source>Line length</source>
@@ -2149,7 +2149,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2181,7 +2181,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostras linha do primeiro ponto até este ponto</translation>
+        <translation type="vanished">Mostrar linha do primeiro ponto até este ponto</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -2205,7 +2205,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2415,7 +2415,7 @@
     </message>
     <message>
         <source>Select origin point</source>
-        <translation>Selecionar ponto de origem</translation>
+        <translation>Selecionar ponto de origemSelecionar ponto de origem</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -2485,7 +2485,7 @@
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Nome único da peça de molde</translation>
+        <translation>Nome único da peça de modelagem</translation>
     </message>
     <message>
         <source>Choose group name</source>
@@ -2528,7 +2528,7 @@
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Selecione o segundo pontoda linha</translation>
+        <translation>Selecionar o segundo ponto da linha</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -2591,11 +2591,11 @@
     </message>
     <message>
         <source>%1 - Base point</source>
-        <translation>%1 - ponto base</translation>
+        <translation>%1 -ponto base</translation>
     </message>
     <message>
         <source>%1_%2 - Line from point %1 to point %2</source>
-        <translation>%1_%2 - Linha do ponto %1 ao ponto %2</translation>
+        <translation>% 1_%2 - Linha do ponto %1 ao ponto %2</translation>
     </message>
     <message>
         <source>%3 - Point along line %1_%2</source>
@@ -2778,7 +2778,7 @@
     </message>
     <message>
         <source>Lines angles</source>
-        <translation>ângulos das linhas</translation>
+        <translation>Ângulos das linhas</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -2802,7 +2802,7 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radianos</translation>
+        <translation>Raio</translation>
     </message>
     <message>
         <source>Angles arcs</source>
@@ -2882,7 +2882,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -3050,11 +3050,11 @@
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Milimetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -3268,7 +3268,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostras linha do primeiro ponto até este ponto</translation>
+        <translation type="vanished">Mostrar linha do primeiro ponto até este ponto</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -3335,7 +3335,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Ponto na linha de interseção</translation>
+        <translation>Ponto na interseção da linha</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -3374,7 +3374,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Axis point</source>
-        <translation type="vanished">Ponto central</translation>
+        <translation type="vanished">Ponto do eixo</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -3398,15 +3398,15 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Mostras linha do primeiro ponto até este ponto</translation>
+        <translation>Mostrar linha do primeiro ponto até este ponto</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Selecione o segundo pontoda linha</translation>
+        <translation>Selecionar o segundo ponto da linha</translation>
     </message>
     <message>
         <source>Select axis point</source>
-        <translation>Selecione ponto central</translation>
+        <translation>Selecione ponto do eixo</translation>
     </message>
     <message>
         <source>Point intersect line and axis</source>
@@ -3414,7 +3414,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>Ponto central</translation>
+        <translation>Ponto do eixo</translation>
     </message>
     <message>
         <source>Second point of line</source>
@@ -3434,7 +3434,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3446,7 +3446,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Axis point:</source>
-        <translation>Ponto central:</translation>
+        <translation>Ponto do eixo:</translation>
     </message>
     <message>
         <source>First line point:</source>
@@ -3582,7 +3582,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Check all</source>
-        <translation>Verificar todos</translation>
+        <translation>Marcar todos</translation>
     </message>
     <message>
         <source>Uncheck all</source>
@@ -3696,11 +3696,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Milimetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -3727,11 +3727,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Milimetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -3743,7 +3743,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Nome único da peça de molde</translation>
+        <translation>Nome único da peça de modelagem</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
@@ -3762,7 +3762,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3790,11 +3790,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostras linha do primeiro ponto até este ponto</translation>
+        <translation type="vanished">Mostrar linha do primeiro ponto até este ponto</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Selecione o segundo pontoda linha</translation>
+        <translation>Selecionar o segundo ponto da linha</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -3822,7 +3822,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4199,7 +4199,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation type="vanished">Não éo possível desfazer mudança</translation>
+        <translation type="vanished">Não é possível desfazer mudança</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
@@ -4562,15 +4562,15 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Esta opção terá efeito somente se o segundo pique na linha de costura for ativado nas preferências globais. A opção ajuda a desativar o segundo pique somente para este pique.</translation>
+        <translation>Esta opção terá efeito somente se o segundo pique na linha de costura for ativado nas preferências globais. A opção ajuda a desativar o segundo pique somente para este pique.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Mostrar segundo pique na linha de costura</translation>
+        <translation>Mostrar segundo pique na linha de costura</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Excluído</translation>
+        <translation>Excluído</translation>
     </message>
 </context>
 <context>
@@ -4735,7 +4735,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecione o ponto central da curva</translation>
+        <translation type="vanished">Selecionar o ponto central da curva</translation>
     </message>
     <message>
         <source>Take</source>
@@ -4759,7 +4759,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation>Ponto tangente:</translation>
+        <translation>Ponto tangente:Ponto tangente:</translation>
     </message>
     <message>
         <source>Arc:</source>
@@ -4778,7 +4778,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radianos</translation>
+        <translation type="vanished">Raio</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4794,7 +4794,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecione o ponto central da curva</translation>
+        <translation type="vanished">Selecionar o ponto central da curva</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -4826,7 +4826,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4854,7 +4854,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation>Ponto tangente:</translation>
+        <translation>Ponto tangente:Ponto tangente:</translation>
     </message>
     <message>
         <source>Take:</source>
@@ -4865,7 +4865,7 @@ Aplicar configurações de qualquer forma?</translation>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radianos</translation>
+        <translation type="vanished">Raio</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -4885,7 +4885,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Selecione o ponto central da curva</translation>
+        <translation>Selecionar o ponto central da curva</translation>
     </message>
     <message>
         <source>Top of the line</source>
@@ -4897,7 +4897,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Selecione o segundo pontoda linha</translation>
+        <translation>Selecionar o segundo ponto da linha</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -4913,7 +4913,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5086,7 +5086,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Selecione o ponto central da curva</translation>
+        <translation type="vanished">Selecionar o ponto central da curva</translation>
     </message>
     <message>
         <source>Center of the second circle</source>
@@ -5122,7 +5122,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5270,7 +5270,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select origin point</source>
-        <translation>Selecionar ponto de origem</translation>
+        <translation>Selecionar ponto de origemSelecionar ponto de origem</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -5678,7 +5678,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valor do comprimento</translation>
+        <translation type="vanished">Valor de comprimento</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5714,7 +5714,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Selecione o segundo pontoda linha</translation>
+        <translation>Selecionar o segundo ponto da linha</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -5734,7 +5734,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5896,7 +5896,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -6035,7 +6035,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Auxiliar de fórmula</translation>
+        <translation>Assistente de fórmulas</translation>
     </message>
     <message>
         <source>Value</source>
@@ -6652,7 +6652,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Ponto a uma distância sobre a linha</translation>
+        <translation>Ponto à distância ao longo da linha</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -6668,7 +6668,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Ponto na linha de interseção</translation>
+        <translation>Ponto na interseção da linha</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
@@ -6932,7 +6932,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Selecione o ponto central da curva</translation>
+        <translation>Selecionar o ponto central da curva</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
@@ -8352,7 +8352,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation>reinicializar avisos</translation>
+        <translation>Reinicializar avisos</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -8486,7 +8486,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation>Minhas Medidas Mutisize</translation>
+        <translation>Minhas Medidas Multisize</translation>
     </message>
     <message>
         <source>My Patterns</source>
@@ -8793,7 +8793,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation>Manta</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -9666,7 +9666,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Este arquivo já foi aberto em outra janela. Ignore se deseja continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation>Este arquivo já foi aberto em outra janela. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -9964,7 +9964,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation>Rótulo do padrão visível</translation>
+        <translation>Rótulo do molde visível</translation>
     </message>
     <message>
         <source>Label template:</source>
@@ -10284,7 +10284,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configurações</translation>
+        <translation type="vanished">Janela de Configuração</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -10292,7 +10292,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="vanished">Paths</translation>
+        <translation type="vanished">Caminhos</translation>
     </message>
 </context>
 <context>
@@ -10307,7 +10307,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="vanished">Sistema de criação de moldes</translation>
+        <translation type="vanished">Sistema de modelagem</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -10335,7 +10335,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="vanished">Sistema de criação de moldes:</translation>
+        <translation type="vanished">Sistema de modelagem:</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -11919,7 +11919,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radio</translation>
+        <translation>Raio</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -12257,7 +12257,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Ponto a uma distância sobre a linha</translation>
+        <translation>Ponto à distância ao longo da linha</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -12265,7 +12265,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radianos</translation>
+        <translation type="vanished">Raio</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -12301,7 +12301,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Ponto na linha de interseção</translation>
+        <translation>Ponto na interseção da linha</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -12421,7 +12421,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="vanished">Ponto mais a esquerda</translation>
+        <translation type="vanished">Ponto mais à esquerda</translation>
     </message>
     <message>
         <source>Rightmost point</source>
@@ -12689,7 +12689,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation>Ponto tangente:</translation>
+        <translation>Ponto tangente:Ponto tangente:</translation>
     </message>
     <message>
         <source>Circle radius:</source>
@@ -13734,7 +13734,7 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>None</source>
         <comment>System name</comment>
-        <translation>nenhum</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>Valentina team</source>
@@ -13979,7 +13979,7 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>size</source>
@@ -13989,7 +13989,7 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
@@ -14029,32 +14029,32 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>sin</source>
         <comment>sine function working with radians</comment>
-        <translation type="unfinished">sen</translation>
+        <translation>sen</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function working with radians</comment>
-        <translation type="unfinished">cos</translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function working with radians</comment>
-        <translation type="unfinished">tg</translation>
+        <translation>tg</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function working with radians</comment>
-        <translation type="unfinished">asen</translation>
+        <translation>asen</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function working with radians</comment>
-        <translation type="unfinished">acos</translation>
+        <translation>acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function working with radians</comment>
-        <translation type="unfinished">atg</translation>
+        <translation>atg</translation>
     </message>
     <message>
         <source>sinD</source>

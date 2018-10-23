@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="vanished">Ogólne</translation>
+        <translation type="vanished">Konfiguracja</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>min</source>
-        <translation type="vanished"> min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>Interval:</source>
@@ -354,7 +354,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="vanished">flizelina</translation>
+        <translation type="vanished">Flizelina</translation>
     </message>
     <message>
         <source>Interlining</source>
@@ -365,7 +365,7 @@
     <name>DialogAboutApp</name>
     <message>
         <source>About Valentina</source>
-        <translation>O programie</translation>
+        <translation>Informacje o programie Valentina</translation>
     </message>
     <message>
         <source>Valentina version</source>
@@ -404,7 +404,7 @@
     <name>DialogAboutTape</name>
     <message>
         <source>About Tape</source>
-        <translation>O Tape</translation>
+        <translation>Informacje o programie Tape</translation>
     </message>
     <message>
         <source>Tape version</source>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -507,7 +507,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -570,7 +570,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -654,7 +654,7 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Punkt centralny:</translation>
+        <translation>Punkt środkowy:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
@@ -689,11 +689,11 @@
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="vanished">Wielkośc promienia</translation>
+        <translation type="vanished">Wielkość promienia</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -753,7 +753,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -773,7 +773,7 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Punkt centralny:</translation>
+        <translation>Punkt środkowy:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -943,7 +943,7 @@
     </message>
     <message>
         <source>Select the second point of curve</source>
-        <translation>Zaznacz drugi punkt krzywej</translation>
+        <translation>Wybierz drugi punkt krzywej</translation>
     </message>
     <message>
         <source>Select the third point of curve</source>
@@ -1029,7 +1029,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -1077,7 +1077,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1128,7 +1128,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1160,7 +1160,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1203,7 +1203,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1235,7 +1235,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1278,7 +1278,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1310,7 +1310,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1424,7 +1424,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="vanished">flizelina</translation>
+        <translation type="vanished">Flizelina</translation>
     </message>
     <message>
         <source>Interlining</source>
@@ -1444,7 +1444,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="vanished">Kreator formuły</translation>
+        <translation type="vanished">Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1456,7 +1456,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1684,7 +1684,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>flizelina</translation>
+        <translation>Flizelina</translation>
     </message>
     <message>
         <source>Material: Interlining</source>
@@ -1755,7 +1755,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1870,7 +1870,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1882,7 +1882,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
@@ -1906,7 +1906,7 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Punkt centralny:</translation>
+        <translation>Punkt środkowy:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
@@ -1965,7 +1965,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -2017,7 +2017,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2630,7 +2630,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2670,7 +2670,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Find:</source>
@@ -3081,7 +3081,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -3137,7 +3137,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3285,7 +3285,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Check all</source>
-        <translation>Zaznacz wszystko</translation>
+        <translation>Zaznacz wszystkie</translation>
     </message>
     <message>
         <source>Uncheck all</source>
@@ -3316,7 +3316,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3324,7 +3324,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3391,7 +3391,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Individual</source>
-        <translation>Indywidualne</translation>
+        <translation>Indywidualny</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3465,7 +3465,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3517,7 +3517,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3723,7 +3723,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation type="vanished">Pokaż plik z wymiaramo</translation>
+        <translation type="vanished">Pokaż plik z wymiarami</translation>
     </message>
     <message>
         <source>From multisize measurements</source>
@@ -3905,7 +3905,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3917,7 +3917,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -4191,7 +4191,7 @@ Apply settings anyway?</source>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Szerokość:</translation>
+        <translation>Szerokość:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4223,7 +4223,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Punkt:</translation>
+        <translation>Punkt:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -4231,7 +4231,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Typ:</translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <source>Edit rectangle width</source>
@@ -4365,7 +4365,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4397,7 +4397,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4440,11 +4440,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="vanished">Wielkośc promienia</translation>
+        <translation type="vanished">Wielkość promienia</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4472,7 +4472,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4605,7 +4605,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4641,7 +4641,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4762,7 +4762,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4774,7 +4774,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Origin Point:</source>
@@ -4845,11 +4845,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Prawy:</translation>
+        <translation>Prawy:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Lewy:</translation>
+        <translation>Lewy:</translation>
     </message>
     <message>
         <source>Top:</source>
@@ -4861,7 +4861,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished">Format papieru</translation>
+        <translation>Format papieru</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -4869,7 +4869,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -5162,7 +5162,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -5210,7 +5210,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5344,7 +5344,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5356,7 +5356,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -5451,7 +5451,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5463,7 +5463,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -6068,7 +6068,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Wykrój</translation>
+        <translation>&amp;Wykrój / forma</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -6184,11 +6184,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>O &amp;Qt</translation>
+        <translation>Informacje o &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;About Valentina</source>
-        <translation>&amp;O programie Valentina</translation>
+        <translation>Informacje &amp;o Valentina</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -6316,7 +6316,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation>O Qt</translation>
+        <translation>Informacje o Qt</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
@@ -6713,7 +6713,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation>Nowy wykrój 3</translation>
+        <translation>Nowy wykrój 1</translation>
     </message>
     <message>
         <source>Open pattern</source>
@@ -7612,11 +7612,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Ścieżka</translation>
+        <translation>Ścieżka</translation>
     </message>
     <message>
         <source>Default</source>
@@ -7640,7 +7640,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Moje wykroje</translation>
     </message>
     <message>
         <source>My Layouts</source>
@@ -7659,19 +7659,19 @@ Do you want to save your changes?</source>
     <name>PreferencesPatternPage</name>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished">Ustawienia grafiki</translation>
+        <translation>Ustawienia grafiki</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished">Włącz wygładzanie</translation>
+        <translation>Włącz wygładzanie</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Cofnij</translation>
+        <translation>Cofnij</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation type="unfinished">Liczba kroków (0 - brak limitu):</translation>
+        <translation>Liczba kroków (0 - brak limitu):</translation>
     </message>
     <message>
         <source>Workpiece</source>
@@ -7707,7 +7707,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Dodatek na szew</translation>
+        <translation>Dodatek na szew</translation>
     </message>
     <message>
         <source>Default value:</source>
@@ -7894,7 +7894,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>flizelina</translation>
+        <translation>Flizelina</translation>
     </message>
     <message>
         <source>Interlining</source>
@@ -8252,7 +8252,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -8384,11 +8384,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>O &amp;Qt</translation>
+        <translation>Informacje o &amp;Qt</translation>
     </message>
     <message>
         <source>About Tape</source>
-        <translation>O Tape</translation>
+        <translation>Informacje o programie Tape</translation>
     </message>
     <message>
         <source>New</source>
@@ -8420,7 +8420,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Show information about all known measurement</source>
-        <translation>Pokaż informacje o wszystkich znanych pomiarach</translation>
+        <translation>Pokaż informacje o wszystkich znanych wymiarach</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -8464,7 +8464,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation>Edytuj pomiar</translation>
+        <translation>Edytuj wymiar</translation>
     </message>
     <message>
         <source>Error</source>
@@ -8593,7 +8593,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Move measurement top</source>
-        <translation>Przesuń wymiar na górę</translation>
+        <translation>Przesuń wymiar na wierzch</translation>
     </message>
     <message>
         <source>Move measurement bottom</source>
@@ -8652,7 +8652,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation>O Qt</translation>
+        <translation>Informacje o Qt</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
@@ -8792,7 +8792,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Nazwa klienta:</translation>
+        <translation>Nazwa klienta:</translation>
     </message>
     <message>
         <source>Open individual …</source>
@@ -8887,7 +8887,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8899,7 +8899,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -8954,7 +8954,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8966,7 +8966,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -9172,7 +9172,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Kreator formuły</translation>
+        <translation>Kreator formuł</translation>
     </message>
     <message>
         <source>Value</source>
@@ -9184,7 +9184,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełną kalkulację w oknie wiadomości&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaż pełne obliczenia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -9291,7 +9291,7 @@ Do you want to save your changes?</source>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Wartość pierwszego kąta</translation>
+        <translation>Wartość pierwszego kąta</translation>
     </message>
 </context>
 <context>
@@ -9341,7 +9341,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="vanished">Książka</translation>
+        <translation type="vanished">Książka:</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
@@ -9357,7 +9357,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="vanished">Separator części dziesiętnych</translation>
+        <translation type="vanished">Separator części dziesiętnych:</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
@@ -9486,11 +9486,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Ścieżka</translation>
+        <translation>Ścieżka</translation>
     </message>
     <message>
         <source>Default</source>
@@ -9593,7 +9593,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation>Niewłaściwa wersja &quot;%1&quot;.</translation>
+        <translation>Wersja &quot;%1&quot; jest nieprawidłowa.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
@@ -9655,23 +9655,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="unfinished">Rolka 24 cale</translation>
+        <translation>Rolka 24 cale</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="unfinished">Rolka 30 cali</translation>
+        <translation>Rolka 30 cali</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="unfinished">Rolka 36 cali</translation>
+        <translation>Rolka 36 cali</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="unfinished">Rolka 42 cale</translation>
+        <translation>Rolka 42 cale</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="unfinished">Rolka 44 cale</translation>
+        <translation>Rolka 44 cale</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -9698,7 +9698,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
 </context>
 <context>
@@ -9731,7 +9731,7 @@ Do you want to save your changes?</source>
     <name>VAbstractSpline</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Label</source>
@@ -10390,7 +10390,7 @@ Do you want to save your changes?</source>
     <name>VNodePoint</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opcje</translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -10762,7 +10762,7 @@ Do you want to save your changes?</source>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -10777,11 +10777,11 @@ Do you want to save your changes?</source>
     <name>VToolArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Promień</translation>
+        <translation>Promień</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -10800,11 +10800,11 @@ Do you want to save your changes?</source>
     <name>VToolArcWithLength</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Promień</translation>
+        <translation>Promień</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -10837,7 +10837,7 @@ Do you want to save your changes?</source>
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Łuk</translation>
+        <translation>Łuk</translation>
     </message>
     <message>
         <source>length</source>
@@ -10924,11 +10924,11 @@ Do you want to save your changes?</source>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Promień</translation>
+        <translation>Promień</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -10969,7 +10969,7 @@ Do you want to save your changes?</source>
     <name>VToolHeight</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -10984,7 +10984,7 @@ Do you want to save your changes?</source>
     <name>VToolLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -11006,7 +11006,7 @@ Do you want to save your changes?</source>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -11025,7 +11025,7 @@ Do you want to save your changes?</source>
     <name>VToolLinePoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -11044,7 +11044,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -11071,7 +11071,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation type="unfinished">Dodaj punkt wg zadanej odległości i kąta</translation>
+        <translation>Dodaj punkt wg zadanej odległości i kąta</translation>
     </message>
     <message>
         <source>Length</source>
@@ -11083,7 +11083,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Dodaj punkt na linii</translation>
+        <translation>Dodaj punkt na linii</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -11279,7 +11279,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Punkt centralny:</translation>
+        <translation>Punkt środkowy:</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -11516,7 +11516,7 @@ Do you want to save your changes?</source>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -11638,7 +11638,7 @@ Do you want to save your changes?</source>
     <name>VToolShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Długość</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -12708,7 +12708,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>wysokość</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>

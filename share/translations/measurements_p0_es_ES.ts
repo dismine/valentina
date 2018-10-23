@@ -289,7 +289,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
         <source>Vertical distance from the Neck Front to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distancia vertical desde el Cuello (delantera) hasta el piso</translation>
+        <translation>Distancia vertical delantera desde el Cuello hasta el piso</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="319"/>
@@ -469,7 +469,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="405"/>
         <source>Horizontal distance from Hip Side to Hip Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distancia horizontal de un lado de la cadera al otro lado de la cadera</translation>
+        <translation>Distancia horizontal de un lado de la cadera al otro lado de la cadera.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="409"/>
@@ -564,7 +564,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="468"/>
         <source>hand_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>longitud_mano</translation>
+        <translation>mano_longitud</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="470"/>
@@ -870,7 +870,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
         <source>bust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bust_circ</translation>
+        <translation>circ_busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="624"/>

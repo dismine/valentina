@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="vanished">%Ok</translation>
+        <translation type="vanished">Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation type="vanished">Tallenna</translation>
+        <translation type="vanished">Talenna</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
@@ -174,15 +174,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="vanished">senttimetriä</translation>
+        <translation type="vanished">Senttimetriä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="vanished">millimetriä</translation>
+        <translation type="vanished">Millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="vanished">tuumaa</translation>
+        <translation type="vanished">Tuumaa</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoa kerätystä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedosta. &lt;/a&gt; </translation>
+        <translation type="vanished">Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoja kerätyistä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedoista. &lt;/a&gt; </translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -335,7 +335,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -680,7 +680,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -791,7 +791,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -850,7 +850,7 @@
     </message>
     <message>
         <source>List of points</source>
-        <translation type="unfinished">Lista pisteistä</translation>
+        <translation>Lista pisteistä</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -858,7 +858,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
@@ -905,7 +905,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -921,7 +921,7 @@
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation>Käyrän ja akselin leikkauspiste</translation>
+        <translation>Kaaren ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Axis Point</source>
@@ -1000,7 +1000,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -1075,7 +1075,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -1146,7 +1146,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -1274,6 +1274,18 @@
         <source>Width:</source>
         <translation type="vanished">Leveys:</translation>
     </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">Peruuta</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="vanished">Arvo</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
 </context>
 <context>
     <name>DialogDuplicateDetail</name>
@@ -1306,7 +1318,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Muokkaa</translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <source>Bold</source>
@@ -1376,7 +1388,7 @@
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Tiedostoa ei voitu tallentaa</translation>
+        <translation>Tiedostoa ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Import template</source>
@@ -1388,7 +1400,7 @@
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Tiedostovirhe.</translation>
+        <translation>Tiedostovirhe.</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1428,11 +1440,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1587,11 +1599,11 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation type="vanished">Kaarenpituus</translation>
+        <translation type="vanished">Kaarien pituus</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Polun pituus</translation>
+        <translation>Käyrän pituus</translation>
     </message>
     <message>
         <source>Angle of lines</source>
@@ -1655,7 +1667,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -1690,7 +1702,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -1698,7 +1710,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
@@ -1734,11 +1746,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Säde ei voi olla negatiivinen</translation>
+        <translation>Säde ei voi olla negatiivinen</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -1801,7 +1813,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1932,23 +1944,23 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">Laskettu arvo</translation>
+        <translation>Laskettu arvo</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Matemaattinen kaava</translation>
+        <translation>Matemaattinen kaava</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Yksityiskohdat</translation>
+        <translation>Yksityiskohdat</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -1964,7 +1976,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1988,7 +2000,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -2000,7 +2012,7 @@
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished">Tyhjä sarake</translation>
+        <translation>Tyhjä sarake</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -2008,11 +2020,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Jäsentämis virhe: %1</translation>
+        <translation>Jäsentämis virhe: %1</translation>
     </message>
 </context>
 <context>
@@ -2112,7 +2124,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -2303,7 +2315,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Käyrä</translation>
+        <translation>Käyrä</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -2311,7 +2323,7 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Kaari</translation>
+        <translation>Kaari</translation>
     </message>
     <message>
         <source>%1 with length %2</source>
@@ -2818,7 +2830,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First line</source>
@@ -2905,7 +2917,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -3128,11 +3140,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3277,7 +3289,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3384,7 +3396,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
 </context>
 <context>
@@ -3483,11 +3495,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">nimetön</translation>
+        <translation>nimetön</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Polku:</translation>
+        <translation>Polku:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -3527,7 +3539,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Kaava</translation>
+        <translation>Kaava</translation>
     </message>
     <message>
         <source>For technical notes</source>
@@ -3725,11 +3737,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Polku</translation>
+        <translation>Polku</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -3757,11 +3769,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Saumavara</translation>
+        <translation>Saumavara</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3769,7 +3781,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3777,7 +3789,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -3797,7 +3809,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Oletus</translation>
+        <translation>Oletus</translation>
     </message>
     <message>
         <source>After:</source>
@@ -3813,11 +3825,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished">Käännä päinvastoin</translation>
+        <translation>Käännä päinvastoin</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
@@ -3877,7 +3889,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -4051,7 +4063,7 @@ Apply settings anyway?</source>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4059,7 +4071,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -4067,11 +4079,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -4308,7 +4320,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -4383,7 +4395,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -4599,19 +4611,19 @@ Apply settings anyway?</source>
     <name>DialogPreferences</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Kaava</translation>
+        <translation>Kaava</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Polut</translation>
+        <translation>Polut</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -4637,11 +4649,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Origin Point:</source>
@@ -4736,7 +4748,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -4826,7 +4838,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Detail</source>
@@ -4842,15 +4854,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished">Käännä päinvastoin</translation>
+        <translation>Käännä päinvastoin</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
@@ -4866,7 +4878,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Jäsentämis virhe: %1</translation>
+        <translation>Jäsentämis virhe: %1</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -4938,7 +4950,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -4958,7 +4970,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Polut</translation>
+        <translation>Polut</translation>
     </message>
     <message>
         <source>Excluded</source>
@@ -5045,7 +5057,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -5160,7 +5172,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -5235,7 +5247,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Invalid spline</source>
@@ -5251,11 +5263,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -5275,7 +5287,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
@@ -5362,7 +5374,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
@@ -5378,11 +5390,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
@@ -5402,7 +5414,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
@@ -5433,15 +5445,15 @@ Apply settings anyway?</source>
     <name>DialogTapePreferences</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Polut</translation>
+        <translation>Polut</translation>
     </message>
 </context>
 <context>
@@ -5527,7 +5539,7 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -5799,6 +5811,10 @@ Apply settings anyway?</source>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">Virhe</translation>
     </message>
 </context>
 <context>
@@ -6381,7 +6397,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Valitse olkapään erityispiste</translation>
+        <translation>Olkapään erityispiste</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -6777,7 +6793,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -6905,7 +6921,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Yksilölliset mitat</translation>
+        <translation>Yksilölliset mitat</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
@@ -6953,15 +6969,15 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">Laskettu arvo</translation>
+        <translation>Laskettu arvo</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Matemaattinen kaava</translation>
+        <translation>Matemaattinen kaava</translation>
     </message>
     <message>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
@@ -7184,15 +7200,15 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Kaava</translation>
+        <translation>Kaava</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
@@ -7216,7 +7232,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
@@ -7374,23 +7390,23 @@ Haluatko tallentaa muutokset?</translation>
     <name>PreferencesConfigurationPage</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Talenna</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="unfinished">Tallenna automaattisesti muokattu kaava</translation>
+        <translation>Tallenna automaattisesti muokattu kaava</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation type="unfinished">Väli:</translation>
+        <translation>Väli:</translation>
     </message>
     <message>
         <source>min</source>
-        <translation type="unfinished">min</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Kieli</translation>
+        <translation>Kieli</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -7446,15 +7462,15 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
     <message>
         <source>Update a pattern only after a curve release</source>
@@ -7540,23 +7556,23 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Tyyppi</translation>
+        <translation>Tyyppi</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Polku</translation>
+        <translation>Polku</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Oletus</translation>
+        <translation>Oletus</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Muokkaa</translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Avaa kansio</translation>
+        <translation>Avaa kansio</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -7587,15 +7603,15 @@ Haluatko tallentaa muutokset?</translation>
     <name>PreferencesPatternPage</name>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished">Graafinen tulos</translation>
+        <translation>Graafinen tulos</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished">Käytä pehmennystä</translation>
+        <translation>Käytä pehmennystä</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Peru</translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
@@ -7635,7 +7651,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Saumavara</translation>
+        <translation>Saumavara</translation>
     </message>
     <message>
         <source>Default value:</source>
@@ -7772,23 +7788,23 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="unfinished">Ei voi muuntaa toUInt parametriä</translation>
+        <translation>Ei voi muuntaa toUInt parametriä</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="unfinished">Ei voi muuntaa toBool parametriä</translation>
+        <translation>Ei voi muuntaa toBool parametriä</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="unfinished">Tyhjä parametri</translation>
+        <translation>Tyhjä parametri</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="unfinished">Ei voinut muuntaa toDouble parametriä</translation>
+        <translation>Ei voinut muuntaa toDouble parametriä</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished">Väärä parametri id. Täytyy olla id &gt; 0.</translation>
+        <translation>Väärä parametri id. Täytyy olla id &gt; 0.</translation>
     </message>
     <message>
         <source>United detail</source>
@@ -8611,7 +8627,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -8758,7 +8774,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -8766,7 +8782,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -8817,7 +8833,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -8825,7 +8841,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -8833,11 +8849,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -8944,7 +8960,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -9027,7 +9043,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Saumavara</translation>
+        <translation>Saumavara</translation>
     </message>
     <message>
         <source>Automatic</source>
@@ -9035,7 +9051,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -9043,7 +9059,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -9051,7 +9067,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -9071,7 +9087,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Oletus</translation>
+        <translation>Oletus</translation>
     </message>
     <message>
         <source>After:</source>
@@ -9246,7 +9262,7 @@ Do you want to save your changes?</source>
     <name>TapePreferencesConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Kieli</translation>
+        <translation>Kieli</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -9313,23 +9329,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Tyyppi</translation>
+        <translation>Tyyppi</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Polku</translation>
+        <translation>Polku</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Oletus</translation>
+        <translation>Oletus</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Muokkaa</translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Avaa kansio</translation>
+        <translation>Avaa kansio</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -9448,7 +9464,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished">Yllättävä versio &quot;%1&quot;.</translation>
+        <translation>Yllättävä versio &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error openning a temp file: %1.</source>
@@ -9525,7 +9541,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
 </context>
 <context>
@@ -9551,14 +9567,14 @@ Do you want to save your changes?</source>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Yksityiskohta</translation>
+        <translation>Yksityiskohta</translation>
     </message>
 </context>
 <context>
     <name>VAbstractSpline</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Label</source>
@@ -9641,7 +9657,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit wrong formula</source>
-        <translation type="unfinished">Muutit väärää kaavaa</translation>
+        <translation>Muutit väärää kaavaa</translation>
     </message>
     <message>
         <source>goldenrod</source>
@@ -10259,7 +10275,7 @@ Do you want to save your changes?</source>
     <name>VNodePoint</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -10275,7 +10291,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -10568,7 +10584,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Yksityiskohta</translation>
+        <translation>Yksityiskohta</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -10643,11 +10659,11 @@ Do you want to save your changes?</source>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Label</source>
@@ -10658,11 +10674,11 @@ Do you want to save your changes?</source>
     <name>VToolArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Säde</translation>
+        <translation>Säde</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -10681,11 +10697,11 @@ Do you want to save your changes?</source>
     <name>VToolArcWithLength</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Säde</translation>
+        <translation>Säde</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -10718,7 +10734,7 @@ Do you want to save your changes?</source>
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Kaari</translation>
+        <translation>Kaari</translation>
     </message>
     <message>
         <source>length</source>
@@ -10745,7 +10761,7 @@ Do you want to save your changes?</source>
     <name>VToolCutSpline</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Käyrä</translation>
+        <translation>Käyrä</translation>
     </message>
     <message>
         <source>length</source>
@@ -10760,7 +10776,7 @@ Do you want to save your changes?</source>
     <name>VToolCutSplinePath</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Käyrä</translation>
+        <translation>Käyrä</translation>
     </message>
     <message>
         <source>length</source>
@@ -10793,11 +10809,11 @@ Do you want to save your changes?</source>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Säde</translation>
+        <translation>Säde</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -10827,22 +10843,22 @@ Do you want to save your changes?</source>
     <name>VToolFlippingByLine</name>
     <message>
         <source>First line point</source>
-        <translation type="unfinished">Viivan ensimmäinen piste</translation>
+        <translation>Viivan ensimmäinen piste</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation type="unfinished">Viivan toinen piste</translation>
+        <translation>Viivan toinen piste</translation>
     </message>
 </context>
 <context>
     <name>VToolHeight</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Label</source>
@@ -10853,11 +10869,11 @@ Do you want to save your changes?</source>
     <name>VToolLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
 </context>
 <context>
@@ -10875,11 +10891,11 @@ Do you want to save your changes?</source>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Label</source>
@@ -10894,11 +10910,11 @@ Do you want to save your changes?</source>
     <name>VToolLinePoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Label</source>
@@ -10913,7 +10929,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -10936,7 +10952,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Position</source>
@@ -11093,6 +11109,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Tool to make point from intersection two curves</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="vanished">Nimi</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -11316,7 +11336,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>C1: angle:</source>
@@ -11397,11 +11417,11 @@ Do you want to save your changes?</source>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Label</source>
@@ -11488,7 +11508,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -11496,7 +11516,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>apply save detail options</source>
@@ -11519,11 +11539,11 @@ Do you want to save your changes?</source>
     <name>VToolShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12534,27 +12554,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Viiva_</translation>
+        <translation>Viiva_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">KulmaViiva_</translation>
+        <translation>KulmaViiva_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Kaari_</translation>
+        <translation>Kaari_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Spl_</translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">SplPath</translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -12604,17 +12624,17 @@ Do you want to save your changes?</source>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>size</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>koko</translation>
     </message>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pituus</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
@@ -12654,32 +12674,32 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function working with radians</comment>
-        <translation type="unfinished">sin</translation>
+        <translation>sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function working with radians</comment>
-        <translation type="unfinished">cos</translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function working with radians</comment>
-        <translation type="unfinished">tan</translation>
+        <translation>tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function working with radians</comment>
-        <translation type="unfinished">asin</translation>
+        <translation>asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function working with radians</comment>
-        <translation type="unfinished">acos</translation>
+        <translation>acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function working with radians</comment>
-        <translation type="unfinished">atan</translation>
+        <translation>atan</translation>
     </message>
     <message>
         <source>sinD</source>
@@ -12957,7 +12977,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -13064,11 +13084,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Varoitus</translation>
+        <translation>Varoitus</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Kriittinen virhe</translation>
+        <translation>Kriittinen virhe</translation>
     </message>
     <message>
         <source>Fatal error</source>

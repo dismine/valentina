@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">נקודה ראשונה בקו</translation>
+        <translation type="vanished">נקודה ראשונה בשורה</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="vanished">נקודה שנייה בקו</translation>
+        <translation type="vanished">נקודה שנייה בשורה</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1553,7 +1553,7 @@
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">הערך המחושב</translation>
+        <translation>הערך המחושב</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1880,7 +1880,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">עקומה</translation>
+        <translation>עקומה</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -3179,7 +3179,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
@@ -4136,11 +4136,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
@@ -6042,7 +6042,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">הערך המחושב</translation>
+        <translation>הערך המחושב</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -6385,7 +6385,7 @@ Do you want to save your changes?</source>
     <name>PreferencesConfigurationPage</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
@@ -6457,11 +6457,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">סנטימטרים</translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">מילימטר</translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -8411,7 +8411,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
 </context>
 <context>
@@ -8444,7 +8444,7 @@ Do you want to save your changes?</source>
     <name>VAbstractSpline</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Label</source>
@@ -9099,7 +9099,7 @@ Do you want to save your changes?</source>
     <name>VNodePoint</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -9115,7 +9115,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -9460,7 +9460,7 @@ Do you want to save your changes?</source>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -9475,11 +9475,11 @@ Do you want to save your changes?</source>
     <name>VToolArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">רדיוס</translation>
+        <translation>רדיוס</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -9498,11 +9498,11 @@ Do you want to save your changes?</source>
     <name>VToolArcWithLength</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">רדיוס</translation>
+        <translation>רדיוס</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -9562,7 +9562,7 @@ Do you want to save your changes?</source>
     <name>VToolCutSpline</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">עקומה</translation>
+        <translation>עקומה</translation>
     </message>
     <message>
         <source>length</source>
@@ -9577,7 +9577,7 @@ Do you want to save your changes?</source>
     <name>VToolCutSplinePath</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">עקומה</translation>
+        <translation>עקומה</translation>
     </message>
     <message>
         <source>length</source>
@@ -9610,11 +9610,11 @@ Do you want to save your changes?</source>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">רדיוס</translation>
+        <translation>רדיוס</translation>
     </message>
     <message>
         <source>Start angle</source>
@@ -9655,7 +9655,7 @@ Do you want to save your changes?</source>
     <name>VToolHeight</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -9670,7 +9670,7 @@ Do you want to save your changes?</source>
     <name>VToolLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -9692,7 +9692,7 @@ Do you want to save your changes?</source>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -9711,7 +9711,7 @@ Do you want to save your changes?</source>
     <name>VToolLinePoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -9730,7 +9730,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -10178,7 +10178,7 @@ Do you want to save your changes?</source>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -10269,7 +10269,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -10277,7 +10277,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>apply save detail options</source>
@@ -10300,7 +10300,7 @@ Do you want to save your changes?</source>
     <name>VToolShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -11641,7 +11641,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
 </context>
 <context>

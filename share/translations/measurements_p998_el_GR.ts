@@ -199,7 +199,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="280"/>
         <source>Vertical distance from point where the front leg meets the foot to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>καβάλο_ποδιού_ως_έδαφος</translation>
+        <translation>Κάθετη απόσταση απο το σημείο οπου το μπροστινό μέρος του ποδιού ως το πόδι στο έδαφος.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="284"/>
@@ -325,7 +325,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="329"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Κάθετη απόσταση από τον Πίσω Λαιμό ως το έδαφος.</translation>
+        <translation>Κάθετη απόσταση από τον Πίσω Λαιμό ως το δίπλωμα στο πίσω μέρος του γονάτου (γραμμή γονάτου).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="333"/>
@@ -745,7 +745,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="552"/>
         <source>head_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>κεφάλι_ύψος</translation>
+        <translation>κεφάλι_μήκος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="554"/>
@@ -1051,13 +1051,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="689"/>
         <source>size</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>μέγεθος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="691"/>
         <source>Size</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="692"/>
@@ -4406,7 +4406,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2148"/>
         <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation>Αυτές οι πληροφορίες έχουν ληφθεί απο πίνακες σε κάποιες μεθόδους σχεδίασης πατρόν, π.χ.</translation>
+        <translation>Αυτές οι πληροφορίες έχουν ληφθεί απο πίνακες σε κάποιες μεθόδους σχεδίασης πατρόν, π.χ.&quot;Metric Pattern Cutting&quot; της Winifred P. Aldrich.</translation>
     </message>
 </context>
 </TS>
