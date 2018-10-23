@@ -1792,7 +1792,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Estatura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1931,7 +1931,7 @@
     </message>
     <message>
         <source>Size and height</source>
-        <translation type="vanished">Alto y ancho</translation>
+        <translation type="vanished">Talla y altura</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -1967,7 +1967,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Estatura</translation>
+        <translation type="vanished">Altura</translation>
     </message>
     <message>
         <source>Size</source>
@@ -3010,7 +3010,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
@@ -3927,7 +3927,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -4619,7 +4619,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -7643,7 +7643,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -7875,7 +7875,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation>No se pudo establecer la estatura. Necesita un archivo con medidas multitalla.</translation>
+        <translation>No se pudo establecer la altura. Necesita un archivo con medidas multitalla.</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -7979,11 +7979,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede leer configuración desde un archivo INI malformado.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede guardar configuración. Acceso denegado.</translation>
     </message>
 </context>
 <context>
@@ -8841,19 +8841,19 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Margen de costura esta vacío.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. No se puede encontrar posición para un pique.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Imposible reparar una posición de pique.</translation>
     </message>
 </context>
 <context>
@@ -9734,7 +9734,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -9858,11 +9858,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede leer configuración desde un archivo INI malformado.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede guardar configuración. Acceso denegado.</translation>
     </message>
 </context>
 <context>
@@ -9960,7 +9960,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -10866,7 +10866,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pique invalido.</translation>
     </message>
 </context>
 <context>
@@ -11036,11 +11036,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>El largo de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
+        <translation>La altura de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
-        <translation type="vanished">Las unidades de ancho/largo de página (no pueden usarse con &quot;%1&quot;, modo de exportación):</translation>
+        <translation type="vanished">Las unidades de medida ancho/altura de página (no pueden usarse con &quot;%1&quot;, modo de exportación):</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -11108,7 +11108,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="vanished">Las unidades de ancho/largo de página (no pueden usarse con &quot;%1&quot;, modo de exportación). Valores válidos: %2.</translation>
+        <translation type="vanished">Las unidades de medida ancho/altura de página (no pueden usarse con &quot;%1&quot;, modo de exportación). Valores válidos: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
