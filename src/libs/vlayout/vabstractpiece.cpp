@@ -244,7 +244,6 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
-            points.append(sp1);
             points.append(px);
 
             cutLine.setAngle(cutLine.angle()-180);
@@ -254,7 +253,6 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
             points.append(px);
-            points.append(sp3);
         }
         else
         {// The point just fine
