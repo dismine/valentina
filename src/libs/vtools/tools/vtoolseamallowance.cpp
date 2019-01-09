@@ -1366,6 +1366,8 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     QFuture<QPainterPath > futurePath = QtConcurrent::run(detail,
                                                           QOverload<const VContainer *>::of(&VPiece::MainPathPath),
                                                           this->getData());
+    QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData());
+
     QFuture<QVector<QPointF> > futureSeamAllowance;
 
     if (detail.IsSeamAllowance())
@@ -1397,19 +1399,9 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     m_placeLabels->setPath(detail.PlaceLabelPath(this->getData()));
 
-    QVector<QPointF> seamAllowancePoints;
-
-    if (detail.IsSeamAllowance())
-    {
-        seamAllowancePoints = futureSeamAllowance.result();
-    }
-
-    QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData(),
-                                                               seamAllowancePoints);
-
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        path.addPath(detail.SeamAllowancePath(seamAllowancePoints));
+        path.addPath(detail.SeamAllowancePath(futureSeamAllowance.result()));
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);
     }
