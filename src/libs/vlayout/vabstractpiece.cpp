@@ -895,7 +895,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         return QVector<QPointF>();
     }
 
-    DumpVector(points); // Uncomment for dumping test data
+//    DumpVector(points); // Uncomment for dumping test data
 
     points = CorrectEquidistantPoints(points);
     if ( points.size() < 3 )
@@ -1012,7 +1012,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     const bool removeFirstAndLast = false;
     ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
     ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
-    DumpVector(ekvPoints); // Uncomment for dumping test data
+//    DumpVector(ekvPoints); // Uncomment for dumping test data
     return ekvPoints;
 }
 
