@@ -81,7 +81,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VAbstractLayoutDialog::GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit) const
+QSizeF VAbstractLayoutDialog::GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit)
 {
     qreal width = 0;
     qreal height = 0;
@@ -155,7 +155,7 @@ QSizeF VAbstractLayoutDialog::GetTemplateSize(const PaperSizeTemplate &tmpl, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VAbstractLayoutDialog::RoundTemplateSize(qreal width, qreal height, Unit unit) const
+QSizeF VAbstractLayoutDialog::RoundTemplateSize(qreal width, qreal height, Unit unit)
 {
     qreal w = 0;
     qreal h = 0;

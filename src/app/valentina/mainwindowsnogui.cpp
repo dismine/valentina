@@ -1342,6 +1342,14 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             printer->setPaperSize (pSZ);
         }
     }
+    else
+    {
+        if (not m_dialogSaveLayout.isNull())
+        {
+            VAbstractLayoutDialog::PaperSizeTemplate tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
+            printer->setPaperSize (m_dialogSaveLayout->GetTemplateSize(tiledFormat, Unit::Mm), QPrinter::Millimeter);
+        }
+    }
 
     printer->setFullPage(ignorePrinterFields);
 
