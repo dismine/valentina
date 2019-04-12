@@ -38,7 +38,6 @@ before_install:
     sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
     brew update > /dev/null;
-    brew unlink qt5;
     brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/5eb54ced793999e3dd3bce7c64c34e7ffe65ddfd/Formula/qt.rb;
     chmod -R 755 /usr/local/opt/qt/*;
     export LDFLAGS="-L/usr/local/opt/qt/lib";
