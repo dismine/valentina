@@ -306,7 +306,11 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/Qt5XmlPatterns.dll \
         $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
-        $$[QT_INSTALL_BINS]/libwinpthread-1.dll
+        $$[QT_INSTALL_BINS]/libwinpthread-1.dll \
+        $$[QT_INSTALL_BINS]/libEGL.dll \
+        $$[QT_INSTALL_BINS]/libGLESv2.dll \
+        $$[QT_INSTALL_BINS]/d3dcompiler_*.dll \
+        $$[QT_INSTALL_BINS]/opengl32sw.dll
 
     # Don't use Qt OpenGL module since Q5.4
     equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
