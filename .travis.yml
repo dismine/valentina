@@ -40,7 +40,7 @@ before_install:
     brew update > /dev/null;
     brew unlink qt5;
     brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/5eb54ced793999e3dd3bce7c64c34e7ffe65ddfd/Formula/qt.rb;
-    chmod -R 755 /usr/local/opt/qt/*
+    chmod -R 755 /usr/local/opt/qt/*;
     export LDFLAGS="-L/usr/local/opt/qt/lib";
     export CPPFLAGS="-I/usr/local/opt/qt/include";
     export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig";
