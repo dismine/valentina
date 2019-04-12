@@ -41,7 +41,6 @@ before_install:
     brew unlink qt5;
     brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/5eb54ced793999e3dd3bce7c64c34e7ffe65ddfd/Formula/qt.rb;
     chmod -R 755 /usr/local/opt/qt5/*
-    brew link qt5;
   fi
 before_script:
 - |
