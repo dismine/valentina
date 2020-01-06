@@ -2587,7 +2587,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Не можу створити запис.</translation>
+        <translation type="vanished">Не можу створити запис.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -4570,6 +4570,10 @@ Apply settings anyway?</source>
         <source>Excluded</source>
         <translation>Виключений</translation>
     </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Пусто&gt;</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5279,6 +5283,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -5671,6 +5679,10 @@ Apply settings anyway?</source>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Пусто&gt;</translation>
     </message>
 </context>
 <context>
@@ -8852,6 +8864,18 @@ This option will take an affect after restart.</source>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -10693,6 +10717,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractOperation</name>
     <message>
         <source>Label</source>
@@ -11462,6 +11493,14 @@ Do you want to save your changes?</source>
         <source>&lt;empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11487,6 +11526,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12943,6 +12986,10 @@ Do you want to save your changes?</source>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -12975,6 +13022,10 @@ Do you want to save your changes?</source>
     <message>
         <source>United detail</source>
         <translation type="vanished">Об&apos;єднана деталь</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

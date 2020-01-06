@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation type="vanished">С опций ОС (%1)</translation>
+        <translation type="vanished">С опциями ОС (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -2587,7 +2587,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Невозможно создать запись.</translation>
+        <translation type="vanished">Невозможно создать запись.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -4546,11 +4546,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation>Введите первую точку области вырезания</translation>
+        <translation>Продлите первую точку к области вырезания</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation>Введите последнюю точку области вырезания</translation>
+        <translation>Продлите последнюю точку к области вырезания</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
@@ -4571,6 +4571,10 @@ Apply settings anyway?</source>
     <message>
         <source>Excluded</source>
         <translation>Исключенный</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
     </message>
 </context>
 <context>
@@ -5281,6 +5285,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>Вычисление</translation>
     </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -5673,6 +5681,10 @@ Apply settings anyway?</source>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation>Для открытия всех функций детали закончите создание главного контура. Пожалуйста, нажмите ОК.</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
     </message>
 </context>
 <context>
@@ -6853,7 +6865,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>zoom in</source>
-        <translation>Увеличить</translation>
+        <translation>увеличить</translation>
     </message>
     <message>
         <source>Zoom out</source>
@@ -7851,7 +7863,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>zoom fit best current pattern piece</source>
-        <translation>Уместить текущую выкройку</translation>
+        <translation>уместить текущую выкройку</translation>
     </message>
     <message>
         <source>Export details skiping the Layout stage</source>
@@ -7979,11 +7991,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно сохранить настройки. Доступ запрещен.</translation>
     </message>
 </context>
 <context>
@@ -8404,7 +8416,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>default unit</source>
-        <translation>Единица измерения по умолчанию</translation>
+        <translation>единица измерения по умолчанию</translation>
     </message>
     <message>
         <source>General</source>
@@ -8841,18 +8853,30 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Припуск шва пуст.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Невозможно найти место для надсечки.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
+        <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Невозможно скорректировать позицию надсечки.</translation>
+    </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9009,7 +9033,7 @@ This option will take an affect after restart.</source>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Определенный пользователем бинарный оператор &quot;$TOK$&quot; конфликтует с встроенным оператором.</translation>
+        <translation>определенный пользователем бинарный оператор &quot;$TOK$&quot; конфликтует с встроенным оператором.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
@@ -9385,7 +9409,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>measurements</source>
-        <translation>Мерки</translation>
+        <translation>мерки</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
@@ -9858,11 +9882,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно сохранить настройки. Доступ запрещен.</translation>
     </message>
 </context>
 <context>
@@ -10206,7 +10230,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Клиент</translation>
+        <translation>Пользовательская</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10696,6 +10720,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractOperation</name>
     <message>
         <source>Label</source>
@@ -10866,7 +10897,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная надсечка.</translation>
     </message>
 </context>
 <context>
@@ -11335,7 +11366,7 @@ Do you want to save your changes?</source>
     <name>VCommonSettings</name>
     <message>
         <source>measurements</source>
-        <translation>Мерки</translation>
+        <translation>мерки</translation>
     </message>
     <message>
         <source>individual</source>
@@ -11466,6 +11497,14 @@ Do you want to save your changes?</source>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11492,6 +11531,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Remove from group</source>
         <translation>Удалить из группы</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11975,11 +12018,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start angle</source>
-        <translation>Начать угол</translation>
+        <translation>Начальный угол</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation>Закончить угол</translation>
+        <translation>Конечный угол</translation>
     </message>
     <message>
         <source>Label</source>
@@ -11998,11 +12041,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start angle</source>
-        <translation>Начать угол</translation>
+        <translation>Начальный угол</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation>Закончить угол</translation>
+        <translation>Конечный угол</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12035,11 +12078,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>start angle</source>
-        <translation>начать угол</translation>
+        <translation>начальный угол</translation>
     </message>
     <message>
         <source>end angle</source>
-        <translation>закончить угол</translation>
+        <translation>конечный угол</translation>
     </message>
     <message>
         <source>radius</source>
@@ -12150,11 +12193,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start angle</source>
-        <translation>Начать угол</translation>
+        <translation>Начальный угол</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation>Закончить угол</translation>
+        <translation>Конечный угол</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12933,7 +12976,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>apply save detail options</source>
-        <translation>Применить &quot;сохранить параметры детали&quot;</translation>
+        <translation>применить &quot;сохранить параметры детали&quot;</translation>
     </message>
     <message>
         <source>multi deletion</source>
@@ -12946,6 +12989,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Force flipping</source>
         <translation>Форсировать переворачивание</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12979,6 +13026,10 @@ Do you want to save your changes?</source>
     <message>
         <source>United detail</source>
         <translation type="vanished">Объединённая деталь</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

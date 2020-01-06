@@ -491,7 +491,7 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Point à distance le long d&apos;un ligne</translation>
+        <translation>Point placé dans l&apos;axe d&apos;une ligne à une certaine distance</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -1876,7 +1876,7 @@
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Au pli</translation>
     </message>
     <message>
         <source>User material</source>
@@ -2047,7 +2047,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculs préliminaires</translation>
     </message>
 </context>
 <context>
@@ -2185,7 +2185,7 @@
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Point à distance et angle</translation>
+        <translation>Point placé à une certaine distance et à un certain angle d&apos;un autre</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -2587,7 +2587,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Ne peut pat créer d&apos;enregistrement.</translation>
+        <translation type="vanished">Ne peut pat créer d&apos;enregistrement.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -2659,7 +2659,7 @@
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
-        <translation>%1- point d&apos;intersection ligne%2_%3 et l&apos;axe en passant par le point %4</translation>
+        <translation>%1- point d&apos;intersection entre la ligne%2_%3 et l&apos;axe passant par le point %4</translation>
     </message>
     <message>
         <source>%1 - point of intersection curve and axis through point %2</source>
@@ -2914,7 +2914,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculs préliminaires</translation>
     </message>
     <message>
         <source>Unique variable name</source>
@@ -3271,7 +3271,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line between points</source>
-        <translation>Ligne entre plusieurs points</translation>
+        <translation>Ligne entre 2 points</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -3330,7 +3330,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Point à l&apos;intersection de lignes</translation>
+        <translation>Point à l&apos;intersection de 2 lignes</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -3793,7 +3793,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Point sur une ligne perpendiculaire</translation>
+        <translation>Point perpendiculaire à un axe</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -4567,6 +4567,10 @@ Apply settings anyway?</source>
         <source>Excluded</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;vide&gt;</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5275,6 +5279,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>Formule</translation>
     </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -5574,7 +5582,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquettes</translation>
     </message>
     <message>
         <source>Error</source>
@@ -5668,6 +5676,10 @@ Apply settings anyway?</source>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;vide&gt;</translation>
+    </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
@@ -5717,7 +5729,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Point spécial sur épaule</translation>
+        <translation>Point spécial extrêmité d&apos;épaule</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -6635,7 +6647,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Point sur une ligne perpendiculaire</translation>
+        <translation>Point perpendiculaire à un axe</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -6647,11 +6659,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Point à distance et angle</translation>
+        <translation>Point placé à une certaine distance et à un certain angle d&apos;un autre</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Point à distance le long d&apos;un ligne</translation>
+        <translation>Point placé dans l&apos;axe d&apos;une ligne à une certaine distance</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -6663,11 +6675,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line between points</source>
-        <translation>Ligne entre plusieurs points</translation>
+        <translation>Ligne entre 2 points</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Point à l&apos;intersection de lignes</translation>
+        <translation>Point à l&apos;intersection de 2 lignes</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
@@ -6859,11 +6871,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation type="vanished">Zoom par défaut</translation>
+        <translation type="vanished">Zoom 100 %</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation type="vanished">Zoom par défaut</translation>
+        <translation type="vanished">Zoom 100 %</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -7093,7 +7105,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Point spécial sur épaule</translation>
+        <translation>Point spécial extrêmité d&apos;épaule</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -7173,7 +7185,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Config pattern piece</source>
-        <translation>Configurer la pièce du patron</translation>
+        <translation>Configurer l&apos;élément de patron</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -7241,7 +7253,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Print tiled PDF</source>
-        <translation>Imprimer PDF trié et assemblé</translation>
+        <translation>Imprimer PDF multipages</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -7249,7 +7261,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Print preview</source>
-        <translation>Aperçu d&apos;impression</translation>
+        <translation>Aperçu avant impression</translation>
     </message>
     <message>
         <source>Print preview original layout</source>
@@ -7257,7 +7269,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export As...</source>
-        <translation type="vanished">Exporter en...</translation>
+        <translation type="vanished">Exporter sous ...</translation>
     </message>
     <message>
         <source>Export original layout</source>
@@ -7305,7 +7317,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation type="vanished">Charger individuelles ...</translation>
+        <translation type="vanished">Charger mensurations individuelles ...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
@@ -7450,7 +7462,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Preview tiled PDF</source>
-        <translation>Aperçu du PDF trié et assemblé</translation>
+        <translation>Aperçu avant impression PDF multipages</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -7554,7 +7566,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
-        <translation>Outil courbe utilisant les points comme poignées</translation>
+        <translation>Outil courbe utilisant les points comme poignées de contrôle</translation>
     </message>
     <message>
         <source>Select first curve point</source>
@@ -7622,7 +7634,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Original zoom</source>
-        <translation>Zoom par défaut</translation>
+        <translation>Zoom 100 %</translation>
     </message>
     <message>
         <source>Select first circle center</source>
@@ -7678,7 +7690,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Elliptical Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arc elliptique</translation>
     </message>
     <message>
         <source>Select point of center of elliptical arc</source>
@@ -7722,27 +7734,27 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Load Individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger mensurations individuelles</translation>
     </message>
     <message>
         <source>Load Individual measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger le fichier de mensurations individuelles</translation>
     </message>
     <message>
         <source>Load Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Load multisize measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger fichier de mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Open Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir Tape</translation>
     </message>
     <message>
         <source>Edit Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer les mesures en cours d&apos;utilisation</translation>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
@@ -7758,7 +7770,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Unload Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler le chargement du fichier Tape</translation>
     </message>
     <message>
         <source>Unload measurements if they were not used in a pattern file</source>
@@ -7810,7 +7822,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export increments to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les incréments sous format CSV</translation>
     </message>
     <message>
         <source>Name</source>
@@ -7874,7 +7886,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Label template editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèles mentions du patron</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -7894,7 +7906,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export As…</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter sous …</translation>
     </message>
     <message>
         <source>Save…</source>
@@ -7906,7 +7918,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export Final Measurements to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les mesures finales au format CSV</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
@@ -7914,7 +7926,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;export des mesures finales.</translation>
     </message>
     <message>
         <source>Destination path is empty.</source>
@@ -8089,7 +8101,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;export des mesures finales.</translation>
     </message>
     <message>
         <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
@@ -8347,11 +8359,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Pattern editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Révision du patron</translation>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher à nouveau les messages d&apos;avertissement</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -8363,7 +8375,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Celui du système</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -8379,15 +8391,15 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Update a pattern only after a curve release</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne mettre à jour le patron qu&apos;une fois la courbe relâchée</translation>
     </message>
     <message>
         <source>Free curve mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode &quot;courbe libre&quot;</translation>
     </message>
     <message>
         <source>default unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Unité par défaut</translation>
     </message>
     <message>
         <source>General</source>
@@ -8395,62 +8407,62 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Double-clic = zoom optimal sur la pièce en cours de travail</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Défilement</translation>
     </message>
     <message>
         <source>Animation</source>
-        <translation type="unfinished"></translation>
+        <translation>Animation</translation>
     </message>
     <message>
         <source>Duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée:</translation>
     </message>
     <message>
         <source>Scrolling animation duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée de l&apos;animation de défilement</translation>
     </message>
     <message>
         <source>ms</source>
         <comment>milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Update interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalle de rafraîchissement:</translation>
     </message>
     <message>
         <source>Time in milliseconds between each animation update</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée en millisecondes entre chaque rafraîchissement de l&apos;animation</translation>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de la souris</translation>
     </message>
     <message>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
-        <translation type="unfinished"></translation>
+        <translation>Capteur:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de défilement pour souris optique</translation>
     </message>
     <message>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
-        <translation type="unfinished"></translation>
+        <translation>Molette:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de défilement pour souris à molette</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Accélération:</translation>
     </message>
 </context>
 <context>
@@ -8799,7 +8811,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Au pli</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
@@ -8835,6 +8847,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9898,7 +9922,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>TabLabels</name>
     <message>
         <source>Piece label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Données de l&apos;étiquette</translation>
     </message>
     <message>
         <source>Letter:</source>
@@ -9914,7 +9938,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquettes</translation>
     </message>
     <message>
         <source>Detail label visible</source>
@@ -9978,11 +10002,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Quantity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantité :</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Au pli</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -10419,11 +10443,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Measurements editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Révision des mensurations</translation>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher à nouveau les messages d&apos;avertissement</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -10447,7 +10471,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Celui du système</translation>
     </message>
 </context>
 <context>
@@ -10671,6 +10695,13 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Roll 72in</source>
         <translation type="unfinished">Rouleau de 44po {72i?}</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11198,7 +11229,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette commande permet d&apos;exporter les mesures finales. Indiquez un chemin d&apos;accès pour le fichier CSV contenant les mesures à exporter. Ce chemin doit spécifier le dossier dans lequel le fichier sera enregistré, ainsi que le nom du fichier. Il peut être absolu ou relatif. Le chemin relatif pointera vers le dossier dans lequel votre patron actuel est enregistré.</translation>
     </message>
     <message>
         <source>Path to csv file</source>
@@ -11439,6 +11470,14 @@ Voulez-vous enregistrer les changements?</translation>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11460,10 +11499,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Add to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter au groupe</translation>
     </message>
     <message>
         <source>Remove from group</source>
+        <translation>Retirer du groupe</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11683,7 +11726,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection line and axis</source>
-        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de ligne et d&apos;axe</translation>
+        <translation>Erreur lors de la création ou de la mise à jour du point d&apos;intersection ligne/axe</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curve and axis</source>
@@ -11915,6 +11958,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>cut</source>
         <translation type="vanished">Couper</translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="vanished">Au pli</translation>
     </message>
 </context>
 <context>
@@ -12197,7 +12244,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de calculer l&apos;emplacement du point &apos;%1&apos;. Aucun point d&apos;intersection entre la ligne (%2;%3) et l&apos;axe &apos;%4&apos; avec l&apos;angle %5°</translation>
     </message>
 </context>
 <context>
@@ -12254,7 +12301,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Point à distance et angle</translation>
+        <translation>Point placé à une certaine distance et à un certain angle d&apos;un autre</translation>
     </message>
     <message>
         <source>Line type</source>
@@ -12270,7 +12317,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Point à distance le long d&apos;un ligne</translation>
+        <translation>Point placé dans l&apos;axe d&apos;une ligne à une certaine distance</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -12310,15 +12357,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Line between points</source>
-        <translation>Ligne entre plusieurs points</translation>
+        <translation>Ligne entre 2 points</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Point à l&apos;intersection de lignes</translation>
+        <translation>Point à l&apos;intersection de 2 lignes</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Point sur une ligne perpendiculaire</translation>
+        <translation>Point perpendiculaire à un axe</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
@@ -12334,7 +12381,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Point spécial sur épaule</translation>
+        <translation>Point spécial extrêmité d&apos;épaule</translation>
     </message>
     <message>
         <source>Curve tool</source>
@@ -12904,6 +12951,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -12936,6 +12987,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>United detail</source>
         <translation type="vanished">Pièces de patron fusionnées</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

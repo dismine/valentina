@@ -2587,7 +2587,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>No se puede crear registro.</translation>
+        <translation type="vanished">No se puede crear registro.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -4571,6 +4571,10 @@ Aplicar características de todos modos?</translation>
         <source>Excluded</source>
         <translation>Excluido</translation>
     </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4687,7 +4691,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation>Etiqueta de lugar</translation>
+        <translation>Marcas del patrón</translation>
     </message>
     <message>
         <source>Control</source>
@@ -5223,9 +5227,9 @@ Aplicar características de todos modos?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
+            <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -5278,6 +5282,10 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Calculation</source>
         <translation>Calculos</translation>
+    </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5662,7 +5670,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation>Etiqueta de lugar</translation>
+        <translation>Marcas del patrón</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
@@ -5671,6 +5679,10 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation>Para abrir todas las características de detalles complete creando la ruta principal, Por favor, presione OK.</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
     </message>
 </context>
 <context>
@@ -7947,7 +7959,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Place label tool</source>
-        <translation>Herramienta de etiqueta de lugar</translation>
+        <translation>Herramienta de marcas del patrón</translation>
     </message>
     <message>
         <source>Duplicate detail tool</source>
@@ -7955,7 +7967,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Select placelabel center point</source>
-        <translation>Seleccionar punto centro etiqueta de lugar</translation>
+        <translation>Seleccionar punto de centro marcas del patrón</translation>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
@@ -8855,6 +8867,18 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Imposible reparar una posición de pique.</translation>
     </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -9113,7 +9137,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <name>SavePlaceLabelOptions</name>
     <message>
         <source>save place label options</source>
-        <translation>guardar opciones de etiqueta de lugar</translation>
+        <translation>guardar opciones de marcas del patrón</translation>
     </message>
 </context>
 <context>
@@ -10696,6 +10720,13 @@ Quieres guardar los cambios?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractOperation</name>
     <message>
         <source>Label</source>
@@ -11466,6 +11497,14 @@ Quieres guardar los cambios?</translation>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11492,6 +11531,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Remove from group</source>
         <translation>Remover del grupo</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12947,6 +12990,10 @@ Quieres guardar los cambios?</translation>
         <source>Force flipping</source>
         <translation>Forzar voltear</translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -12979,6 +13026,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>United detail</source>
         <translation type="vanished">Detalle unido</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14111,7 +14162,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
-        <translation>CurrentSeamAllowance</translation>
+        <translation>MargenCosturaActual</translation>
     </message>
     <message>
         <source>degTorad</source>

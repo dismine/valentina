@@ -400,6 +400,12 @@
         <translation>Distância vertical do Pescoço Costas até a Lateral da Cintura. (&apos;Altura: Pescoço Costas&apos; - &apos;Altura: Lateral da Cintura&apos;).</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
+        <source>Vertical height from Waist Back to floor.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="381"/>
         <source>width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -963,10 +969,9 @@
         <translation>Altura: Cintura Costas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Altura vertical entre Cintura Costas para o chão. (&apos;Altura: Frontal da Cintura&quot; - &apos;Perna: Virilha para o chão&quot;).</translation>
+        <translation type="vanished">Altura vertical entre Cintura Costas para o chão. (&apos;Altura: Frontal da Cintura&quot; - &apos;Perna: Virilha para o chão&quot;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>

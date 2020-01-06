@@ -400,6 +400,12 @@
         <translation>Distancia vertical desde la Nuca hasta el lateral la Cintura. (&apos;Altura: Nuca&apos; - &apos;Altura: lateral de Cintura&apos;).</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
+        <source>Vertical height from Waist Back to floor.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="381"/>
         <source>width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -963,10 +969,9 @@
         <translation>Altura: Cintura posterior</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Altura vertical desde la espalda de la cintura hasta el suelo. (&apos;Altura: Frente de la cintura&apos;&apos; - &apos;Pierna: De entrepierna al suelo&apos;&apos;).</translation>
+        <translation type="vanished">Altura vertical desde la espalda de la cintura hasta el suelo. (&apos;Altura: Frente de la cintura&apos;&apos; - &apos;Pierna: De entrepierna al suelo&apos;&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>
@@ -1188,7 +1193,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="740"/>
         <source>Highbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco del pecho, parte frontal, parte media</translation>
+        <translation>Arco del pecho, parte frontal, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="741"/>
@@ -1224,7 +1229,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="755"/>
         <source>Lowbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco del busto bajo, parte frontal, parte media</translation>
+        <translation>Arco del busto bajo, parte frontal, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="756"/>
@@ -1242,7 +1247,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="762"/>
         <source>Rib arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco de la costilla, parte frontal, parte media</translation>
+        <translation>Arco de la costilla, parte frontal, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="763"/>
@@ -1260,7 +1265,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="769"/>
         <source>Waist arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco de la cintura, parte frontal, parte media</translation>
+        <translation>Arco de la cintura, parte frontal, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="770"/>
@@ -1272,31 +1277,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="774"/>
         <source>highhip_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>caderaalta_arco_mitad_f</translation>
+        <translation>mitad_arco_caderaalta_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="776"/>
         <source>Highhip arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco de la cadera alta, parte frontal, parte media</translation>
+        <translation>Arco de la cadera alta, parte frontal, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="777"/>
         <source>Half of &apos;Highhip arc, front&apos;.  (&apos;Highhip arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Mitad del &apos;Arco de la cadera alta, parte media&apos;.  (&apos;Arco de la cadera alta, parte media&apos; / 2).</translation>
+        <translation>Mitad del &apos;Arco de la cadera alta, mitad&apos;.  (&apos;Arco de la cadera alta, mitad&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="781"/>
         <source>hip_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hip_arc_half_f</translation>
+        <translation>mitad_arco_cadera_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="783"/>
         <source>Hip arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco de la cadera, parte frontal, parte media</translation>
+        <translation>Arco de la cadera, parte frontal, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="784"/>
@@ -1308,7 +1313,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="788"/>
         <source>neck_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>neck_arc_b</translation>
+        <translation>arco_cuello_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="790"/>
@@ -1320,13 +1325,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="791"/>
         <source>From Neck Side to Neck Side across back. (&apos;Neck circumference&apos; - &apos;Neck arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Desde Lado del Cuello a Lado del Cuello a través de la parte trasera. (&apos;Circunferencia del cuello&apos; - &apos;Arco del cuello, parte frontal&apos;).</translation>
+        <translation>Desde Lado del Cuello a Lado del Cuello a través de la parte trasera. (&apos;Circunferencia del cuello&apos; - &apos;Arco del cuello, frente&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="796"/>
         <source>highbust_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>highbust_arc_b</translation>
+        <translation>arco_bustoalto_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="798"/>
@@ -1344,7 +1349,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="803"/>
         <source>bust_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bust_arc_b</translation>
+        <translation>arco_busto_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="805"/>
@@ -1362,7 +1367,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="811"/>
         <source>lowbust_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>lowbust_arc_b</translation>
+        <translation>arco_bajobusto_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="813"/>
@@ -1380,7 +1385,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="819"/>
         <source>rib_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>rib_arc_b</translation>
+        <translation>arco_costillas_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="821"/>
@@ -1398,7 +1403,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="827"/>
         <source>waist_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>waist_arc_b</translation>
+        <translation>arco_cintura_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="829"/>
@@ -1416,7 +1421,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="835"/>
         <source>highhip_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>highhip_arc_b</translation>
+        <translation>arco_altacadera_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="837"/>
@@ -1434,7 +1439,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="843"/>
         <source>hip_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hip_arc_b</translation>
+        <translation>arco_cadera_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="845"/>
@@ -1452,13 +1457,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="851"/>
         <source>neck_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>neck_arc_half_b</translation>
+        <translation>mitad_arco_cuello_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="853"/>
         <source>Neck arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco del cuello, parte trasera, parte media</translation>
+        <translation>Arco del cuello, parte trasera, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="854"/>
@@ -1470,13 +1475,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="858"/>
         <source>highbust_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>highbust_arc_half_b</translation>
+        <translation>mitad_arco_bustoalto_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="860"/>
         <source>Highbust arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco del busto alto, parte trasera, parte media</translation>
+        <translation>Arco del busto alto, parte trasera, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="861"/>
@@ -1488,13 +1493,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="866"/>
         <source>bust_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bust_arc_half_b</translation>
+        <translation>mitad_arco_busto_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="868"/>
         <source>Bust arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco del busto, parte trasera, parte media</translation>
+        <translation>Arco del busto, parte trasera, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="869"/>
@@ -1506,13 +1511,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="873"/>
         <source>lowbust_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>lowbust_arc_half_b</translation>
+        <translation>mitad_arco_bajobusto_b</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="875"/>
         <source>Lowbust arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arco del busto bajo, parte trasera, parte media</translation>
+        <translation>Arco del busto bajo, parte trasera, mitad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="876"/>

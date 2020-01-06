@@ -2,38 +2,52 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AddDet</name>
+    <message>
+        <source>add detail</source>
+        <translation type="vanished">添加细节</translation>
+    </message>
+</context>
+<context>
     <name>AddGroup</name>
     <message>
         <source>add group</source>
-        <translation type="unfinished"></translation>
+        <translation>添加组合</translation>
     </message>
 </context>
 <context>
     <name>AddItemToGroup</name>
     <message>
         <source>Add item to group</source>
-        <translation type="unfinished"></translation>
+        <translation>加入组合</translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>添加纸样 %1</translation>
     </message>
 </context>
 <context>
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished"></translation>
+        <translation>添加细节</translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
     <message>
         <source>add object</source>
-        <translation type="unfinished"></translation>
+        <translation>添加元素</translation>
+    </message>
+</context>
+<context>
+    <name>AddUnionDetails</name>
+    <message>
+        <source>add union details</source>
+        <translation type="vanished">添加合成细节</translation>
     </message>
 </context>
 <context>
@@ -103,6 +117,10 @@
         <translation type="vanished">代理用户：</translation>
     </message>
     <message>
+        <source>Proxy pass:</source>
+        <translation type="vanished">代理密码：</translation>
+    </message>
+    <message>
         <source>User Name:</source>
         <translation type="vanished">用户名:</translation>
     </message>
@@ -153,8 +171,16 @@
         <translation type="vanished">保存</translation>
     </message>
     <message>
+        <source>Auto-save modified pattern</source>
+        <translation type="vanished">自动储存被更改的纸样</translation>
+    </message>
+    <message>
         <source>min</source>
         <translation type="vanished">最小值</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation type="vanished">间隔：</translation>
     </message>
     <message>
         <source>Language</source>
@@ -187,6 +213,10 @@
     <message>
         <source>Send crash reports (recommended)</source>
         <translation type="vanished">发送软件崩溃报告(推荐)</translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="vanished">每次软件崩溃都会收集有关信息以帮助找到造成的原因。我们不会收集任何私人信息。在这里可也了解我们收集信息的&lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;详细&lt;/a&gt;。</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -1913,10 +1943,6 @@
         <translation>工具</translation>
     </message>
     <message>
-        <source>Can&apos;t create record.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 - Base point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3502,6 +3528,10 @@ Apply settings anyway?</source>
         <source>Excluded</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4061,6 +4091,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>打算</translation>
     </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -4412,6 +4446,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6515,11 +6553,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>自动储存被更改的纸样</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>间隔：</translation>
     </message>
     <message>
         <source>min</source>
@@ -6985,6 +7023,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8599,6 +8649,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractOperation</name>
     <message>
         <source>Label</source>
@@ -9227,6 +9284,14 @@ Do you want to save your changes?</source>
         <source>&lt;empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -9248,6 +9313,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10486,6 +10555,10 @@ Do you want to save your changes?</source>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -10513,6 +10586,10 @@ Do you want to save your changes?</source>
     <name>VToolUnionDetails</name>
     <message>
         <source>union details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
