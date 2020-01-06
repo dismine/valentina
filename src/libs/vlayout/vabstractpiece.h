@@ -37,6 +37,7 @@
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/def.h"
 #include "../vgeometry/vgobject.h"
+#include "../ifc/ifcdef.h"
 
 template <class T> class QVector;
 
@@ -53,7 +54,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VSAPoint : public QPointF
 {
 public:
-    Q_DECL_CONSTEXPR VSAPoint();
+    Q_DECL_CONSTEXPR VSAPoint() V_NOEXCEPT_EXPR (true);
     Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
     Q_DECL_CONSTEXPR explicit VSAPoint(const QPointF &p);
 
@@ -84,7 +85,7 @@ Q_DECLARE_METATYPE(VSAPoint)
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint()
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint() V_NOEXCEPT_EXPR (true)
     : QPointF(),
       m_before(-1),
       m_after(-1),
