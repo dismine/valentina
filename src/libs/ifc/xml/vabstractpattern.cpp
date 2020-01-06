@@ -243,7 +243,11 @@ QList<QString> GetTokens(const VFormulaField &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void GatherTokens(QSet<QString> &tokens, const QList<QString> &tokenList)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    tokens = tokens.unite(QSet<QString>(tokenList.begin(), tokenList.end()));
+#else
     tokens = tokens.unite(tokenList.toSet());
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,11 +298,21 @@ QStringList VAbstractPattern::ListMeasurements() const
 {
     const QFuture<QStringList> futureIncrements = QtConcurrent::run(this, &VAbstractPattern::ListIncrements);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QSet<QString> results = QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens, GatherTokens);
+    const auto tokens = QList<QString>(results.begin(), results.end());
+#else
     const QList<QString> tokens = QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens,
                                                                       GatherTokens).toList();
+#endif
 
     QSet<QString> measurements;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QStringList result = futureIncrements.result();
+    QSet<QString> others = QSet<QString>(result.begin(), result.end());
+#else
     QSet<QString> others = futureIncrements.result().toSet();
+#endif
 
     for (const auto &token : tokens)
     {
@@ -310,7 +324,7 @@ QStringList VAbstractPattern::ListMeasurements() const
         IsVariable(token) || IsFunction(token) ? others.insert(token) : measurements.insert(token);
     }
 
-    return QStringList(measurements.toList());
+    return QStringList(measurements.values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
