@@ -229,17 +229,8 @@ void DialogLineIntersect::PointNameChanged()
     QPointF fPoint;
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
 
-    QColor color = okColor;
-    if (set.size() < 3 || intersect == QLineF::NoIntersection)
-    {
-        flagError = false;
-        color = errorColor;
-    }
-    else
-    {
-        flagError = true;
-        color = okColor;
-    }
+    flagError = not (set.size() < 3 || intersect == QLineF::NoIntersection);
+    QColor color = flagError ? okColor : errorColor;
     ChangeColor(ui->labelP1Line1, color);
     ChangeColor(ui->labelP2Line1, color);
     ChangeColor(ui->labelP1Line2, color);
