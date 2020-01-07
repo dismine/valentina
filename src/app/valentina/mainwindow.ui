@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>243</height>
         </rect>
        </property>
@@ -743,7 +743,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>282</height>
         </rect>
        </property>
@@ -1034,7 +1034,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>98</width>
          <height>102</height>
         </rect>
        </property>
@@ -1117,8 +1117,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
-         <height>333</height>
+         <width>104</width>
+         <height>192</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>237</height>
         </rect>
        </property>
@@ -1586,8 +1586,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
-         <height>333</height>
+         <width>104</width>
+         <height>57</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1724,7 +1724,6 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionForum"/>
     <addaction name="actionReportBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
@@ -2676,14 +2675,6 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionForum">
-   <property name="text">
-    <string>Forum</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
