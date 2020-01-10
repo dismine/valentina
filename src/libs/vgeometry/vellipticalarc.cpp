@@ -280,7 +280,9 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     }
 
     QPainterPath path;
+    path.moveTo(GetP1());
     path.arcTo(box, VAbstractArc::GetStartAngle(), sweepAngle);
+    path.moveTo(GetP2());
 
     QTransform t = d->m_transform;
     t.translate(center.x(), center.y());
@@ -298,10 +300,6 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
 #else
         polygon = path.toSubpathPolygons().first(); // clazy:exclude=detaching-temporary
 #endif
-        if (not polygon.isEmpty())
-        {
-            polygon.removeFirst(); // remove point (0;0)
-        }
     }
 
     return polygon;
