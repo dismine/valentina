@@ -300,6 +300,15 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
 #else
         polygon = path.toSubpathPolygons().first(); // clazy:exclude=detaching-temporary
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        if (not polygon.isEmpty() && not VFuzzyComparePoints(GetP1(), polygon.constFirst()))
+#else
+        if (not polygon.isEmpty() && not VFuzzyComparePoints(GetP1(), polygon.first())) // clazy:exclude=detaching-temporary
+#endif
+        {
+            polygon.removeFirst(); // remove point (0;0)
+        }
     }
 
     return polygon;
