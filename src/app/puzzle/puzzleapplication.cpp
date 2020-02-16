@@ -573,7 +573,7 @@ bool PuzzleApplication::event(QEvent *e)
         case QEvent::ApplicationActivate:
         {
             Clean();
-            PuzzleMainWindow *mw = PuzzleMainWindow();
+            PuzzleMainWindow *mw = MainWindow();
             if (mw && not mw->isMinimized())
             {
                 mw->show();
