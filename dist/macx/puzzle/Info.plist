@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>CFBundleIconFile</key>
+	<string>@ICON@</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.6</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2013-2020, Valentina project</string>
+	<key>CFBundleSignature</key>
+	<string>@TYPEINFO@</string>
+	<key>CFBundleExecutable</key>
+	<string>@EXECUTABLE@</string>
+	<key>CFBundleIdentifier</key>
+	<string>io.bitbucket.valentinaproject.@EXECUTABLE@</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.7.0</string>
+	<key>CFBundleVersion</key>
+	<string>0.7.0.0</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>NSRequiresAquaSystemAppearance</key>
+	<true/>
+</dict>
+</plist>
