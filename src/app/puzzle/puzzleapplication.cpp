@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   mapplication.cpp
+ **  @file   puzzleapplication.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   8 7, 2015
+ **  @date   16 2, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,9 +26,9 @@
  **
  *************************************************************************/
 
-#include "mapplication.h"
+#include "puzzleapplication.h"
 #include "version.h"
-#include "tmainwindow.h"
+#include "puzzlemainwindow.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
@@ -37,21 +37,8 @@
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
-#include "../qmuparser/qmuparsererror.h"
-#include "../vpatterndb/variables/vmeasurement.h"
 
-#include <QDir>
-#include <QFileOpenEvent>
-#include <QLocalSocket>
-#include <QResource>
-#include <QTranslator>
-#include <QPointer>
-#include <QLocalServer>
 #include <QMessageBox>
-#include <iostream>
-#include <QGridLayout>
-#include <QSpacerItem>
-#include <QThread>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -62,6 +49,8 @@ Q_LOGGING_CATEGORY(mApp, "m.application")
 QT_WARNING_POP
 
 #include <QCommandLineParser>
+#include <QLocalSocket>
+#include <QLocalServer>
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -242,12 +231,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MApplication::MApplication(int &argc, char **argv)
+PuzzleApplication::PuzzleApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv),
       mainWindows(),
       localServer(nullptr),
-      trVars(nullptr),
-      dataBase(QPointer<DialogMDataBase>()),
       testMode(false)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
@@ -256,22 +243,16 @@ MApplication::MApplication(int &argc, char **argv)
     setOrganizationDomain(VER_COMPANYDOMAIN_STR);
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
-    // We have been running Tape in two different cases.
+    // We have been running Puzzle in two different cases.
     // The first inside own bundle where info.plist is works fine, but the second,
     // when we run inside Valentina's bundle, require direct setting the icon.
-    setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
+    setWindowIcon(QIcon(":/puzzleicon/64x64/logo.png"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MApplication::~MApplication()
+PuzzleApplication::~PuzzleApplication()
 {
     qDeleteAll(mainWindows);
-
-    delete trVars;
-    if (not dataBase.isNull())
-    {
-        delete dataBase;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -282,7 +263,7 @@ MApplication::~MApplication()
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool MApplication::notify(QObject *receiver, QEvent *event)
+bool PuzzleApplication::notify(QObject *receiver, QEvent *event)
 {
     try
     {
@@ -331,13 +312,6 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return true;
     }
-    // These last two cases special. I found that we can't show here modal dialog with error message.
-    // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
-    catch (const qmu::QmuParserError &e)
-    {
-        qCCritical(mApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
-        exit(V_EX_DATAERR);
-    }
     catch (std::exception &e)
     {
         qCCritical(mApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
@@ -347,7 +321,7 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::IsTestMode() const
+bool PuzzleApplication::IsTestMode() const
 {
     return testMode;
 }
@@ -356,13 +330,13 @@ bool MApplication::IsTestMode() const
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool MApplication::IsAppInGUIMode() const
+bool PuzzleApplication::IsAppInGUIMode() const
 {
     return IsTestMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TMainWindow *MApplication::MainWindow()
+PuzzleMainWindow *PuzzleApplication::MainWindow()
 {
     Clean();
     if (mainWindows.isEmpty())
@@ -373,10 +347,10 @@ TMainWindow *MApplication::MainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TMainWindow *> MApplication::MainWindows()
+QList<PuzzleMainWindow *> PuzzleApplication::MainWindows()
 {
     Clean();
-    QList<TMainWindow*> list;
+    QList<PuzzleMainWindow*> list;
     for (auto &w : mainWindows)
     {
         list.append(w);
@@ -385,7 +359,19 @@ QList<TMainWindow *> MApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::InitOptions()
+PuzzleMainWindow *PuzzleApplication::NewMainWindow()
+{
+    PuzzleMainWindow *puzzle = new PuzzleMainWindow();
+    mainWindows.prepend(puzzle);
+    if (not qApp->IsTestMode())
+    {
+        puzzle->show();
+    }
+    return puzzle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::InitOptions()
 {
     qInstallMessageHandler(noisyFailureMsgHandler);
 
@@ -410,16 +396,34 @@ void MApplication::InitOptions()
        QIcon::setThemeName("win.icon.theme");
     }
     ActivateDarkMode();
-    QResource::registerResource(diagramsPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// Dark mode
-void MApplication::ActivateDarkMode()
+const VTranslateVars *PuzzleApplication::TrVars()
 {
-    VTapeSettings *settings = qApp->TapeSettings();
-     if (settings->GetDarkMode())
-     {
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::OpenSettings()
+{
+    settings = new VPuzzleSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                   QCoreApplication::applicationName(), this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleSettings *PuzzleApplication::PuzzleSettings()
+{
+    SCASSERT(settings != nullptr)
+    return qobject_cast<VPuzzleSettings *>(settings);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::ActivateDarkMode()
+{
+    VPuzzleSettings *settings = qApp->PuzzleSettings();
+    if (settings->GetDarkMode())
+    {
          QFile f(":qdarkstyle/style.qss");
          if (!f.exists())
          {
@@ -431,182 +435,17 @@ void MApplication::ActivateDarkMode()
              QTextStream ts(&f);
              qApp->setStyleSheet(ts.readAll());
          }
-
-     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::InitTrVars()
-{
-    if (trVars != nullptr)
-    {
-        trVars->Retranslate();
-    }
-    else
-    {
-        trVars = new VTranslateVars();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::event(QEvent *e)
-{
-    switch(e->type())
-    {
-        // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
-        // Mac specific).
-        case QEvent::FileOpen:
-        {
-            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            const QString macFileOpen = fileOpenEvent->file();
-            if(not macFileOpen.isEmpty())
-            {
-                TMainWindow *mw = MainWindow();
-                if (mw)
-                {
-                    mw->LoadFile(macFileOpen);  // open file in existing window
-                }
-                return true;
-            }
-            break;
-        }
-#if defined(Q_OS_MAC)
-        case QEvent::ApplicationActivate:
-        {
-            Clean();
-            TMainWindow *mw = MainWindow();
-            if (mw && not mw->isMinimized())
-            {
-                mw->show();
-            }
-            return true;
-        }
-#endif //defined(Q_OS_MAC)
-        default:
-            return VAbstractApplication::event(e);
-    }
-    return VAbstractApplication::event(e);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::AboutToQuit()
-{
-    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
-    // instance. Solution is to call sync() before quit.
-    // Connect this slot with VApplication::aboutToQuit.
-    Settings()->sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::OpenSettings()
-{
-    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                                 QCoreApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VTapeSettings *MApplication::TapeSettings()
-{
-    SCASSERT(settings != nullptr)
-    return qobject_cast<VTapeSettings *>(settings);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString MApplication::diagramsPath() const
-{
-    const QString dPath = QStringLiteral("/diagrams.rcc");
-#ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + dPath;
-#elif defined(Q_OS_MAC)
-    QFileInfo fileBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
-    if (fileBundle.exists())
-    {
-        return fileBundle.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
-        if (file.exists())
-        {
-            return file.absoluteFilePath();
-        }
-        else
-        {
-            return QStringLiteral("/usr/share/valentina") + dPath;
-        }
-    }
-#else // Unix
-    QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
-    if (file.exists())
-    {
-        return file.absoluteFilePath();
-    }
-    else
-    {
-        return QStringLiteral("/usr/share/valentina") + dPath;
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::ShowDataBase()
-{
-    if (dataBase.isNull())
-    {
-        dataBase = new DialogMDataBase();
-        dataBase->setAttribute(Qt::WA_DeleteOnClose, true);
-        dataBase->setModal(false);
-        dataBase->show();
-    }
-    else
-    {
-        dataBase->activateWindow();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::RetranslateGroups()
-{
-    if (not dataBase.isNull())
-    {
-        dataBase->RetranslateGroups();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::RetranslateTables()
-{
-    const QList<TMainWindow*> list = MainWindows();
-    for (auto w : list)
-    {
-        w->RetranslateTable();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
+void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     QCommandLineParser parser;
-    parser.setApplicationDescription(tr("Valentina's measurements editor."));
+    parser.setApplicationDescription(tr("Valentina's manual layout editor."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("filename", tr("The measurement file."));
-    //-----
-    QCommandLineOption heightOption(QStringList() << "e" << "height",
-            tr("Open with the base height. Valid values: %1cm.")
-                                    .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
-            tr("The base height"));
-    parser.addOption(heightOption);
-    //-----
-    QCommandLineOption sizeOption(QStringList() << "s" << "size",
-            tr("Open with the base size. Valid values: %1cm.").arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
-            tr("The base size"));
-    parser.addOption(sizeOption);
-    //-----
-    QCommandLineOption unitOption(QStringList() << "u" << "unit",
-            tr("Set pattern file unit: cm, mm, inch."),
-            tr("The pattern unit"));
-    parser.addOption(unitOption);
+    parser.addPositionalArgument("filename", tr("The raw layout file."));
     //-----
     QCommandLineOption testOption(QStringList() << "test",
             tr("Use for unit testing. Run the program and open a file without showing the main window."));
@@ -618,67 +457,6 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.addOption(scalingOption);
     //-----
     parser.process(arguments);
-
-    bool flagHeight = false;
-    bool flagSize = false;
-    bool flagUnit = false;
-
-    int size = 0;
-    int height = 0;
-    Unit unit = Unit::Cm;
-
-    if (parser.isSet(heightOption))
-    {
-        const QString heightValue = parser.value(heightOption);
-        if (VMeasurement::IsGradationHeightValid(heightValue))
-        {
-            flagHeight = true;
-            height = heightValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base height argument. Must be %1cm.")
-                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", "))));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    if (parser.isSet(sizeOption))
-    {
-        const QString sizeValue = parser.value(sizeOption);
-        if (VMeasurement::IsGradationSizeValid(sizeValue))
-        {
-            flagSize = true;
-            size = sizeValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base size argument. Must be %1cm.")
-                               .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", "))));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    {
-    const QString unitValue = parser.value(unitOption);
-    if (not unitValue.isEmpty())
-    {
-
-        const QStringList units = QStringList() << unitMM << unitCM << unitINCH;
-        if (units.contains(unitValue))
-        {
-            flagUnit = true;
-            unit = StrToUnits(unitValue);
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-    }
 
     testMode = parser.isSet(testOption);
 
@@ -701,7 +479,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
 
         localServer = new QLocalServer(this);
-        connect(localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
+        connect(localServer, &QLocalServer::newConnection, this, &PuzzleApplication::NewLocalSocketConnection);
         if (not localServer->listen(serverName))
         {
             qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
@@ -717,7 +495,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             }
         }
 
-        LoadTranslation(TapeSettings()->GetLocale());
+        LoadTranslation(PuzzleSettings()->GetLocale());
     }
 
     const QStringList args = parser.positionalArguments();
@@ -741,21 +519,6 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
                 delete MainWindow();
                 continue;
             }
-
-            if (flagSize)
-            {
-                MainWindow()->SetBaseMSize(size);
-            }
-
-            if (flagHeight)
-            {
-                MainWindow()->SetBaseMHeight(height);
-            }
-
-            if (flagUnit)
-            {
-                MainWindow()->SetPUnit(unit);
-            }
         }
     }
     else
@@ -778,25 +541,68 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TMainWindow *MApplication::NewMainWindow()
-{
-    TMainWindow *tape = new TMainWindow();
-    mainWindows.prepend(tape);
-    if (not qApp->IsTestMode())
-    {
-        tape->show();
-    }
-    return tape;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::ProcessCMD()
+void PuzzleApplication::ProcessCMD()
 {
     ParseCommandLine(SocketConnection::Client, arguments());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::NewLocalSocketConnection()
+bool PuzzleApplication::event(QEvent *e)
+{
+    switch(e->type())
+    {
+        // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
+        // Mac specific).
+        case QEvent::FileOpen:
+        {
+            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            const QString macFileOpen = fileOpenEvent->file();
+            if(not macFileOpen.isEmpty())
+            {
+                PuzzleMainWindow *mw = MainWindow();
+                if (mw)
+                {
+                    mw->LoadFile(macFileOpen);  // open file in existing window
+                }
+                return true;
+            }
+            break;
+        }
+#if defined(Q_OS_MAC)
+        case QEvent::ApplicationActivate:
+        {
+            Clean();
+            PuzzleMainWindow *mw = PuzzleMainWindow();
+            if (mw && not mw->isMinimized())
+            {
+                mw->show();
+            }
+            return true;
+        }
+#endif //defined(Q_OS_MAC)
+        default:
+            return VAbstractApplication::event(e);
+    }
+    return VAbstractApplication::event(e);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::InitTrVars()
+{
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::AboutToQuit()
+{
+    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
+    // instance. Solution is to call sync() before quit.
+    // Connect this slot with VApplication::aboutToQuit.
+    Settings()->sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::NewLocalSocketConnection()
 {
     QLocalSocket *socket = localServer->nextPendingConnection();
     if (not socket)
@@ -816,7 +622,7 @@ void MApplication::NewLocalSocketConnection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::Clean()
+void PuzzleApplication::Clean()
 {
     // cleanup any deleted main windows first
     for (int i = mainWindows.count() - 1; i >= 0; --i)

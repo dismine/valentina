@@ -25,14 +25,67 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "puzzlemainwindow.h"
-#include <QApplication>
+
+#include <QMessageBox> // For QT_REQUIRE_VERSION
+#include <QTimer>
+
+#include "puzzleapplication.h"
+#include "../fervor/fvupdater.h"
+#include "../vmisc/vsysexits.h"
+#include "../vmisc/def.h"
+
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#   include "../vmisc/backport/qscopeguard.h"
+#else
+#   include <QScopeGuard>
+#endif
+#   include "../vmisc/appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    PuzzleMainWindow w;
-    w.show();
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+    /* Fix path to ICU_DATA when run AppImage.*/
+    char *exe_dir = IcuDataPath("/../share/icu");
+    auto FreeMemory = qScopeGuard([exe_dir] {free(exe_dir);});
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-    return a.exec();
+    Q_INIT_RESOURCE(puzzleicon);
+
+    QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
+
+#if defined(Q_OS_WIN)
+    VAbstractApplication::WinAttachConsole();
+#endif
+
+#ifndef Q_OS_MAC // supports natively
+    InitHighDpiScaling(argc, argv);
+#endif //Q_OS_MAC
+
+    PuzzleApplication app(argc, argv);
+    app.InitOptions();
+
+    if (FvUpdater::IsStaledTestBuild())
+    {
+        qWarning() << QApplication::translate("Puzzle",
+                                              "This test build is older than %1 days. To provide you with better "
+                                              "quality service we restrict the lifetime you can use a test build. "
+                                              "To continue using Puzzle please update to newer test build. The "
+                                              "application will be shut down.")
+                       .arg(FvUpdater::testBuildLifetime);
+        return V_EX_UNAVAILABLE;
+    }
+
+    QTimer::singleShot(0, &app, &PuzzleApplication::ProcessCMD);
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+    if (exe_dir)
+    {
+        qDebug() << "Path to ICU folder:" << exe_dir;
+    }
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
+    return app.exec();
 }

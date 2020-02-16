@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   puzzlemainwindow.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 2, 2020
+ **  @date   November 15, 2013
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2020 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,28 +25,6 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef PUZZLEMAINWINDOW_H
-#define PUZZLEMAINWINDOW_H
 
-#include <QMainWindow>
-
-namespace Ui {
-class PuzzleMainWindow;
-}
-
-class PuzzleMainWindow : public QMainWindow
-{
-    Q_OBJECT
-
-public:
-    explicit PuzzleMainWindow(QWidget *parent = nullptr);
-    virtual ~PuzzleMainWindow();
-
-    bool LoadFile(const QString &path);
-
-private:
-    Q_DISABLE_COPY(PuzzleMainWindow)
-    Ui::PuzzleMainWindow *ui;
-};
-
-#endif // PUZZLEMAINWINDOW_H
+// Build the precompiled headers.
+#include "stable.h"

@@ -13,7 +13,8 @@ SOURCES += \
     $$PWD/vtablesearch.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
     $$PWD/literals.cpp \
-    $$PWD/vmodifierkey.cpp
+    $$PWD/vmodifierkey.cpp \
+    $$PWD/vpuzzlesettings.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -50,7 +51,8 @@ HEADERS += \
     $$PWD/vdatastreamenum.h \
     $$PWD/vmodifierkey.h \
     $$PWD/typedef.h \
-    $$PWD/backport/qscopeguard.h
+    $$PWD/backport/qscopeguard.h \
+    $$PWD/vpuzzlesettings.h
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \

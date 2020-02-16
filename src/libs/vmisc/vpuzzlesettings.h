@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   puzzlemainwindow.h
+ **  @file   vpuzzlesettings.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   16 2, 2020
  **
@@ -25,28 +25,22 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef PUZZLEMAINWINDOW_H
-#define PUZZLEMAINWINDOW_H
+#ifndef VPUZZLESETTINGS_H
+#define VPUZZLESETTINGS_H
 
-#include <QMainWindow>
+#include <QByteArray>
 
-namespace Ui {
-class PuzzleMainWindow;
-}
+#include "vcommonsettings.h"
 
-class PuzzleMainWindow : public QMainWindow
+class VPuzzleSettings : public VCommonSettings
 {
     Q_OBJECT
-
 public:
-    explicit PuzzleMainWindow(QWidget *parent = nullptr);
-    virtual ~PuzzleMainWindow();
-
-    bool LoadFile(const QString &path);
+    VPuzzleSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                    QObject *parent = nullptr);
 
 private:
-    Q_DISABLE_COPY(PuzzleMainWindow)
-    Ui::PuzzleMainWindow *ui;
+    Q_DISABLE_COPY(VPuzzleSettings)
 };
 
-#endif // PUZZLEMAINWINDOW_H
+#endif // VPUZZLESETTINGS_H

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   puzzlemainwindow.h
+ **  @file   version.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 2, 2020
+ **  @date   November 15, 2013
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2020 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,28 +25,15 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef PUZZLEMAINWINDOW_H
-#define PUZZLEMAINWINDOW_H
 
-#include <QMainWindow>
+#ifndef VERSION_H
+#define VERSION_H
 
-namespace Ui {
-class PuzzleMainWindow;
-}
+#include "../../libs/vmisc/projectversion.h"
 
-class PuzzleMainWindow : public QMainWindow
-{
-    Q_OBJECT
+#define VER_INTERNALNAME_STR        "Puzzle"
+#define VER_ORIGINALFILENAME_STR    "puzzle.exe"
+#define VER_PRODUCTNAME_STR         "Tape"
+#define VER_FILEDESCRIPTION_STR     "Valentina's manual layout creator."
 
-public:
-    explicit PuzzleMainWindow(QWidget *parent = nullptr);
-    virtual ~PuzzleMainWindow();
-
-    bool LoadFile(const QString &path);
-
-private:
-    Q_DISABLE_COPY(PuzzleMainWindow)
-    Ui::PuzzleMainWindow *ui;
-};
-
-#endif // PUZZLEMAINWINDOW_H
+#endif // VERSION_H

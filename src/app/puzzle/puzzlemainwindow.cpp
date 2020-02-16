@@ -28,6 +28,7 @@
 #include "puzzlemainwindow.h"
 #include "ui_puzzlemainwindow.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow)
@@ -35,7 +36,14 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::~PuzzleMainWindow()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool PuzzleMainWindow::LoadFile(const QString &path)
+{
+
 }
