@@ -45,5 +45,6 @@ PuzzleMainWindow::~PuzzleMainWindow()
 //---------------------------------------------------------------------------------------------------------------------
 bool PuzzleMainWindow::LoadFile(const QString &path)
 {
-
+    Q_UNUSED(path)
+    return true;
 }
