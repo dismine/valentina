@@ -51,6 +51,7 @@ QT_WARNING_POP
 #include <QCommandLineParser>
 #include <QLocalSocket>
 #include <QLocalServer>
+#include <QFileOpenEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
