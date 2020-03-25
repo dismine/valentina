@@ -50,6 +50,8 @@ extern const QString LONG_OPTION_BINARYDXF;
 extern const QString LONG_OPTION_TEXT2PATHS;
 extern const QString LONG_OPTION_EXPORTONLYDETAILS;
 extern const QString LONG_OPTION_EXPORTSUCHDETAILS;
+extern const QString LONG_OPTION_EXPXSCALE;
+extern const QString LONG_OPTION_EXPYSCALE;
 
 extern const QString LONG_OPTION_CROP_LENGTH;
 extern const QString SINGLE_OPTION_CROP_LENGTH;
@@ -128,6 +130,7 @@ extern const QString LONG_OPTION_FOLLOW_GRAINLINE;
 extern const QString LONG_OPTION_MANUAL_PRIORITY;
 extern const QString LONG_OPTION_LANDSCAPE_ORIENTATION;
 extern const QString LONG_OPTION_NEST_QUANTITY;
+extern const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION;
 
 QStringList AllKeys();
 

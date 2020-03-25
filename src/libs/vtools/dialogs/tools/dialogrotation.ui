@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>285</width>
-    <height>189</height>
+    <width>392</width>
+    <height>282</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -223,6 +223,61 @@
     </layout>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupBoxVisibilityGroup">
+     <property name="toolTip">
+      <string>Enable to create a visibility gropup from original objects</string>
+     </property>
+     <property name="title">
+      <string>Visibility Group</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Tags:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditVisibilityGroup">
+        <property name="text">
+         <string>Rotation</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelGroupName">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="VCompleterLineEdit" name="lineEditGroupTags">
+        <property name="toolTip">
+         <string>Separate each tag with comma.</string>
+        </property>
+        <property name="placeholderText">
+         <string>Add tags</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -235,6 +290,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>VCompleterLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>vlineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>

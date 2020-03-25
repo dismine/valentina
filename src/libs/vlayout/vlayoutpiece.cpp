@@ -354,7 +354,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 }
 
                 if (qApp->Settings()->IsDoublePassmark()
-                        && not piece.IsHideMainPath()
+                        && (qApp->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath())
                         && pData.isMainPathNode
                         && pData.passmarkAngleType != PassmarkAngleType::Intersection
                         && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft
@@ -466,7 +466,8 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
                              qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
-    det.SetCountourPoints(futureMainPath.result(), piece.IsHideMainPath());
+    det.SetCountourPoints(futureMainPath.result(),
+                          qApp->Settings()->IsPieceShowMainPath() ? false : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(futureInternalPaths.result());
     det.SetPassmarks(futurePassmarks.result());
@@ -543,6 +544,7 @@ QVector<VLayoutPassmark> VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassm
     for (int i = 0; i < passmarks.size(); ++i)
     {
         passmarks[i].lines = Map(passmarks.at(i).lines);
+        passmarks[i].baseLine = d->matrix.map(passmarks.at(i).baseLine);
     }
 
     return passmarks;
@@ -825,6 +827,14 @@ void VLayoutPiece::Translate(qreal dx, qreal dy)
 {
     QTransform m;
     m.translate(dx, dy);
+    d->matrix *= m;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::Scale(qreal sx, qreal sy)
+{
+    QTransform m;
+    m.scale(sx, sy);
     d->matrix *= m;
 }
 

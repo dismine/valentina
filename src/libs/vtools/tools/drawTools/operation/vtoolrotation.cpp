@@ -98,6 +98,8 @@ void VToolRotation::setDialog()
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
+
+    SetDialogVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +115,9 @@ VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.angle = dialogTool->GetAngle();
     initData.suffix = dialogTool->GetSuffix();
     initData.source = dialogTool->GetObjects();
+    initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
+    initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
+    initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -251,6 +256,11 @@ QT_WARNING_POP
 
     if (initData.parse == Document::FullParse)
     {
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            qApp->getUndoStack()->beginMacro(tr("rotate"));
+        }
+
         VAbstractTool::AddRecord(initData.id, Tool::Rotation, initData.doc);
         VToolRotation *tool = new VToolRotation(initData);
         initData.scene->addItem(tool);
@@ -261,6 +271,13 @@ QT_WARNING_POP
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
+
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractOperation::CreateVisibilityGroup(initData);
+            qApp->getUndoStack()->endMacro();
+        }
+
         return tool;
     }
     return nullptr;
@@ -344,6 +361,10 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+
+    // Save for later use.
+    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    groupName = dialogTool->GetVisibilityGroupName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -371,9 +392,11 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 QString VToolRotation::MakeToolTip() const
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
-                          "<tr> <td><b>%3:</b> %4°</td> </tr>")
-            .arg(tr("Origin point"), OriginPointName(), tr("Rotation angle"))
-            .arg(GetFormulaAngle().getDoubleValue());
+                          "<tr> <td><b>%3:</b> %4°</td> </tr>"
+                          "%5")
+            .arg(tr("Origin point"), OriginPointName(), tr("Rotation angle")) // 1, 2, 3
+            .arg(GetFormulaAngle().getDoubleValue())                          // 4
+            .arg(VisibilityGroupToolTip());                                   // 5
 }
 
 //---------------------------------------------------------------------------------------------------------------------

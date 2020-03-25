@@ -30,6 +30,7 @@
 
 #include <QColor>
 #include <QComboBox>
+#include <QCompleter>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -67,6 +68,7 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
       stage1(true),
       m_suffix(),
       flagName(true),
+      flagGroupName(true),
       flagError(false)
 {
     ui->setupUi(this);
@@ -81,6 +83,7 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
     ui->comboBoxOriginPoint->setCurrentIndex(-1);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
+    connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByAxis::GroupNameChanged);
     connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByAxis::PointChanged);
 
@@ -145,6 +148,49 @@ void DialogFlippingByAxis::SetSuffix(const QString &value)
 QVector<quint32> DialogFlippingByAxis::GetObjects() const
 {
     return ConvertToVector(objects);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogFlippingByAxis::GetVisibilityGroupName() const
+{
+    return ui->lineEditVisibilityGroup->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetVisibilityGroupName(const QString &name)
+{
+    ui->lineEditVisibilityGroup->setText(name.isEmpty() ? tr("Rotation") : name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogFlippingByAxis::HasLinkedVisibilityGroup() const
+{
+    return ui->groupBoxVisibilityGroup->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetHasLinkedVisibilityGroup(bool linked)
+{
+    ui->groupBoxVisibilityGroup->setChecked(linked);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetVisibilityGroupTags(const QStringList &tags)
+{
+    ui->lineEditGroupTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList DialogFlippingByAxis::GetVisibilityGroupTags() const
+{
+    return ui->lineEditGroupTags->text().split(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetGroupCategories(const QStringList &categories)
+{
+    m_groupTags = categories;
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,6 +324,27 @@ void DialogFlippingByAxis::SuffixChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::GroupNameChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        const QString name = edit->text();
+        if (name.isEmpty())
+        {
+            flagGroupName = false;
+            ChangeColor(ui->labelGroupName, errorColor);
+            CheckState();
+            return;
+        }
+
+        flagGroupName = true;
+        ChangeColor(ui->labelGroupName, OkColor(this));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ShowVisualization()
 {
     AddVisualization<VisToolFlippingByAxis>();
@@ -295,6 +362,18 @@ void DialogFlippingByAxis::SaveData()
     operation->SetOriginPointId(GetOriginPointId());
     operation->SetAxisType(GetAxisType());
     operation->RefreshGeometry();
+
+    QStringList groupTags = ui->lineEditGroupTags->text().split(',');
+    for (auto &tag : groupTags)
+    {
+        tag = tag.trimmed();
+        if (not m_groupTags.contains(tag))
+        {
+            m_groupTags.append(tag);
+        }
+    }
+
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

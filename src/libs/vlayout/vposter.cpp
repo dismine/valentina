@@ -124,7 +124,7 @@ VPoster::VPoster(const QPrinter *printer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page, PageOrientation orientation) const
+QVector<PosterData> VPoster::Calc(const QSize &imageRect, int page, PageOrientation orientation) const
 {
     QVector<PosterData> poster;
 
@@ -390,7 +390,7 @@ int VPoster::CountColumns(int width, PageOrientation orientation) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PosterData VPoster::Cut(int i, int j, const QRect &imageRect, PageOrientation orientation) const
+PosterData VPoster::Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const
 {
     Q_UNUSED(imageRect)
 
@@ -431,7 +431,9 @@ QRect VPoster::PageRect() const
 
     if(printer->fullPage())
     {
-        QMarginsF pMargins = printer->pageLayout().margins();
+        QPageLayout layout = printer->pageLayout();
+        layout.setUnits(QPageLayout::Millimeter);
+        QMarginsF pMargins = layout.margins();
         QRectF newRect = rect.marginsRemoved(pMargins);
         const QRect pageRectFP(0, 0, qFloor(ToPixel(newRect.width())), qFloor(ToPixel(newRect.height())));
         return pageRectFP;

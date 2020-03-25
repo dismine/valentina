@@ -204,6 +204,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     diag.SetAutoCropWidth(IsOptionSet(LONG_OPTION_CROP_WIDTH));
     diag.SetUnitePages(IsOptionSet(LONG_OPTION_UNITE));
     diag.SetSaveLength(IsOptionSet(LONG_OPTION_SAVELENGTH));
+    diag.SetPreferOneSheetSolution(IsOptionSet(LONG_OPTION_PREFER_ONE_SHEET_SOLUTION));
     diag.SetGroup(OptGroup());
 
     if (IsOptionSet(LONG_OPTION_IGNORE_MARGINS))
@@ -406,6 +407,28 @@ bool VCommandLine::IsExportOnlyDetails() const
 bool VCommandLine::IsCSVWithHeader() const
 {
     return IsOptionSet(LONG_OPTION_CSVWITHHEADER);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommandLine::ExportXScale() const
+{
+    qreal xs = 0;
+    if (IsOptionSet(LONG_OPTION_EXPXSCALE))
+    {
+        xs = OptionValue(LONG_OPTION_EXPXSCALE).toDouble();
+    }
+    return xs;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommandLine::ExportYScale() const
+{
+    qreal ys = 0;
+    if (IsOptionSet(LONG_OPTION_EXPYSCALE))
+    {
+        ys = OptionValue(LONG_OPTION_EXPYSCALE).toDouble();
+    }
+    return ys;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -664,6 +687,12 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Page bottom margin in current units like 3.0 (export mode). If not set will be "
          "used value from default printer. Or 0 if none printers was found."),
          translate("VCommandLine", "The bottom margin")},
+        {LONG_OPTION_EXPXSCALE,
+         translate("VCommandLine", "Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode)."),
+         translate("VCommandLine", "Horizontal scale")},
+        {LONG_OPTION_EXPYSCALE,
+         translate("VCommandLine", "Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode)."),
+         translate("VCommandLine", "Vertical scale")},
     //=================================================================================================================
         {LONG_OPTION_FOLLOW_GRAINLINE,
          translate("VCommandLine", "Order detail to follow grainline direction (export mode).")},
@@ -678,6 +707,8 @@ void VCommandLine::InitCommandLineOptions()
         {{SINGLE_OPTION_UNITE, LONG_OPTION_UNITE},
          translate("VCommandLine", "Unite pages if possible (export mode). Maximum value limited by QImage that "
          "supports only a maximum of 32768x32768 px images.")},
+        {LONG_OPTION_PREFER_ONE_SHEET_SOLUTION,
+         translate("VCommandLine", "Prefer one sheet layout solution (export mode).")},
     //=================================================================================================================
         {{SINGLE_OPTION_SAVELENGTH, LONG_OPTION_SAVELENGTH},
          translate("VCommandLine", "Save length of the sheet if set (export mode). The option tells the program to use "

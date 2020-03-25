@@ -36,5 +36,6 @@
 #include "dialogaboutapp.h"
 #include "dialogpreferences.h"
 #include "dialogfinalmeasurements.h"
+#include "dialoglayoutscale.h"
 
 #endif // DIALOGS_H

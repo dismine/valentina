@@ -74,6 +74,8 @@ void VToolFlippingByLine::setDialog()
     dialogTool->SetFirstLinePointId(m_firstLinePointId);
     dialogTool->SetSecondLinePointId(m_secondLinePointId);
     dialogTool->SetSuffix(suffix);
+
+    SetDialogVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,6 +91,9 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const QPointer<DialogTool> &dia
     initData.secondLinePointId = dialogTool->GetSecondLinePointId();
     initData.suffix = dialogTool->GetSuffix();
     initData.source = dialogTool->GetObjects();
+    initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
+    initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
+    initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -116,6 +121,11 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
 
     if (initData.parse == Document::FullParse)
     {
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            qApp->getUndoStack()->beginMacro(tr("flipping by line"));
+        }
+
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByLine, initData.doc);
         VToolFlippingByLine *tool = new VToolFlippingByLine(initData);
         initData.scene->addItem(tool);
@@ -127,6 +137,13 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
+
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractOperation::CreateVisibilityGroup(initData);
+            qApp->getUndoStack()->endMacro();
+        }
+
         return tool;
     }
     return nullptr;
@@ -195,6 +212,10 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+
+    // Save for later use.
+    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    groupName = dialogTool->GetVisibilityGroupName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,8 +243,11 @@ void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 QString VToolFlippingByLine::MakeToolTip() const
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
-                          "<tr> <td><b>%3:</b> %4</td> </tr>")
-            .arg(tr("First line point"), FirstLinePointName(), tr("Second line point"), SecondLinePointName());
+                          "<tr> <td><b>%3:</b> %4</td> </tr>"
+                          "%5")
+            .arg(tr("First line point"), FirstLinePointName(),
+             tr("Second line point"), SecondLinePointName()) // 1, 2, 3, 4
+            .arg(VisibilityGroupToolTip()); // 5
 }
 
 //---------------------------------------------------------------------------------------------------------------------

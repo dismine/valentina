@@ -51,9 +51,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
-#include "../vtools/undocommands/addgroup.h"
-#include "../vtools/undocommands/additemtogroup.h"
-#include "../vtools/undocommands/removeitemfromgroup.h"
+#include "../vtools/undocommands/undogroup.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
@@ -101,6 +99,8 @@ protected:
     virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
                                QList<quint32> &newDependencies)=0;
     virtual void    SaveDialogChange(const QString &undoText = QString()) final;
+    virtual void    ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                     const QDomElement &oldDomElement, const QDomElement &newDomElement);
     virtual void    AddToFile() override;
     void            SaveOption(QSharedPointer<VGObject> &obj);
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);

@@ -45,6 +45,7 @@ class VSettings : public VCommonSettings
 public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = nullptr);
+    VSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
@@ -108,6 +109,10 @@ public:
     bool GetLayoutSaveLength() const;
     static bool GetDefLayoutSaveLength();
     void SetLayoutSaveLength(bool value);
+
+    bool GetLayoutPreferOneSheetSolution() const;
+    static bool GetDefLayoutPreferOneSheetSolution();
+    void SetLayoutPreferOneSheetSolution(bool value);
 
     bool GetLayoutUnitePages() const;
     static bool GetDefLayoutUnitePages();

@@ -70,6 +70,17 @@ public:
 
     QVector<quint32> GetObjects() const;
 
+    QString GetVisibilityGroupName() const;
+    void    SetVisibilityGroupName(const QString &name);
+
+    bool HasLinkedVisibilityGroup() const;
+    void SetHasLinkedVisibilityGroup(bool linked);
+
+    void        SetVisibilityGroupTags(const QStringList &tags);
+    QStringList GetVisibilityGroupTags() const;
+
+    virtual void SetGroupCategories(const QStringList &categories) override;
+
     virtual void ShowDialog(bool click) override;
 
 public slots:
@@ -87,6 +98,7 @@ private slots:
     void FXLength();
 
     void SuffixChanged();
+    void GroupNameChanged();
 
 protected:
     virtual void ShowVisualization() override;
@@ -129,6 +141,9 @@ private:
     bool flagRotationAngle;
     bool flagLength;
     bool flagName;
+    bool flagGroupName;
+
+    QStringList m_groupTags{};
 
     void EvalAngle();
     void EvalRotationAngle();
@@ -138,7 +153,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogMove::IsValid() const
 {
-    return flagAngle && flagRotationAngle && flagLength && flagName;
+    return flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName;
 }
 
 #endif // DIALOGMOVING_H
