@@ -2,8 +2,6 @@
 #define VPUZZLECOMMANDLINE_H
 
 #include <memory>
-#include <vector>
-#include <QTextStream>
 #include <QCoreApplication>
 #include <QCommandLineParser>
 
@@ -32,7 +30,7 @@ public:
     /**
      * @brief the file name which should be loaded
      */
-    QString OptionFileName() const;
+    QStringList OptionFileNames() const;
 protected:
     VPuzzleCommandLine();
     /**
@@ -49,6 +47,7 @@ private:
      * @brief add options to the QCommandLineParser that there are in the cmd can be
      */
     void InitCommandLineOptions();
+
     bool IsOptionSet(const QString &option)const;
     QString OptionValue(const QString &option) const;
     QStringList OptionValues(const QString &option) const;
