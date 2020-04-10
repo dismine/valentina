@@ -34,6 +34,8 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     ui(new Ui::PuzzleMainWindow)
 {
     ui->setupUi(this);
+
+    InitMenuBar();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,3 +50,114 @@ bool PuzzleMainWindow::LoadFile(const QString &path)
     Q_UNUSED(path)
     return true;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitMenuBar()
+{
+    // connects the actions for the file menu
+    connect(ui->actionNew, &QAction::triggered, this, &PuzzleMainWindow::New);
+    connect(ui->actionOpen, &QAction::triggered, this, &PuzzleMainWindow::Open);
+    connect(ui->actionSave, &QAction::triggered, this, &PuzzleMainWindow::Save);
+    connect(ui->actionSaveAs, &QAction::triggered, this, &PuzzleMainWindow::SaveAs);
+    connect(ui->actionImportRawLayout, &QAction::triggered, this, &PuzzleMainWindow::ImportRawLayout);
+    connect(ui->actionExit, &QAction::triggered, this, &PuzzleMainWindow::close);
+
+    // connects the actions for the edit menu
+    // TODO : initialise the undo / redo
+
+    // connects the actions for the windows menu
+    // TODO : initialise the entries for the different windows
+    connect(ui->actionCloseLayout, &QAction::triggered, this, &PuzzleMainWindow::CloseLayout);
+
+    // connects the action for the Help Menu
+    connect(ui->actionAboutQt, &QAction::triggered, this, &PuzzleMainWindow::AboutQt);
+    connect(ui->actionAboutPuzzle, &QAction::triggered, this, &PuzzleMainWindow::AboutPuzzle);
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::New()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::New");
+    int ret = msgBox.exec();
+
+    // TODO
+
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::Open()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::Open");
+    int ret = msgBox.exec();
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::Save()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::Save");
+    int ret = msgBox.exec();
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SaveAs()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::SaveAs");
+    int ret = msgBox.exec();
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::ImportRawLayout()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::ImportRawLayout");
+    int ret = msgBox.exec();
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::CloseLayout()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::CloseLayout");
+    int ret = msgBox.exec();
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::AboutQt()
+{
+    QMessageBox::aboutQt(this, tr("About Qt"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::AboutPuzzle()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::AboutPuzzle");
+    int ret = msgBox.exec();
+
+    // TODO
+}
+
+

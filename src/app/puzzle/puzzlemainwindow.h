@@ -29,6 +29,7 @@
 #define PUZZLEMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 
 namespace Ui {
 class PuzzleMainWindow;
@@ -47,6 +48,19 @@ public:
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
+
+    void InitMenuBar();
+
+    void New();
+    void Open();
+    void Save();
+    void SaveAs();
+    void ImportRawLayout();
+    void CloseLayout();
+
+    void AboutQt();
+    void AboutPuzzle();
+
 };
 
 #endif // PUZZLEMAINWINDOW_H
