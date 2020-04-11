@@ -36,6 +36,9 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     InitMenuBar();
+
+    InitPropertyTabs();
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,6 +77,17 @@ void PuzzleMainWindow::InitMenuBar()
     connect(ui->actionAboutPuzzle, &QAction::triggered, this, &PuzzleMainWindow::AboutPuzzle);
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitPropertyTabs()
+{
+    // for the MVP we don't want the tiles and current layer tabs.
+    // we remove them. As soon as we need them, delete / update this code
+    ui->tabWidgetProperties->removeTab(3); // remove layers
+    ui->tabWidgetProperties->removeTab(2); // remove tiles
+
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::New()

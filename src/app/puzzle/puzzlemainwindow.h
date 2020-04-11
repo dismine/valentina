@@ -50,6 +50,7 @@ private:
     Ui::PuzzleMainWindow *ui;
 
     void InitMenuBar();
+    void InitPropertyTabs();
 
 private slots:
     void New();
