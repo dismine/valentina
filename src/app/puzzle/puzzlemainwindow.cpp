@@ -144,6 +144,9 @@ void PuzzleMainWindow::InitPropertyTabLayout()
     connect(ui->checkBoxLayoutStickyEdges,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutStickyEdgesChanged);
 
     // -------------------- export ---------------------------
+
+    // TODO init the file format export combobox
+
     connect(ui->pushButtonLayoutExport, QOverload<bool>::of(&QPushButton::clicked), this, &PuzzleMainWindow::LayoutExport);
 }
 
@@ -297,6 +300,8 @@ void PuzzleMainWindow::LayoutSizeChanged()
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,6 +313,8 @@ void PuzzleMainWindow::LayoutOrientationChanged()
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -319,6 +326,8 @@ void PuzzleMainWindow::LayoutRemoveUnusedLength()
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 
@@ -331,6 +340,8 @@ void PuzzleMainWindow::LayoutMarginChanged()
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 
@@ -343,6 +354,8 @@ void PuzzleMainWindow::LayoutFollowGrainlineChanged()
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 
@@ -356,6 +369,8 @@ void PuzzleMainWindow::LayoutPiecesGapChanged(double value)
 
     Q_UNUSED(value);
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -368,6 +383,8 @@ void PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged(bool checked)
 
     Q_UNUSED(checked);
     Q_UNUSED(ret);
+
+    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -381,6 +398,8 @@ void PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged(bool checked)
     Q_UNUSED(checked);
     Q_UNUSED(ret);
 
+    // TODO
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -393,6 +412,10 @@ void PuzzleMainWindow::LayoutStickyEdgesChanged(bool checked)
 
     Q_UNUSED(checked);
     Q_UNUSED(ret);
+
+
+    // TODO
+
 }
 
 
@@ -406,5 +429,8 @@ void PuzzleMainWindow::LayoutExport()
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
+
+    // TODO
+
 }
 
