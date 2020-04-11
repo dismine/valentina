@@ -58,7 +58,7 @@
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
-#include "../vtools/undocommands/addgroup.h"
+#include "../vtools/undocommands/undogroup.h"
 #include "dialogs/vwidgetdetails.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../qmuparser/qmuparsererror.h"
@@ -647,6 +647,12 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::InsertNode:
             case Tool::PlaceLabel:
                 dialogTool->SetPiecesList(doc->GetActivePPPieces());
+                break;
+            case Tool::Rotation:
+            case Tool::Move:
+            case Tool::FlippingByAxis:
+            case Tool::FlippingByLine:
+                dialogTool->SetGroupCategories(doc->GetGroupCategories());
                 break;
             default:
                 break;
@@ -1241,7 +1247,8 @@ void MainWindow::ClosedDialogGroup(int result)
     {
         const QPointer<DialogGroup> dialog = qobject_cast<DialogGroup *>(dialogTool);
         SCASSERT(not dialog.isNull())
-        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
+        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetTags(),
+                                                   dialog->GetGroup());
         if (not group.isNull())
         {
             AddGroup *addGroup = new AddGroup(group, doc);
@@ -5527,6 +5534,8 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
             m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
             m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
             m_dialogSaveLayout->SetTextAsPaths(expParams->IsTextAsPaths());
+            m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
+            m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
 
             if (static_cast<LayoutExportFormats>(expParams->OptExportType()) == LayoutExportFormats::PDFTiled)
             {
@@ -5562,6 +5571,8 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
+                m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
+                m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
 
                 if (static_cast<LayoutExportFormats>(expParams->OptExportType()) == LayoutExportFormats::PDFTiled)
                 {

@@ -264,7 +264,7 @@ VDomDocument::~VDomDocument()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
+QDomElement VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCache)
 {
     if (id == 0)
     {
@@ -273,16 +273,27 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
 
     if (m_elementIdCache.contains(id))
     {
-       const QDomElement e = m_elementIdCache.value(id);
-       if (e.parentNode().nodeType() != QDomNode::BaseNode)
-       {
-           return e;
-       }
-       m_elementIdCache.remove(id);
+        const QDomElement e = m_elementIdCache.value(id);
+        if (e.parentNode().nodeType() != QDomNode::BaseNode)
+        {
+            if (not tagName.isEmpty())
+            {
+                if (e.tagName() == tagName)
+                {
+                    return e;
+                }
+            }
+            else
+            {
+                return e;
+            }
+        }
     }
 
-    // Cached missed
-    RefreshElementIdCache();
+    if (updateCache)
+    {   // Cached missed
+        RefreshElementIdCache();
+    }
 
     if (tagName.isEmpty())
     {
@@ -290,10 +301,8 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
         QHash<quint32, QDomElement> tmpCache;
         if (VDomDocument::find(tmpCache, this->documentElement(), id))
         {
-            m_elementIdCache = tmpCache;
-            return m_elementIdCache.value(id);
+            return tmpCache.value(id);
         }
-        m_elementIdCache = tmpCache;
     }
     else
     {
@@ -305,7 +314,6 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
             {
                 const quint32 elementId = GetParametrUInt(domElement, AttrId, NULL_ID_STR);
 
-                m_elementIdCache.insert(elementId, domElement);
                 if (elementId == id)
                 {
                     return domElement;

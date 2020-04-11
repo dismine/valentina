@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   addgroup.h
+ **  @file   dialoglayoutscale.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 4, 2016
+ **  @date   21 3, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,32 +25,50 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef DIALOGLAYOUTSCALE_H
+#define DIALOGLAYOUTSCALE_H
 
-#ifndef ADDGROUP_H
-#define ADDGROUP_H
+#include <QDialog>
 
-#include <qcompilerdetection.h>
-#include <QDomElement>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
-#include <QtGlobal>
+namespace Ui
+{
+    class DialogLayoutScale;
+}
 
-#include "vundocommand.h"
-
-class AddGroup : public VUndoCommand
+class DialogLayoutScale : public QDialog
 {
     Q_OBJECT
+
 public:
-    AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~AddGroup();
-    virtual void undo() override;
-    virtual void redo() override;
-signals:
-    void UpdateGroups();
+    explicit DialogLayoutScale(bool printTiled, QWidget *parent = nullptr);
+    ~DialogLayoutScale();
+
+    void      SetTiledMargins(QMarginsF margins);
+    QMarginsF GetTiledMargins() const;
+
+    void  SetXScale(qreal scale);
+    qreal GetXScale() const;
+
+    void  SetYScale(qreal scale);
+    qreal GetYScale() const;
+
+protected:
+    virtual void showEvent(QShowEvent *event) override;
+
+private slots:
+    void Save();
+    void ToggleScaleConnection();
+    void HorizontalScaleChanged(double d);
+    void VerticalScaleChanged(double d);
+
 private:
-    Q_DISABLE_COPY(AddGroup)
-    const QString nameActivDraw;
+    Q_DISABLE_COPY(DialogLayoutScale)
+    Ui::DialogLayoutScale *ui;
+    bool isInitialized{false};
+    bool m_scaleConnected{true};
+
+    void ReadSettings();
+    void WriteSettings() const;
 };
 
-#endif // ADDGROUP_H
+#endif // DIALOGLAYOUTSCALE_H

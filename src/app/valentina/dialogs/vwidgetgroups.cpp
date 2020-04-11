@@ -29,11 +29,11 @@
 #include "vwidgetgroups.h"
 #include "ui_vwidgetgroups.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
-#include "../vtools/undocommands/delgroup.h"
-#include "../vtools/undocommands/changegroupvisibility.h"
-#include "../vtools/undocommands/changemultiplegroupsvisibility.h"
+#include "../vtools/undocommands/undogroup.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vmisc/compatibility.h"
 
+#include <QCompleter>
 #include <QMenu>
 #include <QTableWidget>
 
@@ -53,6 +53,7 @@ VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &VWidgetGroups::GroupVisibilityChanged);
     connect(ui->tableWidget, &QTableWidget::cellChanged, this, &VWidgetGroups::RenameGroup);
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetGroups::CtxMenu);
+    connect(ui->lineEditTags, &QLineEdit::textChanged, this, &VWidgetGroups::UpdateGroups);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +114,32 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QMap<quint32, VGroupData> VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups)
+{
+    QMap<quint32, VGroupData> filtered;
+    QSet<QString> filterCategories = ConvertToSet<QString>(VAbstractPattern::FilterGroupTags(ui->lineEditTags->text()));
+
+    if (filterCategories.isEmpty())
+    {
+        return groups;
+    }
+
+    auto i = groups.constBegin();
+    while (i != groups.constEnd())
+    {
+        const VGroupData &data = i.value();
+        QSet<QString> groupCategories = ConvertToSet<QString>(data.tags);
+        if (SetIntersects(filterCategories, groupCategories))
+        {
+            filtered.insert(i.key(), data);
+        }
+        ++i;
+    }
+
+    return filtered;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VWidgetGroups::GroupRow(vidtype id) const
 {
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
@@ -150,9 +177,9 @@ void VWidgetGroups::RenameGroup(int row, int column)
     }
 
     const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
-    doc->SetGroupName(id, ui->tableWidget->item(row, column)->text());
-
-    UpdateGroups();
+    ::RenameGroup *renameGroup = new ::RenameGroup(doc, id, ui->tableWidget->item(row, column)->text());
+    connect(renameGroup, &RenameGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
+    qApp->getUndoStack()->push(renameGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,7 +214,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")), tr("Hide")) :
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/open_eye.png")), tr("Show"));
 
-    QAction *actionRename = menu->addAction(tr("Rename"));
+    QAction *actionPreferences = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Preferences"));
     QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
     menu->addSeparator();
     QAction *actionHideAll = menu->addAction(tr("Hide All"));
@@ -201,19 +228,22 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     {
         SetGroupVisibility(id, not doc->GetGroupVisibility(id));
     }
-    else if (selectedAction == actionRename)
+    else if (selectedAction == actionPreferences)
     {
         QScopedPointer<VContainer> fackeContainer(new VContainer(qApp->TrVars(), qApp->patternUnitP(),
                                                                  VContainer::UniqueNamespace()));
         QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), NULL_ID, this));
         dialog->SetName(doc->GetGroupName(id));
+        dialog->SetTags(doc->GetGroupTags(id));
+        dialog->SetGroupCategories(doc->GetGroupCategories());
         const int result = dialog->exec();
 
         if (result == QDialog::Accepted)
         {
-            doc->SetGroupName(id, dialog->GetName());
-            item = ui->tableWidget->item(row, 1);
-            item->setText(dialog->GetName());
+            ChangeGroupOptions *changeGroupOptions = new ChangeGroupOptions(doc, id, dialog->GetName(),
+                                                                            dialog->GetTags());
+            connect(changeGroupOptions, &ChangeGroupOptions::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
+            qApp->getUndoStack()->push(changeGroupOptions);
         }
     }
     else if (selectedAction == actionDelete)
@@ -279,8 +309,12 @@ void VWidgetGroups::UpdateGroups()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups)
+void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
 {
+    ui->lineEditTags->SetCompletion(doc->GetGroupCategories());
+
+    groups = FilterGroups(groups);
+
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clear();
 
@@ -291,12 +325,12 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
     while (i != groups.constEnd())
     {
         ++currentRow;
-        const QPair<QString, bool> data = i.value();
+        const VGroupData data = i.value();
 
         QTableWidgetItem *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
-        (data.second) ? item->setIcon(QIcon("://icon/16x16/open_eye.png"))
-                      : item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
+        (data.visible) ? item->setIcon(QIcon("://icon/16x16/open_eye.png"))
+                       : item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
 
         item->setData(Qt::UserRole, i.key());
 
@@ -307,8 +341,9 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
 
         ui->tableWidget->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(data.first);
+        item = new QTableWidgetItem(data.name);
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        item->setToolTip(tr("Categories: %1.").arg(data.tags.join(", ")));
 
         if(doc->GroupIsEmpty(i.key()))
         {

@@ -419,10 +419,10 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmarkDetails
                     name += QLatin1Char('|');
                     break;
                 case PassmarkLineType::TwoLines:
-                    name += QLatin1Literal("||");
+                    name += QLatin1String("||");
                     break;
                 case PassmarkLineType::ThreeLines:
-                    name += QLatin1Literal("|||");
+                    name += QLatin1String("|||");
                     break;
                 case PassmarkLineType::TMark:
                     name += QStringLiteral("┴");
@@ -797,6 +797,13 @@ quint32 DialogTool::GetToolId() const
 void DialogTool::SetToolId(const quint32 &value)
 {
     toolId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SetGroupCategories(const QStringList &categories)
+{
+    Q_UNUSED(categories)
+    // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
