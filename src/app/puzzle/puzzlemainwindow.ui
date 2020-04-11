@@ -419,6 +419,9 @@
                      <property name="text">
                       <string>No</string>
                      </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
                     </widget>
                    </item>
                    <item>
@@ -471,14 +474,14 @@
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+                  <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutPiecesGap"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesSuperposition">
                  <property name="text">
-                  <string>Wargnin superposition of pieces</string>
+                  <string>Warning superposition of pieces</string>
                  </property>
                 </widget>
                </item>

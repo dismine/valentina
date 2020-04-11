@@ -82,13 +82,86 @@ void PuzzleMainWindow::InitMenuBar()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitPropertyTabs()
 {
-    // for the MVP we don't want the tiles and current layer tabs.
-    // we remove them. As soon as we need them, delete / update this code
-    ui->tabWidgetProperties->removeTab(3); // remove layers
-    ui->tabWidgetProperties->removeTab(2); // remove tiles
+    InitPropertyTabCurrentPiece();
+    InitPropertyTabLayout();
+    InitPropertyTabLayers();
+    InitPropertyTabTiles();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitPropertyTabCurrentPiece()
+{
 
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitPropertyTabLayout()
+{
+    // -------------------- init the unit combobox ---------------------
+   ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+   ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+   ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+
+   // set default unit - TODO when we have the setting for the unit
+    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
+    if (indexUnit != -1)
+    {
+        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+    }
+
+    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PuzzleMainWindow::LayoutUnitChanged);
+
+
+    // -------------------- init the template combobox ---------------------
+
+    // TODO
+
+    connect(ui->comboBoxLayoutTemplate, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PuzzleMainWindow::LayoutTemplateChanged);
+
+    // -------------------- layout width, length, orientation  ------------------------
+    connect(ui->doubleSpinBoxLayoutWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutSizeChanged);
+    connect(ui->doubleSpinBoxLayoutLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutSizeChanged);
+    connect(ui->radioButtonLayoutPortrait, QOverload<bool>::of(&QRadioButton::toggled), this, &PuzzleMainWindow::LayoutOrientationChanged);
+    connect(ui->radioButtonLayoutLandscape, QOverload<bool>::of(&QRadioButton::toggled), this, &PuzzleMainWindow::LayoutOrientationChanged);
+    connect(ui->pushButtonLayoutRemoveUnusedLength, QOverload<bool>::of(&QPushButton::clicked), this, &PuzzleMainWindow::LayoutRemoveUnusedLength);
+
+    // -------------------- margins  ------------------------
+    connect(ui->doubleSpinBoxLayoutMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
+
+    // ------------------- follow grainline -----------------------
+    connect(ui->radioButtonLayoutFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this, &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+    connect(ui->radioButtonLayoutFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this, &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+    connect(ui->radioButtonLayoutFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this, &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+
+    // -------------------- pieces gap and checkboxes ---------------
+    connect(ui->doubleSpinBoxLayoutPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutPiecesGapChanged);
+    connect(ui->checkBoxLayoutWarningPiecesSuperposition,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged);
+    connect(ui->checkBoxLayoutWarningPiecesOutOfBound,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged);
+    connect(ui->checkBoxLayoutStickyEdges,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutStickyEdgesChanged);
+
+    // -------------------- export ---------------------------
+    connect(ui->pushButtonLayoutExport, QOverload<bool>::of(&QPushButton::clicked), this, &PuzzleMainWindow::LayoutExport);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitPropertyTabTiles()
+{
+    // for the MVP we don't want the tiles tab.
+    // we remove it. As soon as we need it, update this code
+    ui->tabWidgetProperties->removeTab(2); // remove tiles
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitPropertyTabLayers()
+{
+    // for the MVP we don't want the layers tab.
+    // we remove it. As soon as we need it, update this code
+    ui->tabWidgetProperties->removeTab(3); // remove layers
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::New()
@@ -97,6 +170,8 @@ void PuzzleMainWindow::New()
     QMessageBox msgBox;
     msgBox.setText("TODO PuzzleMainWindow::New");
     int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
 
     // TODO
 
@@ -111,6 +186,8 @@ void PuzzleMainWindow::Open()
     msgBox.setText("TODO PuzzleMainWindow::Open");
     int ret = msgBox.exec();
 
+    Q_UNUSED(ret);
+
     // TODO
 }
 
@@ -121,6 +198,8 @@ void PuzzleMainWindow::Save()
     QMessageBox msgBox;
     msgBox.setText("TODO PuzzleMainWindow::Save");
     int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
 
     // TODO
 }
@@ -133,6 +212,8 @@ void PuzzleMainWindow::SaveAs()
     msgBox.setText("TODO PuzzleMainWindow::SaveAs");
     int ret = msgBox.exec();
 
+     Q_UNUSED(ret);
+
     // TODO
 }
 
@@ -144,6 +225,8 @@ void PuzzleMainWindow::ImportRawLayout()
     msgBox.setText("TODO PuzzleMainWindow::ImportRawLayout");
     int ret = msgBox.exec();
 
+    Q_UNUSED(ret);
+
     // TODO
 }
 
@@ -154,6 +237,8 @@ void PuzzleMainWindow::CloseLayout()
     QMessageBox msgBox;
     msgBox.setText("TODO PuzzleMainWindow::CloseLayout");
     int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
 
     // TODO
 }
@@ -172,4 +257,154 @@ void PuzzleMainWindow::AboutPuzzle()
     aboutDialog->show();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutUnitChanged(int index)
+{
+
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutUnitChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(index);
+    Q_UNUSED(ret);
+
+
+   // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutTemplateChanged(int index)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutTemplateChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(index);
+    Q_UNUSED(ret);
+
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutSizeChanged()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutSizeChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutOrientationChanged()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutOrientationChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutRemoveUnusedLength()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutRemoveUnusedLength");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutMarginChanged()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutMarginChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutFollowGrainlineChanged()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutFollowGrainlineChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutPiecesGapChanged(double value)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutPieceGapChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(value);
+    Q_UNUSED(ret);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged(bool checked)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(checked);
+    Q_UNUSED(ret);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged(bool checked)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(checked);
+    Q_UNUSED(ret);
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutStickyEdgesChanged(bool checked)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutStickyEdgesChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(checked);
+    Q_UNUSED(ret);
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::LayoutExport()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::LayoutExport");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+}
 

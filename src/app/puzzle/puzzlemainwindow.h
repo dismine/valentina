@@ -28,6 +28,8 @@
 #ifndef PUZZLEMAINWINDOW_H
 #define PUZZLEMAINWINDOW_H
 
+#include "../vmisc/def.h"
+
 #include <QMainWindow>
 #include <QMessageBox>
 
@@ -51,6 +53,11 @@ private:
 
     void InitMenuBar();
     void InitPropertyTabs();
+    void InitPropertyTabCurrentPiece();
+    void InitPropertyTabLayout();
+    void InitPropertyTabTiles();
+    void InitPropertyTabLayers();
+
 
 private slots:
     void New();
@@ -62,6 +69,19 @@ private slots:
 
     void AboutQt();
     void AboutPuzzle();
+
+    void LayoutUnitChanged(int index);
+    void LayoutTemplateChanged(int index);
+    void LayoutSizeChanged();
+    void LayoutOrientationChanged();
+    void LayoutRemoveUnusedLength();
+    void LayoutMarginChanged();
+    void LayoutFollowGrainlineChanged();
+    void LayoutPiecesGapChanged(double value);
+    void LayoutWarningPiecesSuperpositionChanged(bool checked);
+    void LayoutWarningPiecesOutOfBoundChanged(bool checked);
+    void LayoutStickyEdgesChanged(bool checked);
+    void LayoutExport();
 
 };
 
