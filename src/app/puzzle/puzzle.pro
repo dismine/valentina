@@ -333,3 +333,5 @@ CONFIG(release, debug|release){
        QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
     }
 }
+
+FORMS +=

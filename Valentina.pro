@@ -53,3 +53,6 @@ unix {
 
 TEMPLATE = subdirs
 SUBDIRS = src
+
+RESOURCES += \
+    src/app/puzzle/share/resources/tapeicon.qrc

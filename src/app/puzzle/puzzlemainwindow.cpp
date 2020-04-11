@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "puzzlemainwindow.h"
 #include "ui_puzzlemainwindow.h"
+#include "dialogs/dialogaboutpuzzle.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
@@ -166,12 +167,9 @@ void PuzzleMainWindow::AboutQt()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::AboutPuzzle()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::AboutPuzzle");
-    int ret = msgBox.exec();
-
-    // TODO
+    auto *aboutDialog = new DialogAboutPuzzle(this);
+    aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    aboutDialog->show();
 }
 
 
