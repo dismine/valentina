@@ -2420,11 +2420,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Όνομα:</translation>
+        <translation>Όνομα:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Περιστροφή</translation>
+        <translation>Περιστροφή</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -2487,11 +2487,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Όνομα:</translation>
+        <translation>Όνομα:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Περιστροφή</translation>
+        <translation>Περιστροφή</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -3075,27 +3075,27 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Περιθώρια</translation>
+        <translation>Περιθώρια</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Αριστερά:</translation>
+        <translation>Αριστερά:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">εκ</translation>
+        <translation>εκ</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Δεξιά:</translation>
+        <translation>Δεξιά:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Επάνω:</translation>
+        <translation>Επάνω:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Κάτω:</translation>
+        <translation>Κάτω:</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -3107,22 +3107,6 @@
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3379,19 +3363,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Efficiency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3411,11 +3387,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
+        <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Prefer one sheet solution</source>
+        <source> min</source>
+        <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3840,11 +3821,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Όνομα:</translation>
+        <translation>Όνομα:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Περιστροφή</translation>
+        <translation>Περιστροφή</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -4788,10 +4769,6 @@ Apply settings anyway?</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5529,7 +5506,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Όνομα:</translation>
+        <translation>Όνομα:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5648,7 +5625,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Επιλογές</translation>
+        <translation>Επιλογές</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5660,22 +5637,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10689,10 +10650,6 @@ Do you want to save your changes?</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -12903,7 +12860,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Αναστροφή κατά άξονα</translation>
+        <translation>Αναστροφή κατά άξονα</translation>
     </message>
 </context>
 <context>
@@ -15342,7 +15299,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Προτιμήσεις</translation>
+        <translation>Προτιμήσεις</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

@@ -2456,11 +2456,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotazione</translation>
+        <translation>Rotazione</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -2523,11 +2523,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotazione</translation>
+        <translation>Rotazione</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -3123,27 +3123,27 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Margini</translation>
+        <translation>Margini</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Sinistra:</translation>
+        <translation>Sinistra:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Destra:</translation>
+        <translation>Destra:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Top:</translation>
+        <translation>Top:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Fondo:</translation>
+        <translation>Fondo:</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -3155,22 +3155,6 @@
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3444,20 +3428,12 @@ Applicare la configurazione comunque?</translation>
         <translation>Tempo concesso all’algoritmo per trovare il miglior piazzamento.</translation>
     </message>
     <message>
-        <source> min</source>
-        <translation>min</translation>
-    </message>
-    <message>
         <source>Efficiency:</source>
         <translation>Efficienza:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
         <translation>Imposta coefficiente di efficienza del piazzamento. Il coefficiente di efficienza del piazzamento è la percentuale di area occupata dai pezzi all’interno dell’area delimitata. Se la loro disposizione raggiunge il livello richiesto, il processo si interrompe. Se il valore è impostato su 0 non viene effettuata nessuna verifica. </translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3476,11 +3452,16 @@ Applicare la configurazione comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
+        <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Prefer one sheet solution</source>
+        <source> min</source>
+        <comment>minutes</comment>
+        <translation>min</translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3905,11 +3886,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotazione</translation>
+        <translation>Rotazione</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -4802,11 +4783,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Prolunga il primo punto fino al contorno del pezzo</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Prolunga l&apos;ultimo punto fino al contorno del pezzo</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
@@ -4863,10 +4844,6 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Length:</source>
         <translation>Lunghezza:</translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>U mark</source>
@@ -5606,7 +5583,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5725,7 +5702,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opzioni</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5737,22 +5714,6 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8270,7 +8231,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Internal path tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento Tracciato Interno</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -9827,7 +9788,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     <name>SavePlaceLabelOptions</name>
     <message>
         <source>save place label options</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva opzioni di posizionamento etichetta</translation>
     </message>
 </context>
 <context>
@@ -10912,10 +10873,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Formula magica</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation>Valore</translation>
     </message>
@@ -11451,7 +11408,7 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">Impossibile aprire file %1:
+        <translation>Impossibile aprire file %1:
 %2.</translation>
     </message>
     <message>
@@ -13251,7 +13208,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Ruotare sull&apos;asse</translation>
+        <translation>Ruotare sull&apos;asse</translation>
     </message>
 </context>
 <context>
@@ -15715,7 +15672,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Preferenze</translation>
+        <translation>Preferenze</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
