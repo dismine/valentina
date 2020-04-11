@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>462</width>
-    <height>320</height>
+    <height>338</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,11 +23,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>About Tape</string>
+   <string>About Puzzle</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../tape/share/resources/tapeicon.qrc">
-    <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
+   <iconset resource="../share/resources/puzzleicon.qrc">
+    <normaloff>:/puzzleicon/64x64/logo.png</normaloff>:/puzzleicon/64x64/logo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -40,6 +40,9 @@
      </property>
      <property name="rightMargin">
       <number>9</number>
+     </property>
+     <property name="bottomMargin">
+      <number>16</number>
      </property>
      <item>
       <widget class="QLabel" name="label_appIcon">
@@ -261,6 +264,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QPushButton" name="pushButtonCheckUpdate">
        <property name="text">
@@ -290,7 +296,6 @@
  </widget>
  <resources>
   <include location="../share/resources/puzzleicon.qrc"/>
-  <include location="../../tape/share/resources/tapeicon.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -125,7 +125,7 @@ void DialogAboutPuzzle::FontPointSize(QWidget *w, int pointSize)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutPuzzle::RetranslateUi()
 {
-    ui->label_Puzzle_Version->setText(QString("Tape %1").arg(APP_VERSION_STR));
+    ui->label_Puzzle_Version->setText(QString("Puzzle %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
