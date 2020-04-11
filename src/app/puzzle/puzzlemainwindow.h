@@ -51,6 +51,7 @@ private:
 
     void InitMenuBar();
 
+private slots:
     void New();
     void Open();
     void Save();

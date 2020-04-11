@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>puzzleicon/64x64/logo.png</file>
+        <file>puzzleicon/64x64/iconLayout.png</file>
+        <file>puzzleicon/64x64/iconCurrentPiece.png</file>
+        <file>puzzleicon/64x64/iconLayers.png</file>
+        <file>puzzleicon/64x64/iconTiles.png</file>
     </qresource>
 </RCC>
