@@ -37,7 +37,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>320</width>
+        <width>360</width>
         <height>0</height>
        </size>
       </property>
@@ -102,8 +102,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>41</height>
+             <width>356</width>
+             <height>779</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -185,7 +185,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>316</width>
+             <width>356</width>
              <height>779</height>
             </rect>
            </property>
@@ -212,47 +212,47 @@
                <item>
                 <layout class="QFormLayout" name="formLayout">
                  <item row="0" column="0">
-                  <widget class="QLabel" name="label_2">
+                  <widget class="QLabel" name="labelLayoutUnit">
                    <property name="text">
                     <string>Unit</string>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QComboBox" name="comboBox"/>
+                  <widget class="QComboBox" name="comboBoxLayoutUnit"/>
                  </item>
                  <item row="1" column="0">
-                  <widget class="QLabel" name="label_3">
+                  <widget class="QLabel" name="labelLayoutTemplate">
                    <property name="text">
-                    <string>Templates</string>
+                    <string>Template</string>
                    </property>
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QComboBox" name="comboBox_2"/>
+                  <widget class="QComboBox" name="comboBoxLayoutTemplate"/>
                  </item>
                  <item row="2" column="0">
-                  <widget class="QLabel" name="label_4">
+                  <widget class="QLabel" name="labelLayoutwidth">
                    <property name="text">
                     <string>Width</string>
                    </property>
                   </widget>
                  </item>
                  <item row="2" column="1">
-                  <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+                  <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutWidth"/>
                  </item>
                  <item row="3" column="1">
-                  <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+                  <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutLength"/>
                  </item>
                  <item row="3" column="0">
-                  <widget class="QLabel" name="label_5">
+                  <widget class="QLabel" name="labelLayoutLength">
                    <property name="text">
                     <string>Length</string>
                    </property>
                   </widget>
                  </item>
                  <item row="4" column="0">
-                  <widget class="QLabel" name="label_6">
+                  <widget class="QLabel" name="labelLayoutOrientation">
                    <property name="text">
                     <string>Orientation</string>
                    </property>
@@ -261,7 +261,7 @@
                  <item row="4" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout">
                    <item>
-                    <widget class="QRadioButton" name="radioLayoutPortrait">
+                    <widget class="QRadioButton" name="radioButtonLayoutPortrait">
                      <property name="toolTip">
                       <string>Portrait</string>
                      </property>
@@ -284,7 +284,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QRadioButton" name="radioButton_2">
+                    <widget class="QRadioButton" name="radioButtonLayoutLandscape">
                      <property name="toolTip">
                       <string>Landscape</string>
                      </property>
@@ -306,6 +306,13 @@
                   </layout>
                  </item>
                 </layout>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonLayoutRemoveUnusedLength">
+                 <property name="text">
+                  <string>Remove unused length</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -395,6 +402,101 @@
               <property name="title">
                <string>Control</string>
               </property>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <layout class="QFormLayout" name="formLayout_2">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelLayoutFollowGrainline">
+                   <property name="text">
+                    <string>Follow grainline</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
+                    <widget class="QRadioButton" name="radioButtonLayoutFollowGrainlineNo">
+                     <property name="text">
+                      <string>No</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButtonLayoutFollowGrainlineVertical">
+                     <property name="toolTip">
+                      <string>Vertical grainline</string>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="share/resources/puzzleicon.qrc">
+                       <normaloff>:/puzzleicon/64x64/iconGrainlineVertical.png</normaloff>:/puzzleicon/64x64/iconGrainlineVertical.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>28</width>
+                       <height>28</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButtonLayoutFollowGrainlineHorizontal">
+                     <property name="toolTip">
+                      <string>Horizontal grainline</string>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="share/resources/puzzleicon.qrc">
+                       <normaloff>:/puzzleicon/64x64/iconGrainlineHorizontal.png</normaloff>:/puzzleicon/64x64/iconGrainlineHorizontal.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>28</width>
+                       <height>28</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="labelLayoutPiecesGap">
+                   <property name="text">
+                    <string>Pieces gap</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesSuperposition">
+                 <property name="text">
+                  <string>Wargnin superposition of pieces</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesOutOfBound">
+                 <property name="text">
+                  <string>Warning pieces out of bound</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxLayoutStickyEdges">
+                 <property name="text">
+                  <string>Sticky edges</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
@@ -402,6 +504,29 @@
               <property name="title">
                <string>Export</string>
               </property>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <layout class="QFormLayout" name="formLayout_3">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelLayoutExportFormat">
+                   <property name="text">
+                    <string>Format</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="comboBoxLayoutExportFormat"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonLayoutExport">
+                 <property name="text">
+                  <string>Export Layout</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
@@ -466,8 +591,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>41</height>
+             <width>356</width>
+             <height>779</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -546,8 +671,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>41</height>
+             <width>356</width>
+             <height>779</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">

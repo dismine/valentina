@@ -7,5 +7,7 @@
         <file>puzzleicon/64x64/iconTiles.png</file>
         <file>puzzleicon/64x64/iconLandscape.png</file>
         <file>puzzleicon/64x64/iconPortrait.png</file>
+        <file>puzzleicon/64x64/iconGrainlineVertical.png</file>
+        <file>puzzleicon/64x64/iconGrainlineHorizontal.png</file>
     </qresource>
 </RCC>
