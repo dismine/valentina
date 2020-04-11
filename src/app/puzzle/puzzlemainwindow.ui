@@ -102,8 +102,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>316</width>
-             <height>779</height>
+             <width>115</width>
+             <height>41</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -208,6 +208,106 @@
               <property name="title">
                <string>Format</string>
               </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <layout class="QFormLayout" name="formLayout">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Unit</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="comboBox"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>Templates</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QComboBox" name="comboBox_2"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_4">
+                   <property name="text">
+                    <string>Width</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>Length</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>Orientation</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout">
+                   <item>
+                    <widget class="QRadioButton" name="radioLayoutPortrait">
+                     <property name="toolTip">
+                      <string>Portrait</string>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="share/resources/puzzleicon.qrc">
+                       <normaloff>:/puzzleicon/64x64/iconPortrait.png</normaloff>:/puzzleicon/64x64/iconPortrait.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>32</width>
+                       <height>32</height>
+                      </size>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButton_2">
+                     <property name="toolTip">
+                      <string>Landscape</string>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="share/resources/puzzleicon.qrc">
+                       <normaloff>:/puzzleicon/64x64/iconLandscape.png</normaloff>:/puzzleicon/64x64/iconLandscape.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>32</width>
+                       <height>32</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
@@ -216,6 +316,26 @@
                <string>Margins</string>
               </property>
               <layout class="QGridLayout" name="gridLayout">
+               <item row="1" column="2">
+                <widget class="QLabel" name="labelLayoutMarginRight">
+                 <property name="text">
+                  <string>Right:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="labelLayoutMarginTop">
+                 <property name="text">
+                  <string>Top:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="3">
                 <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutMarginRight">
                  <property name="singleStep">
@@ -231,19 +351,9 @@
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLabel" name="label_2">
+                <widget class="QLabel" name="labelLayoutMarginLeft">
                  <property name="text">
                   <string>Left:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLabel" name="label_3">
-                 <property name="text">
-                  <string>Right:</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -260,16 +370,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="label_4">
-                 <property name="text">
-                  <string>Top:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="2">
                 <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutMarginBottom">
                  <property name="singleStep">
@@ -278,7 +378,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QLabel" name="label_5">
+                <widget class="QLabel" name="labelLayoutMarginBottom">
                  <property name="text">
                   <string>Bottom:</string>
                  </property>
@@ -366,8 +466,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>316</width>
-             <height>779</height>
+             <width>98</width>
+             <height>41</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -446,8 +546,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>316</width>
-             <height>779</height>
+             <width>98</width>
+             <height>41</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -632,6 +732,18 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>graphicsView</tabstop>
+  <tabstop>tabWidgetProperties</tabstop>
+  <tabstop>scrollAreaLayout</tabstop>
+  <tabstop>doubleSpinBoxLayoutMarginTop</tabstop>
+  <tabstop>doubleSpinBoxLayoutMarginLeft</tabstop>
+  <tabstop>doubleSpinBoxLayoutMarginRight</tabstop>
+  <tabstop>doubleSpinBoxLayoutMarginBottom</tabstop>
+  <tabstop>scrollAreaCurrentPiece</tabstop>
+  <tabstop>scrollAreaLayers</tabstop>
+  <tabstop>scrollAreaTiles</tabstop>
+ </tabstops>
  <resources>
   <include location="share/resources/puzzleicon.qrc"/>
  </resources>
