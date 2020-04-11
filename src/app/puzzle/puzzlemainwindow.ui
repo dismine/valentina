@@ -124,6 +124,136 @@
              </widget>
             </item>
             <item>
+             <widget class="QGroupBox" name="groupBoxCurrentPieceInfo">
+              <property name="title">
+               <string>Infos</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout_4">
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEditCurrentPieceName">
+                 <property name="text">
+                  <string>DummyName</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="labelCurrentPieceName">
+                 <property name="text">
+                  <string>Name:</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBoxCurrentPieceSeamline">
+              <property name="title">
+               <string>Seamline</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <widget class="QCheckBox" name="checkBoxCurrentPieceShowSeamline">
+                 <property name="text">
+                  <string>Show Seamline</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBoxCurrentPieceGeometry">
+              <property name="title">
+               <string>Geometry</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_9">
+               <item>
+                <widget class="QCheckBox" name="checkBoxCurrentPieceMirrorPiece">
+                 <property name="text">
+                  <string>Mirror piece</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBoxCurrentPieceRotation">
+              <property name="title">
+               <string>Rotation</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout_5">
+               <item row="0" column="0">
+                <widget class="QLabel" name="labelCurrentPieceAngle">
+                 <property name="text">
+                  <string>Angle:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBoxCurrentPieceAngle">
+                 <property name="maximum">
+                  <double>360.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBoxCurrentPiecePlacement">
+              <property name="title">
+               <string>Placement</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout_6">
+               <item row="0" column="0">
+                <widget class="QLabel" name="labelCurrentPiecePositionX">
+                 <property name="text">
+                  <string>X:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBoxCurrentPieceBoxPositionX">
+                 <property name="maximum">
+                  <double>10000.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="labelCurrentPiecePositionY">
+                 <property name="text">
+                  <string>Y:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBoxCurrentPieceBoxPositionY">
+                 <property name="maximum">
+                  <double>10000.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacerCurrentPiece">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -868,7 +998,6 @@
   <tabstop>doubleSpinBoxLayoutMarginLeft</tabstop>
   <tabstop>doubleSpinBoxLayoutMarginRight</tabstop>
   <tabstop>doubleSpinBoxLayoutMarginBottom</tabstop>
-  <tabstop>scrollAreaCurrentPiece</tabstop>
   <tabstop>scrollAreaLayers</tabstop>
   <tabstop>scrollAreaTiles</tabstop>
  </tabstops>

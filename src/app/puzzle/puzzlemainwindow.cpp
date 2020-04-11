@@ -91,6 +91,23 @@ void PuzzleMainWindow::InitPropertyTabs()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitPropertyTabCurrentPiece()
 {
+    // ------------------------------ seamline ------------------------------------
+    connect(ui->checkBoxCurrentPieceShowSeamline,  QOverload<bool>::of(&QCheckBox::toggled), this,
+            &PuzzleMainWindow::CurrentPieceShowSeamlineChanged);
+
+    // ------------------------------ geometry ------------------------------------
+    connect(ui->checkBoxCurrentPieceMirrorPiece,  QOverload<bool>::of(&QCheckBox::toggled), this,
+            &PuzzleMainWindow::CurrentPieceMirrorPieceChanged);
+
+    // ------------------------------ rotation ------------------------------------
+    connect(ui->doubleSpinBoxCurrentPieceAngle, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::CurrentPieceAngleChanged);
+
+    // ------------------------------ placement -----------------------------------
+    connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::CurrentPiecePositionChanged);
+    connect(ui->doubleSpinBoxCurrentPieceBoxPositionY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::CurrentPiecePositionChanged);
 
 }
 
@@ -110,44 +127,63 @@ void PuzzleMainWindow::InitPropertyTabLayout()
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
     }
 
-    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PuzzleMainWindow::LayoutUnitChanged);
+    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &PuzzleMainWindow::LayoutUnitChanged);
 
 
     // -------------------- init the template combobox ---------------------
 
     // TODO
 
-    connect(ui->comboBoxLayoutTemplate, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PuzzleMainWindow::LayoutTemplateChanged);
+    connect(ui->comboBoxLayoutTemplate, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &PuzzleMainWindow::LayoutTemplateChanged);
 
     // -------------------- layout width, length, orientation  ------------------------
-    connect(ui->doubleSpinBoxLayoutWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutSizeChanged);
-    connect(ui->doubleSpinBoxLayoutLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutSizeChanged);
-    connect(ui->radioButtonLayoutPortrait, QOverload<bool>::of(&QRadioButton::toggled), this, &PuzzleMainWindow::LayoutOrientationChanged);
-    connect(ui->radioButtonLayoutLandscape, QOverload<bool>::of(&QRadioButton::toggled), this, &PuzzleMainWindow::LayoutOrientationChanged);
-    connect(ui->pushButtonLayoutRemoveUnusedLength, QOverload<bool>::of(&QPushButton::clicked), this, &PuzzleMainWindow::LayoutRemoveUnusedLength);
+    connect(ui->doubleSpinBoxLayoutWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutSizeChanged);
+    connect(ui->doubleSpinBoxLayoutLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutSizeChanged);
+    connect(ui->radioButtonLayoutPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &PuzzleMainWindow::LayoutOrientationChanged);
+    connect(ui->radioButtonLayoutLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &PuzzleMainWindow::LayoutOrientationChanged);
+    connect(ui->pushButtonLayoutRemoveUnusedLength, QOverload<bool>::of(&QPushButton::clicked), this,
+            &PuzzleMainWindow::LayoutRemoveUnusedLength);
 
     // -------------------- margins  ------------------------
-    connect(ui->doubleSpinBoxLayoutMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
-    connect(ui->doubleSpinBoxLayoutMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
-    connect(ui->doubleSpinBoxLayoutMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
-    connect(ui->doubleSpinBoxLayoutMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutMarginChanged);
+    connect(ui->doubleSpinBoxLayoutMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutMarginChanged);
 
     // ------------------- follow grainline -----------------------
-    connect(ui->radioButtonLayoutFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this, &PuzzleMainWindow::LayoutFollowGrainlineChanged);
-    connect(ui->radioButtonLayoutFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this, &PuzzleMainWindow::LayoutFollowGrainlineChanged);
-    connect(ui->radioButtonLayoutFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this, &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+    connect(ui->radioButtonLayoutFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+    connect(ui->radioButtonLayoutFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+    connect(ui->radioButtonLayoutFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &PuzzleMainWindow::LayoutFollowGrainlineChanged);
 
     // -------------------- pieces gap and checkboxes ---------------
-    connect(ui->doubleSpinBoxLayoutPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PuzzleMainWindow::LayoutPiecesGapChanged);
-    connect(ui->checkBoxLayoutWarningPiecesSuperposition,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged);
-    connect(ui->checkBoxLayoutWarningPiecesOutOfBound,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged);
-    connect(ui->checkBoxLayoutStickyEdges,  QOverload<bool>::of(&QCheckBox::toggled), this, &PuzzleMainWindow::LayoutStickyEdgesChanged);
+    connect(ui->doubleSpinBoxLayoutPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzleMainWindow::LayoutPiecesGapChanged);
+    connect(ui->checkBoxLayoutWarningPiecesSuperposition,  QOverload<bool>::of(&QCheckBox::toggled), this,
+            &PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged);
+    connect(ui->checkBoxLayoutWarningPiecesOutOfBound,  QOverload<bool>::of(&QCheckBox::toggled), this,
+            &PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged);
+    connect(ui->checkBoxLayoutStickyEdges,  QOverload<bool>::of(&QCheckBox::toggled), this,
+            &PuzzleMainWindow::LayoutStickyEdgesChanged);
 
     // -------------------- export ---------------------------
 
     // TODO init the file format export combobox
 
-    connect(ui->pushButtonLayoutExport, QOverload<bool>::of(&QPushButton::clicked), this, &PuzzleMainWindow::LayoutExport);
+    connect(ui->pushButtonLayoutExport, QOverload<bool>::of(&QPushButton::clicked), this,
+            &PuzzleMainWindow::LayoutExport);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -434,3 +470,58 @@ void PuzzleMainWindow::LayoutExport()
 
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::CurrentPieceShowSeamlineChanged(bool checked)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceShowSeamlineChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(checked);
+    Q_UNUSED(ret);
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::CurrentPieceMirrorPieceChanged(bool checked)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceMirrorPieceChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(checked);
+    Q_UNUSED(ret);
+
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::CurrentPieceAngleChanged(double value)
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceAngleChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(value);
+    Q_UNUSED(ret);
+
+    // TODO
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::CurrentPiecePositionChanged()
+{
+    // just for test purpuses, to be removed:
+    QMessageBox msgBox;
+    msgBox.setText("TODO PuzzleMainWindow::CurrentPiecePositionChanged");
+    int ret = msgBox.exec();
+
+    Q_UNUSED(ret);
+
+    // TODO
+}

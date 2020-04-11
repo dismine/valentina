@@ -83,6 +83,11 @@ private slots:
     void LayoutStickyEdgesChanged(bool checked);
     void LayoutExport();
 
+    void CurrentPieceShowSeamlineChanged(bool checked);
+    void CurrentPieceMirrorPieceChanged(bool checked);
+    void CurrentPieceAngleChanged(double value);
+    void CurrentPiecePositionChanged();
+
 };
 
 #endif // PUZZLEMAINWINDOW_H
