@@ -31,6 +31,9 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vpuzzlesettings.h"
 #include "../vmisc/vabstractapplication.h"
+#include "vpuzzlecommandline.h"
+
+#include <memory>
 
 class PuzzleApplication;// use in define
 class PuzzleMainWindow;
@@ -68,7 +71,7 @@ public:
     void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
-
+    const std::shared_ptr<VPuzzleCommandLine> CommandLine();
 public slots:
     void ProcessCMD();
 

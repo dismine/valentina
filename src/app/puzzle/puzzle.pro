@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core gui widgets network xml xmlpatterns printsupport testlib
+QT       += core gui widgets network xml xmlpatterns printsupport
 
 # Name of binary file
 TARGET = puzzle

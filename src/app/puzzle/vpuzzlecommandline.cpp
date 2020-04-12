@@ -1,8 +1,8 @@
 #include "vpuzzlecommandline.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsysexits.h"
+#include "../vmisc/literals.h"
 #include <QDebug>
-#include <QTest>
 
 std::shared_ptr<VPuzzleCommandLine> VPuzzleCommandLine::instance = nullptr;
 
@@ -57,6 +57,12 @@ QStringList VPuzzleCommandLine::OptionFileNames() const
     return parser.positionalArguments();
 }
 
+//-------------------------------------------------------------------------------------------
+bool VPuzzleCommandLine::IsNoScalingEnabled() const
+{
+    return IsOptionSet(LONG_OPTION_NO_HDPI_SCALING);
+}
+
 //----------------------------------------------------------------------------------------------
 VPuzzleCommandLine::VPuzzleCommandLine():
     parser(),
@@ -85,23 +91,30 @@ std::shared_ptr<VPuzzleCommandLine> VPuzzleCommandLine::Instance(const QCoreAppl
 //-------------------------------------------------------------------------------------------
 void VPuzzleCommandLine::InitCommandLineOptions()
 {
-    if (IsExportEnabled())
-    {
-        QStringList args = parser.positionalArguments();
-        parser.setSingleDashWordOptionMode(
-                    QCommandLineParser::SingleDashWordOptionMode(args.takeFirst().toInt()));
-        QString source = args.isEmpty() ? QString() : args.at(0);
-        QString destination = args.isEmpty() ? QString() : args.at(1);
-        parser.clearPositionalArguments();
-        parser.addPositionalArgument(source,
-                                     translate("Puzzle", "The raw layout input file."));
-        parser.addPositionalArgument(destination,
-                                     translate("Puzzle", "The destination folder"));
-    }
+    QStringList args = parser.positionalArguments();
+    parser.setSingleDashWordOptionMode(
+                QCommandLineParser::SingleDashWordOptionMode(args.takeFirst().toInt()));
+    QString source = args.isEmpty() ? QString() : args.at(0);
+    QString destination = args.isEmpty() ? QString() : args.at(1);
+    parser.clearPositionalArguments();
+    parser.addPositionalArgument(source,
+                                 translate("Puzzle", "The raw layout input file."));
+    parser.addPositionalArgument(destination,
+                                 translate("Puzzle", "The destination folder"));
 
     QCommandLineOption forceOption(QStringList() << "f" << "force",
                 translate("Puzzle", "Overwrite existing files."));
-        parser.addOption(forceOption);
+    parser.addOption(forceOption);
+
+    QCommandLineOption testOption(QStringList() << "test",
+            tr("Use for unit testing. Run the program and open a file without showing the main window."));
+    parser.addOption(testOption);
+
+    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
+            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+               "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0"));
+    parser.addOption(scalingOption);
+
 }
 
 //--------------------------------------------------------------------------------------------

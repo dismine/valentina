@@ -7,6 +7,7 @@
 
 class VPuzzleCommandLine: public QObject
 {
+    friend class PuzzleApplication;
     Q_OBJECT
 public:   
     virtual ~VPuzzleCommandLine() = default;
@@ -15,24 +16,34 @@ public:
      * @brief if user enabled export from cmd
      */
     bool IsExportEnabled() const;
+
     /**
      * @brief the base name of layout file or empty string if not
      */
     QString OptionBaseName() const;
+
     /**
      * @brief if user enabled test mode from cmd
      */
     bool IsTestModeEnabled() const;
+
     /**
      * @brief if gui enabled or not
      */
     bool IsGuiEnabled() const;
+
     /**
      * @brief the file name which should be loaded
      */
     QStringList OptionFileNames() const;
+
+    /**
+     * @brief if high dpi scaling is enabled
+     */
+    bool IsNoScalingEnabled() const;
 protected:
     VPuzzleCommandLine();
+
     /**
      * @brief create the single instance of the class inside puzzleapplication
      */
