@@ -126,11 +126,11 @@ void PuzzleMainWindow::InitPropertyTabLayout()
    ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
 
    // set default unit - TODO when we have the setting for the unit
-    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
-    if (indexUnit != -1)
-    {
-        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
-    }
+//    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
+//    if (indexUnit != -1)
+//    {
+//        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+//    }
 
     connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &PuzzleMainWindow::LayoutUnitChanged);
