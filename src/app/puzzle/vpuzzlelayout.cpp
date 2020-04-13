@@ -31,6 +31,7 @@
 VPuzzleLayout::VPuzzleLayout() :
     m_unplacedPiecesLayer(new VPuzzleLayer()),
     m_layers(QList<VPuzzleLayer *>()),
+    m_layoutUnit(Unit::Cm),
     m_layoutSize(QSizeF()),
     m_layoutMargins(QMarginsF()),
     m_followGrainLine(FollowGrainline::No),

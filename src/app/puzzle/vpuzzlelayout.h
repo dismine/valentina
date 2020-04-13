@@ -77,6 +77,7 @@ public:
     bool GetStickyEdges();
 
 private:
+    Q_DISABLE_COPY(VPuzzleLayout)
     VPuzzleLayer *m_unplacedPiecesLayer;
     QList<VPuzzleLayer *> m_layers;
 
