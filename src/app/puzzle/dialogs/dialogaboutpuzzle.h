@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   addgroup.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 4, 2016
+ **  @file   dialogaboutpuzzle.h
+ **  @author Ronan Le Tiec
+ **  @date   11 4, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,31 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef ADDGROUP_H
-#define ADDGROUP_H
+#ifndef DIALOGABOUTPUZZLE_H
+#define DIALOGABOUTPUZZLE_H
 
-#include <qcompilerdetection.h>
-#include <QDomElement>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
-#include <QtGlobal>
+#include <QDialog>
 
-#include "vundocommand.h"
+namespace Ui
+{
+    class DialogAboutPuzzle;
+}
 
-class AddGroup : public VUndoCommand
+class DialogAboutPuzzle : public QDialog
 {
     Q_OBJECT
+
 public:
-    AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~AddGroup();
-    virtual void undo() override;
-    virtual void redo() override;
-signals:
-    void UpdateGroups();
+    explicit DialogAboutPuzzle(QWidget *parent = nullptr);
+    virtual ~DialogAboutPuzzle();
+
+protected:
+    virtual void changeEvent(QEvent* event) override;
+    virtual void showEvent(QShowEvent *event) override;
+
 private:
-    Q_DISABLE_COPY(AddGroup)
-    const QString nameActivDraw;
+    Q_DISABLE_COPY(DialogAboutPuzzle)
+    Ui::DialogAboutPuzzle *ui;
+    bool isInitialized;
+
+    void FontPointSize(QWidget *w, int pointSize);
+
+    void RetranslateUi();
 };
 
-#endif // ADDGROUP_H
+#endif // DIALOGABOUTPUZZLE_H

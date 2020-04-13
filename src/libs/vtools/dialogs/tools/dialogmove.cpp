@@ -30,6 +30,7 @@
 
 #include <QColor>
 #include <QComboBox>
+#include <QCompleter>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -85,7 +86,8 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
       flagAngle(false),
       flagRotationAngle(false),
       flagLength(false),
-      flagName(true)
+      flagName(true),
+      flagGroupName(true)
 {
     ui->setupUi(this);
 
@@ -118,6 +120,7 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     ui->comboBoxRotationOriginPoint->blockSignals(false);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogMove::SuffixChanged);
+    connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogMove::GroupNameChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogMove::FXLength);
@@ -255,6 +258,49 @@ void DialogMove::SetRotationOrigPointId(const quint32 &value)
 QVector<quint32> DialogMove::GetObjects() const
 {
     return ConvertToVector(objects);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogMove::GetVisibilityGroupName() const
+{
+    return ui->lineEditVisibilityGroup->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetVisibilityGroupName(const QString &name)
+{
+    ui->lineEditVisibilityGroup->setText(name.isEmpty() ? tr("Rotation") : name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogMove::HasLinkedVisibilityGroup() const
+{
+    return ui->groupBoxVisibilityGroup->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetHasLinkedVisibilityGroup(bool linked)
+{
+    ui->groupBoxVisibilityGroup->setChecked(linked);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetVisibilityGroupTags(const QStringList &tags)
+{
+    ui->lineEditGroupTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList DialogMove::GetVisibilityGroupTags() const
+{
+    return ui->lineEditGroupTags->text().split(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetGroupCategories(const QStringList &categories)
+{
+    m_groupTags = categories;
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -482,6 +528,27 @@ void DialogMove::SuffixChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogMove::GroupNameChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        const QString name = edit->text();
+        if (name.isEmpty())
+        {
+            flagGroupName = false;
+            ChangeColor(ui->labelGroupName, errorColor);
+            CheckState();
+            return;
+        }
+
+        flagGroupName = true;
+        ChangeColor(ui->labelGroupName, OkColor(this));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ShowVisualization()
 {
     AddVisualization<VisToolMove>();
@@ -504,6 +571,18 @@ void DialogMove::SaveData()
     operation->SetRotationAngle(formulaRotationAngle);
     operation->SetRotationOriginPointId(GetRotationOrigPointId());
     operation->RefreshGeometry();
+
+    QStringList groupTags = ui->lineEditGroupTags->text().split(',');
+    for (auto &tag : groupTags)
+    {
+        tag = tag.trimmed();
+        if (not m_groupTags.contains(tag))
+        {
+            m_groupTags.append(tag);
+        }
+    }
+
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

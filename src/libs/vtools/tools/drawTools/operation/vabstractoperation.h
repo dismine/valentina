@@ -53,15 +53,15 @@ struct DestinationItem
 struct VAbstractOperationInitData : VAbstractToolInitData
 {
     VAbstractOperationInitData()
-        : VAbstractToolInitData(),
-          suffix(),
-          source(),
-          destination()
+        : VAbstractToolInitData()
     {}
 
-    QString suffix;
-    QVector<quint32> source;
-    QVector<DestinationItem> destination;
+    QString suffix{};
+    QVector<quint32> source{};
+    QVector<DestinationItem> destination{};
+    QString visibilityGroupName{};
+    QStringList visibilityGroupTags{};
+    bool hasLinkedVisibilityGroup{false};
 };
 
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
@@ -133,18 +133,28 @@ protected:
 
     QMap<quint32, VAbstractSimple *> operatedObjects;
 
+    bool hasLinkedGroup{false};
+    QString groupName{};
+    QStringList groupTags{};
+
     VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                        const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                        QGraphicsItem *parent = nullptr);
 
     virtual void AddToFile() override;
     virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
+    virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                  const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    virtual void PerformDelete() override;
 
     void UpdateNamePosition(quint32 id, const QPointF &pos);
     void SaveSourceDestination(QDomElement &tag);
 
     template <typename T>
     void ShowToolVisualization(bool show);
+
+    template <typename T>
+    void SetDialogVisibilityGroupData(QPointer<T> dialogTool);
 
     void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
@@ -155,12 +165,37 @@ protected:
 
     QString ComplexPointToolTip(quint32 itemId) const;
     QString ComplexCurveToolTip(quint32 itemId) const;
+    QString VisibilityGroupToolTip() const;
+
+    static void CreateVisibilityGroup(const VAbstractOperationInitData & initData);
 private:
     Q_DISABLE_COPY(VAbstractOperation)
 
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);
+
+    bool NeedUpdateVisibilityGroup() const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
+{
+    SCASSERT(not dialogTool.isNull())
+
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    dialogTool->SetGroupCategories(doc->GetGroupCategories());
+    if (group != null_id)
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(true);
+        dialogTool->SetVisibilityGroupName(doc->GetGroupName(group));
+        dialogTool->SetVisibilityGroupTags(doc->GetGroupTags(group));
+    }
+    else
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(false);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>

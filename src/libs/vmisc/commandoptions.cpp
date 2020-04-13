@@ -53,6 +53,8 @@ const QString LONG_OPTION_BINARYDXF         = QStringLiteral("bdxf");
 const QString LONG_OPTION_TEXT2PATHS        = QStringLiteral("text2paths");
 const QString LONG_OPTION_EXPORTONLYDETAILS = QStringLiteral("exportOnlyDetails");
 const QString LONG_OPTION_EXPORTSUCHDETAILS = QStringLiteral("exportSuchDetails");
+const QString LONG_OPTION_EXPXSCALE         = QStringLiteral("xscale");
+const QString LONG_OPTION_EXPYSCALE         = QStringLiteral("yscale");
 
 const QString LONG_OPTION_CROP_LENGTH       = QStringLiteral("crop");
 const QString SINGLE_OPTION_CROP_LENGTH     = QStringLiteral("c");
@@ -134,6 +136,7 @@ const QString LONG_OPTION_MANUAL_PRIORITY = QStringLiteral("manualPriority");
 const QString LONG_OPTION_LANDSCAPE_ORIENTATION = QStringLiteral("landscapeOrientation");
 
 const QString LONG_OPTION_NEST_QUANTITY = QStringLiteral("nestQuantity");
+const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION = QStringLiteral("preferOneSheetSolution");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -153,6 +156,8 @@ QStringList AllKeys()
         LONG_OPTION_TEXT2PATHS,
         LONG_OPTION_EXPORTONLYDETAILS,
         LONG_OPTION_EXPORTSUCHDETAILS,
+        LONG_OPTION_EXPXSCALE,
+        LONG_OPTION_EXPYSCALE,
         LONG_OPTION_CROP_LENGTH, SINGLE_OPTION_CROP_LENGTH,
         LONG_OPTION_CROP_WIDTH,
         LONG_OPTION_UNITE, SINGLE_OPTION_UNITE,
@@ -189,6 +194,7 @@ QStringList AllKeys()
         LONG_OPTION_FOLLOW_GRAINLINE,
         LONG_OPTION_MANUAL_PRIORITY,
         LONG_OPTION_LANDSCAPE_ORIENTATION,
-        LONG_OPTION_NEST_QUANTITY
+        LONG_OPTION_NEST_QUANTITY,
+        LONG_OPTION_PREFER_ONE_SHEET_SOLUTION
     };
 }

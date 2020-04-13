@@ -74,6 +74,8 @@ void VToolFlippingByAxis::setDialog()
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetSuffix(suffix);
+
+    SetDialogVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,6 +91,9 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dia
     initData.axisType = dialogTool->GetAxisType();
     initData.suffix = dialogTool->GetSuffix();
     initData.source = dialogTool->GetObjects();
+    initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
+    initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
+    initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -123,6 +128,11 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
 
     if (initData.parse == Document::FullParse)
     {
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            qApp->getUndoStack()->beginMacro(tr("Flipping by axis"));
+        }
+
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByAxis, initData.doc);
         VToolFlippingByAxis *tool = new VToolFlippingByAxis(initData);
         initData.scene->addItem(tool);
@@ -133,6 +143,13 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
+
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractOperation::CreateVisibilityGroup(initData);
+            qApp->getUndoStack()->endMacro();
+        }
+
         return tool;
     }
     return nullptr;
@@ -208,6 +225,10 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+
+    // Save for later use.
+    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    groupName = dialogTool->GetVisibilityGroupName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -234,8 +255,10 @@ void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolFlippingByAxis::MakeToolTip() const
 {
-    return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>")
-            .arg(tr("Origin point"), OriginPointName());
+    return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
+                          "%3")
+            .arg(tr("Origin point"), OriginPointName()) // 1, 2
+            .arg(VisibilityGroupToolTip());             // 3
 }
 
 //---------------------------------------------------------------------------------------------------------------------

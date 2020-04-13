@@ -65,6 +65,17 @@ public:
 
     QVector<quint32> GetObjects() const;
 
+    QString GetVisibilityGroupName() const;
+    void    SetVisibilityGroupName(const QString &name);
+
+    bool HasLinkedVisibilityGroup() const;
+    void SetHasLinkedVisibilityGroup(bool linked);
+
+    void        SetVisibilityGroupTags(const QStringList &tags);
+    QStringList GetVisibilityGroupTags() const;
+
+    virtual void SetGroupCategories(const QStringList &categories) override;
+
     virtual void ShowDialog(bool click) override;
 
 public slots:
@@ -73,6 +84,7 @@ public slots:
 
 private slots:
     void SuffixChanged();
+    void GroupNameChanged();
 
 protected:
     virtual void ShowVisualization() override;
@@ -96,13 +108,16 @@ private:
     QString m_suffix;
 
     bool flagName;
+    bool flagGroupName;
     bool flagError;
+
+    QStringList m_groupTags{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogFlippingByLine::IsValid() const
 {
-    return flagError && flagName;
+    return flagError && flagName && flagGroupName;
 }
 
 #endif // DIALOGFLIPPINGBYLINE_H

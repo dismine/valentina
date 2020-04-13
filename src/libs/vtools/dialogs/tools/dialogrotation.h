@@ -63,6 +63,17 @@ public:
 
     QVector<quint32> GetObjects() const;
 
+    QString GetVisibilityGroupName() const;
+    void    SetVisibilityGroupName(const QString &name);
+
+    bool HasLinkedVisibilityGroup() const;
+    void SetHasLinkedVisibilityGroup(bool linked);
+
+    void        SetVisibilityGroupTags(const QStringList &tags);
+    QStringList GetVisibilityGroupTags() const;
+
+    virtual void SetGroupCategories(const QStringList &categories) override;
+
     virtual void ShowDialog(bool click) override;
 
 public slots:
@@ -74,6 +85,7 @@ private slots:
     void DeployAngleTextEdit();
     void FXAngle();
     void SuffixChanged();
+    void GroupNameChanged();
     void EvalAngle();
 
 protected:
@@ -111,13 +123,16 @@ private:
     /** @brief flagAngle true if value of angle is correct */
     bool flagAngle;
     bool flagName;
+    bool flagGroupName;
     bool flagError;
+
+    QStringList m_groupTags{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogRotation::IsValid() const
 {
-    return flagAngle && flagName && flagError;
+    return flagAngle && flagName && flagError && flagGroupName;
 }
 
 #endif // DIALOGROTATION_H

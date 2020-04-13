@@ -41,6 +41,7 @@
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
+#include "dialogs/dialoglayoutscale.h"
 #include "../vlayout/vposter.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
@@ -312,7 +313,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                 if (lGenerator.PapersCount() <= papersCount)
                 {
                     const qreal layoutEfficiency = lGenerator.LayoutEfficiency();
-                    if (efficiency < layoutEfficiency)
+                    if (efficiency < layoutEfficiency || lGenerator.PapersCount() < papersCount)
                     {
                         efficiency = layoutEfficiency;
                         if (VApplication::IsGUIMode())
@@ -403,7 +404,10 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                 || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
                     && efficiency >= lGenerator.GetEfficiencyCoefficient()))
         {
-            break;
+            if (not lGenerator.IsPreferOneSheetSolution() || lGenerator.PapersCount() == 1)
+            {
+                break;
+            }
         }
 
         if (IsTimeout())
@@ -510,7 +514,16 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         format == LayoutExportFormats::DXF_AC1018_AAMA ||
         format == LayoutExportFormats::DXF_AC1021_AAMA ||
         format == LayoutExportFormats::DXF_AC1024_AAMA ||
-        format == LayoutExportFormats::DXF_AC1027_AAMA)
+        format == LayoutExportFormats::DXF_AC1027_AAMA ||
+        format == LayoutExportFormats::DXF_AC1006_ASTM ||
+        format == LayoutExportFormats::DXF_AC1009_ASTM ||
+        format == LayoutExportFormats::DXF_AC1012_ASTM ||
+        format == LayoutExportFormats::DXF_AC1014_ASTM ||
+        format == LayoutExportFormats::DXF_AC1015_ASTM ||
+        format == LayoutExportFormats::DXF_AC1018_ASTM ||
+        format == LayoutExportFormats::DXF_AC1021_ASTM ||
+        format == LayoutExportFormats::DXF_AC1024_ASTM ||
+        format == LayoutExportFormats::DXF_AC1027_ASTM)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
@@ -665,15 +678,31 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     switch (format)
     {
         case LayoutExportFormats::DXF_AC1006_ASTM:
+            ASTMDxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1009_ASTM:
+            ASTMDxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1012_ASTM:
+            ASTMDxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1014_ASTM:
+            ASTMDxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1015_ASTM:
+            ASTMDxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1018_ASTM:
+            ASTMDxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1021_ASTM:
+            ASTMDxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1024_ASTM:
+            ASTMDxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1027_ASTM:
-            Q_UNREACHABLE(); // For now not supported
+            ASTMDxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1006_AAMA:
             AAMADxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
@@ -798,7 +827,6 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                                  ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
     const double xscale = printer->pageRect().width() / printerPageRect.width();
     const double yscale = printer->pageRect().height() / printerPageRect.height();
-    const double scale = qMin(xscale, yscale);
 
     QPainter painter;
     if (not painter.begin(printer))
@@ -844,7 +872,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
             if (paper)
             {
-                *poster += posterazor->Calc(paper->rect().toRect(), i, orientation);
+                QRectF paperRect = paper->rect();
+                QSizeF image(paperRect.width() * m_xscale, paperRect.height() * m_yscale);
+                *poster += posterazor->Calc(image.toSize(), i, orientation);
             }
         }
 
@@ -949,7 +979,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                 qreal x,y;
                 if(printer->fullPage())
                 {
-                    QMarginsF printerMargins = printer->pageLayout().margins();
+                    QPageLayout layout = printer->pageLayout();
+                    layout.setUnits(QPageLayout::Millimeter);
+                    QMarginsF printerMargins = layout.margins();
                     x = qFloor(ToPixel(printerMargins.left(),Unit::Mm));
                     y = qFloor(ToPixel(printerMargins.top(),Unit::Mm));
                 }
@@ -958,7 +990,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                     x = 0; y = 0;
                 }
 
-                QRectF target(x * scale, y * scale, source.width() * scale, source.height() * scale);
+                QRectF target(x * xscale, y * yscale, source.width() * xscale, source.height() * yscale);
 
                 scenes.at(paperIndex)->render(&painter, target, source, Qt::IgnoreAspectRatio);
 
@@ -1187,10 +1219,10 @@ void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QG
     const QRectF r = paper->rect();
     QSvgGenerator generator;
     generator.setFileName(name);
-    generator.setSize(QSize(qFloor(r.width() + margins.left() + margins.right()),
-                            qFloor(r.height() + margins.top() + margins.bottom())));
-    generator.setViewBox(QRectF(0, 0, r.width() + margins.left() + margins.right(),
-                                r.height() + margins.top() + margins.bottom()));
+    generator.setSize(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right()),
+                            qFloor(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom())));
+    generator.setViewBox(QRectF(0, 0, r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right(),
+                                r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom()));
     generator.setTitle(tr("Pattern"));
     generator.setDescription(doc->GetDescription().toHtmlEscaped());
     generator.setResolution(static_cast<int>(PrintDPI));
@@ -1200,6 +1232,7 @@ void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QG
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
     scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
     painter.end();
 }
@@ -1214,8 +1247,8 @@ void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QG
 {
     const QRectF r = paper->rect();
     // Create the image with the exact size of the shrunk scene
-    QImage image(QSize(qFloor(r.width() + margins.left() + margins.right()),
-                       qFloor(r.height() + margins.top() + margins.bottom())),
+    QImage image(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right()),
+                       qFloor(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom())),
                  QImage::Format_ARGB32);
     image.fill(Qt::white);
     QPainter painter(&image);
@@ -1223,6 +1256,7 @@ void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QG
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
     scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
     image.save(name);
 }
@@ -1245,9 +1279,11 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     printer.setResolution(static_cast<int>(PrintDPI));
     printer.setOrientation(QPrinter::Portrait);
     printer.setFullPage(ignorePrinterFields);
-    if (not printer.setPageSize(QPageSize(QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
-                                                 FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
-                                          QPageSize::Millimeter)))
+
+    qreal width = FromPixel(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right(), Unit::Mm);
+    qreal height = FromPixel(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom(), Unit::Mm);
+
+    if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
     {
         qWarning() << tr("Cannot set printer page size");
     }
@@ -1272,6 +1308,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
     scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
     painter.end();
 }
@@ -1296,6 +1333,9 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     {
         qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
     }
+
+    m_xscale = m_dialogSaveLayout->GetXScale();
+    m_yscale = m_dialogSaveLayout->GetYScale();
 
     printer.setOutputFileName(name);
     printer.setResolution(static_cast<int>(PrintDPI));
@@ -1395,7 +1435,11 @@ void MainWindowsNoGUI::FlatDxfFile(const QString &name, int version, bool binary
     PrepareTextForDXF(endStringPlaceholder, details);
     VDxfPaintDevice generator;
     generator.setFileName(name);
-    generator.setSize(paper->rect().size().toSize());
+
+    const QRectF r = paper->rect();
+    generator.setSize(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale()),
+                            qFloor(r.height() * m_dialogSaveLayout->GetYScale())));
+
     generator.setResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(version));
     generator.SetBinaryFormat(binary);
@@ -1404,6 +1448,7 @@ void MainWindowsNoGUI::FlatDxfFile(const QString &name, int version, bool binary
     QPainter painter;
     if (painter.begin(&generator))
     {
+        painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
         scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
     }
@@ -1416,12 +1461,31 @@ void MainWindowsNoGUI::AAMADxfFile(const QString &name, int version, bool binary
 {
     VDxfPaintDevice generator;
     generator.setFileName(name);
+    generator.setSize(QSize(qCeil(size.width() * m_dialogSaveLayout->GetXScale()),
+                            qCeil(size.height() * m_dialogSaveLayout->GetYScale())));
+    generator.setResolution(PrintDPI);
+    generator.SetVersion(static_cast<DRW::Version>(version));
+    generator.SetBinaryFormat(binary);
+    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetXScale(m_dialogSaveLayout->GetXScale());
+    generator.SetYScale(m_dialogSaveLayout->GetYScale());
+    generator.ExportToAAMA(details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
+                                   const QVector<VLayoutPiece> &details) const
+{
+    VDxfPaintDevice generator;
+    generator.setFileName(name);
     generator.setSize(size);
     generator.setResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(version));
     generator.SetBinaryFormat(binary);
     generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
-    generator.ExportToAAMA(details);
+    generator.SetXScale(m_dialogSaveLayout->GetXScale());
+    generator.SetYScale(m_dialogSaveLayout->GetYScale());
+    generator.ExportToASTM(details);
 }
 
 QT_WARNING_POP
@@ -1437,6 +1501,17 @@ void MainWindowsNoGUI::PreparePaper(int index) const
         shadows.at(index)->setVisible(false);
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));// border
     }
+
+    QTransform matrix;
+    matrix.scale(m_xscale, m_yscale);
+
+    QList<QGraphicsItem *> paperDetails = details.at(index);
+    for (auto detail : paperDetails)
+    {
+        QTransform m = detail->transform();
+        m *= matrix;
+        detail->setTransform(m);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1450,6 +1525,17 @@ void MainWindowsNoGUI::RestorePaper(int index) const
         QBrush brush(Qt::gray);
         scenes.at(index)->setBackgroundBrush(brush);
         shadows.at(index)->setVisible(true);
+    }
+
+    QTransform matrix;
+    matrix.scale(1./m_xscale, 1./m_yscale);
+
+    QList<QGraphicsItem *> paperDetails = details.at(index);
+    for (auto detail : paperDetails)
+    {
+        QTransform m = detail->transform();
+        m *= matrix;
+        detail->setTransform(m);
     }
 }
 
@@ -1541,8 +1627,19 @@ void MainWindowsNoGUI::PrintPreview()
         return;
     }
 
+    {
+        DialogLayoutScale layoutScale(isTiled, this);
+        layoutScale.SetXScale(1);
+        layoutScale.SetYScale(1);
+        layoutScale.exec();
+
+        m_xscale = layoutScale.GetXScale();
+        m_yscale = layoutScale.GetYScale();
+    }
+
     SetPrinterSettings(printer.data(), PrintType::PrintPreview);
     printer->setResolution(static_cast<int>(PrintDPI));
+
     // display print preview dialog
     QPrintPreviewDialog preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
@@ -1571,6 +1668,16 @@ void MainWindowsNoGUI::LayoutPrint()
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
                   qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
         return;
+    }
+
+    {
+        DialogLayoutScale layoutScale(isTiled, this);
+        layoutScale.SetXScale(1);
+        layoutScale.SetYScale(1);
+        layoutScale.exec();
+
+        m_xscale = layoutScale.GetXScale();
+        m_yscale = layoutScale.GetYScale();
     }
 
     SetPrinterSettings(printer.data(), PrintType::PrintNative);

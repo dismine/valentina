@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>601</width>
-    <height>600</height>
+    <height>645</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -384,7 +384,7 @@
              <string>Time given for the algorithm to find best layout.</string>
             </property>
             <property name="suffix">
-             <string> min</string>
+             <string comment="minutes"> min</string>
             </property>
             <property name="minimum">
              <number>1</number>
@@ -429,7 +429,7 @@
              <string>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </string>
             </property>
             <property name="suffix">
-             <string>%</string>
+             <string notr="true">%</string>
             </property>
             <property name="decimals">
              <number>1</number>
@@ -445,6 +445,16 @@
          <widget class="QCheckBox" name="checkBoxSaveLength">
           <property name="text">
            <string>Save length of the sheet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxOneSheetSolution">
+          <property name="toolTip">
+           <string>Enable this option to prefer getting one sheet solutions.</string>
+          </property>
+          <property name="text">
+           <string>Prefer one sheet solution</string>
           </property>
          </widget>
         </item>

@@ -117,6 +117,9 @@ public:
     bool IsSaveLength() const;
     void SetSaveLength(bool value);
 
+    bool IsPreferOneSheetSolution() const;
+    void SetPreferOneSheetSolution(bool value);
+
     bool IsUnitePages() const;
     void SetUnitePages(bool value);
 
@@ -154,6 +157,7 @@ private:
     bool autoCropLength;
     bool autoCropWidth;
     bool saveLength;
+    bool preferOneSheetSolution{false};
     bool unitePages;
     bool stripOptimizationEnabled;
     quint8 multiplier;
@@ -167,9 +171,10 @@ private:
 
     void GatherPages();
     void UnitePages();
-    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i);
+    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const;
     void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
-    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details);
+    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const;
+    VLayoutPaper MasterPage() const;
 };
 
 #endif // VLAYOUTGENERATOR_H

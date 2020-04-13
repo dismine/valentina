@@ -30,6 +30,7 @@
 
 #include <QColor>
 #include <QComboBox>
+#include <QCompleter>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -67,6 +68,7 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
       stage1(true),
       m_suffix(),
       flagName(true),
+      flagGroupName(true),
       flagError(false)
 {
     ui->setupUi(this);
@@ -79,6 +81,7 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
+    connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByLine::GroupNameChanged);
     connect(ui->comboBoxFirstLinePoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByLine::PointChanged);
     connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged,
@@ -140,6 +143,49 @@ void DialogFlippingByLine::SetSuffix(const QString &value)
 QVector<quint32> DialogFlippingByLine::GetObjects() const
 {
     return ConvertToVector(objects);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogFlippingByLine::GetVisibilityGroupName() const
+{
+    return ui->lineEditVisibilityGroup->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetVisibilityGroupName(const QString &name)
+{
+    ui->lineEditVisibilityGroup->setText(name.isEmpty() ? tr("Rotation") : name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogFlippingByLine::HasLinkedVisibilityGroup() const
+{
+    return ui->groupBoxVisibilityGroup->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetHasLinkedVisibilityGroup(bool linked)
+{
+    ui->groupBoxVisibilityGroup->setChecked(linked);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetVisibilityGroupTags(const QStringList &tags)
+{
+    ui->lineEditGroupTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList DialogFlippingByLine::GetVisibilityGroupTags() const
+{
+    return ui->lineEditGroupTags->text().split(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetGroupCategories(const QStringList &categories)
+{
+    m_groupTags = categories;
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -302,6 +348,27 @@ void DialogFlippingByLine::SuffixChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::GroupNameChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        const QString name = edit->text();
+        if (name.isEmpty())
+        {
+            flagGroupName = false;
+            ChangeColor(ui->labelGroupName, errorColor);
+            CheckState();
+            return;
+        }
+
+        flagGroupName = true;
+        ChangeColor(ui->labelGroupName, OkColor(this));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ShowVisualization()
 {
     AddVisualization<VisToolFlippingByLine>();
@@ -319,6 +386,18 @@ void DialogFlippingByLine::SaveData()
     operation->SetFirstLinePointId(GetFirstLinePointId());
     operation->SetSecondLinePointId(GetSecondLinePointId());
     operation->RefreshGeometry();
+
+    QStringList groupTags = ui->lineEditGroupTags->text().split(',');
+    for (auto &tag : groupTags)
+    {
+        tag = tag.trimmed();
+        if (not m_groupTags.contains(tag))
+        {
+            m_groupTags.append(tag);
+        }
+    }
+
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

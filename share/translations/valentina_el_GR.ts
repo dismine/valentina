@@ -51,6 +51,13 @@
     </message>
 </context>
 <context>
+    <name>ChangeGroupOptions</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
@@ -2403,6 +2410,34 @@
         <source>Flipping by axis</source>
         <translation>Αναστροφή κατά άξονα</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Όνομα:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation>Περιστροφή</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2442,6 +2477,34 @@
         <source>Flipping by line</source>
         <translation>Αναστροφή κατά γραμμή</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Όνομα:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation>Περιστροφή</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogGroup</name>
@@ -2455,7 +2518,7 @@
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Μοναδικό όνομα κομματιού πατρόν</translation>
+        <translation type="vanished">Μοναδικό όνομα κομματιού πατρόν</translation>
     </message>
     <message>
         <source>Choose group name</source>
@@ -2464,6 +2527,18 @@
     <message>
         <source>New group</source>
         <translation>Νέα ομάδα</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2993,6 +3068,49 @@
     </message>
 </context>
 <context>
+    <name>DialogLayoutScale</name>
+    <message>
+        <source>Layout scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation>Περιθώρια</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation>Αριστερά:</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation>εκ</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation>Δεξιά:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation>Επάνω:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation>Κάτω:</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
@@ -3245,19 +3363,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Efficiency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3274,6 +3384,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Auto crop unused width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer one sheet solution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3687,6 +3810,34 @@ Apply settings anyway?</source>
     <message>
         <source>Center point</source>
         <translation>Κεντρικό σημείο</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Όνομα:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation>Περιστροφή</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4618,10 +4769,6 @@ Apply settings anyway?</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5349,6 +5496,30 @@ Apply settings anyway?</source>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Όνομα:</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -5450,6 +5621,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Orientation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Επιλογές</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9364,6 +9551,13 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
+    <name>RenameGroup</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -10456,10 +10650,6 @@ Do you want to save your changes?</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -10973,6 +11163,24 @@ Do you want to save your changes?</source>
         <source>Invalid version. Maximum supported format version is %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t open file %1:
+%2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t open schema file %1:
+%2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not load schema file &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Validation error file %3 in line %1 column %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
@@ -11060,6 +11268,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Length</source>
         <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>operation options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>delete operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11225,6 +11445,21 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBank</name>
+    <message>
+        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing data for layout error: List of details is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11614,6 +11849,26 @@ Do you want to save your changes?</source>
         <source>Auto crop unused width (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer one sheet layout solution (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -11688,15 +11943,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
-%2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11711,10 +11957,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not copy temp file to document file</source>
         <translation type="vanished">Δεν ήταν δυνατή η αντιγραφή του προσωρινού αρχείου στο αρχείο εγγράφου</translation>
-    </message>
-    <message>
-        <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
@@ -12307,6 +12549,14 @@ Do you want to save your changes?</source>
         <source>Can&apos;t create history record for the tool.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reading final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPiece</name>
@@ -12608,6 +12858,10 @@ Do you want to save your changes?</source>
         <source>Origin point</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation>Αναστροφή κατά άξονα</translation>
+    </message>
 </context>
 <context>
     <name>VToolFlippingByLine</name>
@@ -12618,6 +12872,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Second line point</source>
         <translation type="unfinished">Δεύτερο σημείο γραμμής</translation>
+    </message>
+    <message>
+        <source>flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12711,6 +12969,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13307,6 +13569,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14734,6 +15000,191 @@ Do you want to save your changes?</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>converts degrees to radian</source>
+        <comment>functionm degTorad</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>converts radian to degrees</source>
+        <comment>function radTodeg</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sine function working with radians</source>
+        <comment>function sin</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosine function working with radians</source>
+        <comment>function cos</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tangens function working with radians</source>
+        <comment>function tan</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus sine function working with radians</source>
+        <comment>function asin</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus cosine function working with radians</source>
+        <comment>function acos</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus tangens function working with radians</source>
+        <comment>function atan</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic sine function</source>
+        <comment>function sinh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic cosine</source>
+        <comment>function cosh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic tangens function</source>
+        <comment>function tanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic arcus sine function</source>
+        <comment>function asinh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic arcus cosine function</source>
+        <comment>function acosh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic arcur tangens function</source>
+        <comment>function atanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sine function working with degrees</source>
+        <comment>function sinD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosine function working with degrees</source>
+        <comment>function cosD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tangens function working with degrees</source>
+        <comment>function tanD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus sine function working with degrees</source>
+        <comment>function asinD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus cosine function working with degrees</source>
+        <comment>function acosD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus tangens function working with degrees</source>
+        <comment>function atanD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to the base 2</source>
+        <comment>function log2</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to the base 10</source>
+        <comment>function log10</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to the base 10</source>
+        <comment>function log</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to base e (2.71828...)</source>
+        <comment>function ln</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>e raised to the power of x</source>
+        <comment>function exp</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>square root of a value</source>
+        <comment>function sqrt</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
+        <comment>function sign</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>round to nearest integer</source>
+        <comment>function rint</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>round to up to 1 decimal</source>
+        <comment>function r2cm</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cut, split and rotate modeling operation. Takes cm units.</source>
+        <comment>function csrCm</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cut, split and rotate modeling operation. Takes inch units.</source>
+        <comment>function csrInch</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>absolute value</source>
+        <comment>function abs</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>min of all arguments</source>
+        <comment>function min</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>max of all arguments</source>
+        <comment>function max</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sum of all arguments</source>
+        <comment>function sum</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mean value of all arguments</source>
+        <comment>function avg</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
+        <comment>function fmod</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -14795,12 +15246,24 @@ Do you want to save your changes?</source>
         <source>Hide not in layout</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find piece by id &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VWidgetGroups</name>
     <message>
         <source>Rename</source>
-        <translation>Μετονομασία</translation>
+        <translation type="vanished">Μετονομασία</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -14820,6 +15283,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter by tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation>Προτιμήσεις</translation>
+    </message>
+    <message>
+        <source>Categories: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

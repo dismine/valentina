@@ -29,11 +29,43 @@
 #include "vabstractoperation.h"
 #include "../../../undocommands/label/operationmovelabel.h"
 #include "../../../undocommands/label/operationshowlabel.h"
+#include "../../../undocommands/savetooloptions.h"
+#include "../../../undocommands/undogroup.h"
+#include "../../../undocommands/deltool.h"
 #include "../vgeometry/vpointf.h"
 
 const QString VAbstractOperation::TagItem        = QStringLiteral("item");
 const QString VAbstractOperation::TagSource      = QStringLiteral("source");
 const QString VAbstractOperation::TagDestination = QStringLiteral("destination");
+
+namespace
+{
+/**
+ * @brief VisibilityGroupDataFromSource converts source list to visibility group list.
+ * @param data container with pattern data
+ * @param source list with source objects
+ * @return visibility group data
+ */
+QMap<quint32, quint32> VisibilityGroupDataFromSource(const VContainer *data, const QVector<quint32> &source)
+{
+    QMap<quint32, quint32> groupData;
+
+    for (auto &sId : source)
+    {
+        try
+        {
+            groupData.insert(sId, data->GetGObject(sId)->getIdTool());
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+
+    }
+
+    return groupData;
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractOperation::getTagName() const
@@ -498,6 +530,26 @@ VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, 
       destination(destination),
       operatedObjects()
 {
+    connect(doc, &VAbstractPattern::UpdateToolTip, this, [this]()
+    {
+        QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+        while (i.hasNext())
+        {
+            i.next();
+            if (i.value()->GetType() == GOType::Point)
+            {
+                VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
+                SCASSERT(item != nullptr)
+                item->setToolTip(ComplexPointToolTip(i.key()));
+            }
+            else
+            {
+                VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
+                SCASSERT(item != nullptr)
+                item->setToolTip(ComplexCurveToolTip(i.key()));
+            }
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -525,6 +577,95 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
             }
             qApp->getUndoStack()->push(new OperationShowLabel(doc, m_id, id, visible));
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                          const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    bool updateToolOptions =
+        newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement);
+    bool updateVisibilityOptions = NeedUpdateVisibilityGroup();
+
+    if (updateToolOptions && updateVisibilityOptions)
+    {
+        qApp->getUndoStack()->beginMacro(tr("operation options"));
+    }
+
+    if (updateToolOptions)
+    {
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
+                                                           newDependencies, doc, m_id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+
+    if (updateVisibilityOptions)
+    {
+        vidtype group = doc->GroupLinkedToTool(m_id);
+
+        if (hasLinkedGroup)
+        {
+            if (group != null_id)
+            {
+                ChangeGroupOptions *groupOptions = new ChangeGroupOptions(doc, group, groupName, groupTags);
+                connect(groupOptions, &ChangeGroupOptions::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+                qApp->getUndoStack()->push(groupOptions);
+            }
+            else
+            {
+                VAbstractOperationInitData initData;
+                initData.id = m_id;
+                initData.hasLinkedVisibilityGroup = hasLinkedGroup;
+                initData.visibilityGroupName = groupName;
+                initData.visibilityGroupTags = groupTags;
+                initData.data = &(VDataTool::data);
+                initData.doc = doc;
+                initData.source = source;
+
+                VAbstractOperation::CreateVisibilityGroup(initData);
+            }
+        }
+        else
+        {
+            DelGroup *delGroup = new DelGroup(doc, group);
+            connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+            qApp->getUndoStack()->push(delGroup);
+        }
+    }
+
+    if (updateToolOptions && updateVisibilityOptions)
+    {
+        qApp->getUndoStack()->endMacro();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::PerformDelete()
+{
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    bool deleteGroup = group != null_id;
+
+    qCDebug(vTool, "Begin deleting.");
+    if (deleteGroup)
+    {
+        qApp->getUndoStack()->beginMacro(tr("delete operation"));
+
+        qCDebug(vTool, "Deleting the linked group.");
+        DelGroup *delGroup = new DelGroup(doc, group);
+        connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+        qApp->getUndoStack()->push(delGroup);
+    }
+
+    qCDebug(vTool, "Deleting the tool.");
+    DelTool *delTool = new DelTool(doc, m_id);
+    connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(delTool);
+
+    if (deleteGroup)
+    {
+        qApp->getUndoStack()->endMacro();
     }
 }
 
@@ -642,6 +783,33 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractOperation::NeedUpdateVisibilityGroup() const
+{
+    vidtype group = doc->GroupLinkedToTool(m_id);
+
+    if (hasLinkedGroup)
+    {
+        if (group != null_id)
+        {
+            if (groupName != doc->GetGroupName(group) || groupTags != doc->GetGroupTags(group))
+            {
+                return true; // rename group
+            }
+        }
+        else
+        {
+            return true; // create group
+        }
+    }
+    else
+    {
+        return group != null_id; // remove group
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::InitOperatedObjects()
 {
     for (auto object : qAsConst(destination))
@@ -724,4 +892,39 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
             .arg(qApp->fromPixel(curve->GetLength()))
             .arg(UnitsToStr(qApp->patternUnit(), true), MakeToolTip());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractOperation::VisibilityGroupToolTip() const
+{
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    if (group != null_id)
+    {
+        return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>")
+                 .arg(tr("Visibility group"), doc->GetGroupName(group)); // 1, 2
+    }
+
+    return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData &initData)
+{
+    if (not initData.hasLinkedVisibilityGroup && not initData.visibilityGroupName.isEmpty())
+    {
+        return;
+    }
+
+    const QMap<quint32, quint32> groupData = VisibilityGroupDataFromSource(initData.data, initData.source);
+    vidtype groupId = initData.data->getNextId();
+    const QDomElement group = initData.doc->CreateGroup(groupId, initData.visibilityGroupName,
+                                                        initData.visibilityGroupTags, groupData, initData.id);
+    if (not group.isNull())
+    {
+        AddGroup *addGroup = new AddGroup(group, initData.doc);
+        connect(addGroup, &AddGroup::UpdateGroups, initData.doc, &VAbstractPattern::UpdateVisiblityGroups);
+        qApp->getUndoStack()->push(addGroup);
+    }
+
+    return;
 }

@@ -78,6 +78,13 @@ struct VFinalMeasurement
     QString description;
 };
 
+struct VGroupData
+{
+    QString name{};
+    bool visible{true};
+    QStringList tags{};
+};
+
 QT_WARNING_POP
 
 class VAbstractPattern : public VDomDocument
@@ -200,15 +207,26 @@ public:
 
     void           ParseGroups(const QDomElement &domElement);
     QDomElement    CreateGroups();
-    QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData);
+    QDomElement    CreateGroup(quint32 id, const QString &name, const QStringList &tags,
+                               const QMap<quint32, quint32> &groupData, vidtype tool=null_id);
+    vidtype        GroupLinkedToTool(vidtype toolId) const;
+
     QString        GetGroupName(quint32 id);
     void           SetGroupName(quint32 id, const QString &name);
-    QMap<quint32, QPair<QString, bool> > GetGroups();
+
+    QStringList    GetGroupTags(vidtype id);
+    void           SetGroupTags(quint32 id, const QStringList &tags);
+
+    QStringList GetGroupCategories() const;
+
+    QMap<quint32, VGroupData> GetGroups();
     QMap<quint32, QString> GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem);
     QDomElement           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
     QDomElement           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
     bool           GroupIsEmpty(quint32 id);
     bool           GetGroupVisibility(quint32 id);
+
+    static QStringList FilterGroupTags(const QString &tags);
 
     QString PieceDrawName(quint32 id);
 
@@ -288,6 +306,7 @@ public:
     static const QString AttrManualPassmarkLength;
     static const QString AttrPassmarkLength;
     static const QString AttrOpacity;
+    static const QString AttrTags;
 
     static const QString AttrAll;
 
@@ -404,7 +423,8 @@ signals:
     /**
      * @brief UpdateGroups emit if the groups have been updated
      */
-    void            UpdateGroups();
+    void           UpdateGroups();
+    void           UpdateToolTip();
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;
@@ -413,6 +433,7 @@ public slots:
     void           ClearScene();
     void           CheckInLayoutList();
     void           SelectedDetail(quint32 id);
+    void           UpdateVisiblityGroups();
 
 protected:
     /** @brief nameActivDraw name current pattern peace. */

@@ -92,6 +92,12 @@ public:
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
 
+    qreal GetXScale() const;
+    void  SetXScale(const qreal &xscale);
+
+    qreal GetYScale() const;
+    void  SetYScale(const qreal &yscale);
+
 private:
     Q_DISABLE_COPY(VDxfEngine)
     QSize            size;
@@ -104,6 +110,8 @@ private:
     VarMeasurement varMeasurement;
     VarInsunits varInsunits;
     DRW_Text *textBuffer;
+    qreal m_xscale{1};
+    qreal m_yscale{1};
 
     Q_REQUIRED_RESULT double FromPixel(double pix, const VarInsunits &unit) const;
     Q_REQUIRED_RESULT double ToPixel(double val, const VarInsunits &unit) const;
@@ -114,9 +122,18 @@ private:
     void ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details);
+    void ExportPieceText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details);
     void ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+
+    bool ExportToASTM(const QVector<VLayoutPiece> &details);
+    void ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
 
     Q_REQUIRED_RESULT DRW_Entity *AAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed);
     Q_REQUIRED_RESULT DRW_Entity *AAMALine(const QLineF &line, const QString &layer);

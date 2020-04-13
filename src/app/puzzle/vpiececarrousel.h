@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   changemultiplegroupsVisibility.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 7, 2019
+ **  @file   vpiececarrousel.h
+ **  @author Ronan Le Tiec
+ **  @date   13 04, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2019 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,31 +25,35 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef CHANGEMULTIPLEGROUPSVISIBILITY_H
-#define CHANGEMULTIPLEGROUPSVISIBILITY_H
 
-#include "vundocommand.h"
+#ifndef VPIECECARROUSEL_H
+#define VPIECECARROUSEL_H
 
-class ChangeMultipleGroupsVisibility  : public VUndoCommand
+#include <QWidget>
+#include <QComboBox>
+#include <QScrollArea>
+
+class VPieceCarrousel : public QWidget
 {
     Q_OBJECT
 public:
-    ChangeMultipleGroupsVisibility(VAbstractPattern *doc, const QVector<vidtype> &groups, bool visible,
-                                   QUndoCommand *parent = nullptr);
-    virtual ~ChangeMultipleGroupsVisibility() =default;
-    virtual void undo() override;
-    virtual void redo() override;
+    explicit VPieceCarrousel(QWidget *parent = nullptr); 
+    virtual ~VPieceCarrousel();
 
+    void setOrientation(Qt::Orientation orientation);
 signals:
-    void UpdateMultipleGroups(const QMap<vidtype, bool> &groups);
+
+public slots:
 
 private:
-    Q_DISABLE_COPY(ChangeMultipleGroupsVisibility)
+    QComboBox *comboBoxLayer;
+    QScrollArea *mainScrollArea;
+    QList<QWidget *> layers;
 
-    QVector<vidtype> m_groups;
-    bool m_newVisibility{true};
-    QMap<vidtype, bool> m_oldVisibility{};
-    const QString m_nameActivDraw{};
+private slots:
+    void ActiveLayerChanged(int index);
+
+
 };
 
-#endif // CHANGEMULTIPLEGROUPSVISIBILITY_H
+#endif // VPIECECARROUSEL_H

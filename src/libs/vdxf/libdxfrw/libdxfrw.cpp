@@ -553,6 +553,15 @@ bool dxfRW::writePoint(DRW_Point *ent) {
     return true;
 }
 
+bool dxfRW::writeASTMNotch(DRW_ASTMNotch *ent)
+{
+    writePoint(ent);
+    writer->writeDouble(50, ent->angle);
+    writer->writeDouble(39, ent->thickness); // Defined, but not used in point
+
+    return true;
+}
+
 bool dxfRW::writeLine(DRW_Line *ent) {
     writer->writeString(0, "LINE");
     writeEntity(ent);

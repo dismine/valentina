@@ -162,6 +162,9 @@ private:
 
     QString layoutPrinterName;
 
+    qreal m_xscale{1};
+    qreal m_yscale{1};
+
     static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
     static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,
                                                 const QList<QGraphicsItem *> &shadows,
@@ -181,6 +184,8 @@ private:
     void FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
                  const QList<QList<QGraphicsItem *> > &details)const;
     void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
+                     const QVector<VLayoutPiece> &details) const;
+    void ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
                      const QVector<VLayoutPiece> &details) const;
 
     void PreparePaper(int index) const;
