@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   dialogaboutpuzzle.cpp
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @author Ronan Le Tiec
  **  @date   11 4, 2020
  **
  **  @brief

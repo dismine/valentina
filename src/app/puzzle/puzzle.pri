@@ -5,7 +5,8 @@ SOURCES += \
         $$PWD/main.cpp \
         $$PWD/puzzlemainwindow.cpp \
     $$PWD/puzzleapplication.cpp \
-    $$PWD/dialogs/dialogaboutpuzzle.cpp
+    $$PWD/dialogs/dialogaboutpuzzle.cpp \
+    $$PWD/vpiececarrousel.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -13,7 +14,8 @@ HEADERS += \
         $$PWD/puzzlemainwindow.h \
         $$PWD/stable.h \
     $$PWD/puzzleapplication.h \
-    $$PWD/dialogs/dialogaboutpuzzle.h
+    $$PWD/dialogs/dialogaboutpuzzle.h \
+    $$PWD/vpiececarrousel.h
 
 FORMS += \
         $$PWD/puzzlemainwindow.ui \
