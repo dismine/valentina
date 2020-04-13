@@ -15,34 +15,22 @@ class VPuzzleCommandLine: public QObject
 public:   
     virtual ~VPuzzleCommandLine() = default;
 
-    /**
-     * @brief if user enabled export from cmd
-     */
+    /** @brief if user enabled export from cmd */
     bool IsExportEnabled() const;
 
-    /**
-     * @brief the base name of layout file or empty string if not
-     */
+    /** @brief the base name of layout file or empty string if not */
     QString OptionBaseName() const;
 
-    /**
-     * @brief if user enabled test mode from cmd
-     */
+    /** @brief if user enabled test mode from cmd */
     bool IsTestModeEnabled() const;
 
-    /**
-     * @brief if gui enabled or not
-     */
+    /** @brief if gui enabled or not */
     bool IsGuiEnabled() const;
 
-    /**
-     * @brief the file name which should be loaded
-     */
+    /** @brief the file name which should be loaded */
     QStringList OptionFileNames() const;
 
-    /**
-     * @brief if high dpi scaling is enabled
-     */
+    /** @brief if high dpi scaling is enabled */
     bool IsNoScalingEnabled() const;
 protected:
     VPuzzleCommandLine();
@@ -55,9 +43,7 @@ private:
     QCommandLineParser parser;
     bool isGuiEnabled;
 
-    /**
-     * @brief add options to the QCommandLineParser that there are in the cmd can be
-     */
+    /** @brief add options to the QCommandLineParser that there are in the cmd can be */
     void InitCommandLineOptions();
 
     bool IsOptionSet(const QString &option)const;
