@@ -46,14 +46,13 @@ signals:
 public slots:
 
 private:
+    Q_DISABLE_COPY(VPieceCarrousel)
     QComboBox *comboBoxLayer;
     QScrollArea *mainScrollArea;
     QList<QWidget *> layers;
 
 private slots:
     void ActiveLayerChanged(int index);
-
-
 };
 
 #endif // VPIECECARROUSEL_H
