@@ -3,6 +3,7 @@
 
 SOURCES += \
         $$PWD/main.cpp \
+    $$PWD/puzzlecommands.cpp \
         $$PWD/puzzlemainwindow.cpp \
     $$PWD/puzzleapplication.cpp \
     $$PWD/vpuzzlecommandline.cpp
@@ -10,6 +11,7 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
+    $$PWD/puzzlecommands.h \
         $$PWD/puzzlemainwindow.h \
         $$PWD/stable.h \
     $$PWD/puzzleapplication.h \

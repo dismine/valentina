@@ -10,7 +10,6 @@ using VPuzzleCommandLinePtr = std::shared_ptr<VPuzzleCommandLine>;
 
 class VPuzzleCommandLine: public QObject
 {
-    friend class PuzzleApplication;
     Q_OBJECT
 public:   
     virtual ~VPuzzleCommandLine() = default;
@@ -18,8 +17,11 @@ public:
     /** @brief if user enabled export from cmd */
     bool IsExportEnabled() const;
 
-    /** @brief the base name of layout file or empty string if not */
-    QString OptionBaseName() const;
+    /** @brief path to export file or empty string if not */
+    QString OptionExportFile() const;
+
+    /** @brief list with paths to the raw layout data files */
+    QStringList OptionRawLayouts() const;
 
     /** @brief if user enabled test mode from cmd */
     bool IsTestModeEnabled() const;
@@ -42,6 +44,7 @@ private:
     static VPuzzleCommandLinePtr instance;
     QCommandLineParser parser;
     bool isGuiEnabled;
+    friend class PuzzleApplication;
 
     /** @brief add options to the QCommandLineParser that there are in the cmd can be */
     void InitCommandLineOptions();
