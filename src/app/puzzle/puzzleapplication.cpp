@@ -445,24 +445,6 @@ void PuzzleApplication::ActivateDarkMode()
 void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     VPuzzleCommandLinePtr cmd = CommandLine();
-//    QCommandLineParser parser;
-//    parser.setApplicationDescription(tr("Valentina's manual layout editor."));
-//    parser.addHelpOption();
-//    parser.addVersionOption();
-//    parser.addPositionalArgument("filename", tr("The raw layout file."));
-//    //-----
-//    QCommandLineOption testOption(QStringList() << "test",
-//            tr("Use for unit testing. Run the program and open a file without showing the main window."));
-//    parser.addOption(testOption);
-//    //-----
-//    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
-//            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
-//               "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0"));
-//    parser.addOption(scalingOption);
-//    //-----
-//    parser.process(arguments);
-
-//    testMode = parser.isSet(testOption);
     testMode = cmd->IsTestModeEnabled();
 
     if (not testMode && connection == SocketConnection::Client)
@@ -503,7 +485,6 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
         LoadTranslation(PuzzleSettings()->GetLocale());
     }
 
-//    const QStringList args = parser.positionalArguments();
     const QStringList args = cmd->OptionFileNames();
     if (args.count() > 0)
     {
