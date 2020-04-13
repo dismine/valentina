@@ -30,6 +30,8 @@
 #include <QLabel>
 #include <QMessageBox>
 
+#include "../vmisc/backport/qoverload.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 VPieceCarrousel::VPieceCarrousel(QWidget *parent) :
     QWidget(parent),
