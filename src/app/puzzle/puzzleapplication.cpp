@@ -387,6 +387,8 @@ void PuzzleApplication::InitOptions()
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 
+    VPuzzleCommandLine::Instance(*this);
+
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
     {
@@ -442,24 +444,8 @@ void PuzzleApplication::ActivateDarkMode()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
-    QCommandLineParser parser;
-    parser.setApplicationDescription(tr("Valentina's manual layout editor."));
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addPositionalArgument("filename", tr("The raw layout file."));
-    //-----
-    QCommandLineOption testOption(QStringList() << "test",
-            tr("Use for unit testing. Run the program and open a file without showing the main window."));
-    parser.addOption(testOption);
-    //-----
-    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
-            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
-               "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0"));
-    parser.addOption(scalingOption);
-    //-----
-    parser.process(arguments);
-
-    testMode = parser.isSet(testOption);
+    VPuzzleCommandLinePtr cmd = CommandLine();
+    testMode = cmd->IsTestModeEnabled();
 
     if (not testMode && connection == SocketConnection::Client)
     {
@@ -499,13 +485,13 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
         LoadTranslation(PuzzleSettings()->GetLocale());
     }
 
-    const QStringList args = parser.positionalArguments();
+    const QStringList args = cmd->OptionFileNames();
     if (args.count() > 0)
     {
         if (testMode && args.count() > 1)
         {
             qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support openning several files.")));
-            parser.showHelp(V_EX_USAGE);
+            cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
         for (auto &arg : args)
@@ -531,7 +517,7 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
         else
         {
             qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
-            parser.showHelp(V_EX_USAGE);
+            cmd.get()->parser.showHelp(V_EX_USAGE);
         }
     }
 
@@ -633,4 +619,10 @@ void PuzzleApplication::Clean()
             mainWindows.removeAt(i);
         }
     }
+}
+
+//--------------------------------------------------------------------------------------------
+const VPuzzleCommandLinePtr PuzzleApplication::CommandLine()
+{
+    return VPuzzleCommandLine::instance;
 }
