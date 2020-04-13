@@ -444,7 +444,7 @@ void PuzzleApplication::ActivateDarkMode()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
-    std::shared_ptr<VPuzzleCommandLine>cmd = CommandLine();
+    VPuzzleCommandLinePtr cmd = CommandLine();
 //    QCommandLineParser parser;
 //    parser.setApplicationDescription(tr("Valentina's manual layout editor."));
 //    parser.addHelpOption();
@@ -641,7 +641,7 @@ void PuzzleApplication::Clean()
 }
 
 //--------------------------------------------------------------------------------------------
-const std::shared_ptr<VPuzzleCommandLine> PuzzleApplication::CommandLine()
+const VPuzzleCommandLinePtr PuzzleApplication::CommandLine()
 {
     return VPuzzleCommandLine::instance;
 }

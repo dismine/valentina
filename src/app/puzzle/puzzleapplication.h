@@ -71,7 +71,7 @@ public:
     void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
-    const std::shared_ptr<VPuzzleCommandLine> CommandLine();
+    const VPuzzleCommandLinePtr CommandLine();
 public slots:
     void ProcessCMD();
 

@@ -5,6 +5,9 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
 
+class VPuzzleCommandLine;
+using VPuzzleCommandLinePtr = std::shared_ptr<VPuzzleCommandLine>;
+
 class VPuzzleCommandLine: public QObject
 {
     friend class PuzzleApplication;
@@ -44,13 +47,11 @@ public:
 protected:
     VPuzzleCommandLine();
 
-    /**
-     * @brief create the single instance of the class inside puzzleapplication
-     */
-    static std::shared_ptr<VPuzzleCommandLine> Instance(const QCoreApplication &app);
+    /** @brief create the single instance of the class inside puzzleapplication */
+    static VPuzzleCommandLinePtr Instance(const QCoreApplication &app);
 private:
     Q_DISABLE_COPY(VPuzzleCommandLine)
-    static std::shared_ptr<VPuzzleCommandLine> instance;
+    static VPuzzleCommandLinePtr instance;
     QCommandLineParser parser;
     bool isGuiEnabled;
 

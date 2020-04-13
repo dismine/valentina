@@ -76,7 +76,7 @@ VPuzzleCommandLine::VPuzzleCommandLine():
 }
 
 //-------------------------------------------------------------------------------------------
-std::shared_ptr<VPuzzleCommandLine> VPuzzleCommandLine::Instance(const QCoreApplication &app)
+VPuzzleCommandLinePtr VPuzzleCommandLine::Instance(const QCoreApplication &app)
 {
     if (instance == nullptr)
     {
