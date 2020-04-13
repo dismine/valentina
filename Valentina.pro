@@ -55,4 +55,4 @@ TEMPLATE = subdirs
 SUBDIRS = src
 
 RESOURCES += \
-    src/app/puzzle/share/resources/tapeicon.qrc
+    src/app/puzzle/share/resources/puzzleicon.qrc
