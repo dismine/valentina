@@ -32,20 +32,21 @@
 //---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::PuzzleMainWindow)
+    ui(new Ui::PuzzleMainWindow),
+    pieceCarrousel(new VPieceCarrousel)
 {
     ui->setupUi(this);
 
     InitMenuBar();
-
-    InitPropertyTabs();
-
+    InitProperties();
+    InitPieceCarrousel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::~PuzzleMainWindow()
 {
     delete ui;
+    delete pieceCarrousel;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -58,7 +59,7 @@ bool PuzzleMainWindow::LoadFile(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitMenuBar()
 {
-    // connects the actions for the file menu
+    // -------------------- connects the actions for the file menu
     connect(ui->actionNew, &QAction::triggered, this, &PuzzleMainWindow::New);
     connect(ui->actionOpen, &QAction::triggered, this, &PuzzleMainWindow::Open);
     connect(ui->actionSave, &QAction::triggered, this, &PuzzleMainWindow::Save);
@@ -66,12 +67,16 @@ void PuzzleMainWindow::InitMenuBar()
     connect(ui->actionImportRawLayout, &QAction::triggered, this, &PuzzleMainWindow::ImportRawLayout);
     connect(ui->actionExit, &QAction::triggered, this, &PuzzleMainWindow::close);
 
-    // connects the actions for the edit menu
+    // -------------------- connects the actions for the edit menu
     // TODO : initialise the undo / redo
 
-    // connects the actions for the windows menu
+    // -------------------- connects the actions for the windows menu
     // TODO : initialise the entries for the different windows
     connect(ui->actionCloseLayout, &QAction::triggered, this, &PuzzleMainWindow::CloseLayout);
+
+    // Add dock properties action
+    QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
+    ui->menuWindows->addAction(actionDockWidgetToolOptions);
 
     // connects the action for the Help Menu
     connect(ui->actionAboutQt, &QAction::triggered, this, &PuzzleMainWindow::AboutQt);
@@ -80,7 +85,7 @@ void PuzzleMainWindow::InitMenuBar()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::InitPropertyTabs()
+void PuzzleMainWindow::InitProperties()
 {
     InitPropertyTabCurrentPiece();
     InitPropertyTabLayout();
@@ -201,6 +206,18 @@ void PuzzleMainWindow::InitPropertyTabLayers()
     // we remove it. As soon as we need it, update this code
     ui->tabWidgetProperties->removeTab(3); // remove layers
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitPieceCarrousel()
+{
+    ui->dockWidgetPieceCarrousel->setWidget(pieceCarrousel);
+
+    connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
+              &PuzzleMainWindow::PieceCarrouselLocationChanged);
+}
+
+
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::New()
@@ -525,3 +542,21 @@ void PuzzleMainWindow::CurrentPiecePositionChanged()
 
     // TODO
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
+{
+    if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)
+    {
+        pieceCarrousel->setOrientation(Qt::Horizontal);
+        ui->dockWidgetPieceCarrousel->setMaximumHeight(208);
+        ui->dockWidgetPieceCarrousel->setMaximumWidth(10000);
+    }
+    else if (area == Qt::LeftDockWidgetArea || area == Qt::RightDockWidgetArea)
+    {
+        pieceCarrousel->setOrientation(Qt::Vertical);
+        ui->dockWidgetPieceCarrousel->setMaximumHeight(10000);
+        ui->dockWidgetPieceCarrousel->setMaximumWidth(160);
+    }
+}
+

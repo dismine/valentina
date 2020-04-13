@@ -32,6 +32,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include "vpiececarrousel.h"
 
 namespace Ui {
 class PuzzleMainWindow;
@@ -50,14 +51,15 @@ public:
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
+    VPieceCarrousel *pieceCarrousel;
 
     void InitMenuBar();
-    void InitPropertyTabs();
+    void InitProperties();
     void InitPropertyTabCurrentPiece();
     void InitPropertyTabLayout();
     void InitPropertyTabTiles();
     void InitPropertyTabLayers();
-
+    void InitPieceCarrousel();
 
 private slots:
     void New();
@@ -87,6 +89,8 @@ private slots:
     void CurrentPieceMirrorPieceChanged(bool checked);
     void CurrentPieceAngleChanged(double value);
     void CurrentPiecePositionChanged();
+
+    void PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
 
 };
 
