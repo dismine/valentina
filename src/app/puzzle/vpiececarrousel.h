@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   stable.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @file   vpiececarrousel.h
+ **  @author Ronan Le Tiec
+ **  @date   13 04, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,47 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef STABLE_H
-#define STABLE_H
+#ifndef VPIECECARROUSEL_H
+#define VPIECECARROUSEL_H
 
-/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
-#pragma message("Compiling precompiled headers for puzzle utility.\n")
+#include <QWidget>
+#include <QComboBox>
+#include <QScrollArea>
 
-/* Add C includes here */
+class VPieceCarrousel : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit VPieceCarrousel(QWidget *parent = nullptr); 
+    virtual ~VPieceCarrousel();
 
-#if defined __cplusplus
-/* Add C++ includes here */
-#include <csignal>
+    void setOrientation(Qt::Orientation orientation);
+signals:
 
-/*In all cases we need include core header for getting defined values*/
-#ifdef QT_CORE_LIB
-#   include <QtCore>
-#endif
+public slots:
 
-#ifdef QT_GUI_LIB
-#   include <QtGui>
-#endif
+private:
+    QComboBox *comboBoxLayer;
+    QScrollArea *mainScrollArea;
+    QList<QWidget *> layers;
 
-#ifdef QT_XML_LIB
-#   include <QtXml>
-#endif
+private slots:
+    void ActiveLayerChanged(int index);
 
-//In Windows you can't use same header in all modes.
-#if !defined(Q_OS_WIN)
-#   ifdef QT_WIDGETS_LIB
-#       include <QtWidgets>
-#   endif
 
-    //Build doesn't work, if include this headers on Windows.
-#   ifdef QT_XMLPATTERNS_LIB
-#       include <QtXmlPatterns>
-#   endif
+};
 
-#   ifdef QT_NETWORK_LIB
-#       include <QtNetwork>
-#   endif
-#endif/*Q_OS_WIN*/
-
-#endif /*__cplusplus*/
-
-#endif // STABLE_H
+#endif // VPIECECARROUSEL_H

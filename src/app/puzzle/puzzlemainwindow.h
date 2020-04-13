@@ -28,7 +28,11 @@
 #ifndef PUZZLEMAINWINDOW_H
 #define PUZZLEMAINWINDOW_H
 
+#include "../vmisc/def.h"
+
 #include <QMainWindow>
+#include <QMessageBox>
+#include "vpiececarrousel.h"
 
 namespace Ui {
 class PuzzleMainWindow;
@@ -47,6 +51,47 @@ public:
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
+    VPieceCarrousel *pieceCarrousel;
+
+    void InitMenuBar();
+    void InitProperties();
+    void InitPropertyTabCurrentPiece();
+    void InitPropertyTabLayout();
+    void InitPropertyTabTiles();
+    void InitPropertyTabLayers();
+    void InitPieceCarrousel();
+
+private slots:
+    void New();
+    void Open();
+    void Save();
+    void SaveAs();
+    void ImportRawLayout();
+    void CloseLayout();
+
+    void AboutQt();
+    void AboutPuzzle();
+
+    void LayoutUnitChanged(int index);
+    void LayoutTemplateChanged(int index);
+    void LayoutSizeChanged();
+    void LayoutOrientationChanged();
+    void LayoutRemoveUnusedLength();
+    void LayoutMarginChanged();
+    void LayoutFollowGrainlineChanged();
+    void LayoutPiecesGapChanged(double value);
+    void LayoutWarningPiecesSuperpositionChanged(bool checked);
+    void LayoutWarningPiecesOutOfBoundChanged(bool checked);
+    void LayoutStickyEdgesChanged(bool checked);
+    void LayoutExport();
+
+    void CurrentPieceShowSeamlineChanged(bool checked);
+    void CurrentPieceMirrorPieceChanged(bool checked);
+    void CurrentPieceAngleChanged(double value);
+    void CurrentPiecePositionChanged();
+
+    void PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
+
 };
 
 #endif // PUZZLEMAINWINDOW_H

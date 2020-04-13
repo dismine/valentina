@@ -33,7 +33,7 @@
 
 #define VER_INTERNALNAME_STR        "Puzzle"
 #define VER_ORIGINALFILENAME_STR    "puzzle.exe"
-#define VER_PRODUCTNAME_STR         "Tape"
+#define VER_PRODUCTNAME_STR         "Puzzle"
 #define VER_FILEDESCRIPTION_STR     "Valentina's manual layout creator."
 
 #endif // VERSION_H

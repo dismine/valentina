@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   stable.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @file   dialogaboutpuzzle.h
+ **  @author Ronan Le Tiec
+ **  @date   11 4, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,47 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef STABLE_H
-#define STABLE_H
+#ifndef DIALOGABOUTPUZZLE_H
+#define DIALOGABOUTPUZZLE_H
 
-/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
-#pragma message("Compiling precompiled headers for puzzle utility.\n")
+#include <QDialog>
 
-/* Add C includes here */
+namespace Ui
+{
+    class DialogAboutPuzzle;
+}
 
-#if defined __cplusplus
-/* Add C++ includes here */
-#include <csignal>
+class DialogAboutPuzzle : public QDialog
+{
+    Q_OBJECT
 
-/*In all cases we need include core header for getting defined values*/
-#ifdef QT_CORE_LIB
-#   include <QtCore>
-#endif
+public:
+    explicit DialogAboutPuzzle(QWidget *parent = nullptr);
+    virtual ~DialogAboutPuzzle();
 
-#ifdef QT_GUI_LIB
-#   include <QtGui>
-#endif
+protected:
+    virtual void changeEvent(QEvent* event) override;
+    virtual void showEvent(QShowEvent *event) override;
 
-#ifdef QT_XML_LIB
-#   include <QtXml>
-#endif
+private:
+    Q_DISABLE_COPY(DialogAboutPuzzle)
+    Ui::DialogAboutPuzzle *ui;
+    bool isInitialized;
 
-//In Windows you can't use same header in all modes.
-#if !defined(Q_OS_WIN)
-#   ifdef QT_WIDGETS_LIB
-#       include <QtWidgets>
-#   endif
+    void FontPointSize(QWidget *w, int pointSize);
 
-    //Build doesn't work, if include this headers on Windows.
-#   ifdef QT_XMLPATTERNS_LIB
-#       include <QtXmlPatterns>
-#   endif
+    void RetranslateUi();
+};
 
-#   ifdef QT_NETWORK_LIB
-#       include <QtNetwork>
-#   endif
-#endif/*Q_OS_WIN*/
-
-#endif /*__cplusplus*/
-
-#endif // STABLE_H
+#endif // DIALOGABOUTPUZZLE_H
