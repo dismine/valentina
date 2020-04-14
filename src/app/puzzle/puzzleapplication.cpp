@@ -198,7 +198,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            if (not qApp->IsTestMode())
+            if (qApp->IsAppInGUIMode())
             {
                 if (topWinAllowsPop)
                 {
@@ -235,8 +235,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 PuzzleApplication::PuzzleApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv),
       mainWindows(),
-      localServer(nullptr),
-      testMode(false)
+      localServer(nullptr)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -322,18 +321,12 @@ bool PuzzleApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool PuzzleApplication::IsTestMode() const
-{
-    return testMode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
 bool PuzzleApplication::IsAppInGUIMode() const
 {
-    return IsTestMode();
+    return CommandLine()->IsGuiEnabled();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,7 +335,9 @@ PuzzleMainWindow *PuzzleApplication::MainWindow()
     Clean();
     if (mainWindows.isEmpty())
     {
-        NewMainWindow();
+        VPuzzleCommandLinePtr cmd;
+        VPuzzleCommandLine::ProcessInstance(cmd, QStringList());
+        NewMainWindow(true);
     }
     return mainWindows[0];
 }
@@ -360,11 +355,11 @@ QList<PuzzleMainWindow *> PuzzleApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow *PuzzleApplication::NewMainWindow()
+PuzzleMainWindow *PuzzleApplication::NewMainWindow(bool guiMode)
 {
     PuzzleMainWindow *puzzle = new PuzzleMainWindow();
     mainWindows.prepend(puzzle);
-    if (not qApp->IsTestMode())
+    if (guiMode)
     {
         puzzle->show();
     }
@@ -444,10 +439,10 @@ void PuzzleApplication::ActivateDarkMode()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
-    VPuzzleCommandLinePtr cmd = CommandLine();
-    testMode = cmd->IsTestModeEnabled();
+    VPuzzleCommandLinePtr cmd;
+    VPuzzleCommandLine::ProcessInstance(cmd, arguments);
 
-    if (not testMode && connection == SocketConnection::Client)
+    if (cmd->IsGuiEnabled() && connection == SocketConnection::Client)
     {
         const QString serverName = QCoreApplication::applicationName();
         QLocalSocket socket;
@@ -456,7 +451,7 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
         {
             qCDebug(mApp, "Connected to the server '%s'", qUtf8Printable(serverName));
             QTextStream stream(&socket);
-            stream << QCoreApplication::arguments().join(";;");
+            stream << arguments.join(";;");
             stream.flush();
             socket.waitForBytesWritten();
             qApp->exit(V_EX_OK);
@@ -485,43 +480,65 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
         LoadTranslation(PuzzleSettings()->GetLocale());
     }
 
+    ProcessArguments(cmd);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
+{
+    const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
     if (args.count() > 0)
     {
-        if (testMode && args.count() > 1)
+        if (not cmd->IsGuiEnabled() && args.count() > 1)
         {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support openning several files.")));
+            qCCritical(mApp, "%s\n", qPrintable(tr("Export mode doesn't support openning several files.")));
+            cmd.get()->parser.showHelp(V_EX_USAGE);
+        }
+
+        if (args.count() > 1 && rawLayouts.size() > 0)
+        {
+            qCCritical(mApp, "%s\n",
+                       qPrintable(tr("Import raw layout data does not support penning several layout files.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
         for (auto &arg : args)
         {
-            NewMainWindow();
+            NewMainWindow(cmd->IsGuiEnabled());
             if (not MainWindow()->LoadFile(arg))
             {
-                if (testMode)
+                if (not cmd->IsGuiEnabled())
                 {
                     return; // process only one input file
                 }
                 delete MainWindow();
                 continue;
             }
+
+//            if (rawLayouts.size() > 0)
+//            {
+//                MainWindow()->ImportRawLayouts(rawLayouts);
+//            }
         }
     }
     else
     {
-        if (not testMode)
-        {
-            NewMainWindow();
-        }
-        else
+        if (cmd->IsTestModeEnabled())
         {
             qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
+
+        NewMainWindow(cmd->IsGuiEnabled());
+//        if (rawLayouts.size() > 0)
+//        {
+//            MainWindow()->New(); // prepare layout settings
+//            MainWindow()->ImportRawLayouts(rawLayouts);
+//        }
     }
 
-    if (testMode)
+    if (cmd->IsGuiEnabled())
     {
         qApp->exit(V_EX_OK); // close program after processing in console mode
     }
@@ -591,19 +608,18 @@ void PuzzleApplication::AboutToQuit()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleApplication::NewLocalSocketConnection()
 {
-    QLocalSocket *socket = localServer->nextPendingConnection();
-    if (not socket)
+    QScopedPointer<QLocalSocket>socket(localServer->nextPendingConnection());
+    if (socket.isNull())
     {
         return;
     }
     socket->waitForReadyRead(1000);
-    QTextStream stream(socket);
+    QTextStream stream(socket.data());
     const QString arg = stream.readAll();
     if (not arg.isEmpty())
     {
         ParseCommandLine(SocketConnection::Server, arg.split(";;"));
     }
-    delete socket;
     MainWindow()->raise();
     MainWindow()->activateWindow();
 }
@@ -622,7 +638,7 @@ void PuzzleApplication::Clean()
 }
 
 //--------------------------------------------------------------------------------------------
-const VPuzzleCommandLinePtr PuzzleApplication::CommandLine()
+VPuzzleCommandLinePtr PuzzleApplication::CommandLine() const
 {
     return VPuzzleCommandLine::instance;
 }

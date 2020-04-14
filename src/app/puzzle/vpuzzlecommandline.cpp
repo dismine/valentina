@@ -85,14 +85,20 @@ VPuzzleCommandLine::VPuzzleCommandLine():
 //-------------------------------------------------------------------------------------------
 VPuzzleCommandLinePtr VPuzzleCommandLine::Instance(const QCoreApplication &app)
 {
+    VPuzzleCommandLine::ProcessInstance(instance, app.arguments());
+    return instance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleCommandLine::ProcessInstance(VPuzzleCommandLinePtr &instance, const QStringList &arguments)
+{
     if (instance == nullptr)
     {
         instance.reset(new VPuzzleCommandLine);
     }
-    instance->parser.process(app);
+    instance->parser.process(arguments);
 
     instance->isGuiEnabled = not (instance->IsGuiEnabled() || instance->IsExportEnabled());
-    return instance;
 }
 
 //-------------------------------------------------------------------------------------------

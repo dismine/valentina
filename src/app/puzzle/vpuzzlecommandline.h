@@ -38,7 +38,8 @@ protected:
     VPuzzleCommandLine();
 
     /** @brief create the single instance of the class inside puzzleapplication */
-    static VPuzzleCommandLinePtr Instance(const QCoreApplication &app);
+    static VPuzzleCommandLinePtr Instance(const QCoreApplication &app); 
+    static void ProcessInstance(VPuzzleCommandLinePtr &instance, const QStringList &arguments);
 private:
     Q_DISABLE_COPY(VPuzzleCommandLine)
     static VPuzzleCommandLinePtr instance;

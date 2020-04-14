@@ -28,14 +28,15 @@
 #ifndef PUZZLEMAINWINDOW_H
 #define PUZZLEMAINWINDOW_H
 
-#include "../vmisc/def.h"
-
 #include <QMainWindow>
 #include <QMessageBox>
+
+#include "../vmisc/def.h"
 #include "vpiececarrousel.h"
 
-namespace Ui {
-class PuzzleMainWindow;
+namespace Ui
+{
+    class PuzzleMainWindow;
 }
 
 class PuzzleMainWindow : public QMainWindow
@@ -47,6 +48,11 @@ public:
     virtual ~PuzzleMainWindow();
 
     bool LoadFile(const QString &path);
+
+    void ImportRawLayouts(const QStringList &layouts);
+
+public slots:
+    void New();
 
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
@@ -62,7 +68,6 @@ private:
     void InitPieceCarrousel();
 
 private slots:
-    void New();
     void Open();
     void Save();
     void SaveAs();
