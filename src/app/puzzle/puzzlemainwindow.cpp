@@ -57,6 +57,12 @@ bool PuzzleMainWindow::LoadFile(const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::ImportRawLayouts(const QStringList &layouts)
+{
+    Q_UNUSED(layouts)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitMenuBar()
 {
     // -------------------- connects the actions for the file menu
