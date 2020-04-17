@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   vpuzzlecommandline.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @author Dmytro Hladkykh <vorzelmir@gmail.com>
  **  @date   12 4, 2020
  **
  **  @brief
