@@ -31,16 +31,16 @@
 VPuzzleLayout::VPuzzleLayout() :
     m_unplacedPiecesLayer(new VPuzzleLayer()),
     m_layers(QList<VPuzzleLayer *>()),
-    m_layoutUnit(Unit::Cm),
-    m_layoutSize(QSizeF()),
-    m_layoutMargins(QMarginsF()),
+    m_unit(Unit::Cm),
+    m_size(QSizeF()),
+    m_margins(QMarginsF()),
     m_followGrainLine(FollowGrainline::No),
     m_piecesGap(0),
     m_warningSuperpositionOfPieces(false),
     m_warningPiecesOutOfBound(false),
     m_stickyEdges(false)
 {
-    m_piecesGap = 0;
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,53 +79,53 @@ QList<VPuzzleLayer *> VPuzzleLayout::GetLayers()
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetUnit(Unit unit)
 {
-    m_layoutUnit = unit;
+    m_unit = unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit VPuzzleLayout::getUnit()
 {
-    return m_layoutUnit;
+    return m_unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutSize(qreal width, qreal height)
 {
-    m_layoutSize.setWidth(width);
-    m_layoutSize.setHeight(height);
+    m_size.setWidth(width);
+    m_size.setHeight(height);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutSize(QSizeF size)
 {
-    m_layoutSize = size;
+    m_size = size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QSizeF VPuzzleLayout::GetLayoutSize()
 {
-    return m_layoutSize;
+    return m_size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal bottom)
 {
-    m_layoutMargins.setLeft(left);
-    m_layoutMargins.setTop(top);
-    m_layoutMargins.setRight(right);
-    m_layoutMargins.setRight(bottom);
+    m_margins.setLeft(left);
+    m_margins.setTop(top);
+    m_margins.setRight(right);
+    m_margins.setRight(bottom);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutMargins(QMarginsF margins)
 {
-    m_layoutMargins = margins;
+    m_margins = margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QMarginsF VPuzzleLayout::GetLayoutMargins()
 {
-    return m_layoutMargins;
+    return m_margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

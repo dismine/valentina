@@ -82,11 +82,11 @@ private:
     QList<VPuzzleLayer *> m_layers;
 
     // format
-    Unit m_layoutUnit;
-    QSizeF m_layoutSize;
+    Unit m_unit;
+    QSizeF m_size;
 
     // margins
-    QMarginsF m_layoutMargins;
+    QMarginsF m_margins;
 
     // control
     FollowGrainline m_followGrainLine;
