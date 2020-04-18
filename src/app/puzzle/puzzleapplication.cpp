@@ -538,7 +538,7 @@ void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
 //        }
     }
 
-    if (cmd->IsGuiEnabled())
+    if (not cmd->IsGuiEnabled())
     {
         qApp->exit(V_EX_OK); // close program after processing in console mode
     }
