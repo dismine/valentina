@@ -30,11 +30,29 @@
 #define VPUZZLELAYOUTFILEREADER_H
 
 #include <QXmlStreamReader>
+#include "vpuzzlelayout.h"
+#include "vpuzzlelayer.h"
+#include "vpuzzlepiece.h"
 
 class VPuzzleLayoutFileReader : public QXmlStreamReader
 {
 public:
     VPuzzleLayoutFileReader();
+    ~VPuzzleLayoutFileReader();
+
+    bool ReadFile(VPuzzleLayout *layout, QFile *file);
+
+private:
+    void ReadLayout(VPuzzleLayout *layout);
+    void ReadProperties(VPuzzleLayout *layout);
+    void ReadTiles(VPuzzleLayout *layout);
+    void ReadLayers(VPuzzleLayout *layout);
+    void ReadLayer(VPuzzleLayer *layer);
+    void ReadPiece(VPuzzlePiece *piece);
+
+    QMarginsF ReadMargins();
+    QSizeF ReadSize();
+
 };
 
 #endif // VPUZZLELAYOUTFILEREADER_H

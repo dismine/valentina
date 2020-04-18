@@ -26,9 +26,237 @@
  **
  ** *************************************************************************/
 
+#include <QXmlStreamAttributes>
 #include "vpuzzlelayoutfilereader.h"
 
 VPuzzleLayoutFileReader::VPuzzleLayoutFileReader()
 {
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayoutFileReader::~VPuzzleLayoutFileReader()
+{
+    // TODO
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
+{
+    setDevice(file);
+
+    if (readNextStartElement())
+    {
+
+        // TODO extend the handling
+        // if it doesn't start with layout, error
+        // if it starts with version > than current version, error
+
+        if (name() == QString("layout")
+                && attributes().value(QString("version")) == QLatin1String("1.0.0"))
+        {
+            ReadLayout(layout);
+        }
+        else
+        {
+            raiseError(QObject::tr("The file is not a layout version 1.0.0 file."));
+        }
+    }
+
+    return !error();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
+{
+    Q_ASSERT(isStartElement() && name() == QString("layout"));
+
+    while (readNextStartElement()) {
+        if (name() == QString("properties"))
+        {
+            ReadProperties(layout);
+        }
+        else if (name() == QString("layers"))
+        {
+            ReadLayers(layout);
+        }
+        else
+        {
+            // TODO error handling, we encountered a tag that isn't defined in the specification
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
+{
+    Q_ASSERT(isStartElement() && name() == QString("properties"));
+
+    while (readNextStartElement()) {
+        if (name() == QString("unit"))
+        {
+            QString unit = readElementText();
+            // TODO read unit infos
+
+        }
+        else if (name() == QString("description"))
+        {
+            QString description = readElementText();
+            // TODO read the description info
+
+        }
+        else if (name() == QString("size"))
+        {
+            QSizeF size = ReadSize();
+            layout->SetLayoutSize(size);
+        }
+        else if (name() == QString("margin"))
+        {
+            QMarginsF margins = ReadMargins();
+            layout->SetLayoutMargins(margins);
+        }
+        else if (name() == QString("control"))
+        {
+            QXmlStreamAttributes attribs = attributes();
+
+            // attribs.value("followGrainLine"); // TODO
+
+            layout->SetWarningSuperpositionOfPieces(attribs.value("warningSuperposition") == "true");
+            layout->SetWarningPiecesOutOfBound(attribs.value("warningOutOfBound") == "true");
+            layout->SetStickyEdges(attribs.value("stickyEdges") == "true");
+
+            layout->SetPiecesGap(attribs.value("piecesGap").toDouble());
+        }
+        else if (name() == QString("tiles"))
+        {
+            ReadTiles(layout);
+        }
+        else
+        {
+            // TODO error handling, we encountered a tag that isn't defined in the specification
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
+{
+    Q_UNUSED(layout); // to be removed when used
+
+    Q_ASSERT(isStartElement() && name() == QString("tiles"));
+
+    QXmlStreamAttributes attribs = attributes();
+    // attribs.value("visible"); // TODO
+    // attribs.value("matchingMarks"); // TODO
+
+    while (readNextStartElement()) {
+        if (name() == QString("size"))
+        {
+            QSizeF size = ReadSize();
+            // TODO set layout tiled size
+            Q_UNUSED(size);
+        }
+        else if (name() == QString("margin"))
+        {
+            QMarginsF margins = ReadMargins();
+            // TODO set layout tiled margins
+            Q_UNUSED(margins);
+        }
+        else
+        {
+            // TODO error handling, we encountered a tag that isn't defined in the specification
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
+{
+    Q_ASSERT(isStartElement() && name() == QString("layers"));
+
+    while (readNextStartElement()) {
+        if (name() == QString("unplacedPiecesLayer"))
+        {
+            ReadLayer(layout->GetUnplacedPiecesLayer());
+        }
+        else if (name() == QString("layer"))
+        {
+            VPuzzleLayer *layer = layout->AddLayer();
+            ReadLayer(layer);
+        }
+        else
+        {
+            // TODO error handling, we encountered a tag that isn't defined in the specification
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
+{
+    Q_ASSERT(isStartElement() && name() == QString("layer"));
+
+    QXmlStreamAttributes attribs = attributes();
+    layer->SetName(attribs.value("name").toString());
+    layer->SetIsVisible(attribs.value("visible") == "true");
+
+    while (readNextStartElement()) {
+        if (name() == QString("piece"))
+        {
+            VPuzzlePiece *piece = new VPuzzlePiece();
+            ReadPiece(piece);
+            layer->AddPiece(piece);
+        }
+        else
+        {
+            // TODO error handling, we encountered a tag that isn't defined in the specification
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
+{
+    Q_ASSERT(isStartElement() && name() == QString("piece"));
+
+    // TODO read the attributes
+
+    while (readNextStartElement()) {
+        if (name() == QString("..."))
+        {
+            // TODO
+        }
+        else
+        {
+            // TODO error handling, we encountered a tag that isn't defined in the specification
+        }
+    }
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VPuzzleLayoutFileReader::ReadMargins()
+{
+    QMarginsF margins = QMarginsF();
+
+    QXmlStreamAttributes attribs = attributes();
+    margins.setLeft(attribs.value("left").toDouble());
+    margins.setTop(attribs.value("top").toDouble());
+    margins.setRight(attribs.value("right").toDouble());
+    margins.setBottom(attribs.value("bottom").toDouble());
+
+    return margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSizeF VPuzzleLayoutFileReader::ReadSize()
+{
+    QSizeF size = QSize();
+
+    QXmlStreamAttributes attribs = attributes();
+    size.setWidth(attribs.value("width").toDouble());
+    size.setHeight(attribs.value("height").toDouble());
+
+    return size;
 }

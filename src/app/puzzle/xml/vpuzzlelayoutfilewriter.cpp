@@ -37,8 +37,6 @@ VPuzzleLayoutFileWriter::VPuzzleLayoutFileWriter()
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 {
-    Q_UNUSED(layout);
-
     setDevice(file);
     setAutoFormatting(true);
 
@@ -151,6 +149,8 @@ void VPuzzleLayoutFileWriter::WriteLayer(VPuzzleLayer *layer, const QString &tag
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
 {
+    Q_UNUSED(piece);
+
     writeStartElement("piece");
     writeAttribute("id", "uuid1"); // TODO / Fixme get the right value
     writeAttribute("name", "Piece name"); // TODO / Fixme get the right value
