@@ -11,7 +11,9 @@ SOURCES += \
     $$PWD/vpiececarrousel.cpp \
     $$PWD/vpuzzlelayout.cpp \
     $$PWD/vpuzzlelayer.cpp \
-    $$PWD/vpuzzlepiece.cpp
+    $$PWD/vpuzzlepiece.cpp \
+    $$PWD/xml/vpuzzlelayoutfilewriter.cpp \
+    $$PWD/xml/vpuzzlelayoutfilereader.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -25,7 +27,9 @@ HEADERS += \
     $$PWD/vpiececarrousel.h \
     $$PWD/vpuzzlelayout.h \
     $$PWD/vpuzzlelayer.h \
-    $$PWD/vpuzzlepiece.h
+    $$PWD/vpuzzlepiece.h \
+    $$PWD/xml/vpuzzlelayoutfilewriter.h \
+    $$PWD/xml/vpuzzlelayoutfilereader.h
 
 FORMS += \
     $$PWD/puzzlemainwindow.ui \

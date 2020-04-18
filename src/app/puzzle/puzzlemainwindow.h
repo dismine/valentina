@@ -33,6 +33,7 @@
 
 #include "../vmisc/def.h"
 #include "vpiececarrousel.h"
+#include "vpuzzlelayout.h"
 
 namespace Ui
 {
@@ -58,6 +59,9 @@ private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
     VPieceCarrousel *pieceCarrousel;
+
+    VPuzzleLayout *m_layout;
+
 
     void InitMenuBar();
     void InitProperties();

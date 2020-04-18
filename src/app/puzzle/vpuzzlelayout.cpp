@@ -113,7 +113,7 @@ void VPuzzleLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal b
     m_margins.setLeft(left);
     m_margins.setTop(top);
     m_margins.setRight(right);
-    m_margins.setRight(bottom);
+    m_margins.setBottom(bottom);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

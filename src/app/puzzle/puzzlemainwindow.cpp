@@ -26,20 +26,30 @@
  **
  *************************************************************************/
 #include "puzzlemainwindow.h"
+
+#include <QFileDialog>
+
 #include "ui_puzzlemainwindow.h"
 #include "dialogs/dialogaboutpuzzle.h"
+#include "xml/vpuzzlelayoutfilewriter.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
-    pieceCarrousel(new VPieceCarrousel)
+    pieceCarrousel(new VPieceCarrousel),
+    m_layout (new VPuzzleLayout)
 {
     ui->setupUi(this);
 
     InitMenuBar();
     InitProperties();
     InitPieceCarrousel();
+
+
+    // for test purposes, to be removed when we can edit the size / margins through the UI:
+    m_layout->SetLayoutMargins(1.5, 2.00, 4.21, 0.25);
+    m_layout->SetLayoutSize(21.0, 29.7);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,14 +279,24 @@ void PuzzleMainWindow::Save()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::SaveAs()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::SaveAs");
-    int ret = msgBox.exec();
+    // TODO / FIXME : See valentina how the save is done over there. we need to add the extension .vlt, check for empty file names etc.
 
-     Q_UNUSED(ret);
 
-    // TODO
+    QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    /*dir +*/ QLatin1String("/") + tr("Layout") + QLatin1String(".vlt"),
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
+
+
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
+
+    VPuzzleLayoutFileWriter *fileWriter = new VPuzzleLayoutFileWriter();
+    fileWriter->WriteFile(m_layout, &file);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
