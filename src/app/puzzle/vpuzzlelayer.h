@@ -37,6 +37,7 @@ public:
     VPuzzleLayer();
     ~VPuzzleLayer();
 
+    QList<VPuzzlePiece *> GetPieces();
     void AddPiece(VPuzzlePiece *piece);
     void RemovePiece(VPuzzlePiece *piece);
 

@@ -43,6 +43,12 @@ VPuzzleLayer::~VPuzzleLayer()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QList<VPuzzlePiece *> VPuzzleLayer::GetPieces()
+{
+    return m_pieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayer::AddPiece(VPuzzlePiece *piece)
 {
     m_pieces.append(piece);
