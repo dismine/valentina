@@ -28,11 +28,14 @@
 #ifndef VPUZZLEPIECE_H
 #define VPUZZLEPIECE_H
 
-
 class VPuzzlePiece
 {
 public:
     VPuzzlePiece();
+    ~VPuzzlePiece();
+
+private:
+
 };
 
 #endif // VPUZZLEPIECE_H

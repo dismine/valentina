@@ -28,11 +28,34 @@
 #ifndef VPUZZLELAYER_H
 #define VPUZZLELAYER_H
 
+#include <QList>
+#include "vpuzzlepiece.h"
 
 class VPuzzleLayer
 {
 public:
     VPuzzleLayer();
+    ~VPuzzleLayer();
+
+    void AddPiece(VPuzzlePiece *piece);
+    void RemovePiece(VPuzzlePiece *piece);
+
+    // here add some more function if we want to add/move a piece at a
+    // certain position in the list
+
+    QString GetName();
+    void SetName(QString name);
+
+    void SetIsVisible(bool value);
+    bool GetIsVisible();
+
+private:
+    QString m_name;
+    QList<VPuzzlePiece *> m_pieces;
+
+    // control
+    bool m_isVisible;
+
 };
 
 #endif // VPUZZLELAYER_H
