@@ -55,14 +55,12 @@ public:
 
     virtual bool notify(QObject * receiver, QEvent * event) override;
 
-    bool IsTestMode() const;
     virtual bool IsAppInGUIMode() const override;
     PuzzleMainWindow *MainWindow();
     QList<PuzzleMainWindow*> MainWindows();
-    PuzzleMainWindow *NewMainWindow();
+    PuzzleMainWindow *NewMainWindow(bool guiMode);
 
     void InitOptions();
-
 
     virtual const VTranslateVars *TrVars() override;
 
@@ -71,7 +69,8 @@ public:
     void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
-    const VPuzzleCommandLinePtr CommandLine();
+    void ProcessArguments(const VPuzzleCommandLinePtr &cmd);
+    VPuzzleCommandLinePtr CommandLine() const;
 public slots:
     void ProcessCMD();
 
@@ -89,7 +88,6 @@ private:
     Q_DISABLE_COPY(PuzzleApplication)
     QList<QPointer<PuzzleMainWindow> > mainWindows;
     QLocalServer *localServer;
-    bool testMode;
 
     void Clean();
 };
