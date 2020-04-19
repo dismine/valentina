@@ -30,6 +30,7 @@
 #define VPUZZLELAYOUTFILEREADER_H
 
 #include <QXmlStreamReader>
+#include "../ifc/xml/vabstractconverter.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlelayer.h"
 #include "vpuzzlepiece.h"
@@ -43,6 +44,8 @@ public:
     bool ReadFile(VPuzzleLayout *layout, QFile *file);
 
 private:
+    int m_layoutFormatVersion;
+
     void ReadLayout(VPuzzleLayout *layout);
     void ReadProperties(VPuzzleLayout *layout);
     void ReadTiles(VPuzzleLayout *layout);

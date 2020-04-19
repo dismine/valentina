@@ -30,6 +30,7 @@
 #define VPUZZLELAYOUTFILEWRITER_H
 
 #include <QXmlStreamWriter>
+#include "../ifc/xml/vabstractconverter.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlelayer.h"
 #include "vpuzzlepiece.h"
@@ -38,8 +39,23 @@ class VPuzzleLayoutFileWriter : public QXmlStreamWriter
 {
 public:
     VPuzzleLayoutFileWriter();
+    ~VPuzzleLayoutFileWriter();
 
     void WriteFile(VPuzzleLayout *layout, QFile *file);
+
+    /*
+     * Version rules:
+     * 1. Version have three parts "major.minor.patch";
+     * 2. major part only for stable releases;
+     * 3. minor - 10 or more patch changes, or one big change;
+     * 4. patch - little change.
+     */
+    /**
+     * @brief LayoutFileFormatVersion holds the version
+     *
+     */
+    static Q_DECL_CONSTEXPR const int LayoutFileFormatVersion = FORMAT_VERSION(1, 0, 0);
+    const QString LayoutFileFormatVersionStr = QStringLiteral("1.0.0");
 
 private:
 

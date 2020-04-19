@@ -28,6 +28,7 @@
 
 #include <QXmlStreamAttributes>
 #include "vpuzzlelayoutfilereader.h"
+#include "vpuzzlelayoutfilewriter.h"
 
 VPuzzleLayoutFileReader::VPuzzleLayoutFileReader()
 {
@@ -53,14 +54,25 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
         // if it doesn't start with layout, error
         // if it starts with version > than current version, error
 
-        if (name() == QString("layout")
-                && attributes().value(QString("version")) == QLatin1String("1.0.0"))
+        if (name() == QString("layout"))
         {
-            ReadLayout(layout);
+            QString versionStr = attributes().value(QString("version")).toString();
+            QStringList versionStrParts = versionStr.split('.');
+            m_layoutFormatVersion = FORMAT_VERSION(versionStrParts.at(0).toInt(),versionStrParts.at(1).toInt(),versionStrParts.at(2).toInt());
+
+            if(VPuzzleLayoutFileWriter::LayoutFileFormatVersion >= m_layoutFormatVersion)
+            {
+                ReadLayout(layout);
+            }
+            else
+            {
+                // TODO better error handling
+                raiseError(QObject::tr("You're trying to open a layout that was created with a newer version of puzzle"));
+            }
         }
         else
         {
-            raiseError(QObject::tr("The file is not a layout version 1.0.0 file."));
+            raiseError(QObject::tr("Wrong file structure"));
         }
     }
 
@@ -218,6 +230,7 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
 {
+    Q_UNUSED(piece);
     Q_ASSERT(isStartElement() && name() == QString("piece"));
 
     // TODO read the attributes

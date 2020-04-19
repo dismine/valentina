@@ -35,6 +35,12 @@ VPuzzleLayoutFileWriter::VPuzzleLayoutFileWriter()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayoutFileWriter::~VPuzzleLayoutFileWriter()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 {
     setDevice(file);
@@ -51,7 +57,7 @@ void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 void VPuzzleLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 {
     writeStartElement("layout");
-    writeAttribute("version", "1.0.0"); // TODO / FIXME : get the version properly
+    writeAttribute("version", LayoutFileFormatVersionStr);
 
     WriteProperties(layout);
     WriteLayers(layout);
