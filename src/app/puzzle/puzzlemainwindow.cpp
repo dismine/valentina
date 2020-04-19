@@ -38,7 +38,7 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
     pieceCarrousel(new VPieceCarrousel),
-    m_layout (new VPuzzleLayout)
+    m_layout (nullptr)
 {
     ui->setupUi(this);
 
@@ -47,9 +47,13 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     InitPieceCarrousel();
 
 
-    // for test purposes, to be removed when we can edit the size / margins through the UI:
-    m_layout->SetLayoutMargins(1.5, 2.00, 4.21, 0.25);
-    m_layout->SetLayoutSize(21.0, 29.7);
+    // ----- for test purposes, to be removed------------------
+    m_layout = new VPuzzleLayout();
+    m_layout->SetLayoutMarginsConverted(1.5, 2.00, 4.21, 0.25);
+    m_layout->SetLayoutSizeConverted(21.0, 29.7);
+    m_layout->SetPiecesGapConverted(1);
+    m_layout->SetUnit(Unit::Cm);
+    SetPropertiesData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,6 +237,90 @@ void PuzzleMainWindow::InitPieceCarrousel()
 }
 
 
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertiesData()
+{
+    if(m_layout == nullptr)
+    {
+       // TODO : hide the tabs when there is no layout
+    }
+    else
+    {
+        SetPropertyTabCurrentPieceData();
+        SetPropertyTabLayoutData();
+        SetPropertyTabTilesData();
+        SetPropertyTabLayersData();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
+{
+    if(m_selectedPiece == nullptr)
+    {
+        if(false) // check for multiple piece selection
+        {
+            // TODO in the future
+        }
+        else
+        {
+           // TODO : update current piece data to show a "no current piece selected"
+        }
+    }
+    else
+    {
+        // TODO set the values of the piece currently selected
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabLayoutData()
+{
+    // set Unit
+    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->getUnit())));
+    if(index != -1)
+    {
+        ui->comboBoxLayoutUnit->blockSignals(true); // FIXME: is there a better way to block the signals?
+        ui->comboBoxLayoutUnit->setCurrentIndex(index);
+        ui->comboBoxLayoutUnit->blockSignals(false);
+    }
+
+    // set Width / Length
+    QSizeF size = m_layout->GetLayoutSizeConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, size.width());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, size.height());
+
+    // set margins
+    QMarginsF margins = m_layout->GetLayoutMarginsConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginLeft, margins.left());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginTop, margins.top());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginRight, margins.right());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginBottom, margins.bottom());
+
+    // set pieces gap
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutPiecesGap, m_layout->GetPiecesGapConverted());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabTilesData()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabLayersData()
+{
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
+{
+    spinBox->blockSignals(true);
+    spinBox->setValue(value);
+    spinBox->blockSignals(false);
+}
 
 
 //---------------------------------------------------------------------------------------------------------------------

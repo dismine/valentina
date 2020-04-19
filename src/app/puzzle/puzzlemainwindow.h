@@ -30,10 +30,12 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QDoubleSpinBox>
 
 #include "../vmisc/def.h"
 #include "vpiececarrousel.h"
 #include "vpuzzlelayout.h"
+#include "vpuzzlepiece.h"
 
 namespace Ui
 {
@@ -62,6 +64,8 @@ private:
 
     VPuzzleLayout *m_layout;
 
+    VPuzzlePiece *m_selectedPiece;
+
 
     void InitMenuBar();
     void InitProperties();
@@ -70,6 +74,21 @@ private:
     void InitPropertyTabTiles();
     void InitPropertyTabLayers();
     void InitPieceCarrousel();
+
+
+    void SetPropertiesData();
+    void SetPropertyTabCurrentPieceData();
+    void SetPropertyTabLayoutData();
+    void SetPropertyTabTilesData();
+    void SetPropertyTabLayersData();
+
+    /**
+     * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value
+     * the signals are blocked before changing the value and unblocked after
+     * @param spinbox
+     * @param value
+     */
+    void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value);
 
 private slots:
     void Open();

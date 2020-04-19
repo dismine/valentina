@@ -96,15 +96,42 @@ void VPuzzleLayout::SetLayoutSize(qreal width, qreal height)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::SetLayoutSizeConverted(qreal width, qreal height)
+{
+    m_size.setWidth(UnitConvertor(width, m_unit,Unit::Px));
+    m_size.setHeight(UnitConvertor(height, m_unit,Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutSize(QSizeF size)
 {
     m_size = size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::SetLayoutSizeConverted(QSizeF size)
+{
+    m_size = QSizeF(
+                UnitConvertor(size.width(), m_unit,Unit::Px),
+                UnitConvertor(size.height(), m_unit,Unit::Px)
+                );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QSizeF VPuzzleLayout::GetLayoutSize()
 {
     return m_size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSizeF VPuzzleLayout::GetLayoutSizeConverted()
+{
+    QSizeF convertedSize = QSizeF(
+                UnitConvertor(m_size.width(), Unit::Px, m_unit),
+                UnitConvertor(m_size.height(), Unit::Px, m_unit)
+                );
+
+    return convertedSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,6 +142,14 @@ void VPuzzleLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal b
     m_margins.setRight(right);
     m_margins.setBottom(bottom);
 }
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::SetLayoutMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
+{
+    m_margins.setLeft(UnitConvertor(left, m_unit, Unit::Px));
+    m_margins.setTop(UnitConvertor(top, m_unit, Unit::Px));
+    m_margins.setRight(UnitConvertor(right, m_unit, Unit::Px));
+    m_margins.setBottom(UnitConvertor(bottom, m_unit, Unit::Px));
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutMargins(QMarginsF margins)
@@ -123,9 +158,21 @@ void VPuzzleLayout::SetLayoutMargins(QMarginsF margins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::SetLayoutMarginsConverted(QMarginsF margins)
+{
+    m_margins = UnitConvertor(margins, m_unit, Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMarginsF VPuzzleLayout::GetLayoutMargins()
 {
     return m_margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VPuzzleLayout::GetLayoutMarginsConverted()
+{
+    return UnitConvertor(m_margins, Unit::Px, m_unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,10 +194,23 @@ void VPuzzleLayout::SetPiecesGap(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::SetPiecesGapConverted(qreal value)
+{
+    m_piecesGap = UnitConvertor(value, m_unit, Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VPuzzleLayout::GetPiecesGap()
 {
     return m_piecesGap;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPuzzleLayout::GetPiecesGapConverted()
+{
+    return UnitConvertor(m_piecesGap, Unit::Px, m_unit);
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetWarningSuperpositionOfPieces(bool state)
