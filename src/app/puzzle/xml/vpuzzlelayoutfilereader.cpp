@@ -106,30 +106,49 @@ void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
     Q_ASSERT(isStartElement() && name() == QString("properties"));
 
     while (readNextStartElement()) {
+        qDebug(name().toString().toLatin1());
+
         if (name() == QString("unit"))
         {
+            qDebug("read unit");
             QString unit = readElementText();
-            // TODO read unit infos
-
+            if(unit == UnitsToStr(Unit::Inch))
+            {
+                layout->SetUnit(Unit::Inch);
+            }
+            else if(unit == UnitsToStr(Unit::Mm))
+            {
+                layout->SetUnit(Unit::Cm);
+            }
+            else // no condition here to have a default value just in case
+            {
+                layout->SetUnit(Unit::Cm);
+            }
         }
         else if (name() == QString("description"))
         {
+            qDebug("read description");
             QString description = readElementText();
             // TODO read the description info
 
         }
         else if (name() == QString("size"))
         {
+            qDebug("read size");
             QSizeF size = ReadSize();
             layout->SetLayoutSize(size);
+            readElementText();
         }
         else if (name() == QString("margin"))
         {
+            qDebug("read margin");
             QMarginsF margins = ReadMargins();
             layout->SetLayoutMargins(margins);
+            readElementText();
         }
         else if (name() == QString("control"))
         {
+            qDebug("read control");
             QXmlStreamAttributes attribs = attributes();
 
             // attribs.value("followGrainLine"); // TODO
@@ -139,14 +158,18 @@ void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
             layout->SetStickyEdges(attribs.value("stickyEdges") == "true");
 
             layout->SetPiecesGap(attribs.value("piecesGap").toDouble());
+            readElementText();
         }
         else if (name() == QString("tiles"))
         {
+            qDebug("read tiles");
             ReadTiles(layout);
+            readElementText();
         }
         else
         {
             // TODO error handling, we encountered a tag that isn't defined in the specification
+            skipCurrentElement();
         }
     }
 }
@@ -168,16 +191,19 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
             QSizeF size = ReadSize();
             // TODO set layout tiled size
             Q_UNUSED(size);
+            readElementText();
         }
         else if (name() == QString("margin"))
         {
             QMarginsF margins = ReadMargins();
             // TODO set layout tiled margins
             Q_UNUSED(margins);
+            readElementText();
         }
         else
         {
             // TODO error handling, we encountered a tag that isn't defined in the specification
+            skipCurrentElement();
         }
     }
 }
@@ -200,6 +226,7 @@ void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
         else
         {
             // TODO error handling, we encountered a tag that isn't defined in the specification
+            skipCurrentElement();
         }
     }
 }
@@ -223,6 +250,7 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
         else
         {
             // TODO error handling, we encountered a tag that isn't defined in the specification
+            skipCurrentElement();
         }
     }
 }
@@ -239,10 +267,12 @@ void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
         if (name() == QString("..."))
         {
             // TODO
+             readElementText();
         }
         else
         {
             // TODO error handling, we encountered a tag that isn't defined in the specification
+            skipCurrentElement();
         }
     }
 
@@ -269,7 +299,7 @@ QSizeF VPuzzleLayoutFileReader::ReadSize()
 
     QXmlStreamAttributes attribs = attributes();
     size.setWidth(attribs.value("width").toDouble());
-    size.setHeight(attribs.value("height").toDouble());
+    size.setHeight(attribs.value("length").toDouble());
 
     return size;
 }

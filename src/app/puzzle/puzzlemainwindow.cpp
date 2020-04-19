@@ -32,6 +32,11 @@
 #include "ui_puzzlemainwindow.h"
 #include "dialogs/dialogaboutpuzzle.h"
 #include "xml/vpuzzlelayoutfilewriter.h"
+#include "xml/vpuzzlelayoutfilereader.h"
+#include "puzzleapplication.h"
+
+Q_LOGGING_CATEGORY(vPuzzleMainWindow, "v.puzzlemainwindow")
+
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
@@ -68,7 +73,34 @@ PuzzleMainWindow::~PuzzleMainWindow()
 //---------------------------------------------------------------------------------------------------------------------
 bool PuzzleMainWindow::LoadFile(const QString &path)
 {
-    Q_UNUSED(path)
+    QFile file(path);
+    file.open(QIODevice::ReadOnly);
+
+    VPuzzleLayoutFileReader *fileReader = new VPuzzleLayoutFileReader();
+
+    if(m_layout == nullptr)
+    {
+        m_layout = new VPuzzleLayout();
+    }
+
+    fileReader->ReadFile(m_layout, &file);
+
+    // TODO / FIXME : better return value and error handling
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool PuzzleMainWindow::SaveFile(const QString &path)
+{
+    QFile file(path);
+    file.open(QIODevice::WriteOnly);
+
+    VPuzzleLayoutFileWriter *fileWriter = new VPuzzleLayoutFileWriter();
+    fileWriter->WriteFile(m_layout, &file);
+
+    // TODO / FIXME : better return value and error handling
+
     return true;
 }
 
@@ -367,14 +399,60 @@ void PuzzleMainWindow::New()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::Open()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::Open");
-    int ret = msgBox.exec();
+    qCDebug(vPuzzleMainWindow, "Openning puzzle layout file.");
 
-    Q_UNUSED(ret);
+    const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
 
-    // TODO
+    //Get list last open files
+    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
+    QString dir;
+    if (recentFiles.isEmpty())
+    {
+        dir = QDir::homePath();
+    }
+    else
+    {
+        //Absolute path to last open file
+        dir = QFileInfo(recentFiles.first()).absolutePath();
+    }
+    qCDebug(vPuzzleMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
+    const QString filePath = QFileDialog::getOpenFileName(
+                this, tr("Open file"), dir, filter, nullptr,
+#ifdef Q_OS_LINUX
+                QFileDialog::DontUseNativeDialog
+#endif
+                );
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+
+    // TODO : if m_layout == nullptr, open in current window
+    // otherwise open in new window
+
+    // TODO : if layout file has a lock, warning message
+
+
+    if(!LoadFile(filePath))
+    {
+        return;
+    }
+
+    // Updates the list of recent files
+    recentFiles.removeAll(filePath);
+    recentFiles.prepend(filePath);
+    while (recentFiles.size() > MaxRecentFiles)
+    {
+        recentFiles.removeLast();
+    }
+    qApp->PuzzleSettings()->SetRecentFileList(recentFiles);
+
+    // updates the properties with the loaded data
+    SetPropertiesData();
+
+    // TODO : update the Carrousel and the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -395,22 +473,29 @@ void PuzzleMainWindow::SaveAs()
 {
     // TODO / FIXME : See valentina how the save is done over there. we need to add the extension .vlt, check for empty file names etc.
 
+    //Get list last open files
+    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
+    QString dir;
+    if (recentFiles.isEmpty())
+    {
+        dir = QDir::homePath();
+    }
+    else
+    {
+        //Absolute path to last open file
+        dir = QFileInfo(recentFiles.first()).absolutePath();
+    }
 
-    QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
+    QString filters(tr("Layout files") + QLatin1String("(*.vlt)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    /*dir +*/ QLatin1String("/") + tr("Layout") + QLatin1String(".vlt"),
+                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".vlt"),
                                                     filters, nullptr
 #ifdef Q_OS_LINUX
                                                     , QFileDialog::DontUseNativeDialog
 #endif
                                                     );
 
-
-    QFile file(fileName);
-    file.open(QIODevice::WriteOnly);
-
-    VPuzzleLayoutFileWriter *fileWriter = new VPuzzleLayoutFileWriter();
-    fileWriter->WriteFile(m_layout, &file);
+    SaveFile(fileName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

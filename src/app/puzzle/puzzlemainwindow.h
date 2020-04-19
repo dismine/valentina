@@ -50,12 +50,28 @@ public:
     explicit PuzzleMainWindow(QWidget *parent = nullptr);
     virtual ~PuzzleMainWindow();
 
+    /**
+     * @brief LoadFile Loads the layout file of given path in m_layout.
+     * This function doesn't update the gui.
+     * @param path
+     * @return
+     */
     bool LoadFile(const QString &path);
+
+    /**
+     * @brief SaveFile Saves the current layout to the layout file of given path
+     * @param path
+     * @return
+     */
+    bool SaveFile(const QString &path);
 
     void ImportRawLayouts(const QStringList &layouts);
 
 public slots:
     void New();
+
+protected:
+    enum { MaxRecentFiles = 5 };
 
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
