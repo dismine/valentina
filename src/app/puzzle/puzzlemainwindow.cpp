@@ -38,7 +38,8 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
     pieceCarrousel(new VPieceCarrousel),
-    m_layout (nullptr)
+    m_layout (nullptr),
+    m_selectedPiece (nullptr)
 {
     ui->setupUi(this);
 
@@ -46,13 +47,14 @@ PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
     InitProperties();
     InitPieceCarrousel();
 
-
     // ----- for test purposes, to be removed------------------
     m_layout = new VPuzzleLayout();
     m_layout->SetLayoutMarginsConverted(1.5, 2.00, 4.21, 0.25);
-    m_layout->SetLayoutSizeConverted(21.0, 29.7);
-    m_layout->SetPiecesGapConverted(1);
+    m_layout->SetLayoutSizeConverted(30.0, 29.7);
+    m_layout->SetPiecesGapConverted(1.27);
     m_layout->SetUnit(Unit::Cm);
+    m_layout->SetWarningSuperpositionOfPieces(true);
+
     SetPropertiesData();
 }
 
@@ -290,6 +292,16 @@ void PuzzleMainWindow::SetPropertyTabLayoutData()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, size.width());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, size.height());
 
+    // Set Orientation
+    if(size.width() <= size.height())
+    {
+        ui->radioButtonLayoutPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->radioButtonLayoutLandscape->setChecked(true);
+    }
+
     // set margins
     QMarginsF margins = m_layout->GetLayoutMarginsConverted();
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginLeft, margins.left());
@@ -299,6 +311,11 @@ void PuzzleMainWindow::SetPropertyTabLayoutData()
 
     // set pieces gap
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutPiecesGap, m_layout->GetPiecesGapConverted());
+
+    // set the checkboxes
+    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, m_layout->GetWarningPiecesOutOfBound());
+    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
+    SetCheckBoxValue(ui->checkBoxLayoutStickyEdges, m_layout->GetStickyEdges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,6 +338,15 @@ void PuzzleMainWindow::SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal valu
     spinBox->setValue(value);
     spinBox->blockSignals(false);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
+{
+    checkbox->blockSignals(true);
+    checkbox->setChecked(value);
+    checkbox->blockSignals(false);
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,17 +456,24 @@ void PuzzleMainWindow::AboutPuzzle()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutUnitChanged(int index)
 {
-
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutUnitChanged");
-    int ret = msgBox.exec();
-
     Q_UNUSED(index);
-    Q_UNUSED(ret);
+    QVariant comboBoxValue = ui->comboBoxLayoutUnit->currentData();
 
+    if(comboBoxValue == QVariant(UnitsToStr(Unit::Cm)))
+    {
+        m_layout->SetUnit(Unit::Cm);
+    }
+    else if(comboBoxValue == QVariant(UnitsToStr(Unit::Mm)))
+    {
+        m_layout->SetUnit(Unit::Mm);
+    }
+    else if(comboBoxValue == QVariant(UnitsToStr(Unit::Inch)))
+    {
+        m_layout->SetUnit(Unit::Inch);
+    }
 
-   // TODO
+    SetPropertyTabLayoutData();
+    SetPropertyTabCurrentPieceData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -461,27 +494,36 @@ void PuzzleMainWindow::LayoutTemplateChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutSizeChanged()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutSizeChanged");
-    int ret = msgBox.exec();
+    m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
 
-    Q_UNUSED(ret);
+    // updates orientation - no need to block signals because the signal reacts on "clicked"
+    if(ui->doubleSpinBoxLayoutWidth->value() <= ui->doubleSpinBoxLayoutLength->value())
+    {
+        //portrait
+        ui->radioButtonLayoutPortrait->setChecked(true);
+    }
+    else
+    {
+        //landscape
+        ui->radioButtonLayoutLandscape->setChecked(true);
+    }
 
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutOrientationChanged()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutOrientationChanged");
-    int ret = msgBox.exec();
+    // swap the width and length
+    qreal width_before = ui->doubleSpinBoxLayoutWidth->value();
+    qreal length_before = ui->doubleSpinBoxLayoutLength->value();
 
-    Q_UNUSED(ret);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, length_before);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, width_before);
 
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -501,14 +543,15 @@ void PuzzleMainWindow::LayoutRemoveUnusedLength()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutMarginChanged()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutMarginChanged");
-    int ret = msgBox.exec();
+    m_layout->SetLayoutMarginsConverted(
+                ui->doubleSpinBoxLayoutMarginLeft->value(),
+                ui->doubleSpinBoxLayoutMarginTop->value(),
+                ui->doubleSpinBoxLayoutMarginRight->value(),
+                ui->doubleSpinBoxLayoutMarginBottom->value()
+            );
 
-    Q_UNUSED(ret);
-
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 
@@ -529,60 +572,37 @@ void PuzzleMainWindow::LayoutFollowGrainlineChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutPiecesGapChanged(double value)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutPieceGapChanged");
-    int ret = msgBox.exec();
+    m_layout->SetPiecesGapConverted(value);
 
-    Q_UNUSED(value);
-    Q_UNUSED(ret);
-
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged");
-    int ret = msgBox.exec();
+    m_layout->SetWarningSuperpositionOfPieces(checked);
 
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged");
-    int ret = msgBox.exec();
+    m_layout->SetWarningPiecesOutOfBound(checked);
 
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-    // TODO
-
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutStickyEdgesChanged(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutStickyEdgesChanged");
-    int ret = msgBox.exec();
+    m_layout->SetStickyEdges(checked);
 
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-
-    // TODO
-
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 
