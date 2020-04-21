@@ -28,12 +28,25 @@
 #include "puzzlemainwindow.h"
 #include "ui_puzzlemainwindow.h"
 #include "dialogs/dialogaboutpuzzle.h"
+#include "../vlayout/vrawlayout.h"
+#include "../vmisc/vsysexits.h"
+
+#include <QLoggingCategory>
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pWindow, "p.window")
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
+PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
-    pieceCarrousel(new VPieceCarrousel)
+    pieceCarrousel(new VPieceCarrousel),
+    m_cmd(cmd)
 {
     ui->setupUi(this);
 
@@ -59,7 +72,25 @@ bool PuzzleMainWindow::LoadFile(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::ImportRawLayouts(const QStringList &layouts)
 {
-    Q_UNUSED(layouts)
+    VRawLayout layoutReader;
+
+    for(auto &path : layouts)
+    {
+        VRawLayoutData data;
+        if (layoutReader.ReadFile(path, data))
+        {
+            // Do somethinmg with raw layout data
+        }
+        else
+        {
+            qCCritical(pWindow, "%s\n", qPrintable(tr("Could not extract data from file '%1'. %2")
+                                                    .arg(path, layoutReader.ErrorString())));
+            if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
+            {
+                m_cmd->ShowHelp(V_EX_DATAERR);
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

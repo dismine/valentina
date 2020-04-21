@@ -33,6 +33,7 @@
 
 #include "../vmisc/def.h"
 #include "vpiececarrousel.h"
+#include "vpuzzlecommandline.h"
 
 namespace Ui
 {
@@ -44,7 +45,7 @@ class PuzzleMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PuzzleMainWindow(QWidget *parent = nullptr);
+    PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~PuzzleMainWindow();
 
     bool LoadFile(const QString &path);
@@ -58,6 +59,7 @@ private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
     VPieceCarrousel *pieceCarrousel;
+    VPuzzleCommandLinePtr m_cmd;
 
     void InitMenuBar();
     void InitProperties();
