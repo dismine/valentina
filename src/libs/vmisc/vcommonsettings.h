@@ -75,6 +75,10 @@ public:
     QString GetPathLabelTemplate() const;
     void SetPathLabelTemplate(const QString &value);
 
+    static QString GetDefPathManualLayouts();
+    QString GetPathManualLayouts() const;
+    void SetPathManualLayouts(const QString &value);
+
     bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
 
