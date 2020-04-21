@@ -184,6 +184,10 @@ private slots:
     bool on_actionSave_triggered();
     void on_actionOpen_triggered();
 
+    void on_actionOpenPuzzle_triggered();
+    void on_actionCreateManualLayout_triggered();
+    void on_actionUpdateManualLayout_triggered();
+
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);

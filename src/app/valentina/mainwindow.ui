@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>140</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>243</height>
         </rect>
        </property>
@@ -746,7 +746,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>282</height>
         </rect>
        </property>
@@ -1037,7 +1037,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>98</width>
+         <width>140</width>
          <height>102</height>
         </rect>
        </property>
@@ -1120,7 +1120,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>192</height>
         </rect>
        </property>
@@ -1324,7 +1324,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>237</height>
         </rect>
        </property>
@@ -1589,8 +1589,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
-         <height>57</height>
+         <width>140</width>
+         <height>170</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1690,7 +1690,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1804,12 +1804,21 @@
     <addaction name="actionLoadWatermark"/>
     <addaction name="actionRemoveWatermark"/>
    </widget>
+   <widget class="QMenu" name="menuManual_Layout">
+    <property name="title">
+     <string>Manual Layout</string>
+    </property>
+    <addaction name="actionOpenPuzzle"/>
+    <addaction name="actionCreateManualLayout"/>
+    <addaction name="actionUpdateManualLayout"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPatternPiece"/>
    <addaction name="menuMode"/>
    <addaction name="menuMeasurements"/>
    <addaction name="menuHistory"/>
    <addaction name="menuWatermark"/>
+   <addaction name="menuManual_Layout"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -3024,6 +3033,36 @@
    </property>
    <property name="toolTip">
     <string>Create or edit a watermark</string>
+   </property>
+  </action>
+  <action name="actionOpenPuzzle">
+   <property name="text">
+    <string>Open Puzzle</string>
+   </property>
+   <property name="toolTip">
+    <string>Open the Puzzle app</string>
+   </property>
+  </action>
+  <action name="actionCreateManualLayout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create</string>
+   </property>
+   <property name="toolTip">
+    <string>Create manual layout</string>
+   </property>
+  </action>
+  <action name="actionUpdateManualLayout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Update</string>
+   </property>
+   <property name="toolTip">
+    <string>Update manual layout</string>
    </property>
   </action>
  </widget>

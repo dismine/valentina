@@ -150,6 +150,8 @@ protected:
     QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
 
     void CheckRequiredMeasurements(const VMeasurements *m) const;
+
+    void RLDFile(const QString &name, QVector<VLayoutPiece> details, qreal xScale=1, qreal yScale=1) const;
 private slots:
     void PrintPages (QPrinter *printer);
 private:
@@ -186,7 +188,7 @@ private:
     void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
                      const QVector<VLayoutPiece> &details) const;
     void ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
-                     const QVector<VLayoutPiece> &details) const;
+                     const QVector<VLayoutPiece> &details) const; 
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;

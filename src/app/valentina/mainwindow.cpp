@@ -3150,6 +3150,148 @@ void MainWindow::on_actionOpen_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionOpenPuzzle_triggered()
+{
+    const QString puzzle = qApp->PuzzleFilePath();
+    const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+
+    QStringList arguments;
+    if (isNoScaling)
+    {
+        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+    }
+
+    QProcess::startDetached(puzzle, arguments, workingDirectory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionCreateManualLayout_triggered()
+{
+    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    if (rldFile.open())
+    {
+        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+
+        if (detailsInLayout.count() == 0)
+        {
+            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                                 "include at least one detail in layout."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        QVector<VLayoutPiece> listDetails;
+        try
+        {
+            listDetails = PrepareDetailsForLayout(detailsInLayout);
+        }
+        catch (VException &e)
+        {
+            QMessageBox::warning(this, tr("Export details"),
+                                 tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        RLDFile(rldFile.fileName(), listDetails);
+
+        QStringList arguments {"-r", rldFile.fileName()};
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        rldFile.setAutoRemove(false);
+
+        const QString puzzle = qApp->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+    }
+    else
+    {
+        qCCritical(vMainWindow) << tr("Unable to prepare raw layout data.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionUpdateManualLayout_triggered()
+{
+    const QString filter(tr("Manual layout files") + QLatin1String(" (*.vlt)"));
+
+    //Use standard path to manual layouts
+    const QString path = qApp->ValentinaSettings()->GetPathManualLayouts();
+
+    bool usedNotExistedDir = false;
+    QDir directory(path);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
+
+    auto RemoveUnsuded = qScopeGuard([usedNotExistedDir, path]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir directory(path);
+            directory.rmpath(QChar('.'));
+        }
+    });
+
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Select manual layout"), path, filter, nullptr);
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    rldFile.setAutoRemove(false);
+    if (rldFile.open())
+    {
+        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+
+        if (detailsInLayout.count() == 0)
+        {
+            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                                 "include at least one detail in layout."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        QVector<VLayoutPiece> listDetails;
+        try
+        {
+            listDetails = PrepareDetailsForLayout(detailsInLayout);
+        }
+        catch (VException &e)
+        {
+            QMessageBox::warning(this, tr("Export details"),
+                                 tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        RLDFile(rldFile.fileName(), listDetails);
+
+        QStringList arguments {filePath, "-r", rldFile.fileName()};
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        rldFile.setAutoRemove(false);
+
+        const QString puzzle = qApp->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+    }
+    else
+    {
+        qCCritical(vMainWindow) << tr("Unable to prepare raw layout data.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -3554,7 +3696,9 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     const bool drawStage = (qApp->GetDrawMode() == Draw::Calculation);
     const bool detailsStage = (qApp->GetDrawMode() == Draw::Modeling);
+    const bool layoutStage = (qApp->GetDrawMode() == Draw::Layout);
     const bool designStage = (drawStage || detailsStage);
+    const bool piecesStage = (detailsStage || layoutStage);
 
     comboBoxDraws->setEnabled(enable && drawStage);
     ui->actionOptionDraw->setEnabled(enable && drawStage);
@@ -3588,6 +3732,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);
     ui->actionHideLabels->setEnabled(enable);
+    ui->actionCreateManualLayout->setEnabled(enable && piecesStage);
+    ui->actionUpdateManualLayout->setEnabled(enable && piecesStage);
 
     ui->actionLoadWatermark->setEnabled(enable);
     ui->actionRemoveWatermark->setEnabled(enable && not doc->GetWatermarkPath().isEmpty());
