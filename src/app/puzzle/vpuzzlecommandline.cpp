@@ -96,6 +96,12 @@ bool VPuzzleCommandLine::IsNoScalingEnabled() const
     return IsOptionSet(LONG_OPTION_NO_HDPI_SCALING);
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+void VPuzzleCommandLine::ShowHelp(int exitCode)
+{
+    parser.showHelp(exitCode);
+}
+
 //----------------------------------------------------------------------------------------------
 VPuzzleCommandLine::VPuzzleCommandLine():
     parser(),

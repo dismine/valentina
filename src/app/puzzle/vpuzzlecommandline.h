@@ -61,6 +61,8 @@ public:
 
     /** @brief if high dpi scaling is enabled */
     bool IsNoScalingEnabled() const;
+
+    Q_NORETURN void ShowHelp(int exitCode = 0);
 protected:
     VPuzzleCommandLine();
 
