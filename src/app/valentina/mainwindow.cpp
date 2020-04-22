@@ -3209,7 +3209,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
     }
     else
     {
-        qCCritical(vMainWindow) << tr("Unable to prepare raw layout data.");
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Unable to prepare raw layout data.")));
     }
 }
 
@@ -3287,7 +3287,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
     }
     else
     {
-        qCCritical(vMainWindow) << tr("Unable to prepare raw layout data.");
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Unable to prepare raw layout data.")));
     }
 }
 
