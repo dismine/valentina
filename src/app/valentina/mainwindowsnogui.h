@@ -188,7 +188,7 @@ private:
     void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
                      const QVector<VLayoutPiece> &details) const;
     void ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
-                     const QVector<VLayoutPiece> &details) const; 
+                     const QVector<VLayoutPiece> &details) const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
