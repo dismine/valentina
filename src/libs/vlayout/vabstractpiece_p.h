@@ -32,6 +32,7 @@
 #include <QSharedData>
 #include <QString>
 #include <QCoreApplication>
+#include <QUuid>
 
 #include "../vmisc/diagnostic.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
@@ -62,7 +63,8 @@ public:
           m_width(piece.m_width),
           m_mx(piece.m_mx),
           m_my(piece.m_my),
-          m_priority(piece.m_priority)
+          m_priority(piece.m_priority),
+          m_uuid(piece.m_uuid)
     {}
 
     ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
@@ -81,6 +83,7 @@ public:
     qreal   m_mx{0};
     qreal   m_my{0};
     uint    m_priority{0};
+    QUuid   m_uuid{QUuid::createUuid()};
 
 private:
     Q_DISABLE_ASSIGN(VAbstractPieceData)
@@ -110,6 +113,9 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VAbstractPieceData
 
     // Added in classVersion = 2
     dataStream << piece.m_priority;
+
+    // Added in classVersion = 3
+    dataStream << piece.m_uuid;
 
     return dataStream;
 }
@@ -153,6 +159,11 @@ inline QDataStream &operator>>(QDataStream &dataStream, VAbstractPieceData &piec
     if (actualClassVersion >= 2)
     {
         dataStream >> piece.m_priority;
+    }
+
+    if (actualClassVersion >= 3)
+    {
+        dataStream >> piece.m_uuid;
     }
 
     return dataStream;

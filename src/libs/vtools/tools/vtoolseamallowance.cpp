@@ -64,6 +64,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QTimer>
+#include <QUuid>
 
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
@@ -270,6 +271,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, piece.GetName());
+    doc->SetAttribute(domElement, AttrUUID, piece.GetUUID().toString());
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));

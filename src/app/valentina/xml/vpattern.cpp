@@ -829,6 +829,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         VToolSeamAllowanceInitData initData;
         initData.id = GetParametrId(domElement);
         initData.detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
+        initData.detail.SetUUID(GetParametrEmptyString(domElement, AttrUUID));
         initData.detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
         initData.detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("0.0"))));
         initData.detail.SetSeamAllowance(GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowance, falseStr));
