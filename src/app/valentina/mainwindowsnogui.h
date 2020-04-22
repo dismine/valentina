@@ -150,6 +150,8 @@ protected:
     QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
 
     void CheckRequiredMeasurements(const VMeasurements *m) const;
+
+    void RLDFile(const QString &name, QVector<VLayoutPiece> details, qreal xScale=1, qreal yScale=1) const;
 private slots:
     void PrintPages (QPrinter *printer);
 private:

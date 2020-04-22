@@ -53,6 +53,7 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vwatermarkconverter.h"
+#include "../vlayout/vrawlayout.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -523,7 +524,8 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         format == LayoutExportFormats::DXF_AC1018_ASTM ||
         format == LayoutExportFormats::DXF_AC1021_ASTM ||
         format == LayoutExportFormats::DXF_AC1024_ASTM ||
-        format == LayoutExportFormats::DXF_AC1027_ASTM)
+        format == LayoutExportFormats::DXF_AC1027_ASTM ||
+        format == LayoutExportFormats::RLD)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
@@ -730,6 +732,9 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
             break;
         case LayoutExportFormats::DXF_AC1027_AAMA:
             AAMADxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::RLD:
+            RLDFile(name, details, m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
             break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
@@ -1486,6 +1491,25 @@ void MainWindowsNoGUI::ASTMDxfFile(const QString &name, int version, bool binary
     generator.SetXScale(m_dialogSaveLayout->GetXScale());
     generator.SetYScale(m_dialogSaveLayout->GetYScale());
     generator.ExportToASTM(details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::RLDFile(const QString &name, QVector<VLayoutPiece> details, qreal xScale, qreal yScale) const
+{
+    for(auto detail : details)
+    {
+        detail.Scale(xScale, yScale);
+    }
+
+    VRawLayoutData layoutDate;
+    layoutDate.pieces = details;
+
+    VRawLayout generator;
+    if (not generator.WriteFile(name, layoutDate))
+    {
+        const QString errorMsg = tr("Export raw layout data failed. %1.").arg(generator.ErrorString());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qCritical() << errorMsg;
+    }
 }
 
 QT_WARNING_POP

@@ -72,6 +72,7 @@ enum class LayoutExportFormats : qint8
     DXF_AC1027_ASTM = 32, /* ACAD 2013. */
     PDFTiled = 33,
     NC = 34,              /*G-code. Reserved for future*/
+    RLD = 35,             /*Raw Layout Data*/
     COUNT                 /*Use only for validation*/
 };
 

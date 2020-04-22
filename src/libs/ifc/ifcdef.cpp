@@ -47,6 +47,7 @@ const QString AttrType        = QStringLiteral("type");
 const QString AttrMx          = QStringLiteral("mx");
 const QString AttrMy          = QStringLiteral("my");
 const QString AttrName        = QStringLiteral("name");
+const QString AttrUUID        = QStringLiteral("uuid");
 const QString AttrMx1         = QStringLiteral("mx1");
 const QString AttrMy1         = QStringLiteral("my1");
 const QString AttrName1       = QStringLiteral("name1");

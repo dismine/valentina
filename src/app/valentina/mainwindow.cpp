@@ -2143,13 +2143,13 @@ void MainWindow::ToolBarDraws()
 
     connect(ui->actionOptionDraw, &QAction::triggered, this, [this]()
     {
-        const QString activDraw = doc->GetNameActivPP();
-        const QString nameDraw = PatternPieceName(activDraw);
-        if (nameDraw.isEmpty() || activDraw == nameDraw)
+        QString draw = doc->GetNameActivPP();
+        bool ok = PatternPieceName(draw);
+        if (not ok)
         {
             return;
         }
-        qApp->getUndoStack()->push(new RenamePP(doc, nameDraw, comboBoxDraws));
+        qApp->getUndoStack()->push(new RenamePP(doc, draw, comboBoxDraws));
     });
 }
 
@@ -3150,6 +3150,148 @@ void MainWindow::on_actionOpen_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionOpenPuzzle_triggered()
+{
+    const QString puzzle = qApp->PuzzleFilePath();
+    const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+
+    QStringList arguments;
+    if (isNoScaling)
+    {
+        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+    }
+
+    QProcess::startDetached(puzzle, arguments, workingDirectory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionCreateManualLayout_triggered()
+{
+    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    if (rldFile.open())
+    {
+        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+
+        if (detailsInLayout.count() == 0)
+        {
+            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                                 "include at least one detail in layout."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        QVector<VLayoutPiece> listDetails;
+        try
+        {
+            listDetails = PrepareDetailsForLayout(detailsInLayout);
+        }
+        catch (VException &e)
+        {
+            QMessageBox::warning(this, tr("Export details"),
+                                 tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        RLDFile(rldFile.fileName(), listDetails);
+
+        QStringList arguments {"-r", rldFile.fileName()};
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        rldFile.setAutoRemove(false);
+
+        const QString puzzle = qApp->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+    }
+    else
+    {
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Unable to prepare raw layout data.")));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionUpdateManualLayout_triggered()
+{
+    const QString filter(tr("Manual layout files") + QLatin1String(" (*.vlt)"));
+
+    //Use standard path to manual layouts
+    const QString path = qApp->ValentinaSettings()->GetPathManualLayouts();
+
+    bool usedNotExistedDir = false;
+    QDir directory(path);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
+
+    auto RemoveUnsuded = qScopeGuard([usedNotExistedDir, path]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir directory(path);
+            directory.rmpath(QChar('.'));
+        }
+    });
+
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Select manual layout"), path, filter, nullptr);
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    rldFile.setAutoRemove(false);
+    if (rldFile.open())
+    {
+        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+
+        if (detailsInLayout.count() == 0)
+        {
+            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                                 "include at least one detail in layout."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        QVector<VLayoutPiece> listDetails;
+        try
+        {
+            listDetails = PrepareDetailsForLayout(detailsInLayout);
+        }
+        catch (VException &e)
+        {
+            QMessageBox::warning(this, tr("Export details"),
+                                 tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        RLDFile(rldFile.fileName(), listDetails);
+
+        QStringList arguments {filePath, "-r", rldFile.fileName()};
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        rldFile.setAutoRemove(false);
+
+        const QString puzzle = qApp->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+    }
+    else
+    {
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Unable to prepare raw layout data.")));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -3554,7 +3696,9 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     const bool drawStage = (qApp->GetDrawMode() == Draw::Calculation);
     const bool detailsStage = (qApp->GetDrawMode() == Draw::Modeling);
+    const bool layoutStage = (qApp->GetDrawMode() == Draw::Layout);
     const bool designStage = (drawStage || detailsStage);
+    const bool piecesStage = (detailsStage || layoutStage);
 
     comboBoxDraws->setEnabled(enable && drawStage);
     ui->actionOptionDraw->setEnabled(enable && drawStage);
@@ -3588,6 +3732,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);
     ui->actionHideLabels->setEnabled(enable);
+    ui->actionCreateManualLayout->setEnabled(enable && piecesStage);
+    ui->actionUpdateManualLayout->setEnabled(enable && piecesStage);
 
     ui->actionLoadWatermark->setEnabled(enable);
     ui->actionRemoveWatermark->setEnabled(enable && not doc->GetWatermarkPath().isEmpty());
@@ -4524,11 +4670,10 @@ void MainWindow::CreateActions()
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
-        patternPieceName = PatternPieceName(patternPieceName);
+        bool ok = PatternPieceName(patternPieceName);
         qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
-        if (patternPieceName.isEmpty())
+        if (not ok)
         {
-            qCDebug(vMainWindow, "Name empty.");
             return;
         }
 
@@ -4733,7 +4878,7 @@ void MainWindow::InitAutoSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::PatternPieceName(const QString &text)
+bool MainWindow::PatternPieceName(QString &name)
 {
     QScopedPointer<QInputDialog> dlg(new QInputDialog(this));
     dlg->setInputMode( QInputDialog::TextInput );
@@ -4741,23 +4886,29 @@ QString MainWindow::PatternPieceName(const QString &text)
     dlg->setTextEchoMode(QLineEdit::Normal);
     dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
     dlg->resize(300, 100);
-    dlg->setTextValue(text);
+    dlg->setTextValue(name);
     QString nameDraw;
     while (1)
     {
         const bool bOk = dlg->exec();
         nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty() || text == nameDraw)
+        if (not bOk)
         {
-            return text;
+            return false;
+        }
+
+        if (nameDraw.isEmpty())
+        {
+            continue;
         }
 
         if (comboBoxDraws->findText(nameDraw) == -1)
         {
-            break;//repeate show dialog
+            name = nameDraw;
+            break;// unique name
         }
     }
-    return nameDraw;
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

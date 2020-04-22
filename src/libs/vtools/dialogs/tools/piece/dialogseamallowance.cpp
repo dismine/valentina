@@ -53,6 +53,7 @@
 
 #include <QMenu>
 #include <QTimer>
+#include <QUuid>
 #include <QtNumeric>
 
 enum TabOrder {Paths=0, Pins=1, Labels=2, Grainline=3,  Passmarks=4, PlaceLabels=5, Count=6};
@@ -117,6 +118,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       flagFormulaAfter(true),
       flagMainPathIsValid(true),
       flagName(true), //We have default name of piece.
+      flagUUID(true),
       flagFormula(true),
       m_bAddMode(true),
       m_dialog(),
@@ -149,6 +151,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
     EnableApply(applyAllowed);
 
     InitMainPathTab();
+    InitPieceTab();
     InitSeamAllowanceTab();
     InitInternalPathsTab();
     InitPatternPieceDataTab();
@@ -318,6 +321,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabPaths->lineEditName->setText(piece.GetName());
+    uiTabPaths->lineEditUUID->setText(piece.GetUUID().toString());
     uiTabPaths->spinBoxPriority->setValue(static_cast<int>(piece.GetPriority()));
 
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(
@@ -493,7 +497,7 @@ void DialogSeamAllowance::CheckState()
 
     if (flagFormula && flagFormulaBefore && flagFormulaAfter)
     {
-        if (flagMainPathIsValid && flagName)
+        if (flagMainPathIsValid && flagName && flagUUID)
         {
             m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
         }
@@ -508,9 +512,9 @@ void DialogSeamAllowance::CheckState()
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
     }
 
-    if (flagMainPathIsValid && flagName)
+    if (flagMainPathIsValid)
     {
-        if (flagFormula && flagFormulaBefore && flagFormulaAfter)
+        if (flagFormula && flagFormulaBefore && flagFormulaAfter && flagName && flagUUID)
         {
             m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
         }
@@ -530,6 +534,22 @@ void DialogSeamAllowance::CheckState()
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), icon);
+    }
+
+    if (flagName && flagUUID)
+    {
+        if (flagFormula && flagFormulaBefore && flagFormulaAfter && flagMainPathIsValid)
+        {
+            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
+        }
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), QIcon());
+    }
+    else
+    {
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), icon);
     }
 
     uiTabPaths->comboBoxNodes->setEnabled(flagFormulaBefore && flagFormulaAfter);
@@ -615,6 +635,30 @@ void DialogSeamAllowance::NameDetailChanged()
         {
             flagName = true;
             ChangeColor(uiTabPaths->labelEditName, OkColor(this));
+        }
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DetailUUIDChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        QRegularExpression re("^$|^{[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-"
+                              "[0-9a-fA-F]{12}}$");
+        QRegularExpressionMatch match = re.match(edit->text());
+
+        if (match.hasMatch())
+        {
+            flagUUID = true;
+            ChangeColor(uiTabPaths->labelEditUUID, OkColor(this));
+        }
+        else
+        {
+            flagUUID = false;
+            ChangeColor(uiTabPaths->labelEditUUID, errorColor);
         }
     }
     CheckState();
@@ -2454,6 +2498,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
     piece.SetName(uiTabPaths->lineEditName->text());
+    piece.SetUUID(uiTabPaths->lineEditUUID->text());
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
@@ -2832,6 +2877,29 @@ void DialogSeamAllowance::InitFancyTabBar()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitMainPathTab()
 {
+    uiTabPaths->checkBoxHideMainPath->setChecked(qApp->Settings()->IsHideMainPath());
+
+    uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(uiTabPaths->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowMainPathContextMenu);
+    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
+            &DialogSeamAllowance::ListChanged);
+    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
+            &DialogSeamAllowance::SetMoveControls);
+
+    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
+            [this](){MoveListRowTop(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
+            [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
+            [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
+            [this](){MoveListRowBottom(uiTabPaths->listWidgetMainPath);});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPieceTab()
+{
     connect(uiTabPaths->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
@@ -2855,24 +2923,8 @@ void DialogSeamAllowance::InitMainPathTab()
 
     uiTabPaths->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
     uiTabPaths->checkBoxForceFlipping->setChecked(qApp->Settings()->GetForceWorkpieceFlipping());
-    uiTabPaths->checkBoxHideMainPath->setChecked(qApp->Settings()->IsHideMainPath());
 
-    uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
-            &DialogSeamAllowance::ShowMainPathContextMenu);
-    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
-            &DialogSeamAllowance::ListChanged);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
-            &DialogSeamAllowance::SetMoveControls);
-
-    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
-            [this](){MoveListRowTop(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
-            [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
-            [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
-            [this](){MoveListRowBottom(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->lineEditUUID, &QLineEdit::textChanged, this, &DialogSeamAllowance::DetailUUIDChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -337,7 +337,7 @@ PuzzleMainWindow *PuzzleApplication::MainWindow()
     {
         VPuzzleCommandLinePtr cmd;
         VPuzzleCommandLine::ProcessInstance(cmd, QStringList());
-        NewMainWindow(true);
+        NewMainWindow(VPuzzleCommandLinePtr());
     }
     return mainWindows[0];
 }
@@ -355,11 +355,11 @@ QList<PuzzleMainWindow *> PuzzleApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow *PuzzleApplication::NewMainWindow(bool guiMode)
+PuzzleMainWindow *PuzzleApplication::NewMainWindow(const VPuzzleCommandLinePtr &cmd)
 {
-    PuzzleMainWindow *puzzle = new PuzzleMainWindow();
+    PuzzleMainWindow *puzzle = new PuzzleMainWindow(cmd);
     mainWindows.prepend(puzzle);
-    if (guiMode)
+    if (cmd->IsGuiEnabled())
     {
         puzzle->show();
     }
@@ -505,7 +505,7 @@ void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
 
         for (auto &arg : args)
         {
-            NewMainWindow(cmd->IsGuiEnabled());
+            NewMainWindow(cmd);
             if (not MainWindow()->LoadFile(arg))
             {
                 if (not cmd->IsGuiEnabled())
@@ -516,10 +516,10 @@ void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
                 continue;
             }
 
-//            if (rawLayouts.size() > 0)
-//            {
-//                MainWindow()->ImportRawLayouts(rawLayouts);
-//            }
+            if (rawLayouts.size() > 0)
+            {
+                MainWindow()->ImportRawLayouts(rawLayouts);
+            }
         }
     }
     else
@@ -530,12 +530,12 @@ void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
-        NewMainWindow(cmd->IsGuiEnabled());
-//        if (rawLayouts.size() > 0)
-//        {
+        NewMainWindow(cmd);
+        if (rawLayouts.size() > 0)
+        {
 //            MainWindow()->New(); // prepare layout settings
-//            MainWindow()->ImportRawLayouts(rawLayouts);
-//        }
+            MainWindow()->ImportRawLayouts(rawLayouts);
+        }
     }
 
     if (not cmd->IsGuiEnabled())

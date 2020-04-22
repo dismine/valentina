@@ -36,6 +36,7 @@
 #include "vpiececarrousel.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
+#include "vpuzzlecommandline.h"
 
 namespace Ui
 {
@@ -47,7 +48,7 @@ class PuzzleMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PuzzleMainWindow(QWidget *parent = nullptr);
+    PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~PuzzleMainWindow();
 
     /**
@@ -77,6 +78,7 @@ private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
     VPieceCarrousel *pieceCarrousel;
+    VPuzzleCommandLinePtr m_cmd;
 
     VPuzzleLayout *m_layout;
 

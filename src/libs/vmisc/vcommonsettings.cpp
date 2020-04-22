@@ -54,6 +54,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsMultisizeMeasurements, (QLa
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsManualLayouts, (QLatin1String("paths/manualLayouts")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationOsSeparator, (QLatin1String("configuration/osSeparator")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveState, (QLatin1String("configuration/autosave/state")))
@@ -423,6 +424,24 @@ QString VCommonSettings::GetPathLabelTemplate() const
 void VCommonSettings::SetPathLabelTemplate(const QString &value)
 {
     setValue(*settingPathsLabelTemplate, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathManualLayouts()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("manual layouts");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathManualLayouts() const
+{
+    return value(*settingPathsManualLayouts, GetDefPathManualLayouts()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathManualLayouts(const QString &value)
+{
+    setValue(*settingPathsManualLayouts, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

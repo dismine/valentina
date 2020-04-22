@@ -110,6 +110,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     }
     else
     {
+        RemoveFormatFromList(LayoutExportFormats::RLD);
         ui->checkBoxTextAsPaths->setVisible(false);
     }
 
@@ -238,6 +239,7 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
+        case LayoutExportFormats::RLD:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -285,6 +287,7 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
+        case LayoutExportFormats::RLD:
         default:
             return false;
     }
@@ -424,6 +427,8 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
             return QStringLiteral("PDF %1 %2 (*.pdf)").arg(tr("tiled"), filesStr);
         case LayoutExportFormats::NC:
             return QStringLiteral("%1 %2 (*.nc)").arg(tr("Numerical control"), filesStr);
+        case LayoutExportFormats::RLD:
+            return QStringLiteral("%1 %2 (*.rld)").arg(tr("Raw Layout Data"), filesStr);
         default:
             return QString();
     }
@@ -477,6 +482,8 @@ QString DialogSaveLayout::ExportFormatSuffix(LayoutExportFormats format)
             return QStringLiteral(".dxf");
         case LayoutExportFormats::NC:
             return QStringLiteral(".nc");
+        case LayoutExportFormats::RLD:
+            return QStringLiteral(".rld");
         default:
             return QString();
     }
@@ -566,6 +573,7 @@ void DialogSaveLayout::ShowExample()
     ui->checkBoxBinaryDXF->setEnabled(false);
     ui->groupBoxPaperFormat->setEnabled(false);
     ui->groupBoxMargins->setEnabled(false);
+    ui->checkBoxTextAsPaths->setEnabled(true);
 
     switch(currentFormat)
     {
@@ -601,6 +609,9 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::PDFTiled:
             ui->groupBoxPaperFormat->setEnabled(true);
             ui->groupBoxMargins->setEnabled(true);
+            break;
+        case LayoutExportFormats::RLD:
+            ui->checkBoxTextAsPaths->setEnabled(false);
             break;
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
@@ -869,6 +880,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
     InitFormat(LayoutExportFormats::PDFTiled); 
 //    InitFormat(LayoutExportFormats::NC);
+    InitFormat(LayoutExportFormats::RLD);
 
     return list;
 }

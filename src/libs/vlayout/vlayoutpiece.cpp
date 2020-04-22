@@ -44,6 +44,7 @@
 #include <QTransform>
 #include <Qt>
 #include <QtDebug>
+#include <QUuid>
 
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
@@ -452,6 +453,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     det.SetMy(piece.GetMy());
 
     det.SetName(piece.GetName());
+    det.SetUUID(piece.GetUUID());
 
     det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());

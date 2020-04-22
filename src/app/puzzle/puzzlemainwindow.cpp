@@ -34,17 +34,27 @@
 #include "xml/vpuzzlelayoutfilewriter.h"
 #include "xml/vpuzzlelayoutfilereader.h"
 #include "puzzleapplication.h"
+#include "../vlayout/vrawlayout.h"
+#include "../vmisc/vsysexits.h"
 
-Q_LOGGING_CATEGORY(vPuzzleMainWindow, "v.puzzlemainwindow")
+#include <QLoggingCategory>
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pWindow, "p.window")
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow::PuzzleMainWindow(QWidget *parent) :
+PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
     pieceCarrousel(new VPieceCarrousel),
     m_layout (nullptr),
-    m_selectedPiece (nullptr)
+    m_selectedPiece (nullptr),
+    m_cmd(cmd)
 {
     ui->setupUi(this);
 
@@ -107,7 +117,25 @@ bool PuzzleMainWindow::SaveFile(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::ImportRawLayouts(const QStringList &layouts)
 {
-    Q_UNUSED(layouts)
+    VRawLayout layoutReader;
+
+    for(auto &path : layouts)
+    {
+        VRawLayoutData data;
+        if (layoutReader.ReadFile(path, data))
+        {
+            // Do somethinmg with raw layout data
+        }
+        else
+        {
+            qCCritical(pWindow, "%s\n", qPrintable(tr("Could not extract data from file '%1'. %2")
+                                                    .arg(path, layoutReader.ErrorString())));
+            if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
+            {
+                m_cmd->ShowHelp(V_EX_DATAERR);
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -399,7 +427,7 @@ void PuzzleMainWindow::New()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::Open()
 {
-    qCDebug(vPuzzleMainWindow, "Openning puzzle layout file.");
+    qCDebug(pWindow, "Openning puzzle layout file.");
 
     const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
 
@@ -415,7 +443,7 @@ void PuzzleMainWindow::Open()
         //Absolute path to last open file
         dir = QFileInfo(recentFiles.first()).absolutePath();
     }
-    qCDebug(vPuzzleMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
+    qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(
                 this, tr("Open file"), dir, filter, nullptr,
 #ifdef Q_OS_LINUX

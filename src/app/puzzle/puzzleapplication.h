@@ -58,7 +58,7 @@ public:
     virtual bool IsAppInGUIMode() const override;
     PuzzleMainWindow *MainWindow();
     QList<PuzzleMainWindow*> MainWindows();
-    PuzzleMainWindow *NewMainWindow(bool guiMode);
+    PuzzleMainWindow *NewMainWindow(const VPuzzleCommandLinePtr &cmd);
 
     void InitOptions();
 

@@ -85,6 +85,7 @@ protected:
 
 private slots:
     void NameDetailChanged();
+    void DetailUUIDChanged();
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
@@ -192,6 +193,7 @@ private:
     bool   flagFormulaPassmarkLength{true};
     bool   flagMainPathIsValid;
     bool   flagName;
+    bool   flagUUID;
     bool   flagFormula;
     bool   m_bAddMode;
 
@@ -247,6 +249,7 @@ private:
 
     void InitFancyTabBar();
     void InitMainPathTab();
+    void InitPieceTab();
     void InitSeamAllowanceTab();
     void InitNodesList();
     void InitPassmarksList();
@@ -292,7 +295,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogSeamAllowance::IsValid() const
 {
-    return flagName && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
+    return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
             && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
             && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength;
 }

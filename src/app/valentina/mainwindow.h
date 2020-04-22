@@ -184,6 +184,10 @@ private slots:
     bool on_actionSave_triggered();
     void on_actionOpen_triggered();
 
+    void on_actionOpenPuzzle_triggered();
+    void on_actionCreateManualLayout_triggered();
+    void on_actionUpdateManualLayout_triggered();
+
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);
@@ -335,7 +339,7 @@ private:
     void               CreateMenus();
     void               CreateActions();
     void               InitAutoSave();
-    QString            PatternPieceName(const QString &text);
+    bool               PatternPieceName(QString &name);
     QString            CheckPathToMeasurements(const QString &patternPath, const QString &path);
     QComboBox          *SetGradationList(QLabel *label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
