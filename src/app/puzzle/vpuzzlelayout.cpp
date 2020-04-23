@@ -75,7 +75,7 @@ void VPuzzleLayout::SetUnit(Unit unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit VPuzzleLayout::getUnit() const
+Unit VPuzzleLayout::GetUnit() const
 {
     return m_unit;
 }

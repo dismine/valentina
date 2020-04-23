@@ -74,7 +74,7 @@ void VPuzzleLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
 {
     writeStartElement("properties");
 
-    writeTextElement("unit", UnitsToStr(layout->getUnit()));
+    writeTextElement("unit", UnitsToStr(layout->GetUnit()));
 
     writeTextElement("description", ""); // TODO : define the value in layout
 

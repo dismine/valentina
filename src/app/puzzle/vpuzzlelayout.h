@@ -53,7 +53,7 @@ public:
     QList<VPuzzleLayer *> GetLayers();
 
     void SetUnit(Unit unit);
-    Unit getUnit() const;
+    Unit GetUnit() const;
 
     /**
      * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px

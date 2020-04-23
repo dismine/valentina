@@ -337,7 +337,7 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
 void PuzzleMainWindow::SetPropertyTabLayoutData()
 {
     // set Unit
-    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->getUnit())));
+    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->GetUnit())));
     if(index != -1)
     {
         ui->comboBoxLayoutUnit->blockSignals(true); // FIXME: is there a better way to block the signals?
