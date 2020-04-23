@@ -127,16 +127,16 @@ private:
     /**
      * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.
      * the signals are blocked before changing the value and unblocked after
-     * @param spinbox
-     * @param value
+     * @param spinBox pointer to spinbox
+     * @param value spinbox value
      */
     void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value);
 
     /**
      * @brief SetCheckBoxValue sets the given checkbox to the given value.
      * the signals are blocked before changing the value and unblocked after
-     * @param checkbox
-     * @param value
+     * @param checkbox pointer to checkbox
+     * @param value checkbox value
      */
     void SetCheckBoxValue(QCheckBox *checkbox, bool value);
 
