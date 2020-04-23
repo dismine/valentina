@@ -83,7 +83,7 @@ void VPuzzleLayout::SetUnit(Unit unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit VPuzzleLayout::getUnit()
+Unit VPuzzleLayout::getUnit() const
 {
     return m_unit;
 }
@@ -118,13 +118,13 @@ void VPuzzleLayout::SetLayoutSizeConverted(QSizeF size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPuzzleLayout::GetLayoutSize()
+QSizeF VPuzzleLayout::GetLayoutSize() const
 {
     return m_size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPuzzleLayout::GetLayoutSizeConverted()
+QSizeF VPuzzleLayout::GetLayoutSizeConverted() const
 {
     QSizeF convertedSize = QSizeF(
                 UnitConvertor(m_size.width(), Unit::Px, m_unit),
@@ -164,13 +164,13 @@ void VPuzzleLayout::SetLayoutMarginsConverted(QMarginsF margins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPuzzleLayout::GetLayoutMargins()
+QMarginsF VPuzzleLayout::GetLayoutMargins() const
 {
     return m_margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPuzzleLayout::GetLayoutMarginsConverted()
+QMarginsF VPuzzleLayout::GetLayoutMarginsConverted() const
 {
     return UnitConvertor(m_margins, Unit::Px, m_unit);
 }
@@ -200,13 +200,13 @@ void VPuzzleLayout::SetPiecesGapConverted(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzleLayout::GetPiecesGap()
+qreal VPuzzleLayout::GetPiecesGap() const
 {
     return m_piecesGap;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzleLayout::GetPiecesGapConverted()
+qreal VPuzzleLayout::GetPiecesGapConverted() const
 {
     return UnitConvertor(m_piecesGap, Unit::Px, m_unit);
 }
@@ -219,7 +219,7 @@ void VPuzzleLayout::SetWarningSuperpositionOfPieces(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayout::GetWarningSuperpositionOfPieces()
+bool VPuzzleLayout::GetWarningSuperpositionOfPieces() const
 {
     return m_warningSuperpositionOfPieces;
 }
@@ -231,7 +231,7 @@ void VPuzzleLayout::SetWarningPiecesOutOfBound(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayout::GetWarningPiecesOutOfBound()
+bool VPuzzleLayout::GetWarningPiecesOutOfBound() const
 {
     return m_warningPiecesOutOfBound;
 }
@@ -243,7 +243,7 @@ void VPuzzleLayout::SetStickyEdges(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayout::GetStickyEdges()
+bool VPuzzleLayout::GetStickyEdges() const
 {
     return m_stickyEdges;
 }

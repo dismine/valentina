@@ -44,11 +44,11 @@ public:
     // here add some more function if we want to add/move a piece at a
     // certain position in the list
 
-    QString GetName();
+    QString GetName() const;
     void SetName(QString name);
 
     void SetIsVisible(bool value);
-    bool GetIsVisible();
+    bool GetIsVisible() const;
 
 private:
     QString m_name;

@@ -51,7 +51,7 @@ public:
     QList<VPuzzleLayer *> GetLayers();
 
     void SetUnit(Unit unit);
-    Unit getUnit();
+    Unit getUnit() const;
 
     /**
      * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px
@@ -71,24 +71,24 @@ public:
      * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px
      * @param size
      */
-    void SetLayoutSize(QSizeF size);
+    void SetLayoutSize(const QSizeF &size);
     /**
      * @brief SetLayoutSizeConverted sets the size of the layout, the values have to be in the layout's unit
      * @param size
      */
-    void SetLayoutSizeConverted(QSizeF size);
+    void SetLayoutSizeConverted(const QSizeF &size);
 
     /**
      * @brief GetLayoutSize Returns the size in Unit::Px
      * @return
      */
-    QSizeF GetLayoutSize();
+    QSizeF GetLayoutSize() const;
 
     /**
      * @brief GetLayoutSizeConverted Returns the size in the layout's unit
      * @return
      */
-    QSizeF GetLayoutSizeConverted();
+    QSizeF GetLayoutSizeConverted() const;
 
     /**
      * @brief SetLayoutMargins, set the margins of the layout, the values have to be in Unit::Px
@@ -124,13 +124,13 @@ public:
      * @brief GetLayoutMargins Returns the size in Unit::Px
      * @return
      */
-    QMarginsF GetLayoutMargins();
+    QMarginsF GetLayoutMargins() const;
 
     /**
      * @brief GetLayoutMarginsConverted Returns the margins in the layout's unit
      * @return
      */
-    QMarginsF GetLayoutMarginsConverted();
+    QMarginsF GetLayoutMarginsConverted() const;
 
     void SetFollowGrainline(FollowGrainline state);
     FollowGrainline SetFollowGrainline();
@@ -151,22 +151,22 @@ public:
      * @brief GetPiecesGap returns the pieces gap in Unit::Px
      * @return
      */
-    qreal GetPiecesGap();
+    qreal GetPiecesGap() const;
 
     /**
      * @brief GetPiecesGapConverted returns the pieces gap in the layout's unit
      * @return
      */
-    qreal GetPiecesGapConverted();
+    qreal GetPiecesGapConverted() const;
 
     void SetWarningSuperpositionOfPieces(bool state);
-    bool GetWarningSuperpositionOfPieces();
+    bool GetWarningSuperpositionOfPieces() const;
 
     void SetWarningPiecesOutOfBound(bool state);
-    bool GetWarningPiecesOutOfBound();
+    bool GetWarningPiecesOutOfBound() const;
 
     void SetStickyEdges(bool state);
-    bool GetStickyEdges();
+    bool GetStickyEdges() const;
 
 private:
     Q_DISABLE_COPY(VPuzzleLayout)

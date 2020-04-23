@@ -61,7 +61,7 @@ void VPuzzleLayer::RemovePiece(VPuzzlePiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPuzzleLayer::GetName()
+QString VPuzzleLayer::GetName() const
 {
     return m_name;
 }
@@ -79,7 +79,7 @@ void VPuzzleLayer::SetIsVisible(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayer::GetIsVisible()
+bool VPuzzleLayer::GetIsVisible() const
 {
     return m_isVisible;
 }
