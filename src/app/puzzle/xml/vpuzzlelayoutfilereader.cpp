@@ -84,7 +84,8 @@ void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 {
     Q_ASSERT(isStartElement() && name() == QString("layout"));
 
-    while (readNextStartElement()) {
+    while (readNextStartElement())
+    {
         if (name() == QString("properties"))
         {
             ReadProperties(layout);
@@ -105,7 +106,8 @@ void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 {
     Q_ASSERT(isStartElement() && name() == QString("properties"));
 
-    while (readNextStartElement()) {
+    while (readNextStartElement())
+    {
         qDebug(name().toString().toLatin1());
 
         if (name() == QString("unit"))
@@ -185,7 +187,8 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
     // attribs.value("visible"); // TODO
     // attribs.value("matchingMarks"); // TODO
 
-    while (readNextStartElement()) {
+    while (readNextStartElement())
+    {
         if (name() == QString("size"))
         {
             QSizeF size = ReadSize();
@@ -213,7 +216,8 @@ void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 {
     Q_ASSERT(isStartElement() && name() == QString("layers"));
 
-    while (readNextStartElement()) {
+    while (readNextStartElement())
+    {
         if (name() == QString("unplacedPiecesLayer"))
         {
             ReadLayer(layout->GetUnplacedPiecesLayer());
@@ -240,7 +244,8 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
     layer->SetName(attribs.value("name").toString());
     layer->SetIsVisible(attribs.value("visible") == "true");
 
-    while (readNextStartElement()) {
+    while (readNextStartElement())
+    {
         if (name() == QString("piece"))
         {
             VPuzzlePiece *piece = new VPuzzlePiece();
@@ -263,7 +268,8 @@ void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
 
     // TODO read the attributes
 
-    while (readNextStartElement()) {
+    while (readNextStartElement())
+    {
         if (name() == QString("..."))
         {
             // TODO

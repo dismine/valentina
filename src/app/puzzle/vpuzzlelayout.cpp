@@ -91,8 +91,8 @@ void VPuzzleLayout::SetLayoutSize(qreal width, qreal height)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetLayoutSizeConverted(qreal width, qreal height)
 {
-    m_size.setWidth(UnitConvertor(width, m_unit,Unit::Px));
-    m_size.setHeight(UnitConvertor(height, m_unit,Unit::Px));
+    m_size.setWidth(UnitConvertor(width, m_unit, Unit::Px));
+    m_size.setHeight(UnitConvertor(height, m_unit, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,8 +105,8 @@ void VPuzzleLayout::SetLayoutSize(const QSizeF &size)
 void VPuzzleLayout::SetLayoutSizeConverted(const QSizeF &size)
 {
     m_size = QSizeF(
-                UnitConvertor(size.width(), m_unit,Unit::Px),
-                UnitConvertor(size.height(), m_unit,Unit::Px)
+                UnitConvertor(size.width(), m_unit, Unit::Px),
+                UnitConvertor(size.height(), m_unit, Unit::Px)
                 );
 }
 
@@ -203,7 +203,6 @@ qreal VPuzzleLayout::GetPiecesGapConverted() const
 {
     return UnitConvertor(m_piecesGap, Unit::Px, m_unit);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetWarningSuperpositionOfPieces(bool state)

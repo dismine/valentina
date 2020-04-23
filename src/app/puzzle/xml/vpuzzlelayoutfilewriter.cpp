@@ -195,12 +195,14 @@ void VPuzzleLayoutFileWriter::WriteSize(QSizeF size)
 {
     // maybe not necessary to test this, the writer should "stupidly write", the application should take care of these tests
     qreal width = size.width();
-    if(width < 0) {
+    if(width < 0)
+    {
         width = 0;
     }
 
     qreal length = size.height();
-    if(length < 0) {
+    if(length < 0)
+    {
         length = 0;
     }
 
