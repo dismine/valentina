@@ -30,7 +30,10 @@
 #include "vpuzzlelayoutfilereader.h"
 #include "vpuzzlelayoutfilewriter.h"
 #include "layoutliterals.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionconversionerror.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayoutFileReader::VPuzzleLayoutFileReader()
 {
 
@@ -57,7 +60,7 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 
         if (name() == ML::TagLayout)
         {
-            QString versionStr = attributes().value(ML::AttrVersion).toString();
+            QString versionStr = ReadAttributeEmptyString(attributes(), ML::AttrVersion);
             QStringList versionStrParts = versionStr.split('.');
             m_layoutFormatVersion = FORMAT_VERSION(versionStrParts.at(0).toInt(),versionStrParts.at(1).toInt(),versionStrParts.at(2).toInt());
 
@@ -157,11 +160,11 @@ void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 
             // attribs.value("followGrainLine"); // TODO
 
-            layout->SetWarningSuperpositionOfPieces(attribs.value(ML::AttrWarningSuperposition) == "true");
-            layout->SetWarningPiecesOutOfBound(attribs.value(ML::AttrWarningOutOfBound) == "true");
-            layout->SetStickyEdges(attribs.value(ML::AttrStickyEdges) == "true");
+            layout->SetWarningSuperpositionOfPieces(ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
+            layout->SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
+            layout->SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
 
-            layout->SetPiecesGap(attribs.value(ML::AttrPiecesGap).toDouble());
+            layout->SetPiecesGap(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')));
             readElementText();
             break;
         }
@@ -243,8 +246,8 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
     Q_ASSERT(isStartElement() && name() == ML::TagLayer);
 
     QXmlStreamAttributes attribs = attributes();
-    layer->SetName(attribs.value(ML::AttrName).toString());
-    layer->SetIsVisible(attribs.value(ML::AttrVisible) == "true");
+    layer->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Layer")));
+    layer->SetIsVisible(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
 
     while (readNextStartElement())
     {
@@ -292,10 +295,10 @@ QMarginsF VPuzzleLayoutFileReader::ReadMargins()
     QMarginsF margins = QMarginsF();
 
     QXmlStreamAttributes attribs = attributes();
-    margins.setLeft(attribs.value(ML::AttrLeft).toDouble());
-    margins.setTop(attribs.value(ML::AttrTop).toDouble());
-    margins.setRight(attribs.value(ML::AttrRight).toDouble());
-    margins.setBottom(attribs.value(ML::AttrBottom).toDouble());
+    margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
+    margins.setTop(ReadAttributeDouble(attribs, ML::AttrTop, QChar('0')));
+    margins.setRight(ReadAttributeDouble(attribs, ML::AttrRight, QChar('0')));
+    margins.setBottom(ReadAttributeDouble(attribs, ML::AttrBottom, QChar('0')));
 
     return margins;
 }
@@ -306,8 +309,96 @@ QSizeF VPuzzleLayoutFileReader::ReadSize()
     QSizeF size = QSize();
 
     QXmlStreamAttributes attribs = attributes();
-    size.setWidth(attribs.value(ML::AttrWidth).toDouble());
-    size.setHeight(attribs.value(ML::AttrLength).toDouble());
+    size.setWidth(ReadAttributeDouble(attribs, ML::AttrWidth, QChar('0')));
+    size.setHeight(ReadAttributeDouble(attribs, ML::AttrLength, QChar('0')));
 
     return size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPuzzleLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
+                                                     const QString &defValue)
+{
+    const QString parameter = attribs.value(name).toString();
+    if (parameter.isEmpty())
+    {
+        if (defValue.isEmpty())
+        {
+            throw VException(tr("Got empty attribute '%1'").arg(name));
+        }
+        else
+        {
+            return defValue;
+        }
+    }
+    return parameter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPuzzleLayoutFileReader::ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name)
+{
+    return attribs.value(name).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzleLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name,
+                                                const QString &defValue)
+{
+    QString parametr;
+    bool val = true;
+
+    const QString message = QObject::tr("Can't convert toBool parameter");
+    try
+    {
+        parametr = ReadAttributeString(attribs, name, defValue);
+
+        const QStringList bools {trueStr, falseStr, QChar('1'), QChar('0')};
+        switch (bools.indexOf(parametr))
+        {
+            case 0: // true
+            case 2: // 1
+                val = true;
+                break;
+            case 1: // false
+            case 3: // 0
+                val = false;
+                break;
+            default:// others
+                throw VExceptionConversionError(message, name);
+        }
+    }
+    catch (const VException &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+
+    return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPuzzleLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
+                                                   const QString &defValue)
+{
+    bool ok = false;
+    qreal param = 0;
+
+    const QString message = QObject::tr("Can't convert toDouble parameter");
+    try
+    {
+        QString parametr = ReadAttributeString(attribs, name, defValue);
+        param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
+        if (ok == false)
+        {
+            throw VExceptionConversionError(message, name);
+        }
+    }
+    catch (const VException &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    return param;
 }

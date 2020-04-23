@@ -37,6 +37,7 @@
 
 class VPuzzleLayoutFileReader : public QXmlStreamReader
 {
+    Q_DECLARE_TR_FUNCTIONS(VPuzzleLayoutFileReader)
 public:
     VPuzzleLayoutFileReader();
     ~VPuzzleLayoutFileReader();
@@ -60,6 +61,12 @@ private:
     QMarginsF ReadMargins();
     QSizeF ReadSize();
 
+    static QString ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
+                                       const QString &defValue);
+    static QString ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name);
+    static bool    ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue);
+    static qreal   ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
+                                     const QString &defValue);
 };
 
 #endif // VPUZZLELAYOUTFILEREADER_H
