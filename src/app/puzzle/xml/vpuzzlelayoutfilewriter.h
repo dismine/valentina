@@ -71,7 +71,49 @@ private:
     void WriteMargins(QMarginsF margins);
     void WriteSize(QSizeF size);
 
+    template <typename T>
+    void SetAttribute(const QString &name, const T &value);
+
+    template <size_t N>
+    void SetAttribute(const QString &name, const char (&value)[N]);
 
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+void VPuzzleLayoutFileWriter::SetAttribute(const QString &name, const T &value)
+{
+    // See specification for xs:decimal
+    const QLocale locale = QLocale::c();
+    writeAttribute(name, locale.toString(value).remove(locale.groupSeparator()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline void VPuzzleLayoutFileWriter::SetAttribute<QString>(const QString &name, const QString &value)
+{
+    writeAttribute(name, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline void VPuzzleLayoutFileWriter::SetAttribute<QChar>(const QString &name, const QChar &value)
+{
+    writeAttribute(name, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline void VPuzzleLayoutFileWriter::SetAttribute<bool>(const QString &name, const bool &value)
+{
+    writeAttribute(name, value ? trueStr : falseStr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <size_t N>
+inline void VPuzzleLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N])
+{
+    writeAttribute(name, QString(value));
+}
 
 #endif // VPUZZLELAYOUTFILEWRITER_H
