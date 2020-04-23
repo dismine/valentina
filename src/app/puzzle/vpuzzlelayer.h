@@ -45,7 +45,7 @@ public:
     // certain position in the list
 
     QString GetName() const;
-    void SetName(QString name);
+    void SetName(const QString &name);
 
     void SetIsVisible(bool value);
     bool GetIsVisible() const;

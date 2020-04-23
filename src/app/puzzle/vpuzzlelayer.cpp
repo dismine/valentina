@@ -67,7 +67,7 @@ QString VPuzzleLayer::GetName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::SetName(QString name)
+void VPuzzleLayer::SetName(const QString &name)
 {
     m_name = name;
 }

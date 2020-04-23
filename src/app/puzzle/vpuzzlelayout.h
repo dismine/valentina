@@ -112,13 +112,13 @@ public:
      * @brief SetLayoutMargins set the margins of the layout, the values have to be in Unit::Px
      * @param margins
      */
-    void SetLayoutMargins(QMarginsF margins);
+    void SetLayoutMargins(const QMarginsF &margins);
 
     /**
      * @brief SetLayoutMargins set the margins of the layout, the values have to be in the unit of the layout
      * @param margins
      */
-    void SetLayoutMarginsConverted(QMarginsF margins);
+    void SetLayoutMarginsConverted(const QMarginsF &margins);
 
     /**
      * @brief GetLayoutMargins Returns the size in Unit::Px

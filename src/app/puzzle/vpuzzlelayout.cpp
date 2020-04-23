@@ -103,13 +103,13 @@ void VPuzzleLayout::SetLayoutSizeConverted(qreal width, qreal height)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutSize(QSizeF size)
+void VPuzzleLayout::SetLayoutSize(const QSizeF &size)
 {
     m_size = size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutSizeConverted(QSizeF size)
+void VPuzzleLayout::SetLayoutSizeConverted(const QSizeF &size)
 {
     m_size = QSizeF(
                 UnitConvertor(size.width(), m_unit,Unit::Px),
@@ -152,13 +152,13 @@ void VPuzzleLayout::SetLayoutMarginsConverted(qreal left, qreal top, qreal right
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutMargins(QMarginsF margins)
+void VPuzzleLayout::SetLayoutMargins(const QMarginsF &margins)
 {
     m_margins = margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutMarginsConverted(QMarginsF margins)
+void VPuzzleLayout::SetLayoutMarginsConverted(const QMarginsF &margins)
 {
     m_margins = UnitConvertor(margins, m_unit, Unit::Px);
 }
