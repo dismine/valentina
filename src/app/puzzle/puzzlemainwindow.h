@@ -48,7 +48,7 @@ class PuzzleMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
+    explicit PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~PuzzleMainWindow();
 
     /**
