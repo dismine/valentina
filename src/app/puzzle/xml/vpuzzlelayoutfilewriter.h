@@ -31,9 +31,10 @@
 
 #include <QXmlStreamWriter>
 #include "../ifc/xml/vabstractconverter.h"
-#include "vpuzzlelayout.h"
-#include "vpuzzlelayer.h"
-#include "vpuzzlepiece.h"
+
+class VPuzzleLayout;
+class VPuzzleLayer;
+class VPuzzlePiece;
 
 class VPuzzleLayoutFileWriter : public QXmlStreamWriter
 {

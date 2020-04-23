@@ -31,8 +31,10 @@
 #include <QSizeF>
 #include <QMarginsF>
 #include <QList>
-#include "vpuzzlelayer.h"
+
 #include "def.h"
+
+class VPuzzleLayer;
 
 // is this the right place for the definition?
 enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};

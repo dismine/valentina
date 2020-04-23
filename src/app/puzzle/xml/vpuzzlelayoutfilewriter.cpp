@@ -27,6 +27,10 @@
  *************************************************************************/
 
 #include "vpuzzlelayoutfilewriter.h"
+#include "vpuzzlelayout.h"
+#include "vpuzzlelayer.h"
+#include "vpuzzlepiece.h"
+#include "layoutliterals.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayoutFileWriter::VPuzzleLayoutFileWriter()
