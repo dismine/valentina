@@ -52,8 +52,6 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
     pieceCarrousel(new VPieceCarrousel),
-    m_layout (nullptr),
-    m_selectedPiece (nullptr),
     m_cmd(cmd)
 {
     ui->setupUi(this);

@@ -173,31 +173,31 @@ public:
 private:
     Q_DISABLE_COPY(VPuzzleLayout)
     VPuzzleLayer *m_unplacedPiecesLayer;
-    QList<VPuzzleLayer *> m_layers;
+    QList<VPuzzleLayer *> m_layers{};
 
     // format
-    Unit m_unit;
+    Unit m_unit{Unit::Cm};
     /**
      * @brief m_size the Size in Unit::Px
      */
-    QSizeF m_size;
+    QSizeF m_size{};
 
     // margins
     /**
      * @brief m_margins the margins in Unit::Px
      */
-    QMarginsF m_margins;
+    QMarginsF m_margins{};
 
     // control
-    FollowGrainline m_followGrainLine;
+    FollowGrainline m_followGrainLine{FollowGrainline::No};
 
     /**
      * @brief m_piecesGap the pieces gap in Unit::Px
      */
-    qreal m_piecesGap;
-    bool m_warningSuperpositionOfPieces;
-    bool m_warningPiecesOutOfBound;
-    bool m_stickyEdges;
+    qreal m_piecesGap{0};
+    bool m_warningSuperpositionOfPieces{false};
+    bool m_warningPiecesOutOfBound{false};
+    bool m_stickyEdges{false};
 
 };
 

@@ -51,11 +51,11 @@ public:
     bool GetIsVisible() const;
 
 private:
-    QString m_name;
-    QList<VPuzzlePiece *> m_pieces;
+    QString m_name{};
+    QList<VPuzzlePiece *> m_pieces{};
 
     // control
-    bool m_isVisible;
+    bool m_isVisible{true};
 
 };
 

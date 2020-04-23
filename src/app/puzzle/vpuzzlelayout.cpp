@@ -30,16 +30,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayout::VPuzzleLayout() :
-    m_unplacedPiecesLayer(new VPuzzleLayer()),
-    m_layers(QList<VPuzzleLayer *>()),
-    m_unit(Unit::Cm),
-    m_size(QSizeF()),
-    m_margins(QMarginsF()),
-    m_followGrainLine(FollowGrainline::No),
-    m_piecesGap(0),
-    m_warningSuperpositionOfPieces(false),
-    m_warningPiecesOutOfBound(false),
-    m_stickyEdges(false)
+    m_unplacedPiecesLayer(new VPuzzleLayer())
 {
 
 }

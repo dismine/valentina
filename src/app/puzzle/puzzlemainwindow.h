@@ -80,9 +80,9 @@ private:
     VPieceCarrousel *pieceCarrousel;
     VPuzzleCommandLinePtr m_cmd;
 
-    VPuzzleLayout *m_layout;
+    VPuzzleLayout *m_layout{nullptr};
 
-    VPuzzlePiece *m_selectedPiece;
+    VPuzzlePiece *m_selectedPiece{nullptr};
 
 
     void InitMenuBar();

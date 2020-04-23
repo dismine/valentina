@@ -28,10 +28,7 @@
 #include "vpuzzlelayer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer::VPuzzleLayer() :
-    m_name(QString("")),
-    m_pieces(QList<VPuzzlePiece*>()),
-    m_isVisible(true)
+VPuzzleLayer::VPuzzleLayer()
 {
 
 }
