@@ -175,7 +175,7 @@ void VPuzzleLayout::SetFollowGrainline(FollowGrainline state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-FollowGrainline VPuzzleLayout::SetFollowGrainline()
+FollowGrainline VPuzzleLayout::GetFollowGrainline() const
 {
     return m_followGrainLine;
 }

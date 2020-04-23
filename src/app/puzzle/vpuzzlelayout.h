@@ -134,8 +134,8 @@ public:
      */
     QMarginsF GetLayoutMarginsConverted() const;
 
-    void SetFollowGrainline(FollowGrainline state);
-    FollowGrainline SetFollowGrainline();
+    void            SetFollowGrainline(FollowGrainline state);
+    FollowGrainline GetFollowGrainline() const;
 
     /**
      * @brief SetPiecesGap sets the pieces gap to the given value, the unit has to be in Unit::Px
