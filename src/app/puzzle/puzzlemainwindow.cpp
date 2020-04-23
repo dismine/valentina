@@ -26,8 +26,14 @@
  **
  *************************************************************************/
 #include "puzzlemainwindow.h"
+
+#include <QFileDialog>
+
 #include "ui_puzzlemainwindow.h"
 #include "dialogs/dialogaboutpuzzle.h"
+#include "xml/vpuzzlelayoutfilewriter.h"
+#include "xml/vpuzzlelayoutfilereader.h"
+#include "puzzleapplication.h"
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/vsysexits.h"
 
@@ -46,6 +52,8 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
     pieceCarrousel(new VPieceCarrousel),
+    m_layout (nullptr),
+    m_selectedPiece (nullptr),
     m_cmd(cmd)
 {
     ui->setupUi(this);
@@ -53,6 +61,16 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     InitMenuBar();
     InitProperties();
     InitPieceCarrousel();
+
+    // ----- for test purposes, to be removed------------------
+    m_layout = new VPuzzleLayout();
+    m_layout->SetLayoutMarginsConverted(1.5, 2.00, 4.21, 0.25);
+    m_layout->SetLayoutSizeConverted(30.0, 29.7);
+    m_layout->SetPiecesGapConverted(1.27);
+    m_layout->SetUnit(Unit::Cm);
+    m_layout->SetWarningSuperpositionOfPieces(true);
+
+    SetPropertiesData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +83,34 @@ PuzzleMainWindow::~PuzzleMainWindow()
 //---------------------------------------------------------------------------------------------------------------------
 bool PuzzleMainWindow::LoadFile(const QString &path)
 {
-    Q_UNUSED(path)
+    QFile file(path);
+    file.open(QIODevice::ReadOnly);
+
+    VPuzzleLayoutFileReader *fileReader = new VPuzzleLayoutFileReader();
+
+    if(m_layout == nullptr)
+    {
+        m_layout = new VPuzzleLayout();
+    }
+
+    fileReader->ReadFile(m_layout, &file);
+
+    // TODO / FIXME : better return value and error handling
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool PuzzleMainWindow::SaveFile(const QString &path)
+{
+    QFile file(path);
+    file.open(QIODevice::WriteOnly);
+
+    VPuzzleLayoutFileWriter *fileWriter = new VPuzzleLayoutFileWriter();
+    fileWriter->WriteFile(m_layout, &file);
+
+    // TODO / FIXME : better return value and error handling
+
     return true;
 }
 
@@ -254,6 +299,114 @@ void PuzzleMainWindow::InitPieceCarrousel()
 }
 
 
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertiesData()
+{
+    if(m_layout == nullptr)
+    {
+       // TODO : hide the tabs when there is no layout
+    }
+    else
+    {
+        SetPropertyTabCurrentPieceData();
+        SetPropertyTabLayoutData();
+        SetPropertyTabTilesData();
+        SetPropertyTabLayersData();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
+{
+    if(m_selectedPiece == nullptr)
+    {
+        if(false) // check for multiple piece selection
+        {
+            // TODO in the future
+        }
+        else
+        {
+           // TODO : update current piece data to show a "no current piece selected"
+        }
+    }
+    else
+    {
+        // TODO set the values of the piece currently selected
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabLayoutData()
+{
+    // set Unit
+    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->getUnit())));
+    if(index != -1)
+    {
+        ui->comboBoxLayoutUnit->blockSignals(true); // FIXME: is there a better way to block the signals?
+        ui->comboBoxLayoutUnit->setCurrentIndex(index);
+        ui->comboBoxLayoutUnit->blockSignals(false);
+    }
+
+    // set Width / Length
+    QSizeF size = m_layout->GetLayoutSizeConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, size.width());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, size.height());
+
+    // Set Orientation
+    if(size.width() <= size.height())
+    {
+        ui->radioButtonLayoutPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->radioButtonLayoutLandscape->setChecked(true);
+    }
+
+    // set margins
+    QMarginsF margins = m_layout->GetLayoutMarginsConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginLeft, margins.left());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginTop, margins.top());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginRight, margins.right());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginBottom, margins.bottom());
+
+    // set pieces gap
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutPiecesGap, m_layout->GetPiecesGapConverted());
+
+    // set the checkboxes
+    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, m_layout->GetWarningPiecesOutOfBound());
+    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
+    SetCheckBoxValue(ui->checkBoxLayoutStickyEdges, m_layout->GetStickyEdges());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabTilesData()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetPropertyTabLayersData()
+{
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
+{
+    spinBox->blockSignals(true);
+    spinBox->setValue(value);
+    spinBox->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
+{
+    checkbox->blockSignals(true);
+    checkbox->setChecked(value);
+    checkbox->blockSignals(false);
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,14 +427,60 @@ void PuzzleMainWindow::New()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::Open()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::Open");
-    int ret = msgBox.exec();
+    qCDebug(pWindow, "Openning puzzle layout file.");
 
-    Q_UNUSED(ret);
+    const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
 
-    // TODO
+    //Get list last open files
+    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
+    QString dir;
+    if (recentFiles.isEmpty())
+    {
+        dir = QDir::homePath();
+    }
+    else
+    {
+        //Absolute path to last open file
+        dir = QFileInfo(recentFiles.first()).absolutePath();
+    }
+    qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
+    const QString filePath = QFileDialog::getOpenFileName(
+                this, tr("Open file"), dir, filter, nullptr,
+#ifdef Q_OS_LINUX
+                QFileDialog::DontUseNativeDialog
+#endif
+                );
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+
+    // TODO : if m_layout == nullptr, open in current window
+    // otherwise open in new window
+
+    // TODO : if layout file has a lock, warning message
+
+
+    if(!LoadFile(filePath))
+    {
+        return;
+    }
+
+    // Updates the list of recent files
+    recentFiles.removeAll(filePath);
+    recentFiles.prepend(filePath);
+    while (recentFiles.size() > MaxRecentFiles)
+    {
+        recentFiles.removeLast();
+    }
+    qApp->PuzzleSettings()->SetRecentFileList(recentFiles);
+
+    // updates the properties with the loaded data
+    SetPropertiesData();
+
+    // TODO : update the Carrousel and the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,14 +499,31 @@ void PuzzleMainWindow::Save()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::SaveAs()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::SaveAs");
-    int ret = msgBox.exec();
+    // TODO / FIXME : See valentina how the save is done over there. we need to add the extension .vlt, check for empty file names etc.
 
-     Q_UNUSED(ret);
+    //Get list last open files
+    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
+    QString dir;
+    if (recentFiles.isEmpty())
+    {
+        dir = QDir::homePath();
+    }
+    else
+    {
+        //Absolute path to last open file
+        dir = QFileInfo(recentFiles.first()).absolutePath();
+    }
 
-    // TODO
+    QString filters(tr("Layout files") + QLatin1String("(*.vlt)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".vlt"),
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
+
+    SaveFile(fileName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,17 +569,24 @@ void PuzzleMainWindow::AboutPuzzle()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutUnitChanged(int index)
 {
-
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutUnitChanged");
-    int ret = msgBox.exec();
-
     Q_UNUSED(index);
-    Q_UNUSED(ret);
+    QVariant comboBoxValue = ui->comboBoxLayoutUnit->currentData();
 
+    if(comboBoxValue == QVariant(UnitsToStr(Unit::Cm)))
+    {
+        m_layout->SetUnit(Unit::Cm);
+    }
+    else if(comboBoxValue == QVariant(UnitsToStr(Unit::Mm)))
+    {
+        m_layout->SetUnit(Unit::Mm);
+    }
+    else if(comboBoxValue == QVariant(UnitsToStr(Unit::Inch)))
+    {
+        m_layout->SetUnit(Unit::Inch);
+    }
 
-   // TODO
+    SetPropertyTabLayoutData();
+    SetPropertyTabCurrentPieceData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -384,27 +607,36 @@ void PuzzleMainWindow::LayoutTemplateChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutSizeChanged()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutSizeChanged");
-    int ret = msgBox.exec();
+    m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
 
-    Q_UNUSED(ret);
+    // updates orientation - no need to block signals because the signal reacts on "clicked"
+    if(ui->doubleSpinBoxLayoutWidth->value() <= ui->doubleSpinBoxLayoutLength->value())
+    {
+        //portrait
+        ui->radioButtonLayoutPortrait->setChecked(true);
+    }
+    else
+    {
+        //landscape
+        ui->radioButtonLayoutLandscape->setChecked(true);
+    }
 
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutOrientationChanged()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutOrientationChanged");
-    int ret = msgBox.exec();
+    // swap the width and length
+    qreal width_before = ui->doubleSpinBoxLayoutWidth->value();
+    qreal length_before = ui->doubleSpinBoxLayoutLength->value();
 
-    Q_UNUSED(ret);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, length_before);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, width_before);
 
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -424,14 +656,15 @@ void PuzzleMainWindow::LayoutRemoveUnusedLength()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutMarginChanged()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutMarginChanged");
-    int ret = msgBox.exec();
+    m_layout->SetLayoutMarginsConverted(
+                ui->doubleSpinBoxLayoutMarginLeft->value(),
+                ui->doubleSpinBoxLayoutMarginTop->value(),
+                ui->doubleSpinBoxLayoutMarginRight->value(),
+                ui->doubleSpinBoxLayoutMarginBottom->value()
+            );
 
-    Q_UNUSED(ret);
-
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 
@@ -452,60 +685,37 @@ void PuzzleMainWindow::LayoutFollowGrainlineChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutPiecesGapChanged(double value)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutPieceGapChanged");
-    int ret = msgBox.exec();
+    m_layout->SetPiecesGapConverted(value);
 
-    Q_UNUSED(value);
-    Q_UNUSED(ret);
-
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged");
-    int ret = msgBox.exec();
+    m_layout->SetWarningSuperpositionOfPieces(checked);
 
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-    // TODO
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged");
-    int ret = msgBox.exec();
+    m_layout->SetWarningPiecesOutOfBound(checked);
 
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-    // TODO
-
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::LayoutStickyEdgesChanged(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::LayoutStickyEdgesChanged");
-    int ret = msgBox.exec();
+    m_layout->SetStickyEdges(checked);
 
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-
-    // TODO
-
+    // TODO Undo / Redo
+    // TODO update the QGraphicView
 }
 
 

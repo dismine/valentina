@@ -30,9 +30,12 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QDoubleSpinBox>
 
 #include "../vmisc/def.h"
 #include "vpiececarrousel.h"
+#include "vpuzzlelayout.h"
+#include "vpuzzlepiece.h"
 #include "vpuzzlecommandline.h"
 
 namespace Ui
@@ -48,18 +51,39 @@ public:
     PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~PuzzleMainWindow();
 
+    /**
+     * @brief LoadFile Loads the layout file of given path in m_layout.
+     * This function doesn't update the gui.
+     * @param path
+     * @return
+     */
     bool LoadFile(const QString &path);
+
+    /**
+     * @brief SaveFile Saves the current layout to the layout file of given path
+     * @param path
+     * @return
+     */
+    bool SaveFile(const QString &path);
 
     void ImportRawLayouts(const QStringList &layouts);
 
 public slots:
     void New();
 
+protected:
+    enum { MaxRecentFiles = 5 };
+
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
     VPieceCarrousel *pieceCarrousel;
     VPuzzleCommandLinePtr m_cmd;
+
+    VPuzzleLayout *m_layout;
+
+    VPuzzlePiece *m_selectedPiece;
+
 
     void InitMenuBar();
     void InitProperties();
@@ -68,6 +92,53 @@ private:
     void InitPropertyTabTiles();
     void InitPropertyTabLayers();
     void InitPieceCarrousel();
+
+
+    /**
+     * @brief SetPropertiesData Sets the values of UI elements
+     * in all the property tabs to the values saved in m_layout
+     */
+    void SetPropertiesData();
+
+    /**
+     * @brief SetPropertyTabCurrentPieceData Sets the values of UI elements
+     * in the Current Piece Tab to the values saved in m_layout
+     */
+    void SetPropertyTabCurrentPieceData();
+
+    /**
+     * @brief SetPropertyTabLayoutData Sets the values of UI elements
+     * in the Layout Tab to the values saved in m_layout
+     */
+    void SetPropertyTabLayoutData();
+
+    /**
+     * @brief SetPropertyTabTilesData Sets the values of UI elements
+     * in the Tiles Tab to the values saved in m_layout
+     */
+    void SetPropertyTabTilesData();
+
+    /**
+     * @brief SetPropertyTabLayersData Sets the values of UI elements
+     * in the Layers Tab to the values saved in m_layout
+     */
+    void SetPropertyTabLayersData();
+
+    /**
+     * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.
+     * the signals are blocked before changing the value and unblocked after
+     * @param spinbox
+     * @param value
+     */
+    void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value);
+
+    /**
+     * @brief SetCheckBoxValue sets the given checkbox to the given value.
+     * the signals are blocked before changing the value and unblocked after
+     * @param checkbox
+     * @param value
+     */
+    void SetCheckBoxValue(QCheckBox *checkbox, bool value);
 
 private slots:
     void Open();
