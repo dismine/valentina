@@ -53,31 +53,7 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 
     if (readNextStartElement())
     {
-
-        // TODO extend the handling
-        // if it doesn't start with layout, error
-        // if it starts with version > than current version, error
-
-        if (name() == ML::TagLayout)
-        {
-            QString versionStr = ReadAttributeEmptyString(attributes(), ML::AttrVersion);
-            QStringList versionStrParts = versionStr.split('.');
-            m_layoutFormatVersion = FORMAT_VERSION(versionStrParts.at(0).toInt(),versionStrParts.at(1).toInt(),versionStrParts.at(2).toInt());
-
-            if(VPuzzleLayoutFileWriter::LayoutFileFormatVersion >= m_layoutFormatVersion)
-            {
-                ReadLayout(layout);
-            }
-            else
-            {
-                // TODO better error handling
-                raiseError(QObject::tr("You're trying to open a layout that was created with a newer version of puzzle"));
-            }
-        }
-        else
-        {
-            raiseError(QObject::tr("Wrong file structure"));
-        }
+        ReadLayout(layout);
     }
 
     return !error();

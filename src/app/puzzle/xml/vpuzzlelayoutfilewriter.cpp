@@ -31,6 +31,7 @@
 #include "vpuzzlelayer.h"
 #include "vpuzzlepiece.h"
 #include "layoutliterals.h"
+#include "../ifc/xml/vlayoutconverter.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayoutFileWriter::VPuzzleLayoutFileWriter()
@@ -61,7 +62,7 @@ void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 void VPuzzleLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 {
     writeStartElement(ML::TagLayout);
-    SetAttribute(ML::AttrVersion, LayoutFileFormatVersionStr);
+    SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
 
     WriteProperties(layout);
     WriteLayers(layout);
@@ -180,7 +181,7 @@ void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteMargins(QMarginsF margins)
+void VPuzzleLayoutFileWriter::WriteMargins(const QMarginsF &margins)
 {
     writeStartElement(ML::TagMargin);
     SetAttribute(ML::AttrLeft, margins.left());

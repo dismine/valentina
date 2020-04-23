@@ -57,7 +57,7 @@ public:
      * @param path
      * @return
      */
-    bool LoadFile(const QString &path);
+    bool LoadFile(QString path);
 
     /**
      * @brief SaveFile Saves the current layout to the layout file of given path

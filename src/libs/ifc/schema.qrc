@@ -75,5 +75,6 @@
         <file>schema/individual_measurements/v0.5.0.xsd</file>
         <file>schema/label_template/v1.0.0.xsd</file>
         <file>schema/watermark/v1.0.0.xsd</file>
+        <file>schema/layout/v0.1.0.xsd</file>
     </qresource>
 </RCC>

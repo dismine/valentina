@@ -36,6 +36,8 @@
 #include "puzzleapplication.h"
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/vsysexits.h"
+#include "../ifc/xml/vlayoutconverter.h"
+#include "../ifc/exception/vexception.h"
 
 #include <QLoggingCategory>
 
@@ -79,12 +81,24 @@ PuzzleMainWindow::~PuzzleMainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool PuzzleMainWindow::LoadFile(const QString &path)
+bool PuzzleMainWindow::LoadFile(QString path)
 {
+    try
+    {
+        VLayoutConverter converter(path);
+        path = converter.Convert();
+    }
+    catch (VException &e)
+    {
+        qCCritical(pWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return false;
+    }
+
     QFile file(path);
     file.open(QIODevice::ReadOnly);
 
-    VPuzzleLayoutFileReader *fileReader = new VPuzzleLayoutFileReader();
+    QScopedPointer<VPuzzleLayoutFileReader> fileReader(new VPuzzleLayoutFileReader());
 
     if(m_layout == nullptr)
     {
