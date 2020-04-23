@@ -60,8 +60,8 @@ void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 {
-    writeStartElement("layout");
-    writeAttribute("version", LayoutFileFormatVersionStr);
+    writeStartElement(ML::TagLayout);
+    writeAttribute(ML::AttrVersion, LayoutFileFormatVersionStr);
 
     WriteProperties(layout);
     WriteLayers(layout);
@@ -72,22 +72,22 @@ void VPuzzleLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
 {
-    writeStartElement("properties");
+    writeStartElement(ML::TagProperties);
 
-    writeTextElement("unit", UnitsToStr(layout->GetUnit()));
+    writeTextElement(ML::TagUnit, UnitsToStr(layout->GetUnit()));
 
-    writeTextElement("description", ""); // TODO : define the value in layout
+    writeTextElement(ML::TagDescription, QString()); // TODO : define the value in layout
 
     WriteSize(layout->GetLayoutSize());
 
     WriteMargins(layout->GetLayoutMargins());
 
-    writeStartElement("control");
-    writeAttribute("followGrainLine", "no"); // TODO / Fixme get the right value
-    writeAttribute("warningSuperposition", QString(layout->GetWarningSuperpositionOfPieces() ? "true" : "false"));
-    writeAttribute("warningOutOfBound", QString(layout->GetWarningPiecesOutOfBound() ? "true" : "false"));
-    writeAttribute("stickyEdges", QString(layout->GetStickyEdges() ? "true" : "false"));
-    writeAttribute("piecesGap", QString::number(layout->GetPiecesGap()));
+    writeStartElement(ML::TagControl);
+    writeAttribute(ML::AttrFollowGrainLine, "no"); // TODO / Fixme get the right value
+    writeAttribute(ML::AttrWarningSuperposition, QString(layout->GetWarningSuperpositionOfPieces() ? "true" : "false"));
+    writeAttribute(ML::AttrWarningOutOfBound, QString(layout->GetWarningPiecesOutOfBound() ? "true" : "false"));
+    writeAttribute(ML::AttrStickyEdges, QString(layout->GetStickyEdges() ? "true" : "false"));
+    writeAttribute(ML::AttrPiecesGap, QString::number(layout->GetPiecesGap()));
     writeEndElement(); // control
 
     // WriteTiles(layout);  TODO: when tile functionality implemented, then uncomment this line
@@ -100,9 +100,9 @@ void VPuzzleLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
 {
     Q_UNUSED(layout); // to be removed
 
-   writeStartElement("tiles");
-   writeAttribute("visible", QString(false ? "true" : "false")); // TODO / Fixme get the right value
-   writeAttribute("matchingMarks", "standard"); // TODO / Fixme get the right value
+   writeStartElement(ML::TagTiles);
+   writeAttribute(ML::AttrVisible, QString(false ? "true" : "false")); // TODO / Fixme get the right value
+   writeAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
 
    QSizeF size = QSizeF(); // TODO get the right size
    WriteSize(size);
@@ -117,9 +117,9 @@ void VPuzzleLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteLayers(VPuzzleLayout *layout)
 {
-   writeStartElement("layers");
+   writeStartElement(ML::TagLayers);
 
-   WriteLayer(layout->GetUnplacedPiecesLayer(), "unplacedPieces");
+   WriteLayer(layout->GetUnplacedPiecesLayer(), ML::TagUnplacedPiecesLayer);
 
    QList<VPuzzleLayer*> layers = layout->GetLayers();
    for (auto layer : layers)
@@ -134,15 +134,15 @@ void VPuzzleLayoutFileWriter::WriteLayers(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteLayer(VPuzzleLayer *layer)
 {
-    WriteLayer(layer, "layer");
+    WriteLayer(layer, ML::TagLayer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteLayer(VPuzzleLayer *layer, const QString &tagName)
 {
     writeStartElement(tagName); // layer
-    writeAttribute("name", layer->GetName());
-    writeAttribute("visible", QString(layer->GetIsVisible()? "true" : "false"));
+    writeAttribute(ML::AttrName, layer->GetName());
+    writeAttribute(ML::AttrVisible, QString(layer->GetIsVisible()? "true" : "false"));
     //  TODO selected info. Not sure how it's saved yet
     //writeAttribute("selected", QString(layer->GetIsSelected()? "true" : "false"));
 
@@ -161,11 +161,11 @@ void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
 {
     Q_UNUSED(piece);
 
-    writeStartElement("piece");
-    writeAttribute("id", "uuid1"); // TODO / Fixme get the right value
-    writeAttribute("name", "Piece name"); // TODO / Fixme get the right value
-    writeAttribute("mirrored", "false"); // TODO / Fixme get the right value
-    writeAttribute("transform", "string representation of the transformation"); // TODO / Fixme get the right value
+    writeStartElement(ML::TagPiece);
+    writeAttribute(ML::AttrID, "uuid1"); // TODO / Fixme get the right value
+    writeAttribute(ML::AttrName, "Piece name"); // TODO / Fixme get the right value
+    writeAttribute(ML::AttrMirrored, "false"); // TODO / Fixme get the right value
+    writeAttribute(ML::AttrTransform, "string representation of the transformation"); // TODO / Fixme get the right value
 
     // TODO cuttingLine
     // TODO seamLine
@@ -182,11 +182,11 @@ void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileWriter::WriteMargins(QMarginsF margins)
 {
-    writeStartElement("margin");
-    writeAttribute("left", QString::number(margins.left()));
-    writeAttribute("top", QString::number(margins.top()));
-    writeAttribute("right", QString::number(margins.right()));
-    writeAttribute("bottom", QString::number(margins.bottom()));
+    writeStartElement(ML::TagMargin);
+    writeAttribute(ML::AttrLeft, QString::number(margins.left()));
+    writeAttribute(ML::AttrTop, QString::number(margins.top()));
+    writeAttribute(ML::AttrRight, QString::number(margins.right()));
+    writeAttribute(ML::AttrBottom, QString::number(margins.bottom()));
     writeEndElement(); // margin
 }
 
@@ -206,8 +206,8 @@ void VPuzzleLayoutFileWriter::WriteSize(QSizeF size)
         length = 0;
     }
 
-    writeStartElement("size");
-    writeAttribute("width", QString::number(width));
-    writeAttribute("length", QString::number(length));
+    writeStartElement(ML::TagSize);
+    writeAttribute(ML::AttrWidth, QString::number(width));
+    writeAttribute(ML::AttrLength, QString::number(length));
     writeEndElement(); // size
 }

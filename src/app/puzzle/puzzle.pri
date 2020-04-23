@@ -12,6 +12,7 @@ SOURCES += \
     $$PWD/vpuzzlelayout.cpp \
     $$PWD/vpuzzlelayer.cpp \
     $$PWD/vpuzzlepiece.cpp \
+    $$PWD/xml/layoutliterals.cpp \
     $$PWD/xml/vpuzzlelayoutfilewriter.cpp \
     $$PWD/xml/vpuzzlelayoutfilereader.cpp
 
@@ -28,6 +29,7 @@ HEADERS += \
     $$PWD/vpuzzlelayout.h \
     $$PWD/vpuzzlelayer.h \
     $$PWD/vpuzzlepiece.h \
+    $$PWD/xml/layoutliterals.h \
     $$PWD/xml/vpuzzlelayoutfilewriter.h \
     $$PWD/xml/vpuzzlelayoutfilereader.h
 

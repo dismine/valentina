@@ -29,6 +29,7 @@
 #include <QXmlStreamAttributes>
 #include "vpuzzlelayoutfilereader.h"
 #include "vpuzzlelayoutfilewriter.h"
+#include "layoutliterals.h"
 
 VPuzzleLayoutFileReader::VPuzzleLayoutFileReader()
 {
@@ -54,9 +55,9 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
         // if it doesn't start with layout, error
         // if it starts with version > than current version, error
 
-        if (name() == QString("layout"))
+        if (name() == ML::TagLayout)
         {
-            QString versionStr = attributes().value(QString("version")).toString();
+            QString versionStr = attributes().value(ML::AttrVersion).toString();
             QStringList versionStrParts = versionStr.split('.');
             m_layoutFormatVersion = FORMAT_VERSION(versionStrParts.at(0).toInt(),versionStrParts.at(1).toInt(),versionStrParts.at(2).toInt());
 
@@ -82,15 +83,15 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 {
-    Q_ASSERT(isStartElement() && name() == QString("layout"));
+    Q_ASSERT(isStartElement() && name() == ML::TagLayout);
 
     while (readNextStartElement())
     {
-        if (name() == QString("properties"))
+        if (name() == ML::TagProperties)
         {
             ReadProperties(layout);
         }
-        else if (name() == QString("layers"))
+        else if (name() == ML::TagLayers)
         {
             ReadLayers(layout);
         }
@@ -104,74 +105,75 @@ void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 {
-    Q_ASSERT(isStartElement() && name() == QString("properties"));
+    Q_ASSERT(isStartElement() && name() == ML::TagProperties);
 
     while (readNextStartElement())
     {
         qDebug(name().toString().toLatin1());
 
-        if (name() == QString("unit"))
+        const QStringList tags = QStringList(
+            {
+                ML::TagUnit,
+                ML::TagDescription,
+                ML::TagSize,
+                ML::TagMargin,
+                ML::TagControl,
+                ML::TagTiles
+            });
+
+        switch (tags.indexOf(name().toString()))
         {
+        case 0:// unit
             qDebug("read unit");
-            QString unit = readElementText();
-            if(unit == UnitsToStr(Unit::Inch))
-            {
-                layout->SetUnit(Unit::Inch);
-            }
-            else if(unit == UnitsToStr(Unit::Mm))
-            {
-                layout->SetUnit(Unit::Cm);
-            }
-            else // no condition here to have a default value just in case
-            {
-                layout->SetUnit(Unit::Cm);
-            }
-        }
-        else if (name() == QString("description"))
+            layout->SetUnit(StrToUnits(readElementText()));
+            break;
+        case 1:// description
         {
             qDebug("read description");
             QString description = readElementText();
             // TODO read the description info
-
+            break;
         }
-        else if (name() == QString("size"))
+        case 2:// size
         {
             qDebug("read size");
             QSizeF size = ReadSize();
             layout->SetLayoutSize(size);
             readElementText();
+            break;
         }
-        else if (name() == QString("margin"))
+        case 3:// margin
         {
             qDebug("read margin");
             QMarginsF margins = ReadMargins();
             layout->SetLayoutMargins(margins);
             readElementText();
+            break;
         }
-        else if (name() == QString("control"))
+        case 4:// control
         {
             qDebug("read control");
             QXmlStreamAttributes attribs = attributes();
 
             // attribs.value("followGrainLine"); // TODO
 
-            layout->SetWarningSuperpositionOfPieces(attribs.value("warningSuperposition") == "true");
-            layout->SetWarningPiecesOutOfBound(attribs.value("warningOutOfBound") == "true");
-            layout->SetStickyEdges(attribs.value("stickyEdges") == "true");
+            layout->SetWarningSuperpositionOfPieces(attribs.value(ML::AttrWarningSuperposition) == "true");
+            layout->SetWarningPiecesOutOfBound(attribs.value(ML::AttrWarningOutOfBound) == "true");
+            layout->SetStickyEdges(attribs.value(ML::AttrStickyEdges) == "true");
 
-            layout->SetPiecesGap(attribs.value("piecesGap").toDouble());
+            layout->SetPiecesGap(attribs.value(ML::AttrPiecesGap).toDouble());
             readElementText();
+            break;
         }
-        else if (name() == QString("tiles"))
-        {
+        case 5:// tiles
             qDebug("read tiles");
             ReadTiles(layout);
             readElementText();
-        }
-        else
-        {
+            break;
+        default:
             // TODO error handling, we encountered a tag that isn't defined in the specification
             skipCurrentElement();
+            break;
         }
     }
 }
@@ -181,22 +183,22 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 {
     Q_UNUSED(layout); // to be removed when used
 
-    Q_ASSERT(isStartElement() && name() == QString("tiles"));
+    Q_ASSERT(isStartElement() && name() == ML::TagTiles);
 
-    QXmlStreamAttributes attribs = attributes();
-    // attribs.value("visible"); // TODO
-    // attribs.value("matchingMarks"); // TODO
+//    QXmlStreamAttributes attribs = attributes();
+    // attribs.value(ML::AttrVisible); // TODO
+    // attribs.value(ML::AttrMatchingMarks); // TODO
 
     while (readNextStartElement())
     {
-        if (name() == QString("size"))
+        if (name() == ML::TagSize)
         {
             QSizeF size = ReadSize();
             // TODO set layout tiled size
             Q_UNUSED(size);
             readElementText();
         }
-        else if (name() == QString("margin"))
+        else if (name() == ML::TagMargin)
         {
             QMarginsF margins = ReadMargins();
             // TODO set layout tiled margins
@@ -214,15 +216,15 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 {
-    Q_ASSERT(isStartElement() && name() == QString("layers"));
+    Q_ASSERT(isStartElement() && name() == ML::TagLayers);
 
     while (readNextStartElement())
     {
-        if (name() == QString("unplacedPiecesLayer"))
+        if (name() == ML::TagUnplacedPiecesLayer)
         {
             ReadLayer(layout->GetUnplacedPiecesLayer());
         }
-        else if (name() == QString("layer"))
+        else if (name() == ML::TagLayer)
         {
             VPuzzleLayer *layer = layout->AddLayer();
             ReadLayer(layer);
@@ -238,15 +240,15 @@ void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 {
-    Q_ASSERT(isStartElement() && name() == QString("layer"));
+    Q_ASSERT(isStartElement() && name() == ML::TagLayer);
 
     QXmlStreamAttributes attribs = attributes();
-    layer->SetName(attribs.value("name").toString());
-    layer->SetIsVisible(attribs.value("visible") == "true");
+    layer->SetName(attribs.value(ML::AttrName).toString());
+    layer->SetIsVisible(attribs.value(ML::AttrVisible) == "true");
 
     while (readNextStartElement())
     {
-        if (name() == QString("piece"))
+        if (name() == ML::TagPiece)
         {
             VPuzzlePiece *piece = new VPuzzlePiece();
             ReadPiece(piece);
@@ -264,7 +266,7 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
 {
     Q_UNUSED(piece);
-    Q_ASSERT(isStartElement() && name() == QString("piece"));
+    Q_ASSERT(isStartElement() && name() == ML::TagPiece);
 
     // TODO read the attributes
 
@@ -290,10 +292,10 @@ QMarginsF VPuzzleLayoutFileReader::ReadMargins()
     QMarginsF margins = QMarginsF();
 
     QXmlStreamAttributes attribs = attributes();
-    margins.setLeft(attribs.value("left").toDouble());
-    margins.setTop(attribs.value("top").toDouble());
-    margins.setRight(attribs.value("right").toDouble());
-    margins.setBottom(attribs.value("bottom").toDouble());
+    margins.setLeft(attribs.value(ML::AttrLeft).toDouble());
+    margins.setTop(attribs.value(ML::AttrTop).toDouble());
+    margins.setRight(attribs.value(ML::AttrRight).toDouble());
+    margins.setBottom(attribs.value(ML::AttrBottom).toDouble());
 
     return margins;
 }
@@ -304,8 +306,8 @@ QSizeF VPuzzleLayoutFileReader::ReadSize()
     QSizeF size = QSize();
 
     QXmlStreamAttributes attribs = attributes();
-    size.setWidth(attribs.value("width").toDouble());
-    size.setHeight(attribs.value("length").toDouble());
+    size.setWidth(attribs.value(ML::AttrWidth).toDouble());
+    size.setHeight(attribs.value(ML::AttrLength).toDouble());
 
     return size;
 }
