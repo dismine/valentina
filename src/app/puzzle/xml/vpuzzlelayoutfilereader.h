@@ -44,6 +44,7 @@ public:
     bool ReadFile(VPuzzleLayout *layout, QFile *file);
 
 private:
+    Q_DISABLE_COPY(VPuzzleLayoutFileReader)
     /**
      * @brief m_layoutFormatVersion holds the version of the layout currently being read
      */
