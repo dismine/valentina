@@ -109,7 +109,7 @@ void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 
     while (readNextStartElement())
     {
-        qDebug(name().toString().toLatin1());
+        qDebug() << name().toString();
 
         const QStringList tags = QStringList(
             {
