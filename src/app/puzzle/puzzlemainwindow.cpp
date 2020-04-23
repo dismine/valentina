@@ -456,12 +456,7 @@ void PuzzleMainWindow::Open()
         dir = QFileInfo(recentFiles.first()).absolutePath();
     }
     qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(
-                this, tr("Open file"), dir, filter, nullptr,
-#ifdef Q_OS_LINUX
-                QFileDialog::DontUseNativeDialog
-#endif
-                );
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
 
     if (filePath.isEmpty())
     {
