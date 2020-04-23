@@ -57,38 +57,38 @@ public:
 
     /**
      * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px
-     * @param width
-     * @param height
+     * @param width layout width
+     * @param height layout height
      */
     void SetLayoutSize(qreal width, qreal height);
 
     /**
      * @brief SetLayoutSize sets the size of the layout, the values have to be in the layout's unit
-     * @param width
-     * @param height
+     * @param width layout width
+     * @param height layout height
      */
     void SetLayoutSizeConverted(qreal width, qreal height);
 
     /**
      * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px
-     * @param size
+     * @param size layout size
      */
     void SetLayoutSize(const QSizeF &size);
     /**
      * @brief SetLayoutSizeConverted sets the size of the layout, the values have to be in the layout's unit
-     * @param size
+     * @param size layout size
      */
     void SetLayoutSizeConverted(const QSizeF &size);
 
     /**
      * @brief GetLayoutSize Returns the size in Unit::Px
-     * @return
+     * @return layout size in Unit::Px
      */
     QSizeF GetLayoutSize() const;
 
     /**
      * @brief GetLayoutSizeConverted Returns the size in the layout's unit
-     * @return
+     * @return the size in the layout's unit
      */
     QSizeF GetLayoutSizeConverted() const;
 
@@ -112,25 +112,25 @@ public:
 
     /**
      * @brief SetLayoutMargins set the margins of the layout, the values have to be in Unit::Px
-     * @param margins
+     * @param margins layout margins
      */
     void SetLayoutMargins(const QMarginsF &margins);
 
     /**
      * @brief SetLayoutMargins set the margins of the layout, the values have to be in the unit of the layout
-     * @param margins
+     * @param margins layout margins
      */
     void SetLayoutMarginsConverted(const QMarginsF &margins);
 
     /**
      * @brief GetLayoutMargins Returns the size in Unit::Px
-     * @return
+     * @return the size in Unit::Px
      */
     QMarginsF GetLayoutMargins() const;
 
     /**
      * @brief GetLayoutMarginsConverted Returns the margins in the layout's unit
-     * @return
+     * @return the margins in the layout's unit
      */
     QMarginsF GetLayoutMarginsConverted() const;
 
@@ -139,25 +139,25 @@ public:
 
     /**
      * @brief SetPiecesGap sets the pieces gap to the given value, the unit has to be in Unit::Px
-     * @param value
+     * @param value pieces gap
      */
     void SetPiecesGap(qreal value);
 
     /**
      * @brief SetPiecesGapConverted sets the pieces gap to the given value, the unit has to be in the layout's unit
-     * @param value
+     * @param value pieces gap
      */
     void SetPiecesGapConverted(qreal value);
 
     /**
      * @brief GetPiecesGap returns the pieces gap in Unit::Px
-     * @return
+     * @return the pieces gap in Unit::Px
      */
     qreal GetPiecesGap() const;
 
     /**
      * @brief GetPiecesGapConverted returns the pieces gap in the layout's unit
-     * @return
+     * @return the pieces gap in the layout's unit
      */
     qreal GetPiecesGapConverted() const;
 

@@ -54,15 +54,15 @@ public:
     /**
      * @brief LoadFile Loads the layout file of given path in m_layout.
      * This function doesn't update the gui.
-     * @param path
-     * @return
+     * @param path path to layout
+     * @return true if success
      */
     bool LoadFile(QString path);
 
     /**
      * @brief SaveFile Saves the current layout to the layout file of given path
-     * @param path
-     * @return
+     * @param path path to layout file
+     * @return true if success
      */
     bool SaveFile(const QString &path);
 
