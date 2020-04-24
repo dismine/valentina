@@ -219,7 +219,7 @@ void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 {
-    Q_ASSERT(isStartElement() && name() == ML::TagLayer);
+    Q_ASSERT(isStartElement() && (name() == ML::TagLayer || name() == ML::TagUnplacedPiecesLayer));
 
     QXmlStreamAttributes attribs = attributes();
     layer->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Layer")));
