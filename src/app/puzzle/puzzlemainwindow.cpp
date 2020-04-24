@@ -56,11 +56,6 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     pieceCarrousel(new VPieceCarrousel),
     m_cmd(cmd)
 {
-    ui->setupUi(this);
-
-    InitMenuBar();
-    InitProperties();
-    InitPieceCarrousel();
 
     // ----- for test purposes, to be removed------------------
     m_layout = new VPuzzleLayout();
@@ -69,6 +64,14 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     m_layout->SetPiecesGapConverted(1.27);
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
+    // --------------------------------------------------------
+
+    ui->setupUi(this);
+
+    InitMenuBar();
+    InitProperties();
+    InitPieceCarrousel();
+
 
     SetPropertiesData();
 }
@@ -153,12 +156,10 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &layouts)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitMenuBar()
 {
+    // most of the actions are connected through name convention (auto-connection)
+
+
     // -------------------- connects the actions for the file menu
-    connect(ui->actionNew, &QAction::triggered, this, &PuzzleMainWindow::New);
-    connect(ui->actionOpen, &QAction::triggered, this, &PuzzleMainWindow::Open);
-    connect(ui->actionSave, &QAction::triggered, this, &PuzzleMainWindow::Save);
-    connect(ui->actionSaveAs, &QAction::triggered, this, &PuzzleMainWindow::SaveAs);
-    connect(ui->actionImportRawLayout, &QAction::triggered, this, &PuzzleMainWindow::ImportRawLayout);
     connect(ui->actionExit, &QAction::triggered, this, &PuzzleMainWindow::close);
 
     // -------------------- connects the actions for the edit menu
@@ -166,15 +167,10 @@ void PuzzleMainWindow::InitMenuBar()
 
     // -------------------- connects the actions for the windows menu
     // TODO : initialise the entries for the different windows
-    connect(ui->actionCloseLayout, &QAction::triggered, this, &PuzzleMainWindow::CloseLayout);
 
     // Add dock properties action
     QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
     ui->menuWindows->addAction(actionDockWidgetToolOptions);
-
-    // connects the action for the Help Menu
-    connect(ui->actionAboutQt, &QAction::triggered, this, &PuzzleMainWindow::AboutQt);
-    connect(ui->actionAboutPuzzle, &QAction::triggered, this, &PuzzleMainWindow::AboutPuzzle);
 
 }
 
@@ -190,24 +186,12 @@ void PuzzleMainWindow::InitProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitPropertyTabCurrentPiece()
 {
-    // ------------------------------ seamline ------------------------------------
-    connect(ui->checkBoxCurrentPieceShowSeamline,  QOverload<bool>::of(&QCheckBox::toggled), this,
-            &PuzzleMainWindow::CurrentPieceShowSeamlineChanged);
-
-    // ------------------------------ geometry ------------------------------------
-    connect(ui->checkBoxCurrentPieceMirrorPiece,  QOverload<bool>::of(&QCheckBox::toggled), this,
-            &PuzzleMainWindow::CurrentPieceMirrorPieceChanged);
-
-    // ------------------------------ rotation ------------------------------------
-    connect(ui->doubleSpinBoxCurrentPieceAngle, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::CurrentPieceAngleChanged);
 
     // ------------------------------ placement -----------------------------------
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::CurrentPiecePositionChanged);
+            &PuzzleMainWindow::on_CurrentPiecePositionChanged);
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::CurrentPiecePositionChanged);
-
+            &PuzzleMainWindow::on_CurrentPiecePositionChanged);
 }
 
 
@@ -226,63 +210,41 @@ void PuzzleMainWindow::InitPropertyTabLayout()
 //        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
 //    }
 
-    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &PuzzleMainWindow::LayoutUnitChanged);
-
-
-    // -------------------- init the template combobox ---------------------
-
-    // TODO
-
-    connect(ui->comboBoxLayoutTemplate, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &PuzzleMainWindow::LayoutTemplateChanged);
+    // some of the UI Elements are connected to the slots via auto-connect
+   // see https://doc.qt.io/qt-5/designer-using-a-ui-file.html#widgets-and-dialogs-with-auto-connect
 
     // -------------------- layout width, length, orientation  ------------------------
     connect(ui->doubleSpinBoxLayoutWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutSizeChanged);
+            &PuzzleMainWindow::on_LayoutSizeChanged);
     connect(ui->doubleSpinBoxLayoutLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutSizeChanged);
+            &PuzzleMainWindow::on_LayoutSizeChanged);
     connect(ui->radioButtonLayoutPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &PuzzleMainWindow::LayoutOrientationChanged);
+            &PuzzleMainWindow::on_LayoutOrientationChanged);
     connect(ui->radioButtonLayoutLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &PuzzleMainWindow::LayoutOrientationChanged);
-    connect(ui->pushButtonLayoutRemoveUnusedLength, QOverload<bool>::of(&QPushButton::clicked), this,
-            &PuzzleMainWindow::LayoutRemoveUnusedLength);
+            &PuzzleMainWindow::on_LayoutOrientationChanged);
 
     // -------------------- margins  ------------------------
     connect(ui->doubleSpinBoxLayoutMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutMarginChanged);
+            &PuzzleMainWindow::on_LayoutMarginChanged);
     connect(ui->doubleSpinBoxLayoutMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutMarginChanged);
+            &PuzzleMainWindow::on_LayoutMarginChanged);
     connect(ui->doubleSpinBoxLayoutMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutMarginChanged);
+            &PuzzleMainWindow::on_LayoutMarginChanged);
     connect(ui->doubleSpinBoxLayoutMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutMarginChanged);
+            &PuzzleMainWindow::on_LayoutMarginChanged);
 
     // ------------------- follow grainline -----------------------
     connect(ui->radioButtonLayoutFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+            &PuzzleMainWindow::on_LayoutFollowGrainlineChanged);
     connect(ui->radioButtonLayoutFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &PuzzleMainWindow::LayoutFollowGrainlineChanged);
+            &PuzzleMainWindow::on_LayoutFollowGrainlineChanged);
     connect(ui->radioButtonLayoutFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &PuzzleMainWindow::LayoutFollowGrainlineChanged);
-
-    // -------------------- pieces gap and checkboxes ---------------
-    connect(ui->doubleSpinBoxLayoutPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::LayoutPiecesGapChanged);
-    connect(ui->checkBoxLayoutWarningPiecesSuperposition,  QOverload<bool>::of(&QCheckBox::toggled), this,
-            &PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged);
-    connect(ui->checkBoxLayoutWarningPiecesOutOfBound,  QOverload<bool>::of(&QCheckBox::toggled), this,
-            &PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged);
-    connect(ui->checkBoxLayoutStickyEdges,  QOverload<bool>::of(&QCheckBox::toggled), this,
-            &PuzzleMainWindow::LayoutStickyEdgesChanged);
+            &PuzzleMainWindow::on_LayoutFollowGrainlineChanged);
 
     // -------------------- export ---------------------------
 
     // TODO init the file format export combobox
 
-    connect(ui->pushButtonLayoutExport, QOverload<bool>::of(&QPushButton::clicked), this,
-            &PuzzleMainWindow::LayoutExport);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,7 +269,7 @@ void PuzzleMainWindow::InitPieceCarrousel()
     ui->dockWidgetPieceCarrousel->setWidget(pieceCarrousel);
 
     connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
-              &PuzzleMainWindow::PieceCarrouselLocationChanged);
+              &PuzzleMainWindow::on_PieceCarrouselLocationChanged);
 }
 
 
@@ -422,7 +384,7 @@ void PuzzleMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::New()
+void PuzzleMainWindow::on_actionNew_triggered()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -437,7 +399,7 @@ void PuzzleMainWindow::New()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::Open()
+void PuzzleMainWindow::on_actionOpen_triggered()
 {
     qCDebug(pWindow, "Openning puzzle layout file.");
 
@@ -491,7 +453,7 @@ void PuzzleMainWindow::Open()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::Save()
+void PuzzleMainWindow::on_actionSave_triggered()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -504,7 +466,7 @@ void PuzzleMainWindow::Save()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::SaveAs()
+void PuzzleMainWindow::on_actionSaveAs_triggered()
 {
     // TODO / FIXME : See valentina how the save is done over there. we need to add the extension .vlt, check for empty file names etc.
 
@@ -534,7 +496,7 @@ void PuzzleMainWindow::SaveAs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::ImportRawLayout()
+void PuzzleMainWindow::on_actionImportRawLayout_triggered()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -547,7 +509,7 @@ void PuzzleMainWindow::ImportRawLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::CloseLayout()
+void PuzzleMainWindow::on_actionCloseLayout_triggered()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -560,13 +522,13 @@ void PuzzleMainWindow::CloseLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::AboutQt()
+void PuzzleMainWindow::on_actionAboutQt_triggered()
 {
     QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::AboutPuzzle()
+void PuzzleMainWindow::on_actionAboutPuzzle_triggered()
 {
     auto *aboutDialog = new DialogAboutPuzzle(this);
     aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
@@ -574,7 +536,7 @@ void PuzzleMainWindow::AboutPuzzle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutUnitChanged(int index)
+void PuzzleMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
 {
     Q_UNUSED(index);
     QVariant comboBoxValue = ui->comboBoxLayoutUnit->currentData();
@@ -597,7 +559,7 @@ void PuzzleMainWindow::LayoutUnitChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutTemplateChanged(int index)
+void PuzzleMainWindow::on_comboBoxLayoutTemplate_currentIndexChanged(int index)
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -612,7 +574,7 @@ void PuzzleMainWindow::LayoutTemplateChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutSizeChanged()
+void PuzzleMainWindow::on_LayoutSizeChanged()
 {
     m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
 
@@ -633,7 +595,7 @@ void PuzzleMainWindow::LayoutSizeChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutOrientationChanged()
+void PuzzleMainWindow::on_LayoutOrientationChanged()
 {
     // swap the width and length
     qreal width_before = ui->doubleSpinBoxLayoutWidth->value();
@@ -647,7 +609,7 @@ void PuzzleMainWindow::LayoutOrientationChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutRemoveUnusedLength()
+void PuzzleMainWindow::on_pushButtonLayoutRemoveUnusedLength_clicked()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -661,7 +623,7 @@ void PuzzleMainWindow::LayoutRemoveUnusedLength()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutMarginChanged()
+void PuzzleMainWindow::on_LayoutMarginChanged()
 {
     m_layout->SetLayoutMarginsConverted(
                 ui->doubleSpinBoxLayoutMarginLeft->value(),
@@ -676,7 +638,7 @@ void PuzzleMainWindow::LayoutMarginChanged()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutFollowGrainlineChanged()
+void PuzzleMainWindow::on_LayoutFollowGrainlineChanged()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -690,7 +652,7 @@ void PuzzleMainWindow::LayoutFollowGrainlineChanged()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutPiecesGapChanged(double value)
+void PuzzleMainWindow::on_doubleSpinBoxLayoutPiecesGap_valueChanged(double value)
 {
     m_layout->SetPiecesGapConverted(value);
 
@@ -699,7 +661,7 @@ void PuzzleMainWindow::LayoutPiecesGapChanged(double value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged(bool checked)
+void PuzzleMainWindow::on_checkBoxLayoutWarningPiecesSuperposition_toggled(bool checked)
 {
     m_layout->SetWarningSuperpositionOfPieces(checked);
 
@@ -708,7 +670,7 @@ void PuzzleMainWindow::LayoutWarningPiecesSuperpositionChanged(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged(bool checked)
+void PuzzleMainWindow::on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked)
 {
     m_layout->SetWarningPiecesOutOfBound(checked);
 
@@ -717,7 +679,7 @@ void PuzzleMainWindow::LayoutWarningPiecesOutOfBoundChanged(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutStickyEdgesChanged(bool checked)
+void PuzzleMainWindow::on_checkBoxLayoutStickyEdges_toggled(bool checked)
 {
     m_layout->SetStickyEdges(checked);
 
@@ -728,7 +690,7 @@ void PuzzleMainWindow::LayoutStickyEdgesChanged(bool checked)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::LayoutExport()
+void PuzzleMainWindow::on_pushButtonLayoutExport_clicked()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -742,7 +704,7 @@ void PuzzleMainWindow::LayoutExport()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::CurrentPieceShowSeamlineChanged(bool checked)
+void PuzzleMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -756,7 +718,7 @@ void PuzzleMainWindow::CurrentPieceShowSeamlineChanged(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::CurrentPieceMirrorPieceChanged(bool checked)
+void PuzzleMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -770,7 +732,7 @@ void PuzzleMainWindow::CurrentPieceMirrorPieceChanged(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::CurrentPieceAngleChanged(double value)
+void PuzzleMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -785,7 +747,7 @@ void PuzzleMainWindow::CurrentPieceAngleChanged(double value)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::CurrentPiecePositionChanged()
+void PuzzleMainWindow::on_CurrentPiecePositionChanged()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -798,7 +760,7 @@ void PuzzleMainWindow::CurrentPiecePositionChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
+void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
 {
     if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)
     {

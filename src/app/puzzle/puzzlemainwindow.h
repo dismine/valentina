@@ -66,10 +66,19 @@ public:
      */
     bool SaveFile(const QString &path);
 
+    /**
+     * @brief ImportRawLayouts The function imports the raw layouts of given paths
+     * @param layouts paths of the layouts to import
+     */
     void ImportRawLayouts(const QStringList &layouts);
 
 public slots:
-    void New();
+    /**
+     * @brief on_actionNew_triggered When the menu action File > New
+     * is triggered
+     *
+     */
+    void on_actionNew_triggered();
 
 protected:
     enum { MaxRecentFiles = 5 };
@@ -85,12 +94,39 @@ private:
     VPuzzlePiece *m_selectedPiece{nullptr};
 
 
+    /**
+     * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
+     */
     void InitMenuBar();
+
+    /**
+     * @brief InitProperties Init the properties
+     */
     void InitProperties();
+
+    /**
+     * @brief InitPropertyTabCurrentPiece Inits the current piece tab in the properties
+     */
     void InitPropertyTabCurrentPiece();
+
+    /**
+     * @brief InitPropertyTabLayout Inits the layout tab in the properties
+     */
     void InitPropertyTabLayout();
+
+    /**
+     * @brief InitPropertyTabTiles Inits the tiles tab in the properties
+     */
     void InitPropertyTabTiles();
+
+    /**
+     * @brief InitPropertyTabLayers Inits the layers tab in the properties
+     */
     void InitPropertyTabLayers();
+
+    /**
+     * @brief InitPieceCarrousel Inits the piece carrousel
+     */
     void InitPieceCarrousel();
 
 
@@ -141,34 +177,179 @@ private:
     void SetCheckBoxValue(QCheckBox *checkbox, bool value);
 
 private slots:
-    void Open();
-    void Save();
-    void SaveAs();
-    void ImportRawLayout();
-    void CloseLayout();
+    /**
+     * @brief on_actionOpen_triggered When the menu action File > Open is
+     * triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionOpen_triggered();
 
-    void AboutQt();
-    void AboutPuzzle();
+    /**
+     * @brief on_actionSave_triggered When the menu action File > Save is
+     * triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionSave_triggered();
 
-    void LayoutUnitChanged(int index);
-    void LayoutTemplateChanged(int index);
-    void LayoutSizeChanged();
-    void LayoutOrientationChanged();
-    void LayoutRemoveUnusedLength();
-    void LayoutMarginChanged();
-    void LayoutFollowGrainlineChanged();
-    void LayoutPiecesGapChanged(double value);
-    void LayoutWarningPiecesSuperpositionChanged(bool checked);
-    void LayoutWarningPiecesOutOfBoundChanged(bool checked);
-    void LayoutStickyEdgesChanged(bool checked);
-    void LayoutExport();
+    /**
+     * @brief on_actionSaveAs_triggered When the menu action File > Save As
+     * is triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionSaveAs_triggered();
 
-    void CurrentPieceShowSeamlineChanged(bool checked);
-    void CurrentPieceMirrorPieceChanged(bool checked);
-    void CurrentPieceAngleChanged(double value);
-    void CurrentPiecePositionChanged();
+    /**
+     * @brief on_actionImportRawLayout_triggered When the menu action
+     * File > Import Raw Layout is triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionImportRawLayout_triggered();
 
-    void PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
+    /**
+     * @brief on_actionCloseLayout_triggered When the menu action
+     * File > Close Layout is triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionCloseLayout_triggered();
+
+    /**
+     * @brief on_actionAboutQt_triggered When the menu action Help > About Qt
+     * is triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionAboutQt_triggered();
+
+    /**
+     * @brief on_actionAboutPuzzle_triggered When the menu action Help > About Puzzle
+     * is triggered.
+     * The slot is automatically connected through name convention.
+     */
+    void on_actionAboutPuzzle_triggered();
+
+    /**
+     * @brief on_comboBoxLayoutUnit_currentIndexChanged When the unit is changed in
+     * the layout property tab.
+     * The slot is automatically connected through name convention.
+     * @param index the index of the selected unit
+     */
+    void on_comboBoxLayoutUnit_currentIndexChanged(int index);
+
+    /**
+     * @brief on_comboBoxLayoutTemplate_currentIndexChanged When the template is
+     * changed in the layout property tab.
+     * The slot is automatically connected through name convention.
+     * @param index the index of the selected templated
+     */
+    void on_comboBoxLayoutTemplate_currentIndexChanged(int index);
+
+    /**
+     * @brief LayoutSizeChanged When the width or the length has been changed in
+     * the layout property tab
+     */
+    void on_LayoutSizeChanged();
+
+    /**
+     * @brief LayoutOrientationChanged When one of the radio boxes for the layout
+     * orientation has been clicked
+     */
+    void on_LayoutOrientationChanged();
+
+    /**
+     * @brief on_pushButtonLayoutRemoveUnusedLength_clicked When the button
+     * "Remove unused length" in the layout property tab is clicked.
+     * The slot is automatically connected through name convention.
+     */
+    void on_pushButtonLayoutRemoveUnusedLength_clicked();
+
+    /**
+     * @brief on_LayoutMarginChanged When one of the margin values has been changed
+     * in the layout property tab.
+     */
+    void on_LayoutMarginChanged();
+
+    /**
+     * @brief LayoutFollowGrainlineChanged When one of the radio boxes for the
+     * "Follow grainline" has been clicked in the layout property tab.
+     */
+    void on_LayoutFollowGrainlineChanged();
+
+    /**
+     * @brief on_doubleSpinBoxLayoutPiecesGap_valueChanged When the "pieces gap"
+     * value is changed in the layout property tab.
+     * The slot is automatically connected through name convention.
+     * @param value the new value of the pieces gap
+     */
+    void on_doubleSpinBoxLayoutPiecesGap_valueChanged(double value);
+
+    /**
+     * @brief on_checkBoxLayoutWarningPiecesSuperposition_toggled When the
+     * "Warning when pieces superposition" checkbox value in the layout
+     * property tab is toggled.
+     * The slot is automatically connected through name convention.
+     * @param checked the new checked value
+     */
+    void on_checkBoxLayoutWarningPiecesSuperposition_toggled(bool checked);
+
+    /**
+     * @brief on_checkBoxLayoutWarningPiecesOutOfBound_toggled When the
+     * "Warning when pieces out of bound" checkbox value in the layout property
+     * tab is toggled.
+     * The slot is automatically connected through name convention.
+     * @param checked the new checked value
+     */
+    void on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked);
+
+    /**
+     * @brief on_checkBoxLayoutStickyEdges_toggled When the "Sticky edges"
+     * checkbox value in the layout property tab is toggled.
+     * The slot is automatically connected through name convention.
+     * @param checked the new checked value
+     */
+    void on_checkBoxLayoutStickyEdges_toggled(bool checked);
+
+    /**
+     * @brief on_pushButtonLayoutExport_clicked When the button
+     * "Export layout" in the layout property is clicked.
+     * The slot is automatically connected through name convention.
+     */
+    void on_pushButtonLayoutExport_clicked();
+
+    /**
+     * @brief on_checkBoxCurrentPieceShowSeamline_toggled When the
+     * "Show seamline" checkbox value in the current piece tab is toggled.
+     * The slot is automatically connected through name convention.
+     * @param checked the new checked value
+     */
+    void on_checkBoxCurrentPieceShowSeamline_toggled(bool checked);
+
+    /**
+     * @brief on_checkBoxCurrentPieceMirrorPiece_toggled When the
+     * "Mirror piece" checkbox in the current piece tab is toggled.
+     * The slot is automatically connected through name convention.
+     * @param checked the new checked value
+     */
+    void on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked);
+
+    /**
+     * @brief on_doubleSpinBoxCurrentPieceAngle_valueChanged When the
+     * "Current Piece Angle" value in the current piece property is changed
+     * The slot is automatically connected through name convention.
+     * @param value the new angle value
+     */
+    void on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value);
+
+    /**
+     * @brief on_CurrentPiecePositionChanged When the positionX or the positionY
+     * is changed in the current piece tab
+     */
+    void on_CurrentPiecePositionChanged();
+
+    /**
+     * @brief PieceCarrouselLocationChanged When the Piece Carrousel's location
+     * has been changed
+     * @param area The new area where the Piece Carrousel has been placed
+     */
+    void on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
 
 };
 
