@@ -80,6 +80,12 @@ void VPieceCarrouselPiece::Init()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselPiece::CleanPreview()
+{
+    m_graphicsView->fitInView(m_graphicsView->scene()->sceneRect(), Qt::KeepAspectRatio);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselPiece::Refresh()
 {
     // update the graphic view / the scene

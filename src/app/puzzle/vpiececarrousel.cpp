@@ -121,7 +121,7 @@ void VPieceCarrousel::Refresh()
         m_layersContainer->layout()->addWidget(carrouselLayer);
     }
 
-    m_comboBoxLayer->setCurrentIndex(0);
+    on_ActiveLayerChanged(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

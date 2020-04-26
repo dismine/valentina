@@ -72,6 +72,7 @@ void VPieceCarrouselLayer::Refresh()
           [](const VPuzzlePiece* a, const VPuzzlePiece* b) -> bool { return a->GetName() < b->GetName();});
 
     // create the corresponding carrousel pieces
+
     for (auto piece : pieces)
     {
 //        qCDebug(pCarrouselLayer, "piece name : %s", piece->GetName().toStdString().c_str());
@@ -79,5 +80,11 @@ void VPieceCarrouselLayer::Refresh()
         VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece);
         m_carrouselPieces.append(carrouselPiece);
         layout()->addWidget(carrouselPiece);
+
+        // FIXME? the fitInView inside the refresh of the piece doesn't workd properly.
+        // only by doing the following I did get it to work:
+        setVisible(true);
+        carrouselPiece->CleanPreview();
+        setVisible(false);
     }
 }

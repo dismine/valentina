@@ -44,6 +44,11 @@ public:
 
     void Init();
     void Refresh();
+    /**
+    * @brief CleanPiecesPreview fitInView of the qGraphicsView of the pieces works properly
+    * only when the piece is in place in the layer and we call it from the layer.
+    */
+    void CleanPreview();
 
 signals:
 
