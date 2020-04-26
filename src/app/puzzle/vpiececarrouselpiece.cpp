@@ -64,6 +64,7 @@ void VPieceCarrouselPiece::Init()
     m_label->setStyleSheet("background-color:cornflowerblue");
 
     pieceLayout->addWidget(m_label);
+    setMinimumSize(120,120);
 
     // then refresh the data
     Refresh();

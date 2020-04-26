@@ -69,6 +69,7 @@ private:
     VPuzzleLayout *m_layout;
 
     QComboBox *m_comboBoxLayer;
+    QScrollArea *m_scrollArea;
     QWidget *m_layersContainer;
 
     QList<VPieceCarrouselLayer*> m_carrouselLayers;

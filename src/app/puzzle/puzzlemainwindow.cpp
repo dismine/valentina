@@ -64,10 +64,6 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     m_layout->SetPiecesGapConverted(1.27);
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
-    VPuzzleLayer *unplacedLayer = m_layout->GetUnplacedPiecesLayer();
-    VPuzzlePiece *piece = new VPuzzlePiece();
-    piece->SetName("Hello");
-    unplacedLayer->AddPiece(piece);
     // --------------------------------------------------------
 
     ui->setupUi(this);
@@ -289,7 +285,7 @@ void PuzzleMainWindow::InitPropertyTabLayers()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitPieceCarrousel()
 {
-    m_pieceCarrousel = new VPieceCarrousel(m_layout);
+    m_pieceCarrousel = new VPieceCarrousel(m_layout, ui->dockWidgetPieceCarrousel);
     ui->dockWidgetPieceCarrousel->setWidget(m_pieceCarrousel);
 
     connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,

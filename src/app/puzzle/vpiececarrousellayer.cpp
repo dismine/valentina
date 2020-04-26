@@ -67,9 +67,14 @@ void VPieceCarrouselLayer::Refresh()
     // Updates the carrousel pieces from the pieces list
     QList<VPuzzlePiece*> pieces = m_layer->GetPieces();
 
+    // sort the pieces in alphabetical order
+    std::sort(pieces.begin(), pieces.end(),
+          [](const VPuzzlePiece* a, const VPuzzlePiece* b) -> bool { return a->GetName() < b->GetName();});
+
+    // create the corresponding carrousel pieces
     for (auto piece : pieces)
     {
-        qCDebug(pCarrouselLayer, "piece name : %s", piece->GetName().toStdString().c_str());
+//        qCDebug(pCarrouselLayer, "piece name : %s", piece->GetName().toStdString().c_str());
 
         VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece);
         m_carrouselPieces.append(carrouselPiece);

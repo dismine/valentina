@@ -94,8 +94,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>160</width>
-     <height>208</height>
+     <width>24</width>
+     <height>37</height>
     </size>
    </property>
    <property name="styleSheet">
@@ -126,7 +126,11 @@
       <height>0</height>
      </size>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_10"/>
+    <layout class="QVBoxLayout" name="verticalLayout_10">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidgetProperties">
@@ -228,8 +232,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>170</width>
-              <height>452</height>
+              <width>356</width>
+              <height>760</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -858,8 +862,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>98</width>
-              <height>41</height>
+              <width>356</width>
+              <height>760</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -938,8 +942,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>98</width>
-              <height>41</height>
+              <width>356</width>
+              <height>760</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
