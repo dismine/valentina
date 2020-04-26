@@ -247,7 +247,13 @@ void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
     Q_UNUSED(piece);
     Q_ASSERT(isStartElement() && name() == ML::TagPiece);
 
-    // TODO read the attributes
+    QXmlStreamAttributes attribs = attributes();
+    piece->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece")));
+    QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid().toString());// FIXME: is that correct to have a default value here?
+    piece->SetUuid(QUuid(uuidStr));
+
+    // TODO read the further attributes
+
 
     while (readNextStartElement())
     {
