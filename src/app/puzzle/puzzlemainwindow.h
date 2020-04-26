@@ -36,6 +36,7 @@
 #include "vpiececarrousel.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
+#include "../vlayout/vlayoutpiece.h"
 #include "vpuzzlecommandline.h"
 
 namespace Ui
@@ -68,15 +69,14 @@ public:
 
     /**
      * @brief ImportRawLayouts The function imports the raw layouts of given paths
-     * @param layouts paths of the layouts to import
+     * @param rawLayouts paths of the layouts to import
      */
-    void ImportRawLayouts(const QStringList &layouts);
+    void ImportRawLayouts(const QStringList &rawLayouts);
 
 public slots:
     /**
      * @brief on_actionNew_triggered When the menu action File > New
      * is triggered
-     *
      */
     void on_actionNew_triggered();
 
@@ -86,13 +86,18 @@ protected:
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
-    VPieceCarrousel *pieceCarrousel;
+    VPieceCarrousel *m_pieceCarrousel{nullptr};
     VPuzzleCommandLinePtr m_cmd;
 
     VPuzzleLayout *m_layout{nullptr};
 
     VPuzzlePiece *m_selectedPiece{nullptr};
 
+    /**
+     * @brief CreatePiece creates a piece from the given VLayoutPiece data
+     * @param rawPiece the raw piece data
+     */
+    VPuzzlePiece* CreatePiece(const VLayoutPiece &rawPiece);
 
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)

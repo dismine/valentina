@@ -53,17 +53,21 @@ QT_WARNING_POP
 PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PuzzleMainWindow),
-    pieceCarrousel(new VPieceCarrousel),
     m_cmd(cmd)
 {
 
-    // ----- for test purposes, to be removed------------------
     m_layout = new VPuzzleLayout();
+
+    // ----- for test purposes, to be removed------------------
     m_layout->SetLayoutMarginsConverted(1.5, 2.00, 4.21, 0.25);
     m_layout->SetLayoutSizeConverted(30.0, 29.7);
     m_layout->SetPiecesGapConverted(1.27);
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
+    VPuzzleLayer *unplacedLayer = m_layout->GetUnplacedPiecesLayer();
+    VPuzzlePiece *piece = new VPuzzlePiece();
+    piece->SetName("Hello");
+    unplacedLayer->AddPiece(piece);
     // --------------------------------------------------------
 
     ui->setupUi(this);
@@ -80,23 +84,23 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
 PuzzleMainWindow::~PuzzleMainWindow()
 {
     delete ui;
-    delete pieceCarrousel;
+    delete m_pieceCarrousel;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool PuzzleMainWindow::LoadFile(QString path)
 {
-    try
-    {
-        VLayoutConverter converter(path);
-        path = converter.Convert();
-    }
-    catch (VException &e)
-    {
-        qCCritical(pWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return false;
-    }
+//    try
+//    {
+//        VLayoutConverter converter(path);
+//        path = converter.Convert();
+//    }
+//    catch (VException &e)
+//    {
+//        qCCritical(pWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+//                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+//        return false;
+//    }
 
     QFile file(path);
     file.open(QIODevice::ReadOnly);
@@ -130,27 +134,46 @@ bool PuzzleMainWindow::SaveFile(const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::ImportRawLayouts(const QStringList &layouts)
+void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 {
-    VRawLayout layoutReader;
+    VRawLayout rawLayoutReader;
 
-    for(auto &path : layouts)
+    for(auto &path : rawLayouts)
     {
         VRawLayoutData data;
-        if (layoutReader.ReadFile(path, data))
+        if (rawLayoutReader.ReadFile(path, data))
         {
-            // Do somethinmg with raw layout data
+            for (int i = 0; i < data.pieces.size(); ++i)
+            {
+                VLayoutPiece rawPiece = data.pieces.at(i);
+                VPuzzlePiece *piece = CreatePiece(rawPiece);
+                m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
+            }
+
+            m_pieceCarrousel->Refresh();
         }
         else
         {
             qCCritical(pWindow, "%s\n", qPrintable(tr("Could not extract data from file '%1'. %2")
-                                                    .arg(path, layoutReader.ErrorString())));
+                                                    .arg(path, rawLayoutReader.ErrorString())));
             if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
             {
                 m_cmd->ShowHelp(V_EX_DATAERR);
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
+{
+    VPuzzlePiece *piece = new VPuzzlePiece();
+    piece->SetName(rawPiece.GetName());
+    piece->SetUuid(rawPiece.GetUUID());
+
+    // TODO : set all the information we need for the piece!
+
+    return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,7 +289,8 @@ void PuzzleMainWindow::InitPropertyTabLayers()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::InitPieceCarrousel()
 {
-    ui->dockWidgetPieceCarrousel->setWidget(pieceCarrousel);
+    m_pieceCarrousel = new VPieceCarrousel(m_layout);
+    ui->dockWidgetPieceCarrousel->setWidget(m_pieceCarrousel);
 
     connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
               &PuzzleMainWindow::on_PieceCarrouselLocationChanged);
@@ -498,14 +522,30 @@ void PuzzleMainWindow::on_actionSaveAs_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_actionImportRawLayout_triggered()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::ImportRawLayout");
-    int ret = msgBox.exec();
+    // TODO: here the code is probably just bad, to be edited
 
-    Q_UNUSED(ret);
+    QString dir;
+    if (true)
+    {
+        dir = QDir::homePath();
+    }
+    else
+    {
+        // TODO / FIXME get the default path for raw layouts
+    }
 
-    // TODO
+    const QString filter(tr("Raw Layout files") + QLatin1String(" (*.rld)"));
+
+    qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
+
+    QStringList rawLayouts = QStringList();
+    rawLayouts.append(filePath);
+
+    ImportRawLayouts(rawLayouts);
+
+    // TODO / FIXME : better error handling
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -764,13 +804,13 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
 {
     if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)
     {
-        pieceCarrousel->setOrientation(Qt::Horizontal);
+        m_pieceCarrousel->SetOrientation(Qt::Horizontal);
         ui->dockWidgetPieceCarrousel->setMaximumHeight(208);
         ui->dockWidgetPieceCarrousel->setMaximumWidth(10000);
     }
     else if (area == Qt::LeftDockWidgetArea || area == Qt::RightDockWidgetArea)
     {
-        pieceCarrousel->setOrientation(Qt::Vertical);
+        m_pieceCarrousel->SetOrientation(Qt::Vertical);
         ui->dockWidgetPieceCarrousel->setMaximumHeight(10000);
         ui->dockWidgetPieceCarrousel->setMaximumWidth(160);
     }

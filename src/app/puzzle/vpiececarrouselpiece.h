@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpiececarrousel.h
+ **  @file   vpiececarrouselpiece.h
  **  @author Ronan Le Tiec
- **  @date   13 04, 2020
+ **  @date   25 4, 2020
  **
  **  @brief
  **  @copyright
@@ -25,57 +25,36 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
-#ifndef VPIECECARROUSEL_H
-#define VPIECECARROUSEL_H
+#ifndef VPIECECARROUSELPIECE_H
+#define VPIECECARROUSELPIECE_H
 
 #include <QWidget>
-#include <QComboBox>
-#include <QScrollArea>
-#include "vpuzzlelayout.h"
-#include "vpiececarrousellayer.h"
+#include <QLabel>
 
-class VPieceCarrousel : public QWidget
+#include "vpuzzlepiece.h"
+
+class VPieceCarrouselPiece : public QWidget
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
-    virtual ~VPieceCarrousel();
+    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent = nullptr);
+    ~VPieceCarrouselPiece();
 
-    void SetOrientation(Qt::Orientation orientation);
-
-    /**
-     * @brief Inits the carroussel
-     */
     void Init();
-
-    /**
-     * @brief Refresh Refreshes the content of the carrousel
-     */
     void Refresh();
-
-    /**
-     * @brief Clear Clears the carrousel (removes everything)
-     */
-    void Clear();
 
 signals:
 
 public slots:
 
 private:
-    Q_DISABLE_COPY(VPieceCarrousel)
+    Q_DISABLE_COPY(VPieceCarrouselPiece)
 
-    VPuzzleLayout *m_layout;
-
-    QComboBox *m_comboBoxLayer;
-    QWidget *m_layersContainer;
-
-    QList<VPieceCarrouselLayer*> m_carrouselLayers;
-
+    VPuzzlePiece *m_piece;
+    QLabel *m_label;
 
 private slots:
-    void on_ActiveLayerChanged(int index);
+
 };
 
-#endif // VPIECECARROUSEL_H
+#endif // VPIECECARROUSELPIECE_H

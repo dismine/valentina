@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpuzzlepiece.cpp
+ **  @file   vpiececarrousellayer.cpp
  **  @author Ronan Le Tiec
- **  @date   13 4, 2020
+ **  @date   25 4, 2020
  **
  **  @brief
  **  @copyright
@@ -25,43 +25,54 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlepiece.h"
+
+#include "vpiececarrousellayer.h"
+
+#include <QVBoxLayout>
+
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece::VPuzzlePiece()
+VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent) : QWidget(parent), m_layer(layer)
 {
-
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece::~VPuzzlePiece()
+VPieceCarrouselLayer::~VPieceCarrouselLayer()
 {
-
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPuzzlePiece::GetName() const
-{
-    return m_name;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetName(const QString &name)
-{
-    m_name = name;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QUuid VPuzzlePiece::GetUuid() const
-{
-    return m_uuid;
+    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetUuid(const QUuid &uuid)
+void VPieceCarrouselLayer::Init()
 {
-    m_uuid = uuid;
+    // initiales the structure
+    QVBoxLayout *layoutPiecesLayout = new QVBoxLayout();
+    layoutPiecesLayout->setMargin(0);
+    setLayout(layoutPiecesLayout);
+
+    // then refresh the content
+    Refresh();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselLayer::Refresh()
+{
+    // remove the existing carrousel pieces
+    // TODO
+
+    // Updates the carrousel pieces from the pieces list
+    QList<VPuzzlePiece*> pieces = m_layer->GetPieces();
+
+    for (auto piece : pieces)
+    {
+        qCDebug(pCarrouselLayer, "piece name : %s", piece->GetName().toStdString().c_str());
+
+        VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece);
+        m_carrouselPieces.append(carrouselPiece);
+        layout()->addWidget(carrouselPiece);
+    }
 }

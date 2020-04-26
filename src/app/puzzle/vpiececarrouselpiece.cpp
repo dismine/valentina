@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpuzzlepiece.cpp
+ **  @file   vpiececarrouselpiece.cpp
  **  @author Ronan Le Tiec
- **  @date   13 4, 2020
+ **  @date   25 4, 2020
  **
  **  @brief
  **  @copyright
@@ -25,43 +25,63 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlepiece.h"
+
+#include "vpiececarrouselpiece.h"
+#include <QLabel>
+#include <QVBoxLayout>
+
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece::VPuzzlePiece()
+VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent) : QWidget(parent), m_piece(piece)
+{
+    Init();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceCarrouselPiece::~VPieceCarrouselPiece()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece::~VPuzzlePiece()
+void VPieceCarrouselPiece::Init()
 {
+    // first define the structure
+    
+    QVBoxLayout *pieceLayout = new QVBoxLayout();
+    pieceLayout->setMargin(0);
+    setLayout(pieceLayout);
 
-}
+    // NOTE: this label structure is for test purpuses, it has to be changed when we see the piece preview
+    m_label = new QLabel();
+    m_label->setFixedSize(120,120);
+    m_label->sizePolicy();
+    m_label->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+    m_label->setStyleSheet("background-color:cornflowerblue");
 
+    pieceLayout->addWidget(m_label);
 
-//---------------------------------------------------------------------------------------------------------------------
-QString VPuzzlePiece::GetName() const
-{
-    return m_name;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetName(const QString &name)
-{
-    m_name = name;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QUuid VPuzzlePiece::GetUuid() const
-{
-    return m_uuid;
+    // then refresh the data
+    Refresh();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetUuid(const QUuid &uuid)
+void VPieceCarrouselPiece::Refresh()
 {
-    m_uuid = uuid;
+    // update the label of the piece
+
+    QFontMetrics metrix(m_label->font());
+    int width = m_label->width() - 8;
+    QString clippedText = metrix.elidedText(m_piece->GetName(), Qt::ElideRight, width);
+    m_label->setText(clippedText);
+
+    m_label->setToolTip(m_piece->GetName());
+
+
+    // update the graphic preview of the piece
+    // TODO
 }

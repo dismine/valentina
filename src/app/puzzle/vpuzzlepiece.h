@@ -28,14 +28,42 @@
 #ifndef VPUZZLEPIECE_H
 #define VPUZZLEPIECE_H
 
+#include <QUuid>
+
 class VPuzzlePiece
 {
 public:
     VPuzzlePiece();
     ~VPuzzlePiece();
 
-private:
+    /**
+     * @brief GetName Returns the name of the piece
+     * @return the piece's name
+     */
+    QString GetName() const;
 
+    /**
+     * @brief SetName Sets the piece's name to the given name
+     * @param name new name of the piece
+     */
+    void SetName(const QString &name);
+
+    /**
+     * @brief GetUuid Returns the uuid of the piece
+     * @return the uuid of the piece
+     */
+    QUuid GetUuid() const;
+
+    /**
+     * @brief SetUuid Sets the uuid of the piece to the given value
+     * @return the uuid of the piece
+     */
+    void SetUuid(const QUuid &uuid);
+
+
+private:
+    QUuid m_uuid{QUuid()};
+    QString m_name{QString()};
 };
 
 #endif // VPUZZLEPIECE_H

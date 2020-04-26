@@ -27,12 +27,18 @@
  *************************************************************************/
 #include "vpuzzlelayout.h"
 #include "vpuzzlelayer.h"
+#include "vpuzzlepiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayout::VPuzzleLayout() :
     m_unplacedPiecesLayer(new VPuzzleLayer())
 {
+    m_unplacedPiecesLayer->SetName(QObject::tr("Unplaced pieces"));
 
+    // create a standard default layer:
+    VPuzzleLayer *layer = new VPuzzleLayer();
+    layer->SetName(QObject::tr("Layout"));
+    AddLayer(layer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
