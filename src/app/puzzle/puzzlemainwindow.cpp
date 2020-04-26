@@ -142,6 +142,9 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             for (int i = 0; i < data.pieces.size(); ++i)
             {
                 VLayoutPiece rawPiece = data.pieces.at(i);
+
+                // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
+
                 VPuzzlePiece *piece = CreatePiece(rawPiece);
                 m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
             }
@@ -166,6 +169,7 @@ VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
     VPuzzlePiece *piece = new VPuzzlePiece();
     piece->SetName(rawPiece.GetName());
     piece->SetUuid(rawPiece.GetUUID());
+    piece->SetCuttingLine(rawPiece.GetMappedSeamAllowancePoints());
 
     // TODO : set all the information we need for the piece!
 

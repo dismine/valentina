@@ -29,6 +29,8 @@
 #define VPUZZLEPIECE_H
 
 #include <QUuid>
+#include <QVector>
+#include <QPoint>
 
 class VPuzzlePiece
 {
@@ -60,10 +62,15 @@ public:
      */
     void SetUuid(const QUuid &uuid);
 
+    QVector<QPointF> GetCuttingLine() const;
+
+    void SetCuttingLine(const QVector<QPointF> &cuttingLine);
+
 
 private:
     QUuid m_uuid{QUuid()};
     QString m_name{QString()};
+    QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
 };
 
 #endif // VPUZZLEPIECE_H

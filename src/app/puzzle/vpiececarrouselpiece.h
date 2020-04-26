@@ -30,8 +30,10 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QGraphicsView>
 
 #include "vpuzzlepiece.h"
+
 
 class VPieceCarrouselPiece : public QWidget
 {
@@ -52,6 +54,7 @@ private:
 
     VPuzzlePiece *m_piece;
     QLabel *m_label;
+    QGraphicsView *m_graphicsView;
 
 private slots:
 

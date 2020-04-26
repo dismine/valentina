@@ -65,3 +65,16 @@ void VPuzzlePiece::SetUuid(const QUuid &uuid)
 {
     m_uuid = uuid;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPuzzlePiece::GetCuttingLine() const
+{
+    return m_cuttingLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
+{
+    m_cuttingLine = cuttingLine;
+}

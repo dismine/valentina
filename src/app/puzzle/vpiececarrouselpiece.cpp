@@ -29,6 +29,8 @@
 #include "vpiececarrouselpiece.h"
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QGraphicsScene>
+#include <QPainter>
 
 #include <QLoggingCategory>
 
@@ -44,27 +46,34 @@ VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VPieceCarrouselPiece::~VPieceCarrouselPiece()
 {
-
+    delete m_graphicsView;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselPiece::Init()
 {
-    // first define the structure
-    
+    //m_label->setStyleSheet("background-color:cornflowerblue");
+
+    // Define the structure
+    setFixedSize(120,120);
     QVBoxLayout *pieceLayout = new QVBoxLayout();
     pieceLayout->setMargin(0);
     setLayout(pieceLayout);
 
-    // NOTE: this label structure is for test purpuses, it has to be changed when we see the piece preview
-    m_label = new QLabel();
-    m_label->setFixedSize(120,120);
-    m_label->sizePolicy();
-    m_label->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
-    m_label->setStyleSheet("background-color:cornflowerblue");
+    // define the preview of the piece
+    m_graphicsView = new QGraphicsView(this);
+    QGraphicsScene *graphicsScene = new QGraphicsScene(this);
+    m_graphicsView->setScene(graphicsScene);
+    m_graphicsView->setFixedSize(120,100);
 
+    // define the label
+    m_label = new QLabel();
+    m_label->sizePolicy();
+    m_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+    m_label->setFixedSize(120,20);
+
+    pieceLayout->addWidget(m_graphicsView);
     pieceLayout->addWidget(m_label);
-    setMinimumSize(120,120);
 
     // then refresh the data
     Refresh();
@@ -73,8 +82,24 @@ void VPieceCarrouselPiece::Init()
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselPiece::Refresh()
 {
-    // update the label of the piece
+    // update the graphic view / the scene
 
+    // TODO / FIXME : not perfect and maybe not the right way, still need to work on this
+    QVector<QPointF> points = m_piece->GetCuttingLine();
+
+    QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    pen.setCosmetic(true);
+    QBrush noBrush(Qt::NoBrush);
+
+    QPainterPath path;
+    path.moveTo(points.first());
+    for (int i = 1; i < points.size(); ++i)
+        path.lineTo(points.at(i));
+    m_graphicsView->scene()->addPath(path, pen, noBrush);
+
+    m_graphicsView->fitInView(m_graphicsView->scene()->sceneRect(), Qt::KeepAspectRatio);
+
+    // update the label of the piece
     QFontMetrics metrix(m_label->font());
     int width = m_label->width() - 8;
     QString clippedText = metrix.elidedText(m_piece->GetName(), Qt::ElideRight, width);
@@ -82,7 +107,4 @@ void VPieceCarrouselPiece::Refresh()
 
     m_label->setToolTip(m_piece->GetName());
 
-
-    // update the graphic preview of the piece
-    // TODO
 }
