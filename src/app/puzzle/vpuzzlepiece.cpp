@@ -78,3 +78,29 @@ void VPuzzlePiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
 {
     m_cuttingLine = cuttingLine;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzlePiece::GetShowSeamLine()
+{
+    return m_showSeamline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetShowSeamLine(bool value)
+{
+    m_showSeamline = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzlePiece::GetPieceMirrored()
+{
+    return m_mirrorPiece;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetPieceMirrored(bool value)
+{
+    m_mirrorPiece = value;
+}
+

@@ -72,7 +72,6 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     InitProperties();
     InitPieceCarrousel();
 
-
     SetPropertiesData();
 }
 
@@ -328,14 +327,22 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
         else
         {
            // TODO : update current piece data to show a "no current piece selected"
+            ui->containerCurrentPieceNoData->setVisible(true);
+            ui->containerCurrentPieceData->setVisible(false);
         }
     }
     else
     {
+        ui->containerCurrentPieceNoData->setVisible(false);
+        ui->containerCurrentPieceData->setVisible(true);
+
         // set the value to the current piece
         ui->lineEditCurrentPieceName->setText(m_selectedPiece->GetName());
 
-        // TODO: checkbox show seamline, mirror piece, rotation and placement;
+        ui->checkBoxCurrentPieceShowSeamline->setChecked(m_selectedPiece->GetShowSeamLine());
+        ui->checkBoxCurrentPieceMirrorPiece->setChecked(m_selectedPiece->GetPieceMirrored());
+
+        // TODO:rotation and placement;
     }
 }
 
@@ -752,29 +759,19 @@ void PuzzleMainWindow::on_pushButtonLayoutExport_clicked()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceShowSeamlineChanged");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-    // TODO
+    if(m_selectedPiece != nullptr)
+    {
+        m_selectedPiece->SetShowSeamLine(checked);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceMirrorPieceChanged");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(checked);
-    Q_UNUSED(ret);
-
-    // TODO
+    if(m_selectedPiece != nullptr)
+    {
+        m_selectedPiece->SetPieceMirrored(checked);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

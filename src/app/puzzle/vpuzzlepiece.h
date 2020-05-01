@@ -65,11 +65,37 @@ public:
 
     void SetCuttingLine(const QVector<QPointF> &cuttingLine);
 
+    /**
+     * @brief GetShowSeamLine returns wether the seam line of the piece has to be shown or not
+     * @return true if the seamline has to be shown
+     */
+    bool GetShowSeamLine();
+
+    /**
+     * @brief SetShowSeamLine sets wether the seam line of the piece has to be shown or not
+     * @param value true if the seamline has to be shown
+     */
+    void SetShowSeamLine(bool value);
+
+    /**
+     * @brief GetMirrorPiece returns wether the piece is mirrored or not
+     * @return  true if the piece is mirrored
+     */
+    bool GetPieceMirrored();
+
+    /**
+     * @brief SetMirrorPiece sets wether the piece is mirrored or not
+     * @param value true if the piece will be mirrored
+     */
+    void SetPieceMirrored(bool value);
+
 
 private:
     QUuid m_uuid{QUuid()};
     QString m_name{QString()};
     QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
+    bool m_showSeamline{true};
+    bool m_mirrorPiece{false};
 };
 
 #endif // VPUZZLEPIECE_H
