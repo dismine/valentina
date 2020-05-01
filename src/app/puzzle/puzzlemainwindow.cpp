@@ -294,6 +294,9 @@ void PuzzleMainWindow::InitPieceCarrousel()
 
     connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
               &PuzzleMainWindow::on_PieceCarrouselLocationChanged);
+
+    connect(m_pieceCarrousel, QOverload<VPuzzlePiece*>::of(&VPieceCarrousel::pieceClicked), this,
+                    &PuzzleMainWindow::on_PieceSelected);
 }
 
 
@@ -329,7 +332,10 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
     }
     else
     {
-        // TODO set the values of the piece currently selected
+        // set the value to the current piece
+        ui->lineEditCurrentPieceName->setText(m_selectedPiece->GetName());
+
+        // TODO: checkbox show seamline, mirror piece, rotation and placement;
     }
 }
 
@@ -816,3 +822,18 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::on_PieceSelected(VPuzzlePiece* piece)
+{
+    m_selectedPiece = piece;
+
+    // update the state of the piece carrousel
+    m_pieceCarrousel->SelectPiece(piece);
+
+    // update the Layout
+
+    // TODO
+
+    // update the property of the piece currently selected
+    SetPropertyTabCurrentPieceData();
+}

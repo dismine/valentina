@@ -43,9 +43,13 @@ public:
     void Init();
     void Refresh();
 
+    QList<VPieceCarrouselPiece*> GetCarrouselPieces();
+
 signals:
+    void pieceClicked(VPieceCarrouselPiece* carrouselPiece);
 
 public slots:
+    void on_PieceClicked(VPieceCarrouselPiece* carrouselPiece);
 
 private:
     Q_DISABLE_COPY(VPieceCarrouselLayer)

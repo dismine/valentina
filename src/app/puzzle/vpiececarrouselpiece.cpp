@@ -37,7 +37,7 @@
 Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent) : QWidget(parent), m_piece(piece)
+VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent) : QFrame(parent), m_piece(piece)
 {
     Init();
 }
@@ -52,25 +52,31 @@ VPieceCarrouselPiece::~VPieceCarrouselPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselPiece::Init()
 {
-    //m_label->setStyleSheet("background-color:cornflowerblue");
-
     // Define the structure
-    setFixedSize(120,120);
+    setFixedSize(124,128);
     QVBoxLayout *pieceLayout = new QVBoxLayout();
     pieceLayout->setMargin(0);
+    pieceLayout->setSpacing(0);
     setLayout(pieceLayout);
+
+    setStyleSheet("background-color:white; border: 2px solid transparent;");
 
     // define the preview of the piece
     m_graphicsView = new QGraphicsView(this);
+
+    // m_graphicsView = new VMainGraphicsView(this);
+    // --> undefined reference to 'VMainGraphicsView::VMainGraphicView(QWidget*)'
     QGraphicsScene *graphicsScene = new QGraphicsScene(this);
     m_graphicsView->setScene(graphicsScene);
     m_graphicsView->setFixedSize(120,100);
+    m_graphicsView->setStyleSheet("border: 4px solid transparent;");
 
     // define the label
     m_label = new QLabel();
     m_label->sizePolicy();
     m_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-    m_label->setFixedSize(120,20);
+    m_label->setFixedSize(120,24);
+    m_label->setStyleSheet("border: 0px;");
 
     pieceLayout->addWidget(m_graphicsView);
     pieceLayout->addWidget(m_label);
@@ -111,6 +117,46 @@ void VPieceCarrouselPiece::Refresh()
     QString clippedText = metrix.elidedText(m_piece->GetName(), Qt::ElideRight, width);
     m_label->setText(clippedText);
 
-    m_label->setToolTip(m_piece->GetName());
+    setToolTip(m_piece->GetName());
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzlePiece * VPieceCarrouselPiece::GetPiece()
+{
+    return m_piece;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselPiece::SetIsSelected(bool value)
+{
+    m_isSelected = value;
+
+    if(value)
+    {
+        setStyleSheet("background-color:white; border: 2px solid red;");
+    }
+    else
+    {
+        setStyleSheet("background-color:white; border: 2px solid transparent;");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceCarrouselPiece::GetIsSelected()
+{
+    return m_isSelected;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        if(!m_isSelected)
+        {
+            emit clicked(this);
+        }
+    }
+}
+

@@ -356,6 +356,12 @@ private slots:
      */
     void on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
 
+    /**
+     * @brief on_PieceSelected When a been has been selected
+     * @param piece the piece that was selected
+     */
+    void on_PieceSelected(VPuzzlePiece* piece);
+
 };
 
 #endif // PUZZLEMAINWINDOW_H

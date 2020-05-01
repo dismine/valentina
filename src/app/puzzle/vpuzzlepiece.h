@@ -58,7 +58,6 @@ public:
 
     /**
      * @brief SetUuid Sets the uuid of the piece to the given value
-     * @return the uuid of the piece
      */
     void SetUuid(const QUuid &uuid);
 

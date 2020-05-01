@@ -33,6 +33,7 @@
 #include <QComboBox>
 #include <QScrollArea>
 #include "vpuzzlelayout.h"
+#include "vpuzzlepiece.h"
 #include "vpiececarrousellayer.h"
 
 class VPieceCarrousel : public QWidget
@@ -59,9 +60,19 @@ public:
      */
     void Clear();
 
+    /**
+     * @brief SelectPiece Updates the carrousel so that the given piece is selected
+     * @param piece the piece to select
+     */
+    void SelectPiece(VPuzzlePiece* piece);
+
+
 signals:
+    void pieceClicked(VPuzzlePiece* piece);
 
 public slots:
+    void on_PieceClicked(VPieceCarrouselPiece* carrouselPiece);
+
 
 private:
     Q_DISABLE_COPY(VPieceCarrousel)

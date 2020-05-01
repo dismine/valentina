@@ -119,6 +119,10 @@ void VPieceCarrousel::Refresh()
         VPieceCarrouselLayer *carrouselLayer = new VPieceCarrouselLayer(layer, this);
         m_carrouselLayers.append(carrouselLayer);
         m_layersContainer->layout()->addWidget(carrouselLayer);
+
+        connect(carrouselLayer, QOverload<VPieceCarrouselPiece*>::of(&VPieceCarrouselLayer::pieceClicked), this,
+                        &VPieceCarrousel::on_PieceClicked);
+
     }
 
     on_ActiveLayerChanged(0);
@@ -154,6 +158,20 @@ void VPieceCarrousel::Clear()
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrousel::SelectPiece(VPuzzlePiece* piece)
+{
+    for (auto layer : m_carrouselLayers)
+    {
+        QList<VPieceCarrouselPiece*> carrouselPieces = layer->GetCarrouselPieces();
+        for (auto carrouselPiece : carrouselPieces)
+        {
+            carrouselPiece->SetIsSelected(carrouselPiece->GetPiece() == piece);
+        }
+    }
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrousel::on_ActiveLayerChanged(int index)
@@ -198,7 +216,7 @@ void VPieceCarrousel::SetOrientation(Qt::Orientation orientation)
         m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
         // FIXME: find a nicer way than putting directly the 120 height of the piece
-        m_scrollArea->setMinimumHeight(120 + m_scrollArea->horizontalScrollBar()->sizeHint().height()+2);
+        m_scrollArea->setMinimumHeight(128 + m_scrollArea->horizontalScrollBar()->sizeHint().height()+2);
         m_scrollArea->setMinimumWidth(0);
     }
     else // Qt::Vertical
@@ -211,10 +229,16 @@ void VPieceCarrousel::SetOrientation(Qt::Orientation orientation)
         m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
         m_scrollArea->setMinimumHeight(0);
-        m_scrollArea->setMinimumWidth(120 + m_scrollArea->verticalScrollBar()->sizeHint().width()+2);
+        m_scrollArea->setMinimumWidth(124 + m_scrollArea->verticalScrollBar()->sizeHint().width()+2);
         // FIXME: find a nicer way than putting directly the 120 width of the piece
     }
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrousel::on_PieceClicked(VPieceCarrouselPiece* carrouselPiece)
+{
+    emit pieceClicked(carrouselPiece->GetPiece());
 }
 
 

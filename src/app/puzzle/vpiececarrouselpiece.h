@@ -28,14 +28,15 @@
 #ifndef VPIECECARROUSELPIECE_H
 #define VPIECECARROUSELPIECE_H
 
-#include <QWidget>
+#include <QFrame>
 #include <QLabel>
 #include <QGraphicsView>
+#include <QMouseEvent>
 
 #include "vpuzzlepiece.h"
 
 
-class VPieceCarrouselPiece : public QWidget
+class VPieceCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
@@ -50,16 +51,40 @@ public:
     */
     void CleanPreview();
 
+    /**
+     * @brief GetLayoutPiece Returns the corresponding layout piece
+     * @return  the corresponding layout piece
+     */
+    VPuzzlePiece * GetPiece();
+
+    /**
+     * @brief SetSelected sets the selected state to the given value
+     * @param value the new selected state
+     */
+    void SetIsSelected(bool value);
+
+    /**
+     * @brief GetSelected Returns wether the piece is selected or not
+     * @return true if the piece is selected
+     */
+    bool GetIsSelected();
+
 signals:
+    void clicked(VPieceCarrouselPiece* m_piece);
 
 public slots:
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     Q_DISABLE_COPY(VPieceCarrouselPiece)
 
     VPuzzlePiece *m_piece;
-    QLabel *m_label;
-    QGraphicsView *m_graphicsView;
+    QLabel *m_label{nullptr};
+    QGraphicsView *m_graphicsView{nullptr};
+
+    bool m_isSelected = false;
 
 private slots:
 
