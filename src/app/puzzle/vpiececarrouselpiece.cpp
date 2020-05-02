@@ -37,7 +37,9 @@
 Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent) : QFrame(parent), m_piece(piece)
+VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent) :
+    QFrame(parent),
+    m_piece(piece)
 {
     Init();
 }
@@ -97,6 +99,7 @@ void VPieceCarrouselPiece::Refresh()
     // update the graphic view / the scene
 
     // TODO / FIXME : not perfect and maybe not the right way, still need to work on this
+    // for instance: use a painter to habve a better quality, less pixeled.
     QVector<QPointF> points = m_piece->GetCuttingLine();
 
     QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
@@ -117,8 +120,8 @@ void VPieceCarrouselPiece::Refresh()
     QString clippedText = metrix.elidedText(m_piece->GetName(), Qt::ElideRight, width);
     m_label->setText(clippedText);
 
+    // set the tooltip
     setToolTip(m_piece->GetName());
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------

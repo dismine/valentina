@@ -350,14 +350,14 @@ private slots:
     void on_CurrentPiecePositionChanged();
 
     /**
-     * @brief PieceCarrouselLocationChanged When the Piece Carrousel's location
+     * @brief PieceCarrouselLocationChanged When the piece carrousel's location
      * has been changed
-     * @param area The new area where the Piece Carrousel has been placed
+     * @param area The new area where the piece carrousel has been placed
      */
     void on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
 
     /**
-     * @brief on_PieceSelected When a been has been selected
+     * @brief on_PieceSelected When a piece has been selected
      * @param piece the piece that was selected
      */
     void on_PieceSelected(VPuzzlePiece* piece);

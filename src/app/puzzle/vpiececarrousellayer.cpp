@@ -35,7 +35,10 @@
 Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent) : QWidget(parent), m_layer(layer)
+VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent) :
+    QWidget(parent),
+    m_layer(layer),
+    m_carrouselPieces(QList<VPieceCarrouselPiece*>())
 {
     Init();
 }
