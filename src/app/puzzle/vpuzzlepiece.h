@@ -61,9 +61,29 @@ public:
      */
     void SetUuid(const QUuid &uuid);
 
+    /**
+     * @brief GetCuttingLine Returns the vector points of the cutting line
+     * @return the vector points of the cutting line
+     */
     QVector<QPointF> GetCuttingLine() const;
 
+    /**
+     * @brief SetCuttingLine Sets the vector points of the cutting line to the given value
+     * @param cuttingLine the new vector points for the cutting line
+     */
     void SetCuttingLine(const QVector<QPointF> &cuttingLine);
+
+    /**
+     * @brief GetSeamLine Returns the vector points of the seam line
+     * @return the vector points of the seam line
+     */
+    QVector<QPointF> GetSeamLine() const;
+
+    /**
+     * @brief SetSeamLine Sets the vector points of the seam line to the given value
+     * @param seamLine the new vector points for the seam line
+     */
+    void SetSeamLine(const QVector<QPointF> &seamLine);
 
     /**
      * @brief GetShowSeamLine returns wether the seam line of the piece has to be shown or not
@@ -94,6 +114,7 @@ private:
     QUuid m_uuid{QUuid()};
     QString m_name{QString()};
     QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
+    QVector<QPointF> m_seamLine{QVector<QPointF>()};
     bool m_showSeamline{true};
     bool m_mirrorPiece{false};
 };

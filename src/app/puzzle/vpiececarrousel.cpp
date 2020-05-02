@@ -75,7 +75,9 @@ void VPieceCarrousel::Init()
     QVBoxLayout *layersContainerLayout = new QVBoxLayout();
     layersContainerLayout->setMargin(0);
     m_layersContainer->setLayout(layersContainerLayout);
+    m_layersContainer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     QSpacerItem *spacer = new QSpacerItem(10, 10, QSizePolicy::Expanding, QSizePolicy::Expanding);
+
 
     layersContainerWrapperLayout->addWidget(m_layersContainer);
     layersContainerWrapperLayout->addSpacerItem(spacer);
@@ -92,9 +94,6 @@ void VPieceCarrousel::Init()
 
     // ------ then we fill the carrousel with the layout content
     Refresh();
-
-    // ------ and make sure the calculation for the qlayout is right
-    SetOrientation(Qt::Vertical);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -126,6 +125,8 @@ void VPieceCarrousel::Refresh()
     }
 
     on_ActiveLayerChanged(0);
+
+    RefreshOrientation();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,8 +189,14 @@ void VPieceCarrousel::on_ActiveLayerChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrousel::SetOrientation(Qt::Orientation orientation)
 {
+    m_orientation = orientation;
+    RefreshOrientation();
+}
 
-    QBoxLayout::Direction direction = (orientation == Qt::Horizontal)?
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrousel::RefreshOrientation()
+{
+    QBoxLayout::Direction direction = (m_orientation == Qt::Horizontal)?
                 QBoxLayout::LeftToRight
                 :
                 QBoxLayout::TopToBottom;
@@ -207,7 +214,7 @@ void VPieceCarrousel::SetOrientation(Qt::Orientation orientation)
     }
 
     // then update the scrollarea min height / width and scrollbar behaviour
-    if(orientation == Qt::Horizontal)
+    if(m_orientation == Qt::Horizontal)
     {
         m_comboBoxLayer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -232,7 +239,6 @@ void VPieceCarrousel::SetOrientation(Qt::Orientation orientation)
         m_scrollArea->setMinimumWidth(124 + m_scrollArea->verticalScrollBar()->sizeHint().width()+2);
         // FIXME: find a nicer way than putting directly the 120 width of the piece
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------

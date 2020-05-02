@@ -43,7 +43,18 @@ public:
     explicit VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
     virtual ~VPieceCarrousel();
 
+    /**
+     * @brief SetOrientation Sets the orientation to the given value and refreshes
+     * the orientation of the carrousel.
+     * @param orientation the orientation to set the carrousel to.
+     */
     void SetOrientation(Qt::Orientation orientation);
+
+    /**
+     * @brief RefreshOrientation Refreshes the orientation of the carrousel with the
+     * m_orientation value;
+     */
+    void RefreshOrientation();
 
     /**
      * @brief Inits the carroussel
@@ -84,6 +95,8 @@ private:
     QWidget *m_layersContainer;
 
     QList<VPieceCarrouselLayer*> m_carrouselLayers;
+
+    Qt::Orientation m_orientation{Qt::Vertical};
 
 
 private slots:

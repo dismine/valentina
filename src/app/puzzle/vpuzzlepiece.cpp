@@ -79,6 +79,17 @@ void VPuzzlePiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
     m_cuttingLine = cuttingLine;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPuzzlePiece::GetSeamLine() const
+{
+    return m_seamLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetSeamLine(const QVector<QPointF> &seamLine)
+{
+    m_seamLine = seamLine;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VPuzzlePiece::GetShowSeamLine()

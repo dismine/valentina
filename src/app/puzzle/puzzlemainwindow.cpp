@@ -144,6 +144,14 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 
                 // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
 
+
+                // TODO / FIXME: make a few tests, on the data to check for validity. If not
+                //
+                // If seam allowance enabled, but the path is empty — invalid.
+                // If seam line path not hidden, but the path is empty — invalid.
+                // If seam allowance is built-in, but the seam line path is empty — invalid.
+
+
                 VPuzzlePiece *piece = CreatePiece(rawPiece);
                 m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
             }
@@ -165,10 +173,12 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 {
+
     VPuzzlePiece *piece = new VPuzzlePiece();
     piece->SetName(rawPiece.GetName());
     piece->SetUuid(rawPiece.GetUUID());
     piece->SetCuttingLine(rawPiece.GetMappedSeamAllowancePoints());
+    piece->SetSeamLine(rawPiece.GetMappedContourPoints());
 
     // TODO : set all the information we need for the piece!
 

@@ -72,6 +72,7 @@ void VPieceCarrouselPiece::Init()
     m_graphicsView->setScene(graphicsScene);
     m_graphicsView->setFixedSize(120,100);
     m_graphicsView->setStyleSheet("border: 4px solid transparent;");
+    m_graphicsView->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
     // define the label
     m_label = new QLabel();
@@ -98,9 +99,11 @@ void VPieceCarrouselPiece::Refresh()
 {
     // update the graphic view / the scene
 
-    // TODO / FIXME : not perfect and maybe not the right way, still need to work on this
-    // for instance: use a painter to habve a better quality, less pixeled.
-    QVector<QPointF> points = m_piece->GetCuttingLine();
+    QVector<QPointF> points = m_piece->GetSeamLine();
+    if(points.isEmpty())
+    {
+        points = m_piece->GetCuttingLine();
+    }
 
     QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     pen.setCosmetic(true);
