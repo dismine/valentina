@@ -163,9 +163,10 @@ void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
     Q_UNUSED(piece);
 
     writeStartElement(ML::TagPiece);
-    SetAttribute(ML::AttrID, "uuid1"); // TODO / Fixme get the right value
-    SetAttribute(ML::AttrName, "Piece name"); // TODO / Fixme get the right value
-    SetAttribute(ML::AttrMirrored, "false"); // TODO / Fixme get the right value
+    SetAttribute(ML::AttrID, piece->GetUuid().toString());
+    SetAttribute(ML::AttrName, piece->GetName());
+    SetAttribute(ML::AttrMirrored, piece->GetPieceMirrored()); // TODO / Fixme get the right value
+    SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine()); // TODO / Fixme get the right value
     SetAttribute(ML::AttrTransform, "string representation of the transformation"); // TODO / Fixme get the right value
 
     // TODO cuttingLine

@@ -34,8 +34,8 @@ struct VRawLayoutData
 {
     QVector<VLayoutPiece> pieces{};
 
-    friend QDataStream& operator<< (QDataStream& dataStream, const VRawLayoutData& date);
-    friend QDataStream& operator>> (QDataStream& dataStream, VRawLayoutData& date);
+    friend QDataStream& operator<< (QDataStream& dataStream, const VRawLayoutData& data);
+    friend QDataStream& operator>> (QDataStream& dataStream, VRawLayoutData& data);
 
 private:
     static const quint32 streamHeader;

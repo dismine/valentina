@@ -60,4 +60,5 @@ const QString AttrFollowGrainLine      = QStringLiteral("followGrainLine");
 const QString AttrID                   = QStringLiteral("id");
 const QString AttrMirrored             = QStringLiteral("mirrored");
 const QString AttrTransform            = QStringLiteral("transform");
+const QString AttrShowSeamline         = QStringLiteral("showSeamline");
 }

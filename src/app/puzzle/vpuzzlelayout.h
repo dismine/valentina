@@ -41,7 +41,6 @@ enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
 
 class VPuzzleLayout
 {
-
 public:
     VPuzzleLayout();
     virtual ~VPuzzleLayout();

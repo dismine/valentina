@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpiececarrousel.h
+ **  @file   vpiececarrousellayer.h
  **  @author Ronan Le Tiec
- **  @date   13 04, 2020
+ **  @date   25 4, 2020
  **
  **  @brief
  **  @copyright
@@ -26,68 +26,39 @@
  **
  *************************************************************************/
 
-#ifndef VPIECECARROUSEL_H
-#define VPIECECARROUSEL_H
+#ifndef VPIECECARROUSELLAYER_H
+#define VPIECECARROUSELLAYER_H
 
 #include <QWidget>
-#include <QComboBox>
-#include <QScrollArea>
-#include "vpuzzlelayout.h"
-#include "vpuzzlepiece.h"
-#include "vpiececarrousellayer.h"
+#include "vpuzzlelayer.h"
+#include "vpiececarrouselpiece.h"
 
-class VPieceCarrousel : public QWidget
+class VPieceCarrouselLayer : public QWidget
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
-    virtual ~VPieceCarrousel();
+    explicit VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent = nullptr);
+    ~VPieceCarrouselLayer();
 
-    void SetOrientation(Qt::Orientation orientation);
-
-    /**
-     * @brief Inits the carroussel
-     */
     void Init();
-
-    /**
-     * @brief Refresh Refreshes the content of the carrousel
-     */
     void Refresh();
 
-    /**
-     * @brief Clear Clears the carrousel (removes everything)
-     */
-    void Clear();
-
-    /**
-     * @brief SelectPiece Updates the carrousel so that the given piece is selected
-     * @param piece the piece to select
-     */
-    void SelectPiece(VPuzzlePiece* piece);
-
+    QList<VPieceCarrouselPiece*> GetCarrouselPieces();
 
 signals:
-    void pieceClicked(VPuzzlePiece* piece);
+    void pieceClicked(VPieceCarrouselPiece* carrouselPiece);
 
 public slots:
     void on_PieceClicked(VPieceCarrouselPiece* carrouselPiece);
 
-
 private:
-    Q_DISABLE_COPY(VPieceCarrousel)
+    Q_DISABLE_COPY(VPieceCarrouselLayer)
 
-    VPuzzleLayout *m_layout;
-
-    QComboBox *m_comboBoxLayer;
-    QScrollArea *m_scrollArea;
-    QWidget *m_layersContainer;
-
-    QList<VPieceCarrouselLayer*> m_carrouselLayers;
-
+    VPuzzleLayer *m_layer;
+    QList<VPieceCarrouselPiece*> m_carrouselPieces;
 
 private slots:
-    void on_ActiveLayerChanged(int index);
+
 };
 
-#endif // VPIECECARROUSEL_H
+#endif // VPIECECARROUSELLAYER_H

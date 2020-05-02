@@ -62,7 +62,7 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 {
-    Q_ASSERT(isStartElement() && name() == ML::TagLayout);
+    SCASSERT(isStartElement() && name() == ML::TagLayout);
 
     while (readNextStartElement())
     {
@@ -84,7 +84,7 @@ void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 {
-    Q_ASSERT(isStartElement() && name() == ML::TagProperties);
+    SCASSERT(isStartElement() && name() == ML::TagProperties);
 
     while (readNextStartElement())
     {
@@ -162,7 +162,7 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 {
     Q_UNUSED(layout); // to be removed when used
 
-    Q_ASSERT(isStartElement() && name() == ML::TagTiles);
+    SCASSERT(isStartElement() && name() == ML::TagTiles);
 
 //    QXmlStreamAttributes attribs = attributes();
     // attribs.value(ML::AttrVisible); // TODO
@@ -195,7 +195,7 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 {
-    Q_ASSERT(isStartElement() && name() == ML::TagLayers);
+    SCASSERT(isStartElement() && name() == ML::TagLayers);
 
     while (readNextStartElement())
     {
@@ -219,7 +219,7 @@ void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 {
-    Q_ASSERT(isStartElement() && name() == ML::TagLayer);
+    SCASSERT(isStartElement() && (name() == ML::TagLayer || name() == ML::TagUnplacedPiecesLayer));
 
     QXmlStreamAttributes attribs = attributes();
     layer->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Layer")));
@@ -245,9 +245,21 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
 {
     Q_UNUSED(piece);
-    Q_ASSERT(isStartElement() && name() == ML::TagPiece);
+    SCASSERT(isStartElement() && name() == ML::TagPiece);
 
-    // TODO read the attributes
+    QXmlStreamAttributes attribs = attributes();
+    piece->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece")));
+
+    QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid().toString());// FIXME: is that correct to have a default value here?
+    piece->SetUuid(QUuid(uuidStr));
+
+    bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
+    piece->SetShowSeamLine(showSeamline);
+
+    bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
+    piece->SetPieceMirrored(pieceMirrored);
+    // TODO read the further attributes
+
 
     while (readNextStartElement())
     {

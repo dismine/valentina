@@ -65,6 +65,7 @@ extern const QString AttrFollowGrainLine;
 extern const QString AttrID;
 extern const QString AttrMirrored;
 extern const QString AttrTransform;
+extern const QString AttrShowSeamline;
 }
 
 
