@@ -230,7 +230,6 @@ void VPieceCarrousel::RefreshOrientation()
     {
         m_comboBoxLayer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-
         // scroll bar policy of scroll area
         m_scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);

@@ -34,6 +34,7 @@
 #include <QMouseEvent>
 
 #include "vpuzzlepiece.h"
+#include "vpiececarrouselpiecepreview.h"
 
 
 class VPieceCarrouselPiece : public QFrame
@@ -77,14 +78,18 @@ public slots:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
 
+    void mouseMoveEvent(QMouseEvent *event) override;
+
 private:
     Q_DISABLE_COPY(VPieceCarrouselPiece)
 
     VPuzzlePiece *m_piece;
     QLabel *m_label{nullptr};
-    QGraphicsView *m_graphicsView{nullptr};
+    VPieceCarrouselPiecePreview *m_piecePreview{nullptr};
 
     bool m_isSelected = false;
+
+    QPoint m_dragStart;
 
 private slots:
 

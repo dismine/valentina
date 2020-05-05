@@ -59,9 +59,9 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     m_layout = new VPuzzleLayout();
 
     // ----- for test purposes, to be removed------------------
-    m_layout->SetLayoutMarginsConverted(1.5, 2.00, 4.21, 0.25);
-    m_layout->SetLayoutSizeConverted(30.0, 29.7);
-    m_layout->SetPiecesGapConverted(1.27);
+    m_layout->SetLayoutMarginsConverted(2, 2, 2, 2);
+    m_layout->SetLayoutSizeConverted(30.0, 45);
+    m_layout->SetPiecesGapConverted(1);
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
     // --------------------------------------------------------
@@ -71,6 +71,8 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     InitMenuBar();
     InitProperties();
     InitPieceCarrousel();
+    InitMainGraphics();
+
 
     SetPropertiesData();
 }
@@ -142,7 +144,12 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             {
                 VLayoutPiece rawPiece = data.pieces.at(i);
 
-                // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
+                // We translate the piece, so that the origin of the bounding rect of the piece is at (0,0)
+                // It makes positioning later on easier.
+                QRectF boundingRect = rawPiece.DetailBoundingRect();
+                QPointF topLeft = boundingRect.topLeft();
+                rawPiece.Translate(-topLeft.x(), -topLeft.y());
+
 
 
                 // TODO / FIXME: make a few tests, on the data to check for validity. If not
@@ -152,6 +159,7 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
                 // If seam allowance is built-in, but the seam line path is empty — invalid.
 
 
+                // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
                 VPuzzlePiece *piece = CreatePiece(rawPiece);
                 m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
             }
@@ -173,7 +181,6 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 {
-
     VPuzzlePiece *piece = new VPuzzlePiece();
     piece->SetName(rawPiece.GetName());
     piece->SetUuid(rawPiece.GetUUID());
@@ -409,6 +416,15 @@ void PuzzleMainWindow::SetPropertyTabTilesData()
 void PuzzleMainWindow::SetPropertyTabLayersData()
 {
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitMainGraphics()
+{
+    m_graphicsView = new VPuzzleMainGraphicsView(m_layout, this);
+    ui->centralWidget->layout()->addWidget(m_graphicsView);
+
+    m_graphicsView->RefreshLayout();
 }
 
 
@@ -654,7 +670,8 @@ void PuzzleMainWindow::on_LayoutSizeChanged()
     }
 
     // TODO Undo / Redo
-    // TODO update the QGraphicView
+
+    m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -667,8 +684,11 @@ void PuzzleMainWindow::on_LayoutOrientationChanged()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, length_before);
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, width_before);
 
+    m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
+
     // TODO Undo / Redo
-    // TODO update the QGraphicView
+
+    m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -696,7 +716,8 @@ void PuzzleMainWindow::on_LayoutMarginChanged()
             );
 
     // TODO Undo / Redo
-    // TODO update the QGraphicView
+
+    m_graphicsView->RefreshLayout();
 }
 
 

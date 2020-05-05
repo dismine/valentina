@@ -24,9 +24,6 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
-    <item>
-     <widget class="QGraphicsView" name="graphicsView"/>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -1096,7 +1093,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>graphicsView</tabstop>
   <tabstop>scrollAreaLayout</tabstop>
   <tabstop>doubleSpinBoxLayoutMarginTop</tabstop>
   <tabstop>doubleSpinBoxLayoutMarginLeft</tabstop>

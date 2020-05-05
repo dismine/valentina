@@ -34,6 +34,7 @@
 
 #include "../vmisc/def.h"
 #include "vpiececarrousel.h"
+#include "vpuzzlemaingraphicsview.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
 #include "../vlayout/vlayoutpiece.h"
@@ -86,11 +87,13 @@ protected:
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
+
     VPieceCarrousel *m_pieceCarrousel{nullptr};
+    VPuzzleMainGraphicsView *m_graphicsView{nullptr};
+
     VPuzzleCommandLinePtr m_cmd;
 
     VPuzzleLayout *m_layout{nullptr};
-
     VPuzzlePiece *m_selectedPiece{nullptr};
 
     /**
@@ -134,6 +137,10 @@ private:
      */
     void InitPieceCarrousel();
 
+    /**
+     * @brief InitMainGraphics Initialises the puzzle main graphics
+     */
+    void InitMainGraphics();
 
     /**
      * @brief SetPropertiesData Sets the values of UI elements
