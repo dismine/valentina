@@ -31,14 +31,26 @@
 
 #include <QGraphicsItem>
 
-#include "vpuzzlepiece.h"
+class VPuzzlePiece;
 
-class VPuzzleGraphicsPiece : public QGraphicsItem
+class VPuzzleGraphicsPiece : public QGraphicsObject
 {
+    Q_OBJECT
 public:
     VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent = nullptr);
     ~VPuzzleGraphicsPiece();
     void Init();
+
+public slots:
+    /**
+     * @brief on_PieceSelectionChanged When the piece selection was changed
+     */
+    void on_PieceSelectionChanged();
+
+    /**
+     * @brief on_PiecePositionChanged When the piece position was changed
+     */
+    void on_PiecePositionChanged();
 
 protected:
     QRectF boundingRect() const override;
@@ -48,6 +60,7 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 private:
     Q_DISABLE_COPY(VPuzzleGraphicsPiece)
@@ -55,7 +68,6 @@ private:
 
     QPainterPath m_cuttingLine;
     QPainterPath m_seamLine;
-
 };
 
 #endif // VPUZZLEGRAPHICSPIECE_H

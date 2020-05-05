@@ -94,7 +94,7 @@ private:
     VPuzzleCommandLinePtr m_cmd;
 
     VPuzzleLayout *m_layout{nullptr};
-    VPuzzlePiece *m_selectedPiece{nullptr};
+    QList<VPuzzlePiece *>m_selectedPieces{QList<VPuzzlePiece *>()};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
@@ -354,7 +354,7 @@ private slots:
      * @brief on_CurrentPiecePositionChanged When the positionX or the positionY
      * is changed in the current piece tab
      */
-    void on_CurrentPiecePositionChanged();
+    void on_CurrentPiecePositionEdited();
 
     /**
      * @brief PieceCarrouselLocationChanged When the piece carrousel's location
@@ -364,10 +364,14 @@ private slots:
     void on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
 
     /**
-     * @brief on_PieceSelected When a piece has been selected
-     * @param piece the piece that was selected
+     * @brief on_PieceSelectionChanged When the piece selection has changed
      */
-    void on_PieceSelected(VPuzzlePiece* piece);
+    void on_PieceSelectionChanged();
+
+    /**
+     * @brief on_PiecePositionChanged When the current piece position has changed
+     */
+    void on_PiecePositionChanged();
 
 };
 

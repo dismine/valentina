@@ -78,13 +78,6 @@ public:
     void SelectPiece(VPuzzlePiece* piece);
 
 
-signals:
-    void pieceClicked(VPuzzlePiece* piece);
-
-public slots:
-    void on_PieceClicked(VPieceCarrouselPiece* carrouselPiece);
-
-
 private:
     Q_DISABLE_COPY(VPieceCarrousel)
 

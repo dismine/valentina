@@ -189,6 +189,11 @@ VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 
     // TODO : set all the information we need for the piece!
 
+    //
+    connect(piece, &VPuzzlePiece::SelectionChanged, this, &PuzzleMainWindow::on_PieceSelectionChanged);
+    connect(piece, &VPuzzlePiece::PositionChanged, this, &PuzzleMainWindow::on_PiecePositionChanged);
+
+
     return piece;
 }
 
@@ -228,9 +233,9 @@ void PuzzleMainWindow::InitPropertyTabCurrentPiece()
 
     // ------------------------------ placement -----------------------------------
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::on_CurrentPiecePositionChanged);
+            &PuzzleMainWindow::on_CurrentPiecePositionEdited);
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::on_CurrentPiecePositionChanged);
+            &PuzzleMainWindow::on_CurrentPiecePositionEdited);
 }
 
 
@@ -310,9 +315,6 @@ void PuzzleMainWindow::InitPieceCarrousel()
 
     connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
               &PuzzleMainWindow::on_PieceCarrouselLocationChanged);
-
-    connect(m_pieceCarrousel, QOverload<VPuzzlePiece*>::of(&VPieceCarrousel::pieceClicked), this,
-                    &PuzzleMainWindow::on_PieceSelected);
 }
 
 
@@ -335,31 +337,34 @@ void PuzzleMainWindow::SetPropertiesData()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
 {
-    if(m_selectedPiece == nullptr)
+    if(m_selectedPieces.count() == 0)
     {
-        if(false) // check for multiple piece selection
-        {
-            // TODO in the future
-        }
-        else
-        {
-           // TODO : update current piece data to show a "no current piece selected"
-            ui->containerCurrentPieceNoData->setVisible(true);
-            ui->containerCurrentPieceData->setVisible(false);
-        }
+        // TODO : update current piece data to show a "no current piece selected"
+         ui->containerCurrentPieceNoData->setVisible(true);
+         ui->containerCurrentPieceData->setVisible(false);
     }
-    else
+    else if(m_selectedPieces.count() == 1)
     {
+        VPuzzlePiece *selectedPiece = m_selectedPieces.first();
+
         ui->containerCurrentPieceNoData->setVisible(false);
         ui->containerCurrentPieceData->setVisible(true);
 
         // set the value to the current piece
-        ui->lineEditCurrentPieceName->setText(m_selectedPiece->GetName());
+        ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
 
-        ui->checkBoxCurrentPieceShowSeamline->setChecked(m_selectedPiece->GetShowSeamLine());
-        ui->checkBoxCurrentPieceMirrorPiece->setChecked(m_selectedPiece->GetPieceMirrored());
+        ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
+        ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
 
-        // TODO:rotation and placement;
+        QPointF pos = selectedPiece->GetPosition();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+
+        // TODO: rotation
+    }
+    else
+    {
+        // TODO in the future
     }
 }
 
@@ -790,18 +795,18 @@ void PuzzleMainWindow::on_pushButtonLayoutExport_clicked()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
 {
-    if(m_selectedPiece != nullptr)
+    if(m_selectedPieces.count() == 1)
     {
-        m_selectedPiece->SetShowSeamLine(checked);
+        m_selectedPieces.first()->SetShowSeamLine(checked);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 {
-    if(m_selectedPiece != nullptr)
+    if(m_selectedPieces.count() == 1)
     {
-        m_selectedPiece->SetPieceMirrored(checked);
+        m_selectedPieces.first()->SetPieceMirrored(checked);
     }
 }
 
@@ -821,16 +826,22 @@ void PuzzleMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double val
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::on_CurrentPiecePositionChanged()
+void PuzzleMainWindow::on_CurrentPiecePositionEdited()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::CurrentPiecePositionChanged");
-    int ret = msgBox.exec();
+//    ui->doubleSpinBoxCurrentPieceBoxPositionX->blockSignals(true);
+//    ui->doubleSpinBoxCurrentPieceBoxPositionY->blockSignals(true);
 
-    Q_UNUSED(ret);
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        QPointF pos(UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(), m_layout->GetUnit(), Unit::Px),
+                    UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(), m_layout->GetUnit(), Unit::Px));
+        piece->SetPosition(pos);
+    }
 
-    // TODO
+//    ui->doubleSpinBoxCurrentPieceBoxPositionX->blockSignals(false);
+//    ui->doubleSpinBoxCurrentPieceBoxPositionY->blockSignals(false);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -851,17 +862,35 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::on_PieceSelected(VPuzzlePiece* piece)
+void PuzzleMainWindow::on_PieceSelectionChanged()
 {
-    m_selectedPiece = piece;
+    // for now we have only single selection
+    // FIXME / TODO : To be updated when we support multiple selection.
 
-    // update the state of the piece carrousel
-    m_pieceCarrousel->SelectPiece(piece);
-
-    // update the Layout
-
-    // TODO
+    for (auto piece : m_selectedPieces)
+    {
+        if(piece->GetIsSelected())
+        {
+            piece->SetIsSelected(false);
+        }
+    }
+    m_selectedPieces = m_layout->GetSelectedPieces();
 
     // update the property of the piece currently selected
     SetPropertyTabCurrentPieceData();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::on_PiecePositionChanged()
+{
+
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        QPointF pos = piece->GetPosition();
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+    }
 }

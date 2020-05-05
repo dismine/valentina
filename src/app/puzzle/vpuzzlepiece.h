@@ -31,9 +31,11 @@
 #include <QUuid>
 #include <QVector>
 #include <QPoint>
+#include <QTransform>
 
-class VPuzzlePiece
+class VPuzzlePiece : public QObject
 {
+    Q_OBJECT
 public:
     VPuzzlePiece();
     ~VPuzzlePiece();
@@ -109,14 +111,84 @@ public:
      */
     void SetPieceMirrored(bool value);
 
+    /**
+     * @brief SetPosition Sets the position of the piece, in relation to the origin of the scene
+     * @param point the point where to set the piece
+     */
+    void SetPosition(QPointF point);
+
+    /**
+     * @brief GetPosition Returns the position of the piece
+     * @return the position of the piece
+     */
+    QPointF GetPosition();
+
+    /**
+     * @brief SetRotation  Sets the rotation of the piece to the given angle.
+     * @param angle the angle of the rotation
+     */
+    void SetRotation(qreal angle);
+
+    /**
+     * @brief GetRotation Returns the angle of rotation
+     * @return the angle of rotation
+     */
+    qreal GetRotation();
+
+    /**
+     * @brief SetIsSelected Sets wether the piece is selected
+     * @param value true if the piece is selected
+     */
+    void SetIsSelected(bool value);
+
+    /**
+     * @brief GetIsSelected Returns wether the piece is selected
+     * @return true if the piece is selected
+     */
+    bool GetIsSelected();
+
+
+signals:
+    /**
+     * @brief SelectionChanged emited when the selection of the piece was
+     * changed through the SetIsSelected function
+     */
+    void SelectionChanged();
+
+    /**
+     * @brief PositionChanged emited when the position of the piece was
+     * changed through the SetPosition function
+     */
+    void PositionChanged();
+
+    /**
+     * @brief RotationChanged emited when the position of the piece was
+     * changed through the function SetRotation
+     */
+    void RotationChanged();
+
+    /**
+     * @brief PropertiesChanged emited when of the properties showSemaline
+     * or mirrorpiece where changed.
+     */
+    void PropertiesChanged();
+
+    /**
+     * @brief LayerChanged emited when the piece's layer was changed.
+     */
+    void LayerChanged();
 
 private:
     QUuid m_uuid{QUuid()};
     QString m_name{QString()};
     QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
     QVector<QPointF> m_seamLine{QVector<QPointF>()};
+
+    QTransform m_transform{QTransform()};
+
     bool m_showSeamline{true};
     bool m_mirrorPiece{false};
+    bool m_isSelected{false};
 };
 
 #endif // VPUZZLEPIECE_H

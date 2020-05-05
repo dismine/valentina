@@ -40,7 +40,8 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget *parent) :
-    QGraphicsView(parent)
+    QGraphicsView(parent),
+    m_graphicsPieces(QList<VPuzzleGraphicsPiece*>())
 {
     m_scene = new VPuzzleMainGraphicsScene(this);
     setScene(m_scene);
@@ -123,9 +124,22 @@ void VPuzzleMainGraphicsView::dropEvent(QDropEvent *event)
             QPointF scenePos = mapToScene(point);
             // todo take the position into account
 
-            VPuzzleGraphicsPiece *item = new VPuzzleGraphicsPiece(piece);
-            item->setPos(scenePos);
-            m_scene->addItem(item);
+            AddPiece(piece, scenePos);
+
         }
     }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleMainGraphicsView::AddPiece(VPuzzlePiece *piece, QPointF pos)
+{
+    VPuzzleGraphicsPiece *item = new VPuzzleGraphicsPiece(piece);
+    m_scene->addItem(item);
+    item->setSelected(true);
+    item->setPos(pos);
+
+    item->blockSignals(true);
+    piece->SetPosition(pos);
+    item->blockSignals(false);
 }

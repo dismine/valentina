@@ -50,6 +50,8 @@ public:
      */
     void RefreshLayout();
 
+    void AddPiece(VPuzzlePiece *piece, QPointF pos);
+
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
@@ -60,8 +62,11 @@ protected:
 private:
     Q_DISABLE_COPY(VPuzzleMainGraphicsView)
 
-    VPuzzleGraphicsLayout *m_graphicsLayout{nullptr};
     VPuzzleMainGraphicsScene *m_scene{nullptr};
+
+    VPuzzleGraphicsLayout *m_graphicsLayout{nullptr};
+    QList<VPuzzleGraphicsPiece*> m_graphicsPieces;
+
 };
 
 #endif // VPUZZLEMAINGRAPHICVIEW_H

@@ -76,6 +76,29 @@ QList<VPuzzleLayer *> VPuzzleLayout::GetLayers()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QList<VPuzzlePiece *> VPuzzleLayout::GetSelectedPieces()
+{
+    QList<VPuzzlePiece *> result = QList<VPuzzlePiece *>();
+
+    QList<VPuzzleLayer *> layers = m_layers;
+    layers.prepend(m_unplacedPiecesLayer);
+
+    for (auto layer : layers)
+    {
+        for (auto piece : layer->GetPieces())
+        {
+            if(piece->GetIsSelected())
+            {
+                result.append(piece);
+            }
+        }
+    }
+
+    return result;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetUnit(Unit unit)
 {
     m_unit = unit;

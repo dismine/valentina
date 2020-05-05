@@ -101,6 +101,8 @@ bool VPuzzlePiece::GetShowSeamLine()
 void VPuzzlePiece::SetShowSeamLine(bool value)
 {
     m_showSeamline = value;
+
+    emit PropertiesChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,5 +115,53 @@ bool VPuzzlePiece::GetPieceMirrored()
 void VPuzzlePiece::SetPieceMirrored(bool value)
 {
     m_mirrorPiece = value;
+
+    emit PropertiesChanged();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetPosition(QPointF point)
+{
+    m_transform.translate(point.x() - m_transform.dx(), point.y() - m_transform.dy());
+
+    emit PositionChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPuzzlePiece::GetPosition()
+{
+    return QPointF(m_transform.dx(), m_transform.dy());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetRotation(qreal angle)
+{
+    Q_UNUSED(angle);
+    //TODO
+
+    emit RotationChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPuzzlePiece::GetRotation()
+{
+    // TODO
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetIsSelected(bool value)
+{
+    m_isSelected = value;
+
+    emit SelectionChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzlePiece::GetIsSelected()
+{
+    return m_isSelected;
+}
+
+
 

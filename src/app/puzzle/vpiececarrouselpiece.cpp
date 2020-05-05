@@ -92,6 +92,11 @@ void VPieceCarrouselPiece::Init()
     pieceLayout->addWidget(m_piecePreview);
     pieceLayout->addWidget(m_label);
 
+
+    // connect the signals
+    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPieceCarrouselPiece::on_PieceSelectionChanged);
+
+
     // then refresh the data
     Refresh();
 }
@@ -142,11 +147,9 @@ VPuzzlePiece * VPieceCarrouselPiece::GetPiece()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::SetIsSelected(bool value)
+void VPieceCarrouselPiece::on_PieceSelectionChanged()
 {
-    m_isSelected = value;
-
-    if(value)
+    if(m_piece->GetIsSelected())
     {
         setStyleSheet("background-color:white; border: 2px solid red;");
     }
@@ -156,11 +159,7 @@ void VPieceCarrouselPiece::SetIsSelected(bool value)
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-bool VPieceCarrouselPiece::GetIsSelected()
-{
-    return m_isSelected;
-}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
@@ -170,9 +169,9 @@ void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
 
     if (event->button() == Qt::LeftButton)
     {
-        if(!m_isSelected)
+        if(!m_piece->GetIsSelected())
         {
-            emit clicked(this);
+            m_piece->SetIsSelected(true);
         }
         m_dragStart = event->pos();
     }

@@ -35,6 +35,7 @@
 #include "def.h"
 
 class VPuzzleLayer;
+class VPuzzlePiece;
 
 // is this the right place for the definition?
 enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
@@ -51,7 +52,22 @@ public:
     VPuzzleLayer* AddLayer(VPuzzleLayer *layer);
     QList<VPuzzleLayer *> GetLayers();
 
+    /**
+     * @brief GetSelectedPieces Returns the list of the selected pieces
+     * @return the selected pieces
+     */
+    QList<VPuzzlePiece *> GetSelectedPieces();
+
+    /**
+     * @brief SetUnit Sets the unit of the layout to the given unit
+     * @param unit the new unit
+     */
     void SetUnit(Unit unit);
+
+    /**
+     * @brief GetUnit Returns the current unit of the layout
+     * @return the unit
+     */
     Unit GetUnit() const;
 
     /**
@@ -133,7 +149,16 @@ public:
      */
     QMarginsF GetLayoutMarginsConverted() const;
 
-    void            SetFollowGrainline(FollowGrainline state);
+    /**
+     * @brief SetFollowGrainline Sets the type of grainline for the pieces to follow
+     * @param state the type of grainline
+     */
+    void SetFollowGrainline(FollowGrainline state);
+
+    /**
+     * @brief GetFollowGrainline Returns if the layout's pieces follow a grainline or not
+     * @return wether the pieces follow a grainline and if so, which grainline
+     */
     FollowGrainline GetFollowGrainline() const;
 
     /**

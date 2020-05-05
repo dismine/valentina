@@ -33,11 +33,16 @@
 #include <QPainter>
 #include <QCursor>
 #include <QGraphicsSceneMouseEvent>
+#include <QStyleOptionGraphicsItem>
 
+#include "vpuzzlepiece.h"
+
+#include <QLoggingCategory>
+Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleGraphicsPiece::VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent) :
-    QGraphicsItem(parent),
+    QGraphicsObject(parent),
     m_piece(piece),
     m_cuttingLine(QPainterPath()),
     m_seamLine(QPainterPath())
@@ -55,7 +60,7 @@ VPuzzleGraphicsPiece::~VPuzzleGraphicsPiece()
 void VPuzzleGraphicsPiece::Init()
 {
     // set some infos
-    setFlags(ItemIsSelectable | ItemIsMovable);
+    setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
     setCursor(QCursor(Qt::OpenHandCursor));
 
     //setAcceptHoverEvents(true); // maybe we can do some stuff with this
@@ -76,7 +81,9 @@ void VPuzzleGraphicsPiece::Init()
 
     // TODO : initialises the other elements like grain line, labels, passmarks etc.
 
-
+    // Initialises the connectors
+    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPuzzleGraphicsPiece::on_PieceSelectionChanged);
+    connect(m_piece, &VPuzzlePiece::PositionChanged, this, &VPuzzleGraphicsPiece::on_PiecePositionChanged);
 }
 
 
@@ -106,8 +113,14 @@ QPainterPath VPuzzleGraphicsPiece::shape() const
 void VPuzzleGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+    Q_UNUSED(option);
 
     QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    if(isSelected())
+    {
+        pen.setColor(Qt::red);
+    }
+
     QBrush noBrush(Qt::NoBrush);
 
     painter->setPen(pen);
@@ -136,6 +149,8 @@ void VPuzzleGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
+    setSelected(true);
+
     setCursor(Qt::ClosedHandCursor);
 }
 
@@ -155,4 +170,38 @@ void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::on_PieceSelectionChanged()
+{
+    setSelected(m_piece->GetIsSelected());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::on_PiecePositionChanged()
+{
+    setPos(m_piece->GetPosition());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVariant VPuzzleGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    if (scene()) {
+        if(change == ItemPositionHasChanged)
+        {
+            blockSignals(true);
+            m_piece->SetPosition(pos());
+            blockSignals(false);
+        }
+
+        if(change == ItemSelectedHasChanged)
+        {
+            if(m_piece->GetIsSelected() != isSelected())
+            {
+                m_piece->SetIsSelected(isSelected());
+            }
+        }
+    }
+
+    return QGraphicsObject::itemChange(change, value);
+}
 

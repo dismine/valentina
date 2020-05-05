@@ -89,10 +89,6 @@ void VPieceCarrouselLayer::Refresh()
         setVisible(true);
         carrouselPiece->CleanPreview();
         setVisible(false);
-
-        connect(carrouselPiece, QOverload<VPieceCarrouselPiece*>::of(&VPieceCarrouselPiece::clicked), this,
-                        &VPieceCarrouselLayer::on_PieceClicked);
-
     }
 }
 
@@ -102,8 +98,3 @@ QList<VPieceCarrouselPiece*> VPieceCarrouselLayer::GetCarrouselPieces()
     return m_carrouselPieces;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::on_PieceClicked(VPieceCarrouselPiece* carrouselPiece)
-{
-    emit pieceClicked(carrouselPiece);
-}
