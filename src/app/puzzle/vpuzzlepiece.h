@@ -147,6 +147,42 @@ public:
      */
     bool GetIsSelected();
 
+    /**
+     * @brief SetIsGrainlineEnabled Wether the piece has a grainline or not
+     * @param value true or false
+     */
+    void SetIsGrainlineEnabled(bool value);
+
+    /**
+     * @brief GetIsGrainlineEnabled Returns wether the grainline is enabled for this piece
+     * @return true if enabled
+     */
+    bool GetIsGrainlineEnabled();
+
+    /**
+     * @brief SetGrainlineAngle Sets the angle of the grainline
+     * @param value
+     */
+    void SetGrainlineAngle(qreal value);
+
+    /**
+     * @brief GetGrainlineAngle Returns the angle of the grainline for this piece
+     * @return the angle
+     */
+    qreal GetGrainlineAngle();
+
+    /**
+     * @brief SetGrainline Sets the grainline to the given vector of points
+     * @param grainline the grainline
+     */
+    void SetGrainline(QVector<QPointF> grainline);
+
+    /**
+     * @brief GetGrainline Returns the grainline for this piece
+     * @return the vector
+     */
+    QVector<QPointF> GetGrainline();
+
 
 signals:
     /**
@@ -183,6 +219,10 @@ private:
     QString m_name{QString()};
     QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
     QVector<QPointF> m_seamLine{QVector<QPointF>()};
+
+    QVector<QPointF> m_grainline{QVector<QPointF>()};
+    bool m_isGrainlineEnabled{false};
+    qreal m_grainlineAngle{0};
 
     QTransform m_transform{QTransform()};
 

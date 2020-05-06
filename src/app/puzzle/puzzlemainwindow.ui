@@ -228,9 +228,9 @@
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>0</y>
+              <y>-542</y>
               <width>342</width>
-              <height>894</height>
+              <height>1302</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -248,31 +248,6 @@
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QWidget" name="containerCurrentPieceNoData" native="true">
-               <layout class="QVBoxLayout" name="containerCurrentPieceNoDataLayout">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="labelCurrentPieceNoPieceSelected">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>400</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>No piece selected</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
               </widget>
              </item>
              <item>
@@ -380,6 +355,9 @@
                    </item>
                    <item row="0" column="1">
                     <widget class="QDoubleSpinBox" name="doubleSpinBoxCurrentPieceBoxPositionX">
+                     <property name="minimum">
+                      <double>-10000.000000000000000</double>
+                     </property>
                      <property name="maximum">
                       <double>10000.000000000000000</double>
                      </property>
@@ -397,6 +375,9 @@
                    </item>
                    <item row="1" column="1">
                     <widget class="QDoubleSpinBox" name="doubleSpinBoxCurrentPieceBoxPositionY">
+                     <property name="minimum">
+                      <double>-10000.000000000000000</double>
+                     </property>
                      <property name="maximum">
                       <double>10000.000000000000000</double>
                      </property>
@@ -406,6 +387,53 @@
                     </widget>
                    </item>
                   </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="containerCurrentPieceNoData" native="true">
+               <layout class="QVBoxLayout" name="containerCurrentPieceNoDataLayout">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="labelCurrentPieceNoPieceSelected">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>400</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>No piece selected</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="containerCurrentPieceMultipleData" native="true">
+               <layout class="QVBoxLayout" name="verticalLayout_11">
+                <item>
+                 <widget class="QLabel" name="labelCurrentPieceMultiplePieceSelected">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>400</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Multiple pieces selected</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                </layout>

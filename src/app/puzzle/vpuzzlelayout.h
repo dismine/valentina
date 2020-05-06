@@ -194,6 +194,12 @@ public:
     void SetStickyEdges(bool state);
     bool GetStickyEdges() const;
 
+    /**
+     * @brief ClearSelection goes through the layers & pieces and calls
+     * SetIsSelected(false) for the pieces that were selected.
+     */
+    void ClearSelection();
+
 private:
     Q_DISABLE_COPY(VPuzzleLayout)
     VPuzzleLayer *m_unplacedPiecesLayer;

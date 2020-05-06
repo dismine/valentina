@@ -152,9 +152,11 @@ qreal VPuzzlePiece::GetRotation()
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzlePiece::SetIsSelected(bool value)
 {
-    m_isSelected = value;
-
-    emit SelectionChanged();
+    if(m_isSelected != value)
+    {
+        m_isSelected = value;
+        emit SelectionChanged();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,5 +165,38 @@ bool VPuzzlePiece::GetIsSelected()
     return m_isSelected;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetIsGrainlineEnabled(bool value)
+{
+    m_isGrainlineEnabled = value;
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzlePiece::GetIsGrainlineEnabled()
+{
+    return m_isGrainlineEnabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetGrainlineAngle(qreal value)
+{
+    m_grainlineAngle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPuzzlePiece::GetGrainlineAngle()
+{
+    return m_grainlineAngle;
+}
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetGrainline(QVector<QPointF> grainline)
+{
+    m_grainline = grainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPuzzlePiece::GetGrainline()
+{
+    return m_grainline;
+}
 

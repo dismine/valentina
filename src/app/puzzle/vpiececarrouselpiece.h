@@ -37,11 +37,13 @@
 #include "vpiececarrouselpiecepreview.h"
 
 
+class VPieceCarrouselLayer;
+
 class VPieceCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent = nullptr);
+    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, VPieceCarrouselLayer *carrouselLayer);
     ~VPieceCarrouselPiece();
 
     void Init();
@@ -70,6 +72,9 @@ private:
     Q_DISABLE_COPY(VPieceCarrouselPiece)
 
     VPuzzlePiece *m_piece;
+
+    VPieceCarrouselLayer *m_carrouselLayer;
+
     QLabel *m_label{nullptr};
     VPieceCarrouselPiecePreview *m_piecePreview{nullptr};
 

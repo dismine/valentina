@@ -184,8 +184,16 @@ VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
     VPuzzlePiece *piece = new VPuzzlePiece();
     piece->SetName(rawPiece.GetName());
     piece->SetUuid(rawPiece.GetUUID());
+
     piece->SetCuttingLine(rawPiece.GetMappedSeamAllowancePoints());
     piece->SetSeamLine(rawPiece.GetMappedContourPoints());
+
+    piece->SetIsGrainlineEnabled(rawPiece.IsGrainlineEnabled());
+    if(rawPiece.IsGrainlineEnabled())
+    {
+        piece->SetGrainlineAngle(rawPiece.GrainlineAngle());
+        piece->SetGrainline(rawPiece.GetGrainline());
+    }
 
     // TODO : set all the information we need for the piece!
 
@@ -339,16 +347,20 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
 {
     if(m_selectedPieces.count() == 0)
     {
-        // TODO : update current piece data to show a "no current piece selected"
+        // show the content "no piece selected"
+
          ui->containerCurrentPieceNoData->setVisible(true);
          ui->containerCurrentPieceData->setVisible(false);
+         ui->containerCurrentPieceMultipleData->setVisible(false);
     }
     else if(m_selectedPieces.count() == 1)
     {
-        VPuzzlePiece *selectedPiece = m_selectedPieces.first();
-
+        // show the content "selected piece data"
         ui->containerCurrentPieceNoData->setVisible(false);
         ui->containerCurrentPieceData->setVisible(true);
+        ui->containerCurrentPieceMultipleData->setVisible(false);
+
+        VPuzzlePiece *selectedPiece = m_selectedPieces.first();
 
         // set the value to the current piece
         ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
@@ -364,7 +376,13 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
     }
     else
     {
-        // TODO in the future
+        // show the content "multiple pieces selected"
+
+        ui->containerCurrentPieceNoData->setVisible(false);
+        ui->containerCurrentPieceData->setVisible(false);
+        ui->containerCurrentPieceMultipleData->setVisible(true);
+
+        // if needed in the future, we can show some properties that coul be edited for all the pieces
     }
 }
 
@@ -864,16 +882,6 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_PieceSelectionChanged()
 {
-    // for now we have only single selection
-    // FIXME / TODO : To be updated when we support multiple selection.
-
-    for (auto piece : m_selectedPieces)
-    {
-        if(piece->GetIsSelected())
-        {
-            piece->SetIsSelected(false);
-        }
-    }
     m_selectedPieces = m_layout->GetSelectedPieces();
 
     // update the property of the piece currently selected

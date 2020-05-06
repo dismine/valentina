@@ -37,6 +37,8 @@
 #include <QApplication>
 
 #include "vpuzzlemimedatapiece.h"
+#include "vpiececarrousellayer.h"
+#include "vpiececarrousel.h"
 
 #include <QLoggingCategory>
 
@@ -44,9 +46,10 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent) :
-    QFrame(parent),
-    m_piece(piece)
+VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, VPieceCarrouselLayer *carrouselLayer) :
+    m_piece(piece),
+    m_carrouselLayer(carrouselLayer),
+    m_dragStart(QPoint())
 {
     Init();
 }
@@ -169,10 +172,16 @@ void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
 
     if (event->button() == Qt::LeftButton)
     {
-        if(!m_piece->GetIsSelected())
+        if(!(event->modifiers() & Qt::ControlModifier))
         {
+            m_carrouselLayer->GetCarrousel()->ClearSelection();
             m_piece->SetIsSelected(true);
         }
+        else
+        {
+            m_piece->SetIsSelected(!m_piece->GetIsSelected());
+        }
+
         m_dragStart = event->pos();
     }
 }
@@ -190,6 +199,11 @@ void VPieceCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
         return;
     }
 
+    // make sure the multiple selection is removed
+    m_carrouselLayer->GetCarrousel()->ClearSelection();
+    m_piece->SetIsSelected(true);
+
+    // starts the dragging
     QDrag *drag = new QDrag(this);
     VPuzzleMimeDataPiece *mimeData = new VPuzzleMimeDataPiece();
     mimeData->SetPiecePtr(m_piece);

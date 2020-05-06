@@ -45,7 +45,8 @@ VPuzzleGraphicsPiece::VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *p
     QGraphicsObject(parent),
     m_piece(piece),
     m_cuttingLine(QPainterPath()),
-    m_seamLine(QPainterPath())
+    m_seamLine(QPainterPath()),
+    m_grainline(QPainterPath())
 {
     Init();
 }
@@ -63,9 +64,6 @@ void VPuzzleGraphicsPiece::Init()
     setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
     setCursor(QCursor(Qt::OpenHandCursor));
 
-    //setAcceptHoverEvents(true); // maybe we can do some stuff with this
-
-
     // initialises the seam line
     QVector<QPointF> seamLinePoints = m_piece->GetSeamLine();
     m_seamLine.moveTo(seamLinePoints.first());
@@ -78,8 +76,14 @@ void VPuzzleGraphicsPiece::Init()
     for (int i = 1; i < cuttingLinepoints.size(); ++i)
         m_cuttingLine.lineTo(cuttingLinepoints.at(i));
 
+    // initialises the grainline
+    QVector<QPointF> grainLinepoints = m_piece->GetGrainline();
+    m_grainline.moveTo(grainLinepoints.first());
+    for (int i = 1; i < grainLinepoints.size(); ++i)
+        m_grainline.lineTo(grainLinepoints.at(i));
 
-    // TODO : initialises the other elements like grain line, labels, passmarks etc.
+
+    // TODO : initialises the other elements labels, passmarks etc.
 
     // Initialises the connectors
     connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPuzzleGraphicsPiece::on_PieceSelectionChanged);
@@ -126,47 +130,69 @@ void VPuzzleGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsIt
     painter->setPen(pen);
     painter->setBrush(noBrush);
 
+    // paint the cutting line
     if(!m_cuttingLine.isEmpty())
     {
         painter->drawPath(m_cuttingLine);
     }
 
+    // paint the seam line
     if(!m_seamLine.isEmpty())
     {
         painter->drawPath(m_seamLine);
+    }
+
+    // paint the grainline
+    if(!m_grainline.isEmpty())
+    {
+        painter->drawPath(m_grainline);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    bool selectionState = isSelected();
     //perform the default behaviour
     QGraphicsItem::mousePressEvent(event);
 
     // change the cursor when clicking left button
-    if (!(event->buttons() & Qt::LeftButton))
+    if (event->button() == Qt::LeftButton)
     {
-        return;
+        setSelected(true);
+        setCursor(Qt::ClosedHandCursor);
+
+        if (event->modifiers() & Qt::ControlModifier)
+        {
+            setSelected(!selectionState);
+        }
+        else
+        {
+            setSelected(true);
+        }
     }
-
-    setSelected(true);
-
-    setCursor(Qt::ClosedHandCursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    bool selectionState = isSelected();
+
     //perform the default behaviour
     QGraphicsItem::mouseReleaseEvent(event);
 
-    // change the cursor when clicking left button
-    if (!(event->buttons() & Qt::LeftButton))
-    {
-        return;
-    }
+    qCDebug(pGraphicsPiece, "piiiiieeece --- mouse release");
 
-    setCursor(Qt::OpenHandCursor);
+    // change the cursor when clicking left button
+
+    if (event->button() == Qt::LeftButton)
+    {
+        setCursor(Qt::OpenHandCursor);
+
+        qCDebug(pGraphicsPiece, "piiiiieeece --- left button");
+
+        setSelected(selectionState);
+    }
 }
 
 

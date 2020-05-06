@@ -72,10 +72,9 @@ public:
     void Clear();
 
     /**
-     * @brief SelectPiece Updates the carrousel so that the given piece is selected
-     * @param piece the piece to select
+     * @brief ClearSelection Clears the selection of the carrousel.
      */
-    void SelectPiece(VPuzzlePiece* piece);
+    void ClearSelection();
 
 
 private:

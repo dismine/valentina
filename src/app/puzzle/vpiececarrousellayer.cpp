@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vpiececarrousellayer.h"
+#include "vpiececarrousel.h"
+
 
 #include <QVBoxLayout>
 
@@ -35,9 +37,9 @@
 Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent) :
-    QWidget(parent),
+VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, VPieceCarrousel *carrousel) :
     m_layer(layer),
+    m_carrousel(carrousel),
     m_carrouselPieces(QList<VPieceCarrouselPiece*>())
 {
     Init();
@@ -80,7 +82,7 @@ void VPieceCarrouselLayer::Refresh()
     {
 //        qCDebug(pCarrouselLayer, "piece name : %s", piece->GetName().toStdString().c_str());
 
-        VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece);
+        VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece, this);
         m_carrouselPieces.append(carrouselPiece);
         layout()->addWidget(carrouselPiece);
 
@@ -96,5 +98,11 @@ void VPieceCarrouselLayer::Refresh()
 QList<VPieceCarrouselPiece*> VPieceCarrouselLayer::GetCarrouselPieces()
 {
     return m_carrouselPieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceCarrousel* VPieceCarrouselLayer::GetCarrousel()
+{
+    return m_carrousel;
 }
 

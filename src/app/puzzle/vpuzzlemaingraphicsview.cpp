@@ -142,4 +142,7 @@ void VPuzzleMainGraphicsView::AddPiece(VPuzzlePiece *piece, QPointF pos)
     item->blockSignals(true);
     piece->SetPosition(pos);
     item->blockSignals(false);
+
+
+
 }

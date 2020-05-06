@@ -68,6 +68,7 @@ private:
 
     QPainterPath m_cuttingLine;
     QPainterPath m_seamLine;
+    QPainterPath m_grainline;
 };
 
 #endif // VPUZZLEGRAPHICSPIECE_H

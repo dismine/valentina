@@ -221,3 +221,9 @@ void VPieceCarrousel::RefreshOrientation()
         // FIXME: find a nicer way than putting directly the 120 width of the piece
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrousel::ClearSelection()
+{
+    m_layout->ClearSelection();
+}
