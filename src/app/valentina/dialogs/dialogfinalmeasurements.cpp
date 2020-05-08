@@ -35,6 +35,9 @@
 #include "../vpatterndb/calculator.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 
+#include <QtGlobal>
+#include <QtCore/qnumeric.h>
+
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
 namespace
