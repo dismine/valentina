@@ -37,6 +37,7 @@
 
 #include <QPainterPath>
 #include <QtGlobal>
+#include <QtCore/qnumeric.h>
 
 namespace
 {
