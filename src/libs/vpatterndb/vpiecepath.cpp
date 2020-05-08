@@ -36,6 +36,7 @@
 #include "../ifc/exception/vexceptionobjecterror.h"
 
 #include <QPainterPath>
+#include <QtGlobal>
 
 namespace
 {
