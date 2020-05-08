@@ -99,7 +99,6 @@ void VPieceCarrouselPiece::Init()
     // connect the signals
     connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPieceCarrouselPiece::on_PieceSelectionChanged);
 
-
     // then refresh the data
     Refresh();
 }
@@ -141,6 +140,9 @@ void VPieceCarrouselPiece::Refresh()
 
     // set the tooltip
     setToolTip(m_piece->GetName());
+
+    // set the selection state correctly.
+    on_PieceSelectionChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,8 +163,6 @@ void VPieceCarrouselPiece::on_PieceSelectionChanged()
         setStyleSheet("background-color:white; border: 2px solid transparent;");
     }
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
@@ -194,6 +194,12 @@ void VPieceCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
     {
         return;
     }
+
+    if(m_piece->GetLayer() != m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer())
+    {
+        return;
+    }
+
     if((event->pos() - m_dragStart).manhattanLength() < QApplication::startDragDistance())
     {
         return;

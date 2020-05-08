@@ -31,10 +31,13 @@
 #include <QList>
 #include "vpuzzlepiece.h"
 
-class VPuzzleLayer
+class VPuzzleLayout;
+
+class VPuzzleLayer : public QObject
 {
+    Q_OBJECT
 public:
-    VPuzzleLayer();
+    VPuzzleLayer(VPuzzleLayout *layout);
     ~VPuzzleLayer();
 
     QList<VPuzzlePiece *> GetPieces();
@@ -50,9 +53,30 @@ public:
     void SetIsVisible(bool value);
     bool GetIsVisible() const;
 
+    /**
+     * @brief GetLayout Returns the layout in which this layer is
+     * @return the layout of this layer
+     */
+    VPuzzleLayout* GetLayout();
+
+signals:
+    /**
+     * @brief PieceAdded The signal is emited when a piece was added
+     */
+    void PieceAdded(VPuzzlePiece *piece);
+
+    /**
+     * @brief PieceRemoved The signal is emited when a piece was removed
+     */
+    void PieceRemoved(VPuzzlePiece *piece);
+
 private:
+    Q_DISABLE_COPY(VPuzzleLayer)
+
     QString m_name{};
     QList<VPuzzlePiece *> m_pieces{};
+
+    VPuzzleLayout *m_layout{nullptr};
 
     // control
     bool m_isVisible{true};

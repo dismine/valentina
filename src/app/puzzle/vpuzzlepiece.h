@@ -33,6 +33,8 @@
 #include <QPoint>
 #include <QTransform>
 
+class VPuzzleLayer;
+
 class VPuzzlePiece : public QObject
 {
     Q_OBJECT
@@ -136,18 +138,6 @@ public:
     qreal GetRotation();
 
     /**
-     * @brief SetIsSelected Sets wether the piece is selected
-     * @param value true if the piece is selected
-     */
-    void SetIsSelected(bool value);
-
-    /**
-     * @brief GetIsSelected Returns wether the piece is selected
-     * @return true if the piece is selected
-     */
-    bool GetIsSelected();
-
-    /**
      * @brief SetIsGrainlineEnabled Wether the piece has a grainline or not
      * @param value true or false
      */
@@ -184,6 +174,30 @@ public:
     QVector<QPointF> GetGrainline();
 
 
+    /**
+     * @brief SetIsSelected Sets wether the piece is selected
+     * @param value true if the piece is selected
+     */
+    void SetIsSelected(bool value);
+
+    /**
+     * @brief GetIsSelected Returns wether the piece is selected. It emit the signal SelectionChanged
+     * @return true if the piece is selected
+     */
+    bool GetIsSelected();
+
+    /**
+     * @brief GetLayer Returns the layer in which the piece is.
+     * @return layer of the piece
+     */
+    VPuzzleLayer* GetLayer();
+
+    /**
+     * @brief SetLayer Sets the layer of the piece to the given layer
+     * @param layer
+     */
+    void SetLayer(VPuzzleLayer* layer);
+
 signals:
     /**
      * @brief SelectionChanged emited when the selection of the piece was
@@ -209,12 +223,8 @@ signals:
      */
     void PropertiesChanged();
 
-    /**
-     * @brief LayerChanged emited when the piece's layer was changed.
-     */
-    void LayerChanged();
-
 private:
+    Q_DISABLE_COPY(VPuzzlePiece)
     QUuid m_uuid{QUuid()};
     QString m_name{QString()};
     QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
@@ -228,7 +238,9 @@ private:
 
     bool m_showSeamline{true};
     bool m_mirrorPiece{false};
+
     bool m_isSelected{false};
+    VPuzzleLayer *m_layer{nullptr};
 };
 
 #endif // VPUZZLEPIECE_H

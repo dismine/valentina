@@ -27,6 +27,12 @@
  *************************************************************************/
 #include "vpuzzlepiece.h"
 
+#include "vpuzzlelayer.h"
+
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(pPiece, "p.piece")
+
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzlePiece::VPuzzlePiece()
 {
@@ -200,3 +206,18 @@ QVector<QPointF> VPuzzlePiece::GetGrainline()
     return m_grainline;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayer* VPuzzlePiece::GetLayer()
+{
+    return m_layer;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetLayer(VPuzzleLayer* layer)
+{
+    if(layer != m_layer)
+    {
+        m_layer = layer;
+    }
+}

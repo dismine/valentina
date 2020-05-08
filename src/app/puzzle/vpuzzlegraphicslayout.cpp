@@ -31,9 +31,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleGraphicsLayout::VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsItem *parent):
     QGraphicsItem(parent),
-    m_layout(layout)
+    m_layout(layout),
+    m_boundingRect(GetLayoutRect())
 {
-    m_boundingRect = GetLayoutRect();
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

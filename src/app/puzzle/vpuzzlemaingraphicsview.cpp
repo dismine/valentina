@@ -30,8 +30,10 @@
 
 #include <QDragEnterEvent>
 #include <QMimeData>
+#include <QKeyEvent>
 
 #include "vpuzzlemimedatapiece.h"
+#include "vpuzzlelayer.h"
 
 #include <QLoggingCategory>
 
@@ -41,6 +43,7 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget *parent) :
     QGraphicsView(parent),
+    m_layout(layout),
     m_graphicsPieces(QList<VPuzzleGraphicsPiece*>())
 {
     m_scene = new VPuzzleMainGraphicsScene(this);
@@ -53,6 +56,9 @@ VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget 
     setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
     setAcceptDrops(true);
+
+    // add the connections
+    connect(m_layout, &VPuzzleLayout::PieceMovedToLayer, this, &VPuzzleMainGraphicsView::on_PieceMovedToLayer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,30 +125,66 @@ void VPuzzleMainGraphicsView::dropEvent(QDropEvent *event)
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
             event->acceptProposedAction();
 
-
             QPoint point = event->pos();
-            QPointF scenePos = mapToScene(point);
-            // todo take the position into account
+            piece->SetPosition(mapToScene(point));
 
-            AddPiece(piece, scenePos);
-
+            // change the layer of the piece
+            VPuzzleLayer *focusedLayer = m_layout->GetFocusedLayer();
+            if(focusedLayer != nullptr)
+            {
+                m_layout->MovePieceToLayer(piece, focusedLayer);
+            }
         }
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleMainGraphicsView::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
+    {
+        for(auto graphicsPiece : m_graphicsPieces)
+        {
+            VPuzzlePiece *piece = graphicsPiece->GetPiece();
+
+            if(piece->GetIsSelected())
+            {
+                m_layout->MovePieceToLayer(piece, m_layout->GetUnplacedPiecesLayer());
+            }
+        }
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::AddPiece(VPuzzlePiece *piece, QPointF pos)
+void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter)
 {
-    VPuzzleGraphicsPiece *item = new VPuzzleGraphicsPiece(piece);
-    m_scene->addItem(item);
-    item->setSelected(true);
-    item->setPos(pos);
+    Q_UNUSED(layerBefore)
 
-    item->blockSignals(true);
-    piece->SetPosition(pos);
-    item->blockSignals(false);
+    VPuzzleGraphicsPiece *_graphicsPiece = nullptr;
+    for(auto graphicPiece : m_graphicsPieces)
+    {
+        if(graphicPiece->GetPiece() == piece)
+        {
+            _graphicsPiece = graphicPiece;
+        }
+    }
 
+    if(layerAfter == m_layout->GetUnplacedPiecesLayer() && _graphicsPiece != nullptr)
+    {
+        scene()->removeItem(_graphicsPiece);
+        m_graphicsPieces.removeAll(_graphicsPiece);
+    }
+    else if(layerAfter != m_layout->GetUnplacedPiecesLayer())
+    {
+        if(_graphicsPiece == nullptr)
+        {
+            _graphicsPiece = new VPuzzleGraphicsPiece(piece);
+            m_graphicsPieces.append(_graphicsPiece);
+        }
 
-
+        scene()->addItem(_graphicsPiece);
+        _graphicsPiece->setPos(_graphicsPiece->GetPiece()->GetPosition());
+        _graphicsPiece->setSelected(_graphicsPiece->GetPiece()->GetIsSelected());
+        _graphicsPiece->update();
+    }
 }

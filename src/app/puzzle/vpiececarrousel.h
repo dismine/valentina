@@ -76,7 +76,6 @@ public:
      */
     void ClearSelection();
 
-
 private:
     Q_DISABLE_COPY(VPieceCarrousel)
 
@@ -92,6 +91,11 @@ private:
 
 
 private slots:
+
+    /**
+     * @brief on_ActiveLayerChanged Called when the active layer is changed
+     * @param index
+     */
     void on_ActiveLayerChanged(int index);
 };
 

@@ -45,9 +45,20 @@ public:
     void Init();
     void Refresh();
 
+    /**
+     * @brief Clear it clears the carrousel layer from its pieces
+     */
+    void Clear();
+
     QList<VPieceCarrouselPiece*> GetCarrouselPieces();
 
     VPieceCarrousel* GetCarrousel();
+
+    /**
+     * @brief GetPuzzleLayer Returns the corresponding VPuzzleLayer
+     * @return the VPuzzleLayer
+     */
+    VPuzzleLayer* GetLayer();
 
 private:
     Q_DISABLE_COPY(VPieceCarrouselLayer)
@@ -57,6 +68,16 @@ private:
     QList<VPieceCarrouselPiece*> m_carrouselPieces;
 
 private slots:
+
+    /**
+     * @brief on_PieceUpdated This slot is called when a piece was added
+     */
+    void on_PieceAdded(VPuzzlePiece* piece);
+
+    /**
+     * @brief on_PieceUpdated This slot is called when a piece was removed
+     */
+    void on_PieceRemoved(VPuzzlePiece* piece);
 
 };
 

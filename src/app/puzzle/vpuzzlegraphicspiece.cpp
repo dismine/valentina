@@ -90,6 +90,11 @@ void VPuzzleGraphicsPiece::Init()
     connect(m_piece, &VPuzzlePiece::PositionChanged, this, &VPuzzleGraphicsPiece::on_PiecePositionChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzlePiece* VPuzzleGraphicsPiece::GetPiece()
+{
+    return m_piece;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPuzzleGraphicsPiece::boundingRect() const
@@ -120,20 +125,25 @@ void VPuzzleGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsIt
     Q_UNUSED(option);
 
     QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    if(isSelected())
-    {
-        pen.setColor(Qt::red);
-    }
-
     QBrush noBrush(Qt::NoBrush);
+    QBrush selectionBrush(QColor(255,160,160,60));
 
     painter->setPen(pen);
-    painter->setBrush(noBrush);
+
+    if(isSelected())
+    {
+       painter->setBrush(selectionBrush);
+    }
+    else
+    {
+        painter->setBrush(noBrush);
+    }
 
     // paint the cutting line
     if(!m_cuttingLine.isEmpty())
     {
         painter->drawPath(m_cuttingLine);
+        painter->setBrush(noBrush);
     }
 
     // paint the seam line
@@ -141,6 +151,8 @@ void VPuzzleGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsIt
     {
         painter->drawPath(m_seamLine);
     }
+
+    painter->setBrush(noBrush);
 
     // paint the grainline
     if(!m_grainline.isEmpty())

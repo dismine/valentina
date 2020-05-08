@@ -28,7 +28,6 @@
 
 #include "vpuzzlemaingraphicsscene.h"
 
-
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleMainGraphicsScene::VPuzzleMainGraphicsScene(QObject *parent): QGraphicsScene(parent)
 {

@@ -38,6 +38,7 @@ class VPuzzleMainGraphicsScene : public QGraphicsScene
     Q_OBJECT
 public:
     VPuzzleMainGraphicsScene(QObject *parent = nullptr);
+
 };
 
 #endif // VPUZZLEMAINGRAPHICSSCENE_H

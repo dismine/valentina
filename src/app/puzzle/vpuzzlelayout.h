@@ -40,8 +40,9 @@ class VPuzzlePiece;
 // is this the right place for the definition?
 enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
 
-class VPuzzleLayout
+class VPuzzleLayout : public QObject
 {
+    Q_OBJECT
 public:
     VPuzzleLayout();
     virtual ~VPuzzleLayout();
@@ -200,10 +201,42 @@ public:
      */
     void ClearSelection();
 
+    /**
+     * @brief SetFocusedLayer Sets the focused layer, to which pieces are added from the carrousel via drag
+     * and drop
+     * @param focusedLayer the new active layer. If nullptr, then it sets automaticaly the first layer from m_layers
+     */
+    void SetFocusedLayer(VPuzzleLayer* focusedLayer = nullptr);
+
+    /**
+     * @brief GetFocusedLayer Returns the focused layer, to which pieces are added from the carrousel via drag
+     * and drop
+     * @return the focused layer
+     */
+    VPuzzleLayer* GetFocusedLayer();
+
+    /**
+     * @brief MovePieceToLayer Moves the given piece to the given layer
+     * @param piece the piece to move
+     * @param layer the layer to move the piece to
+     */
+    void MovePieceToLayer(VPuzzlePiece* piece, VPuzzleLayer* layer);
+
+signals:
+
+    void PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter);
+
 private:
     Q_DISABLE_COPY(VPuzzleLayout)
+
     VPuzzleLayer *m_unplacedPiecesLayer;
     QList<VPuzzleLayer *> m_layers{};
+
+    /**
+     * @brief m_focusedLayer pointer the the focused layer, to which pieces will be
+     * added via drag and drop, or if no layer is defined.
+     */
+    VPuzzleLayer *m_focusedLayer{nullptr};
 
     // format
     Unit m_unit{Unit::Cm};

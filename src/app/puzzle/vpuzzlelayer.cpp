@@ -27,8 +27,15 @@
  *************************************************************************/
 #include "vpuzzlelayer.h"
 
+#include "vpuzzlelayout.h"
+
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(pLayer, "p.layer")
+
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer::VPuzzleLayer()
+VPuzzleLayer::VPuzzleLayer(VPuzzleLayout *layout):
+    m_layout(layout)
 {
 
 }
@@ -40,6 +47,12 @@ VPuzzleLayer::~VPuzzleLayer()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayout* VPuzzleLayer::GetLayout()
+{
+    return m_layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QList<VPuzzlePiece *> VPuzzleLayer::GetPieces()
 {
     return m_pieces;
@@ -48,13 +61,21 @@ QList<VPuzzlePiece *> VPuzzleLayer::GetPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayer::AddPiece(VPuzzlePiece *piece)
 {
+    qCDebug(pLayer(), "piece -- %s -- added to %s", qUtf8Printable(piece->GetName()), qUtf8Printable(this->GetName()));
+
     m_pieces.append(piece);
+    piece->SetLayer(this);
+
+    emit PieceAdded(piece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayer::RemovePiece(VPuzzlePiece *piece)
 {
     m_pieces.removeAll(piece);
+    piece->SetLayer(nullptr);
+
+    emit PieceRemoved(piece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

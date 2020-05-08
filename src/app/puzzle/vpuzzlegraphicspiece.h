@@ -41,6 +41,12 @@ public:
     ~VPuzzleGraphicsPiece();
     void Init();
 
+    /**
+     * @brief GetPiece Returns the piece that corresponds to the graphics piece
+     * @return the piece
+     */
+    VPuzzlePiece* GetPiece();
+
 public slots:
     /**
      * @brief on_PieceSelectionChanged When the piece selection was changed

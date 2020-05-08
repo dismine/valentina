@@ -93,8 +93,8 @@ void VPieceCarrousel::Init()
     mainLayout->addWidget(m_scrollArea);
 
     // ------ then we fill the carrousel with the layout content
-    Refresh();
-}
+    Refresh();  
+ }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrousel::Refresh()

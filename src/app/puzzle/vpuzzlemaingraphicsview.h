@@ -50,14 +50,22 @@ public:
      */
     void RefreshLayout();
 
-    void AddPiece(VPuzzlePiece *piece, QPointF pos);
-
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 
+    void keyPressEvent(QKeyEvent *event) override;
+
+private slots:
+    /**
+     * @brief on_PieceMovedToLayer The slot is called when the given piece was moved from the given layer to the other given layer
+     * @param piece the piece that was moved
+     * @param layerBefore the layer before the move
+     * @param layerAfter the layer after the move
+     */
+    void on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter);
 
 private:
     Q_DISABLE_COPY(VPuzzleMainGraphicsView)
@@ -65,6 +73,8 @@ private:
     VPuzzleMainGraphicsScene *m_scene{nullptr};
 
     VPuzzleGraphicsLayout *m_graphicsLayout{nullptr};
+    VPuzzleLayout *m_layout{nullptr};
+
     QList<VPuzzleGraphicsPiece*> m_graphicsPieces;
 
 };
