@@ -48,9 +48,9 @@ VElidedLabel::VElidedLabel(const QString &text, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VElidedLabel::setText(const QString &newText)
+void VElidedLabel::setText(const QString &text)
 {
-    m_content = newText;
+    m_content = text;
     update();
 }
 
