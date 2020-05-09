@@ -187,9 +187,10 @@ void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleL
         }
 
         scene()->addItem(_graphicsPiece);
-        _graphicsPiece->setPos(_graphicsPiece->GetPiece()->GetPosition());
-        _graphicsPiece->setSelected(_graphicsPiece->GetPiece()->GetIsSelected());
-        _graphicsPiece->update();
+        // not very clean to directly call slots
+        _graphicsPiece->on_PieceSelectionChanged();
+        _graphicsPiece->on_PiecePositionChanged();
+        _graphicsPiece->on_PieceRotationChanged();
     }
 }
 
