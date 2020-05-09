@@ -93,7 +93,7 @@ public:
      * @brief GetShowSeamLine returns wether the seam line of the piece has to be shown or not
      * @return true if the seamline has to be shown
      */
-    bool GetShowSeamLine();
+    bool GetShowSeamLine() const;
 
     /**
      * @brief SetShowSeamLine sets wether the seam line of the piece has to be shown or not
@@ -105,7 +105,7 @@ public:
      * @brief GetMirrorPiece returns wether the piece is mirrored or not
      * @return  true if the piece is mirrored
      */
-    bool GetPieceMirrored();
+    bool GetPieceMirrored() const;
 
     /**
      * @brief SetMirrorPiece sets wether the piece is mirrored or not

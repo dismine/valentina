@@ -100,7 +100,7 @@ void VPuzzlePiece::SetSeamLine(const QVector<QPointF> &seamLine)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzlePiece::GetShowSeamLine()
+bool VPuzzlePiece::GetShowSeamLine() const
 {
     return m_showSeamline;
 }
@@ -114,7 +114,7 @@ void VPuzzlePiece::SetShowSeamLine(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzlePiece::GetPieceMirrored()
+bool VPuzzlePiece::GetPieceMirrored() const
 {
     return m_mirrorPiece;
 }
