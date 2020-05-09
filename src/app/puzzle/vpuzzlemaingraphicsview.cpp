@@ -59,6 +59,7 @@ VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget 
 
     // add the connections
     connect(m_layout, &VPuzzleLayout::PieceMovedToLayer, this, &VPuzzleMainGraphicsView::on_PieceMovedToLayer);
+    connect(m_scene, &VPuzzleMainGraphicsScene::selectionChanged, this, &VPuzzleMainGraphicsView::on_SceneSelectionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,12 +144,15 @@ void VPuzzleMainGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
     {
-        for(auto graphicsPiece : m_graphicsPieces)
+        QList<VPuzzleGraphicsPiece*> tmpGraphicsPieces = m_graphicsPieces;
+
+        for(auto graphicsPiece : tmpGraphicsPieces)
         {
             VPuzzlePiece *piece = graphicsPiece->GetPiece();
 
             if(piece->GetIsSelected())
             {
+                piece->SetIsSelected(false);
                 m_layout->MovePieceToLayer(piece, m_layout->GetUnplacedPiecesLayer());
             }
         }
@@ -187,4 +191,14 @@ void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleL
         _graphicsPiece->setSelected(_graphicsPiece->GetPiece()->GetIsSelected());
         _graphicsPiece->update();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleMainGraphicsView::on_SceneSelectionChanged()
+{
+    // most of the selection behaviour taks place automatically
+    // but we need to make sure that the unplaced pieces are unselected when the scene selection has changed
+    // because as they are not part of the scene, they are not updated
+
+    m_layout->GetUnplacedPiecesLayer()->ClearSelection();
 }

@@ -59,6 +59,11 @@ public:
      */
     VPuzzleLayout* GetLayout();
 
+    /**
+     * @brief ClearSelection Clears the selection of the pieces in this layer
+     */
+    void ClearSelection();
+
 signals:
     /**
      * @brief PieceAdded The signal is emited when a piece was added

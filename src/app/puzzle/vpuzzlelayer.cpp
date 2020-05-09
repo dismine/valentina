@@ -58,6 +58,16 @@ QList<VPuzzlePiece *> VPuzzleLayer::GetPieces()
     return m_pieces;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayer::ClearSelection()
+{
+    for (auto piece: m_pieces)
+    {
+        piece->SetIsSelected(false);
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayer::AddPiece(VPuzzlePiece *piece)
 {

@@ -275,9 +275,11 @@ bool VPuzzleLayout::GetStickyEdges() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::ClearSelection()
 {
-    for(auto piece : GetSelectedPieces())
+    m_unplacedPiecesLayer->ClearSelection();
+
+    for (auto layer : m_layers)
     {
-        piece->SetIsSelected(false);
+        layer->ClearSelection();
     }
 }
 

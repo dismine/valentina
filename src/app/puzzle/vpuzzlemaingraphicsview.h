@@ -67,6 +67,11 @@ private slots:
      */
     void on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter);
 
+    /**
+     * @brief on_SceneSelectionChanged Slot is called when the scene selection has changed
+     */
+    void on_SceneSelectionChanged();
+
 private:
     Q_DISABLE_COPY(VPuzzleMainGraphicsView)
 
