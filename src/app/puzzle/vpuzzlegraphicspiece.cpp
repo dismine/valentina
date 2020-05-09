@@ -92,6 +92,7 @@ void VPuzzleGraphicsPiece::Init()
     // Initialises the connectors
     connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPuzzleGraphicsPiece::on_PieceSelectionChanged);
     connect(m_piece, &VPuzzlePiece::PositionChanged, this, &VPuzzleGraphicsPiece::on_PiecePositionChanged);
+    connect(m_piece, &VPuzzlePiece::RotationChanged, this, &VPuzzleGraphicsPiece::on_PieceRotationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,6 +264,13 @@ void VPuzzleGraphicsPiece::on_PieceSelectionChanged()
 void VPuzzleGraphicsPiece::on_PiecePositionChanged()
 {
     setPos(m_piece->GetPosition());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::on_PieceRotationChanged()
+{
+    setTransformOriginPoint(boundingRect().center());
+    setRotation(-m_piece->GetRotation());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

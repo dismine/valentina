@@ -372,7 +372,8 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
 
-        // TODO: rotation
+        qreal angle = selectedPiece->GetRotation();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
     }
     else
     {
@@ -831,24 +832,17 @@ void PuzzleMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceAngleChanged");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(value);
-    Q_UNUSED(ret);
-
-    // TODO
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        piece->SetRotation(value);
+    }
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_CurrentPiecePositionEdited()
 {
-//    ui->doubleSpinBoxCurrentPieceBoxPositionX->blockSignals(true);
-//    ui->doubleSpinBoxCurrentPieceBoxPositionY->blockSignals(true);
-
     if(m_selectedPieces.count() == 1)
     {
         VPuzzlePiece *piece = m_selectedPieces.first();
@@ -856,10 +850,6 @@ void PuzzleMainWindow::on_CurrentPiecePositionEdited()
                     UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(), m_layout->GetUnit(), Unit::Px));
         piece->SetPosition(pos);
     }
-
-//    ui->doubleSpinBoxCurrentPieceBoxPositionX->blockSignals(false);
-//    ui->doubleSpinBoxCurrentPieceBoxPositionY->blockSignals(false);
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------

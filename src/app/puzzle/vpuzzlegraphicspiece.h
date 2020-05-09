@@ -49,14 +49,19 @@ public:
 
 public slots:
     /**
-     * @brief on_PieceSelectionChanged When the piece selection was changed
+     * @brief on_PieceSelectionChanged Slot called when the piece selection was changed
      */
     void on_PieceSelectionChanged();
 
     /**
-     * @brief on_PiecePositionChanged When the piece position was changed
+     * @brief on_PiecePositionChanged Slot called when the piece position was changed
      */
     void on_PiecePositionChanged();
+
+    /**
+     * @brief on_PieceRotationChanged Slot called when the piece rotation was changed
+     */
+    void on_PieceRotationChanged();
 
 protected:
     QRectF boundingRect() const override;

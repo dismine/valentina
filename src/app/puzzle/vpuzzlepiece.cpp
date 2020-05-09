@@ -27,6 +27,8 @@
  *************************************************************************/
 #include "vpuzzlepiece.h"
 
+#include <QtMath>
+
 #include "vpuzzlelayer.h"
 
 #include <QLoggingCategory>
@@ -142,8 +144,25 @@ QPointF VPuzzlePiece::GetPosition()
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzlePiece::SetRotation(qreal angle)
 {
-    Q_UNUSED(angle);
-    //TODO
+    m_pieceAngle = angle;
+
+    // make sure the angle is  [0 <= angle < 360]
+    while(m_pieceAngle >= 360)
+    {
+        m_pieceAngle -= 360;
+    }
+
+    while(m_pieceAngle < 0)
+    {
+        m_pieceAngle += 360;
+    }
+
+
+//    qreal currentAngle = GetRotation();
+//    qreal newAngle = angle - currentAngle;
+
+//    m_transform.rotate(newAngle);
+
 
     emit RotationChanged();
 }
@@ -151,8 +170,20 @@ void VPuzzlePiece::SetRotation(qreal angle)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPuzzlePiece::GetRotation()
 {
-    // TODO
-    return 0;
+    return m_pieceAngle;
+
+    // We don't use the QTransform vor now because the math behind it to retrieve the angle is not trivial.
+    // TODO / FIXME:  we can use QTransform later for optimization
+
+
+//    QTransform tmpTransform = m_transform;
+//    tmpTransform.translate(-tmpTransform.dx(), -tmpTransform.dy()); // make sure there is only the rotation in the matrix
+
+//    qreal angle = qRadiansToDegrees(qAcos(tmpTransform.m11()));
+
+//    qCDebug(pPiece, "new angle : %f", angle);
+
+//    return angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

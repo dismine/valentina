@@ -127,7 +127,7 @@ public:
 
     /**
      * @brief SetRotation  Sets the rotation of the piece to the given angle.
-     * @param angle the angle of the rotation
+     * @param angle the angle of the rotation in degree
      */
     void SetRotation(qreal angle);
 
@@ -235,6 +235,8 @@ private:
     qreal m_grainlineAngle{0};
 
     QTransform m_transform{QTransform()};
+    // use a separate value for now because it's not easy to get the angle from the transform matrix
+    qreal m_pieceAngle{0};
 
     bool m_showSeamline{true};
     bool m_mirrorPiece{false};
