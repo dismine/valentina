@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vpiececarrousellayer.h"
+#include "../vmisc/backport/qoverload.h"
 
 #include <QVBoxLayout>
 
