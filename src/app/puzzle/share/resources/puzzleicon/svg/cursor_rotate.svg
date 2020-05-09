@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866668"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="icon_rotate.svg"
+   inkscape:export-filename="/home/ronan/Desktop/iconRotate.png"
+   inkscape:export-xdpi="48"
+   inkscape:export-ydpi="48"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="-73.50406"
+     inkscape:cy="-5.7476577"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1487"
+     inkscape:window-height="906"
+     inkscape:window-x="648"
+     inkscape:window-y="365"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-263.13332)">
+    <path
+       style="fill:#000000;fill-opacity:0.99622641;stroke:#000000;stroke-width:0.56587124;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 7.0186194,287.41283 -6.32117702,-9.61886 4.59283552,0.0718 c 0.2260142,-13.99266 14.6277861,-19.32352 24.6168741,-9.04316 8.326613,8.56942 1.645094,23.6663 -11.704329,23.56294 l -0.02016,4.07882 -9.3161816,-5.90315 9.3649386,-5.23047 -0.0097,3.75053 c 12.855101,-0.23223 15.657569,-13.03558 9.321879,-19.01152 -6.380838,-6.01853 -18.7084318,-6.45152 -19.0255146,7.87916 l 4.6551916,0.099 z"
+       id="path873"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccscccccsccc" />
+  </g>
+</svg>

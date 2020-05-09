@@ -200,6 +200,7 @@ VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
     //
     connect(piece, &VPuzzlePiece::SelectionChanged, this, &PuzzleMainWindow::on_PieceSelectionChanged);
     connect(piece, &VPuzzlePiece::PositionChanged, this, &PuzzleMainWindow::on_PiecePositionChanged);
+    connect(piece, &VPuzzlePiece::RotationChanged, this, &PuzzleMainWindow::on_PieceRotationChanged);
 
 
     return piece;
@@ -890,5 +891,17 @@ void PuzzleMainWindow::on_PiecePositionChanged()
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::on_PieceRotationChanged()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        qreal angle = piece->GetRotation();
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
     }
 }

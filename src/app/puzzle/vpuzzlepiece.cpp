@@ -144,27 +144,28 @@ QPointF VPuzzlePiece::GetPosition()
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzlePiece::SetRotation(qreal angle)
 {
-    m_pieceAngle = angle;
+    //    qreal currentAngle = GetRotation();
+    //    qreal newAngle = angle - currentAngle;
 
-    // make sure the angle is  [0 <= angle < 360]
-    while(m_pieceAngle >= 360)
+    //    m_transform.rotate(newAngle);
+
+    if(m_pieceAngle != angle)
     {
-        m_pieceAngle -= 360;
+        m_pieceAngle = angle;
+
+        // make sure the angle is  [0 <= angle < 360]
+        while(m_pieceAngle >= 360)
+        {
+            m_pieceAngle -= 360;
+        }
+
+        while(m_pieceAngle < 0)
+        {
+            m_pieceAngle += 360;
+        }
+
+        emit RotationChanged();
     }
-
-    while(m_pieceAngle < 0)
-    {
-        m_pieceAngle += 360;
-    }
-
-
-//    qreal currentAngle = GetRotation();
-//    qreal newAngle = angle - currentAngle;
-
-//    m_transform.rotate(newAngle);
-
-
-    emit RotationChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -69,7 +69,10 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
 
     void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
@@ -89,6 +92,9 @@ private:
     QPainterPath m_cuttingLine;
     QPainterPath m_seamLine;
     QPainterPath m_grainline;
+
+    QPointF m_rotationStartPoint;
+
 };
 
 #endif // VPUZZLEGRAPHICSPIECE_H

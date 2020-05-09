@@ -373,6 +373,11 @@ private slots:
      */
     void on_PiecePositionChanged();
 
+    /**
+     * @brief on_PieceRotationChanged When the current piece rotation has changed
+     */
+    void on_PieceRotationChanged();
+
 };
 
 #endif // PUZZLEMAINWINDOW_H

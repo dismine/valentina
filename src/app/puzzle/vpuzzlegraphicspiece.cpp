@@ -36,6 +36,8 @@
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QMenu>
+#include <QtMath>
+#include <QGraphicsScene>
 
 #include "vpuzzlepiece.h"
 #include "vpuzzlelayer.h"
@@ -50,7 +52,8 @@ VPuzzleGraphicsPiece::VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *p
     m_piece(piece),
     m_cuttingLine(QPainterPath()),
     m_seamLine(QPainterPath()),
-    m_grainline(QPainterPath())
+    m_grainline(QPainterPath()),
+    m_rotationStartPoint(QPointF())
 {
     Init();
 }
@@ -66,6 +69,7 @@ void VPuzzleGraphicsPiece::Init()
 {
     // set some infos
     setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
+    setAcceptHoverEvents(true);
     setCursor(QCursor(Qt::OpenHandCursor));
 
     // initialises the seam line
@@ -188,7 +192,49 @@ void VPuzzleGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
             setSelected(true);
         }
     }
+
+    if((event->button() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
+    {
+        m_rotationStartPoint = event->scenePos();
+
+        QPixmap cursor_pixmap = QPixmap(":/cursor_rotate");
+        cursor_pixmap = cursor_pixmap.scaledToWidth(32);
+        QCursor cursor_rotate = QCursor(cursor_pixmap, 16, 16);
+
+        setCursor(cursor_rotate);
+    }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+{
+    if((event->buttons() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
+    {
+
+        QPointF rotationNewPoint = event->scenePos();
+        QPointF rotationCenter = sceneBoundingRect().center();
+
+        // get the angle from the center to the initial click point
+          qreal init_x = m_rotationStartPoint.x() - rotationCenter.x();
+          qreal init_y = m_rotationStartPoint.y() - rotationCenter.y();
+          qreal initial_angle = qAtan2(init_y, init_x);
+
+          qreal x = rotationNewPoint.x() - rotationCenter.x();
+          qreal y = rotationNewPoint.y() - rotationCenter.y();
+          qreal mv_angle = qAtan2(y,x);
+
+          qreal angle = (initial_angle-mv_angle)*180/M_PI;
+
+          setTransformOriginPoint(boundingRect().center());
+          setRotation(-(angle+m_piece->GetRotation()));
+          event->accept();
+    }
+    else
+    {
+       QGraphicsItem::mouseMoveEvent(event);
+    }
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -204,6 +250,36 @@ void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         setCursor(Qt::OpenHandCursor);
 
         setSelected(selectionState);
+
+        if(m_piece->GetPosition() != pos())
+        {
+            m_piece->SetPosition(pos());
+        }
+    }
+
+    if((event->button() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
+    {
+        m_piece->SetRotation(-rotation());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+
+    if(event->modifiers() & Qt::AltModifier)
+    {
+        // TODO FIXME: find a more efficient way
+
+        QPixmap cursor_pixmap = QPixmap(":/cursor_rotate");
+        cursor_pixmap = cursor_pixmap.scaledToWidth(32);
+        QCursor cursor_rotate = QCursor(cursor_pixmap, 16, 16);
+
+        setCursor(cursor_rotate);
+    }
+    else
+    {
+        setCursor(QCursor(Qt::OpenHandCursor));
     }
 }
 
@@ -246,7 +322,7 @@ void VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();
-    VPuzzleLayer *layer = (VPuzzleLayer *) v.value<VPuzzleLayer *>();
+    VPuzzleLayer *layer = v.value<VPuzzleLayer *>();
     if(layer != nullptr)
     {
         layer->GetLayout()->MovePieceToLayer(m_piece, layer);
@@ -277,12 +353,14 @@ void VPuzzleGraphicsPiece::on_PieceRotationChanged()
 QVariant VPuzzleGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (scene()) {
-        if(change == ItemPositionHasChanged)
-        {
-            blockSignals(true);
-            m_piece->SetPosition(pos());
-            blockSignals(false);
-        }
+
+        // we do this in the mouseRelease button to avoid updated this property all the time.
+//        if(change == ItemPositionHasChanged)
+//        {
+//            blockSignals(true);
+//            m_piece->SetPosition(pos());
+//            blockSignals(false);
+//        }
 
         if(change == ItemSelectedHasChanged)
         {
