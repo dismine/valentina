@@ -34,8 +34,12 @@
 #include <QCursor>
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
+#include <QGraphicsSceneContextMenuEvent>
+#include <QMenu>
 
 #include "vpuzzlepiece.h"
+#include "vpuzzlelayer.h"
+#include "vpuzzlelayout.h"
 
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
@@ -193,17 +197,58 @@ void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     //perform the default behaviour
     QGraphicsItem::mouseReleaseEvent(event);
 
-    qCDebug(pGraphicsPiece, "piiiiieeece --- mouse release");
-
     // change the cursor when clicking left button
-
     if (event->button() == Qt::LeftButton)
     {
         setCursor(Qt::OpenHandCursor);
 
-        qCDebug(pGraphicsPiece, "piiiiieeece --- left button");
-
         setSelected(selectionState);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    QMenu contextMenu;
+
+    // move to layer actions  -- TODO : To be tested properly when we have several layers
+    QList<VPuzzleLayer*> layers = m_piece->GetLayer()->GetLayout()->GetLayers();
+    layers.removeAll(m_piece->GetLayer());
+
+    if(layers.count() > 0)
+    {
+        QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
+
+        // TODO order in alphabetical order
+
+        for (auto layer : layers)
+        {
+            QAction* moveToLayer = moveMenu->addAction(layer->GetName());
+            QVariant data = QVariant::fromValue(layer);
+            moveToLayer->setData(data);
+
+            connect(moveToLayer, &QAction::triggered, this, &VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer);
+        }
+    }
+
+    // remove from layout action
+    QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
+    QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
+    removeAction->setData(data);
+    connect(removeAction, &QAction::triggered, this, &VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer);
+
+    contextMenu.exec(event->screenPos());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer()
+{
+    QAction *act = qobject_cast<QAction *>(sender());
+    QVariant v = act->data();
+    VPuzzleLayer *layer = (VPuzzleLayer *) v.value<VPuzzleLayer *>();
+    if(layer != nullptr)
+    {
+        layer->GetLayout()->MovePieceToLayer(m_piece, layer);
     }
 }
 

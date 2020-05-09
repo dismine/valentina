@@ -35,6 +35,7 @@
 #include <QDrag>
 #include <QPainter>
 #include <QApplication>
+#include <QMenu>
 
 #include "vpuzzlemimedatapiece.h"
 #include "vpiececarrousellayer.h"
@@ -228,4 +229,57 @@ void VPieceCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
     drag->setPixmap(pixmap);
     drag->setMimeData(mimeData);
     drag->exec();
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu contextMenu;
+
+    VPuzzleLayer* unplacedLayer = m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer();
+    QList<VPuzzleLayer*> layers = m_piece->GetLayer()->GetLayout()->GetLayers();
+
+    // move to layer actions  -- TODO : To be tested properly when we have several layers
+    layers.removeAll(m_piece->GetLayer());
+    if(layers.count() > 0)
+    {
+        QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
+
+        // TODO order in alphabetical order
+
+        for (auto layer : layers)
+        {
+            QAction* moveToLayer = moveMenu->addAction(layer->GetName());
+            QVariant data = QVariant::fromValue(layer);
+            moveToLayer->setData(data);
+
+            connect(moveToLayer, &QAction::triggered, this, &VPieceCarrouselPiece::on_ActionPieceMovedToLayer);
+        }
+    }
+
+    // remove from layout action
+    if(m_piece->GetLayer() != unplacedLayer)
+    {
+        QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
+        QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
+        removeAction->setData(data);
+        connect(removeAction, &QAction::triggered, this, &VPieceCarrouselPiece::on_ActionPieceMovedToLayer);
+    }
+
+    contextMenu.exec(event->globalPos());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselPiece::on_ActionPieceMovedToLayer()
+{
+    QAction *act = qobject_cast<QAction *>(sender());
+    QVariant v = act->data();
+    VPuzzleLayer *layer = (VPuzzleLayer *) v.value<VPuzzleLayer *>();
+    if(layer != nullptr)
+    {
+        layer->GetLayout()->MovePieceToLayer(m_piece, layer);
+    }
 }

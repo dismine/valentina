@@ -68,6 +68,15 @@ protected:
 
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+
+private slots:
+    /**
+     * @brief on_ActionPieceMovedToLayer Slot called when the piece is moved via the
+     * context menu to anoter layer
+     */
+    void on_ActionPieceMovedToLayer();
+
 private:
     Q_DISABLE_COPY(VPuzzleGraphicsPiece)
     VPuzzlePiece *m_piece;
