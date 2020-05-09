@@ -5606,30 +5606,6 @@ Apply settings anyway?</source>
         <source>Add tags</source>
         <translation>Добавить категории</translation>
     </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tags:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add tags</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -13005,14 +12981,6 @@ Do you want to save your changes?</source>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Reading final measurements error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>VPiece</name>
@@ -14049,7 +14017,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>поворот</translation>
     </message>
 </context>
 <context>
