@@ -30,6 +30,7 @@
 #include <QtMath>
 
 #include "vpuzzlelayer.h"
+#include "../vmisc/def.h"
 
 #include <QLoggingCategory>
 
@@ -149,7 +150,7 @@ void VPuzzlePiece::SetRotation(qreal angle)
 
     //    m_transform.rotate(newAngle);
 
-    if(m_pieceAngle != angle)
+    if(not VFuzzyComparePossibleNulls(m_pieceAngle, angle))
     {
         m_pieceAngle = angle;
 
