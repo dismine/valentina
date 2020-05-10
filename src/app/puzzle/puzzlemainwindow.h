@@ -84,6 +84,8 @@ public slots:
 protected:
     enum { MaxRecentFiles = 5 };
 
+    virtual void closeEvent(QCloseEvent *event) override;
+
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
@@ -187,6 +189,11 @@ private:
      * @param value checkbox value
      */
     void SetCheckBoxValue(QCheckBox *checkbox, bool value);
+
+    void ReadSettings();
+    void WriteSettings();
+
+    bool MaybeSave();
 
 private slots:
     /**
