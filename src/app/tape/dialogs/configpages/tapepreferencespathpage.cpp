@@ -29,7 +29,7 @@
 #include "tapepreferencespathpage.h"
 #include "ui_tapepreferencespathpage.h"
 #include "../../mapplication.h"
-#include "../vmisc/vtapesettings.h"
+#include "../../vtapesettings.h"
 
 #include <QDir>
 #include <QFileDialog>

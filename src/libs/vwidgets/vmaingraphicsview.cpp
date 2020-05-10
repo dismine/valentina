@@ -56,7 +56,7 @@
 #include "vsimplecurve.h"
 #include "vcontrolpointspline.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vcommonsettings.h"
 #include "vabstractmainwindow.h"
 
 const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
@@ -70,7 +70,7 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
     qreal numSteps = 0;
-    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    VCommonSettings *settings = qApp->Settings();
 
     if (not numPixels.isNull())
     {
@@ -105,7 +105,7 @@ qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
         scheduledScrollings += numSteps;
     }
 
-    scheduledScrollings *= qobject_cast<VSettings *>(qApp->Settings())->GetScrollingAcceleration();
+    scheduledScrollings *= qApp->Settings()->GetScrollingAcceleration();
 
     return scheduledScrollings;
 }
@@ -197,7 +197,7 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::InitScrollingAnimation()
 {
-    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    VCommonSettings *settings = qApp->Settings();
 
     if (not verticalScrollAnim.isNull())
     {
@@ -427,7 +427,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
       m_oldCursor(),
       m_currentCursor(Qt::ArrowCursor)
 {
-    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    VCommonSettings *settings = qApp->Settings();
     if (settings && settings->IsOpenGLRender())
     {
         QOpenGLWidget *viewport = new QOpenGLWidget();

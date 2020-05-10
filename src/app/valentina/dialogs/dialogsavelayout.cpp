@@ -29,7 +29,7 @@
 #include "dialogsavelayout.h"
 #include "ui_dialogsavelayout.h"
 #include "../core/vapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../core/vvalentinasettings.h"
 #include "../ifc/exception/vexception.h"
 
 #include <QDir>
@@ -903,7 +903,7 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
  */
 void DialogSaveLayout::ReadSettings()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     const Unit unit = qApp->patternUnit();
 
     // read Margins top, right, bottom, left
@@ -957,7 +957,7 @@ void DialogSaveLayout::WriteSettings() const
         return;
     }
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     const Unit unit = qApp->patternUnit();
 
     // write Margins top, right, bottom, left

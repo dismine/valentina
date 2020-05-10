@@ -447,7 +447,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 
 void VApplication::ActivateDarkMode()
 {
-     VSettings *settings = qApp->ValentinaSettings();
+     VValentinaSettings *settings = qApp->ValentinaSettings();
      if (settings->GetDarkMode())
      {
          QFile f(QStringLiteral(":qdarkstyle/style.qss"));
@@ -726,15 +726,15 @@ void VApplication::AboutToQuit()
  */
 void VApplication::OpenSettings()
 {
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                             QCoreApplication::applicationName(), this);
+    settings = new VValentinaSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                      QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSettings *VApplication::ValentinaSettings()
+VValentinaSettings *VApplication::ValentinaSettings()
 {
     SCASSERT(settings != nullptr)
-    return qobject_cast<VSettings *>(settings);
+    return qobject_cast<VValentinaSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

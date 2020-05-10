@@ -29,7 +29,7 @@
 #include "dialoglayoutscale.h"
 #include "ui_dialoglayoutscale.h"
 #include "../core/vapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../core/vvalentinasettings.h"
 
 #include <QPushButton>
 
@@ -180,7 +180,7 @@ void DialogLayoutScale::VerticalScaleChanged(double d)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::ReadSettings()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     const Unit unit = qApp->patternUnit();
 
     // read Margins top, right, bottom, left
@@ -200,7 +200,7 @@ void DialogLayoutScale::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::WriteSettings() const
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     const Unit unit = qApp->patternUnit();
 
     // write Margins top, right, bottom, left

@@ -40,7 +40,7 @@
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/customevents.h"
-#include "../vmisc/vsettings.h"
+#include "../core/vvalentinasettings.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/compatibility.h"

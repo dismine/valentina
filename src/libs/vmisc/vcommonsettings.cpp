@@ -47,6 +47,26 @@
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/pmsystems.h"
 
+const int VCommonSettings::defaultScrollingDuration = 300;
+const int VCommonSettings::scrollingDurationMin = 100;
+const int VCommonSettings::scrollingDurationMax = 1000;
+
+const int VCommonSettings::defaultScrollingUpdateInterval = 30;
+const int VCommonSettings::scrollingUpdateIntervalMin = 10;
+const int VCommonSettings::scrollingUpdateIntervalMax = 100;
+
+const qreal VCommonSettings::defaultSensorMouseScale = 2.0;
+const qreal VCommonSettings::sensorMouseScaleMin = 1.0;
+const qreal VCommonSettings::sensorMouseScaleMax = 10.0;
+
+const qreal VCommonSettings::defaultWheelMouseScale = 45.0;
+const qreal VCommonSettings::wheelMouseScaleMin = 1.0;
+const qreal VCommonSettings::wheelMouseScaleMax = 100.0;
+
+const qreal VCommonSettings::defaultScrollingAcceleration = 1.3;
+const qreal VCommonSettings::scrollingAccelerationMin = 1.0;
+const qreal VCommonSettings::scrollingAccelerationMax = 10.0;
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements, (QLatin1String("paths/individual_measurements")))
@@ -81,6 +101,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, (QLatin
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath, (QLatin1String("pattern/pieceShowMainPath")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, (QLatin1String("pattern/labelFontSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, (QLatin1String("pattern/hideLabels")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, (QLatin1String("recentFileList")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1String("restoreFileList")))
@@ -105,12 +127,24 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserDateFormats, (QLatin1St
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelTimeFormat, (QLatin1String("label/timeFormat")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserTimeFormats, (QLatin1String("label/userTimeFormats")))
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale,
+                          (QLatin1String("scrolling/sensorMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
+
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
 Q_GLOBAL_STATIC(QString, localeCached)
 qreal lineWidthCached = 0;
 int labelFontSizeCached = 0;
 int pieceShowMainPath = -1;
+int scrollingDurationCached = -1;
+int scrollingUpdateIntervalCached = -1;
+qreal scrollingSensorMouseScaleCached = -1;
+qreal scrollingWheelMouseScaleCached = -1;
+qreal scrollingAccelerationCached = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
@@ -1218,4 +1252,119 @@ qreal VCommonSettings::WidthMainLine() const
 qreal VCommonSettings::WidthHairLine() const
 {
     return WidthMainLine()/3.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetScrollingDuration() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingDurationCached, *settingScrollingDuration, defaultScrollingDuration,
+                          scrollingDurationMin, scrollingDurationMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetScrollingDuration(int duration)
+{
+    scrollingDurationCached = qBound(scrollingDurationMin, duration, scrollingDurationMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingDuration, scrollingDurationCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetScrollingUpdateInterval() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingUpdateIntervalCached, *settingScrollingUpdateInterval,
+                          defaultScrollingUpdateInterval, scrollingUpdateIntervalMin, scrollingUpdateIntervalMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetScrollingUpdateInterval(int updateInterval)
+{
+    scrollingUpdateIntervalCached = qBound(scrollingUpdateIntervalMin, updateInterval, scrollingUpdateIntervalMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingUpdateInterval, scrollingUpdateIntervalCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetSensorMouseScale() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingSensorMouseScaleCached, *settingScrollingSensorMouseScale,
+                          defaultSensorMouseScale, sensorMouseScaleMin, sensorMouseScaleMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetSensorMouseScale(qreal scale)
+{
+    scrollingSensorMouseScaleCached = qBound(sensorMouseScaleMin, scale, sensorMouseScaleMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingSensorMouseScale, scrollingSensorMouseScaleCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetWheelMouseScale() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingWheelMouseScaleCached, *settingScrollingWheelMouseScale,
+                          defaultWheelMouseScale, wheelMouseScaleMin, wheelMouseScaleMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetWheelMouseScale(qreal scale)
+{
+    scrollingWheelMouseScaleCached = qBound(wheelMouseScaleMin, scale, wheelMouseScaleMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingWheelMouseScale, scrollingWheelMouseScaleCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetScrollingAcceleration() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingAccelerationCached, *settingScrollingAcceleration,
+                          defaultScrollingAcceleration, scrollingAccelerationMin, scrollingAccelerationMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetScrollingAcceleration(qreal acceleration)
+{
+    scrollingAccelerationCached = qBound(scrollingAccelerationMin, acceleration, scrollingAccelerationMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingAcceleration, scrollingAccelerationCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsOpenGLRender() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPatternUseOpenGLRender, 0).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetOpenGLRender(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPatternUseOpenGLRender, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetGraphicalOutput() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPatternGraphicalOutput, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetGraphicalOutput(const bool &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPatternGraphicalOutput, value);
+    settings.sync();
 }

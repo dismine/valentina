@@ -197,14 +197,14 @@ noRunPath{ # For enable run qmake with CONFIG+=noRunPath
 #win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
 #else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
 
-##VWidgets static library
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
+#VWidgets static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
 
-#INCLUDEPATH += $$PWD/../../libs/vwidgets
-#DEPENDPATH += $$PWD/../../libs/vwidgets
+INCLUDEPATH += $$PWD/../../libs/vwidgets
+DEPENDPATH += $$PWD/../../libs/vwidgets
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
 
 ## VFormat static library (depend on VPatternDB, IFC)
 #unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
@@ -277,13 +277,13 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
 INCLUDEPATH += $${PWD}/../../libs/qmuparser
 DEPENDPATH += $${PWD}/../../libs/qmuparser
 
-## VPropertyExplorer library
-#win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
-#else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+# VPropertyExplorer library
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
 
-#INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
-#DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
+INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
+DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
 contains(DEFINES, APPIMAGE) {
     unix:!macx: LIBS += -licudata -licui18n -licuuc

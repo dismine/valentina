@@ -3,18 +3,15 @@
 
 SOURCES += \
     $$PWD/def.cpp \
-    $$PWD/vsettings.cpp \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
     $$PWD/vcommonsettings.cpp \
-    $$PWD/vtapesettings.cpp \
     $$PWD/commandoptions.cpp \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
     $$PWD/literals.cpp \
-    $$PWD/vmodifierkey.cpp \
-    $$PWD/vpuzzlesettings.cpp
+    $$PWD/vmodifierkey.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -29,11 +26,9 @@ HEADERS += \
     $$PWD/stable.h \
     $$PWD/def.h \
     $$PWD/vmath.h \
-    $$PWD/vsettings.h \
     $$PWD/vabstractapplication.h \
     $$PWD/projectversion.h \
     $$PWD/vcommonsettings.h \
-    $$PWD/vtapesettings.h \
     $$PWD/debugbreak.h \
     $$PWD/vlockguard.h \
     $$PWD/vsysexits.h \
@@ -51,8 +46,7 @@ HEADERS += \
     $$PWD/vdatastreamenum.h \
     $$PWD/vmodifierkey.h \
     $$PWD/typedef.h \
-    $$PWD/backport/qscopeguard.h \
-    $$PWD/vpuzzlesettings.h
+    $$PWD/backport/qscopeguard.h
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \

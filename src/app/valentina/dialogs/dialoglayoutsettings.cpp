@@ -30,7 +30,7 @@
 #include "ui_dialoglayoutsettings.h"
 #include "../core/vapplication.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vmisc/vsettings.h"
+#include "../core/vvalentinasettings.h"
 #include "../vmisc/vmath.h"
 #include "../vlayout/vlayoutgenerator.h"
 
@@ -698,17 +698,17 @@ void DialogLayoutSettings::RestoreDefaults()
     InitPrinter();
     ui->comboBoxPrinter->blockSignals(false);
 
-    SetLayoutWidth(VSettings::GetDefLayoutWidth());
-    SetGroup(VSettings::GetDefLayoutGroup());
-    SetFollowGrainline(VSettings::GetDefLayoutFollowGrainline());
-    SetManualPriority(VSettings::GetDefLayoutManualPriority());
+    SetLayoutWidth(VValentinaSettings::GetDefLayoutWidth());
+    SetGroup(VValentinaSettings::GetDefLayoutGroup());
+    SetFollowGrainline(VValentinaSettings::GetDefLayoutFollowGrainline());
+    SetManualPriority(VValentinaSettings::GetDefLayoutManualPriority());
     SetFields(GetDefPrinterFields());
-    SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
-    SetMultiplier(VSettings::GetDefMultiplier());
-    SetNestingTime(VSettings::GetDefNestingTime());
-    SetEfficiencyCoefficient(VSettings::GetDefEfficiencyCoefficient());
-    SetNestQuantity(VSettings::GetDefLayoutNestQuantity());
-    SetPreferOneSheetSolution(VSettings::GetDefLayoutPreferOneSheetSolution());
+    SetIgnoreAllFields(VValentinaSettings::GetDefIgnoreAllFields());
+    SetMultiplier(VValentinaSettings::GetDefMultiplier());
+    SetNestingTime(VValentinaSettings::GetDefNestingTime());
+    SetEfficiencyCoefficient(VValentinaSettings::GetDefEfficiencyCoefficient());
+    SetNestQuantity(VValentinaSettings::GetDefLayoutNestQuantity());
+    SetPreferOneSheetSolution(VValentinaSettings::GetDefLayoutPreferOneSheetSolution());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
@@ -1019,7 +1019,7 @@ void DialogLayoutSettings::MinimumLayoutSize()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::ReadSettings()
 {
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VValentinaSettings *settings = qApp->ValentinaSettings();
     SetLayoutWidth(settings->GetLayoutWidth());
     SetNestingTime(settings->GetNestingTime());
     SetEfficiencyCoefficient(settings->GetEfficiencyCoefficient());
@@ -1051,7 +1051,7 @@ void DialogLayoutSettings::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::WriteSettings() const
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     settings->SetLayoutWidth(GetLayoutWidth());
     settings->SetLayoutGroup(GetGroup());
     settings->SetLayoutPaperHeight(GetPaperHeight());

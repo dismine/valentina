@@ -37,7 +37,17 @@
 #endif
 #define qApp (static_cast<TestVApplication*>(QCoreApplication::instance()))
 
-class VTestSettings;
+class VTestSettings : public VCommonSettings
+{
+    Q_OBJECT
+public:
+    VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                  QObject *parent = nullptr)
+        : VCommonSettings(format, scope, organization, application, parent)
+    {
+        qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+    }
+};
 
 class TestVApplication : public VAbstractApplication
 {
@@ -50,7 +60,7 @@ public:
         setApplicationName("ValentinaTest");
         setOrganizationName(VER_COMPANYNAME_STR);
 
-        OpenSettings();
+        TestVApplication::OpenSettings();
     }
 
     virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
@@ -62,8 +72,8 @@ public:
 
     virtual void OpenSettings() override
     {
-        settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                                 QCoreApplication::applicationName(), this);
+        settings = new VTestSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                     QCoreApplication::applicationName(), this);
     }
 
     virtual bool IsAppInGUIMode() const override
@@ -86,18 +96,6 @@ protected slots:
 private:
     Q_DISABLE_COPY(TestVApplication)
     VTranslateVars *m_trVars;
-};
-
-class VTestSettings : public VCommonSettings
-{
-    Q_OBJECT
-public:
-    VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-                  QObject *parent = nullptr)
-        : VCommonSettings(format, scope, organization, application, parent)
-    {
-        qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
-    }
 };
 
 #endif // TESTVAPPLICATION_H

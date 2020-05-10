@@ -81,7 +81,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     SCASSERT(doc != nullptr)
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     patternMaterials = doc->GetPatternMaterials();
@@ -951,7 +951,7 @@ void DialogPatternProperties::EditLabel()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ManagePatternMaterials()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
 
     DialogPatternMaterials editor(patternMaterials, settings->IsRememberPatternMaterials());
 

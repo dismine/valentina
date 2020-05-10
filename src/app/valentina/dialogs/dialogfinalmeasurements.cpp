@@ -28,7 +28,7 @@
 
 #include "dialogfinalmeasurements.h"
 #include "ui_dialogfinalmeasurements.h"
-#include "../vmisc/vsettings.h"
+#include "../core/vvalentinasettings.h"
 #include "../vmisc/compatibility.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
