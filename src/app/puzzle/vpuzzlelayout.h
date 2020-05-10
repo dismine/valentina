@@ -35,12 +35,14 @@
 #include "def.h"
 
 class VPuzzleLayer;
+class VPuzzlePiece;
 
 // is this the right place for the definition?
 enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
 
-class VPuzzleLayout
+class VPuzzleLayout : public QObject
 {
+    Q_OBJECT
 public:
     VPuzzleLayout();
     virtual ~VPuzzleLayout();
@@ -51,7 +53,22 @@ public:
     VPuzzleLayer* AddLayer(VPuzzleLayer *layer);
     QList<VPuzzleLayer *> GetLayers();
 
+    /**
+     * @brief GetSelectedPieces Returns the list of the selected pieces
+     * @return the selected pieces
+     */
+    QList<VPuzzlePiece *> GetSelectedPieces();
+
+    /**
+     * @brief SetUnit Sets the unit of the layout to the given unit
+     * @param unit the new unit
+     */
     void SetUnit(Unit unit);
+
+    /**
+     * @brief GetUnit Returns the current unit of the layout
+     * @return the unit
+     */
     Unit GetUnit() const;
 
     /**
@@ -133,7 +150,16 @@ public:
      */
     QMarginsF GetLayoutMarginsConverted() const;
 
-    void            SetFollowGrainline(FollowGrainline state);
+    /**
+     * @brief SetFollowGrainline Sets the type of grainline for the pieces to follow
+     * @param state the type of grainline
+     */
+    void SetFollowGrainline(FollowGrainline state);
+
+    /**
+     * @brief GetFollowGrainline Returns if the layout's pieces follow a grainline or not
+     * @return wether the pieces follow a grainline and if so, which grainline
+     */
     FollowGrainline GetFollowGrainline() const;
 
     /**
@@ -169,10 +195,48 @@ public:
     void SetStickyEdges(bool state);
     bool GetStickyEdges() const;
 
+    /**
+     * @brief ClearSelection goes through the layers & pieces and calls
+     * SetIsSelected(false) for the pieces that were selected.
+     */
+    void ClearSelection();
+
+    /**
+     * @brief SetFocusedLayer Sets the focused layer, to which pieces are added from the carrousel via drag
+     * and drop
+     * @param focusedLayer the new active layer. If nullptr, then it sets automaticaly the first layer from m_layers
+     */
+    void SetFocusedLayer(VPuzzleLayer* focusedLayer = nullptr);
+
+    /**
+     * @brief GetFocusedLayer Returns the focused layer, to which pieces are added from the carrousel via drag
+     * and drop
+     * @return the focused layer
+     */
+    VPuzzleLayer* GetFocusedLayer();
+
+    /**
+     * @brief MovePieceToLayer Moves the given piece to the given layer
+     * @param piece the piece to move
+     * @param layer the layer to move the piece to
+     */
+    void MovePieceToLayer(VPuzzlePiece* piece, VPuzzleLayer* layer);
+
+signals:
+
+    void PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter);
+
 private:
     Q_DISABLE_COPY(VPuzzleLayout)
+
     VPuzzleLayer *m_unplacedPiecesLayer;
     QList<VPuzzleLayer *> m_layers{};
+
+    /**
+     * @brief m_focusedLayer pointer the the focused layer, to which pieces will be
+     * added via drag and drop, or if no layer is defined.
+     */
+    VPuzzleLayer *m_focusedLayer{nullptr};
 
     // format
     Unit m_unit{Unit::Cm};

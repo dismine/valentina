@@ -27,6 +27,14 @@
  *************************************************************************/
 #include "vpuzzlepiece.h"
 
+#include <QtMath>
+
+#include "vpuzzlelayer.h"
+
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(pPiece, "p.piece")
+
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzlePiece::VPuzzlePiece()
 {
@@ -79,6 +87,17 @@ void VPuzzlePiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
     m_cuttingLine = cuttingLine;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPuzzlePiece::GetSeamLine() const
+{
+    return m_seamLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetSeamLine(const QVector<QPointF> &seamLine)
+{
+    m_seamLine = seamLine;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VPuzzlePiece::GetShowSeamLine() const
@@ -90,6 +109,8 @@ bool VPuzzlePiece::GetShowSeamLine() const
 void VPuzzlePiece::SetShowSeamLine(bool value)
 {
     m_showSeamline = value;
+
+    emit PropertiesChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,5 +123,133 @@ bool VPuzzlePiece::GetPieceMirrored() const
 void VPuzzlePiece::SetPieceMirrored(bool value)
 {
     m_mirrorPiece = value;
+
+    emit PropertiesChanged();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetPosition(QPointF point)
+{
+    m_transform.translate(point.x() - m_transform.dx(), point.y() - m_transform.dy());
+
+    emit PositionChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPuzzlePiece::GetPosition()
+{
+    return QPointF(m_transform.dx(), m_transform.dy());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetRotation(qreal angle)
+{
+    //    qreal currentAngle = GetRotation();
+    //    qreal newAngle = angle - currentAngle;
+
+    //    m_transform.rotate(newAngle);
+
+    if(m_pieceAngle != angle)
+    {
+        m_pieceAngle = angle;
+
+        // make sure the angle is  [0 <= angle < 360]
+        while(m_pieceAngle >= 360)
+        {
+            m_pieceAngle -= 360;
+        }
+
+        while(m_pieceAngle < 0)
+        {
+            m_pieceAngle += 360;
+        }
+
+        emit RotationChanged();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPuzzlePiece::GetRotation()
+{
+    return m_pieceAngle;
+
+    // We don't use the QTransform vor now because the math behind it to retrieve the angle is not trivial.
+    // TODO / FIXME:  we can use QTransform later for optimization
+
+
+//    QTransform tmpTransform = m_transform;
+//    tmpTransform.translate(-tmpTransform.dx(), -tmpTransform.dy()); // make sure there is only the rotation in the matrix
+
+//    qreal angle = qRadiansToDegrees(qAcos(tmpTransform.m11()));
+
+//    qCDebug(pPiece, "new angle : %f", angle);
+
+//    return angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetIsSelected(bool value)
+{
+    if(m_isSelected != value)
+    {
+        m_isSelected = value;
+        emit SelectionChanged();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzlePiece::GetIsSelected()
+{
+    return m_isSelected;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetIsGrainlineEnabled(bool value)
+{
+    m_isGrainlineEnabled = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzlePiece::GetIsGrainlineEnabled()
+{
+    return m_isGrainlineEnabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetGrainlineAngle(qreal value)
+{
+    m_grainlineAngle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPuzzlePiece::GetGrainlineAngle()
+{
+    return m_grainlineAngle;
+}
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetGrainline(QVector<QPointF> grainline)
+{
+    m_grainline = grainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPuzzlePiece::GetGrainline()
+{
+    return m_grainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayer* VPuzzlePiece::GetLayer()
+{
+    return m_layer;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzlePiece::SetLayer(VPuzzleLayer* layer)
+{
+    if(layer != m_layer)
+    {
+        m_layer = layer;
+    }
+}

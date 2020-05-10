@@ -31,14 +31,17 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayout::VPuzzleLayout() :
-    m_unplacedPiecesLayer(new VPuzzleLayer())
+    m_unplacedPiecesLayer(new VPuzzleLayer(this))
 {
     m_unplacedPiecesLayer->SetName(QObject::tr("Unplaced pieces"));
 
     // create a standard default layer:
-    VPuzzleLayer *layer = new VPuzzleLayer();
+    VPuzzleLayer *layer = new VPuzzleLayer(this);
     layer->SetName(QObject::tr("Layout"));
     AddLayer(layer);
+
+    // sets the default active layer
+    SetFocusedLayer();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,7 +60,7 @@ VPuzzleLayer* VPuzzleLayout::GetUnplacedPiecesLayer()
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayer* VPuzzleLayout::AddLayer()
 {
-    VPuzzleLayer *newLayer = new VPuzzleLayer();
+    VPuzzleLayer *newLayer = new VPuzzleLayer(this);
     m_layers.append(newLayer);
     return newLayer;
 }
@@ -74,6 +77,29 @@ QList<VPuzzleLayer *> VPuzzleLayout::GetLayers()
 {
     return m_layers;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<VPuzzlePiece *> VPuzzleLayout::GetSelectedPieces()
+{
+    QList<VPuzzlePiece *> result = QList<VPuzzlePiece *>();
+
+    QList<VPuzzleLayer *> layers = m_layers;
+    layers.prepend(m_unplacedPiecesLayer);
+
+    for (auto layer : layers)
+    {
+        for (auto piece : layer->GetPieces())
+        {
+            if(piece->GetIsSelected())
+            {
+                result.append(piece);
+            }
+        }
+    }
+
+    return result;
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::SetUnit(Unit unit)
@@ -244,4 +270,49 @@ void VPuzzleLayout::SetStickyEdges(bool state)
 bool VPuzzleLayout::GetStickyEdges() const
 {
     return m_stickyEdges;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::ClearSelection()
+{
+    m_unplacedPiecesLayer->ClearSelection();
+
+    for (auto layer : m_layers)
+    {
+        layer->ClearSelection();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::SetFocusedLayer(VPuzzleLayer* focusedLayer)
+{
+    if(focusedLayer == nullptr)
+    {
+        m_focusedLayer = m_layers.first();
+    }
+    else
+    {
+        m_focusedLayer = focusedLayer;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayer* VPuzzleLayout::GetFocusedLayer()
+{
+    return m_focusedLayer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleLayout::MovePieceToLayer(VPuzzlePiece* piece, VPuzzleLayer* layer)
+{
+    VPuzzleLayer* layerBefore = piece->GetLayer();
+
+    if(layerBefore != nullptr)
+    {
+        piece->GetLayer()->RemovePiece(piece);
+    }
+    layer->AddPiece(piece);
+
+    // signal, that a piece was moved
+    emit PieceMovedToLayer(piece, layerBefore,layer);
 }

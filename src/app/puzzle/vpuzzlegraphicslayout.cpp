@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpuzzlelayer.cpp
+ **  @file   vpuzzlegraphicslayout.cpp
  **  @author Ronan Le Tiec
- **  @date   13 4, 2020
+ **  @date   3 5, 2020
  **
  **  @brief
  **  @copyright
@@ -25,89 +25,68 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlelayer.h"
 
-#include "vpuzzlelayout.h"
-
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(pLayer, "p.layer")
+#include "vpuzzlegraphicslayout.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer::VPuzzleLayer(VPuzzleLayout *layout):
-    m_layout(layout)
+VPuzzleGraphicsLayout::VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsItem *parent):
+    QGraphicsItem(parent),
+    m_layout(layout),
+    m_boundingRect(GetLayoutRect())
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer::~VPuzzleLayer()
+VPuzzleGraphicsLayout::~VPuzzleGraphicsLayout()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayout* VPuzzleLayer::GetLayout()
+void VPuzzleGraphicsLayout::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    return m_layout;
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+
+    QPen pen(QColor(0,179,255), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    pen.setCosmetic(true);
+    QBrush noBrush(Qt::NoBrush);
+    painter->setPen(pen);
+    painter->setBrush(noBrush);
+
+    painter->drawRect(GetMarginsRect());
+
+    pen.setColor(Qt::black);
+
+    painter->setPen(pen);
+    painter->drawRect(GetLayoutRect());
+
+    m_boundingRect = GetLayoutRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPuzzlePiece *> VPuzzleLayer::GetPieces()
+QRectF VPuzzleGraphicsLayout::GetLayoutRect() const
 {
-    return m_pieces;
+    QRectF rect = QRectF(QPointF(0,0), m_layout->GetLayoutSize());
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VPuzzleGraphicsLayout::GetMarginsRect() const
+{
+    QMarginsF margins = m_layout->GetLayoutMargins();
+    QSizeF size = m_layout->GetLayoutSize();
+    QRectF rect = QRectF(
+                    QPointF(margins.left(),margins.top()),
+                    QPointF(size.width()-margins.right(), size.height()-margins.bottom())
+                );
+    return rect;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::ClearSelection()
+QRectF VPuzzleGraphicsLayout::boundingRect() const
 {
-    for (auto piece: m_pieces)
-    {
-        piece->SetIsSelected(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::AddPiece(VPuzzlePiece *piece)
-{
-    qCDebug(pLayer(), "piece -- %s -- added to %s", qUtf8Printable(piece->GetName()), qUtf8Printable(this->GetName()));
-
-    m_pieces.append(piece);
-    piece->SetLayer(this);
-
-    emit PieceAdded(piece);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::RemovePiece(VPuzzlePiece *piece)
-{
-    m_pieces.removeAll(piece);
-    piece->SetLayer(nullptr);
-
-    emit PieceRemoved(piece);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPuzzleLayer::GetName() const
-{
-    return m_name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::SetName(const QString &name)
-{
-    m_name = name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::SetIsVisible(bool value)
-{
-    m_isVisible = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayer::GetIsVisible() const
-{
-    return m_isVisible;
+    return m_boundingRect;
 }

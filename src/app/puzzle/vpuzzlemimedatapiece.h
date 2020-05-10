@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpiececarrousellayer.h
+ **  @file   vpuzzlemimedatapiece.h
  **  @author Ronan Le Tiec
- **  @date   25 4, 2020
+ **  @date   4 5, 2020
  **
  **  @brief
  **  @copyright
@@ -26,59 +26,40 @@
  **
  *************************************************************************/
 
-#ifndef VPIECECARROUSELLAYER_H
-#define VPIECECARROUSELLAYER_H
+#ifndef VPUZZLEMIMEDATAPIECE_H
+#define VPUZZLEMIMEDATAPIECE_H
 
-#include <QWidget>
-#include "vpuzzlelayer.h"
-#include "vpiececarrouselpiece.h"
+#include <QMimeData>
 
-class VPieceCarrousel;
+#include "vpuzzlepiece.h"
 
-class VPieceCarrouselLayer : public QWidget
+class VPuzzleMimeDataPiece : public QMimeData
 {
     Q_OBJECT
+
 public:
-    VPieceCarrouselLayer(VPuzzleLayer *layer, VPieceCarrousel *carrousel);
-    ~VPieceCarrouselLayer();
 
-    void Init();
-    void Refresh();
+    VPuzzleMimeDataPiece();
+    ~VPuzzleMimeDataPiece();
 
     /**
-     * @brief Clear it clears the carrousel layer from its pieces
+     * @brief GetPiecePtr Returns the piece pointer of the mime data
+     * @return  piece pointer
      */
-    void Clear();
-
-    QList<VPieceCarrouselPiece*> GetCarrouselPieces();
-
-    VPieceCarrousel* GetCarrousel();
+    VPuzzlePiece* GetPiecePtr() const;
 
     /**
-     * @brief GetPuzzleLayer Returns the corresponding VPuzzleLayer
-     * @return the VPuzzleLayer
+     * @brief SetPiecePtr sets the piece pointer to the given value
+     * @param piece the piece pointer
      */
-    VPuzzleLayer* GetLayer();
+    void SetPiecePtr(VPuzzlePiece* piece);
 
 private:
-    Q_DISABLE_COPY(VPieceCarrouselLayer)
+    Q_DISABLE_COPY(VPuzzleMimeDataPiece)
 
-    VPuzzleLayer *m_layer;
-    VPieceCarrousel *m_carrousel;
-    QList<VPieceCarrouselPiece*> m_carrouselPieces;
-
-private slots:
-
-    /**
-     * @brief on_PieceUpdated This slot is called when a piece was added
-     */
-    void on_PieceAdded(VPuzzlePiece* piece);
-
-    /**
-     * @brief on_PieceUpdated This slot is called when a piece was removed
-     */
-    void on_PieceRemoved(VPuzzlePiece* piece);
+    VPuzzlePiece *m_piece{nullptr};
 
 };
 
-#endif // VPIECECARROUSELLAYER_H
+
+#endif // VPUZZLEMIMEDATAPIECE_H

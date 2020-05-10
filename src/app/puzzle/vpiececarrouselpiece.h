@@ -34,13 +34,16 @@
 #include <QMouseEvent>
 
 #include "vpuzzlepiece.h"
+#include "vpiececarrouselpiecepreview.h"
 
+
+class VPieceCarrouselLayer;
 
 class VPieceCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, QWidget *parent = nullptr);
+    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, VPieceCarrouselLayer *carrouselLayer);
     ~VPieceCarrouselPiece();
 
     void Init();
@@ -57,34 +60,34 @@ public:
      */
     VPuzzlePiece * GetPiece();
 
-    /**
-     * @brief SetSelected sets the selected state to the given value
-     * @param value the new selected state
-     */
-    void SetIsSelected(bool value);
-
-    /**
-     * @brief GetSelected Returns wether the piece is selected or not
-     * @return true if the piece is selected
-     */
-    bool GetIsSelected();
-
-signals:
-    void clicked(VPieceCarrouselPiece* m_piece);
-
 public slots:
+    void on_PieceSelectionChanged();
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
+
+    void mouseMoveEvent(QMouseEvent *event) override;
+
+    void contextMenuEvent(QContextMenuEvent *event) override;
+
+private slots:
+    /**
+     * @brief on_ActionPieceMovedToLayer Slot called when the piece is moved via the
+     * context menu to anoter layer
+     */
+    void on_ActionPieceMovedToLayer();
 
 private:
     Q_DISABLE_COPY(VPieceCarrouselPiece)
 
     VPuzzlePiece *m_piece;
-    QLabel *m_label{nullptr};
-    QGraphicsView *m_graphicsView{nullptr};
 
-    bool m_isSelected = false;
+    VPieceCarrouselLayer *m_carrouselLayer;
+
+    QLabel *m_label{nullptr};
+    VPieceCarrouselPiecePreview *m_piecePreview{nullptr};
+
+    QPoint m_dragStart;
 
 private slots:
 

@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vpiececarrousellayer.h"
+#include "vpiececarrousel.h"
 #include "../vmisc/backport/qoverload.h"
 
 #include <QVBoxLayout>
@@ -36,9 +37,9 @@
 Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent) :
-    QWidget(parent),
+VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, VPieceCarrousel *carrousel) :
     m_layer(layer),
+    m_carrousel(carrousel),
     m_carrouselPieces(QList<VPieceCarrouselPiece*>())
 {
     Init();
@@ -47,7 +48,7 @@ VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VPieceCarrouselLayer::~VPieceCarrouselLayer()
 {
-    // TODO
+    Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,13 +61,16 @@ void VPieceCarrouselLayer::Init()
 
     // then refresh the content
     Refresh();
+
+    // add the connections
+    connect(m_layer, &VPuzzleLayer::PieceAdded, this, &VPieceCarrouselLayer::on_PieceAdded);
+    connect(m_layer, &VPuzzleLayer::PieceRemoved, this, &VPieceCarrouselLayer::on_PieceRemoved);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceCarrouselLayer::Refresh()
 {
-    // remove the existing carrousel pieces
-    // TODO
+    Clear();
 
     // Updates the carrousel pieces from the pieces list
     QList<VPuzzlePiece*> pieces = m_layer->GetPieces();
@@ -77,24 +81,33 @@ void VPieceCarrouselLayer::Refresh()
 
     // create the corresponding carrousel pieces
 
+    bool _isVisible = isVisible();
+    setVisible(true);
     for (auto piece : pieces)
     {
-//        qCDebug(pCarrouselLayer, "piece name : %s", piece->GetName().toStdString().c_str());
-
-        VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece);
+        VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece, this);
         m_carrouselPieces.append(carrouselPiece);
         layout()->addWidget(carrouselPiece);
-
-        // FIXME? the fitInView inside the refresh of the piece doesn't workd properly.
-        // only by doing the following I did get it to work:
-        setVisible(true);
-        carrouselPiece->CleanPreview();
-        setVisible(false);
-
-        connect(carrouselPiece, QOverload<VPieceCarrouselPiece*>::of(&VPieceCarrouselPiece::clicked), this,
-                        &VPieceCarrouselLayer::on_PieceClicked);
-
+        carrouselPiece->CleanPreview(); // fitInView only works if the widget is displayed.
     }
+    setVisible(_isVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselLayer::Clear()
+{
+    // Removes and deletes the carrousel pieces from the layer
+    while (!m_carrouselPieces.isEmpty())
+    {
+        VPieceCarrouselPiece *carrouselPiece = m_carrouselPieces.takeLast();
+
+        if(carrouselPiece != nullptr)
+        {
+            layout()->removeWidget(carrouselPiece);
+            delete carrouselPiece;
+        }
+    }
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,7 +117,39 @@ QList<VPieceCarrouselPiece*> VPieceCarrouselLayer::GetCarrouselPieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::on_PieceClicked(VPieceCarrouselPiece* carrouselPiece)
+VPieceCarrousel* VPieceCarrouselLayer::GetCarrousel()
 {
-    emit pieceClicked(carrouselPiece);
+    return m_carrousel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleLayer* VPieceCarrouselLayer::GetLayer()
+{
+    return m_layer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselLayer::on_PieceAdded(VPuzzlePiece* piece)
+{
+    Q_UNUSED(piece)
+
+    // TODO/ FIXME: see if we find a solution more efficient refreshing the complete layout everytime.
+
+    Refresh();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceCarrouselLayer::on_PieceRemoved(VPuzzlePiece* piece)
+{
+    for (auto carrouselPiece : m_carrouselPieces)
+    {
+        if(carrouselPiece->GetPiece() == piece)
+        {
+            m_carrouselPieces.removeAll(carrouselPiece);
+            layout()->removeWidget(carrouselPiece);
+            delete carrouselPiece;
+
+            return;
+        }
+    }
 }

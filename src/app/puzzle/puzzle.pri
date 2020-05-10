@@ -6,11 +6,17 @@ SOURCES += \
     $$PWD/puzzlecommands.cpp \
     $$PWD/puzzlemainwindow.cpp \
     $$PWD/puzzleapplication.cpp \
+    $$PWD/vpiececarrouselpiecepreview.cpp \
     $$PWD/vpuzzlecommandline.cpp \
     $$PWD/dialogs/dialogaboutpuzzle.cpp \
     $$PWD/vpiececarrousel.cpp \
+    $$PWD/vpuzzlegraphicslayout.cpp \
+    $$PWD/vpuzzlegraphicspiece.cpp \
     $$PWD/vpuzzlelayout.cpp \
     $$PWD/vpuzzlelayer.cpp \
+    $$PWD/vpuzzlemaingraphicsscene.cpp \
+    $$PWD/vpuzzlemaingraphicsview.cpp \
+    $$PWD/vpuzzlemimedatapiece.cpp \
     $$PWD/vpuzzlepiece.cpp \
     $$PWD/xml/layoutliterals.cpp \
     $$PWD/xml/vpuzzlelayoutfilewriter.cpp \
@@ -25,11 +31,17 @@ HEADERS += \
     $$PWD/puzzlemainwindow.h \
     $$PWD/stable.h \
     $$PWD/puzzleapplication.h \
+    $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpuzzlecommandline.h \
     $$PWD/dialogs/dialogaboutpuzzle.h \
     $$PWD/vpiececarrousel.h \
+    $$PWD/vpuzzlegraphicslayout.h \
+    $$PWD/vpuzzlegraphicspiece.h \
     $$PWD/vpuzzlelayout.h \
     $$PWD/vpuzzlelayer.h \
+    $$PWD/vpuzzlemaingraphicsscene.h \
+    $$PWD/vpuzzlemaingraphicsview.h \
+    $$PWD/vpuzzlemimedatapiece.h \
     $$PWD/vpuzzlepiece.h \
     $$PWD/xml/layoutliterals.h \
     $$PWD/xml/vpuzzlelayoutfilewriter.h \

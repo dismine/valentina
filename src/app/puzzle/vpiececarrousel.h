@@ -43,7 +43,18 @@ public:
     explicit VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
     virtual ~VPieceCarrousel();
 
+    /**
+     * @brief SetOrientation Sets the orientation to the given value and refreshes
+     * the orientation of the carrousel.
+     * @param orientation the orientation to set the carrousel to.
+     */
     void SetOrientation(Qt::Orientation orientation);
+
+    /**
+     * @brief RefreshOrientation Refreshes the orientation of the carrousel with the
+     * m_orientation value;
+     */
+    void RefreshOrientation();
 
     /**
      * @brief Inits the carroussel
@@ -61,18 +72,9 @@ public:
     void Clear();
 
     /**
-     * @brief SelectPiece Updates the carrousel so that the given piece is selected
-     * @param piece the piece to select
+     * @brief ClearSelection Clears the selection of the carrousel.
      */
-    void SelectPiece(VPuzzlePiece* piece);
-
-
-signals:
-    void pieceClicked(VPuzzlePiece* piece);
-
-public slots:
-    void on_PieceClicked(VPieceCarrouselPiece* carrouselPiece);
-
+    void ClearSelection();
 
 private:
     Q_DISABLE_COPY(VPieceCarrousel)
@@ -85,8 +87,15 @@ private:
 
     QList<VPieceCarrouselLayer*> m_carrouselLayers;
 
+    Qt::Orientation m_orientation{Qt::Vertical};
+
 
 private slots:
+
+    /**
+     * @brief on_ActiveLayerChanged Called when the active layer is changed
+     * @param index
+     */
     void on_ActiveLayerChanged(int index);
 };
 

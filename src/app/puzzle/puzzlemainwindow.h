@@ -34,6 +34,7 @@
 
 #include "../vmisc/def.h"
 #include "vpiececarrousel.h"
+#include "vpuzzlemaingraphicsview.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
 #include "../vlayout/vlayoutpiece.h"
@@ -86,12 +87,14 @@ protected:
 private:
     Q_DISABLE_COPY(PuzzleMainWindow)
     Ui::PuzzleMainWindow *ui;
+
     VPieceCarrousel *m_pieceCarrousel{nullptr};
+    VPuzzleMainGraphicsView *m_graphicsView{nullptr};
+
     VPuzzleCommandLinePtr m_cmd;
 
     VPuzzleLayout *m_layout{nullptr};
-
-    VPuzzlePiece *m_selectedPiece{nullptr};
+    QList<VPuzzlePiece *>m_selectedPieces{QList<VPuzzlePiece *>()};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
@@ -134,6 +137,10 @@ private:
      */
     void InitPieceCarrousel();
 
+    /**
+     * @brief InitMainGraphics Initialises the puzzle main graphics
+     */
+    void InitMainGraphics();
 
     /**
      * @brief SetPropertiesData Sets the values of UI elements
@@ -347,7 +354,7 @@ private slots:
      * @brief on_CurrentPiecePositionChanged When the positionX or the positionY
      * is changed in the current piece tab
      */
-    void on_CurrentPiecePositionChanged();
+    void on_CurrentPiecePositionEdited();
 
     /**
      * @brief PieceCarrouselLocationChanged When the piece carrousel's location
@@ -357,10 +364,19 @@ private slots:
     void on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
 
     /**
-     * @brief on_PieceSelected When a piece has been selected
-     * @param piece the piece that was selected
+     * @brief on_PieceSelectionChanged When the piece selection has changed
      */
-    void on_PieceSelected(VPuzzlePiece* piece);
+    void on_PieceSelectionChanged();
+
+    /**
+     * @brief on_PiecePositionChanged When the current piece position has changed
+     */
+    void on_PiecePositionChanged();
+
+    /**
+     * @brief on_PieceRotationChanged When the current piece rotation has changed
+     */
+    void on_PieceRotationChanged();
 
 };
 

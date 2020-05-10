@@ -59,9 +59,9 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     m_layout = new VPuzzleLayout();
 
     // ----- for test purposes, to be removed------------------
-    m_layout->SetLayoutMarginsConverted(1.5, 2.00, 4.21, 0.25);
-    m_layout->SetLayoutSizeConverted(30.0, 29.7);
-    m_layout->SetPiecesGapConverted(1.27);
+    m_layout->SetLayoutMarginsConverted(2, 2, 2, 2);
+    m_layout->SetLayoutSizeConverted(30.0, 45);
+    m_layout->SetPiecesGapConverted(1);
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
     // --------------------------------------------------------
@@ -71,6 +71,8 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
     InitMenuBar();
     InitProperties();
     InitPieceCarrousel();
+    InitMainGraphics();
+
 
     SetPropertiesData();
 }
@@ -142,8 +144,22 @@ void PuzzleMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             {
                 VLayoutPiece rawPiece = data.pieces.at(i);
 
-                // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
+                // We translate the piece, so that the origin of the bounding rect of the piece is at (0,0)
+                // It makes positioning later on easier.
+                QRectF boundingRect = rawPiece.DetailBoundingRect();
+                QPointF topLeft = boundingRect.topLeft();
+                rawPiece.Translate(-topLeft.x(), -topLeft.y());
 
+
+
+                // TODO / FIXME: make a few tests, on the data to check for validity. If not
+                //
+                // If seam allowance enabled, but the path is empty — invalid.
+                // If seam line path not hidden, but the path is empty — invalid.
+                // If seam allowance is built-in, but the seam line path is empty — invalid.
+
+
+                // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
                 VPuzzlePiece *piece = CreatePiece(rawPiece);
                 m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
             }
@@ -168,9 +184,24 @@ VPuzzlePiece* PuzzleMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
     VPuzzlePiece *piece = new VPuzzlePiece();
     piece->SetName(rawPiece.GetName());
     piece->SetUuid(rawPiece.GetUUID());
+
     piece->SetCuttingLine(rawPiece.GetMappedSeamAllowancePoints());
+    piece->SetSeamLine(rawPiece.GetMappedContourPoints());
+
+    piece->SetIsGrainlineEnabled(rawPiece.IsGrainlineEnabled());
+    if(rawPiece.IsGrainlineEnabled())
+    {
+        piece->SetGrainlineAngle(rawPiece.GrainlineAngle());
+        piece->SetGrainline(rawPiece.GetGrainline());
+    }
 
     // TODO : set all the information we need for the piece!
+
+    //
+    connect(piece, &VPuzzlePiece::SelectionChanged, this, &PuzzleMainWindow::on_PieceSelectionChanged);
+    connect(piece, &VPuzzlePiece::PositionChanged, this, &PuzzleMainWindow::on_PiecePositionChanged);
+    connect(piece, &VPuzzlePiece::RotationChanged, this, &PuzzleMainWindow::on_PieceRotationChanged);
+
 
     return piece;
 }
@@ -211,9 +242,9 @@ void PuzzleMainWindow::InitPropertyTabCurrentPiece()
 
     // ------------------------------ placement -----------------------------------
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::on_CurrentPiecePositionChanged);
+            &PuzzleMainWindow::on_CurrentPiecePositionEdited);
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &PuzzleMainWindow::on_CurrentPiecePositionChanged);
+            &PuzzleMainWindow::on_CurrentPiecePositionEdited);
 }
 
 
@@ -293,9 +324,6 @@ void PuzzleMainWindow::InitPieceCarrousel()
 
     connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
               &PuzzleMainWindow::on_PieceCarrouselLocationChanged);
-
-    connect(m_pieceCarrousel, QOverload<VPuzzlePiece*>::of(&VPieceCarrousel::pieceClicked), this,
-                    &PuzzleMainWindow::on_PieceSelected);
 }
 
 
@@ -318,31 +346,45 @@ void PuzzleMainWindow::SetPropertiesData()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
 {
-    if(m_selectedPiece == nullptr)
+    if(m_selectedPieces.count() == 0)
     {
-        if(false) // check for multiple piece selection
-        {
-            // TODO in the future
-        }
-        else
-        {
-           // TODO : update current piece data to show a "no current piece selected"
-            ui->containerCurrentPieceNoData->setVisible(true);
-            ui->containerCurrentPieceData->setVisible(false);
-        }
+        // show the content "no piece selected"
+
+         ui->containerCurrentPieceNoData->setVisible(true);
+         ui->containerCurrentPieceData->setVisible(false);
+         ui->containerCurrentPieceMultipleData->setVisible(false);
+    }
+    else if(m_selectedPieces.count() == 1)
+    {
+        // show the content "selected piece data"
+        ui->containerCurrentPieceNoData->setVisible(false);
+        ui->containerCurrentPieceData->setVisible(true);
+        ui->containerCurrentPieceMultipleData->setVisible(false);
+
+        VPuzzlePiece *selectedPiece = m_selectedPieces.first();
+
+        // set the value to the current piece
+        ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
+
+        ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
+        ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
+
+        QPointF pos = selectedPiece->GetPosition();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+
+        qreal angle = selectedPiece->GetRotation();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
     }
     else
     {
+        // show the content "multiple pieces selected"
+
         ui->containerCurrentPieceNoData->setVisible(false);
-        ui->containerCurrentPieceData->setVisible(true);
+        ui->containerCurrentPieceData->setVisible(false);
+        ui->containerCurrentPieceMultipleData->setVisible(true);
 
-        // set the value to the current piece
-        ui->lineEditCurrentPieceName->setText(m_selectedPiece->GetName());
-
-        ui->checkBoxCurrentPieceShowSeamline->setChecked(m_selectedPiece->GetShowSeamLine());
-        ui->checkBoxCurrentPieceMirrorPiece->setChecked(m_selectedPiece->GetPieceMirrored());
-
-        // TODO:rotation and placement;
+        // if needed in the future, we can show some properties that coul be edited for all the pieces
     }
 }
 
@@ -399,6 +441,15 @@ void PuzzleMainWindow::SetPropertyTabTilesData()
 void PuzzleMainWindow::SetPropertyTabLayersData()
 {
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::InitMainGraphics()
+{
+    m_graphicsView = new VPuzzleMainGraphicsView(m_layout, this);
+    ui->centralWidget->layout()->addWidget(m_graphicsView);
+
+    m_graphicsView->RefreshLayout();
 }
 
 
@@ -644,7 +695,8 @@ void PuzzleMainWindow::on_LayoutSizeChanged()
     }
 
     // TODO Undo / Redo
-    // TODO update the QGraphicView
+
+    m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -657,8 +709,11 @@ void PuzzleMainWindow::on_LayoutOrientationChanged()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, length_before);
     SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, width_before);
 
+    m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
+
     // TODO Undo / Redo
-    // TODO update the QGraphicView
+
+    m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -686,7 +741,8 @@ void PuzzleMainWindow::on_LayoutMarginChanged()
             );
 
     // TODO Undo / Redo
-    // TODO update the QGraphicView
+
+    m_graphicsView->RefreshLayout();
 }
 
 
@@ -759,47 +815,42 @@ void PuzzleMainWindow::on_pushButtonLayoutExport_clicked()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
 {
-    if(m_selectedPiece != nullptr)
+    if(m_selectedPieces.count() == 1)
     {
-        m_selectedPiece->SetShowSeamLine(checked);
+        m_selectedPieces.first()->SetShowSeamLine(checked);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 {
-    if(m_selectedPiece != nullptr)
+    if(m_selectedPieces.count() == 1)
     {
-        m_selectedPiece->SetPieceMirrored(checked);
+        m_selectedPieces.first()->SetPieceMirrored(checked);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::CurrentPieceAngleChanged");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(value);
-    Q_UNUSED(ret);
-
-    // TODO
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        piece->SetRotation(value);
+    }
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::on_CurrentPiecePositionChanged()
+void PuzzleMainWindow::on_CurrentPiecePositionEdited()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO PuzzleMainWindow::CurrentPiecePositionChanged");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(ret);
-
-    // TODO
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        QPointF pos(UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(), m_layout->GetUnit(), Unit::Px),
+                    UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(), m_layout->GetUnit(), Unit::Px));
+        piece->SetPosition(pos);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -820,17 +871,37 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleMainWindow::on_PieceSelected(VPuzzlePiece* piece)
+void PuzzleMainWindow::on_PieceSelectionChanged()
 {
-    m_selectedPiece = piece;
-
-    // update the state of the piece carrousel
-    m_pieceCarrousel->SelectPiece(piece);
-
-    // update the Layout
-
-    // TODO
+    m_selectedPieces = m_layout->GetSelectedPieces();
 
     // update the property of the piece currently selected
     SetPropertyTabCurrentPieceData();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::on_PiecePositionChanged()
+{
+
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        QPointF pos = piece->GetPosition();
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::on_PieceRotationChanged()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+        VPuzzlePiece *piece = m_selectedPieces.first();
+        qreal angle = piece->GetRotation();
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+    }
 }
