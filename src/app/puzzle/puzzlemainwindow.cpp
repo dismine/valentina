@@ -796,8 +796,6 @@ void PuzzleMainWindow::on_checkBoxLayoutStickyEdges_toggled(bool checked)
     // TODO update the QGraphicView
 }
 
-
-
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_pushButtonLayoutExport_clicked()
 {
@@ -883,14 +881,15 @@ void PuzzleMainWindow::on_PieceSelectionChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_PiecePositionChanged()
 {
-
     if(m_selectedPieces.count() == 1)
     {
         VPuzzlePiece *piece = m_selectedPieces.first();
         QPointF pos = piece->GetPosition();
 
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
+                              UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
+                              UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
     }
 }
 

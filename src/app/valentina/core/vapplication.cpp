@@ -445,6 +445,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VApplication::ActivateDarkMode()
 {
      VValentinaSettings *settings = qApp->ValentinaSettings();
@@ -464,7 +465,6 @@ void VApplication::ActivateDarkMode()
 
      }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::TapeFilePath() const
