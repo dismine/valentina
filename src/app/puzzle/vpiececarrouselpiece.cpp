@@ -277,7 +277,7 @@ void VPieceCarrouselPiece::on_ActionPieceMovedToLayer()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();
-    VPuzzleLayer *layer = (VPuzzleLayer *) v.value<VPuzzleLayer *>();
+    VPuzzleLayer *layer = v.value<VPuzzleLayer *>();
     if(layer != nullptr)
     {
         layer->GetLayout()->MovePieceToLayer(m_piece, layer);
