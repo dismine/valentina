@@ -34,6 +34,7 @@
 
 #include "vpuzzlemimedatapiece.h"
 #include "vpuzzlelayer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 #include <QLoggingCategory>
 
@@ -42,30 +43,22 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget *parent) :
-    QGraphicsView(parent),
-    m_layout(layout),
-    m_graphicsPieces(QList<VPuzzleGraphicsPiece*>())
+    VMainGraphicsView(parent),
+    m_layout(layout)
 {
-    m_scene = new VPuzzleMainGraphicsScene(this);
+    m_scene = new VMainGraphicsScene(this);
     setScene(m_scene);
 
     m_graphicsLayout = new VPuzzleGraphicsLayout(layout);
-    m_graphicsLayout->setPos(0,0);
+    m_graphicsLayout->setPos(0, 0);
     m_scene->addItem(m_graphicsLayout);
-
-    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
     setAcceptDrops(true);
 
     // add the connections
     connect(m_layout, &VPuzzleLayout::PieceMovedToLayer, this, &VPuzzleMainGraphicsView::on_PieceMovedToLayer);
-    connect(m_scene, &VPuzzleMainGraphicsScene::selectionChanged, this, &VPuzzleMainGraphicsView::on_SceneSelectionChanged);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPuzzleMainGraphicsView::~VPuzzleMainGraphicsView()
-{
-
+    connect(m_scene, &VMainGraphicsScene::selectionChanged, this,
+            &VPuzzleMainGraphicsView::on_SceneSelectionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
