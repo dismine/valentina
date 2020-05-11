@@ -245,7 +245,6 @@ VPuzzleLayer* VPuzzlePiece::GetLayer()
     return m_layer;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzlePiece::SetLayer(VPuzzleLayer* layer)
 {

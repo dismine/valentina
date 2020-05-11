@@ -373,8 +373,10 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
         ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
 
         QPointF pos = selectedPiece->GetPosition();
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
+                              UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
+                              UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
 
         qreal angle = selectedPiece->GetRotation();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
