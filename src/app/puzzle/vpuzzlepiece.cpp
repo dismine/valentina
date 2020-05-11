@@ -32,7 +32,9 @@
 #include "vpuzzlelayer.h"
 #include "../vmisc/def.h"
 
+#include <QIcon>
 #include <QLoggingCategory>
+#include <QPainter>
 
 Q_LOGGING_CATEGORY(pPiece, "p.piece")
 
@@ -252,4 +254,47 @@ void VPuzzlePiece::SetLayer(VPuzzleLayer* layer)
     {
         m_layer = layer;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QIcon VPuzzlePiece::PieceIcon(const QSize &size) const
+{
+    QVector<QPointF> points = GetSeamLine();
+    if(points.isEmpty())
+    {
+        points = GetCuttingLine();
+    }
+
+    QPolygonF shape(points);
+    shape << shape.first();
+
+    QRectF boundingRect = shape.boundingRect();
+    qreal canvasSize = qMax(boundingRect.height(), boundingRect.width());
+    QRectF canvas = QRectF(0, 0, canvasSize, canvasSize);
+
+    qreal dx = canvas.center().x() - boundingRect.center().x();
+    qreal dy = canvas.center().y() - boundingRect.center().y();
+
+    QPixmap pixmap(size);
+    pixmap.fill(QColor("white"));
+
+    QPainter painter;
+    painter.begin(&pixmap);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+    int spacing = 2;
+    painter.translate(spacing, spacing);
+
+    qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing*2) / 100;
+    qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing*2) / 100;
+    painter.scale(1./scaleFactorX, 1./scaleFactorY);
+    painter.setPen(QPen(Qt::black, 0.8*qMax(scaleFactorX, scaleFactorY)));
+
+    painter.translate(dx, dy);
+
+    painter.drawPolygon(shape);
+    painter.end();
+
+    return QIcon(pixmap);
 }

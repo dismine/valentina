@@ -51,4 +51,5 @@ HEADERS += \
 
 FORMS += \
     $$PWD/puzzlemainwindow.ui \
-    $$PWD/dialogs/dialogaboutpuzzle.ui
+    $$PWD/dialogs/dialogaboutpuzzle.ui \
+    $$PWD/vpiececarrousel.ui

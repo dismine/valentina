@@ -34,14 +34,18 @@
 #include <QScrollArea>
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
-#include "vpiececarrousellayer.h"
+
+namespace Ui
+{
+class VPieceCarrousel;
+}
 
 class VPieceCarrousel : public QWidget
 {
     Q_OBJECT
 public:
     explicit VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
-    virtual ~VPieceCarrousel();
+    virtual ~VPieceCarrousel() = default;
 
     /**
      * @brief SetOrientation Sets the orientation to the given value and refreshes
@@ -55,11 +59,6 @@ public:
      * m_orientation value;
      */
     void RefreshOrientation();
-
-    /**
-     * @brief Inits the carroussel
-     */
-    void Init();
 
     /**
      * @brief Refresh Refreshes the content of the carrousel
@@ -78,14 +77,10 @@ public:
 
 private:
     Q_DISABLE_COPY(VPieceCarrousel)
+    Ui::VPieceCarrousel *ui;
 
     VPuzzleLayout *m_layout;
-
-    QComboBox *m_comboBoxLayer;
-    QScrollArea *m_scrollArea;
-    QWidget *m_layersContainer;
-
-    QList<VPieceCarrouselLayer*> m_carrouselLayers;
+    QList<VPuzzleLayer*> m_layers{};
 
     Qt::Orientation m_orientation{Qt::Vertical};
 
