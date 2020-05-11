@@ -977,14 +977,10 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
     if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)
     {
         m_pieceCarrousel->SetOrientation(Qt::Horizontal);
-        ui->dockWidgetPieceCarrousel->setMaximumHeight(208);
-        ui->dockWidgetPieceCarrousel->setMaximumWidth(10000);
     }
     else if (area == Qt::LeftDockWidgetArea || area == Qt::RightDockWidgetArea)
     {
         m_pieceCarrousel->SetOrientation(Qt::Vertical);
-        ui->dockWidgetPieceCarrousel->setMaximumHeight(10000);
-        ui->dockWidgetPieceCarrousel->setMaximumWidth(160);
     }
 }
 
