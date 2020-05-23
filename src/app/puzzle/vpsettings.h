@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlesettings.h
+ **  @file   vpsettings.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   16 2, 2020
  **
@@ -25,20 +25,20 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUZZLESETTINGS_H
-#define VPUZZLESETTINGS_H
+#ifndef VPSETTINGS_H
+#define VPSETTINGS_H
 
 #include <QByteArray>
 
 #include "vcommonsettings.h"
 
-class VPuzzleSettings : public VCommonSettings
+class VPSettings : public VCommonSettings
 {
     Q_OBJECT
 public:
-    VPuzzleSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+    VPSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                     QObject *parent = nullptr);
-    VPuzzleSettings(const QString &fileName, Format format, QObject *parent = nullptr);
+    VPSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
     bool IsDockWidgetPropertiesActive() const;
     static bool GetDefDockWidgetPropertiesActive();
@@ -49,7 +49,7 @@ public:
     void SetDockWidgetPropertiesContentsActive(bool value);
 
 private:
-    Q_DISABLE_COPY(VPuzzleSettings)
+    Q_DISABLE_COPY(VPSettings)
 };
 
-#endif // VPUZZLESETTINGS_H
+#endif // VPSETTINGS_H

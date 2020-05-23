@@ -463,7 +463,7 @@ void VPMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
 void VPMainWindow::ReadSettings()
 {
     qCDebug(pWindow, "Reading settings.");
-    const VPuzzleSettings *settings = qApp->PuzzleSettings();
+    const VPSettings *settings = qApp->PuzzleSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -489,7 +489,7 @@ void VPMainWindow::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::WriteSettings()
 {
-    VPuzzleSettings *settings = qApp->PuzzleSettings();
+    VPSettings *settings = qApp->PuzzleSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));

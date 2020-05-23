@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlesettings.cpp
+ **  @file   vpsettings.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   16 2, 2020
  **
@@ -25,7 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlesettings.h"
+#include "vpsettings.h"
 
 namespace
 {
@@ -34,48 +34,48 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, (Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleSettings::VPuzzleSettings(Format format, Scope scope, const QString &organization, const QString &application,
+VPSettings::VPSettings(Format format, Scope scope, const QString &organization, const QString &application,
                                  QObject *parent)
     : VCommonSettings(format, scope, organization, application, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleSettings::VPuzzleSettings(const QString &fileName, QSettings::Format format, QObject *parent)
+VPSettings::VPSettings(const QString &fileName, QSettings::Format format, QObject *parent)
     : VCommonSettings(fileName, format, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleSettings::IsDockWidgetPropertiesActive() const
+bool VPSettings::IsDockWidgetPropertiesActive() const
 {
     return value(*settingDockWidgetPropertiesActive, GetDefDockWidgetPropertiesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleSettings::GetDefDockWidgetPropertiesActive()
+bool VPSettings::GetDefDockWidgetPropertiesActive()
 {
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleSettings::SetDockWidgetPropertiesActive(bool value)
+void VPSettings::SetDockWidgetPropertiesActive(bool value)
 {
     setValue(*settingDockWidgetPropertiesActive, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleSettings::IsDockWidgetPropertiesContentsActive() const
+bool VPSettings::IsDockWidgetPropertiesContentsActive() const
 {
     return value(*settingDockWidgetPropertiesActive, GetDefDockWidgetPropertiesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleSettings::GetDefDockWidgetPropertiesContentsActive()
+bool VPSettings::GetDefDockWidgetPropertiesContentsActive()
 {
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleSettings::SetDockWidgetPropertiesContentsActive(bool value)
+void VPSettings::SetDockWidgetPropertiesContentsActive(bool value)
 {
     setValue(*settingDockPropertiesContentsActive, value);
 }

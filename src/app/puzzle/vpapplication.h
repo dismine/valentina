@@ -29,7 +29,7 @@
 #define VPAPPLICATION_H
 
 #include "../vmisc/def.h"
-#include "vpuzzlesettings.h"
+#include "vpsettings.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vpcommandline.h"
 
@@ -65,7 +65,7 @@ public:
     virtual const VTranslateVars *TrVars() override;
 
     virtual void  OpenSettings() override;
-    VPuzzleSettings *PuzzleSettings();
+    VPSettings *PuzzleSettings();
     void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);

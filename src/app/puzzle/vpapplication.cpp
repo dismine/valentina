@@ -405,21 +405,21 @@ const VTranslateVars *VPApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::OpenSettings()
 {
-    settings = new VPuzzleSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+    settings = new VPSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                    QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleSettings *VPApplication::PuzzleSettings()
+VPSettings *VPApplication::PuzzleSettings()
 {
     SCASSERT(settings != nullptr)
-    return qobject_cast<VPuzzleSettings *>(settings);
+    return qobject_cast<VPSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::ActivateDarkMode()
 {
-    VPuzzleSettings *settings = qApp->PuzzleSettings();
+    VPSettings *settings = qApp->PuzzleSettings();
     if (settings->GetDarkMode())
     {
          QFile f(":qdarkstyle/style.qss");
