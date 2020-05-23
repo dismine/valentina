@@ -32,7 +32,7 @@
 
 #include "ui_puzzlemainwindow.h"
 #include "dialogs/vpdialogabout.h"
-#include "xml/vpuzzlelayoutfilewriter.h"
+#include "xml/vplayoutfilewriter.h"
 #include "xml/vplayoutfilereader.h"
 #include "puzzleapplication.h"
 #include "../vlayout/vrawlayout.h"
@@ -126,7 +126,7 @@ bool PuzzleMainWindow::SaveFile(const QString &path)
     QFile file(path);
     file.open(QIODevice::WriteOnly);
 
-    VPuzzleLayoutFileWriter *fileWriter = new VPuzzleLayoutFileWriter();
+    VPLayoutFileWriter *fileWriter = new VPLayoutFileWriter();
     fileWriter->WriteFile(m_layout, &file);
 
     // TODO / FIXME : better return value and error handling

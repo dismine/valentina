@@ -28,7 +28,7 @@
 
 #include <QXmlStreamAttributes>
 #include "vplayoutfilereader.h"
-#include "vpuzzlelayoutfilewriter.h"
+#include "vplayoutfilewriter.h"
 #include "vplayoutliterals.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"

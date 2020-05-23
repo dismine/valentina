@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vpuzzlelayoutfilewriter.h"
+#include "vplayoutfilewriter.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlelayer.h"
 #include "vpuzzlepiece.h"
@@ -34,19 +34,19 @@
 #include "../ifc/xml/vlayoutconverter.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayoutFileWriter::VPuzzleLayoutFileWriter()
+VPLayoutFileWriter::VPLayoutFileWriter()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayoutFileWriter::~VPuzzleLayoutFileWriter()
+VPLayoutFileWriter::~VPLayoutFileWriter()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
+void VPLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 {
     setDevice(file);
     setAutoFormatting(true);
@@ -59,7 +59,7 @@ void VPuzzleLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
@@ -71,7 +71,7 @@ void VPuzzleLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
 {
     writeStartElement(ML::TagProperties);
 
@@ -97,7 +97,7 @@ void VPuzzleLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
 {
     Q_UNUSED(layout); // to be removed
 
@@ -116,7 +116,7 @@ void VPuzzleLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteLayers(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteLayers(VPuzzleLayout *layout)
 {
    writeStartElement(ML::TagLayers);
 
@@ -133,13 +133,13 @@ void VPuzzleLayoutFileWriter::WriteLayers(VPuzzleLayout *layout)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteLayer(VPuzzleLayer *layer)
+void VPLayoutFileWriter::WriteLayer(VPuzzleLayer *layer)
 {
     WriteLayer(layer, ML::TagLayer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteLayer(VPuzzleLayer *layer, const QString &tagName)
+void VPLayoutFileWriter::WriteLayer(VPuzzleLayer *layer, const QString &tagName)
 {
     writeStartElement(tagName); // layer
     SetAttribute(ML::AttrName, layer->GetName());
@@ -158,7 +158,7 @@ void VPuzzleLayoutFileWriter::WriteLayer(VPuzzleLayer *layer, const QString &tag
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
+void VPLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
 {
     Q_UNUSED(piece);
 
@@ -182,7 +182,7 @@ void VPuzzleLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteMargins(const QMarginsF &margins)
+void VPLayoutFileWriter::WriteMargins(const QMarginsF &margins)
 {
     writeStartElement(ML::TagMargin);
     SetAttribute(ML::AttrLeft, margins.left());
@@ -193,7 +193,7 @@ void VPuzzleLayoutFileWriter::WriteMargins(const QMarginsF &margins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileWriter::WriteSize(QSizeF size)
+void VPLayoutFileWriter::WriteSize(QSizeF size)
 {
     // maybe not necessary to test this, the writer should "stupidly write", the application should take care of these tests
     qreal width = size.width();

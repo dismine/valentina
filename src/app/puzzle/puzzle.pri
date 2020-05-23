@@ -19,8 +19,8 @@ SOURCES += \
     $$PWD/vpuzzlepiece.cpp \
     $$PWD/vpuzzlesettings.cpp \
     $$PWD/xml/vplayoutfilereader.cpp \
+    $$PWD/xml/vplayoutfilewriter.cpp \
     $$PWD/xml/vplayoutliterals.cpp \
-    $$PWD/xml/vpuzzlelayoutfilewriter.cpp \
     $$PWD/vpiececarrousellayer.cpp \
     $$PWD/vpiececarrouselpiece.cpp
 
@@ -44,8 +44,8 @@ HEADERS += \
     $$PWD/vpuzzlepiece.h \
     $$PWD/vpuzzlesettings.h \
     $$PWD/xml/vplayoutfilereader.h \
+    $$PWD/xml/vplayoutfilewriter.h \
     $$PWD/xml/vplayoutliterals.h \
-    $$PWD/xml/vpuzzlelayoutfilewriter.h \
     $$PWD/vpiececarrousellayer.h \
     $$PWD/vpiececarrouselpiece.h
 

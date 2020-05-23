@@ -26,8 +26,8 @@
  **
  ** *************************************************************************/
 
-#ifndef VPUZZLELAYOUTFILEWRITER_H
-#define VPUZZLELAYOUTFILEWRITER_H
+#ifndef VPLAYOUTFILEWRITER_H
+#define VPLAYOUTFILEWRITER_H
 
 #include <QLocale>
 #include <QXmlStreamWriter>
@@ -40,11 +40,11 @@ class VPuzzlePiece;
 class QFile;
 class QMarginsF;
 
-class VPuzzleLayoutFileWriter : public QXmlStreamWriter
+class VPLayoutFileWriter : public QXmlStreamWriter
 {
 public:
-    VPuzzleLayoutFileWriter();
-    ~VPuzzleLayoutFileWriter();
+    VPLayoutFileWriter();
+    ~VPLayoutFileWriter();
 
     void WriteFile(VPuzzleLayout *layout, QFile *file);
 
@@ -71,7 +71,7 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T>
-void VPuzzleLayoutFileWriter::SetAttribute(const QString &name, const T &value)
+void VPLayoutFileWriter::SetAttribute(const QString &name, const T &value)
 {
     // See specification for xs:decimal
     const QLocale locale = QLocale::c();
@@ -80,30 +80,30 @@ void VPuzzleLayoutFileWriter::SetAttribute(const QString &name, const T &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-inline void VPuzzleLayoutFileWriter::SetAttribute<QString>(const QString &name, const QString &value)
+inline void VPLayoutFileWriter::SetAttribute<QString>(const QString &name, const QString &value)
 {
     writeAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-inline void VPuzzleLayoutFileWriter::SetAttribute<QChar>(const QString &name, const QChar &value)
+inline void VPLayoutFileWriter::SetAttribute<QChar>(const QString &name, const QChar &value)
 {
     writeAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-inline void VPuzzleLayoutFileWriter::SetAttribute<bool>(const QString &name, const bool &value)
+inline void VPLayoutFileWriter::SetAttribute<bool>(const QString &name, const bool &value)
 {
     writeAttribute(name, value ? trueStr : falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <size_t N>
-inline void VPuzzleLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N])
+inline void VPLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N])
 {
     writeAttribute(name, QString(value));
 }
 
-#endif // VPUZZLELAYOUTFILEWRITER_H
+#endif // VPLAYOUTFILEWRITER_H
