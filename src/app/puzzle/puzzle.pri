@@ -5,11 +5,11 @@ SOURCES += \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
     $$PWD/vpapplication.cpp \
+    $$PWD/vpcarrousel.cpp \
     $$PWD/vpcommands.cpp \
     $$PWD/vpiececarrouselpiecepreview.cpp \
     $$PWD/vpmainwindow.cpp \
     $$PWD/vpuzzlecommandline.cpp \
-    $$PWD/vpiececarrousel.cpp \
     $$PWD/vpuzzlegraphicslayout.cpp \
     $$PWD/vpuzzlegraphicspiece.cpp \
     $$PWD/vpuzzlelayout.cpp \
@@ -29,12 +29,12 @@ SOURCES += \
 HEADERS += \
     $$PWD/dialogs/vpdialogabout.h \
     $$PWD/vpapplication.h \
+    $$PWD/vpcarrousel.h \
     $$PWD/vpcommands.h \
     $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpmainwindow.h \
     $$PWD/vpstable.h \
     $$PWD/vpuzzlecommandline.h \
-    $$PWD/vpiececarrousel.h \
     $$PWD/vpuzzlegraphicslayout.h \
     $$PWD/vpuzzlegraphicspiece.h \
     $$PWD/vpuzzlelayout.h \
@@ -51,7 +51,7 @@ HEADERS += \
 
 FORMS += \
     $$PWD/dialogs/vpdialogabout.ui \
-    $$PWD/vpiececarrousel.ui \
+    $$PWD/vpcarrousel.ui \
     $$PWD/vpmainwindow.ui
 
 SOURCES += \

@@ -82,7 +82,7 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QDockWidget" name="dockWidgetPieceCarrousel">
+  <widget class="QDockWidget" name="dockWidgetCarrousel">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
      <horstretch>0</horstretch>
@@ -110,7 +110,7 @@
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="QWidget" name="widgetPieceCarrousel">
+   <widget class="QWidget" name="widgetCarrousel">
     <property name="sizePolicy">
      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
       <horstretch>0</horstretch>

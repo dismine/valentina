@@ -39,7 +39,7 @@
 
 #include "vpuzzlemimedatapiece.h"
 #include "vpiececarrousellayer.h"
-#include "vpiececarrousel.h"
+#include "vpcarrousel.h"
 
 #include <QLoggingCategory>
 

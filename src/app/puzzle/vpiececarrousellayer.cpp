@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vpiececarrousellayer.h"
-#include "vpiececarrousel.h"
+#include "vpcarrousel.h"
 #include "../vmisc/backport/qoverload.h"
 
 #include <QVBoxLayout>
@@ -37,7 +37,7 @@
 Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, VPieceCarrousel *carrousel) :
+VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, VPCarrousel *carrousel) :
     m_layer(layer),
     m_carrousel(carrousel),
     m_carrouselPieces(QList<VPieceCarrouselPiece*>())
@@ -117,7 +117,7 @@ QList<VPieceCarrouselPiece*> VPieceCarrouselLayer::GetCarrouselPieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrousel* VPieceCarrouselLayer::GetCarrousel()
+VPCarrousel* VPieceCarrouselLayer::GetCarrousel()
 {
     return m_carrousel;
 }

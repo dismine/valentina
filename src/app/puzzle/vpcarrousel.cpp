@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrousel.cpp
+ **  @file   vpcarrousel.cpp
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpiececarrousel.h"
-#include "ui_vpiececarrousel.h"
+#include "vpcarrousel.h"
+#include "ui_vpcarrousel.h"
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include <QScrollBar>
@@ -41,16 +41,16 @@
 Q_LOGGING_CATEGORY(pCarrousel, "p.carrousel")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrousel::VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent) :
+VPCarrousel::VPCarrousel(VPuzzleLayout *layout, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::VPieceCarrousel),
+    ui(new Ui::VPCarrousel),
     m_layout(layout)
 {
     ui->setupUi(this);
 
     // init the combo box
     connect(ui->comboBoxLayer, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &VPieceCarrousel::on_ActiveLayerChanged);
+            &VPCarrousel::on_ActiveLayerChanged);
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -59,7 +59,7 @@ VPieceCarrousel::VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrousel::Refresh()
+void VPCarrousel::Refresh()
 {
     // NOTE: alternative to clearing the carrousel and adding things again, we could make comparision
 
@@ -85,7 +85,7 @@ void VPieceCarrousel::Refresh()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrousel::Clear()
+void VPCarrousel::Clear()
 {
     // remove the combobox entries
     ui->comboBoxLayer->clear();
@@ -94,7 +94,7 @@ void VPieceCarrousel::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrousel::on_ActiveLayerChanged(int index)
+void VPCarrousel::on_ActiveLayerChanged(int index)
 {
     qCDebug(pCarrousel, "index changed %i", index);
 
@@ -117,14 +117,14 @@ void VPieceCarrousel::on_ActiveLayerChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrousel::SetOrientation(Qt::Orientation orientation)
+void VPCarrousel::SetOrientation(Qt::Orientation orientation)
 {
     m_orientation = orientation;
     RefreshOrientation();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrousel::RefreshOrientation()
+void VPCarrousel::RefreshOrientation()
 {
     // then update the scrollarea min height / width and scrollbar behaviour
     if(m_orientation == Qt::Horizontal)
@@ -150,7 +150,7 @@ void VPieceCarrousel::RefreshOrientation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrousel::ClearSelection()
+void VPCarrousel::ClearSelection()
 {
     m_layout->ClearSelection();
 }

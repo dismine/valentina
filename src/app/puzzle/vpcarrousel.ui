@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VPieceCarrousel</class>
- <widget class="QWidget" name="VPieceCarrousel">
+ <class>VPCarrousel</class>
+ <widget class="QWidget" name="VPCarrousel">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -42,7 +42,7 @@
       <enum>Qt::ScrollBarAlwaysOn</enum>
      </property>
      <property name="dragDropMode">
-      <enum>QAbstractItemView::DragOnly</enum>
+      <enum>QAbstractItemView::NoDragDrop</enum>
      </property>
      <property name="iconSize">
       <size>

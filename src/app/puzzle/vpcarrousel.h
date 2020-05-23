@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrousel.h
+ **  @file   vpcarrousel.h
  **  @author Ronan Le Tiec
  **  @date   13 04, 2020
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VPIECECARROUSEL_H
-#define VPIECECARROUSEL_H
+#ifndef VPCARROUSEL_H
+#define VPCARROUSEL_H
 
 #include <QWidget>
 #include <QComboBox>
@@ -37,15 +37,15 @@
 
 namespace Ui
 {
-class VPieceCarrousel;
+class VPCarrousel;
 }
 
-class VPieceCarrousel : public QWidget
+class VPCarrousel : public QWidget
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
-    virtual ~VPieceCarrousel() = default;
+    explicit VPCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
+    virtual ~VPCarrousel() = default;
 
     /**
      * @brief SetOrientation Sets the orientation to the given value and refreshes
@@ -76,8 +76,8 @@ public:
     void ClearSelection();
 
 private:
-    Q_DISABLE_COPY(VPieceCarrousel)
-    Ui::VPieceCarrousel *ui;
+    Q_DISABLE_COPY(VPCarrousel)
+    Ui::VPCarrousel *ui;
 
     VPuzzleLayout *m_layout;
     QList<VPuzzleLayer*> m_layers{};
@@ -94,4 +94,4 @@ private slots:
     void on_ActiveLayerChanged(int index);
 };
 
-#endif // VPIECECARROUSEL_H
+#endif // VPCARROUSEL_H

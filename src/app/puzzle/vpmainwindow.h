@@ -33,7 +33,7 @@
 #include <QDoubleSpinBox>
 
 #include "../vmisc/def.h"
-#include "vpiececarrousel.h"
+#include "vpcarrousel.h"
 #include "vpuzzlemaingraphicsview.h"
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
@@ -90,7 +90,7 @@ private:
     Q_DISABLE_COPY(VPMainWindow)
     Ui::VPMainWindow *ui;
 
-    VPieceCarrousel *m_pieceCarrousel{nullptr};
+    VPCarrousel *m_carrousel{nullptr};
     VPuzzleMainGraphicsView *m_graphicsView{nullptr};
 
     VPuzzleCommandLinePtr m_cmd;
@@ -135,9 +135,9 @@ private:
     void InitPropertyTabLayers();
 
     /**
-     * @brief InitPieceCarrousel Inits the piece carrousel
+     * @brief InitCarrousel Inits the carrousel
      */
-    void InitPieceCarrousel();
+    void InitCarrousel();
 
     /**
      * @brief InitMainGraphics Initialises the puzzle main graphics
@@ -364,11 +364,11 @@ private slots:
     void on_CurrentPiecePositionEdited();
 
     /**
-     * @brief PieceCarrouselLocationChanged When the piece carrousel's location
+     * @brief CarrouselLocationChanged When the piece carrousel's location
      * has been changed
      * @param area The new area where the piece carrousel has been placed
      */
-    void on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area);
+    void on_CarrouselLocationChanged(Qt::DockWidgetArea area);
 
     /**
      * @brief on_PieceSelectionChanged When the piece selection has changed

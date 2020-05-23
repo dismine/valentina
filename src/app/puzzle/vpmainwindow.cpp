@@ -72,7 +72,7 @@ VPMainWindow::VPMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent) :
 
     InitMenuBar();
     InitProperties();
-    InitPieceCarrousel();
+    InitCarrousel();
     InitMainGraphics();
 
 
@@ -85,7 +85,7 @@ VPMainWindow::VPMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent) :
 VPMainWindow::~VPMainWindow()
 {
     delete ui;
-    delete m_pieceCarrousel;
+    delete m_carrousel;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
                 m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
             }
 
-            m_pieceCarrousel->Refresh();
+            m_carrousel->Refresh();
         }
         else
         {
@@ -321,13 +321,13 @@ void VPMainWindow::InitPropertyTabLayers()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitPieceCarrousel()
+void VPMainWindow::InitCarrousel()
 {
-    m_pieceCarrousel = new VPieceCarrousel(m_layout, ui->dockWidgetPieceCarrousel);
-    ui->dockWidgetPieceCarrousel->setWidget(m_pieceCarrousel);
+    m_carrousel = new VPCarrousel(m_layout, ui->dockWidgetCarrousel);
+    ui->dockWidgetCarrousel->setWidget(m_carrousel);
 
-    connect(ui->dockWidgetPieceCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
-              &VPMainWindow::on_PieceCarrouselLocationChanged);
+    connect(ui->dockWidgetCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
+              &VPMainWindow::on_CarrouselLocationChanged);
 }
 
 
@@ -973,15 +973,15 @@ void VPMainWindow::on_CurrentPiecePositionEdited()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
+void VPMainWindow::on_CarrouselLocationChanged(Qt::DockWidgetArea area)
 {
     if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)
     {
-        m_pieceCarrousel->SetOrientation(Qt::Horizontal);
+        m_carrousel->SetOrientation(Qt::Horizontal);
     }
     else if (area == Qt::LeftDockWidgetArea || area == Qt::RightDockWidgetArea)
     {
-        m_pieceCarrousel->SetOrientation(Qt::Vertical);
+        m_carrousel->SetOrientation(Qt::Vertical);
     }
 }
 

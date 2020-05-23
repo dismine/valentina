@@ -33,13 +33,13 @@
 #include "vpuzzlelayer.h"
 #include "vpiececarrouselpiece.h"
 
-class VPieceCarrousel;
+class VPCarrousel;
 
 class VPieceCarrouselLayer : public QWidget
 {
     Q_OBJECT
 public:
-    VPieceCarrouselLayer(VPuzzleLayer *layer, VPieceCarrousel *carrousel);
+    VPieceCarrouselLayer(VPuzzleLayer *layer, VPCarrousel *carrousel);
     ~VPieceCarrouselLayer();
 
     void Init();
@@ -52,7 +52,7 @@ public:
 
     QList<VPieceCarrouselPiece*> GetCarrouselPieces();
 
-    VPieceCarrousel* GetCarrousel();
+    VPCarrousel* GetCarrousel();
 
     /**
      * @brief GetPuzzleLayer Returns the corresponding VPuzzleLayer
@@ -64,7 +64,7 @@ private:
     Q_DISABLE_COPY(VPieceCarrouselLayer)
 
     VPuzzleLayer *m_layer;
-    VPieceCarrousel *m_carrousel;
+    VPCarrousel *m_carrousel;
     QList<VPieceCarrouselPiece*> m_carrouselPieces;
 
 private slots:
