@@ -30,7 +30,7 @@
 #define VPCARROUSELPIECELIST_H
 
 #include <QWidget>
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 #include "vpcarrouselpiece.h"
 
 class VPCarrousel;
@@ -39,7 +39,7 @@ class VPCarrouselPieceList : public QWidget
 {
     Q_OBJECT
 public:
-    VPCarrouselPieceList(VPuzzleLayer *layer, VPCarrousel *carrousel);
+    VPCarrouselPieceList(VPPieceList *pieceList, VPCarrousel *carrousel);
     ~VPCarrouselPieceList();
 
     void Init();
@@ -55,15 +55,15 @@ public:
     VPCarrousel* GetCarrousel();
 
     /**
-     * @brief GetPuzzleLayer Returns the corresponding VPuzzleLayer
-     * @return the VPuzzleLayer
+     * @brief GetPieceList Returns the corresponding VPPieceList
+     * @return the VPPieceList
      */
-    VPuzzleLayer* GetLayer();
+    VPPieceList* GetPieceList();
 
 private:
     Q_DISABLE_COPY(VPCarrouselPieceList)
 
-    VPuzzleLayer *m_layer;
+    VPPieceList *m_pieceList;
     VPCarrousel *m_carrousel;
     QList<VPCarrouselPiece*> m_carrouselPieces;
 

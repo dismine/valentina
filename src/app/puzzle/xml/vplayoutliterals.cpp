@@ -31,15 +31,15 @@ namespace ML
 {
 const QString TagLayout              = QStringLiteral("layout");
 const QString TagProperties          = QStringLiteral("properties");
-const QString TagLayers              = QStringLiteral("layers");
+const QString TagPieceLists              = QStringLiteral("pieceLists");
 const QString TagUnit                = QStringLiteral("unit");
 const QString TagDescription         = QStringLiteral("description");
 const QString TagSize                = QStringLiteral("size");
 const QString TagMargin              = QStringLiteral("margin");
 const QString TagControl             = QStringLiteral("control");
 const QString TagTiles               = QStringLiteral("tiles");
-const QString TagUnplacedPiecesLayer = QStringLiteral("unplacedPiecesLayer");
-const QString TagLayer               = QStringLiteral("layer");
+const QString TagUnplacedPieceList   = QStringLiteral("unplacedPieceList");
+const QString TagPieceList           = QStringLiteral("pieceList");
 const QString TagPiece               = QStringLiteral("piece");
 
 const QString AttrVersion              = QStringLiteral("version");

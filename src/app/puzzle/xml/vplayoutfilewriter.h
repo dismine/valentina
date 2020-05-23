@@ -35,7 +35,7 @@
 #include "../vmisc/literals.h"
 
 class VPuzzleLayout;
-class VPuzzleLayer;
+class VPPieceList;
 class VPuzzlePiece;
 class QFile;
 class QMarginsF;
@@ -53,9 +53,9 @@ private:
     void WriteLayout(VPuzzleLayout *layout);
     void WriteProperties(VPuzzleLayout *layout);
     void WriteTiles(VPuzzleLayout *layout);
-    void WriteLayers(VPuzzleLayout *layout);
-    void WriteLayer(VPuzzleLayer *layer);
-    void WriteLayer(VPuzzleLayer *layer, const QString &tagName);
+    void WritePieceLists(VPuzzleLayout *layout);
+    void WritePieceList(VPPieceList *pieceList);
+    void WritePieceList(VPPieceList *pieceList, const QString &tagName);
     void WritePiece(VPuzzlePiece *piece);
 
     void WriteMargins(const QMarginsF &margins);

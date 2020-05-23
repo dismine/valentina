@@ -34,7 +34,7 @@
 
 #include "def.h"
 
-class VPuzzleLayer;
+class VPPieceList;
 class VPuzzlePiece;
 
 // is this the right place for the definition?
@@ -47,11 +47,15 @@ public:
     VPuzzleLayout();
     virtual ~VPuzzleLayout();
 
-    VPuzzleLayer* GetUnplacedPiecesLayer();
+    /**
+     * @brief GetUnplacedPieceList Returns the piece list of unplaced pieces
+     * @return the unplaced pieces list
+     */
+    VPPieceList* GetUnplacedPieceList();
 
-    VPuzzleLayer* AddLayer();
-    VPuzzleLayer* AddLayer(VPuzzleLayer *layer);
-    QList<VPuzzleLayer *> GetLayers();
+    VPPieceList* AddPieceList();
+    VPPieceList* AddPieceList(VPPieceList *pieceList);
+    QList<VPPieceList *> GetPiecesLists();
 
     /**
      * @brief GetSelectedPieces Returns the list of the selected pieces
@@ -196,47 +200,47 @@ public:
     bool GetStickyEdges() const;
 
     /**
-     * @brief ClearSelection goes through the layers & pieces and calls
+     * @brief ClearSelection goes through the piece list and pieces and calls
      * SetIsSelected(false) for the pieces that were selected.
      */
     void ClearSelection();
 
     /**
-     * @brief SetFocusedLayer Sets the focused layer, to which pieces are added from the carrousel via drag
+     * @brief SetFocusedPieceList Sets the focused piece klist, to which pieces are added from the carrousel via drag
      * and drop
-     * @param focusedLayer the new active layer. If nullptr, then it sets automaticaly the first layer from m_layers
+     * @param focusedPieceList the new active piece list. If nullptr, then it sets automaticaly the first piece list from m_pieceLists
      */
-    void SetFocusedLayer(VPuzzleLayer* focusedLayer = nullptr);
+    void SetFocusedPieceList(VPPieceList* focusedPieceList = nullptr);
 
     /**
-     * @brief GetFocusedLayer Returns the focused layer, to which pieces are added from the carrousel via drag
+     * @brief GetFocusedPieceList Returns the focused piece list, to which pieces are added from the carrousel via drag
      * and drop
-     * @return the focused layer
+     * @return the focused piece list
      */
-    VPuzzleLayer* GetFocusedLayer();
+    VPPieceList* GetFocusedPieceList();
 
     /**
-     * @brief MovePieceToLayer Moves the given piece to the given layer
+     * @brief MovePieceToPieceList Moves the given piece to the given piece list
      * @param piece the piece to move
-     * @param layer the layer to move the piece to
+     * @param pieceList the piece list to move the piece to
      */
-    void MovePieceToLayer(VPuzzlePiece* piece, VPuzzleLayer* layer);
+    void MovePieceToPieceList(VPuzzlePiece* piece, VPPieceList* pieceList);
 
 signals:
 
-    void PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter);
+    void PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
 
 private:
     Q_DISABLE_COPY(VPuzzleLayout)
 
-    VPuzzleLayer *m_unplacedPiecesLayer;
-    QList<VPuzzleLayer *> m_layers{};
+    VPPieceList *m_unplacedPieceList;
+    QList<VPPieceList *> m_pieceLists{};
 
     /**
-     * @brief m_focusedLayer pointer the the focused layer, to which pieces will be
-     * added via drag and drop, or if no layer is defined.
+     * @brief m_focusedPieceList pointer the the focused piece list, to which pieces will be
+     * added via drag and drop, or if no piece list is defined.
      */
-    VPuzzleLayer *m_focusedLayer{nullptr};
+    VPPieceList *m_focusedPieceList{nullptr};
 
     // format
     Unit m_unit{Unit::Cm};

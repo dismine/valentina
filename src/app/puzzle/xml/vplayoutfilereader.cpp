@@ -70,9 +70,9 @@ void VPLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
         {
             ReadProperties(layout);
         }
-        else if (name() == ML::TagLayers)
+        else if (name() == ML::TagPieceLists)
         {
-            ReadLayers(layout);
+            ReadPieceLists(layout);
         }
         else
         {
@@ -193,20 +193,20 @@ void VPLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadPieceLists(VPuzzleLayout *layout)
 {
-    SCASSERT(isStartElement() && name() == ML::TagLayers);
+    SCASSERT(isStartElement() && name() == ML::TagPieceLists);
 
     while (readNextStartElement())
     {
-        if (name() == ML::TagUnplacedPiecesLayer)
+        if (name() == ML::TagUnplacedPieceList)
         {
-            ReadLayer(layout->GetUnplacedPiecesLayer());
+            ReadPieceList(layout->GetUnplacedPieceList());
         }
-        else if (name() == ML::TagLayer)
+        else if (name() == ML::TagPieceList)
         {
-            VPuzzleLayer *layer = layout->AddLayer();
-            ReadLayer(layer);
+            VPPieceList *pieceList = layout->AddPieceList();
+            ReadPieceList(pieceList);
         }
         else
         {
@@ -217,13 +217,13 @@ void VPLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
+void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
 {
-    SCASSERT(isStartElement() && (name() == ML::TagLayer || name() == ML::TagUnplacedPiecesLayer));
+    SCASSERT(isStartElement() && (name() == ML::TagPieceList || name() == ML::TagUnplacedPieceList));
 
     QXmlStreamAttributes attribs = attributes();
-    layer->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Layer")));
-    layer->SetIsVisible(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
+    pieceList->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece List")));
+    pieceList->SetIsVisible(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
 
     while (readNextStartElement())
     {
@@ -231,7 +231,7 @@ void VPLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
         {
             VPuzzlePiece *piece = new VPuzzlePiece();
             ReadPiece(piece);
-            layer->AddPiece(piece);
+            pieceList->AddPiece(piece);
         }
         else
         {

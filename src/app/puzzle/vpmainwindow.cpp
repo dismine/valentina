@@ -165,7 +165,7 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 
                 // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
                 VPuzzlePiece *piece = CreatePiece(rawPiece);
-                m_layout->GetUnplacedPiecesLayer()->AddPiece(piece);
+                m_layout->GetUnplacedPieceList()->AddPiece(piece);
             }
 
             m_carrousel->Refresh();
@@ -236,7 +236,6 @@ void VPMainWindow::InitProperties()
 {
     InitPropertyTabCurrentPiece();
     InitPropertyTabLayout();
-    InitPropertyTabLayers();
     InitPropertyTabTiles();
 }
 
@@ -313,14 +312,6 @@ void VPMainWindow::InitPropertyTabTiles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitPropertyTabLayers()
-{
-    // for the MVP we don't want the layers tab.
-    // we remove it. As soon as we need it, update this code
-    ui->tabWidgetProperties->removeTab(3); // remove layers
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitCarrousel()
 {
     m_carrousel = new VPCarrousel(m_layout, ui->dockWidgetCarrousel);
@@ -343,7 +334,6 @@ void VPMainWindow::SetPropertiesData()
         SetPropertyTabCurrentPieceData();
         SetPropertyTabLayoutData();
         SetPropertyTabTilesData();
-        SetPropertyTabLayersData();
     }
 }
 
@@ -439,12 +429,6 @@ void VPMainWindow::SetPropertyTabLayoutData()
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabTilesData()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::SetPropertyTabLayersData()
 {
 
 }

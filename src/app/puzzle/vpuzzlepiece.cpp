@@ -29,7 +29,7 @@
 
 #include <QtMath>
 
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 #include "../vmisc/def.h"
 
 #include <QIcon>
@@ -242,17 +242,17 @@ QVector<QPointF> VPuzzlePiece::GetGrainline()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPuzzlePiece::GetLayer()
+VPPieceList* VPuzzlePiece::GetPieceList()
 {
-    return m_layer;
+    return m_pieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetLayer(VPuzzleLayer* layer)
+void VPuzzlePiece::SetPieceList(VPPieceList* pieceList)
 {
-    if(layer != m_layer)
+    if(pieceList != m_pieceList)
     {
-        m_layer = layer;
+        m_pieceList = pieceList;
     }
 }
 

@@ -26,56 +26,56 @@
  **
  *************************************************************************/
 #include "vpuzzlelayout.h"
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 #include "vpuzzlepiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayout::VPuzzleLayout() :
-    m_unplacedPiecesLayer(new VPuzzleLayer(this))
+    m_unplacedPieceList(new VPPieceList(this))
 {
-    m_unplacedPiecesLayer->SetName(QObject::tr("Unplaced pieces"));
+    m_unplacedPieceList->SetName(QObject::tr("Unplaced pieces"));
 
-    // create a standard default layer:
-    VPuzzleLayer *layer = new VPuzzleLayer(this);
-    layer->SetName(QObject::tr("Layout"));
-    AddLayer(layer);
+    // create a standard default piecelist:
+    VPPieceList *pieceList = new VPPieceList(this);
+    pieceList->SetName(QObject::tr("Layout"));
+    AddPieceList(pieceList);
 
-    // sets the default active layer
-    SetFocusedLayer();
+    // sets the default active piece list
+    SetFocusedPieceList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPuzzleLayout::~VPuzzleLayout()
 {
-    qDeleteAll(m_layers);
-    delete m_unplacedPiecesLayer;
+    qDeleteAll(m_pieceLists);
+    delete m_unplacedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPuzzleLayout::GetUnplacedPiecesLayer()
+VPPieceList* VPuzzleLayout::GetUnplacedPieceList()
 {
-    return m_unplacedPiecesLayer;
+    return m_unplacedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPuzzleLayout::AddLayer()
+VPPieceList* VPuzzleLayout::AddPieceList()
 {
-    VPuzzleLayer *newLayer = new VPuzzleLayer(this);
-    m_layers.append(newLayer);
-    return newLayer;
+    VPPieceList *newPieceList = new VPPieceList(this);
+    m_pieceLists.append(newPieceList);
+    return newPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPuzzleLayout::AddLayer(VPuzzleLayer *layer)
+VPPieceList* VPuzzleLayout::AddPieceList(VPPieceList *pieceList)
 {
-    m_layers.append(layer);
-    return layer;
+    m_pieceLists.append(pieceList);
+    return pieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPuzzleLayer *> VPuzzleLayout::GetLayers()
+QList<VPPieceList *> VPuzzleLayout::GetPiecesLists()
 {
-    return m_layers;
+    return m_pieceLists;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,12 +83,12 @@ QList<VPuzzlePiece *> VPuzzleLayout::GetSelectedPieces()
 {
     QList<VPuzzlePiece *> result = QList<VPuzzlePiece *>();
 
-    QList<VPuzzleLayer *> layers = m_layers;
-    layers.prepend(m_unplacedPiecesLayer);
+    QList<VPPieceList *> pieceLists = m_pieceLists;
+    pieceLists.prepend(m_unplacedPieceList);
 
-    for (auto layer : layers)
+    for (auto pieceList : pieceLists)
     {
-        for (auto piece : layer->GetPieces())
+        for (auto piece : pieceList->GetPieces())
         {
             if(piece->GetIsSelected())
             {
@@ -275,44 +275,44 @@ bool VPuzzleLayout::GetStickyEdges() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPuzzleLayout::ClearSelection()
 {
-    m_unplacedPiecesLayer->ClearSelection();
+    m_unplacedPieceList->ClearSelection();
 
-    for (auto layer : m_layers)
+    for (auto pieceList : m_pieceLists)
     {
-        layer->ClearSelection();
+        pieceList->ClearSelection();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetFocusedLayer(VPuzzleLayer* focusedLayer)
+void VPuzzleLayout::SetFocusedPieceList(VPPieceList* focusedPieceList)
 {
-    if(focusedLayer == nullptr)
+    if(focusedPieceList == nullptr)
     {
-        m_focusedLayer = m_layers.first();
+        m_focusedPieceList = m_pieceLists.first();
     }
     else
     {
-        m_focusedLayer = focusedLayer;
+        m_focusedPieceList = focusedPieceList;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPuzzleLayout::GetFocusedLayer()
+VPPieceList* VPuzzleLayout::GetFocusedPieceList()
 {
-    return m_focusedLayer;
+    return m_focusedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::MovePieceToLayer(VPuzzlePiece* piece, VPuzzleLayer* layer)
+void VPuzzleLayout::MovePieceToPieceList(VPuzzlePiece* piece, VPPieceList* pieceList)
 {
-    VPuzzleLayer* layerBefore = piece->GetLayer();
+    VPPieceList* pieceListBefore = piece->GetPieceList();
 
-    if(layerBefore != nullptr)
+    if(pieceListBefore != nullptr)
     {
-        piece->GetLayer()->RemovePiece(piece);
+        piece->GetPieceList()->RemovePiece(piece);
     }
-    layer->AddPiece(piece);
+    pieceList->AddPiece(piece);
 
     // signal, that a piece was moved
-    emit PieceMovedToLayer(piece, layerBefore,layer);
+    emit PieceMovedToPieceList(piece, pieceListBefore,pieceList);
 }

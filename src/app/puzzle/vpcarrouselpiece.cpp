@@ -47,9 +47,9 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPiece::VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer) :
+VPCarrouselPiece::VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselPieceList) :
     m_piece(piece),
-    m_carrouselPieceList(carrouselLayer),
+    m_carrouselPieceList(carrouselPieceList),
     m_dragStart(QPoint())
 {
     Init();
@@ -196,7 +196,7 @@ void VPCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
         return;
     }
 
-    if(m_piece->GetLayer() != m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer())
+    if(m_piece->GetPieceList() != m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList())
     {
         return;
     }
@@ -239,32 +239,32 @@ void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu contextMenu;
 
-    VPuzzleLayer* unplacedLayer = m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer();
-    QList<VPuzzleLayer*> layers = m_piece->GetLayer()->GetLayout()->GetLayers();
+    VPPieceList* unplacedPieces = m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList();
+    QList<VPPieceList*> pieceLists = m_piece->GetPieceList()->GetLayout()->GetPiecesLists();
 
-    // move to layer actions  -- TODO : To be tested properly when we have several layers
-    layers.removeAll(m_piece->GetLayer());
-    if(layers.count() > 0)
+    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
+    pieceLists.removeAll(m_piece->GetPieceList());
+    if(pieceLists.count() > 0)
     {
         QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
 
         // TODO order in alphabetical order
 
-        for (auto layer : layers)
+        for (auto pieceList : pieceLists)
         {
-            QAction* moveToLayer = moveMenu->addAction(layer->GetName());
-            QVariant data = QVariant::fromValue(layer);
-            moveToLayer->setData(data);
+            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
+            QVariant data = QVariant::fromValue(pieceList);
+            moveToPieceList->setData(data);
 
-            connect(moveToLayer, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
+            connect(moveToPieceList, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
         }
     }
 
-    // remove from layout action
-    if(m_piece->GetLayer() != unplacedLayer)
+    // remove from piece list action
+    if(m_piece->GetPieceList() != unplacedPieces)
     {
         QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
-        QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
+        QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
         removeAction->setData(data);
         connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
     }
@@ -277,9 +277,9 @@ void VPCarrouselPiece::on_ActionPieceMovedToPieceList()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();
-    VPuzzleLayer *layer = v.value<VPuzzleLayer *>();
-    if(layer != nullptr)
+    VPPieceList *pieceList = v.value<VPPieceList *>();
+    if(pieceList != nullptr)
     {
-        layer->GetLayout()->MovePieceToLayer(m_piece, layer);
+        pieceList->GetLayout()->MovePieceToPieceList(m_piece, pieceList);
     }
 }

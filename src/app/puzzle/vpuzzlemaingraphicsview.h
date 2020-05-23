@@ -58,13 +58,13 @@ protected:
 
 private slots:
     /**
-     * @brief on_PieceMovedToLayer The slot is called when the given piece was moved from the given layer to the other
-     * given layer
+     * @brief on_PieceMovedToPieceList The slot is called when the given piece was moved from the given piece list to the other
+     * given piece list
      * @param piece the piece that was moved
-     * @param layerBefore the layer before the move
-     * @param layerAfter the layer after the move
+     * @param pieceListBefore the piece list before the move
+     * @param pieceListAfter the piece list after the move
      */
-    void on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter);
+    void on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
 
     /**
      * @brief on_SceneSelectionChanged Slot is called when the scene selection has changed

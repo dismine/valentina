@@ -33,7 +33,7 @@
 #include <QPoint>
 #include <QTransform>
 
-class VPuzzleLayer;
+class VPPieceList;
 
 class VPuzzlePiece : public QObject
 {
@@ -187,16 +187,16 @@ public:
     bool GetIsSelected();
 
     /**
-     * @brief GetLayer Returns the layer in which the piece is.
-     * @return layer of the piece
+     * @brief GetPieceList Returns the piecelist in which the piece is.
+     * @return pieceList of the piece
      */
-    VPuzzleLayer* GetLayer();
+    VPPieceList* GetPieceList();
 
     /**
-     * @brief SetLayer Sets the layer of the piece to the given layer
-     * @param layer
+     * @brief SetPieceList Sets the pieceList of the piece to the given pieceList
+     * @param pieceList
      */
-    void SetLayer(VPuzzleLayer* layer);
+    void SetPieceList(VPPieceList* pieceList);
 
     QIcon PieceIcon(const QSize &size) const;
 
@@ -244,7 +244,7 @@ private:
     bool m_mirrorPiece{false};
 
     bool m_isSelected{false};
-    VPuzzleLayer *m_layer{nullptr};
+    VPPieceList *m_pieceList{nullptr};
 };
 
 #endif // VPUZZLEPIECE_H

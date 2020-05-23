@@ -43,14 +43,15 @@ class VPCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer);
+    explicit VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselPieceList);
     ~VPCarrouselPiece();
 
     void Init();
     void Refresh();
+
     /**
     * @brief CleanPiecesPreview fitInView of the qGraphicsView of the pieces works properly
-    * only when the piece is in place in the layer and we call it from the layer.
+    * only when the piece is in place in the piece list and we call it from the piece list.
     */
     void CleanPreview();
 

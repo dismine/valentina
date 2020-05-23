@@ -28,7 +28,7 @@
 
 #include "vplayoutfilewriter.h"
 #include "vpuzzlelayout.h"
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 #include "vpuzzlepiece.h"
 #include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -65,7 +65,7 @@ void VPLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
 
     WriteProperties(layout);
-    WriteLayers(layout);
+    WritePieceLists(layout);
 
     writeEndElement(); //layout
 }
@@ -116,45 +116,45 @@ void VPLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteLayers(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WritePieceLists(VPuzzleLayout *layout)
 {
-   writeStartElement(ML::TagLayers);
+   writeStartElement(ML::TagPieceLists);
 
-   WriteLayer(layout->GetUnplacedPiecesLayer(), ML::TagUnplacedPiecesLayer);
+   WritePieceList(layout->GetUnplacedPieceList(), ML::TagUnplacedPieceList);
 
-   QList<VPuzzleLayer*> layers = layout->GetLayers();
-   for (auto layer : layers)
+   QList<VPPieceList*> pieceLists = layout->GetPiecesLists();
+   for (auto pieceList : pieceLists)
    {
-       WriteLayer(layer);
+       WritePieceList(pieceList);
    }
 
-   writeEndElement(); // layers
+   writeEndElement(); // piece list
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteLayer(VPuzzleLayer *layer)
+void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList)
 {
-    WriteLayer(layer, ML::TagLayer);
+    WritePieceList(pieceList, ML::TagPieceList);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteLayer(VPuzzleLayer *layer, const QString &tagName)
+void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList, const QString &tagName)
 {
-    writeStartElement(tagName); // layer
-    SetAttribute(ML::AttrName, layer->GetName());
-    SetAttribute(ML::AttrVisible, layer->GetIsVisible());
+    writeStartElement(tagName); // piece list
+    SetAttribute(ML::AttrName, pieceList->GetName());
+    SetAttribute(ML::AttrVisible, pieceList->GetIsVisible());
     //  TODO selected info. Not sure how it's saved yet
-    //SetAttribute("selected", layer->GetIsSelected());
+    //SetAttribute("selected", pieceList->GetIsSelected());
 
 
-    QList<VPuzzlePiece*> pieces = layer->GetPieces();
+    QList<VPuzzlePiece*> pieces = pieceList->GetPieces();
     for (auto piece : pieces)
     {
         WritePiece(piece);
     }
 
-    writeEndElement(); // layer
+    writeEndElement(); // piece list
 }
 
 //---------------------------------------------------------------------------------------------------------------------

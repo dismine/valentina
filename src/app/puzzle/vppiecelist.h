@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlelayer.h
+ **  @file   vppiecelist.h
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,20 +25,20 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUZZLELAYER_H
-#define VPUZZLELAYER_H
+#ifndef VPPIECELIST_H
+#define VPPIECELIST_H
 
 #include <QList>
 #include "vpuzzlepiece.h"
 
 class VPuzzleLayout;
 
-class VPuzzleLayer : public QObject
+class VPPieceList : public QObject
 {
     Q_OBJECT
 public:
-    VPuzzleLayer(VPuzzleLayout *layout);
-    ~VPuzzleLayer();
+    VPPieceList(VPuzzleLayout *layout);
+    ~VPPieceList();
 
     QList<VPuzzlePiece *> GetPieces();
     void AddPiece(VPuzzlePiece *piece);
@@ -54,13 +54,13 @@ public:
     bool GetIsVisible() const;
 
     /**
-     * @brief GetLayout Returns the layout in which this layer is
-     * @return the layout of this layer
+     * @brief GetLayout Returns the layout in which this piece list is
+     * @return the layout of this piece list
      */
     VPuzzleLayout* GetLayout();
 
     /**
-     * @brief ClearSelection Clears the selection of the pieces in this layer
+     * @brief ClearSelection Clears the selection of the pieces in this piece list
      */
     void ClearSelection();
 
@@ -76,7 +76,7 @@ signals:
     void PieceRemoved(VPuzzlePiece *piece);
 
 private:
-    Q_DISABLE_COPY(VPuzzleLayer)
+    Q_DISABLE_COPY(VPPieceList)
 
     QString m_name{};
     QList<VPuzzlePiece *> m_pieces{};
@@ -88,4 +88,4 @@ private:
 
 };
 
-#endif // VPUZZLELAYER_H
+#endif // VPPIECELIST_H

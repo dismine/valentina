@@ -34,11 +34,11 @@
 
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
+Q_LOGGING_CATEGORY(pCarrouselPieceList, "p.carrouselPieceList")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPieceList::VPCarrouselPieceList(VPuzzleLayer *layer, VPCarrousel *carrousel) :
-    m_layer(layer),
+VPCarrouselPieceList::VPCarrouselPieceList(VPPieceList *pieceList, VPCarrousel *carrousel) :
+    m_pieceList(pieceList),
     m_carrousel(carrousel),
     m_carrouselPieces(QList<VPCarrouselPiece*>())
 {
@@ -63,8 +63,8 @@ void VPCarrouselPieceList::Init()
     Refresh();
 
     // add the connections
-    connect(m_layer, &VPuzzleLayer::PieceAdded, this, &VPCarrouselPieceList::on_PieceAdded);
-    connect(m_layer, &VPuzzleLayer::PieceRemoved, this, &VPCarrouselPieceList::on_PieceRemoved);
+    connect(m_pieceList, &VPPieceList::PieceAdded, this, &VPCarrouselPieceList::on_PieceAdded);
+    connect(m_pieceList, &VPPieceList::PieceRemoved, this, &VPCarrouselPieceList::on_PieceRemoved);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ void VPCarrouselPieceList::Refresh()
     Clear();
 
     // Updates the carrousel pieces from the pieces list
-    QList<VPuzzlePiece*> pieces = m_layer->GetPieces();
+    QList<VPuzzlePiece*> pieces = m_pieceList->GetPieces();
 
     // sort the pieces in alphabetical order
     std::sort(pieces.begin(), pieces.end(),
@@ -96,7 +96,7 @@ void VPCarrouselPieceList::Refresh()
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::Clear()
 {
-    // Removes and deletes the carrousel pieces from the layer
+    // Removes and deletes the carrousel pieces from the piece list
     while (!m_carrouselPieces.isEmpty())
     {
         VPCarrouselPiece *carrouselPiece = m_carrouselPieces.takeLast();
@@ -123,9 +123,9 @@ VPCarrousel* VPCarrouselPieceList::GetCarrousel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPCarrouselPieceList::GetLayer()
+VPPieceList* VPCarrouselPieceList::GetPieceList()
 {
-    return m_layer;
+    return m_pieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

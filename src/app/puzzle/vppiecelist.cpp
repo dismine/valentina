@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlelayer.cpp
+ **  @file   vppiecelist.cpp
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,42 +25,42 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 
 #include "vpuzzlelayout.h"
 
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(pLayer, "p.layer")
+Q_LOGGING_CATEGORY(pPieceList, "p.pieceList")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer::VPuzzleLayer(VPuzzleLayout *layout):
+VPPieceList::VPPieceList(VPuzzleLayout *layout):
     m_layout(layout)
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer::~VPuzzleLayer()
+VPPieceList::~VPPieceList()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayout* VPuzzleLayer::GetLayout()
+VPuzzleLayout* VPPieceList::GetLayout()
 {
     return m_layout;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPuzzlePiece *> VPuzzleLayer::GetPieces()
+QList<VPuzzlePiece *> VPPieceList::GetPieces()
 {
     return m_pieces;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::ClearSelection()
+void VPPieceList::ClearSelection()
 {
     for (auto piece: m_pieces)
     {
@@ -69,45 +69,45 @@ void VPuzzleLayer::ClearSelection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::AddPiece(VPuzzlePiece *piece)
+void VPPieceList::AddPiece(VPuzzlePiece *piece)
 {
-    qCDebug(pLayer(), "piece -- %s -- added to %s", qUtf8Printable(piece->GetName()), qUtf8Printable(this->GetName()));
+    qCDebug(pPieceList(), "piece -- %s -- added to %s", qUtf8Printable(piece->GetName()), qUtf8Printable(this->GetName()));
 
     m_pieces.append(piece);
-    piece->SetLayer(this);
+    piece->SetPieceList(this);
 
     emit PieceAdded(piece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::RemovePiece(VPuzzlePiece *piece)
+void VPPieceList::RemovePiece(VPuzzlePiece *piece)
 {
     m_pieces.removeAll(piece);
-    piece->SetLayer(nullptr);
+    piece->SetPieceList(nullptr);
 
     emit PieceRemoved(piece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPuzzleLayer::GetName() const
+QString VPPieceList::GetName() const
 {
     return m_name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::SetName(const QString &name)
+void VPPieceList::SetName(const QString &name)
 {
     m_name = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayer::SetIsVisible(bool value)
+void VPPieceList::SetIsVisible(bool value)
 {
     m_isVisible = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayer::GetIsVisible() const
+bool VPPieceList::GetIsVisible() const
 {
     return m_isVisible;
 }

@@ -130,11 +130,6 @@ private:
     void InitPropertyTabTiles();
 
     /**
-     * @brief InitPropertyTabLayers Inits the layers tab in the properties
-     */
-    void InitPropertyTabLayers();
-
-    /**
      * @brief InitCarrousel Inits the carrousel
      */
     void InitCarrousel();
@@ -167,12 +162,6 @@ private:
      * in the Tiles Tab to the values saved in m_layout
      */
     void SetPropertyTabTilesData();
-
-    /**
-     * @brief SetPropertyTabLayersData Sets the values of UI elements
-     * in the Layers Tab to the values saved in m_layout
-     */
-    void SetPropertyTabLayersData();
 
     /**
      * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.

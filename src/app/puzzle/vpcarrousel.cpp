@@ -32,7 +32,7 @@
 #include <QScrollBar>
 
 #include "../vmisc/backport/qoverload.h"
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 
 #include <QLoggingCategory>
 #include <QMenu>
@@ -49,8 +49,8 @@ VPCarrousel::VPCarrousel(VPuzzleLayout *layout, QWidget *parent) :
     ui->setupUi(this);
 
     // init the combo box
-    connect(ui->comboBoxLayer, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &VPCarrousel::on_ActiveLayerChanged);
+    connect(ui->comboBoxPieceList, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &VPCarrousel::on_ActivePieceListChanged);
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -68,18 +68,18 @@ void VPCarrousel::Refresh()
 
     // --- add the content saved in the layout to the carrousel.
     // Do not rely on m_layout because we do not control it.
-    m_layers = m_layout->GetLayers();
-    m_layers.prepend(m_layout->GetUnplacedPiecesLayer());
+    m_pieceLists = m_layout->GetPiecesLists();
+    m_pieceLists.prepend(m_layout->GetUnplacedPieceList());
 
-    for (auto layer : m_layers)
+    for (auto pieceList : m_pieceLists)
     {
-        // add layer name to combo
-        ui->comboBoxLayer->blockSignals(true);
-        ui->comboBoxLayer->addItem(layer->GetName());
-        ui->comboBoxLayer->blockSignals(false);
+        // add piece list name to combo
+        ui->comboBoxPieceList->blockSignals(true);
+        ui->comboBoxPieceList->addItem(pieceList->GetName());
+        ui->comboBoxPieceList->blockSignals(false);
     }
 
-    on_ActiveLayerChanged(0);
+    on_ActivePieceListChanged(0);
 
     RefreshOrientation();
 }
@@ -88,25 +88,25 @@ void VPCarrousel::Refresh()
 void VPCarrousel::Clear()
 {
     // remove the combobox entries
-    ui->comboBoxLayer->clear();
+    ui->comboBoxPieceList->clear();
 
     ui->listWidget->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrousel::on_ActiveLayerChanged(int index)
+void VPCarrousel::on_ActivePieceListChanged(int index)
 {
     qCDebug(pCarrousel, "index changed %i", index);
 
     ui->listWidget->clear();
 
-    if (index >= 0 && index < m_layers.size())
+    if (index >= 0 && index < m_pieceLists.size())
     {
-        VPuzzleLayer *layer = m_layers.at(index);
+        VPPieceList *pieceList = m_pieceLists.at(index);
 
-        if (layer)
+        if (pieceList)
         {
-            QList<VPuzzlePiece*> pieces = layer->GetPieces();
+            QList<VPuzzlePiece*> pieces = pieceList->GetPieces();
 
             for (auto piece : pieces)
             {
@@ -129,7 +129,7 @@ void VPCarrousel::RefreshOrientation()
     // then update the scrollarea min height / width and scrollbar behaviour
     if(m_orientation == Qt::Horizontal)
     {
-        ui->comboBoxLayer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        ui->comboBoxPieceList->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
         // scroll bar policy of scroll area
         ui->listWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -139,7 +139,7 @@ void VPCarrousel::RefreshOrientation()
     }
     else // Qt::Vertical
     {
-        ui->comboBoxLayer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        ui->comboBoxPieceList->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         // scroll bar policy of scroll area
         ui->listWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);

@@ -40,7 +40,7 @@
 #include <QGraphicsScene>
 
 #include "vpuzzlepiece.h"
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 #include "vpuzzlelayout.h"
 
 #include <QLoggingCategory>
@@ -296,44 +296,44 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu contextMenu;
 
-    // move to layer actions  -- TODO : To be tested properly when we have several layers
-    QList<VPuzzleLayer*> layers = m_piece->GetLayer()->GetLayout()->GetLayers();
-    layers.removeAll(m_piece->GetLayer());
+    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
+    QList<VPPieceList*> pieceLists = m_piece->GetPieceList()->GetLayout()->GetPiecesLists();
+    pieceLists.removeAll(m_piece->GetPieceList());
 
-    if(layers.count() > 0)
+    if(pieceLists.count() > 0)
     {
         QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
 
         // TODO order in alphabetical order
 
-        for (auto layer : layers)
+        for (auto pieceList : pieceLists)
         {
-            QAction* moveToLayer = moveMenu->addAction(layer->GetName());
-            QVariant data = QVariant::fromValue(layer);
-            moveToLayer->setData(data);
+            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
+            QVariant data = QVariant::fromValue(pieceList);
+            moveToPieceList->setData(data);
 
-            connect(moveToLayer, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToLayer);
+            connect(moveToPieceList, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
         }
     }
 
     // remove from layout action
     QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
-    QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
+    QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
     removeAction->setData(data);
-    connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToLayer);
+    connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
 
     contextMenu.exec(event->screenPos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::on_ActionPieceMovedToLayer()
+void VPGraphicsPiece::on_ActionPieceMovedToPieceList()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();
-    VPuzzleLayer *layer = v.value<VPuzzleLayer *>();
-    if(layer != nullptr)
+    VPPieceList *pieceList = v.value<VPPieceList *>();
+    if(pieceList != nullptr)
     {
-        layer->GetLayout()->MovePieceToLayer(m_piece, layer);
+        pieceList->GetLayout()->MovePieceToPieceList(m_piece, pieceList);
     }
 }
 

@@ -80,7 +80,7 @@ private:
     Ui::VPCarrousel *ui;
 
     VPuzzleLayout *m_layout;
-    QList<VPuzzleLayer*> m_layers{};
+    QList<VPPieceList*> m_pieceLists{};
 
     Qt::Orientation m_orientation{Qt::Vertical};
 
@@ -88,10 +88,10 @@ private:
 private slots:
 
     /**
-     * @brief on_ActiveLayerChanged Called when the active layer is changed
+     * @brief on_ActivePieceListChanged Called when the active piece list is changed
      * @param index
      */
-    void on_ActiveLayerChanged(int index);
+    void on_ActivePieceListChanged(int index);
 };
 
 #endif // VPCARROUSEL_H

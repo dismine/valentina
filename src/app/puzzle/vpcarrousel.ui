@@ -27,7 +27,7 @@
     <number>6</number>
    </property>
    <item>
-    <widget class="QComboBox" name="comboBoxLayer">
+    <widget class="QComboBox" name="comboBoxPieceList">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>

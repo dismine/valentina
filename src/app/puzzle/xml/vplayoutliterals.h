@@ -36,15 +36,15 @@ namespace ML
 {
 extern const QString TagLayout;
 extern const QString TagProperties;
-extern const QString TagLayers;
+extern const QString TagPieceLists;
 extern const QString TagUnit;
 extern const QString TagDescription;
 extern const QString TagSize;
 extern const QString TagMargin;
 extern const QString TagControl;
 extern const QString TagTiles;
-extern const QString TagUnplacedPiecesLayer;
-extern const QString TagLayer;
+extern const QString TagUnplacedPieceList;
+extern const QString TagPieceList;
 extern const QString TagPiece;
 
 extern const QString AttrVersion;

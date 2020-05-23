@@ -33,7 +33,7 @@
 #include <QKeyEvent>
 
 #include "vpuzzlemimedatapiece.h"
-#include "vpuzzlelayer.h"
+#include "vppiecelist.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
 #include <QLoggingCategory>
@@ -56,7 +56,7 @@ VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget 
     setAcceptDrops(true);
 
     // add the connections
-    connect(m_layout, &VPuzzleLayout::PieceMovedToLayer, this, &VPuzzleMainGraphicsView::on_PieceMovedToLayer);
+    connect(m_layout, &VPuzzleLayout::PieceMovedToPieceList, this, &VPuzzleMainGraphicsView::on_PieceMovedToPieceList);
     connect(m_scene, &VMainGraphicsScene::selectionChanged, this,
             &VPuzzleMainGraphicsView::on_SceneSelectionChanged);
 }
@@ -122,11 +122,11 @@ void VPuzzleMainGraphicsView::dropEvent(QDropEvent *event)
             QPoint point = event->pos();
             piece->SetPosition(mapToScene(point));
 
-            // change the layer of the piece
-            VPuzzleLayer *focusedLayer = m_layout->GetFocusedLayer();
-            if(focusedLayer != nullptr)
+            // change the piecelist of the piece
+            VPPieceList *focusedPieceList = m_layout->GetFocusedPieceList();
+            if(focusedPieceList != nullptr)
             {
-                m_layout->MovePieceToLayer(piece, focusedLayer);
+                m_layout->MovePieceToPieceList(piece, focusedPieceList);
             }
         }
     }
@@ -146,16 +146,16 @@ void VPuzzleMainGraphicsView::keyPressEvent(QKeyEvent *event)
             if(piece->GetIsSelected())
             {
                 piece->SetIsSelected(false);
-                m_layout->MovePieceToLayer(piece, m_layout->GetUnplacedPiecesLayer());
+                m_layout->MovePieceToPieceList(piece, m_layout->GetUnplacedPieceList());
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleLayer *layerBefore, VPuzzleLayer *layerAfter)
+void VPuzzleMainGraphicsView::on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter)
 {
-    Q_UNUSED(layerBefore)
+    Q_UNUSED(pieceListBefore)
 
     VPGraphicsPiece *_graphicsPiece = nullptr;
     for(auto graphicPiece : m_graphicsPieces)
@@ -166,12 +166,12 @@ void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleL
         }
     }
 
-    if(layerAfter == m_layout->GetUnplacedPiecesLayer() && _graphicsPiece != nullptr)
+    if(pieceListAfter == m_layout->GetUnplacedPieceList() && _graphicsPiece != nullptr)
     {
         scene()->removeItem(_graphicsPiece);
         m_graphicsPieces.removeAll(_graphicsPiece);
     }
-    else if(layerAfter != m_layout->GetUnplacedPiecesLayer())
+    else if(pieceListAfter != m_layout->GetUnplacedPieceList())
     {
         if(_graphicsPiece == nullptr)
         {
@@ -194,5 +194,5 @@ void VPuzzleMainGraphicsView::on_SceneSelectionChanged()
     // but we need to make sure that the unplaced pieces are unselected when the scene selection has changed
     // because as they are not part of the scene, they are not updated
 
-    m_layout->GetUnplacedPiecesLayer()->ClearSelection();
+    m_layout->GetUnplacedPieceList()->ClearSelection();
 }
