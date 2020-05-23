@@ -34,7 +34,7 @@
 
 #include "../vmisc/def.h"
 #include "vpcarrousel.h"
-#include "vpuzzlemaingraphicsview.h"
+#include "vpmaingraphicsview.h"
 #include "vplayout.h"
 #include "vpuzzlepiece.h"
 #include "../vlayout/vlayoutpiece.h"
@@ -91,7 +91,7 @@ private:
     Ui::VPMainWindow *ui;
 
     VPCarrousel *m_carrousel{nullptr};
-    VPuzzleMainGraphicsView *m_graphicsView{nullptr};
+    VPMainGraphicsView *m_graphicsView{nullptr};
 
     VPCommandLinePtr m_cmd;
 

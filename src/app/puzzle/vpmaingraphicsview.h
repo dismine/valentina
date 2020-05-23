@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlemaingraphicsview.h
+ **  @file   vpmaingraphicsview.h
  **  @author Ronan Le Tiec
  **  @date   3 5, 2020
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VPUZZLEMAINGRAPHICSVIEW_H
-#define VPUZZLEMAINGRAPHICSVIEW_H
+#ifndef VPMAINGRAPHICSVIEW_H
+#define VPMAINGRAPHICSVIEW_H
 
 #include "vpgraphicssheet.h"
 #include "vpgraphicspiece.h"
@@ -36,12 +36,12 @@
 class VMainGraphicsScene;
 
 
-class VPuzzleMainGraphicsView : public VMainGraphicsView
+class VPMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
-    VPuzzleMainGraphicsView(VPLayout *layout, QWidget *parent);
-    ~VPuzzleMainGraphicsView() = default;
+    VPMainGraphicsView(VPLayout *layout, QWidget *parent);
+    ~VPMainGraphicsView() = default;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
@@ -72,7 +72,7 @@ private slots:
     void on_SceneSelectionChanged();
 
 private:
-    Q_DISABLE_COPY(VPuzzleMainGraphicsView)
+    Q_DISABLE_COPY(VPMainGraphicsView)
 
     VMainGraphicsScene *m_scene{nullptr};
 
@@ -83,4 +83,4 @@ private:
 
 };
 
-#endif // VPUZZLEMAINGRAPHICVIEW_H
+#endif // VPMAINGRAPHICSVIEW_H

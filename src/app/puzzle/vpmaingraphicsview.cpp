@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlemaingraphicsview.cpp
+ **  @file   vpmaingraphicsview.cpp
  **  @author Ronan Le Tiec
  **  @date   3 5, 2020
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vpuzzlemaingraphicsview.h"
+#include "vpmaingraphicsview.h"
 
 #include <QDragEnterEvent>
 #include <QMimeData>
@@ -42,7 +42,7 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPLayout *layout, QWidget *parent) :
+VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, QWidget *parent) :
     VMainGraphicsView(parent),
     m_layout(layout)
 {
@@ -56,13 +56,13 @@ VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPLayout *layout, QWidget *pare
     setAcceptDrops(true);
 
     // add the connections
-    connect(m_layout, &VPLayout::PieceMovedToPieceList, this, &VPuzzleMainGraphicsView::on_PieceMovedToPieceList);
+    connect(m_layout, &VPLayout::PieceMovedToPieceList, this, &VPMainGraphicsView::on_PieceMovedToPieceList);
     connect(m_scene, &VMainGraphicsScene::selectionChanged, this,
-            &VPuzzleMainGraphicsView::on_SceneSelectionChanged);
+            &VPMainGraphicsView::on_SceneSelectionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::RefreshLayout()
+void VPMainGraphicsView::RefreshLayout()
 {
     // FIXME: Is that the way to go?
 
@@ -72,7 +72,7 @@ void VPuzzleMainGraphicsView::RefreshLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
+void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
@@ -84,7 +84,7 @@ void VPuzzleMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
+void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
@@ -95,7 +95,7 @@ void VPuzzleMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::dragLeaveEvent(QDragLeaveEvent *event)
+void VPMainGraphicsView::dragLeaveEvent(QDragLeaveEvent *event)
 {
     event->accept();
 }
@@ -103,7 +103,7 @@ void VPuzzleMainGraphicsView::dragLeaveEvent(QDragLeaveEvent *event)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::dropEvent(QDropEvent *event)
+void VPMainGraphicsView::dropEvent(QDropEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
@@ -133,7 +133,7 @@ void VPuzzleMainGraphicsView::dropEvent(QDropEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::keyPressEvent(QKeyEvent *event)
+void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
     {
@@ -153,7 +153,7 @@ void VPuzzleMainGraphicsView::keyPressEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter)
+void VPMainGraphicsView::on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter)
 {
     Q_UNUSED(pieceListBefore)
 
@@ -188,7 +188,7 @@ void VPuzzleMainGraphicsView::on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleMainGraphicsView::on_SceneSelectionChanged()
+void VPMainGraphicsView::on_SceneSelectionChanged()
 {
     // most of the selection behaviour taks place automatically
     // but we need to make sure that the unplaced pieces are unselected when the scene selection has changed

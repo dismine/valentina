@@ -436,7 +436,7 @@ void VPMainWindow::SetPropertyTabTilesData()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitMainGraphics()
 {
-    m_graphicsView = new VPuzzleMainGraphicsView(m_layout, this);
+    m_graphicsView = new VPMainGraphicsView(m_layout, this);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
