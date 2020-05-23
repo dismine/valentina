@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrousellayer.cpp
+ **  @file   vpcarrouselpiecelist.cpp
  **  @author Ronan Le Tiec
  **  @date   25 4, 2020
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vpiececarrousellayer.h"
+#include "vpcarrouselpiecelist.h"
 #include "vpcarrousel.h"
 #include "../vmisc/backport/qoverload.h"
 
@@ -37,7 +37,7 @@
 Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, VPCarrousel *carrousel) :
+VPCarrouselPieceList::VPCarrouselPieceList(VPuzzleLayer *layer, VPCarrousel *carrousel) :
     m_layer(layer),
     m_carrousel(carrousel),
     m_carrouselPieces(QList<VPieceCarrouselPiece*>())
@@ -46,13 +46,13 @@ VPieceCarrouselLayer::VPieceCarrouselLayer(VPuzzleLayer *layer, VPCarrousel *car
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselLayer::~VPieceCarrouselLayer()
+VPCarrouselPieceList::~VPCarrouselPieceList()
 {
     Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::Init()
+void VPCarrouselPieceList::Init()
 {
     // initiales the structure
     QVBoxLayout *layoutPiecesLayout = new QVBoxLayout();
@@ -63,12 +63,12 @@ void VPieceCarrouselLayer::Init()
     Refresh();
 
     // add the connections
-    connect(m_layer, &VPuzzleLayer::PieceAdded, this, &VPieceCarrouselLayer::on_PieceAdded);
-    connect(m_layer, &VPuzzleLayer::PieceRemoved, this, &VPieceCarrouselLayer::on_PieceRemoved);
+    connect(m_layer, &VPuzzleLayer::PieceAdded, this, &VPCarrouselPieceList::on_PieceAdded);
+    connect(m_layer, &VPuzzleLayer::PieceRemoved, this, &VPCarrouselPieceList::on_PieceRemoved);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::Refresh()
+void VPCarrouselPieceList::Refresh()
 {
     Clear();
 
@@ -94,7 +94,7 @@ void VPieceCarrouselLayer::Refresh()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::Clear()
+void VPCarrouselPieceList::Clear()
 {
     // Removes and deletes the carrousel pieces from the layer
     while (!m_carrouselPieces.isEmpty())
@@ -111,25 +111,25 @@ void VPieceCarrouselLayer::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPieceCarrouselPiece*> VPieceCarrouselLayer::GetCarrouselPieces()
+QList<VPieceCarrouselPiece*> VPCarrouselPieceList::GetCarrouselPieces()
 {
     return m_carrouselPieces;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrousel* VPieceCarrouselLayer::GetCarrousel()
+VPCarrousel* VPCarrouselPieceList::GetCarrousel()
 {
     return m_carrousel;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayer* VPieceCarrouselLayer::GetLayer()
+VPuzzleLayer* VPCarrouselPieceList::GetLayer()
 {
     return m_layer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::on_PieceAdded(VPuzzlePiece* piece)
+void VPCarrouselPieceList::on_PieceAdded(VPuzzlePiece* piece)
 {
     Q_UNUSED(piece)
 
@@ -139,7 +139,7 @@ void VPieceCarrouselLayer::on_PieceAdded(VPuzzlePiece* piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselLayer::on_PieceRemoved(VPuzzlePiece* piece)
+void VPCarrouselPieceList::on_PieceRemoved(VPuzzlePiece* piece)
 {
     for (auto carrouselPiece : m_carrouselPieces)
     {

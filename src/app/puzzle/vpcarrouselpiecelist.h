@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrousellayer.h
+ **  @file   vpcarrouselpiecelist.h
  **  @author Ronan Le Tiec
  **  @date   25 4, 2020
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VPIECECARROUSELLAYER_H
-#define VPIECECARROUSELLAYER_H
+#ifndef VPCARROUSELPIECELIST_H
+#define VPCARROUSELPIECELIST_H
 
 #include <QWidget>
 #include "vpuzzlelayer.h"
@@ -35,12 +35,12 @@
 
 class VPCarrousel;
 
-class VPieceCarrouselLayer : public QWidget
+class VPCarrouselPieceList : public QWidget
 {
     Q_OBJECT
 public:
-    VPieceCarrouselLayer(VPuzzleLayer *layer, VPCarrousel *carrousel);
-    ~VPieceCarrouselLayer();
+    VPCarrouselPieceList(VPuzzleLayer *layer, VPCarrousel *carrousel);
+    ~VPCarrouselPieceList();
 
     void Init();
     void Refresh();
@@ -61,7 +61,7 @@ public:
     VPuzzleLayer* GetLayer();
 
 private:
-    Q_DISABLE_COPY(VPieceCarrouselLayer)
+    Q_DISABLE_COPY(VPCarrouselPieceList)
 
     VPuzzleLayer *m_layer;
     VPCarrousel *m_carrousel;
@@ -81,4 +81,4 @@ private slots:
 
 };
 
-#endif // VPIECECARROUSELLAYER_H
+#endif // VPCARROUSELPIECELIST_H

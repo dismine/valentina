@@ -38,7 +38,7 @@
 #include <QMenu>
 
 #include "vpuzzlemimedatapiece.h"
-#include "vpiececarrousellayer.h"
+#include "vpcarrouselpiecelist.h"
 #include "vpcarrousel.h"
 
 #include <QLoggingCategory>
@@ -47,7 +47,7 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, VPieceCarrouselLayer *carrouselLayer) :
+VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer) :
     m_piece(piece),
     m_carrouselLayer(carrouselLayer),
     m_dragStart(QPoint())

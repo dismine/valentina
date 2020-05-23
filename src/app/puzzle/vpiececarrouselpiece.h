@@ -37,13 +37,13 @@
 #include "vpiececarrouselpiecepreview.h"
 
 
-class VPieceCarrouselLayer;
+class VPCarrouselPieceList;
 
 class VPieceCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, VPieceCarrouselLayer *carrouselLayer);
+    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer);
     ~VPieceCarrouselPiece();
 
     void Init();
@@ -82,7 +82,7 @@ private:
 
     VPuzzlePiece *m_piece;
 
-    VPieceCarrouselLayer *m_carrouselLayer;
+    VPCarrouselPieceList *m_carrouselLayer;
 
     QLabel *m_label{nullptr};
     VPieceCarrouselPiecePreview *m_piecePreview{nullptr};
