@@ -74,22 +74,30 @@ void VPuzzleGraphicsPiece::Init()
 
     // initialises the seam line
     QVector<QPointF> seamLinePoints = m_piece->GetSeamLine();
-    m_seamLine.moveTo(seamLinePoints.first());
-    for (int i = 1; i < seamLinePoints.size(); ++i)
-        m_seamLine.lineTo(seamLinePoints.at(i));
+    if(!seamLinePoints.isEmpty())
+    {
+        m_seamLine.moveTo(seamLinePoints.first());
+        for (int i = 1; i < seamLinePoints.size(); ++i)
+            m_seamLine.lineTo(seamLinePoints.at(i));
+    }
 
     // initiliases the cutting line
     QVector<QPointF> cuttingLinepoints = m_piece->GetCuttingLine();
-    m_cuttingLine.moveTo(cuttingLinepoints.first());
-    for (int i = 1; i < cuttingLinepoints.size(); ++i)
-        m_cuttingLine.lineTo(cuttingLinepoints.at(i));
+    if(!cuttingLinepoints.isEmpty())
+    {
+        m_cuttingLine.moveTo(cuttingLinepoints.first());
+        for (int i = 1; i < cuttingLinepoints.size(); ++i)
+            m_cuttingLine.lineTo(cuttingLinepoints.at(i));
+    }
 
     // initialises the grainline
     QVector<QPointF> grainLinepoints = m_piece->GetGrainline();
-    m_grainline.moveTo(grainLinepoints.first());
-    for (int i = 1; i < grainLinepoints.size(); ++i)
-        m_grainline.lineTo(grainLinepoints.at(i));
-
+    if(!grainLinepoints.isEmpty())
+    {
+        m_grainline.moveTo(grainLinepoints.first());
+        for (int i = 1; i < grainLinepoints.size(); ++i)
+            m_grainline.lineTo(grainLinepoints.at(i));
+    }
 
     // TODO : initialises the other elements labels, passmarks etc.
 
