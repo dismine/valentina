@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrouselpiece.cpp
+ **  @file   vpcarrouselpiece.cpp
  **  @author Ronan Le Tiec
  **  @date   25 4, 2020
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vpiececarrouselpiece.h"
+#include "vpcarrouselpiece.h"
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -47,7 +47,7 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer) :
+VPCarrouselPiece::VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer) :
     m_piece(piece),
     m_carrouselLayer(carrouselLayer),
     m_dragStart(QPoint())
@@ -57,13 +57,13 @@ VPieceCarrouselPiece::VPieceCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPiece
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiece::~VPieceCarrouselPiece()
+VPCarrouselPiece::~VPCarrouselPiece()
 {
     delete m_piecePreview;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::Init()
+void VPCarrouselPiece::Init()
 {
     // Define the structure
     setFixedSize(124,128);
@@ -98,20 +98,20 @@ void VPieceCarrouselPiece::Init()
 
 
     // connect the signals
-    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPieceCarrouselPiece::on_PieceSelectionChanged);
+    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPCarrouselPiece::on_PieceSelectionChanged);
 
     // then refresh the data
     Refresh();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::CleanPreview()
+void VPCarrouselPiece::CleanPreview()
 {
     m_piecePreview->fitInView(m_piecePreview->scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::Refresh()
+void VPCarrouselPiece::Refresh()
 {
     // update the graphic view / the scene
 
@@ -147,13 +147,13 @@ void VPieceCarrouselPiece::Refresh()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece * VPieceCarrouselPiece::GetPiece()
+VPuzzlePiece * VPCarrouselPiece::GetPiece()
 {
     return m_piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::on_PieceSelectionChanged()
+void VPCarrouselPiece::on_PieceSelectionChanged()
 {
     if(m_piece->GetIsSelected())
     {
@@ -166,7 +166,7 @@ void VPieceCarrouselPiece::on_PieceSelectionChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
+void VPCarrouselPiece::mousePressEvent(QMouseEvent *event)
 {
     qCDebug(pCarrouselPiece, "mouse pressed");
 
@@ -189,7 +189,7 @@ void VPieceCarrouselPiece::mousePressEvent(QMouseEvent *event)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
+void VPCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
 {
     if (!(event->buttons() & Qt::LeftButton))
     {
@@ -235,7 +235,7 @@ void VPieceCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
+void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu contextMenu;
 
@@ -256,7 +256,7 @@ void VPieceCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
             QVariant data = QVariant::fromValue(layer);
             moveToLayer->setData(data);
 
-            connect(moveToLayer, &QAction::triggered, this, &VPieceCarrouselPiece::on_ActionPieceMovedToLayer);
+            connect(moveToLayer, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToLayer);
         }
     }
 
@@ -266,14 +266,14 @@ void VPieceCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
         QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
         QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
         removeAction->setData(data);
-        connect(removeAction, &QAction::triggered, this, &VPieceCarrouselPiece::on_ActionPieceMovedToLayer);
+        connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToLayer);
     }
 
     contextMenu.exec(event->globalPos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiece::on_ActionPieceMovedToLayer()
+void VPCarrouselPiece::on_ActionPieceMovedToLayer()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();

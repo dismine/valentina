@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrouselpiece.h
+ **  @file   vpcarrouselpiece.h
  **  @author Ronan Le Tiec
  **  @date   25 4, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPIECECARROUSELPIECE_H
-#define VPIECECARROUSELPIECE_H
+#ifndef VPCARROUSELPIECE_H
+#define VPCARROUSELPIECE_H
 
 #include <QFrame>
 #include <QLabel>
@@ -39,12 +39,12 @@
 
 class VPCarrouselPieceList;
 
-class VPieceCarrouselPiece : public QFrame
+class VPCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VPieceCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer);
-    ~VPieceCarrouselPiece();
+    explicit VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer);
+    ~VPCarrouselPiece();
 
     void Init();
     void Refresh();
@@ -55,7 +55,7 @@ public:
     void CleanPreview();
 
     /**
-     * @brief GetLayoutPiece Returns the corresponding layout piece
+     * @brief GetPiece Returns the corresponding layout piece
      * @return  the corresponding layout piece
      */
     VPuzzlePiece * GetPiece();
@@ -78,7 +78,7 @@ private slots:
     void on_ActionPieceMovedToLayer();
 
 private:
-    Q_DISABLE_COPY(VPieceCarrouselPiece)
+    Q_DISABLE_COPY(VPCarrouselPiece)
 
     VPuzzlePiece *m_piece;
 
@@ -93,4 +93,4 @@ private slots:
 
 };
 
-#endif // VPIECECARROUSELPIECE_H
+#endif // VPCARROUSELPIECE_H

@@ -31,7 +31,7 @@
 
 #include <QWidget>
 #include "vpuzzlelayer.h"
-#include "vpiececarrouselpiece.h"
+#include "vpcarrouselpiece.h"
 
 class VPCarrousel;
 
@@ -46,11 +46,11 @@ public:
     void Refresh();
 
     /**
-     * @brief Clear it clears the carrousel layer from its pieces
+     * @brief Clear it clears the carrousel pieceList from its pieces
      */
     void Clear();
 
-    QList<VPieceCarrouselPiece*> GetCarrouselPieces();
+    QList<VPCarrouselPiece*> GetCarrouselPieces();
 
     VPCarrousel* GetCarrousel();
 
@@ -65,7 +65,7 @@ private:
 
     VPuzzleLayer *m_layer;
     VPCarrousel *m_carrousel;
-    QList<VPieceCarrouselPiece*> m_carrouselPieces;
+    QList<VPCarrouselPiece*> m_carrouselPieces;
 
 private slots:
 

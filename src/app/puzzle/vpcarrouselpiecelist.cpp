@@ -40,7 +40,7 @@ Q_LOGGING_CATEGORY(pCarrouselLayer, "p.carrouselLayer")
 VPCarrouselPieceList::VPCarrouselPieceList(VPuzzleLayer *layer, VPCarrousel *carrousel) :
     m_layer(layer),
     m_carrousel(carrousel),
-    m_carrouselPieces(QList<VPieceCarrouselPiece*>())
+    m_carrouselPieces(QList<VPCarrouselPiece*>())
 {
     Init();
 }
@@ -85,7 +85,7 @@ void VPCarrouselPieceList::Refresh()
     setVisible(true);
     for (auto piece : pieces)
     {
-        VPieceCarrouselPiece *carrouselPiece = new VPieceCarrouselPiece(piece, this);
+        VPCarrouselPiece *carrouselPiece = new VPCarrouselPiece(piece, this);
         m_carrouselPieces.append(carrouselPiece);
         layout()->addWidget(carrouselPiece);
         carrouselPiece->CleanPreview(); // fitInView only works if the widget is displayed.
@@ -99,7 +99,7 @@ void VPCarrouselPieceList::Clear()
     // Removes and deletes the carrousel pieces from the layer
     while (!m_carrouselPieces.isEmpty())
     {
-        VPieceCarrouselPiece *carrouselPiece = m_carrouselPieces.takeLast();
+        VPCarrouselPiece *carrouselPiece = m_carrouselPieces.takeLast();
 
         if(carrouselPiece != nullptr)
         {
@@ -111,7 +111,7 @@ void VPCarrouselPieceList::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPieceCarrouselPiece*> VPCarrouselPieceList::GetCarrouselPieces()
+QList<VPCarrouselPiece*> VPCarrouselPieceList::GetCarrouselPieces()
 {
     return m_carrouselPieces;
 }
