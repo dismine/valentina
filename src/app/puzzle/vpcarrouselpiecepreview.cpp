@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpiececarrouselpiecepreview.cpp
+ **  @file   vpcarrouselpiecepreview.cpp
  **  @author Ronan Le Tiec
  **  @date   3 5, 2020
  **
@@ -26,29 +26,29 @@
  **
  *************************************************************************/
 
-#include "vpiececarrouselpiecepreview.h"
+#include "vpcarrouselpiecepreview.h"
 
 #include <QMouseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiecePreview::VPieceCarrouselPiecePreview(QWidget *parent):
+VPCarrouselPiecePreview::VPCarrouselPiecePreview(QWidget *parent):
     QGraphicsView(parent)
 {
 
 }
 //---------------------------------------------------------------------------------------------------------------------
-VPieceCarrouselPiecePreview::~VPieceCarrouselPiecePreview()
+VPCarrouselPiecePreview::~VPCarrouselPiecePreview()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiecePreview::mousePressEvent(QMouseEvent *event)
+void VPCarrouselPiecePreview::mousePressEvent(QMouseEvent *event)
 {
     event->ignore();
 }
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceCarrouselPiecePreview::mouseMoveEvent(QMouseEvent *event)
+void VPCarrouselPiecePreview::mouseMoveEvent(QMouseEvent *event)
 {
     event->ignore();
 }

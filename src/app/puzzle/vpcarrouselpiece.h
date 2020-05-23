@@ -34,7 +34,7 @@
 #include <QMouseEvent>
 
 #include "vpuzzlepiece.h"
-#include "vpiececarrouselpiecepreview.h"
+#include "vpcarrouselpiecepreview.h"
 
 
 class VPCarrouselPieceList;
@@ -82,10 +82,10 @@ private:
 
     VPuzzlePiece *m_piece;
 
-    VPCarrouselPieceList *m_carrouselLayer;
+    VPCarrouselPieceList *m_carrouselPieceList;
 
     QLabel *m_label{nullptr};
-    VPieceCarrouselPiecePreview *m_piecePreview{nullptr};
+    VPCarrouselPiecePreview *m_piecePreview{nullptr};
 
     QPoint m_dragStart;
 

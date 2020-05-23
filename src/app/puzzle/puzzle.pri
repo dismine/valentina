@@ -8,8 +8,8 @@ SOURCES += \
     $$PWD/vpcarrousel.cpp \
     $$PWD/vpcarrouselpiece.cpp \
     $$PWD/vpcarrouselpiecelist.cpp \
+    $$PWD/vpcarrouselpiecepreview.cpp \
     $$PWD/vpcommands.cpp \
-    $$PWD/vpiececarrouselpiecepreview.cpp \
     $$PWD/vpmainwindow.cpp \
     $$PWD/vpuzzlecommandline.cpp \
     $$PWD/vpuzzlegraphicslayout.cpp \
@@ -32,8 +32,8 @@ HEADERS += \
     $$PWD/vpcarrousel.h \
     $$PWD/vpcarrouselpiece.h \
     $$PWD/vpcarrouselpiecelist.h \
+    $$PWD/vpcarrouselpiecepreview.h \
     $$PWD/vpcommands.h \
-    $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpmainwindow.h \
     $$PWD/vpstable.h \
     $$PWD/vpuzzlecommandline.h \

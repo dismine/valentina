@@ -49,7 +49,7 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrouselPiece::VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselLayer) :
     m_piece(piece),
-    m_carrouselLayer(carrouselLayer),
+    m_carrouselPieceList(carrouselLayer),
     m_dragStart(QPoint())
 {
     Init();
@@ -75,7 +75,7 @@ void VPCarrouselPiece::Init()
     setStyleSheet("background-color:white; border: 2px solid transparent;");
 
     // define the preview of the piece
-    m_piecePreview = new VPieceCarrouselPiecePreview(this);
+    m_piecePreview = new VPCarrouselPiecePreview(this);
 
     // m_graphicsView = new VMainGraphicsView(this);
     // --> undefined reference to 'VMainGraphicsView::VMainGraphicView(QWidget*)'
@@ -175,7 +175,7 @@ void VPCarrouselPiece::mousePressEvent(QMouseEvent *event)
     {
         if(!(event->modifiers() & Qt::ControlModifier))
         {
-            m_carrouselLayer->GetCarrousel()->ClearSelection();
+            m_carrouselPieceList->GetCarrousel()->ClearSelection();
             m_piece->SetIsSelected(true);
         }
         else
@@ -207,7 +207,7 @@ void VPCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
     }
 
     // make sure the multiple selection is removed
-    m_carrouselLayer->GetCarrousel()->ClearSelection();
+    m_carrouselPieceList->GetCarrousel()->ClearSelection();
     m_piece->SetIsSelected(true);
 
     // starts the dragging
