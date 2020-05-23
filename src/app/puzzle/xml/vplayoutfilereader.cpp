@@ -27,27 +27,27 @@
  ** *************************************************************************/
 
 #include <QXmlStreamAttributes>
-#include "vpuzzlelayoutfilereader.h"
+#include "vplayoutfilereader.h"
 #include "vpuzzlelayoutfilewriter.h"
 #include "vplayoutliterals.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayoutFileReader::VPuzzleLayoutFileReader()
+VPLayoutFileReader::VPLayoutFileReader()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayoutFileReader::~VPuzzleLayoutFileReader()
+VPLayoutFileReader::~VPLayoutFileReader()
 {
     // TODO
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
+bool VPLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 {
     setDevice(file);
 
@@ -60,7 +60,7 @@ bool VPuzzleLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 {
     SCASSERT(isStartElement() && name() == ML::TagLayout);
 
@@ -82,7 +82,7 @@ void VPuzzleLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 {
     SCASSERT(isStartElement() && name() == ML::TagProperties);
 
@@ -158,7 +158,7 @@ void VPuzzleLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 {
     Q_UNUSED(layout); // to be removed when used
 
@@ -193,7 +193,7 @@ void VPuzzleLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 {
     SCASSERT(isStartElement() && name() == ML::TagLayers);
 
@@ -217,7 +217,7 @@ void VPuzzleLayoutFileReader::ReadLayers(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
+void VPLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 {
     SCASSERT(isStartElement() && (name() == ML::TagLayer || name() == ML::TagUnplacedPiecesLayer));
 
@@ -242,7 +242,7 @@ void VPuzzleLayoutFileReader::ReadLayer(VPuzzleLayer *layer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
+void VPLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
 {
     Q_UNUSED(piece);
     SCASSERT(isStartElement() && name() == ML::TagPiece);
@@ -278,7 +278,7 @@ void VPuzzleLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPuzzleLayoutFileReader::ReadMargins()
+QMarginsF VPLayoutFileReader::ReadMargins()
 {
     QMarginsF margins = QMarginsF();
 
@@ -292,7 +292,7 @@ QMarginsF VPuzzleLayoutFileReader::ReadMargins()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPuzzleLayoutFileReader::ReadSize()
+QSizeF VPLayoutFileReader::ReadSize()
 {
     QSizeF size = QSize();
 
@@ -304,7 +304,7 @@ QSizeF VPuzzleLayoutFileReader::ReadSize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPuzzleLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
+QString VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
                                                      const QString &defValue)
 {
     const QString parameter = attribs.value(name).toString();
@@ -323,13 +323,13 @@ QString VPuzzleLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPuzzleLayoutFileReader::ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name)
+QString VPLayoutFileReader::ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name)
 {
     return attribs.value(name).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name,
+bool VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name,
                                                 const QString &defValue)
 {
     QString parametr;
@@ -366,7 +366,7 @@ bool VPuzzleLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzleLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
+qreal VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
                                                    const QString &defValue)
 {
     bool ok = false;

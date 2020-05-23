@@ -26,8 +26,8 @@
  **
  ** *************************************************************************/
 
-#ifndef VPUZZLELAYOUTFILEREADER_H
-#define VPUZZLELAYOUTFILEREADER_H
+#ifndef VPLAYOUTFILEREADER_H
+#define VPLAYOUTFILEREADER_H
 
 #include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
@@ -35,17 +35,17 @@
 #include "vpuzzlelayer.h"
 #include "vpuzzlepiece.h"
 
-class VPuzzleLayoutFileReader : public QXmlStreamReader
+class VPLayoutFileReader : public QXmlStreamReader
 {
     Q_DECLARE_TR_FUNCTIONS(VPuzzleLayoutFileReader)
 public:
-    VPuzzleLayoutFileReader();
-    ~VPuzzleLayoutFileReader();
+    VPLayoutFileReader();
+    ~VPLayoutFileReader();
 
     bool ReadFile(VPuzzleLayout *layout, QFile *file);
 
 private:
-    Q_DISABLE_COPY(VPuzzleLayoutFileReader)
+    Q_DISABLE_COPY(VPLayoutFileReader)
 
     void ReadLayout(VPuzzleLayout *layout);
     void ReadProperties(VPuzzleLayout *layout);
@@ -65,4 +65,4 @@ private:
                                      const QString &defValue);
 };
 
-#endif // VPUZZLELAYOUTFILEREADER_H
+#endif // VPLAYOUTFILEREADER_H

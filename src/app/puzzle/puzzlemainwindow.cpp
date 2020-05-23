@@ -33,7 +33,7 @@
 #include "ui_puzzlemainwindow.h"
 #include "dialogs/vpdialogabout.h"
 #include "xml/vpuzzlelayoutfilewriter.h"
-#include "xml/vpuzzlelayoutfilereader.h"
+#include "xml/vplayoutfilereader.h"
 #include "puzzleapplication.h"
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/vsysexits.h"
@@ -106,7 +106,7 @@ bool PuzzleMainWindow::LoadFile(QString path)
     QFile file(path);
     file.open(QIODevice::ReadOnly);
 
-    QScopedPointer<VPuzzleLayoutFileReader> fileReader(new VPuzzleLayoutFileReader());
+    QScopedPointer<VPLayoutFileReader> fileReader(new VPLayoutFileReader());
 
     if(m_layout == nullptr)
     {
