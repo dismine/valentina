@@ -36,7 +36,7 @@
 
 class VPLayout;
 class VPPieceList;
-class VPuzzlePiece;
+class VPPiece;
 class QFile;
 class QMarginsF;
 
@@ -56,7 +56,7 @@ private:
     void WritePieceLists(VPLayout *layout);
     void WritePieceList(VPPieceList *pieceList);
     void WritePieceList(VPPieceList *pieceList, const QString &tagName);
-    void WritePiece(VPuzzlePiece *piece);
+    void WritePiece(VPPiece *piece);
 
     void WriteMargins(const QMarginsF &margins);
     void WriteSize(QSizeF size);

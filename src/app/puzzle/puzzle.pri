@@ -17,8 +17,8 @@ SOURCES += \
     $$PWD/vpmaingraphicsview.cpp \
     $$PWD/vpmainwindow.cpp \
     $$PWD/vpmimedatapiece.cpp \
+    $$PWD/vppiece.cpp \
     $$PWD/vppiecelist.cpp \
-    $$PWD/vpuzzlepiece.cpp \
     $$PWD/vpuzzlesettings.cpp \
     $$PWD/xml/vplayoutfilereader.cpp \
     $$PWD/xml/vplayoutfilewriter.cpp \
@@ -41,9 +41,9 @@ HEADERS += \
     $$PWD/vpmaingraphicsview.h \
     $$PWD/vpmainwindow.h \
     $$PWD/vpmimedatapiece.h \
+    $$PWD/vppiece.h \
     $$PWD/vppiecelist.h \
     $$PWD/vpstable.h \
-    $$PWD/vpuzzlepiece.h \
     $$PWD/vpuzzlesettings.h \
     $$PWD/xml/vplayoutfilereader.h \
     $$PWD/xml/vplayoutfilewriter.h \

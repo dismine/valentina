@@ -31,13 +31,13 @@
 
 #include <QGraphicsItem>
 
-class VPuzzlePiece;
+class VPPiece;
 
 class VPGraphicsPiece : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    VPGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent = nullptr);
+    VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent = nullptr);
     ~VPGraphicsPiece();
     void Init();
 
@@ -45,7 +45,7 @@ public:
      * @brief GetPiece Returns the piece that corresponds to the graphics piece
      * @return the piece
      */
-    VPuzzlePiece* GetPiece();
+    VPPiece* GetPiece();
 
 public slots:
     /**
@@ -87,7 +87,7 @@ private slots:
 
 private:
     Q_DISABLE_COPY(VPGraphicsPiece)
-    VPuzzlePiece *m_piece;
+    VPPiece *m_piece;
 
     QPainterPath m_cuttingLine;
     QPainterPath m_seamLine;

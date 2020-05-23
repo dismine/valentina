@@ -33,7 +33,7 @@
 #include <QGraphicsView>
 #include <QMouseEvent>
 
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 #include "vpcarrouselpiecepreview.h"
 
 
@@ -43,7 +43,7 @@ class VPCarrouselPiece : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselPieceList);
+    explicit VPCarrouselPiece(VPPiece *piece, VPCarrouselPieceList *carrouselPieceList);
     ~VPCarrouselPiece();
 
     void Init();
@@ -59,7 +59,7 @@ public:
      * @brief GetPiece Returns the corresponding layout piece
      * @return  the corresponding layout piece
      */
-    VPuzzlePiece * GetPiece();
+    VPPiece * GetPiece();
 
 public slots:
     void on_PieceSelectionChanged();
@@ -81,7 +81,7 @@ private slots:
 private:
     Q_DISABLE_COPY(VPCarrouselPiece)
 
-    VPuzzlePiece *m_piece;
+    VPPiece *m_piece;
 
     VPCarrouselPieceList *m_carrouselPieceList;
 

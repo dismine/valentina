@@ -47,7 +47,7 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPiece::VPCarrouselPiece(VPuzzlePiece *piece, VPCarrouselPieceList *carrouselPieceList) :
+VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, VPCarrouselPieceList *carrouselPieceList) :
     m_piece(piece),
     m_carrouselPieceList(carrouselPieceList),
     m_dragStart(QPoint())
@@ -98,7 +98,7 @@ void VPCarrouselPiece::Init()
 
 
     // connect the signals
-    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPCarrouselPiece::on_PieceSelectionChanged);
+    connect(m_piece, &VPPiece::SelectionChanged, this, &VPCarrouselPiece::on_PieceSelectionChanged);
 
     // then refresh the data
     Refresh();
@@ -147,7 +147,7 @@ void VPCarrouselPiece::Refresh()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece * VPCarrouselPiece::GetPiece()
+VPPiece * VPCarrouselPiece::GetPiece()
 {
     return m_piece;
 }

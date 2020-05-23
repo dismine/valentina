@@ -72,12 +72,12 @@ private slots:
     /**
      * @brief on_PieceUpdated This slot is called when a piece was added
      */
-    void on_PieceAdded(VPuzzlePiece* piece);
+    void on_PieceAdded(VPPiece* piece);
 
     /**
      * @brief on_PieceUpdated This slot is called when a piece was removed
      */
-    void on_PieceRemoved(VPuzzlePiece* piece);
+    void on_PieceRemoved(VPPiece* piece);
 
 };
 

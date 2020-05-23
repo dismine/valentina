@@ -39,7 +39,7 @@
 #include <QtMath>
 #include <QGraphicsScene>
 
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 #include "vppiecelist.h"
 #include "vplayout.h"
 
@@ -47,7 +47,7 @@
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsPiece::VPGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent) :
+VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
     QGraphicsObject(parent),
     m_piece(piece),
     m_cuttingLine(QPainterPath()),
@@ -102,13 +102,13 @@ void VPGraphicsPiece::Init()
     // TODO : initialises the other elements labels, passmarks etc.
 
     // Initialises the connectors
-    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);
-    connect(m_piece, &VPuzzlePiece::PositionChanged, this, &VPGraphicsPiece::on_PiecePositionChanged);
-    connect(m_piece, &VPuzzlePiece::RotationChanged, this, &VPGraphicsPiece::on_PieceRotationChanged);
+    connect(m_piece, &VPPiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);
+    connect(m_piece, &VPPiece::PositionChanged, this, &VPGraphicsPiece::on_PiecePositionChanged);
+    connect(m_piece, &VPPiece::RotationChanged, this, &VPGraphicsPiece::on_PieceRotationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece* VPGraphicsPiece::GetPiece()
+VPPiece* VPGraphicsPiece::GetPiece()
 {
     return m_piece;
 }

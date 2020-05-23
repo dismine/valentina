@@ -41,13 +41,13 @@ VPMimeDataPiece::~VPMimeDataPiece()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece* VPMimeDataPiece::GetPiecePtr() const
+VPPiece* VPMimeDataPiece::GetPiecePtr() const
 {
     return m_piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMimeDataPiece::SetPiecePtr(VPuzzlePiece* piece)
+void VPMimeDataPiece::SetPiecePtr(VPPiece* piece)
 {
     m_piece = piece;
 }

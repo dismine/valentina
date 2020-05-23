@@ -31,7 +31,7 @@
 
 #include <QMimeData>
 
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 
 class VPMimeDataPiece : public QMimeData
 {
@@ -46,18 +46,18 @@ public:
      * @brief GetPiecePtr Returns the piece pointer of the mime data
      * @return  piece pointer
      */
-    VPuzzlePiece* GetPiecePtr() const;
+    VPPiece* GetPiecePtr() const;
 
     /**
      * @brief SetPiecePtr sets the piece pointer to the given value
      * @param piece the piece pointer
      */
-    void SetPiecePtr(VPuzzlePiece* piece);
+    void SetPiecePtr(VPPiece* piece);
 
 private:
     Q_DISABLE_COPY(VPMimeDataPiece)
 
-    VPuzzlePiece *m_piece{nullptr};
+    VPPiece *m_piece{nullptr};
 
 };
 

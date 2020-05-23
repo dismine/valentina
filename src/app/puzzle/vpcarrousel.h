@@ -33,7 +33,7 @@
 #include <QComboBox>
 #include <QScrollArea>
 #include "vplayout.h"
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 
 namespace Ui
 {

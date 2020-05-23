@@ -27,7 +27,7 @@
  *************************************************************************/
 #include "vplayout.h"
 #include "vppiecelist.h"
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout() :
@@ -79,9 +79,9 @@ QList<VPPieceList *> VPLayout::GetPiecesLists()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPuzzlePiece *> VPLayout::GetSelectedPieces()
+QList<VPPiece *> VPLayout::GetSelectedPieces()
 {
-    QList<VPuzzlePiece *> result = QList<VPuzzlePiece *>();
+    QList<VPPiece *> result = QList<VPPiece *>();
 
     QList<VPPieceList *> pieceLists = m_pieceLists;
     pieceLists.prepend(m_unplacedPieceList);
@@ -303,7 +303,7 @@ VPPieceList* VPLayout::GetFocusedPieceList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::MovePieceToPieceList(VPuzzlePiece* piece, VPPieceList* pieceList)
+void VPLayout::MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList)
 {
     VPPieceList* pieceListBefore = piece->GetPieceList();
 

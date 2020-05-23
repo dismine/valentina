@@ -64,7 +64,7 @@ private slots:
      * @param pieceListBefore the piece list before the move
      * @param pieceListAfter the piece list after the move
      */
-    void on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
+    void on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
 
     /**
      * @brief on_SceneSelectionChanged Slot is called when the scene selection has changed

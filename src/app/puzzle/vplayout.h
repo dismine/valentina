@@ -35,7 +35,7 @@
 #include "def.h"
 
 class VPPieceList;
-class VPuzzlePiece;
+class VPPiece;
 
 // is this the right place for the definition?
 enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
@@ -61,7 +61,7 @@ public:
      * @brief GetSelectedPieces Returns the list of the selected pieces
      * @return the selected pieces
      */
-    QList<VPuzzlePiece *> GetSelectedPieces();
+    QList<VPPiece *> GetSelectedPieces();
 
     /**
      * @brief SetUnit Sets the unit of the layout to the given unit
@@ -224,11 +224,11 @@ public:
      * @param piece the piece to move
      * @param pieceList the piece list to move the piece to
      */
-    void MovePieceToPieceList(VPuzzlePiece* piece, VPPieceList* pieceList);
+    void MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList);
 
 signals:
 
-    void PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
+    void PieceMovedToPieceList(VPPiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
 
 private:
     Q_DISABLE_COPY(VPLayout)

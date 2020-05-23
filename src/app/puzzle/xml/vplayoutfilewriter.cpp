@@ -29,7 +29,7 @@
 #include "vplayoutfilewriter.h"
 #include "vplayout.h"
 #include "vppiecelist.h"
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 #include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
 
@@ -148,7 +148,7 @@ void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList, const QString &t
     //SetAttribute("selected", pieceList->GetIsSelected());
 
 
-    QList<VPuzzlePiece*> pieces = pieceList->GetPieces();
+    QList<VPPiece*> pieces = pieceList->GetPieces();
     for (auto piece : pieces)
     {
         WritePiece(piece);
@@ -158,7 +158,7 @@ void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList, const QString &t
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePiece(VPuzzlePiece *piece)
+void VPLayoutFileWriter::WritePiece(VPPiece *piece)
 {
     Q_UNUSED(piece);
 

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlepiece.h
+ **  @file   vpiece.h
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUZZLEPIECE_H
-#define VPUZZLEPIECE_H
+#ifndef VPPIECE_H
+#define VPPIECE_H
 
 #include <QUuid>
 #include <QVector>
@@ -35,12 +35,12 @@
 
 class VPPieceList;
 
-class VPuzzlePiece : public QObject
+class VPPiece : public QObject
 {
     Q_OBJECT
 public:
-    VPuzzlePiece();
-    ~VPuzzlePiece();
+    VPPiece();
+    ~VPPiece();
 
     /**
      * @brief GetName Returns the name of the piece
@@ -226,7 +226,7 @@ signals:
     void PropertiesChanged();
 
 private:
-    Q_DISABLE_COPY(VPuzzlePiece)
+    Q_DISABLE_COPY(VPPiece)
     QUuid m_uuid{QUuid()};
     QString m_name{QString()};
     QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
@@ -247,4 +247,4 @@ private:
     VPPieceList *m_pieceList{nullptr};
 };
 
-#endif // VPUZZLEPIECE_H
+#endif // VPPIECE_H

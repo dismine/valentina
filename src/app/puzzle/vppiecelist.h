@@ -29,7 +29,7 @@
 #define VPPIECELIST_H
 
 #include <QList>
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 
 class VPLayout;
 
@@ -40,9 +40,9 @@ public:
     VPPieceList(VPLayout *layout);
     ~VPPieceList();
 
-    QList<VPuzzlePiece *> GetPieces();
-    void AddPiece(VPuzzlePiece *piece);
-    void RemovePiece(VPuzzlePiece *piece);
+    QList<VPPiece *> GetPieces();
+    void AddPiece(VPPiece *piece);
+    void RemovePiece(VPPiece *piece);
 
     // here add some more function if we want to add/move a piece at a
     // certain position in the list
@@ -68,18 +68,18 @@ signals:
     /**
      * @brief PieceAdded The signal is emited when a piece was added
      */
-    void PieceAdded(VPuzzlePiece *piece);
+    void PieceAdded(VPPiece *piece);
 
     /**
      * @brief PieceRemoved The signal is emited when a piece was removed
      */
-    void PieceRemoved(VPuzzlePiece *piece);
+    void PieceRemoved(VPPiece *piece);
 
 private:
     Q_DISABLE_COPY(VPPieceList)
 
     QString m_name{};
-    QList<VPuzzlePiece *> m_pieces{};
+    QList<VPPiece *> m_pieces{};
 
     VPLayout *m_layout{nullptr};
 

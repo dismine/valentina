@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlepiece.cpp
+ **  @file   vppiece.cpp
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,7 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 
 #include <QtMath>
 
@@ -39,77 +39,77 @@
 Q_LOGGING_CATEGORY(pPiece, "p.piece")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece::VPuzzlePiece()
+VPPiece::VPPiece()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece::~VPuzzlePiece()
+VPPiece::~VPPiece()
 {
 
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPuzzlePiece::GetName() const
+QString VPPiece::GetName() const
 {
     return m_name;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetName(const QString &name)
+void VPPiece::SetName(const QString &name)
 {
     m_name = name;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QUuid VPuzzlePiece::GetUuid() const
+QUuid VPPiece::GetUuid() const
 {
     return m_uuid;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetUuid(const QUuid &uuid)
+void VPPiece::SetUuid(const QUuid &uuid)
 {
     m_uuid = uuid;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPuzzlePiece::GetCuttingLine() const
+QVector<QPointF> VPPiece::GetCuttingLine() const
 {
     return m_cuttingLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
+void VPPiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
 {
     m_cuttingLine = cuttingLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPuzzlePiece::GetSeamLine() const
+QVector<QPointF> VPPiece::GetSeamLine() const
 {
     return m_seamLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetSeamLine(const QVector<QPointF> &seamLine)
+void VPPiece::SetSeamLine(const QVector<QPointF> &seamLine)
 {
     m_seamLine = seamLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzlePiece::GetShowSeamLine() const
+bool VPPiece::GetShowSeamLine() const
 {
     return m_showSeamline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetShowSeamLine(bool value)
+void VPPiece::SetShowSeamLine(bool value)
 {
     m_showSeamline = value;
 
@@ -117,13 +117,13 @@ void VPuzzlePiece::SetShowSeamLine(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzlePiece::GetPieceMirrored() const
+bool VPPiece::GetPieceMirrored() const
 {
     return m_mirrorPiece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetPieceMirrored(bool value)
+void VPPiece::SetPieceMirrored(bool value)
 {
     m_mirrorPiece = value;
 
@@ -131,7 +131,7 @@ void VPuzzlePiece::SetPieceMirrored(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetPosition(QPointF point)
+void VPPiece::SetPosition(QPointF point)
 {
     m_transform.translate(point.x() - m_transform.dx(), point.y() - m_transform.dy());
 
@@ -139,13 +139,13 @@ void VPuzzlePiece::SetPosition(QPointF point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPuzzlePiece::GetPosition()
+QPointF VPPiece::GetPosition()
 {
     return QPointF(m_transform.dx(), m_transform.dy());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetRotation(qreal angle)
+void VPPiece::SetRotation(qreal angle)
 {
     //    qreal currentAngle = GetRotation();
     //    qreal newAngle = angle - currentAngle;
@@ -172,7 +172,7 @@ void VPuzzlePiece::SetRotation(qreal angle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzlePiece::GetRotation()
+qreal VPPiece::GetRotation()
 {
     return m_pieceAngle;
 
@@ -191,7 +191,7 @@ qreal VPuzzlePiece::GetRotation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetIsSelected(bool value)
+void VPPiece::SetIsSelected(bool value)
 {
     if(m_isSelected != value)
     {
@@ -201,54 +201,54 @@ void VPuzzlePiece::SetIsSelected(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzlePiece::GetIsSelected()
+bool VPPiece::GetIsSelected()
 {
     return m_isSelected;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetIsGrainlineEnabled(bool value)
+void VPPiece::SetIsGrainlineEnabled(bool value)
 {
     m_isGrainlineEnabled = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzlePiece::GetIsGrainlineEnabled()
+bool VPPiece::GetIsGrainlineEnabled()
 {
     return m_isGrainlineEnabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetGrainlineAngle(qreal value)
+void VPPiece::SetGrainlineAngle(qreal value)
 {
     m_grainlineAngle = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzlePiece::GetGrainlineAngle()
+qreal VPPiece::GetGrainlineAngle()
 {
     return m_grainlineAngle;
 }
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetGrainline(QVector<QPointF> grainline)
+void VPPiece::SetGrainline(QVector<QPointF> grainline)
 {
     m_grainline = grainline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPuzzlePiece::GetGrainline()
+QVector<QPointF> VPPiece::GetGrainline()
 {
     return m_grainline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPuzzlePiece::GetPieceList()
+VPPieceList* VPPiece::GetPieceList()
 {
     return m_pieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzlePiece::SetPieceList(VPPieceList* pieceList)
+void VPPiece::SetPieceList(VPPieceList* pieceList)
 {
     if(pieceList != m_pieceList)
     {
@@ -257,7 +257,7 @@ void VPuzzlePiece::SetPieceList(VPPieceList* pieceList)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon VPuzzlePiece::PieceIcon(const QSize &size) const
+QIcon VPPiece::PieceIcon(const QSize &size) const
 {
     QVector<QPointF> points = GetSeamLine();
     if(points.isEmpty())

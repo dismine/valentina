@@ -164,7 +164,7 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 
 
                 // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
-                VPuzzlePiece *piece = CreatePiece(rawPiece);
+                VPPiece *piece = CreatePiece(rawPiece);
                 m_layout->GetUnplacedPieceList()->AddPiece(piece);
             }
 
@@ -183,9 +183,9 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
+VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 {
-    VPuzzlePiece *piece = new VPuzzlePiece();
+    VPPiece *piece = new VPPiece();
     piece->SetName(rawPiece.GetName());
     piece->SetUuid(rawPiece.GetUUID());
 
@@ -202,9 +202,9 @@ VPuzzlePiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
     // TODO : set all the information we need for the piece!
 
     //
-    connect(piece, &VPuzzlePiece::SelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
-    connect(piece, &VPuzzlePiece::PositionChanged, this, &VPMainWindow::on_PiecePositionChanged);
-    connect(piece, &VPuzzlePiece::RotationChanged, this, &VPMainWindow::on_PieceRotationChanged);
+    connect(piece, &VPPiece::SelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
+    connect(piece, &VPPiece::PositionChanged, this, &VPMainWindow::on_PiecePositionChanged);
+    connect(piece, &VPPiece::RotationChanged, this, &VPMainWindow::on_PieceRotationChanged);
 
 
     return piece;
@@ -355,7 +355,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         ui->containerCurrentPieceData->setVisible(true);
         ui->containerCurrentPieceMultipleData->setVisible(false);
 
-        VPuzzlePiece *selectedPiece = m_selectedPieces.first();
+        VPPiece *selectedPiece = m_selectedPieces.first();
 
         // set the value to the current piece
         ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
@@ -938,7 +938,7 @@ void VPMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
 {
     if(m_selectedPieces.count() == 1)
     {
-        VPuzzlePiece *piece = m_selectedPieces.first();
+        VPPiece *piece = m_selectedPieces.first();
         piece->SetRotation(value);
     }
 }
@@ -949,7 +949,7 @@ void VPMainWindow::on_CurrentPiecePositionEdited()
 {
     if(m_selectedPieces.count() == 1)
     {
-        VPuzzlePiece *piece = m_selectedPieces.first();
+        VPPiece *piece = m_selectedPieces.first();
         QPointF pos(UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(), m_layout->GetUnit(), Unit::Px),
                     UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(), m_layout->GetUnit(), Unit::Px));
         piece->SetPosition(pos);
@@ -984,7 +984,7 @@ void VPMainWindow::on_PiecePositionChanged()
 {
     if(m_selectedPieces.count() == 1)
     {
-        VPuzzlePiece *piece = m_selectedPieces.first();
+        VPPiece *piece = m_selectedPieces.first();
         QPointF pos = piece->GetPosition();
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
@@ -999,7 +999,7 @@ void VPMainWindow::on_PieceRotationChanged()
 {
     if(m_selectedPieces.count() == 1)
     {
-        VPuzzlePiece *piece = m_selectedPieces.first();
+        VPPiece *piece = m_selectedPieces.first();
         qreal angle = piece->GetRotation();
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);

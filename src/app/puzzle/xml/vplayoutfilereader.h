@@ -33,7 +33,7 @@
 #include "../ifc/xml/vabstractconverter.h"
 #include "vplayout.h"
 #include "vppiecelist.h"
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 
 class VPLayoutFileReader : public QXmlStreamReader
 {
@@ -52,7 +52,7 @@ private:
     void ReadTiles(VPLayout *layout);
     void ReadPieceLists(VPLayout *layout);
     void ReadPieceList(VPPieceList *pieceList);
-    void ReadPiece(VPuzzlePiece *piece);
+    void ReadPiece(VPPiece *piece);
 
     QMarginsF ReadMargins();
     QSizeF ReadSize();

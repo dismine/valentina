@@ -73,11 +73,11 @@ void VPCarrouselPieceList::Refresh()
     Clear();
 
     // Updates the carrousel pieces from the pieces list
-    QList<VPuzzlePiece*> pieces = m_pieceList->GetPieces();
+    QList<VPPiece*> pieces = m_pieceList->GetPieces();
 
     // sort the pieces in alphabetical order
     std::sort(pieces.begin(), pieces.end(),
-          [](const VPuzzlePiece* a, const VPuzzlePiece* b) -> bool { return a->GetName() < b->GetName();});
+          [](const VPPiece* a, const VPPiece* b) -> bool { return a->GetName() < b->GetName();});
 
     // create the corresponding carrousel pieces
 
@@ -129,7 +129,7 @@ VPPieceList* VPCarrouselPieceList::GetPieceList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPieceList::on_PieceAdded(VPuzzlePiece* piece)
+void VPCarrouselPieceList::on_PieceAdded(VPPiece* piece)
 {
     Q_UNUSED(piece)
 
@@ -139,7 +139,7 @@ void VPCarrouselPieceList::on_PieceAdded(VPuzzlePiece* piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPieceList::on_PieceRemoved(VPuzzlePiece* piece)
+void VPCarrouselPieceList::on_PieceRemoved(VPPiece* piece)
 {
     for (auto carrouselPiece : m_carrouselPieces)
     {

@@ -113,7 +113,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
     {
         const VPMimeDataPiece *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
 
-        VPuzzlePiece *piece = mimePiece->GetPiecePtr();
+        VPPiece *piece = mimePiece->GetPiecePtr();
         if(piece != nullptr)
         {
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
@@ -141,7 +141,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 
         for(auto graphicsPiece : tmpGraphicsPieces)
         {
-            VPuzzlePiece *piece = graphicsPiece->GetPiece();
+            VPPiece *piece = graphicsPiece->GetPiece();
 
             if(piece->GetIsSelected())
             {
@@ -153,7 +153,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::on_PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter)
+void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter)
 {
     Q_UNUSED(pieceListBefore)
 

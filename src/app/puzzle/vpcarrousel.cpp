@@ -106,7 +106,7 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 
         if (pieceList)
         {
-            QList<VPuzzlePiece*> pieces = pieceList->GetPieces();
+            QList<VPPiece*> pieces = pieceList->GetPieces();
 
             for (auto piece : pieces)
             {

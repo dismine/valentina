@@ -53,7 +53,7 @@ VPLayout* VPPieceList::GetLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPuzzlePiece *> VPPieceList::GetPieces()
+QList<VPPiece *> VPPieceList::GetPieces()
 {
     return m_pieces;
 }
@@ -69,7 +69,7 @@ void VPPieceList::ClearSelection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPieceList::AddPiece(VPuzzlePiece *piece)
+void VPPieceList::AddPiece(VPPiece *piece)
 {
     qCDebug(pPieceList(), "piece -- %s -- added to %s", qUtf8Printable(piece->GetName()), qUtf8Printable(this->GetName()));
 
@@ -80,7 +80,7 @@ void VPPieceList::AddPiece(VPuzzlePiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPieceList::RemovePiece(VPuzzlePiece *piece)
+void VPPieceList::RemovePiece(VPPiece *piece)
 {
     m_pieces.removeAll(piece);
     piece->SetPieceList(nullptr);

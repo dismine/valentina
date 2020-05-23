@@ -36,7 +36,7 @@
 #include "vpcarrousel.h"
 #include "vpmaingraphicsview.h"
 #include "vplayout.h"
-#include "vpuzzlepiece.h"
+#include "vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "vpcommandline.h"
 
@@ -96,13 +96,13 @@ private:
     VPCommandLinePtr m_cmd;
 
     VPLayout *m_layout{nullptr};
-    QList<VPuzzlePiece *>m_selectedPieces{QList<VPuzzlePiece *>()};
+    QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
      * @param rawPiece the raw piece data
      */
-    VPuzzlePiece* CreatePiece(const VLayoutPiece &rawPiece);
+    VPPiece* CreatePiece(const VLayoutPiece &rawPiece);
 
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)

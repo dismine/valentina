@@ -229,7 +229,7 @@ void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
     {
         if (name() == ML::TagPiece)
         {
-            VPuzzlePiece *piece = new VPuzzlePiece();
+            VPPiece *piece = new VPPiece();
             ReadPiece(piece);
             pieceList->AddPiece(piece);
         }
@@ -242,7 +242,7 @@ void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadPiece(VPuzzlePiece *piece)
+void VPLayoutFileReader::ReadPiece(VPPiece *piece)
 {
     Q_UNUSED(piece);
     SCASSERT(isStartElement() && name() == ML::TagPiece);
