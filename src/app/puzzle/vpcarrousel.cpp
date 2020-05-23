@@ -33,6 +33,7 @@
 
 #include "../vmisc/backport/qoverload.h"
 #include "vppiecelist.h"
+#include "vpsheet.h"
 
 #include <QLoggingCategory>
 #include <QMenu>
@@ -68,8 +69,12 @@ void VPCarrousel::Refresh()
 
     // --- add the content saved in the layout to the carrousel.
     // Do not rely on m_layout because we do not control it.
-    m_pieceLists = m_layout->GetPiecesLists();
-    m_pieceLists.prepend(m_layout->GetUnplacedPieceList());
+    m_pieceLists = QList<VPPieceList*>();
+    m_pieceLists.append(m_layout->GetUnplacedPieceList());
+    for(auto sheet : m_layout->GetSheets())
+    {
+        m_pieceLists.append(sheet->GetPieceList());
+    }
 
     for (auto pieceList : m_pieceLists)
     {

@@ -46,6 +46,8 @@ extern const QString TagTiles;
 extern const QString TagUnplacedPieceList;
 extern const QString TagPieceList;
 extern const QString TagPiece;
+extern const QString TagSheets;
+extern const QString TagSheet;
 
 extern const QString AttrVersion;
 extern const QString AttrWarningSuperposition;

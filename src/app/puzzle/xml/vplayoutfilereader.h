@@ -50,7 +50,9 @@ private:
     void ReadLayout(VPLayout *layout);
     void ReadProperties(VPLayout *layout);
     void ReadTiles(VPLayout *layout);
-    void ReadPieceLists(VPLayout *layout);
+    void ReadUnplacedPieces(VPLayout *layout);
+    void ReadSheets(VPLayout *layout);
+    void ReadSheet(VPLayout *layout);
     void ReadPieceList(VPPieceList *pieceList);
     void ReadPiece(VPPiece *piece);
 

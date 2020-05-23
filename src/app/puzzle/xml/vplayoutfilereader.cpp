@@ -72,7 +72,11 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
         }
         else if (name() == ML::TagPieceLists)
         {
-            ReadPieceLists(layout);
+            ReadSheets(layout);
+        }
+        else if (name() == ML::TagUnplacedPieceList)
+        {
+            ReadUnplacedPieces(layout);
         }
         else
         {
@@ -94,8 +98,6 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
             {
                 ML::TagUnit,
                 ML::TagDescription,
-                ML::TagSize,
-                ML::TagMargin,
                 ML::TagControl,
                 ML::TagTiles
             });
@@ -113,38 +115,17 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
             // TODO read the description info
             break;
         }
-        case 2:// size
-        {
-            qDebug("read size");
-            QSizeF size = ReadSize();
-            layout->SetLayoutSize(size);
-            readElementText();
-            break;
-        }
-        case 3:// margin
-        {
-            qDebug("read margin");
-            QMarginsF margins = ReadMargins();
-            layout->SetLayoutMargins(margins);
-            readElementText();
-            break;
-        }
-        case 4:// control
+        case 2:// control
         {
             qDebug("read control");
             QXmlStreamAttributes attribs = attributes();
-
-            // attribs.value("followGrainLine"); // TODO
-
             layout->SetWarningSuperpositionOfPieces(ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
             layout->SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
-            layout->SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
 
-            layout->SetPiecesGap(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')));
             readElementText();
             break;
         }
-        case 5:// tiles
+        case 3:// tiles
             qDebug("read tiles");
             ReadTiles(layout);
             readElementText();
@@ -155,6 +136,12 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
             break;
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadUnplacedPieces(VPLayout *layout)
+{
+    ReadPieceList(layout->GetUnplacedPieceList());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,20 +180,15 @@ void VPLayoutFileReader::ReadTiles(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadPieceLists(VPLayout *layout)
+void VPLayoutFileReader::ReadSheets(VPLayout *layout)
 {
-    SCASSERT(isStartElement() && name() == ML::TagPieceLists);
+    SCASSERT(isStartElement() && name() == ML::TagSheets);
 
     while (readNextStartElement())
     {
-        if (name() == ML::TagUnplacedPieceList)
+        if (name() == ML::TagSheet)
         {
-            ReadPieceList(layout->GetUnplacedPieceList());
-        }
-        else if (name() == ML::TagPieceList)
-        {
-            VPPieceList *pieceList = layout->AddPieceList();
-            ReadPieceList(pieceList);
+            ReadSheet(layout);
         }
         else
         {
@@ -215,6 +197,14 @@ void VPLayoutFileReader::ReadPieceLists(VPLayout *layout)
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadSheet(VPLayout *layout)
+{
+    Q_UNUSED(layout);
+    // TODO
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)

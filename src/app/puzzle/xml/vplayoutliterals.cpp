@@ -41,6 +41,8 @@ const QString TagTiles               = QStringLiteral("tiles");
 const QString TagUnplacedPieceList   = QStringLiteral("unplacedPieceList");
 const QString TagPieceList           = QStringLiteral("pieceList");
 const QString TagPiece               = QStringLiteral("piece");
+const QString TagSheets              = QStringLiteral("sheets");
+const QString TagSheet               = QStringLiteral("sheet");
 
 const QString AttrVersion              = QStringLiteral("version");
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");

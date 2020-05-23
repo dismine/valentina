@@ -40,6 +40,7 @@
 #include "vpmimedatapiece.h"
 #include "vpcarrouselpiecelist.h"
 #include "vpcarrousel.h"
+#include "vpsheet.h"
 
 #include <QLoggingCategory>
 
@@ -240,7 +241,12 @@ void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
     QMenu contextMenu;
 
     VPPieceList* unplacedPieces = m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList();
-    QList<VPPieceList*> pieceLists = m_piece->GetPieceList()->GetLayout()->GetPiecesLists();
+    QList<VPSheet*> sheets = m_piece->GetPieceList()->GetLayout()->GetSheets();
+    QList<VPPieceList*> pieceLists = QList<VPPieceList*>();
+    for (auto sheet : sheets)
+    {
+        pieceLists.append(sheet->GetPieceList());
+    }
 
     // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
     pieceLists.removeAll(m_piece->GetPieceList());

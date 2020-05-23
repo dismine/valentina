@@ -28,26 +28,19 @@
 #include "vplayout.h"
 #include "vppiecelist.h"
 #include "vppiece.h"
+#include "vpsheet.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout() :
     m_unplacedPieceList(new VPPieceList(this))
 {
     m_unplacedPieceList->SetName(QObject::tr("Unplaced pieces"));
-
-    // create a standard default piecelist:
-    VPPieceList *pieceList = new VPPieceList(this);
-    pieceList->SetName(QObject::tr("Layout"));
-    AddPieceList(pieceList);
-
-    // sets the default active piece list
-    SetFocusedPieceList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::~VPLayout()
 {
-    qDeleteAll(m_pieceLists);
+    qDeleteAll(m_sheets);
     delete m_unplacedPieceList;
 }
 
@@ -58,24 +51,24 @@ VPPieceList* VPLayout::GetUnplacedPieceList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPLayout::AddPieceList()
+VPSheet* VPLayout::AddSheet()
 {
-    VPPieceList *newPieceList = new VPPieceList(this);
-    m_pieceLists.append(newPieceList);
-    return newPieceList;
+    VPSheet *newSheet = new VPSheet(this);
+    m_sheets.append(newSheet);
+    return newSheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPLayout::AddPieceList(VPPieceList *pieceList)
+VPSheet* VPLayout::AddSheet(VPSheet *sheet)
 {
-    m_pieceLists.append(pieceList);
-    return pieceList;
+    m_sheets.append(sheet);
+    return sheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPPieceList *> VPLayout::GetPiecesLists()
+QList<VPSheet *> VPLayout::GetSheets()
 {
-    return m_pieceLists;
+    return m_sheets;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,8 +76,12 @@ QList<VPPiece *> VPLayout::GetSelectedPieces()
 {
     QList<VPPiece *> result = QList<VPPiece *>();
 
-    QList<VPPieceList *> pieceLists = m_pieceLists;
-    pieceLists.prepend(m_unplacedPieceList);
+    QList<VPPieceList *> pieceLists = QList<VPPieceList *>();
+    pieceLists.append(m_unplacedPieceList);
+    for (auto sheet : m_sheets)
+    {
+        pieceLists.append(sheet->GetPieceList());
+    }
 
     for (auto pieceList : pieceLists)
     {
@@ -113,128 +110,6 @@ Unit VPLayout::GetUnit() const
     return m_unit;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutSize(qreal width, qreal height)
-{
-    m_size.setWidth(width);
-    m_size.setHeight(height);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutSizeConverted(qreal width, qreal height)
-{
-    m_size.setWidth(UnitConvertor(width, m_unit, Unit::Px));
-    m_size.setHeight(UnitConvertor(height, m_unit, Unit::Px));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutSize(const QSizeF &size)
-{
-    m_size = size;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutSizeConverted(const QSizeF &size)
-{
-    m_size = QSizeF(
-                UnitConvertor(size.width(), m_unit, Unit::Px),
-                UnitConvertor(size.height(), m_unit, Unit::Px)
-                );
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayout::GetLayoutSize() const
-{
-    return m_size;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayout::GetLayoutSizeConverted() const
-{
-    QSizeF convertedSize = QSizeF(
-                UnitConvertor(m_size.width(), Unit::Px, m_unit),
-                UnitConvertor(m_size.height(), Unit::Px, m_unit)
-                );
-
-    return convertedSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal bottom)
-{
-    m_margins.setLeft(left);
-    m_margins.setTop(top);
-    m_margins.setRight(right);
-    m_margins.setBottom(bottom);
-}
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
-{
-    m_margins.setLeft(UnitConvertor(left, m_unit, Unit::Px));
-    m_margins.setTop(UnitConvertor(top, m_unit, Unit::Px));
-    m_margins.setRight(UnitConvertor(right, m_unit, Unit::Px));
-    m_margins.setBottom(UnitConvertor(bottom, m_unit, Unit::Px));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutMargins(const QMarginsF &margins)
-{
-    m_margins = margins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetLayoutMarginsConverted(const QMarginsF &margins)
-{
-    m_margins = UnitConvertor(margins, m_unit, Unit::Px);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayout::GetLayoutMargins() const
-{
-    return m_margins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayout::GetLayoutMarginsConverted() const
-{
-    return UnitConvertor(m_margins, Unit::Px, m_unit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetFollowGrainline(FollowGrainline state)
-{
-    m_followGrainLine = state;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-FollowGrainline VPLayout::GetFollowGrainline() const
-{
-    return m_followGrainLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetPiecesGap(qreal value)
-{
-    m_piecesGap = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetPiecesGapConverted(qreal value)
-{
-    m_piecesGap = UnitConvertor(value, m_unit, Unit::Px);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPLayout::GetPiecesGap() const
-{
-    return m_piecesGap;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPLayout::GetPiecesGapConverted() const
-{
-    return UnitConvertor(m_piecesGap, Unit::Px, m_unit);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::SetWarningSuperpositionOfPieces(bool state)
@@ -261,45 +136,14 @@ bool VPLayout::GetWarningPiecesOutOfBound() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetStickyEdges(bool state)
-{
-    m_stickyEdges = state;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPLayout::GetStickyEdges() const
-{
-    return m_stickyEdges;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPLayout::ClearSelection()
 {
     m_unplacedPieceList->ClearSelection();
 
-    for (auto pieceList : m_pieceLists)
+    for (auto sheet : m_sheets)
     {
-        pieceList->ClearSelection();
+        sheet->ClearSelection();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetFocusedPieceList(VPPieceList* focusedPieceList)
-{
-    if(focusedPieceList == nullptr)
-    {
-        m_focusedPieceList = m_pieceLists.first();
-    }
-    else
-    {
-        m_focusedPieceList = focusedPieceList;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPLayout::GetFocusedPieceList()
-{
-    return m_focusedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,4 +159,24 @@ void VPLayout::MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList)
 
     // signal, that a piece was moved
     emit PieceMovedToPieceList(piece, pieceListBefore,pieceList);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetFocusedSheet(VPSheet *focusedSheet)
+{
+    if(focusedSheet == nullptr)
+    {
+        m_focusedSheet = m_sheets.first();
+    }
+    else
+    {
+        m_focusedSheet = focusedSheet;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPSheet* VPLayout::GetFocusedSheet()
+{
+    return m_focusedSheet;
 }

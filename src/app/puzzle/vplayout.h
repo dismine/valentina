@@ -28,17 +28,14 @@
 #ifndef VPLAYOUT_H
 #define VPLAYOUT_H
 
-#include <QSizeF>
-#include <QMarginsF>
+
 #include <QList>
 
 #include "def.h"
 
 class VPPieceList;
 class VPPiece;
-
-// is this the right place for the definition?
-enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
+class VPSheet;
 
 class VPLayout : public QObject
 {
@@ -53,9 +50,9 @@ public:
      */
     VPPieceList* GetUnplacedPieceList();
 
-    VPPieceList* AddPieceList();
-    VPPieceList* AddPieceList(VPPieceList *pieceList);
-    QList<VPPieceList *> GetPiecesLists();
+    VPSheet* AddSheet();
+    VPSheet* AddSheet(VPSheet *sheet);
+    QList<VPSheet *> GetSheets();
 
     /**
      * @brief GetSelectedPieces Returns the list of the selected pieces
@@ -75,149 +72,17 @@ public:
      */
     Unit GetUnit() const;
 
-    /**
-     * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px
-     * @param width layout width
-     * @param height layout height
-     */
-    void SetLayoutSize(qreal width, qreal height);
-
-    /**
-     * @brief SetLayoutSize sets the size of the layout, the values have to be in the layout's unit
-     * @param width layout width
-     * @param height layout height
-     */
-    void SetLayoutSizeConverted(qreal width, qreal height);
-
-    /**
-     * @brief SetLayoutSize sets the size of the layout, the values have to be in Unit::Px
-     * @param size layout size
-     */
-    void SetLayoutSize(const QSizeF &size);
-    /**
-     * @brief SetLayoutSizeConverted sets the size of the layout, the values have to be in the layout's unit
-     * @param size layout size
-     */
-    void SetLayoutSizeConverted(const QSizeF &size);
-
-    /**
-     * @brief GetLayoutSize Returns the size in Unit::Px
-     * @return layout size in Unit::Px
-     */
-    QSizeF GetLayoutSize() const;
-
-    /**
-     * @brief GetLayoutSizeConverted Returns the size in the layout's unit
-     * @return the size in the layout's unit
-     */
-    QSizeF GetLayoutSizeConverted() const;
-
-    /**
-     * @brief SetLayoutMargins, set the margins of the layout, the values have to be in Unit::Px
-     * @param left in Unit::Px
-     * @param top in Unit::Px
-     * @param right in Unit::Px
-     * @param bottom in Unit::Px
-     */
-    void SetLayoutMargins(qreal left, qreal top, qreal right, qreal bottom);
-
-    /**
-     * @brief SetLayoutMargins, set the margins of the layout, the values have to be in the unit of the layout
-     * @param left in Unit::Px
-     * @param top in Unit::Px
-     * @param right in Unit::Px
-     * @param bottom in Unit::Px
-     */
-    void SetLayoutMarginsConverted(qreal left, qreal top, qreal right, qreal bottom);
-
-    /**
-     * @brief SetLayoutMargins set the margins of the layout, the values have to be in Unit::Px
-     * @param margins layout margins
-     */
-    void SetLayoutMargins(const QMarginsF &margins);
-
-    /**
-     * @brief SetLayoutMargins set the margins of the layout, the values have to be in the unit of the layout
-     * @param margins layout margins
-     */
-    void SetLayoutMarginsConverted(const QMarginsF &margins);
-
-    /**
-     * @brief GetLayoutMargins Returns the size in Unit::Px
-     * @return the size in Unit::Px
-     */
-    QMarginsF GetLayoutMargins() const;
-
-    /**
-     * @brief GetLayoutMarginsConverted Returns the margins in the layout's unit
-     * @return the margins in the layout's unit
-     */
-    QMarginsF GetLayoutMarginsConverted() const;
-
-    /**
-     * @brief SetFollowGrainline Sets the type of grainline for the pieces to follow
-     * @param state the type of grainline
-     */
-    void SetFollowGrainline(FollowGrainline state);
-
-    /**
-     * @brief GetFollowGrainline Returns if the layout's pieces follow a grainline or not
-     * @return wether the pieces follow a grainline and if so, which grainline
-     */
-    FollowGrainline GetFollowGrainline() const;
-
-    /**
-     * @brief SetPiecesGap sets the pieces gap to the given value, the unit has to be in Unit::Px
-     * @param value pieces gap
-     */
-    void SetPiecesGap(qreal value);
-
-    /**
-     * @brief SetPiecesGapConverted sets the pieces gap to the given value, the unit has to be in the layout's unit
-     * @param value pieces gap
-     */
-    void SetPiecesGapConverted(qreal value);
-
-    /**
-     * @brief GetPiecesGap returns the pieces gap in Unit::Px
-     * @return the pieces gap in Unit::Px
-     */
-    qreal GetPiecesGap() const;
-
-    /**
-     * @brief GetPiecesGapConverted returns the pieces gap in the layout's unit
-     * @return the pieces gap in the layout's unit
-     */
-    qreal GetPiecesGapConverted() const;
-
     void SetWarningSuperpositionOfPieces(bool state);
     bool GetWarningSuperpositionOfPieces() const;
 
     void SetWarningPiecesOutOfBound(bool state);
     bool GetWarningPiecesOutOfBound() const;
 
-    void SetStickyEdges(bool state);
-    bool GetStickyEdges() const;
-
     /**
-     * @brief ClearSelection goes through the piece list and pieces and calls
+     * @brief ClearSelection goes through the unplaced pieces and through the sheets and calls
      * SetIsSelected(false) for the pieces that were selected.
      */
     void ClearSelection();
-
-    /**
-     * @brief SetFocusedPieceList Sets the focused piece klist, to which pieces are added from the carrousel via drag
-     * and drop
-     * @param focusedPieceList the new active piece list. If nullptr, then it sets automaticaly the first piece list from m_pieceLists
-     */
-    void SetFocusedPieceList(VPPieceList* focusedPieceList = nullptr);
-
-    /**
-     * @brief GetFocusedPieceList Returns the focused piece list, to which pieces are added from the carrousel via drag
-     * and drop
-     * @return the focused piece list
-     */
-    VPPieceList* GetFocusedPieceList();
 
     /**
      * @brief MovePieceToPieceList Moves the given piece to the given piece list
@@ -225,6 +90,21 @@ public:
      * @param pieceList the piece list to move the piece to
      */
     void MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList);
+
+    /**
+     * @brief SetFocusedSheet Sets the focused sheet, to which pieces are added from the carrousel via drag
+     * and drop
+     * @param focusedSheet the new active sheet. If nullptr, then it sets automaticaly the first sheet from m_sheets
+     */
+    void SetFocusedSheet(VPSheet *focusedSheet = nullptr);
+
+    /**
+     * @brief GetFocusedSheet Returns the focused sheet, to which pieces are added from the carrousel via drag
+     * and drop
+     * @return the focused sheet
+     */
+    VPSheet* GetFocusedSheet();
+
 
 signals:
 
@@ -234,37 +114,25 @@ private:
     Q_DISABLE_COPY(VPLayout)
 
     VPPieceList *m_unplacedPieceList;
-    QList<VPPieceList *> m_pieceLists{};
+
+    QList<VPSheet*> m_sheets;
 
     /**
+     TODO : To be replaced by m_focusedSheet
      * @brief m_focusedPieceList pointer the the focused piece list, to which pieces will be
      * added via drag and drop, or if no piece list is defined.
      */
     VPPieceList *m_focusedPieceList{nullptr};
 
+
+    VPSheet *m_focusedSheet{nullptr};
+
     // format
     Unit m_unit{Unit::Cm};
-    /**
-     * @brief m_size the Size in Unit::Px
-     */
-    QSizeF m_size{};
 
-    // margins
-    /**
-     * @brief m_margins the margins in Unit::Px
-     */
-    QMarginsF m_margins{};
-
-    // control
-    FollowGrainline m_followGrainLine{FollowGrainline::No};
-
-    /**
-     * @brief m_piecesGap the pieces gap in Unit::Px
-     */
-    qreal m_piecesGap{0};
     bool m_warningSuperpositionOfPieces{false};
     bool m_warningPiecesOutOfBound{false};
-    bool m_stickyEdges{false};
+
 
 };
 

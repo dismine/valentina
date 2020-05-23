@@ -32,26 +32,26 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-#include "vplayout.h"
+#include "vpsheet.h"
 
 class VPGraphicsSheet : public QGraphicsItem
 {
 public:
-    explicit VPGraphicsSheet(VPLayout *layout, QGraphicsItem *parent = nullptr);
+    explicit VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent = nullptr);
     ~VPGraphicsSheet();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
 
 
-    QRectF GetLayoutRect() const;
+    QRectF GetSheetRect() const;
     QRectF GetMarginsRect() const;
 
 
 private:
     Q_DISABLE_COPY(VPGraphicsSheet)
 
-    VPLayout *m_layout{nullptr};
+    VPSheet *m_sheet{nullptr};
     QRectF m_boundingRect;
 };
 

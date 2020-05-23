@@ -34,6 +34,8 @@
 
 #include "vpmimedatapiece.h"
 #include "vppiecelist.h"
+#include "vplayout.h"
+#include "vpsheet.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
 #include <QLoggingCategory>
@@ -46,10 +48,11 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, QWidget *parent) :
     VMainGraphicsView(parent),
     m_layout(layout)
 {
+    // TODO : list of scenes
     m_scene = new VMainGraphicsScene(this);
     setScene(m_scene);
 
-    m_graphicsSheet = new VPGraphicsSheet(layout);
+    m_graphicsSheet = new VPGraphicsSheet(layout->GetFocusedSheet());
     m_graphicsSheet->setPos(0, 0);
     m_scene->addItem(m_graphicsSheet);
 
@@ -123,7 +126,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             piece->SetPosition(mapToScene(point));
 
             // change the piecelist of the piece
-            VPPieceList *focusedPieceList = m_layout->GetFocusedPieceList();
+            VPPieceList *focusedPieceList = m_layout->GetFocusedSheet()->GetPieceList();
             if(focusedPieceList != nullptr)
             {
                 m_layout->MovePieceToPieceList(piece, focusedPieceList);

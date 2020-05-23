@@ -40,6 +40,7 @@
 #include "../vmisc/projectversion.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../ifc/exception/vexception.h"
+#include "vpsheet.h"
 
 #include <QLoggingCategory>
 
@@ -57,13 +58,19 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     ui(new Ui::VPMainWindow),
     m_cmd(cmd)
 {
-
     m_layout = new VPLayout();
 
+    // create a standard sheet
+    VPSheet *sheet = new VPSheet(m_layout);
+    sheet->SetName(QObject::tr("Sheet #1"));
+    m_layout->AddSheet(sheet);
+    m_layout->SetFocusedSheet();
+
     // ----- for test purposes, to be removed------------------
-    m_layout->SetLayoutMarginsConverted(2, 2, 2, 2);
-    m_layout->SetLayoutSizeConverted(30.0, 45);
-    m_layout->SetPiecesGapConverted(1);
+    sheet->SetSheetMarginsConverted(2, 2, 2, 2);
+    sheet->SetSheetSizeConverted(30.0, 45);
+    sheet->SetPiecesGapConverted(1);
+
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
     // --------------------------------------------------------
@@ -270,32 +277,32 @@ void VPMainWindow::InitPropertyTabLayout()
    // see https://doc.qt.io/qt-5/designer-using-a-ui-file.html#widgets-and-dialogs-with-auto-connect
 
     // -------------------- layout width, length, orientation  ------------------------
-    connect(ui->doubleSpinBoxLayoutWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_LayoutSizeChanged);
-    connect(ui->doubleSpinBoxLayoutLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_LayoutSizeChanged);
-    connect(ui->radioButtonLayoutPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_LayoutOrientationChanged);
-    connect(ui->radioButtonLayoutLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_LayoutOrientationChanged);
+    connect(ui->doubleSpinBoxSheetWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_SheetSizeChanged);
+    connect(ui->doubleSpinBoxSheetLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_SheetSizeChanged);
+    connect(ui->radioButtonSheetPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_SheetOrientationChanged);
+    connect(ui->radioButtonSheetLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_SheetOrientationChanged);
 
     // -------------------- margins  ------------------------
-    connect(ui->doubleSpinBoxLayoutMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_LayoutMarginChanged);
-    connect(ui->doubleSpinBoxLayoutMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_LayoutMarginChanged);
-    connect(ui->doubleSpinBoxLayoutMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_LayoutMarginChanged);
-    connect(ui->doubleSpinBoxLayoutMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_LayoutMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_SheetMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_SheetMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_SheetMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_SheetMarginChanged);
 
     // ------------------- follow grainline -----------------------
-    connect(ui->radioButtonLayoutFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_LayoutFollowGrainlineChanged);
-    connect(ui->radioButtonLayoutFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_LayoutFollowGrainlineChanged);
-    connect(ui->radioButtonLayoutFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_LayoutFollowGrainlineChanged);
+    connect(ui->radioButtonSheetFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_SheetFollowGrainlineChanged);
+    connect(ui->radioButtonSheetFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_SheetFollowGrainlineChanged);
+    connect(ui->radioButtonSheetFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_SheetFollowGrainlineChanged);
 
     // -------------------- export ---------------------------
 
@@ -332,8 +339,9 @@ void VPMainWindow::SetPropertiesData()
     else
     {
         SetPropertyTabCurrentPieceData();
-        SetPropertyTabLayoutData();
+        SetPropertyTabSheetData();
         SetPropertyTabTilesData();
+        SetPropertyTabLayoutData();
     }
 }
 
@@ -385,8 +393,42 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetPropertyTabSheetData()
+{
+    // set Width / Length
+    QSizeF size = m_layout->GetFocusedSheet()->GetSheetSizeConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetWidth, size.width());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, size.height());
+
+    // Set Orientation
+    if(size.width() <= size.height())
+    {
+        ui->radioButtonSheetPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->radioButtonSheetLandscape->setChecked(true);
+    }
+
+    // set margins
+    QMarginsF margins = m_layout->GetFocusedSheet()->GetSheetMarginsConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
+
+    // set pieces gap
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->GetFocusedSheet()->GetPiecesGapConverted());
+
+    // set the checkboxes
+    SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->GetFocusedSheet()->GetStickyEdges());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabLayoutData()
 {
+    // TODO FIXME : Set name and description
+
     // set Unit
     int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->GetUnit())));
     if(index != -1)
@@ -396,35 +438,9 @@ void VPMainWindow::SetPropertyTabLayoutData()
         ui->comboBoxLayoutUnit->blockSignals(false);
     }
 
-    // set Width / Length
-    QSizeF size = m_layout->GetLayoutSizeConverted();
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, size.width());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, size.height());
-
-    // Set Orientation
-    if(size.width() <= size.height())
-    {
-        ui->radioButtonLayoutPortrait->setChecked(true);
-    }
-    else
-    {
-        ui->radioButtonLayoutLandscape->setChecked(true);
-    }
-
-    // set margins
-    QMarginsF margins = m_layout->GetLayoutMarginsConverted();
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginLeft, margins.left());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginTop, margins.top());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginRight, margins.right());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutMarginBottom, margins.bottom());
-
-    // set pieces gap
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutPiecesGap, m_layout->GetPiecesGapConverted());
-
-    // set the checkboxes
+    // set controls
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, m_layout->GetWarningPiecesOutOfBound());
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
-    SetCheckBoxValue(ui->checkBoxLayoutStickyEdges, m_layout->GetStickyEdges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -763,16 +779,16 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
         m_layout->SetUnit(Unit::Inch);
     }
 
-    SetPropertyTabLayoutData();
+    SetPropertyTabSheetData();
     SetPropertyTabCurrentPieceData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_comboBoxLayoutTemplate_currentIndexChanged(int index)
+void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::LayoutTemplateChanged");
+    msgBox.setText("TODO VPMainWindow::SheetTemplateChanged");
     int ret = msgBox.exec();
 
     Q_UNUSED(index);
@@ -783,20 +799,20 @@ void VPMainWindow::on_comboBoxLayoutTemplate_currentIndexChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_LayoutSizeChanged()
+void VPMainWindow::on_SheetSizeChanged()
 {
-    m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
+    m_layout->GetFocusedSheet()->SetSheetSizeConverted(ui->doubleSpinBoxSheetWidth->value(), ui->doubleSpinBoxSheetLength->value());
 
     // updates orientation - no need to block signals because the signal reacts on "clicked"
-    if(ui->doubleSpinBoxLayoutWidth->value() <= ui->doubleSpinBoxLayoutLength->value())
+    if(ui->doubleSpinBoxSheetWidth->value() <= ui->doubleSpinBoxSheetLength->value())
     {
         //portrait
-        ui->radioButtonLayoutPortrait->setChecked(true);
+        ui->radioButtonSheetPortrait->setChecked(true);
     }
     else
     {
         //landscape
-        ui->radioButtonLayoutLandscape->setChecked(true);
+        ui->radioButtonSheetLandscape->setChecked(true);
     }
 
     // TODO Undo / Redo
@@ -805,16 +821,16 @@ void VPMainWindow::on_LayoutSizeChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_LayoutOrientationChanged()
+void VPMainWindow::on_SheetOrientationChanged()
 {
     // swap the width and length
-    qreal width_before = ui->doubleSpinBoxLayoutWidth->value();
-    qreal length_before = ui->doubleSpinBoxLayoutLength->value();
+    qreal width_before = ui->doubleSpinBoxSheetWidth->value();
+    qreal length_before = ui->doubleSpinBoxSheetLength->value();
 
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutWidth, length_before);
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxLayoutLength, width_before);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetWidth, length_before);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, width_before);
 
-    m_layout->SetLayoutSizeConverted(ui->doubleSpinBoxLayoutWidth->value(), ui->doubleSpinBoxLayoutLength->value());
+    m_layout->GetFocusedSheet()->SetSheetSizeConverted(ui->doubleSpinBoxSheetWidth->value(), ui->doubleSpinBoxSheetLength->value());
 
     // TODO Undo / Redo
 
@@ -822,7 +838,7 @@ void VPMainWindow::on_LayoutOrientationChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonLayoutRemoveUnusedLength_clicked()
+void VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -836,13 +852,13 @@ void VPMainWindow::on_pushButtonLayoutRemoveUnusedLength_clicked()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_LayoutMarginChanged()
+void VPMainWindow::on_SheetMarginChanged()
 {
-    m_layout->SetLayoutMarginsConverted(
-                ui->doubleSpinBoxLayoutMarginLeft->value(),
-                ui->doubleSpinBoxLayoutMarginTop->value(),
-                ui->doubleSpinBoxLayoutMarginRight->value(),
-                ui->doubleSpinBoxLayoutMarginBottom->value()
+    m_layout->GetFocusedSheet()->SetSheetMarginsConverted(
+                ui->doubleSpinBoxSheetMarginLeft->value(),
+                ui->doubleSpinBoxSheetMarginTop->value(),
+                ui->doubleSpinBoxSheetMarginRight->value(),
+                ui->doubleSpinBoxSheetMarginBottom->value()
             );
 
     // TODO Undo / Redo
@@ -852,7 +868,7 @@ void VPMainWindow::on_LayoutMarginChanged()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_LayoutFollowGrainlineChanged()
+void VPMainWindow::on_SheetFollowGrainlineChanged()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
@@ -866,9 +882,9 @@ void VPMainWindow::on_LayoutFollowGrainlineChanged()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_doubleSpinBoxLayoutPiecesGap_valueChanged(double value)
+void VPMainWindow::on_doubleSpinBoxSheetPiecesGap_valueChanged(double value)
 {
-    m_layout->SetPiecesGapConverted(value);
+    m_layout->GetFocusedSheet()->SetPiecesGapConverted(value);
 
     // TODO Undo / Redo
     // TODO update the QGraphicView
@@ -893,16 +909,16 @@ void VPMainWindow::on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxLayoutStickyEdges_toggled(bool checked)
+void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
 {
-    m_layout->SetStickyEdges(checked);
+    m_layout->GetFocusedSheet()->SetStickyEdges(checked);
 
     // TODO Undo / Redo
     // TODO update the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonLayoutExport_clicked()
+void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;

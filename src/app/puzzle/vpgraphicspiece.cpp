@@ -42,6 +42,7 @@
 #include "vppiece.h"
 #include "vppiecelist.h"
 #include "vplayout.h"
+#include "vpsheet.h"
 
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
@@ -294,10 +295,19 @@ void VPGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
+
+
+    // TODO/FIXME   context menu needs to be refactored
+
     QMenu contextMenu;
 
     // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
-    QList<VPPieceList*> pieceLists = m_piece->GetPieceList()->GetLayout()->GetPiecesLists();
+    QList<VPPieceList*> pieceLists =  QList<VPPieceList*>();
+    for(auto sheet : m_piece->GetPieceList()->GetLayout()->GetSheets())
+    {
+        pieceLists.append(sheet->GetPieceList());
+    }
+
     pieceLists.removeAll(m_piece->GetPieceList());
 
     if(pieceLists.count() > 0)

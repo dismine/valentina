@@ -29,10 +29,10 @@
 #include "vpgraphicssheet.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsSheet::VPGraphicsSheet(VPLayout *layout, QGraphicsItem *parent):
+VPGraphicsSheet::VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent):
     QGraphicsItem(parent),
-    m_layout(layout),
-    m_boundingRect(GetLayoutRect())
+    m_sheet(sheet),
+    m_boundingRect(GetSheetRect())
 {
 
 }
@@ -60,23 +60,23 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     pen.setColor(Qt::black);
 
     painter->setPen(pen);
-    painter->drawRect(GetLayoutRect());
+    painter->drawRect(GetSheetRect());
 
-    m_boundingRect = GetLayoutRect();
+    m_boundingRect = GetSheetRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsSheet::GetLayoutRect() const
+QRectF VPGraphicsSheet::GetSheetRect() const
 {
-    QRectF rect = QRectF(QPointF(0,0), m_layout->GetLayoutSize());
+    QRectF rect = QRectF(QPointF(0,0), m_sheet->GetSheetSize());
     return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsSheet::GetMarginsRect() const
 {
-    QMarginsF margins = m_layout->GetLayoutMargins();
-    QSizeF size = m_layout->GetLayoutSize();
+    QMarginsF margins = m_sheet->GetSheetMargins();
+    QSizeF size = m_sheet->GetSheetSize();
     QRectF rect = QRectF(
                     QPointF(margins.left(),margins.top()),
                     QPointF(size.width()-margins.right(), size.height()-margins.bottom())

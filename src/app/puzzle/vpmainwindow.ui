@@ -172,7 +172,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>
@@ -458,7 +458,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tabLayoutProperty">
+       <widget class="QWidget" name="tabSheetProperty">
         <attribute name="icon">
          <iconset resource="share/resources/puzzleicon.qrc">
           <normaloff>:/puzzleicon/64x64/iconLayout.png</normaloff>:/puzzleicon/64x64/iconLayout.png</iconset>
@@ -483,7 +483,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QScrollArea" name="scrollAreaLayout">
+          <widget class="QScrollArea" name="scrollAreaSheet">
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -507,12 +507,12 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QLabel" name="labelLayout">
+              <widget class="QLabel" name="labelSheet">
                <property name="styleSheet">
                 <string notr="true">font-weight: bold;</string>
                </property>
                <property name="text">
-                <string>Layout</string>
+                <string>Current sheet</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -520,7 +520,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="groupBoxLayoutFormat">
+              <widget class="QGroupBox" name="groupBoxSheetFormat">
                <property name="title">
                 <string>Format</string>
                </property>
@@ -528,64 +528,54 @@
                 <item>
                  <layout class="QFormLayout" name="formLayout">
                   <item row="0" column="0">
-                   <widget class="QLabel" name="labelLayoutUnit">
-                    <property name="text">
-                     <string>Unit</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QComboBox" name="comboBoxLayoutUnit"/>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="labelLayoutTemplate">
+                   <widget class="QLabel" name="labelSheetTemplate">
                     <property name="text">
                      <string>Template</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QComboBox" name="comboBoxLayoutTemplate"/>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="comboBoxSheetTemplate"/>
                   </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="labelLayoutwidth">
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelSheetwidth">
                     <property name="text">
                      <string>Width</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutWidth">
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetWidth">
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
                    </widget>
                   </item>
-                  <item row="3" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutLength">
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="labelSheetLength">
+                    <property name="text">
+                     <string>Length</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetLength">
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
                    </widget>
                   </item>
                   <item row="3" column="0">
-                   <widget class="QLabel" name="labelLayoutLength">
-                    <property name="text">
-                     <string>Length</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="labelLayoutOrientation">
+                   <widget class="QLabel" name="labelSheetOrientation">
                     <property name="text">
                      <string>Orientation</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="1">
+                  <item row="3" column="1">
                    <layout class="QHBoxLayout" name="horizontalLayout">
                     <item>
-                     <widget class="QRadioButton" name="radioButtonLayoutPortrait">
+                     <widget class="QRadioButton" name="radioButtonSheetPortrait">
                       <property name="toolTip">
                        <string>Portrait</string>
                       </property>
@@ -608,7 +598,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="radioButtonLayoutLandscape">
+                     <widget class="QRadioButton" name="radioButtonSheetLandscape">
                       <property name="toolTip">
                        <string>Landscape</string>
                       </property>
@@ -632,7 +622,7 @@
                  </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButtonLayoutRemoveUnusedLength">
+                 <widget class="QPushButton" name="pushButtonSheetRemoveUnusedLength">
                   <property name="text">
                    <string>Remove unused length</string>
                   </property>
@@ -642,13 +632,13 @@
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="groupBoxLayoutMargin">
+              <widget class="QGroupBox" name="groupBoxSheetMargin">
                <property name="title">
                 <string>Margins</string>
                </property>
                <layout class="QGridLayout" name="gridLayout">
                 <item row="1" column="2">
-                 <widget class="QLabel" name="labelLayoutMarginRight">
+                 <widget class="QLabel" name="labelSheetMarginRight">
                   <property name="text">
                    <string>Right:</string>
                   </property>
@@ -658,7 +648,7 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLabel" name="labelLayoutMarginTop">
+                 <widget class="QLabel" name="labelSheetMarginTop">
                   <property name="text">
                    <string>Top:</string>
                   </property>
@@ -668,21 +658,21 @@
                  </widget>
                 </item>
                 <item row="1" column="3">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutMarginRight">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetMarginRight">
                   <property name="singleStep">
                    <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutMarginLeft">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetMarginLeft">
                   <property name="singleStep">
                    <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QLabel" name="labelLayoutMarginLeft">
+                 <widget class="QLabel" name="labelSheetMarginLeft">
                   <property name="text">
                    <string>Left:</string>
                   </property>
@@ -692,7 +682,7 @@
                  </widget>
                 </item>
                 <item row="0" column="2">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutMarginTop">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetMarginTop">
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                   </property>
@@ -702,14 +692,14 @@
                  </widget>
                 </item>
                 <item row="2" column="2">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutMarginBottom">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetMarginBottom">
                   <property name="singleStep">
                    <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QLabel" name="labelLayoutMarginBottom">
+                 <widget class="QLabel" name="labelSheetMarginBottom">
                   <property name="text">
                    <string>Bottom:</string>
                   </property>
@@ -722,7 +712,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="groupBoxLayoutControl">
+              <widget class="QGroupBox" name="groupBoxSheetControl">
                <property name="title">
                 <string>Control</string>
                </property>
@@ -730,7 +720,7 @@
                 <item>
                  <layout class="QFormLayout" name="formLayout_2">
                   <item row="0" column="0">
-                   <widget class="QLabel" name="labelLayoutFollowGrainline">
+                   <widget class="QLabel" name="labelSheetFollowGrainline">
                     <property name="text">
                      <string>Follow grainline</string>
                     </property>
@@ -739,7 +729,7 @@
                   <item row="0" column="1">
                    <layout class="QHBoxLayout" name="horizontalLayout_4">
                     <item>
-                     <widget class="QRadioButton" name="radioButtonLayoutFollowGrainlineNo">
+                     <widget class="QRadioButton" name="radioButtonSheetFollowGrainlineNo">
                       <property name="text">
                        <string>No</string>
                       </property>
@@ -749,7 +739,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="radioButtonLayoutFollowGrainlineVertical">
+                     <widget class="QRadioButton" name="radioButtonSheetFollowGrainlineVertical">
                       <property name="toolTip">
                        <string>Vertical grainline</string>
                       </property>
@@ -769,7 +759,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="radioButtonLayoutFollowGrainlineHorizontal">
+                     <widget class="QRadioButton" name="radioButtonSheetFollowGrainlineHorizontal">
                       <property name="toolTip">
                        <string>Horizontal grainline</string>
                       </property>
@@ -791,33 +781,19 @@
                    </layout>
                   </item>
                   <item row="1" column="0">
-                   <widget class="QLabel" name="labelLayoutPiecesGap">
+                   <widget class="QLabel" name="labelSheetPiecesGap">
                     <property name="text">
                      <string>Pieces gap</string>
                     </property>
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutPiecesGap"/>
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetPiecesGap"/>
                   </item>
                  </layout>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesSuperposition">
-                  <property name="text">
-                   <string>Warning superposition of pieces</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesOutOfBound">
-                  <property name="text">
-                   <string>Warning pieces out of bound</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="checkBoxLayoutStickyEdges">
+                 <widget class="QCheckBox" name="checkBoxSheetStickyEdges">
                   <property name="text">
                    <string>Sticky edges</string>
                   </property>
@@ -827,7 +803,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="LayoutExport">
+              <widget class="QGroupBox" name="SheetExport">
                <property name="title">
                 <string>Export</string>
                </property>
@@ -835,21 +811,21 @@
                 <item>
                  <layout class="QFormLayout" name="formLayout_3">
                   <item row="0" column="0">
-                   <widget class="QLabel" name="labelLayoutExportFormat">
+                   <widget class="QLabel" name="labelSheetExportFormat">
                     <property name="text">
                      <string>Format</string>
                     </property>
                    </widget>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QComboBox" name="comboBoxLayoutExportFormat"/>
+                   <widget class="QComboBox" name="comboBoxSheetExportFormat"/>
                   </item>
                  </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButtonLayoutExport">
+                 <widget class="QPushButton" name="pushButtonSheetExport">
                   <property name="text">
-                   <string>Export Layout</string>
+                   <string>Export Sheet</string>
                   </property>
                  </widget>
                 </item>
@@ -857,7 +833,7 @@
               </widget>
              </item>
              <item>
-              <spacer name="verticalSpacerLayout">
+              <spacer name="verticalSpacerSheet">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -929,7 +905,7 @@
                 <string notr="true">font-weight: bold;</string>
                </property>
                <property name="text">
-                <string>Tiles</string>
+                <string>Tiles of current sheet</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -938,6 +914,162 @@
              </item>
              <item>
               <spacer name="verticalSpacerTiles">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabLayoutProperty">
+        <attribute name="title">
+         <string>Prop.</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayoutLayoutProperty">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QScrollArea" name="scrollAreaLayout">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="lineWidth">
+            <number>0</number>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>356</width>
+              <height>760</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="labelLayout">
+               <property name="styleSheet">
+                <string notr="true">font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Layout</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxLayoutInfos">
+               <property name="title">
+                <string>Infos</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_16">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_7">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelLayoutName">
+                    <property name="text">
+                     <string>Name</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="lineEditLayoutName">
+                    <property name="text">
+                     <string>My layout</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string>Description</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPlainTextEdit" name="plainTextEditLayoutDescription"/>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxLayoutFormat">
+               <property name="title">
+                <string>Format</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_12">
+                <item>
+                 <layout class="QFormLayout" name="formLayoutLayout">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelLayoutUnit">
+                    <property name="text">
+                     <string>Unit</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="comboBoxLayoutUnit"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxLayoutControl">
+               <property name="title">
+                <string>Control</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_14">
+                <item>
+                 <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesSuperposition">
+                  <property name="text">
+                   <string>Warning superposition of pieces</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesOutOfBound">
+                  <property name="text">
+                   <string>Warning pieces out of bound</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacerLayout">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -1041,11 +1173,11 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>scrollAreaLayout</tabstop>
-  <tabstop>doubleSpinBoxLayoutMarginTop</tabstop>
-  <tabstop>doubleSpinBoxLayoutMarginLeft</tabstop>
-  <tabstop>doubleSpinBoxLayoutMarginRight</tabstop>
-  <tabstop>doubleSpinBoxLayoutMarginBottom</tabstop>
+  <tabstop>scrollAreaSheet</tabstop>
+  <tabstop>doubleSpinBoxSheetMarginTop</tabstop>
+  <tabstop>doubleSpinBoxSheetMarginLeft</tabstop>
+  <tabstop>doubleSpinBoxSheetMarginRight</tabstop>
+  <tabstop>doubleSpinBoxSheetMarginBottom</tabstop>
   <tabstop>scrollAreaTiles</tabstop>
  </tabstops>
  <resources>

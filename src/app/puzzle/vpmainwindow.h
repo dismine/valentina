@@ -152,16 +152,22 @@ private:
     void SetPropertyTabCurrentPieceData();
 
     /**
-     * @brief SetPropertyTabLayoutData Sets the values of UI elements
-     * in the Layout Tab to the values saved in m_layout
+     * @brief SetPropertyTabSheetData Sets the values of UI elements
+     * in the Sheet Tab to the values saved in focused sheet
      */
-    void SetPropertyTabLayoutData();
+    void SetPropertyTabSheetData();
 
     /**
      * @brief SetPropertyTabTilesData Sets the values of UI elements
      * in the Tiles Tab to the values saved in m_layout
      */
     void SetPropertyTabTilesData();
+
+    /**
+    * @brief SetPropertyTabLayoutData Sets the values of UI elements
+    * in the Layout Tab to the values saved in m_layout
+    */
+    void SetPropertyTabLayoutData();
 
     /**
      * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.
@@ -248,38 +254,38 @@ private slots:
      * The slot is automatically connected through name convention.
      * @param index the index of the selected templated
      */
-    void on_comboBoxLayoutTemplate_currentIndexChanged(int index);
+    void on_comboBoxSheetTemplate_currentIndexChanged(int index);
 
     /**
      * @brief LayoutSizeChanged When the width or the length has been changed in
      * the layout property tab
      */
-    void on_LayoutSizeChanged();
+    void on_SheetSizeChanged();
 
     /**
      * @brief LayoutOrientationChanged When one of the radio boxes for the layout
      * orientation has been clicked
      */
-    void on_LayoutOrientationChanged();
+    void on_SheetOrientationChanged();
 
     /**
      * @brief on_pushButtonLayoutRemoveUnusedLength_clicked When the button
      * "Remove unused length" in the layout property tab is clicked.
      * The slot is automatically connected through name convention.
      */
-    void on_pushButtonLayoutRemoveUnusedLength_clicked();
+    void on_pushButtonSheetRemoveUnusedLength_clicked();
 
     /**
      * @brief on_LayoutMarginChanged When one of the margin values has been changed
      * in the layout property tab.
      */
-    void on_LayoutMarginChanged();
+    void on_SheetMarginChanged();
 
     /**
      * @brief LayoutFollowGrainlineChanged When one of the radio boxes for the
      * "Follow grainline" has been clicked in the layout property tab.
      */
-    void on_LayoutFollowGrainlineChanged();
+    void on_SheetFollowGrainlineChanged();
 
     /**
      * @brief on_doubleSpinBoxLayoutPiecesGap_valueChanged When the "pieces gap"
@@ -287,7 +293,7 @@ private slots:
      * The slot is automatically connected through name convention.
      * @param value the new value of the pieces gap
      */
-    void on_doubleSpinBoxLayoutPiecesGap_valueChanged(double value);
+    void on_doubleSpinBoxSheetPiecesGap_valueChanged(double value);
 
     /**
      * @brief on_checkBoxLayoutWarningPiecesSuperposition_toggled When the
@@ -313,14 +319,14 @@ private slots:
      * The slot is automatically connected through name convention.
      * @param checked the new checked value
      */
-    void on_checkBoxLayoutStickyEdges_toggled(bool checked);
+    void on_checkBoxSheetStickyEdges_toggled(bool checked);
 
     /**
      * @brief on_pushButtonLayoutExport_clicked When the button
      * "Export layout" in the layout property is clicked.
      * The slot is automatically connected through name convention.
      */
-    void on_pushButtonLayoutExport_clicked();
+    void on_pushButtonSheetExport_clicked();
 
     /**
      * @brief on_checkBoxCurrentPieceShowSeamline_toggled When the

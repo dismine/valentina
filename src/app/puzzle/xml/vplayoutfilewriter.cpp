@@ -28,6 +28,7 @@
 
 #include "vplayoutfilewriter.h"
 #include "vplayout.h"
+#include "vpsheet.h"
 #include "vppiecelist.h"
 #include "vppiece.h"
 #include "vplayoutliterals.h"
@@ -65,7 +66,7 @@ void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
 
     WriteProperties(layout);
-    WritePieceLists(layout);
+    WriteUnplacePiecesList(layout);
 
     writeEndElement(); //layout
 }
@@ -79,22 +80,42 @@ void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
 
     writeTextElement(ML::TagDescription, QString()); // TODO : define the value in layout
 
-    WriteSize(layout->GetLayoutSize());
-
-    WriteMargins(layout->GetLayoutMargins());
-
     writeStartElement(ML::TagControl);
-    SetAttribute(ML::AttrFollowGrainLine, "no"); // TODO / Fixme get the right value
+
     SetAttribute(ML::AttrWarningSuperposition, layout->GetWarningSuperpositionOfPieces());
     SetAttribute(ML::AttrWarningOutOfBound, layout->GetWarningPiecesOutOfBound());
-    SetAttribute(ML::AttrStickyEdges, layout->GetStickyEdges());
-    SetAttribute(ML::AttrPiecesGap, layout->GetPiecesGap());
     writeEndElement(); // control
 
     // WriteTiles(layout);  TODO: when tile functionality implemented, then uncomment this line
 
     writeEndElement(); // properties
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileWriter::WriteUnplacePiecesList(VPLayout *layout)
+{
+    Q_UNUSED(layout);
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileWriter::WriteSheets(VPLayout *layout)
+{
+    Q_UNUSED(layout);
+    // TODO
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileWriter::WriteSheet(VPSheet* sheet)
+{
+    Q_UNUSED(sheet);
+    // TODO
+
+    // WritePieceList(pieceList);
+
+}
+
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
@@ -112,23 +133,6 @@ void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
    WriteMargins(margins);
 
    writeEndElement(); // tiles
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePieceLists(VPLayout *layout)
-{
-   writeStartElement(ML::TagPieceLists);
-
-   WritePieceList(layout->GetUnplacedPieceList(), ML::TagUnplacedPieceList);
-
-   QList<VPPieceList*> pieceLists = layout->GetPiecesLists();
-   for (auto pieceList : pieceLists)
-   {
-       WritePieceList(pieceList);
-   }
-
-   writeEndElement(); // piece list
 }
 
 
