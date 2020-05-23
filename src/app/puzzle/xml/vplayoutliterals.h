@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   literals.h
+ **  @file   vplayoutliterals.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   23 4, 2020
  **

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlelayoutfilereader.h
+ **  @file   vplayoutfilereader.h
  **  @author Ronan Le Tiec
  **  @date   18 4, 2020
  **
