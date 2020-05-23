@@ -335,9 +335,9 @@ VPMainWindow *VPApplication::MainWindow()
     Clean();
     if (mainWindows.isEmpty())
     {
-        VPuzzleCommandLinePtr cmd;
-        VPuzzleCommandLine::ProcessInstance(cmd, QStringList());
-        NewMainWindow(VPuzzleCommandLinePtr());
+        VPCommandLinePtr cmd;
+        VPCommandLine::ProcessInstance(cmd, QStringList());
+        NewMainWindow(VPCommandLinePtr());
     }
     return mainWindows[0];
 }
@@ -355,7 +355,7 @@ QList<VPMainWindow *> VPApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow *VPApplication::NewMainWindow(const VPuzzleCommandLinePtr &cmd)
+VPMainWindow *VPApplication::NewMainWindow(const VPCommandLinePtr &cmd)
 {
     VPMainWindow *puzzle = new VPMainWindow(cmd);
     mainWindows.prepend(puzzle);
@@ -382,7 +382,7 @@ void VPApplication::InitOptions()
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 
-    VPuzzleCommandLine::Instance(*this);
+    VPCommandLine::Instance(*this);
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
@@ -439,8 +439,8 @@ void VPApplication::ActivateDarkMode()
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
-    VPuzzleCommandLinePtr cmd;
-    VPuzzleCommandLine::ProcessInstance(cmd, arguments);
+    VPCommandLinePtr cmd;
+    VPCommandLine::ProcessInstance(cmd, arguments);
 
     if (cmd->IsGuiEnabled() && connection == SocketConnection::Client)
     {
@@ -484,7 +484,7 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
+void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
@@ -638,7 +638,7 @@ void VPApplication::Clean()
 }
 
 //--------------------------------------------------------------------------------------------
-VPuzzleCommandLinePtr VPApplication::CommandLine() const
+VPCommandLinePtr VPApplication::CommandLine() const
 {
-    return VPuzzleCommandLine::instance;
+    return VPCommandLine::instance;
 }

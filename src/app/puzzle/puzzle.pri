@@ -9,9 +9,9 @@ SOURCES += \
     $$PWD/vpcarrouselpiece.cpp \
     $$PWD/vpcarrouselpiecelist.cpp \
     $$PWD/vpcarrouselpiecepreview.cpp \
+    $$PWD/vpcommandline.cpp \
     $$PWD/vpcommands.cpp \
     $$PWD/vpmainwindow.cpp \
-    $$PWD/vpuzzlecommandline.cpp \
     $$PWD/vpuzzlegraphicslayout.cpp \
     $$PWD/vpuzzlegraphicspiece.cpp \
     $$PWD/vpuzzlelayout.cpp \
@@ -33,10 +33,10 @@ HEADERS += \
     $$PWD/vpcarrouselpiece.h \
     $$PWD/vpcarrouselpiecelist.h \
     $$PWD/vpcarrouselpiecepreview.h \
+    $$PWD/vpcommandline.h \
     $$PWD/vpcommands.h \
     $$PWD/vpmainwindow.h \
     $$PWD/vpstable.h \
-    $$PWD/vpuzzlecommandline.h \
     $$PWD/vpuzzlegraphicslayout.h \
     $$PWD/vpuzzlegraphicspiece.h \
     $$PWD/vpuzzlelayout.h \

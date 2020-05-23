@@ -31,7 +31,7 @@
 #include "../vmisc/def.h"
 #include "vpuzzlesettings.h"
 #include "../vmisc/vabstractapplication.h"
-#include "vpuzzlecommandline.h"
+#include "vpcommandline.h"
 
 #include <memory>
 
@@ -58,7 +58,7 @@ public:
     virtual bool IsAppInGUIMode() const override;
     VPMainWindow *MainWindow();
     QList<VPMainWindow*> MainWindows();
-    VPMainWindow *NewMainWindow(const VPuzzleCommandLinePtr &cmd);
+    VPMainWindow *NewMainWindow(const VPCommandLinePtr &cmd);
 
     void InitOptions();
 
@@ -69,8 +69,8 @@ public:
     void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
-    void ProcessArguments(const VPuzzleCommandLinePtr &cmd);
-    VPuzzleCommandLinePtr CommandLine() const;
+    void ProcessArguments(const VPCommandLinePtr &cmd);
+    VPCommandLinePtr CommandLine() const;
 public slots:
     void ProcessCMD();
 

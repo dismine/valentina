@@ -72,10 +72,10 @@ protected:
 
 private slots:
     /**
-     * @brief on_ActionPieceMovedToLayer Slot called when the piece is moved via the
-     * context menu to anoter layer
+     * @brief on_ActionPieceMovedToPieceList Slot called when the piece is moved via the
+     * context menu to anoter piece list
      */
-    void on_ActionPieceMovedToLayer();
+    void on_ActionPieceMovedToPieceList();
 
 private:
     Q_DISABLE_COPY(VPCarrouselPiece)

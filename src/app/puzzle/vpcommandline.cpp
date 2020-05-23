@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlecommandline.cpp
+ **  @file   vpcommandline.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   12 4, 2020
  **
@@ -25,31 +25,31 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlecommandline.h"
+#include "vpcommandline.h"
 #include "vpcommands.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/literals.h"
 #include <QDebug>
 
-std::shared_ptr<VPuzzleCommandLine> VPuzzleCommandLine::instance = nullptr;
+std::shared_ptr<VPCommandLine> VPCommandLine::instance = nullptr;
 
 #define translate(context, source) QCoreApplication::translate((context), source)
 
 //------------------------------------------------------------------------------------------------
-bool VPuzzleCommandLine::IsExportEnabled() const
+bool VPCommandLine::IsExportEnabled() const
 {
     const bool result = IsOptionSet(LONG_OPTION_EXPORT_FILE);
     int argSize = parser.positionalArguments().size();
     if (result && argSize != 1)
     {
         qCritical() << translate("Puzzle", "Export options can be used with single input file only.") << "/n";
-        const_cast<VPuzzleCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        const_cast<VPCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
     return result;
 }
 
 //----------------------------------------------------------------------------------------------
-QString VPuzzleCommandLine::OptionExportFile() const
+QString VPCommandLine::OptionExportFile() const
 {
     QString path;
     if (IsExportEnabled())
@@ -61,49 +61,49 @@ QString VPuzzleCommandLine::OptionExportFile() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VPuzzleCommandLine::OptionRawLayouts() const
+QStringList VPCommandLine::OptionRawLayouts() const
 {
     return OptionValues(LONG_OPTION_RAW_LAYOUT);
 }
 
 //--------------------------------------------------------------------------------------------
-bool VPuzzleCommandLine::IsTestModeEnabled() const
+bool VPCommandLine::IsTestModeEnabled() const
 {
     const bool r = IsOptionSet(LONG_OPTION_TEST);
     if (r && parser.positionalArguments().size() != 1)
     {
         qCritical() << translate("VCommandLine", "Test option can be used with single input file only.") << "/n";
-        const_cast<VPuzzleCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        const_cast<VPCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
     return r;
 }
 
 //--------------------------------------------------------------------------------------------
-bool VPuzzleCommandLine::IsGuiEnabled() const
+bool VPCommandLine::IsGuiEnabled() const
 {
     return isGuiEnabled;
 }
 
 //--------------------------------------------------------------------------------------------
-QStringList VPuzzleCommandLine::OptionFileNames() const
+QStringList VPCommandLine::OptionFileNames() const
 {
     return parser.positionalArguments();
 }
 
 //-------------------------------------------------------------------------------------------
-bool VPuzzleCommandLine::IsNoScalingEnabled() const
+bool VPCommandLine::IsNoScalingEnabled() const
 {
     return IsOptionSet(LONG_OPTION_NO_HDPI_SCALING);
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-void VPuzzleCommandLine::ShowHelp(int exitCode)
+void VPCommandLine::ShowHelp(int exitCode)
 {
     parser.showHelp(exitCode);
 }
 
 //----------------------------------------------------------------------------------------------
-VPuzzleCommandLine::VPuzzleCommandLine():
+VPCommandLine::VPCommandLine():
     parser(),
     isGuiEnabled(false)
 {
@@ -116,18 +116,18 @@ VPuzzleCommandLine::VPuzzleCommandLine():
 }
 
 //-------------------------------------------------------------------------------------------
-VPuzzleCommandLinePtr VPuzzleCommandLine::Instance(const QCoreApplication &app)
+VPCommandLinePtr VPCommandLine::Instance(const QCoreApplication &app)
 {
-    VPuzzleCommandLine::ProcessInstance(instance, app.arguments());
+    VPCommandLine::ProcessInstance(instance, app.arguments());
     return instance;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleCommandLine::ProcessInstance(VPuzzleCommandLinePtr &instance, const QStringList &arguments)
+void VPCommandLine::ProcessInstance(VPCommandLinePtr &instance, const QStringList &arguments)
 {
     if (instance == nullptr)
     {
-        instance.reset(new VPuzzleCommandLine);
+        instance.reset(new VPCommandLine);
     }
     instance->parser.process(arguments);
 
@@ -135,7 +135,7 @@ void VPuzzleCommandLine::ProcessInstance(VPuzzleCommandLinePtr &instance, const 
 }
 
 //-------------------------------------------------------------------------------------------
-void VPuzzleCommandLine::InitCommandLineOptions()
+void VPCommandLine::InitCommandLineOptions()
 {
     //keep in mind order here - that is how user will see it, so group-up for usability
     //=================================================================================================================
@@ -193,19 +193,19 @@ void VPuzzleCommandLine::InitCommandLineOptions()
 }
 
 //--------------------------------------------------------------------------------------------
-bool VPuzzleCommandLine::IsOptionSet(const QString &option) const
+bool VPCommandLine::IsOptionSet(const QString &option) const
 {
     return parser.isSet(option);
 }
 
 //-------------------------------------------------------------------------------------------
-QString VPuzzleCommandLine::OptionValue(const QString &option) const
+QString VPCommandLine::OptionValue(const QString &option) const
 {
     return parser.value(option);
 }
 
 //--------------------------------------------------------------------------------------------
-QStringList VPuzzleCommandLine::OptionValues(const QString &option) const
+QStringList VPCommandLine::OptionValues(const QString &option) const
 {
     return parser.values(option);
 }

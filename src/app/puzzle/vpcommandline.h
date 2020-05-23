@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlecommandline.h
+ **  @file   vpcommandline.h
  **  @author Dmytro Hladkykh <vorzelmir@gmail.com>
  **  @date   12 4, 2020
  **
@@ -25,21 +25,21 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUZZLECOMMANDLINE_H
-#define VPUZZLECOMMANDLINE_H
+#ifndef VPCOMMANDLINE_H
+#define VPCOMMANDLINE_H
 
 #include <memory>
 #include <QCoreApplication>
 #include <QCommandLineParser>
 
-class VPuzzleCommandLine;
-using VPuzzleCommandLinePtr = std::shared_ptr<VPuzzleCommandLine>;
+class VPCommandLine;
+using VPCommandLinePtr = std::shared_ptr<VPCommandLine>;
 
-class VPuzzleCommandLine: public QObject
+class VPCommandLine: public QObject
 {
     Q_OBJECT
 public:   
-    virtual ~VPuzzleCommandLine() = default;
+    virtual ~VPCommandLine() = default;
 
     /** @brief if user enabled export from cmd */
     bool IsExportEnabled() const;
@@ -64,14 +64,14 @@ public:
 
     Q_NORETURN void ShowHelp(int exitCode = 0);
 protected:
-    VPuzzleCommandLine();
+    VPCommandLine();
 
     /** @brief create the single instance of the class inside vpapplication */
-    static VPuzzleCommandLinePtr Instance(const QCoreApplication &app); 
-    static void ProcessInstance(VPuzzleCommandLinePtr &instance, const QStringList &arguments);
+    static VPCommandLinePtr Instance(const QCoreApplication &app);
+    static void ProcessInstance(VPCommandLinePtr &instance, const QStringList &arguments);
 private:
-    Q_DISABLE_COPY(VPuzzleCommandLine)
-    static VPuzzleCommandLinePtr instance;
+    Q_DISABLE_COPY(VPCommandLine)
+    static VPCommandLinePtr instance;
     QCommandLineParser parser;
     bool isGuiEnabled;
     friend class VPApplication;
@@ -84,4 +84,4 @@ private:
     QStringList OptionValues(const QString &option) const;
 };
 
-#endif // VPUZZLECOMMANDLINE_H
+#endif // VPCOMMANDLINE_H
