@@ -36,6 +36,7 @@
 #include "puzzleapplication.h"
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/vsysexits.h"
+#include "../vmisc/projectversion.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../ifc/exception/vexception.h"
 
@@ -75,6 +76,8 @@ PuzzleMainWindow::PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *pa
 
 
     SetPropertiesData();
+
+    ReadSettings();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -370,8 +373,10 @@ void PuzzleMainWindow::SetPropertyTabCurrentPieceData()
         ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
 
         QPointF pos = selectedPiece->GetPosition();
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
+                              UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
+                              UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
 
         qreal angle = selectedPiece->GetRotation();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
@@ -469,7 +474,98 @@ void PuzzleMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
     checkbox->blockSignals(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::ReadSettings()
+{
+    qCDebug(pWindow, "Reading settings.");
+    const VPuzzleSettings *settings = qApp->PuzzleSettings();
 
+    if (settings->status() == QSettings::NoError)
+    {
+        restoreGeometry(settings->GetGeometry());
+        restoreState(settings->GetWindowState());
+        restoreState(settings->GetToolbarsState(), APP_VERSION);
+
+        ui->dockWidgetProperties->setVisible(settings->IsDockWidgetPropertiesActive());
+        ui->dockWidgetPropertiesContents->setVisible(settings->IsDockWidgetPropertiesContentsActive());
+
+        // Scene antialiasing
+        m_graphicsView->SetAntialiasing(settings->GetGraphicalOutput());
+
+        // Stack limit
+//        qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
+    }
+    else
+    {
+        qWarning() << tr("Cannot read settings from a malformed .INI file.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::WriteSettings()
+{
+    VPuzzleSettings *settings = qApp->PuzzleSettings();
+    settings->SetGeometry(saveGeometry());
+    settings->SetWindowState(saveState());
+    settings->SetToolbarsState(saveState(APP_VERSION));
+
+    settings->SetDockWidgetPropertiesActive(ui->dockWidgetProperties->isEnabled());
+    settings->SetDockWidgetPropertiesContentsActive(ui->dockWidgetPropertiesContents->isEnabled());
+
+    settings->sync();
+    if (settings->status() == QSettings::AccessError)
+    {
+        qWarning() << tr("Cannot save settings. Access denied.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool PuzzleMainWindow::MaybeSave()
+{
+    // TODO: Implement maybe save check
+//    if (this->isWindowModified())
+//    {
+//        if (curFile.isEmpty() && ui->tableWidget->rowCount() == 0)
+//        {
+//            return true;// Don't ask if file was created without modifications.
+//        }
+
+//        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
+//                                                               tr("Measurements have been modified.\n"
+//                                                                  "Do you want to save your changes?"),
+//                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
+//                                                               QMessageBox::Cancel, this, Qt::Sheet));
+
+//        messageBox->setDefaultButton(QMessageBox::Yes);
+//        messageBox->setEscapeButton(QMessageBox::Cancel);
+
+//        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || mIsReadOnly ? tr("Save…") : tr("Save"));
+//        messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
+
+//        messageBox->setWindowModality(Qt::ApplicationModal);
+//        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
+
+//        switch (ret)
+//        {
+//        case QMessageBox::Yes:
+//            if (mIsReadOnly)
+//            {
+//                return FileSaveAs();
+//            }
+//            else
+//            {
+//                return FileSave();
+//            }
+//        case QMessageBox::No:
+//            return true;
+//        case QMessageBox::Cancel:
+//            return false;
+//        default:
+//            break;
+//        }
+//    }
+    return true;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_actionNew_triggered()
@@ -484,6 +580,30 @@ void PuzzleMainWindow::on_actionNew_triggered()
     // TODO
 
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzleMainWindow::closeEvent(QCloseEvent *event)
+{
+#if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 11, 1)
+    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
+    static int numCalled = 0;
+    if (numCalled++ >= 1)
+    {
+        return;
+    }
+#endif
+
+    if (MaybeSave())
+    {
+        WriteSettings();
+        event->accept();
+        deleteLater();
+    }
+    else
+    {
+        event->ignore();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -796,8 +916,6 @@ void PuzzleMainWindow::on_checkBoxLayoutStickyEdges_toggled(bool checked)
     // TODO update the QGraphicView
 }
 
-
-
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_pushButtonLayoutExport_clicked()
 {
@@ -859,14 +977,10 @@ void PuzzleMainWindow::on_PieceCarrouselLocationChanged(Qt::DockWidgetArea area)
     if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)
     {
         m_pieceCarrousel->SetOrientation(Qt::Horizontal);
-        ui->dockWidgetPieceCarrousel->setMaximumHeight(208);
-        ui->dockWidgetPieceCarrousel->setMaximumWidth(10000);
     }
     else if (area == Qt::LeftDockWidgetArea || area == Qt::RightDockWidgetArea)
     {
         m_pieceCarrousel->SetOrientation(Qt::Vertical);
-        ui->dockWidgetPieceCarrousel->setMaximumHeight(10000);
-        ui->dockWidgetPieceCarrousel->setMaximumWidth(160);
     }
 }
 
@@ -883,14 +997,15 @@ void PuzzleMainWindow::on_PieceSelectionChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_PiecePositionChanged()
 {
-
     if(m_selectedPieces.count() == 1)
     {
         VPuzzlePiece *piece = m_selectedPieces.first();
         QPointF pos = piece->GetPosition();
 
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX, UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY, UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
+                              UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
+                              UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
     }
 }
 

@@ -31,7 +31,7 @@
 
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vtapesettings.h"
+#include "vtapesettings.h"
 #include "../vmisc/vabstractapplication.h"
 #include "dialogs/dialogmdatabase.h"
 
@@ -101,8 +101,8 @@ private:
 
     void Clean();
 };
-//---------------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------------------------------------------------
 inline const VTranslateVars *MApplication::TrVars()
 {
     return trVars;

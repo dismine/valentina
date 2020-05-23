@@ -37,7 +37,7 @@
 class VPuzzleGraphicsLayout : public QGraphicsItem
 {
 public:
-    VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsItem *parent = nullptr);
+    explicit VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsItem *parent = nullptr);
     ~VPuzzleGraphicsLayout();
 
     QRectF boundingRect() const override;

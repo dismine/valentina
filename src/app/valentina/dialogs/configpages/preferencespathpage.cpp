@@ -28,7 +28,7 @@
 
 #include "preferencespathpage.h"
 #include "ui_preferencespathpage.h"
-#include "../vmisc/vsettings.h"
+#include "../../core/vvalentinasettings.h"
 #include "../../core/vapplication.h"
 
 #include <QDir>
@@ -65,7 +65,7 @@ PreferencesPathPage::~PreferencesPathPage()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList PreferencesPathPage::Apply()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
@@ -105,13 +105,13 @@ void PreferencesPathPage::DefaultPath()
             path = VCommonSettings::GetDefPathMultisizeMeasurements();
             break;
         case 2: // pattern path
-            path = VSettings::GetDefPathPattern();
+            path = VValentinaSettings::GetDefPathPattern();
             break;
         case 0: // individual measurements
             path = VCommonSettings::GetDefPathIndividualMeasurements();
             break;
         case 3: // layout path
-            path = VSettings::GetDefPathLayout();
+            path = VValentinaSettings::GetDefPathLayout();
             break;
         case 4: // templates
             path = VCommonSettings::GetDefPathTemplate();
@@ -206,7 +206,7 @@ void PreferencesPathPage::InitTable()
     ui->pathTable->setRowCount(7);
     ui->pathTable->setColumnCount(2);
 
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VValentinaSettings *settings = qApp->ValentinaSettings();
 
     {
         ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));

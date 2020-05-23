@@ -45,7 +45,6 @@
 #include "def.h"
 #include "vcommonsettings.h"
 #include "vlockguard.h"
-#include "vsettings.h"
 
 class QUndoStack;
 class VAbstractApplication;// use in define

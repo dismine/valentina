@@ -38,6 +38,8 @@
 #include <QStringList>
 #include <QtGlobal>
 
+#include "../vlayout/vbank.h"
+
 class VCommonSettings : public QSettings
 {
     Q_OBJECT
@@ -225,6 +227,52 @@ public:
     void  SetLineWidth(qreal width);
     qreal WidthMainLine() const;
     qreal WidthHairLine() const;
+
+    static const int defaultScrollingDuration;
+    static const int scrollingDurationMin;
+    static const int scrollingDurationMax;
+    int GetScrollingDuration() const;
+    void SetScrollingDuration(int duration);
+
+    static const int defaultScrollingUpdateInterval;
+    static const int scrollingUpdateIntervalMin;
+    static const int scrollingUpdateIntervalMax;
+    int GetScrollingUpdateInterval() const;
+    void SetScrollingUpdateInterval(int updateInterval);
+
+    static const qreal defaultSensorMouseScale;
+    static const qreal sensorMouseScaleMin;
+    static const qreal sensorMouseScaleMax;
+    qreal GetSensorMouseScale() const;
+    void SetSensorMouseScale(qreal scale);
+
+    static const qreal defaultWheelMouseScale;
+    static const qreal wheelMouseScaleMin;
+    static const qreal wheelMouseScaleMax;
+    qreal GetWheelMouseScale() const;
+    void SetWheelMouseScale(qreal scale);
+
+    static const qreal defaultScrollingAcceleration;
+    static const qreal scrollingAccelerationMin;
+    static const qreal scrollingAccelerationMax;
+    qreal GetScrollingAcceleration() const;
+    void SetScrollingAcceleration(qreal acceleration);
+
+    bool IsOpenGLRender() const;
+    void SetOpenGLRender(bool value);
+
+    bool GetGraphicalOutput() const;
+    void SetGraphicalOutput(const bool &value);
+
+protected:
+
+    template <typename T>
+    static T GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
+                            T valueMax);
+
+    template <class T>
+    static T ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue);
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };
@@ -245,6 +293,44 @@ inline qreal VCommonSettings::MinimalLineWidth()
 inline qreal VCommonSettings::MaximalLineWidth()
 {
     return 5.0; // mm
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+T VCommonSettings::GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
+                                  T valueMax)
+{
+    if (cache < 0)
+    {
+        cache = qBound(valueMin, ValueOrDef(settings, setting, defValue), valueMax);
+    }
+
+    return cache;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline T VCommonSettings::ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue)
+{
+    const QVariant val = settings.value(setting, QVariant::fromValue(defValue));
+    return val.canConvert<T>() ? val.value<T>() : defValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline Cases VCommonSettings::ValueOrDef<Cases>(const QSettings &settings, const QString &setting,
+                                                const Cases &defValue)
+{
+    const QVariant val = settings.value(setting, QVariant::fromValue(static_cast<int>(defValue)));
+    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
+    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
+    {
+        return defValue;
+    }
+    else
+    {
+        return static_cast<Cases>(g);
+    }
 }
 
 #endif // VCOMMONSETTINGS_H

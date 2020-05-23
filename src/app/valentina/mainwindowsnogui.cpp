@@ -1820,7 +1820,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
         }
         else
         {
-            VSettings *settings = qApp->ValentinaSettings();
+            VValentinaSettings *settings = qApp->ValentinaSettings();
             pageMargin = QMarginsF(settings->GetTiledPDFMargins(Unit::Mm));
             orientation = settings->GetTiledPDFOrientation();
         }

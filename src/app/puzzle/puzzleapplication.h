@@ -29,7 +29,7 @@
 #define PUZZLEAPPLICATION_H
 
 #include "../vmisc/def.h"
-#include "../vmisc/vpuzzlesettings.h"
+#include "vpuzzlesettings.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vpuzzlecommandline.h"
 

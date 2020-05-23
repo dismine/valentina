@@ -29,21 +29,19 @@
 #ifndef VPUZZLEMAINGRAPHICSVIEW_H
 #define VPUZZLEMAINGRAPHICSVIEW_H
 
-#include <QGraphicsView>
-
 #include "vpuzzlegraphicslayout.h"
-#include "vpuzzlemaingraphicsscene.h"
 #include "vpuzzlegraphicspiece.h"
+#include "../vwidgets/vmaingraphicsview.h"
+
+class VMainGraphicsScene;
 
 
-// TODO: when ready, extend the VMainGrapchisView instead
-
-class VPuzzleMainGraphicsView : public QGraphicsView
+class VPuzzleMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
     VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget *parent);
-    ~VPuzzleMainGraphicsView();
+    ~VPuzzleMainGraphicsView() = default;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
@@ -60,7 +58,8 @@ protected:
 
 private slots:
     /**
-     * @brief on_PieceMovedToLayer The slot is called when the given piece was moved from the given layer to the other given layer
+     * @brief on_PieceMovedToLayer The slot is called when the given piece was moved from the given layer to the other
+     * given layer
      * @param piece the piece that was moved
      * @param layerBefore the layer before the move
      * @param layerAfter the layer after the move
@@ -75,12 +74,12 @@ private slots:
 private:
     Q_DISABLE_COPY(VPuzzleMainGraphicsView)
 
-    VPuzzleMainGraphicsScene *m_scene{nullptr};
+    VMainGraphicsScene *m_scene{nullptr};
 
     VPuzzleGraphicsLayout *m_graphicsLayout{nullptr};
     VPuzzleLayout *m_layout{nullptr};
 
-    QList<VPuzzleGraphicsPiece*> m_graphicsPieces;
+    QList<VPuzzleGraphicsPiece*> m_graphicsPieces{};
 
 };
 

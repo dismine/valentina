@@ -198,6 +198,8 @@ public:
      */
     void SetLayer(VPuzzleLayer* layer);
 
+    QIcon PieceIcon(const QSize &size) const;
+
 signals:
     /**
      * @brief SelectionChanged emited when the selection of the piece was

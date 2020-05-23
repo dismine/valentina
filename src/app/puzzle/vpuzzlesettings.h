@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpuzzlemaingraphicsscene.cpp
- **  @author Ronan Le Tiec
- **  @date   3 5, 2020
+ **  @file   vpuzzlesettings.h
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   16 2, 2020
  **
  **  @brief
  **  @copyright
@@ -25,20 +25,31 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VPUZZLESETTINGS_H
+#define VPUZZLESETTINGS_H
 
-#ifndef VPUZZLEMAINGRAPHICSSCENE_H
-#define VPUZZLEMAINGRAPHICSSCENE_H
+#include <QByteArray>
 
-#include <QGraphicsScene>
+#include "vcommonsettings.h"
 
-// TODO: When ready, extend from QGraphicsScene instead
-
-class VPuzzleMainGraphicsScene : public QGraphicsScene
+class VPuzzleSettings : public VCommonSettings
 {
     Q_OBJECT
 public:
-    VPuzzleMainGraphicsScene(QObject *parent = nullptr);
+    VPuzzleSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                    QObject *parent = nullptr);
+    VPuzzleSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
+    bool IsDockWidgetPropertiesActive() const;
+    static bool GetDefDockWidgetPropertiesActive();
+    void SetDockWidgetPropertiesActive(bool value);
+
+    bool IsDockWidgetPropertiesContentsActive() const;
+    static bool GetDefDockWidgetPropertiesContentsActive();
+    void SetDockWidgetPropertiesContentsActive(bool value);
+
+private:
+    Q_DISABLE_COPY(VPuzzleSettings)
 };
 
-#endif // VPUZZLEMAINGRAPHICSSCENE_H
+#endif // VPUZZLESETTINGS_H

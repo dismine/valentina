@@ -14,10 +14,10 @@ SOURCES += \
     $$PWD/vpuzzlegraphicspiece.cpp \
     $$PWD/vpuzzlelayout.cpp \
     $$PWD/vpuzzlelayer.cpp \
-    $$PWD/vpuzzlemaingraphicsscene.cpp \
     $$PWD/vpuzzlemaingraphicsview.cpp \
     $$PWD/vpuzzlemimedatapiece.cpp \
     $$PWD/vpuzzlepiece.cpp \
+    $$PWD/vpuzzlesettings.cpp \
     $$PWD/xml/layoutliterals.cpp \
     $$PWD/xml/vpuzzlelayoutfilewriter.cpp \
     $$PWD/xml/vpuzzlelayoutfilereader.cpp \
@@ -39,10 +39,10 @@ HEADERS += \
     $$PWD/vpuzzlegraphicspiece.h \
     $$PWD/vpuzzlelayout.h \
     $$PWD/vpuzzlelayer.h \
-    $$PWD/vpuzzlemaingraphicsscene.h \
     $$PWD/vpuzzlemaingraphicsview.h \
     $$PWD/vpuzzlemimedatapiece.h \
     $$PWD/vpuzzlepiece.h \
+    $$PWD/vpuzzlesettings.h \
     $$PWD/xml/layoutliterals.h \
     $$PWD/xml/vpuzzlelayoutfilewriter.h \
     $$PWD/xml/vpuzzlelayoutfilereader.h \
@@ -51,4 +51,5 @@ HEADERS += \
 
 FORMS += \
     $$PWD/puzzlemainwindow.ui \
-    $$PWD/dialogs/dialogaboutpuzzle.ui
+    $$PWD/dialogs/dialogaboutpuzzle.ui \
+    $$PWD/vpiececarrousel.ui

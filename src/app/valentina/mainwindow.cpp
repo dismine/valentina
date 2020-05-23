@@ -37,7 +37,7 @@
 #include "version.h"
 #include "core/vapplication.h"
 #include "../vmisc/customevents.h"
-#include "../vmisc/vsettings.h"
+#include "core/vvalentinasettings.h"
 #include "../vmisc/def.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vmodifierkey.h"
@@ -301,7 +301,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonMessagesZoomInFont, &QToolButton::clicked, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = qApp->ValentinaSettings();
         QFont f = ui->plainTextEditPatternMessages->font();
         if (f.pointSize() < settings->GetDefMaxPatternMessageFontSize())
         {
@@ -313,7 +313,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonMessagesZoomOutFont, &QToolButton::clicked, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = qApp->ValentinaSettings();
         QFont f = ui->plainTextEditPatternMessages->font();
         if (f.pointSize() > settings->GetDefMinPatternMessageFontSize())
         {
@@ -2195,7 +2195,7 @@ void MainWindow::ToolBarTools()
     ui->actionIncreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = qApp->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetLabelFontSize() + 1);
         if (sceneDraw)
         {
@@ -2211,7 +2211,7 @@ void MainWindow::ToolBarTools()
     ui->actionDecreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = qApp->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetLabelFontSize() - 1);
         if (sceneDraw)
         {
@@ -2227,7 +2227,7 @@ void MainWindow::ToolBarTools()
     ui->actionOriginalLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_0));
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = qApp->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetDefLabelFontSize());
         if (sceneDraw)
         {
@@ -4172,7 +4172,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     if (not qApp->GetPatternPath().isEmpty() && VApplication::IsGUIMode())
     {
         qCDebug(vMainWindow, "Updating recent file list.");
-        VSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = qApp->ValentinaSettings();
         QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -4201,7 +4201,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VValentinaSettings *settings = qApp->ValentinaSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -4243,7 +4243,7 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));

@@ -11,7 +11,8 @@ SOURCES  += \
     $$PWD/vlitepattern.cpp \
     $$PWD/dialogs/dialogtapepreferences.cpp \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
-    $$PWD/dialogs/configpages/tapepreferencespathpage.cpp
+    $$PWD/dialogs/configpages/tapepreferencespathpage.cpp \
+    $$PWD/vtapesettings.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -26,7 +27,8 @@ HEADERS  += \
     $$PWD/vlitepattern.h \
     $$PWD/dialogs/dialogtapepreferences.h \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.h \
-    $$PWD/dialogs/configpages/tapepreferencespathpage.h
+    $$PWD/dialogs/configpages/tapepreferencespathpage.h \
+    $$PWD/vtapesettings.h
 
 FORMS    += \
     $$PWD/tmainwindow.ui \

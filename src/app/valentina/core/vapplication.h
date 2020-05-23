@@ -32,7 +32,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "vsettings.h"
+#include "vvalentinasettings.h"
 #include "vcmdexport.h"
 
 class VApplication;// use in define
@@ -76,7 +76,7 @@ public:
     virtual bool IsPedantic() const override;
 
     virtual void OpenSettings() override;
-    VSettings *ValentinaSettings();
+    VValentinaSettings *ValentinaSettings();
 
 protected:
     virtual void       InitTrVars() override;

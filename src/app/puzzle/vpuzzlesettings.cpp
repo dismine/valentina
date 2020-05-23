@@ -1,0 +1,81 @@
+/************************************************************************
+ **
+ **  @file   vpuzzlesettings.cpp
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   16 2, 2020
+ **
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentina project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2020 Valentina project
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
+ **
+ **  Valentina is free software: you can redistribute it and/or modify
+ **  it under the terms of the GNU General Public License as published by
+ **  the Free Software Foundation, either version 3 of the License, or
+ **  (at your option) any later version.
+ **
+ **  Valentina is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ **  GNU General Public License for more details.
+ **
+ **  You should have received a copy of the GNU General Public License
+ **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
+ **
+ *************************************************************************/
+#include "vpuzzlesettings.h"
+
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPropertiesActive, (QLatin1String("dockWidget/properties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, (QLatin1String("dockWidget/contents")))
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleSettings::VPuzzleSettings(Format format, Scope scope, const QString &organization, const QString &application,
+                                 QObject *parent)
+    : VCommonSettings(format, scope, organization, application, parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzleSettings::VPuzzleSettings(const QString &fileName, QSettings::Format format, QObject *parent)
+    : VCommonSettings(fileName, format, parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzleSettings::IsDockWidgetPropertiesActive() const
+{
+    return value(*settingDockWidgetPropertiesActive, GetDefDockWidgetPropertiesActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzleSettings::GetDefDockWidgetPropertiesActive()
+{
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleSettings::SetDockWidgetPropertiesActive(bool value)
+{
+    setValue(*settingDockWidgetPropertiesActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzleSettings::IsDockWidgetPropertiesContentsActive() const
+{
+    return value(*settingDockWidgetPropertiesActive, GetDefDockWidgetPropertiesActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPuzzleSettings::GetDefDockWidgetPropertiesContentsActive()
+{
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPuzzleSettings::SetDockWidgetPropertiesContentsActive(bool value)
+{
+    setValue(*settingDockPropertiesContentsActive, value);
+}

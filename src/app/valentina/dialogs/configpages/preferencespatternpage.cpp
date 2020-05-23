@@ -63,7 +63,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->setupUi(this);
     RetranslateUi();
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
 
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
@@ -125,7 +125,7 @@ QStringList PreferencesPatternPage::Apply()
 {
     QStringList preferences;
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
 
     // Scene antialiasing
     if (settings->GetGraphicalOutput() != ui->graphOutputCheck->isChecked())
@@ -200,7 +200,7 @@ void PreferencesPatternPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::EditDateTimeFormats()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
 
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     if (button == ui->pushButtonEditDateFormats)
@@ -230,7 +230,7 @@ void PreferencesPatternPage::ManageKnownMaterials()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitLabelDateTimeFormats()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = qApp->ValentinaSettings();
 
     InitComboBoxFormats(ui->comboBoxDateFormats,
                         VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),

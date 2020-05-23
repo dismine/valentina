@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vsettings.h"
+#include "vvalentinasettings.h"
 
 #include <QDir>
 #include <QLocale>
@@ -47,26 +47,6 @@
 
 Q_DECLARE_METATYPE(QMarginsF)
 
-const int VSettings::defaultScrollingDuration = 300;
-const int VSettings::scrollingDurationMin = 100;
-const int VSettings::scrollingDurationMax = 1000;
-
-const int VSettings::defaultScrollingUpdateInterval = 30;
-const int VSettings::scrollingUpdateIntervalMin = 10;
-const int VSettings::scrollingUpdateIntervalMax = 100;
-
-const qreal VSettings::defaultSensorMouseScale = 2.0;
-const qreal VSettings::sensorMouseScaleMin = 1.0;
-const qreal VSettings::sensorMouseScaleMax = 10.0;
-
-const qreal VSettings::defaultWheelMouseScale = 45.0;
-const qreal VSettings::wheelMouseScaleMin = 1.0;
-const qreal VSettings::wheelMouseScaleMax = 100.0;
-
-const qreal VSettings::defaultScrollingAcceleration = 1.3;
-const qreal VSettings::scrollingAccelerationMin = 1.0;
-const qreal VSettings::scrollingAccelerationMax = 10.0;
-
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
@@ -76,8 +56,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternKnownMaterials, (QLatin1String("pattern/knownMaterials")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternRememberMaterials, (QLatin1String("pattern/rememberMaterials")))
 
@@ -107,13 +85,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1Str
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale,
-                          (QLatin1String("scrolling/sensorMouseScale")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
-
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingdockWidgetGroupsActive, (QLatin1String("dockWidget/groupsActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
                           (QLatin1String("dockWidget/toolOptionsActive")))
@@ -122,17 +93,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1String("watermarkEditorSize")))
-
-// Reading settings file is very expensive, cache values to speed up getting a value
-int scrollingDurationCached = -1;
-int scrollingUpdateIntervalCached = -1;
-qreal scrollingSensorMouseScaleCached = -1;
-qreal scrollingWheelMouseScaleCached = -1;
-qreal scrollingAccelerationCached = -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
+VValentinaSettings::VValentinaSettings(Format format, Scope scope, const QString &organization, const QString &application,
                      QObject *parent)
     :VCommonSettings(format, scope, organization, application, parent)
 {
@@ -140,63 +104,39 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSettings::VSettings(const QString &fileName, QSettings::Format format, QObject *parent)
+VValentinaSettings::VValentinaSettings(const QString &fileName, QSettings::Format format, QObject *parent)
     :VCommonSettings(fileName, format, parent)
 {
     qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline T VSettings::ValueOrDef(const QString &setting, const T &defValue) const
-{
-    const QVariant val = value(setting, QVariant::fromValue(defValue));
-    return val.canConvert<T>() ? val.value<T>() : defValue;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <>
-inline Cases VSettings::ValueOrDef<Cases>(const QString &setting, const Cases &defValue) const
-{
-    const QVariant val = value(setting, QVariant::fromValue(static_cast<int>(defValue)));
-    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
-    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
-    {
-        return defValue;
-    }
-    else
-    {
-        return static_cast<Cases>(g);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetLabelLanguage() const
+QString VValentinaSettings::GetLabelLanguage() const
 {
     return value(*settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLabelLanguage(const QString &value)
+void VValentinaSettings::SetLabelLanguage(const QString &value)
 {
     setValue(*settingConfigurationLabelLanguage, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetDefPathLayout()
+QString VValentinaSettings::GetDefPathLayout()
 {
     return QDir::homePath() + QStringLiteral("/valentina/") + tr("layouts");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetPathLayout() const
+QString VValentinaSettings::GetPathLayout() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     return settings.value(*settingPathsLayout, GetDefPathLayout()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetPathLayout(const QString &value)
+void VValentinaSettings::SetPathLayout(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     settings.setValue(*settingPathsLayout, value);
@@ -204,358 +144,334 @@ void VSettings::SetPathLayout(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetGraphicalOutput() const
+qreal VValentinaSettings::GetLayoutPaperHeight() const
 {
-    return value(*settingPatternGraphicalOutput, 1).toBool();
+    return ValueOrDef<qreal>(*this, *settingLayoutPaperHeight, UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetGraphicalOutput(const bool &value)
-{
-    setValue(*settingPatternGraphicalOutput, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VSettings::IsOpenGLRender() const
-{
-    return value(*settingPatternUseOpenGLRender, 0).toBool();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetOpenGLRender(bool value)
-{
-    setValue(*settingPatternUseOpenGLRender, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetLayoutPaperHeight() const
-{
-    return ValueOrDef<qreal>(*settingLayoutPaperHeight, UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutPaperHeight(qreal value)
+void VValentinaSettings::SetLayoutPaperHeight(qreal value)
 {
     setValue(*settingLayoutPaperHeight, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetLayoutPaperWidth() const
+qreal VValentinaSettings::GetLayoutPaperWidth() const
 {
-    return ValueOrDef<qreal>(*settingLayoutPaperWidth, UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutPaperWidth, UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutPaperWidth(qreal value)
+void VValentinaSettings::SetLayoutPaperWidth(qreal value)
 {
     setValue(*settingLayoutPaperWidth, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetLayoutWidth() const
+qreal VValentinaSettings::GetLayoutWidth() const
 {
-    return ValueOrDef<qreal>(*settingLayoutWidth, GetDefLayoutWidth());
+    return ValueOrDef<qreal>(*this, *settingLayoutWidth, GetDefLayoutWidth());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetDefLayoutWidth()
+qreal VValentinaSettings::GetDefLayoutWidth()
 {
     return UnitConvertor(2.5, Unit::Mm, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutWidth(qreal value)
+void VValentinaSettings::SetLayoutWidth(qreal value)
 {
     setValue(*settingLayoutWidth, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetNestingTime() const
+int VValentinaSettings::GetNestingTime() const
 {
-    return ValueOrDef<int>(*settingNestingTime, GetDefNestingTime());
+    return ValueOrDef<int>(*this, *settingNestingTime, GetDefNestingTime());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetNestingTime(int value)
+void VValentinaSettings::SetNestingTime(int value)
 {
     setValue(*settingNestingTime, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetEfficiencyCoefficient() const
+qreal VValentinaSettings::GetEfficiencyCoefficient() const
 {
-    return ValueOrDef<qreal>(*settingEfficiencyCoefficient, GetDefEfficiencyCoefficient());
+    return ValueOrDef<qreal>(*this, *settingEfficiencyCoefficient, GetDefEfficiencyCoefficient());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetEfficiencyCoefficient(qreal value)
+void VValentinaSettings::SetEfficiencyCoefficient(qreal value)
 {
     setValue(*settingEfficiencyCoefficient, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VSettings::GetFields(const QMarginsF &def) const
+QMarginsF VValentinaSettings::GetFields(const QMarginsF &def) const
 {
-    return ValueOrDef<QMarginsF>(*settingFields, def);
+    return ValueOrDef<QMarginsF>(*this, *settingFields, def);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetFields(const QMarginsF &value)
+void VValentinaSettings::SetFields(const QMarginsF &value)
 {
     setValue(*settingFields, QVariant::fromValue(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Cases VSettings::GetLayoutGroup() const
+Cases VValentinaSettings::GetLayoutGroup() const
 {
-    return ValueOrDef<Cases>(*settingLayoutSorting, GetDefLayoutGroup());
+    return ValueOrDef<Cases>(*this, *settingLayoutSorting, GetDefLayoutGroup());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Cases VSettings::GetDefLayoutGroup()
+Cases VValentinaSettings::GetDefLayoutGroup()
 {
     return Cases::CaseDesc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutGroup(const Cases &value)
+void VValentinaSettings::SetLayoutGroup(const Cases &value)
 {
     setValue(*settingLayoutSorting, static_cast<int>(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutFollowGrainline() const
+bool VValentinaSettings::GetLayoutFollowGrainline() const
 {
     return value(*settingLayoutFollowGrainline, GetDefLayoutFollowGrainline()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutFollowGrainline()
+bool VValentinaSettings::GetDefLayoutFollowGrainline()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutFollowGrainline(bool value)
+void VValentinaSettings::SetLayoutFollowGrainline(bool value)
 {
     setValue(*settingLayoutFollowGrainline, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutManualPriority() const
+bool VValentinaSettings::GetLayoutManualPriority() const
 {
     return value(*settingLayoutManualPriority, GetDefLayoutManualPriority()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutManualPriority()
+bool VValentinaSettings::GetDefLayoutManualPriority()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutManualPriority(bool value)
+void VValentinaSettings::SetLayoutManualPriority(bool value)
 {
     setValue(*settingLayoutManualPriority, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutNestQuantity() const
+bool VValentinaSettings::GetLayoutNestQuantity() const
 {
     return value(*settingLayoutNestQuantity, GetDefLayoutNestQuantity()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutNestQuantity()
+bool VValentinaSettings::GetDefLayoutNestQuantity()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutNestQuantity(bool value)
+void VValentinaSettings::SetLayoutNestQuantity(bool value)
 {
     setValue(*settingLayoutNestQuantity, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutAutoCropLength() const
+bool VValentinaSettings::GetLayoutAutoCropLength() const
 {
     return value(*settingLayoutAutoCropLength, GetDefLayoutAutoCropLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutAutoCropLength()
+bool VValentinaSettings::GetDefLayoutAutoCropLength()
 {
     return false;
 }
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutAutoCropLength(bool value)
+void VValentinaSettings::SetLayoutAutoCropLength(bool value)
 {
     setValue(*settingLayoutAutoCropLength, value);
 }
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutAutoCropWidth() const
+bool VValentinaSettings::GetLayoutAutoCropWidth() const
 {
     return value(*settingLayoutAutoCropWidth, GetDefLayoutAutoCropWidth()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutAutoCropWidth()
+bool VValentinaSettings::GetDefLayoutAutoCropWidth()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutAutoCropWidth(bool value)
+void VValentinaSettings::SetLayoutAutoCropWidth(bool value)
 {
     setValue(*settingLayoutAutoCropWidth, value);
 }
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutSaveLength() const
+bool VValentinaSettings::GetLayoutSaveLength() const
 {
     return value(*settingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutSaveLength()
+bool VValentinaSettings::GetDefLayoutSaveLength()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutSaveLength(bool value)
+void VValentinaSettings::SetLayoutSaveLength(bool value)
 {
     setValue(*settingLayoutSaveLength, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutPreferOneSheetSolution() const
+bool VValentinaSettings::GetLayoutPreferOneSheetSolution() const
 {
     return value(*settingLayoutPreferOneSheetSolution, GetDefLayoutPreferOneSheetSolution()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutPreferOneSheetSolution()
+bool VValentinaSettings::GetDefLayoutPreferOneSheetSolution()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutPreferOneSheetSolution(bool value)
+void VValentinaSettings::SetLayoutPreferOneSheetSolution(bool value)
 {
     setValue(*settingLayoutPreferOneSheetSolution, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutUnitePages() const
+bool VValentinaSettings::GetLayoutUnitePages() const
 {
     return value(*settingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutUnitePages()
+bool VValentinaSettings::GetDefLayoutUnitePages()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutUnitePages(bool value)
+void VValentinaSettings::SetLayoutUnitePages(bool value)
 {
     setValue(*settingLayoutUnitePages, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetIgnoreAllFields() const
+bool VValentinaSettings::GetIgnoreAllFields() const
 {
     return value(*settingIgnoreFields, GetDefIgnoreAllFields()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefIgnoreAllFields()
+bool VValentinaSettings::GetDefIgnoreAllFields()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetIgnoreAllFields(bool value)
+void VValentinaSettings::SetIgnoreAllFields(bool value)
 {
     setValue(*settingIgnoreFields, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetStripOptimization() const
+bool VValentinaSettings::GetStripOptimization() const
 {
     return value(*settingStripOptimization, GetDefStripOptimization()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefStripOptimization()
+bool VValentinaSettings::GetDefStripOptimization()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetStripOptimization(bool value)
+void VValentinaSettings::SetStripOptimization(bool value)
 {
     setValue(*settingStripOptimization, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint8 VSettings::GetMultiplier() const
+quint8 VValentinaSettings::GetMultiplier() const
 {
     return static_cast<quint8>(value(*settingMultiplier, GetDefMultiplier()).toUInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint8 VSettings::GetDefMultiplier()
+quint8 VValentinaSettings::GetDefMultiplier()
 {
     return 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetMultiplier(quint8 value)
+void VValentinaSettings::SetMultiplier(quint8 value)
 {
     setValue(*settingMultiplier, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetTextAsPaths() const
+bool VValentinaSettings::GetTextAsPaths() const
 {
     return value(*settingTextAsPaths, GetDefTextAsPaths()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefTextAsPaths()
+bool VValentinaSettings::GetDefTextAsPaths()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetTextAsPaths(bool value)
+void VValentinaSettings::SetTextAsPaths(bool value)
 {
     setValue(*settingTextAsPaths, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VSettings::GetKnownMaterials() const
+QStringList VValentinaSettings::GetKnownMaterials() const
 {
     return value(*settingPatternKnownMaterials, QStringList()).toStringList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetKnownMaterials(const QStringList &list)
+void VValentinaSettings::SetKnownMaterials(const QStringList &list)
 {
     setValue(*settingPatternKnownMaterials, list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::IsRememberPatternMaterials() const
+bool VValentinaSettings::IsRememberPatternMaterials() const
 {
     return value(*settingPatternRememberMaterials, true).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetRememberPatternMaterials(bool value)
+void VValentinaSettings::SetRememberPatternMaterials(bool value)
 {
     setValue(*settingPatternRememberMaterials, value);
 }
@@ -569,10 +485,11 @@ void VSettings::SetRememberPatternMaterials(bool value)
  * internaly as mm so there is conversion beeing made.
  * @return tiled pdf margins
  */
-QMarginsF VSettings::GetTiledPDFMargins(const Unit &unit) const
+QMarginsF VValentinaSettings::GetTiledPDFMargins(const Unit &unit) const
 {
     // default value is 10mm. We save the margins in mm in the setting.
-    return UnitConvertor(ValueOrDef<QMarginsF>(*settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm, unit);
+    return UnitConvertor(ValueOrDef<QMarginsF>(*this, *settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm,
+                         unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -582,7 +499,7 @@ QMarginsF VSettings::GetTiledPDFMargins(const Unit &unit) const
  * @param unit the unit in which are the value. Necessary because we save the values
  * internaly as mm so there is conversion beeing made.
  */
-void VSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
+void VValentinaSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
 {
     setValue(*settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
 }
@@ -594,9 +511,9 @@ void VSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
  * internaly as mm so there is conversion beeing made.
  * @return tiled pdf paper height
  */
-qreal VSettings::GetTiledPDFPaperHeight(const Unit &unit) const
+qreal VValentinaSettings::GetTiledPDFPaperHeight(const Unit &unit) const
 {
-    return UnitConvertor(ValueOrDef<qreal>(*settingTiledPDFPaperHeight, 297 /*A4*/), Unit::Mm, unit);
+    return UnitConvertor(ValueOrDef<qreal>(*this, *settingTiledPDFPaperHeight, 297 /*A4*/), Unit::Mm, unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,7 +522,7 @@ qreal VSettings::GetTiledPDFPaperHeight(const Unit &unit) const
  * @param value in mm
  * @param unit unit of the given value
  */
-void VSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
+void VValentinaSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
 {
     setValue(*settingTiledPDFPaperHeight, UnitConvertor(value, unit, Unit::Mm));
 }
@@ -617,9 +534,9 @@ void VSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
  * internaly as mm so there is conversion beeing made.
  * @return tiled pdf paper width
  */
-qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
+qreal VValentinaSettings::GetTiledPDFPaperWidth(const Unit &unit) const
 {
-    return UnitConvertor(ValueOrDef<qreal>(*settingTiledPDFPaperWidth, 210 /*A4*/), Unit::Mm, unit);
+    return UnitConvertor(ValueOrDef<qreal>(*this, *settingTiledPDFPaperWidth, 210 /*A4*/), Unit::Mm, unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -628,13 +545,13 @@ qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
  * @param unit unit of the given value
  * @param value in mm
  */
-void VSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
+void VValentinaSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 {
     setValue(*settingTiledPDFPaperWidth, UnitConvertor(value,unit, Unit::Mm));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PageOrientation VSettings::GetTiledPDFOrientation() const
+PageOrientation VValentinaSettings::GetTiledPDFOrientation() const
 {
     bool defaultValue = static_cast<bool>(PageOrientation::Portrait);
     bool result = value(*settingTiledPDFOrientation, defaultValue).toBool();
@@ -642,137 +559,69 @@ PageOrientation VSettings::GetTiledPDFOrientation() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetTiledPDFOrientation(PageOrientation value)
+void VValentinaSettings::SetTiledPDFOrientation(PageOrientation value)
 {
     setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetScrollingDuration() const
-{
-    return GetCachedValue(scrollingDurationCached, *settingScrollingDuration, defaultScrollingDuration,
-                          scrollingDurationMin, scrollingDurationMax);
-}
+
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetScrollingDuration(int duration)
-{
-    scrollingDurationCached = qBound(scrollingDurationMin, duration, scrollingDurationMax);
-    setValue(*settingScrollingDuration, scrollingDurationCached);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetScrollingUpdateInterval() const
-{
-    return GetCachedValue(scrollingUpdateIntervalCached, *settingScrollingUpdateInterval,
-                          defaultScrollingUpdateInterval, scrollingUpdateIntervalMin, scrollingUpdateIntervalMax);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetScrollingUpdateInterval(int updateInterval)
-{
-    scrollingUpdateIntervalCached = qBound(scrollingUpdateIntervalMin, updateInterval, scrollingUpdateIntervalMax);
-    setValue(*settingScrollingUpdateInterval, scrollingUpdateIntervalCached);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetSensorMouseScale() const
-{
-    return GetCachedValue(scrollingSensorMouseScaleCached, *settingScrollingSensorMouseScale, defaultSensorMouseScale,
-                          sensorMouseScaleMin, sensorMouseScaleMax);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetSensorMouseScale(qreal scale)
-{
-    scrollingSensorMouseScaleCached = qBound(sensorMouseScaleMin, scale, sensorMouseScaleMax);
-    setValue(*settingScrollingSensorMouseScale, scrollingSensorMouseScaleCached);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetWheelMouseScale() const
-{
-    return GetCachedValue(scrollingWheelMouseScaleCached, *settingScrollingWheelMouseScale, defaultWheelMouseScale,
-                          wheelMouseScaleMin, wheelMouseScaleMax);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetWheelMouseScale(qreal scale)
-{
-    scrollingWheelMouseScaleCached = qBound(wheelMouseScaleMin, scale, wheelMouseScaleMax);
-    setValue(*settingScrollingWheelMouseScale, scrollingWheelMouseScaleCached);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetScrollingAcceleration() const
-{
-    return GetCachedValue(scrollingAccelerationCached, *settingScrollingAcceleration, defaultScrollingAcceleration,
-                          scrollingAccelerationMin, scrollingAccelerationMax);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetScrollingAcceleration(qreal acceleration)
-{
-    scrollingAccelerationCached = qBound(scrollingAccelerationMin, acceleration, scrollingAccelerationMax);
-    setValue(*settingScrollingAcceleration, scrollingAccelerationCached);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VSettings::IsDockWidgetGroupsActive() const
+bool VValentinaSettings::IsDockWidgetGroupsActive() const
 {
     return value(*settingdockWidgetGroupsActive, GetDefDockWidgetGroupsActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefDockWidgetGroupsActive()
+bool VValentinaSettings::GetDefDockWidgetGroupsActive()
 {
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetDockWidgetGroupsActive(bool value)
+void VValentinaSettings::SetDockWidgetGroupsActive(bool value)
 {
     setValue(*settingdockWidgetGroupsActive, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::IsDockWidgetToolOptionsActive() const
+bool VValentinaSettings::IsDockWidgetToolOptionsActive() const
 {
     return value(*settingDockWidgetToolOptionsActive, GetDefDockWidgetToolOptionsActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefDockWidgetToolOptionsActive()
+bool VValentinaSettings::GetDefDockWidgetToolOptionsActive()
 {
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetDockWidgetToolOptionsActive(bool value)
+void VValentinaSettings::SetDockWidgetToolOptionsActive(bool value)
 {
     setValue(*settingDockWidgetToolOptionsActive, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::IsDockWidgetPatternMessagesActive() const
+bool VValentinaSettings::IsDockWidgetPatternMessagesActive() const
 {
     return value(*settingDockWidgetPatternMessagesActive, GetDefDockWidgetPatternMessagesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefDockWidgetPatternMessagesActive()
+bool VValentinaSettings::GetDefDockWidgetPatternMessagesActive()
 {
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetDockWidgetPatternMessagesActive(bool value)
+void VValentinaSettings::SetDockWidgetPatternMessagesActive(bool value)
 {
     setValue(*settingDockWidgetPatternMessagesActive, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetPatternMessageFontSize(int fontSizeDef) const
+int VValentinaSettings::GetPatternMessageFontSize(int fontSizeDef) const
 {
     fontSizeDef = qBound(GetDefMinPatternMessageFontSize(), fontSizeDef, GetDefMaxPatternMessageFontSize());
     const int fontSize = value(*settingPatternMessagesFontSize, fontSizeDef).toInt();
@@ -780,56 +629,44 @@ int VSettings::GetPatternMessageFontSize(int fontSizeDef) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetDefMinPatternMessageFontSize()
+int VValentinaSettings::GetDefMinPatternMessageFontSize()
 {
     return 5;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetDefMaxPatternMessageFontSize()
+int VValentinaSettings::GetDefMaxPatternMessageFontSize()
 {
     return 40;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetPatternMessageFontSize(int size)
+void VValentinaSettings::SetPatternMessageFontSize(int size)
 {
     setValue(*settingPatternMessagesFontSize, qBound(GetDefMinPatternMessageFontSize(), size,
                                                      GetDefMaxPatternMessageFontSize()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetAutoRefreshPatternMessage() const
+bool VValentinaSettings::GetAutoRefreshPatternMessage() const
 {
     return value(*settingAutoRefreshPatternMessage, true).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetAutoRefreshPatternMessage(bool value)
+void VValentinaSettings::SetAutoRefreshPatternMessage(bool value)
 {
     setValue(*settingAutoRefreshPatternMessage, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize VSettings::GetWatermarkEditorSize() const
+QSize VValentinaSettings::GetWatermarkEditorSize() const
 {
     return value(*settingWatermarkEditorSize, QSize(0, 0)).toSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetWatermarkEditorSize(const QSize &sz)
+void VValentinaSettings::SetWatermarkEditorSize(const QSize &sz)
 {
     setValue(*settingWatermarkEditorSize, sz);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-T VSettings::GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const
-{
-    if (cache < 0)
-    {
-        cache = qBound(valueMin, ValueOrDef(setting, defValue), valueMax);
-    }
-
-    return cache;
 }
