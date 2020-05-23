@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlegraphicslayout.h
+ **  @file   vpgraphicssheet.h
  **  @author Ronan Le Tiec
  **  @date   3 5, 2020
  **
@@ -26,19 +26,19 @@
  **
  *************************************************************************/
 
-#ifndef VPUZZLEGRAPHICSLAYOUT_H
-#define VPUZZLEGRAPHICSLAYOUT_H
+#ifndef VPGRAPHICSSHEET_H
+#define VPGRAPHICSSHEET_H
 
 #include <QGraphicsItem>
 #include <QPainter>
 
 #include "vpuzzlelayout.h"
 
-class VPuzzleGraphicsLayout : public QGraphicsItem
+class VPGraphicsSheet : public QGraphicsItem
 {
 public:
-    explicit VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsItem *parent = nullptr);
-    ~VPuzzleGraphicsLayout();
+    explicit VPGraphicsSheet(VPuzzleLayout *layout, QGraphicsItem *parent = nullptr);
+    ~VPGraphicsSheet();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
@@ -49,10 +49,10 @@ public:
 
 
 private:
-    Q_DISABLE_COPY(VPuzzleGraphicsLayout)
+    Q_DISABLE_COPY(VPGraphicsSheet)
 
     VPuzzleLayout *m_layout{nullptr};
     QRectF m_boundingRect;
 };
 
-#endif // VPUZZLEGRAPHICSLAYOUT_H
+#endif // VPGRAPHICSSHEET_H

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlegraphicslayout.cpp
+ **  @file   vpgraphicssheet.cpp
  **  @author Ronan Le Tiec
  **  @date   3 5, 2020
  **
@@ -26,10 +26,10 @@
  **
  *************************************************************************/
 
-#include "vpuzzlegraphicslayout.h"
+#include "vpgraphicssheet.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleGraphicsLayout::VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsItem *parent):
+VPGraphicsSheet::VPGraphicsSheet(VPuzzleLayout *layout, QGraphicsItem *parent):
     QGraphicsItem(parent),
     m_layout(layout),
     m_boundingRect(GetLayoutRect())
@@ -38,13 +38,13 @@ VPuzzleGraphicsLayout::VPuzzleGraphicsLayout(VPuzzleLayout *layout, QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleGraphicsLayout::~VPuzzleGraphicsLayout()
+VPGraphicsSheet::~VPGraphicsSheet()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsLayout::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
     Q_UNUSED(option);
@@ -66,14 +66,14 @@ void VPuzzleGraphicsLayout::paint(QPainter *painter, const QStyleOptionGraphicsI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPuzzleGraphicsLayout::GetLayoutRect() const
+QRectF VPGraphicsSheet::GetLayoutRect() const
 {
     QRectF rect = QRectF(QPointF(0,0), m_layout->GetLayoutSize());
     return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPuzzleGraphicsLayout::GetMarginsRect() const
+QRectF VPGraphicsSheet::GetMarginsRect() const
 {
     QMarginsF margins = m_layout->GetLayoutMargins();
     QSizeF size = m_layout->GetLayoutSize();
@@ -86,7 +86,7 @@ QRectF VPuzzleGraphicsLayout::GetMarginsRect() const
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPuzzleGraphicsLayout::boundingRect() const
+QRectF VPGraphicsSheet::boundingRect() const
 {
     return m_boundingRect;
 }

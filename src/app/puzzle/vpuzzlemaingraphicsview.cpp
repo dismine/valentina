@@ -49,9 +49,9 @@ VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget 
     m_scene = new VMainGraphicsScene(this);
     setScene(m_scene);
 
-    m_graphicsLayout = new VPuzzleGraphicsLayout(layout);
-    m_graphicsLayout->setPos(0, 0);
-    m_scene->addItem(m_graphicsLayout);
+    m_graphicsSheet = new VPGraphicsSheet(layout);
+    m_graphicsSheet->setPos(0, 0);
+    m_scene->addItem(m_graphicsSheet);
 
     setAcceptDrops(true);
 
@@ -66,7 +66,7 @@ void VPuzzleMainGraphicsView::RefreshLayout()
 {
     // FIXME: Is that the way to go?
 
-    m_graphicsLayout->update();
+    m_graphicsSheet->update();
 
     m_scene->update();
 }

@@ -52,7 +52,7 @@ Q_LOGGING_CATEGORY(pWindow, "p.window")
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow::VPMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent) :
+VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::VPMainWindow),
     m_cmd(cmd)

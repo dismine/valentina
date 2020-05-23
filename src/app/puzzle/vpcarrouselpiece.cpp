@@ -256,7 +256,7 @@ void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
             QVariant data = QVariant::fromValue(layer);
             moveToLayer->setData(data);
 
-            connect(moveToLayer, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToLayer);
+            connect(moveToLayer, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
         }
     }
 
@@ -266,14 +266,14 @@ void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
         QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
         QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
         removeAction->setData(data);
-        connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToLayer);
+        connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
     }
 
     contextMenu.exec(event->globalPos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::on_ActionPieceMovedToLayer()
+void VPCarrouselPiece::on_ActionPieceMovedToPieceList()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();

@@ -38,7 +38,7 @@
 #include "vpuzzlelayout.h"
 #include "vpuzzlepiece.h"
 #include "../vlayout/vlayoutpiece.h"
-#include "vpuzzlecommandline.h"
+#include "vpcommandline.h"
 
 namespace Ui
 {
@@ -50,7 +50,7 @@ class VPMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit VPMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
+    explicit VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~VPMainWindow();
 
     /**
@@ -93,7 +93,7 @@ private:
     VPCarrousel *m_carrousel{nullptr};
     VPuzzleMainGraphicsView *m_graphicsView{nullptr};
 
-    VPuzzleCommandLinePtr m_cmd;
+    VPCommandLinePtr m_cmd;
 
     VPuzzleLayout *m_layout{nullptr};
     QList<VPuzzlePiece *>m_selectedPieces{QList<VPuzzlePiece *>()};
