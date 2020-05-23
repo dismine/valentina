@@ -24,15 +24,15 @@ SOURCES += \
     $$PWD/vpiececarrousellayer.cpp \
     $$PWD/vpiececarrouselpiece.cpp
 
-*msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES +=
 
 HEADERS += \
     $$PWD/dialogs/vpdialogabout.h \
-    $$PWD/stable.h \
     $$PWD/vpapplication.h \
     $$PWD/vpcommands.h \
     $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpmainwindow.h \
+    $$PWD/vpstable.h \
     $$PWD/vpuzzlecommandline.h \
     $$PWD/vpiececarrousel.h \
     $$PWD/vpuzzlegraphicslayout.h \
@@ -53,3 +53,6 @@ FORMS += \
     $$PWD/dialogs/vpdialogabout.ui \
     $$PWD/vpiececarrousel.ui \
     $$PWD/vpmainwindow.ui
+
+SOURCES += \
+    $$PWD/vpstable.cpp
