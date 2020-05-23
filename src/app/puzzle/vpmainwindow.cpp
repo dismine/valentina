@@ -842,7 +842,7 @@ void VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::LayoutRemoveUnusedLength");
+    msgBox.setText("TODO VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked");
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
@@ -872,7 +872,7 @@ void VPMainWindow::on_SheetFollowGrainlineChanged()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::LayoutFollowGrainlineChanged");
+    msgBox.setText("TODO VPMainWindow::on_SheetFollowGrainlineChanged");
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
@@ -922,7 +922,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
     // just for test purpuses, to be removed:
     QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::LayoutExport");
+    msgBox.setText("TODO VPMainWindow::on_pushButtonSheetExport_clicked");
     int ret = msgBox.exec();
 
     Q_UNUSED(ret);
