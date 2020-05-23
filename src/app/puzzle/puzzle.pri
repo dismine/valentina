@@ -4,9 +4,9 @@
 SOURCES += \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
-    $$PWD/puzzlecommands.cpp \
     $$PWD/puzzlemainwindow.cpp \
     $$PWD/vpapplication.cpp \
+    $$PWD/vpcommands.cpp \
     $$PWD/vpiececarrouselpiecepreview.cpp \
     $$PWD/vpuzzlecommandline.cpp \
     $$PWD/vpiececarrousel.cpp \
@@ -28,10 +28,10 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/dialogs/vpdialogabout.h \
-    $$PWD/puzzlecommands.h \
     $$PWD/puzzlemainwindow.h \
     $$PWD/stable.h \
     $$PWD/vpapplication.h \
+    $$PWD/vpcommands.h \
     $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpuzzlecommandline.h \
     $$PWD/vpiececarrousel.h \

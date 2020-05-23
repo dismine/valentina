@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   commands.cpp
+ **  @file   vpcommands.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   13 4, 2020
  **
@@ -25,7 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "puzzlecommands.h"
+#include "vpcommands.h"
 
 #include <QStringList>
 

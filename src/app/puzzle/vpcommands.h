@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   commands.h
+ **  @file   vpcommands.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   13 4, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef COMMANDS_H
-#define COMMANDS_H
+#ifndef VPCOMMANDS_H
+#define VPCOMMANDS_H
 
 
 #include <QString>
@@ -60,4 +60,4 @@ extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
 
 QStringList AllKeys();
 
-#endif // COMMANDS_H
+#endif // VPCOMMANDS_H

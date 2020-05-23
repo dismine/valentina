@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 #include "vpuzzlecommandline.h"
-#include "puzzlecommands.h"
+#include "vpcommands.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/literals.h"
 #include <QDebug>
