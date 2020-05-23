@@ -66,7 +66,7 @@ public:
 protected:
     VPuzzleCommandLine();
 
-    /** @brief create the single instance of the class inside puzzleapplication */
+    /** @brief create the single instance of the class inside vpapplication */
     static VPuzzleCommandLinePtr Instance(const QCoreApplication &app); 
     static void ProcessInstance(VPuzzleCommandLinePtr &instance, const QStringList &arguments);
 private:
@@ -74,7 +74,7 @@ private:
     static VPuzzleCommandLinePtr instance;
     QCommandLineParser parser;
     bool isGuiEnabled;
-    friend class PuzzleApplication;
+    friend class VPApplication;
 
     /** @brief add options to the QCommandLineParser that there are in the cmd can be */
     void InitCommandLineOptions();

@@ -6,7 +6,7 @@ SOURCES += \
     $$PWD/main.cpp \
     $$PWD/puzzlecommands.cpp \
     $$PWD/puzzlemainwindow.cpp \
-    $$PWD/puzzleapplication.cpp \
+    $$PWD/vpapplication.cpp \
     $$PWD/vpiececarrouselpiecepreview.cpp \
     $$PWD/vpuzzlecommandline.cpp \
     $$PWD/vpiececarrousel.cpp \
@@ -31,7 +31,7 @@ HEADERS += \
     $$PWD/puzzlecommands.h \
     $$PWD/puzzlemainwindow.h \
     $$PWD/stable.h \
-    $$PWD/puzzleapplication.h \
+    $$PWD/vpapplication.h \
     $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpuzzlecommandline.h \
     $$PWD/vpiececarrousel.h \

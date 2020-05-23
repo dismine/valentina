@@ -34,7 +34,7 @@
 #include "dialogs/vpdialogabout.h"
 #include "xml/vplayoutfilewriter.h"
 #include "xml/vplayoutfilereader.h"
-#include "puzzleapplication.h"
+#include "vpapplication.h"
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/projectversion.h"

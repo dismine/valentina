@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   puzzleapplication.h
+ **  @file   vpapplication.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   16 2, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef PUZZLEAPPLICATION_H
-#define PUZZLEAPPLICATION_H
+#ifndef VPAPPLICATION_H
+#define VPAPPLICATION_H
 
 #include "../vmisc/def.h"
 #include "vpuzzlesettings.h"
@@ -35,23 +35,23 @@
 
 #include <memory>
 
-class PuzzleApplication;// use in define
+class VPApplication;// use in define
 class PuzzleMainWindow;
 class QLocalServer;
 
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<PuzzleApplication*>(VAbstractApplication::instance()))
+#define qApp (static_cast<VPApplication*>(VAbstractApplication::instance()))
 
 enum class SocketConnection : bool {Client = false, Server = true};
 
-class PuzzleApplication : public VAbstractApplication
+class VPApplication : public VAbstractApplication
 {
     Q_OBJECT
 public:
-    PuzzleApplication(int &argc, char **argv);
-    virtual ~PuzzleApplication() override;
+    VPApplication(int &argc, char **argv);
+    virtual ~VPApplication() override;
 
     virtual bool notify(QObject * receiver, QEvent * event) override;
 
@@ -85,11 +85,11 @@ private slots:
     void NewLocalSocketConnection();
 
 private:
-    Q_DISABLE_COPY(PuzzleApplication)
+    Q_DISABLE_COPY(VPApplication)
     QList<QPointer<PuzzleMainWindow> > mainWindows;
     QLocalServer *localServer;
 
     void Clean();
 };
 
-#endif // PUZZLEAPPLICATION_H
+#endif // VPAPPLICATION_H

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   puzzleapplication.cpp
+ **  @file   vpapplication.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   16 2, 2020
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "puzzleapplication.h"
+#include "vpapplication.h"
 #include "version.h"
 #include "puzzlemainwindow.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
@@ -232,7 +232,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleApplication::PuzzleApplication(int &argc, char **argv)
+VPApplication::VPApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv),
       mainWindows(),
       localServer(nullptr)
@@ -250,7 +250,7 @@ PuzzleApplication::PuzzleApplication(int &argc, char **argv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleApplication::~PuzzleApplication()
+VPApplication::~VPApplication()
 {
     qDeleteAll(mainWindows);
 }
@@ -263,7 +263,7 @@ PuzzleApplication::~PuzzleApplication()
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool PuzzleApplication::notify(QObject *receiver, QEvent *event)
+bool VPApplication::notify(QObject *receiver, QEvent *event)
 {
     try
     {
@@ -324,13 +324,13 @@ bool PuzzleApplication::notify(QObject *receiver, QEvent *event)
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool PuzzleApplication::IsAppInGUIMode() const
+bool VPApplication::IsAppInGUIMode() const
 {
     return CommandLine()->IsGuiEnabled();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow *PuzzleApplication::MainWindow()
+PuzzleMainWindow *VPApplication::MainWindow()
 {
     Clean();
     if (mainWindows.isEmpty())
@@ -343,7 +343,7 @@ PuzzleMainWindow *PuzzleApplication::MainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<PuzzleMainWindow *> PuzzleApplication::MainWindows()
+QList<PuzzleMainWindow *> VPApplication::MainWindows()
 {
     Clean();
     QList<PuzzleMainWindow*> list;
@@ -355,7 +355,7 @@ QList<PuzzleMainWindow *> PuzzleApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow *PuzzleApplication::NewMainWindow(const VPuzzleCommandLinePtr &cmd)
+PuzzleMainWindow *VPApplication::NewMainWindow(const VPuzzleCommandLinePtr &cmd)
 {
     PuzzleMainWindow *puzzle = new PuzzleMainWindow(cmd);
     mainWindows.prepend(puzzle);
@@ -367,7 +367,7 @@ PuzzleMainWindow *PuzzleApplication::NewMainWindow(const VPuzzleCommandLinePtr &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::InitOptions()
+void VPApplication::InitOptions()
 {
     qInstallMessageHandler(noisyFailureMsgHandler);
 
@@ -397,27 +397,27 @@ void PuzzleApplication::InitOptions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *PuzzleApplication::TrVars()
+const VTranslateVars *VPApplication::TrVars()
 {
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::OpenSettings()
+void VPApplication::OpenSettings()
 {
     settings = new VPuzzleSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                    QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleSettings *PuzzleApplication::PuzzleSettings()
+VPuzzleSettings *VPApplication::PuzzleSettings()
 {
     SCASSERT(settings != nullptr)
     return qobject_cast<VPuzzleSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::ActivateDarkMode()
+void VPApplication::ActivateDarkMode()
 {
     VPuzzleSettings *settings = qApp->PuzzleSettings();
     if (settings->GetDarkMode())
@@ -437,7 +437,7 @@ void PuzzleApplication::ActivateDarkMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
+void VPApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     VPuzzleCommandLinePtr cmd;
     VPuzzleCommandLine::ProcessInstance(cmd, arguments);
@@ -461,7 +461,7 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
         qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
 
         localServer = new QLocalServer(this);
-        connect(localServer, &QLocalServer::newConnection, this, &PuzzleApplication::NewLocalSocketConnection);
+        connect(localServer, &QLocalServer::newConnection, this, &VPApplication::NewLocalSocketConnection);
         if (not localServer->listen(serverName))
         {
             qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
@@ -484,7 +484,7 @@ void PuzzleApplication::ParseCommandLine(const SocketConnection &connection, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
+void VPApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
@@ -545,13 +545,13 @@ void PuzzleApplication::ProcessArguments(const VPuzzleCommandLinePtr &cmd)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::ProcessCMD()
+void VPApplication::ProcessCMD()
 {
     ParseCommandLine(SocketConnection::Client, arguments());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool PuzzleApplication::event(QEvent *e)
+bool VPApplication::event(QEvent *e)
 {
     switch(e->type())
     {
@@ -591,13 +591,13 @@ bool PuzzleApplication::event(QEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::InitTrVars()
+void VPApplication::InitTrVars()
 {
     // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::AboutToQuit()
+void VPApplication::AboutToQuit()
 {
     // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
     // instance. Solution is to call sync() before quit.
@@ -606,7 +606,7 @@ void PuzzleApplication::AboutToQuit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::NewLocalSocketConnection()
+void VPApplication::NewLocalSocketConnection()
 {
     QScopedPointer<QLocalSocket>socket(localServer->nextPendingConnection());
     if (socket.isNull())
@@ -625,7 +625,7 @@ void PuzzleApplication::NewLocalSocketConnection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzleApplication::Clean()
+void VPApplication::Clean()
 {
     // cleanup any deleted main windows first
     for (int i = mainWindows.count() - 1; i >= 0; --i)
@@ -638,7 +638,7 @@ void PuzzleApplication::Clean()
 }
 
 //--------------------------------------------------------------------------------------------
-VPuzzleCommandLinePtr PuzzleApplication::CommandLine() const
+VPuzzleCommandLinePtr VPApplication::CommandLine() const
 {
     return VPuzzleCommandLine::instance;
 }
