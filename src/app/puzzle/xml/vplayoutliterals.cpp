@@ -25,7 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "layoutliterals.h"
+#include "vplayoutliterals.h"
 
 namespace ML
 {

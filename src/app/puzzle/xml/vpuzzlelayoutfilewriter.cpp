@@ -30,7 +30,7 @@
 #include "vpuzzlelayout.h"
 #include "vpuzzlelayer.h"
 #include "vpuzzlepiece.h"
-#include "layoutliterals.h"
+#include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
 
 //---------------------------------------------------------------------------------------------------------------------

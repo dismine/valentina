@@ -29,7 +29,7 @@
 #include <QXmlStreamAttributes>
 #include "vpuzzlelayoutfilereader.h"
 #include "vpuzzlelayoutfilewriter.h"
-#include "layoutliterals.h"
+#include "vplayoutliterals.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 

@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef LAYOUTLITERALS_H
-#define LAYOUTLITERALS_H
+#ifndef VPLAYOUTLITERALS_H
+#define VPLAYOUTLITERALS_H
 
 #include <QString>
 
@@ -69,4 +69,4 @@ extern const QString AttrShowSeamline;
 }
 
 
-#endif // LAYOUTLITERALS_H
+#endif // VPLAYOUTLITERALS_H
