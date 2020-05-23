@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vplayoutfilewriter.h"
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 #include "vppiecelist.h"
 #include "vpuzzlepiece.h"
 #include "vplayoutliterals.h"
@@ -46,7 +46,7 @@ VPLayoutFileWriter::~VPLayoutFileWriter()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
+void VPLayoutFileWriter::WriteFile(VPLayout *layout, QFile *file)
 {
     setDevice(file);
     setAutoFormatting(true);
@@ -59,7 +59,7 @@ void VPLayoutFileWriter::WriteFile(VPuzzleLayout *layout, QFile *file)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
@@ -71,7 +71,7 @@ void VPLayoutFileWriter::WriteLayout(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
 {
     writeStartElement(ML::TagProperties);
 
@@ -97,7 +97,7 @@ void VPLayoutFileWriter::WriteProperties(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
 {
     Q_UNUSED(layout); // to be removed
 
@@ -116,7 +116,7 @@ void VPLayoutFileWriter::WriteTiles(VPuzzleLayout *layout)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePieceLists(VPuzzleLayout *layout)
+void VPLayoutFileWriter::WritePieceLists(VPLayout *layout)
 {
    writeStartElement(ML::TagPieceLists);
 

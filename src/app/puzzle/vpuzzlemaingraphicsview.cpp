@@ -42,7 +42,7 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget *parent) :
+VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPLayout *layout, QWidget *parent) :
     VMainGraphicsView(parent),
     m_layout(layout)
 {
@@ -56,7 +56,7 @@ VPuzzleMainGraphicsView::VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget 
     setAcceptDrops(true);
 
     // add the connections
-    connect(m_layout, &VPuzzleLayout::PieceMovedToPieceList, this, &VPuzzleMainGraphicsView::on_PieceMovedToPieceList);
+    connect(m_layout, &VPLayout::PieceMovedToPieceList, this, &VPuzzleMainGraphicsView::on_PieceMovedToPieceList);
     connect(m_scene, &VMainGraphicsScene::selectionChanged, this,
             &VPuzzleMainGraphicsView::on_SceneSelectionChanged);
 }

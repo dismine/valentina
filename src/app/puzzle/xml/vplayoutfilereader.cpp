@@ -47,7 +47,7 @@ VPLayoutFileReader::~VPLayoutFileReader()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
+bool VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file)
 {
     setDevice(file);
 
@@ -60,7 +60,7 @@ bool VPLayoutFileReader::ReadFile(VPuzzleLayout *layout, QFile *file)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadLayout(VPLayout *layout)
 {
     SCASSERT(isStartElement() && name() == ML::TagLayout);
 
@@ -82,7 +82,7 @@ void VPLayoutFileReader::ReadLayout(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadProperties(VPLayout *layout)
 {
     SCASSERT(isStartElement() && name() == ML::TagProperties);
 
@@ -158,7 +158,7 @@ void VPLayoutFileReader::ReadProperties(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadTiles(VPLayout *layout)
 {
     Q_UNUSED(layout); // to be removed when used
 
@@ -193,7 +193,7 @@ void VPLayoutFileReader::ReadTiles(VPuzzleLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadPieceLists(VPuzzleLayout *layout)
+void VPLayoutFileReader::ReadPieceLists(VPLayout *layout)
 {
     SCASSERT(isStartElement() && name() == ML::TagPieceLists);
 

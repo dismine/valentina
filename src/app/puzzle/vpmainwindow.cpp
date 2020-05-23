@@ -58,7 +58,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_cmd(cmd)
 {
 
-    m_layout = new VPuzzleLayout();
+    m_layout = new VPLayout();
 
     // ----- for test purposes, to be removed------------------
     m_layout->SetLayoutMarginsConverted(2, 2, 2, 2);
@@ -110,7 +110,7 @@ bool VPMainWindow::LoadFile(QString path)
 
     if(m_layout == nullptr)
     {
-        m_layout = new VPuzzleLayout();
+        m_layout = new VPLayout();
     }
 
     fileReader->ReadFile(m_layout, &file);

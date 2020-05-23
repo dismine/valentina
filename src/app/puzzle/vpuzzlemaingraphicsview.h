@@ -40,7 +40,7 @@ class VPuzzleMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
-    VPuzzleMainGraphicsView(VPuzzleLayout *layout, QWidget *parent);
+    VPuzzleMainGraphicsView(VPLayout *layout, QWidget *parent);
     ~VPuzzleMainGraphicsView() = default;
 
     /**
@@ -77,7 +77,7 @@ private:
     VMainGraphicsScene *m_scene{nullptr};
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
-    VPuzzleLayout *m_layout{nullptr};
+    VPLayout *m_layout{nullptr};
 
     QList<VPGraphicsPiece*> m_graphicsPieces{};
 

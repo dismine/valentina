@@ -32,7 +32,7 @@
 #include <QWidget>
 #include <QComboBox>
 #include <QScrollArea>
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 #include "vpuzzlepiece.h"
 
 namespace Ui
@@ -44,7 +44,7 @@ class VPCarrousel : public QWidget
 {
     Q_OBJECT
 public:
-    explicit VPCarrousel(VPuzzleLayout *layout, QWidget *parent = nullptr);
+    explicit VPCarrousel(VPLayout *layout, QWidget *parent = nullptr);
     virtual ~VPCarrousel() = default;
 
     /**
@@ -79,7 +79,7 @@ private:
     Q_DISABLE_COPY(VPCarrousel)
     Ui::VPCarrousel *ui;
 
-    VPuzzleLayout *m_layout;
+    VPLayout *m_layout;
     QList<VPPieceList*> m_pieceLists{};
 
     Qt::Orientation m_orientation{Qt::Vertical};

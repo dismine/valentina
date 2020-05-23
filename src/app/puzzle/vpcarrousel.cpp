@@ -41,7 +41,7 @@
 Q_LOGGING_CATEGORY(pCarrousel, "p.carrousel")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrousel::VPCarrousel(VPuzzleLayout *layout, QWidget *parent) :
+VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VPCarrousel),
     m_layout(layout)

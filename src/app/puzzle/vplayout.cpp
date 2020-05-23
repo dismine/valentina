@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlelayout.cpp
+ **  @file   vplayout.cpp
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,12 +25,12 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 #include "vppiecelist.h"
 #include "vpuzzlepiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayout::VPuzzleLayout() :
+VPLayout::VPLayout() :
     m_unplacedPieceList(new VPPieceList(this))
 {
     m_unplacedPieceList->SetName(QObject::tr("Unplaced pieces"));
@@ -45,20 +45,20 @@ VPuzzleLayout::VPuzzleLayout() :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayout::~VPuzzleLayout()
+VPLayout::~VPLayout()
 {
     qDeleteAll(m_pieceLists);
     delete m_unplacedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPuzzleLayout::GetUnplacedPieceList()
+VPPieceList* VPLayout::GetUnplacedPieceList()
 {
     return m_unplacedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPuzzleLayout::AddPieceList()
+VPPieceList* VPLayout::AddPieceList()
 {
     VPPieceList *newPieceList = new VPPieceList(this);
     m_pieceLists.append(newPieceList);
@@ -66,20 +66,20 @@ VPPieceList* VPuzzleLayout::AddPieceList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPuzzleLayout::AddPieceList(VPPieceList *pieceList)
+VPPieceList* VPLayout::AddPieceList(VPPieceList *pieceList)
 {
     m_pieceLists.append(pieceList);
     return pieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPPieceList *> VPuzzleLayout::GetPiecesLists()
+QList<VPPieceList *> VPLayout::GetPiecesLists()
 {
     return m_pieceLists;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPuzzlePiece *> VPuzzleLayout::GetSelectedPieces()
+QList<VPuzzlePiece *> VPLayout::GetSelectedPieces()
 {
     QList<VPuzzlePiece *> result = QList<VPuzzlePiece *>();
 
@@ -102,39 +102,39 @@ QList<VPuzzlePiece *> VPuzzleLayout::GetSelectedPieces()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetUnit(Unit unit)
+void VPLayout::SetUnit(Unit unit)
 {
     m_unit = unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit VPuzzleLayout::GetUnit() const
+Unit VPLayout::GetUnit() const
 {
     return m_unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutSize(qreal width, qreal height)
+void VPLayout::SetLayoutSize(qreal width, qreal height)
 {
     m_size.setWidth(width);
     m_size.setHeight(height);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutSizeConverted(qreal width, qreal height)
+void VPLayout::SetLayoutSizeConverted(qreal width, qreal height)
 {
     m_size.setWidth(UnitConvertor(width, m_unit, Unit::Px));
     m_size.setHeight(UnitConvertor(height, m_unit, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutSize(const QSizeF &size)
+void VPLayout::SetLayoutSize(const QSizeF &size)
 {
     m_size = size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutSizeConverted(const QSizeF &size)
+void VPLayout::SetLayoutSizeConverted(const QSizeF &size)
 {
     m_size = QSizeF(
                 UnitConvertor(size.width(), m_unit, Unit::Px),
@@ -143,13 +143,13 @@ void VPuzzleLayout::SetLayoutSizeConverted(const QSizeF &size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPuzzleLayout::GetLayoutSize() const
+QSizeF VPLayout::GetLayoutSize() const
 {
     return m_size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPuzzleLayout::GetLayoutSizeConverted() const
+QSizeF VPLayout::GetLayoutSizeConverted() const
 {
     QSizeF convertedSize = QSizeF(
                 UnitConvertor(m_size.width(), Unit::Px, m_unit),
@@ -160,7 +160,7 @@ QSizeF VPuzzleLayout::GetLayoutSizeConverted() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal bottom)
+void VPLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal bottom)
 {
     m_margins.setLeft(left);
     m_margins.setTop(top);
@@ -168,7 +168,7 @@ void VPuzzleLayout::SetLayoutMargins(qreal left, qreal top, qreal right, qreal b
     m_margins.setBottom(bottom);
 }
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
+void VPLayout::SetLayoutMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
 {
     m_margins.setLeft(UnitConvertor(left, m_unit, Unit::Px));
     m_margins.setTop(UnitConvertor(top, m_unit, Unit::Px));
@@ -177,103 +177,103 @@ void VPuzzleLayout::SetLayoutMarginsConverted(qreal left, qreal top, qreal right
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutMargins(const QMarginsF &margins)
+void VPLayout::SetLayoutMargins(const QMarginsF &margins)
 {
     m_margins = margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetLayoutMarginsConverted(const QMarginsF &margins)
+void VPLayout::SetLayoutMarginsConverted(const QMarginsF &margins)
 {
     m_margins = UnitConvertor(margins, m_unit, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPuzzleLayout::GetLayoutMargins() const
+QMarginsF VPLayout::GetLayoutMargins() const
 {
     return m_margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPuzzleLayout::GetLayoutMarginsConverted() const
+QMarginsF VPLayout::GetLayoutMarginsConverted() const
 {
     return UnitConvertor(m_margins, Unit::Px, m_unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetFollowGrainline(FollowGrainline state)
+void VPLayout::SetFollowGrainline(FollowGrainline state)
 {
     m_followGrainLine = state;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-FollowGrainline VPuzzleLayout::GetFollowGrainline() const
+FollowGrainline VPLayout::GetFollowGrainline() const
 {
     return m_followGrainLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetPiecesGap(qreal value)
+void VPLayout::SetPiecesGap(qreal value)
 {
     m_piecesGap = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetPiecesGapConverted(qreal value)
+void VPLayout::SetPiecesGapConverted(qreal value)
 {
     m_piecesGap = UnitConvertor(value, m_unit, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzleLayout::GetPiecesGap() const
+qreal VPLayout::GetPiecesGap() const
 {
     return m_piecesGap;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPuzzleLayout::GetPiecesGapConverted() const
+qreal VPLayout::GetPiecesGapConverted() const
 {
     return UnitConvertor(m_piecesGap, Unit::Px, m_unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetWarningSuperpositionOfPieces(bool state)
+void VPLayout::SetWarningSuperpositionOfPieces(bool state)
 {
     m_warningSuperpositionOfPieces = state;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayout::GetWarningSuperpositionOfPieces() const
+bool VPLayout::GetWarningSuperpositionOfPieces() const
 {
     return m_warningSuperpositionOfPieces;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetWarningPiecesOutOfBound(bool state)
+void VPLayout::SetWarningPiecesOutOfBound(bool state)
 {
     m_warningPiecesOutOfBound = state;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayout::GetWarningPiecesOutOfBound() const
+bool VPLayout::GetWarningPiecesOutOfBound() const
 {
     return m_warningPiecesOutOfBound;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetStickyEdges(bool state)
+void VPLayout::SetStickyEdges(bool state)
 {
     m_stickyEdges = state;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPuzzleLayout::GetStickyEdges() const
+bool VPLayout::GetStickyEdges() const
 {
     return m_stickyEdges;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::ClearSelection()
+void VPLayout::ClearSelection()
 {
     m_unplacedPieceList->ClearSelection();
 
@@ -284,7 +284,7 @@ void VPuzzleLayout::ClearSelection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::SetFocusedPieceList(VPPieceList* focusedPieceList)
+void VPLayout::SetFocusedPieceList(VPPieceList* focusedPieceList)
 {
     if(focusedPieceList == nullptr)
     {
@@ -297,13 +297,13 @@ void VPuzzleLayout::SetFocusedPieceList(VPPieceList* focusedPieceList)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPuzzleLayout::GetFocusedPieceList()
+VPPieceList* VPLayout::GetFocusedPieceList()
 {
     return m_focusedPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleLayout::MovePieceToPieceList(VPuzzlePiece* piece, VPPieceList* pieceList)
+void VPLayout::MovePieceToPieceList(VPuzzlePiece* piece, VPPieceList* pieceList)
 {
     VPPieceList* pieceListBefore = piece->GetPieceList();
 

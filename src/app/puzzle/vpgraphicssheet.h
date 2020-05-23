@@ -32,12 +32,12 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 
 class VPGraphicsSheet : public QGraphicsItem
 {
 public:
-    explicit VPGraphicsSheet(VPuzzleLayout *layout, QGraphicsItem *parent = nullptr);
+    explicit VPGraphicsSheet(VPLayout *layout, QGraphicsItem *parent = nullptr);
     ~VPGraphicsSheet();
 
     QRectF boundingRect() const override;
@@ -51,7 +51,7 @@ public:
 private:
     Q_DISABLE_COPY(VPGraphicsSheet)
 
-    VPuzzleLayout *m_layout{nullptr};
+    VPLayout *m_layout{nullptr};
     QRectF m_boundingRect;
 };
 

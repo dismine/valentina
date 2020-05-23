@@ -35,7 +35,7 @@
 #include "../vmisc/def.h"
 #include "vpcarrousel.h"
 #include "vpuzzlemaingraphicsview.h"
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 #include "vpuzzlepiece.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "vpcommandline.h"
@@ -95,7 +95,7 @@ private:
 
     VPCommandLinePtr m_cmd;
 
-    VPuzzleLayout *m_layout{nullptr};
+    VPLayout *m_layout{nullptr};
     QList<VPuzzlePiece *>m_selectedPieces{QList<VPuzzlePiece *>()};
 
     /**

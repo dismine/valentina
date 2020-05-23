@@ -31,26 +31,26 @@
 
 #include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 #include "vppiecelist.h"
 #include "vpuzzlepiece.h"
 
 class VPLayoutFileReader : public QXmlStreamReader
 {
-    Q_DECLARE_TR_FUNCTIONS(VPuzzleLayoutFileReader)
+    Q_DECLARE_TR_FUNCTIONS(VPLayoutFileReader)
 public:
     VPLayoutFileReader();
     ~VPLayoutFileReader();
 
-    bool ReadFile(VPuzzleLayout *layout, QFile *file);
+    bool ReadFile(VPLayout *layout, QFile *file);
 
 private:
     Q_DISABLE_COPY(VPLayoutFileReader)
 
-    void ReadLayout(VPuzzleLayout *layout);
-    void ReadProperties(VPuzzleLayout *layout);
-    void ReadTiles(VPuzzleLayout *layout);
-    void ReadPieceLists(VPuzzleLayout *layout);
+    void ReadLayout(VPLayout *layout);
+    void ReadProperties(VPLayout *layout);
+    void ReadTiles(VPLayout *layout);
+    void ReadPieceLists(VPLayout *layout);
     void ReadPieceList(VPPieceList *pieceList);
     void ReadPiece(VPuzzlePiece *piece);
 

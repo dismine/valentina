@@ -41,7 +41,7 @@
 
 #include "vpuzzlepiece.h"
 #include "vppiecelist.h"
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")

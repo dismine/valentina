@@ -31,13 +31,13 @@
 #include <QList>
 #include "vpuzzlepiece.h"
 
-class VPuzzleLayout;
+class VPLayout;
 
 class VPPieceList : public QObject
 {
     Q_OBJECT
 public:
-    VPPieceList(VPuzzleLayout *layout);
+    VPPieceList(VPLayout *layout);
     ~VPPieceList();
 
     QList<VPuzzlePiece *> GetPieces();
@@ -57,7 +57,7 @@ public:
      * @brief GetLayout Returns the layout in which this piece list is
      * @return the layout of this piece list
      */
-    VPuzzleLayout* GetLayout();
+    VPLayout* GetLayout();
 
     /**
      * @brief ClearSelection Clears the selection of the pieces in this piece list
@@ -81,7 +81,7 @@ private:
     QString m_name{};
     QList<VPuzzlePiece *> m_pieces{};
 
-    VPuzzleLayout *m_layout{nullptr};
+    VPLayout *m_layout{nullptr};
 
     // control
     bool m_isVisible{true};

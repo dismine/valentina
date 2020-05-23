@@ -27,14 +27,14 @@
  *************************************************************************/
 #include "vppiecelist.h"
 
-#include "vpuzzlelayout.h"
+#include "vplayout.h"
 
 #include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(pPieceList, "p.pieceList")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList::VPPieceList(VPuzzleLayout *layout):
+VPPieceList::VPPieceList(VPLayout *layout):
     m_layout(layout)
 {
 
@@ -47,7 +47,7 @@ VPPieceList::~VPPieceList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleLayout* VPPieceList::GetLayout()
+VPLayout* VPPieceList::GetLayout()
 {
     return m_layout;
 }

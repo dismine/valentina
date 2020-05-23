@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlelayout.h
+ **  @file   vplayout.h
  **  @author Ronan Le Tiec
  **  @date   13 4, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUZZLELAYOUT_H
-#define VPUZZLELAYOUT_H
+#ifndef VPLAYOUT_H
+#define VPLAYOUT_H
 
 #include <QSizeF>
 #include <QMarginsF>
@@ -40,12 +40,12 @@ class VPuzzlePiece;
 // is this the right place for the definition?
 enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
 
-class VPuzzleLayout : public QObject
+class VPLayout : public QObject
 {
     Q_OBJECT
 public:
-    VPuzzleLayout();
-    virtual ~VPuzzleLayout();
+    VPLayout();
+    virtual ~VPLayout();
 
     /**
      * @brief GetUnplacedPieceList Returns the piece list of unplaced pieces
@@ -231,7 +231,7 @@ signals:
     void PieceMovedToPieceList(VPuzzlePiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
 
 private:
-    Q_DISABLE_COPY(VPuzzleLayout)
+    Q_DISABLE_COPY(VPLayout)
 
     VPPieceList *m_unplacedPieceList;
     QList<VPPieceList *> m_pieceLists{};
@@ -268,4 +268,4 @@ private:
 
 };
 
-#endif // VPUZZLELAYOUT_H
+#endif // VPLAYOUT_H

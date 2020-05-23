@@ -34,7 +34,7 @@
 
 #include "../vmisc/literals.h"
 
-class VPuzzleLayout;
+class VPLayout;
 class VPPieceList;
 class VPuzzlePiece;
 class QFile;
@@ -46,14 +46,14 @@ public:
     VPLayoutFileWriter();
     ~VPLayoutFileWriter();
 
-    void WriteFile(VPuzzleLayout *layout, QFile *file);
+    void WriteFile(VPLayout *layout, QFile *file);
 
 private:
 
-    void WriteLayout(VPuzzleLayout *layout);
-    void WriteProperties(VPuzzleLayout *layout);
-    void WriteTiles(VPuzzleLayout *layout);
-    void WritePieceLists(VPuzzleLayout *layout);
+    void WriteLayout(VPLayout *layout);
+    void WriteProperties(VPLayout *layout);
+    void WriteTiles(VPLayout *layout);
+    void WritePieceLists(VPLayout *layout);
     void WritePieceList(VPPieceList *pieceList);
     void WritePieceList(VPPieceList *pieceList, const QString &tagName);
     void WritePiece(VPuzzlePiece *piece);

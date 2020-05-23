@@ -29,7 +29,7 @@
 #include "vpgraphicssheet.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsSheet::VPGraphicsSheet(VPuzzleLayout *layout, QGraphicsItem *parent):
+VPGraphicsSheet::VPGraphicsSheet(VPLayout *layout, QGraphicsItem *parent):
     QGraphicsItem(parent),
     m_layout(layout),
     m_boundingRect(GetLayoutRect())
