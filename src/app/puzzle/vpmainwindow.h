@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   puzzlemainwindow.h
+ **  @file   vpmainwindow.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   16 2, 2020
  **
@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef PUZZLEMAINWINDOW_H
-#define PUZZLEMAINWINDOW_H
+#ifndef VPMAINWINDOW_H
+#define VPMAINWINDOW_H
 
 #include <QMainWindow>
 #include <QMessageBox>
@@ -42,16 +42,16 @@
 
 namespace Ui
 {
-    class PuzzleMainWindow;
+    class VPMainWindow;
 }
 
-class PuzzleMainWindow : public QMainWindow
+class VPMainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit PuzzleMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
-    virtual ~PuzzleMainWindow();
+    explicit VPMainWindow(const VPuzzleCommandLinePtr &cmd, QWidget *parent = nullptr);
+    virtual ~VPMainWindow();
 
     /**
      * @brief LoadFile Loads the layout file of given path in m_layout.
@@ -87,8 +87,8 @@ protected:
     virtual void closeEvent(QCloseEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(PuzzleMainWindow)
-    Ui::PuzzleMainWindow *ui;
+    Q_DISABLE_COPY(VPMainWindow)
+    Ui::VPMainWindow *ui;
 
     VPieceCarrousel *m_pieceCarrousel{nullptr};
     VPuzzleMainGraphicsView *m_graphicsView{nullptr};
@@ -387,4 +387,4 @@ private slots:
 
 };
 
-#endif // PUZZLEMAINWINDOW_H
+#endif // VPMAINWINDOW_H

@@ -28,7 +28,7 @@
 
 #include "vpapplication.h"
 #include "version.h"
-#include "puzzlemainwindow.h"
+#include "vpmainwindow.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
@@ -330,7 +330,7 @@ bool VPApplication::IsAppInGUIMode() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow *VPApplication::MainWindow()
+VPMainWindow *VPApplication::MainWindow()
 {
     Clean();
     if (mainWindows.isEmpty())
@@ -343,10 +343,10 @@ PuzzleMainWindow *VPApplication::MainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<PuzzleMainWindow *> VPApplication::MainWindows()
+QList<VPMainWindow *> VPApplication::MainWindows()
 {
     Clean();
-    QList<PuzzleMainWindow*> list;
+    QList<VPMainWindow*> list;
     for (auto &w : mainWindows)
     {
         list.append(w);
@@ -355,9 +355,9 @@ QList<PuzzleMainWindow *> VPApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzleMainWindow *VPApplication::NewMainWindow(const VPuzzleCommandLinePtr &cmd)
+VPMainWindow *VPApplication::NewMainWindow(const VPuzzleCommandLinePtr &cmd)
 {
-    PuzzleMainWindow *puzzle = new PuzzleMainWindow(cmd);
+    VPMainWindow *puzzle = new VPMainWindow(cmd);
     mainWindows.prepend(puzzle);
     if (cmd->IsGuiEnabled())
     {
@@ -563,7 +563,7 @@ bool VPApplication::event(QEvent *e)
             const QString macFileOpen = fileOpenEvent->file();
             if(not macFileOpen.isEmpty())
             {
-                PuzzleMainWindow *mw = MainWindow();
+                VPMainWindow *mw = MainWindow();
                 if (mw)
                 {
                     mw->LoadFile(macFileOpen);  // open file in existing window
@@ -576,7 +576,7 @@ bool VPApplication::event(QEvent *e)
         case QEvent::ApplicationActivate:
         {
             Clean();
-            PuzzleMainWindow *mw = MainWindow();
+            VPMainWindow *mw = MainWindow();
             if (mw && not mw->isMinimized())
             {
                 mw->show();

@@ -36,7 +36,7 @@
 #include <memory>
 
 class VPApplication;// use in define
-class PuzzleMainWindow;
+class VPMainWindow;
 class QLocalServer;
 
 #if defined(qApp)
@@ -56,9 +56,9 @@ public:
     virtual bool notify(QObject * receiver, QEvent * event) override;
 
     virtual bool IsAppInGUIMode() const override;
-    PuzzleMainWindow *MainWindow();
-    QList<PuzzleMainWindow*> MainWindows();
-    PuzzleMainWindow *NewMainWindow(const VPuzzleCommandLinePtr &cmd);
+    VPMainWindow *MainWindow();
+    QList<VPMainWindow*> MainWindows();
+    VPMainWindow *NewMainWindow(const VPuzzleCommandLinePtr &cmd);
 
     void InitOptions();
 
@@ -86,7 +86,7 @@ private slots:
 
 private:
     Q_DISABLE_COPY(VPApplication)
-    QList<QPointer<PuzzleMainWindow> > mainWindows;
+    QList<QPointer<VPMainWindow> > mainWindows;
     QLocalServer *localServer;
 
     void Clean();
