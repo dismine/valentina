@@ -32,7 +32,7 @@
 #include <QMimeData>
 #include <QKeyEvent>
 
-#include "vpuzzlemimedatapiece.h"
+#include "vpmimedatapiece.h"
 #include "vppiecelist.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
@@ -111,7 +111,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
     if(mime->objectName() == "piecePointer")
     {
-        const VPuzzleMimeDataPiece *mimePiece = qobject_cast<const VPuzzleMimeDataPiece *> (mime);
+        const VPMimeDataPiece *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
 
         VPuzzlePiece *piece = mimePiece->GetPiecePtr();
         if(piece != nullptr)

@@ -37,7 +37,7 @@
 #include <QApplication>
 #include <QMenu>
 
-#include "vpuzzlemimedatapiece.h"
+#include "vpmimedatapiece.h"
 #include "vpcarrouselpiecelist.h"
 #include "vpcarrousel.h"
 
@@ -212,7 +212,7 @@ void VPCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
 
     // starts the dragging
     QDrag *drag = new QDrag(this);
-    VPuzzleMimeDataPiece *mimeData = new VPuzzleMimeDataPiece();
+    VPMimeDataPiece *mimeData = new VPMimeDataPiece();
     mimeData->SetPiecePtr(m_piece);
     mimeData->setObjectName("piecePointer");
 

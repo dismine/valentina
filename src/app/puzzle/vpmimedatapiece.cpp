@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlemimedatapiece.h
+ **  @file   vpmimedatapiece.cpp
  **  @author Ronan Le Tiec
  **  @date   4 5, 2020
  **
@@ -26,40 +26,28 @@
  **
  *************************************************************************/
 
-#ifndef VPUZZLEMIMEDATAPIECE_H
-#define VPUZZLEMIMEDATAPIECE_H
+#include "vpmimedatapiece.h"
 
-#include <QMimeData>
-
-#include "vpuzzlepiece.h"
-
-class VPuzzleMimeDataPiece : public QMimeData
+//---------------------------------------------------------------------------------------------------------------------
+VPMimeDataPiece::VPMimeDataPiece()
 {
-    Q_OBJECT
 
-public:
+}
 
-    VPuzzleMimeDataPiece();
-    ~VPuzzleMimeDataPiece();
+//---------------------------------------------------------------------------------------------------------------------
+VPMimeDataPiece::~VPMimeDataPiece()
+{
 
-    /**
-     * @brief GetPiecePtr Returns the piece pointer of the mime data
-     * @return  piece pointer
-     */
-    VPuzzlePiece* GetPiecePtr() const;
+}
 
-    /**
-     * @brief SetPiecePtr sets the piece pointer to the given value
-     * @param piece the piece pointer
-     */
-    void SetPiecePtr(VPuzzlePiece* piece);
+//---------------------------------------------------------------------------------------------------------------------
+VPuzzlePiece* VPMimeDataPiece::GetPiecePtr() const
+{
+    return m_piece;
+}
 
-private:
-    Q_DISABLE_COPY(VPuzzleMimeDataPiece)
-
-    VPuzzlePiece *m_piece{nullptr};
-
-};
-
-
-#endif // VPUZZLEMIMEDATAPIECE_H
+//---------------------------------------------------------------------------------------------------------------------
+void VPMimeDataPiece::SetPiecePtr(VPuzzlePiece* piece)
+{
+    m_piece = piece;
+}
