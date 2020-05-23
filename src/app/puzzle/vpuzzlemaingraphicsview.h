@@ -30,7 +30,7 @@
 #define VPUZZLEMAINGRAPHICSVIEW_H
 
 #include "vpgraphicssheet.h"
-#include "vpuzzlegraphicspiece.h"
+#include "vpgraphicspiece.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 class VMainGraphicsScene;
@@ -79,7 +79,7 @@ private:
     VPGraphicsSheet *m_graphicsSheet{nullptr};
     VPuzzleLayout *m_layout{nullptr};
 
-    QList<VPuzzleGraphicsPiece*> m_graphicsPieces{};
+    QList<VPGraphicsPiece*> m_graphicsPieces{};
 
 };
 

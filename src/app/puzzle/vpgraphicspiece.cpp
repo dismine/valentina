@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlegraphicspiece.cpp
+ **  @file   vpgraphicspiece.cpp
  **  @author Ronan Le Tiec
  **  @date   4 5, 2020
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vpuzzlegraphicspiece.h"
+#include "vpgraphicspiece.h"
 
 #include <QPen>
 #include <QBrush>
@@ -47,7 +47,7 @@
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleGraphicsPiece::VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent) :
+VPGraphicsPiece::VPGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent) :
     QGraphicsObject(parent),
     m_piece(piece),
     m_cuttingLine(QPainterPath()),
@@ -59,13 +59,13 @@ VPuzzleGraphicsPiece::VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzleGraphicsPiece::~VPuzzleGraphicsPiece()
+VPGraphicsPiece::~VPGraphicsPiece()
 {
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::Init()
+void VPGraphicsPiece::Init()
 {
     // set some infos
     setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
@@ -102,19 +102,19 @@ void VPuzzleGraphicsPiece::Init()
     // TODO : initialises the other elements labels, passmarks etc.
 
     // Initialises the connectors
-    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPuzzleGraphicsPiece::on_PieceSelectionChanged);
-    connect(m_piece, &VPuzzlePiece::PositionChanged, this, &VPuzzleGraphicsPiece::on_PiecePositionChanged);
-    connect(m_piece, &VPuzzlePiece::RotationChanged, this, &VPuzzleGraphicsPiece::on_PieceRotationChanged);
+    connect(m_piece, &VPuzzlePiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);
+    connect(m_piece, &VPuzzlePiece::PositionChanged, this, &VPGraphicsPiece::on_PiecePositionChanged);
+    connect(m_piece, &VPuzzlePiece::RotationChanged, this, &VPGraphicsPiece::on_PieceRotationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPuzzlePiece* VPuzzleGraphicsPiece::GetPiece()
+VPuzzlePiece* VPGraphicsPiece::GetPiece()
 {
     return m_piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPuzzleGraphicsPiece::boundingRect() const
+QRectF VPGraphicsPiece::boundingRect() const
 {
     if(!m_cuttingLine.isEmpty())
     {
@@ -125,7 +125,7 @@ QRectF VPuzzleGraphicsPiece::boundingRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPuzzleGraphicsPiece::shape() const
+QPainterPath VPGraphicsPiece::shape() const
 {
     if(!m_cuttingLine.isEmpty())
     {
@@ -136,7 +136,7 @@ QPainterPath VPuzzleGraphicsPiece::shape() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
     Q_UNUSED(option);
@@ -179,7 +179,7 @@ void VPuzzleGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     bool selectionState = isSelected();
     //perform the default behaviour
@@ -214,7 +214,7 @@ void VPuzzleGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+void VPGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     if((event->buttons() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
     {
@@ -245,7 +245,7 @@ void VPuzzleGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     bool selectionState = isSelected();
 
@@ -272,7 +272,7 @@ void VPuzzleGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VPGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
 
     if(event->modifiers() & Qt::AltModifier)
@@ -292,7 +292,7 @@ void VPuzzleGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu contextMenu;
 
@@ -312,7 +312,7 @@ void VPuzzleGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
             QVariant data = QVariant::fromValue(layer);
             moveToLayer->setData(data);
 
-            connect(moveToLayer, &QAction::triggered, this, &VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer);
+            connect(moveToLayer, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToLayer);
         }
     }
 
@@ -320,13 +320,13 @@ void VPuzzleGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
     QVariant data = QVariant::fromValue(m_piece->GetLayer()->GetLayout()->GetUnplacedPiecesLayer());
     removeAction->setData(data);
-    connect(removeAction, &QAction::triggered, this, &VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer);
+    connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToLayer);
 
     contextMenu.exec(event->screenPos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer()
+void VPGraphicsPiece::on_ActionPieceMovedToLayer()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QVariant v = act->data();
@@ -339,26 +339,26 @@ void VPuzzleGraphicsPiece::on_ActionPieceMovedToLayer()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::on_PieceSelectionChanged()
+void VPGraphicsPiece::on_PieceSelectionChanged()
 {
     setSelected(m_piece->GetIsSelected());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::on_PiecePositionChanged()
+void VPGraphicsPiece::on_PiecePositionChanged()
 {
     setPos(m_piece->GetPosition());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPuzzleGraphicsPiece::on_PieceRotationChanged()
+void VPGraphicsPiece::on_PieceRotationChanged()
 {
     setTransformOriginPoint(boundingRect().center());
     setRotation(-m_piece->GetRotation());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVariant VPuzzleGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value)
+QVariant VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (scene()) {
 

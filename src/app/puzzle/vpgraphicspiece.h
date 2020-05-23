@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpuzzlegraphicspiece.h
+ **  @file   vpgraphicspiece.h
  **  @author Ronan Le Tiec
  **  @date   4 5, 2020
  **
@@ -26,19 +26,19 @@
  **
  *************************************************************************/
 
-#ifndef VPUZZLEGRAPHICSPIECE_H
-#define VPUZZLEGRAPHICSPIECE_H
+#ifndef VPGRAPHICSPIECE_H
+#define VPGRAPHICSPIECE_H
 
 #include <QGraphicsItem>
 
 class VPuzzlePiece;
 
-class VPuzzleGraphicsPiece : public QGraphicsObject
+class VPGraphicsPiece : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    VPuzzleGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent = nullptr);
-    ~VPuzzleGraphicsPiece();
+    VPGraphicsPiece(VPuzzlePiece *piece, QGraphicsItem *parent = nullptr);
+    ~VPGraphicsPiece();
     void Init();
 
     /**
@@ -86,7 +86,7 @@ private slots:
     void on_ActionPieceMovedToLayer();
 
 private:
-    Q_DISABLE_COPY(VPuzzleGraphicsPiece)
+    Q_DISABLE_COPY(VPGraphicsPiece)
     VPuzzlePiece *m_piece;
 
     QPainterPath m_cuttingLine;
@@ -97,4 +97,4 @@ private:
 
 };
 
-#endif // VPUZZLEGRAPHICSPIECE_H
+#endif // VPGRAPHICSPIECE_H

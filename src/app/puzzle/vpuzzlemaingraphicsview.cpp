@@ -137,7 +137,7 @@ void VPuzzleMainGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
     {
-        QList<VPuzzleGraphicsPiece*> tmpGraphicsPieces = m_graphicsPieces;
+        QList<VPGraphicsPiece*> tmpGraphicsPieces = m_graphicsPieces;
 
         for(auto graphicsPiece : tmpGraphicsPieces)
         {
@@ -157,7 +157,7 @@ void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleL
 {
     Q_UNUSED(layerBefore)
 
-    VPuzzleGraphicsPiece *_graphicsPiece = nullptr;
+    VPGraphicsPiece *_graphicsPiece = nullptr;
     for(auto graphicPiece : m_graphicsPieces)
     {
         if(graphicPiece->GetPiece() == piece)
@@ -175,7 +175,7 @@ void VPuzzleMainGraphicsView::on_PieceMovedToLayer(VPuzzlePiece *piece, VPuzzleL
     {
         if(_graphicsPiece == nullptr)
         {
-            _graphicsPiece = new VPuzzleGraphicsPiece(piece);
+            _graphicsPiece = new VPGraphicsPiece(piece);
             m_graphicsPieces.append(_graphicsPiece);
         }
 
