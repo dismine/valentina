@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   dialogaboutpuzzle.cpp
+ **  @file   vpdialogabout.cpp
  **  @author Ronan Le Tiec
  **  @date   11 4, 2020
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#include "dialogaboutpuzzle.h"
-#include "ui_dialogaboutpuzzle.h"
+#include "vpdialogabout.h"
+#include "ui_vpdialogabout.h"
 #include "../version.h"
 #include "../vmisc/def.h"
 #include "../fervor/fvupdater.h"
@@ -40,9 +40,9 @@
 #include <QtDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAboutPuzzle::DialogAboutPuzzle(QWidget *parent)
+VPDialogAbout::VPDialogAbout(QWidget *parent)
     :QDialog(parent),
-      ui(new Ui::DialogAboutPuzzle),
+      ui(new Ui::VPDialogAbout),
       isInitialized(false)
 {
     ui->setupUi(this);
@@ -57,7 +57,7 @@ DialogAboutPuzzle::DialogAboutPuzzle(QWidget *parent)
             qWarning() << tr("Cannot open your default browser");
         }
     });
-    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogAboutPuzzle::close);
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &VPDialogAbout::close);
     connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
     {
         // Set feed URL before doing anything else
@@ -72,13 +72,13 @@ DialogAboutPuzzle::DialogAboutPuzzle(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAboutPuzzle::~DialogAboutPuzzle()
+VPDialogAbout::~VPDialogAbout()
 {
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAboutPuzzle::changeEvent(QEvent *event)
+void VPDialogAbout::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
@@ -92,7 +92,7 @@ void DialogAboutPuzzle::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAboutPuzzle::showEvent(QShowEvent *event)
+void VPDialogAbout::showEvent(QShowEvent *event)
 {
     QDialog::showEvent( event );
     if ( event->spontaneous() )
@@ -113,7 +113,7 @@ void DialogAboutPuzzle::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAboutPuzzle::FontPointSize(QWidget *w, int pointSize)
+void VPDialogAbout::FontPointSize(QWidget *w, int pointSize)
 {
     SCASSERT(w != nullptr)
 
@@ -123,7 +123,7 @@ void DialogAboutPuzzle::FontPointSize(QWidget *w, int pointSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAboutPuzzle::RetranslateUi()
+void VPDialogAbout::RetranslateUi()
 {
     ui->label_Puzzle_Version->setText(QString("Puzzle %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogAboutPuzzle</class>
- <widget class="QDialog" name="DialogAboutPuzzle">
+ <class>VPDialogAbout</class>
+ <widget class="QDialog" name="VPDialogAbout">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -295,6 +295,7 @@
   </layout>
  </widget>
  <resources>
+  <include location="../share/resources/puzzleicon.qrc"/>
   <include location="../share/resources/puzzleicon.qrc"/>
  </resources>
  <connections/>

@@ -28,9 +28,10 @@
 #include "puzzlemainwindow.h"
 
 #include <QFileDialog>
+#include <QCloseEvent>
 
 #include "ui_puzzlemainwindow.h"
-#include "dialogs/dialogaboutpuzzle.h"
+#include "dialogs/vpdialogabout.h"
 #include "xml/vpuzzlelayoutfilewriter.h"
 #include "xml/vpuzzlelayoutfilereader.h"
 #include "puzzleapplication.h"
@@ -754,7 +755,7 @@ void PuzzleMainWindow::on_actionAboutQt_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzleMainWindow::on_actionAboutPuzzle_triggered()
 {
-    auto *aboutDialog = new DialogAboutPuzzle(this);
+    auto *aboutDialog = new VPDialogAbout(this);
     aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
     aboutDialog->show();
 }

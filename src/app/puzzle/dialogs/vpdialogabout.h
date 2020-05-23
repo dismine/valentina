@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   dialogaboutpuzzle.h
+ **  @file   vpdialogabout.h
  **  @author Ronan Le Tiec
  **  @date   11 4, 2020
  **
@@ -26,31 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGABOUTPUZZLE_H
-#define DIALOGABOUTPUZZLE_H
+#ifndef VPDIALOGABOUT_H
+#define VPDIALOGABOUT_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class DialogAboutPuzzle;
+    class VPDialogAbout;
 }
 
-class DialogAboutPuzzle : public QDialog
+class VPDialogAbout : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogAboutPuzzle(QWidget *parent = nullptr);
-    virtual ~DialogAboutPuzzle();
+    explicit VPDialogAbout(QWidget *parent = nullptr);
+    virtual ~VPDialogAbout();
 
 protected:
     virtual void changeEvent(QEvent* event) override;
     virtual void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogAboutPuzzle)
-    Ui::DialogAboutPuzzle *ui;
+    Q_DISABLE_COPY(VPDialogAbout)
+    Ui::VPDialogAbout *ui;
     bool isInitialized;
 
     void FontPointSize(QWidget *w, int pointSize);
@@ -58,4 +58,4 @@ private:
     void RetranslateUi();
 };
 
-#endif // DIALOGABOUTPUZZLE_H
+#endif // VPDIALOGABOUT_H

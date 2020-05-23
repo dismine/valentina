@@ -2,13 +2,13 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
     $$PWD/puzzlecommands.cpp \
     $$PWD/puzzlemainwindow.cpp \
     $$PWD/puzzleapplication.cpp \
     $$PWD/vpiececarrouselpiecepreview.cpp \
     $$PWD/vpuzzlecommandline.cpp \
-    $$PWD/dialogs/dialogaboutpuzzle.cpp \
     $$PWD/vpiececarrousel.cpp \
     $$PWD/vpuzzlegraphicslayout.cpp \
     $$PWD/vpuzzlegraphicspiece.cpp \
@@ -27,13 +27,13 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
+    $$PWD/dialogs/vpdialogabout.h \
     $$PWD/puzzlecommands.h \
     $$PWD/puzzlemainwindow.h \
     $$PWD/stable.h \
     $$PWD/puzzleapplication.h \
     $$PWD/vpiececarrouselpiecepreview.h \
     $$PWD/vpuzzlecommandline.h \
-    $$PWD/dialogs/dialogaboutpuzzle.h \
     $$PWD/vpiececarrousel.h \
     $$PWD/vpuzzlegraphicslayout.h \
     $$PWD/vpuzzlegraphicspiece.h \
@@ -50,6 +50,6 @@ HEADERS += \
     $$PWD/vpiececarrouselpiece.h
 
 FORMS += \
+    $$PWD/dialogs/vpdialogabout.ui \
     $$PWD/puzzlemainwindow.ui \
-    $$PWD/dialogs/dialogaboutpuzzle.ui \
     $$PWD/vpiececarrousel.ui
