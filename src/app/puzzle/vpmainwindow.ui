@@ -172,7 +172,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -230,7 +230,7 @@
               <x>0</x>
               <y>0</y>
               <width>342</width>
-              <height>1318</height>
+              <height>1264</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -253,6 +253,18 @@
              <item>
               <widget class="QWidget" name="containerCurrentPieceData" native="true">
                <layout class="QVBoxLayout" name="containerCurrentPieceDataLayout">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QGroupBox" name="groupBoxCurrentPieceInfo">
                   <property name="title">
@@ -398,6 +410,18 @@
                 <property name="spacing">
                  <number>0</number>
                 </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QLabel" name="labelCurrentPieceNoPieceSelected">
                   <property name="minimumSize">
@@ -420,6 +444,18 @@
              <item>
               <widget class="QWidget" name="containerCurrentPieceMultipleData" native="true">
                <layout class="QVBoxLayout" name="verticalLayout_11">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QLabel" name="labelCurrentPieceMultiplePieceSelected">
                   <property name="minimumSize">
@@ -517,6 +553,29 @@
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxSheetInfos">
+               <property name="title">
+                <string>Infos</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_17">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_8">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelSheetName">
+                    <property name="text">
+                     <string>Name </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="lineEditSheetName"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
               </widget>
              </item>
              <item>

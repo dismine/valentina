@@ -30,6 +30,7 @@
 
 #include <QApplication>
 #include <QMenu>
+#include <QPainter>
 
 #include "vpmimedatapiece.h"
 #include "vpcarrouselpiecelist.h"
@@ -49,7 +50,7 @@ VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, QListWidget* parent) :
     int width = 120 - 8;
     QFontMetrics metrix = QFontMetrics(QFont());
     QString clippedText = metrix.elidedText(piece->GetName(), Qt::ElideRight, width);
-    setIcon(m_piece->PieceIcon(QSize(120, 120)));
+    setIcon(CreatePieceIcon(QSize(120, 120)));
     setText(clippedText);
 }
 
@@ -72,57 +73,50 @@ void VPCarrouselPiece::RefreshSelection()
     setSelected(m_piece->GetIsSelected());
 }
 
-////---------------------------------------------------------------------------------------------------------------------
-//void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
-//{
-//    QMenu contextMenu;
+//---------------------------------------------------------------------------------------------------------------------
+QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size) const
+{
+    QVector<QPointF> points = m_piece->GetSeamLine();
+    if(points.isEmpty())
+    {
+        points = m_piece->GetCuttingLine();
+    }
 
-//    VPPieceList* unplacedPieces = m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList();
-//    QList<VPSheet*> sheets = m_piece->GetPieceList()->GetLayout()->GetSheets();
-//    QList<VPPieceList*> pieceLists = QList<VPPieceList*>();
-//    for (auto sheet : sheets)
-//    {
-//        pieceLists.append(sheet->GetPieceList());
-//    }
+    QPolygonF shape(points);
+    shape << shape.first();
 
-//    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
-//    pieceLists.removeAll(m_piece->GetPieceList());
-//    if(pieceLists.count() > 0)
-//    {
-//        QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
+    QRectF boundingRect = shape.boundingRect();
+    qreal canvasSize = qMax(boundingRect.height(), boundingRect.width());
+    QRectF canvas = QRectF(0, 0, canvasSize, canvasSize);
 
-//        // TODO order in alphabetical order
+    qreal dx = canvas.center().x() - boundingRect.center().x();
+    qreal dy = canvas.center().y() - boundingRect.center().y();
 
-//        for (auto pieceList : pieceLists)
-//        {
-//            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
-//            QVariant data = QVariant::fromValue(pieceList);
-//            moveToPieceList->setData(data);
+    QPixmap pixmap(size);
+    pixmap.fill(QColor("white"));
 
-//            connect(moveToPieceList, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
-//        }
-//    }
+    QPainter painter;
+    painter.begin(&pixmap);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
-//    // remove from piece list action
-//    if(m_piece->GetPieceList() != unplacedPieces)
-//    {
-//        QAction *removeAction = contextMenu.addAction(tr("Remove from Sheet"));
-//        QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
-//        removeAction->setData(data);
-//        connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
-//    }
+    int spacing = 2;
+    painter.translate(spacing, spacing);
 
-//    contextMenu.exec(event->globalPos());
-//}
+    qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing*2) / 100;
+    qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing*2) / 100;
+    painter.scale(1./scaleFactorX, 1./scaleFactorY);
+    painter.setPen(QPen(Qt::black, 0.8*qMax(scaleFactorX, scaleFactorY)));
 
-////---------------------------------------------------------------------------------------------------------------------
-//void VPCarrouselPiece::on_ActionPieceMovedToPieceList()
-//{
-//    QAction *act = qobject_cast<QAction *>(sender());
-//    QVariant v = act->data();
-//    VPPieceList *pieceList = v.value<VPPieceList *>();
-//    if(pieceList != nullptr)
-//    {
-//        pieceList->GetLayout()->MovePieceToPieceList(m_piece, pieceList);
-//    }
-//}
+    painter.translate(dx, dy);
+
+    painter.drawPolygon(shape);
+    painter.end();
+
+    QIcon icon;
+
+    icon.addPixmap(pixmap,QIcon::Normal);
+    icon.addPixmap(pixmap,QIcon::Selected);
+
+    return icon;
+}

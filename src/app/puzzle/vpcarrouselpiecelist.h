@@ -31,6 +31,7 @@
 
 #include <QListWidget>
 #include "vppiecelist.h"
+#include "vpcarrousel.h"
 
 
 class VPCarrouselPieceList : public QListWidget
@@ -40,7 +41,9 @@ public:
     VPCarrouselPieceList(QWidget* parent);
     ~VPCarrouselPieceList();
 
-    void Init();
+    /**
+     * @brief Refresh refreshes the items of the carrousel piece list
+     */
     void Refresh();
 
     /**
@@ -53,9 +56,19 @@ public:
      * @brief SetCurrentPieceList Sets the current piece list to the given piece list and redraw
      * the carrousel.
      */
-    void SetCurrentPieceList(VPPieceList* pieceList);
+    void SetCurrentPieceList(VPPieceList *pieceList);
+
+    /**
+     * @brief SetCarrousel Sets the carrousel corresponding to the list
+     * @param carrousel
+     */
+    void SetCarrousel(VPCarrousel *carrousel);
+
 
 public slots:
+    /**
+     * @brief on_SelectionChangedExternal when the selection was changed outside of the carrousel
+     */
     void on_SelectionChangedExternal();
 
 protected:
@@ -65,11 +78,14 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 
+    void contextMenuEvent(QContextMenuEvent *event) override;
+
 private:
     Q_DISABLE_COPY(VPCarrouselPieceList)
 
     VPPieceList *m_pieceList{nullptr};
     QPoint m_dragStart;
+    VPCarrousel *m_carrousel{nullptr};
 
 private slots:
 
@@ -83,7 +99,15 @@ private slots:
      */
     void on_PieceRemoved(VPPiece* piece);
 
+    /**
+     * @brief on_SelectionChangedInternal when the selection was changed inside of the carrousel
+     */
     void on_SelectionChangedInternal();
+
+    /**
+     * @brief on_ActionPieceMovedToPieceList when a piece is moved to another piece list via a context menu
+     */
+    void on_ActionPieceMovedToPieceList();
 
 };
 

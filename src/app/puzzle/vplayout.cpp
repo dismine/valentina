@@ -30,6 +30,11 @@
 #include "vppiece.h"
 #include "vpsheet.h"
 
+
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(pLayout, "p.layout")
+
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout() :
     m_unplacedPieceList(new VPPieceList(this)),
@@ -146,6 +151,25 @@ void VPLayout::ClearSelection()
         sheet->ClearSelection();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::ClearSelectionExceptForGivenPieceList(VPPieceList* pieceList)
+{
+    if(m_unplacedPieceList != pieceList)
+    {
+        m_unplacedPieceList->ClearSelection();
+    }
+
+    for (auto sheet : m_sheets)
+    {
+        if(sheet->GetPieceList() != pieceList)
+        {
+            sheet->ClearSelection();
+        }
+    }
+}
+
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList)

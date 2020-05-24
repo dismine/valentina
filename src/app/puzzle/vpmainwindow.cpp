@@ -395,6 +395,9 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabSheetData()
 {
+    // set name // TODO FIXME make it better
+    ui->lineEditSheetName->setText(m_layout->GetFocusedSheet()->GetName());
+
     // set Width / Length
     QSizeF size = m_layout->GetFocusedSheet()->GetSheetSizeConverted();
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetWidth, size.width());

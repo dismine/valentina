@@ -51,12 +51,13 @@ public:
      */
     void RefreshSelection();
 
-private slots:
     /**
-     * @brief on_ActionPieceMovedToPieceList Slot called when the piece is moved via the
-     * context menu to anoter piece list
+     * @brief CreatePieceIcon Creates an icon of the piece of given size
+     * @param size of the icon
+     * @return the created icon
      */
-    void on_ActionPieceMovedToPieceList();
+    QIcon CreatePieceIcon(const QSize &size) const;
+
 
 private:
     VPPiece *m_piece;

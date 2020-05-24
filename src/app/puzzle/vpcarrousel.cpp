@@ -49,6 +49,7 @@ VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
     m_layout(layout)
 {
     ui->setupUi(this);
+    ui->listWidget->SetCarrousel(this);
 
     // init the combo box
     connect(ui->comboBoxPieceList, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
@@ -61,8 +62,6 @@ VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Refresh()
 {
-    // NOTE: alternative to clearing the carrousel and adding things again, we could make comparision
-
     // --- clears the content of the carrousel
     Clear();
 
@@ -70,18 +69,14 @@ void VPCarrousel::Refresh()
     // Do not rely on m_layout because we do not control it.
     m_pieceLists = QList<VPPieceList*>();
     m_pieceLists.append(m_layout->GetUnplacedPieceList());
-    for(auto sheet : m_layout->GetSheets())
-    {
-        m_pieceLists.append(sheet->GetPieceList());
-    }
+    m_pieceLists.append(m_layout->GetFocusedSheet()->GetPieceList());
 
-    for (auto pieceList : m_pieceLists)
-    {
-        // add piece list name to combo
-        ui->comboBoxPieceList->blockSignals(true);
-        ui->comboBoxPieceList->addItem(pieceList->GetName());
-        ui->comboBoxPieceList->blockSignals(false);
-    }
+    ui->comboBoxPieceList->blockSignals(true);
+
+    ui->comboBoxPieceList->addItem(m_layout->GetUnplacedPieceList()->GetName());
+    ui->comboBoxPieceList->addItem(tr("Pieces of ") + m_layout->GetFocusedSheet()->GetName());
+
+    ui->comboBoxPieceList->blockSignals(false);
 
     on_ActivePieceListChanged(0);
 
@@ -147,4 +142,14 @@ void VPCarrousel::RefreshOrientation()
 void VPCarrousel::ClearSelection()
 {
     m_layout->ClearSelection();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPCarrousel::ClearSelectionExceptForCurrentPieceList()
+{
+    if (m_layout != nullptr)
+    {
+        m_layout->ClearSelectionExceptForGivenPieceList(ui->listWidget->GetCurrentPieceList());
+    }
 }

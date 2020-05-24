@@ -85,6 +85,14 @@ public:
     void ClearSelection();
 
     /**
+     * @brief ClearSelectionExceptForPieceList same as clearSelection but it leaves the selection
+     * for the given piece list like it ist.
+     *
+     * @param pieceList the piece list to let be the way it is.
+     */
+    void ClearSelectionExceptForGivenPieceList(VPPieceList* pieceList);
+
+    /**
      * @brief MovePieceToPieceList Moves the given piece to the given piece list
      * @param piece the piece to move
      * @param pieceList the piece list to move the piece to

@@ -75,11 +75,18 @@ public:
      */
     void ClearSelection();
 
+    /**
+     * @brief ClearSelectionExceptForCurrentPieceList Clears the selection of all pieces of
+     * the layout except for the one in the current piece list
+     */
+    void ClearSelectionExceptForCurrentPieceList();
+
 private:
     Q_DISABLE_COPY(VPCarrousel)
     Ui::VPCarrousel *ui;
 
-    VPLayout *m_layout;
+    VPLayout *m_layout{nullptr};
+
     QList<VPPieceList*> m_pieceLists{};
 
     Qt::Orientation m_orientation{Qt::Vertical};
