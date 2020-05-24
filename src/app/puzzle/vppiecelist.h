@@ -30,6 +30,7 @@
 
 #include <QList>
 #include "vppiece.h"
+#include "vpsheet.h"
 
 class VPLayout;
 
@@ -37,7 +38,7 @@ class VPPieceList : public QObject
 {
     Q_OBJECT
 public:
-    VPPieceList(VPLayout *layout);
+    VPPieceList(VPLayout *layout, VPSheet *sheet = nullptr);
     ~VPPieceList();
 
     QList<VPPiece *> GetPieces();
@@ -58,6 +59,14 @@ public:
      * @return the layout of this piece list
      */
     VPLayout* GetLayout();
+
+
+    /**
+     * @brief GetSheet returns the sheet corresponding to this piece list, or nullptr
+     * if no sheet associated
+     * @return the sheet
+     */
+    VPSheet* GetSheet();
 
     /**
      * @brief ClearSelection Clears the selection of the pieces in this piece list
@@ -80,6 +89,8 @@ private:
 
     QString m_name{};
     QList<VPPiece *> m_pieces{};
+
+    VPSheet *m_sheet{nullptr};
 
     VPLayout *m_layout{nullptr};
 

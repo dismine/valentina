@@ -296,5 +296,10 @@ QIcon VPPiece::PieceIcon(const QSize &size) const
     painter.drawPolygon(shape);
     painter.end();
 
-    return QIcon(pixmap);
+    QIcon icon;
+
+    icon.addPixmap(pixmap,QIcon::Normal);
+    icon.addPixmap(pixmap,QIcon::Selected);
+
+    return icon;
 }

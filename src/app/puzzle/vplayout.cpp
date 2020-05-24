@@ -32,7 +32,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout() :
-    m_unplacedPieceList(new VPPieceList(this))
+    m_unplacedPieceList(new VPPieceList(this)),
+    m_sheets(QList<VPSheet*>())
 {
     m_unplacedPieceList->SetName(QObject::tr("Unplaced pieces"));
 }

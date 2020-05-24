@@ -327,7 +327,7 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     // remove from layout action
-    QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
+    QAction *removeAction = contextMenu.addAction(tr("Remove from Sheet"));
     QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
     removeAction->setData(data);
     connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);

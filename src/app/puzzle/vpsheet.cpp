@@ -34,7 +34,7 @@
 VPSheet::VPSheet(VPLayout* layout) :
     m_layout(layout)
 {
-    m_pieceList = new VPPieceList(layout);
+    m_pieceList = new VPPieceList(layout, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

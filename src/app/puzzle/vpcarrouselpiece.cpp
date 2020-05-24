@@ -28,12 +28,6 @@
 
 #include "vpcarrouselpiece.h"
 
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QGraphicsScene>
-#include <QPainter>
-#include <QDrag>
-#include <QPainter>
 #include <QApplication>
 #include <QMenu>
 
@@ -48,103 +42,22 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, VPCarrouselPieceList *carrouselPieceList) :
-    m_piece(piece),
-    m_carrouselPieceList(carrouselPieceList),
-    m_dragStart(QPoint())
+VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, QListWidget* parent) :
+    QListWidgetItem(parent,1001),
+    m_piece(piece)
 {
-    Init();
+    int width = 120 - 8;
+    QFontMetrics metrix = QFontMetrics(QFont());
+    QString clippedText = metrix.elidedText(piece->GetName(), Qt::ElideRight, width);
+    setIcon(m_piece->PieceIcon(QSize(120, 120)));
+    setText(clippedText);
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrouselPiece::~VPCarrouselPiece()
 {
-    delete m_piecePreview;
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::Init()
-{
-    // Define the structure
-    setFixedSize(124,128);
-    QVBoxLayout *pieceLayout = new QVBoxLayout();
-    pieceLayout->setMargin(0);
-    pieceLayout->setSpacing(0);
-    setLayout(pieceLayout);
-
-    setStyleSheet("background-color:white; border: 2px solid transparent;");
-
-    // define the preview of the piece
-    m_piecePreview = new VPCarrouselPiecePreview(this);
-
-    // m_graphicsView = new VMainGraphicsView(this);
-    // --> undefined reference to 'VMainGraphicsView::VMainGraphicView(QWidget*)'
-    QGraphicsScene *graphicsScene = new QGraphicsScene(this);
-    m_piecePreview->setScene(graphicsScene);
-    m_piecePreview->setFixedSize(120,100);
-    m_piecePreview->setStyleSheet("border: 4px solid transparent;");
-    m_piecePreview->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-
-    // define the label
-    m_label = new QLabel();
-    m_label->sizePolicy();
-    m_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-    m_label->setFixedSize(120,24);
-    m_label->setStyleSheet("border: 0px;");
-    m_label->setMouseTracking(false);
-
-    pieceLayout->addWidget(m_piecePreview);
-    pieceLayout->addWidget(m_label);
-
-
-    // connect the signals
-    connect(m_piece, &VPPiece::SelectionChanged, this, &VPCarrouselPiece::on_PieceSelectionChanged);
-
-    // then refresh the data
-    Refresh();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::CleanPreview()
-{
-    m_piecePreview->fitInView(m_piecePreview->scene()->sceneRect(), Qt::KeepAspectRatio);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::Refresh()
-{
-    // update the graphic view / the scene
-
-    QVector<QPointF> points = m_piece->GetSeamLine();
-    if(points.isEmpty())
-    {
-        points = m_piece->GetCuttingLine();
-    }
-
-    QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    pen.setCosmetic(true);
-    QBrush noBrush(Qt::NoBrush);
-
-    QPainterPath path;
-    path.moveTo(points.first());
-    for (int i = 1; i < points.size(); ++i)
-        path.lineTo(points.at(i));
-    m_piecePreview->scene()->addPath(path, pen, noBrush);
-
-    m_piecePreview->fitInView(m_piecePreview->scene()->sceneRect(), Qt::KeepAspectRatio);
-
-    // update the label of the piece
-    QFontMetrics metrix(m_label->font());
-    int width = m_label->width() - 8;
-    QString clippedText = metrix.elidedText(m_piece->GetName(), Qt::ElideRight, width);
-    m_label->setText(clippedText);
-
-    // set the tooltip
-    setToolTip(m_piece->GetName());
-
-    // set the selection state correctly.
-    on_PieceSelectionChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,138 +67,62 @@ VPPiece * VPCarrouselPiece::GetPiece()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::on_PieceSelectionChanged()
+void VPCarrouselPiece::RefreshSelection()
 {
-    if(m_piece->GetIsSelected())
-    {
-        setStyleSheet("background-color:white; border: 2px solid red;");
-    }
-    else
-    {
-        setStyleSheet("background-color:white; border: 2px solid transparent;");
-    }
+    setSelected(m_piece->GetIsSelected());
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::mousePressEvent(QMouseEvent *event)
-{
-    qCDebug(pCarrouselPiece, "mouse pressed");
+////---------------------------------------------------------------------------------------------------------------------
+//void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
+//{
+//    QMenu contextMenu;
 
+//    VPPieceList* unplacedPieces = m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList();
+//    QList<VPSheet*> sheets = m_piece->GetPieceList()->GetLayout()->GetSheets();
+//    QList<VPPieceList*> pieceLists = QList<VPPieceList*>();
+//    for (auto sheet : sheets)
+//    {
+//        pieceLists.append(sheet->GetPieceList());
+//    }
 
-    if (event->button() == Qt::LeftButton)
-    {
-        if(!(event->modifiers() & Qt::ControlModifier))
-        {
-            m_carrouselPieceList->GetCarrousel()->ClearSelection();
-            m_piece->SetIsSelected(true);
-        }
-        else
-        {
-            m_piece->SetIsSelected(!m_piece->GetIsSelected());
-        }
+//    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
+//    pieceLists.removeAll(m_piece->GetPieceList());
+//    if(pieceLists.count() > 0)
+//    {
+//        QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
 
-        m_dragStart = event->pos();
-    }
-}
+//        // TODO order in alphabetical order
 
+//        for (auto pieceList : pieceLists)
+//        {
+//            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
+//            QVariant data = QVariant::fromValue(pieceList);
+//            moveToPieceList->setData(data);
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::mouseMoveEvent(QMouseEvent *event)
-{
-    if (!(event->buttons() & Qt::LeftButton))
-    {
-        return;
-    }
+//            connect(moveToPieceList, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
+//        }
+//    }
 
-    if(m_piece->GetPieceList() != m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList())
-    {
-        return;
-    }
+//    // remove from piece list action
+//    if(m_piece->GetPieceList() != unplacedPieces)
+//    {
+//        QAction *removeAction = contextMenu.addAction(tr("Remove from Sheet"));
+//        QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
+//        removeAction->setData(data);
+//        connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
+//    }
 
-    if((event->pos() - m_dragStart).manhattanLength() < QApplication::startDragDistance())
-    {
-        return;
-    }
+//    contextMenu.exec(event->globalPos());
+//}
 
-    // make sure the multiple selection is removed
-    m_carrouselPieceList->GetCarrousel()->ClearSelection();
-    m_piece->SetIsSelected(true);
-
-    // starts the dragging
-    QDrag *drag = new QDrag(this);
-    VPMimeDataPiece *mimeData = new VPMimeDataPiece();
-    mimeData->SetPiecePtr(m_piece);
-    mimeData->setObjectName("piecePointer");
-
-    // in case we would want to have the pieces original size:
-    //drag->setHotSpot(QPoint(0,0));
-    //QPixmap pixmap(m_piecePreview->sceneRect().size().toSize());
-
-    QPixmap pixmap(112,92);
-    pixmap.fill(Qt::transparent);
-    QPainter painter(&pixmap);
-    painter.setRenderHint(QPainter::Antialiasing);
-    m_piecePreview->scene()->render(&painter);
-
-    drag->setPixmap(pixmap);
-    drag->setMimeData(mimeData);
-    drag->exec();
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::contextMenuEvent(QContextMenuEvent *event)
-{
-    QMenu contextMenu;
-
-    VPPieceList* unplacedPieces = m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList();
-    QList<VPSheet*> sheets = m_piece->GetPieceList()->GetLayout()->GetSheets();
-    QList<VPPieceList*> pieceLists = QList<VPPieceList*>();
-    for (auto sheet : sheets)
-    {
-        pieceLists.append(sheet->GetPieceList());
-    }
-
-    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
-    pieceLists.removeAll(m_piece->GetPieceList());
-    if(pieceLists.count() > 0)
-    {
-        QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
-
-        // TODO order in alphabetical order
-
-        for (auto pieceList : pieceLists)
-        {
-            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
-            QVariant data = QVariant::fromValue(pieceList);
-            moveToPieceList->setData(data);
-
-            connect(moveToPieceList, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
-        }
-    }
-
-    // remove from piece list action
-    if(m_piece->GetPieceList() != unplacedPieces)
-    {
-        QAction *removeAction = contextMenu.addAction(tr("Remove from Layout"));
-        QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
-        removeAction->setData(data);
-        connect(removeAction, &QAction::triggered, this, &VPCarrouselPiece::on_ActionPieceMovedToPieceList);
-    }
-
-    contextMenu.exec(event->globalPos());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPiece::on_ActionPieceMovedToPieceList()
-{
-    QAction *act = qobject_cast<QAction *>(sender());
-    QVariant v = act->data();
-    VPPieceList *pieceList = v.value<VPPieceList *>();
-    if(pieceList != nullptr)
-    {
-        pieceList->GetLayout()->MovePieceToPieceList(m_piece, pieceList);
-    }
-}
+////---------------------------------------------------------------------------------------------------------------------
+//void VPCarrouselPiece::on_ActionPieceMovedToPieceList()
+//{
+//    QAction *act = qobject_cast<QAction *>(sender());
+//    QVariant v = act->data();
+//    VPPieceList *pieceList = v.value<VPPieceList *>();
+//    if(pieceList != nullptr)
+//    {
+//        pieceList->GetLayout()->MovePieceToPieceList(m_piece, pieceList);
+//    }
+//}

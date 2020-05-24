@@ -34,7 +34,8 @@
 Q_LOGGING_CATEGORY(pPieceList, "p.pieceList")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList::VPPieceList(VPLayout *layout):
+VPPieceList::VPPieceList(VPLayout *layout, VPSheet *sheet):
+    m_sheet(sheet),
     m_layout(layout)
 {
 
@@ -50,6 +51,12 @@ VPPieceList::~VPPieceList()
 VPLayout* VPPieceList::GetLayout()
 {
     return m_layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPSheet* VPPieceList::GetSheet()
+{
+    return m_sheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

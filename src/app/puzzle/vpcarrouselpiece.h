@@ -28,32 +28,17 @@
 #ifndef VPCARROUSELPIECE_H
 #define VPCARROUSELPIECE_H
 
-#include <QFrame>
-#include <QLabel>
-#include <QGraphicsView>
 #include <QMouseEvent>
+#include <QListWidgetItem>
 
 #include "vppiece.h"
-#include "vpcarrouselpiecepreview.h"
 
 
-class VPCarrouselPieceList;
-
-class VPCarrouselPiece : public QFrame
+class VPCarrouselPiece : public QListWidgetItem
 {
-    Q_OBJECT
 public:
-    explicit VPCarrouselPiece(VPPiece *piece, VPCarrouselPieceList *carrouselPieceList);
+    explicit VPCarrouselPiece(VPPiece *piece, QListWidget* parent);
     ~VPCarrouselPiece();
-
-    void Init();
-    void Refresh();
-
-    /**
-    * @brief CleanPiecesPreview fitInView of the qGraphicsView of the pieces works properly
-    * only when the piece is in place in the piece list and we call it from the piece list.
-    */
-    void CleanPreview();
 
     /**
      * @brief GetPiece Returns the corresponding layout piece
@@ -61,15 +46,10 @@ public:
      */
     VPPiece * GetPiece();
 
-public slots:
-    void on_PieceSelectionChanged();
-
-protected:
-    void mousePressEvent(QMouseEvent *event) override;
-
-    void mouseMoveEvent(QMouseEvent *event) override;
-
-    void contextMenuEvent(QContextMenuEvent *event) override;
+    /**
+     * @brief RefreshSelection refreshes the selection of the piece according to the selection information of m_piece
+     */
+    void RefreshSelection();
 
 private slots:
     /**
@@ -79,16 +59,7 @@ private slots:
     void on_ActionPieceMovedToPieceList();
 
 private:
-    Q_DISABLE_COPY(VPCarrouselPiece)
-
     VPPiece *m_piece;
-
-    VPCarrouselPieceList *m_carrouselPieceList;
-
-    QLabel *m_label{nullptr};
-    VPCarrouselPiecePreview *m_piecePreview{nullptr};
-
-    QPoint m_dragStart;
 
 private slots:
 

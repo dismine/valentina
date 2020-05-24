@@ -30,6 +30,7 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QFontMetrics>
 
 #include "../vmisc/backport/qoverload.h"
 #include "vppiecelist.h"
@@ -52,8 +53,6 @@ VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
     // init the combo box
     connect(ui->comboBoxPieceList, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &VPCarrousel::on_ActivePieceListChanged);
-
-    ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     // ------ then we fill the carrousel with the layout content
     Refresh();
@@ -103,21 +102,11 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 {
     qCDebug(pCarrousel, "index changed %i", index);
 
-    ui->listWidget->clear();
-
     if (index >= 0 && index < m_pieceLists.size())
     {
         VPPieceList *pieceList = m_pieceLists.at(index);
 
-        if (pieceList)
-        {
-            QList<VPPiece*> pieces = pieceList->GetPieces();
-
-            for (auto piece : pieces)
-            {
-                new QListWidgetItem(piece->PieceIcon(QSize(120, 120)) , piece->GetName(), ui->listWidget);
-            }
-        }
+        ui->listWidget->SetCurrentPieceList(pieceList);
     }
 }
 

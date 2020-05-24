@@ -29,43 +29,47 @@
 #ifndef VPCARROUSELPIECELIST_H
 #define VPCARROUSELPIECELIST_H
 
-#include <QWidget>
+#include <QListWidget>
 #include "vppiecelist.h"
-#include "vpcarrouselpiece.h"
 
-class VPCarrousel;
 
-class VPCarrouselPieceList : public QWidget
+class VPCarrouselPieceList : public QListWidget
 {
     Q_OBJECT
 public:
-    VPCarrouselPieceList(VPPieceList *pieceList, VPCarrousel *carrousel);
+    VPCarrouselPieceList(QWidget* parent);
     ~VPCarrouselPieceList();
 
     void Init();
     void Refresh();
 
     /**
-     * @brief Clear it clears the carrousel pieceList from its pieces
-     */
-    void Clear();
-
-    QList<VPCarrouselPiece*> GetCarrouselPieces();
-
-    VPCarrousel* GetCarrousel();
-
-    /**
      * @brief GetPieceList Returns the corresponding VPPieceList
      * @return the VPPieceList
      */
-    VPPieceList* GetPieceList();
+    VPPieceList* GetCurrentPieceList();
+
+    /**
+     * @brief SetCurrentPieceList Sets the current piece list to the given piece list and redraw
+     * the carrousel.
+     */
+    void SetCurrentPieceList(VPPieceList* pieceList);
+
+public slots:
+    void on_SelectionChangedExternal();
+
+protected:
+    void startDrag(Qt::DropActions supportedActions) override;
+    void dragMoveEvent(QDragMoveEvent* e) override;
+
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
     Q_DISABLE_COPY(VPCarrouselPieceList)
 
-    VPPieceList *m_pieceList;
-    VPCarrousel *m_carrousel;
-    QList<VPCarrouselPiece*> m_carrouselPieces;
+    VPPieceList *m_pieceList{nullptr};
+    QPoint m_dragStart;
 
 private slots:
 
@@ -78,6 +82,8 @@ private slots:
      * @brief on_PieceUpdated This slot is called when a piece was removed
      */
     void on_PieceRemoved(VPPiece* piece);
+
+    void on_SelectionChangedInternal();
 
 };
 
