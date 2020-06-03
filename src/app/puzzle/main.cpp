@@ -29,7 +29,7 @@
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
-#include "puzzleapplication.h"
+#include "vpapplication.h"
 #include "../fervor/fvupdater.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/def.h"
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     InitHighDpiScaling(argc, argv);
 #endif //Q_OS_MAC
 
-    PuzzleApplication app(argc, argv);
+    VPApplication app(argc, argv);
     app.InitOptions();
 
     if (FvUpdater::IsStaledTestBuild())
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
         return V_EX_UNAVAILABLE;
     }
 
-    QTimer::singleShot(0, &app, &PuzzleApplication::ProcessCMD);
+    QTimer::singleShot(0, &app, &VPApplication::ProcessCMD);
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     if (exe_dir)
