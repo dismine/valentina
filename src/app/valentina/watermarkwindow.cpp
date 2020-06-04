@@ -358,20 +358,14 @@ bool WatermarkWindow::on_actionSave_triggered()
         {
             return false;
         }
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(m_curFile).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
 
+        const bool isFileWritable = QFileInfo(m_curFile).isWritable();
         if (not isFileWritable)
         {
             QMessageBox messageBox(this);
             messageBox.setIcon(QMessageBox::Question);
             messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText("Do you want to change the premissions?");
+            messageBox.setInformativeText(tr("Do you want to change the premissions?"));
             messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
             messageBox.setDefaultButton(QMessageBox::Yes);
 
@@ -494,13 +488,7 @@ void WatermarkWindow::UpdateWindowTitle()
     bool isFileWritable = true;
     if (not m_curFile.isEmpty())
     {
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
         isFileWritable = QFileInfo(m_curFile).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
     }
 
     if (isFileWritable)

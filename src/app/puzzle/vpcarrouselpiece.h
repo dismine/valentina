@@ -60,6 +60,7 @@ public:
 
 
 private:
+    Q_DISABLE_COPY(VPCarrouselPiece)
     VPPiece *m_piece;
 
 private slots:

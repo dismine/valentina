@@ -5597,30 +5597,6 @@ Applicare la configurazione comunque?</translation>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Nome:</translation>
-    </message>
-    <message>
-        <source>Tags:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add tags</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -11448,25 +11424,6 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Can&apos;t open file %1:
-%2.</source>
-        <translation>Impossibile aprire file %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open schema file %1:
-%2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
@@ -11736,21 +11693,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Tacca non valida.</translation>
-    </message>
-</context>
-<context>
-    <name>VBank</name>
-    <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

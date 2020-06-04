@@ -170,6 +170,9 @@ public:
     QSize GetWatermarkEditorSize() const;
     void SetWatermarkEditorSize(const QSize& sz);
 
+    bool GetToolPanelScaling() const;
+    void SetToolPanelScaling(const bool &value);
+
 private:
     Q_DISABLE_COPY(VValentinaSettings)
 };

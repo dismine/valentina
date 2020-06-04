@@ -53,6 +53,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
                           (QLatin1String("configuration/label_language")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
                           (QLatin1String("configuration/autoRefreshPatternMessage")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolPanelScaling,
+                          (QLatin1String("configuration/toolPanelScaling")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))
 
@@ -669,4 +671,16 @@ QSize VValentinaSettings::GetWatermarkEditorSize() const
 void VValentinaSettings::SetWatermarkEditorSize(const QSize &sz)
 {
     setValue(*settingWatermarkEditorSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VValentinaSettings::GetToolPanelScaling() const
+{
+    return value(*settingToolPanelScaling, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetToolPanelScaling(const bool &value)
+{
+    setValue(*settingToolPanelScaling, value);
 }

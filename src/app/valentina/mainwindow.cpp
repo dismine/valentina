@@ -652,6 +652,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::Move:
             case Tool::FlippingByAxis:
             case Tool::FlippingByLine:
+            case Tool::Group:
                 dialogTool->SetGroupCategories(doc->GetGroupCategories());
                 break;
             default:
@@ -3048,20 +3049,14 @@ bool MainWindow::on_actionSave_triggered()
         {
             return false;
         }
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
 
+        const bool isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
         if (not isFileWritable)
         {
             QMessageBox messageBox(this);
             messageBox.setIcon(QMessageBox::Question);
             messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText("Do you want to change the premissions?");
+            messageBox.setInformativeText(tr("Do you want to change the premissions?"));
             messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
             messageBox.setDefaultButton(QMessageBox::Yes);
 
@@ -4222,6 +4217,9 @@ void MainWindow::ReadSettings()
         // Text under tool buton icon
         ToolBarStyles();
 
+        // Tool box scaling
+        ToolBoxSizePolicy();
+
         isDockToolOptionsVisible = ui->dockWidgetToolOptions->isEnabled();
         isDockGroupsVisible = ui->dockWidgetGroups->isEnabled();
 
@@ -5230,6 +5228,14 @@ void MainWindow::ToolBarStyles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBoxSizePolicy()
+{
+    ui->toolBox->setSizePolicy(ui->toolBox->sizePolicy().horizontalPolicy(),
+                               qApp->ValentinaSettings()->GetToolPanelScaling() ? QSizePolicy::Fixed
+                                                                                : QSizePolicy::Preferred);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
     if (index < 0 || index >= scenes.size())
@@ -5260,6 +5266,7 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, toolOptions,
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBoxSizePolicy);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this](){emit doc->FullUpdateFromFile();});
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);
@@ -5995,13 +6002,7 @@ void MainWindow::UpdateWindowTitle()
     bool isFileWritable = true;
     if (not qApp->GetPatternPath().isEmpty())
     {
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
         isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
     }
 
     if (not patternReadOnly && isFileWritable)
