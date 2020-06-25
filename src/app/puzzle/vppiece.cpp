@@ -55,9 +55,9 @@ VPPiece::VPPiece(VLayoutPiece layoutPiece): VLayoutPiece(layoutPiece)
     // then translate the piece so that the top left corner of the bouding rect of the piece is at the position
     // (0,0) in the sheet coordinate system
     QRectF boundingRect = DetailBoundingRect();
-    m_offset = boundingRect.topLeft();
+    QPointF offset = boundingRect.topLeft();
     matrix = GetMatrix();
-    matrix.translate(-m_offset.x() ,-m_offset.y());
+    matrix.translate(-offset.x() ,-offset.y());
     SetMatrix(matrix);
 }
 
@@ -98,9 +98,7 @@ void VPPiece::SetPieceMirrored(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 void VPPiece::SetPosition(QPointF point)
 {
-    QTransform matrix = GetMatrix();
-    matrix.translate(point.x() - matrix.dx() - m_offset.x(), point.y() - matrix.dy() - m_offset.y());
-    SetMatrix(matrix);
+    m_transform.translate(point.x() - m_transform.dx(), point.y() - m_transform.dy());
 
     emit PositionChanged();
 }
@@ -108,7 +106,7 @@ void VPPiece::SetPosition(QPointF point)
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VPPiece::GetPosition()
 {
-    return QPointF(GetMatrix().dx() + m_offset.x(), GetMatrix().dy()+m_offset.y());
+    return QPointF(m_transform.dx(),m_transform.dy());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

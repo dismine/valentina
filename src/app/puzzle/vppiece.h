@@ -151,12 +151,12 @@ signals:
 private:
     Q_DISABLE_COPY(VPPiece)
 
-    QPointF m_offset{QPointF()};
-
     QVector<QPointF> m_grainline{QVector<QPointF>()};
     bool m_isGrainlineEnabled{false};
     qreal m_grainlineAngle{0};
 
+    // for now separate the position of the piece to the matrix coming from vlayoutpiece
+    // because it's difficult to have the origin of the piece by (0,0)
     QTransform m_transform{QTransform()};
     // use a separate value for now because it's not easy to get the angle from the transform matrix
     qreal m_pieceAngle{0};

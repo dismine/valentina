@@ -67,8 +67,8 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->SetFocusedSheet();
 
     // ----- for test purposes, to be removed------------------
-    sheet->SetSheetMarginsConverted(2, 2, 2, 2);
-    sheet->SetSheetSizeConverted(30.0, 45);
+    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
+    sheet->SetSheetSizeConverted(84.1, 118.9);
     sheet->SetPiecesGapConverted(1);
 
     m_layout->SetUnit(Unit::Cm);
@@ -795,18 +795,6 @@ void VPMainWindow::on_SheetSizeChanged()
 {
     m_layout->GetFocusedSheet()->SetSheetSizeConverted(ui->doubleSpinBoxSheetWidth->value(), ui->doubleSpinBoxSheetLength->value());
 
-    // updates orientation - no need to block signals because the signal reacts on "clicked"
-    if(ui->doubleSpinBoxSheetWidth->value() <= ui->doubleSpinBoxSheetLength->value())
-    {
-        //portrait
-        ui->radioButtonSheetPortrait->setChecked(true);
-    }
-    else
-    {
-        //landscape
-        ui->radioButtonSheetLandscape->setChecked(true);
-    }
-
     // TODO Undo / Redo
 
     m_graphicsView->RefreshLayout();
@@ -815,14 +803,15 @@ void VPMainWindow::on_SheetSizeChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_SheetOrientationChanged()
 {
-    // swap the width and length
-    qreal width_before = ui->doubleSpinBoxSheetWidth->value();
-    qreal length_before = ui->doubleSpinBoxSheetLength->value();
-
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetWidth, length_before);
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, width_before);
-
-    m_layout->GetFocusedSheet()->SetSheetSizeConverted(ui->doubleSpinBoxSheetWidth->value(), ui->doubleSpinBoxSheetLength->value());
+    // Updates the orientation
+    if(ui->radioButtonSheetPortrait->isChecked())
+    {
+        m_layout->GetFocusedSheet()->SetOrientation(PageOrientation::Portrait);
+    }
+    else
+    {
+        m_layout->GetFocusedSheet()->SetOrientation(PageOrientation::Landscape);
+    }
 
     // TODO Undo / Redo
 

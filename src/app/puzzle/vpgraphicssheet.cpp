@@ -68,7 +68,13 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsSheet::GetSheetRect() const
 {
-    QRectF rect = QRectF(QPointF(0,0), m_sheet->GetSheetSize());
+    QPoint topLeft = QPoint(0,0);
+    QSizeF size = m_sheet->GetSheetSize();
+    if(m_sheet->GetOrientation() == PageOrientation::Landscape)
+    {
+        size.transpose();
+    }
+    QRectF rect = QRectF(topLeft, size);
     return rect;
 }
 
@@ -77,6 +83,12 @@ QRectF VPGraphicsSheet::GetMarginsRect() const
 {
     QMarginsF margins = m_sheet->GetSheetMargins();
     QSizeF size = m_sheet->GetSheetSize();
+
+    if(m_sheet->GetOrientation() == PageOrientation::Landscape)
+    {
+        size.transpose();
+    }
+
     QRectF rect = QRectF(
                     QPointF(margins.left(),margins.top()),
                     QPointF(size.width()-margins.right(), size.height()-margins.bottom())

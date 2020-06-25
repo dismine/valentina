@@ -108,6 +108,22 @@ QSizeF VPSheet::GetSheetSizeConverted() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+PageOrientation VPSheet::GetOrientation()
+{
+    return m_orientation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetOrientation(PageOrientation orientation)
+{
+    if(orientation != m_orientation)
+    {
+        m_orientation = orientation;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPSheet::SetSheetMargins(qreal left, qreal top, qreal right, qreal bottom)
 {
     m_margins.setLeft(left);

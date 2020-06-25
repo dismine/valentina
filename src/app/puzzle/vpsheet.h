@@ -105,6 +105,18 @@ public:
     QSizeF GetSheetSizeConverted() const;
 
     /**
+     * @brief GetOrientation Returns the orientation of the sheet
+     * @return orientation of the sheet
+     */
+    PageOrientation GetOrientation();
+
+    /**
+     * @brief SetOrientation Sets the orientation of the sheet to the given value
+     * @param orientation the new page orientation
+     */
+    void SetOrientation(PageOrientation orientation);
+
+    /**
      * @brief SetSheetMargins, set the margins of the sheet, the values have to be in Unit::Px
      * @param left in Unit::Px
      * @param top in Unit::Px
@@ -204,6 +216,11 @@ private:
      * @brief m_size the Size in Unit::Px
      */
     QSizeF m_size{};
+
+    /**
+     * @brief holds the orientation of the sheet
+     */
+    PageOrientation m_orientation {PageOrientation::Portrait};
 
     // margins
     /**
