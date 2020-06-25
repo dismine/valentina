@@ -155,12 +155,6 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             {
                 VLayoutPiece rawPiece = data.pieces.at(i);
 
-                // We translate the piece, so that the origin of the bounding rect of the piece is at (0,0)
-                // It makes positioning later on easier.
-                QRectF boundingRect = rawPiece.DetailBoundingRect();
-                QPointF topLeft = boundingRect.topLeft();
-                rawPiece.Translate(-topLeft.x(), -topLeft.y());
-
 
 
                 // TODO / FIXME: make a few tests, on the data to check for validity. If not
@@ -192,19 +186,14 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 //---------------------------------------------------------------------------------------------------------------------
 VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 {
-    VPPiece *piece = new VPPiece();
-    piece->SetName(rawPiece.GetName());
-    piece->SetUuid(rawPiece.GetUUID());
+    VPPiece *piece = new VPPiece(rawPiece);
 
-    piece->SetCuttingLine(rawPiece.GetMappedSeamAllowancePoints());
-    piece->SetSeamLine(rawPiece.GetMappedContourPoints());
 
-    piece->SetIsGrainlineEnabled(rawPiece.IsGrainlineEnabled());
-    if(rawPiece.IsGrainlineEnabled())
-    {
-        piece->SetGrainlineAngle(rawPiece.GrainlineAngle());
-        piece->SetGrainline(rawPiece.GetGrainline());
-    }
+    // cutting line : GetMappedSeamAllowancePoints();
+    // seamline : GetMappedContourPoints();
+
+    // rawPiece.IsGrainlineEnabled() , GrainlineAngle , GetGrainline
+
 
     // TODO : set all the information we need for the piece!
 

@@ -45,61 +45,26 @@ VPPiece::VPPiece()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPPiece::VPPiece(VLayoutPiece layoutPiece): VLayoutPiece(layoutPiece)
+{
+    // Resets the translation of the matrix
+    QTransform matrix = GetMatrix();
+    matrix.translate(-matrix.dx() ,-matrix.dy());
+    SetMatrix(matrix);
+
+    // then translate the piece so that the top left corner of the bouding rect of the piece is at the position
+    // (0,0) in the sheet coordinate system
+    QRectF boundingRect = DetailBoundingRect();
+    m_offset = boundingRect.topLeft();
+    matrix = GetMatrix();
+    matrix.translate(-m_offset.x() ,-m_offset.y());
+    SetMatrix(matrix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPPiece::~VPPiece()
 {
 
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPPiece::GetName() const
-{
-    return m_name;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetName(const QString &name)
-{
-    m_name = name;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QUuid VPPiece::GetUuid() const
-{
-    return m_uuid;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetUuid(const QUuid &uuid)
-{
-    m_uuid = uuid;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPPiece::GetCuttingLine() const
-{
-    return m_cuttingLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetCuttingLine(const QVector<QPointF> &cuttingLine)
-{
-    m_cuttingLine = cuttingLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPPiece::GetSeamLine() const
-{
-    return m_seamLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetSeamLine(const QVector<QPointF> &seamLine)
-{
-    m_seamLine = seamLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,7 +98,9 @@ void VPPiece::SetPieceMirrored(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 void VPPiece::SetPosition(QPointF point)
 {
-    m_transform.translate(point.x() - m_transform.dx(), point.y() - m_transform.dy());
+    QTransform matrix = GetMatrix();
+    matrix.translate(point.x() - matrix.dx() - m_offset.x(), point.y() - matrix.dy() - m_offset.y());
+    SetMatrix(matrix);
 
     emit PositionChanged();
 }
@@ -141,7 +108,7 @@ void VPPiece::SetPosition(QPointF point)
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VPPiece::GetPosition()
 {
-    return QPointF(m_transform.dx(), m_transform.dy());
+    return QPointF(GetMatrix().dx() + m_offset.x(), GetMatrix().dy()+m_offset.y());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,6 +137,7 @@ void VPPiece::SetRotation(qreal angle)
         emit RotationChanged();
     }
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPPiece::GetRotation()
@@ -207,41 +175,6 @@ bool VPPiece::GetIsSelected()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetIsGrainlineEnabled(bool value)
-{
-    m_isGrainlineEnabled = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPPiece::GetIsGrainlineEnabled()
-{
-    return m_isGrainlineEnabled;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainlineAngle(qreal value)
-{
-    m_grainlineAngle = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPPiece::GetGrainlineAngle()
-{
-    return m_grainlineAngle;
-}
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainline(QVector<QPointF> grainline)
-{
-    m_grainline = grainline;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPPiece::GetGrainline()
-{
-    return m_grainline;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VPPieceList* VPPiece::GetPieceList()
 {
     return m_pieceList;
@@ -255,5 +188,3 @@ void VPPiece::SetPieceList(VPPieceList* pieceList)
         m_pieceList = pieceList;
     }
 }
-
-

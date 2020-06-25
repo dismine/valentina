@@ -241,7 +241,7 @@ void VPLayoutFileReader::ReadPiece(VPPiece *piece)
     piece->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece")));
 
     QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid().toString());// FIXME: is that correct to have a default value here?
-    piece->SetUuid(QUuid(uuidStr));
+    piece->SetUUID(QUuid(uuidStr));
 
     bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
     piece->SetShowSeamLine(showSeamline);

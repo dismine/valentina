@@ -76,10 +76,10 @@ void VPCarrouselPiece::RefreshSelection()
 //---------------------------------------------------------------------------------------------------------------------
 QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size) const
 {
-    QVector<QPointF> points = m_piece->GetSeamLine();
+    QVector<QPointF> points = m_piece->GetMappedContourPoints(); // seamline
     if(points.isEmpty())
     {
-        points = m_piece->GetCuttingLine();
+        points = m_piece->GetMappedSeamAllowancePoints(); // cutting line
     }
 
     QPolygonF shape(points);
