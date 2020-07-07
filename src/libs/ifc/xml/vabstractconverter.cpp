@@ -45,6 +45,7 @@
 #include <QStringDataPtr>
 #include <QStringList>
 #include <QTextDocument>
+#include <QUrl>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
 
