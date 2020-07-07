@@ -325,7 +325,7 @@ void VApplication::NewValentina(const QString &fileName)
         qCDebug(vApp, "New process without arguments. program = %s",
                 qUtf8Printable(QCoreApplication::applicationFilePath()));
         // Path can contain spaces.
-        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
+        if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList()))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
@@ -338,7 +338,7 @@ void VApplication::NewValentina(const QString &fileName)
     {
         const QString run = QStringLiteral("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
-        if (QProcess::startDetached(run))
+        if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList{fileName}))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
