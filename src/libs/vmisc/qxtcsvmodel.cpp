@@ -647,7 +647,11 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
         stream << data << Qt::endl;
 #endif
     }
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     stream << flush;
+#else
+    stream << Qt::flush;
+#endif
     dest->close();
     return true;
 }
