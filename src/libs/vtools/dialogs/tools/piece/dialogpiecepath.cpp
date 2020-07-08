@@ -1154,10 +1154,16 @@ void DialogPiecePath::InitPassmarksTab()
     connect(ui->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogPiecePath::PassmarkChanged);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     connect(ui->buttonGroupMarkType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkAngleTypeChanged);
+#else
+    connect(ui->buttonGroupMarkType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkLineTypeChanged);
+    connect(ui->buttonGroupAngleType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkAngleTypeChanged);
+#endif
+
     connect(ui->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogPiecePath::PassmarkShowSecondChanged);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkLength);

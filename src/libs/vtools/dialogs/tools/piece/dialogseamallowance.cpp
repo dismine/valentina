@@ -3190,10 +3190,17 @@ void DialogSeamAllowance::InitPassmarksTab()
     connect(uiTabPassmarks->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::PassmarkChanged);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     connect(uiTabPassmarks->buttonGroupLineType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogSeamAllowance::PassmarkLineTypeChanged);
     connect(uiTabPassmarks->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogSeamAllowance::PassmarkAngleTypeChanged);
+#else
+    connect(uiTabPassmarks->buttonGroupLineType, &QButtonGroup::idClicked,
+            this, &DialogSeamAllowance::PassmarkLineTypeChanged);
+    connect(uiTabPassmarks->buttonGroupAngleType, &QButtonGroup::idClicked,
+            this, &DialogSeamAllowance::PassmarkAngleTypeChanged);
+#endif
     connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);
     connect(uiTabPassmarks->toolButtonExprLength, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkLength);
