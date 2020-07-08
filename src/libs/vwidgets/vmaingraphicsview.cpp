@@ -76,12 +76,12 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
     if (not numPixels.isNull())
     {
         const qreal mouseScale = settings->GetSensorMouseScale();
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x()) / mouseScale;
+        numSteps = (numPixels.x() == 0 ? numPixels.y() : numPixels.x()) / mouseScale;
     }
     else if (not numDegrees.isNull())
     {
         const qreal mouseScale = settings->GetWheelMouseScale();
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
+        numSteps = (numPixels.x() == 0 ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
     }
 
     return numSteps;
@@ -283,11 +283,12 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
     {
         if (QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event))
         {
-            if (wheel_event->orientation() == Qt::Vertical)
+            const QPoint numDegrees = wheel_event->angleDelta();
+            if (numDegrees.x() == 0)
             {
                 if (QGuiApplication::keyboardModifiers() == _modifiers)
                 {
-                    gentle_zoom(qPow(_zoom_factor_base, wheel_event->angleDelta().y()));
+                    gentle_zoom(qPow(_zoom_factor_base, numDegrees.y()));
                     return true;
                 }
                 else if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
