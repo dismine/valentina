@@ -79,7 +79,13 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 #BuildRequires: clang-libs
 #%endif
 
-Requires:   poppler-utils
+%if 0%{?mageia} > 0
+Requires: poppler
+%elif 0%{?suse_version} > 0
+Requires: poppler-tools
+%elif 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
+Requires: poppler-utils
+%endif
 
 Version:	0.7.0
 Release:	0
