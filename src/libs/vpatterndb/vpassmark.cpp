@@ -26,6 +26,8 @@
  **
  *************************************************************************/
 
+#include <QPainterPath>
+
 #include "vpassmark.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"

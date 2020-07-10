@@ -30,6 +30,7 @@
 
 #include <QLineF>
 #include <QPoint>
+#include <QPainterPath>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
