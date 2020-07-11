@@ -19,6 +19,15 @@ unix{
     } else {
         VCOPY = $$QMAKE_COPY -u
     }
+
+    # Prefix for binary file.
+    isEmpty(PREFIX){
+        PREFIX = $$DEFAULT_PREFIX
+    }
+
+    DATADIR = $$PREFIX/share
+    PKGDATADIR = $$DATADIR/valentina
+    DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 }
 
 win32{

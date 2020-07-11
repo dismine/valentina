@@ -191,19 +191,11 @@ include(../translations.pri)
 
 # Set "make install" command for Unix-like systems.
 unix{
-    # Prefix for binary file.
-    isEmpty(PREFIX){
-        PREFIX = $$DEFAULT_PREFIX
-    }
-
-    unix:!macx{
-        DATADIR =$$PREFIX/share
-        DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
-
+    !macx{
         # Path to bin file after installation
         target.path = $$PREFIX/bin
 
-        rcc_diagrams.path = $$PREFIX/share/valentina/
+        rcc_diagrams.path = $$PKGDATADIR
         rcc_diagrams.files = $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
         rcc_diagrams.CONFIG = no_check_exist
 

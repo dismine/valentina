@@ -163,7 +163,7 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
         }
         else
         {
-            return QStringLiteral("/usr/share/valentina/translations");
+            return PKGDATADIR + trPath;
         }
     }
 #else // Unix
@@ -175,7 +175,7 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     }
     else
     {
-        return QStringLiteral("/usr/share/valentina/translations");
+        return PKGDATADIR + trPath;
     }
 #endif
 }

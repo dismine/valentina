@@ -531,7 +531,7 @@ QString MApplication::diagramsPath() const
         }
         else
         {
-            return QStringLiteral("/usr/share/valentina") + dPath;
+            return PKGDATADIR + dPath;
         }
     }
 #else // Unix
@@ -542,7 +542,7 @@ QString MApplication::diagramsPath() const
     }
     else
     {
-        return QStringLiteral("/usr/share/valentina") + dPath;
+        return PKGDATADIR + dPath;
     }
 #endif
 }

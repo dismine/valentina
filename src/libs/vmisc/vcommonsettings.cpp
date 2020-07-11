@@ -125,7 +125,7 @@ QStringList ClearFormats(const QStringList &predefinedFormats, QStringList forma
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, commonIniFilename, (QLatin1String("common")))
 
 #if !defined(Q_OS_WIN)
-const QString VCommonSettings::unixStandardSharePath = QStringLiteral("/usr/share/valentina");
+const QString VCommonSettings::unixStandardSharePath = PKGDATADIR;
 #endif
 
 namespace
