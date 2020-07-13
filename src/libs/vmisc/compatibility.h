@@ -31,6 +31,7 @@
 #include <QtGlobal>
 #include <QStringList>
 #include <QSet>
+#include <QVector>
 
 class QPointF;
 
@@ -183,14 +184,13 @@ inline void Move(T &vector, int from, int to)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-T Reverse(const T &container)
+QVector<T> Reverse(const QVector<T> &container)
 {
     if (container.isEmpty())
     {
         return container;
     }
-    T reversed;
-    reversed.reserve(container.size());
+    QVector<T> reversed(container.size());
     qint32 j = 0;
     for (qint32 i = container.size() - 1; i >= 0; --i)
     {
@@ -198,6 +198,20 @@ T Reverse(const T &container)
         ++j;
     }
     return reversed;
+}
+
+template <typename T, template <typename> class C>
+//---------------------------------------------------------------------------------------------------------------------
+C<T> Reverse(const C<T> &container)
+{
+    return ConvertToList(Reverse(ConvertToVector(container)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type* = nullptr>
+T Reverse(const T &container)
+{
+    return Reverse<QString, QList>(container);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
