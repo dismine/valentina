@@ -8464,6 +8464,10 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8975,6 +8979,14 @@ Voulez-vous sauvegarder les changements?</translation>
     <message>
         <source>dark mode</source>
         <translation>Mode nuit</translation>
+    </message>
+    <message>
+        <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9511,6 +9523,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment end.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16089,6 +16117,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Une erreur inconnue s&apos;est produite, par exemple une partition pleine empêche d&apos;écrire le fichier verrouillé. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

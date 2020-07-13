@@ -8469,6 +8469,10 @@ el patrón.</translation>
         <source>Watermark files</source>
         <translation>Archivos de marca de agua</translation>
     </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">¿Quieres cambiar los permisos?</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8996,6 +9000,14 @@ el patrón.</translation>
     <message>
         <source>dark mode</source>
         <translation>modo oscuro</translation>
+    </message>
+    <message>
+        <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9534,6 +9546,22 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>No se puede convertir el parámetro toInt</translation>
+    </message>
+    <message>
+        <source>Could not find the segment start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment end.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16142,6 +16170,10 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos).</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">¿Quieres cambiar los permisos?</translation>
     </message>
 </context>
 <context>

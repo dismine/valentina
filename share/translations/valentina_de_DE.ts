@@ -8468,6 +8468,10 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Watermark files</source>
         <translation>Wasserzeichen Dateien</translation>
     </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Wollen Sie die Berechtigung ändern ?</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8995,6 +8999,14 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>dark mode</source>
         <translation>Dunkler Hintergrund</translation>
+    </message>
+    <message>
+        <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9533,6 +9545,22 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Konnte nicht in Parameter vom Typ &apos;Ganzzahl&apos; umwandeln</translation>
+    </message>
+    <message>
+        <source>Could not find the segment start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment end.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16085,6 +16113,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Wollen Sie die Berechtigung ändern ?</translation>
     </message>
 </context>
 <context>

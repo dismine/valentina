@@ -8354,11 +8354,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Increase label font</source>
-        <translation>Vermeerder label fontgrootte</translation>
+        <translation>Vergroot fontgrootte label</translation>
     </message>
     <message>
         <source>Decrease label font</source>
-        <translation>Verminder label fontgrootte</translation>
+        <translation>Verklein fontgrootte label</translation>
     </message>
     <message>
         <source>Original label font</source>
@@ -8467,6 +8467,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Watermark files</source>
         <translation>Watermerk bestanden</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Wens je de rechten te veranderen?</translation>
     </message>
 </context>
 <context>
@@ -8995,6 +8999,14 @@ Do you want to save your changes?</source>
     <message>
         <source>dark mode</source>
         <translation>donkere modus</translation>
+    </message>
+    <message>
+        <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9533,6 +9545,22 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Kan toInt parameter niet omzetten</translation>
+    </message>
+    <message>
+        <source>Could not find the segment start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment end.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16141,6 +16169,10 @@ Deze wijziging opslaan?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Wens je de rechten te veranderen?</translation>
     </message>
 </context>
 <context>

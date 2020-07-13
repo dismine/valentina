@@ -8392,7 +8392,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструмент сложная кривая, которая использует точки чертежа как контрольные точки</translation>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
@@ -8469,6 +8469,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Watermark files</source>
         <translation>Файлы водяных знаков</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Вы хотите изменить права?</translation>
     </message>
 </context>
 <context>
@@ -8997,6 +9001,14 @@ Do you want to save your changes?</source>
     <message>
         <source>dark mode</source>
         <translation>тёмный режим</translation>
+    </message>
+    <message>
+        <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9534,6 +9546,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment end.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10586,7 +10614,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Вы хотите изменить настройки?</translation>
+        <translation>Вы хотите изменить права?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -16149,6 +16177,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Вы хотите изменить права?</translation>
     </message>
 </context>
 <context>
