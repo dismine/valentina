@@ -53,6 +53,10 @@
 #include <QSpacerItem>
 #include <QThread>
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#   include "../vmisc/appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -542,7 +546,12 @@ QString MApplication::diagramsPath() const
     }
     else
     {
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+        /* Fix path to diagrams when run inside AppImage. */
+        return AppImageRoot() + PKGDATADIR + dPath;
+#else
         return PKGDATADIR + dPath;
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
     }
 #endif
 }

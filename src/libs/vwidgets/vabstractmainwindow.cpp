@@ -30,6 +30,7 @@
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
 #include "dialogs/dialogexporttocsv.h"
 
 #include <QStyle>
@@ -44,28 +45,6 @@
 
 namespace
 {
-//---------------------------------------------------------------------------------------------------------------------
-QStringList SplitFilePaths(const QString &path)
-{
-    QStringList result;
-    QString subPath = QDir::cleanPath(path);
-    QString lastFileName;
-
-    do
-    {
-        QFileInfo fileInfo(subPath);
-        lastFileName = fileInfo.fileName();
-        if (not lastFileName.isEmpty())
-        {
-            result.prepend(lastFileName);
-            subPath = fileInfo.path();
-        }
-    }
-    while(not lastFileName.isEmpty());
-
-    return result;
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ReverseList(const QStringList &list)
 {

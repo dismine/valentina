@@ -49,6 +49,10 @@
 #  include <unistd.h>
 #endif
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#   include "appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
 const QString VAbstractApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +179,12 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     }
     else
     {
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+        /* Fix path to trasnaltions when run inside AppImage. */
+        return AppImageRoot() + PKGDATADIR + trPath;
+#else
         return PKGDATADIR + trPath;
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
     }
 #endif
 }

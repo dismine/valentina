@@ -791,3 +791,25 @@ IncrementType StringToIncrementType(const QString &value)
     }
     return IncrementType::Increment;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList SplitFilePaths(const QString &path)
+{
+    QStringList result;
+    QString subPath = QDir::cleanPath(path);
+    QString lastFileName;
+
+    do
+    {
+        QFileInfo fileInfo(subPath);
+        lastFileName = fileInfo.fileName();
+        if (not lastFileName.isEmpty())
+        {
+            result.prepend(lastFileName);
+            subPath = fileInfo.path();
+        }
+    }
+    while(not lastFileName.isEmpty());
+
+    return result;
+}

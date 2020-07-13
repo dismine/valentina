@@ -597,6 +597,8 @@ Q_REQUIRED_RESULT QString StrippedName(const QString &fullFileName);
 Q_REQUIRED_RESULT QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
 Q_REQUIRED_RESULT QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
 
+QStringList SplitFilePaths(const QString &path);
+
 Q_REQUIRED_RESULT QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
                                                           QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
 
