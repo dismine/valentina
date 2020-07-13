@@ -81,9 +81,13 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 
 %if 0%{?mageia} > 0
 Requires: poppler
-%elif 0%{?suse_version} > 0
+%endif
+
+%if 0%{?suse_version} > 0
 Requires: poppler-tools
-%elif 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
+%endif
+
+%if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
 Requires: poppler-utils
 %endif
 
