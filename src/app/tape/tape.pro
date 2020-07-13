@@ -193,7 +193,7 @@ include(../translations.pri)
 unix{
     !macx{
         # Path to bin file after installation
-        target.path = $$PREFIX/bin
+        target.path = $$BINDIR
 
         rcc_diagrams.path = $$PKGDATADIR
         rcc_diagrams.files = $${OUT_PWD}/$${DESTDIR}/diagrams.rcc

@@ -20,14 +20,18 @@ unix{
         VCOPY = $$QMAKE_COPY -u
     }
 
+    # Default prefix. Use for creation install path.
+    DEFAULT_PREFIX = /usr
+
     # Prefix for binary file.
     isEmpty(PREFIX){
         PREFIX = $$DEFAULT_PREFIX
     }
 
+    BINDIR = $$PREFIX/bin
     DATADIR = $$PREFIX/share
     PKGDATADIR = $$DATADIR/valentina
-    DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
+    DEFINES += BINDIR=\\\"$$BINDIR\\\" DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 }
 
 win32{
@@ -318,9 +322,6 @@ defineReplace(FindLatestTagDistance){
         return($${GIT_DISTANCE})
     }
 }
-
-# Default prefix. Use for creation install path.
-DEFAULT_PREFIX = /usr
 
 # In debug mode on Unix system we use all usefull for us compilers keys for checking errors.
 # Also trying make all possible for speed up build time.

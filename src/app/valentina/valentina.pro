@@ -144,9 +144,9 @@ include(../translations.pri)
 unix{
     !macx{
         # Path to bin file after installation
-        target.path = $$PREFIX/bin
+        target.path = $$BINDIR
 
-        tape.path = $$PREFIX/bin
+        tape.path = $$BINDIR
         tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
 
         # .desktop file
