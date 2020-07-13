@@ -33,6 +33,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 #include "../ifc/ifcdef.h"
 #include "vabstractcurve.h"
 #include "varc_p.h"
@@ -307,7 +308,7 @@ QVector<QPointF> VArc::GetPoints() const
         points << splPoints;
         pStart = lineP4P3.p1();
     }
-    return IsFlipped() ? VGObject::GetReversePoints(points) : points;
+    return IsFlipped() ? Reverse(points) : points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

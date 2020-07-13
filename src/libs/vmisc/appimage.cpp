@@ -39,26 +39,6 @@ extern "C" {
 #include "../vmisc/def.h"
 #include "compatibility.h"
 
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-QStringList ReverseList(const QStringList &list)
-{
-    if (list.isEmpty())
-    {
-        return list;
-    }
-    QVector<QString> reversedList(list.size());
-    qint32 j = 0;
-    for (qint32 i = list.size() - 1; i >= 0; --i)
-    {
-        reversedList.replace(j, list.at(i));
-        ++j;
-    }
-    return ConvertToList(reversedList);
-}
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
  * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
@@ -112,8 +92,8 @@ QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir
         return QString();
     }
 
-    appSub = ReverseList(appSub);
-    defaultSub = ReverseList(defaultSub);
+    appSub = Reverse(appSub);
+    defaultSub = Reverse(defaultSub);
 
     for (int i = 0; i < defaultSub.size(); ++i)
     {
@@ -124,7 +104,7 @@ QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir
     }
 
     QStringList rootSub = appSub.mid(defaultSub.size());
-    rootSub = ReverseList(rootSub);
+    rootSub = Reverse(rootSub);
 
     return '/' + rootSub.join('/');
 }

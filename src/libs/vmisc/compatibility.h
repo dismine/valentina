@@ -182,6 +182,25 @@ inline void Move(T &vector, int from, int to)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+T Reverse(const T &container)
+{
+    if (container.isEmpty())
+    {
+        return container;
+    }
+    T reversed;
+    reversed.reserve(container.size());
+    qint32 j = 0;
+    for (qint32 i = container.size() - 1; i >= 0; --i)
+    {
+        reversed.replace(j, container.at(i));
+        ++j;
+    }
+    return reversed;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename Cont, typename Input>
 inline void AppendTo(Cont &container, const Input &input)
 {

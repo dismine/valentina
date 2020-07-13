@@ -1755,7 +1755,7 @@ QVector<VRawSAPoint> VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> 
             {
                 clipped.append(points.at(j));
             }
-            points = VGObject::GetReversePoints(clipped);
+            points = Reverse(clipped);
             *success = true;
             break;
         }

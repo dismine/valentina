@@ -35,6 +35,7 @@
 #include "../vgeometry/varc.h"
 #include "vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vlayout/testpath.h"
 
@@ -780,7 +781,7 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
             QVector<VPieceNode> customNodes = data->GetPiecePath(records.at(i).path).GetNodes();
             if (records.at(i).reverse)
             {
-                customNodes = VGObject::GetReversePoints(customNodes);
+                customNodes = Reverse(customNodes);
             }
 
             for (int j = 0; j < customNodes.size(); ++j)

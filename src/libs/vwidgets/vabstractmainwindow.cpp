@@ -46,28 +46,11 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ReverseList(const QStringList &list)
-{
-    if (list.isEmpty())
-    {
-        return list;
-    }
-    QVector<QString> reversedList(list.size());
-    qint32 j = 0;
-    for (qint32 i = list.size() - 1; i >= 0; --i)
-    {
-        reversedList.replace(j, list.at(i));
-        ++j;
-    }
-    return ConvertToList(reversedList);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QStringList SelectNumber(QStringList path, int number)
 {
-    path = ReverseList(path);
+    path = Reverse(path);
     QStringList subPath = path.mid(0, number);
-    return ReverseList(subPath);
+    return Reverse(subPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

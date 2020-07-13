@@ -33,6 +33,7 @@
 #include "../vlayout/vabstractpiece.h"
 #include "calculator.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
 #include <qnumeric.h>
@@ -391,8 +392,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
         if (IsLastToCuttingCountour())
         {
             QPointF lastConnection;
-            if (IntersectionWithCuttingCountour(cuttingPath, VGObject::GetReversePoints(points),
-                                                &lastConnection))
+            if (IntersectionWithCuttingCountour(cuttingPath, Reverse(points), &lastConnection))
             {
                 extended.append(lastConnection);
             }
@@ -509,7 +509,7 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 
     if (reverse)
     {
-        pointsEkv = VGObject::GetReversePoints(pointsEkv);
+        pointsEkv = Reverse(pointsEkv);
     }
 
     return pointsEkv;
