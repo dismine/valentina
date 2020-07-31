@@ -146,9 +146,7 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
 
             loop = QLineF(bigLine1.p1(), sp2);
             loop.setLength(loop.length() + localWidth);
-            VRawSAPoint loopPoint(loop.p2());
-            loopPoint.SetLoopPoint(true);
-            points.append(loopPoint);
+            points.append(VRawSAPoint(loop.p2(), true));
         }
         else
         {
@@ -1460,9 +1458,7 @@ QT_WARNING_POP
 
                             loop = QLineF(crosPoint, bigLine1.p1());
                             loop.setLength(loop.length() + localWidth*2.);
-                            VRawSAPoint loopPoint(loop.p2());
-                            loopPoint.SetLoopPoint(true);
-                            points.append(loopPoint);
+                            points.append(VRawSAPoint(loop.p2(), true));
                         }
 
                         return points;
