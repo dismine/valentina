@@ -313,10 +313,14 @@ QPainterPath VPiece::SeamAllowancePath(const QVector<QPointF> &points) const
 
 #if !defined(V_NO_ASSERT)
             // uncomment for debug
+//            QFont font;
+//            font.setPixelSize(1);
 //            for (qint32 i = 0; i < points.count(); ++i)
 //            {
 //                ekv.addEllipse(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine,
 //                               accuracyPointOnLine*2., accuracyPointOnLine*2.);
+//                ekv.addText(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine, font,
+//                            QString::number(i+1));
 //            }
 #endif
 
