@@ -139,14 +139,30 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
 
         if (angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
         {
-            QLineF loop(sp2, bigLine1.p1());
-            loop.setLength(accuracyPointOnLine*2.);
-            points.append(loop.p2());
-            points.append(sp2);
+            if (VGObject::IsPointOnLineSegment(sp2, bigLine2.p1(), bigLine2.p2()))
+            {
+                QLineF loop(bigLine1.p2(), sp2);
+                loop.setLength(loop.length() + accuracyPointOnLine*2.);
+                points.append(loop.p2());
+                points.append(sp2);
+                points.append(VRawSAPoint(bigLine1.p2(), true));
 
-            loop = QLineF(bigLine1.p1(), sp2);
-            loop.setLength(loop.length() + localWidth);
-            points.append(VRawSAPoint(loop.p2(), true));
+                loop = QLineF(bigLine2.p2(), sp2);
+                loop.setLength(loop.length() + localWidth);
+                points.append(VRawSAPoint(loop.p2(), true));
+            }
+            else
+            {
+                QLineF loop(sp2, bigLine1.p1());
+                loop.setLength(accuracyPointOnLine*2.);
+                points.append(loop.p2());
+                points.append(sp2);
+
+                loop = QLineF(bigLine1.p1(), sp2);
+                loop.setLength(loop.length() + localWidth);
+                points.append(VRawSAPoint(loop.p2(), true));
+                points.append(VRawSAPoint(bigLine2.p1(), true));
+            }
         }
         else
         {

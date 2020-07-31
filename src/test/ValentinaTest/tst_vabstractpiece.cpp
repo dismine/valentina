@@ -320,6 +320,44 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
+{
+    QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<qreal>("width");
+    QTest::addColumn<QVector<QPointF>>("ekvOrig");
+
+    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    {
+        QVector<VSAPoint> inputPoints;
+        AbstractTest::VectorFromJson(input, inputPoints);
+
+        QVector<QPointF> outputPoints;
+        AbstractTest::VectorFromJson(output, outputPoints);
+
+        QTest::newRow(title) << inputPoints << width << outputPoints;
+    };
+
+    // See file src/app/share/collection/test/smart_pattern_#58.val (private collection)
+    ASSERT_TEST_CASE("Loop in layout allowance",
+                     QStringLiteral("://smart_pattern_#58/input.json"),
+                     QStringLiteral("://smart_pattern_#58/output.json"),
+                     18.897637795275593 /*seam allowance width (0.5 cm)*/);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::LayoutAllowanceRemoveLoop() const
+{
+    QFETCH(QVector<VSAPoint>, points);
+    QFETCH(qreal, width);
+    QFETCH(QVector<QPointF>, ekvOrig);
+
+    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());
+
+    // Begin comparison
+    Comparison(ekv, ekvOrig);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::SumTrapezoids() const
 {
     // Case3 checks that the method 'SumTrapezoids' returns negative value for three clockwise allocated points
