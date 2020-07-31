@@ -5359,9 +5359,15 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 {
                     QString dirPath;
                     const QDir patternDir = QFileInfo(patternPath).absoluteDir();
-                    if (patternDir.exists(table.fileName()))
+                    QString measurements = table.fileName();
+                    if (patternDir.exists(measurements))
                     {
-                        selectedName = table.fileName();
+                        selectedName = measurements;
+                        dirPath = patternDir.absolutePath();
+                    }
+                    else if (patternDir.exists(measurements.replace(' ', '_')))
+                    {
+                        selectedName = measurements.replace(' ', '_');
                         dirPath = patternDir.absolutePath();
                     }
                     else

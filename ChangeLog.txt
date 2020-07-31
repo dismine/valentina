@@ -51,6 +51,7 @@
 - [smart-pattern/valentina#45] Optimize tool box position for big screen resolutions.
 - [smart-pattern/valentina#40] Invalid name of arc in modeling mode.
 - New warning. Error calculating segment of curve.
+- Improve searching lost measurements. Additional case with underscores instead of regular spaces.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
