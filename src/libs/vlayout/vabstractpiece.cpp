@@ -1548,69 +1548,7 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
         return false; // Wrong direction
     }
 
-    // Edges must not intersect
-    for (auto i = 0; i < base.count(); ++i)
-    {
-        int nextI = -1;
-        if (i < base.count()-1)
-        {
-            nextI = i + 1;
-        }
-        else
-        {
-            nextI = 0;
-        }
-
-        QLineF baseSegment(base.at(i), base.at(nextI));
-        if (baseSegment.isNull())
-        {
-            continue;
-        }
-
-        for (auto j = 0; j < allowance.count(); ++j)
-        {
-            int nextJ = -1;
-            if (j < allowance.count()-1)
-            {
-                nextJ = j + 1;
-            }
-            else
-            {
-                nextJ = 0;
-            }
-
-            QLineF allowanceSegment(allowance.at(j), allowance.at(nextJ));
-            if (allowanceSegment.isNull())
-            {
-                continue;
-            }
-
-            QPointF crosPoint;
-            const auto type = Intersects(baseSegment, allowanceSegment, &crosPoint);
-
-            if (type == QLineF::BoundedIntersection
-                    && not VFuzzyComparePoints(baseSegment.p1(), crosPoint)
-                    && not VFuzzyComparePoints(baseSegment.p2(), crosPoint)
-                    && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p1(), baseSegment.p1(), baseSegment.p2())
-                    && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p2(), baseSegment.p1(), baseSegment.p2()))
-            {
-                return false;
-            }
-        }
-    }
-
-    // Just instersection edges is not enough. The base must be inside of the allowance.
-    QPolygonF allowancePolygon(allowance);
-
-    for (auto &point : base)
-    {
-        if (not allowancePolygon.containsPoint(point, Qt::WindingFill))
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return IsInsidePolygon(base, allowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
