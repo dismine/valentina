@@ -1399,30 +1399,20 @@ QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// NOTE: Once C++17 is made mandatory, this method can further be refactored with std::optional<int>
 int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const
 {
-    if (p1.isNull())
+    if (p1.isNull() || path.count() < 3)
     {
         return 0;
     }
 
-    if (path.count() < 3)
+    const auto points = Map(path);
+    const auto posIter = std::find_if(points.cbegin(), points.cend(),
+                                      [&p1](const auto &point){ return VFuzzyComparePoints(point, p1); });
+    if (posIter != points.cend())
     {
-        return 0;
-    }
-
-    const QVector<QPointF> points = Map(path);
-    for (int i=0; i < points.size(); i++)
-    {
-        if (VFuzzyComparePoints(points.at(i), p1))
-        {
-            int pos = i+1;
-            if (pos > points.size())
-            {
-                pos = 1;
-            }
-            return pos;
-        }
+        return posIter - points.cbegin() + 1;
     }
     return 0; // Did not find edge
 }
