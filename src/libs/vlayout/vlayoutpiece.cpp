@@ -508,20 +508,11 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
 template <class T>
 QVector<T> VLayoutPiece::Map(QVector<T> points) const
 {
-    for (int i = 0; i < points.size(); ++i)
-    {
-        points[i] = d->matrix.map(points.at(i));
-    }
-
+    std::transform(points.begin(), points.end(), points.begin(),
+                   [this](const auto &point) { return d->matrix.map(point); });
     if (d->mirror)
     {
-        QList<T> list = ConvertToList(points);
-
-        for (int k=0, s=list.size(), max=(s/2); k<max; k++)
-        {
-            SwapItemsAt(list, k, s-(1+k));
-        }
-        points = ConvertToVector(list);
+        std::reverse(points.begin(), points.end());
     }
     return points;
 }
