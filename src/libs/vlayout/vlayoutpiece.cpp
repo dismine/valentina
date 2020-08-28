@@ -175,7 +175,7 @@ QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
     allowancePoints.reserve(points.size());
-    for(auto point : points)
+    for(auto &point : points)
     {
         allowancePoints.append(VSAPoint(point));
     }
@@ -206,8 +206,9 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
     QStringList text;
     if (labelShape.count() > 2)
     {
-        text.reserve(tm.GetSourceLinesCount());
-        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+        int sourceCount = tm.GetSourceLinesCount();
+        text.reserve(sourceCount);
+        for (int i = 0; i < sourceCount; ++i)
         {
             text.append(tm.GetSourceLine(i).m_qsText);
         }
@@ -219,9 +220,9 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
 QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern)
 {
     QVector<VLayoutPlaceLabel> labels;
-    const QVector<quint32> placeLabels = piece.GetPlaceLabels();
+    const auto placeLabels = piece.GetPlaceLabels();
     labels.reserve(placeLabels.size());
-    for(auto placeLabel : placeLabels)
+    for(auto &placeLabel : placeLabels)
     {
         const auto label = pattern->GeometricObject<VPlaceLabelItem>(placeLabel);
         if (label->IsVisible())
