@@ -148,15 +148,16 @@ inline QVector<T> ConvertToVector(const QSet<T> &container)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void SwapItemsAt(T &container, int i, int j)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-    container.swapItemsAt(i, j);
-#else
-    container.swap(i, j);
-#endif
-}
+// NOTE: Delete if not necessary anymore
+//template <typename T>
+//inline void SwapItemsAt(T &container, int i, int j)
+//{
+//#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+//    container.swapItemsAt(i, j);
+//#else
+//    container.swap(i, j);
+//#endif
+//}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
