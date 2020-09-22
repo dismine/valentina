@@ -9565,6 +9565,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>

@@ -264,8 +264,33 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
                 if (nodeIndex != -1)
                 {
-                    layoutPassmark.lines = passmark.BuiltInSAPassmark(piece, pattern);
-                    layoutPassmark.baseLine = ConstFirst (passmark.BuiltInSAPassmarkBaseLine(piece));
+                    const QVector<QLineF> lines = passmark.BuiltInSAPassmark(piece, pattern);
+                    if (lines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare builtin passmark '%1' for piece '%2'. Passmark is empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
+
+                    layoutPassmark.lines = lines;
+
+                    const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece);
+                    if (baseLines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare builtin  passmark '%1' for piece '%2'. Passmark base line is "
+                                        "empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
+                    layoutPassmark.baseLine = ConstFirst (baseLines);
+
+
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = true;
 
@@ -295,18 +320,39 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
                 if (nodeIndex != -1)
                 {
-                    QVector<QLineF> lines =
+                    QVector<QLineF> baseLines =
                             passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
+                    if (baseLines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark base line is empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
 
                     if (side == PassmarkSide::All || side == PassmarkSide::Right)
                     {
-                        layoutPassmark.baseLine = lines.first();
+                        layoutPassmark.baseLine = baseLines.first();
                     }
                     else if (side == PassmarkSide::Right)
                     {
-                        layoutPassmark.baseLine = lines.last();
+                        layoutPassmark.baseLine = baseLines.last();
                     }
-                    layoutPassmark.lines = passmark.SAPassmark(piece, pattern, side);
+
+                    const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
+                    if (lines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark is empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
+
+                    layoutPassmark.lines = lines;
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = false;
 
