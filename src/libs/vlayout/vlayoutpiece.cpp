@@ -1409,7 +1409,7 @@ int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) c
 
     const auto points = Map(path);
     const auto posIter = std::find_if(points.cbegin(), points.cend(),
-                                      [&p1](const auto &point){ return VFuzzyComparePoints(point, p1); });
+                                      [&p1](const QPointF &point){ return VFuzzyComparePoints(point, p1); });
     if (posIter != points.cend())
     {
         return static_cast<int>(posIter - points.cbegin() + 1);
