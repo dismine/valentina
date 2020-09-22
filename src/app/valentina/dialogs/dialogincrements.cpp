@@ -816,6 +816,9 @@ void DialogIncrements::FullUpdateFromFile()
 {
     hasChanges = false;
 
+    const int incrementRow = ui->tableWidgetIncrement->currentRow();
+    const int pcRow = ui->tableWidgetPC->currentRow();
+
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
     ui->tableWidgetAnglesCurves->clearContents();
@@ -835,6 +838,9 @@ void DialogIncrements::FullUpdateFromFile()
 
     search->RefreshList(ui->lineEditFind->text());
     searchPC->RefreshList(ui->lineEditFindPC->text());
+
+    ui->tableWidgetIncrement->selectRow(incrementRow);
+    ui->tableWidgetPC->selectRow(pcRow);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
