@@ -28,14 +28,7 @@ jobs:
     compiler: clang
     env:
     - DEPLOY=true
-    - LEGACY=false
     osx_image: xcode11
-  - os: osx
-    compiler: clang
-    env:
-    - DEPLOY=true
-    - LEGACY=true
-    osx_image: xcode8
   - stage: sonarcloud
     os: linux
     dist: bionic
@@ -75,12 +68,7 @@ before_install:
     sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
     brew update > /dev/null;
-    if [[ "$LEGACY" = false ]]; then
-      brew install qt5;
-    else
-      unset SSL_CERT_FILE;
-      brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/20544ac8e68ef3523f92e15f432bbaf9a6aa2c22/qt5.rb;
-    fi
+    brew install qt5;
     chmod -R 755 /usr/local/opt/qt5/*
   fi
 before_script:
@@ -135,11 +123,7 @@ before_deploy:
 - |
   if [[ "$DEPLOY" == "true" ]]; then
     ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
-    if [[ "$LEGACY" = false ]]; then
-      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
-    else
-      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz Valentina.app/;
-    fi
+    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
   fi
 deploy:
   provider: bintray
