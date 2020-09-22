@@ -509,7 +509,7 @@ template <class T>
 QVector<T> VLayoutPiece::Map(QVector<T> points) const
 {
     std::transform(points.begin(), points.end(), points.begin(),
-                   [this](const auto &point) { return d->matrix.map(point); });
+                   [this](const T &point) { return d->matrix.map(point); });
     if (d->mirror)
     {
         std::reverse(points.begin(), points.end());
