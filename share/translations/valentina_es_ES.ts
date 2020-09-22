@@ -8471,7 +8471,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">¿Quieres cambiar los permisos?</translation>
+        <translation>¿Quieres cambiar los permisos?</translation>
     </message>
 </context>
 <context>
@@ -9003,11 +9003,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambie la posición del panel de herramientas para optimizar las resoluciones de pantalla grande. De forma predeterminada, el panel de herramientas ocupará todo el espacio disponible.</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala de panel de herramientas</translation>
     </message>
 </context>
 <context>
@@ -9549,19 +9549,19 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Could not find the segment start.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo encontrar el inicio del segmento.</translation>
     </message>
     <message>
         <source>Could not find the segment end.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo encontrar el final del segmento.</translation>
     </message>
     <message>
         <source>Segment is too short.</source>
-        <translation type="unfinished"></translation>
+        <translation>El segmento es demasiado corto.</translation>
     </message>
     <message>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error calculando el segmento para la curva &apos;%1&apos;. %2</translation>
     </message>
 </context>
 <context>
@@ -16173,7 +16173,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">¿Quieres cambiar los permisos?</translation>
+        <translation>¿Quieres cambiar los permisos?</translation>
     </message>
 </context>
 <context>

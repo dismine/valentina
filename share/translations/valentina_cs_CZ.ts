@@ -8473,7 +8473,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Chcete změnit oprávnění?</translation>
+        <translation>Chcete změnit oprávnění?</translation>
     </message>
 </context>
 <context>
@@ -16174,7 +16174,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Chcete změnit oprávnění?</translation>
+        <translation>Chcete změnit oprávnění?</translation>
     </message>
 </context>
 <context>

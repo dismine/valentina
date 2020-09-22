@@ -261,7 +261,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше об &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам исправить ошибки. Мы не собираем персональную информацию пользователей. Узнать больше об &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -429,7 +429,7 @@
     </message>
     <message>
         <source>Tape version</source>
-        <translation>Версия  Tape</translation>
+        <translation>Версия Tape</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -3470,7 +3470,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включите эту опцию, чтобы предпочесть получать решения на одном листе.</translation>
     </message>
 </context>
 <context>
@@ -3647,7 +3647,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -4831,11 +4831,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит внутрь детали</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит наружу детали</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -5273,7 +5273,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
-        <translation>Выберите точку по горозинтали</translation>
+        <translation>Выберите точку по горизонтали</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -7154,7 +7154,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
-        <translation>Сохранить еще не сохраненную выкройку</translation>
+        <translation>Сохранить еще несохраненную выкройку</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -7451,7 +7451,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation>Валентина не была закрыта корректно. Вы хотите восстановить файлы (%1) которые былы открыты раньше?</translation>
+        <translation>Valentina не была закрыта корректно. Вы хотите восстановить файлы (%1) которые были открыты раньше?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
@@ -7687,7 +7687,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show ...</source>
-        <translation type="vanished">Показать...</translation>
+        <translation type="vanished">Показать ...</translation>
     </message>
     <message>
         <source>Show measurements</source>
@@ -7736,7 +7736,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено 2 окна программы.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
@@ -8472,7 +8472,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Вы хотите изменить права?</translation>
+        <translation>Вы хотите изменить права?</translation>
     </message>
 </context>
 <context>
@@ -8727,7 +8727,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="vanished">Путь, что использует Валентина</translation>
+        <translation type="vanished">Путь, что использует Valentina</translation>
     </message>
     <message>
         <source>Default</source>
@@ -9004,11 +9004,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Измените положение панели инструментов, чтобы оптимизировать место для больших разрешений экрана. По умолчанию панель инструментов займет все доступное пространство.</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабирование панели инструментов</translation>
     </message>
 </context>
 <context>
@@ -9462,11 +9462,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать надсечку для точки &quot;%1&quot; в детали &quot;%2&quot;. Тип ошибки - коллапс надсечки.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать надсечку для точки &quot;%1&quot; в части &quot;%2&quot;. Нет пересечения.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
@@ -9550,19 +9550,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Could not find the segment start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось найти начало сегмента.</translation>
     </message>
     <message>
         <source>Could not find the segment end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось найти конец сегмента.</translation>
     </message>
     <message>
         <source>Segment is too short.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент слишком короткий.</translation>
     </message>
     <message>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка расчёта сегмента для кривой &apos;%1&apos;. %2</translation>
     </message>
 </context>
 <context>
@@ -10065,7 +10065,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation type="vanished">Открыть стандартные...</translation>
+        <translation type="vanished">Открыть стандартные ...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -10235,7 +10235,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено 2 окна программы.</translation>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
@@ -10895,7 +10895,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит наружу детали</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -11385,7 +11385,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation>Не по&amp;казывать снова</translation>
+        <translation>Не &amp;показывать снова</translation>
     </message>
 </context>
 <context>
@@ -12260,7 +12260,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите горизонтальный масштабный коэффициент от 0,01 до 3,0 (по умолчанию = 1,0, режим экспорта).</translation>
     </message>
     <message>
         <source>Horizontal scale</source>
@@ -12268,7 +12268,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите вертикальный масштабный коэффициент от 0,01 до 3,0 (по умолчанию = 1,0, режим экспорта).</translation>
     </message>
     <message>
         <source>Vertical scale</source>
@@ -12396,7 +12396,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="vanished">Этот id не уникальный.</translation>
+        <translation type="vanished">Этот id неуникальный.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -12725,7 +12725,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка, не уникальный id.</translation>
+        <translation type="vanished">Ошибка, неуникальный id.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -13018,7 +13018,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Надсечка для точки &quot;%1&quot; в детали &quot;%2&quot; будет отключена. Ручная длина меньше допустимого значения.</translation>
     </message>
 </context>
 <context>
@@ -15594,12 +15594,12 @@ Do you want to save your changes?</source>
     <message>
         <source>hyperbolic sine function</source>
         <comment>function sinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция синуса</translation>
     </message>
     <message>
         <source>hyperbolic cosine</source>
         <comment>function cosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболический косинус</translation>
     </message>
     <message>
         <source>hyperbolic tangens function</source>
@@ -15807,7 +15807,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot find piece by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается найти деталь с идентификатором &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -16180,7 +16180,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Вы хотите изменить права?</translation>
+        <translation>Вы хотите изменить права?</translation>
     </message>
 </context>
 <context>

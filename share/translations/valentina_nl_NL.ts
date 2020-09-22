@@ -8470,7 +8470,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Wens je de rechten te veranderen?</translation>
+        <translation>Wens je de rechten te veranderen?</translation>
     </message>
 </context>
 <context>
@@ -9002,11 +9002,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander de positie van het gereedschapspaneel om te optimatizeren voor hoge scherm resoluties. Standaard zal het gereedschapspaneel alle beschikbare plaats innemen.</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Paneel herschalings gereedschap</translation>
     </message>
 </context>
 <context>
@@ -9548,19 +9548,19 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Could not find the segment start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon het segment begin niet vinden.</translation>
     </message>
     <message>
         <source>Could not find the segment end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon het segement einde niet vinden.</translation>
     </message>
     <message>
         <source>Segment is too short.</source>
-        <translation type="unfinished"></translation>
+        <translation>Segment is te kort.</translation>
     </message>
     <message>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij berekenen segment voor boog &apos;%1&apos;. %2 </translation>
     </message>
 </context>
 <context>
@@ -16172,7 +16172,7 @@ Deze wijziging opslaan?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Wens je de rechten te veranderen?</translation>
+        <translation>Wens je de rechten te veranderen?</translation>
     </message>
 </context>
 <context>

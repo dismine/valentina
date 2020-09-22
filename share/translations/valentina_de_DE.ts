@@ -8470,7 +8470,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Wollen Sie die Berechtigung ändern ?</translation>
+        <translation>Wollen Sie die Berechtigung ändern ?</translation>
     </message>
 </context>
 <context>
@@ -16116,7 +16116,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Wollen Sie die Berechtigung ändern ?</translation>
+        <translation>Wollen Sie die Berechtigung ändern ?</translation>
     </message>
 </context>
 <context>
