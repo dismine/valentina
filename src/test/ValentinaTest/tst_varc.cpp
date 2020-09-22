@@ -32,9 +32,33 @@
 
 #include <QtTest>
 
+namespace
+{
+void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
+{
+    qreal radius = UnitConvertor(1, Unit::Cm, Unit::Px);
+    const qreal threshold = UnitConvertor(2000, Unit::Cm, Unit::Px);
+    while(radius <= threshold)
+    {
+        VArc arc(VPointF(center), radius, startAngle, endAngle);
+        const QVector<QPointF> points = arc.GetPoints();
+
+        const QString testStartAngle = QString("Test start angel. Arc radius %1, start angle %2, end angle %3")
+                                           .arg(radius).arg(startAngle).arg(endAngle);
+        QTest::newRow(qUtf8Printable(testStartAngle)) << center << startAngle << points << points.first() << true;
+
+        const QString testEndAngle = QString("Test end angel. Arc radius %1, start angle %2, end angle %3")
+                                         .arg(radius).arg(startAngle).arg(endAngle);
+        QTest::newRow(qUtf8Printable(testEndAngle)) << center << endAngle << points << points.last() << true;
+
+        radius += UnitConvertor(5, Unit::Cm, Unit::Px);
+    }
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VArc::TST_VArc(QObject *parent)
-    :QObject(parent)
+    :AbstractTest(parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,4 +418,41 @@ void TST_VArc::TestCutArc()
 
     qreal segmentsLength = VAbstractCurve::PathLength(arc1.GetPoints()) + VAbstractCurve::PathLength(arc2.GetPoints());
     QVERIFY(qAbs(segmentsLength - VAbstractCurve::PathLength(arc.GetPoints())) <= accuracyPointOnLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestCurveIntersectAxis_data()
+{
+    QTest::addColumn<QPointF>("basePoint");
+    QTest::addColumn<qreal>("angle");
+    QTest::addColumn<QVector<QPointF>>("curvePoints");
+    QTest::addColumn<QPointF>("crosPoint");
+    QTest::addColumn<bool>("result");
+
+    QPointF basePoint(10, 10);
+
+    PrepareTestCase(basePoint, 0, 15);
+    PrepareTestCase(basePoint, 0, 25);
+    PrepareTestCase(basePoint, 0, 45);
+    PrepareTestCase(basePoint, 0, 90);
+    PrepareTestCase(basePoint, 0, 180);
+    PrepareTestCase(basePoint, 0, 270);
+    PrepareTestCase(basePoint, 180, 315);
+    PrepareTestCase(basePoint, 183, 312);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestCurveIntersectAxis()
+{
+    QFETCH(QPointF, basePoint);
+    QFETCH(qreal, angle);
+    QFETCH(QVector<QPointF>, curvePoints);
+    QFETCH(QPointF, crosPoint);
+    QFETCH(bool, result);
+
+    QPointF intersectionPoint;
+    const bool found = VAbstractCurve::CurveIntersectAxis(basePoint, angle, curvePoints, &intersectionPoint);
+    QCOMPARE(found, result);
+
+    Comparison(intersectionPoint, crosPoint);
 }

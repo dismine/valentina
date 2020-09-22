@@ -29,9 +29,9 @@
 #ifndef TST_VARC_H
 #define TST_VARC_H
 
-#include <QObject>
+#include "../vtest/abstracttest.h"
 
-class TST_VArc : public QObject
+class TST_VArc : public AbstractTest
 {
     Q_OBJECT
 public:
@@ -48,6 +48,8 @@ private slots:
     void TestFlip();
     void TestCutArc_data();
     void TestCutArc();
+    void TestCurveIntersectAxis_data();
+    void TestCurveIntersectAxis();
 };
 
 #endif // TST_VARC_H
