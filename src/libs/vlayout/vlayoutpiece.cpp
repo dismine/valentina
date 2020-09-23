@@ -135,9 +135,11 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
     {
         Calculator cal1;
         labelWidth = cal1.EvalFormula(pattern->DataVariables(), labelData.GetLabelWidth());
+        labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
 
         Calculator cal2;
         labelHeight = cal2.EvalFormula(pattern->DataVariables(), labelData.GetLabelHeight());
+        labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
     }
     catch(qmu::QmuParserError &e)
     {
@@ -151,11 +153,7 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
         try
         {
             const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
-
-            const qreal lWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
-            const qreal lHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
-
-            pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, lWidth, lHeight).center();
+            pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, labelWidth, labelHeight).center();
         }
         catch(const VExceptionBadId &)
         {
@@ -679,9 +677,6 @@ void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& da
         return;
     }
 
-    labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
-    labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
-
     QVector<QPointF> v;
     v << ptPos
       << QPointF(ptPos.x() + labelWidth, ptPos.y())
@@ -739,9 +734,6 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelDat
     {
         return;
     }
-
-    labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
-    labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
 
     QVector<QPointF> v;
     v << ptPos
