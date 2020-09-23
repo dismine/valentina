@@ -3017,7 +3017,7 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
         box->addItem(data->GetGObject(pin)->name(), pin);
     }
 
-    const int index = uiTabPaths->comboBoxNodes->findData(currentId);
+    const int index = box->findData(currentId);
     if (index != -1)
     {
         box->setCurrentIndex(index);
