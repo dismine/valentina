@@ -32,6 +32,7 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/dialogtapepreferences.h"
+#include "dialogs/dialogsetupmultisize.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
@@ -371,13 +372,24 @@ void TMainWindow::FileNew()
         pUnit = mUnit;
         mType = measurements.Type();
 
+        if (mType == MeasurementsType::Multisize)
+        {
+            DialogSetupMultisize setup(mUnit, this);
+            if (setup.exec() == QDialog::Rejected)
+            {
+                return;
+            }
+        }
+
+        return; // temporary
+
         data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
-        currentHeight = measurements.BaseHeight();
-        currentSize = measurements.BaseSize();
+//        currentHeight = measurements.BaseHeight();
+//        currentSize = measurements.BaseSize();
 
         if (mType == MeasurementsType::Multisize)
         {
-            m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
+            m = new VMeasurements(mUnit, /*measurements.BaseSize(), measurements.BaseHeight(),*/ data);
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
         }
