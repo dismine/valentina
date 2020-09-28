@@ -939,7 +939,7 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
 
     // Disabled due to "undefined behavior" problem
-#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64) && !defined(Q_PROCESSOR_S390)
+#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64) && !defined(Q_PROCESSOR_S390) \
     && !defined(Q_PROCESSOR_S390_X)
     QTest::newRow("GAVAUDAN Laure.") << points << 37.795275590551185 << ekvOrig;
 #endif
