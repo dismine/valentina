@@ -92,8 +92,6 @@ TMainWindow::TMainWindow(QWidget *parent)
       mUnit(Unit::Cm),
       pUnit(Unit::Cm),
       mType(MeasurementsType::Individual),
-      currentSize(0),
-      currentHeight(0),
       curFile(),
       gradationHeights(nullptr),
       gradationSizes(nullptr),
@@ -182,10 +180,10 @@ void TMainWindow::SetBaseMHeight(int height)
         if (mType == MeasurementsType::Multisize)
         {
             const int row = ui->tableWidget->currentRow();
-            currentHeight = UnitConvertor(height, Unit::Cm, mUnit);
+            currentDimensionA = UnitConvertor(height, Unit::Cm, mUnit);
 
             gradationHeights->blockSignals(true);
-            SetDefaultHeight(static_cast<int>(currentHeight));
+            SetDefaultHeight(static_cast<int>(currentDimensionA));
             gradationHeights->blockSignals(false);
 
             RefreshData();
@@ -203,10 +201,10 @@ void TMainWindow::SetBaseMSize(int size)
         if (mType == MeasurementsType::Multisize)
         {
             const int row = ui->tableWidget->currentRow();
-            currentSize = UnitConvertor(size, Unit::Cm, mUnit);
+            currentDimensionB = UnitConvertor(size, Unit::Cm, mUnit);
 
             gradationSizes->blockSignals(true);
-            SetDefaultSize(static_cast<int>(currentSize));
+            SetDefaultSize(static_cast<int>(currentDimensionB));
             gradationSizes->blockSignals(false);
 
             RefreshData();
@@ -298,8 +296,8 @@ bool TMainWindow::LoadFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            currentSize = m->BaseSize();
-            currentHeight = m->BaseHeight();
+            currentDimensionB = m->DimensionABase();
+            currentDimensionA = m->DimensionBBase();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -379,22 +377,17 @@ void TMainWindow::FileNew()
             {
                 return;
             }
-        }
 
-        return; // temporary
+            data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
 
-        data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
-//        currentHeight = measurements.BaseHeight();
-//        currentSize = measurements.BaseSize();
-
-        if (mType == MeasurementsType::Multisize)
-        {
-            m = new VMeasurements(mUnit, /*measurements.BaseSize(), measurements.BaseHeight(),*/ data);
+            m = new VMeasurements(mUnit, setup.Dimensions(), data);
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
         }
         else
         {
+            data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
+
             m = new VMeasurements(mUnit, data);
             m_curFileFormatVersion = VVITConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVITConverter::MeasurementMaxVerStr;
@@ -568,9 +561,9 @@ void TMainWindow::changeEvent(QEvent *event)
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelMType->setText(tr("Multisize measurements"));
-            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QChar(QChar::Space) +
+            ui->labelBaseSizeValue->setText(QString().setNum(m->DimensionABase()) + QChar(QChar::Space) +
                                             UnitsToStr(m->MUnit(), true));
-            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QChar(QChar::Space) +
+            ui->labelBaseHeightValue->setText(QString().setNum(m->DimensionBBase()) + QChar(QChar::Space) +
                                               UnitsToStr(m->MUnit(), true));
 
             labelGradationHeights->setText(tr("Height (%1):").arg(UnitsToStr(mUnit)));
@@ -1468,7 +1461,7 @@ void TMainWindow::ImportFromPattern()
 void TMainWindow::ChangedSize(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-    currentSize = text.toInt();
+    currentDimensionB = text.toInt();
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -1478,7 +1471,7 @@ void TMainWindow::ChangedSize(const QString &text)
 void TMainWindow::ChangedHeight(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-    currentHeight = text.toInt();
+    currentDimensionA = text.toInt();
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -2031,9 +2024,9 @@ void TMainWindow::InitWindow()
     if (mType == MeasurementsType::Multisize)
     {
         ui->labelMType->setText(tr("Multisize measurements"));
-        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QChar(QChar::Space) +
+        ui->labelBaseSizeValue->setText(QString().setNum(m->DimensionABase()) + QChar(QChar::Space) +
                                         UnitsToStr(m->MUnit(), true));
-        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QChar(QChar::Space) +
+        ui->labelBaseHeightValue->setText(QString().setNum(m->DimensionBBase()) + QChar(QChar::Space) +
                                           UnitsToStr(m->MUnit(), true));
 
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
@@ -2379,7 +2372,7 @@ void TMainWindow::SetDefaultHeight(int value)
     }
     else
     {
-        currentHeight = gradationHeights->currentText().toInt();
+        currentDimensionA = gradationHeights->currentText().toInt();
     }
 }
 
@@ -2393,7 +2386,7 @@ void TMainWindow::SetDefaultSize(int value)
     }
     else
     {
-        currentSize = gradationSizes->currentText().toInt();
+        currentDimensionB = gradationSizes->currentText().toInt();
     }
 }
 
@@ -2402,7 +2395,7 @@ void TMainWindow::RefreshData(bool freshCall)
 {
     data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
-    m->ReadMeasurements(currentHeight, currentSize);
+    m->ReadMeasurements(currentDimensionA, currentDimensionB);
 
     RefreshTable(freshCall);
 }
@@ -2884,8 +2877,8 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            currentHeight = m->BaseHeight();
-            currentSize = m->BaseSize();
+            currentDimensionA = m->DimensionBBase();
+            currentDimensionB = m->DimensionABase();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);

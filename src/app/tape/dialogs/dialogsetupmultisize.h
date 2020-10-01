@@ -48,7 +48,7 @@ public:
     explicit DialogSetupMultisize(Unit unit, QWidget *parent = nullptr);
     ~DialogSetupMultisize();
 
-    QVector<QSharedPointer<VAbstartMeasurementDimension> > Dimensions() const;
+    QVector<MeasurementDimension_p> Dimensions() const;
 
 protected:
     virtual void changeEvent(QEvent* event) override;
@@ -70,11 +70,11 @@ private:
     void CheckState();
 
     void InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue,
-                             const QSharedPointer<VAbstartMeasurementDimension> &dimension);
-    void InitDimensionStep(QComboBox *comboBoxStep,const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+                             const MeasurementDimension_p &dimension);
+    void InitDimensionStep(QComboBox *comboBoxStep,const MeasurementDimension_p &dimension);
 
     void InitDimension(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
-                       const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+                       const MeasurementDimension_p &dimension);
     void InitXDimension();
     void InitYDimension();
     void InitWDimension();
@@ -82,18 +82,18 @@ private:
 
     void DimensionMinValueChanged(int value, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
                                   QComboBox *comboBoxBase,
-                                  const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+                                  const MeasurementDimension_p &dimension);
     void DimensionMaxValueChanged(int value, QSpinBox *spinboxMinValue, QComboBox *comboBoxStep,
                                   QComboBox *comboBoxBase,
-                                  const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+                                  const MeasurementDimension_p &dimension);
 
     void DimensionStepChanged(int index, QComboBox *comboBoxStep, QComboBox *comboBoxBase,
-                              const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+                              const MeasurementDimension_p &dimension);
     void DimensionBaseChanged(int index, QComboBox *comboBoxBase,
-                              const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+                              const MeasurementDimension_p &dimension);
 
-    void UpdateSteps(QComboBox *comboBoxStep, const QSharedPointer<VAbstartMeasurementDimension> &dimension);
-    void UpdateBase(QComboBox *comboBoxBase, const QSharedPointer<VAbstartMeasurementDimension> &dimension);
+    void UpdateSteps(QComboBox *comboBoxStep, const MeasurementDimension_p &dimension);
+    void UpdateBase(QComboBox *comboBoxBase, const MeasurementDimension_p &dimension);
 };
 
 #endif // DIALOGSETUPMULTISIZE_H

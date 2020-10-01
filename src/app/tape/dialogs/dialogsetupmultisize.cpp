@@ -170,9 +170,9 @@ DialogSetupMultisize::~DialogSetupMultisize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QSharedPointer<VAbstartMeasurementDimension> > DialogSetupMultisize::Dimensions() const
+QVector<MeasurementDimension_p> DialogSetupMultisize::Dimensions() const
 {
-    QVector<QSharedPointer<VAbstartMeasurementDimension> > dimensions;
+    QVector<MeasurementDimension_p> dimensions;
 
     if (ui->groupBoxXDimension->isChecked())
     {
@@ -236,7 +236,7 @@ void DialogSetupMultisize::ShowFullCircumference()
 {
     auto ShowDimensionFullCircumference = [this](QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue,
                                                  QComboBox *comboBoxStep, QComboBox *comboBoxBase,
-                                                 const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                                 const MeasurementDimension_p &dimension)
     {
         SCASSERT(spinboxMinValue != nullptr)
         SCASSERT(spinboxMaxValue != nullptr)
@@ -302,7 +302,7 @@ void DialogSetupMultisize::CheckState()
     int dimensions = 0;
 
     auto CheckDimension = [this](QGroupBox *group, bool &dimensionValid, int &dimensions,
-                                 const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                 const MeasurementDimension_p &dimension)
     {
         SCASSERT(group != nullptr)
 
@@ -346,7 +346,7 @@ void DialogSetupMultisize::CheckState()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue,
-                                               const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                               const MeasurementDimension_p &dimension)
 {
     SCASSERT(spinboxMinValue != nullptr)
     SCASSERT(spinboxMaxValue != nullptr)
@@ -383,7 +383,7 @@ void DialogSetupMultisize::InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinB
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
-                                             const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                             const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxStep != nullptr)
 
@@ -412,7 +412,7 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitDimension(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
-                                         const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                         const MeasurementDimension_p &dimension)
 {
     InitDimensionMinMax(spinboxMinValue, spinboxMaxValue, dimension);
     InitDimensionStep(comboBoxStep, dimension);
@@ -449,7 +449,7 @@ void DialogSetupMultisize::InitZDimension()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::DimensionMinValueChanged(int value, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
                                                     QComboBox *comboBoxBase,
-                                                    const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                                    const MeasurementDimension_p &dimension)
 {
     SCASSERT(spinboxMaxValue != nullptr)
     SCASSERT(comboBoxStep != nullptr)
@@ -475,7 +475,7 @@ void DialogSetupMultisize::DimensionMinValueChanged(int value, QSpinBox *spinbox
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::DimensionMaxValueChanged(int value, QSpinBox *spinboxMinValue, QComboBox *comboBoxStep,
                                                     QComboBox *comboBoxBase,
-                                                    const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                                    const MeasurementDimension_p &dimension)
 {
     SCASSERT(spinboxMinValue != nullptr)
     SCASSERT(comboBoxStep != nullptr)
@@ -500,7 +500,7 @@ void DialogSetupMultisize::DimensionMaxValueChanged(int value, QSpinBox *spinbox
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::DimensionStepChanged(int index, QComboBox *comboBoxStep, QComboBox *comboBoxBase,
-                                                const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                                const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxStep != nullptr)
     SCASSERT(comboBoxBase != nullptr)
@@ -516,7 +516,7 @@ void DialogSetupMultisize::DimensionStepChanged(int index, QComboBox *comboBoxSt
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::DimensionBaseChanged(int index, QComboBox *comboBoxBase,
-                                                const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                                const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxBase != nullptr)
 
@@ -529,7 +529,7 @@ void DialogSetupMultisize::DimensionBaseChanged(int index, QComboBox *comboBoxBa
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
-                                       const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                       const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxStep != nullptr)
 
@@ -564,7 +564,7 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
-                                      const QSharedPointer<VAbstartMeasurementDimension> &dimension)
+                                      const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxBase != nullptr)
 

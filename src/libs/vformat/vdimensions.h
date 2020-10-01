@@ -34,12 +34,16 @@
 
 enum class MeasurementDimension: qint8
 {
-    X, // height
-    Y, // size (chest half circumference)
-    W, // hip half circumference
-    Z  // waist half circumference
+    X = 0, // height
+    Y = 1, // size (chest half circumference)
+    W = 2, // hip half circumference
+    Z = 3  // waist half circumference
 };
 
+class VAbstartMeasurementDimension;
+template <class T> class QSharedPointer;
+
+using MeasurementDimension_p = QSharedPointer<VAbstartMeasurementDimension>;
 
 class VAbstartMeasurementDimension
 {

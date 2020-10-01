@@ -499,8 +499,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
-    const qreal size = UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit());
-    const qreal height = UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit());
+    const qreal size = UnitConvertor(m->DimensionABase(), m->MUnit(), *m->GetData()->GetPatternUnit());
+    const qreal height = UnitConvertor(m->DimensionBBase(), m->MUnit(), *m->GetData()->GetPatternUnit());
 
     try
     {
