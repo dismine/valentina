@@ -210,6 +210,7 @@ private:
 
     template <class T>
     void HackWidget(T **widget);
+    void HackDimensionBaseValue();
 
     QString CheckMName(const QString &name, const QSet<QString> &importedNames) const;
     void ShowError(const QString &text);
@@ -222,8 +223,6 @@ private:
 
     QString DimensionName(MeasurementDimension type);
     QString DimensionToolTip(MeasurementDimension type, bool circumference);
-
-    void RetranslateDimensionBaseValues();
 };
 
 #endif // TMAINWINDOW_H

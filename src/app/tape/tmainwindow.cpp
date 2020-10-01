@@ -563,7 +563,7 @@ void TMainWindow::changeEvent(QEvent *event)
         {
             ui->labelMType->setText(tr("Multisize measurements"));
 
-            RetranslateDimensionBaseValues();
+            InitDimensionsBaseValue();
 
             labelGradationHeights->setText(tr("Height (%1):").arg(UnitsToStr(mUnit)));
             labelGradationSizes->setText(tr("Size (%1):").arg(UnitsToStr(mUnit)));
@@ -2025,6 +2025,7 @@ void TMainWindow::InitWindow()
         ui->labelMType->setText(tr("Multisize measurements"));
 
         InitDimensionsBaseValue();
+        HackDimensionBaseValue();
 
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
@@ -2087,12 +2088,7 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->labelInHeights);
 
         // Tab Information
-        HackWidget(&ui->labelDimensionA);
-        HackWidget(&ui->labelDimensionABase);
-        HackWidget(&ui->labelDimensionB);
-        HackWidget(&ui->labelDimensionBBase);
-        HackWidget(&ui->labelDimensionC);
-        HackWidget(&ui->labelDimensionCBase);
+        HackDimensionBaseValue();
         HackWidget(&ui->frameBaseValue);
         HackWidget(&ui->labelBaseValues);
 
@@ -2204,11 +2200,6 @@ void TMainWindow::InitDimensionsBaseValue()
             {
                 base->setText(QString::number(dimension->BaseValue()));
             }
-        }
-        else
-        {
-            HackWidget(&name);
-            HackWidget(&base);
         }
     };
 
@@ -3069,6 +3060,28 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::HackDimensionBaseValue()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto DimensionsBaseValue = [this, dimensions](int index, QLabel *name, QLabel *base)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(base != nullptr)
+
+        if (dimensions.size() <= index)
+        {
+            HackWidget(&name);
+            HackWidget(&base);
+        }
+    };
+
+    DimensionsBaseValue(0, ui->labelDimensionA, ui->labelDimensionABase);
+    DimensionsBaseValue(1, ui->labelDimensionB, ui->labelDimensionBBase);
+    DimensionsBaseValue(2, ui->labelDimensionC, ui->labelDimensionCBase);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedNames) const
 {
     if (name.isEmpty())
@@ -3360,39 +3373,6 @@ QString TMainWindow::DimensionName(MeasurementDimension type)
         default:
             return QString();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::RetranslateDimensionBaseValues()
-{
-    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QString unit = UnitsToStr(m->MUnit(), true);
-
-    auto DimensionsBaseValue = [this, dimensions, unit](int index, QLabel *name, QLabel *base)
-    {
-        SCASSERT(name != nullptr)
-        SCASSERT(base != nullptr)
-
-        if (dimensions.size() > index)
-        {
-            MeasurementDimension_p dimension = dimensions.at(index);
-            name->setText(DimensionName(dimension->Type())+QChar(':'));
-            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
-
-            if (dimension->IsCircumference())
-            {
-                base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
-            }
-            else
-            {
-                base->setText(QString::number(dimension->BaseValue()));
-            }
-        }
-    };
-
-    DimensionsBaseValue(0, ui->labelDimensionA, ui->labelDimensionABase);
-    DimensionsBaseValue(1, ui->labelDimensionC, ui->labelDimensionCBase);
-    DimensionsBaseValue(2, ui->labelDimensionB, ui->labelDimensionBBase);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
