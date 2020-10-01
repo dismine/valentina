@@ -561,6 +561,8 @@ void TMainWindow::changeEvent(QEvent *event)
 
         if (mType == MeasurementsType::Multisize)
         {
+            actionFullCircumference->setText(tr("Use full circumference"));
+
             ui->labelMType->setText(tr("Multisize measurements"));
 
             InitDimensionsBaseValue();
@@ -1916,6 +1918,14 @@ void TMainWindow::SaveMFullName()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FullCircumferenceChanged(bool checked)
+{
+    m->SetFullCircumference(checked);
+    MeasurementsWereSaved(false);
+    InitDimensionsBaseValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -2022,6 +2032,7 @@ void TMainWindow::InitWindow()
 
     if (mType == MeasurementsType::Multisize)
     {
+        InitMenu();
         ui->labelMType->setText(tr("Multisize measurements"));
 
         InitDimensionsBaseValue();
@@ -2176,12 +2187,28 @@ void TMainWindow::InitWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitMenu()
+{
+    if (mType == MeasurementsType::Multisize)
+    {
+        ui->menuMeasurements->addSeparator();
+
+        actionFullCircumference = new QAction(tr("Use full circumference"), this);
+        actionFullCircumference->setCheckable(true);
+        actionFullCircumference->setChecked(m->IsFullCircumference());
+        ui->menuMeasurements->addAction(actionFullCircumference);
+        connect(actionFullCircumference, &QAction::triggered, this, &TMainWindow::FullCircumferenceChanged);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitDimensionsBaseValue()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
     const QString unit = UnitsToStr(m->MUnit(), true);
+    const bool fc = m->IsFullCircumference();
 
-    auto DimensionsBaseValue = [this, dimensions, unit](int index, QLabel *name, QLabel *base)
+    auto DimensionsBaseValue = [this, dimensions, unit, fc](int index, QLabel *name, QLabel *base)
     {
         SCASSERT(name != nullptr)
         SCASSERT(base != nullptr)
@@ -2194,7 +2221,14 @@ void TMainWindow::InitDimensionsBaseValue()
 
             if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
             {
-                base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
+                if (dimension->Type() != MeasurementDimension::X && fc)
+                {
+                    base->setText(QString("%1 %2").arg(dimension->BaseValue()*2).arg(unit));
+                }
+                else
+                {
+                    base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
+                }
             }
             else
             {

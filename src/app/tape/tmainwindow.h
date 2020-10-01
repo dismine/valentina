@@ -127,6 +127,8 @@ private slots:
     void SaveMDescription();
     void SaveMFullName();
 
+    void FullCircumferenceChanged(bool checked);
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
@@ -150,11 +152,13 @@ private:
     QLabel *labelPatternUnit;
     bool isInitialized;
     bool mIsReadOnly;
+    QAction *actionFullCircumference{nullptr};
 
     QVector<QObject *> hackedWidgets;
 
     void SetupMenu();
     void InitWindow();
+    void InitMenu();
     void InitDimensionsBaseValue();
     void InitTable();
     void SetDecimals();
