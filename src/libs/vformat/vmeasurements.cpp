@@ -513,7 +513,7 @@ void VMeasurements::SetReadOnly(bool ro)
 //---------------------------------------------------------------------------------------------------------------------
 bool VMeasurements::IsFullCircumference() const
 {
-    QDomElement dimenstionsTag = firstChildElement(TagDimensions);
+    QDomElement dimenstionsTag = documentElement().firstChildElement(TagDimensions);
     if (not dimenstionsTag.isNull())
     {
         return GetParametrBool(dimenstionsTag, AttrFullCircumference, falseStr);
@@ -529,7 +529,7 @@ bool VMeasurements::IsFullCircumference() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetFullCircumference(bool fc)
 {
-    QDomElement dimenstionsTag = firstChildElement(TagDimensions);
+    QDomElement dimenstionsTag = documentElement().firstChildElement(TagDimensions);
     if (not dimenstionsTag.isNull())
     {
         SetAttributeOrRemoveIf(dimenstionsTag, AttrFullCircumference, fc, not fc);
