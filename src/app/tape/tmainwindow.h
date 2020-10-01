@@ -155,6 +155,7 @@ private:
 
     void SetupMenu();
     void InitWindow();
+    void InitDimensionsBaseValue();
     void InitTable();
     void SetDecimals();
     void InitUnits();
@@ -218,6 +219,11 @@ private:
     void ImportMultisizeMeasurements(const QxtCsvModel &csv);
 
     void SetCurrentPatternUnit();
+
+    QString DimensionName(MeasurementDimension type);
+    QString DimensionToolTip(MeasurementDimension type, bool circumference);
+
+    void RetranslateDimensionBaseValues();
 };
 
 #endif // TMAINWINDOW_H

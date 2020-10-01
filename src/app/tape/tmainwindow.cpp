@@ -562,10 +562,8 @@ void TMainWindow::changeEvent(QEvent *event)
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelMType->setText(tr("Multisize measurements"));
-            ui->labelBaseSizeValue->setText(QString().setNum(m->DimensionABase()) + QChar(QChar::Space) +
-                                            UnitsToStr(m->MUnit(), true));
-            ui->labelBaseHeightValue->setText(QString().setNum(m->DimensionBBase()) + QChar(QChar::Space) +
-                                              UnitsToStr(m->MUnit(), true));
+
+            RetranslateDimensionBaseValues();
 
             labelGradationHeights->setText(tr("Height (%1):").arg(UnitsToStr(mUnit)));
             labelGradationSizes->setText(tr("Size (%1):").arg(UnitsToStr(mUnit)));
@@ -2017,7 +2015,7 @@ void TMainWindow::InitWindow()
     SCASSERT(m != nullptr)
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
-    ui->tabWidget->setCurrentIndex(0);
+    ui->tabWidget->setCurrentIndex(0); // measurements
 
     ui->plainTextEditNotes->setEnabled(true);
     ui->toolBarGradation->setVisible(true);
@@ -2025,10 +2023,8 @@ void TMainWindow::InitWindow()
     if (mType == MeasurementsType::Multisize)
     {
         ui->labelMType->setText(tr("Multisize measurements"));
-        ui->labelBaseSizeValue->setText(QString().setNum(m->DimensionABase()) + QChar(QChar::Space) +
-                                        UnitsToStr(m->MUnit(), true));
-        ui->labelBaseHeightValue->setText(QString().setNum(m->DimensionBBase()) + QChar(QChar::Space) +
-                                          UnitsToStr(m->MUnit(), true));
+
+        InitDimensionsBaseValue();
 
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
@@ -2091,10 +2087,14 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->labelInHeights);
 
         // Tab Information
-        HackWidget(&ui->labelBaseSize);
-        HackWidget(&ui->labelBaseSizeValue);
-        HackWidget(&ui->labelBaseHeight);
-        HackWidget(&ui->labelBaseHeightValue);
+        HackWidget(&ui->labelDimensionA);
+        HackWidget(&ui->labelDimensionABase);
+        HackWidget(&ui->labelDimensionB);
+        HackWidget(&ui->labelDimensionBBase);
+        HackWidget(&ui->labelDimensionC);
+        HackWidget(&ui->labelDimensionCBase);
+        HackWidget(&ui->frameBaseValue);
+        HackWidget(&ui->labelBaseValues);
 
         ui->lineEditCustomerName->setText(m->Customer());
 
@@ -2177,6 +2177,44 @@ void TMainWindow::InitWindow()
     InitUnits();
 
     InitTable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitDimensionsBaseValue()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QString unit = UnitsToStr(m->MUnit(), true);
+
+    auto DimensionsBaseValue = [this, dimensions, unit](int index, QLabel *name, QLabel *base)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(base != nullptr)
+
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+            name->setText(DimensionName(dimension->Type())+QChar(':'));
+            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
+
+            if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
+            {
+                base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
+            }
+            else
+            {
+                base->setText(QString::number(dimension->BaseValue()));
+            }
+        }
+        else
+        {
+            HackWidget(&name);
+            HackWidget(&base);
+        }
+    };
+
+    DimensionsBaseValue(0, ui->labelDimensionA, ui->labelDimensionABase);
+    DimensionsBaseValue(1, ui->labelDimensionB, ui->labelDimensionBBase);
+    DimensionsBaseValue(2, ui->labelDimensionC, ui->labelDimensionCBase);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3303,6 +3341,84 @@ void TMainWindow::SetCurrentPatternUnit()
             comboBoxUnits->setCurrentIndex(indexUnit);
         }
         comboBoxUnits->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString TMainWindow::DimensionName(MeasurementDimension type)
+{
+    switch(type)
+    {
+        case MeasurementDimension::X:
+            return tr("Height");
+        case MeasurementDimension::Y:
+            return tr("Size");
+        case MeasurementDimension::W:
+            return tr("Hip");
+        case MeasurementDimension::Z:
+            return tr("Waist");
+        default:
+            return QString();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RetranslateDimensionBaseValues()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QString unit = UnitsToStr(m->MUnit(), true);
+
+    auto DimensionsBaseValue = [this, dimensions, unit](int index, QLabel *name, QLabel *base)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(base != nullptr)
+
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+            name->setText(DimensionName(dimension->Type())+QChar(':'));
+            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
+
+            if (dimension->IsCircumference())
+            {
+                base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
+            }
+            else
+            {
+                base->setText(QString::number(dimension->BaseValue()));
+            }
+        }
+    };
+
+    DimensionsBaseValue(0, ui->labelDimensionA, ui->labelDimensionABase);
+    DimensionsBaseValue(1, ui->labelDimensionC, ui->labelDimensionCBase);
+    DimensionsBaseValue(2, ui->labelDimensionB, ui->labelDimensionBBase);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString TMainWindow::DimensionToolTip(MeasurementDimension type, bool circumference)
+{
+    const bool fc = m->IsFullCircumference();
+    switch(type)
+    {
+        case MeasurementDimension::X:
+            return tr("Height");
+        case MeasurementDimension::Y:
+            if (circumference)
+            {
+                return fc ? tr("Chest full circumference") : tr("Chest half circumference");
+            }
+            else
+            {
+                return tr("Size");
+            }
+            return circumference ? tr("Chest circumference") : tr("Size");
+        case MeasurementDimension::W:
+            return fc ? tr("Hip full circumference") : tr("Hip half circumference");
+        case MeasurementDimension::Z:
+            return fc ? tr("Waist full circumference") : tr("Waist half circumference");
+        default:
+            return QString();
     }
 }
 
