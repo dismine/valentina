@@ -652,25 +652,32 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
         const int min = GetParametrInt(dom, AttrMin, QChar('0'));
         const int max = GetParametrInt(dom, AttrMax, QChar('0'));
         const int step = GetParametrInt(dom, AttrStep, QString("-1"));
+        const int base = GetParametrInt(dom, AttrBase, QChar('0'));
 
         if (type == MeasurementDimension::X)
         {
-            dimesions.insert(type, QSharedPointer<VXMeasurementDimension>::create(units, min, max, step));
+            auto dimension = QSharedPointer<VXMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimesions.insert(type, dimension);
         }
         else if (type == MeasurementDimension::Y)
         {
             auto dimension = QSharedPointer<VYMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
             dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
-
             dimesions.insert(type, dimension);
         }
         else if (type == MeasurementDimension::W)
         {
-            dimesions.insert(type, QSharedPointer<VWMeasurementDimension>::create(units, min, max, step));
+            auto dimension = QSharedPointer<VWMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimesions.insert(type, dimension);
         }
         else if (type == MeasurementDimension::Z)
         {
-            dimesions.insert(type, QSharedPointer<VZMeasurementDimension>::create(units, min, max, step));
+            auto dimension = QSharedPointer<VZMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimesions.insert(type, dimension);
         }
     }
 
