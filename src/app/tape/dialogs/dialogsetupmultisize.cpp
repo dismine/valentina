@@ -198,6 +198,12 @@ QVector<MeasurementDimension_p> DialogSetupMultisize::Dimensions() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogSetupMultisize::FullCircumference() const
+{
+    return ui->checkBoxFullCircumference->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)

@@ -381,6 +381,7 @@ void TMainWindow::FileNew()
             data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
 
             m = new VMeasurements(mUnit, setup.Dimensions(), data);
+            m->SetFullCircumference(setup.FullCircumference());
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
         }

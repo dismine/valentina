@@ -83,6 +83,7 @@ const QString VMeasurements::AttrMin            = QStringLiteral("min");
 const QString VMeasurements::AttrMax            = QStringLiteral("max");
 const QString VMeasurements::AttrStep           = QStringLiteral("step");
 const QString VMeasurements::AttrCircumference  = QStringLiteral("circumference");
+const QString VMeasurements::AttrFullCircumference = QStringLiteral("fullCircumference");
 
 const QString VMeasurements::GenderMale    = QStringLiteral("male");
 const QString VMeasurements::GenderFemale  = QStringLiteral("female");
@@ -507,6 +508,36 @@ bool VMeasurements::IsReadOnly() const
 void VMeasurements::SetReadOnly(bool ro)
 {
     setTagText(TagReadOnly, ro ? trueStr : falseStr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VMeasurements::IsFullCircumference() const
+{
+    QDomElement dimenstionsTag = firstChildElement(TagDimensions);
+    if (not dimenstionsTag.isNull())
+    {
+        return GetParametrBool(dimenstionsTag, AttrFullCircumference, falseStr);
+    }
+    else
+    {
+        qDebug()<<"Can't read full circumference "<<Q_FUNC_INFO;
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetFullCircumference(bool fc)
+{
+    QDomElement dimenstionsTag = firstChildElement(TagDimensions);
+    if (not dimenstionsTag.isNull())
+    {
+        SetAttributeOrRemoveIf(dimenstionsTag, AttrFullCircumference, fc, not fc);
+    }
+    else
+    {
+        qDebug()<<"Can't save full circumference "<<Q_FUNC_INFO;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

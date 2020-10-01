@@ -50,6 +50,8 @@ public:
 
     QVector<MeasurementDimension_p> Dimensions() const;
 
+    bool FullCircumference() const;
+
 protected:
     virtual void changeEvent(QEvent* event) override;
     virtual void showEvent(QShowEvent *event) override;

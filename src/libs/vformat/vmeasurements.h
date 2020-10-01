@@ -96,6 +96,9 @@ public:
     bool    IsReadOnly() const;
     void    SetReadOnly(bool ro);
 
+    bool    IsFullCircumference() const;
+    void    SetFullCircumference(bool fc);
+
     void SetMName(const QString &name, const QString &text);
     void SetMValue(const QString &name, const QString &text);
     void SetMBaseValue(const QString &name, double value);
@@ -133,6 +136,7 @@ public:
     static const QString AttrMax;
     static const QString AttrStep;
     static const QString AttrCircumference;
+    static const QString AttrFullCircumference;
 
     static const QString GenderMale;
     static const QString GenderFemale;

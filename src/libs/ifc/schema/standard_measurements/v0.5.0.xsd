@@ -22,6 +22,7 @@
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
+            <xs:attribute name="fullCircumference" type="xs:boolean"/>
           </xs:complexType>
         </xs:element>
         <xs:element name="restrictions">
