@@ -109,6 +109,9 @@ public:
 
     QMap<MeasurementDimension, MeasurementDimension_p > Dimensions() const;
 
+    QPair<int, int> OneDimensionRestriction(int base) const;
+    QPair<int, int> TwoDimensionRestriction(int base1, int base2) const;
+
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;

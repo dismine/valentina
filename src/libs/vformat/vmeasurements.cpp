@@ -685,6 +685,18 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPair<int, int> VMeasurements::OneDimensionRestriction(int base) const
+{
+    return QPair<int, int>(0, 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPair<int, int> VMeasurements::TwoDimensionRestriction(int base1, int base2) const
+{
+    return QPair<int, int>(0, 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::GenderToStr(const GenderType &sex)
 {
     switch (sex)

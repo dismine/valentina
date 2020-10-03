@@ -113,8 +113,11 @@ private slots:
     void AddKnown();
     void ImportFromPattern();
 
-    void ChangedSize(const QString &text);
-    void ChangedHeight(const QString & text);
+    void DimensionABaseChanged();
+    void DimensionBBaseChanged();
+    void DimensionCBaseChanged();
+
+    void GradationChanged();
 
     void ShowMData();
 
@@ -156,6 +159,7 @@ private:
     bool isInitialized{false};
     bool mIsReadOnly{false};
     QAction *actionFullCircumference{nullptr};
+    QTimer *gradation;
 
     QVector<QObject *> hackedWidgets{};
 
@@ -163,6 +167,8 @@ private:
     void InitWindow();
     void InitMenu();
     void InitDimensionsBaseValue();
+    void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QComboBox *control);
+    void InitDimensionControls();
     void InitTable();
     void SetDecimals();
     void InitUnits();
@@ -180,11 +186,6 @@ private:
     bool MaybeSave();
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
-
-    Q_REQUIRED_RESULT QComboBox *SetGradationList(QLabel *label, const QStringList &list);
-
-    void       SetDefaultHeight(int value);
-    void       SetDefaultSize(int value);
 
     void RefreshData(bool freshCall = false);
     void RefreshTable(bool freshCall = false);
@@ -230,6 +231,12 @@ private:
 
     QString DimensionName(MeasurementDimension type);
     QString DimensionToolTip(MeasurementDimension type, bool circumference);
+
+    void ShowDimensionControls();
+    void SetDimensionBases();
+    void SetCurrentDimensionValues();
+
+    QVector<int> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
 };
 
 #endif // TMAINWINDOW_H
