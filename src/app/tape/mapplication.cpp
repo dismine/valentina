@@ -599,96 +599,46 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("filename", tr("The measurement file."));
-    //-----
-    QCommandLineOption heightOption(QStringList() << "e" << "height",
-            tr("Open with the base height. Valid values: %1cm.")
-                                    .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
-            tr("The base height"));
-    parser.addOption(heightOption);
-    //-----
-    QCommandLineOption sizeOption(QStringList() << "s" << "size",
-            tr("Open with the base size. Valid values: %1cm.").arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
-            tr("The base size"));
-    parser.addOption(sizeOption);
-    //-----
-    QCommandLineOption unitOption(QStringList() << "u" << "unit",
-            tr("Set pattern file unit: cm, mm, inch."),
-            tr("The pattern unit"));
-    parser.addOption(unitOption);
-    //-----
-    QCommandLineOption testOption(QStringList() << "test",
-            tr("Use for unit testing. Run the program and open a file without showing the main window."));
-    parser.addOption(testOption);
-    //-----
-    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
-            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
-               "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0"));
-    parser.addOption(scalingOption);
-    //-----
+
+    const QString LONG_OPTION_DIMENSION_A = QStringLiteral("dimensionA");
+    const QString SINGLE_OPTION_DIMENSION_A = QChar('a');
+
+    const QString LONG_OPTION_DIMENSION_B = QStringLiteral("dimensionB");
+    const QString SINGLE_OPTION_DIMENSION_B = QChar('b');
+
+    const QString LONG_OPTION_DIMENSION_C = QStringLiteral("dimensionC");
+    const QString SINGLE_OPTION_DIMENSION_C = QChar('c');
+
+    const QString LONG_OPTION_UNITS = QStringLiteral("units");
+    const QString SINGLE_OPTION_UNITS = QChar('u');
+
+    const QString LONG_OPTION_TEST = QStringLiteral("test");
+
+    parser.addOptions(
+    {
+        {{SINGLE_OPTION_DIMENSION_A, LONG_OPTION_DIMENSION_A}, tr("Set base for dimension A in the table units."),
+             tr("The dimension A base")},
+
+        {{SINGLE_OPTION_DIMENSION_B, LONG_OPTION_DIMENSION_B}, tr("Set base for dimension B in the table units."),
+             tr("The dimension B base")},
+
+        {{SINGLE_OPTION_DIMENSION_C, LONG_OPTION_DIMENSION_C}, tr("Set base for dimension C in the table units."),
+             tr("The dimension C base")},
+
+        {{SINGLE_OPTION_UNITS, LONG_OPTION_UNITS}, tr("Set pattern file units: cm, mm, inch."),
+             tr("The pattern units")},
+
+        {LONG_OPTION_TEST,
+             tr("Use for unit testing. Run the program and open a file without showing the main window.")},
+
+        {LONG_OPTION_NO_HDPI_SCALING,
+             tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+                "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
+    });
+
     parser.process(arguments);
 
-    bool flagHeight = false;
-    bool flagSize = false;
-    bool flagUnit = false;
-
-    int size = 0;
-    int height = 0;
-    Unit unit = Unit::Cm;
-
-    if (parser.isSet(heightOption))
-    {
-        const QString heightValue = parser.value(heightOption);
-        if (VMeasurement::IsGradationHeightValid(heightValue))
-        {
-            flagHeight = true;
-            height = heightValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base height argument. Must be %1cm.")
-                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", "))));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    if (parser.isSet(sizeOption))
-    {
-        const QString sizeValue = parser.value(sizeOption);
-        if (VMeasurement::IsGradationSizeValid(sizeValue))
-        {
-            flagSize = true;
-            size = sizeValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base size argument. Must be %1cm.")
-                               .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", "))));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    {
-    const QString unitValue = parser.value(unitOption);
-    if (not unitValue.isEmpty())
-    {
-
-        const QStringList units = QStringList() << unitMM << unitCM << unitINCH;
-        if (units.contains(unitValue))
-        {
-            flagUnit = true;
-            unit = StrToUnits(unitValue);
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-    }
-
-    testMode = parser.isSet(testOption);
+    testMode = parser.isSet(LONG_OPTION_TEST);
 
     if (not testMode && connection == SocketConnection::Client)
     {
@@ -737,6 +687,84 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             parser.showHelp(V_EX_USAGE);
         }
 
+        bool flagDimensionA = false;
+        bool flagDimensionB = false;
+        bool flagDimensionC = false;
+        bool flagUnits = false;
+
+        int dimensionAValue = 0;
+        int dimensionBValue = 0;
+        int dimensionCValue = 0;
+        Unit unit = Unit::Cm;
+
+        if (parser.isSet(LONG_OPTION_DIMENSION_A))
+        {
+            const QString value = parser.value(LONG_OPTION_DIMENSION_A);
+
+            bool ok = false;
+            dimensionAValue = value.toInt(&ok);
+            if(ok && dimensionAValue > 0)
+            {
+                flagDimensionA = true;
+            }
+            else
+            {
+                qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension A base value.")));
+                parser.showHelp(V_EX_USAGE);
+            }
+        }
+
+        if (parser.isSet(LONG_OPTION_DIMENSION_B))
+        {
+            const QString value = parser.value(LONG_OPTION_DIMENSION_B);
+
+            bool ok = false;
+            dimensionBValue = value.toInt(&ok);
+            if(ok && dimensionBValue > 0)
+            {
+                flagDimensionB = true;
+            }
+            else
+            {
+                qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension B base value.")));
+                parser.showHelp(V_EX_USAGE);
+            }
+        }
+
+        if (parser.isSet(LONG_OPTION_DIMENSION_C))
+        {
+            const QString value = parser.value(LONG_OPTION_DIMENSION_C);
+
+            bool ok = false;
+            dimensionCValue = value.toInt(&ok);
+            if(ok && dimensionCValue > 0)
+            {
+                flagDimensionC = true;
+            }
+            else
+            {
+                qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension C base value.")));
+                parser.showHelp(V_EX_USAGE);
+            }
+        }
+
+        {
+            const QString unitValue = parser.value(LONG_OPTION_UNITS);
+            if (not unitValue.isEmpty())
+            {
+                if (QStringList{unitMM, unitCM, unitINCH}.contains(unitValue))
+                {
+                    flagUnits = true;
+                    unit = StrToUnits(unitValue);
+                }
+                else
+                {
+                    qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
+                    parser.showHelp(V_EX_USAGE);
+                }
+            }
+        }
+
         for (auto &arg : args)
         {
             NewMainWindow();
@@ -750,17 +778,31 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
                 continue;
             }
 
-            if (flagSize)
+            if (flagDimensionA)
             {
-                MainWindow()->SetBaseMSize(size);
+                if (not MainWindow()->SetDimensionABase(dimensionAValue))
+                {
+                    parser.showHelp(V_EX_USAGE);
+                }
             }
 
-            if (flagHeight)
+            if (flagDimensionB)
             {
-                MainWindow()->SetBaseMHeight(height);
+                if (MainWindow()->SetDimensionBBase(dimensionBValue))
+                {
+                    parser.showHelp(V_EX_USAGE);
+                }
             }
 
-            if (flagUnit)
+            if (flagDimensionC)
+            {
+                if (MainWindow()->SetDimensionCBase(dimensionCValue))
+                {
+                    parser.showHelp(V_EX_USAGE);
+                }
+            }
+
+            if (flagUnits)
             {
                 MainWindow()->SetPUnit(unit);
             }

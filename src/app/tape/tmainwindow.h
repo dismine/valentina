@@ -57,8 +57,9 @@ public:
 
     void RetranslateTable();
 
-    void SetBaseMHeight(int height);
-    void SetBaseMSize(int size);
+    bool SetDimensionABase(int base);
+    bool SetDimensionBBase(int base);
+    bool SetDimensionCBase(int base);
     void SetPUnit(Unit unit);
 
     bool LoadFile(const QString &path);
@@ -132,29 +133,31 @@ private slots:
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
-    VMeasurements   *m;
-    VContainer      *data;
-    Unit             mUnit;
-    Unit             pUnit;
-    MeasurementsType mType;
+    VMeasurements   *m{nullptr};
+    VContainer      *data{nullptr};
+    Unit             mUnit{Unit::Cm};
+    Unit             pUnit{Unit::Cm};
+    MeasurementsType mType{MeasurementsType::Individual};
     int              currentDimensionA{0};
     int              currentDimensionB{0};
     int              currentDimensionC{0};
-    QString          curFile;
-    QComboBox       *gradationHeights;
-    QComboBox       *gradationSizes;
-    QComboBox       *comboBoxUnits;
+    QString          curFile{};
+    QComboBox       *gradationDimensionA{nullptr};
+    QComboBox       *gradationDimensionB{nullptr};
+    QComboBox       *gradationDimensionC{nullptr};
+    QComboBox       *comboBoxUnits{nullptr};
     int              formulaBaseHeight;
-    QSharedPointer<VLockGuard<char>> lock;
-    QSharedPointer<VTableSearch> search;
-    QLabel *labelGradationHeights;
-    QLabel *labelGradationSizes;
-    QLabel *labelPatternUnit;
-    bool isInitialized;
-    bool mIsReadOnly;
+    QSharedPointer<VLockGuard<char>> lock{nullptr};
+    QSharedPointer<VTableSearch> search{};
+    QLabel *labelGradationDimensionA{nullptr};
+    QLabel *labelGradationDimensionB{nullptr};
+    QLabel *labelGradationDimensionC{nullptr};
+    QLabel *labelPatternUnit{nullptr};
+    bool isInitialized{false};
+    bool mIsReadOnly{false};
     QAction *actionFullCircumference{nullptr};
 
-    QVector<QObject *> hackedWidgets;
+    QVector<QObject *> hackedWidgets{};
 
     void SetupMenu();
     void InitWindow();

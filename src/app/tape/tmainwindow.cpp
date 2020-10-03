@@ -87,24 +87,7 @@ enum {ColumnName = 0, ColumnFullName, ColumnCalcValue, ColumnFormula, ColumnBase
 TMainWindow::TMainWindow(QWidget *parent)
     : VAbstractMainWindow(parent),
       ui(new Ui::TMainWindow),
-      m(nullptr),
-      data(nullptr),
-      mUnit(Unit::Cm),
-      pUnit(Unit::Cm),
-      mType(MeasurementsType::Individual),
-      curFile(),
-      gradationHeights(nullptr),
-      gradationSizes(nullptr),
-      comboBoxUnits(nullptr),
-      formulaBaseHeight(0),
-      lock(nullptr),
-      search(),
-      labelGradationHeights(nullptr),
-      labelGradationSizes(nullptr),
-      labelPatternUnit(nullptr),
-      isInitialized(false),
-      mIsReadOnly(false),
-      hackedWidgets()
+      formulaBaseHeight(0)
 {
     ui->setupUi(this);
 
@@ -173,45 +156,79 @@ void TMainWindow::RetranslateTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetBaseMHeight(int height)
+bool TMainWindow::SetDimensionABase(int base)
 {
-    if (m != nullptr)
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.isEmpty())
     {
-        if (mType == MeasurementsType::Multisize)
-        {
-            const int row = ui->tableWidget->currentRow();
-            currentDimensionA = UnitConvertor(height, Unit::Cm, mUnit);
-
-            gradationHeights->blockSignals(true);
-            SetDefaultHeight(static_cast<int>(currentDimensionA));
-            gradationHeights->blockSignals(false);
-
-            RefreshData();
-            search->RefreshList(ui->lineEditFind->text());
-            ui->tableWidget->selectRow(row);
-        }
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't provide dimensions")));
+        return false;
     }
+
+    const qint32 i = gradationDimensionA->findData(base);
+    if (i != -1)
+    {
+        gradationDimensionA->setCurrentIndex(i);
+    }
+
+    if (base != currentDimensionA)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension A")));
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetBaseMSize(int size)
+bool TMainWindow::SetDimensionBBase(int base)
 {
-    if (m != nullptr)
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() <= 1)
     {
-        if (mType == MeasurementsType::Multisize)
-        {
-            const int row = ui->tableWidget->currentRow();
-            currentDimensionB = UnitConvertor(size, Unit::Cm, mUnit);
-
-            gradationSizes->blockSignals(true);
-            SetDefaultSize(static_cast<int>(currentDimensionB));
-            gradationSizes->blockSignals(false);
-
-            RefreshData();
-            search->RefreshList(ui->lineEditFind->text());
-            ui->tableWidget->selectRow(row);
-        }
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension B")));
+        return false;
     }
+
+    const qint32 i = gradationDimensionB->findData(base);
+    if (i != -1)
+    {
+        gradationDimensionB->setCurrentIndex(i);
+    }
+
+    if (base != currentDimensionB)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension B")));
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::SetDimensionCBase(int base)
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() <= 2)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension C")));
+        return false;
+    }
+
+    const qint32 i = gradationDimensionC->findData(base);
+    if (i != -1)
+    {
+        gradationDimensionC->setCurrentIndex(i);
+    }
+
+    if (base != currentDimensionC)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension C")));
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
