@@ -67,13 +67,17 @@ public:
 
     void StoreNames(bool store);
 
-    void ReadMeasurements(qreal height, qreal size) const;
+    void ReadMeasurements(qreal baseA, qreal baseB=0, qreal baseC=0) const;
     void ClearForExport();
 
     MeasurementsType Type() const;
     int DimensionABase() const;
     int DimensionBBase() const;
     int DimensionCBase() const;
+
+    int DimensionAStep() const;
+    int DimensionBStep() const;
+    int DimensionCStep() const;
 
     QString Notes() const;
     void    SetNotes(const QString &text);
@@ -102,8 +106,11 @@ public:
     void SetMName(const QString &name, const QString &text);
     void SetMValue(const QString &name, const QString &text);
     void SetMBaseValue(const QString &name, double value);
-    void SetMSizeIncrease(const QString &name, double value);
-    void SetMHeightIncrease(const QString &name, double value);
+    void SetMShiftA(const QString &name, double value);
+    void SetMShiftB(const QString &name, double value);
+    void SetMShiftC(const QString &name, double value);
+    void SetMSpecialUnits(const QString &name, bool special);
+    void SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value);
     void SetMDescription(const QString &name, const QString &text);
     void SetMFullName(const QString &name, const QString &text);
 
@@ -127,11 +134,17 @@ public:
     static const QString TagDimensions;
     static const QString TagDimension;
     static const QString TagRestrictions;
+    static const QString TagCorrections;
+    static const QString TagCorrection;
 
     static const QString AttrBase;
     static const QString AttrValue;
-    static const QString AttrSizeIncrease;
-    static const QString AttrHeightIncrease;
+    static const QString AttrShiftA;
+    static const QString AttrShiftB;
+    static const QString AttrShiftC;
+    static const QString AttrCorrection;
+    static const QString AttrCoordinates;
+    static const QString AttrSpecialUnits;
     static const QString AttrDescription;
     static const QString AttrName;
     static const QString AttrFullName;
@@ -187,6 +200,9 @@ private:
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 
     QString ClearPMCode(const QString &code) const;
+
+    QMap<QString, qreal> ReadCorrections(const QDomElement &mElement) const;
+    void                 WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections);
 };
 
 #endif // VMEASUREMENTS_H

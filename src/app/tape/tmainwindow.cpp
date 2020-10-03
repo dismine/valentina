@@ -81,8 +81,23 @@ Q_LOGGING_CATEGORY(tMainWindow, "t.mainwindow")
 
 QT_WARNING_POP
 
+namespace
+{
+enum class MUnits : qint8 { Table, Degrees};
+}
+
 // We need this enum in case we will add or delete a column. And also make code more readable.
-enum {ColumnName = 0, ColumnFullName, ColumnCalcValue, ColumnFormula, ColumnBaseValue, ColumnInSizes, ColumnInHeights};
+enum {
+    ColumnName = 0,
+    ColumnFullName = 1,
+    ColumnCalcValue = 2,
+    ColumnFormula = 3,
+    ColumnBaseValue = 4,
+    ColumnShiftA = 5,
+    ColumnShiftB = 6,
+    ColumnShiftC = 7,
+    ColumnCorrection = 8
+};
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
@@ -582,6 +597,8 @@ void TMainWindow::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
+        InitMeasurementUnits();
+
         if (mType == MeasurementsType::Multisize)
         {
             actionFullCircumference->setText(tr("Use full circumference"));
@@ -590,6 +607,7 @@ void TMainWindow::changeEvent(QEvent *event)
 
             InitDimensionsBaseValue();
             InitDimensionControls();
+            InitDimesionShifts();
         }
         else
         {
@@ -1158,22 +1176,32 @@ void TMainWindow::Remove()
         ui->lineEditFullName->setText(QString());
         ui->lineEditFullName->blockSignals(false);
 
+        ui->comboBoxMUnits->blockSignals(true);
+        ui->comboBoxMUnits->setCurrentIndex(-1);
+        ui->comboBoxMUnits->blockSignals(false);
+
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
-            ui->doubleSpinBoxInSizes->blockSignals(true);
-            ui->doubleSpinBoxInHeights->blockSignals(true);
+            ui->doubleSpinBoxCorrection->blockSignals(true);
+            ui->doubleSpinBoxShiftA->blockSignals(true);
+            ui->doubleSpinBoxShiftB->blockSignals(true);
+            ui->doubleSpinBoxShiftC->blockSignals(true);
 
             ui->labelCalculatedValue->setText(QString());
             ui->doubleSpinBoxBaseValue->setValue(0);
-            ui->doubleSpinBoxInSizes->setValue(0);
-            ui->doubleSpinBoxInHeights->setValue(0);
+            ui->doubleSpinBoxCorrection->setValue(0);
+            ui->doubleSpinBoxShiftA->setValue(0);
+            ui->doubleSpinBoxShiftB->setValue(0);
+            ui->doubleSpinBoxShiftC->setValue(0);
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
-            ui->doubleSpinBoxInSizes->blockSignals(false);
-            ui->doubleSpinBoxInHeights->blockSignals(false);
+            ui->doubleSpinBoxCorrection->blockSignals(false);
+            ui->doubleSpinBoxShiftA->blockSignals(false);
+            ui->doubleSpinBoxShiftB->blockSignals(false);
+            ui->doubleSpinBoxShiftC->blockSignals(false);
         }
         else
         {
@@ -1590,12 +1618,17 @@ void TMainWindow::ShowNewMData(bool fresh)
         connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
 
+        ui->comboBoxMUnits->setCurrentIndex(
+            ui->comboBoxMUnits->findData(static_cast<int>(meash->IsSpecialUnits() ? MUnits::Degrees : MUnits::Table)));
+
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
-            ui->doubleSpinBoxInSizes->blockSignals(true);
-            ui->doubleSpinBoxInHeights->blockSignals(true);
+            ui->doubleSpinBoxCorrection->blockSignals(true);
+            ui->doubleSpinBoxShiftA->blockSignals(true);
+            ui->doubleSpinBoxShiftB->blockSignals(true);
+            ui->doubleSpinBoxShiftC->blockSignals(true);
 
             const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
             const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
@@ -1605,14 +1638,19 @@ void TMainWindow::ShowNewMData(bool fresh)
             if (fresh)
             {
                 ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
-                ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
-                ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
+                ui->doubleSpinBoxCorrection->setValue(
+                    meash->GetCorrection(currentDimensionA, currentDimensionB, currentDimensionC));
+                ui->doubleSpinBoxShiftA->setValue(meash->GetShiftA());
+                ui->doubleSpinBoxShiftB->setValue(meash->GetShiftB());
+                ui->doubleSpinBoxShiftC->setValue(meash->GetShiftC());
             }
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
-            ui->doubleSpinBoxInSizes->blockSignals(false);
-            ui->doubleSpinBoxInHeights->blockSignals(false);
+            ui->doubleSpinBoxCorrection->blockSignals(false);
+            ui->doubleSpinBoxShiftA->blockSignals(false);
+            ui->doubleSpinBoxShiftB->blockSignals(false);
+            ui->doubleSpinBoxShiftC->blockSignals(false);
         }
         else
         {
@@ -1851,7 +1889,7 @@ void TMainWindow::SaveMBaseValue(double value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMSizeIncrease(double value)
+void TMainWindow::SaveMShiftA(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -1861,7 +1899,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMShiftA(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWereSaved(false);
 
@@ -1876,7 +1914,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMHeightIncrease(double value)
+void TMainWindow::SaveMShiftB(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -1886,7 +1924,58 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMShiftB(nameField->data(Qt::UserRole).toString(), value);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMShiftC(double value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    m->SetMShiftC(nameField->data(Qt::UserRole).toString(), value);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMCorrectionValue(double value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    m->SetMCorrectionValue(nameField->data(Qt::UserRole).toString(),
+                           currentDimensionA, currentDimensionB, currentDimensionC, value);
 
     MeasurementsWereSaved(false);
 
@@ -1970,6 +2059,32 @@ void TMainWindow::SaveMFullName()
     {
         qCWarning(tMainWindow, "%s", qUtf8Printable(tr("The full name of known measurement forbidden to change.")));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMUnits()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const MUnits units = static_cast<MUnits>(ui->comboBoxMUnits->currentData().toInt());
+    m->SetMSpecialUnits(nameField->data(Qt::UserRole).toString(), units == MUnits::Degrees);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2117,12 +2232,20 @@ void TMainWindow::InitWindow()
         ShowDimensionControls();
         SetDimensionBases();
 
+        InitDimesionShifts();
+        HackDimensionShifts();
+
         connect(ui->doubleSpinBoxBaseValue, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMBaseValue);
-        connect(ui->doubleSpinBoxInSizes, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-                this, &TMainWindow::SaveMSizeIncrease);
-        connect(ui->doubleSpinBoxInHeights, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-                this, &TMainWindow::SaveMHeightIncrease);
+        connect(ui->doubleSpinBoxCorrection, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMCorrectionValue);
+
+        connect(ui->doubleSpinBoxShiftA, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMShiftA);
+        connect(ui->doubleSpinBoxShiftB, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMShiftB);
+        connect(ui->doubleSpinBoxShiftC, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMShiftC);
 
         SetDecimals();
     }
@@ -2137,11 +2260,10 @@ void TMainWindow::InitWindow()
 
         // Tab Measurements
         HackWidget(&ui->doubleSpinBoxBaseValue);
-        HackWidget(&ui->doubleSpinBoxInSizes);
-        HackWidget(&ui->doubleSpinBoxInHeights);
+        HackWidget(&ui->doubleSpinBoxCorrection);
         HackWidget(&ui->labelBaseValue);
-        HackWidget(&ui->labelInSizes);
-        HackWidget(&ui->labelInHeights);
+        HackWidget(&ui->labelCorrection);
+        HackDimensionShifts();
 
         // Tab Information
         HackDimensionBaseValue();
@@ -2226,7 +2348,14 @@ void TMainWindow::InitWindow()
         ShowInGraphicalShell(curFile);
     });
 
-    InitUnits();
+    InitPatternUnits();
+    InitMeasurementUnits();
+
+    ui->comboBoxMUnits->blockSignals(true);
+    ui->comboBoxMUnits->setCurrentIndex(-1);
+    ui->comboBoxMUnits->blockSignals(false);
+
+    connect(ui->comboBoxMUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TMainWindow::SaveMUnits);
 
     InitTable();
 }
@@ -2389,17 +2518,71 @@ void TMainWindow::InitDimensionControls()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitDimesionShifts()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto InitShift = [this, dimensions](int index, QLabel *name)
+    {
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+
+            name->setText(tr("Shift (%1):").arg(DimensionName(dimension->Type())));
+            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
+        }
+    };
+
+    InitShift(0, ui->labelShiftA);
+    InitShift(1, ui->labelShiftB);
+    InitShift(2, ui->labelShiftC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitTable()
 {
     if (mType == MeasurementsType::Multisize)
     {
         ui->tableWidget->setColumnHidden( ColumnFormula, true );// formula
+
+        const QList< MeasurementDimension_p > dimensions = m->Dimensions().values();
+
+        if (dimensions.size() > 0)
+        {
+            MeasurementDimension_p dimension = dimensions.at(0);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftA)->setText(
+                tr("%1 shift").arg(DimensionName(dimension->Type())));
+        }
+
+        if (dimensions.size() < 2)
+        {
+            ui->tableWidget->setColumnHidden( ColumnShiftB, true );
+        }
+        else
+        {
+            MeasurementDimension_p dimension = dimensions.at(1);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftB)->setText(
+                tr("%1 shift").arg(DimensionName(dimension->Type())));
+        }
+
+        if (dimensions.size() < 3)
+        {
+            ui->tableWidget->setColumnHidden( ColumnShiftC, true );
+        }
+        else
+        {
+            MeasurementDimension_p dimension = dimensions.at(2);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftC)->setText(
+                tr("%1 shift").arg(DimensionName(dimension->Type())));
+        }
     }
     else
     {
         ui->tableWidget->setColumnHidden( ColumnBaseValue, true );// base value
-        ui->tableWidget->setColumnHidden( ColumnInSizes, true );// in sizes
-        ui->tableWidget->setColumnHidden( ColumnInHeights, true );// in heights
+        ui->tableWidget->setColumnHidden( ColumnShiftA, true );
+        ui->tableWidget->setColumnHidden( ColumnShiftB, true );
+        ui->tableWidget->setColumnHidden( ColumnShiftC, true );
+        ui->tableWidget->setColumnHidden( ColumnCorrection, true );
     }
 
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this, &TMainWindow::ShowMData);
@@ -2419,8 +2602,10 @@ void TMainWindow::ShowUnits()
     ShowHeaderUnits(ui->tableWidget, ColumnCalcValue, UnitsToStr(pUnit));// calculated value
     ShowHeaderUnits(ui->tableWidget, ColumnFormula, unit);// formula
     ShowHeaderUnits(ui->tableWidget, ColumnBaseValue, unit);// base value
-    ShowHeaderUnits(ui->tableWidget, ColumnInSizes, unit);// in sizes
-    ShowHeaderUnits(ui->tableWidget, ColumnInHeights, unit);// in heights
+    ShowHeaderUnits(ui->tableWidget, ColumnShiftA, unit);
+    ShowHeaderUnits(ui->tableWidget, ColumnShiftB, unit);
+    ShowHeaderUnits(ui->tableWidget, ColumnShiftC, unit);
+    ShowHeaderUnits(ui->tableWidget, ColumnCorrection, unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2641,11 +2826,17 @@ void TMainWindow::RefreshTable(bool freshCall)
             AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
                     Qt::AlignHCenter | Qt::AlignVCenter); // base value
 
-            AddCell(locale().toString(meash->GetKsize()), currentRow, ColumnInSizes,
-                    Qt::AlignHCenter | Qt::AlignVCenter); // in sizes
+            AddCell(locale().toString(meash->GetShiftA()), currentRow, ColumnShiftA,
+                    Qt::AlignHCenter | Qt::AlignVCenter);
 
-            AddCell(locale().toString(meash->GetKheight()), currentRow, ColumnInHeights,
-                    Qt::AlignHCenter | Qt::AlignVCenter); // in heights
+            AddCell(locale().toString(meash->GetShiftB()), currentRow, ColumnShiftB,
+                    Qt::AlignHCenter | Qt::AlignVCenter);
+
+            AddCell(locale().toString(meash->GetShiftC()), currentRow, ColumnShiftC,
+                    Qt::AlignHCenter | Qt::AlignVCenter);
+
+            AddCell(locale().toString(meash->GetCorrection(currentDimensionA, currentDimensionB, currentDimensionC)),
+                    currentRow, ColumnCorrection, Qt::AlignHCenter | Qt::AlignVCenter);
         }
     }
 
@@ -2725,12 +2916,15 @@ void TMainWindow::MFields(bool enabled)
     ui->lineEditName->setEnabled(enabled);
     ui->plainTextEditDescription->setEnabled(enabled);
     ui->lineEditFullName->setEnabled(enabled);
+    ui->comboBoxMUnits->setEnabled(enabled);
 
     if (mType == MeasurementsType::Multisize)
     {
         ui->doubleSpinBoxBaseValue->setEnabled(enabled);
-        ui->doubleSpinBoxInSizes->setEnabled(enabled);
-        ui->doubleSpinBoxInHeights->setEnabled(enabled);
+        ui->doubleSpinBoxShiftA->setEnabled(enabled);
+        ui->doubleSpinBoxShiftB->setEnabled(enabled);
+        ui->doubleSpinBoxShiftC->setEnabled(enabled);
+        ui->doubleSpinBoxCorrection->setEnabled(enabled);
     }
     else
     {
@@ -3222,6 +3416,28 @@ void TMainWindow::HackDimensionBaseValue()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::HackDimensionShifts()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto HackShift = [this, dimensions](int index, QLabel *name, QDoubleSpinBox *shift)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(shift != nullptr)
+
+        if (dimensions.size() <= index)
+        {
+            HackWidget(&name);
+            HackWidget(&shift);
+        }
+    };
+
+    HackShift(0, ui->labelShiftA, ui->doubleSpinBoxShiftA);
+    HackShift(0, ui->labelShiftB, ui->doubleSpinBoxShiftB);
+    HackShift(0, ui->labelShiftC, ui->doubleSpinBoxShiftC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedNames) const
 {
     if (name.isEmpty())
@@ -3465,8 +3681,8 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     {
         m->AddEmpty(mm.name);
         m->SetMBaseValue(mm.name, mm.base);
-        m->SetMSizeIncrease(mm.name, mm.sizeIncrease);
-        m->SetMHeightIncrease(mm.name, mm.heightIncrease);
+        m->SetMShiftB(mm.name, mm.sizeIncrease);
+        m->SetMShiftA(mm.name, mm.heightIncrease);
 
         if (not mm.fullName.isEmpty())
         {
@@ -3716,31 +3932,49 @@ void TMainWindow::SetDecimals()
             ui->doubleSpinBoxBaseValue->setDecimals(2);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.01);
 
-            ui->doubleSpinBoxInSizes->setDecimals(2);
-            ui->doubleSpinBoxInSizes->setSingleStep(0.01);
+            ui->doubleSpinBoxCorrection->setDecimals(2);
+            ui->doubleSpinBoxCorrection->setSingleStep(0.01);
 
-            ui->doubleSpinBoxInHeights->setDecimals(2);
-            ui->doubleSpinBoxInHeights->setSingleStep(0.01);
+            ui->doubleSpinBoxShiftA->setDecimals(2);
+            ui->doubleSpinBoxShiftA->setSingleStep(0.01);
+
+            ui->doubleSpinBoxShiftB->setDecimals(2);
+            ui->doubleSpinBoxShiftB->setSingleStep(0.01);
+
+            ui->doubleSpinBoxShiftC->setDecimals(2);
+            ui->doubleSpinBoxShiftC->setSingleStep(0.01);
             break;
         case Unit::Mm:
             ui->doubleSpinBoxBaseValue->setDecimals(1);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
 
-            ui->doubleSpinBoxInSizes->setDecimals(1);
-            ui->doubleSpinBoxInSizes->setSingleStep(0.1);
+            ui->doubleSpinBoxCorrection->setDecimals(1);
+            ui->doubleSpinBoxCorrection->setSingleStep(0.1);
 
-            ui->doubleSpinBoxInHeights->setDecimals(1);
-            ui->doubleSpinBoxInHeights->setSingleStep(0.1);
+            ui->doubleSpinBoxShiftA->setDecimals(1);
+            ui->doubleSpinBoxShiftA->setSingleStep(0.1);
+
+            ui->doubleSpinBoxShiftB->setDecimals(1);
+            ui->doubleSpinBoxShiftB->setSingleStep(0.1);
+
+            ui->doubleSpinBoxShiftC->setDecimals(1);
+            ui->doubleSpinBoxShiftC->setSingleStep(0.1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.00001);
 
-            ui->doubleSpinBoxInSizes->setDecimals(5);
-            ui->doubleSpinBoxInSizes->setSingleStep(0.00001);
+            ui->doubleSpinBoxCorrection->setDecimals(5);
+            ui->doubleSpinBoxCorrection->setSingleStep(0.00001);
 
-            ui->doubleSpinBoxInHeights->setDecimals(5);
-            ui->doubleSpinBoxInHeights->setSingleStep(0.00001);
+            ui->doubleSpinBoxShiftA->setDecimals(5);
+            ui->doubleSpinBoxShiftA->setSingleStep(0.00001);
+
+            ui->doubleSpinBoxShiftB->setDecimals(5);
+            ui->doubleSpinBoxShiftB->setSingleStep(0.00001);
+
+            ui->doubleSpinBoxShiftC->setDecimals(5);
+            ui->doubleSpinBoxShiftC->setSingleStep(0.00001);
             break;
         default:
             break;
@@ -3748,7 +3982,7 @@ void TMainWindow::SetDecimals()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::InitUnits()
+void TMainWindow::InitPatternUnits()
 {
     labelPatternUnit = new QLabel(tr("Pattern unit:"));
     ui->toolBarGradation->addWidget(labelPatternUnit);
@@ -3774,6 +4008,47 @@ void TMainWindow::InitComboBoxUnits()
     comboBoxUnits->addItem(UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
     comboBoxUnits->addItem(UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
     comboBoxUnits->addItem(UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitMeasurementUnits()
+{
+    ui->comboBoxMUnits->blockSignals(true);
+
+    int current = -1;
+    if (ui->comboBoxMUnits->currentIndex() != -1)
+    {
+        current = ui->comboBoxMUnits->currentData().toInt();
+    }
+
+    QString units;
+    switch (m->MUnit())
+    {
+        case Unit::Mm:
+            units = tr("Millimeters");
+            break;
+        case Unit::Inch:
+            units = tr("Inches");
+            break;
+        case Unit::Cm:
+            units = tr("Centimeters");
+            break;
+        default:
+            units = "<Invalid>";
+            break;
+    }
+
+    ui->comboBoxMUnits->clear();
+    ui->comboBoxMUnits->addItem(units, QVariant(static_cast<int>(MUnits::Table)));
+    ui->comboBoxMUnits->addItem(tr("Degrees"), QVariant(static_cast<int>(MUnits::Degrees)));
+
+    int i = ui->comboBoxMUnits->findData(current);
+    if (i != -1)
+    {
+        ui->comboBoxMUnits->setCurrentIndex(i);
+    }
+
+    ui->comboBoxMUnits->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

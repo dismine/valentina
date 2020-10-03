@@ -126,10 +126,13 @@ private slots:
     void SaveMName(const QString &text);
     void SaveMValue();
     void SaveMBaseValue(double value);
-    void SaveMSizeIncrease(double value);
-    void SaveMHeightIncrease(double value);
+    void SaveMShiftA(double value);
+    void SaveMShiftB(double value);
+    void SaveMShiftC(double value);
+    void SaveMCorrectionValue(double value);
     void SaveMDescription();
     void SaveMFullName();
+    void SaveMUnits();
 
     void FullCircumferenceChanged(bool checked);
 
@@ -169,10 +172,12 @@ private:
     void InitDimensionsBaseValue();
     void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QComboBox *control);
     void InitDimensionControls();
+    void InitDimesionShifts();
     void InitTable();
     void SetDecimals();
-    void InitUnits();
+    void InitPatternUnits();
     void InitComboBoxUnits();
+    void InitMeasurementUnits();
     void InitGender(QComboBox *gender);
 
     void ShowNewMData(bool fresh);
@@ -219,6 +224,7 @@ private:
     template <class T>
     void HackWidget(T **widget);
     void HackDimensionBaseValue();
+    void HackDimensionShifts();
 
     QString CheckMName(const QString &name, const QSet<QString> &importedNames) const;
     void ShowError(const QString &text);
