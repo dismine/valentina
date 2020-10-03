@@ -32,12 +32,28 @@
             <xs:sequence>
               <xs:element name="m" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="corrections" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="correction" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="coordinates" type="xs:string" use="required"/>
+                              <xs:attribute name="correction" type="xs:double" use="required"/> 
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
                   <xs:attribute name="name" type="shortName" use="required"/>
                   <xs:attribute name="base" type="xs:double" use="required"/>
-                  <xs:attribute name="height_increase" type="xs:double" use="required"/>
-                  <xs:attribute name="size_increase" type="xs:double" use="required"/>
+                  <xs:attribute name="shiftA" type="xs:double" use="required"/>
+                  <xs:attribute name="shiftB" type="xs:double"/>
+                  <xs:attribute name="shiftC" type="xs:double"/>
                   <xs:attribute name="full_name" type="xs:string"/>
                   <xs:attribute name="description" type="xs:string"/>
+                  <xs:attribute name="specialUnits" type="xs:boolean"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -92,5 +108,4 @@
       <xs:maxInclusive value="8"/>
     </xs:restriction>
   </xs:simpleType>
-</xs:element>
 </xs:schema>
