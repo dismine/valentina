@@ -1630,10 +1630,21 @@ void TMainWindow::ShowNewMData(bool fresh)
             ui->doubleSpinBoxShiftB->blockSignals(true);
             ui->doubleSpinBoxShiftC->blockSignals(true);
 
-            const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
-            const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
-                                              pUnit);
-            ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + QChar(QChar::Space) +postfix);
+            QString calculatedValue;
+
+            if (meash->IsSpecialUnits())
+            {
+                const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+                const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
+                                                  pUnit);
+                calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + postfix;
+            }
+            else
+            {
+                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
+                calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + degreeSymbol;
+            }
+            ui->labelCalculatedValue->setText(calculatedValue);
 
             if (fresh)
             {
@@ -1654,7 +1665,8 @@ void TMainWindow::ShowNewMData(bool fresh)
         }
         else
         {
-            EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue);
+            EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue,
+                        meash->IsSpecialUnits());
 
             ui->plainTextEditFormula->blockSignals(true);
 
@@ -1833,7 +1845,7 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    if (not EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue))
+    if (not EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue, meash->IsSpecialUnits()))
     {
         return;
     }
@@ -2750,7 +2762,7 @@ void TMainWindow::RefreshData(bool freshCall)
 {
     data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
-    m->ReadMeasurements(currentDimensionA, currentDimensionB);
+    m->ReadMeasurements(currentDimensionA, currentDimensionB, currentDimensionC);
 
     RefreshTable(freshCall);
 }
@@ -2795,8 +2807,17 @@ void TMainWindow::RefreshTable(bool freshCall)
                 AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
             }
 
-            const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
-            AddCell(locale().toString(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
+            QString calculatedValue;
+            if (meash->IsSpecialUnits())
+            {
+                calculatedValue = locale().toString(*meash->GetValue()) + degreeSymbol;
+            }
+            else
+            {
+                calculatedValue = locale().toString(UnitConvertor(*meash->GetValue(), mUnit, pUnit));
+            }
+
+            AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
             QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -2818,9 +2839,20 @@ void TMainWindow::RefreshTable(bool freshCall)
                 AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
             }
 
-            const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
-                                              pUnit);
-            AddCell(locale().toString(value), currentRow, ColumnCalcValue,
+            QString calculatedValue;
+            if (meash->IsSpecialUnits())
+            {
+                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
+                calculatedValue = locale().toString(value) + degreeSymbol;
+            }
+            else
+            {
+                const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
+                                                  pUnit);
+                calculatedValue = locale().toString(value);
+            }
+
+            AddCell(calculatedValue, currentRow, ColumnCalcValue,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
             AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
@@ -3012,9 +3044,11 @@ QString TMainWindow::ClearCustomName(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
+bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label,
+                              bool specialUnits)
 {
-    const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = specialUnits ? degreeSymbol : UnitsToStr(pUnit);
+
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + QStringLiteral(" (") + postfix + QStringLiteral("). ") + tr("Empty field."));
@@ -3044,7 +3078,10 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             return false;
         }
 
-        result = UnitConvertor(result, mUnit, pUnit);
+        if (not specialUnits)
+        {
+            result = UnitConvertor(result, mUnit, pUnit);
+        }
 
         label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) +postfix);
         label->setToolTip(tr("Value"));

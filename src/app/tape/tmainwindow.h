@@ -198,7 +198,7 @@ private:
     QString GetCustomName() const;
     QString ClearCustomName(const QString &name) const;
 
-    bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
+    bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool specialUnits);
     void ShowMDiagram(const QString &name);
 
     void Open(const QString &pathTo, const QString &filter);
