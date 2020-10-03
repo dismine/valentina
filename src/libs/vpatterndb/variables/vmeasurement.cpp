@@ -223,7 +223,18 @@ bool VMeasurement::IsGradationHeightValid(const QString &height)
 //---------------------------------------------------------------------------------------------------------------------
 QString VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC)
 {
-    return QStringList({QString::number(baseA), QString::number(baseB), QString::number(baseC)}).join(';');
+    QStringList hashBlocks{QString::number(baseA)};
+
+    if (baseB > 0)
+    {
+        hashBlocks.append(QString::number(baseB));
+    }
+
+    if (baseC > 0)
+    {
+        hashBlocks.append(QString::number(baseC));
+    }
+    return hashBlocks.join(';');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
