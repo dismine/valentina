@@ -1618,8 +1618,10 @@ void TMainWindow::ShowNewMData(bool fresh)
         connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
 
+        ui->comboBoxMUnits->blockSignals(true);
         ui->comboBoxMUnits->setCurrentIndex(
             ui->comboBoxMUnits->findData(static_cast<int>(meash->IsSpecialUnits() ? MUnits::Degrees : MUnits::Table)));
+        ui->comboBoxMUnits->blockSignals(false);
 
         if (mType == MeasurementsType::Multisize)
         {
@@ -1634,15 +1636,15 @@ void TMainWindow::ShowNewMData(bool fresh)
 
             if (meash->IsSpecialUnits())
             {
+                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
+                calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + degreeSymbol;
+            }
+            else
+            {
                 const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
                 const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
                                                   pUnit);
                 calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + postfix;
-            }
-            else
-            {
-                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
-                calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + degreeSymbol;
             }
             ui->labelCalculatedValue->setText(calculatedValue);
 
@@ -2245,7 +2247,6 @@ void TMainWindow::InitWindow()
         SetDimensionBases();
 
         InitDimesionShifts();
-        HackDimensionShifts();
 
         connect(ui->doubleSpinBoxBaseValue, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMBaseValue);
@@ -2258,6 +2259,8 @@ void TMainWindow::InitWindow()
                 this, &TMainWindow::SaveMShiftB);
         connect(ui->doubleSpinBoxShiftC, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMShiftC);
+
+        HackDimensionShifts();
 
         SetDecimals();
     }
@@ -3457,7 +3460,7 @@ void TMainWindow::HackDimensionShifts()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    auto HackShift = [this, dimensions](int index, QLabel *name, QDoubleSpinBox *shift)
+    auto HackShift = [this, dimensions](int index, QLabel *&name, QDoubleSpinBox *&shift)
     {
         SCASSERT(name != nullptr)
         SCASSERT(shift != nullptr)
@@ -3470,8 +3473,8 @@ void TMainWindow::HackDimensionShifts()
     };
 
     HackShift(0, ui->labelShiftA, ui->doubleSpinBoxShiftA);
-    HackShift(0, ui->labelShiftB, ui->doubleSpinBoxShiftB);
-    HackShift(0, ui->labelShiftC, ui->doubleSpinBoxShiftC);
+    HackShift(1, ui->labelShiftB, ui->doubleSpinBoxShiftB);
+    HackShift(2, ui->labelShiftC, ui->doubleSpinBoxShiftC);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3839,6 +3842,24 @@ void TMainWindow::ShowDimensionControls()
 void TMainWindow::SetDimensionBases()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() > 0)
+    {
+        MeasurementDimension_p dimension = dimensions.at(0);
+        currentDimensionA = dimension->BaseValue();
+    }
+
+    if (dimensions.size() > 1)
+    {
+        MeasurementDimension_p dimension = dimensions.at(1);
+        currentDimensionB = dimension->BaseValue();
+    }
+
+    if (dimensions.size() > 2)
+    {
+        MeasurementDimension_p dimension = dimensions.at(2);
+        currentDimensionC = dimension->BaseValue();
+    }
 
     auto SetBase = [dimensions](int index, QComboBox *control, int &value)
     {
