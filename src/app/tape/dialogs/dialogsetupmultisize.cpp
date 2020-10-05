@@ -365,7 +365,7 @@ void DialogSetupMultisize::InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinB
 
     spinboxMinValue->blockSignals(true);
     const QString unitStr = " " + UnitsToStr(dimension->Units());
-    if (c)
+    if (c || dimension->Type() == MeasurementDimension::X)
     {
         spinboxMinValue->setSuffix(unitStr);
     }
@@ -376,7 +376,7 @@ void DialogSetupMultisize::InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinB
     spinboxMinValue->blockSignals(false);
 
     spinboxMaxValue->blockSignals(true);
-    if (c)
+    if (c || dimension->Type() == MeasurementDimension::X)
     {
         spinboxMaxValue->setSuffix(unitStr);
     }
@@ -405,7 +405,7 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
     for(auto step : steps)
     {
         comboBoxStep->addItem(QString("%1%2").arg(c && fc ? step*2 : step)
-                                  .arg(c ? unitStr : QString()), step);
+                                  .arg(c || dimension->Type() == MeasurementDimension::X ? unitStr : QString()), step);
     }
 
     comboBoxStep->setCurrentIndex(-1); // force a user to select
@@ -590,7 +590,8 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
 
     for(auto base : bases)
     {
-        comboBoxBase->addItem(QString("%1%2").arg(c && fc ? base * 2 : base).arg(c ? unitStr : QString()), base);
+        comboBoxBase->addItem(QString("%1%2").arg(c && fc ? base * 2 : base)
+                                  .arg(c || dimension->Type() == MeasurementDimension::X ? unitStr : QString()), base);
     }
 
     comboBoxBase->setCurrentIndex(comboBoxBase->findData(oldBase));
