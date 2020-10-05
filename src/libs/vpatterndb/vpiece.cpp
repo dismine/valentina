@@ -174,7 +174,10 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 {
 //    DumpPiece(*this, data);  // Uncomment for dumping test data
 
-    QVector<QPointF> points = GetPath().PathPoints(data);
+    VPiecePath mainPath = GetPath();
+    mainPath.SetName(tr("Main path of piece %1").arg(GetName()));
+
+    QVector<QPointF> points = mainPath.PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
 
 //    DumpVector(points); // Uncomment for dumping test data
@@ -184,7 +187,7 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::UniteMainPathPoints(const VContainer *data) const
 {
-    QVector<QPointF> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data));
+    QVector<QPointF> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data), GetName());
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
     return points;
 }
@@ -731,7 +734,7 @@ QVector<QPointF> VPiece::SeamAllowancePointsWithRotation(const VContainer *data,
                     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
                     pointsEkv += VPiecePath::CurveSeamAllowanceSegment(data, unitedPath, curve, i, node.GetReverse(),
-                                                                       width);
+                                                                       width, GetName());
                 }
             }
             break;
@@ -899,7 +902,7 @@ QVector<VSAPoint> VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, int i
         const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
         const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
 
-        points += VPiecePath::CurveSeamAllowanceSegment(data, path, curve, index, node.GetReverse(), width);
+        points += VPiecePath::CurveSeamAllowanceSegment(data, path, curve, index, node.GetReverse(), width, GetName());
     }
     return points;
 }

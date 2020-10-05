@@ -126,15 +126,25 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
+QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
+                                                  const QString &piece) const
 {
     QString error;
     QVector<QPointF> segment = GetSegmentPoints(GetPoints(), begin, end, reverse, error);
 
     if (not error.isEmpty())
     {
-        const QString errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2")
-                                     .arg(name(), error);
+        QString errorMsg;
+        if (piece.isEmpty())
+        {
+            errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2")
+                                         .arg(name(), error);
+        }
+        else
+        {
+            errorMsg = QObject::tr("Error in path '%1'. Calculating segment for curve '%2' has failed. %3")
+                           .arg(piece, name(), error);
+        }
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
                            qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
