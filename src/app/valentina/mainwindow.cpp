@@ -156,6 +156,30 @@ QVector<DetailForLayout> SortDetailsForLayout(const QHash<quint32, VPiece> *allD
     return details;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
+{
+    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+    QSet<QString> uniqueNames;
+
+    while (i != allDetails->constEnd())
+    {
+        const QString pieceName = i.value().GetName();
+        if (not uniqueNames.contains(pieceName))
+        {
+            uniqueNames.insert(pieceName);
+        }
+        else
+        {
+            const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(pieceName);
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                               qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+        }
+
+        ++i;
+    }
+}
+
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2780,6 +2804,8 @@ void MainWindow::ActionDetails(bool checked)
         ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
 
         m_statusLabel->setText(QString());
+
+        WarningNotUniquePieceName(pattern->DataPieces());
     }
     else
     {
@@ -2826,6 +2852,7 @@ void MainWindow::ActionLayout(bool checked)
             }
             else
             {
+                WarningNotUniquePieceName(allDetails);
                 details = SortDetailsForLayout(allDetails);
 
                 if (details.count() == 0)
