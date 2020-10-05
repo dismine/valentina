@@ -62,19 +62,13 @@ QVector<int> VAbstartMeasurementDimension::ValidSteps() const
     }
     else if (diff > 0)
     {
-        steps.append(1);
-
-        auto AddStep = [&steps, diff](int step)
+        for (int i=1; i < 9; ++i)
         {
+            const int step = (m_units == Unit::Mm ? i * 10 : i);
             if (diff % step == 0)
             {
                 steps.append(step);
             }
-        };
-
-        for (int i=2; i < 9; ++i)
-        {
-            AddStep(i);
         }
     }
 
