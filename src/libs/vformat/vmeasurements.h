@@ -116,8 +116,10 @@ public:
 
     QMap<MeasurementDimension, MeasurementDimension_p > Dimensions() const;
 
-    QPair<int, int> OneDimensionRestriction(int base) const;
-    QPair<int, int> TwoDimensionRestriction(int base1, int base2) const;
+    QMap<QString, QPair<int, int> > GetRestrictions() const;
+    void                            SetRestrictions(const QMap<QString, QPair<int, int> > &restrictions);
+
+    QPair<int, int> Restriction(int base, int base2=0) const;
 
     static const QString TagVST;
     static const QString TagVIT;
@@ -134,6 +136,7 @@ public:
     static const QString TagDimensions;
     static const QString TagDimension;
     static const QString TagRestrictions;
+    static const QString TagRestriction;
     static const QString TagCorrections;
     static const QString TagCorrection;
 

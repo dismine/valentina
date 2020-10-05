@@ -993,6 +993,8 @@
     <addaction name="actionImportFromPattern"/>
     <addaction name="actionMeasurementDiagram"/>
     <addaction name="actionUseFullCircumference"/>
+    <addaction name="actionRestrictSecondDimension"/>
+    <addaction name="actionRestrictThirdDimension"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -1360,6 +1362,28 @@
    </property>
    <property name="text">
     <string>Use full circumference</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRestrictSecondDimension">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Restrict second dimension</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRestrictThirdDimension">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Restrict third dimension</string>
    </property>
    <property name="visible">
     <bool>false</bool>

@@ -139,6 +139,9 @@ private slots:
 
     void ExportToIndividual();
 
+    void RestrictSecondDimesion();
+    void RestrictThirdDimesion();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

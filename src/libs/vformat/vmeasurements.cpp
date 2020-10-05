@@ -71,6 +71,7 @@ const QString VMeasurements::TagMeasurement      = QStringLiteral("m");
 const QString VMeasurements::TagDimensions       = QStringLiteral("dimensions");
 const QString VMeasurements::TagDimension        = QStringLiteral("dimension");
 const QString VMeasurements::TagRestrictions     = QStringLiteral("restrictions");
+const QString VMeasurements::TagRestriction      = QStringLiteral("restriction");
 const QString VMeasurements::TagCorrections      = QStringLiteral("corrections");
 const QString VMeasurements::TagCorrection       = QStringLiteral("correction");
 
@@ -853,15 +854,58 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPair<int, int> VMeasurements::OneDimensionRestriction(int base) const
+QMap<QString, QPair<int, int> > VMeasurements::GetRestrictions() const
 {
-    return QPair<int, int>(0, 0);
+    QMap<QString, QPair<int, int> > restrictions;
+
+    const QDomNodeList list = elementsByTagName(TagRestriction);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement res = list.at(i).toElement();
+
+        QString coordinates = GetParametrString(res, AttrCoordinates);
+        const int min = GetParametrInt(res, AttrMin, QChar('0'));
+        const int max = GetParametrInt(res, AttrMax, QChar('0'));
+
+        restrictions.insert(coordinates, qMakePair(min, max));
+    }
+
+    return restrictions;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPair<int, int> VMeasurements::TwoDimensionRestriction(int base1, int base2) const
+void VMeasurements::SetRestrictions(const QMap<QString, QPair<int, int> > &restrictions)
 {
-    return QPair<int, int>(0, 0);
+    QDomElement root = documentElement();
+    QDomElement restrictionsTag = root.firstChildElement(TagRestrictions);
+
+    if (restrictionsTag.isNull())
+    {
+        qDebug() << "Can't find restrictions tag";
+    }
+
+    RemoveAllChildren(restrictionsTag);
+
+    QMap<QString, QPair<int, int> >::const_iterator i = restrictions.constBegin();
+    while (i != restrictions.constEnd())
+    {
+        QDomElement restrictionTag = createElement(TagRestriction);
+
+        SetAttribute(restrictionTag, AttrCoordinates, i.key());
+        SetAttribute(restrictionTag, AttrMin, i.value().first);
+        SetAttribute(restrictionTag, AttrMax, i.value().second);
+
+        restrictionsTag.appendChild(restrictionTag);
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPair<int, int> VMeasurements::Restriction(int base, int base2) const
+{
+    const QMap<QString, QPair<int, int> > restrictions = GetRestrictions();
+    const QString hash = VMeasurement::CorrectionHash(base, base2, 0);
+    return restrictions.value(hash, QPair<int, int>(0, 0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

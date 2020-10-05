@@ -33,6 +33,7 @@
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/dialogtapepreferences.h"
 #include "dialogs/dialogsetupmultisize.h"
+#include "dialogs/dialogrestrictdimension.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
@@ -2188,6 +2189,44 @@ void TMainWindow::ExportToIndividual()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RestrictSecondDimesion()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QMap<QString, QPair<int, int>> restrictions = m->GetRestrictions();
+
+    bool oneDimesionRestriction = true;
+    bool fullCircumference = m->IsFullCircumference();
+
+    DialogRestrictDimension dialog(dimensions, restrictions, oneDimesionRestriction, fullCircumference, this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetRestrictions(dialog.Restrictions());
+    MeasurementsWereSaved(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RestrictThirdDimesion()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QMap<QString, QPair<int, int>> restrictions = m->GetRestrictions();
+
+    bool oneDimesionRestriction = false;
+    bool fullCircumference = m->IsFullCircumference();
+
+    DialogRestrictDimension dialog(dimensions, restrictions, oneDimesionRestriction, fullCircumference, this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetRestrictions(dialog.Restrictions());
+    MeasurementsWereSaved(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -2466,6 +2505,26 @@ void TMainWindow::InitMenu()
         QAction *separator = new QAction(this);
         separator->setSeparator(true);
         ui->menuMeasurements->insertAction(ui->actionUseFullCircumference, separator);
+
+        const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+        if (dimensions.size() > 1)
+        {
+            ui->actionRestrictSecondDimension->setVisible(true);
+            ui->actionRestrictSecondDimension->setEnabled(true);
+            connect(ui->actionRestrictSecondDimension, &QAction::triggered, this, &TMainWindow::RestrictSecondDimesion);
+
+            separator = new QAction(this);
+            separator->setSeparator(true);
+            ui->menuMeasurements->insertAction(ui->actionRestrictSecondDimension, separator);
+
+            if (dimensions.size() > 2)
+            {
+                ui->actionRestrictThirdDimension->setVisible(true);
+                ui->actionRestrictThirdDimension->setEnabled(true);
+                connect(ui->actionRestrictThirdDimension, &QAction::triggered, this,
+                        &TMainWindow::RestrictThirdDimesion);
+            }
+        }
 
         // File
         ui->actionExportToIndividual->setVisible(true);
@@ -3995,7 +4054,7 @@ QVector<int> TMainWindow::DimensionRestrictedValues(int index, const Measurement
     }
     else if (dimension->Type() == MeasurementDimension::Y)
     {
-        const QPair<int, int> restriction = m->OneDimensionRestriction(currentDimensionA);
+        const QPair<int, int> restriction = m->Restriction(currentDimensionA);
         VYMeasurementDimension restricted(dimension->Units(), restriction.first, restriction.second, dimension->Step());
         restricted.SetCircumference(dimension->IsCircumference());
 
@@ -4013,11 +4072,11 @@ QVector<int> TMainWindow::DimensionRestrictedValues(int index, const Measurement
 
         if (index == 1)
         {
-            restriction = m->OneDimensionRestriction(currentDimensionA);
+            restriction = m->Restriction(currentDimensionA);
         }
         else
         {
-            restriction = m->TwoDimensionRestriction(currentDimensionA, currentDimensionB);
+            restriction = m->Restriction(currentDimensionA, currentDimensionB);
         }
 
         VWMeasurementDimension restricted(dimension->Units(), restriction.first, restriction.second, dimension->Step());
@@ -4036,11 +4095,11 @@ QVector<int> TMainWindow::DimensionRestrictedValues(int index, const Measurement
 
         if (index == 1)
         {
-            restriction = m->OneDimensionRestriction(currentDimensionA);
+            restriction = m->Restriction(currentDimensionA);
         }
         else
         {
-            restriction = m->TwoDimensionRestriction(currentDimensionA, currentDimensionB);
+            restriction = m->Restriction(currentDimensionA, currentDimensionB);
         }
 
         VZMeasurementDimension restricted(dimension->Units(), restriction.first, restriction.second, dimension->Step());

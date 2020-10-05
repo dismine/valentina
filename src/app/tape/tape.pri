@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES  += \
+    $$PWD/dialogs/dialogrestrictdimension.cpp \
     $$PWD/main.cpp \
     $$PWD/tmainwindow.cpp \
     $$PWD/mapplication.cpp \
@@ -17,6 +18,7 @@ SOURCES  += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS  += \
+    $$PWD/dialogs/dialogrestrictdimension.h \
     $$PWD/tmainwindow.h \
     $$PWD/stable.h \
     $$PWD/mapplication.h \
@@ -31,6 +33,7 @@ HEADERS  += \
     $$PWD/dialogs/dialogsetupmultisize.h
 
 FORMS    += \
+    $$PWD/dialogs/dialogrestrictdimension.ui \
     $$PWD/tmainwindow.ui \
     $$PWD/dialogs/dialogabouttape.ui \
     $$PWD/dialogs/dialognewmeasurements.ui \
