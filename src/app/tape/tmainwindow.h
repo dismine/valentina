@@ -44,6 +44,7 @@ namespace Ui
 
 class QLabel;
 class QxtCsvModel;
+class VMeasurement;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -135,6 +136,8 @@ private slots:
     void SaveMUnits();
 
     void FullCircumferenceChanged(bool checked);
+
+    void ExportToIndividual();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
@@ -243,6 +246,8 @@ private:
     void SetCurrentDimensionValues();
 
     QVector<int> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
+
+    QMap<int, QSharedPointer<VMeasurement> > OrderedMeasurments() const;
 };
 
 #endif // TMAINWINDOW_H

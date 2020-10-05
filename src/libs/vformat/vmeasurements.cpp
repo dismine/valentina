@@ -132,7 +132,7 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 {
     SCASSERT(data != nullptr)
 
-            CreateEmptyIndividualFile(unit);
+    CreateEmptyIndividualFile(unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

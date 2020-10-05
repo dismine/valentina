@@ -2111,6 +2111,85 @@ void TMainWindow::FullCircumferenceChanged(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ExportToIndividual()
+{
+    QString dir;
+    if (curFile.isEmpty())
+    {
+        dir = qApp->TapeSettings()->GetPathIndividualMeasurements();
+    }
+    else
+    {
+        dir = QFileInfo(curFile).absolutePath();
+    }
+
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
+
+    QString filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
+    QString fName = tr("measurements.vit");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + QChar('/') + fName,
+                                                    filters);
+
+    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
+                                     {
+                                         if (usedNotExistedDir)
+                                         {
+                                             QDir(dir).rmpath(QChar('.'));
+                                         }
+                                     });
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QString suffix = QStringLiteral("vit");
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QChar('.') + suffix;
+    }
+
+    QScopedPointer<VContainer> tmpData(new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace()));
+
+    VMeasurements individualMeasurements(mUnit, tmpData.data());
+
+    const QMap<int, QSharedPointer<VMeasurement> > orderedTable = OrderedMeasurments();
+    QMap<int, QSharedPointer<VMeasurement> >::const_iterator iMap;
+    for (iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
+    {
+        const QSharedPointer<VMeasurement> &meash = iMap.value();
+        individualMeasurements.AddEmpty(meash->GetName());
+        individualMeasurements.SetMValue(meash->GetName(), QString::number(*meash->GetValue()));
+        individualMeasurements.SetMSpecialUnits(meash->GetName(), meash->IsSpecialUnits());
+        if (meash->IsCustom())
+        {
+            individualMeasurements.SetMDescription(meash->GetName(), meash->GetDescription());
+            individualMeasurements.SetMFullName(meash->GetName(), meash->GetGuiText());
+        }
+    }
+
+    QString error;
+    const bool result = individualMeasurements.SaveDocument(fileName, error);
+    if (not result)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save the file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -2387,6 +2466,10 @@ void TMainWindow::InitMenu()
         actionFullCircumference->setChecked(m->IsFullCircumference());
         ui->menuMeasurements->addAction(actionFullCircumference);
         connect(actionFullCircumference, &QAction::triggered, this, &TMainWindow::FullCircumferenceChanged);
+
+        ui->actionExportToIndividual->setVisible(true);
+        ui->actionExportToIndividual->setEnabled(true);
+        connect(ui->actionExportToIndividual, &QAction::triggered, this, &TMainWindow::ExportToIndividual);
     }
 }
 
@@ -2778,15 +2861,7 @@ void TMainWindow::RefreshTable(bool freshCall)
 
     ShowUnits();
 
-    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
-    QMap<int, QSharedPointer<VMeasurement> > orderedTable;
-    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
-    for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
-    {
-        const QSharedPointer<VMeasurement> &meash = iterMap.value();
-        orderedTable.insert(meash->Index(), meash);
-    }
-
+    const QMap<int, QSharedPointer<VMeasurement> > orderedTable = OrderedMeasurments();
     qint32 currentRow = -1;
     QMap<int, QSharedPointer<VMeasurement> >::const_iterator iMap;
     ui->tableWidget->setRowCount ( orderedTable.size() );
@@ -3979,6 +4054,21 @@ QVector<int> TMainWindow::DimensionRestrictedValues(int index, const Measurement
     }
 
     return QVector<int>();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<int, QSharedPointer<VMeasurement> > TMainWindow::OrderedMeasurments() const
+{
+    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
+    QMap<int, QSharedPointer<VMeasurement> > orderedTable;
+    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
+    for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
+    {
+        const QSharedPointer<VMeasurement> &meash = iterMap.value();
+        orderedTable.insert(meash->Index(), meash);
+    }
+
+    return orderedTable;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

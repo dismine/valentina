@@ -963,6 +963,7 @@
     <addaction name="actionSaveAs"/>
     <addaction name="actionExportToCSV"/>
     <addaction name="actionImportFromCSV"/>
+    <addaction name="actionExportToIndividual"/>
     <addaction name="separator"/>
     <addaction name="actionReadOnly"/>
     <addaction name="separator"/>
@@ -1327,6 +1328,26 @@
    </property>
    <property name="text">
     <string>Measurement diagram</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionExportToIndividual">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export to individual</string>
+   </property>
+   <property name="toolTip">
+    <string>Export to individual measurements</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
