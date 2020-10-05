@@ -80,6 +80,10 @@ private:
     void PM_SystemV0_4_1();
     void ConvertMeasurementsToV0_4_2();
 
+    void AddNewTagsForV0_5_0();
+    void RemoveTagsForV0_5_0();
+    void ConvertMeasurementsToV0_5_0();
+
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();

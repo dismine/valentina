@@ -105,7 +105,7 @@
   <xs:simpleType name="dimensionStep">
     <xs:restriction base="xs:unsignedInt">
       <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="8"/>
+      <xs:maxInclusive value="80"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

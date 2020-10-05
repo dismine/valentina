@@ -313,6 +313,112 @@ void VVSTConverter::ConvertMeasurementsToV0_4_2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::AddNewTagsForV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    QDomElement root = documentElement();
+    const QDomElement pmSystemTag = root.firstChildElement(QStringLiteral("pm_system"));
+    if (pmSystemTag.isNull())
+    {
+        return;
+    }
+
+    QDomElement dimensionsTag = createElement(QStringLiteral("dimensions"));
+
+    auto Base = [this](const QString &base)
+    {
+        const QDomElement root = documentElement();
+        const QDomElement baseTag = root.firstChildElement(base);
+        if (baseTag.isNull())
+        {
+            return 0;
+        }
+
+        return GetParametrInt(baseTag, QStringLiteral("base"), QChar('0'));
+    };
+
+    const Unit units = MUnit();
+
+    {
+        const int step = static_cast<int>(UnitConvertor(6, Unit::Cm, units));
+        const int min = static_cast<int>(UnitConvertor(50, Unit::Cm, units));
+        const int max = static_cast<int>(UnitConvertor(200, Unit::Cm, units));
+
+        QDomElement dimensionX = createElement(QStringLiteral("dimension"));
+        SetAttribute(dimensionX, QStringLiteral("type"), QChar('x'));
+        SetAttribute(dimensionX, QStringLiteral("step"), step);
+        SetAttribute(dimensionX, QStringLiteral("min"), min);
+        SetAttribute(dimensionX, QStringLiteral("max"), max);
+        SetAttribute(dimensionX, QStringLiteral("base"), Base(QStringLiteral("height")));
+        dimensionsTag.appendChild(dimensionX);
+    }
+
+    {
+        const int step = static_cast<int>(UnitConvertor(2, Unit::Cm, units));
+        const int min = static_cast<int>(UnitConvertor(22, Unit::Cm, units));
+        const int max = static_cast<int>(UnitConvertor(72, Unit::Cm, units));
+
+        QDomElement dimensionY = createElement(QStringLiteral("dimension"));
+        SetAttribute(dimensionY, QStringLiteral("type"), QChar('y'));
+        SetAttribute(dimensionY, QStringLiteral("step"), step);
+        SetAttribute(dimensionY, QStringLiteral("min"), min);
+        SetAttribute(dimensionY, QStringLiteral("max"), max);
+        SetAttribute(dimensionY, QStringLiteral("base"), Base(QStringLiteral("size")));
+        SetAttribute(dimensionY, QStringLiteral("circumference"), true);
+        dimensionsTag.appendChild(dimensionY);
+    }
+
+    root.insertAfter(dimensionsTag, pmSystemTag);
+
+    root.insertAfter(createElement(QStringLiteral("restrictions")), dimensionsTag);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::RemoveTagsForV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    QDomElement root = documentElement();
+
+    const QDomElement sizeTag = root.firstChildElement(QStringLiteral("size"));
+    if (not sizeTag.isNull())
+    {
+        root.removeChild(sizeTag);
+    }
+
+    const QDomElement heightTag = root.firstChildElement(QStringLiteral("height"));
+    if (not heightTag.isNull())
+    {
+        root.removeChild(heightTag);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ConvertMeasurementsToV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList measurements = elementsByTagName(QStringLiteral("m"));
+    for (int i = 0; i < measurements.size(); ++i)
+    {
+        QDomElement m = measurements.at(i).toElement();
+
+        SetAttribute(m, QStringLiteral("shiftA"), GetParametrString(m, QStringLiteral("height_increase")));
+        m.removeAttribute(QStringLiteral("height_increase"));
+
+        SetAttribute(m, QStringLiteral("shiftB"), GetParametrString(m, QStringLiteral("size_increase")));
+        m.removeAttribute(QStringLiteral("size_increase"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
@@ -381,5 +487,8 @@ void VVSTConverter::ToV0_5_0()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.5.0"));
+    AddNewTagsForV0_5_0();
+    RemoveTagsForV0_5_0();
+    ConvertMeasurementsToV0_5_0();
     Save();
 }
