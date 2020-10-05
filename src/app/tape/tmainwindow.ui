@@ -992,6 +992,7 @@
     <addaction name="actionDatabase"/>
     <addaction name="actionImportFromPattern"/>
     <addaction name="actionMeasurementDiagram"/>
+    <addaction name="actionUseFullCircumference"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -1351,6 +1352,17 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionUseFullCircumference">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Use full circumference</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
  </widget>

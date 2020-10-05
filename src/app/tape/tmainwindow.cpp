@@ -601,8 +601,6 @@ void TMainWindow::changeEvent(QEvent *event)
 
         if (mType == MeasurementsType::Multisize)
         {
-            actionFullCircumference->setText(tr("Use full circumference"));
-
             ui->labelMType->setText(tr("Multisize measurements"));
 
             InitDimensionsBaseValue();
@@ -2459,14 +2457,17 @@ void TMainWindow::InitMenu()
 {
     if (mType == MeasurementsType::Multisize)
     {
-        ui->menuMeasurements->addSeparator();
+        // Measurements
+        ui->actionUseFullCircumference->setVisible(true);
+        ui->actionUseFullCircumference->setEnabled(true);
+        ui->actionUseFullCircumference->setChecked(m->IsFullCircumference());
+        connect(ui->actionUseFullCircumference, &QAction::triggered, this, &TMainWindow::FullCircumferenceChanged);
 
-        actionFullCircumference = new QAction(tr("Use full circumference"), this);
-        actionFullCircumference->setCheckable(true);
-        actionFullCircumference->setChecked(m->IsFullCircumference());
-        ui->menuMeasurements->addAction(actionFullCircumference);
-        connect(actionFullCircumference, &QAction::triggered, this, &TMainWindow::FullCircumferenceChanged);
+        QAction *separator = new QAction(this);
+        separator->setSeparator(true);
+        ui->menuMeasurements->insertAction(ui->actionUseFullCircumference, separator);
 
+        // File
         ui->actionExportToIndividual->setVisible(true);
         ui->actionExportToIndividual->setEnabled(true);
         connect(ui->actionExportToIndividual, &QAction::triggered, this, &TMainWindow::ExportToIndividual);

@@ -164,7 +164,6 @@ private:
     QLabel *labelPatternUnit{nullptr};
     bool isInitialized{false};
     bool mIsReadOnly{false};
-    QAction *actionFullCircumference{nullptr};
     QTimer *gradation;
 
     QVector<QObject *> hackedWidgets{};
