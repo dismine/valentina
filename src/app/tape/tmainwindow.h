@@ -240,9 +240,6 @@ private:
 
     void SetCurrentPatternUnit();
 
-    QString DimensionName(MeasurementDimension type);
-    QString DimensionToolTip(MeasurementDimension type, bool circumference);
-
     void ShowDimensionControls();
     void SetDimensionBases();
     void SetCurrentDimensionValues();

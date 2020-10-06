@@ -155,6 +155,50 @@ bool VAbstartMeasurementDimension::IsUnitsValid()
     return m_units == Unit::Cm || m_units == Unit::Mm || m_units == Unit::Inch;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstartMeasurementDimension::DimensionName(MeasurementDimension type)
+{
+    switch(type)
+    {
+    case MeasurementDimension::X:
+        return tr("Height");
+    case MeasurementDimension::Y:
+        return tr("Size");
+    case MeasurementDimension::W:
+        return tr("Hip");
+    case MeasurementDimension::Z:
+        return tr("Waist");
+    default:
+        return QString();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstartMeasurementDimension::DimensionToolTip(MeasurementDimension type, bool circumference, bool fc)
+{
+    switch(type)
+    {
+    case MeasurementDimension::X:
+        return tr("Height");
+    case MeasurementDimension::Y:
+        if (circumference)
+        {
+            return fc ? tr("Chest full circumference") : tr("Chest half circumference");
+        }
+        else
+        {
+            return tr("Size");
+        }
+        return circumference ? tr("Chest circumference") : tr("Size");
+    case MeasurementDimension::W:
+        return fc ? tr("Hip full circumference") : tr("Hip half circumference");
+    case MeasurementDimension::Z:
+        return fc ? tr("Waist full circumference") : tr("Waist half circumference");
+    default:
+        return QString();
+    }
+}
+
 // VXMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VXMeasurementDimension::VXMeasurementDimension(Unit units)

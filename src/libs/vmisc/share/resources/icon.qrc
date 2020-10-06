@@ -89,5 +89,9 @@
         <file>icon/32x32/broken_link@2x.png</file>
         <file>icon/32x32/link.png</file>
         <file>icon/32x32/link@2x.png</file>
+        <file>icon/24x24/star.png</file>
+        <file>icon/24x24/star@2x.png</file>
+        <file>icon/24x24/close.png</file>
+        <file>icon/24x24/close@2x.png</file>
     </qresource>
 </RCC>

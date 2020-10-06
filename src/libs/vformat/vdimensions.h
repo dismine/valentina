@@ -83,6 +83,9 @@ public:
     QVector<int> ValidBases() const;
     QStringList  ValidBasesList() const;
 
+    static QString DimensionName(MeasurementDimension type);
+    static QString DimensionToolTip(MeasurementDimension type, bool circumference, bool fc);
+
 protected:
     Unit    m_units{Unit::Cm};
     int     m_minValue{0};

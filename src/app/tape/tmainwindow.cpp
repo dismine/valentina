@@ -2548,8 +2548,10 @@ void TMainWindow::InitDimensionsBaseValue()
         if (dimensions.size() > index)
         {
             MeasurementDimension_p dimension = dimensions.at(index);
-            name->setText(DimensionName(dimension->Type())+QChar(':'));
-            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
+            name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                            dimension->IsCircumference(),
+                                                                            m->IsFullCircumference()));
 
             if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
             {
@@ -2591,10 +2593,10 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     control->blockSignals(true);
     control->clear();
 
+    const QVector<int> bases = DimensionRestrictedValues(index, dimension);
+
     if (dimension->Type() == MeasurementDimension::X)
     {
-        const QVector<int> bases = DimensionRestrictedValues(index, dimension);
-
         for(auto base : bases)
         {
             control->addItem(QString("%1 %2").arg(base).arg(unit), base);
@@ -2602,8 +2604,6 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     }
     else if (dimension->Type() == MeasurementDimension::Y)
     {
-        const QVector<int> bases = dimension->ValidBases();
-
         for(auto base : bases)
         {
             if (dimension->IsCircumference())
@@ -2618,8 +2618,6 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     }
     else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
     {
-        const QVector<int> bases = dimension->ValidBases();
-
         for(auto base : bases)
         {
             control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
@@ -2653,13 +2651,15 @@ void TMainWindow::InitDimensionControls()
 
             if (name == nullptr)
             {
-                name = new QLabel(DimensionName(dimension->Type())+QChar(':'));
+                name = new QLabel(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
             }
             else
             {
-                name->setText(DimensionName(dimension->Type())+QChar(':'));
+                name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
             }
-            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                            dimension->IsCircumference(),
+                                                                            m->IsFullCircumference()));
 
             if (control == nullptr)
             {
@@ -2686,8 +2686,10 @@ void TMainWindow::InitDimesionShifts()
         {
             MeasurementDimension_p dimension = dimensions.at(index);
 
-            name->setText(tr("Shift (%1):").arg(DimensionName(dimension->Type())));
-            name->setToolTip(DimensionToolTip(dimension->Type(), dimension->IsCircumference()));
+            name->setText(tr("Shift (%1):").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                            dimension->IsCircumference(),
+                                                                            m->IsFullCircumference()));
         }
     };
 
@@ -2709,7 +2711,7 @@ void TMainWindow::InitTable()
         {
             MeasurementDimension_p dimension = dimensions.at(0);
             ui->tableWidget->horizontalHeaderItem(ColumnShiftA)->setText(
-                tr("%1 shift").arg(DimensionName(dimension->Type())));
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
         }
 
         if (dimensions.size() < 2)
@@ -2720,7 +2722,7 @@ void TMainWindow::InitTable()
         {
             MeasurementDimension_p dimension = dimensions.at(1);
             ui->tableWidget->horizontalHeaderItem(ColumnShiftB)->setText(
-                tr("%1 shift").arg(DimensionName(dimension->Type())));
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
         }
 
         if (dimensions.size() < 3)
@@ -2731,7 +2733,7 @@ void TMainWindow::InitTable()
         {
             MeasurementDimension_p dimension = dimensions.at(2);
             ui->tableWidget->horizontalHeaderItem(ColumnShiftC)->setText(
-                tr("%1 shift").arg(DimensionName(dimension->Type())));
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
         }
     }
     else
@@ -3885,51 +3887,6 @@ void TMainWindow::SetCurrentPatternUnit()
             comboBoxUnits->setCurrentIndex(indexUnit);
         }
         comboBoxUnits->blockSignals(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString TMainWindow::DimensionName(MeasurementDimension type)
-{
-    switch(type)
-    {
-        case MeasurementDimension::X:
-            return tr("Height");
-        case MeasurementDimension::Y:
-            return tr("Size");
-        case MeasurementDimension::W:
-            return tr("Hip");
-        case MeasurementDimension::Z:
-            return tr("Waist");
-        default:
-            return QString();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString TMainWindow::DimensionToolTip(MeasurementDimension type, bool circumference)
-{
-    const bool fc = m->IsFullCircumference();
-    switch(type)
-    {
-        case MeasurementDimension::X:
-            return tr("Height");
-        case MeasurementDimension::Y:
-            if (circumference)
-            {
-                return fc ? tr("Chest full circumference") : tr("Chest half circumference");
-            }
-            else
-            {
-                return tr("Size");
-            }
-            return circumference ? tr("Chest circumference") : tr("Size");
-        case MeasurementDimension::W:
-            return fc ? tr("Hip full circumference") : tr("Hip half circumference");
-        case MeasurementDimension::Z:
-            return fc ? tr("Waist full circumference") : tr("Waist half circumference");
-        default:
-            return QString();
     }
 }
 

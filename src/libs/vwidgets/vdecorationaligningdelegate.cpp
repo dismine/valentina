@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vcomboboxdelegate.h
+ **  @file   vdecorationaligningdelegate.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 9, 2019
+ **  @date   6 10, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2019 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,28 +25,24 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VCOMBOBOXDELEGATE_H
-#define VCOMBOBOXDELEGATE_H
+#include "vdecorationaligningdelegate.h"
 
-#include <QItemDelegate>
+#include <QPainter>
 
-class VComboBoxDelegate : public QItemDelegate
+//---------------------------------------------------------------------------------------------------------------------
+VDecorationAligningDelegate::VDecorationAligningDelegate(Qt::Alignment alignment, QObject *parent)
+    : QStyledItemDelegate(parent), m_alignment(alignment)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDecorationAligningDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    Q_OBJECT
-public:
-    explicit VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
+    QIcon icon = QIcon(qvariant_cast<QIcon>(index.data(Qt::DecorationRole)));
 
-    virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                                  const QModelIndex &index) const override;
-    virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override;
-    virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
-                              const QModelIndex &index) const override;
+    if (option.state & QStyle::State_Selected)
+    {
+        painter->fillRect(option.rect, option.palette.highlight());
+    }
 
-    virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
-                                      const QModelIndex &index) const override;
-private:
-    Q_DISABLE_COPY(VComboBoxDelegate)
-    QStringList m_items;
-};
-
-#endif // VCOMBOBOXDELEGATE_H
+    icon.paint(painter, option.rect, m_alignment);
+}

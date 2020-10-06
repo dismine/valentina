@@ -119,7 +119,7 @@ public:
     static QStringList WholeListSizes(Unit patternUnit);
     static bool IsGradationSizeValid(const QString &size);
     static bool IsGradationHeightValid(const QString &height);
-    static QString CorrectionHash(qreal baseA, qreal baseB, qreal baseC);
+    static QString CorrectionHash(qreal baseA, qreal baseB=0, qreal baseC=0);
 private:
     QSharedDataPointer<VMeasurementData> d;
 

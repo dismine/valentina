@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vcomboboxdelegate.h
+ **  @file   vdecorationaligningdelegate.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 9, 2019
+ **  @date   6 10, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2019 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,28 +25,33 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VCOMBOBOXDELEGATE_H
-#define VCOMBOBOXDELEGATE_H
+#ifndef VDECORATIONALIGNINGDELEGATE_H
+#define VDECORATIONALIGNINGDELEGATE_H
 
-#include <QItemDelegate>
+#include <QStyledItemDelegate>
 
-class VComboBoxDelegate : public QItemDelegate
+
+
+class VDecorationAligningDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
+
 public:
-    explicit VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
+    explicit VDecorationAligningDelegate(Qt::Alignment alignment, QObject *parent = nullptr);
 
-    virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                                  const QModelIndex &index) const override;
-    virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override;
-    virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
-                              const QModelIndex &index) const override;
+    Qt::Alignment Alignment() const;
 
-    virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
-                                      const QModelIndex &index) const override;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
 private:
-    Q_DISABLE_COPY(VComboBoxDelegate)
-    QStringList m_items;
+    Q_DISABLE_COPY(VDecorationAligningDelegate)
+    Qt::Alignment const m_alignment;
 };
 
-#endif // VCOMBOBOXDELEGATE_H
+//---------------------------------------------------------------------------------------------------------------------
+inline Qt::Alignment VDecorationAligningDelegate::Alignment() const
+{
+    return m_alignment;
+}
+
+#endif // VDECORATIONALIGNINGDELEGATE_H

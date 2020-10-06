@@ -35,8 +35,11 @@
 
 namespace Ui
 {
-    class DialogRestrictDimension;
+class DialogRestrictDimension;
 }
+
+class QTableWidgetItem;
+
 
 class DialogRestrictDimension : public QDialog
 {
@@ -50,6 +53,15 @@ public:
 
     QMap<QString, QPair<int, int> > Restrictions() const;
 
+protected:
+    virtual void changeEvent(QEvent* event) override;
+
+protected slots:
+    void RowSelected();
+    void DimensionAChanged();
+    void MinRestrictionChanged();
+    void MaxRestrictionChanged();
+
 private:
     Q_DISABLE_COPY(DialogRestrictDimension)
     Ui::DialogRestrictDimension *ui;
@@ -58,6 +70,20 @@ private:
     bool m_fullCircumference;
     QList<MeasurementDimension_p>  m_dimensions;
     QMap<QString, QPair<int, int>> m_restrictions;
+
+    void InitDimensionsBaseValues();
+    void InitDimensionGradation(const MeasurementDimension_p &dimension, QComboBox *control);
+    void InitTable();
+
+    void RefreshTable();
+
+    void AddCell(int row, int column, int rowValue, int columnValue);
+
+    void EnableRestrictionControls(bool enable);
+
+    void FillBases(const QVector<int> &bases, const MeasurementDimension_p &dimension, QComboBox *control);
+
+    QStringList DimensionLabels(const QVector<int> &bases, const MeasurementDimension_p &dimension);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
