@@ -333,8 +333,9 @@ bool TMainWindow::LoadFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            currentDimensionB = m->DimensionABase();
-            currentDimensionA = m->DimensionBBase();
+            currentDimensionA = m->DimensionABase();
+            currentDimensionB = m->DimensionBBase();
+            currentDimensionC = m->DimensionCBase();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -3424,8 +3425,9 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            currentDimensionA = m->DimensionBBase();
-            currentDimensionB = m->DimensionABase();
+            currentDimensionA = m->DimensionABase();
+            currentDimensionB = m->DimensionBBase();
+            currentDimensionC = m->DimensionCBase();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -4021,12 +4023,18 @@ QVector<int> TMainWindow::DimensionRestrictedValues(int index, const Measurement
         restriction = m->Restriction(currentDimensionA, currentDimensionB);
     }
 
-    if (restriction.first < dimension->MinValue() || restriction.second > dimension->MaxValue())
-    { // invalid restriction
-        return dimension->ValidBases();
+    const QVector<int> bases = dimension->ValidBases();
+
+    int min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+    int max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+
+    if (min > max)
+    {
+        min = dimension->MinValue();
+        max = dimension->MaxValue();
     }
 
-    return VAbstartMeasurementDimension::ValidBases(restriction.first, restriction.second, dimension->Step());
+    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

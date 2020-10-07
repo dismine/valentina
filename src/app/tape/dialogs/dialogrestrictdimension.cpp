@@ -453,31 +453,50 @@ void DialogRestrictDimension::AddCell(int row, int column, int rowValue, int col
 
     int base1 = 0;
     int base2 = 0;
+    MeasurementDimension_p dimension;
+    QVector<int> bases;
 
     if (m_oneDimesionRestriction)
     {
         base1 = rowValue;
+
+        if (m_dimensions.size() >= 2)
+        {
+            dimension = m_dimensions.at(1);
+            bases = dimension->ValidBases();
+        }
     }
     else
     {
         base1 = ui->comboBoxDimensionA->currentData().toInt();
         base2 = rowValue;
+
+        if (m_dimensions.size() >= 3)
+        {
+            dimension = m_dimensions.at(2);
+            bases = dimension->ValidBases();
+        }
     }
 
     QPair<int, int> restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2),
                                                        QPair<int, int>(0, 0));
+    int min = INT32_MIN;
+    int max = INT32_MAX;
 
-    bool leftRestriction = true;
-    if (restriction.first > 0 && restriction.first <= restriction.second)
+    if (not dimension.isNull())
     {
-        leftRestriction = columnValue >= restriction.first;
+        min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+        max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+
+        if (max < min)
+        {
+            min = dimension->MinValue();
+            max = dimension->MaxValue();
+        }
     }
 
-    bool rightRestriction = true;
-    if (restriction.second > 0 && restriction.second >= restriction.first)
-    {
-        rightRestriction = columnValue <= restriction.second;
-    }
+    const bool leftRestriction = columnValue >= min;
+    const bool rightRestriction = columnValue <= max;
 
     if (leftRestriction && rightRestriction)
     {
