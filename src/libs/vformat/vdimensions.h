@@ -83,6 +83,7 @@ public:
     QVector<int> ValidBases() const;
     QStringList  ValidBasesList() const;
 
+    static QVector<int> ValidBases(int min, int max, int step);
     static QString DimensionName(MeasurementDimension type);
     static QString DimensionToolTip(MeasurementDimension type, bool circumference, bool fc);
 

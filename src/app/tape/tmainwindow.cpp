@@ -4000,77 +4000,27 @@ void TMainWindow::SetCurrentDimensionValues()
 //---------------------------------------------------------------------------------------------------------------------
 QVector<int> TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
 {
+    QPair<int, int> restriction;
+
     if (index == 0)
     {
         return dimension->ValidBases();
     }
-
-    if (dimension->Type() == MeasurementDimension::X)
+    else if (index == 1)
     {
+        restriction = m->Restriction(currentDimensionA);
+    }
+    else
+    {
+        restriction = m->Restriction(currentDimensionA, currentDimensionB);
+    }
+
+    if (restriction.first < dimension->MinValue() || restriction.second > dimension->MaxValue())
+    { // invalid restriction
         return dimension->ValidBases();
     }
-    else if (dimension->Type() == MeasurementDimension::Y)
-    {
-        const QPair<int, int> restriction = m->Restriction(currentDimensionA);
-        VYMeasurementDimension restricted(dimension->Units(), restriction.first, restriction.second, dimension->Step());
-        restricted.SetCircumference(dimension->IsCircumference());
 
-        if (restriction.first < dimension->MinValue() || restriction.second > dimension->MaxValue()
-            || not restricted.IsValid())
-        { // invalid restriction
-            return dimension->ValidBases();
-        }
-
-        return restricted.ValidBases();
-    }
-    else if (dimension->Type() == MeasurementDimension::W)
-    {
-        QPair<int, int> restriction;
-
-        if (index == 1)
-        {
-            restriction = m->Restriction(currentDimensionA);
-        }
-        else
-        {
-            restriction = m->Restriction(currentDimensionA, currentDimensionB);
-        }
-
-        VWMeasurementDimension restricted(dimension->Units(), restriction.first, restriction.second, dimension->Step());
-
-        if (restriction.first < dimension->MinValue() || restriction.second > dimension->MaxValue()
-            || not restricted.IsValid())
-        { // invalid restriction
-            return dimension->ValidBases();
-        }
-
-        return restricted.ValidBases();
-    }
-    else if (dimension->Type() == MeasurementDimension::Z)
-    {
-        QPair<int, int> restriction;
-
-        if (index == 1)
-        {
-            restriction = m->Restriction(currentDimensionA);
-        }
-        else
-        {
-            restriction = m->Restriction(currentDimensionA, currentDimensionB);
-        }
-
-        VZMeasurementDimension restricted(dimension->Units(), restriction.first, restriction.second, dimension->Step());
-
-        if (restriction.first < dimension->MinValue() || restriction.second > dimension->MaxValue()
-            || not restricted.IsValid())
-        { // invalid restriction
-            return dimension->ValidBases();
-        }
-
-        return restricted.ValidBases();
-    }
-
-    return QVector<int>();
+    return VAbstartMeasurementDimension::ValidBases(restriction.first, restriction.second, dimension->Step());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -78,24 +78,7 @@ QVector<int> VAbstartMeasurementDimension::ValidSteps() const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<int> VAbstartMeasurementDimension::ValidBases() const
 {
-    QVector<int> validBases;
-    int step = Step();
-
-    if (step < 0)
-    {
-        return validBases;
-    }
-    else if (step == 0)
-    {
-        step = 1;
-    }
-
-    for (int value = MinValue(); value <= MaxValue(); value += step)
-    {
-        validBases.append(value);
-    }
-
-    return validBases;
+    return VAbstartMeasurementDimension::ValidBases(m_minValue, m_maxValue, m_step);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,6 +92,28 @@ QStringList VAbstartMeasurementDimension::ValidBasesList() const
     }
     return list;
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<int> VAbstartMeasurementDimension::ValidBases(int min, int max, int step)
+{
+    QVector<int> validBases;
+
+    if (step < 0)
+    {
+        return validBases;
+    }
+    else if (step == 0)
+    {
+        step = 1;
+    }
+
+    for (int value = min; value <= max; value += step)
+    {
+        validBases.append(value);
+    }
+
+    return validBases;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
