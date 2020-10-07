@@ -2205,6 +2205,7 @@ void TMainWindow::RestrictSecondDimesion()
 
     m->SetRestrictions(dialog.Restrictions());
     MeasurementsWereSaved(false);
+    DimensionABaseChanged(); // trigger refresh
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2224,6 +2225,7 @@ void TMainWindow::RestrictThirdDimesion()
 
     m->SetRestrictions(dialog.Restrictions());
     MeasurementsWereSaved(false);
+    DimensionABaseChanged(); // trigger refresh
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2623,6 +2625,10 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
             control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
         }
     }
+
+    // after initialization the current index is 0. The signal for changing the index will not be triggered if not make
+    // it invalid first
+    control->setCurrentIndex(-1);
 
     int i = control->findData(current);
     if (i != -1)
