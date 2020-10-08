@@ -538,26 +538,41 @@ void DialogRestrictDimension::FillBases(const QVector<int> &bases, const Measure
 {
     SCASSERT(control != nullptr)
 
+    const DimesionLabels labels = dimension->Labels();
     const QString units = UnitsToStr(dimension->Units(), true);
 
     if (dimension->Type() == MeasurementDimension::X)
     {
         for(auto base : bases)
         {
-            control->addItem(QString("%1 %2").arg(base).arg(units), base);
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(base).arg(units), base);
+            }
         }
     }
     else if (dimension->Type() == MeasurementDimension::Y)
     {
         for(auto base : bases)
         {
-            if (dimension->IsCircumference())
+            if (labels.contains(base) && not labels.value(base).isEmpty())
             {
-                control->addItem(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
+                control->addItem(labels.value(base), base);
             }
             else
             {
-                control->addItem(QString::number(base), base);
+                if (dimension->IsCircumference())
+                {
+                    control->addItem(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
+                }
+                else
+                {
+                    control->addItem(QString::number(base), base);
+                }
             }
         }
     }
@@ -565,7 +580,14 @@ void DialogRestrictDimension::FillBases(const QVector<int> &bases, const Measure
     {
         for(auto base : bases)
         {
-            control->addItem(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
+            }
         }
     }
 }
@@ -575,6 +597,7 @@ QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, 
 {
     const bool showUnits = dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X;
     const QString units = showUnits ? UnitsToStr(dimension->Units(), true) : QString();
+    const DimesionLabels dimensionLabels = dimension->Labels();
 
     QStringList labels;
 
@@ -582,20 +605,34 @@ QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, 
     {
         for(auto base : bases)
         {
-            labels.append(QString("%1 %2").arg(base).arg(units));
+            if (dimensionLabels.contains(base) && not dimensionLabels.value(base).isEmpty())
+            {
+                labels.append(dimensionLabels.value(base));
+            }
+            else
+            {
+                labels.append(QString("%1 %2").arg(base).arg(units));
+            }
         }
     }
     else if (dimension->Type() == MeasurementDimension::Y)
     {
         for(auto base : bases)
         {
-            if (dimension->IsCircumference())
+            if (dimensionLabels.contains(base) && not dimensionLabels.value(base).isEmpty())
             {
-                labels.append(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+                labels.append(dimensionLabels.value(base));
             }
             else
             {
-                labels.append(QString::number(base));
+                if (dimension->IsCircumference())
+                {
+                    labels.append(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+                }
+                else
+                {
+                    labels.append(QString::number(base));
+                }
             }
         }
     }
@@ -603,7 +640,14 @@ QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, 
     {
         for(auto base : bases)
         {
-            labels.append(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+            if (dimensionLabels.contains(base) && not dimensionLabels.value(base).isEmpty())
+            {
+                labels.append(dimensionLabels.value(base));
+            }
+            else
+            {
+                labels.append(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+            }
         }
     }
 

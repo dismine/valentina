@@ -995,6 +995,7 @@
     <addaction name="actionUseFullCircumference"/>
     <addaction name="actionRestrictSecondDimension"/>
     <addaction name="actionRestrictThirdDimension"/>
+    <addaction name="actionDimensionLabels"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -1384,6 +1385,17 @@
    </property>
    <property name="text">
     <string>Restrict third dimension</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionDimensionLabels">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Dimension labels</string>
    </property>
    <property name="visible">
     <bool>false</bool>

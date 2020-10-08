@@ -34,6 +34,7 @@
 #include "dialogs/dialogtapepreferences.h"
 #include "dialogs/dialogsetupmultisize.h"
 #include "dialogs/dialogrestrictdimension.h"
+#include "dialogs/dialogdimensionlabels.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
@@ -2230,6 +2231,25 @@ void TMainWindow::RestrictThirdDimesion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::EditDimensionLabels()
+{
+    const QMap<MeasurementDimension, MeasurementDimension_p > dimensions = m->Dimensions();
+
+    DialogDimensionLabels dialog(dimensions, m->IsFullCircumference(), this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetDimensionLabels(dialog.Labels());
+
+    MeasurementsWereSaved(false);
+
+    InitDimensionsBaseValue();
+    InitDimensionControls();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -2516,10 +2536,6 @@ void TMainWindow::InitMenu()
             ui->actionRestrictSecondDimension->setEnabled(true);
             connect(ui->actionRestrictSecondDimension, &QAction::triggered, this, &TMainWindow::RestrictSecondDimesion);
 
-            separator = new QAction(this);
-            separator->setSeparator(true);
-            ui->menuMeasurements->insertAction(ui->actionRestrictSecondDimension, separator);
-
             if (dimensions.size() > 2)
             {
                 ui->actionRestrictThirdDimension->setVisible(true);
@@ -2528,6 +2544,10 @@ void TMainWindow::InitMenu()
                         &TMainWindow::RestrictThirdDimesion);
             }
         }
+
+        ui->actionDimensionLabels->setVisible(true);
+        ui->actionDimensionLabels->setEnabled(true);
+        connect(ui->actionDimensionLabels, &QAction::triggered, this, &TMainWindow::EditDimensionLabels);
 
         // File
         ui->actionExportToIndividual->setVisible(true);
@@ -2556,20 +2576,29 @@ void TMainWindow::InitDimensionsBaseValue()
                                                                             dimension->IsCircumference(),
                                                                             m->IsFullCircumference()));
 
-            if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
+            DimesionLabels labels = dimension->Labels();
+
+            if (labels.contains(dimension->BaseValue()) && not labels.value(dimension->BaseValue()).isEmpty())
             {
-                if (dimension->Type() != MeasurementDimension::X && fc)
-                {
-                    base->setText(QString("%1 %2").arg(dimension->BaseValue()*2).arg(unit));
-                }
-                else
-                {
-                    base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
-                }
+                base->setText(labels.value(dimension->BaseValue()));
             }
             else
             {
-                base->setText(QString::number(dimension->BaseValue()));
+                if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
+                {
+                    if (dimension->Type() != MeasurementDimension::X && fc)
+                    {
+                        base->setText(QString("%1 %2").arg(dimension->BaseValue()*2).arg(unit));
+                    }
+                    else
+                    {
+                        base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
+                    }
+                }
+                else
+                {
+                    base->setText(QString::number(dimension->BaseValue()));
+                }
             }
         }
     };
@@ -2597,25 +2626,40 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     control->clear();
 
     const QVector<int> bases = DimensionRestrictedValues(index, dimension);
+    const DimesionLabels labels = dimension->Labels();
 
     if (dimension->Type() == MeasurementDimension::X)
     {
         for(auto base : bases)
         {
-            control->addItem(QString("%1 %2").arg(base).arg(unit), base);
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(base).arg(unit), base);
+            }
         }
     }
     else if (dimension->Type() == MeasurementDimension::Y)
     {
         for(auto base : bases)
         {
-            if (dimension->IsCircumference())
+            if (labels.contains(base) && not labels.value(base).isEmpty())
             {
-                control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                control->addItem(labels.value(base), base);
             }
             else
             {
-                control->addItem(QString::number(base), base);
+                if (dimension->IsCircumference())
+                {
+                    control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                }
+                else
+                {
+                    control->addItem(QString::number(base), base);
+                }
             }
         }
     }
@@ -2623,7 +2667,14 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     {
         for(auto base : bases)
         {
-            control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+            }
         }
     }
 

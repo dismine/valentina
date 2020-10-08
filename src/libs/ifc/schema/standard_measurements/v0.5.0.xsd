@@ -13,6 +13,20 @@
             <xs:sequence>
               <xs:element name="dimension" minOccurs="0" maxOccurs="3">
                 <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="labels" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="label" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="value" type="dimesionValue" use="required"/>
+                              <xs:attribute name="label" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
                   <xs:attribute name="type" type="dimensionType" use="required"/>
                   <xs:attribute name="base" type="dimesionValue" use="required"/>
                   <xs:attribute name="min" type="dimesionValue" use="required"/>

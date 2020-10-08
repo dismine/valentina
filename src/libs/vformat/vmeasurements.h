@@ -121,6 +121,8 @@ public:
 
     QPair<int, int> Restriction(int base, int base2=0) const;
 
+    void SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels);
+
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;
@@ -139,6 +141,8 @@ public:
     static const QString TagRestriction;
     static const QString TagCorrections;
     static const QString TagCorrection;
+    static const QString TagLabels;
+    static const QString TagLabel;
 
     static const QString AttrBase;
     static const QString AttrValue;
@@ -156,6 +160,7 @@ public:
     static const QString AttrStep;
     static const QString AttrCircumference;
     static const QString AttrFullCircumference;
+    static const QString AttrLabel;
 
     static const QString GenderMale;
     static const QString GenderFemale;
@@ -206,6 +211,9 @@ private:
 
     QMap<QString, qreal> ReadCorrections(const QDomElement &mElement) const;
     void                 WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections);
+
+    void           SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels);
+    DimesionLabels ReadDimensionLabels(const QDomElement &dElement) const;
 };
 
 #endif // VMEASUREMENTS_H

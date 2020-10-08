@@ -74,6 +74,8 @@ const QString VMeasurements::TagRestrictions     = QStringLiteral("restrictions"
 const QString VMeasurements::TagRestriction      = QStringLiteral("restriction");
 const QString VMeasurements::TagCorrections      = QStringLiteral("corrections");
 const QString VMeasurements::TagCorrection       = QStringLiteral("correction");
+const QString VMeasurements::TagLabels           = QStringLiteral("labels");
+const QString VMeasurements::TagLabel            = QStringLiteral("label");
 
 const QString VMeasurements::AttrBase              = QStringLiteral("base");
 const QString VMeasurements::AttrValue             = QStringLiteral("value");
@@ -91,6 +93,7 @@ const QString VMeasurements::AttrMax               = QStringLiteral("max");
 const QString VMeasurements::AttrStep              = QStringLiteral("step");
 const QString VMeasurements::AttrCircumference     = QStringLiteral("circumference");
 const QString VMeasurements::AttrFullCircumference = QStringLiteral("fullCircumference");
+const QString VMeasurements::AttrLabel             = QStringLiteral("label");
 
 const QString VMeasurements::GenderMale    = QStringLiteral("male");
 const QString VMeasurements::GenderFemale  = QStringLiteral("female");
@@ -822,10 +825,13 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
             const int step = GetParametrInt(dom, AttrStep, QString("-1"));
             const int base = GetParametrInt(dom, AttrBase, QChar('0'));
 
+            const DimesionLabels labels = ReadDimensionLabels(dom);
+
             if (type == MeasurementDimension::X)
             {
                 auto dimension = QSharedPointer<VXMeasurementDimension>::create(units, min, max, step);
                 dimension->SetBaseValue(base);
+                dimension->SetLabels(labels);
                 dimensionsCached->insert(type, dimension);
             }
             else if (type == MeasurementDimension::Y)
@@ -833,18 +839,21 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
                 auto dimension = QSharedPointer<VYMeasurementDimension>::create(units, min, max, step);
                 dimension->SetBaseValue(base);
                 dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
+                dimension->SetLabels(labels);
                 dimensionsCached->insert(type, dimension);
             }
             else if (type == MeasurementDimension::W)
             {
                 auto dimension = QSharedPointer<VWMeasurementDimension>::create(units, min, max, step);
                 dimension->SetBaseValue(base);
+                dimension->SetLabels(labels);
                 dimensionsCached->insert(type, dimension);
             }
             else if (type == MeasurementDimension::Z)
             {
                 auto dimension = QSharedPointer<VZMeasurementDimension>::create(units, min, max, step);
                 dimension->SetBaseValue(base);
+                dimension->SetLabels(labels);
                 dimensionsCached->insert(type, dimension);
             }
         }
@@ -906,6 +915,24 @@ QPair<int, int> VMeasurements::Restriction(int base, int base2) const
     const QMap<QString, QPair<int, int> > restrictions = GetRestrictions();
     const QString hash = VMeasurement::CorrectionHash(base, base2, 0);
     return restrictions.value(hash, QPair<int, int>(0, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels)
+{
+    const QDomNodeList list = elementsByTagName(TagDimension);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+        const MeasurementDimension type = StrToDimensionType(GetParametrString(dom, AttrType));
+
+        if (labels.contains(type))
+        {
+            SaveDimesionLabels(dom, labels.value(type));
+        }
+    }
+
+    dimensionsCached->clear(); // Invalidate cache
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1310,4 +1337,85 @@ void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, 
             mElement.removeChild(correctionsTag);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels)
+{
+    if (dElement.isNull())
+    {
+        qDebug() << "Invalid dimension tag";
+    }
+
+    QDomElement labelsTag = dElement.firstChildElement(TagLabels);
+    if (not labels.isEmpty())
+    {
+        if (not labelsTag.isNull())
+        {
+            RemoveAllChildren(labelsTag);
+        }
+        else
+        {
+            labelsTag = createElement(TagLabels);
+            dElement.appendChild(labelsTag);
+        }
+
+        DimesionLabels::const_iterator i = labels.constBegin();
+        while (i != labels.constEnd())
+        {
+            if (not i.value().isEmpty())
+            {
+                QDomElement labelTag = createElement(TagLabel);
+
+                SetAttribute(labelTag, AttrValue, i.key());
+                SetAttribute(labelTag, AttrLabel, i.value());
+
+                labelsTag.appendChild(labelTag);
+            }
+            ++i;
+        }
+    }
+    else
+    {
+        if (not labelsTag.isNull())
+        {
+            dElement.removeChild(labelsTag);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DimesionLabels VMeasurements::ReadDimensionLabels(const QDomElement &dElement) const
+{
+    if (dElement.isNull())
+    {
+        return DimesionLabels();
+    }
+
+    QDomElement labelsTag = dElement.firstChildElement(TagLabels);
+    if (labelsTag.isNull())
+    {
+        return DimesionLabels();
+    }
+
+    DimesionLabels labels;
+
+    QDomNode labelTag = labelsTag.firstChild();
+    while (not labelTag.isNull())
+    {
+        if (labelTag.isElement())
+        {
+            const QDomElement l = labelTag.toElement();
+            const int value = GetParametrInt(l, AttrValue, QChar('0'));
+            const QString label = GetParametrEmptyString(l, AttrLabel);
+
+            if (value > 0 && not label.isEmpty())
+            {
+                labels.insert(value, label);
+            }
+        }
+        labelTag = labelTag.nextSibling();
+    }
+
+    return labels;
 }

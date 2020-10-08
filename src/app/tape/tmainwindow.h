@@ -142,6 +142,8 @@ private slots:
     void RestrictSecondDimesion();
     void RestrictThirdDimesion();
 
+    void EditDimensionLabels();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

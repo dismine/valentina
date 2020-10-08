@@ -29,6 +29,7 @@
 #define VDIMENSIONS_H
 
 #include <QCoreApplication>
+#include <QMap>
 
 #include "../vmisc/def.h"
 
@@ -44,6 +45,7 @@ class VAbstartMeasurementDimension;
 template <class T> class QSharedPointer;
 
 using MeasurementDimension_p = QSharedPointer<VAbstartMeasurementDimension>;
+using DimesionLabels = QMap<int, QString>;
 
 class VAbstartMeasurementDimension
 {
@@ -87,13 +89,17 @@ public:
     static QString DimensionName(MeasurementDimension type);
     static QString DimensionToolTip(MeasurementDimension type, bool circumference, bool fc);
 
+    DimesionLabels Labels() const;
+    void           SetLabels(const DimesionLabels &labels);
+
 protected:
-    Unit    m_units{Unit::Cm};
-    int     m_minValue{0};
-    int     m_maxValue{0};
-    int     m_step{-1};
-    int     m_baseValue{0};
-    QString m_error{};
+    Unit           m_units{Unit::Cm};
+    int            m_minValue{0};
+    int            m_maxValue{0};
+    int            m_step{-1};
+    int            m_baseValue{0};
+    QString        m_error{};
+    DimesionLabels m_labels{};
 
     bool IsRangeValid();
     bool IsStepValid();
@@ -165,6 +171,18 @@ inline Unit VAbstartMeasurementDimension::Units() const
 inline bool VAbstartMeasurementDimension::IsCircumference() const
 {
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline DimesionLabels VAbstartMeasurementDimension::Labels() const
+{
+    return m_labels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstartMeasurementDimension::SetLabels(const DimesionLabels &labels)
+{
+    m_labels = labels;
 }
 
 // VXMeasurementDimension
