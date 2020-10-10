@@ -3,6 +3,7 @@
 
 SOURCES  += \
     $$PWD/dialogs/dialogdimensionlabels.cpp \
+    $$PWD/dialogs/dialogmeasurementscsvcolumns.cpp \
     $$PWD/dialogs/dialogrestrictdimension.cpp \
     $$PWD/main.cpp \
     $$PWD/tmainwindow.cpp \
@@ -20,6 +21,7 @@ SOURCES  += \
 
 HEADERS  += \
     $$PWD/dialogs/dialogdimensionlabels.h \
+    $$PWD/dialogs/dialogmeasurementscsvcolumns.h \
     $$PWD/dialogs/dialogrestrictdimension.h \
     $$PWD/tmainwindow.h \
     $$PWD/stable.h \
@@ -36,6 +38,7 @@ HEADERS  += \
 
 FORMS    += \
     $$PWD/dialogs/dialogdimensionlabels.ui \
+    $$PWD/dialogs/dialogmeasurementscsvcolumns.ui \
     $$PWD/dialogs/dialogrestrictdimension.ui \
     $$PWD/tmainwindow.ui \
     $$PWD/dialogs/dialogabouttape.ui \

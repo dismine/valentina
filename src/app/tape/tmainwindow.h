@@ -237,8 +237,8 @@ private:
     void ShowError(const QString &text);
     void RefreshDataAfterImport();
 
-    void ImportIndividualMeasurements(const QxtCsvModel &csv);
-    void ImportMultisizeMeasurements(const QxtCsvModel &csv);
+    void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map);
+    void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map);
 
     void SetCurrentPatternUnit();
 

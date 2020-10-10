@@ -35,6 +35,7 @@
 #include "dialogs/dialogsetupmultisize.h"
 #include "dialogs/dialogrestrictdimension.h"
 #include "dialogs/dialogdimensionlabels.h"
+#include "dialogs/dialogmeasurementscsvcolumns.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
@@ -1020,16 +1021,34 @@ void TMainWindow::ImportDataFromCSV()
         qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
         qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
 
-        QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
-                        QTextCodec::codecForMib(dialog.GetSelectedMib()));
-
-        if (m->Type() == MeasurementsType::Individual)
+        QSharedPointer<DialogMeasurementsCSVColumns> columns;
+        if (m->Type() == MeasurementsType::Multisize)
         {
-            ImportIndividualMeasurements(csv);
+            const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+            columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m->Type(), dimensions, this);
         }
         else
         {
-            ImportMultisizeMeasurements(csv);
+            columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m->Type(), this);
+        }
+        columns->SetWithHeader(dialog.IsWithHeader());
+        columns->SetSeparator(dialog.GetSeparator());
+        columns->SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
+
+        if (columns->exec() == QDialog::Accepted)
+        {
+            QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
+                            QTextCodec::codecForMib(dialog.GetSelectedMib()));
+            const QVector<int> map = columns->ColumnsMap();
+
+            if (m->Type() == MeasurementsType::Individual)
+            {
+                ImportIndividualMeasurements(csv, map);
+            }
+            else
+            {
+                ImportMultisizeMeasurements(csv, map);
+            }
         }
     }
 }
@@ -3740,7 +3759,7 @@ void TMainWindow::RefreshDataAfterImport()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
+void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map)
 {
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -3773,7 +3792,8 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
     {
         try
         {
-            const QString name = csv.text(i, 0).simplified();
+            const int nameColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Name));
+            const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
                 ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
@@ -3784,17 +3804,28 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
             const QString mName = CheckMName(qApp->TrVars()->MFromUser(name), importedNames);
             importedNames.insert(mName);
             measurement.name = mName;
-            measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, 1), qApp->Settings()->GetOsSeparator());
 
-            const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
+            const int valueColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Value));
+            measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, valueColumn),
+                                                                   qApp->Settings()->GetOsSeparator());
+
+            const bool custom = name.startsWith(CustomMSign);
             if (columns > 2 && custom)
             {
-                measurement.fullName = csv.text(i, 2).simplified();
+                const int fullNameColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::FullName));
+                if (fullNameColumn >= 0)
+                {
+                    measurement.fullName = csv.text(i, fullNameColumn).simplified();
+                }
             }
 
             if (columns > 3 && custom)
             {
-                measurement.description = csv.text(i, 3).simplified();
+                const int descriptionColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Description));
+                if (descriptionColumn >= 0)
+                {
+                    measurement.description = csv.text(i, descriptionColumn).simplified();
+                }
             }
 
             measurements.append(measurement);
@@ -3825,7 +3856,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
+void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map)
 {
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -3838,9 +3869,10 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
 
     auto ConverToDouble = [](QString text, const QString &error)
     {
+        text.replace(" ", QString());
         text = VTranslateVars::TryFormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         bool ok = false;
-        QLocale::c();
+
         const qreal value = QLocale::c().toDouble(text, &ok);
         if (not ok)
         {
@@ -3859,8 +3891,9 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
 
         QString name;
         qreal base{0};
-        qreal heightIncrease{0};
-        qreal sizeIncrease{0};
+        qreal shiftA{0};
+        qreal shiftB{0};
+        qreal shiftC{0};
         QString fullName;
         QString description;
     };
@@ -3868,11 +3901,14 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     QVector<MultisizeMeasurement> measurements;
     QSet<QString> importedNames;
 
+    const QMap<MeasurementDimension, MeasurementDimension_p > dimensions = m->Dimensions();
+
     for(int i=0; i < rows; ++i)
     {
         try
         {
-            const QString name = csv.text(i, 0).simplified();
+            const int nameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Name));
+            const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
                 ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
@@ -3884,24 +3920,48 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
             importedNames.insert(mName);
             measurement.name = mName;
 
-            measurement.base = ConverToDouble(csv.text(i, 1),
-                                              tr("Cannot convert base size value to double in column 2."));
+            const int baseValueColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
+            measurement.base = ConverToDouble(csv.text(i, baseValueColumn),
+                                              tr("Cannot convert base value to double in column 2."));
 
-            measurement.heightIncrease = ConverToDouble(csv.text(i, 2),
-                                                     tr("Cannot convert height increase value to double in column 3."));
+            const int shiftAColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
+            measurement.shiftA = ConverToDouble(csv.text(i, shiftAColumn),
+                                                tr("Cannot convert shift value to double in column %1.")
+                                                    .arg(shiftAColumn));
 
-            measurement.sizeIncrease = ConverToDouble(csv.text(i, 3),
-                                                      tr("Cannot convert size increase value to double in column 4."));
+            if (dimensions.size() > 1)
+            {
+                const int shiftBColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftB));
+                measurement.shiftB = ConverToDouble(csv.text(i, shiftBColumn),
+                                                    tr("Cannot convert shift value to double in column %1.")
+                                                        .arg(shiftBColumn));
+            }
 
-            const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
+            if (dimensions.size() > 2)
+            {
+                const int shiftCColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftC));
+                measurement.shiftC = ConverToDouble(csv.text(i, shiftCColumn),
+                                                    tr("Cannot convert shift value to double in column %1.")
+                                                        .arg(shiftCColumn));
+            }
+
+            const bool custom = name.startsWith(CustomMSign);
             if (columns > 4 && custom)
             {
-                measurement.fullName = csv.text(i, 4).simplified();
+                const int fullNameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::FullName));
+                if (fullNameColumn >= 0)
+                {
+                    measurement.fullName = csv.text(i, fullNameColumn).simplified();
+                }
             }
 
             if (columns > 5 && custom)
             {
-                measurement.description = csv.text(i, 5).simplified();
+                const int descriptionColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Description));
+                if (descriptionColumn >= 0)
+                {
+                    measurement.description = csv.text(i, descriptionColumn).simplified();
+                }
             }
 
             measurements.append(measurement);
@@ -3917,8 +3977,17 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     {
         m->AddEmpty(mm.name);
         m->SetMBaseValue(mm.name, mm.base);
-        m->SetMShiftB(mm.name, mm.sizeIncrease);
-        m->SetMShiftA(mm.name, mm.heightIncrease);
+        m->SetMShiftA(mm.name, mm.shiftA);
+
+        if (dimensions.size() > 1)
+        {
+            m->SetMShiftB(mm.name, mm.shiftB);
+        }
+
+        if (dimensions.size() > 2)
+        {
+            m->SetMShiftC(mm.name, mm.shiftC);
+        }
 
         if (not mm.fullName.isEmpty())
         {
