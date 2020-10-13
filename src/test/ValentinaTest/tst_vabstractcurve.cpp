@@ -170,3 +170,40 @@ void TST_VAbstractCurve::IsPointOnCurve() const
     bool result = VAbstractCurve::IsPointOnCurve(points, point);
     QCOMPARE(result, expectedResult);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::CurveIntersectLine_data()
+{
+    QTest::addColumn<QVector<QPointF>>("points");
+    QTest::addColumn<QVector<QPointF>>("intersections");
+    QTest::addColumn<QLineF>("line");
+
+    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, QLineF line)
+    {
+        QVector<QPointF> points;
+        AbstractTest::VectorFromJson(input, points);
+
+        QVector<QPointF> intersections;
+        AbstractTest::VectorFromJson(output, intersections);
+
+        QTest::newRow(title) << points << intersections << line;
+    };
+
+    // See file src/app/share/collection/bugs/160-42.val (private collection)
+    ASSERT_TEST_CASE("Notch angle by intersection (right side)",
+                     QStringLiteral("://160-42_intersection/points.json"),
+                     QStringLiteral("://160-42_intersection/intersections.json"),
+                     QLineF(QPointF(1153.6026868898712, 828.1618345186405),
+                            QPointF(2072.237934910698, 903.3749180877085)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::CurveIntersectLine() const
+{
+    QFETCH(QVector<QPointF>, points);
+    QFETCH(QVector<QPointF>, intersections);
+    QFETCH(QLineF, line);
+
+    const QVector<QPointF> result = VAbstractCurve::CurveIntersectLine(points, line);
+    QCOMPARE(result, intersections);
+}

@@ -877,7 +877,12 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
     {
         line.setLength(line.length()*100); // Hope 100 is enough
 
+//        DumpVector(seamAllowance, QStringLiteral("points.json.XXXXXX")); // Uncomment for dumping test data
+
         const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, line);
+
+//        DumpVector(intersections, QStringLiteral("intersections.json.XXXXXX")); // Uncomment for dumping test data
+
         if (not intersections.isEmpty())
         {
             if (intersections.last() != m_data.passmarkSAPoint)

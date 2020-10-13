@@ -449,7 +449,8 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
 
         // QLineF::intersects not always accurate on edge cases
         if (type == QLineF::BoundedIntersection ||
-            VGObject::IsPointOnLineSegment (crosPoint, points.at(i), points.at(i+1)))
+            (VGObject::IsPointOnLineSegment (crosPoint, points.at(i), points.at(i+1)) &&
+             VGObject::IsPointOnLineSegment (crosPoint, line.p1(), line.p2())))
         {
             intersections.append(crosPoint);
         }

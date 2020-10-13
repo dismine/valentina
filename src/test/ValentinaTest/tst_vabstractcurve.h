@@ -40,6 +40,8 @@ public:
 private slots:
     void IsPointOnCurve_data() const;
     void IsPointOnCurve() const;
+    void CurveIntersectLine_data();
+    void CurveIntersectLine() const;
 };
 
 #endif // TST_VABSTRACTCURVE_H
