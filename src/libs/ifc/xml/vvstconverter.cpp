@@ -55,7 +55,7 @@
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
 const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.5.0");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.5.0.xsd");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/multisize_measurements/v0.5.0.xsd");
 
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -77,12 +77,12 @@ QString VVSTConverter::XSDSchema(int ver) const
 {
     QHash <int, QString> schemas =
     {
-        std::make_pair(FORMAT_VERSION(0, 3, 0), QStringLiteral("://schema/standard_measurements/v0.3.0.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 0), QStringLiteral("://schema/standard_measurements/v0.4.0.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 1), QStringLiteral("://schema/standard_measurements/v0.4.1.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 2), QStringLiteral("://schema/standard_measurements/v0.4.2.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 3), QStringLiteral("://schema/standard_measurements/v0.4.3.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 4), QStringLiteral("://schema/standard_measurements/v0.4.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 0), QStringLiteral("://schema/multisize_measurements/v0.3.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 0), QStringLiteral("://schema/multisize_measurements/v0.4.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 1), QStringLiteral("://schema/multisize_measurements/v0.4.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 2), QStringLiteral("://schema/multisize_measurements/v0.4.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 3), QStringLiteral("://schema/multisize_measurements/v0.4.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 4), QStringLiteral("://schema/multisize_measurements/v0.4.4.xsd")),
         std::make_pair(FORMAT_VERSION(0, 5, 0), CurrentSchema),
     };
 
