@@ -94,11 +94,13 @@ const QString VMeasurements::AttrStep              = QStringLiteral("step");
 const QString VMeasurements::AttrCircumference     = QStringLiteral("circumference");
 const QString VMeasurements::AttrFullCircumference = QStringLiteral("fullCircumference");
 const QString VMeasurements::AttrLabel             = QStringLiteral("label");
+const QString VMeasurements::AttrDimension         = QStringLiteral("dimension");
 
 const QString VMeasurements::GenderMale    = QStringLiteral("male");
 const QString VMeasurements::GenderFemale  = QStringLiteral("female");
 const QString VMeasurements::GenderUnknown = QStringLiteral("unknown");
 
+const QString VMeasurements::DimensionN    = QStringLiteral("n");
 const QString VMeasurements::DimensionX    = QStringLiteral("x");
 const QString VMeasurements::DimensionY    = QStringLiteral("y");
 const QString VMeasurements::DimensionW    = QStringLiteral("w");
@@ -366,6 +368,8 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
         }
         else
         {
+            const IMD dimension =
+                VMeasurements::StrToIMD(GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
             const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
             bool ok = false;
             qreal value = EvalFormula(tempData.data(), formula, &ok);
@@ -382,6 +386,7 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
             meash->SetGuiText(fullName);
             meash->SetDescription(description);
             meash->SetSpecialUnits(specialUnits);
+            meash->SetDimension(dimension);
         }
 
         if (m_keepNames)
@@ -805,6 +810,41 @@ void VMeasurements::SetMFullName(const QString &name, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMDimension(const QString &name, IMD type)
+{
+    ClearDimension(type);
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttributeOrRemoveIf(node, AttrDimension, VMeasurements::IMDToStr(type), type == IMD::N);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurements::MeasurementForDimension(IMD type) const
+{
+    const QString d = VMeasurements::IMDToStr(type);
+    QDomNodeList list = elementsByTagName(TagMeasurement);
+
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement domElement = list.at(i).toElement();
+        if (domElement.isNull() == false)
+        {
+            if (domElement.attribute(AttrDimension) == d)
+            {
+                return domElement.attribute(AttrName);
+            }
+        }
+    }
+    return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() const
 {
     if (type != MeasurementsType::Multisize)
@@ -998,6 +1038,65 @@ MeasurementDimension VMeasurements::StrToDimensionType(const QString &type)
         case 0: // DimensionX
         default:
             return MeasurementDimension::X;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurements::IMDToStr(const IMD &type)
+{
+    switch (type)
+    {
+        case IMD::X:
+            return DimensionX;
+        case IMD::Y:
+            return DimensionY;
+        case IMD::W:
+            return DimensionW;
+        case IMD::Z:
+            return DimensionZ;
+        case IMD::N:
+        default:
+            return DimensionN;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+IMD VMeasurements::StrToIMD(const QString &type)
+{
+    const QStringList dimensions = QStringList{DimensionN, DimensionX, DimensionY, DimensionW, DimensionZ};
+    switch (dimensions.indexOf(type))
+    {
+        case 1: // DimensionX
+            return IMD::X;
+        case 2: // DimensionY
+            return IMD::Y;
+        case 3: // DimensionW
+            return IMD::W;
+        case 4: // DimensionZ
+            return IMD::Z;
+        case 0: // DimensionN
+        default:
+            return IMD::N;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurements::IMDName(IMD type)
+{
+    switch(type)
+    {
+        case IMD::N:
+            return tr("None");
+        case IMD::X:
+            return tr("Height");
+        case IMD::Y:
+            return tr("Size");
+        case IMD::W:
+            return tr("Hip");
+        case IMD::Z:
+            return tr("Waist");
+        default:
+            return QString();
     }
 }
 
@@ -1418,4 +1517,23 @@ DimesionLabels VMeasurements::ReadDimensionLabels(const QDomElement &dElement) c
     }
 
     return labels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::ClearDimension(IMD type)
+{
+    const QString d = VMeasurements::IMDToStr(type);
+    QDomNodeList list = elementsByTagName(TagMeasurement);
+
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement domElement = list.at(i).toElement();
+        if (domElement.isNull() == false)
+        {
+            if (domElement.attribute(AttrDimension) == d)
+            {
+                domElement.removeAttribute(AttrDimension);
+            }
+        }
+    }
 }

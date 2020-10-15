@@ -288,6 +288,15 @@ enum class GSizes : quint8 { ALL,
                              S42=42, S44=44, S46=46, S48=48, S50=50, S52=52, S54=54, S56=56, S58=58, S60=60,
                              S62=62, S64=64, S66=66, S68=68, S70=70, S72=72 };
 
+enum class IMD: qint8 // Individual measurement dimension
+{
+    N, // None
+    X, // height
+    Y, // size (chest half circumference)
+    W, // hip half circumference
+    Z  // waist half circumference
+};
+
 /* QImage supports a maximum of 32768x32768 px images (signed short).
  * This follows from the condition: width * height * colordepth < INT_MAX (4 billion) -> 32768 * 32768 * 4 = 4 billion.
  * The second condition is of course that malloc is able to allocate the requested memory.

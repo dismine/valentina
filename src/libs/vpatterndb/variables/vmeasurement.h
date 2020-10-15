@@ -108,6 +108,9 @@ public:
     bool IsSpecialUnits() const;
     void SetSpecialUnits(bool special);
 
+    IMD  GetDimension() const;
+    void SetDimension(IMD type);
+
     qreal GetCorrection(int baseA, int baseB, int baseC) const;
 
     QMap<QString, qreal> GetCorrections() const;

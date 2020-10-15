@@ -28,6 +28,7 @@
                   <xs:attribute name="full_name" type="xs:string"/>
                   <xs:attribute name="description" type="xs:string"/>
                   <xs:attribute name="specialUnits" type="xs:boolean"/>
+                  <xs:attribute name="dimension" type="dimensionType"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -68,6 +69,15 @@
   <xs:simpleType name="psCode">
     <xs:restriction base="xs:string">
       <xs:pattern value="(([0-9]|[1-4][0-9]|5[0-4])|998)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dimensionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="n"/>
+      <xs:enumeration value="x"/>
+      <xs:enumeration value="y"/>
+      <xs:enumeration value="w"/>
+      <xs:enumeration value="z"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

@@ -113,6 +113,9 @@ public:
     void SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value);
     void SetMDescription(const QString &name, const QString &text);
     void SetMFullName(const QString &name, const QString &text);
+    void SetMDimension(const QString &name, IMD type);
+
+    QString MeasurementForDimension(IMD type) const;
 
     QMap<MeasurementDimension, MeasurementDimension_p > Dimensions() const;
 
@@ -161,11 +164,13 @@ public:
     static const QString AttrCircumference;
     static const QString AttrFullCircumference;
     static const QString AttrLabel;
+    static const QString AttrDimension;
 
     static const QString GenderMale;
     static const QString GenderFemale;
     static const QString GenderUnknown;
 
+    static const QString DimensionN;
     static const QString DimensionX;
     static const QString DimensionY;
     static const QString DimensionW;
@@ -176,6 +181,11 @@ public:
 
     static QString DimensionTypeToStr(const MeasurementDimension &type);
     static MeasurementDimension StrToDimensionType(const QString &type);
+
+    static QString IMDToStr(const IMD &type);
+    static IMD StrToIMD(const QString &type);
+
+    static QString IMDName(IMD type);
 
     QStringList ListAll() const;
     QStringList ListKnown() const;
@@ -214,6 +224,8 @@ private:
 
     void           SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels);
     DimesionLabels ReadDimensionLabels(const QDomElement &dElement) const;
+
+    void ClearDimension(IMD type);
 };
 
 #endif // VMEASUREMENTS_H

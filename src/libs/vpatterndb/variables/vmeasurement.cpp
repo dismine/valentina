@@ -459,6 +459,18 @@ void VMeasurement::SetSpecialUnits(bool special)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+IMD VMeasurement::GetDimension() const
+{
+    return d->dimension;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetDimension(IMD type)
+{
+    d->dimension = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VMeasurement::GetCorrection(int baseA, int baseB, int baseC) const
 {
     return d->corrections.value(VMeasurement::CorrectionHash(baseA, baseB, baseC), 0);

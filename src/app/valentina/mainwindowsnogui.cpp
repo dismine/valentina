@@ -2191,21 +2191,6 @@ QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QStrin
         }
 
         CheckRequiredMeasurements(m.data());
-
-        if (m->Type() == MeasurementsType::Multisize)
-        {
-            if (m->MUnit() == Unit::Inch)
-            {
-                qCCritical(vMainNoGUIWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
-                          qUtf8Printable(tr("Application doesn't support multisize table with inches.")));
-                m->clear();
-                if (not VApplication::IsGUIMode())
-                {
-                    qApp->exit(V_EX_DATAERR);
-                }
-                return m;
-            }
-        }
     }
     catch (VException &e)
     {

@@ -165,16 +165,16 @@ QString VAbstartMeasurementDimension::DimensionName(MeasurementDimension type)
 {
     switch(type)
     {
-    case MeasurementDimension::X:
-        return tr("Height");
-    case MeasurementDimension::Y:
-        return tr("Size");
-    case MeasurementDimension::W:
-        return tr("Hip");
-    case MeasurementDimension::Z:
-        return tr("Waist");
-    default:
-        return QString();
+        case MeasurementDimension::X:
+            return tr("Height");
+        case MeasurementDimension::Y:
+            return tr("Size");
+        case MeasurementDimension::W:
+            return tr("Hip");
+        case MeasurementDimension::Z:
+            return tr("Waist");
+        default:
+            return QString();
     }
 }
 

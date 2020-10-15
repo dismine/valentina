@@ -339,14 +339,14 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="label">
                 <property name="text">
                  <string>Name:</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
+              <item row="2" column="1">
                <widget class="QLineEdit" name="lineEditName">
                 <property name="enabled">
                  <bool>false</bool>
@@ -359,14 +359,14 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="3" column="0">
                <widget class="QLabel" name="labelCalculated">
                 <property name="text">
                  <string>Calculated value:</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="3" column="1">
                <widget class="QLabel" name="labelCalculatedValue">
                 <property name="toolTip">
                  <string>Calculated value</string>
@@ -376,14 +376,14 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
+              <item row="4" column="0">
                <widget class="QLabel" name="labelFormula">
                 <property name="text">
                  <string>Formula:</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
+              <item row="4" column="1">
                <layout class="QHBoxLayout" name="horizontalLayoutValue">
                 <item>
                  <widget class="VPlainTextEdit" name="plainTextEditFormula">
@@ -470,14 +470,14 @@
                 </item>
                </layout>
               </item>
-              <item row="4" column="0">
+              <item row="5" column="0">
                <widget class="QLabel" name="labelBaseValue">
                 <property name="text">
                  <string>Base value:</string>
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
+              <item row="5" column="1">
                <widget class="QDoubleSpinBox" name="doubleSpinBoxBaseValue">
                 <property name="enabled">
                  <bool>false</bool>
@@ -490,14 +490,14 @@
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
+              <item row="6" column="0">
                <widget class="QLabel" name="labelShiftA">
                 <property name="text">
                  <string notr="true">Shift A</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
+              <item row="6" column="1">
                <widget class="QDoubleSpinBox" name="doubleSpinBoxShiftA">
                 <property name="enabled">
                  <bool>false</bool>
@@ -510,14 +510,14 @@
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
+              <item row="7" column="0">
                <widget class="QLabel" name="labelShiftB">
                 <property name="text">
                  <string>Shift B</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="7" column="1">
                <widget class="QDoubleSpinBox" name="doubleSpinBoxShiftB">
                 <property name="enabled">
                  <bool>false</bool>
@@ -530,14 +530,14 @@
                 </property>
                </widget>
               </item>
-              <item row="7" column="0">
+              <item row="8" column="0">
                <widget class="QLabel" name="labelShiftC">
                 <property name="text">
                  <string>Shift C</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
+              <item row="8" column="1">
                <widget class="QDoubleSpinBox" name="doubleSpinBoxShiftC">
                 <property name="enabled">
                  <bool>false</bool>
@@ -550,14 +550,14 @@
                 </property>
                </widget>
               </item>
-              <item row="8" column="0">
+              <item row="9" column="0">
                <widget class="QLabel" name="labelCorrection">
                 <property name="text">
                  <string>Correction:</string>
                 </property>
                </widget>
               </item>
-              <item row="8" column="1">
+              <item row="9" column="1">
                <widget class="QDoubleSpinBox" name="doubleSpinBoxCorrection">
                 <property name="enabled">
                  <bool>false</bool>
@@ -570,14 +570,14 @@
                 </property>
                </widget>
               </item>
-              <item row="9" column="0">
+              <item row="10" column="0">
                <widget class="QLabel" name="labelFullName">
                 <property name="text">
                  <string>Full name:</string>
                 </property>
                </widget>
               </item>
-              <item row="9" column="1">
+              <item row="10" column="1">
                <widget class="QLineEdit" name="lineEditFullName">
                 <property name="enabled">
                  <bool>false</bool>
@@ -590,14 +590,14 @@
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
+              <item row="11" column="0">
                <widget class="QLabel" name="label_7">
                 <property name="text">
                  <string>Description:</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="1">
+              <item row="11" column="1">
                <widget class="VPlainTextEdit" name="plainTextEditDescription">
                 <property name="enabled">
                  <bool>false</bool>
@@ -613,6 +613,29 @@
                   <width>0</width>
                   <height>28</height>
                  </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelDimension">
+                <property name="text">
+                 <string>Dimension:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="comboBoxDimension">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Select one of the dimensions to later use the measurement value in piece label</string>
                 </property>
                </widget>
               </item>

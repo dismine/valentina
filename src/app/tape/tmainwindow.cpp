@@ -621,6 +621,8 @@ void TMainWindow::changeEvent(QEvent *event)
             InitGender(ui->comboBoxGender);
             ui->comboBoxGender->setCurrentIndex(index);
             ui->comboBoxGender->blockSignals(false);
+
+            InitMeasurementDimension();
         }
 
         {
@@ -1696,6 +1698,11 @@ void TMainWindow::ShowNewMData(bool fresh)
 
             ui->plainTextEditFormula->setPlainText(formula);
             ui->plainTextEditFormula->blockSignals(false);
+
+            ui->comboBoxDimension->blockSignals(true);
+            ui->comboBoxDimension->setCurrentIndex(
+                ui->comboBoxDimension->findData(static_cast<int>(meash->GetDimension())));
+            ui->comboBoxDimension->blockSignals(false);
         }
 
         MeasurementGUI();
@@ -2122,6 +2129,32 @@ void TMainWindow::SaveMUnits()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMDimension()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const IMD dimension = static_cast<IMD>(ui->comboBoxDimension->currentData().toInt());
+    m->SetMDimension(nameField->data(Qt::UserRole).toString(), dimension);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FullCircumferenceChanged(bool checked)
 {
     m->SetFullCircumference(checked);
@@ -2389,6 +2422,8 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->toolButtonExpr);
         HackWidget(&ui->labelFormula);
         HackWidget(&ui->pushButtonGrow);
+        HackWidget(&ui->labelDimension);
+        HackWidget(&ui->comboBoxDimension);
 
         // Tab Information
         HackWidget(&ui->lineEditCustomerName);
@@ -2471,6 +2506,10 @@ void TMainWindow::InitWindow()
                 Qt::UniqueConnection);
 
         connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
+
+        InitMeasurementDimension();
+        connect(ui->comboBoxDimension, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                &TMainWindow::SaveMDimension);
     }
 
     ui->comboBoxPMSystem->setEnabled(true);
@@ -3180,6 +3219,7 @@ void TMainWindow::MFields(bool enabled)
         ui->plainTextEditFormula->setEnabled(enabled);
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
+        ui->comboBoxDimension->setEnabled(enabled);
     }
 
     ui->lineEditFind->setEnabled(enabled);
@@ -4307,6 +4347,34 @@ void TMainWindow::InitGender(QComboBox *gender)
     gender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
     gender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
     gender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitMeasurementDimension()
+{
+    ui->comboBoxDimension->blockSignals(true);
+
+    int current = -1;
+    if (ui->comboBoxDimension->currentIndex() != -1)
+    {
+        current = ui->comboBoxDimension->currentData().toInt();
+    }
+
+    ui->comboBoxDimension->clear();
+
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::N), QVariant(static_cast<int>(IMD::N)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::X), QVariant(static_cast<int>(IMD::X)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::Y), QVariant(static_cast<int>(IMD::Y)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::W), QVariant(static_cast<int>(IMD::W)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::Z), QVariant(static_cast<int>(IMD::Z)));
+
+    int i = ui->comboBoxDimension->findData(current);
+    if (i != -1)
+    {
+        ui->comboBoxDimension->setCurrentIndex(i);
+    }
+
+    ui->comboBoxDimension->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

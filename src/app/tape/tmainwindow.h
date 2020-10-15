@@ -134,6 +134,7 @@ private slots:
     void SaveMDescription();
     void SaveMFullName();
     void SaveMUnits();
+    void SaveMDimension();
 
     void FullCircumferenceChanged(bool checked);
 
@@ -186,6 +187,7 @@ private:
     void InitComboBoxUnits();
     void InitMeasurementUnits();
     void InitGender(QComboBox *gender);
+    void InitMeasurementDimension();
 
     void ShowNewMData(bool fresh);
     void ShowUnits();

@@ -79,7 +79,8 @@ public:
           baseB(m.baseB),
           baseC(m.baseC),
           corrections(m.corrections),
-          specialUnits(m.specialUnits)
+          specialUnits(m.specialUnits),
+          dimension(m.dimension)
     {}
 
     virtual  ~VMeasurementData();
@@ -111,6 +112,8 @@ public:
     QMap<QString, qreal> corrections{};
 
     bool specialUnits{false};
+
+    IMD dimension{IMD::N};
 
 private:
     Q_DISABLE_ASSIGN(VMeasurementData)
