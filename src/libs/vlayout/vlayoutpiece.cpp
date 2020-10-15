@@ -48,7 +48,7 @@
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vmath.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
@@ -269,7 +269,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Cannot prepare builtin passmark '%1' for piece '%2'. Passmark is empty.")
                                 .arg(pData.nodeName, piece.GetName());
                         qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                         return;
                     }
 
@@ -283,7 +283,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                                         "empty.")
                                 .arg(pData.nodeName, piece.GetName());
                         qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                         return;
                     }
                     layoutPassmark.baseLine = ConstFirst (baseLines);
@@ -300,7 +300,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Passmark '%1' is not part of piece '%2'.")
                             .arg(pData.nodeName, piece.GetName());
                     qApp->IsPedantic() ? throw VException(errorMsg) :
-                                         qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                         qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                 }
             };
 
@@ -326,7 +326,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark base line is empty.")
                                 .arg(pData.nodeName, piece.GetName());
                         qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                         return;
                     }
 
@@ -346,7 +346,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark is empty.")
                                 .arg(pData.nodeName, piece.GetName());
                         qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                         return;
                     }
 
@@ -362,7 +362,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Passmark '%1' is not part of piece '%2'.")
                             .arg(pData.nodeName, piece.GetName());
                     qApp->IsPedantic() ? throw VException(errorMsg) :
-                                         qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                         qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                 }
             };
 
@@ -508,7 +508,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
         const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.")
                 .arg(piece.GetName());
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     det.SetCountourPoints(futureMainPath.result(),

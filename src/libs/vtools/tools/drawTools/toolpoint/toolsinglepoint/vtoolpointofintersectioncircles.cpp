@@ -135,7 +135,7 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
         const QString errorMsg = tr("Error calculating point '%1'. Circles with centers in points '%2' and '%3' have "
                                     "no point of intersection").arg(initData.name, c1Point.name(), c2Point.name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
@@ -219,7 +219,7 @@ VFormula VToolPointOfIntersectionCircles::GetFirstCircleRadius() const
     VFormula radius(firstCircleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -244,7 +244,7 @@ VFormula VToolPointOfIntersectionCircles::GetSecondCircleRadius() const
     VFormula radius(secondCircleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }

@@ -447,7 +447,7 @@ void DialogSplinePath::FXLength1()
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length1F);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         length1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -472,7 +472,7 @@ void DialogSplinePath::FXLength2()
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length2F);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         length2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -553,7 +553,7 @@ void DialogSplinePath::EvalLength1()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength1;
     formulaData.labelResult = ui->labelResultLength1;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -580,7 +580,7 @@ void DialogSplinePath::EvalLength2()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength2;
     formulaData.labelResult = ui->labelResultLength2;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 

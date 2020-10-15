@@ -32,7 +32,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/def.h"
 #include "vundocommand.h"
 

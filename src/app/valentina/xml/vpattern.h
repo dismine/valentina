@@ -100,9 +100,11 @@ public:
     bool IsDefCustom() const;
     void SetDefCustom(bool value);
 
+    // TODO: remove
     int  GetDefCustomHeight() const;
     void SetDefCustomHeight(int value);
 
+    // TODO: remove
     int  GetDefCustomSize() const;
     void SetDefCustomSize(int value);
 

@@ -122,8 +122,8 @@ protected:
     QSharedPointer<DialogSaveLayout> m_dialogSaveLayout;
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
-    QPointer<QLabel> m_mouseCoordinate;
-    QPointer<QLabel> m_unreadPatternMessage{};
+    QPointer<QLabel> m_mouseCoordinate{nullptr};
+    QPointer<QLabel> m_unreadPatternMessage{nullptr};
 
 #if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QWinTaskbarButton *m_taskbarButton;
@@ -142,7 +142,6 @@ protected:
     bool GenerateLayout(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
     QString FileName() const;
-    void SetSizeHeightForIndividualM() const;
 
     bool ExportFMeasurementsToCSVData(const QString &fileName,
                                       bool withHeader, int mib, const QChar &separator) const;

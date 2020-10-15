@@ -479,7 +479,7 @@ void DialogMove::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetLength());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetLength(dialog->GetFormula());
@@ -630,7 +630,7 @@ void DialogMove::EvalLength()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength;
     formulaData.labelResult = ui->labelResultLength;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagLength);
 }

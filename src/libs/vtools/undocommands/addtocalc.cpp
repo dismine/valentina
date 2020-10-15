@@ -33,7 +33,7 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/customevents.h"
 #include "vundocommand.h"
 

@@ -140,7 +140,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(bCancel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     ui->tabWidget->setCurrentIndex(0);
-    if (qApp->patternType() != MeasurementsType::Multisize)
+    if (qApp->GetMeasurementsType() != MeasurementsType::Multisize)
     {
         ui->tabWidget->setTabEnabled(1, false);
     }
@@ -198,7 +198,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
     ui->lineEditCompanyName->setText(doc->GetCompanyName());
 
-    if (qApp->patternType() == MeasurementsType::Individual)
+    if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
         ui->lineEditCustomerName->setText(qApp->GetCustomerName());
         ui->lineEditCustomerName->setReadOnly(true);
@@ -629,7 +629,7 @@ void DialogPatternProperties::SaveLabelData()
         doc->SetPatternName(ui->lineEditPatternName->text());
         doc->SetPatternNumber(ui->lineEditPatternNumber->text());
         doc->SetCompanyName(ui->lineEditCompanyName->text());
-        if (qApp->patternType() != MeasurementsType::Individual)
+        if (qApp->GetMeasurementsType() != MeasurementsType::Individual)
         {
             doc->SetCustomerName(ui->lineEditCustomerName->text());
         }

@@ -54,7 +54,7 @@
 #include "vpatternconverter.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vlayout/vtextmanager.h"
 

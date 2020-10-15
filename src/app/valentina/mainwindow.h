@@ -32,7 +32,9 @@
 #include "mainwindowsnogui.h"
 #include "core/vcmdexport.h"
 #include "../vmisc/vlockguard.h"
+#include "../vformat/vdimensions.h"
 
+#include <QDoubleSpinBox>
 #include <QPointer>
 
 namespace Ui
@@ -51,7 +53,6 @@ class DialogFinalMeasurements;
 class VWidgetGroups;
 class VWidgetDetails;
 class QToolButton;
-class QDoubleSpinBox;
 class QProgressBar;
 class WatermarkWindow;
 
@@ -208,8 +209,11 @@ private slots:
     void OpenAt(QAction *where);
 #endif //defined(Q_OS_MAC)
 
-    void ChangedSize(const QString &text);
-    void ChangedHeight(const QString &text);
+    void DimensionABaseChanged();
+    void DimensionBBaseChanged();
+    void DimensionCBaseChanged();
+
+    void GradationChanged();
 
     void ShowProgress();
     void ClearPatternMessages();
@@ -267,12 +271,14 @@ private:
     QLabel             *rightGoToStage;
     QTimer             *autoSaveTimer;
     bool               guiEnabled;
-    QPointer<QComboBox> gradationHeights;
-    QPointer<QComboBox> gradationSizes;
-    QPointer<QLabel>   gradationHeightsLabel;
-    QPointer<QLabel>   gradationSizesLabel;
-    QPointer<QLabel>   zoomScale;
-    QPointer<QDoubleSpinBox> doubleSpinBoxScale;
+    QPointer<QComboBox> dimensionA{nullptr};
+    QPointer<QComboBox> dimensionB{nullptr};
+    QPointer<QComboBox> dimensionC{nullptr};
+    QPointer<QLabel>   dimensionALabel{nullptr};
+    QPointer<QLabel>   dimensionBLabel{nullptr};
+    QPointer<QLabel>   dimensionCLabel{nullptr};
+    QPointer<QLabel>   zoomScale{nullptr};
+    QPointer<QDoubleSpinBox> doubleSpinBoxScale{nullptr};
     VToolOptionsPropertyBrowser *toolOptions;
     VWidgetGroups *groupsWidget;
     VWidgetDetails *detailsWidget;
@@ -285,8 +291,16 @@ private:
 
     QList<QPointer<WatermarkWindow>> m_watermarkEditors{};
 
-    void               SetDefaultHeight();
-    void               SetDefaultSize();
+    int m_currentDimensionA{0};
+    int m_currentDimensionB{0};
+    int m_currentDimensionC{0};
+
+    QSharedPointer<VMeasurements> m{};
+
+    QTimer *m_gradation;
+
+    void InitDimensionControls();
+    void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QPointer<QComboBox> control);
 
     void               ToolBarOption();
     void               ToolBarStages();
@@ -338,15 +352,12 @@ private:
     void               InitAutoSave();
     bool               PatternPieceName(QString &name);
     QString            CheckPathToMeasurements(const QString &patternPath, const QString &path);
-    QComboBox          *SetGradationList(QLabel *label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
     /**
      * @brief EndVisualization try show dialog after and working with tool visualization.
      */
     void               EndVisualization(bool click = false);
     void               ZoomFirstShow();
-    void               UpdateHeightsList(const QStringList &list);
-    void               UpdateSizesList(const QStringList &list);
 
     void               AddDocks();
     void               InitDocksContain();
@@ -360,7 +371,7 @@ private:
     void               InitScenes();
 
     bool               LoadMeasurements(const QString &path);
-    bool               UpdateMeasurements(const QString &path, int size, int height);
+    bool               UpdateMeasurements(const QString &path, int baseA, int baseB, int baseC);
 
     void               ReopenFilesAfterCrash(QStringList &args);
     bool               DoExport(const VCommandLinePtr& expParams);
@@ -393,6 +404,12 @@ private:
 
     void OpenWatermark(const QString &path = QString());
     void CleanWaterkmarkEditors();
+
+    void StoreMultisizeMDimensions();
+    void StoreIndividualMDimensions();
+
+    QVector<int> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
+    void SetDimensionBases();
 };
 
 #endif // MAINWINDOW_H

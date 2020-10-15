@@ -83,7 +83,7 @@ VFormula VToolCut::GetFormula() const
     VFormula val(formula, getData());
     val.setCheckZero(true);
     val.setToolId(m_id);
-    val.setPostfix(UnitsToStr(qApp->patternUnit()));
+    val.setPostfix(UnitsToStr(qApp->patternUnits()));
     val.Eval();
     return val;
 }

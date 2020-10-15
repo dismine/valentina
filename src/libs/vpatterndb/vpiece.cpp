@@ -34,7 +34,7 @@
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/varc.h"
 #include "vcontainer.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vlayout/testpath.h"
@@ -937,7 +937,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
         qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -976,7 +976,7 @@ bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index,
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
         qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -1060,7 +1060,7 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
         qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return VPassmark();
     }
 
@@ -1089,7 +1089,7 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
         const QString infoMsg = tr("Notch for point '%1' in piece '%2' will be disabled. Manual length is less than "
                                     "allowed value.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qInfo() << VAbstractApplication::patternMessageSignature + infoMsg;
+        qInfo() << VAbstractValApplication::patternMessageSignature + infoMsg;
         return VPassmark();
     }
 

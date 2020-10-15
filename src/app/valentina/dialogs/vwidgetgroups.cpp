@@ -230,7 +230,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     }
     else if (selectedAction == actionPreferences)
     {
-        QScopedPointer<VContainer> fackeContainer(new VContainer(qApp->TrVars(), qApp->patternUnitP(),
+        QScopedPointer<VContainer> fackeContainer(new VContainer(qApp->TrVars(), qApp->patternUnitsP(),
                                                                  VContainer::UniqueNamespace()));
         QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), NULL_ID, this));
         dialog->SetName(doc->GetGroupName(id));

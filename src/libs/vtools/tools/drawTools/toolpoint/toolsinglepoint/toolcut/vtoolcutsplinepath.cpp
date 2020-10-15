@@ -367,7 +367,7 @@ QString VToolCutSplinePath::MakeToolTip() const
                                     "</table>")
             .arg(curveStr + QLatin1String("1 ") + lengthStr)
             .arg(qApp->fromPixel(splPath1->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), curveStr + QLatin1String("2 ") + lengthStr)
+            .arg(UnitsToStr(qApp->patternUnits(), true), curveStr + QLatin1String("2 ") + lengthStr)
             .arg(qApp->fromPixel(splPath2->GetLength()))
             .arg(curveStr + QLatin1String(" 1") + tr("label"), splPath1->name(),
                  curveStr + QLatin1String(" 2") + tr("label"), splPath2->name());

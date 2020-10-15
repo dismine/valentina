@@ -28,7 +28,7 @@
 
 #include "vabstractpiece.h"
 #include "vabstractpiece_p.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vgeometry/vpointf.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vmath.h"
@@ -1072,7 +1072,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     {
         const QString errorMsg = tr("Piece '%1'. Not enough points to build seam allowance.").arg(name);
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return QVector<QPointF>();
     }
 

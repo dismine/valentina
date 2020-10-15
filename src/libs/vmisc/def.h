@@ -82,7 +82,7 @@ extern const int maxLabelFontSize;
 
 enum class NodeDetail : qint8 { Contour, Modeling };
 enum class SceneObject : qint8 { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
-enum class MeasurementsType : qint8 { Multisize, Individual , Unknown};
+enum class MeasurementsType : qint8 { Multisize, Individual, Unknown};
 enum class Unit : qint8 { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
 enum class Source : qint8 { FromGui, FromFile, FromTool };
 enum class NodeUsage : bool {NotInUse = false, InUse = true};

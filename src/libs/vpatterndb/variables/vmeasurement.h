@@ -116,6 +116,7 @@ public:
     QMap<QString, qreal> GetCorrections() const;
     void  SetCorrections(const QMap<QString, qreal> &corrections);
 
+    // TODO: remove
     static QStringList ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit);
     static QStringList ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit);
     static QStringList WholeListHeights(Unit patternUnit);

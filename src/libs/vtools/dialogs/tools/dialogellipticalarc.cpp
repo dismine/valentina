@@ -387,7 +387,7 @@ void DialogEllipticalArc::EvalRadiuses()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius1;
     formulaData.labelResult = ui->labelResultRadius1;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagRadius1);
@@ -434,7 +434,7 @@ void DialogEllipticalArc::FXRadius1()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius1"));
     dialog->SetFormula(GetRadius1());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius1(dialog->GetFormula());
@@ -448,7 +448,7 @@ void DialogEllipticalArc::FXRadius2()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius2"));
     dialog->SetFormula(GetRadius2());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius2(dialog->GetFormula());

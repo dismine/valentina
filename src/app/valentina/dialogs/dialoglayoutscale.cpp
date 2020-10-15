@@ -71,7 +71,7 @@ DialogLayoutScale::~DialogLayoutScale()
 void DialogLayoutScale::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnit());
+    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -89,7 +89,7 @@ QMarginsF DialogLayoutScale::GetTiledMargins() const
         ui->doubleSpinBoxBottomField->value()
         );
 
-    return UnitConvertor(margins, qApp->patternUnit(), Unit::Mm);
+    return UnitConvertor(margins, qApp->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,7 +181,7 @@ void DialogLayoutScale::VerticalScaleChanged(double d)
 void DialogLayoutScale::ReadSettings()
 {
     VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    const Unit unit = qApp->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -201,7 +201,7 @@ void DialogLayoutScale::ReadSettings()
 void DialogLayoutScale::WriteSettings() const
 {
     VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    const Unit unit = qApp->patternUnits();
 
     // write Margins top, right, bottom, left
     QMarginsF margins = QMarginsF(

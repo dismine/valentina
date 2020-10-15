@@ -173,7 +173,7 @@ VFormula VToolArcWithLength::GetFormulaRadius() const
     VFormula radius(arc->GetFormulaRadius(), getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -232,7 +232,7 @@ VFormula VToolArcWithLength::GetFormulaLength() const
     VFormula radius(arc->GetFormulaLength(), getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -366,7 +366,7 @@ QString VToolArcWithLength::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(arc->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Radius"))
+            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Radius"))
             .arg(qApp->fromPixel(arc->GetRadius()))
             .arg(tr("Start angle"))
             .arg(arc->GetStartAngle())

@@ -191,30 +191,30 @@ void DialogEditWrongFormula::ValChanged(int row)
         if (ui->radioButtonStandardTable->isChecked())
         {
             const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-            SetDescription(item->text(), *stable->GetValue(), UnitsToStr(qApp->patternUnit(), true),
+            SetDescription(item->text(), *stable->GetValue(), UnitsToStr(qApp->patternUnits(), true),
                            stable->GetGuiText());
         }
         else if (ui->radioButtonIncrements->isChecked())
         {
             const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
-            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
+            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnits(), true),
                            incr->GetDescription());
         }
         else if (ui->radioButtonPC->isChecked())
         {
             const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
-            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
+            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnits(), true),
                            incr->GetDescription());
         }
         else if (ui->radioButtonLengthLine->isChecked())
         {
             SetDescription(item->text(), *data->GetVariable<VLengthLine>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
+                           UnitsToStr(qApp->patternUnits(), true), tr("Line length"));
         }
         else if (ui->radioButtonLengthSpline->isChecked())
         {
             SetDescription(item->text(), *data->GetVariable<VCurveLength>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
+                           UnitsToStr(qApp->patternUnits(), true), tr("Curve length"));
         }
         else if (ui->radioButtonAngleLine->isChecked())
         {
@@ -224,7 +224,7 @@ void DialogEditWrongFormula::ValChanged(int row)
         else if (ui->radioButtonRadiusesArcs->isChecked())
         {
             SetDescription(item->text(), *data->GetVariable<VArcRadius>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
+                           UnitsToStr(qApp->patternUnits(), true), tr("Arc radius"));
         }
         else if (ui->radioButtonAnglesCurves->isChecked())
         {

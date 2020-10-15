@@ -32,7 +32,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vabstractpiece.h"
 #include "calculator.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
@@ -385,7 +385,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                                                      "point with cutting countour")
                         .arg(GetName());
                 qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             }
         }
 
@@ -402,7 +402,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                                                      "point with cutting countour")
                         .arg(GetName());
                 qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             }
         }
 

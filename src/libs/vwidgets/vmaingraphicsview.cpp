@@ -55,7 +55,7 @@
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 #include "vcontrolpointspline.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vsettings.h"
 #include "vabstractmainwindow.h"
 #include "global.h"

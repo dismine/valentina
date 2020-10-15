@@ -37,7 +37,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vmath.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #   include "../vmisc/vdatastreamenum.h"
@@ -185,7 +185,7 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     placeholders.insert(pl_patternNumber, doc->GetPatternNumber());
     placeholders.insert(pl_author, doc->GetCompanyName());
 
-    if (qApp->patternType() == MeasurementsType::Individual)
+    if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
         placeholders.insert(pl_customer, qApp->GetCustomerName());
     }
@@ -201,13 +201,13 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     QString curSize;
     QString curHeight;
     QString mExt;
-    if (qApp->patternType() == MeasurementsType::Multisize)
+    if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
     {
         curSize = QString::number(VContainer::size(valentinaNamespace));
         curHeight = QString::number(VContainer::height(valentinaNamespace));
         mExt = QStringLiteral("vst");
     }
-    else if (qApp->patternType() == MeasurementsType::Individual)
+    else if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
         curSize = QString::number(VContainer::size(valentinaNamespace));
         curHeight = QString::number(VContainer::height(valentinaNamespace));

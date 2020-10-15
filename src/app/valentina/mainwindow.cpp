@@ -173,7 +173,7 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
         {
             const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(pieceName);
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                               qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                               qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         }
 
         ++i;
@@ -200,22 +200,19 @@ MainWindow::MainWindow(QWidget *parent)
       currentDrawIndex(0), currentToolBoxIndex(0),
       drawMode(true),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
-      gradationHeights(nullptr),
-      gradationSizes(nullptr),
-      gradationHeightsLabel(nullptr),
-      gradationSizesLabel(nullptr),
-      zoomScale(nullptr),
-      doubleSpinBoxScale(nullptr),
       toolOptions(nullptr),
       groupsWidget(nullptr),
       detailsWidget(nullptr),
       lock(nullptr),
       toolButtonPointerList(),
       m_progressBar(new QProgressBar(this)),
-      m_statusLabel(new QLabel(this))
+      m_statusLabel(new QLabel(this)),
+      m_gradation(new QTimer(this))
 {
     CreateActions();
     InitScenes();
+
+    connect(m_gradation, &QTimer::timeout, this, &MainWindow::GradationChanged);
 
     doc = new VPattern(pattern, sceneDraw, sceneDetails);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
@@ -510,33 +507,33 @@ void MainWindow::InitScenes()
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::LoadMeasurements(const QString &path)
 {
-    QSharedPointer<VMeasurements> m = OpenMeasurementFile(path);
+    m = OpenMeasurementFile(path);
 
     if (m->isNull())
     {
         return false;
     }
 
-    if (qApp->patternUnit() == Unit::Inch && m->Type() == MeasurementsType::Multisize)
-    {
-        qWarning()<<tr("Gradation doesn't support inches");
-        return false;
-    }
-
-    const qreal size = UnitConvertor(m->DimensionABase(), m->MUnit(), *m->GetData()->GetPatternUnit());
-    const qreal height = UnitConvertor(m->DimensionBBase(), m->MUnit(), *m->GetData()->GetPatternUnit());
-
     try
     {
-        qApp->setPatternType(m->Type());
+        qApp->SetMeasurementsType(m->Type());
         if (m->Type() == MeasurementsType::Individual)
         {
             qApp->SetCustomerName(m->Customer());
+            qApp->SetCustomerBirthDate(m->BirthDate());
+            qApp->SetCustomerEmail(m->Email());
+        }
+        else if (m->Type() == MeasurementsType::Multisize)
+        {
+            m_currentDimensionA = m->DimensionABase();
+            m_currentDimensionB = m->DimensionBBase();
+            m_currentDimensionC = m->DimensionCBase();
         }
         ToolBarOption();
+        SetDimensionBases();
         pattern->ClearVariables(VarType::Measurement);
         m->StoreNames(false);
-        m->ReadMeasurements(height, size);
+        m->ReadMeasurements(m_currentDimensionA, m_currentDimensionB, m_currentDimensionC);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -551,31 +548,33 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        pattern->SetSize(size);
-        pattern->SetHeight(height);
+        StoreMultisizeMDimensions();
 
         doc->SetPatternWasChanged(true);
         emit doc->UpdatePatternLabel();
     }
     else if (m->Type() == MeasurementsType::Individual)
     {
-        SetSizeHeightForIndividualM();
+        StoreIndividualMDimensions();
+
+        doc->SetPatternWasChanged(true);
+        emit doc->UpdatePatternLabel();
     }
 
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
+bool MainWindow::UpdateMeasurements(const QString &path, int baseA, int baseB, int baseC)
 {
-    QSharedPointer<VMeasurements> m = OpenMeasurementFile(path);
+    m = OpenMeasurementFile(path);
 
     if (m->isNull())
     {
         return false;
     }
 
-    if (qApp->patternType() != m->Type())
+    if (qApp->GetMeasurementsType() != m->Type())
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Measurement files types have not match.")));
         if (not VApplication::IsGUIMode())
@@ -589,10 +588,12 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     {
         pattern->ClearVariables(VarType::Measurement);
         m->StoreNames(false);
-        m->ReadMeasurements(height, size);
+        m->ReadMeasurements(baseA, baseB, baseC);
         if (m->Type() == MeasurementsType::Individual)
         {
             qApp->SetCustomerName(m->Customer());
+            qApp->SetCustomerBirthDate(m->BirthDate());
+            qApp->SetCustomerEmail(m->Email());
         }
     }
     catch (VExceptionEmptyParameter &e)
@@ -608,15 +609,17 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        pattern->SetSize(size);
-        pattern->SetHeight(height);
+        StoreMultisizeMDimensions();
 
         doc->SetPatternWasChanged(true);
         emit doc->UpdatePatternLabel();
     }
     else if (m->Type() == MeasurementsType::Individual)
     {
-        SetSizeHeightForIndividualM();
+        StoreIndividualMDimensions();
+
+        doc->SetPatternWasChanged(true);
+        emit doc->UpdatePatternLabel();
     }
 
     return true;
@@ -1570,6 +1573,8 @@ void MainWindow::changeEvent(QEvent *event)
             ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
         }
 
+        ToolBarOption();
+
         UpdateWindowTitle();
         emit sceneDetails->LanguageChanged();
     }
@@ -1792,14 +1797,14 @@ void MainWindow::LoadMultisize()
     if (not mPath.isEmpty())
     {
         QString hText;
-        if (not gradationHeights.isNull())
+        if (not dimensionA.isNull())
         {
-            hText = gradationHeights->currentText();
+            hText = dimensionA->currentText();
         }
         QString sText;
-        if (not gradationSizes.isNull())
+        if (not dimensionB.isNull())
         {
-            sText = gradationSizes->currentText();
+            sText = dimensionB->currentText();
         }
 
         if(LoadMeasurements(mPath))
@@ -1818,16 +1823,16 @@ void MainWindow::LoadMultisize()
 
             UpdateWindowTitle();
 
-            if (qApp->patternType() == MeasurementsType::Multisize)
+            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
             {
-                if (not hText.isEmpty() && not gradationHeights.isNull())
+                if (not hText.isEmpty() && not dimensionA.isNull())
                 {
-                    gradationHeights->setCurrentText(hText);
+                    dimensionA->setCurrentText(hText);
                 }
 
-                if (not sText.isEmpty() && not gradationSizes.isNull())
+                if (not sText.isEmpty() && not dimensionB.isNull())
                 {
-                    gradationSizes->setCurrentText(sText);
+                    dimensionB->setCurrentText(sText);
                 }
             }
         }
@@ -1846,11 +1851,35 @@ void MainWindow::UnloadMeasurements()
     if (doc->ListMeasurements().isEmpty())
     {
         watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
-        if (qApp->patternType() == MeasurementsType::Multisize)
+
+        const MeasurementsType oldType = qApp->GetMeasurementsType();
+        qApp->SetMeasurementsType(MeasurementsType::Unknown);
+
+        m.clear();
+
+        if (oldType == MeasurementsType::Multisize)
         {
+            m_currentDimensionA = 0;
+            m_currentDimensionB = 0;
+            m_currentDimensionC = 0;
+
             ToolBarOption();
         }
-        qApp->setPatternType(MeasurementsType::Unknown);
+        else if (oldType == MeasurementsType::Individual)
+        {
+            qApp->SetCustomerBirthDate(QDate());
+            qApp->SetCustomerEmail(QString());
+            qApp->SetCustomerName(QString());
+
+            qApp->SetDimensionHeight(0);
+            qApp->SetDimensionSize(0);
+            qApp->SetDimensionHip(0);
+            qApp->SetDimensionWaist(0);
+
+            qApp->SetMeasurementsUnits(Unit::LAST_UNIT_DO_NOT_USE);
+            qApp->SetDimensionSizeUnits(Unit::LAST_UNIT_DO_NOT_USE);
+        }
+
         doc->SetMPath(QString());
         emit doc->UpdatePatternLabel();
         PatternChangesWereSaved(false);
@@ -1875,12 +1904,12 @@ void MainWindow::ShowMeasurements()
         const QString absoluteMPath = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
 
         QStringList arguments;
-        if (qApp->patternType() == MeasurementsType::Multisize)
+        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             arguments = QStringList()
                     << absoluteMPath
                     << "-u"
-                    << UnitsToStr(qApp->patternUnit())
+                    << UnitsToStr(qApp->patternUnits())
                     << "-e"
                     << QString().setNum(static_cast<int>(UnitConvertor(pattern->height(), doc->MUnit(), Unit::Cm)))
                     << "-s"
@@ -1890,7 +1919,7 @@ void MainWindow::ShowMeasurements()
         {
             arguments = QStringList() << absoluteMPath
                                       << "-u"
-                                      << UnitsToStr(qApp->patternUnit());
+                                      << UnitsToStr(qApp->patternUnits());
         }
 
         if (isNoScaling)
@@ -1945,7 +1974,7 @@ void MainWindow::SyncMeasurements()
     if (mChanges)
     {
         const QString path = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
-        if(UpdateMeasurements(path, static_cast<int>(pattern->size()), static_cast<int>(pattern->height())))
+        if(UpdateMeasurements(path, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
         {
             if (not watcher->files().contains(path))
             {
@@ -2032,6 +2061,150 @@ void MainWindow::CleanWaterkmarkEditors()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::StoreMultisizeMDimensions()
+{
+    qApp->SetMeasurementsUnits(m->MUnit());
+
+    QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto StoreDimension = [this, dimensions](int index, int currentBase)
+    {
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+
+            switch(dimension->Type())
+            {
+                case MeasurementDimension::X:
+                    qApp->SetDimensionHeight(currentBase);
+                    break;
+                case MeasurementDimension::Y:
+                {
+                    const bool fc = m->IsFullCircumference();
+                    qApp->SetDimensionSize(fc ? currentBase*2 : currentBase);
+                    const bool circumference = dimension->IsCircumference();
+                    qApp->SetDimensionSizeUnits(circumference ? m->MUnit() : Unit::LAST_UNIT_DO_NOT_USE);
+                    break;
+                }
+                case MeasurementDimension::W:
+                    Q_FALLTHROUGH();
+                case MeasurementDimension::Z:
+                {
+                    const bool fc = m->IsFullCircumference();
+                    qApp->SetDimensionSize(fc ? currentBase*2 : currentBase);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    };
+
+    StoreDimension(0, m_currentDimensionA);
+    StoreDimension(1, m_currentDimensionB);
+    StoreDimension(2, m_currentDimensionC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::StoreIndividualMDimensions()
+{
+    QMap<QString, QSharedPointer<VMeasurement> > measurements = pattern->DataMeasurements();
+
+    auto StoreDimension = [this, measurements](IMD type)
+    {
+        const QString name = m->MeasurementForDimension(type);
+        if (not name.isEmpty() && measurements.contains(name))
+        {
+            switch(type)
+            {
+                case IMD::X:
+                    qApp->SetDimensionHeight(*measurements.value(name)->GetValue());
+                    break;
+                case IMD::Y:
+                    qApp->SetDimensionSize(*measurements.value(name)->GetValue());
+                    break;
+                case IMD::W:
+                    qApp->SetDimensionHip(*measurements.value(name)->GetValue());
+                    break;
+                case IMD::Z:
+                    qApp->SetDimensionWaist(*measurements.value(name)->GetValue());
+                    break;
+                case IMD::N:
+                default:
+                    break;
+            }
+        }
+    };
+
+    StoreDimension(IMD::X);
+    StoreDimension(IMD::Y);
+    StoreDimension(IMD::W);
+    StoreDimension(IMD::Z);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<int> MainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
+{
+    QPair<int, int> restriction;
+
+    if (index == 0)
+    {
+        return dimension->ValidBases();
+    }
+    else if (index == 1)
+    {
+        restriction = m->Restriction(m_currentDimensionA);
+    }
+    else
+    {
+        restriction = m->Restriction(m_currentDimensionA, m_currentDimensionB);
+    }
+
+    const QVector<int> bases = dimension->ValidBases();
+
+    int min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+    int max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+
+    if (min > max)
+    {
+        min = dimension->MinValue();
+        max = dimension->MaxValue();
+    }
+
+    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetDimensionBases()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto SetBase = [dimensions](int index, QPointer<QComboBox> control, int &value)
+    {
+        if (dimensions.size() > index)
+        {
+            SCASSERT(control != nullptr)
+
+            MeasurementDimension_p dimension = dimensions.at(index);
+
+            const qint32 i = control->findData(value);
+            if (i != -1)
+            {
+                control->setCurrentIndex(i);
+            }
+            else
+            {
+                value = control->currentData().toInt();
+            }
+        }
+    };
+
+    SetBase(0, dimensionA, m_currentDimensionA);
+    SetBase(1, dimensionB, m_currentDimensionB);
+    SetBase(2, dimensionC, m_currentDimensionC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
@@ -2053,22 +2226,7 @@ void MainWindow::OpenAt(QAction *where)
 void MainWindow::ToolBarOption()
 {
     ui->toolBarOption->clear();
-    if (not gradationHeights.isNull())
-    {
-        delete gradationHeights;
-    }
-    if (not gradationSizes.isNull())
-    {
-        delete gradationSizes;
-    }
-    if (not gradationHeightsLabel.isNull())
-    {
-        delete gradationHeightsLabel;
-    }
-    if (not gradationSizesLabel.isNull())
-    {
-        delete gradationSizesLabel;
-    }
+
     if (not zoomScale.isNull())
     {
         delete zoomScale;
@@ -2078,31 +2236,17 @@ void MainWindow::ToolBarOption()
         delete doubleSpinBoxScale;
     }
 
-    if (qApp->patternType() == MeasurementsType::Multisize)
+    if (not m_mouseCoordinate.isNull())
     {
-        const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
-        const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit());
-
-        gradationHeightsLabel = new QLabel(tr("Height:"), this);
-        gradationHeights = SetGradationList(gradationHeightsLabel, listHeights);
-
-        // set default height
-        SetDefaultHeight();
-
-        connect(gradationHeights.data(), &QComboBox::currentTextChanged,
-                this, &MainWindow::ChangedHeight);
-
-        gradationSizesLabel = new QLabel(tr("Size:"), this);
-        gradationSizes = SetGradationList(gradationSizesLabel, listSizes);
-
-        // set default size
-        SetDefaultSize();
-
-        connect(gradationSizes.data(), &QComboBox::currentTextChanged,
-                this, &MainWindow::ChangedSize);
-
-        ui->toolBarOption->addSeparator();
+        delete m_mouseCoordinate;
     }
+
+    if (not m_unreadPatternMessage.isNull())
+    {
+        delete m_unreadPatternMessage;
+    }
+
+    InitDimensionControls();
 
     zoomScale = new QLabel(tr("Scale:"), this);
     ui->toolBarOption->addWidget(zoomScale);
@@ -2111,30 +2255,18 @@ void MainWindow::ToolBarOption()
     doubleSpinBoxScale->setDecimals(1);
     doubleSpinBoxScale->setSuffix("%");
     ScaleChanged(ui->view->transform().m11());
-    connect(doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+    connect(doubleSpinBoxScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){ui->view->Zoom(d/100.0);});
     ui->toolBarOption->addWidget(doubleSpinBoxScale);
 
     ui->toolBarOption->addSeparator();
 
-    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
+    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnits(), true)));
     ui->toolBarOption->addWidget(m_mouseCoordinate);
 
     ui->toolBarOption->addSeparator();
     m_unreadPatternMessage = new QLabel();
     ui->toolBarOption->addWidget(m_unreadPatternMessage);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QComboBox *MainWindow::SetGradationList(QLabel *label, const QStringList &list)
-{
-    ui->toolBarOption->addWidget(label);
-
-    QComboBox *comboBox = new QComboBox(this);
-    comboBox->addItems(list);
-    ui->toolBarOption->addWidget(comboBox);
-
-    return comboBox;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2363,7 +2495,7 @@ void MainWindow::MouseMove(const QPointF &scenePos)
         m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
                                    .arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
                                    .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                   .arg(UnitsToStr(qApp->patternUnit(), true)));
+                                   .arg(UnitsToStr(qApp->patternUnits(), true)));
     }
 }
 
@@ -2714,7 +2846,7 @@ void MainWindow::ActionDraw(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
 
-        if (qApp->patternType() == MeasurementsType::Multisize)
+        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(true);
         }
@@ -2789,7 +2921,7 @@ void MainWindow::ActionDetails(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->detailPage));
 
-        if (qApp->patternType() == MeasurementsType::Multisize)
+        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(true);
         }
@@ -2904,7 +3036,7 @@ void MainWindow::ActionLayout(bool checked)
             m_mouseCoordinate->setText(QString());
         }
 
-        if (qApp->patternType() == MeasurementsType::Multisize)
+        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(false);
         }
@@ -3227,8 +3359,8 @@ void MainWindow::Clear()
     ui->actionPreviousPatternPiece->setEnabled(false);
     ui->actionNextPatternPiece->setEnabled(false);
     SetEnableTool(false);
-    qApp->setPatternUnit(Unit::Cm);
-    qApp->setPatternType(MeasurementsType::Unknown);
+    qApp->SetPatternUnits(Unit::Cm);
+    qApp->SetMeasurementsType(MeasurementsType::Unknown);
     ui->toolBarOption->clear();
 #ifndef QT_NO_CURSOR
     QGuiApplication::restoreOverrideCursor();
@@ -3627,56 +3759,6 @@ void MainWindow::SetEnableWidgets(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::UpdateHeightsList(const QStringList &list)
-{
-    QString val;
-    if (gradationHeights->currentIndex() != -1)
-    {
-        val = gradationHeights->currentText();
-    }
-
-    gradationHeights->blockSignals(true);
-    gradationHeights->clear();
-    gradationHeights->addItems(list);
-    gradationHeights->blockSignals(false);
-
-    int index = gradationHeights->findText(val);
-    if (index != -1)
-    {
-        gradationHeights->setCurrentIndex(index);
-    }
-    else
-    {
-        ChangedHeight(list.at(0));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::UpdateSizesList(const QStringList &list)
-{
-    QString val;
-    if (gradationSizes->currentIndex() != -1)
-    {
-        val = gradationSizes->currentText();
-    }
-
-    gradationSizes->blockSignals(true);
-    gradationSizes->clear();
-    gradationSizes->addItems(list);
-    gradationSizes->blockSignals(false);
-
-    int index = gradationSizes->findText(val);
-    if (index != -1)
-    {
-        gradationSizes->setCurrentIndex(index);
-    }
-    else
-    {
-        ChangedSize(list.at(0));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief on_actionNew_triggered create new empty pattern.
  */
@@ -3693,7 +3775,7 @@ void MainWindow::on_actionNew_triggered()
         if (newPattern.exec() == QDialog::Accepted)
         {
             patternPieceName = newPattern.name();
-            qApp->setPatternUnit(newPattern.PatternUnit());
+            qApp->SetPatternUnits(newPattern.PatternUnit());
             qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
         }
         else
@@ -3708,7 +3790,7 @@ void MainWindow::on_actionNew_triggered()
 
         AddPP(patternPieceName);
 
-        m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
+        m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnits(), true)));
         ui->toolBarOption->addWidget(m_mouseCoordinate);
 
         m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
@@ -3739,45 +3821,55 @@ void MainWindow::PatternChangesWereSaved(bool saved)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedSize change new size value.
- * @param text value size.
- */
-void MainWindow::ChangedSize(const QString & text)
+void MainWindow::DimensionABaseChanged()
 {
-    const int size = static_cast<int>(pattern->size());
-    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), text.toInt(),
-                           static_cast<int>(pattern->height())))
-    {
-        doc->LiteParseTree(Document::FullLiteParse);
-        emit sceneDetails->DimensionsChanged();
-    }
-    else
-    {
-        qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't update measurements.")));
+    m_currentDimensionA = dimensionA->currentData().toInt();
 
-        const qint32 index = gradationSizes->findText(QString().setNum(size));
-        if (index != -1)
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    if (dimensions.size() > 1)
+    {
+        MeasurementDimension_p dimension = dimensions.at(1);
+        InitDimensionGradation(1, dimension, dimensionB);
+
+        if (dimensions.size() > 2)
         {
-            gradationSizes->setCurrentIndex(index);
-        }
-        else
-        {
-            qCDebug(vMainWindow, "Couldn't restore size value.");
+            dimension = dimensions.at(2);
+            InitDimensionGradation(2, dimension, dimensionC);
         }
     }
+
+    m_gradation->start();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedGrowth change new height value.
- * @param text value height.
- */
-void MainWindow::ChangedHeight(const QString &text)
+void MainWindow::DimensionBBaseChanged()
 {
-    const int height = static_cast<int>(pattern->height());
-    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), static_cast<int>(pattern->size()),
-                           text.toInt()))
+    m_currentDimensionB = dimensionB->currentData().toInt();
+
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() > 2)
+    {
+        MeasurementDimension_p dimension = dimensions.at(2);
+        InitDimensionGradation(2, dimension, dimensionC);
+    }
+
+    m_gradation->start();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::DimensionCBaseChanged()
+{
+    m_currentDimensionC = dimensionC->currentData().toInt();
+    m_gradation->start();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::GradationChanged()
+{
+    m_gradation->stop();
+    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), m_currentDimensionA,
+                           m_currentDimensionB, m_currentDimensionC))
     {
         doc->LiteParseTree(Document::FullLiteParse);
         emit sceneDetails->DimensionsChanged();
@@ -3785,16 +3877,6 @@ void MainWindow::ChangedHeight(const QString &text)
     else
     {
         qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't update measurements.")));
-
-        const qint32 index = gradationHeights->findText(QString().setNum(height));
-        if (index != -1)
-        {
-            gradationHeights->setCurrentIndex(index);
-        }
-        else
-        {
-            qCDebug(vMainWindow, "Couldn't restore height value.");
-        }
     }
 }
 
@@ -3823,43 +3905,181 @@ void MainWindow::ClearPatternMessages()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::SetDefaultHeight()
+void MainWindow::InitDimensionControls()
 {
-    const QString defHeight = QString().setNum(doc->GetDefCustomHeight());
-    int index = gradationHeights->findText(defHeight);
-    if (index != -1)
+    if (not dimensionA.isNull())
     {
-        gradationHeights->setCurrentIndex(index);
+        delete dimensionA;
     }
-    else
+    if (not dimensionALabel.isNull())
     {
-        index = gradationHeights->findText(QString().setNum(pattern->height()));
-        if (index != -1)
+        delete dimensionALabel;
+    }
+
+    if (not dimensionB.isNull())
+    {
+        delete dimensionB;
+    }
+    if (not dimensionBLabel.isNull())
+    {
+        delete dimensionBLabel;
+    }
+
+    if (not dimensionC.isNull())
+    {
+        delete dimensionC;
+    }
+    if (not dimensionCLabel.isNull())
+    {
+        delete dimensionCLabel;
+    }
+
+    if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+    {
+        const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+        const QString unit = UnitsToStr(qApp->MeasurementsUnits(), true);
+
+        auto InitControl = [this, dimensions, unit](int index, QPointer<QLabel> &name, QPointer<QComboBox> &control)
         {
-            gradationHeights->setCurrentIndex(index);
+            if (dimensions.size() > index)
+            {
+                MeasurementDimension_p dimension = dimensions.at(index);
+
+                if (name.isNull())
+                {
+                    name = new QLabel(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+                }
+                else
+                {
+                    name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+                }
+                name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                                dimension->IsCircumference(),
+                                                                                m->IsFullCircumference()));
+
+                if (control.isNull())
+                {
+                    control = new QComboBox;
+                }
+
+                InitDimensionGradation(index, dimension, control);
+
+                ui->toolBarOption->addWidget(name);
+                ui->toolBarOption->addWidget(control);
+            }
+        };
+
+        InitControl(0, dimensionALabel, dimensionA);
+        InitControl(1, dimensionBLabel, dimensionB);
+        InitControl(2, dimensionCLabel, dimensionC);
+
+        if (not dimensionA.isNull())
+        {
+            connect(dimensionA, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                    this, &MainWindow::DimensionABaseChanged);
         }
+
+        if (not dimensionB.isNull())
+        {
+            connect(dimensionB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                    this, &MainWindow::DimensionBBaseChanged);
+        }
+
+        if (not dimensionC.isNull())
+        {
+            connect(dimensionC, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                    this, &MainWindow::DimensionCBaseChanged);
+        }
+
+        ui->toolBarOption->addSeparator();
     }
-    pattern->SetHeight(gradationHeights->currentText().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::SetDefaultSize()
+void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QPointer<QComboBox> control)
 {
-    const QString defSize = QString().setNum(doc->GetDefCustomSize());
-    int index = gradationSizes->findText(defSize);
-    if (index != -1)
+    SCASSERT(control != nullptr)
+
+    const bool fc = m->IsFullCircumference();
+    const QString unit = UnitsToStr(qApp->MeasurementsUnits(), true);
+
+    int current = -1;
+    if (control->currentIndex() != -1)
     {
-        gradationSizes->setCurrentIndex(index);
+        current = control->currentData().toInt();
+    }
+
+    control->blockSignals(true);
+    control->clear();
+
+    const QVector<int> bases = DimensionRestrictedValues(index, dimension);
+    const DimesionLabels labels = dimension->Labels();
+
+    if (dimension->Type() == MeasurementDimension::X)
+    {
+        for(auto base : bases)
+        {
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(base).arg(unit), base);
+            }
+        }
+    }
+    else if (dimension->Type() == MeasurementDimension::Y)
+    {
+        for(auto base : bases)
+        {
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                if (dimension->IsCircumference())
+                {
+                    control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                }
+                else
+                {
+                    control->addItem(QString::number(base), base);
+                }
+            }
+        }
+    }
+    else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
+    {
+        for(auto base : bases)
+        {
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+            }
+        }
+    }
+
+    // after initialization the current index is 0. The signal for changing the index will not be triggered if not make
+    // it invalid first
+    control->setCurrentIndex(-1);
+
+    int i = control->findData(current);
+    if (i != -1)
+    {
+        control->setCurrentIndex(i);
+        control->blockSignals(false);
     }
     else
     {
-        index = gradationSizes->findText(QString().setNum(pattern->size()));
-        if (index != -1)
-        {
-            gradationSizes->setCurrentIndex(index);
-        }
+        control->blockSignals(false);
+        control->setCurrentIndex(0);
     }
-    pattern->SetSize(gradationSizes->currentText().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4629,11 +4849,6 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, [this]()
     {
         DialogPatternProperties proper(doc, pattern, this);
-        connect(&proper, &DialogPatternProperties::UpdateGradation, this, [this]()
-        {
-            UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit()));
-            UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit()));
-        });
         proper.exec();
     });
 
@@ -4909,7 +5124,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         {
             doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
         }
-        qApp->setPatternUnit(doc->MUnit());
+        qApp->SetPatternUnits(doc->MUnit());
 
         QString path = AbsoluteMPath(fileName, doc->MPath());
         QString fixedMPath;
@@ -4976,7 +5191,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             }
         }
 
-        if (qApp->patternType() == MeasurementsType::Unknown)
+        if (qApp->GetMeasurementsType() == MeasurementsType::Unknown)
         {// Show toolbar only if was not uploaded any measurements.
             ToolBarOption();
         }
@@ -4996,7 +5211,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             {
                 doc->SetMPath(RelativeMPath(fileName, fixedMPath));
             }
-            qApp->setPatternUnit(doc->MUnit());
+            qApp->SetPatternUnits(doc->MUnit());
         }
     }
     catch (VException &e)
@@ -5463,7 +5678,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
                     CheckRequiredMeasurements(m.data());
 
-                    qApp->setPatternType(patternType);
+                    qApp->SetMeasurementsType(patternType);
                     doc->SetMPath(RelativeMPath(patternPath, mPath));
                     return mPath;
                 }
@@ -5700,13 +5915,13 @@ bool MainWindow::SetSize(const QString &text)
     {
         if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
         {
-            if (qApp->patternType() == MeasurementsType::Multisize)
+            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
             {
                 const int size = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
-                const qint32 index = gradationSizes->findText(QString().setNum(size));
+                const qint32 index = dimensionB->findText(QString().setNum(size));
                 if (index != -1)
                 {
-                    gradationSizes->setCurrentIndex(index);
+                    dimensionB->setCurrentIndex(index);
                 }
                 else
                 {
@@ -5743,13 +5958,13 @@ bool MainWindow::SetHeight(const QString &text)
     {
         if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
         {
-            if (qApp->patternType() == MeasurementsType::Multisize)
+            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
             {
                 const int height = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
-                const qint32 index = gradationHeights->findText(QString().setNum(height));
+                const qint32 index = dimensionA->findText(QString().setNum(height));
                 if (index != -1)
                 {
-                    gradationHeights->setCurrentIndex(index);
+                    dimensionA->setCurrentIndex(index);
                 }
                 else
                 {

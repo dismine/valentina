@@ -136,7 +136,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       listDetails(),
       currentScene(nullptr),
       tempSceneLayout(nullptr),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP(), valentinaNamespace)),
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitsP(), valentinaNamespace)),
       doc(nullptr),
       papers(),
       shadows(),
@@ -155,7 +155,6 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       margins(),
       paperSize(),
       m_dialogSaveLayout(),
-      m_mouseCoordinate(),
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
       m_taskbarButton(new QWinTaskbarButton(this)),
       m_taskbarProgress(nullptr),
@@ -930,7 +929,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         {
             const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         }
     }
 
@@ -2045,33 +2044,6 @@ QString MainWindowsNoGUI::FileName() const
     QString fileName;
     qApp->GetPatternPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPatternPath();
     return QFileInfo(fileName).baseName();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
-{
-    const QHash<QString, QSharedPointer<VInternalVariable> > * vars = pattern->DataVariables();
-
-    if (vars->contains(size_M))
-    {
-        pattern->SetSize(*vars->value(size_M)->GetValue());
-    }
-    else
-    {
-        pattern->SetSize(0);
-    }
-
-    if (vars->contains(height_M))
-    {
-        pattern->SetHeight(*vars->value(height_M)->GetValue());
-    }
-    else
-    {
-        pattern->SetHeight(0);
-    }
-
-    doc->SetPatternWasChanged(true);
-    emit doc->UpdatePatternLabel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

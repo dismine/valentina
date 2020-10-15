@@ -127,7 +127,7 @@ void VPattern::CreateEmptyFile()
 
     patternElement.appendChild(createComment(FileComment()));
     patternElement.appendChild(CreateElementWithText(TagVersion, VPatternConverter::PatternMaxVerStr));
-    patternElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(qApp->patternUnit())));
+    patternElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(qApp->patternUnits())));
 
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));

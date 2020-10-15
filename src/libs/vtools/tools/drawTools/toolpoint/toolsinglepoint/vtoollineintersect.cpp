@@ -150,7 +150,7 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
                                     "intersection")
                 .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -321,7 +321,7 @@ QString VToolLineIntersect::MakeToolTip() const
                                     "</table>")
             .arg(QString("%1->%2").arg(p1L1->name(), current->name()))
             .arg(qApp->fromPixel(p1L1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), QString("%1->%2").arg(current->name(), p2L1->name()))
+            .arg(UnitsToStr(qApp->patternUnits(), true), QString("%1->%2").arg(current->name(), p2L1->name()))
             .arg(qApp->fromPixel(curToP2L1.length()))
             .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
             .arg(qApp->fromPixel(p1L2ToCur.length()))

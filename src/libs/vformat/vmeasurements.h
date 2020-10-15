@@ -89,7 +89,7 @@ public:
     void    SetBirthDate(const QDate &date);
 
     GenderType Gender() const;
-    void    SetGender(const GenderType &gender);
+    void       SetGender(const GenderType &gender);
 
     QString PMSystem() const;
     void    SetPMSystem(const QString &system);

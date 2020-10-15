@@ -216,7 +216,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             {
                 if (topWinAllowsPop)
                 {
-                    messageBox.setText(VAbstractApplication::ClearMessage(msg));
+                    messageBox.setText(msg);
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);

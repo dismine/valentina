@@ -32,7 +32,7 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vgeometry/vpointf.h"

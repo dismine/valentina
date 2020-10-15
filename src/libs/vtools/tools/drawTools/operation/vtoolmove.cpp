@@ -398,7 +398,7 @@ VFormula VToolMove::GetFormulaLength() const
     VFormula fLength(formulaLength, getData());
     fLength.setCheckZero(true);
     fLength.setToolId(m_id);
-    fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
+    fLength.setPostfix(UnitsToStr(qApp->patternUnits()));
     fLength.Eval();
     return fLength;
 }
@@ -523,7 +523,7 @@ QString VToolMove::MakeToolTip() const
             .arg(GetFormulaAngle().getDoubleValue())         // 2
             .arg(tr("Length"))                               // 3
             .arg(GetFormulaLength().getDoubleValue())        // 4
-            .arg(UnitsToStr(qApp->patternUnit(), true),      // 5
+            .arg(UnitsToStr(qApp->patternUnits(), true),      // 5
                  tr("Rotation angle"))                       // 6
             .arg(GetFormulaRotationAngle().getDoubleValue()) // 7
             .arg(tr("Rotation origin point"),                // 8

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   varc_p.h
+ **  @file   vabstractvalapplication.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 8, 2014
+ **  @date   15 10, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,67 +25,56 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#include "vabstractvalapplication.h"
+#include "../vmisc/customevents.h"
 
-#ifndef VARC_P_H
-#define VARC_P_H
+#include <QWidget>
 
-#include <QSharedData>
-#include "vgeometrydef.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/diagnostic.h"
+const QString VAbstractValApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Weffc++")
-QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractValApplication::VAbstractValApplication(int &argc, char **argv)
+    : VAbstractApplication(argc, argv)
+{}
 
-class VArcData : public QSharedData
+//---------------------------------------------------------------------------------------------------------------------
+double VAbstractValApplication::toPixel(double val) const
 {
-public:
-    VArcData();
-    VArcData(qreal radius, const QString &formulaRadius);
-    explicit VArcData(qreal radius);
-    VArcData(const VArcData &arc);
-    virtual ~VArcData();
-
-    /** @brief radius arc radius. */
-    qreal              radius;
-
-    /** @brief formulaRadius formula for arc radius. */
-    QString            formulaRadius;
-
-private:
-    Q_DISABLE_ASSIGN(VArcData)
-};
+    return ToPixel(val, m_patternUnits);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData()
-    : radius(0),
-      formulaRadius(QString())
-{}
+double VAbstractValApplication::fromPixel(double pix) const
+{
+    return FromPixel(pix, m_patternUnits);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius, const QString &formulaRadius)
-    : radius(radius),
-      formulaRadius(formulaRadius)
-{}
+void VAbstractValApplication::PostPatternMessage(const QString &message, QtMsgType severity) const
+{
+    QApplication::postEvent(mainWindow,
+                            new PatternMessageEvent(VAbstractValApplication::ClearMessage(message), severity));
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius)
-    : radius(radius),
-      formulaRadius(QString().number(qApp->fromPixel(radius)))
-{}
+/**
+ * @brief ClearMessage helps to clear a message string from standard Qt function.
+ * @param msg the message that contains '"' at the start and at the end
+ * @return cleared string
+ */
+QString VAbstractValApplication::ClearMessage(QString msg)
+{
+    if (msg.startsWith('"') && msg.endsWith('"'))
+    {
+        msg.remove(0, 1);
+        msg.chop(1);
+    }
+
+    return msg;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(const VArcData &arc)
-    : QSharedData(arc),
-      radius(arc.radius),
-      formulaRadius(arc.formulaRadius)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::~VArcData()
-{}
-
-QT_WARNING_POP
-
-#endif // VARC_P_H
+bool VAbstractValApplication::IsPatternMessage(const QString &message) const
+{
+    return VAbstractValApplication::ClearMessage(message).startsWith(patternMessageSignature);
+}
