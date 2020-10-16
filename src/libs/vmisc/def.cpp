@@ -183,44 +183,6 @@ const QString pl_wCut          = QStringLiteral("wCut");
 const QString pl_wOnFold       = QStringLiteral("wOnFold");
 const QString pl_measurement   = QStringLiteral("measurement_");
 
-const QStringList labelTemplatePlaceholders = {
-    pl_size,
-    pl_height,
-    pl_hip,
-    pl_waist,
-    pl_date,
-    pl_time,
-    pl_birthDate,
-    pl_patternName,
-    pl_patternNumber,
-    pl_author,
-    pl_customer,
-    pl_email,
-    pl_userMaterial,
-    pl_pExt,
-    pl_pUnits,
-    pl_pFileName,
-    pl_mFileName,
-    pl_mExt,
-    pl_mUnits,
-    pl_mSizeUnits,
-    pl_pLetter,
-    pl_pAnnotation,
-    pl_pOrientation,
-    pl_pRotation,
-    pl_pTilt,
-    pl_pFoldPosition,
-    pl_pName,
-    pl_pQuantity,
-    pl_mFabric,
-    pl_mLining,
-    pl_mInterfacing,
-    pl_mInterlining,
-    pl_wCut,
-    pl_wOnFold,
-    pl_measurement
-};
-
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
 

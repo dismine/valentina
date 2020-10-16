@@ -440,8 +440,6 @@ extern const QString pl_measurement;
 // Don't forget to syncronize with XSD schema.
 const int userMaterialPlaceholdersQuantity = 20;
 
-extern const QStringList labelTemplatePlaceholders;
-
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 

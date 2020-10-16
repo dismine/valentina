@@ -45,10 +45,6 @@ public:
     bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
     QString InternalVarToUser(const QString &var) const;
-    QString PlaceholderToUser(QString var) const;
-
-    QString PlaceholderToUserText(QString text) const;
-    QString PlaceholderFromUserText(QString text) const;
 
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
@@ -79,14 +75,12 @@ private:
     QMap<QString, qmu::QmuTranslation> variables{};
     QMap<QString, qmu::QmuTranslation> functions{};
     QMap<QString, qmu::QmuTranslation> functionsDescriptions{};
-    QMap<QString, qmu::QmuTranslation> placeholders{};
     QMap<QString, qmu::QmuTranslation> stDescriptions{};
     QMap<QString, QString> translatedFunctions{};
 
     void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
-    void InitPlaceholder();
 
     void PrepareFunctionTranslations();
 

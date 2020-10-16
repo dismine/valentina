@@ -479,7 +479,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
     {
         auto value = i.value();
         QAction *action = m_placeholdersMenu->addAction(value.first);
-        action->setData(per + qApp->TrVars()->PlaceholderToUser(i.key()) + per);
+        action->setData(per + i.key() + per);
         connect(action, &QAction::triggered, this, &DialogEditLabel::InsertPlaceholder);
         ++i;
     }
@@ -606,7 +606,7 @@ QVector<VLabelTemplateLine> DialogEditLabel::GetTemplate() const
         if (lineItem)
         {
             VLabelTemplateLine line;
-            line.line = qApp->TrVars()->PlaceholderFromUserText(lineItem->text());
+            line.line = lineItem->text();
             line.alignment = lineItem->textAlignment();
             line.fontSizeIncrement = lineItem->data(Qt::UserRole).toInt();
 
@@ -631,7 +631,7 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 
     for (auto &line : lines)
     {
-        QListWidgetItem *item = new QListWidgetItem(qApp->TrVars()->PlaceholderToUserText(line.line));
+        QListWidgetItem *item = new QListWidgetItem(line.line);
         item->setTextAlignment(line.alignment);
         item->setData(Qt::UserRole, line.fontSizeIncrement);
 
