@@ -112,7 +112,7 @@
   </xs:simpleType>
   <xs:simpleType name="dimesionValue">
     <xs:restriction base="xs:unsignedInt">
-      <xs:minInclusive value="8"/>
+      <xs:minInclusive value="6"/>
       <xs:maxInclusive value="2720"/>
     </xs:restriction>
   </xs:simpleType>

@@ -54,7 +54,7 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
     auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
     m_xDimension->SetBaseValue(176);
 
-    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 2, 22, 72);
+    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 22, 72, 2);
     m_yDimension->SetBaseValue(50);
     m_yDimension->SetCircumference(true);
 
@@ -149,7 +149,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
     auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
     m_xDimension->SetBaseValue(176);
 
-    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 2, 22, 72);
+    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 22, 72, 2);
     m_yDimension->SetBaseValue(50);
     m_yDimension->SetCircumference(true);
 
