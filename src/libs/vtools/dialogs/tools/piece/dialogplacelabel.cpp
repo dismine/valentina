@@ -315,7 +315,7 @@ void DialogPlaceLabel::EvalWidth()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormulaWidth;
     formulaData.labelResult = ui->labelResultCalculationWidth;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, m_flagWidth);
@@ -329,7 +329,7 @@ void DialogPlaceLabel::EvalHeight()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormulaHeight;
     formulaData.labelResult = ui->labelResultCalculationHeight;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, m_flagHeight);
@@ -370,7 +370,7 @@ void DialogPlaceLabel::FXWidth()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetWidth());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetWidth(dialog->GetFormula());
@@ -383,7 +383,7 @@ void DialogPlaceLabel::FXHeight()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetHeight());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetHeight(dialog->GetFormula());
@@ -429,8 +429,8 @@ void DialogPlaceLabel::InitPlaceLabelTab()
     ui->plainTextEditFormulaHeight->installEventFilter(this);
     ui->plainTextEditFormulaAngle->installEventFilter(this);
 
-    ui->plainTextEditFormulaWidth->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnit())));
-    ui->plainTextEditFormulaHeight->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnit())));
+    ui->plainTextEditFormulaWidth->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnits())));
+    ui->plainTextEditFormulaHeight->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnits())));
 
     connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPlaceLabel::FXWidth);
     connect(ui->toolButtonExprHeight, &QPushButton::clicked, this, &DialogPlaceLabel::FXHeight);

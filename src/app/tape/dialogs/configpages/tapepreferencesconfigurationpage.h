@@ -52,7 +52,6 @@ private:
     Ui::TapePreferencesConfigurationPage *ui;
     bool m_langChanged;
     bool m_systemChanged;
-    bool m_defGradationChanged;
 
     void RetranslateUi();
 };

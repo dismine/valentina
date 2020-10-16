@@ -44,6 +44,7 @@ namespace Ui
 
 class QLabel;
 class QxtCsvModel;
+class VMeasurement;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -57,8 +58,9 @@ public:
 
     void RetranslateTable();
 
-    void SetBaseMHeight(int height);
-    void SetBaseMSize(int size);
+    bool SetDimensionABase(int base);
+    bool SetDimensionBBase(int base);
+    bool SetDimensionCBase(int base);
     void SetPUnit(Unit unit);
 
     bool LoadFile(const QString &path);
@@ -112,8 +114,11 @@ private slots:
     void AddKnown();
     void ImportFromPattern();
 
-    void ChangedSize(const QString &text);
-    void ChangedHeight(const QString & text);
+    void DimensionABaseChanged();
+    void DimensionBBaseChanged();
+    void DimensionCBaseChanged();
+
+    void GradationChanged();
 
     void ShowMData();
 
@@ -122,43 +127,67 @@ private slots:
     void SaveMName(const QString &text);
     void SaveMValue();
     void SaveMBaseValue(double value);
-    void SaveMSizeIncrease(double value);
-    void SaveMHeightIncrease(double value);
+    void SaveMShiftA(double value);
+    void SaveMShiftB(double value);
+    void SaveMShiftC(double value);
+    void SaveMCorrectionValue(double value);
     void SaveMDescription();
     void SaveMFullName();
+    void SaveMUnits();
+    void SaveMDimension();
+
+    void FullCircumferenceChanged(bool checked);
+
+    void ExportToIndividual();
+
+    void RestrictSecondDimesion();
+    void RestrictThirdDimesion();
+
+    void EditDimensionLabels();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
-    VMeasurements   *m;
-    VContainer      *data;
-    Unit             mUnit;
-    Unit             pUnit;
-    MeasurementsType mType;
-    qreal            currentSize;
-    qreal            currentHeight;
-    QString          curFile;
-    QComboBox       *gradationHeights;
-    QComboBox       *gradationSizes;
-    QComboBox       *comboBoxUnits;
+    VMeasurements   *m{nullptr};
+    VContainer      *data{nullptr};
+    Unit             mUnit{Unit::Cm};
+    Unit             pUnit{Unit::Cm};
+    MeasurementsType mType{MeasurementsType::Individual};
+    int              currentDimensionA{0};
+    int              currentDimensionB{0};
+    int              currentDimensionC{0};
+    QString          curFile{};
+    QComboBox       *gradationDimensionA{nullptr};
+    QComboBox       *gradationDimensionB{nullptr};
+    QComboBox       *gradationDimensionC{nullptr};
+    QComboBox       *comboBoxUnits{nullptr};
     int              formulaBaseHeight;
-    QSharedPointer<VLockGuard<char>> lock;
-    QSharedPointer<VTableSearch> search;
-    QLabel *labelGradationHeights;
-    QLabel *labelGradationSizes;
-    QLabel *labelPatternUnit;
-    bool isInitialized;
-    bool mIsReadOnly;
+    QSharedPointer<VLockGuard<char>> lock{nullptr};
+    QSharedPointer<VTableSearch> search{};
+    QLabel *labelGradationDimensionA{nullptr};
+    QLabel *labelGradationDimensionB{nullptr};
+    QLabel *labelGradationDimensionC{nullptr};
+    QLabel *labelPatternUnit{nullptr};
+    bool isInitialized{false};
+    bool mIsReadOnly{false};
+    QTimer *gradation;
 
-    QVector<QObject *> hackedWidgets;
+    QVector<QObject *> hackedWidgets{};
 
     void SetupMenu();
     void InitWindow();
+    void InitMenu();
+    void InitDimensionsBaseValue();
+    void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QComboBox *control);
+    void InitDimensionControls();
+    void InitDimesionShifts();
     void InitTable();
     void SetDecimals();
-    void InitUnits();
+    void InitPatternUnits();
     void InitComboBoxUnits();
+    void InitMeasurementUnits();
     void InitGender(QComboBox *gender);
+    void InitMeasurementDimension();
 
     void ShowNewMData(bool fresh);
     void ShowUnits();
@@ -172,18 +201,13 @@ private:
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
-    Q_REQUIRED_RESULT QComboBox *SetGradationList(QLabel *label, const QStringList &list);
-
-    void       SetDefaultHeight(int value);
-    void       SetDefaultSize(int value);
-
     void RefreshData(bool freshCall = false);
     void RefreshTable(bool freshCall = false);
 
     QString GetCustomName() const;
     QString ClearCustomName(const QString &name) const;
 
-    bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
+    bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool specialUnits);
     void ShowMDiagram(const QString &name);
 
     void Open(const QString &pathTo, const QString &filter);
@@ -208,15 +232,25 @@ private:
 
     template <class T>
     void HackWidget(T **widget);
+    void HackDimensionBaseValue();
+    void HackDimensionShifts();
 
     QString CheckMName(const QString &name, const QSet<QString> &importedNames) const;
     void ShowError(const QString &text);
     void RefreshDataAfterImport();
 
-    void ImportIndividualMeasurements(const QxtCsvModel &csv);
-    void ImportMultisizeMeasurements(const QxtCsvModel &csv);
+    void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map);
+    void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map);
 
     void SetCurrentPatternUnit();
+
+    void ShowDimensionControls();
+    void SetDimensionBases();
+    void SetCurrentDimensionValues();
+
+    QVector<int> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
+
+    QMap<int, QSharedPointer<VMeasurement> > OrderedMeasurments() const;
 };
 
 #endif // TMAINWINDOW_H

@@ -97,15 +97,6 @@ public:
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
     virtual QString GenerateSuffix() const override;
 
-    bool IsDefCustom() const;
-    void SetDefCustom(bool value);
-
-    int  GetDefCustomHeight() const;
-    void SetDefCustomHeight(int value);
-
-    int  GetDefCustomSize() const;
-    void SetDefCustomSize(int value);
-
     bool IsReadOnly() const;
     void SetReadOnly(bool rOnly);
 

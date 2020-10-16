@@ -32,25 +32,21 @@
 #include <qcompilerdetection.h>
 #include <QApplication>
 #include <QCoreApplication>
-#include <QGraphicsScene>
 #include <QLocale>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointer>
 #include <QString>
 #include <QtGlobal>
+#include <QTranslator>
 
 #include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "def.h"
 #include "vcommonsettings.h"
-#include "vlockguard.h"
-#include "vsettings.h"
 
 class QUndoStack;
 class VAbstractApplication;// use in define
-class VAbstractPattern;
-class VMainGraphicsView;
+class VCommonSettings;
 
 #if defined(qApp)
 #undef qApp
@@ -62,92 +58,42 @@ class VAbstractApplication : public QApplication
     Q_OBJECT
 public:
     VAbstractApplication(int &argc, char ** argv);
-    virtual ~VAbstractApplication() override;
+    virtual ~VAbstractApplication() =default;
 
     virtual const VTranslateVars *TrVars()=0;
 
-    QString          translationsPath(const QString &locale = QString()) const;
+    QString translationsPath(const QString &locale = QString()) const;
 
-    void             LoadTranslation(const QString &locale);
-
-    Unit             patternUnit() const;
-    const Unit      *patternUnitP() const;
-    void             setPatternUnit(const Unit &patternUnit);
-
-    MeasurementsType patternType() const;
-    void             setPatternType(const MeasurementsType &patternType);
-
-    QString GetCustomerName() const;
-    void    SetCustomerName(const QString &name);
+    void LoadTranslation(const QString &locale);
 
     virtual void     OpenSettings()=0;
     VCommonSettings *Settings();
 
     template <typename T>
-    QString          LocaleToString(const T &value);
+    QString LocaleToString(const T &value);
 
-    QGraphicsScene  *getCurrentScene() const;
-    void             setCurrentScene(QGraphicsScene **value);
+    QUndoStack *getUndoStack() const;
 
-    VMainGraphicsView *getSceneView() const;
-    void               setSceneView(VMainGraphicsView *value);
-
-    double           toPixel(double val) const;
-    double           fromPixel(double pix) const;
-
-    void             setCurrentDocument(VAbstractPattern *doc);
-    VAbstractPattern *getCurrentDocument()const;
-
-    bool             getOpeningPattern() const;
-    void             setOpeningPattern();
-
-    QWidget         *getMainWindow() const;
-    void             setMainWindow(QWidget *value);
-
-    QUndoStack      *getUndoStack() const;
-
-    virtual bool     IsAppInGUIMode()const =0;
-    virtual bool     IsPedantic() const;
-
-    QString         GetPatternPath() const;
-    void            SetPatternPath(const QString &value);
+    virtual bool IsAppInGUIMode()const =0;
+    virtual bool IsPedantic() const;
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();
 #endif
 
-    static QString ClearMessage(QString msg);
-
-    QMap<int, QString> GetUserMaterials() const;
-    void               SetUserMaterials(const QMap<int, QString> &userMaterials);
-
-    const Draw &GetDrawMode() const;
-    void        SetDrawMode(const Draw &value);
-
-    void PostPatternMessage(const QString &message, QtMsgType severity) const;
-
-    static const QString patternMessageSignature;
-    bool IsPatternMessage(const QString &message) const;
-
 protected:
-    QUndoStack         *undoStack;
-
-    /**
-     * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window
-     * modality doesn't work.
-     */
-    QWidget            *mainWindow;
+    QUndoStack *undoStack;
 
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
-    VCommonSettings    *settings;
+    VCommonSettings *settings{nullptr};
 
-    QPointer<QTranslator> qtTranslator;
-    QPointer<QTranslator> qtxmlTranslator;
-    QPointer<QTranslator> qtBaseTranslator;
-    QPointer<QTranslator> appTranslator;
-    QPointer<QTranslator> pmsTranslator;
+    QPointer<QTranslator> qtTranslator{nullptr};
+    QPointer<QTranslator> qtxmlTranslator{nullptr};
+    QPointer<QTranslator> qtBaseTranslator{nullptr};
+    QPointer<QTranslator> appTranslator{nullptr};
+    QPointer<QTranslator> pmsTranslator{nullptr};
 
     virtual void InitTrVars()=0;
 
@@ -156,65 +102,9 @@ protected slots:
 
 private:
     Q_DISABLE_COPY(VAbstractApplication)
-    Unit               _patternUnit;
-    MeasurementsType   _patternType;
-    QString            patternFilePath;
-
-    QGraphicsScene     **currentScene;
-    VMainGraphicsView  *sceneView;
-
-    VAbstractPattern   *doc;
-    QString            m_customerName;
-
-    QMap<int, QString> m_userMaterials;
-
-    /**
-     * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
-     * we can allow user use Undo option.
-     */
-    bool               openingPattern;
-
-    /** @brief mode keep current draw mode. */
-    Draw               mode;
 
     void ClearTranslation();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractApplication::GetCustomerName() const
-{
-    return m_customerName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetCustomerName(const QString &name)
-{
-    m_customerName = name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractApplication::GetPatternPath() const
-{
-    return patternFilePath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetPatternPath(const QString &value)
-{
-    patternFilePath = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QMap<int, QString> VAbstractApplication::GetUserMaterials() const
-{
-    return m_userMaterials;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetUserMaterials(const QMap<int, QString> &userMaterials)
-{
-    m_userMaterials = userMaterials;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>

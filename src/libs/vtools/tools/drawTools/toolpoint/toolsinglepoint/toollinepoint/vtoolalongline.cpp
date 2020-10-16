@@ -162,7 +162,7 @@ QString VToolAlongLine::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QStringLiteral("%1->%2").arg(basePoint->name(), current->name()),
                  QStringLiteral("%1->%2").arg(current->name(), secondPoint->name()))

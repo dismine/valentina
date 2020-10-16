@@ -118,7 +118,7 @@ QDomElement VPatternRecipe::Prerequisite()
     QDomElement prerequisiteElement = createElement(QStringLiteral("prerequisite"));
 
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), APP_VERSION_STR));
-    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"), UnitsToStr(qApp->patternUnit())));
+    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"), UnitsToStr(qApp->patternUnits())));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("author"), m_pattern->GetCompanyName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("pattenName"), m_pattern->GetPatternName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("description"), m_pattern->GetDescription()));
@@ -437,7 +437,7 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm)
                                                          tr("Value for final measurtement '%1' is infinite or NaN. "
                                                             "Please, check your calculations.").arg(fm.name));
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);

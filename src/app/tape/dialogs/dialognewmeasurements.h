@@ -48,16 +48,10 @@ public:
 
     MeasurementsType Type() const;
     Unit MUnit() const;
-    int BaseSize() const;
-    int BaseHeight() const;
 
 protected:
     virtual void changeEvent(QEvent* event) override;
     virtual void showEvent(QShowEvent *event) override;
-
-private slots:
-    void CurrentTypeChanged(int index);
-    void CurrentUnitChanged(int index);
 
 private:
     Q_DISABLE_COPY(DialogNewMeasurements)
@@ -65,9 +59,7 @@ private:
     bool isInitialized;
 
     void InitMTypes();
-    void InitHeightsList();
-    void InitSizesList();
-    void InitUnits(const MeasurementsType &type);
+    void InitUnits();
 };
 
 #endif // DIALOGNEWMEASUREMENTS_H

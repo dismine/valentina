@@ -201,7 +201,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius1() const
     VFormula radius1(elArc->GetFormulaRadius1(), getData());
     radius1.setCheckZero(true);
     radius1.setToolId(m_id);
-    radius1.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius1.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius1.Eval();
     return radius1;
 }
@@ -230,7 +230,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius2() const
     VFormula radius2(elArc->GetFormulaRadius2(), getData());
     radius2.setCheckZero(true);
     radius2.setToolId(m_id);
-    radius2.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius2.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius2.Eval();
     return radius2;
 }
@@ -440,7 +440,7 @@ QString VToolEllipticalArc::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))                          // 1
             .arg(qApp->fromPixel(elArc->GetLength()))   // 2
-            .arg(UnitsToStr(qApp->patternUnit(), true), // 3
+            .arg(UnitsToStr(qApp->patternUnits(), true), // 3
                  tr("Radius") + QLatin1Char('1'))       // 4
             .arg(qApp->fromPixel(elArc->GetRadius1()))  // 5
             .arg(tr("Radius") + QLatin1Char('2'))       // 6

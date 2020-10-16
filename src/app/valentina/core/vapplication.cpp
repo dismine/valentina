@@ -150,7 +150,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     const bool isPatternMessage = qApp->IsPatternMessage(msg);
     if (isPatternMessage)
     {
-        logMsg = logMsg.remove(VAbstractApplication::patternMessageSignature);
+        logMsg = logMsg.remove(VAbstractValApplication::patternMessageSignature);
     }
 
     {
@@ -249,7 +249,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                             break;
                     }
 
-                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
+                    messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
@@ -287,7 +287,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv),
+    : VAbstractValApplication(argc, argv),
       trVars(nullptr),
       autoSaveTimer(nullptr),
       lockLog(),

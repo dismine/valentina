@@ -42,40 +42,20 @@ class VMeasurementData : public QSharedData
 {
 public:
 
-    VMeasurementData(quint32 index, const QString &gui_text, const QString &tagName, qreal baseSize, qreal baseHeight,
-                     qreal base, qreal ksize, qreal kheight )
-        : data(),
-          index(index),
-          formula(),
-          gui_text(gui_text),
-          _tagName(tagName),
-          formulaOk(true),
-          currentSize(0),
-          currentHeight(0),
-          currentUnit(nullptr),
-          base(base),
-          ksize(ksize),
-          kheight(kheight),
-          baseSize(baseSize),
-          baseHeight(baseHeight)
+    VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base)
+        : index(index),
+          shiftBase(base),
+          baseA(baseA),
+          baseB(baseB),
+          baseC(baseC)
     {}
 
-    VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, const QString &gui_text,
-                     const QString &tagName, qreal base)
+    VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, qreal base)
         : data(QSharedPointer<VContainer>(new VContainer(*data))),
           index(index),
           formula(formula),
-          gui_text(gui_text),
-          _tagName(tagName),
           formulaOk(ok),
-          currentSize(0),
-          currentHeight(0),
-          currentUnit(nullptr),
-          base(base),
-          ksize(0),
-          kheight(0),
-          baseSize(0),
-          baseHeight(0)
+          shiftBase(base)
     {}
 
     VMeasurementData(const VMeasurementData &m)
@@ -84,42 +64,56 @@ public:
           index(m.index),
           formula(m.formula),
           gui_text(m.gui_text),
-          _tagName(m._tagName),
           formulaOk(m.formulaOk),
-          currentSize(m.currentSize),
-          currentHeight(m.currentHeight),
-          currentUnit(m.currentUnit),
-          base(m.base),
-          ksize(m.ksize),
-          kheight(m.kheight),
-          baseSize(m.baseSize),
-          baseHeight(m.baseHeight)
+          currentBaseA(m.currentBaseA),
+          currentBaseB(m.currentBaseB),
+          currentBaseC(m.currentBaseC),
+          shiftBase(m.shiftBase),
+          shiftA(m.shiftA),
+          shiftB(m.shiftB),
+          shiftC(m.shiftC),
+          stepA(m.stepA),
+          stepB(m.stepB),
+          stepC(m.stepC),
+          baseA(m.baseA),
+          baseB(m.baseB),
+          baseC(m.baseC),
+          corrections(m.corrections),
+          specialUnits(m.specialUnits),
+          dimension(m.dimension)
     {}
 
     virtual  ~VMeasurementData();
 
-    QSharedPointer<VContainer> data;
+    QSharedPointer<VContainer> data{};
     quint32 index;
-    QString formula;
-    QString gui_text;
-    QString _tagName;
-    bool formulaOk;
+    QString formula{};
+    QString gui_text{};
+    bool formulaOk{true};
 
-    qreal currentSize;
-    qreal currentHeight;
-    const Unit *currentUnit;
+    qreal currentBaseA{0};
+    qreal currentBaseB{0};
+    qreal currentBaseC{0};
 
-    /** @brief base value in base size and height */
-    qreal   base;
+    qreal shiftBase{0};
 
-    /** @brief ksize increment in sizes */
-    qreal   ksize;
+    qreal shiftA{0};
+    qreal shiftB{0};
+    qreal shiftC{0};
 
-    /** @brief kgrowth increment in heights */
-    qreal   kheight;
+    qreal stepA{0};
+    qreal stepB{0};
+    qreal stepC{0};
 
-    qreal baseSize;
-    qreal baseHeight;
+    qreal baseA{0};
+    qreal baseB{0};
+    qreal baseC{0};
+
+    QMap<QString, qreal> corrections{};
+
+    bool specialUnits{false};
+
+    IMD dimension{IMD::N};
 
 private:
     Q_DISABLE_ASSIGN(VMeasurementData)

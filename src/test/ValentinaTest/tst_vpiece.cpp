@@ -33,7 +33,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 
 #include <QtTest>
 #include "../vpatterndb/vpiece.h"
@@ -51,7 +51,7 @@ void TST_VPiece::Issue620()
     // Check main path
     const Unit unit = Unit::Cm;
     QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
-    qApp->setPatternUnit(unit);
+    qApp->SetPatternUnits(unit);
 
     VPiece detail;
     AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);

@@ -4,8 +4,9 @@
 #include <algorithm>
 #include <QString>
 #include <QTextCodec>
+#include <QDebug>
 #include "../drw_base.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexception.h"
 
 namespace
@@ -112,7 +113,7 @@ void DRW_TextCodec::setCodePage(const std::string *c, bool dxfFormat){
         const QString errorMsg = QCoreApplication::translate("DRW_TextCodec", "No available codec for code page '%1'.")
                 .arg(cp.c_str());
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
 
         if (version < DRW::AC1021 && cp == "UTF-8")
         {

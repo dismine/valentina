@@ -45,7 +45,7 @@ class VVariable :public VInternalVariable
 {
 public:
     VVariable();
-    VVariable(const QString &name, const QString &description = QString());
+    explicit VVariable(const QString &name, const QString &description = QString());
     VVariable(const VVariable &var);
 
     virtual ~VVariable() override;

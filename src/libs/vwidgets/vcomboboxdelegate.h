@@ -34,7 +34,7 @@ class VComboBoxDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-    VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
+    explicit VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
 
     virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                                   const QModelIndex &index) const override;

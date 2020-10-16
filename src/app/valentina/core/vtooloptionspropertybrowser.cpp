@@ -2318,7 +2318,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VFormula length1(spl.GetC1LengthFormula(), i->getData());
     length1.setCheckZero(false);
     length1.setToolId(i->getId());
-    length1.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length1.setPostfix(UnitsToStr(qApp->patternUnits()));
     length1.Eval();
     AddPropertyFormula(tr("C1: length:"), length1, AttrLength1);
 
@@ -2332,7 +2332,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VFormula length2(spl.GetC2LengthFormula(), i->getData());
     length2.setCheckZero(false);
     length2.setToolId(i->getId());
-    length2.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length2.setPostfix(UnitsToStr(qApp->patternUnits()));
     length2.Eval();
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
@@ -3046,7 +3046,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     VFormula length1F(spl.GetC1LengthFormula(), i->getData());
     length1F.setCheckZero(false);
     length1F.setToolId(i->getId());
-    length1F.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length1F.setPostfix(UnitsToStr(qApp->patternUnits()));
     length1F.Eval();
     QVariant length1;
     length1.setValue(length1F);
@@ -3064,7 +3064,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     VFormula length2F(spl.GetC2LengthFormula(), i->getData());
     length2F.setCheckZero(false);
     length2F.setToolId(i->getId());
-    length2F.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length2F.setPostfix(UnitsToStr(qApp->patternUnits()));
     length2F.Eval();
     QVariant length2;
     length2.setValue(length2F);

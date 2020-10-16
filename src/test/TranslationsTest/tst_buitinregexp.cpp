@@ -226,43 +226,6 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_BuitInRegExp::TestTemplatePlaceholders()
-{
-    QSet<QString> originals;
-    QSet<QString> translations;
-    QStringList issue;
-
-    for (auto &placeholder : labelTemplatePlaceholders)
-    {
-        originals.insert(placeholder);
-        const QString translated = m_trMs->PlaceholderToUser(placeholder);
-
-        const QRegularExpression re(QLatin1String("^[^\\s]+$"));
-        if (re.match(translated).hasMatch())
-        {
-            if (not translations.contains(translated))
-            {
-                translations.insert(translated);
-            }
-            else
-            {
-                issue << QString("Duplicate translation '%1' for placeholder '%2' in locale '%3'.\n")
-                         .arg(translated, placeholder, m_locale);
-            }
-        }
-        else
-        {
-            issue << QString("Invalid translation '%1' for placeholder '%2' in locale '%3'.\n")
-                     .arg(translated, placeholder, m_locale);
-        }
-    }
-
-    QVERIFY2(issue.isEmpty(), qUtf8Printable(issue.join("")));
-    QCOMPARE(originals.size(), labelTemplatePlaceholders.size()); // All tags are unique
-    QCOMPARE(translations.size(), labelTemplatePlaceholders.size()); // All translated tags are unique
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TST_BuitInRegExp::TestForValidChars_data()
 {
     PrepareData();

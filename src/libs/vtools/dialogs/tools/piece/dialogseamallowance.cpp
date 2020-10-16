@@ -1050,7 +1050,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
 
                 if (passmarkLength.isEmpty())
                 {
-                    qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+                    qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
                     uiTabPassmarks->plainTextEditPassmarkLength->setPlainText(qApp->LocaleToString(length));
                 }
                 else
@@ -1060,7 +1060,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             }
             else
             {
-                qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+                qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
                 uiTabPassmarks->plainTextEditPassmarkLength->setPlainText(qApp->LocaleToString(length));
             }
 
@@ -1598,7 +1598,7 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         {
             plbVal = uiTabGrainline->labelLen;
             plbText = uiTabGrainline->labelEditLen;
-            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnits());
         }
 
         plbVal->setToolTip(tr("Value"));
@@ -1667,13 +1667,13 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         {
             plbVal = uiTabLabels->labelDLWidth;
             plbText = uiTabLabels->labelEditDLWidth;
-            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnits());
         }
         else if (i == 1)
         {
             plbVal = uiTabLabels->labelDLHeight;
             plbText = uiTabLabels->labelEditDLHeight;
-            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnits());
         }
         else
         {
@@ -1753,13 +1753,13 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         {
             plbVal = uiTabLabels->labelPLWidth;
             plbText = uiTabLabels->labelEditPLWidth;
-            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnits());
         }
         else if (i == 1)
         {
             plbVal = uiTabLabels->labelPLHeight;
             plbText = uiTabLabels->labelEditPLHeight;
-            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnits());
         }
         else
         {
@@ -2133,7 +2133,7 @@ void DialogSeamAllowance::EvalWidth()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = uiTabPaths->labelEditWidth;
     formulaData.labelResult = uiTabPaths->labelResultWidth;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -2166,7 +2166,7 @@ void DialogSeamAllowance::EvalWidthBefore()
             formulaData.variables = data->DataVariables();
             formulaData.labelEditFormula = uiTabPaths->labelEditBefore;
             formulaData.labelResult = uiTabPaths->labelResultBefore;
-            formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+            formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
             formulaData.checkZero = false;
             formulaData.checkLessThanZero = true;
 
@@ -2197,7 +2197,7 @@ void DialogSeamAllowance::EvalWidthAfter()
             formulaData.variables = data->DataVariables();
             formulaData.labelEditFormula = uiTabPaths->labelEditAfter;
             formulaData.labelResult = uiTabPaths->labelResultAfter;
-            formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+            formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
             formulaData.checkZero = false;
             formulaData.checkLessThanZero = true;
 
@@ -2228,7 +2228,7 @@ void DialogSeamAllowance::EvalPassmarkLength()
             formulaData.variables = data->DataVariables();
             formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkLength;
             formulaData.labelResult = uiTabPassmarks->labelResultPassmarkLength;
-            formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+            formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
             formulaData.checkZero = false;
             formulaData.checkLessThanZero = false;
 
@@ -2252,7 +2252,7 @@ void DialogSeamAllowance::FXWidth()
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaSAWidth(dialog->GetFormula());
@@ -2266,7 +2266,7 @@ void DialogSeamAllowance::FXWidthBefore()
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore));
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSABefore(dialog->GetFormula());
@@ -2280,7 +2280,7 @@ void DialogSeamAllowance::FXWidthAfter()
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter));
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSAAfter(dialog->GetFormula());
@@ -2293,7 +2293,7 @@ void DialogSeamAllowance::FXPassmarkLength()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark length"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkLength));
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormularPassmarkLength(dialog->GetFormula());
@@ -2428,7 +2428,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EditLabel()
 {
-    DialogEditLabel editor(qApp->getCurrentDocument());
+    DialogEditLabel editor(qApp->getCurrentDocument(), data);
     editor.SetTemplate(m_templateLines);
     editor.SetPiece(GetPiece());
 
@@ -2923,7 +2923,7 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
 
     // init the default seam allowance, convert the value if app unit is different than pattern unit
     m_saWidth = UnitConvertor(qApp->Settings()->GetDefaultSeamAllowance(),
-                              StrToUnits(qApp->Settings()->GetUnit()), qApp->patternUnit());
+                              StrToUnits(qApp->Settings()->GetUnit()), qApp->patternUnits());
 
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 

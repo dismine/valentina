@@ -48,7 +48,7 @@
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
 #include "../vmisc/projectversion.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"

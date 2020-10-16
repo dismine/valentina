@@ -29,11 +29,12 @@
 #ifndef VAPPLICATION_H
 #define VAPPLICATION_H
 
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vsettings.h"
 #include "vcmdexport.h"
+#include "vlockguard.h"
 
 class VApplication;// use in define
 
@@ -45,7 +46,7 @@ class VApplication;// use in define
 /**
  * @brief The VApplication class reimplamentation QApplication class.
  */
-class VApplication : public VAbstractApplication
+class VApplication : public VAbstractValApplication
 {
     Q_OBJECT
 public:
@@ -114,7 +115,5 @@ inline void VApplication::setAutoSaveTimer(QTimer *value)
 {
     autoSaveTimer = value;
 }
-//---------------------------------------------------------------------------------------------------------------------
-
 
 #endif // VAPPLICATION_H

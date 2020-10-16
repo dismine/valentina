@@ -217,7 +217,7 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
                                     "intersection with line (%4;%5)")
                 .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -373,7 +373,7 @@ QString VToolPointOfContact::MakeToolTip() const
                                     "</table>")
             .arg(QStringLiteral("%1->%2").arg(p1->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), QStringLiteral("%1->%2").arg(p2->name(), current->name()))
+            .arg(UnitsToStr(qApp->patternUnits(), true), QStringLiteral("%1->%2").arg(p2->name(), current->name()))
             .arg(qApp->fromPixel(p2ToCur.length()))
             .arg(QStringLiteral("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
             .arg(qApp->fromPixel(centerToCur.length()))
@@ -409,7 +409,7 @@ VFormula VToolPointOfContact::getArcRadius() const
     VFormula radius(arcRadius, this->getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
 
     return radius;

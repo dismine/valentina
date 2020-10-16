@@ -87,11 +87,9 @@ extern const QString SINGLE_OPTION_TEST;
 
 extern const QString LONG_OPTION_PENDANTIC;
 
-extern const QString LONG_OPTION_GRADATIONSIZE;
-extern const QString SINGLE_OPTION_GRADATIONSIZE;
-
-extern const QString LONG_OPTION_GRADATIONHEIGHT;
-extern const QString SINGLE_OPTION_GRADATIONHEIGHT;
+extern const QString LONG_OPTION_DIMENSION_A;
+extern const QString LONG_OPTION_DIMENSION_B;
+extern const QString LONG_OPTION_DIMENSION_C;
 
 extern const QString LONG_OPTION_USER_MATERIAL;
 

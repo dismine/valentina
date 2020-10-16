@@ -32,7 +32,7 @@
 #include <QLoggingCategory>
 
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "vlayoutdef.h"
 #include "../ifc/exception/vexception.h"
@@ -335,7 +335,7 @@ bool VBank::PrepareUnsorted()
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
-            qCCritical(lBank) << VAbstractApplication::patternMessageSignature +
+            qCCritical(lBank) << VAbstractValApplication::patternMessageSignature +
                                      tr("Preparing data for layout error: Detail '%1' square <= 0")
                                          .arg(details.at(i).GetName());
             prepare = false;
@@ -360,7 +360,7 @@ bool VBank::PrepareDetails()
 {
     if (layoutWidth <= 0)
     {
-        qCCritical(lBank) << VAbstractApplication::patternMessageSignature +
+        qCCritical(lBank) << VAbstractValApplication::patternMessageSignature +
                                  tr("Preparing data for layout error: Layout paper sheet <= 0");
         prepare = false;
         return prepare;
@@ -368,7 +368,7 @@ bool VBank::PrepareDetails()
 
     if (details.isEmpty())
     {
-        qCCritical(lBank) << VAbstractApplication::patternMessageSignature +
+        qCCritical(lBank) << VAbstractValApplication::patternMessageSignature +
                                  tr("Preparing data for layout error: List of details is empty");
         prepare = false;
         return prepare;
@@ -391,7 +391,7 @@ bool VBank::PrepareDetails()
             const QString errorMsg = QObject::tr("Piece '%1' has invalid layout allowance. Please, check seam allowance"
                                                  " to check how seam allowance behave.").arg(details.at(i).GetName());
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         }
 
         const qreal d = details.at(i).Diagonal();

@@ -890,7 +890,7 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
                                     "</table>")
             .arg(tr("Label"), curve->name(), tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), MakeToolTip());
+            .arg(UnitsToStr(qApp->patternUnits(), true), MakeToolTip());
     return toolTip;
 }
 

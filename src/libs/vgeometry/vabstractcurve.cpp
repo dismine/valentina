@@ -36,7 +36,7 @@
 #include <QtDebug>
 
 #include "vabstractcurve_p.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
@@ -146,7 +146,7 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
                            .arg(piece, name(), error);
         }
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     return segment;

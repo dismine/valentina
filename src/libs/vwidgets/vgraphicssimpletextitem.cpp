@@ -48,7 +48,7 @@
 #include "global.h"
 #include "vscenepoint.h"
 #include "../vmisc/vmath.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

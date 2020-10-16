@@ -38,6 +38,7 @@
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/def.h"
+#include "vdimensions.h"
 
 class VContainer;
 
@@ -49,7 +50,8 @@ class VMeasurements : public VDomDocument
 public:
     explicit VMeasurements(VContainer *data);
     VMeasurements(Unit unit, VContainer *data);
-    VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
+    VMeasurements(Unit unit, const QVector<MeasurementDimension_p > &dimensions,
+                  VContainer *data);
     virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
 
     virtual void setXMLContent(const QString &fileName) override;
@@ -65,12 +67,17 @@ public:
 
     void StoreNames(bool store);
 
-    void ReadMeasurements(qreal height, qreal size) const;
+    void ReadMeasurements(qreal baseA, qreal baseB=0, qreal baseC=0) const;
     void ClearForExport();
 
     MeasurementsType Type() const;
-    int BaseSize() const;
-    int BaseHeight() const;
+    int DimensionABase() const;
+    int DimensionBBase() const;
+    int DimensionCBase() const;
+
+    int DimensionAStep() const;
+    int DimensionBStep() const;
+    int DimensionCStep() const;
 
     QString Notes() const;
     void    SetNotes(const QString &text);
@@ -82,7 +89,7 @@ public:
     void    SetBirthDate(const QDate &date);
 
     GenderType Gender() const;
-    void    SetGender(const GenderType &gender);
+    void       SetGender(const GenderType &gender);
 
     QString PMSystem() const;
     void    SetPMSystem(const QString &system);
@@ -93,20 +100,36 @@ public:
     bool    IsReadOnly() const;
     void    SetReadOnly(bool ro);
 
+    bool    IsFullCircumference() const;
+    void    SetFullCircumference(bool fc);
+
     void SetMName(const QString &name, const QString &text);
     void SetMValue(const QString &name, const QString &text);
     void SetMBaseValue(const QString &name, double value);
-    void SetMSizeIncrease(const QString &name, double value);
-    void SetMHeightIncrease(const QString &name, double value);
+    void SetMShiftA(const QString &name, double value);
+    void SetMShiftB(const QString &name, double value);
+    void SetMShiftC(const QString &name, double value);
+    void SetMSpecialUnits(const QString &name, bool special);
+    void SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value);
     void SetMDescription(const QString &name, const QString &text);
     void SetMFullName(const QString &name, const QString &text);
+    void SetMDimension(const QString &name, IMD type);
+
+    QString MeasurementForDimension(IMD type) const;
+
+    QMap<MeasurementDimension, MeasurementDimension_p > Dimensions() const;
+
+    QMap<QString, QPair<int, int> > GetRestrictions() const;
+    void                            SetRestrictions(const QMap<QString, QPair<int, int> > &restrictions);
+
+    QPair<int, int> Restriction(int base, int base2=0) const;
+
+    void SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels);
 
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;
     static const QString TagNotes;
-    static const QString TagSize;
-    static const QString TagHeight;
     static const QString TagPersonal;
     static const QString TagCustomer;
     static const QString TagBirthDate;
@@ -115,21 +138,54 @@ public:
     static const QString TagEmail;
     static const QString TagReadOnly;
     static const QString TagMeasurement;
+    static const QString TagDimensions;
+    static const QString TagDimension;
+    static const QString TagRestrictions;
+    static const QString TagRestriction;
+    static const QString TagCorrections;
+    static const QString TagCorrection;
+    static const QString TagLabels;
+    static const QString TagLabel;
 
     static const QString AttrBase;
     static const QString AttrValue;
-    static const QString AttrSizeIncrease;
-    static const QString AttrHeightIncrease;
+    static const QString AttrShiftA;
+    static const QString AttrShiftB;
+    static const QString AttrShiftC;
+    static const QString AttrCorrection;
+    static const QString AttrCoordinates;
+    static const QString AttrSpecialUnits;
     static const QString AttrDescription;
     static const QString AttrName;
     static const QString AttrFullName;
+    static const QString AttrMin;
+    static const QString AttrMax;
+    static const QString AttrStep;
+    static const QString AttrCircumference;
+    static const QString AttrFullCircumference;
+    static const QString AttrLabel;
+    static const QString AttrDimension;
 
     static const QString GenderMale;
     static const QString GenderFemale;
     static const QString GenderUnknown;
 
+    static const QString DimensionN;
+    static const QString DimensionX;
+    static const QString DimensionY;
+    static const QString DimensionW;
+    static const QString DimensionZ;
+
     static QString GenderToStr(const GenderType &sex);
     static GenderType StrToGender(const QString &sex);
+
+    static QString DimensionTypeToStr(const MeasurementDimension &type);
+    static MeasurementDimension StrToDimensionType(const QString &type);
+
+    static QString IMDToStr(const IMD &type);
+    static IMD StrToIMD(const QString &type);
+
+    static QString IMDName(IMD type);
 
     QStringList ListAll() const;
     QStringList ListKnown() const;
@@ -148,8 +204,10 @@ private:
     /** @brief m_keepNames store names in container to check uniqueness. */
     bool m_keepNames{true};
 
-    void CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight);
+    void CreateEmptyMultisizeFile(Unit unit, const QVector<MeasurementDimension_p > &dimensions);
     void CreateEmptyIndividualFile(Unit unit);
+
+    QDomElement CreateDimensions(const QVector<MeasurementDimension_p > &dimensions);
 
     qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;
 
@@ -160,6 +218,14 @@ private:
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 
     QString ClearPMCode(const QString &code) const;
+
+    QMap<QString, qreal> ReadCorrections(const QDomElement &mElement) const;
+    void                 WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections);
+
+    void           SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels);
+    DimesionLabels ReadDimensionLabels(const QDomElement &dElement) const;
+
+    void ClearDimension(IMD type);
 };
 
 #endif // VMEASUREMENTS_H

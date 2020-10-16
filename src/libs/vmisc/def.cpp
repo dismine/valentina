@@ -149,17 +149,24 @@ const QStringList builInFunctions = QStringList() << degTorad_F
 
 const QString pl_size          = QStringLiteral("size");
 const QString pl_height        = QStringLiteral("height");
+const QString pl_hip           = QStringLiteral("hip");
+const QString pl_waist         = QStringLiteral("waist");
 const QString pl_date          = QStringLiteral("date");
 const QString pl_time          = QStringLiteral("time");
+const QString pl_birthDate     = QStringLiteral("birthDate");
 const QString pl_patternName   = QStringLiteral("patternName");
 const QString pl_patternNumber = QStringLiteral("patternNumber");
 const QString pl_author        = QStringLiteral("author");
 const QString pl_customer      = QStringLiteral("customer");
+const QString pl_email         = QStringLiteral("email");
 const QString pl_userMaterial  = QStringLiteral("userMaterial");
 const QString pl_pExt          = QStringLiteral("pExt");
+const QString pl_pUnits        = QStringLiteral("pUnits");
 const QString pl_pFileName     = QStringLiteral("pFileName");
 const QString pl_mFileName     = QStringLiteral("mFileName");
 const QString pl_mExt          = QStringLiteral("mExt");
+const QString pl_mUnits        = QStringLiteral("mUnits");
+const QString pl_mSizeUnits    = QStringLiteral("mSizeUnits");
 const QString pl_pLetter       = QStringLiteral("pLetter");
 const QString pl_pAnnotation   = QStringLiteral("pAnnotation");
 const QString pl_pOrientation  = QStringLiteral("pOrientation");
@@ -174,34 +181,7 @@ const QString pl_mInterfacing  = QStringLiteral("mInterfacing");
 const QString pl_mInterlining  = QStringLiteral("mInterlining");
 const QString pl_wCut          = QStringLiteral("wCut");
 const QString pl_wOnFold       = QStringLiteral("wOnFold");
-
-const QStringList labelTemplatePlaceholders = QStringList() << pl_size
-                                                            << pl_height
-                                                            << pl_date
-                                                            << pl_time
-                                                            << pl_patternName
-                                                            << pl_patternNumber
-                                                            << pl_author
-                                                            << pl_customer
-                                                            << pl_userMaterial
-                                                            << pl_pExt
-                                                            << pl_pFileName
-                                                            << pl_mFileName
-                                                            << pl_mExt
-                                                            << pl_pLetter
-                                                            << pl_pAnnotation
-                                                            << pl_pOrientation
-                                                            << pl_pRotation
-                                                            << pl_pTilt
-                                                            << pl_pFoldPosition
-                                                            << pl_pName
-                                                            << pl_pQuantity
-                                                            << pl_mFabric
-                                                            << pl_mLining
-                                                            << pl_mInterfacing
-                                                            << pl_mInterlining
-                                                            << pl_wCut
-                                                            << pl_wOnFold;
+const QString pl_measurement   = QStringLiteral("measurement_");
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
@@ -638,6 +618,8 @@ QString UnitsToStr(const Unit &unit, const bool translate)
             break;
         case Unit::Px:
             translate ? result = QObject::tr("px") : result = unitPX;
+            break;
+        case Unit::LAST_UNIT_DO_NOT_USE:
             break;
         case Unit::Cm:
         default:

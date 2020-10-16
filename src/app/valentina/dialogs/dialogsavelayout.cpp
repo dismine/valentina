@@ -676,7 +676,7 @@ void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
 void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnit());
+    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -694,7 +694,7 @@ QMarginsF DialogSaveLayout::GetTiledMargins() const
         ui->doubleSpinBoxBottomField->value()
     );
 
-    return UnitConvertor(margins, qApp->patternUnit(), Unit::Mm);
+    return UnitConvertor(margins, qApp->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -892,7 +892,7 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
 void DialogSaveLayout::ReadSettings()
 {
     VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    const Unit unit = qApp->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -946,7 +946,7 @@ void DialogSaveLayout::WriteSettings() const
     }
 
     VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    const Unit unit = qApp->patternUnits();
 
     // write Margins top, right, bottom, left
     QMarginsF margins = QMarginsF(

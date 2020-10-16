@@ -38,8 +38,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     : QWidget(parent),
       ui(new Ui::TapePreferencesConfigurationPage),
       m_langChanged(false),
-      m_systemChanged(false),
-      m_defGradationChanged(false)
+      m_systemChanged(false)
 {
     ui->setupUi(this);
     RetranslateUi();
@@ -84,31 +83,6 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(qApp->TapeSettings()->GetToolBarStyle());
-
-    //---------------------------Default height and size
-    // If change units don't forget about the label
-    ui->defHeightCombo->addItems(VMeasurement::WholeListHeights(Unit::Cm));
-    index = ui->defHeightCombo->findText(QString().setNum(qApp->TapeSettings()->GetDefHeight()));
-    if (index != -1)
-    {
-        ui->defHeightCombo->setCurrentIndex(index);
-    }
-
-    auto DefGradationChanged = [this]()
-    {
-        m_defGradationChanged = true;
-    };
-
-    connect(ui->defHeightCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
-
-    // If change units don't forget about the label
-    ui->defSizeCombo->addItems(VMeasurement::WholeListSizes(Unit::Cm));
-    index = ui->defSizeCombo->findText(QString().setNum(qApp->TapeSettings()->GetDefSize()));
-    if (index != -1)
-    {
-        ui->defSizeCombo->setCurrentIndex(index);
-    }
-    connect(ui->defSizeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,13 +124,6 @@ QStringList TapePreferencesConfigurationPage::Apply()
         qApp->RetranslateGroups();
     }
 
-    if (m_defGradationChanged)
-    {
-        settings->SetDefHeight(ui->defHeightCombo->currentText().toInt());
-        settings->SetDefSize(ui->defSizeCombo->currentText().toInt());
-        m_defGradationChanged = false;
-    }
-
     return preferences;
 }
 
@@ -187,7 +154,4 @@ void TapePreferencesConfigurationPage::RetranslateUi()
     ui->systemCombo->blockSignals(false);
     ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
     }
-
-    ui->labelHeightUnit->setText(UnitsToStr(Unit::Cm, true));
-    ui->labelSizeUnit->setText(UnitsToStr(Unit::Cm, true));
 }

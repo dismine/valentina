@@ -33,7 +33,7 @@
 #include <QLineF>
 
 #include "vpointf.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vmath.h"
 
 QT_WARNING_PUSH

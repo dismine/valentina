@@ -45,11 +45,12 @@
 #include <QDate>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
+DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, const VContainer *data, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogEditLabel),
       m_placeholdersMenu(new QMenu(this)),
       m_doc(doc),
+      m_data(data),
       m_placeholders()
 {
     ui->setupUi(this);
@@ -478,7 +479,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
     {
         auto value = i.value();
         QAction *action = m_placeholdersMenu->addAction(value.first);
-        action->setData(per + qApp->TrVars()->PlaceholderToUser(i.key()) + per);
+        action->setData(per + i.key() + per);
         connect(action, &QAction::triggered, this, &DialogEditLabel::InsertPlaceholder);
         ++i;
     }
@@ -500,13 +501,27 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_patternNumber, qMakePair(tr("Pattern number"), m_doc->GetPatternNumber()));
     m_placeholders.insert(pl_author, qMakePair(tr("Company name or designer name"), m_doc->GetCompanyName()));
 
-    if (qApp->patternType() == MeasurementsType::Individual)
+    m_placeholders.insert(pl_mUnits, qMakePair(tr("Measurements units"), UnitsToStr(qApp->MeasurementsUnits(), true)));
+    m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"), UnitsToStr(qApp->patternUnits(), true)));
+    m_placeholders.insert(pl_mSizeUnits, qMakePair(tr("Size units"), UnitsToStr(qApp->DimensionSizeUnits(), true)));
+
+    if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
         m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), qApp->GetCustomerName()));
+
+        const QString birthDate = locale.toString(qApp->GetCustomerBirthDate(), m_doc->GetLabelDateFormat());
+        m_placeholders.insert(pl_birthDate, qMakePair(tr("Customer birth date"), birthDate));
+
+        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"), qApp->CustomerEmail()));
     }
     else
     {
         m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), m_doc->GetCustomerName()));
+
+        const QString birthDate = locale.toString(m_doc->GetCustomerBirthDate(), m_doc->GetLabelDateFormat());
+        m_placeholders.insert(pl_birthDate, qMakePair(tr("Customer birth date"), birthDate));
+
+        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"), m_doc->GetCustomerEmail()));
     }
 
     m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
@@ -517,25 +532,14 @@ void DialogEditLabel::InitPlaceholders()
     const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
 
-    QString curSize;
-    QString curHeight;
-    QString mExt;
-    if (qApp->patternType() == MeasurementsType::Multisize)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vst";
-    }
-    else if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vit";
-    }
-
-    m_placeholders.insert(pl_size, qMakePair(tr("Size"), curSize));
-    m_placeholders.insert(pl_height, qMakePair(tr("Height"), curHeight));
-    m_placeholders.insert(pl_mExt, qMakePair(tr("Measurments extension"), mExt));
+    m_placeholders.insert(pl_height, qMakePair(tr("Height"), QString::number(qApp->GetDimensionHeight())));
+    m_placeholders.insert(pl_size, qMakePair(tr("Size"), QString::number(qApp->GetDimensionSize())));
+    m_placeholders.insert(pl_hip, qMakePair(tr("Hip"), QString::number(qApp->GetDimensionHip())));
+    m_placeholders.insert(pl_waist, qMakePair(tr("Waist"), QString::number(qApp->GetDimensionWaist())));
+    m_placeholders.insert(pl_mExt,
+                          qMakePair(tr("Measurments extension"),
+                                    qApp->GetMeasurementsType() == MeasurementsType::Multisize ? QString("vst")
+                                                                                               : QString("vit")));
 
     const QString materialDescription = tr("User material");
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();
@@ -552,21 +556,31 @@ void DialogEditLabel::InitPlaceholders()
         m_placeholders.insert(pl_userMaterial + number, qMakePair(materialDescription + number, value));
     }
 
+    const QMap<QString, QSharedPointer<VMeasurement> > measurements = m_data->DataMeasurements();
+    auto i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+        m_placeholders.insert(pl_measurement + i.key(), qMakePair(tr("Measurement: %1").arg(description),
+                                                                  QString::number(*i.value()->GetValue())));
+        ++i;
+    }
+
     // Piece tags
-    m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString(QString())));
-    m_placeholders.insert(pl_pAnnotation, qMakePair(tr("Piece annotation"), QString(QString())));
-    m_placeholders.insert(pl_pOrientation, qMakePair(tr("Piece orientation"), QString(QString())));
-    m_placeholders.insert(pl_pRotation, qMakePair(tr("Piece rotation"), QString(QString())));
-    m_placeholders.insert(pl_pTilt, qMakePair(tr("Piece tilt"), QString(QString())));
-    m_placeholders.insert(pl_pFoldPosition, qMakePair(tr("Piece fold position"), QString(QString())));
-    m_placeholders.insert(pl_pName, qMakePair(tr("Piece name"), QString(QString())));
-    m_placeholders.insert(pl_pQuantity, qMakePair(tr("Quantity"), QString(QString())));
+    m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString()));
+    m_placeholders.insert(pl_pAnnotation, qMakePair(tr("Piece annotation"), QString()));
+    m_placeholders.insert(pl_pOrientation, qMakePair(tr("Piece orientation"), QString()));
+    m_placeholders.insert(pl_pRotation, qMakePair(tr("Piece rotation"), QString()));
+    m_placeholders.insert(pl_pTilt, qMakePair(tr("Piece tilt"), QString()));
+    m_placeholders.insert(pl_pFoldPosition, qMakePair(tr("Piece fold position"), QString()));
+    m_placeholders.insert(pl_pName, qMakePair(tr("Piece name"), QString()));
+    m_placeholders.insert(pl_pQuantity, qMakePair(tr("Quantity"), QString()));
     m_placeholders.insert(pl_mFabric, qMakePair(tr("Material: Fabric"), tr("Fabric")));
     m_placeholders.insert(pl_mLining, qMakePair(tr("Material: Lining"), tr("Lining")));
     m_placeholders.insert(pl_mInterfacing, qMakePair(tr("Material: Interfacing"), tr("Interfacing")));
     m_placeholders.insert(pl_mInterlining, qMakePair(tr("Material: Interlining"), tr("Interlining")));
     m_placeholders.insert(pl_wCut, qMakePair(tr("Word: Cut"), tr("Cut")));
-    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString(QString())));// By default should be empty
+    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString()));// By default should be empty
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -592,7 +606,7 @@ QVector<VLabelTemplateLine> DialogEditLabel::GetTemplate() const
         if (lineItem)
         {
             VLabelTemplateLine line;
-            line.line = qApp->TrVars()->PlaceholderFromUserText(lineItem->text());
+            line.line = lineItem->text();
             line.alignment = lineItem->textAlignment();
             line.fontSizeIncrement = lineItem->data(Qt::UserRole).toInt();
 
@@ -617,7 +631,7 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 
     for (auto &line : lines)
     {
-        QListWidgetItem *item = new QListWidgetItem(qApp->TrVars()->PlaceholderToUserText(line.line));
+        QListWidgetItem *item = new QListWidgetItem(line.line);
         item->setTextAlignment(line.alignment);
         item->setData(Qt::UserRole, line.fontSizeIncrement);
 

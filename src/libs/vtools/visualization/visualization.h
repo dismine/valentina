@@ -36,7 +36,7 @@
 #include <QLoggingCategory>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
 #include "../vwidgets/global.h"
