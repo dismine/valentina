@@ -82,9 +82,6 @@ const QString VAbstractPattern::TagArc              = QStringLiteral("arc");
 const QString VAbstractPattern::TagElArc            = QStringLiteral("elArc");
 const QString VAbstractPattern::TagTools            = QStringLiteral("tools");
 const QString VAbstractPattern::TagOperation        = QStringLiteral("operation");
-const QString VAbstractPattern::TagGradation        = QStringLiteral("gradation");
-const QString VAbstractPattern::TagHeights          = QStringLiteral("heights");
-const QString VAbstractPattern::TagSizes            = QStringLiteral("sizes");
 const QString VAbstractPattern::TagData             = QStringLiteral("data");
 const QString VAbstractPattern::TagPatternInfo      = QStringLiteral("patternInfo");
 const QString VAbstractPattern::TagPatternName      = QStringLiteral("patternName");
@@ -138,65 +135,6 @@ const QString VAbstractPattern::AttrPassmarkLength    = QStringLiteral("passmark
 const QString VAbstractPattern::AttrOpacity           = QStringLiteral("opacity");
 const QString VAbstractPattern::AttrTags              = QStringLiteral("tags");
 
-const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
-
-const QString VAbstractPattern::AttrH50             = QStringLiteral("h50");
-const QString VAbstractPattern::AttrH56             = QStringLiteral("h56");
-const QString VAbstractPattern::AttrH62             = QStringLiteral("h62");
-const QString VAbstractPattern::AttrH68             = QStringLiteral("h68");
-const QString VAbstractPattern::AttrH74             = QStringLiteral("h74");
-const QString VAbstractPattern::AttrH80             = QStringLiteral("h80");
-const QString VAbstractPattern::AttrH86             = QStringLiteral("h86");
-const QString VAbstractPattern::AttrH92             = QStringLiteral("h92");
-const QString VAbstractPattern::AttrH98             = QStringLiteral("h98");
-const QString VAbstractPattern::AttrH104            = QStringLiteral("h104");
-const QString VAbstractPattern::AttrH110            = QStringLiteral("h110");
-const QString VAbstractPattern::AttrH116            = QStringLiteral("h116");
-const QString VAbstractPattern::AttrH122            = QStringLiteral("h122");
-const QString VAbstractPattern::AttrH128            = QStringLiteral("h128");
-const QString VAbstractPattern::AttrH134            = QStringLiteral("h134");
-const QString VAbstractPattern::AttrH140            = QStringLiteral("h140");
-const QString VAbstractPattern::AttrH146            = QStringLiteral("h146");
-const QString VAbstractPattern::AttrH152            = QStringLiteral("h152");
-const QString VAbstractPattern::AttrH158            = QStringLiteral("h158");
-const QString VAbstractPattern::AttrH164            = QStringLiteral("h164");
-const QString VAbstractPattern::AttrH170            = QStringLiteral("h170");
-const QString VAbstractPattern::AttrH176            = QStringLiteral("h176");
-const QString VAbstractPattern::AttrH182            = QStringLiteral("h182");
-const QString VAbstractPattern::AttrH188            = QStringLiteral("h188");
-const QString VAbstractPattern::AttrH194            = QStringLiteral("h194");
-const QString VAbstractPattern::AttrH200            = QStringLiteral("h200");
-
-const QString VAbstractPattern::AttrS22             = QStringLiteral("s22");
-const QString VAbstractPattern::AttrS24             = QStringLiteral("s24");
-const QString VAbstractPattern::AttrS26             = QStringLiteral("s26");
-const QString VAbstractPattern::AttrS28             = QStringLiteral("s28");
-const QString VAbstractPattern::AttrS30             = QStringLiteral("s30");
-const QString VAbstractPattern::AttrS32             = QStringLiteral("s32");
-const QString VAbstractPattern::AttrS34             = QStringLiteral("s34");
-const QString VAbstractPattern::AttrS36             = QStringLiteral("s36");
-const QString VAbstractPattern::AttrS38             = QStringLiteral("s38");
-const QString VAbstractPattern::AttrS40             = QStringLiteral("s40");
-const QString VAbstractPattern::AttrS42             = QStringLiteral("s42");
-const QString VAbstractPattern::AttrS44             = QStringLiteral("s44");
-const QString VAbstractPattern::AttrS46             = QStringLiteral("s46");
-const QString VAbstractPattern::AttrS48             = QStringLiteral("s48");
-const QString VAbstractPattern::AttrS50             = QStringLiteral("s50");
-const QString VAbstractPattern::AttrS52             = QStringLiteral("s52");
-const QString VAbstractPattern::AttrS54             = QStringLiteral("s54");
-const QString VAbstractPattern::AttrS56             = QStringLiteral("s56");
-const QString VAbstractPattern::AttrS58             = QStringLiteral("s58");
-const QString VAbstractPattern::AttrS60             = QStringLiteral("s60");
-const QString VAbstractPattern::AttrS62             = QStringLiteral("s62");
-const QString VAbstractPattern::AttrS64             = QStringLiteral("s64");
-const QString VAbstractPattern::AttrS66             = QStringLiteral("s66");
-const QString VAbstractPattern::AttrS68             = QStringLiteral("s68");
-const QString VAbstractPattern::AttrS70             = QStringLiteral("s70");
-const QString VAbstractPattern::AttrS72             = QStringLiteral("s72");
-
-const QString VAbstractPattern::AttrCustom          = QStringLiteral("custom");
-const QString VAbstractPattern::AttrDefHeight       = QStringLiteral("defHeight");
-const QString VAbstractPattern::AttrDefSize         = QStringLiteral("defSize");
 const QString VAbstractPattern::AttrExtension       = QStringLiteral("extension");
 
 const QString VAbstractPattern::AttrFormula     = QStringLiteral("formula");
@@ -954,395 +892,6 @@ QStringList VAbstractPattern::getPatternPieces() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
-{
-    QMap<GHeights, bool> map;
-
-    map.insert(GHeights::ALL, true);
-    map.insert(GHeights::H50, true);
-    map.insert(GHeights::H56, true);
-    map.insert(GHeights::H62, true);
-    map.insert(GHeights::H68, true);
-    map.insert(GHeights::H74, true);
-    map.insert(GHeights::H80, true);
-    map.insert(GHeights::H86, true);
-    map.insert(GHeights::H92, true);
-    map.insert(GHeights::H98, true);
-    map.insert(GHeights::H104, true);
-    map.insert(GHeights::H110, true);
-    map.insert(GHeights::H116, true);
-    map.insert(GHeights::H122, true);
-    map.insert(GHeights::H128, true);
-    map.insert(GHeights::H134, true);
-    map.insert(GHeights::H140, true);
-    map.insert(GHeights::H146, true);
-    map.insert(GHeights::H152, true);
-    map.insert(GHeights::H158, true);
-    map.insert(GHeights::H164, true);
-    map.insert(GHeights::H170, true);
-    map.insert(GHeights::H176, true);
-    map.insert(GHeights::H182, true);
-    map.insert(GHeights::H188, true);
-    map.insert(GHeights::H194, true);
-    map.insert(GHeights::H200, true);
-
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
-    {
-        return map;
-    }
-
-    QStringList gTags = QStringList() << TagHeights << TagSizes;
-    QDomNode domNode = tags.at(0).firstChild();
-    while (domNode.isNull() == false)
-    {
-        if (domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                const QString defValue = trueStr;
-                switch (gTags.indexOf(domElement.tagName()))
-                {
-                    case 0: // TagHeights
-                        if (GetParametrBool(domElement, AttrAll, defValue))
-                        {
-                            return map;
-                        }
-                        else
-                        {
-                            map.insert(GHeights::ALL, false);
-                        }
-
-                        map.insert(GHeights::H50, GetParametrBool(domElement, AttrH50, defValue));
-                        map.insert(GHeights::H56, GetParametrBool(domElement, AttrH56, defValue));
-                        map.insert(GHeights::H62, GetParametrBool(domElement, AttrH62, defValue));
-                        map.insert(GHeights::H68, GetParametrBool(domElement, AttrH68, defValue));
-                        map.insert(GHeights::H74, GetParametrBool(domElement, AttrH74, defValue));
-                        map.insert(GHeights::H80, GetParametrBool(domElement, AttrH80, defValue));
-                        map.insert(GHeights::H86, GetParametrBool(domElement, AttrH86, defValue));
-                        map.insert(GHeights::H92, GetParametrBool(domElement, AttrH92, defValue));
-                        map.insert(GHeights::H98, GetParametrBool(domElement, AttrH98, defValue));
-                        map.insert(GHeights::H104, GetParametrBool(domElement, AttrH104, defValue));
-                        map.insert(GHeights::H110, GetParametrBool(domElement, AttrH110, defValue));
-                        map.insert(GHeights::H116, GetParametrBool(domElement, AttrH116, defValue));
-                        map.insert(GHeights::H122, GetParametrBool(domElement, AttrH122, defValue));
-                        map.insert(GHeights::H128, GetParametrBool(domElement, AttrH128, defValue));
-                        map.insert(GHeights::H134, GetParametrBool(domElement, AttrH134, defValue));
-                        map.insert(GHeights::H140, GetParametrBool(domElement, AttrH140, defValue));
-                        map.insert(GHeights::H146, GetParametrBool(domElement, AttrH146, defValue));
-                        map.insert(GHeights::H152, GetParametrBool(domElement, AttrH152, defValue));
-                        map.insert(GHeights::H158, GetParametrBool(domElement, AttrH158, defValue));
-                        map.insert(GHeights::H164, GetParametrBool(domElement, AttrH164, defValue));
-                        map.insert(GHeights::H170, GetParametrBool(domElement, AttrH170, defValue));
-                        map.insert(GHeights::H176, GetParametrBool(domElement, AttrH176, defValue));
-                        map.insert(GHeights::H182, GetParametrBool(domElement, AttrH182, defValue));
-                        map.insert(GHeights::H188, GetParametrBool(domElement, AttrH188, defValue));
-                        map.insert(GHeights::H194, GetParametrBool(domElement, AttrH194, defValue));
-                        map.insert(GHeights::H200, GetParametrBool(domElement, AttrH200, defValue));
-                        return map;
-                    case 1: // TagSizes
-                    default:
-                        break;
-                }
-            }
-        }
-        domNode = domNode.nextSibling();
-    }
-    return map;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
-        return;
-    }
-
-    QStringList gTags = QStringList() << TagHeights << TagSizes;
-    QDomNode domNode = tags.at(0).firstChild();
-    while (domNode.isNull() == false)
-    {
-        if (domNode.isElement())
-        {
-            QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                switch (gTags.indexOf(domElement.tagName()))
-                {
-                    case 0: // TagHeights
-                        SetAttribute(domElement, AttrAll, options.value(GHeights::ALL));
-                        if (options.value(GHeights::ALL))
-                        {
-                            domElement.removeAttribute(AttrH50);
-                            domElement.removeAttribute(AttrH56);
-                            domElement.removeAttribute(AttrH62);
-                            domElement.removeAttribute(AttrH68);
-                            domElement.removeAttribute(AttrH74);
-                            domElement.removeAttribute(AttrH80);
-                            domElement.removeAttribute(AttrH86);
-                            domElement.removeAttribute(AttrH92);
-                            domElement.removeAttribute(AttrH98);
-                            domElement.removeAttribute(AttrH104);
-                            domElement.removeAttribute(AttrH110);
-                            domElement.removeAttribute(AttrH116);
-                            domElement.removeAttribute(AttrH122);
-                            domElement.removeAttribute(AttrH128);
-                            domElement.removeAttribute(AttrH134);
-                            domElement.removeAttribute(AttrH140);
-                            domElement.removeAttribute(AttrH146);
-                            domElement.removeAttribute(AttrH152);
-                            domElement.removeAttribute(AttrH158);
-                            domElement.removeAttribute(AttrH164);
-                            domElement.removeAttribute(AttrH170);
-                            domElement.removeAttribute(AttrH176);
-                            domElement.removeAttribute(AttrH182);
-                            domElement.removeAttribute(AttrH188);
-                            domElement.removeAttribute(AttrH194);
-                            domElement.removeAttribute(AttrH200);
-                        }
-                        else
-                        {
-                            SetAttribute(domElement, AttrH50, options.value(GHeights::H50));
-                            SetAttribute(domElement, AttrH56, options.value(GHeights::H56));
-                            SetAttribute(domElement, AttrH62, options.value(GHeights::H62));
-                            SetAttribute(domElement, AttrH68, options.value(GHeights::H68));
-                            SetAttribute(domElement, AttrH74, options.value(GHeights::H74));
-                            SetAttribute(domElement, AttrH80, options.value(GHeights::H80));
-                            SetAttribute(domElement, AttrH86, options.value(GHeights::H86));
-                            SetAttribute(domElement, AttrH92, options.value(GHeights::H92));
-                            SetAttribute(domElement, AttrH98, options.value(GHeights::H98));
-                            SetAttribute(domElement, AttrH104, options.value(GHeights::H104));
-                            SetAttribute(domElement, AttrH110, options.value(GHeights::H110));
-                            SetAttribute(domElement, AttrH116, options.value(GHeights::H116));
-                            SetAttribute(domElement, AttrH122, options.value(GHeights::H122));
-                            SetAttribute(domElement, AttrH128, options.value(GHeights::H128));
-                            SetAttribute(domElement, AttrH134, options.value(GHeights::H134));
-                            SetAttribute(domElement, AttrH140, options.value(GHeights::H140));
-                            SetAttribute(domElement, AttrH146, options.value(GHeights::H146));
-                            SetAttribute(domElement, AttrH152, options.value(GHeights::H152));
-                            SetAttribute(domElement, AttrH158, options.value(GHeights::H158));
-                            SetAttribute(domElement, AttrH164, options.value(GHeights::H164));
-                            SetAttribute(domElement, AttrH170, options.value(GHeights::H170));
-                            SetAttribute(domElement, AttrH176, options.value(GHeights::H176));
-                            SetAttribute(domElement, AttrH182, options.value(GHeights::H182));
-                            SetAttribute(domElement, AttrH188, options.value(GHeights::H188));
-                            SetAttribute(domElement, AttrH194, options.value(GHeights::H194));
-                            SetAttribute(domElement, AttrH200, options.value(GHeights::H200));
-                        }
-
-                        modified = true;
-                        emit patternChanged(false);
-                        return;
-                    case 1: // TagSizes
-                    default:
-                        break;
-                }
-            }
-        }
-        domNode = domNode.nextSibling();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
-{
-    QMap<GSizes, bool> map;
-    map.insert(GSizes::ALL, true);
-    map.insert(GSizes::S22, true);
-    map.insert(GSizes::S24, true);
-    map.insert(GSizes::S26, true);
-    map.insert(GSizes::S28, true);
-    map.insert(GSizes::S30, true);
-    map.insert(GSizes::S32, true);
-    map.insert(GSizes::S34, true);
-    map.insert(GSizes::S36, true);
-    map.insert(GSizes::S38, true);
-    map.insert(GSizes::S40, true);
-    map.insert(GSizes::S42, true);
-    map.insert(GSizes::S44, true);
-    map.insert(GSizes::S46, true);
-    map.insert(GSizes::S48, true);
-    map.insert(GSizes::S50, true);
-    map.insert(GSizes::S52, true);
-    map.insert(GSizes::S54, true);
-    map.insert(GSizes::S56, true);
-    map.insert(GSizes::S58, true);
-    map.insert(GSizes::S60, true);
-    map.insert(GSizes::S62, true);
-    map.insert(GSizes::S64, true);
-    map.insert(GSizes::S66, true);
-    map.insert(GSizes::S68, true);
-    map.insert(GSizes::S70, true);
-    map.insert(GSizes::S72, true);
-
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
-    {
-        return map;
-    }
-
-    QStringList gTags = QStringList() << TagHeights << TagSizes;
-    QDomNode domNode = tags.at(0).firstChild();
-    while (domNode.isNull() == false)
-    {
-        if (domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                const QString defValue = trueStr;
-                switch (gTags.indexOf(domElement.tagName()))
-                {
-                    case 1: // TagSizes
-                        if (GetParametrBool(domElement, AttrAll, defValue))
-                        {
-                            return map;
-                        }
-                        else
-                        {
-                            map.insert(GSizes::ALL, false);
-                        }
-
-                        map.insert(GSizes::S22, GetParametrBool(domElement, AttrS22, defValue));
-                        map.insert(GSizes::S24, GetParametrBool(domElement, AttrS24, defValue));
-                        map.insert(GSizes::S26, GetParametrBool(domElement, AttrS26, defValue));
-                        map.insert(GSizes::S28, GetParametrBool(domElement, AttrS28, defValue));
-                        map.insert(GSizes::S30, GetParametrBool(domElement, AttrS30, defValue));
-                        map.insert(GSizes::S32, GetParametrBool(domElement, AttrS32, defValue));
-                        map.insert(GSizes::S34, GetParametrBool(domElement, AttrS34, defValue));
-                        map.insert(GSizes::S36, GetParametrBool(domElement, AttrS36, defValue));
-                        map.insert(GSizes::S38, GetParametrBool(domElement, AttrS38, defValue));
-                        map.insert(GSizes::S40, GetParametrBool(domElement, AttrS40, defValue));
-                        map.insert(GSizes::S42, GetParametrBool(domElement, AttrS42, defValue));
-                        map.insert(GSizes::S44, GetParametrBool(domElement, AttrS44, defValue));
-                        map.insert(GSizes::S46, GetParametrBool(domElement, AttrS46, defValue));
-                        map.insert(GSizes::S48, GetParametrBool(domElement, AttrS48, defValue));
-                        map.insert(GSizes::S50, GetParametrBool(domElement, AttrS50, defValue));
-                        map.insert(GSizes::S52, GetParametrBool(domElement, AttrS52, defValue));
-                        map.insert(GSizes::S54, GetParametrBool(domElement, AttrS54, defValue));
-                        map.insert(GSizes::S56, GetParametrBool(domElement, AttrS56, defValue));
-                        map.insert(GSizes::S58, GetParametrBool(domElement, AttrS58, defValue));
-                        map.insert(GSizes::S60, GetParametrBool(domElement, AttrS60, defValue));
-                        map.insert(GSizes::S62, GetParametrBool(domElement, AttrS62, defValue));
-                        map.insert(GSizes::S64, GetParametrBool(domElement, AttrS64, defValue));
-                        map.insert(GSizes::S66, GetParametrBool(domElement, AttrS66, defValue));
-                        map.insert(GSizes::S68, GetParametrBool(domElement, AttrS68, defValue));
-                        map.insert(GSizes::S70, GetParametrBool(domElement, AttrS70, defValue));
-                        map.insert(GSizes::S72, GetParametrBool(domElement, AttrS72, defValue));
-                        return map;
-                    case 0: // TagHeights
-                    default:
-                        break;
-                }
-            }
-        }
-        domNode = domNode.nextSibling();
-    }
-    return map;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
-        return;
-    }
-
-    QStringList gTags = QStringList() << TagHeights << TagSizes;
-    QDomNode domNode = tags.at(0).firstChild();
-    while (domNode.isNull() == false)
-    {
-        if (domNode.isElement())
-        {
-            QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                switch (gTags.indexOf(domElement.tagName()))
-                {
-                    case 1: // TagSizes
-                        SetAttribute(domElement, AttrAll, options.value(GSizes::ALL));
-                        if (options.value(GSizes::ALL))
-                        {
-                            domElement.removeAttribute(AttrS22);
-                            domElement.removeAttribute(AttrS24);
-                            domElement.removeAttribute(AttrS26);
-                            domElement.removeAttribute(AttrS28);
-                            domElement.removeAttribute(AttrS30);
-                            domElement.removeAttribute(AttrS32);
-                            domElement.removeAttribute(AttrS34);
-                            domElement.removeAttribute(AttrS36);
-                            domElement.removeAttribute(AttrS38);
-                            domElement.removeAttribute(AttrS40);
-                            domElement.removeAttribute(AttrS42);
-                            domElement.removeAttribute(AttrS44);
-                            domElement.removeAttribute(AttrS46);
-                            domElement.removeAttribute(AttrS48);
-                            domElement.removeAttribute(AttrS50);
-                            domElement.removeAttribute(AttrS52);
-                            domElement.removeAttribute(AttrS54);
-                            domElement.removeAttribute(AttrS56);
-                            domElement.removeAttribute(AttrS58);
-                            domElement.removeAttribute(AttrS60);
-                            domElement.removeAttribute(AttrS62);
-                            domElement.removeAttribute(AttrS64);
-                            domElement.removeAttribute(AttrS66);
-                            domElement.removeAttribute(AttrS68);
-                            domElement.removeAttribute(AttrS70);
-                            domElement.removeAttribute(AttrS72);
-                        }
-                        else
-                        {
-                            SetAttribute(domElement, AttrS22, options.value(GSizes::S22));
-                            SetAttribute(domElement, AttrS24, options.value(GSizes::S24));
-                            SetAttribute(domElement, AttrS26, options.value(GSizes::S26));
-                            SetAttribute(domElement, AttrS28, options.value(GSizes::S28));
-                            SetAttribute(domElement, AttrS30, options.value(GSizes::S30));
-                            SetAttribute(domElement, AttrS32, options.value(GSizes::S32));
-                            SetAttribute(domElement, AttrS34, options.value(GSizes::S34));
-                            SetAttribute(domElement, AttrS36, options.value(GSizes::S36));
-                            SetAttribute(domElement, AttrS38, options.value(GSizes::S38));
-                            SetAttribute(domElement, AttrS40, options.value(GSizes::S40));
-                            SetAttribute(domElement, AttrS42, options.value(GSizes::S42));
-                            SetAttribute(domElement, AttrS44, options.value(GSizes::S44));
-                            SetAttribute(domElement, AttrS46, options.value(GSizes::S46));
-                            SetAttribute(domElement, AttrS48, options.value(GSizes::S48));
-                            SetAttribute(domElement, AttrS50, options.value(GSizes::S50));
-                            SetAttribute(domElement, AttrS52, options.value(GSizes::S52));
-                            SetAttribute(domElement, AttrS54, options.value(GSizes::S54));
-                            SetAttribute(domElement, AttrS56, options.value(GSizes::S56));
-                            SetAttribute(domElement, AttrS58, options.value(GSizes::S58));
-                            SetAttribute(domElement, AttrS60, options.value(GSizes::S60));
-                            SetAttribute(domElement, AttrS62, options.value(GSizes::S62));
-                            SetAttribute(domElement, AttrS64, options.value(GSizes::S64));
-                            SetAttribute(domElement, AttrS66, options.value(GSizes::S66));
-                            SetAttribute(domElement, AttrS68, options.value(GSizes::S68));
-                            SetAttribute(domElement, AttrS70, options.value(GSizes::S70));
-                            SetAttribute(domElement, AttrS72, options.value(GSizes::S72));
-                        }
-
-                        modified = true;
-                        emit patternChanged(false);
-                        return;
-                    case 0: // TagHeights
-                    default:
-                        break;
-                }
-            }
-        }
-        domNode = domNode.nextSibling();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetDescription() const
 {
     return UniqueTagText(TagDescription);
@@ -1798,15 +1347,14 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             TagImage, // 1
             TagDescription, // 2
             TagNotes, // 3
-            TagGradation, // 4
-            TagPatternName, // 5
-            TagPatternNum, // 6
-            TagCompanyName, // 7
-            TagCustomerName, // 8
-            TagPatternLabel, // 9
-            TagWatermark, // 10
-            TagPatternMaterials, // 11
-            TagFinalMeasurements // 12
+            TagPatternName, // 4
+            TagPatternNum, // 5
+            TagCompanyName, // 6
+            TagCustomerName, // 7
+            TagPatternLabel, // 8
+            TagWatermark, // 9
+            TagPatternMaterials, // 10
+            TagFinalMeasurements // 11
         };
 
         switch (tags.indexOf(tag))
@@ -1820,41 +1368,28 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 3: //TagNotes
                 element = createElement(TagNotes);
                 break;
-            case 4: //TagGradation
-            {
-                element = createElement(TagGradation);
-
-                QDomElement heights = createElement(TagHeights);
-                heights.setAttribute(AttrAll, trueStr);
-                element.appendChild(heights);
-
-                QDomElement sizes = createElement(TagSizes);
-                sizes.setAttribute(AttrAll, trueStr);
-                element.appendChild(sizes);
-                break;
-            }
-            case 5: // TagPatternName
+            case 4: // TagPatternName
                 element = createElement(TagPatternName);
                 break;
-            case 6: // TagPatternNum
+            case 5: // TagPatternNum
                 element = createElement(TagPatternNum);
                 break;
-            case 7: // TagCompanyName
+            case 6: // TagCompanyName
                 element = createElement(TagCompanyName);
                 break;
-            case 8: // TagCustomerName
+            case 7: // TagCustomerName
                 element = createElement(TagCustomerName);
                 break;
-            case 9: // TagPatternLabel
+            case 8: // TagPatternLabel
                 element = createElement(TagPatternLabel);
                 break;
-            case 10: // TagWatermark
+            case 9: // TagWatermark
                 element = createElement(TagWatermark);
                 break;
-            case 11: // TagPatternMaterials
+            case 10: // TagPatternMaterials
                 element = createElement(TagPatternMaterials);
                 break;
-            case 12: // TagFinalMeasurements
+            case 11: // TagFinalMeasurements
                 element = createElement(TagFinalMeasurements);
                 break;
             case 0: //TagUnit (Mandatory tag)

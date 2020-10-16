@@ -147,12 +147,6 @@ public:
 
     QStringList    getPatternPieces() const;
 
-    QMap<GHeights, bool> GetGradationHeights() const;
-    void                 SetGradationHeights(const QMap<GHeights, bool> &options);
-
-    QMap<GSizes, bool>   GetGradationSizes() const;
-    void                 SetGradationSizes(const QMap<GSizes, bool> &options);
-
     QString        GetDescription() const;
     void           SetDescription(const QString &text);
 
@@ -252,9 +246,6 @@ public:
     static const QString TagElArc;
     static const QString TagTools;
     static const QString TagOperation;
-    static const QString TagGradation;
-    static const QString TagHeights;
-    static const QString TagSizes;
     static const QString TagData;
     static const QString TagPatternInfo;
     static const QString TagPatternName;
@@ -308,65 +299,6 @@ public:
     static const QString AttrOpacity;
     static const QString AttrTags;
 
-    static const QString AttrAll;
-
-    static const QString AttrH50;
-    static const QString AttrH56;
-    static const QString AttrH62;
-    static const QString AttrH68;
-    static const QString AttrH74;
-    static const QString AttrH80;
-    static const QString AttrH86;
-    static const QString AttrH92;
-    static const QString AttrH98;
-    static const QString AttrH104;
-    static const QString AttrH110;
-    static const QString AttrH116;
-    static const QString AttrH122;
-    static const QString AttrH128;
-    static const QString AttrH134;
-    static const QString AttrH140;
-    static const QString AttrH146;
-    static const QString AttrH152;
-    static const QString AttrH158;
-    static const QString AttrH164;
-    static const QString AttrH170;
-    static const QString AttrH176;
-    static const QString AttrH182;
-    static const QString AttrH188;
-    static const QString AttrH194;
-    static const QString AttrH200;
-
-    static const QString AttrS22;
-    static const QString AttrS24;
-    static const QString AttrS26;
-    static const QString AttrS28;
-    static const QString AttrS30;
-    static const QString AttrS32;
-    static const QString AttrS34;
-    static const QString AttrS36;
-    static const QString AttrS38;
-    static const QString AttrS40;
-    static const QString AttrS42;
-    static const QString AttrS44;
-    static const QString AttrS46;
-    static const QString AttrS48;
-    static const QString AttrS50;
-    static const QString AttrS52;
-    static const QString AttrS54;
-    static const QString AttrS56;
-    static const QString AttrS58;
-    static const QString AttrS60;
-    static const QString AttrS62;
-    static const QString AttrS64;
-    static const QString AttrS66;
-    static const QString AttrS68;
-    static const QString AttrS70;
-    static const QString AttrS72;
-
-    static const QString AttrCustom;
-    static const QString AttrDefHeight;
-    static const QString AttrDefSize;
     static const QString AttrExtension;
 
     static const QString AttrFormula;

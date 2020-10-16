@@ -5909,7 +5909,7 @@ bool MainWindow::DoFMExport(const VCommandLinePtr &expParams)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::SetSize(const QString &text)
+bool MainWindow::SetDimensionA(int value)
 {
     if (not VApplication::IsGUIMode())
     {
@@ -5917,29 +5917,29 @@ bool MainWindow::SetSize(const QString &text)
         {
             if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
             {
-                const int size = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
-                const qint32 index = dimensionB->findText(QString().setNum(size));
+                const qint32 index = dimensionA->findData(value);
                 if (index != -1)
                 {
-                    dimensionB->setCurrentIndex(index);
+                    dimensionA->setCurrentIndex(index);
                 }
                 else
                 {
                     qCCritical(vMainWindow, "%s",
-                              qUtf8Printable(tr("Not supported size value '%1' for this pattern file.").arg(text)));
+                               qUtf8Printable(tr("Not supported dimension A value '%1' for this pattern file.")
+                                                  .arg(value)));
                     return false;
                 }
             }
             else
             {
                 qCCritical(vMainWindow, "%s",
-                          qUtf8Printable(tr("Couldn't set size. Need a file with multisize measurements.")));
+                           qUtf8Printable(tr("Couldn't set dimension A. Need a file with multisize measurements.")));
                 return false;
             }
         }
         else
         {
-            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set size. File wasn't opened.")));
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set dimension A. File wasn't opened.")));
             return false;
         }
     }
@@ -5952,7 +5952,7 @@ bool MainWindow::SetSize(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::SetHeight(const QString &text)
+bool MainWindow::SetDimensionB(int value)
 {
     if (not VApplication::IsGUIMode())
     {
@@ -5960,29 +5960,72 @@ bool MainWindow::SetHeight(const QString &text)
         {
             if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
             {
-                const int height = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
-                const qint32 index = dimensionA->findText(QString().setNum(height));
+                const qint32 index = dimensionB->findData(value);
                 if (index != -1)
                 {
-                    dimensionA->setCurrentIndex(index);
+                    dimensionB->setCurrentIndex(index);
                 }
                 else
                 {
                     qCCritical(vMainWindow, "%s",
-                              qUtf8Printable(tr("Not supported height value '%1' for this pattern file.").arg(text)));
+                              qUtf8Printable(tr("Not supported dimension B value '%1' for this pattern file.")
+                                                  .arg(value)));
                     return false;
                 }
             }
             else
             {
                 qCCritical(vMainWindow, "%s",
-                          qUtf8Printable(tr("Couldn't set height. Need a file with multisize measurements.")));
+                          qUtf8Printable(tr("Couldn't set dimension B. Need a file with multisize measurements.")));
                 return false;
             }
         }
         else
         {
-            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set height. File wasn't opened.")));
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set dimension B. File wasn't opened.")));
+            return false;
+        }
+    }
+    else
+    {
+        qCWarning(vMainWindow, "%s", qUtf8Printable(tr("The method %1 does nothing in GUI mode").arg(Q_FUNC_INFO)));
+        return false;
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindow::SetDimensionC(int value)
+{
+    if (not VApplication::IsGUIMode())
+    {
+        if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
+        {
+            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+            {
+                const qint32 index = dimensionC->findData(value);
+                if (index != -1)
+                {
+                    dimensionC->setCurrentIndex(index);
+                }
+                else
+                {
+                    qCCritical(vMainWindow, "%s",
+                               qUtf8Printable(tr("Not supported dimension C value '%1' for this pattern file.")
+                                                  .arg(value)));
+                    return false;
+                }
+            }
+            else
+            {
+                qCCritical(vMainWindow, "%s",
+                           qUtf8Printable(tr("Couldn't set dimension C. Need a file with multisize measurements.")));
+                return false;
+            }
+        }
+        else
+        {
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set dimension C. File wasn't opened.")));
             return false;
         }
     }
@@ -6029,19 +6072,25 @@ void MainWindow::ProcessCMD()
             return; // process only one input file
         }
 
-        bool hSetted = true;
-        bool sSetted = true;
-        if (cmd->IsSetGradationSize())
+        bool aSetted = true;
+        bool bSetted = true;
+        bool cSetted = true;
+        if (cmd->IsSetDimensionA())
         {
-            sSetted = SetSize(cmd->OptGradationSize());
+            aSetted = SetDimensionA(cmd->OptDimensionA());
         }
 
-        if (cmd->IsSetGradationHeight())
+        if (cmd->IsSetDimensionB())
         {
-            hSetted = SetHeight(cmd->OptGradationHeight());
+            bSetted = SetDimensionB(cmd->OptDimensionB());
         }
 
-        if (not (hSetted && sSetted))
+        if (cmd->IsSetDimensionC())
+        {
+            cSetted = SetDimensionB(cmd->OptDimensionC());
+        }
+
+        if (not (aSetted && bSetted && cSetted))
         {
             qApp->exit(V_EX_DATAERR);
             return;

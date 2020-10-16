@@ -275,19 +275,6 @@ enum class IncrementType : qint8 { Increment, Separator };
 QString       IncrementTypeToString(IncrementType type);
 IncrementType StringToIncrementType(const QString &value);
 
-static const int heightStep = 6;
-enum class GHeights : quint8 { ALL,
-                               H50=50,   H56=56,   H62=62,   H68=68,   H74=74,   H80=80,   H86=86,   H92=92,
-                               H98=98,   H104=104, H110=110, H116=116, H122=122, H128=128, H134=134, H140=140,
-                               H146=146, H152=152, H158=158, H164=164, H170=170, H176=176, H182=182, H188=188,
-                               H194=194, H200=200};
-
-static const int sizeStep = 2;
-enum class GSizes : quint8 { ALL,
-                             S22=22, S24=24, S26=26, S28=28, S30=30, S32=32, S34=34, S36=36, S38=38, S40=40,
-                             S42=42, S44=44, S46=46, S48=48, S50=50, S52=52, S54=54, S56=56, S58=58, S60=60,
-                             S62=62, S64=64, S66=66, S68=68, S70=70, S72=72 };
-
 enum class IMD: qint8 // Individual measurement dimension
 {
     N, // None

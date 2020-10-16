@@ -377,8 +377,9 @@ private:
     bool               DoExport(const VCommandLinePtr& expParams);
     bool               DoFMExport(const VCommandLinePtr& expParams);
 
-    bool               SetSize(const QString &text);
-    bool               SetHeight(const QString & text);
+    bool               SetDimensionA(int value);
+    bool               SetDimensionB(int value);
+    bool               SetDimensionC(int value);
 
     QString            GetPatternFileName();
     QString            GetMeasurementFileName();

@@ -90,11 +90,9 @@ const QString SINGLE_OPTION_TEST            = QStringLiteral("t");
 
 const QString LONG_OPTION_PENDANTIC         = QStringLiteral("pedantic");
 
-const QString LONG_OPTION_GRADATIONSIZE     = QStringLiteral("gsize");
-const QString SINGLE_OPTION_GRADATIONSIZE   = QStringLiteral("x");
-
-const QString LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
-const QString SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
+const QString LONG_OPTION_DIMENSION_A       = QStringLiteral("dimensionA");
+const QString LONG_OPTION_DIMENSION_B       = QStringLiteral("dimensionB");
+const QString LONG_OPTION_DIMENSION_C       = QStringLiteral("dimensionC");
 
 const QString LONG_OPTION_USER_MATERIAL     = QStringLiteral("userMaterial");
 
@@ -170,8 +168,9 @@ QStringList AllKeys()
         LONG_OPTION_GROUPPING, SINGLE_OPTION_GROUPPING,
         LONG_OPTION_TEST, SINGLE_OPTION_TEST,
         LONG_OPTION_PENDANTIC,
-        LONG_OPTION_GRADATIONSIZE, SINGLE_OPTION_GRADATIONSIZE,
-        LONG_OPTION_GRADATIONHEIGHT, SINGLE_OPTION_GRADATIONHEIGHT,
+        LONG_OPTION_DIMENSION_A,
+        LONG_OPTION_DIMENSION_B,
+        LONG_OPTION_DIMENSION_C,
         LONG_OPTION_USER_MATERIAL,
         LONG_OPTION_IGNORE_MARGINS, SINGLE_OPTION_IGNORE_MARGINS,
         LONG_OPTION_LEFT_MARGIN, SINGLE_OPTION_LEFT_MARGIN,
