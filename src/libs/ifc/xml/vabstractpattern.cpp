@@ -87,6 +87,8 @@ const QString VAbstractPattern::TagPatternInfo      = QStringLiteral("patternInf
 const QString VAbstractPattern::TagPatternName      = QStringLiteral("patternName");
 const QString VAbstractPattern::TagPatternNum       = QStringLiteral("patternNumber");
 const QString VAbstractPattern::TagCustomerName     = QStringLiteral("customer");
+const QString VAbstractPattern::TagCustomerBirthDate = QStringLiteral("birthDate");
+const QString VAbstractPattern::TagCustomerEmail     = QStringLiteral("email");
 const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
 const QString VAbstractPattern::TagPatternLabel     = QStringLiteral("patternLabel");
 const QString VAbstractPattern::TagWatermark        = QStringLiteral("watermark");
@@ -1001,6 +1003,38 @@ void VAbstractPattern::SetCustomerName(const QString& qsName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QDate VAbstractPattern::GetCustomerBirthDate() const
+{
+    return QDate::fromString(UniqueTagText(TagCustomerBirthDate), "yyyy-MM-dd");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetCustomerBirthDate(const QDate &date)
+{
+    CheckTagExists(TagCustomerBirthDate);
+    setTagText(TagCustomerBirthDate, date.toString("yyyy-MM-dd"));
+    patternLabelWasChanged = true;
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetCustomerEmail() const
+{
+    return UniqueTagText(TagCustomerEmail);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetCustomerEmail(const QString &email)
+{
+    CheckTagExists(TagCustomerEmail);
+    setTagText(TagCustomerEmail, email);
+    patternLabelWasChanged = true;
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetLabelDateFormat() const
 {
     if (*labelDateFormatCached == unknownCharacter)
@@ -1351,10 +1385,12 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             TagPatternNum, // 5
             TagCompanyName, // 6
             TagCustomerName, // 7
-            TagPatternLabel, // 8
-            TagWatermark, // 9
-            TagPatternMaterials, // 10
-            TagFinalMeasurements // 11
+            TagCustomerBirthDate, // 8
+            TagCustomerEmail, // 9
+            TagPatternLabel, // 10
+            TagWatermark, // 11
+            TagPatternMaterials, // 12
+            TagFinalMeasurements // 13
         };
 
         switch (tags.indexOf(tag))
@@ -1380,16 +1416,22 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 7: // TagCustomerName
                 element = createElement(TagCustomerName);
                 break;
-            case 8: // TagPatternLabel
+            case 8: // TagCustomerBirthDate
+                element = createElement(TagCustomerBirthDate);
+                break;
+            case 9: // TagCustomerEmail
+                element = createElement(TagCustomerEmail);
+                break;
+            case 10: // TagPatternLabel
                 element = createElement(TagPatternLabel);
                 break;
-            case 9: // TagWatermark
+            case 11: // TagWatermark
                 element = createElement(TagWatermark);
                 break;
-            case 10: // TagPatternMaterials
+            case 12: // TagPatternMaterials
                 element = createElement(TagPatternMaterials);
                 break;
-            case 11: // TagFinalMeasurements
+            case 13: // TagFinalMeasurements
                 element = createElement(TagFinalMeasurements);
                 break;
             case 0: //TagUnit (Mandatory tag)

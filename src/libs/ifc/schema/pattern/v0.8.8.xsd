@@ -21,6 +21,8 @@
         <xs:element name="patternNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="company" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="customer" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="birthDate" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="patternLabel" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>

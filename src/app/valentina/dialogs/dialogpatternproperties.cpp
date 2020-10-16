@@ -71,6 +71,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     setWindowFlags(Qt::Window);
 #endif
 
+    ui->lineEditCustomerEmail->setClearButtonEnabled(true);
+
     SCASSERT(doc != nullptr)
 
     VSettings *settings = qApp->ValentinaSettings();
@@ -157,21 +159,29 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
     ui->lineEditCompanyName->setText(doc->GetCompanyName());
 
+    ui->lineEditCustomerName->setText(qApp->GetCustomerName());
+    ui->lineEditCustomerEmail->setText(qApp->CustomerEmail());
+    ui->dateEditCustomerBirthDate->setDate(qApp->GetCustomerBirthDate());
+
     if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
-        ui->lineEditCustomerName->setText(qApp->GetCustomerName());
         ui->lineEditCustomerName->setReadOnly(true);
         ui->lineEditCustomerName->setToolTip(tr("The customer name from individual measurements"));
-    }
-    else
-    {
-        ui->lineEditCustomerName->setText(doc->GetCustomerName());
+
+        ui->lineEditCustomerEmail->setReadOnly(true);
+        ui->lineEditCustomerEmail->setToolTip(tr("The customer email from individual measurements"));
+
+        ui->dateEditCustomerBirthDate->setReadOnly(true);
+        ui->dateEditCustomerBirthDate->setToolTip(tr("The customer birth date from individual measurements"));
     }
 
     connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditCustomerEmail, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->dateEditCustomerBirthDate, &QDateEdit::editingFinished, this,
+            &DialogPatternProperties::LabelDataChanged);
     connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
     connect(ui->pushButtonPatternMaterials, &QPushButton::clicked, this,
             &DialogPatternProperties::ManagePatternMaterials);
@@ -286,6 +296,8 @@ void DialogPatternProperties::SaveLabelData()
         if (qApp->GetMeasurementsType() != MeasurementsType::Individual)
         {
             doc->SetCustomerName(ui->lineEditCustomerName->text());
+            doc->SetCustomerBirthDate(ui->dateEditCustomerBirthDate->date());
+            doc->SetCustomerEmail(ui->lineEditCustomerEmail->text());
         }
         doc->SetLabelDateFormat(ui->comboBoxDateFormat->currentText());
         doc->SetLabelTimeFormat(ui->comboBoxTimeFormat->currentText());

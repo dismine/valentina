@@ -500,13 +500,27 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_patternNumber, qMakePair(tr("Pattern number"), m_doc->GetPatternNumber()));
     m_placeholders.insert(pl_author, qMakePair(tr("Company name or designer name"), m_doc->GetCompanyName()));
 
+    m_placeholders.insert(pl_mUnits, qMakePair(tr("Measurements units"), UnitsToStr(qApp->MeasurementsUnits(), true)));
+    m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"), UnitsToStr(qApp->patternUnits(), true)));
+    m_placeholders.insert(pl_mSizeUnits, qMakePair(tr("Size units"), UnitsToStr(qApp->DimensionSizeUnits(), true)));
+
     if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
         m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), qApp->GetCustomerName()));
+
+        const QString birthDate = locale.toString(qApp->GetCustomerBirthDate(), m_doc->GetLabelDateFormat());
+        m_placeholders.insert(pl_birthDate, qMakePair(tr("Customer birth date"), birthDate));
+
+        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"), qApp->CustomerEmail()));
     }
     else
     {
         m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), m_doc->GetCustomerName()));
+
+        const QString birthDate = locale.toString(m_doc->GetCustomerBirthDate(), m_doc->GetLabelDateFormat());
+        m_placeholders.insert(pl_birthDate, qMakePair(tr("Customer birth date"), birthDate));
+
+        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"), m_doc->GetCustomerEmail()));
     }
 
     m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
@@ -517,25 +531,14 @@ void DialogEditLabel::InitPlaceholders()
     const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
 
-    QString curSize;
-    QString curHeight;
-    QString mExt;
-    if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vst";
-    }
-    else if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vit";
-    }
-
-    m_placeholders.insert(pl_size, qMakePair(tr("Size"), curSize));
-    m_placeholders.insert(pl_height, qMakePair(tr("Height"), curHeight));
-    m_placeholders.insert(pl_mExt, qMakePair(tr("Measurments extension"), mExt));
+    m_placeholders.insert(pl_height, qMakePair(tr("Height"), QString::number(qApp->GetDimensionHeight())));
+    m_placeholders.insert(pl_size, qMakePair(tr("Size"), QString::number(qApp->GetDimensionSize())));
+    m_placeholders.insert(pl_hip, qMakePair(tr("Hip"), QString::number(qApp->GetDimensionHip())));
+    m_placeholders.insert(pl_waist, qMakePair(tr("Waist"), QString::number(qApp->GetDimensionWaist())));
+    m_placeholders.insert(pl_mExt,
+                          qMakePair(tr("Measurments extension"),
+                                    qApp->GetMeasurementsType() == MeasurementsType::Multisize ? QString("vst")
+                                                                                               : QString("vit")));
 
     const QString materialDescription = tr("User material");
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();

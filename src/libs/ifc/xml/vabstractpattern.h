@@ -165,6 +165,12 @@ public:
     QString        GetCustomerName() const;
     void           SetCustomerName(const QString& qsName);
 
+    QDate          GetCustomerBirthDate() const;
+    void           SetCustomerBirthDate(const QDate& date);
+
+    QString        GetCustomerEmail() const;
+    void           SetCustomerEmail(const QString& email);
+
     QString        GetLabelDateFormat() const;
     void           SetLabelDateFormat(const QString &format);
 
@@ -252,6 +258,8 @@ public:
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
+    static const QString TagCustomerBirthDate;
+    static const QString TagCustomerEmail;
     static const QString TagPatternLabel;
     static const QString TagWatermark;
     static const QString TagPatternMaterials;

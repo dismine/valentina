@@ -185,38 +185,39 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     placeholders.insert(pl_patternNumber, doc->GetPatternNumber());
     placeholders.insert(pl_author, doc->GetCompanyName());
 
+    placeholders.insert(pl_mUnits, UnitsToStr(qApp->MeasurementsUnits(), true));
+    placeholders.insert(pl_pUnits, UnitsToStr(qApp->patternUnits(), true));
+    placeholders.insert(pl_mSizeUnits, UnitsToStr(qApp->DimensionSizeUnits(), true));
+
     if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
     {
         placeholders.insert(pl_customer, qApp->GetCustomerName());
+
+        const QString birthDate = locale.toString(qApp->GetCustomerBirthDate(), doc->GetLabelDateFormat());
+        placeholders.insert(pl_birthDate, birthDate);
+
+        placeholders.insert(pl_email, qApp->CustomerEmail());
     }
     else
     {
         placeholders.insert(pl_customer, doc->GetCustomerName());
+
+        const QString birthDate = locale.toString(doc->GetCustomerBirthDate(), doc->GetLabelDateFormat());
+        placeholders.insert(pl_birthDate, birthDate);
+
+        placeholders.insert(pl_email, doc->GetCustomerEmail());
     }
 
     placeholders.insert(pl_pExt, QStringLiteral("val"));
     placeholders.insert(pl_pFileName, QFileInfo(qApp->GetPatternPath()).baseName());
     placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
 
-    QString curSize;
-    QString curHeight;
-    QString mExt;
-    if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = QStringLiteral("vst");
-    }
-    else if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = QStringLiteral("vit");
-    }
-
-    placeholders.insert(pl_size, curSize);
-    placeholders.insert(pl_height, curHeight);
-    placeholders.insert(pl_mExt, mExt);
+    placeholders.insert(pl_height, QString::number(qApp->GetDimensionHeight()));
+    placeholders.insert(pl_size, QString::number(qApp->GetDimensionSize()));
+    placeholders.insert(pl_hip, QString::number(qApp->GetDimensionHip()));
+    placeholders.insert(pl_waist, QString::number(qApp->GetDimensionWaist()));
+    placeholders.insert(pl_mExt, qApp->GetMeasurementsType() == MeasurementsType::Multisize ? QString("vst")
+                                                                                            : QString("vit"));
 
     const QMap<int, QString> materials = doc->GetPatternMaterials();
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
