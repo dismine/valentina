@@ -788,7 +788,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
 
             if (flagDimensionB)
             {
-                if (MainWindow()->SetDimensionBBase(dimensionBValue))
+                if (not MainWindow()->SetDimensionBBase(dimensionBValue))
                 {
                     parser.showHelp(V_EX_USAGE);
                 }
@@ -796,7 +796,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
 
             if (flagDimensionC)
             {
-                if (MainWindow()->SetDimensionCBase(dimensionCValue))
+                if (not MainWindow()->SetDimensionCBase(dimensionCValue))
                 {
                     parser.showHelp(V_EX_USAGE);
                 }

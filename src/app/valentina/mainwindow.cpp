@@ -1904,22 +1904,29 @@ void MainWindow::ShowMeasurements()
         const QString absoluteMPath = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
 
         QStringList arguments;
+        arguments.append(absoluteMPath);
+        arguments.append("-u");
+        arguments.append(UnitsToStr(qApp->patternUnits()));
+
         if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
         {
-            arguments = QStringList()
-                    << absoluteMPath
-                    << "-u"
-                    << UnitsToStr(qApp->patternUnits())
-                    << "-e"
-                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->height(), doc->MUnit(), Unit::Cm)))
-                    << "-s"
-                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->size(), doc->MUnit(), Unit::Cm)));
-        }
-        else
-        {
-            arguments = QStringList() << absoluteMPath
-                                      << "-u"
-                                      << UnitsToStr(qApp->patternUnits());
+            if (m_currentDimensionA > 0)
+            {
+                arguments.append("-a");
+                arguments.append(QString::number(m_currentDimensionA));
+            }
+
+            if (m_currentDimensionB > 0)
+            {
+                arguments.append("-b");
+                arguments.append(QString::number(m_currentDimensionB));
+            }
+
+            if (m_currentDimensionC > 0)
+            {
+                arguments.append("-c");
+                arguments.append(QString::number(m_currentDimensionC));
+            }
         }
 
         if (isNoScaling)
