@@ -104,7 +104,7 @@ protected:
     bool IsRangeValid();
     bool IsStepValid();
     bool IsBaseValid();
-    bool IsUnitsValid();
+    bool IsUnitsValid() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

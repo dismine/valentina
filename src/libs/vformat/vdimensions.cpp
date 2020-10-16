@@ -155,7 +155,7 @@ bool VAbstartMeasurementDimension::IsBaseValid()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstartMeasurementDimension::IsUnitsValid()
+bool VAbstartMeasurementDimension::IsUnitsValid() const
 {
     return m_units == Unit::Cm || m_units == Unit::Mm || m_units == Unit::Inch;
 }
