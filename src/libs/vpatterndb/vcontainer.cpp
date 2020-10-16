@@ -65,8 +65,6 @@ Q_LOGGING_CATEGORY(vCon, "v.container")
 QT_WARNING_POP
 
 QMap<QString, quint32> VContainer::_id = QMap<QString, quint32>();
-QMap<QString, qreal> VContainer::_size = QMap<QString, qreal>();
-QMap<QString, qreal> VContainer::_height = QMap<QString, qreal>();
 QMap<QString, QSet<QString>> VContainer::uniqueNames = QMap<QString, QSet<QString>>();
 QMap<QString, quint32> VContainer::copyCounter = QMap<QString, quint32>();
 
@@ -90,16 +88,6 @@ VContainer::VContainer(const VTranslateVars *trVars, const Unit *patternUnit, co
     if (not _id.contains(d->nspace))
     {
         _id[d->nspace] = NULL_ID;
-    }
-
-    if (not _size.contains(d->nspace))
-    {
-        _size[d->nspace] = 50;
-    }
-
-    if (not _height.contains(d->nspace))
-    {
-        _height[d->nspace] = 176;
     }
 
     if (not uniqueNames.contains(d->nspace))
@@ -167,7 +155,7 @@ QString VContainer::UniqueNamespace()
     {
         candidate = QUuid::createUuid().toString();
     }
-    while(_size.contains(candidate));
+    while(_id.contains(candidate));
 
     return candidate;
 }
@@ -176,8 +164,6 @@ QString VContainer::UniqueNamespace()
 void VContainer::ClearNamespace(const QString &nspace)
 {
     _id.remove(nspace);
-    _size.remove(nspace);
-    _height.remove(nspace);
     uniqueNames.remove(nspace);
 }
 
@@ -731,72 +717,6 @@ void VContainer::ClearExceptUniqueIncrementNames() const
         {
             uniqueNames[d->nspace].insert(name);
         }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetSize set value of size
- * @param size value of size
- */
-void VContainer::SetSize(qreal size) const
-{
-    _size[d->nspace] = size;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetGrowth set value of growth
- * @param height value of height
- */
-void VContainer::SetHeight(qreal height) const
-{
-    _height[d->nspace] = height;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief size return size
- * @return size in mm
- */
-qreal VContainer::size() const
-{
-    return VContainer::size(d->nspace);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VContainer::size(const QString &nspace)
-{
-    if (_size.contains(nspace))
-    {
-        return _size.value(nspace);
-    }
-    else
-    {
-        throw VException(QStringLiteral("Unknown namespace"));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief height return height
- * @return height in pattern units
- */
-qreal VContainer::height() const
-{
-    return VContainer::height(d->nspace);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VContainer::height(const QString &nspace)
-{
-    if (_height.contains(nspace))
-    {
-        return _height.value(nspace);
-    }
-    else
-    {
-        throw VException(QStringLiteral("Unknown namespace"));
     }
 }
 

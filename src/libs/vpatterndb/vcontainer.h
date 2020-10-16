@@ -190,13 +190,6 @@ public:
     void               ClearUniqueIncrementNames() const;
     void               ClearExceptUniqueIncrementNames() const;
 
-    void               SetSize(qreal size) const;
-    void               SetHeight(qreal height) const;
-    qreal              size() const;
-    static qreal       size(const QString &nspace);
-    qreal              height() const;
-    static qreal       height(const QString &nspace);
-
     void               RemoveIncrement(const QString& name);
 
     const QHash<quint32, QSharedPointer<VGObject> >         *CalculationGObjects() const;
@@ -227,8 +220,6 @@ private:
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
     static QMap<QString, quint32> _id;
-    static QMap<QString, qreal>   _size;
-    static QMap<QString, qreal>   _height;
     static QMap<QString, QSet<QString>> uniqueNames;
     static QMap<QString, quint32> copyCounter;
 

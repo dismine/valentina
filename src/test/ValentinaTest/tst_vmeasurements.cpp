@@ -48,16 +48,20 @@ TST_VMeasurements::TST_VMeasurements(QObject *parent) :
 void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
-    const int height = 176;
-    const int size = 50;
 
     QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
                                                                                 VContainer::UniqueNamespace()));
-    data->SetHeight(height);
-    data->SetSize(size);
+    auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
+    m_xDimension->SetBaseValue(176);
+
+    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 2, 22, 72);
+    m_yDimension->SetBaseValue(50);
+    m_yDimension->SetCircumference(true);
+
+    QVector<MeasurementDimension_p > dimensions{m_xDimension, m_yDimension};
 
     QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, /*size, height,*/ data.data()));
+            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -138,16 +142,21 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 void TST_VMeasurements::ValidPMCodesMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
-    const int height = 176;
-    const int size = 50;
 
     QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
                                                                                 VContainer::UniqueNamespace()));
-    data->SetHeight(height);
-    data->SetSize(size);
+
+    auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
+    m_xDimension->SetBaseValue(176);
+
+    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 2, 22, 72);
+    m_yDimension->SetBaseValue(50);
+    m_yDimension->SetCircumference(true);
+
+    QVector<MeasurementDimension_p > dimensions{m_xDimension, m_yDimension};
 
     QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, /*size, height,*/ data.data()));
+            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     const QStringList listSystems = ListPMSystems();
     for (int i = 0; i < listSystems.size(); ++i)
