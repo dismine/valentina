@@ -1653,6 +1653,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionLabels</name>
+    <message>
+        <source>Dimension labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Etichetta</translation>
+    </message>
+</context>
+<context>
     <name>DialogDuplicateDetail</name>
     <message>
         <source>Dialog duplicate detail</source>
@@ -1918,6 +1933,38 @@
     <message>
         <source>Move on bottom</source>
         <translation>Sposta in basso</translation>
+    </message>
+    <message>
+        <source>Measurements units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer birth date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3815,6 +3862,89 @@ Applicare la configurazione comunque?</translation>
     </message>
 </context>
 <context>
+    <name>DialogMeasurementsCSVColumns</name>
+    <message>
+        <source>Setup columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Anteprima</translation>
+    </message>
+    <message>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name:</source>
+        <translation type="unfinished">Nome intero:</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Descrizione:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <translation type="unfinished">Nome intero</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descrizione</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="unfinished">Valore di base</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift (%1)*:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File path is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough data to import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
@@ -3921,11 +4051,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Base size:</source>
-        <translation>Misura base:</translation>
+        <translation type="vanished">Misura base:</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Altezza base:</translation>
+        <translation type="vanished">Altezza base:</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -4145,19 +4275,19 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
-        <translation>Altezze e Taglie</translation>
+        <translation type="vanished">Altezze e Taglie</translation>
     </message>
     <message>
         <source>All heights (cm)</source>
-        <translation>Tutte le altezze (cm)</translation>
+        <translation type="vanished">Tutte le altezze (cm)</translation>
     </message>
     <message>
         <source>All sizes (cm)</source>
-        <translation>Tutte le taglie (cm)</translation>
+        <translation type="vanished">Tutte le taglie (cm)</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Altezza e taglia di default</translation>
+        <translation type="vanished">Altezza e taglia di default</translation>
     </message>
     <message>
         <source>From standard measurements</source>
@@ -4165,15 +4295,15 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizzato</translation>
+        <translation type="vanished">Personalizzato</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Altezza:</translation>
+        <translation type="vanished">Altezza:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taglia:</translation>
+        <translation type="vanished">Taglia:</translation>
     </message>
     <message>
         <source>Security</source>
@@ -4297,7 +4427,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>From multisize measurements</source>
-        <translation>Da misure di più taglie</translation>
+        <translation type="vanished">Da misure di più taglie</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -4362,6 +4492,26 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Label language:</source>
         <translation>Lingua etichetta:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">aaaa-MM-gg</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5520,6 +5670,29 @@ Applicare la configurazione comunque?</translation>
     </message>
 </context>
 <context>
+    <name>DialogRestrictDimension</name>
+    <message>
+        <source>Restrict dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension A:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restriction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogRotation</name>
     <message>
         <source>Rotation</source>
@@ -6028,6 +6201,85 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogSetupMultisize</name>
+    <message>
+        <source>Setup multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Altezza</translation>
+    </message>
+    <message>
+        <source>Min value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimal value described in the column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximal value described in the column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Step:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single-step between the column values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base value for the column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Taglia</translation>
+    </message>
+    <message>
+        <source>Circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select at least one dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No more than 3 dimensions allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6925,19 +7177,19 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>The base height</source>
-        <translation>Altezza base</translation>
+        <translation type="vanished">Altezza base</translation>
     </message>
     <message>
         <source>The base size</source>
-        <translation>Taglia base</translation>
+        <translation type="vanished">Taglia base</translation>
     </message>
     <message>
         <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation>Imposta l&apos;unità di misura del file di pattern: cm, mm, pollici.</translation>
+        <translation type="vanished">Imposta l&apos;unità di misura del file di pattern: cm, mm, pollici.</translation>
     </message>
     <message>
         <source>The pattern unit</source>
-        <translation>Unità del pattern</translation>
+        <translation type="vanished">Unità del pattern</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing a window.</source>
@@ -6961,19 +7213,19 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
-        <translation>Aprire con taglia base. Valori validi: %1cm.</translation>
+        <translation type="vanished">Aprire con taglia base. Valori validi: %1cm.</translation>
     </message>
     <message>
         <source>Invalid base height argument. Must be %1cm.</source>
-        <translation>Altezza base non valida. Deve essere %1cm.</translation>
+        <translation type="vanished">Altezza base non valida. Deve essere %1cm.</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be %1cm.</source>
-        <translation>Dimensione di base non valida. Deve essere %1cm.</translation>
+        <translation type="vanished">Dimensione di base non valida. Deve essere %1cm.</translation>
     </message>
     <message>
         <source>Open with the base height. Valid values: %1cm.</source>
-        <translation>Aprire con altezza base. Valori validi: %1cm.</translation>
+        <translation type="vanished">Aprire con altezza base. Valori validi: %1cm.</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
@@ -6981,6 +7233,50 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension A in the table units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension A base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension B in the table units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension B base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension C in the table units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension C base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set pattern file units: cm, mm, inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The pattern units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension A base value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension B base value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension C base value.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7775,7 +8071,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
-        <translation>Valore della misura non supportata &apos;%1&apos; per questo pattern.</translation>
+        <translation type="vanished">Valore della misura non supportata &apos;%1&apos; per questo pattern.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
@@ -7783,7 +8079,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
-        <translation>Impossibile stabilire la taglia. Il file non è stato aperto.</translation>
+        <translation type="vanished">Impossibile stabilire la taglia. Il file non è stato aperto.</translation>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
@@ -7791,7 +8087,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation>Valore dell&apos;altezza non supportata &apos;%1&apos; per questo pattern.</translation>
+        <translation type="vanished">Valore dell&apos;altezza non supportata &apos;%1&apos; per questo pattern.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
@@ -7799,7 +8095,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
-        <translation>Impossibile stabilire l&apos;altezza. Il file non è stato aperto.</translation>
+        <translation type="vanished">Impossibile stabilire l&apos;altezza. Il file non è stato aperto.</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -8003,11 +8299,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Altezza:</translation>
+        <translation type="vanished">Altezza:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taglia:</translation>
+        <translation type="vanished">Taglia:</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
@@ -8028,10 +8324,6 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Le misure son state cambiate. Vuoi sincronizzare le misure adesso?</translation>
-    </message>
-    <message>
-        <source>Gradation doesn&apos;t support inches</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measurements have been synced</source>
@@ -8215,11 +8507,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation>Impossibile aggiungere la taglia. Inserire un file con misure multi taglia.</translation>
+        <translation type="vanished">Impossibile aggiungere la taglia. Inserire un file con misure multi taglia.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation>Impossibile aggiungere l&apos;altezza. Inserire un file con misure multi taglia.</translation>
+        <translation type="vanished">Impossibile aggiungere l&apos;altezza. Inserire un file con misure multi taglia.</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -8465,6 +8757,42 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Do you want to change the premissions?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8606,11 +8934,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Unità sbagliate.</translation>
+        <translation type="vanished">Unità sbagliate.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation>L&apos;applicazione non supporta tabelle multitaglia con pollici.</translation>
+        <translation type="vanished">L&apos;applicazione non supporta tabelle multitaglia con pollici.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -9567,6 +9895,14 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece name &apos;%1&apos; is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -9884,11 +10220,11 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation>Nelle taglie</translation>
+        <translation type="vanished">Nelle taglie</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation>Nelle altezze</translation>
+        <translation type="vanished">Nelle altezze</translation>
     </message>
     <message>
         <source>Details</source>
@@ -9912,11 +10248,11 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>In sizes:</source>
-        <translation>Nelle misure:</translation>
+        <translation type="vanished">Nelle misure:</translation>
     </message>
     <message>
         <source>In heights:</source>
-        <translation>Nelle altezze:</translation>
+        <translation type="vanished">Nelle altezze:</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -9964,19 +10300,19 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Base size:</source>
-        <translation>Misura base:</translation>
+        <translation type="vanished">Misura base:</translation>
     </message>
     <message>
         <source>Base size value</source>
-        <translation>Valore base della misura</translation>
+        <translation type="vanished">Valore base della misura</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Altezza base:</translation>
+        <translation type="vanished">Altezza base:</translation>
     </message>
     <message>
         <source>Base height value</source>
-        <translation>Valore base dell&apos;altezza</translation>
+        <translation type="vanished">Valore base dell&apos;altezza</translation>
     </message>
     <message>
         <source>Given name:</source>
@@ -10548,18 +10884,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10624,11 +10948,119 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height (%1):</source>
+        <source>Correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size (%1):</source>
+        <source>Units:</source>
+        <translation type="unfinished">Unità:</translation>
+    </message>
+    <message>
+        <source>Shift B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one of the dimensions to later use the measurement value in piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base Values:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restrict second dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restrict third dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The table doesn&apos;t provide dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base value for dimension A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The table doesn&apos;t support dimension B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base value for dimension B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The table doesn&apos;t support dimension C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base value for dimension C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>measurements.vit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert base value to double in column 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert shift value to double in column %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Pollici</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimetri</translation>
+    </message>
+    <message>
+        <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11284,18 +11716,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">Il testo appare sotto l&apos;icona. (raccomandato per i principianti).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="unfinished">Altezza e taglia di default</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="unfinished">Altezza di default:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="unfinished">Taglia di default:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>Come da opzioni del Sistema Operativo</translation>
     </message>
@@ -11389,6 +11809,65 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Do not &amp;show again</source>
         <translation>Do not &amp;show again</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstartMeasurementDimension</name>
+    <message>
+        <source>Invalid min/max range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base value invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Altezza</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Taglia</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chest full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chest half circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chest circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip half circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist half circumference</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11898,7 +12377,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The size value</source>
-        <translation>Il valore di misura</translation>
+        <translation type="vanished">Il valore di misura</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
@@ -11906,7 +12385,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The height value</source>
-        <translation>Il valore di altezza</translation>
+        <translation type="vanished">Il valore di altezza</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
@@ -11922,11 +12401,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation>Valore di gradazione misura non valido.</translation>
+        <translation type="vanished">Valore di gradazione misura non valido.</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation>Valore di gradazione altezza non valido.</translation>
+        <translation type="vanished">Valore di gradazione altezza non valido.</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
@@ -12149,14 +12628,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12242,6 +12713,42 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Prefer one sheet layout solution (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension A value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension B value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension C value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension A in the multisize measurements units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension A base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension B in the multisize measurements units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension B base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension C in the multisize measurements units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension C base</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12490,6 +12997,26 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>The measurement name is empty!</source>
         <translation>Il nome delle misure è vuoto!</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Altezza</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Taglia</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12946,6 +13473,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main path of piece %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15135,12 +15666,7 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>size</source>
         <comment>placeholder</comment>
-        <translation>Taglia</translation>
-    </message>
-    <message>
-        <source>height</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Taglia</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
@@ -15275,127 +15801,32 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>date</source>
         <comment>placeholder</comment>
-        <translation>data</translation>
+        <translation type="vanished">data</translation>
     </message>
     <message>
         <source>time</source>
         <comment>placeholder</comment>
-        <translation>ora</translation>
+        <translation type="vanished">ora</translation>
     </message>
     <message>
         <source>patternName</source>
         <comment>placeholder</comment>
-        <translation>nomeModello</translation>
+        <translation type="vanished">nomeModello</translation>
     </message>
     <message>
         <source>patternNumber</source>
         <comment>placeholder</comment>
-        <translation>numeroModello</translation>
+        <translation type="vanished">numeroModello</translation>
     </message>
     <message>
         <source>author</source>
         <comment>placeholder</comment>
-        <translation>autore</translation>
+        <translation type="vanished">autore</translation>
     </message>
     <message>
         <source>customer</source>
         <comment>placeholder</comment>
-        <translation>cliente</translation>
-    </message>
-    <message>
-        <source>pExt</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pFileName</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mFileName</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mExt</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pLetter</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pAnnotation</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pOrientation</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pRotation</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pTilt</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pFoldPosition</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pName</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pQuantity</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mFabric</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mLining</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mInterfacing</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mInterlining</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>wCut</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>wOnFold</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>userMaterial</source>
-        <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">cliente</translation>
     </message>
     <message>
         <source>r2cm</source>
