@@ -28,7 +28,7 @@
 
 #include "vabstractmainwindow.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "dialogs/dialogexporttocsv.h"
