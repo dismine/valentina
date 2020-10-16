@@ -121,7 +121,7 @@ private:
     void ShowFunctions();
     void ShowIncrementsInPreviewCalculation(bool show);
 
-    void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
+    void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
