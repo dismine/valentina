@@ -4947,7 +4947,7 @@ void MainWindow::CreateActions()
 
     connect(ui->actionLabelTemplateEditor, &QAction::triggered, this, [this]()
     {
-        DialogEditLabel editor(doc);
+        DialogEditLabel editor(doc, pattern);
         editor.exec();
     });
 

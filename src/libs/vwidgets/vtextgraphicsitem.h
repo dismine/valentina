@@ -65,8 +65,8 @@ public:
     int  GetFontSize() const;
     void SetSize(qreal fW, qreal fH);
     bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
-    void UpdateData(const QString& qsName, const VPieceLabelData& data);
-    void UpdateData(VAbstractPattern* pDoc);
+    void UpdateData(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern);
+    void UpdateData(VAbstractPattern* pDoc, const VContainer *pattern);
     int  GetTextLines() const;
 
 protected:

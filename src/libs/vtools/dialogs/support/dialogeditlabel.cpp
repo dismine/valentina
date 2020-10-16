@@ -45,11 +45,12 @@
 #include <QDate>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
+DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, const VContainer *data, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogEditLabel),
       m_placeholdersMenu(new QMenu(this)),
       m_doc(doc),
+      m_data(data),
       m_placeholders()
 {
     ui->setupUi(this);
@@ -553,6 +554,16 @@ void DialogEditLabel::InitPlaceholders()
         }
 
         m_placeholders.insert(pl_userMaterial + number, qMakePair(materialDescription + number, value));
+    }
+
+    const QMap<QString, QSharedPointer<VMeasurement> > measurements = m_data->DataMeasurements();
+    auto i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+        m_placeholders.insert(pl_measurement + i.key(), qMakePair(tr("Measurement: %1").arg(description),
+                                                                  QString::number(*i.value()->GetValue())));
+        ++i;
     }
 
     // Piece tags

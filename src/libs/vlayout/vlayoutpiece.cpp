@@ -697,7 +697,7 @@ void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& da
     // generate text
     d->m_tmDetail.SetFont(font);
     d->m_tmDetail.SetFontSize(data.GetFontSize());
-    d->m_tmDetail.Update(qsName, data);
+    d->m_tmDetail.Update(qsName, data, pattern);
     // this will generate the lines of text
     d->m_tmDetail.SetFontSize(data.GetFontSize());
     d->m_tmDetail.FitFontSize(labelWidth, labelHeight);
@@ -754,7 +754,7 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelDat
     d->m_tmPattern.SetFont(font);
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
 
-    d->m_tmPattern.Update(pDoc);
+    d->m_tmPattern.Update(pDoc, pattern);
 
     // generate lines of text
     d->m_tmPattern.SetFontSize(geom.GetFontSize());

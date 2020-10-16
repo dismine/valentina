@@ -495,7 +495,7 @@ void DialogPatternProperties::EditLabel()
         }
     }
 
-    DialogEditLabel editor(doc);
+    DialogEditLabel editor(doc, pattern);
 
     templateDataChanged ? editor.SetTemplate(templateLines) : editor.SetTemplate(doc->GetPatternLabelTemplate());
 

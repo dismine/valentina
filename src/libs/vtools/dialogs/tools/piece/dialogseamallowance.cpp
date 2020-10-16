@@ -2428,7 +2428,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EditLabel()
 {
-    DialogEditLabel editor(qApp->getCurrentDocument());
+    DialogEditLabel editor(qApp->getCurrentDocument(), data);
     editor.SetTemplate(m_templateLines);
     editor.SetPiece(GetPiece());
 

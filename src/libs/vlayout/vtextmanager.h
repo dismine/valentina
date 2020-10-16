@@ -41,6 +41,7 @@
 
 class VPieceLabelData;
 class VAbstractPattern;
+class VContainer;
 
 #define MIN_FONT_SIZE               5
 #define MAX_FONT_SIZE               128
@@ -88,8 +89,8 @@ public:
     int               GetSourceLinesCount() const;
     const TextLine&   GetSourceLine(int i) const;
 
-    void Update(const QString& qsName, const VPieceLabelData& data);
-    void Update(VAbstractPattern* pDoc);
+    void Update(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern);
+    void Update(VAbstractPattern* pDoc, const VContainer *pattern);
 
     friend QDataStream& operator<<(QDataStream& dataStream, const VTextManager& data);
     friend QDataStream& operator>>(QDataStream& dataStream, VTextManager& data);

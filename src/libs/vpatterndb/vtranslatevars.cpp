@@ -541,17 +541,24 @@ void VTranslateVars::InitPlaceholder()
 {
     placeholders.insert(pl_size,          translate("VTranslateVars", "size",          "placeholder"));
     placeholders.insert(pl_height,        translate("VTranslateVars", "height",        "placeholder"));
+    placeholders.insert(pl_hip,           translate("VTranslateVars", "hip",           "placeholder"));
+    placeholders.insert(pl_waist,         translate("VTranslateVars", "waist",         "placeholder"));
     placeholders.insert(pl_date,          translate("VTranslateVars", "date",          "placeholder"));
     placeholders.insert(pl_time,          translate("VTranslateVars", "time",          "placeholder"));
+    placeholders.insert(pl_birthDate,     translate("VTranslateVars", "birthDate",     "placeholder"));
     placeholders.insert(pl_patternName,   translate("VTranslateVars", "patternName",   "placeholder"));
     placeholders.insert(pl_patternNumber, translate("VTranslateVars", "patternNumber", "placeholder"));
     placeholders.insert(pl_author,        translate("VTranslateVars", "author",        "placeholder"));
     placeholders.insert(pl_customer,      translate("VTranslateVars", "customer",      "placeholder"));
+    placeholders.insert(pl_email,         translate("VTranslateVars", "email",         "placeholder"));
     placeholders.insert(pl_userMaterial,  translate("VTranslateVars", "userMaterial",  "placeholder"));
     placeholders.insert(pl_pExt,          translate("VTranslateVars", "pExt",          "placeholder"));
+    placeholders.insert(pl_pUnits,        translate("VTranslateVars", "pUnits",        "placeholder"));
     placeholders.insert(pl_pFileName,     translate("VTranslateVars", "pFileName",     "placeholder"));
     placeholders.insert(pl_mFileName,     translate("VTranslateVars", "mFileName",     "placeholder"));
     placeholders.insert(pl_mExt,          translate("VTranslateVars", "mExt",          "placeholder"));
+    placeholders.insert(pl_mUnits,        translate("VTranslateVars", "mUnits",        "placeholder"));
+    placeholders.insert(pl_mSizeUnits,    translate("VTranslateVars", "mSizeUnits",    "placeholder"));
     placeholders.insert(pl_pLetter,       translate("VTranslateVars", "pLetter",       "placeholder"));
     placeholders.insert(pl_pAnnotation,   translate("VTranslateVars", "pAnnotation",   "placeholder"));
     placeholders.insert(pl_pOrientation,  translate("VTranslateVars", "pOrientation",  "placeholder"));
@@ -566,6 +573,7 @@ void VTranslateVars::InitPlaceholder()
     placeholders.insert(pl_mInterlining,  translate("VTranslateVars", "mInterlining",  "placeholder"));
     placeholders.insert(pl_wCut,          translate("VTranslateVars", "wCut",          "placeholder"));
     placeholders.insert(pl_wOnFold,       translate("VTranslateVars", "wOnFold",       "placeholder"));
+    placeholders.insert(pl_measurement,   translate("VTranslateVars", "measurement",   "placeholder"));
 }
 
 #undef translate

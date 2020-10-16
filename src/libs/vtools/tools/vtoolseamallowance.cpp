@@ -614,7 +614,7 @@ void VToolSeamAllowance::UpdateDetailLabel()
 
         if (PrepareLabelData(labelData, pins, m_dataLabel, pos, labelAngle))
         {
-            m_dataLabel->UpdateData(detail.GetName(), labelData);
+            m_dataLabel->UpdateData(detail.GetName(), labelData, getData());
             UpdateLabelItem(m_dataLabel, pos, labelAngle);
         }
     }
@@ -641,7 +641,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
 
         if (PrepareLabelData(geom, pins, m_patternInfo, pos, labelAngle))
         {
-            m_patternInfo->UpdateData(doc);
+            m_patternInfo->UpdateData(doc, getData());
             UpdateLabelItem(m_patternInfo, pos, labelAngle);
         }
     }

@@ -166,9 +166,10 @@ namespace
 {
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
+QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data)
 {
     SCASSERT(doc != nullptr)
+    SCASSERT(data != nullptr)
 
     QMap<QString, QString> placeholders;
 
@@ -231,6 +232,15 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
         }
 
         placeholders.insert(pl_userMaterial + number, value);
+    }
+
+    const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
+    auto i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+        placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+        ++i;
     }
 
     // Piece tags
@@ -474,11 +484,11 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
  * @param qsName detail name
  * @param data reference to the detail data
  */
-void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
+void VTextManager::Update(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern)
 {
     m_liLines.clear();
 
-    QMap<QString, QString> placeholders = PreparePlaceholders(qApp->getCurrentDocument());
+    QMap<QString, QString> placeholders = PreparePlaceholders(qApp->getCurrentDocument(), pattern);
     InitPiecePlaceholders(placeholders, qsName, data);
 
     QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
@@ -496,7 +506,7 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
  * @brief VTextManager::Update updates the text lines with pattern info
  * @param pDoc pointer to the abstract pattern object
  */
-void VTextManager::Update(VAbstractPattern *pDoc)
+void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 {
     m_liLines.clear();
 
@@ -508,7 +518,7 @@ void VTextManager::Update(VAbstractPattern *pDoc)
             return; // Nothing to parse
         }
 
-        const QMap<QString, QString> placeholders = PreparePlaceholders(pDoc);
+        const QMap<QString, QString> placeholders = PreparePlaceholders(pDoc, pattern);
 
         for (int i=0; i<lines.size(); ++i)
         {
