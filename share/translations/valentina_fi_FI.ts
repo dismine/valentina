@@ -1304,7 +1304,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Label</source>
@@ -3404,11 +3404,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3416,11 +3416,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Alkuarvo</translation>
+        <translation>Alkuarvo</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -5539,7 +5539,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -5575,7 +5575,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7923,10 +7923,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Väärät yksiköt.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Tiedostovirhe.</translation>
     </message>
@@ -7964,6 +7960,10 @@ Haluatko tallentaa muutokset?</translation>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9666,7 +9666,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Mittayksiköt:</translation>
+        <translation>Mittayksiköt:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -9766,11 +9766,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -10493,11 +10493,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -11593,11 +11593,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Hip</source>

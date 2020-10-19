@@ -9162,6 +9162,10 @@ Do you want to save your changes?</translation>
 %2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MoveDoubleLabel</name>

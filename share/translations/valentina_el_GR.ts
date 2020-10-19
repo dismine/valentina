@@ -1624,7 +1624,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Label</source>
@@ -3820,11 +3820,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Πλήρες όνομα:</translation>
+        <translation>Πλήρες όνομα:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Περιγραφή:</translation>
+        <translation>Περιγραφή:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3832,19 +3832,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Πλήρες όνομα</translation>
+        <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Περιγραφή</translation>
+        <translation>Περιγραφή</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -4426,7 +4426,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">χχχχ-ΜΜ-ηη</translation>
+        <translation>χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6131,7 +6131,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6167,7 +6167,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8784,10 +8784,6 @@ Do you want to save your changes?</source>
         <translation>Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Λανθασμένες μονάδες.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Σφάλμα στο αρχείο.</translation>
     </message>
@@ -8825,6 +8821,10 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10694,7 +10694,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Μονάδες μέτρησης:</translation>
+        <translation>Μονάδες μέτρησης:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -10794,11 +10794,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Ίντσες</translation>
+        <translation>Ίντσες</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Εκατοστά</translation>
+        <translation>Εκατοστά</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11557,11 +11557,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -12620,15 +12620,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Κανένα</translation>
+        <translation>Κανένα</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>

@@ -1660,11 +1660,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Etichetta</translation>
+        <translation>Etichetta</translation>
     </message>
 </context>
 <context>
@@ -3869,7 +3869,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Anteprima</translation>
+        <translation>Anteprima</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3885,11 +3885,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Nome intero:</translation>
+        <translation>Nome intero:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Descrizione:</translation>
+        <translation>Descrizione:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3897,23 +3897,23 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Nome intero</translation>
+        <translation>Nome intero</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descrizione</translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Valore di base</translation>
+        <translation>Valore di base</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4426,10 +4426,6 @@ Applicare la configurazione comunque?</translation>
         <translation type="vanished">Mostra il file delle misure</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Da misure di più taglie</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation type="unfinished">Modello</translation>
     </message>
@@ -4499,7 +4495,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">aaaa-MM-gg</translation>
+        <translation>aaaa-MM-gg</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6216,7 +6212,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altezza</translation>
+        <translation>Altezza</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6252,7 +6248,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taglia</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8506,14 +8502,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Impossibile esportare dettagli.</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">Impossibile aggiungere la taglia. Inserire un file con misure multi taglia.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">Impossibile aggiungere l&apos;altezza. Inserire un file con misure multi taglia.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Editor dei modelli di etichetta</translation>
     </message>
@@ -8933,14 +8921,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Il file delle misure contiene misura(e) note come invalide.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Unità sbagliate.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">L&apos;applicazione non supporta tabelle multitaglia con pollici.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Errore nel file.</translation>
     </message>
@@ -8978,6 +8958,10 @@ Vuoi salvare i cambiamenti?</translation>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10953,7 +10937,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Unità:</translation>
+        <translation>Unità:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11053,11 +11037,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pollici</translation>
+        <translation>Pollici</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetri</translation>
+        <translation>Centimetri</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11827,11 +11811,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altezza</translation>
+        <translation>Altezza</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taglia</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13000,15 +12984,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altezza</translation>
+        <translation>Altezza</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taglia</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -15797,36 +15781,6 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>date</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">data</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">ora</translation>
-    </message>
-    <message>
-        <source>patternName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">nomeModello</translation>
-    </message>
-    <message>
-        <source>patternNumber</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">numeroModello</translation>
-    </message>
-    <message>
-        <source>author</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">autore</translation>
-    </message>
-    <message>
-        <source>customer</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">cliente</translation>
     </message>
     <message>
         <source>r2cm</source>

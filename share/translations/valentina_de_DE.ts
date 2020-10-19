@@ -1668,11 +1668,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Bezeichnung</translation>
+        <translation>Bezeichnung</translation>
     </message>
 </context>
 <context>
@@ -3876,7 +3876,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Vorschau</translation>
+        <translation>Vorschau</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3892,11 +3892,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Vollständiger Name:</translation>
+        <translation>Vollständiger Name:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Beschreibung:</translation>
+        <translation>Beschreibung:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3904,23 +3904,23 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Vollständiger Name</translation>
+        <translation>Vollständiger Name</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Basiswert</translation>
+        <translation>Basiswert</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4433,10 +4433,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Maßdatei anzeigen</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Aus Multimaß-Maße</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation>Schnittmuster</translation>
     </message>
@@ -4506,7 +4502,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6223,7 +6219,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Höhe</translation>
+        <translation>Höhe</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6259,7 +6255,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8517,14 +8513,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Kann Details nicht exportieren.</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">Konnte die Größe nicht übernehmen. Benötige eine Datei mit MultiMaß Massen.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">Konnte die Höhe nicht übernehmen. Benötige eine Datei mit MultiMaß Massen.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Beschriftungsvorlageneditor</translation>
     </message>
@@ -8944,14 +8932,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Maßdatei enthält ungültiges Maß(e).</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Falsche Maßeinheiten.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Anwendung unterstützt keine MultiMaß-Tabelle mit Inches.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Dateifehler.</translation>
     </message>
@@ -8994,6 +8974,10 @@ Sollen die Änderungen gespeichert werden?</translation>
 %1
 
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10898,18 +10882,6 @@ Do you want to save your changes?</source>
         <translation>MultiMaß Maße erfordern mindestens 4 Spalten.</translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="vanished">Kann den Wert der Basis-Größe nicht in eine Fließkommazahl wandeln in Spalte 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="vanished">Kann den Wert der Höhen-Zunahme nicht in eine Fließkommazahl wandeln in Spalte 3.</translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="vanished">Kann den Wert der Größenzunahme nicht in eine Fließkommazahl wandeln in Spalte 4.</translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Importierte Datei darf die selbe Bezeichnung nicht zweimal enthalten.</translation>
     </message>
@@ -10974,20 +10946,12 @@ Do you want to save your changes?</source>
         <translation>Kann Einstellungen nicht aus fehlerhafter .INI Datei lesen.</translation>
     </message>
     <message>
-        <source>Height (%1):</source>
-        <translation type="vanished">Höhe (%1):</translation>
-    </message>
-    <message>
-        <source>Size (%1):</source>
-        <translation type="vanished">Größe (%1):</translation>
-    </message>
-    <message>
         <source>Correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Einheiten:</translation>
+        <translation>Einheiten:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11087,11 +11051,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Inch</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Zentimeter</translation>
+        <translation>Zentimeter</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11750,18 +11714,6 @@ Do you want to save your changes?</source>
         <translation>Der Text erscheint unter dem Icon (empfohlen für Anfangende).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Standard Höhe und Größe</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Standardhöhe:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Standardgröße:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>Mit Betriebssystem (OS) Optionen</translation>
     </message>
@@ -11873,11 +11825,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Höhe</translation>
+        <translation>Höhe</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13119,15 +13071,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keine</translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Höhe</translation>
+        <translation>Höhe</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Hip</source>

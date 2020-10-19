@@ -1668,7 +1668,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <source>Label</source>
@@ -3891,11 +3891,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Повне ім&apos;я:</translation>
+        <translation>Повне ім&apos;я:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Опис:</translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3903,23 +3903,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Повне ім&apos;я</translation>
+        <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Опис</translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Базове значення</translation>
+        <translation>Базове значення</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4501,7 +4501,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6219,7 +6219,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6255,7 +6255,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8932,10 +8932,6 @@ Do you want to save your changes?</source>
         <translation>Файл мірок містить недійсні відомі мірки.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Неправильні одиниці виміру.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
@@ -8973,6 +8969,10 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10947,7 +10947,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Одинці виміру:</translation>
+        <translation>Одинці виміру:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11047,11 +11047,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюйми</translation>
+        <translation>Дюйми</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметри</translation>
+        <translation>Сантиметри</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11710,18 +11710,6 @@ Do you want to save your changes?</source>
         <translation>Текст відображається під іконкою (рекомендується для новачків).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Стандартний зріст і розмір</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Стандартний зріст:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Стандартний розмір:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>З параметрами ОС</translation>
     </message>
@@ -11833,11 +11821,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13079,15 +13067,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Жодного</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Hip</source>

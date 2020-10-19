@@ -1668,11 +1668,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Метка</translation>
     </message>
 </context>
 <context>
@@ -3877,7 +3877,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Предварительный просмотр</translation>
+        <translation>Предварительный просмотр</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3893,11 +3893,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Полное имя:</translation>
+        <translation>Полное имя:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Описание:</translation>
+        <translation>Описание:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3905,23 +3905,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished"></translation>
+        <translation>Полное название</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Базовое значение</translation>
+        <translation>Базовое значение</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4434,10 +4434,6 @@ Apply settings anyway?</source>
         <translation type="vanished">Показать файл мерок</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Для мультиразмерных мерок</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation>Выкройка</translation>
     </message>
@@ -4507,7 +4503,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">гггг-мм-дд</translation>
+        <translation>гггг-мм-дд</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6225,7 +6221,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6261,7 +6257,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8519,14 +8515,6 @@ Do you want to save your changes?</source>
         <translation>Невозможно экспортировать детали.</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">Невозможно установить размер. Нужен файл мультиразмерных мерок.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">Невозможно установить рост. Необходим файл мультиразмерных мерок.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Редактор шаблона метки</translation>
     </message>
@@ -8946,14 +8934,6 @@ Do you want to save your changes?</source>
         <translation>Файл мерок содержит неправильные мерки.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Неправильные единицы измерения.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Приложение не поддерживает мультиразмерную таблицу в дюймах.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
@@ -8996,6 +8976,10 @@ Do you want to save your changes?</source>
 %1
 
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10901,18 +10885,6 @@ Do you want to save your changes?</source>
         <translation>Мультиразмерные мерки требуют как минимум 4 колонки.</translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="vanished">Невозможно конвертировать значение базового размера для дублирования в колонку 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="vanished">Невозможно конвертировать значение увеличения роста для дублирования в колонку 3.</translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="vanished">Невозможно конвертировать значение увеличения размера для дублирования в колонку 4.</translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Импортируемый файл не должен содержать то же самое имя дважды.</translation>
     </message>
@@ -10977,20 +10949,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height (%1):</source>
-        <translation type="vanished">Рост (%1):</translation>
-    </message>
-    <message>
-        <source>Size (%1):</source>
-        <translation type="vanished">Размер (%1):</translation>
-    </message>
-    <message>
         <source>Correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Единицы измерения:</translation>
+        <translation>Единицы измерения:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11090,11 +11054,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюймы</translation>
+        <translation>Дюймы</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметры</translation>
+        <translation>Сантиметры</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11753,18 +11717,6 @@ Do you want to save your changes?</source>
         <translation>Текст отображается под иконками (рекомендуется для начинающих).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Рост и размер по умолчанию</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Рост по умолчанию:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Размер по умолчанию:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>С опций ОС</translation>
     </message>
@@ -11876,11 +11828,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -12714,14 +12666,6 @@ Do you want to save your changes?</source>
         <translation>Единицы измерения страницы (режим экспорта). Допустимые значения: %1.</translation>
     </message>
     <message>
-        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Задайте значение размера для файла шаблона, которое было открыто с помощью мультиразмерных мерок (export mode). Допустимые значения: %1 см.</translation>
-    </message>
-    <message>
-        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Устанавливает значение роста для файла выкройки, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
-    </message>
-    <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Используйте этот параметр для переопределения пользовательского материала, заданного в выкройке. Значение должно быть в форме &lt;number&gt;@&lt;user matrial name&gt;. Число должно быть в диапазоне от 1 до %1. Например, 1@Fabric2. Ключ может использоваться несколько раз. Не действует в графическом режиме.</translation>
     </message>
@@ -13132,15 +13076,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Произвольное</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -15996,131 +15940,6 @@ Do you want to save your changes?</source>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Угол2ЭлДуга_</translation>
-    </message>
-    <message>
-        <source>date</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дата</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">время</translation>
-    </message>
-    <message>
-        <source>patternName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">названиеМодели</translation>
-    </message>
-    <message>
-        <source>patternNumber</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">номерМодели</translation>
-    </message>
-    <message>
-        <source>author</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">автор</translation>
-    </message>
-    <message>
-        <source>customer</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">клиент</translation>
-    </message>
-    <message>
-        <source>pExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">чРазширение</translation>
-    </message>
-    <message>
-        <source>pFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">чИмяФайла</translation>
-    </message>
-    <message>
-        <source>mFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мИмяФайла</translation>
-    </message>
-    <message>
-        <source>mExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мРазширение</translation>
-    </message>
-    <message>
-        <source>pLetter</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дБуква</translation>
-    </message>
-    <message>
-        <source>pAnnotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дАннотация</translation>
-    </message>
-    <message>
-        <source>pOrientation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дОриентация</translation>
-    </message>
-    <message>
-        <source>pRotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дВращение</translation>
-    </message>
-    <message>
-        <source>pTilt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дНаклон</translation>
-    </message>
-    <message>
-        <source>pFoldPosition</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дРасположениеСгиба</translation>
-    </message>
-    <message>
-        <source>pName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дИмя</translation>
-    </message>
-    <message>
-        <source>pQuantity</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дКоличество</translation>
-    </message>
-    <message>
-        <source>mFabric</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мТкань</translation>
-    </message>
-    <message>
-        <source>mLining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мПодклад</translation>
-    </message>
-    <message>
-        <source>mInterfacing</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мКлееваяПодкладка</translation>
-    </message>
-    <message>
-        <source>mInterlining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мМежподкладка</translation>
-    </message>
-    <message>
-        <source>wCut</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">сВырезать</translation>
-    </message>
-    <message>
-        <source>wOnFold</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">сНаСгиб</translation>
-    </message>
-    <message>
-        <source>userMaterial</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">полМатериал</translation>
     </message>
     <message>
         <source>r2cm</source>

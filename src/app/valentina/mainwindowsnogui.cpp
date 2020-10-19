@@ -67,6 +67,7 @@
 #include <QtConcurrent>
 #include <functional>
 #include <QPageSize>
+#include <QDebug>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -830,7 +831,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
     QPainter painter;
     if (not painter.begin(printer))
     { // failed to open file
-        qWarning("failed to open file, is it writable?");
+        qCritical() << tr("Failed to open file, is it writable?");
         return;
     }
 

@@ -1668,11 +1668,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Etiqueta</translation>
+        <translation>Etiqueta</translation>
     </message>
 </context>
 <context>
@@ -3876,7 +3876,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Vista previa</translation>
+        <translation>Vista previa</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3892,11 +3892,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Nombre completo:</translation>
+        <translation>Nombre completo:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Descripción:</translation>
+        <translation>Descripción:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3904,23 +3904,23 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished"></translation>
+        <translation>Apellido</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Valor base</translation>
+        <translation>Valor base</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4433,10 +4433,6 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Mostrar archivo de medidas</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Desde medidas multitalla</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation>Patrón</translation>
     </message>
@@ -4506,7 +4502,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6223,7 +6219,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6259,7 +6255,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Talla</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8518,14 +8514,6 @@ el patrón.</translation>
         <translation>No se puede exportar detalles.</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">No se pudo establecer la talla. Necesita un archivo con medidas multitalla.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">No se pudo establecer la estatura. Necesita un archivo con medidas multitalla.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Editor de plantilla de etiqueta</translation>
     </message>
@@ -8945,14 +8933,6 @@ el patrón.</translation>
         <translation>El archivo de medidas contiene medida(s) conocidas no válidas.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Unidades equivocadas.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">La aplicación no soporta la tabla multitalla en pulgadas.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Error en archivo.</translation>
     </message>
@@ -8995,6 +8975,10 @@ el patrón.</translation>
 %1
 
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10900,18 +10884,6 @@ Quieres guardar los cambios?</translation>
         <translation>Las medidas multitalla requiere al menos 4 columnas.</translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="vanished">No se puede convertir un valor de talla base a doble en columna 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="vanished">No se puede convertir un valor de incremento de altura a doble en columna 3.</translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="vanished">No se puede convertir un valor de incremento de talla a doble en columna 4.</translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Los archivos importados no deben contener el mismo nombre dos veces.</translation>
     </message>
@@ -10976,20 +10948,12 @@ Quieres guardar los cambios?</translation>
         <translation>No se puede leer la configuración desde un archivo .INI deforme.</translation>
     </message>
     <message>
-        <source>Height (%1):</source>
-        <translation type="vanished">Altura (%1):</translation>
-    </message>
-    <message>
-        <source>Size (%1):</source>
-        <translation type="vanished">Talla (%1):</translation>
-    </message>
-    <message>
         <source>Correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Unidades:</translation>
+        <translation>Unidades:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11089,11 +11053,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pulgadas</translation>
+        <translation>Pulgadas</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centímetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11752,18 +11716,6 @@ Quieres guardar los cambios?</translation>
         <translation>El texto aparece debajo del icono (recomendado para principiantes).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Altura y talla predeterminada</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Altura predeterminada:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Talla predeterminada:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>Con opciones del Sistema Operativo</translation>
     </message>
@@ -11875,11 +11827,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Talla</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -12713,14 +12665,6 @@ Quieres guardar los cambios?</translation>
         <translation>Unidades de medida de paginas (modo exportación). Valores validos: %1.</translation>
     </message>
     <message>
-        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Ajustar el valor de la talla para un archivo de patrón, que fue abierto con medidas multitalla (modo exportación). Valores validos: %1cm.</translation>
-    </message>
-    <message>
-        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Ajustar el valor de altura para un archivo de patrón, que fue abierto con medidas multitalla (modo exportación). Valores validos: %1cm.</translation>
-    </message>
-    <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Use esta opción para anular el material del usuario definido en el patrón. El valor deberá estar en forma &lt;number&gt;@&lt;user matrial name&gt;. El numero deberá estar en un rango desde 1 a %1. Por ejemplo, 1@Tela2. La clave puede ser usada múltiples veces. No tiene efecto en el modo interfaz grafica de usuario.</translation>
     </message>
@@ -13131,15 +13075,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Ninguno</translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Talla</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -15990,131 +15934,6 @@ Quieres guardar los cambios?</translation>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Angulo2ElArco_</translation>
-    </message>
-    <message>
-        <source>date</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">fecha</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">hora</translation>
-    </message>
-    <message>
-        <source>patternName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">NombreDelPatron</translation>
-    </message>
-    <message>
-        <source>patternNumber</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">NumeroDelPatron</translation>
-    </message>
-    <message>
-        <source>author</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">autor</translation>
-    </message>
-    <message>
-        <source>customer</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">cliente</translation>
-    </message>
-    <message>
-        <source>pExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pExtensión</translation>
-    </message>
-    <message>
-        <source>pFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNombreArchivo</translation>
-    </message>
-    <message>
-        <source>mFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mNombreArchivo</translation>
-    </message>
-    <message>
-        <source>mExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mExtensión</translation>
-    </message>
-    <message>
-        <source>pLetter</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pLetra</translation>
-    </message>
-    <message>
-        <source>pAnnotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNota</translation>
-    </message>
-    <message>
-        <source>pOrientation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pOrientación</translation>
-    </message>
-    <message>
-        <source>pRotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pRotación</translation>
-    </message>
-    <message>
-        <source>pTilt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pInclinación</translation>
-    </message>
-    <message>
-        <source>pFoldPosition</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pPosiciónDoblez</translation>
-    </message>
-    <message>
-        <source>pName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNombre</translation>
-    </message>
-    <message>
-        <source>pQuantity</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pCantidad</translation>
-    </message>
-    <message>
-        <source>mFabric</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mTela</translation>
-    </message>
-    <message>
-        <source>mLining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mForro</translation>
-    </message>
-    <message>
-        <source>mInterfacing</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mEntretela</translation>
-    </message>
-    <message>
-        <source>mInterlining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mEntreforro</translation>
-    </message>
-    <message>
-        <source>wCut</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">wCortar</translation>
-    </message>
-    <message>
-        <source>wOnFold</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">wEnDoblez</translation>
-    </message>
-    <message>
-        <source>userMaterial</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">usuarioMaterial</translation>
     </message>
     <message>
         <source>r2cm</source>

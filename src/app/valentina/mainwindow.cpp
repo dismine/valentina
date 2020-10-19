@@ -2192,6 +2192,8 @@ void MainWindow::SetDimensionBases()
         {
             SCASSERT(control != nullptr)
 
+            control->blockSignals(true);
+
             MeasurementDimension_p dimension = dimensions.at(index);
 
             const qint32 i = control->findData(value);
@@ -2203,6 +2205,8 @@ void MainWindow::SetDimensionBases()
             {
                 value = control->currentData().toInt();
             }
+
+            control->blockSignals(false);
         }
     };
 

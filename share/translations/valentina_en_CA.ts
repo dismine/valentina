@@ -1668,7 +1668,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Label</source>
@@ -3891,11 +3891,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Full name:</translation>
+        <translation>Full name:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Description:</translation>
+        <translation>Description:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3903,23 +3903,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Full name</translation>
+        <translation>Full name</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Description</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Base value</translation>
+        <translation>Base value</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4501,7 +4501,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6218,7 +6218,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Height</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6254,7 +6254,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Size</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8931,10 +8931,6 @@ Do you want to save your changes?</translation>
         <translation>Measurement file contains invalid known measurement(s).</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Wrong units.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>File error.</translation>
     </message>
@@ -8972,6 +8968,10 @@ Do you want to save your changes?</translation>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10946,7 +10946,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Units:</translation>
+        <translation>Units:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11046,11 +11046,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inches</translation>
+        <translation>Inches</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimeters</translation>
+        <translation>Centimeters</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11709,18 +11709,6 @@ Do you want to save your changes?</translation>
         <translation>The text appears under the icon (recommended for beginners).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Default height and size</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Default height:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Default size:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>With OS options</translation>
     </message>
@@ -11832,11 +11820,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Height</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Size</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13080,15 +13068,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">None</translation>
+        <translation>None</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Height</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Size</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <source>Hip</source>

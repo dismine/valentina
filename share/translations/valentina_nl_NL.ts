@@ -1664,15 +1664,15 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie labels</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Label</translation>
+        <translation>Label</translation>
     </message>
 </context>
 <context>
@@ -1944,35 +1944,35 @@
     </message>
     <message>
         <source>Measurements units</source>
-        <translation type="unfinished"></translation>
+        <translation>Maateenheid</translation>
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon eenheden</translation>
     </message>
     <message>
         <source>Size units</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat eenheden</translation>
     </message>
     <message>
         <source>Customer birth date</source>
-        <translation type="unfinished"></translation>
+        <translation>Klant geboortedatum</translation>
     </message>
     <message>
         <source>Customer email</source>
-        <translation type="unfinished"></translation>
+        <translation>Klant e-mail</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat: %1</translation>
     </message>
 </context>
 <context>
@@ -3873,83 +3873,83 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogMeasurementsCSVColumns</name>
     <message>
         <source>Setup columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellen kolommen</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Voorbeeld</translation>
+        <translation>Voorbeeld</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingave</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeer</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolommen</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Volledige naam:</translation>
+        <translation>Volledige naam:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Beschrijving:</translation>
+        <translation>Beschrijving:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Volledige naam</translation>
+        <translation>Volledige naam</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Beschrijving</translation>
+        <translation>Beschrijving</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Basis waarde</translation>
+        <translation>Basis waarde</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Overslaan</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift (%1)*:</translation>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandspad is leeg</translation>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet genoeg kolommen</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Onvoldoende gegevens om te importeren</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelieve een uniek nummer voor elke kolom te selecteren</translation>
     </message>
 </context>
 <context>
@@ -4434,10 +4434,6 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Toon matenbestand</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Van multimaten maten metingen</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation>Patroon</translation>
     </message>
@@ -4503,23 +4499,23 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klant geboortedatum:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klant e-mail:</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail klant uit persoonlijke maten</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Geboortedatum klant uit persoonlijke maten</translation>
     </message>
 </context>
 <context>
@@ -5681,23 +5677,23 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogRestrictDimension</name>
     <message>
         <source>Restrict dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperk dimensies</translation>
     </message>
     <message>
         <source>Dimension A:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie A:</translation>
     </message>
     <message>
         <source>Restriction</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperking</translation>
     </message>
     <message>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Min:</translation>
     </message>
     <message>
         <source>Max:</source>
-        <translation type="unfinished"></translation>
+        <translation>Max:</translation>
     </message>
 </context>
 <context>
@@ -6216,79 +6212,79 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSetupMultisize</name>
     <message>
         <source>Setup multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Multimaten maten instellen</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik volledige omtrek</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hoogte</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <source>Min value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Min waarde:</translation>
     </message>
     <message>
         <source>Minimal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimale waarde beschreven in de kolom</translation>
     </message>
     <message>
         <source>Max value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Max waarde:</translation>
     </message>
     <message>
         <source>Maximal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale waarde beschreven in de kolom</translation>
     </message>
     <message>
         <source>Step:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stap:</translation>
     </message>
     <message>
         <source>Single-step between the column values</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkele stap tussen de kolom waardes</translation>
     </message>
     <message>
         <source>Base:</source>
-        <translation type="unfinished"></translation>
+        <translation>Basis:</translation>
     </message>
     <message>
         <source>The base value for the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Basiswaarde voor de kolom</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Maat</translation>
+        <translation>Maat</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Omtrek</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelieve de juiste gegevens aan te bieden voor de kolom</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelieve ten minste één dimensie te selecteren</translation>
     </message>
     <message>
         <source>No more than 3 dimensions allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet meer dan 3 dimensies toegelaten</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
 </context>
 <context>
@@ -7245,47 +7241,47 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Set base for dimension A in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de basis voor dimensie A in de tabel eenheden.</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie A basis</translation>
     </message>
     <message>
         <source>Set base for dimension B in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de basis voor dimensie B in de tabel eenheden.</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie B basis</translation>
     </message>
     <message>
         <source>Set base for dimension C in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de basis voor dimensie C in de tabel eenheden.</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie C basis</translation>
     </message>
     <message>
         <source>Set pattern file units: cm, mm, inch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel patroon bestand eenheid in: cm, mm, inches.</translation>
     </message>
     <message>
         <source>The pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon eenheden</translation>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor dimensie A basis.</translation>
     </message>
     <message>
         <source>Invalid dimension B base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor dimensie B basis.</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor dimensie C basis.</translation>
     </message>
 </context>
 <context>
@@ -8517,14 +8513,6 @@ Do you want to save your changes?</source>
         <translation>Kan geen details exporteren.</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">Kon de maat niet vaststellen. Heb een bestand nodig met multimaten maten metingen.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">Kon de hoogte niet vaststellen. Heb een bestand nodig met multimaten metingen.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Label sjabloon bewerker</translation>
     </message>
@@ -8770,39 +8758,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteunde dimensie A waarde &apos;%1&apos; voor dit patroonbestand.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan dimensie A niet instellen. Heb een bestand nodig met multimaat maten metingen.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan dimensie A niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteunde dimensie B waarde &apos;%1&apos; voor dit patroonbestand.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan dimensie B niet instellen. Heb een bestand nodig met multimaat maten metingen.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan dimensie B niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteunde dimensie C waarde &apos;%1&apos; voor dit patroonbestand.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan dimensie C niet instellen. Heb een bestand nodig met multimaat maten metingen.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan dimensie C niet instellen. Bestand was niet geopend.</translation>
     </message>
 </context>
 <context>
@@ -8944,14 +8932,6 @@ Do you want to save your changes?</source>
         <translation>Maten bestand bevat ongeldige bekende ma(a)t(en).</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Verkeerde eenheden.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Applicatie ondersteunt niet het multimaten maten tabel met inches.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
@@ -8994,6 +8974,10 @@ Do you want to save your changes?</source>
 %1
 
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9912,11 +9896,11 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deel naam &apos;%1&apos; is niet uniek.</translation>
     </message>
     <message>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in pad &apos;%1&apos;. Berekening van segment voor boog &apos;%2&apos; is mislukt. %3</translation>
     </message>
 </context>
 <context>
@@ -10899,18 +10883,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Multimaten maten vereisen tenminste 4 kolommen.</translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="vanished">Kan de basis grootte waarde niet naar het dubbele omzetten in kolom 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="vanished">Kan de waarde van de hoogte toename niet omzetten naar het dubbele in kolom 3.</translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="vanished">Kan de waarde van de grootte toename niet omzetten naar het dubbele in kolom 4.</translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
     </message>
@@ -10975,128 +10947,120 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
-        <source>Height (%1):</source>
-        <translation type="vanished">Hoogte (%1)::</translation>
-    </message>
-    <message>
-        <source>Size (%1):</source>
-        <translation type="vanished">Maat (%1):</translation>
-    </message>
-    <message>
         <source>Correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanpassing</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Eenheden:</translation>
+        <translation>Eenheden:</translation>
     </message>
     <message>
         <source>Shift B</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift B</translation>
     </message>
     <message>
         <source>Shift C</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift C</translation>
     </message>
     <message>
         <source>Correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanpassing:</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer één van de dimensies om later de maatwaarde ervan in het deel label te gebruiken</translation>
     </message>
     <message>
         <source>Base Values:</source>
-        <translation type="unfinished"></translation>
+        <translation>Basis waarden:</translation>
     </message>
     <message>
         <source>Export to individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer naar individueel</translation>
     </message>
     <message>
         <source>Export to individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer naar individuele maten</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik volledige omtrek</translation>
     </message>
     <message>
         <source>Restrict second dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperk tweede dimensie</translation>
     </message>
     <message>
         <source>Restrict third dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperk derde dimensie</translation>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie labels</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>De tabel toont geen dimensies</translation>
     </message>
     <message>
         <source>Invalid base value for dimension A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige basiswaarde voor dimensie A</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension B</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabel ondersteunt dimensie B niet</translation>
     </message>
     <message>
         <source>Invalid base value for dimension B</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige basiswaarde voor dimensie B</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabel ondersteunt dimensie C niet</translation>
     </message>
     <message>
         <source>Invalid base value for dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige basiswaarde voor dimensie C</translation>
     </message>
     <message>
         <source>measurements.vit</source>
-        <translation type="unfinished"></translation>
+        <translation>measurements.vit</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift (%1):</translation>
     </message>
     <message>
         <source>%1 shift</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 shift</translation>
     </message>
     <message>
         <source>Cannot convert base value to double in column 2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de basiswaarde niet naar het dubbele omzetten in kolom 2.</translation>
     </message>
     <message>
         <source>Cannot convert shift value to double in column %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de basiswaarde niet naar het dubbele omzetten in kolom %1.</translation>
     </message>
     <message>
         <source>Millimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimeters</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inches</translation>
+        <translation>Inches</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimeters</translation>
+        <translation>Centimeters</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Graden</translation>
     </message>
 </context>
 <context>
@@ -11751,18 +11715,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>De tekst verschijnt onder het icoon. (Aanbevolen voor beginners).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Standaardhoogte en grootte</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Standaard hoogte:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Standaard maat:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>Met OS opties</translation>
     </message>
@@ -11862,59 +11814,59 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VAbstartMeasurementDimension</name>
     <message>
         <source>Invalid min/max range</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig min/max bereik</translation>
     </message>
     <message>
         <source>Invalid step</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige stap</translation>
     </message>
     <message>
         <source>Base value invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige basiswaarde</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hoogte</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Maat</translation>
+        <translation>Maat</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledige borstomtrek</translation>
     </message>
     <message>
         <source>Chest half circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Borst halve omtrek</translation>
     </message>
     <message>
         <source>Chest circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Borstomtrek</translation>
     </message>
     <message>
         <source>Hip full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Heup volledige omtrek</translation>
     </message>
     <message>
         <source>Hip half circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Heup halve omtrek</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille volledige omtrek</translation>
     </message>
     <message>
         <source>Waist half circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille halve omtrek</translation>
     </message>
 </context>
 <context>
@@ -12712,14 +12664,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Pagina maten eenheden (export modus). Geldige waardes: %1.</translation>
     </message>
     <message>
-        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Zet de maat voor het patroon dat geopend werd met multimaten maten (export modus). Geldige waarden: %1cm.</translation>
-    </message>
-    <message>
-        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Zet de hoogte voor het patroon dat geopend werd met multimaten maten (export modus). Geldige waarden: %1cm.</translation>
-    </message>
-    <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Gebruik deze optie om de door de gebruiker gedefineerde materialen te overschrijven. De waarde moet in de vorm &lt;number&gt;@&lt;user matrial name&gt;. Het nummer moet tussen 1 en %1 vallen. Bijvoorbeeld, 1@Fabric2. De sleutel kan meerdere keren gebruikt worden. Het heeft geen effect in GUI modus.</translation>
     </message>
@@ -12809,39 +12753,39 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Invalid dimension A value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor dimensie A.</translation>
     </message>
     <message>
         <source>Invalid dimension B value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor dimensie B.</translation>
     </message>
     <message>
         <source>Invalid dimension C value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor dimensie C.</translation>
     </message>
     <message>
         <source>Set base for dimension A in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de basis voor dimensie A in de multimaten maten eenheden (export modus).</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie A basis</translation>
     </message>
     <message>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de basis voor dimensie B in de multimaten maten eenheden (export modus).</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie B basis</translation>
     </message>
     <message>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de basis voor dimensie C in de multimaten maten eenheden (export modus).</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie C basis</translation>
     </message>
 </context>
 <context>
@@ -13130,23 +13074,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Geen</translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hoogte</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Maat</translation>
+        <translation>Maat</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
 </context>
 <context>
@@ -13607,7 +13551,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Main path of piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdpad voor deel %1</translation>
     </message>
 </context>
 <context>
@@ -15989,131 +15933,6 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Hoek2ElHoek_</translation>
-    </message>
-    <message>
-        <source>date</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">datum</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">tijd</translation>
-    </message>
-    <message>
-        <source>patternName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">patroonNaam</translation>
-    </message>
-    <message>
-        <source>patternNumber</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">patroonNummer</translation>
-    </message>
-    <message>
-        <source>author</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">auteur</translation>
-    </message>
-    <message>
-        <source>customer</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">klant</translation>
-    </message>
-    <message>
-        <source>pExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pExt</translation>
-    </message>
-    <message>
-        <source>pFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pBestandsNaam</translation>
-    </message>
-    <message>
-        <source>mFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mBestandsNaam</translation>
-    </message>
-    <message>
-        <source>mExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mExt</translation>
-    </message>
-    <message>
-        <source>pLetter</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pLetter</translation>
-    </message>
-    <message>
-        <source>pAnnotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pAantekening</translation>
-    </message>
-    <message>
-        <source>pOrientation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pOrientatie</translation>
-    </message>
-    <message>
-        <source>pRotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pDraaiing</translation>
-    </message>
-    <message>
-        <source>pTilt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pTillen</translation>
-    </message>
-    <message>
-        <source>pFoldPosition</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pVouwPostie</translation>
-    </message>
-    <message>
-        <source>pName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNaam</translation>
-    </message>
-    <message>
-        <source>pQuantity</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pKwantiteit</translation>
-    </message>
-    <message>
-        <source>mFabric</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mStof</translation>
-    </message>
-    <message>
-        <source>mLining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mVoering</translation>
-    </message>
-    <message>
-        <source>mInterfacing</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mVlieseline</translation>
-    </message>
-    <message>
-        <source>mInterlining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mTussenvoering</translation>
-    </message>
-    <message>
-        <source>wCut</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">wKnippen</translation>
-    </message>
-    <message>
-        <source>wOnFold</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">wOpVouw</translation>
-    </message>
-    <message>
-        <source>userMaterial</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">gebruikersMateriaal</translation>
     </message>
     <message>
         <source>r2cm</source>

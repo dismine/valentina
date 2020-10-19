@@ -1668,11 +1668,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
 </context>
 <context>
@@ -3877,7 +3877,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Náhled</translation>
+        <translation>Náhled</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3893,11 +3893,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Plný název:</translation>
+        <translation>Plný název:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Popis:</translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3905,23 +3905,23 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Název</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Plný název</translation>
+        <translation>Plný název</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Základní hodnota</translation>
+        <translation>Základní hodnota</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4434,10 +4434,6 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Ukázat soubor s mírami</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Z vícevelikostních rozměrů</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation>Střih</translation>
     </message>
@@ -4507,7 +4503,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">rrrr mm dd</translation>
+        <translation>rrrr mm dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6225,7 +6221,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6261,7 +6257,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8520,14 +8516,6 @@ Chcete uložit své změny?</translation>
         <translation>Nelze vyvést jednotlivosti (díly střihu).</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">Nepodařilo se stanovit velikost. Soubor musí mít vícevelikostní rozměry.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">Nepodařilo se stanovit výšku. Soubor musí mít vícevelikostní rozměry.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Editor předlohy popisu</translation>
     </message>
@@ -8947,14 +8935,6 @@ Chcete uložit své změny?</translation>
         <translation>Soubor s rozměry obsahuje neplatný(é) rozměr(y).</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Nesprávné jednotky.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Program nepodporuje vícevelikostní tabulku s palci.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
@@ -8997,6 +8977,10 @@ Chcete uložit své změny?</translation>
 %1
 
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10902,18 +10886,6 @@ Chcete uložit změny?</translation>
         <translation>Vícevelikostní rozměry vyžadují alespoň 4 sloupce.</translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="vanished">Nelze převést hodnotu základní velikosti na dvojnásobek ve sloupci 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="vanished">Nelze převést hodnotu zvětšení velikosti na dvojnásobek ve sloupci 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="vanished">Nelze převést hodnotu zvětšení velikosti na dvojnásobek ve sloupci 4.</translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
     </message>
@@ -10978,20 +10950,12 @@ Chcete uložit změny?</translation>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
-        <source>Height (%1):</source>
-        <translation type="vanished">Výška (%1):</translation>
-    </message>
-    <message>
-        <source>Size (%1):</source>
-        <translation type="vanished">Velikost (%1):</translation>
-    </message>
-    <message>
         <source>Correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Jednotky:</translation>
+        <translation>Jednotky:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11091,11 +11055,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Palce</translation>
+        <translation>Palce</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetry</translation>
+        <translation>Centimetry</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11754,18 +11718,6 @@ Chcete uložit změny?</translation>
         <translation>Text se ukáže pod symbolem (doporučeno pro začátečníky).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Výchozí výška a velikost</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Výchozí výška:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Výchozí velikost:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>S volbami OS</translation>
     </message>
@@ -11877,11 +11829,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -12715,14 +12667,6 @@ Chcete uložit změny?</translation>
         <translation>Jednotky pro měření strany (režim vyvedení). Platné hodnoty: %1.</translation>
     </message>
     <message>
-        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Nastavit hodnotu velikosti pro soubor se střihem, který byl otevřen s vícevelikostními rozměry (režim vyvedení). Platné hodnoty: %1 cm.</translation>
-    </message>
-    <message>
-        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Nastavit hodnotu výšky pro soubor se střihem, který byl otevřen s vícevelikostními rozměry (režim vyvedení). Platné hodnoty: %1 cm.</translation>
-    </message>
-    <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Tuto volbu použijte na zrušení uživatelského materiálu stanoveného ve střihu. Hodnota musí být ve tvaru &lt;číslo&gt;@&lt;název uživatelského materiálu&gt;. Číslo má být v rozsahu od 1 po %1. Například, 1@Fabric2. Klíč lze použít vícekrát. Nemúčinkuje v režimu grafického uživatelského rozhraní.</translation>
     </message>
@@ -13133,15 +13077,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Žádný</translation>
+        <translation>Žádný</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -15992,131 +15936,6 @@ Chcete uložit změny?</translation>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel2ElOblouk_</translation>
-    </message>
-    <message>
-        <source>date</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">Datum</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">Čas</translation>
-    </message>
-    <message>
-        <source>patternName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">NázevStřihu</translation>
-    </message>
-    <message>
-        <source>patternNumber</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">ČísloStřihu</translation>
-    </message>
-    <message>
-        <source>author</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">Autor</translation>
-    </message>
-    <message>
-        <source>customer</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">Zákazník</translation>
-    </message>
-    <message>
-        <source>pExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pExt</translation>
-    </message>
-    <message>
-        <source>pFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNázevSouboru</translation>
-    </message>
-    <message>
-        <source>mFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mNázevSouboru</translation>
-    </message>
-    <message>
-        <source>mExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mExt</translation>
-    </message>
-    <message>
-        <source>pLetter</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pPísmeno</translation>
-    </message>
-    <message>
-        <source>pAnnotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pVysvětlivka</translation>
-    </message>
-    <message>
-        <source>pOrientation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNatočení</translation>
-    </message>
-    <message>
-        <source>pRotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pOtočení</translation>
-    </message>
-    <message>
-        <source>pTilt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pSklon</translation>
-    </message>
-    <message>
-        <source>pFoldPosition</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pPolohaZáhybu</translation>
-    </message>
-    <message>
-        <source>pName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pNázev</translation>
-    </message>
-    <message>
-        <source>pQuantity</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pMnožství</translation>
-    </message>
-    <message>
-        <source>mFabric</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pLátka</translation>
-    </message>
-    <message>
-        <source>mLining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pPodšívka</translation>
-    </message>
-    <message>
-        <source>mInterfacing</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">mVnitřníVýztuha</translation>
-    </message>
-    <message>
-        <source>mInterlining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">pVnitřníPodšívka</translation>
-    </message>
-    <message>
-        <source>wCut</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">wStřih</translation>
-    </message>
-    <message>
-        <source>wOnFold</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">wVZáhybu</translation>
-    </message>
-    <message>
-        <source>userMaterial</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">UživatelskýMateriál</translation>
     </message>
     <message>
         <source>r2cm</source>

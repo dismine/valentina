@@ -1668,7 +1668,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Label</source>
@@ -3872,7 +3872,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Prévisualiser</translation>
+        <translation>Prévisualiser</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3888,11 +3888,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Nom complet:</translation>
+        <translation>Nom complet:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Description:</translation>
+        <translation>Description:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3900,23 +3900,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Nom complet</translation>
+        <translation>Nom complet</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Description du patron</translation>
+        <translation>Description du patron</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Valeur de départ</translation>
+        <translation>Valeur de départ</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4498,7 +4498,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -6215,7 +6215,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6251,7 +6251,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taille</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -8924,10 +8924,6 @@ Voulez-vous sauvegarder les changements?</translation>
         <translation>Le tableau de mesure contient une ou plusieur valeurs connuse vides.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Mauvaises unités de mesure.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Erreur de fichier.</translation>
     </message>
@@ -8965,6 +8961,10 @@ Voulez-vous sauvegarder les changements?</translation>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10927,7 +10927,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Unités:</translation>
+        <translation>Unités:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11027,11 +11027,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pouces</translation>
+        <translation>Pouces</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimètres</translation>
+        <translation>Centimètres</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11690,18 +11690,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Un libellé accompagne les icônes (recommandé pour les débutants).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Taille et stature par défaut</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Stature par défaut:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Taille par défaut:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>Celui du système</translation>
     </message>
@@ -11813,11 +11801,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taille</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13051,15 +13039,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taille</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Hip</source>

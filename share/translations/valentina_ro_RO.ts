@@ -1469,7 +1469,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Label</source>
@@ -3577,11 +3577,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3589,11 +3589,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descriere</translation>
+        <translation>Descriere</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Valoarea de bază</translation>
+        <translation>Valoarea de bază</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -5593,7 +5593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -5629,7 +5629,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7957,10 +7957,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Unități de măsură greșite.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Eroare de fișier.</translation>
     </message>
@@ -7998,6 +7994,10 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9629,7 +9629,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Unități:</translation>
+        <translation>Unități:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -9729,11 +9729,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetrii</translation>
+        <translation>Centimetrii</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -10452,11 +10452,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -11475,11 +11475,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Hip</source>
