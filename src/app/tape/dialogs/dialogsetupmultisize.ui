@@ -30,7 +30,7 @@
      <item>
       <widget class="QGroupBox" name="groupBoxXDimension">
        <property name="title">
-        <string>Height</string>
+        <string comment="dimension">Height</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -120,7 +120,7 @@
      <item>
       <widget class="QGroupBox" name="groupBoxYDimension">
        <property name="title">
-        <string>Size</string>
+        <string comment="dimension">Size</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -220,7 +220,7 @@
      <item>
       <widget class="QGroupBox" name="groupBoxWDimension">
        <property name="title">
-        <string>Hip</string>
+        <string comment="dimension">Waist</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -310,7 +310,7 @@
      <item>
       <widget class="QGroupBox" name="groupBoxZDimension">
        <property name="title">
-        <string>Waist</string>
+        <string comment="dimension">Hip</string>
        </property>
        <property name="checkable">
         <bool>true</bool>

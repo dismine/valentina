@@ -166,13 +166,13 @@ QString VAbstartMeasurementDimension::DimensionName(MeasurementDimension type)
     switch(type)
     {
         case MeasurementDimension::X:
-            return tr("Height");
+            return tr("Height", "dimension");
         case MeasurementDimension::Y:
-            return tr("Size");
+            return tr("Size", "dimension");
         case MeasurementDimension::W:
-            return tr("Hip");
+            return tr("Waist", "dimension");
         case MeasurementDimension::Z:
-            return tr("Waist");
+            return tr("Hip", "dimension");
         default:
             return QString();
     }
@@ -184,21 +184,21 @@ QString VAbstartMeasurementDimension::DimensionToolTip(MeasurementDimension type
     switch(type)
     {
     case MeasurementDimension::X:
-        return tr("Height");
+        return tr("Height", "dimension");
     case MeasurementDimension::Y:
         if (circumference)
         {
-            return fc ? tr("Chest full circumference") : tr("Chest half circumference");
+            return fc ? tr("Chest full circumference", "dimension") : tr("Chest half circumference", "dimension");
         }
         else
         {
             return tr("Size");
         }
-        return circumference ? tr("Chest circumference") : tr("Size");
+        return circumference ? tr("Chest circumference", "dimension") : tr("Size", "dimension");
     case MeasurementDimension::W:
-        return fc ? tr("Hip full circumference") : tr("Hip half circumference");
+        return fc ? tr("Waist full circumference", "dimension") : tr("Waist half circumference", "dimension");
     case MeasurementDimension::Z:
-        return fc ? tr("Waist full circumference") : tr("Waist half circumference");
+        return fc ? tr("Hip full circumference", "dimension") : tr("Hip half circumference", "dimension");
     default:
         return QString();
     }

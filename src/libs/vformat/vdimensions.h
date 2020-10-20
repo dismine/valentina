@@ -37,8 +37,8 @@ enum class MeasurementDimension: qint8
 {
     X = 0, // height
     Y = 1, // size (chest half circumference)
-    W = 2, // hip half circumference
-    Z = 3  // waist half circumference
+    W = 2, // waist half circumference
+    Z = 3  // hip half circumference
 };
 
 class VAbstartMeasurementDimension;
