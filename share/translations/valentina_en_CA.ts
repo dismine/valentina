@@ -6218,7 +6218,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation type="vanished">Height</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6254,18 +6254,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation>Size</translation>
+        <translation type="vanished">Size</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6282,6 +6274,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Height</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Size</translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11820,46 +11832,65 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation type="vanished">Height</translation>
     </message>
     <message>
         <source>Size</source>
         <translation>Size</translation>
     </message>
     <message>
-        <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Height</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Size</translation>
     </message>
     <message>
         <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chest full circumference</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chest half circumference</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chest circumference</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip full circumference</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip half circumference</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waist full circumference</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waist half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip half circumference</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

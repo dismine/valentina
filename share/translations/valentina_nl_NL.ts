@@ -6220,7 +6220,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hoogte</translation>
+        <translation type="vanished">Hoogte</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6256,7 +6256,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -6264,11 +6264,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation>Heup</translation>
+        <translation type="vanished">Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation>Taille</translation>
+        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
@@ -6285,6 +6285,26 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Ready</source>
         <translation>Klaar</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Hoogte</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Maat</translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taille</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Heup</translation>
     </message>
 </context>
 <context>
@@ -11826,7 +11846,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hoogte</translation>
+        <translation type="vanished">Hoogte</translation>
     </message>
     <message>
         <source>Size</source>
@@ -11834,39 +11854,94 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation>Heup</translation>
+        <translation type="vanished">Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation>Taille</translation>
+        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
-        <translation>Volledige borstomtrek</translation>
+        <translation type="vanished">Volledige borstomtrek</translation>
     </message>
     <message>
         <source>Chest half circumference</source>
-        <translation>Borst halve omtrek</translation>
+        <translation type="vanished">Borst halve omtrek</translation>
     </message>
     <message>
         <source>Chest circumference</source>
-        <translation>Borstomtrek</translation>
+        <translation type="vanished">Borstomtrek</translation>
     </message>
     <message>
         <source>Hip full circumference</source>
-        <translation>Heup volledige omtrek</translation>
+        <translation type="vanished">Heup volledige omtrek</translation>
     </message>
     <message>
         <source>Hip half circumference</source>
-        <translation>Heup halve omtrek</translation>
+        <translation type="vanished">Heup halve omtrek</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
-        <translation>Taille volledige omtrek</translation>
+        <translation type="vanished">Taille volledige omtrek</translation>
     </message>
     <message>
         <source>Waist half circumference</source>
-        <translation>Taille halve omtrek</translation>
+        <translation type="vanished">Taille halve omtrek</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Hoogte</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Maat</translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taille</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Heup</translation>
+    </message>
+    <message>
+        <source>Chest full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Volledige borstomtrek</translation>
+    </message>
+    <message>
+        <source>Chest half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Borst halve omtrek</translation>
+    </message>
+    <message>
+        <source>Chest circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Borstomtrek</translation>
+    </message>
+    <message>
+        <source>Waist full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taille volledige omtrek</translation>
+    </message>
+    <message>
+        <source>Waist half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taille halve omtrek</translation>
+    </message>
+    <message>
+        <source>Hip full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Heup volledige omtrek</translation>
+    </message>
+    <message>
+        <source>Hip half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Heup halve omtrek</translation>
     </message>
 </context>
 <context>
