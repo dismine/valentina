@@ -339,11 +339,11 @@ int VWMeasurementDimension::RangeMin() const
     switch(m_units)
     {
         case Unit::Cm:
-            return 33;
+            return 20;
         case Unit::Mm:
-            return 330;
+            return 200;
         case Unit::Inch:
-            return 12;
+            return 8;
         default:
             return 0;
     }
@@ -355,11 +355,11 @@ int VWMeasurementDimension::RangeMax() const
     switch(m_units)
     {
         case Unit::Cm:
-            return 63;
+            return 65;
         case Unit::Mm:
-            return 630;
+            return 650;
         case Unit::Inch:
-            return 25;
+            return 26;
         default:
             return 0;
     }
@@ -388,11 +388,11 @@ int VZMeasurementDimension::RangeMin() const
     switch(m_units)
     {
         case Unit::Cm:
-            return 33;
+            return 20;
         case Unit::Mm:
-            return 330;
+            return 200;
         case Unit::Inch:
-            return 12;
+            return 8;
         default:
             return 0;
     }
@@ -404,11 +404,11 @@ int VZMeasurementDimension::RangeMax() const
     switch(m_units)
     {
         case Unit::Cm:
-            return 63;
+            return 75;
         case Unit::Mm:
-            return 630;
+            return 750;
         case Unit::Inch:
-            return 25;
+            return 30;
         default:
             return 0;
     }
