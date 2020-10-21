@@ -2267,7 +2267,7 @@ void MainWindow::ToolBarOption()
     doubleSpinBoxScale->setDecimals(1);
     doubleSpinBoxScale->setSuffix("%");
     ScaleChanged(ui->view->transform().m11());
-    connect(doubleSpinBoxScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+    connect(doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){ui->view->Zoom(d/100.0);});
     ui->toolBarOption->addWidget(doubleSpinBoxScale);
 
@@ -3987,19 +3987,19 @@ void MainWindow::InitDimensionControls()
 
         if (not dimensionA.isNull())
         {
-            connect(dimensionA, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            connect(dimensionA.data(), QOverload<int>::of(&QComboBox::currentIndexChanged),
                     this, &MainWindow::DimensionABaseChanged);
         }
 
         if (not dimensionB.isNull())
         {
-            connect(dimensionB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            connect(dimensionB.data(), QOverload<int>::of(&QComboBox::currentIndexChanged),
                     this, &MainWindow::DimensionBBaseChanged);
         }
 
         if (not dimensionC.isNull())
         {
-            connect(dimensionC, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            connect(dimensionC.data(), QOverload<int>::of(&QComboBox::currentIndexChanged),
                     this, &MainWindow::DimensionCBaseChanged);
         }
 
