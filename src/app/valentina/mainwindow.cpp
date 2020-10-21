@@ -65,6 +65,7 @@
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 #include "../vformat/vpatternrecipe.h"
 #include "watermarkwindow.h"
+#include "../vmisc/backport/qoverload.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
