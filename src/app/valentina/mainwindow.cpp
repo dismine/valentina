@@ -2121,26 +2121,24 @@ void MainWindow::StoreIndividualMDimensions()
     auto StoreDimension = [this, measurements](IMD type)
     {
         const QString name = m->MeasurementForDimension(type);
-        if (not name.isEmpty() && measurements.contains(name))
+        const bool valid = not name.isEmpty() && measurements.contains(name);
+        switch(type)
         {
-            switch(type)
-            {
-                case IMD::X:
-                    qApp->SetDimensionHeight(*measurements.value(name)->GetValue());
-                    break;
-                case IMD::Y:
-                    qApp->SetDimensionSize(*measurements.value(name)->GetValue());
-                    break;
-                case IMD::W:
-                    qApp->SetDimensionHip(*measurements.value(name)->GetValue());
-                    break;
-                case IMD::Z:
-                    qApp->SetDimensionWaist(*measurements.value(name)->GetValue());
-                    break;
-                case IMD::N:
-                default:
-                    break;
-            }
+            case IMD::X:
+                qApp->SetDimensionHeight(valid ? *measurements.value(name)->GetValue() : 0);
+                break;
+            case IMD::Y:
+                qApp->SetDimensionSize(valid ? *measurements.value(name)->GetValue() : 0);
+                break;
+            case IMD::W:
+                qApp->SetDimensionHip(valid ? *measurements.value(name)->GetValue() : 0);
+                break;
+            case IMD::Z:
+                qApp->SetDimensionWaist(valid ? *measurements.value(name)->GetValue() : 0);
+                break;
+            case IMD::N:
+            default:
+                break;
         }
     };
 
