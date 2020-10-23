@@ -6217,10 +6217,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Height</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6253,10 +6249,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Size</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6279,12 +6271,12 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Height</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Size</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -11831,22 +11823,18 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Height</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Size</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Height</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Size</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <source>Waist</source>

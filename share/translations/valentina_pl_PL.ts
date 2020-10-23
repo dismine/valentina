@@ -5659,10 +5659,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Wysokość</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5695,10 +5691,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Rozmiar</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5721,12 +5713,12 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Wysokość</translation>
+        <translation>Wysokość</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Rozmiar</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -10718,22 +10710,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Wysokość</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Wysokość</translation>
+        <translation>Wysokość</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Rozmiar</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Waist</source>

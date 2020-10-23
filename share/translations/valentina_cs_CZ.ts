@@ -6220,10 +6220,6 @@ Přesto použít nastavení?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Výška</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6256,10 +6252,6 @@ Přesto použít nastavení?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Velikost</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6282,12 +6274,12 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -11840,22 +11832,18 @@ Chcete uložit změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Výška</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Waist</source>

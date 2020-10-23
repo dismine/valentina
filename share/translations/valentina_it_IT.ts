@@ -6211,10 +6211,6 @@ Applicare la configurazione comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Altezza</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6247,10 +6243,6 @@ Applicare la configurazione comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Taglia</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6273,12 +6265,12 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Altezza</translation>
+        <translation>Altezza</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Taglia</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -11822,22 +11814,18 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Altezza</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Taglia</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Altezza</translation>
+        <translation>Altezza</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Taglia</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Waist</source>

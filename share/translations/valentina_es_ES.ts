@@ -6218,10 +6218,6 @@ Aplicar características de todos modos?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Altura</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6254,10 +6250,6 @@ Aplicar características de todos modos?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Talla</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6280,12 +6272,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Talla</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -11838,22 +11830,18 @@ Quieres guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="vanished">Altura</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Talla</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Talla</translation>
     </message>
     <message>
         <source>Waist</source>

@@ -1664,7 +1664,7 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Метки измерения</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1944,35 +1944,35 @@
     </message>
     <message>
         <source>Measurements units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения мерок</translation>
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения выкройки</translation>
     </message>
     <message>
         <source>Size units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения размера</translation>
     </message>
     <message>
         <source>Customer birth date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата рождения клиента</translation>
     </message>
     <message>
         <source>Customer email</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронная почта клиента</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерка: %1</translation>
     </message>
 </context>
 <context>
@@ -2039,7 +2039,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Высота</translation>
+        <translation type="vanished">Рост</translation>
     </message>
     <message>
         <source>Size</source>
@@ -3229,7 +3229,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation>Рост:</translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
@@ -3873,7 +3873,7 @@ Apply settings anyway?</source>
     <name>DialogMeasurementsCSVColumns</name>
     <message>
         <source>Setup columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки столбцов</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -3889,7 +3889,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Столбцы</translation>
     </message>
     <message>
         <source>Full name:</source>
@@ -3901,7 +3901,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <source>Name</source>
@@ -3925,7 +3925,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3933,7 +3933,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Shift (%1)*:</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (%1)*:</translation>
     </message>
     <message>
         <source>File path is empty</source>
@@ -3941,15 +3941,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно столбцов</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно данных для импорта</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, выберите уникальный номер для каждого столбца</translation>
     </message>
 </context>
 <context>
@@ -4499,7 +4499,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата рождения клиента:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
@@ -4507,15 +4507,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронная почта клиента:</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронная почта клиента с индивидуальными мерками</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата рождения клиента с индивидуальными мерками</translation>
     </message>
 </context>
 <context>
@@ -5059,7 +5059,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation>Рост:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -5678,15 +5678,15 @@ Apply settings anyway?</source>
     <name>DialogRestrictDimension</name>
     <message>
         <source>Restrict dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить измерение</translation>
     </message>
     <message>
         <source>Dimension A:</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение A:</translation>
     </message>
     <message>
         <source>Restriction</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение</translation>
     </message>
     <message>
         <source>Min:</source>
@@ -6213,91 +6213,83 @@ Apply settings anyway?</source>
     <name>DialogSetupMultisize</name>
     <message>
         <source>Setup multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка мультиразмерных мерок</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Высота</translation>
+        <translation>Использовать полный обхват</translation>
     </message>
     <message>
         <source>Min value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальное значение:</translation>
     </message>
     <message>
         <source>Minimal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальное значение, указанное в столбце</translation>
     </message>
     <message>
         <source>Max value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное значение:</translation>
     </message>
     <message>
         <source>Maximal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное значение, указанное в столбце</translation>
     </message>
     <message>
         <source>Step:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг:</translation>
     </message>
     <message>
         <source>Single-step between the column values</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг между значениями в столбце</translation>
     </message>
     <message>
         <source>Base:</source>
-        <translation type="unfinished"></translation>
+        <translation>База:</translation>
     </message>
     <message>
         <source>The base value for the column</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Размер</translation>
+        <translation>Базовое значение столбца</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Обхват</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, укажите правильные данные для измерений</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, выберите хотя бы одно измерение</translation>
     </message>
     <message>
         <source>No more than 3 dimensions allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Допускается не более 3 измерений</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
 </context>
 <context>
@@ -7255,35 +7247,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set base for dimension A in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения A в единицах измерения таблицы.</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение А - база</translation>
     </message>
     <message>
         <source>Set base for dimension B in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения B в единицах измерения таблицы.</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение B - база</translation>
     </message>
     <message>
         <source>Set base for dimension C in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения C в единицах измерения таблицы.</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение C - база</translation>
     </message>
     <message>
         <source>Set pattern file units: cm, mm, inch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите единицу измерения файла выкройки: см, мм, дюйм.</translation>
     </message>
     <message>
         <source>The pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения выкройки</translation>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
@@ -8776,11 +8768,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение A. Нужен файл с мультиразмерными мерками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение A. Файл не открыт.</translation>
     </message>
     <message>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
@@ -8788,11 +8780,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение B. Нужен файл с мультиразмерными мерками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение B. Файл не открыт.</translation>
     </message>
     <message>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
@@ -8800,11 +8792,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение C. Нужен файл с мультиразмерными мерками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение C. Файл не открыт.</translation>
     </message>
 </context>
 <context>
@@ -8991,7 +8983,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть файл, доступен ли он для записи?</translation>
     </message>
 </context>
 <context>
@@ -10962,7 +10954,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Коррекция</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -10970,87 +10962,87 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift B</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение B</translation>
     </message>
     <message>
         <source>Shift C</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение C</translation>
     </message>
     <message>
         <source>Correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коррекция:</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите одно из измерений, чтобы в дальнейшем использовать значение мерки в метке детали</translation>
     </message>
     <message>
         <source>Base Values:</source>
-        <translation type="unfinished"></translation>
+        <translation>Базовые значения:</translation>
     </message>
     <message>
         <source>Export to individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт в индивидуальные</translation>
     </message>
     <message>
         <source>Export to individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт в индивидуальные мерки</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать полный обхват</translation>
     </message>
     <message>
         <source>Restrict second dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить второе измерение</translation>
     </message>
     <message>
         <source>Restrict third dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить третье измерение</translation>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Метки измерения</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>В таблице не указаны измерения</translation>
     </message>
     <message>
         <source>Invalid base value for dimension A</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение для измерения A</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension B</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица не поддерживает измерение B</translation>
     </message>
     <message>
         <source>Invalid base value for dimension B</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение для измерения B</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица не поддерживает измерение C</translation>
     </message>
     <message>
         <source>Invalid base value for dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение для измерения C</translation>
     </message>
     <message>
         <source>measurements.vit</source>
-        <translation type="unfinished"></translation>
+        <translation>мерки.vit</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (%1):</translation>
     </message>
     <message>
         <source>%1 shift</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 смещение</translation>
     </message>
     <message>
         <source>Cannot convert base value to double in column 2.</source>
@@ -11062,7 +11054,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -11074,7 +11066,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Градусы</translation>
     </message>
 </context>
 <context>
@@ -11172,7 +11164,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation>Рост:</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -11832,15 +11824,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid step</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный шаг</translation>
     </message>
     <message>
         <source>Base value invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Высота</translation>
+        <translation>Неправильное базовое значение</translation>
     </message>
     <message>
         <source>Size</source>
@@ -11849,57 +11837,57 @@ Do you want to save your changes?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полный обхват груди</translation>
     </message>
     <message>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полуобхват груди</translation>
     </message>
     <message>
         <source>Chest circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Обхват груди</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полный обхват талии</translation>
     </message>
     <message>
         <source>Waist half circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полуобхват талии</translation>
     </message>
     <message>
         <source>Hip full circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полный обхват бёдер</translation>
     </message>
     <message>
         <source>Hip half circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полуобхват бёдер</translation>
     </message>
 </context>
 <context>
@@ -12786,39 +12774,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid dimension A value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое значение измерения A.</translation>
     </message>
     <message>
         <source>Invalid dimension B value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое значение измерения B.</translation>
     </message>
     <message>
         <source>Invalid dimension C value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое значение измерения C.</translation>
     </message>
     <message>
         <source>Set base for dimension A in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения A в единицах измерения мультиразмерных мерок (режим экспорта).</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение А - база</translation>
     </message>
     <message>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения B в единицах измерения мультиразмерных мерок (режим экспорта).</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение B - база</translation>
     </message>
     <message>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения C в единицах измерения мультиразмерных мерок (режим экспорта).</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение C - база</translation>
     </message>
 </context>
 <context>
@@ -13111,7 +13099,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation>Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Size</source>
@@ -13119,11 +13107,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
 </context>
 <context>
