@@ -3913,19 +3913,15 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Plný název</translation>
+        <translation type="vanished">Plný název</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Popis</translation>
+        <translation type="vanished">Popis</translation>
     </message>
     <message>
         <source>Base value</source>
         <translation>Základní hodnota</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3949,6 +3945,36 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Hodnota</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Plný název</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Popis</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Základní hodnota</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10210,7 +10236,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation type="vanished">Název</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -10218,11 +10244,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Vzorec</translation>
+        <translation type="vanished">Vzorec</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Základní hodnota</translation>
+        <translation type="vanished">Základní hodnota</translation>
     </message>
     <message>
         <source>In sizes</source>
@@ -10592,7 +10618,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Plný název</translation>
+        <translation type="vanished">Plný název</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -10954,10 +10980,6 @@ Chcete uložit změny?</translation>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Jednotky:</translation>
     </message>
@@ -11067,6 +11089,36 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Plný název</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vypočítaná hodnota</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vzorec</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Základní hodnota</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

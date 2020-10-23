@@ -2912,19 +2912,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Base value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2949,6 +2937,36 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8008,19 +8026,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Calculated value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Base value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8266,10 +8272,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File has unknown format.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Full name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8572,10 +8574,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8685,6 +8683,36 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

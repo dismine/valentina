@@ -251,13 +251,13 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
         switch(individualColumn)
         {
             case IndividualMeasurementsColumns::Name:
-                return tr("Name");
+                return tr("Name", "measurement column");
             case IndividualMeasurementsColumns::Value:
-                return tr("Value");
+                return tr("Value", "measurement column");
             case IndividualMeasurementsColumns::FullName:
-                return tr("Full name");
+                return tr("Full name", "measurement column");
             case IndividualMeasurementsColumns::Description:
-                return tr("Description");
+                return tr("Description", "measurement column");
             default:
                 return QString();
         }
@@ -268,14 +268,15 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
         switch(multisizeColumn)
         {
             case MultisizeMeasurementsColumns::Name:
-                return tr("Name");
+                return tr("Name", "measurement column");
             case MultisizeMeasurementsColumns::BaseValue:
-                return tr("Base value");
+                return tr("Base value", "measurement column");
             case MultisizeMeasurementsColumns::ShiftA:
                 if (m_dimensions.size() > 0)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(0);
-                    return tr("Shift (%1):").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
+                    return tr("Shift (%1):", "measurement column")
+                        .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
                 }
                 else
                 {
@@ -285,7 +286,8 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
                 if (m_dimensions.size() > 1)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(1);
-                    return tr("Shift (%1):").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
+                    return tr("Shift (%1):", "measurement column")
+                        .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
                 }
                 else
                 {
@@ -295,16 +297,17 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
                 if (m_dimensions.size() > 2)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(2);
-                    return tr("Shift (%1):").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
+                    return tr("Shift (%1):", "measurement column")
+                        .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
                 }
                 else
                 {
                     return "Shift C";
                 }
             case MultisizeMeasurementsColumns::FullName:
-                return tr("Full name");
+                return tr("Full name", "measurement column");
             case MultisizeMeasurementsColumns::Description:
-                return tr("Description");
+                return tr("Description", "measurement column");
             default:
                 return QString();
         }

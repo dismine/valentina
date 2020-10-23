@@ -14,7 +14,7 @@
    <string notr="true"/>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="share/resources/tapeicon.qrc">
     <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -47,11 +47,11 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
-        <iconset>
+        <iconset resource="share/resources/tapeicon.qrc">
          <normaloff>:/tapeicon/16x16/measurement.png</normaloff>:/tapeicon/16x16/measurement.png</iconset>
        </attribute>
        <attribute name="title">
@@ -148,47 +148,47 @@
            </attribute>
            <column>
             <property name="text">
-             <string>Name</string>
+             <string comment="measurement column">Name</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Full name</string>
+             <string comment="measurement column">Full name</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Calculated value</string>
+             <string comment="measurement column">Calculated value</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Formula</string>
+             <string comment="measurement column">Formula</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Base value</string>
+             <string comment="measurement column">Base value</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string notr="true">Shift A</string>
+             <string notr="true" comment="measurement column">Shift A</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string notr="true">Shift B</string>
+             <string notr="true" comment="measurement column">Shift B</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string notr="true">Shift C</string>
+             <string notr="true" comment="measurement column">Shift C</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Correction</string>
+             <string comment="measurement column">Correction</string>
             </property>
            </column>
           </widget>
@@ -457,7 +457,7 @@
                    <string notr="true">...</string>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="share/resources/tapeicon.qrc">
                     <normaloff>:/tapeicon/24x24/fx.png</normaloff>:/tapeicon/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -649,7 +649,7 @@
       </widget>
       <widget class="QWidget" name="tabInformation">
        <attribute name="icon">
-        <iconset>
+        <iconset resource="share/resources/tapeicon.qrc">
          <normaloff>:/tapeicon/16x16/info.png</normaloff>:/tapeicon/16x16/info.png</iconset>
        </attribute>
        <attribute name="title">
@@ -1209,7 +1209,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="share/resources/tapeicon.qrc">
      <normaloff>:/tapeicon/24x24/red_plus.png</normaloff>:/tapeicon/24x24/red_plus.png</iconset>
    </property>
    <property name="text">
@@ -1224,7 +1224,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="share/resources/tapeicon.qrc">
      <normaloff>:/tapeicon/24x24/orange_plus.png</normaloff>:/tapeicon/24x24/orange_plus.png</iconset>
    </property>
    <property name="text">
@@ -1242,7 +1242,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="share/resources/tapeicon.qrc">
      <normaloff>:/tapeicon/24x24/padlock_opened.png</normaloff>:/tapeicon/24x24/padlock_opened.png</iconset>
    </property>
    <property name="text">
@@ -1350,7 +1350,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="share/resources/tapeicon.qrc">
      <normaloff>:/tapeicon/24x24/mannequin.png</normaloff>:/tapeicon/24x24/mannequin.png</iconset>
    </property>
    <property name="text">
@@ -1433,7 +1433,9 @@
    <header location="global">vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="share/resources/tapeicon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionMeasurementDiagram</sender>

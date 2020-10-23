@@ -3592,19 +3592,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Pełna nazwa</translation>
+        <translation type="vanished">Pełna nazwa</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation type="vanished">Opis</translation>
     </message>
     <message>
         <source>Base value</source>
         <translation>Wartość podstawowa</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3628,6 +3624,36 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Nazwa</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Wartość</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Pełna nazwa</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Opis</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Wartość podstawowa</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9172,7 +9198,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nazwa</translation>
+        <translation type="vanished">Nazwa</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -9180,11 +9206,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formuła</translation>
+        <translation type="vanished">Formuła</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Wartość podstawowa</translation>
+        <translation type="vanished">Wartość podstawowa</translation>
     </message>
     <message>
         <source>Details</source>
@@ -9505,7 +9531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Pełna nazwa</translation>
+        <translation type="vanished">Pełna nazwa</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -9839,10 +9865,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Jednostki:</translation>
     </message>
@@ -9952,6 +9974,36 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Nazwa</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Pełna nazwa</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Wartość obliczona</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Formuła</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Wartość podstawowa</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3913,11 +3913,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Volledige naam</translation>
+        <translation type="vanished">Volledige naam</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschrijving</translation>
+        <translation type="vanished">Beschrijving</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -3925,7 +3925,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation>Shift (%1):</translation>
+        <translation type="vanished">Shift (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3950,6 +3950,36 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Please, select unique number for each column</source>
         <translation>Gelieve een uniek nummer voor elke kolom te selecteren</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Waarde</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Volledige naam</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Beschrijving</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Basis waarde</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Shift (%1):</translation>
     </message>
 </context>
 <context>
@@ -8981,7 +9011,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestand niet openen. Is het beschrijfbaar?</translation>
     </message>
 </context>
 <context>
@@ -10207,7 +10237,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Naam</translation>
+        <translation type="vanished">Naam</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -10215,11 +10245,11 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formule</translation>
+        <translation type="vanished">Formule</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Basis waarde</translation>
+        <translation type="vanished">Basis waarde</translation>
     </message>
     <message>
         <source>In sizes</source>
@@ -10589,7 +10619,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Volledige naam</translation>
+        <translation type="vanished">Volledige naam</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -10952,7 +10982,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Correction</source>
-        <translation>Aanpassing</translation>
+        <translation type="vanished">Aanpassing</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -11065,6 +11095,36 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Degrees</source>
         <translation>Graden</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Volledige naam</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Berekende waarde</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Formule</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Basis waarde</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Aanpassing</translation>
     </message>
 </context>
 <context>

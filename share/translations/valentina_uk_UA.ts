@@ -3911,19 +3911,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Повне ім&apos;я</translation>
+        <translation type="vanished">Повне ім&apos;я</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Опис</translation>
+        <translation type="vanished">Опис</translation>
     </message>
     <message>
         <source>Base value</source>
         <translation>Базове значення</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3947,6 +3943,36 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Значення</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Повне ім&apos;я</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Опис</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Базове значення</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10202,7 +10228,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Позначення</translation>
+        <translation type="vanished">Позначення</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -10210,11 +10236,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Формула</translation>
+        <translation type="vanished">Формула</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Базове значення</translation>
+        <translation type="vanished">Базове значення</translation>
     </message>
     <message>
         <source>In sizes</source>
@@ -10584,7 +10610,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Повне ім&apos;я</translation>
+        <translation type="vanished">Повне ім&apos;я</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -10946,10 +10972,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Одинці виміру:</translation>
     </message>
@@ -11059,6 +11081,36 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Повне ім&apos;я</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Розраховане значення</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Формула</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Базове значення</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

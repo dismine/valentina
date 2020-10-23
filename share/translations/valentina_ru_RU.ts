@@ -1409,7 +1409,7 @@
     </message>
     <message>
         <source>Name of detail</source>
-        <translation type="vanished">Имя детали</translation>
+        <translation type="vanished">Название детали</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -1485,7 +1485,7 @@
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="vanished">Имя детали:</translation>
+        <translation type="vanished">Название детали:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -3873,7 +3873,7 @@ Apply settings anyway?</source>
     <name>DialogMeasurementsCSVColumns</name>
     <message>
         <source>Setup columns</source>
-        <translation>Настройки столбцов</translation>
+        <translation>Настройки колонок</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -3881,15 +3881,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Входные данные</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные, необходимые для импорта</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation>Столбцы</translation>
+        <translation>Колонки</translation>
     </message>
     <message>
         <source>Full name:</source>
@@ -3913,11 +3913,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Полное название</translation>
+        <translation type="vanished">Полное название</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Описание</translation>
+        <translation type="vanished">Описание</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -3925,11 +3925,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation>Смещение (%1):</translation>
+        <translation type="vanished">Смещение (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропустить</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
@@ -3941,7 +3941,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation>Недостаточно столбцов</translation>
+        <translation>Недостаточно колонок</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
@@ -3949,7 +3949,37 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation>Пожалуйста, выберите уникальный номер для каждого столбца</translation>
+        <translation>Пожалуйста, выберите уникальный номер для каждой колонки</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Описание</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Базовое значение</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Смещение (%1):</translation>
     </message>
 </context>
 <context>
@@ -6225,7 +6255,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Minimal value described in the column</source>
-        <translation>Минимальное значение, указанное в столбце</translation>
+        <translation>Минимальное значение, указанное в колонке</translation>
     </message>
     <message>
         <source>Max value:</source>
@@ -6233,7 +6263,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Maximal value described in the column</source>
-        <translation>Максимальное значение, указанное в столбце</translation>
+        <translation>Максимальное значение, указанное в колонке</translation>
     </message>
     <message>
         <source>Step:</source>
@@ -6241,7 +6271,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Single-step between the column values</source>
-        <translation>Шаг между значениями в столбце</translation>
+        <translation>Шаг между значениями в колонке</translation>
     </message>
     <message>
         <source>Base:</source>
@@ -6249,7 +6279,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base value for the column</source>
-        <translation>Базовое значение столбца</translation>
+        <translation>Базовое значение колонки</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -10209,7 +10239,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation type="vanished">Имя</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -10217,11 +10247,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Формула</translation>
+        <translation type="vanished">Формула</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Базовое значение</translation>
+        <translation type="vanished">Базовое значение</translation>
     </message>
     <message>
         <source>In sizes</source>
@@ -10591,7 +10621,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Полное имя</translation>
+        <translation type="vanished">Полное имя</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -10954,7 +10984,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Correction</source>
-        <translation>Коррекция</translation>
+        <translation type="vanished">Коррекция</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -11067,6 +11097,36 @@ Do you want to save your changes?</source>
     <message>
         <source>Degrees</source>
         <translation>Градусы</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Рассчитанное значение</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Формула</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Базовое значение</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Коррекция</translation>
     </message>
 </context>
 <context>

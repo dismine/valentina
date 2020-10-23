@@ -3584,20 +3584,12 @@ Apply settings anyway?</source>
         <translation>Valoare</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description</source>
-        <translation>Descriere</translation>
+        <translation type="vanished">Descriere</translation>
     </message>
     <message>
         <source>Base value</source>
         <translation>Valoarea de bază</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3621,6 +3613,36 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Nume</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Valoare</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Descriere</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Valoarea de bază</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9029,7 +9051,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nume</translation>
+        <translation type="vanished">Nume</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -9037,11 +9059,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formula</translation>
+        <translation type="vanished">Formula</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Valoarea de bază</translation>
+        <translation type="vanished">Valoarea de bază</translation>
     </message>
     <message>
         <source>In sizes</source>
@@ -9322,10 +9344,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File has unknown format.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Full name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9628,10 +9646,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Unități:</translation>
     </message>
@@ -9741,6 +9755,36 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Nume</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Formula</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Valoarea de bază</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3912,19 +3912,15 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Vollständiger Name</translation>
+        <translation type="vanished">Vollständiger Name</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation type="vanished">Beschreibung</translation>
     </message>
     <message>
         <source>Base value</source>
         <translation>Basiswert</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3948,6 +3944,36 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vollständiger Name</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Beschreibung</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Basiswert</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10207,7 +10233,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Bezeichnung</translation>
+        <translation type="vanished">Bezeichnung</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -10215,11 +10241,11 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formel</translation>
+        <translation type="vanished">Formel</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Basiswert</translation>
+        <translation type="vanished">Basiswert</translation>
     </message>
     <message>
         <source>In sizes</source>
@@ -10588,7 +10614,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Vollständiger Name</translation>
+        <translation type="vanished">Vollständiger Name</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -10950,10 +10976,6 @@ Do you want to save your changes?</source>
         <translation>Kann Einstellungen nicht aus fehlerhafter .INI Datei lesen.</translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Einheiten:</translation>
     </message>
@@ -11063,6 +11085,36 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vollständiger Name</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Berechneter Wert</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Formel</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Basiswert</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
