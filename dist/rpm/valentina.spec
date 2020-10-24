@@ -91,7 +91,7 @@ Requires: poppler-tools
 Requires: poppler-utils
 %endif
 
-Version:	0.7.0
+Version:	0.7.36
 Release:	0
 URL:		https://gitlab.com/smart-pattern/valentina
 License:	GPL-3.0+
@@ -243,6 +243,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Mon Jun 11 2018 Roman Telezhynskyi
+* Sat Oct 24 2020 Roman Telezhynskyi
  - Auto build
 

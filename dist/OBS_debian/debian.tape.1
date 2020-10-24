@@ -1,6 +1,6 @@
 .\" Manpage for tape.
 .\" Contact dismine@gmail.com to correct errors.
-.TH tape 1 "10 March, 2017" "tape man page"
+.TH tape 1 "3 October, 2020" "tape man page"
 .SH NAME
 Tape \- Valentina's measurements editor.
 .SH SYNOPSIS
@@ -20,12 +20,14 @@ is a part of Valentina. And used for creating and editing measurement files.
 Displays this help.
 .IP "-v, --version"
 Displays version information.
-.IP "-e, --height <The base height>"
-Open with the base height. Valid values: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182, 188, 194, 200cm.
-.IP "-s, --size <The base size>" 
-Open with the base size. Valid values: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56cm.
-.IP "-u, --unit <The pattern unit>" 
-Set pattern file unit: cm, mm, inch.
+.IP "-a, --dimensionA <The dimension A base>"
+Set base for dimension A in the table units.
+.IP "-b, --dimensionB <The dimension B base>"
+Set base for dimension B in the table units.
+.IP "-c, --dimensionA <The dimension C base>"
+Set base for dimension C in the table units.
+.IP "-u, --units <The pattern units>" 
+Set pattern file units: cm, mm, inch.
 .IP "--test"
 Use for unit testing. Run the program and open a file without showing the main window.
 .IP "--no-scaling"
@@ -35,9 +37,5 @@ Disable high dpi scaling. Call this option if has problem with scaling (by defau
 \- the measurement file.
 .SH AUTHOR
 .RI "This  manual  page  was  written  by Roman Telezhynskyi <" dismine@gmail.com ">"
-.SH "SEE ALSO"
-.RB "Full " "User Manual" " is availiable in" 
-.UR https://bitbucket.org/dismine/valentina/wiki/manual/Content
-.UE
 
 .BR valentina (1)

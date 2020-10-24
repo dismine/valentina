@@ -6,11 +6,11 @@
 #define MyAppPublisher "Roman Telezhynskyi"
 #define MyAppURL "http://valentinaproject.bitbucket.io/"
 #define MyAppExeName "valentina.exe"
-#define MyAppCopyright "(C) 2013-2018 Valentina project"
+#define MyAppCopyright "(C) 2013-2020 Valentina project"
 #define MyDateTimeString GetDateTimeString('yyyymmddhhnnss', '', '');
 ; Appstatus: "" = release, "b" = beta, "a" = alpha
 ; this only modifies the resulting exe name of the installer package ;-)
-#define MyAppStatus "a"
+#define MyAppStatus ""
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -226,8 +226,6 @@ Source: ".\valentina\*.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\valentina\*.rcc"; DestDir: "{app}"; Flags: ignoreversion 
 Source: ".\valentina\*.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\valentina\*.ini"; DestDir: "{app}"; Flags: ignoreversion
-; Only for test versions
-;Source: ".\valentina\VERSION"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; DLL used to check if the target program is running at install time
 
