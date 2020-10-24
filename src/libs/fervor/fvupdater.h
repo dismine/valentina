@@ -46,7 +46,6 @@ public:
     static QString CurrentFeedURL();
     static int CurrentVersion();
     static bool IsTestBuild();
-    static bool IsStaledTestBuild();
 
     // Set / get feed URL
     void SetFeedURL(const QUrl &feedURL);
@@ -55,8 +54,6 @@ public:
 
     bool IsDropOnFinnish() const;
     void SetDropOnFinnish(bool value);
-
-    static const int testBuildLifetime;
 
 public slots:
     // Check for updates
