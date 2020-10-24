@@ -3905,27 +3905,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Название</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Value</source>
         <translation>Значение</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="vanished">Полное название</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Описание</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Базовое значение</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="vanished">Смещение (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3954,32 +3942,32 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полное имя</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базовое значение</translation>
+        <translation>Базовое значение</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Смещение (%1):</translation>
+        <translation>Смещение (%1):</translation>
     </message>
 </context>
 <context>
@@ -10649,7 +10637,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The full name of known measurement forbidden to change.</source>
-        <translation>Нельзя изменить полное название известной мерки.</translation>
+        <translation>Нельзя изменить полное имя известной мерки.</translation>
     </message>
     <message>
         <source>Name in formula</source>
@@ -10983,10 +10971,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="vanished">Коррекция</translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Единицы измерения:</translation>
     </message>
@@ -11101,32 +11085,32 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полное имя</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Рассчитанное значение</translation>
+        <translation>Рассчитанное значение</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Формула</translation>
+        <translation>Формула</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базовое значение</translation>
+        <translation>Базовое значение</translation>
     </message>
     <message>
         <source>Correction</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Коррекция</translation>
+        <translation>Коррекция</translation>
     </message>
 </context>
 <context>

@@ -3411,10 +3411,6 @@ Apply settings anyway?</source>
         <translation>Arvo</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="vanished">Kuvaus</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Alkuarvo</translation>
     </message>
@@ -3445,12 +3441,12 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3460,12 +3456,12 @@ Apply settings anyway?</source>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Alkuarvo</translation>
+        <translation>Alkuarvo</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -9797,7 +9793,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -9812,12 +9808,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Matemaattinen kaava</translation>
+        <translation>Matemaattinen kaava</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Alkuarvo</translation>
+        <translation>Alkuarvo</translation>
     </message>
     <message>
         <source>Correction</source>

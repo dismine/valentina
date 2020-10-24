@@ -3904,14 +3904,6 @@ Applicare la configurazione comunque?</translation>
         <translation>Valore</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="vanished">Nome intero</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Descrizione</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Valore di base</translation>
     </message>
@@ -3942,27 +3934,27 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nome intero</translation>
+        <translation>Nome intero</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Descrizione</translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valore di base</translation>
+        <translation>Valore di base</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -11076,27 +11068,27 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nome intero</translation>
+        <translation>Nome intero</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valore calcolato</translation>
+        <translation>Valore calcolato</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valore di base</translation>
+        <translation>Valore di base</translation>
     </message>
     <message>
         <source>Correction</source>

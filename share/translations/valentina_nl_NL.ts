@@ -3912,20 +3912,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Waarde</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="vanished">Volledige naam</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Beschrijving</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Basis waarde</translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <translation type="vanished">Shift (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
@@ -3954,32 +3942,32 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Volledige naam</translation>
+        <translation>Volledige naam</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Beschrijving</translation>
+        <translation>Beschrijving</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Basis waarde</translation>
+        <translation>Basis waarde</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Shift (%1):</translation>
+        <translation>Shift (%1):</translation>
     </message>
 </context>
 <context>
@@ -10981,10 +10969,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
-        <source>Correction</source>
-        <translation type="vanished">Aanpassing</translation>
-    </message>
-    <message>
         <source>Units:</source>
         <translation>Eenheden:</translation>
     </message>
@@ -11099,32 +11083,32 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Volledige naam</translation>
+        <translation>Volledige naam</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Berekende waarde</translation>
+        <translation>Berekende waarde</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Formule</translation>
+        <translation>Formule</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Basis waarde</translation>
+        <translation>Basis waarde</translation>
     </message>
     <message>
         <source>Correction</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Aanpassing</translation>
+        <translation>Aanpassing</translation>
     </message>
 </context>
 <context>

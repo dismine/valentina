@@ -3584,10 +3584,6 @@ Apply settings anyway?</source>
         <translation>Valoare</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="vanished">Descriere</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Valoarea de bază</translation>
     </message>
@@ -3618,12 +3614,12 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3633,12 +3629,12 @@ Apply settings anyway?</source>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Descriere</translation>
+        <translation>Descriere</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valoarea de bază</translation>
+        <translation>Valoarea de bază</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -9760,7 +9756,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -9775,12 +9771,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valoarea de bază</translation>
+        <translation>Valoarea de bază</translation>
     </message>
     <message>
         <source>Correction</source>

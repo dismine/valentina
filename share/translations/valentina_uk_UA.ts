@@ -3910,14 +3910,6 @@ Apply settings anyway?</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="vanished">Повне ім&apos;я</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Опис</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Базове значення</translation>
     </message>
@@ -3948,27 +3940,27 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Повне ім&apos;я</translation>
+        <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Опис</translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базове значення</translation>
+        <translation>Базове значення</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -11086,27 +11078,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Повне ім&apos;я</translation>
+        <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Розраховане значення</translation>
+        <translation>Розраховане значення</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Формула</translation>
+        <translation>Формула</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базове значення</translation>
+        <translation>Базове значення</translation>
     </message>
     <message>
         <source>Correction</source>

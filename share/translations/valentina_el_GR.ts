@@ -3839,14 +3839,6 @@ Apply settings anyway?</source>
         <translation>Τιμή</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="vanished">Πλήρες όνομα</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Περιγραφή</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3877,22 +3869,22 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Πλήρες όνομα</translation>
+        <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Περιγραφή</translation>
+        <translation>Περιγραφή</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -10829,22 +10821,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Πλήρες όνομα</translation>
+        <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Υπολογισμένη τιμή</translation>
+        <translation>Υπολογισμένη τιμή</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Φόρμουλα</translation>
+        <translation>Φόρμουλα</translation>
     </message>
     <message>
         <source>Base value</source>

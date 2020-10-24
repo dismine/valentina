@@ -3910,14 +3910,6 @@ Apply settings anyway?</source>
         <translation>Value</translation>
     </message>
     <message>
-        <source>Full name</source>
-        <translation type="vanished">Full name</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Description</translation>
-    </message>
-    <message>
         <source>Base value</source>
         <translation>Base value</translation>
     </message>
@@ -3948,27 +3940,27 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Full name</translation>
+        <translation>Full name</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Description</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Base value</translation>
+        <translation>Base value</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -11085,27 +11077,27 @@ Do you want to save your changes?</translation>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Full name</translation>
+        <translation>Full name</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Calculated value</translation>
+        <translation>Calculated value</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Base value</translation>
+        <translation>Base value</translation>
     </message>
     <message>
         <source>Correction</source>
