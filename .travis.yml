@@ -29,23 +29,6 @@ jobs:
     env:
     - DEPLOY=true
     osx_image: xcode11
-  - stage: sonarcloud
-    os: linux
-    dist: bionic
-    compiler: clang
-    env:
-    - DEPLOY=false
-    - CCACHE_CPP2=yes
-    - RUN_TESTS=false
-    cache:
-     ccache: true
-     directories:
-     - "$HOME/.sonar/cache"
-    addons:
-      sonarcloud:
-        organization: "dismine"
-        token:
-          secure: L8uC9uH9d+coVwndZ+UzDpMFS+fxk8dCSEcoAIXC22xg4PhHACbZJqrSANRNy8UC7LZHdFlGDozeHLqw6FPanKIoNy6yX7ngGjuR2azLOdqNhBvlhH6Knc0ua7zSpQuHDkkv3vwdJHS4MNXvAwTr+ErLXmEBvuekiM2HEHGRA8MtdEo9naq+m65/ZTkn3iiA654HT2gh3afYDONyTbEa6WkGmoI1Z597PoIJ/0HaKf9TqO/FahXhLYmLL9UW7rPCwj8rUyLiJ39lRrmo2JAPdRT/QoxAA5l97OI+IMjv5ut5p1KZUozuAedxj8kx43QAw+YuRqBZAuZOy5meFSHV62WG5CbqCuZPE79+JyLTYSKxuuzK6v8F6jnQRXC79EdYEIRbXtC86ZftFDgHTt1LP4JaBoPV9ee3DiY7PHO65oSjey7831Ou18UcjmV0BqtQfVVAWsRKYTqjFCBKa9hNDbzIKHLbmj5/K5TitBMTBpjSYnLYJdkDWY3DPGpWDFyT2oo2bRrSl9/UsuT27hi5psMTQSlrYqIGezVz0KDf3TjWPS5RhHjMr+Lt4Ykh5YxKw9zmvH9gvPwOQbfTtPNZHGOMt1Q8aZhovruYDlBleBFuDaHnKV8U9lJr2BOb44nvx+BBURo/Xq1cNew9UNitjTvtEmPeocOLMb2lFMkXAbs=
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -101,14 +84,10 @@ script:
 - "$CXX --version"
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    make -j$(nproc);
     if [[ "$RUN_TESTS" == "true" ]]; then
-      make -j$(nproc);
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
       xvfb-run -a make --silent check TESTARGS="-silent";
-    else
-      build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
-      cd ..;
-      sonar-scanner;
     fi
   else
     make -j1;
