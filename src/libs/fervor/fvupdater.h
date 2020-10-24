@@ -44,7 +44,6 @@ public:
     static FvUpdater* sharedUpdater();
     static void drop();
     static QString CurrentFeedURL();
-    static int CurrentVersion();
     static bool IsTestBuild();
 
     // Set / get feed URL
