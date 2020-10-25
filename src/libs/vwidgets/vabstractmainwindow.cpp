@@ -28,7 +28,7 @@
 
 #include "vabstractmainwindow.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
-#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "dialogs/dialogexporttocsv.h"
@@ -166,25 +166,11 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
+void VAbstractMainWindow::ToolBarStyle(QToolBar *bar) const
 {
     SCASSERT(bar != nullptr)
-    if (qApp->Settings()->GetToolBarStyle())
-    {
-        bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    }
-    else
-    {
-        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    }
-
-#if defined(Q_OS_MAC)
-    // Temporary fix issue with toolbar black background on mac with OpenGL render
-    if (qApp->getSceneView() && qApp->getSceneView()->IsOpenGLRender())
-    {
-        bar->setStyle(QStyleFactory::create("fusion"));
-    }
-#endif
+    qApp->Settings()->GetToolBarStyle() ? bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon)
+                                        : bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

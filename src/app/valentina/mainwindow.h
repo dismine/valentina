@@ -111,6 +111,7 @@ protected:
     virtual void PrepareSceneList(PreviewQuatilty quality) override;
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
                                  const QChar &separator) final;
+    virtual void ToolBarStyle(QToolBar *bar) const override;
 private slots:
     void ScaleChanged(qreal scale);
     void MouseMove(const QPointF &scenePos);

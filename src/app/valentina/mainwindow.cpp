@@ -1720,6 +1720,20 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBarStyle(QToolBar *bar) const
+{
+    MainWindowsNoGUI::ToolBarStyle(bar);
+
+#if defined(Q_OS_MAC)
+    // Temporary fix issue with toolbar black background on mac with OpenGL render
+    if (qApp->getSceneView() && qApp->getSceneView()->IsOpenGLRender())
+    {
+        bar->setStyle(QStyleFactory::create("fusion"));
+    }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ScaleChanged(qreal scale)
 {
     if (not doubleSpinBoxScale.isNull())

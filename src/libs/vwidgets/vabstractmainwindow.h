@@ -62,7 +62,7 @@ protected:
     QAction *m_separatorAct{nullptr};
 
     bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
-    void ToolBarStyle(QToolBar *bar);
+    virtual void ToolBarStyle(QToolBar *bar) const;
 
     QString CSVFilePath();
 
