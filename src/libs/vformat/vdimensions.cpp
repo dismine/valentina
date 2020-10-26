@@ -312,7 +312,7 @@ int VYMeasurementDimension::RangeMax() const
     }
     else
     {
-        return 58;
+        return 60;
     }
 }
 
