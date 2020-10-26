@@ -1,5 +1,6 @@
 # Version 0.7.37 (unreleased)
 - Fix Tape crash on Mac OS X.
+- Fix issue in VAbstractCurve::CurveIntersectAxis.
 
 # Version 0.7.36 October 24, 2020
 - [#892] Show tooltip for piece node point.

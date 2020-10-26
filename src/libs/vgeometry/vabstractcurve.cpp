@@ -464,6 +464,13 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
 {
     SCASSERT(intersectionPoint != nullptr)
 
+    // Normalize an angle
+    {
+        QLineF line(QPointF(10,10), QPointF(100, 10));
+        line.setAngle(angle);
+        angle = line.angle();
+    }
+
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
 
