@@ -220,6 +220,8 @@ void VToolPointOfIntersection::SaveOptions(QDomElement &tag, QSharedPointer<VGOb
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }

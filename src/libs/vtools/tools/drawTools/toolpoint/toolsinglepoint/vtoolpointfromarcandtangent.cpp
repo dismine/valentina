@@ -314,6 +314,8 @@ void VToolPointFromArcAndTangent::SaveOptions(QDomElement &tag, QSharedPointer<V
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     arcId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
     tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
     crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));

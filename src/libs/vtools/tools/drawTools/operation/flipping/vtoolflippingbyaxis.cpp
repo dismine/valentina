@@ -233,6 +233,8 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::ReadToolAttributes(const QDomElement &domElement)
 {
+    VAbstractFlipping::ReadToolAttributes(domElement);
+
     m_originPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     m_axisType = static_cast<AxisType>(doc->GetParametrUInt(domElement, AttrAxisType, QChar('1')));
     suffix = doc->GetParametrString(domElement, AttrSuffix);
@@ -241,7 +243,7 @@ void VToolFlippingByAxis::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractFlipping::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCenter, QString().setNum(m_originPointId));

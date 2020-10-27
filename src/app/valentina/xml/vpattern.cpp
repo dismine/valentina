@@ -1166,7 +1166,7 @@ void VPattern::PointsWithLineCommonAttributes(const QDomElement &domElement, VTo
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData)
 {
-    PointsCommonAttributes(domElement, initData.id, initData.mx, initData.my);
+    DrawPointsCommonAttributes(domElement, initData.id, initData.mx, initData.my, initData.notes);
     initData.name = GetParametrString(domElement, AttrName, QChar('A'));
     initData.showLabel = GetParametrBool(domElement, AttrShowLabel, trueStr);
 }
@@ -1175,6 +1175,15 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
+    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("10.0")));
+    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("15.0")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my,
+                                          QString &notes)
+{
+    DrawToolsCommonAttributes(domElement, id, notes);
     mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("10.0")));
     my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("15.0")));
 }
@@ -4296,6 +4305,13 @@ void VPattern::PrepareForParse(const Document &parse)
 void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 {
     id = GetParametrId(domElement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes)
+{
+    ToolsCommonAttributes(domElement, id);
+    notes = GetParametrEmptyString(domElement, AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -175,6 +175,7 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     Q_UNUSED(obj)
 
     doc->SetAttribute(tag, VDomDocument::AttrId, m_id);
+    doc->SetAttributeOrRemoveIf(tag, AttrNotes, m_notes, m_notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,6 +209,12 @@ void VDrawTool::ReadAttributes()
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::ReadToolAttributes(const QDomElement &domElement)
+{
+    m_notes = doc->GetParametrEmptyString(domElement, AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,4 +286,19 @@ bool VDrawTool::IsLabelVisible(quint32 id) const
 {
     Q_UNUSED(id)
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDrawTool::GetNotes() const
+{
+    return m_notes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SetNotes(const QString &notes)
+{
+    m_notes = notes;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
 }

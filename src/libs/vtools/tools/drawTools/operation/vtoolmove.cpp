@@ -489,6 +489,8 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 {
+    VAbstractOperation::ReadToolAttributes(domElement);
+
     origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
     formulaRotationAngle = doc->GetParametrString(domElement, AttrRotationAngle, QChar('0'));
@@ -499,7 +501,7 @@ void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractOperation::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrAngle, formulaAngle);

@@ -330,6 +330,8 @@ void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     arcRadius = doc->GetParametrString(domElement, AttrRadius, QString());
     center = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);

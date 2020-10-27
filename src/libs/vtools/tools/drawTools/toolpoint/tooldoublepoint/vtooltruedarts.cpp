@@ -306,6 +306,8 @@ void VToolTrueDarts::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolDoublePoint::ReadToolAttributes(domElement);
+
     baseLineP1Id = doc->GetParametrUInt(domElement, AttrBaseLineP1, NULL_ID_STR);
     baseLineP2Id = doc->GetParametrUInt(domElement, AttrBaseLineP2, NULL_ID_STR);
     dartP1Id = doc->GetParametrUInt(domElement, AttrDartP1, NULL_ID_STR);

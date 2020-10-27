@@ -335,6 +335,8 @@ void VToolPointOfIntersectionArcs::SaveOptions(QDomElement &tag, QSharedPointer<
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     firstArcId = doc->GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
     secondArcId = doc->GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
     crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));

@@ -347,6 +347,8 @@ void VToolPointOfIntersectionCircles::SaveOptions(QDomElement &tag, QSharedPoint
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     firstCircleCenterId = doc->GetParametrUInt(domElement, AttrC1Center, NULL_ID_STR);
     secondCircleCenterId = doc->GetParametrUInt(domElement, AttrC2Center, NULL_ID_STR);
     firstCircleRadius = doc->GetParametrString(domElement, AttrC1Radius);

@@ -321,6 +321,8 @@ void VToolCutSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolCut::ReadToolAttributes(domElement);
+
     formula = doc->GetParametrString(domElement, AttrLength, QString());
     curveCutId = doc->GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
 }

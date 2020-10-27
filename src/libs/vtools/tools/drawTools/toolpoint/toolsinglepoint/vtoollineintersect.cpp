@@ -276,6 +276,8 @@ void VToolLineIntersect::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     p1Line1 = doc->GetParametrUInt(domElement, AttrP1Line1, NULL_ID_STR);
     p2Line1 = doc->GetParametrUInt(domElement, AttrP2Line1, NULL_ID_STR);
     p1Line2 = doc->GetParametrUInt(domElement, AttrP1Line2, NULL_ID_STR);

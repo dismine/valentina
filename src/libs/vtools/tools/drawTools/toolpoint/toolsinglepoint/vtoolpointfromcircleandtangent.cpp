@@ -307,6 +307,8 @@ void VToolPointFromCircleAndTangent::SaveOptions(QDomElement &tag, QSharedPointe
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     circleCenterId = doc->GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
     tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
     circleRadius = doc->GetParametrString(domElement, AttrCRadius);

@@ -323,12 +323,6 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
-{
-    Q_UNUSED(domElement)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VDrawTool::SaveOptions(tag, obj);

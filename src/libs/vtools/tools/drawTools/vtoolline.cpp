@@ -407,6 +407,8 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 {
+    VDrawTool::ReadToolAttributes(domElement);
+
     firstPoint = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     secondPoint = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);

@@ -220,6 +220,8 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::ReadToolAttributes(const QDomElement &domElement)
 {
+    VAbstractFlipping::ReadToolAttributes(domElement);
+
     m_firstLinePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
     m_secondLinePointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
     suffix = doc->GetParametrString(domElement, AttrSuffix);
@@ -228,7 +230,7 @@ void VToolFlippingByLine::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractFlipping::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrP1Line, QString().setNum(m_firstLinePointId));

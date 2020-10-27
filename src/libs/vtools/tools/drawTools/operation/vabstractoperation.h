@@ -50,10 +50,10 @@ struct DestinationItem
     bool showLabel;
 };
 
-struct VAbstractOperationInitData : VAbstractToolInitData
+struct VAbstractOperationInitData : VDrawToolInitData
 {
     VAbstractOperationInitData()
-        : VAbstractToolInitData()
+        : VDrawToolInitData()
     {}
 
     QString suffix{};

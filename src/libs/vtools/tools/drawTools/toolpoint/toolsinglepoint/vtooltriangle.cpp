@@ -319,6 +319,8 @@ void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     axisP1Id = doc->GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
     axisP2Id = doc->GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
