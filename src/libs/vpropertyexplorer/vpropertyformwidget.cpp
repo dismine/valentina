@@ -26,6 +26,7 @@
 #include <QLayout>
 #include <QLayoutItem>
 #include <QMargins>
+#include <QPlainTextEdit>
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QWidget>
@@ -304,19 +305,39 @@ bool VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
 
     if (event->type() == QEvent::KeyPress)
     {
-        switch (static_cast<QKeyEvent *>(event)->key())
+        if (QPlainTextEdit *textEdit = qobject_cast<QPlainTextEdit *>(editor))
         {
-            case Qt::Key_Tab:
-            case Qt::Key_Backtab:
-            case Qt::Key_Enter:
-            case Qt::Key_Return:
-            case Qt::Key_Escape:
-                commitData(editor);
-                event->accept();
-                return true;
-            default:
-                return false;
+            switch (static_cast<QKeyEvent *>(event)->key())
+            {
+                case Qt::Key_Escape:
+                    commitData(editor);
+                    event->accept();
+                    return true;
+                case Qt::Key_Tab:
+                case Qt::Key_Backtab:
+                case Qt::Key_Enter:
+                case Qt::Key_Return:
+                default:
+                    return false;
+            }
         }
+        else
+        {
+            switch (static_cast<QKeyEvent *>(event)->key())
+            {
+                case Qt::Key_Tab:
+                case Qt::Key_Backtab:
+                case Qt::Key_Enter:
+                case Qt::Key_Return:
+                case Qt::Key_Escape:
+                    commitData(editor);
+                    event->accept();
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
     else if (event->type() == QEvent::FocusOut || (event->type() == QEvent::Hide && editor->isWindow()))
     {

@@ -372,8 +372,9 @@ void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
-void  VToolBasePoint::FullUpdateFromFile()
+void VToolBasePoint::FullUpdateFromFile()
 {
+    ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
 }
 

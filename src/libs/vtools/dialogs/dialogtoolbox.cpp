@@ -486,3 +486,24 @@ void CurrentCurveLength(vidtype curveId, VContainer *data)
 
     data->AddVariable(length);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
+{
+    SCASSERT(edit != nullptr)
+    const auto fontMetrics = edit->fontMetrics();
+
+    const QString testString(" ");
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+    const int single_char_width = fontMetrics.width(testString);
+    edit->setTabStopWidth(tabWidthChar * single_char_width);
+#else
+    // compute the size of a char in double-precision
+    static constexpr int bigNumber = 1000; // arbitrary big number.
+    const int many_char_width = fontMetrics.width(testString.repeated(bigNumber));
+    const double singleCharWidthDouble = many_char_width / double(bigNumber);
+    // set the tab stop with double precision
+    edit->setTabStopDistance(tabWidthChar * singleCharWidthDouble);
+#endif
+}

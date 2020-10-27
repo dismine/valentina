@@ -126,7 +126,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTextEdit" name="textEditToolNotes"/>
+        <widget class="QPlainTextEdit" name="plainTextEditToolNotes"/>
        </item>
       </layout>
      </widget>

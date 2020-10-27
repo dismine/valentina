@@ -897,6 +897,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSinglePoint(VPE::VProperty *prop
         case 1: // QLatin1String("position")
             i->SetBasePointPos(value.toPointF());
             break;
+        case 61: // AttrNotes
+            i->SetNotes(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1986,6 +1989,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item
     VPE::VPointFProperty* itemPosition = new VPE::VPointFProperty(tr("Position:"));
     itemPosition->setValue(i->GetBasePointPos());
     AddProperty(itemPosition, QLatin1String("position"));
+
+    VPE::VTextProperty* itemNotes = new VPE::VTextProperty(tr("Notes:"));
+    itemNotes->setValue(i->GetNotes());
+    AddProperty(itemNotes, AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2501,6 +2508,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(currentItem);
     idToProperty[AttrName]->setValue(i->name());
     idToProperty[QLatin1String("position")]->setValue(i->GetBasePointPos());
+    idToProperty[AttrNotes]->setValue(i->GetNotes());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3406,6 +3414,7 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                             << AttrPoint3                         /* 57 */
                                             << AttrPoint4                         /* 58 */
                                             << AttrPenStyle                       /* 59 */
-                                            << AttrAScale;                        /* 60 */
+                                            << AttrAScale                         /* 60 */
+                                            << AttrNotes;                         /* 61 */
     return attr;
 }

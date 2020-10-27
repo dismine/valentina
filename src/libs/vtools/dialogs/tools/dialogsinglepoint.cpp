@@ -64,6 +64,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWi
     });
 
     ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,11 +135,11 @@ QString DialogSinglePoint::GetPointName() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSinglePoint::SetNotes(const QString &notes)
 {
-    ui->textEditToolNotes->setText(notes);
+    ui->plainTextEditToolNotes->setPlainText(notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSinglePoint::GetNotes() const
 {
-    return ui->textEditToolNotes->toPlainText();
+    return ui->plainTextEditToolNotes->toPlainText();
 }
