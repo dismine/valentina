@@ -78,7 +78,7 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCut::GetFormula() const
+VFormula VToolCut::GetFormulaLength() const
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
@@ -89,7 +89,7 @@ VFormula VToolCut::GetFormula() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SetFormula(const VFormula &value)
+void VToolCut::SetFormulaLength(const VFormula &value)
 {
     if (value.error() == false)
     {

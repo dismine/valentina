@@ -273,7 +273,7 @@ QString VDrawTool::getLineType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SetTypeLine(const QString &value)
+void VDrawTool::SetLineType(const QString &value)
 {
     m_lineType = value;
 

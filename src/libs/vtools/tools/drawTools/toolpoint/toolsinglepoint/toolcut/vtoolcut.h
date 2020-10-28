@@ -54,8 +54,8 @@ public:
     virtual int   type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
-    VFormula GetFormula() const;
-    void     SetFormula(const VFormula &value);
+    VFormula GetFormulaLength() const;
+    void     SetFormulaLength(const VFormula &value);
 
     QString CurveName() const;
 

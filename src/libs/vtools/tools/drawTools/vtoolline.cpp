@@ -475,7 +475,7 @@ void VToolLine::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::SetTypeLine(const QString &value)
+void VToolLine::SetLineType(const QString &value)
 {
     m_lineType = value;
 

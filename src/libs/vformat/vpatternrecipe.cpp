@@ -808,7 +808,7 @@ QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, AttrArc, tool->CurveName());
 
     return step;
@@ -822,7 +822,7 @@ QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, VToolCutSpline::AttrSpline, tool->CurveName());
 
     return step;
@@ -836,7 +836,7 @@ QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, VToolCutSplinePath::AttrSplinePath, tool->CurveName());
 
     return step;

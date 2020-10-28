@@ -87,7 +87,7 @@ public:
 
     virtual void     ShowVisualization(bool show) override;
 
-    virtual void     SetTypeLine(const QString &value) override;
+    virtual void     SetLineType(const QString &value) override;
     virtual void     GroupVisibility(quint32 object, bool visible) override;
 public slots:
     virtual void     FullUpdateFromFile() override;

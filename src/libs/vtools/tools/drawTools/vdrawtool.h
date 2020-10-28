@@ -75,7 +75,7 @@ public:
     virtual ~VDrawTool() Q_DECL_EQ_DEFAULT;
 
     QString      getLineType() const;
-    virtual void SetTypeLine(const QString &value);
+    virtual void SetLineType(const QString &value);
 
     virtual bool IsLabelVisible(quint32 id) const;
 
