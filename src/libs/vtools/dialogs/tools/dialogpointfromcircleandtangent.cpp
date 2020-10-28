@@ -103,6 +103,9 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
             &DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit);
 
     vis = new VisToolPointFromCircleAndTangent(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,4 +332,16 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditRadius->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointFromCircleAndTangent::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

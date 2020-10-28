@@ -58,7 +58,7 @@ const QString VToolCubicBezier::ToolType = QStringLiteral("cubicBezier");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCubicBezier::VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent)
-    :VAbstractSpline(initData.doc, initData.data, initData.id, parent)
+    :VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
     sceneType = SceneObject::Spline;
 
@@ -75,6 +75,7 @@ void VToolCubicBezier::setDialog()
     SCASSERT(dialogTool != nullptr)
     const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
     dialogTool->SetSpline(*spl);
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,6 +93,7 @@ VToolCubicBezier *VToolCubicBezier::Create(const QPointer<DialogTool> &dialog, V
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.spline = new VCubicBezier(dialogTool->GetSpline());
+    initData.notes = dialogTool->GetNotes();
 
     auto* spl = Create(initData);
 
@@ -230,6 +232,9 @@ void VToolCubicBezier::SaveDialog(QDomElement &domElement, QList<quint32> &oldDe
     AddDependence(newDependencies, spl.GetP2().id());
     AddDependence(newDependencies, spl.GetP3().id());
     AddDependence(newDependencies, spl.GetP4().id());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 
     SetSplineAttributes(domElement, spl);
 }

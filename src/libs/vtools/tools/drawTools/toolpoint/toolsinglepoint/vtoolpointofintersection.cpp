@@ -61,7 +61,7 @@ const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfInters
  */
 VToolPointOfIntersection::VToolPointOfIntersection(const VToolPointOfIntersectionInitData &initData,
                                                    QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       firstPointId(initData.firstPointId),
       secondPointId(initData.secondPointId)
 {
@@ -81,6 +81,7 @@ void VToolPointOfIntersection::setDialog()
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,6 +110,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const QPointer<Dialog
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfIntersection *point = Create(initData);
     if (point != nullptr)
@@ -205,6 +207,9 @@ void VToolPointOfIntersection::SaveDialog(QDomElement &domElement, QList<quint32
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,6 +225,8 @@ void VToolPointOfIntersection::SaveOptions(QDomElement &tag, QSharedPointer<VGOb
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }

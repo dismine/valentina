@@ -128,6 +128,7 @@ void VToolMove::setDialog()
     dialogTool->SetLength(formulaLength);
     dialogTool->SetSuffix(suffix);
     dialogTool->SetRotationOrigPointId(origPointId);
+    dialogTool->SetNotes(m_notes);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -155,6 +156,7 @@ VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolMove* operation = Create(initData);
     if (operation != nullptr)
@@ -482,6 +484,9 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetRotationOrigPointId()));
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
 
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
 }
@@ -489,6 +494,8 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 {
+    VAbstractOperation::ReadToolAttributes(domElement);
+
     origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
     formulaRotationAngle = doc->GetParametrString(domElement, AttrRotationAngle, QChar('0'));
@@ -499,7 +506,7 @@ void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractOperation::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrAngle, formulaAngle);
@@ -534,7 +541,7 @@ QString VToolMove::MakeToolTip() const
 //---------------------------------------------------------------------------------------------------------------------
 VToolMove::VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent)
     : VAbstractOperation(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                         initData.destination, parent),
+                         initData.destination, initData.notes, parent),
       formulaAngle(initData.formulaAngle),
       formulaRotationAngle(initData.formulaRotationAngle),
       formulaLength(initData.formulaLength),

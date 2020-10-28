@@ -88,6 +88,9 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
             this, &DialogFlippingByAxis::PointChanged);
 
     vis = new VisToolFlippingByAxis(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -401,4 +404,16 @@ void DialogFlippingByAxis::FillComboBoxAxisType(QComboBox *box)
 
     box->addItem(tr("Vertical axis"), QVariant(static_cast<int>(AxisType::VerticalAxis)));
     box->addItem(tr("Horizontal axis"), QVariant(static_cast<int>(AxisType::HorizontalAxis)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogFlippingByAxis::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

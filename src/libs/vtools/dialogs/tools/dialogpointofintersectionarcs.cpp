@@ -71,6 +71,9 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
             this, &DialogPointOfIntersectionArcs::ArcChanged);
 
     vis = new VisToolPointOfIntersectionArcs(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,4 +223,16 @@ void DialogPointOfIntersectionArcs::SaveData()
     point->setArc2Id(GetSecondArcId());
     point->setCrossPoint(GetCrossArcPoint());
     point->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionArcs::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionArcs::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

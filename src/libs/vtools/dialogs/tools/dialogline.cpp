@@ -72,6 +72,9 @@ DialogLine::DialogLine(const VContainer *data, quint32 toolId, QWidget *parent)
             this, &DialogLine::PointNameChanged);
 
     vis = new VisToolLine(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -238,4 +241,16 @@ quint32 DialogLine::GetSecondPoint() const
 QString DialogLine::GetTypeLine() const
 {
     return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLine::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

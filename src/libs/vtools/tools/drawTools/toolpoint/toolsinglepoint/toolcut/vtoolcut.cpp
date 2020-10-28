@@ -45,8 +45,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &curveCutId, QGraphicsItem *parent)
-    : VToolSinglePoint(doc, data, id, parent),
+                   const quint32 &curveCutId, const QString &notes, QGraphicsItem *parent)
+    : VToolSinglePoint(doc, data, id, notes, parent),
       formula(formula),
       curveCutId(curveCutId),
       detailsMode(qApp->Settings()->IsShowCurveDetails())
@@ -78,7 +78,7 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCut::GetFormula() const
+VFormula VToolCut::GetFormulaLength() const
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
@@ -89,7 +89,7 @@ VFormula VToolCut::GetFormula() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SetFormula(const VFormula &value)
+void VToolCut::SetFormulaLength(const VFormula &value)
 {
     if (value.error() == false)
     {

@@ -169,9 +169,12 @@ private:
     void           ParseIncrementsElement(const QDomNode& node, const Document &parse);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
+    void           DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes);
     void           PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);
     void           PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
+    void           DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my,
+                                    QString &notes);
     void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
                                            quint32 &idTool);
     template <typename T>

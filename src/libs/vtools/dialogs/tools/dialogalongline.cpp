@@ -113,6 +113,9 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget
 
     // Call after initialization vis!!!!
     SetTypeLine(TypeLineNone);//By default don't show line
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,7 +297,19 @@ void DialogAlongLine::SetSecondPointId(quint32 value)
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject2Id(value);
+            line->setObject2Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogAlongLine::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

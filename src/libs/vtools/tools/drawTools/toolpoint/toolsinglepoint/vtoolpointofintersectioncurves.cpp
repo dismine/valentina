@@ -58,7 +58,7 @@ const QString VToolPointOfIntersectionCurves::ToolType = QStringLiteral("pointOf
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionCurves::VToolPointOfIntersectionCurves(const VToolPointOfIntersectionCurvesInitData &initData,
                                                                QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       firstCurveId(initData.firstCurveId),
       secondCurveId(initData.secondCurveId),
       vCrossPoint(initData.vCrossPoint),
@@ -79,6 +79,7 @@ void VToolPointOfIntersectionCurves::setDialog()
     dialogTool->SetVCrossPoint(vCrossPoint);
     dialogTool->SetHCrossPoint(hCrossPoint);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,6 +103,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const QPo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfIntersectionCurves *point = Create(initData);
     if (point != nullptr)
@@ -368,6 +370,9 @@ void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrCurve2, QString().setNum(dialogTool->GetSecondCurveId()));
     doc->SetAttribute(domElement, AttrVCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetVCrossPoint())));
     doc->SetAttribute(domElement, AttrHCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetHCrossPoint())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,6 +390,8 @@ void VToolPointOfIntersectionCurves::SaveOptions(QDomElement &tag, QSharedPointe
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     firstCurveId = doc->GetParametrUInt(domElement, AttrCurve1, NULL_ID_STR);
     secondCurveId = doc->GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
     vCrossPoint = static_cast<VCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));

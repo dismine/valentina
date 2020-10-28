@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/plugins/vtextproperty.cpp \
     $$PWD/vproperty.cpp \
     $$PWD/vpropertydelegate.cpp \
     $$PWD/vpropertyfactorymanager.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS +=\
+    $$PWD/plugins/vtextproperty.h \
     $$PWD/vpropertyexplorer_global.h \
     $$PWD/vpropertyfactorymanager_p.h \
     $$PWD/vpropertytreeview_p.h \

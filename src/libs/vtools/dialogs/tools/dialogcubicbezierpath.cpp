@@ -81,6 +81,9 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 too
             this, &DialogCubicBezierPath::currentPointChanged);
 
     vis = new VisToolCubicBezierPath(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -359,4 +362,16 @@ void DialogCubicBezierPath::ValidatePath()
 
     ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCubicBezierPath::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

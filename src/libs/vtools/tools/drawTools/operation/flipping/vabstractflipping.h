@@ -40,7 +40,7 @@ public:
     virtual ~VAbstractFlipping() Q_DECL_EQ_DEFAULT;
 protected:
     VAbstractFlipping(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
-                      const QVector<quint32> &source, const QVector<DestinationItem> &destination,
+                      const QVector<quint32> &source, const QVector<DestinationItem> &destination, const QString &notes,
                       QGraphicsItem *parent = nullptr);
 
     static void CreateDestination(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint);

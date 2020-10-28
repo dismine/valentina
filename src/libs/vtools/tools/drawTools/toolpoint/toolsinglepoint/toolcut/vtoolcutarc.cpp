@@ -63,7 +63,7 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
  * @param parent parent object.
  */
 VToolCutArc::VToolCutArc(const VToolCutArcInitData &initData, QGraphicsItem * parent)
-    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.arcId, parent)
+    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.arcId, initData.notes, parent)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -81,6 +81,7 @@ void VToolCutArc::setDialog()
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
     dialogTool->SetPointName(point->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,6 +108,7 @@ VToolCutArc* VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolCutArc* point = Create(initData);
     if (point != nullptr)
@@ -216,6 +218,9 @@ void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,6 +236,8 @@ void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolCut::ReadToolAttributes(domElement);
+
     formula = doc->GetParametrString(domElement, AttrLength, QString());
     curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
 }

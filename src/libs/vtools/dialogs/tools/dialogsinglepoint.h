@@ -58,6 +58,9 @@ public:
 
     QString        GetPointName() const;
 
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
 public slots:
     void           mousePress(const QPointF &scenePos);
 protected:

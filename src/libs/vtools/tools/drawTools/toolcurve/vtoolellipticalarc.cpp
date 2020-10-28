@@ -65,7 +65,7 @@ const QString VToolEllipticalArc::ToolType = QStringLiteral("simple");
  * @param parent parent object
  */
 VToolEllipticalArc::VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent)
-    :VToolAbstractArc(initData.doc, initData.data, initData.id, parent)
+    :VToolAbstractArc(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
     sceneType = SceneObject::ElArc;
 
@@ -92,6 +92,7 @@ void VToolEllipticalArc::setDialog()
     dialogTool->SetRotationAngle(elArc->GetFormulaRotationAngle());
     dialogTool->SetColor(elArc->GetColor());
     dialogTool->SetPenStyle(elArc->GetPenStyle());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,6 +124,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
     //initData.approximationScale = dialogTool->GetApproximationScale(); // For future use
 
     VToolEllipticalArc* point = Create(initData);
@@ -383,6 +385,9 @@ void VToolEllipticalArc::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

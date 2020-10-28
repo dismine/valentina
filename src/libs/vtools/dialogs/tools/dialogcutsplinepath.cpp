@@ -93,6 +93,9 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, quint32 toolId,
     connect(ui->comboBoxSplinePath, &QComboBox::currentTextChanged, this, &DialogCutSplinePath::SplinePathChanged);
 
     vis = new VisToolCutSplinePath(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,4 +266,16 @@ QString DialogCutSplinePath::GetFormula() const
 quint32 DialogCutSplinePath::getSplinePathId() const
 {
     return getCurrentObjectId(ui->comboBoxSplinePath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutSplinePath::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

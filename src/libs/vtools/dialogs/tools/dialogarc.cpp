@@ -123,6 +123,9 @@ DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
 
     vis = new VisToolArc(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +222,19 @@ void DialogArc::SetApproximationScale(qreal value)
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setApproximationScale(value);
+            path->setApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

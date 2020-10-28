@@ -58,7 +58,7 @@ const QString VToolPointFromArcAndTangent::ToolType = QStringLiteral("pointFromA
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(const VToolPointFromArcAndTangentInitData &initData,
                                                          QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       arcId(initData.arcId),
       tangentPointId(initData.tangentPointId),
       crossPoint(initData.crossPoint)
@@ -77,6 +77,7 @@ void VToolPointFromArcAndTangent::setDialog()
     dialogTool->SetCrossCirclesPoint(crossPoint);
     dialogTool->SetTangentPointId(tangentPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,6 +99,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const QPointer<
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointFromArcAndTangent *point = Create(initData);
     if (point != nullptr)
@@ -298,6 +300,9 @@ void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quin
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,6 +319,8 @@ void VToolPointFromArcAndTangent::SaveOptions(QDomElement &tag, QSharedPointer<V
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     arcId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
     tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
     crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));

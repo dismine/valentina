@@ -81,7 +81,7 @@ const QString VToolRotation::ToolType = QStringLiteral("rotation");
 //---------------------------------------------------------------------------------------------------------------------
 VToolRotation::VToolRotation(const VToolRotationInitData &initData, QGraphicsItem *parent)
     : VAbstractOperation(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                         initData.destination, parent),
+                         initData.destination, initData.notes, parent),
       origPointId(initData.origin),
       formulaAngle(initData.angle)
 {
@@ -98,6 +98,7 @@ void VToolRotation::setDialog()
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
+    dialogTool->SetNotes(m_notes);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -123,6 +124,7 @@ VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolRotation* operation = Create(initData);
     if (operation != nullptr)
@@ -362,6 +364,9 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
 
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
 }
@@ -369,6 +374,8 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::ReadToolAttributes(const QDomElement &domElement)
 {
+    VAbstractOperation::ReadToolAttributes(domElement);
+
     origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
     suffix = doc->GetParametrString(domElement, AttrSuffix);
@@ -377,7 +384,7 @@ void VToolRotation::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractOperation::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCenter, QString().setNum(origPointId));

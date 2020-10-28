@@ -76,7 +76,8 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  * @param parent parent object.
  */
 VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent )
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent), namePP(initData.nameActivPP)
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+     namePP(initData.nameActivPP)
 {
     m_baseColor = Qt::red;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -96,6 +97,7 @@ void VToolBasePoint::setDialog()
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -267,6 +269,9 @@ void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,13 +326,6 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
-{
-    Q_UNUSED(domElement)
-    // This tool doesn't need read attributes from file.
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VToolBasePoint::MakeToolTip() const
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
@@ -374,8 +372,9 @@ void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
-void  VToolBasePoint::FullUpdateFromFile()
+void VToolBasePoint::FullUpdateFromFile()
 {
+    ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
 }
 

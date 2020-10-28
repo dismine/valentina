@@ -106,6 +106,9 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId,
             this, &DialogShoulderPoint::PointNameChanged);
 
     vis = new VisToolShoulderPoint(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -415,4 +418,16 @@ quint32 DialogShoulderPoint::GetP2Line() const
 quint32 DialogShoulderPoint::GetP3() const
 {
     return getCurrentObjectId(ui->comboBoxP3);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogShoulderPoint::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

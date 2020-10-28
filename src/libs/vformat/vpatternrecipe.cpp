@@ -89,7 +89,7 @@ VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObj
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
     recipeElement.appendChild(createComment(FileComment()));
-    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.1.0"));
+    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.2.0"));
 
     recipeElement.appendChild(Prerequisite());
     recipeElement.appendChild(Content());
@@ -808,7 +808,7 @@ QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, AttrArc, tool->CurveName());
 
     return step;
@@ -822,7 +822,7 @@ QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, VToolCutSpline::AttrSpline, tool->CurveName());
 
     return step;
@@ -836,7 +836,7 @@ QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, VToolCutSplinePath::AttrSplinePath, tool->CurveName());
 
     return step;
@@ -1105,6 +1105,7 @@ inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrType, T::ToolType);
     SetAttribute(step, AttrLabel, tool->name());
+    SetAttribute(step, AttrNotes, tool->GetNotes());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

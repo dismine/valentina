@@ -63,7 +63,7 @@ class VToolLinePoint : public VToolSinglePoint
 public:
     VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const
                    QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
-                   QGraphicsItem * parent = nullptr);
+                   const QString &notes, QGraphicsItem * parent = nullptr);
     virtual ~VToolLinePoint() override;
     virtual int       type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};

@@ -69,7 +69,7 @@ const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
  * @param parent parent object.
  */
 VToolCutSplinePath::VToolCutSplinePath(const VToolCutSplinePathInitData &initData, QGraphicsItem *parent)
-    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.splinePathId, parent)
+    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.splinePathId, initData.notes, parent)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -87,6 +87,7 @@ void VToolCutSplinePath::setDialog()
     dialogTool->SetFormula(formula);
     dialogTool->setSplinePathId(curveCutId);
     dialogTool->SetPointName(point->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +114,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolCutSplinePath* point = Create(initData);
     if (point != nullptr)
@@ -306,6 +308,9 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,6 +326,8 @@ void VToolCutSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolCut::ReadToolAttributes(domElement);
+
     formula = doc->GetParametrString(domElement, AttrLength, QString());
     curveCutId = doc->GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
 }

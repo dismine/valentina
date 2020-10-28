@@ -53,6 +53,16 @@
 #include "../vgeometry/vpointf.h"
 #include "../vtools/undocommands/undogroup.h"
 
+struct VDrawToolInitData : VAbstractToolInitData
+{
+    VDrawToolInitData()
+        : VAbstractToolInitData(),
+        notes()
+    {}
+
+    QString notes;
+};
+
 /**
  * @brief The VDrawTool abstract class for all draw tool.
  */
@@ -61,13 +71,16 @@ class VDrawTool : public VInteractiveTool
     Q_OBJECT
 public:
 
-    VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
+    VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
     virtual ~VDrawTool() Q_DECL_EQ_DEFAULT;
 
     QString      getLineType() const;
-    virtual void SetTypeLine(const QString &value);
+    virtual void SetLineType(const QString &value);
 
     virtual bool IsLabelVisible(quint32 id) const;
+
+    QString GetNotes() const;
+    void    SetNotes(const QString &notes);
 
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
@@ -92,6 +105,8 @@ protected:
     /** @brief typeLine line type. */
     QString      m_lineType;
 
+    QString      m_notes{};
+
     void AddToCalculation(const QDomElement &domElement);
     void AddDependence(QList<quint32> &list, quint32 objectId) const;
 
@@ -109,7 +124,7 @@ protected:
     bool         CorrectDisable(bool disable, const QString &namePP) const;
 
     void         ReadAttributes();
-    virtual void ReadToolAttributes(const QDomElement &domElement)=0;
+    virtual void ReadToolAttributes(const QDomElement &domElement);
     virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
     template <class Dialog>

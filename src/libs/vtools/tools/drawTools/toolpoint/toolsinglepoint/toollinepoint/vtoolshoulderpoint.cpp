@@ -66,7 +66,7 @@ const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
  */
 VToolShoulderPoint::VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem * parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.p1Line, 0, parent),
+                    initData.p1Line, 0, initData.notes, parent),
       p2Line(initData.p2Line),
       pShoulder(initData.pShoulder)
 {
@@ -90,6 +90,7 @@ void VToolShoulderPoint::setDialog()
     dialogTool->SetP2Line(p2Line);
     dialogTool->SetP3(pShoulder);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -166,6 +167,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolShoulderPoint * point = Create(initData);
     if (point != nullptr)
@@ -279,6 +281,9 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1Line()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2Line()));
     doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->GetP3()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -296,6 +301,8 @@ void VToolShoulderPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolLinePoint::ReadToolAttributes(domElement);
+
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     formulaLength = doc->GetParametrString(domElement, AttrLength, QString());

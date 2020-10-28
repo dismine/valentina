@@ -107,6 +107,9 @@ DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *
             this, &DialogRotation::PointChanged);
 
     vis = new VisToolRotation(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -503,4 +506,16 @@ void DialogRotation::EvalAngle()
     formulaData.checkZero = false;
 
     Eval(formulaData, flagAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogRotation::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

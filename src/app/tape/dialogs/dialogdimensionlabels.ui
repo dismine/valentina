@@ -14,7 +14,7 @@
    <string>Dimension labels</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../share/resources/tapeicon.qrc">
+   <iconset>
     <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -36,7 +36,7 @@
      <item>
       <widget class="QLabel" name="labelDimension">
        <property name="text">
-        <string notr="true">Dimension:</string>
+        <string>Dimension:</string>
        </property>
       </widget>
      </item>
@@ -96,9 +96,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../share/resources/tapeicon.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

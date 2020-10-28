@@ -104,6 +104,9 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolI
             this, &DialogPointOfContact::PointNameChanged);
 
     vis = new VisToolPointOfContact(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -380,4 +383,16 @@ quint32 DialogPointOfContact::GetFirstPoint() const
 quint32 DialogPointOfContact::GetSecondPoint() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfContact::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

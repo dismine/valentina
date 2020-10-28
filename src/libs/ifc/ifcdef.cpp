@@ -133,6 +133,7 @@ const QString AttrPlaceLabelType = QStringLiteral("placeLabelType");
 const QString AttrVersion     = QStringLiteral("version");
 const QString AttrFirstToCountour = QStringLiteral("firstToCountour");
 const QString AttrLastToCountour = QStringLiteral("lastToCountour");
+const QString AttrNotes       = QStringLiteral("notes");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

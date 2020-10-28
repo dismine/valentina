@@ -133,6 +133,9 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, quint32 toolId, QWidg
     SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSplinePath::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSplinePath::MouseLeftReleased);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -943,4 +946,16 @@ bool DialogSplinePath::IsValid() const
     }
 
     return fAngle1 && fAngle2 && fLength1 && fLength2 && flagError;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSplinePath::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

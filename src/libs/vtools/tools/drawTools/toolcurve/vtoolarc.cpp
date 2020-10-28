@@ -64,7 +64,7 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param initData init data
  */
 VToolArc::VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent)
-    : VToolAbstractArc(initData.doc, initData.data, initData.id, parent)
+    : VToolAbstractArc(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
     sceneType = SceneObject::Arc;
 
@@ -90,6 +90,7 @@ void VToolArc::setDialog()
     dialogTool->SetColor(arc->GetColor());
     dialogTool->SetPenStyle(arc->GetPenStyle());
     dialogTool->SetApproximationScale(arc->GetApproximationScale());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,6 +121,7 @@ VToolArc* VToolArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScen
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.approximationScale = dialogTool->GetApproximationScale();
+    initData.notes = dialogTool->GetNotes();
 
     VToolArc* point = Create(initData);
     if (point != nullptr)
@@ -336,6 +338,9 @@ void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenci
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

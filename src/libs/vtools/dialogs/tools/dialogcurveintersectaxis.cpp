@@ -96,6 +96,9 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, quint
     connect(timerFormula, &QTimer::timeout, this, &DialogCurveIntersectAxis::EvalAngle);
 
     vis = new VisToolCurveIntersectAxis(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,4 +345,16 @@ void DialogCurveIntersectAxis::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCurveIntersectAxis::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

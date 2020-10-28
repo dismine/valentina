@@ -94,6 +94,9 @@ DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *pare
     connect(ui->comboBoxArc, &QComboBox::currentTextChanged, this, &DialogCutArc::ArcChanged);
 
     vis = new VisToolCutArc(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,4 +266,16 @@ QString DialogCutArc::GetFormula() const
 quint32 DialogCutArc::getArcId() const
 {
     return getCurrentObjectId(ui->comboBoxArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutArc::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

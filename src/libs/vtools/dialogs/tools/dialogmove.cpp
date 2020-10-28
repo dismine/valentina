@@ -146,6 +146,9 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     vis = new VisToolMove(data);
 
     SetRotationOrigPointId(NULL_ID);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -633,4 +636,16 @@ void DialogMove::EvalLength()
     formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogMove::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

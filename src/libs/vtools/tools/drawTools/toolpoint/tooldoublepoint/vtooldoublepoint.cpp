@@ -55,8 +55,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
-                                   QGraphicsItem *parent)
-    :VAbstractPoint(doc, data, id),
+                                   const QString &notes, QGraphicsItem *parent)
+    :VAbstractPoint(doc, data, id, notes),
       QGraphicsPathItem(parent),
       firstPoint(nullptr),
       secondPoint(nullptr),

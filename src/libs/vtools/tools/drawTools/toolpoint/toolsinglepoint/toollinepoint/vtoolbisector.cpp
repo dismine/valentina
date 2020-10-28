@@ -63,7 +63,7 @@ const QString VToolBisector::ToolType = QStringLiteral("bisector");
  */
 VToolBisector::VToolBisector(const VToolBisectorInitData &initData, QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.secondPointId, 0, parent),
+                    initData.secondPointId, 0, initData.notes, parent),
       firstPointId(initData.firstPointId),
       thirdPointId(initData.thirdPointId)
 {
@@ -122,6 +122,7 @@ void VToolBisector::setDialog()
     dialogTool->SetSecondPointId(basePointId);
     dialogTool->SetThirdPointId(thirdPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,6 +153,7 @@ VToolBisector* VToolBisector::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolBisector *point = Create(initData);
     if (point != nullptr)
@@ -261,6 +263,9 @@ void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
     doc->SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogTool->GetThirdPointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,6 +283,8 @@ void VToolBisector::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolLinePoint::ReadToolAttributes(domElement);
+
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     formulaLength = doc->GetParametrString(domElement, AttrLength, QString());

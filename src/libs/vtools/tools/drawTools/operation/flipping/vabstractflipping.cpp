@@ -40,8 +40,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFlipping::VAbstractFlipping(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                                      const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                                     QGraphicsItem *parent)
-    : VAbstractOperation(doc, data, id, suffix, source, destination, parent)
+                                     const QString &notes, QGraphicsItem *parent)
+    : VAbstractOperation(doc, data, id, suffix, source, destination, notes, parent)
 {
 }
 

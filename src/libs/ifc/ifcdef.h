@@ -151,6 +151,7 @@ extern const QString AttrPlaceLabelType;
 extern const QString AttrVersion;
 extern const QString AttrFirstToCountour;
 extern const QString AttrLastToCountour;
+extern const QString AttrNotes;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;
