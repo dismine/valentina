@@ -89,7 +89,7 @@ VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObj
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
     recipeElement.appendChild(createComment(FileComment()));
-    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.1.0"));
+    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.2.0"));
 
     recipeElement.appendChild(Prerequisite());
     recipeElement.appendChild(Content());
@@ -1105,6 +1105,7 @@ inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrType, T::ToolType);
     SetAttribute(step, AttrLabel, tool->name());
+    SetAttribute(step, AttrNotes, tool->GetNotes());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
