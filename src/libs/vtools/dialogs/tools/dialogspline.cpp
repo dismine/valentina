@@ -156,6 +156,9 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSpline::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSpline::MouseLeftReleased);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -596,4 +599,16 @@ void DialogSpline::SetSpline(const VSpline &spline)
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
     path->setApproximationScale(spl.GetApproximationScale());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSpline::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

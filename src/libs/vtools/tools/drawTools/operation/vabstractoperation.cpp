@@ -522,8 +522,8 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                                        const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                                       QGraphicsItem *parent)
-    : VDrawTool(doc, data, id),
+                                       const QString &notes, QGraphicsItem *parent)
+    : VDrawTool(doc, data, id, notes),
       QGraphicsLineItem(parent),
       suffix(suffix),
       source(source),

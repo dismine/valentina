@@ -64,7 +64,7 @@ const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
  * @param parent parent object.
  */
 VToolLineIntersect::VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       p1Line1(initData.p1Line1Id),
       p2Line1(initData.p2Line1Id),
       p1Line2(initData.p1Line2Id),
@@ -88,6 +88,7 @@ void VToolLineIntersect::setDialog()
     dialogTool->SetP1Line2(p1Line2);
     dialogTool->SetP2Line2(p2Line2);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +118,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolLineIntersect* point = Create(initData);
     if (point != nullptr)
@@ -259,6 +261,9 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));
     doc->SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogTool->GetP1Line2()));
     doc->SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogTool->GetP2Line2()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

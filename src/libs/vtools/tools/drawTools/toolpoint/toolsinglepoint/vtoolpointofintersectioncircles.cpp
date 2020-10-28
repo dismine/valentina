@@ -59,7 +59,7 @@ const QString VToolPointOfIntersectionCircles::ToolType = QStringLiteral("pointO
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(
         const VToolPointOfIntersectionCirclesInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       firstCircleCenterId(initData.firstCircleCenterId),
       secondCircleCenterId(initData.secondCircleCenterId),
       firstCircleRadius(initData.firstCircleRadius),
@@ -83,6 +83,7 @@ void VToolPointOfIntersectionCircles::setDialog()
     dialogTool->SetSecondCircleRadius(secondCircleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,6 +108,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const Q
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfIntersectionCircles *point = Create(initData);
     if (point != nullptr)
@@ -329,6 +331,9 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<
     doc->SetAttribute(domElement, AttrC2Radius, dialogTool->GetSecondCircleRadius());
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

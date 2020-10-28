@@ -64,7 +64,7 @@ const QString VToolEndLine::ToolType = QStringLiteral("endLine");
  */
 VToolEndLine::VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor,
-                    initData.formulaLength, initData.basePointId, 0, parent),
+                    initData.formulaLength, initData.basePointId, 0, initData.notes, parent),
       formulaAngle(initData.formulaAngle)
 {
     ToolCreation(initData.typeCreation);
@@ -87,6 +87,7 @@ void VToolEndLine::setDialog()
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetBasePointId(basePointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +118,7 @@ VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGrap
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolEndLine *point = Create(initData);
     if (point != nullptr)
@@ -190,6 +192,9 @@ void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepend
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -83,6 +83,9 @@ DialogTriangle::DialogTriangle(const VContainer *data, quint32 toolId, QWidget *
             this, &DialogTriangle::PointNameChanged);
 
     vis = new VisToolTriangle(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -330,4 +333,16 @@ quint32 DialogTriangle::GetFirstPointId() const
 quint32 DialogTriangle::GetSecondPointId() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTriangle::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTriangle::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

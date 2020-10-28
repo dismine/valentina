@@ -73,6 +73,9 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWi
             this, &DialogCubicBezier::PointNameChanged);
 
     vis = new VisToolCubicBezier(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,4 +278,16 @@ const QSharedPointer<VPointF> DialogCubicBezier::GetP3() const
 const QSharedPointer<VPointF> DialogCubicBezier::GetP4() const
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCubicBezier::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

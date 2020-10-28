@@ -116,6 +116,9 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId,
     connect(ui->pushButtonGrowLengthArcLength, &QPushButton::clicked, this, &DialogArcWithLength::DeployLengthTextEdit);
 
     vis = new VisToolArcWithLength(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,7 +248,19 @@ void DialogArcWithLength::SetApproximationScale(qreal value)
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
-    path->setApproximationScale(value);
+            path->setApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArcWithLength::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

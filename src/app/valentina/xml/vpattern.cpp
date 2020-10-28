@@ -3268,7 +3268,7 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstLinePointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondLinePointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
@@ -3300,7 +3300,7 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, QChar('1')));
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());

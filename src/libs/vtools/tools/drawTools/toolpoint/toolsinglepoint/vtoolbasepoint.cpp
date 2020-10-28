@@ -76,9 +76,9 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  * @param parent parent object.
  */
 VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent )
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent), namePP(initData.nameActivPP)
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+     namePP(initData.nameActivPP)
 {
-    m_notes = initData.notes;
     m_baseColor = Qt::red;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);

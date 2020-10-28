@@ -74,6 +74,9 @@ public:
     QString       GetColor() const;
     void          SetColor(const QString &value);
 
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     /**

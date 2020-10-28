@@ -74,6 +74,9 @@ public:
     void        SetVisibilityGroupTags(const QStringList &tags);
     QStringList GetVisibilityGroupTags() const;
 
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
     virtual void SetGroupCategories(const QStringList &categories) override;
 
     virtual void ShowDialog(bool click) override;

@@ -139,7 +139,7 @@ protected:
 
     VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                        const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                       QGraphicsItem *parent = nullptr);
+                       const QString &notes, QGraphicsItem *parent = nullptr);
 
     virtual void AddToFile() override;
     virtual void ChangeLabelVisibility(quint32 id, bool visible) override;

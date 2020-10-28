@@ -123,6 +123,9 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
             &DialogPointOfIntersectionCircles::DeployCircle2RadiusTextEdit);
 
     vis = new VisToolPointOfIntersectionCircles(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -419,4 +422,16 @@ void DialogPointOfIntersectionCircles::closeEvent(QCloseEvent *event)
     ui->plainTextEditCircle1Radius->blockSignals(true);
     ui->plainTextEditCircle2Radius->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCircles::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

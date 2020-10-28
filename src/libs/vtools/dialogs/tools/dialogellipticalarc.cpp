@@ -155,6 +155,9 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId,
             this, &DialogEllipticalArc::DeployRotationAngleTextEdit);
 
     vis = new VisToolEllipticalArc(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -587,4 +590,16 @@ void DialogEllipticalArc::closeEvent(QCloseEvent *event)
     ui->plainTextEditF2->blockSignals(true);
     ui->plainTextEditRotationAngle->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEllipticalArc::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

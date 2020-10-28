@@ -67,8 +67,8 @@ template <class T> class QSharedPointer;
  */
 VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
-                               const qreal &angle, QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
+                               const qreal &angle, const QString &notes, QGraphicsItem *parent)
+    :VToolSinglePoint(doc, data, id, notes, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
       mainLine(nullptr), lineColor(lineColor)
 {
     this->m_lineType = typeLine;

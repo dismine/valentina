@@ -36,8 +36,8 @@
 #include "../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id)
-    :VDrawTool(doc, data, id)
+VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes)
+    :VDrawTool(doc, data, id, notes)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

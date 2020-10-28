@@ -64,7 +64,7 @@ const QString VToolNormal::ToolType = QStringLiteral("normal");
  */
 VToolNormal::VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.firstPointId, initData.angle, parent),
+                    initData.firstPointId, initData.angle, initData.notes, parent),
     secondPointId(initData.secondPointId)
 {
 
@@ -88,6 +88,7 @@ void VToolNormal::setDialog()
     dialogTool->SetFirstPointId(basePointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,6 +119,7 @@ VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolNormal *point = Create(initData);
     if (point != nullptr)
@@ -232,6 +234,9 @@ void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     doc->SetAttribute(domElement, AttrAngle, QString().setNum(dialogTool->GetAngle()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

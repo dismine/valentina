@@ -76,8 +76,9 @@ QT_WARNING_POP
  * @param id object id in container.
  * @param parent parent object.
  */
-VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    : VAbstractPoint(doc, data, id),
+VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                                   QGraphicsItem *parent)
+    : VAbstractPoint(doc, data, id, notes),
       VScenePoint(parent)
 {
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);

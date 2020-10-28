@@ -74,7 +74,7 @@ const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersect
 VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData,
                                                  QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, parent),
+                    initData.basePointId, 0, initData.notes, parent),
       formulaAngle(initData.formulaAngle),
       curveId(initData.curveId)
 {
@@ -95,6 +95,7 @@ void VToolCurveIntersectAxis::setDialog()
     dialogTool->SetBasePointId(basePointId);
     dialogTool->setCurveId(curveId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,6 +119,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolCurveIntersectAxis *point = Create(initData);
     if (point != nullptr)
@@ -262,6 +264,9 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrCurve, QString().setNum(dialogTool->getCurveId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

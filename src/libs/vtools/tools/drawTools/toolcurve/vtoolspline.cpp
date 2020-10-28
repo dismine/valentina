@@ -77,7 +77,7 @@ const QString VToolSpline::OldToolType = QStringLiteral("simple");
  * @param parent parent object.
  */
 VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent)
-    : VAbstractSpline(initData.doc, initData.data, initData.id, parent),
+    : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent),
       oldPosition(),
       moved(false),
       oldMoveSpline(),
@@ -131,6 +131,7 @@ void VToolSpline::setDialog()
     SCASSERT(not dialogTool.isNull())
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
     dialogTool->SetSpline(*spl);
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,6 +156,7 @@ VToolSpline* VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     auto spl = Create(initData, new VSpline(dialogTool->GetSpline()));
 
@@ -337,6 +339,9 @@ void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
 
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 
     SetSplineAttributes(domElement, spl);
 }

@@ -55,8 +55,9 @@
 #include "../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    :VDrawTool(doc, data, id),
+VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                                 QGraphicsItem *parent)
+    :VDrawTool(doc, data, id, notes),
       QGraphicsPathItem(parent),
       controlPoints(),
       sceneType(SceneObject::Unknown),
@@ -502,8 +503,9 @@ void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 
 // VToolAbstractArc
 //---------------------------------------------------------------------------------------------------------------------
-VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    : VAbstractSpline(doc, data, id, parent)
+VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                                   QGraphicsItem *parent)
+    : VAbstractSpline(doc, data, id, notes, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

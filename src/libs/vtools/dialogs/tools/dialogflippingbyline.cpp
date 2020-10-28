@@ -88,6 +88,9 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
             this, &DialogFlippingByLine::PointChanged);
 
     vis = new VisToolFlippingByLine(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -429,4 +432,16 @@ void DialogFlippingByLine::PointChanged()
     }
 
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogFlippingByLine::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

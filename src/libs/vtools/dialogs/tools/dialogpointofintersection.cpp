@@ -78,6 +78,9 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, qui
 
     vis = new VisToolPointOfIntersection(data);
     vis->VisualMode(NULL_ID);//Show vertical axis
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,4 +234,16 @@ quint32 DialogPointOfIntersection::GetFirstPointId() const
 quint32 DialogPointOfIntersection::GetSecondPointId() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersection::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersection::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

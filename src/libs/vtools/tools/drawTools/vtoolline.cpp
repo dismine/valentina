@@ -61,7 +61,7 @@ template <class T> class QSharedPointer;
  * @param parent parent object.
  */
 VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
-    :VDrawTool(initData.doc, initData.data, initData.id),
+    :VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
       VScaledLine(parent),
       firstPoint(initData.firstPoint),
       secondPoint(initData.secondPoint),
@@ -92,6 +92,7 @@ void VToolLine::setDialog()
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,6 +120,7 @@ VToolLine *VToolLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolLine *line = Create(initData);
     if (line != nullptr)
@@ -391,6 +393,9 @@ void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

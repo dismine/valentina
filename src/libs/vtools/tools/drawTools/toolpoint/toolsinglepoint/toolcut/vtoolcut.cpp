@@ -45,8 +45,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &curveCutId, QGraphicsItem *parent)
-    : VToolSinglePoint(doc, data, id, parent),
+                   const quint32 &curveCutId, const QString &notes, QGraphicsItem *parent)
+    : VToolSinglePoint(doc, data, id, notes, parent),
       formula(formula),
       curveCutId(curveCutId),
       detailsMode(qApp->Settings()->IsShowCurveDetails())

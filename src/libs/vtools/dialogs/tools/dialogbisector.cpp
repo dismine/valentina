@@ -106,6 +106,9 @@ DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *
             this, &DialogBisector::PointNameChanged);
 
     vis = new VisToolBisector(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,6 +346,18 @@ QString DialogBisector::GetLineColor() const
 void DialogBisector::SetLineColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogBisector::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

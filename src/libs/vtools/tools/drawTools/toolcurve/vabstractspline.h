@@ -72,7 +72,8 @@ class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
+    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                    QGraphicsItem * parent = nullptr);
     virtual ~VAbstractSpline() Q_DECL_EQ_DEFAULT;
 
     virtual QPainterPath shape() const override;
@@ -249,7 +250,8 @@ void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *too
 class VToolAbstractArc:public VAbstractSpline
 {
 public:
-    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent = nullptr);
+    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                     QGraphicsItem *parent = nullptr);
     virtual ~VToolAbstractArc() = default;
 
     QString CenterPointName() const;

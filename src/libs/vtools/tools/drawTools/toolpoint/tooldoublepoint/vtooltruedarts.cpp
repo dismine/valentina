@@ -57,7 +57,7 @@ const QString VToolTrueDarts::ToolType = QStringLiteral("trueDarts");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolTrueDarts::VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent)
-    :VToolDoublePoint(initData.doc, initData.data, initData.id, initData.p1id, initData.p2id, parent),
+    :VToolDoublePoint(initData.doc, initData.data, initData.id, initData.p1id, initData.p2id, initData.notes, parent),
       baseLineP1Id (initData.baseLineP1Id),
       baseLineP2Id(initData.baseLineP2Id),
       dartP1Id(initData.dartP1Id),
@@ -108,6 +108,7 @@ void VToolTrueDarts::setDialog()
     dialogTool->SetFirstDartPointId(dartP1Id);
     dialogTool->SetSecondDartPointId(dartP2Id);
     dialogTool->SetThirdDartPointId(dartP3Id);
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,6 +132,7 @@ VToolTrueDarts *VToolTrueDarts::Create(const QPointer<DialogTool> &dialog, VMain
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolTrueDarts *point = Create(initData);
     if (point != nullptr)
@@ -288,6 +290,9 @@ void VToolTrueDarts::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrDartP1, QString().setNum(dialogTool->GetFirstDartPointId()));
     doc->SetAttribute(domElement, AttrDartP2, QString().setNum(dialogTool->GetSecondDartPointId()));
     doc->SetAttribute(domElement, AttrDartP3, QString().setNum(dialogTool->GetThirdDartPointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

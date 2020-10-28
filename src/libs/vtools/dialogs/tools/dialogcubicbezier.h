@@ -55,6 +55,9 @@ public:
 
     VCubicBezier GetSpline() const;
     void         SetSpline(const VCubicBezier &spline);
+
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void  PointNameChanged() override;

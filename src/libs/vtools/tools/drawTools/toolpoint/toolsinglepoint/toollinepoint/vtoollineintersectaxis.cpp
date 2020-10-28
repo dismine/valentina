@@ -60,7 +60,7 @@ const QString VToolLineIntersectAxis::ToolType = QStringLiteral("lineIntersectAx
 //---------------------------------------------------------------------------------------------------------------------
 VToolLineIntersectAxis::VToolLineIntersectAxis(const VToolLineIntersectAxisInitData &initData, QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, parent),
+                    initData.basePointId, 0, initData.notes, parent),
       formulaAngle(initData.formulaAngle),
       firstPointId(initData.firstPointId),
       secondPointId(initData.secondPointId)
@@ -83,6 +83,7 @@ void VToolLineIntersectAxis::setDialog()
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,6 +107,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const QPointer<DialogTool
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolLineIntersectAxis *point = Create(initData);
     if (point != nullptr)
@@ -279,6 +281,9 @@ void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> 
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondPointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

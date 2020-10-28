@@ -74,6 +74,7 @@ void VToolFlippingByAxis::setDialog()
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetSuffix(suffix);
+    dialogTool->SetNotes(m_notes);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -99,6 +100,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dia
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolFlippingByAxis* operation = Create(initData);
     if (operation != nullptr)
@@ -226,6 +228,9 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
 
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
 }
@@ -265,7 +270,7 @@ QString VToolFlippingByAxis::MakeToolTip() const
 //---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByAxis::VToolFlippingByAxis(const VToolFlippingByAxisInitData &initData, QGraphicsItem *parent)
     : VAbstractFlipping(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                        initData.destination, parent),
+                        initData.destination, initData.notes, parent),
       m_originPointId(initData.originPointId),
       m_axisType(initData.axisType)
 {

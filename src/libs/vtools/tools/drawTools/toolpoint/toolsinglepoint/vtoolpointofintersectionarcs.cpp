@@ -58,7 +58,7 @@ const QString VToolPointOfIntersectionArcs::ToolType = QStringLiteral("pointOfIn
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(const VToolPointOfIntersectionArcsInitData &initData,
                                                            QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       firstArcId(initData.firstArcId),
       secondArcId(initData.secondArcId),
       crossPoint(initData.pType)
@@ -77,6 +77,7 @@ void VToolPointOfIntersectionArcs::setDialog()
     dialogTool->SetSecondArcId(secondArcId);
     dialogTool->SetCrossArcPoint(crossPoint);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,6 +99,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const QPointe
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfIntersectionArcs *point = Create(initData);
     if (point != nullptr)
@@ -319,6 +321,9 @@ void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement, QList<qui
     doc->SetAttribute(domElement, AttrFirstArc, QString().setNum(dialogTool->GetFirstArcId()));
     doc->SetAttribute(domElement, AttrSecondArc, QString().setNum(dialogTool->GetSecondArcId()));
     doc->SetAttribute(domElement, AttrCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetCrossArcPoint())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

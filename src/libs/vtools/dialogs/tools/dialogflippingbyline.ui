@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>304</width>
-    <height>237</height>
+    <width>319</width>
+    <height>301</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,94 +17,131 @@
    <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelFirstLinePoint">
-       <property name="text">
-        <string>First line point:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="comboBoxFirstLinePoint"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelSuffix">
-       <property name="text">
-        <string>Suffix:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEditSuffix"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="labelSecondLinePoint">
-       <property name="text">
-        <string>Second line point:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxSecondLinePoint"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBoxVisibilityGroup">
-     <property name="toolTip">
-      <string>Enable to create a visibility gropup from original objects</string>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <property name="title">
-      <string>Visibility Group</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelGroupName">
-        <property name="text">
-         <string>Name:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditVisibilityGroup">
-        <property name="text">
-         <string>Flipping by line</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Tags:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="VCompleterLineEdit" name="lineEditGroupTags">
-        <property name="toolTip">
-         <string>Separate each tag with comma.</string>
-        </property>
-        <property name="placeholderText">
-         <string>Add tags</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Tool</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelFirstLinePoint">
+           <property name="text">
+            <string>First line point:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBoxFirstLinePoint"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelSuffix">
+           <property name="text">
+            <string>Suffix:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEditSuffix"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelSecondLinePoint">
+           <property name="text">
+            <string>Second line point:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBoxSecondLinePoint"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxVisibilityGroup">
+         <property name="toolTip">
+          <string>Enable to create a visibility gropup from original objects</string>
+         </property>
+         <property name="title">
+          <string>Visibility Group</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelGroupName">
+            <property name="text">
+             <string>Name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditVisibilityGroup">
+            <property name="text">
+             <string>Flipping by line</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Tags:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="VCompleterLineEdit" name="lineEditGroupTags">
+            <property name="toolTip">
+             <string>Separate each tag with comma.</string>
+            </property>
+            <property name="placeholderText">
+             <string>Add tags</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Notes</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPlainTextEdit" name="plainTextEditToolNotes"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>

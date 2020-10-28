@@ -68,6 +68,9 @@ public:
 
     quint32        GetSecondPoint() const;
     void           SetSecondPoint(quint32 value);
+
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     /**

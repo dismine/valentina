@@ -114,6 +114,9 @@ DialogNormal::DialogNormal(const VContainer *data, quint32 toolId, QWidget *pare
             this, &DialogNormal::PointNameChanged);
 
     vis = new VisToolNormal(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -402,4 +405,16 @@ quint32 DialogNormal::GetFirstPointId() const
 quint32 DialogNormal::GetSecondPointId() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogNormal::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

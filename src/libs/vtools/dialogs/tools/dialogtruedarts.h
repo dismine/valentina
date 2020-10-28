@@ -71,6 +71,9 @@ public:
     void               SetThirdDartPointId(const quint32 &value);
 
     void               SetChildrenId(const quint32 &ch1, const quint32 &ch2);
+
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
 public slots:
     virtual void       ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void       PointNameChanged() override;

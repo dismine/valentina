@@ -49,7 +49,7 @@ class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
     Q_OBJECT
 public:
     VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
-                     QGraphicsItem * parent = nullptr);
+                     const QString &notes, QGraphicsItem * parent = nullptr);
     virtual ~VToolDoublePoint() Q_DECL_EQ_DEFAULT;
 
     virtual int   type() const override {return Type;}

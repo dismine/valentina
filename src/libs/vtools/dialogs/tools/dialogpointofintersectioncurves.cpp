@@ -74,6 +74,9 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
             this, &DialogPointOfIntersectionCurves::CurveChanged);
 
     vis = new VisToolPointOfIntersectionCurves(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -247,4 +250,16 @@ void DialogPointOfIntersectionCurves::CurveChanged()
     ChangeColor(ui->labelCurve1, color);
     ChangeColor(ui->labelCurve2, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCurves::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

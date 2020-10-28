@@ -81,7 +81,7 @@ const QString VToolRotation::ToolType = QStringLiteral("rotation");
 //---------------------------------------------------------------------------------------------------------------------
 VToolRotation::VToolRotation(const VToolRotationInitData &initData, QGraphicsItem *parent)
     : VAbstractOperation(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                         initData.destination, parent),
+                         initData.destination, initData.notes, parent),
       origPointId(initData.origin),
       formulaAngle(initData.angle)
 {
@@ -98,6 +98,7 @@ void VToolRotation::setDialog()
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
+    dialogTool->SetNotes(m_notes);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -123,6 +124,7 @@ VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolRotation* operation = Create(initData);
     if (operation != nullptr)
@@ -361,6 +363,9 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
