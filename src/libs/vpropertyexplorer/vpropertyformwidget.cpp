@@ -305,7 +305,7 @@ bool VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
 
     if (event->type() == QEvent::KeyPress)
     {
-        if (QPlainTextEdit *textEdit = qobject_cast<QPlainTextEdit *>(editor))
+        if (qobject_cast<QPlainTextEdit *>(editor))
         {
             switch (static_cast<QKeyEvent *>(event)->key())
             {
