@@ -49,10 +49,11 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
 
     // Create the tool button
     ToolButton = new QToolButton(this);
-    ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
+    ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     ToolButton->setText("...");
     ToolButton->setIcon(QIcon("://icon/16x16/fx.png"));
-    ToolButton->setFixedWidth(20);
+    ToolButton->setIconSize(QSize(16, 16));
+    ToolButton->setFixedSize(24, 24);
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
@@ -60,6 +61,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
 
     // Create the text label
     TextLabel = new QLabel(this);
+    TextLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     TextLabel->setText(formula.getStringValue());
 
     // The layout (a horizontal layout)
@@ -68,7 +70,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     layout->setMargin(0);
     layout->addWidget(TextLabel);
     // Spacer (this is needed for proper display of the label and button)
-    layout->addSpacerItem(new QSpacerItem(1000000000, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
+    layout->addSpacerItem(new QSpacerItem(1000000000, 0, QSizePolicy::Expanding, QSizePolicy::Preferred));
     layout->addWidget(ToolButton);
 }
 

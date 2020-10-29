@@ -167,7 +167,7 @@ QWidget* VPE::VDoubleProperty::createEditor(QWidget * parent, const QStyleOption
     tmpEditor->setMaximum(maxValue);
     tmpEditor->setDecimals(Precision);
     tmpEditor->setSingleStep(singleStep);
-    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     tmpEditor->setValue(VProperty::d_ptr->VariantValue.toDouble());
     connect(tmpEditor, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &VIntegerProperty::valueChanged);
 
