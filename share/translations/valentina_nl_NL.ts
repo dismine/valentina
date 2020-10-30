@@ -574,6 +574,14 @@
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -697,6 +705,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -811,6 +827,14 @@
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -931,6 +955,14 @@
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
@@ -994,6 +1026,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -1040,6 +1080,14 @@
     <message>
         <source>Cannot find point with id %1</source>
         <translation>Kan punt met id %1 niet vinden</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1140,6 +1188,14 @@
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -1214,6 +1270,14 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1290,6 +1354,14 @@
         <source>Color:</source>
         <translation type="vanished">Kleur:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
@@ -1364,6 +1436,14 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1674,6 +1754,10 @@
         <source>Label</source>
         <translation>Label</translation>
     </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished">Dimensie:</translation>
+    </message>
 </context>
 <context>
     <name>DialogDuplicateDetail</name>
@@ -1828,11 +1912,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hoogte</translation>
+        <translation type="vanished">Hoogte</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1964,15 +2048,35 @@
     </message>
     <message>
         <source>Hip</source>
-        <translation>Heup</translation>
+        <translation type="vanished">Heup</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation>Taille</translation>
+        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
         <translation>Maat: %1</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Hoogte</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Maat</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Heup</translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taille</translation>
     </message>
 </context>
 <context>
@@ -2204,6 +2308,14 @@
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -2306,6 +2418,14 @@
     <message>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2529,6 +2649,14 @@
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2595,6 +2723,14 @@
     <message>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2709,6 +2845,14 @@
     <message>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3566,6 +3710,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
@@ -3624,6 +3776,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3743,6 +3903,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4060,6 +4228,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -4260,6 +4436,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5230,6 +5414,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Take:</source>
         <translation>Kies:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromCircleAndTangent</name>
@@ -5321,6 +5513,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Take:</source>
         <translation>Kies:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
@@ -5408,6 +5608,14 @@ Toch de instellingen aanpassen?</translation>
         <source>End of the line:</source>
         <translation>Einde van de lijn:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
@@ -5458,6 +5666,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Y: horizontal point:</source>
         <translation>Y: horizontaal punt:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5517,6 +5733,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Tool point of intersetion arcs</source>
         <translation>Kruispunt van bogen gereedschap</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5625,6 +5849,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Tool point of intersection circles</source>
         <translation>Gereedschap kruispunt van cirkels</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCurves</name>
@@ -5663,6 +5895,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Select second curve</source>
         <translation>Selecteer tweede kromming</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5791,6 +6031,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6415,6 +6663,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -6449,6 +6705,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6588,6 +6852,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6735,6 +7007,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Cannot find point with id %1</source>
         <translation>Kan punt met id %1 niet vinden</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6916,6 +7196,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogTrueDarts</name>
@@ -7018,6 +7306,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Second new dart point:</source>
         <translation>Tweede nieuwe figuurnaad punt:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Gereedschap</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11592,7 +11888,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>Tape</name>
     <message>
         <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation>Deze testversie is ouder dan %1 dagen. Om je een betere dienst te verlenen beperken we de levensduur van een testversie. Om Tape verder te gebruiken, vragen we jou om bij te werken naar een nieuwere testversie. Het programma wordt nu gestopt.</translation>
+        <translation type="vanished">Deze testversie is ouder dan %1 dagen. Om je een betere dienst te verlenen beperken we de levensduur van een testversie. Om Tape verder te gebruiken, vragen we jou om bij te werken naar een nieuwere testversie. Het programma wordt nu gestopt.</translation>
     </message>
 </context>
 <context>
@@ -14574,6 +14870,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Rotation origin point:</source>
         <translation>Rotatie startpunt:</translation>
     </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished">Notities:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -16331,7 +16631,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>Valentina</name>
     <message>
         <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
-        <translation>Deze testversie is ouder dan %1 dagen. Om je een betere dienst te verlenen beperken we de levensduur van een testversie. Om Tape verder te gebruiken, vragen we jou om bij te werken naar een nieuwere testversie. Het programma wordt nu gestopt.</translation>
+        <translation type="vanished">Deze testversie is ouder dan %1 dagen. Om je een betere dienst te verlenen beperken we de levensduur van een testversie. Om Tape verder te gebruiken, vragen we jou om bij te werken naar een nieuwere testversie. Het programma wordt nu gestopt.</translation>
     </message>
 </context>
 <context>

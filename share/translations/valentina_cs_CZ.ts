@@ -574,6 +574,14 @@
         <source>Choose unique label.</source>
         <translation>Zvolte jedinečný popis.</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -697,6 +705,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -811,6 +827,14 @@
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -931,6 +955,14 @@
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
@@ -994,6 +1026,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -1040,6 +1080,14 @@
     <message>
         <source>Cannot find point with id %1</source>
         <translation>Nelze najít bod s ID %1</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1140,6 +1188,14 @@
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -1214,6 +1270,14 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Barva:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1290,6 +1354,14 @@
         <source>Color:</source>
         <translation type="vanished">Barva:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
@@ -1364,6 +1436,14 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Barva:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1674,6 +1754,10 @@
         <source>Label</source>
         <translation>Popis</translation>
     </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogDuplicateDetail</name>
@@ -1828,11 +1912,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Výška</translation>
+        <translation type="vanished">Výška</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1963,15 +2047,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
         <source>Hip</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurement: %1</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2204,6 +2300,14 @@
         <source>Pen style:</source>
         <translation>Styl pera:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -2306,6 +2410,14 @@
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2529,6 +2641,14 @@
         <source>Add tags</source>
         <translation>Přidat značky</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2595,6 +2715,14 @@
     <message>
         <source>Add tags</source>
         <translation>Přidat značky</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2709,6 +2837,14 @@
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3566,6 +3702,14 @@ Přesto použít nastavení?</translation>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
@@ -3624,6 +3768,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Second point:</source>
         <translation>Druhý bod:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3743,6 +3895,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4060,6 +4220,14 @@ Přesto použít nastavení?</translation>
         <source>Add tags</source>
         <translation>Přidat značky</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -4260,6 +4428,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5230,6 +5406,14 @@ Přesto použít nastavení?</translation>
         <source>Take:</source>
         <translation>Vzít:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromCircleAndTangent</name>
@@ -5321,6 +5505,14 @@ Přesto použít nastavení?</translation>
         <source>Take:</source>
         <translation>Vzít:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
@@ -5408,6 +5600,14 @@ Přesto použít nastavení?</translation>
         <source>End of the line:</source>
         <translation>Konec čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
@@ -5458,6 +5658,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Y: horizontal point:</source>
         <translation>Y: vodorovný bod:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5517,6 +5725,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Tool point of intersetion arcs</source>
         <translation>Nástroj Průsečík oblouků</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5625,6 +5841,14 @@ Přesto použít nastavení?</translation>
         <source>Tool point of intersection circles</source>
         <translation>Nástroj Průsečík kruhů</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCurves</name>
@@ -5663,6 +5887,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Select second curve</source>
         <translation>Vybrat druhou křivku</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5792,6 +6024,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Add tags</source>
         <translation>Přidat značky</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6416,6 +6656,14 @@ Přesto použít nastavení?</translation>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -6450,6 +6698,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Choose unique label.</source>
         <translation>Zvolte jedinečný popis.</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6589,6 +6845,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6736,6 +7000,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Cannot find point with id %1</source>
         <translation>Nelze najít bod s ID %1</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6918,6 +7190,14 @@ Přesto použít nastavení?</translation>
         <source>Second point:</source>
         <translation>Druhý bod:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogTrueDarts</name>
@@ -7020,6 +7300,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Second new dart point:</source>
         <translation>Druhý nový bod záševku:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11592,13 +11880,6 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
@@ -14577,6 +14858,10 @@ Chcete uložit změny?</translation>
         <source>Rotation origin point:</source>
         <translation>Původní bod otočení:</translation>
     </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished">Poznámky:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -16327,13 +16612,6 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

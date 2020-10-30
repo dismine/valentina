@@ -287,6 +287,14 @@
         <source>Choose unique label.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -378,6 +386,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -459,6 +475,14 @@
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -556,6 +580,14 @@
         <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
@@ -615,6 +647,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -656,6 +696,14 @@
     </message>
     <message>
         <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -733,6 +781,14 @@
         <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -790,6 +846,14 @@
     </message>
     <message>
         <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -855,6 +919,14 @@
         <source>Choose unique label.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
@@ -918,6 +990,14 @@
         <source>Choose unique label.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogDateTimeFormats</name>
@@ -969,6 +1049,10 @@
     </message>
     <message>
         <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1124,14 +1208,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1260,15 +1336,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Hip</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurement: %1</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1457,6 +1545,14 @@
         <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -1538,6 +1634,14 @@
     </message>
     <message>
         <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1750,6 +1854,14 @@
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -1811,6 +1923,14 @@
     </message>
     <message>
         <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1905,6 +2025,14 @@
     </message>
     <message>
         <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2590,6 +2718,14 @@ Apply settings anyway?</source>
         <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
@@ -2647,6 +2783,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2742,6 +2886,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3056,6 +3208,14 @@ Apply settings anyway?</source>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -3223,6 +3383,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3951,6 +4119,14 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromCircleAndTangent</name>
@@ -4024,6 +4200,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4101,6 +4285,14 @@ Apply settings anyway?</source>
         <source>End of the line:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
@@ -4134,6 +4326,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Y: horizontal point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4173,6 +4373,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4254,6 +4462,14 @@ Apply settings anyway?</source>
         <source>Tool point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCurves</name>
@@ -4291,6 +4507,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select second curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4411,6 +4635,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4976,6 +5208,14 @@ Apply settings anyway?</source>
         <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -5009,6 +5249,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5104,6 +5352,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5203,6 +5459,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5345,6 +5609,14 @@ Apply settings anyway?</source>
         <source>Second point:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogTrueDarts</name>
@@ -5402,6 +5674,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second new dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">כלי</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9194,13 +9474,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TapePreferencesConfigurationPage</name>
     <message>
         <source>Language</source>
@@ -11628,6 +11901,10 @@ Do you want to save your changes?</source>
         <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -13229,13 +13506,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

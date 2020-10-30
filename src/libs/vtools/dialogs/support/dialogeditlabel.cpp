@@ -532,10 +532,10 @@ void DialogEditLabel::InitPlaceholders()
     const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
 
-    m_placeholders.insert(pl_height, qMakePair(tr("Height"), QString::number(qApp->GetDimensionHeight())));
-    m_placeholders.insert(pl_size, qMakePair(tr("Size"), QString::number(qApp->GetDimensionSize())));
-    m_placeholders.insert(pl_hip, qMakePair(tr("Hip"), QString::number(qApp->GetDimensionHip())));
-    m_placeholders.insert(pl_waist, qMakePair(tr("Waist"), QString::number(qApp->GetDimensionWaist())));
+    m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), QString::number(qApp->GetDimensionHeight())));
+    m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"), QString::number(qApp->GetDimensionSize())));
+    m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), QString::number(qApp->GetDimensionHip())));
+    m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), QString::number(qApp->GetDimensionWaist())));
     m_placeholders.insert(pl_mExt,
                           qMakePair(tr("Measurments extension"),
                                     qApp->GetMeasurementsType() == MeasurementsType::Multisize ? QString("vst")

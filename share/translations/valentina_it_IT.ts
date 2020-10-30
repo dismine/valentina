@@ -574,6 +574,14 @@
         <source>Choose unique label.</source>
         <translation>Scegli una etichetta.</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -697,6 +705,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -811,6 +827,14 @@
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -931,6 +955,14 @@
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
@@ -994,6 +1026,14 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -1035,6 +1075,14 @@
     </message>
     <message>
         <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1136,6 +1184,14 @@
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -1210,6 +1266,14 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Colore:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1286,6 +1350,14 @@
         <source>Color:</source>
         <translation type="vanished">Colore:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
@@ -1360,6 +1432,14 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Colore:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1666,6 +1746,10 @@
         <source>Label</source>
         <translation>Etichetta</translation>
     </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogDuplicateDetail</name>
@@ -1820,11 +1904,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation>Taglia</translation>
+        <translation type="vanished">Taglia</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Altezza</translation>
+        <translation type="vanished">Altezza</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1955,15 +2039,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Altezza</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taglia</translation>
+    </message>
+    <message>
         <source>Hip</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurement: %1</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2196,6 +2292,14 @@
         <source>Pen style:</source>
         <translation>Stile di penna:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -2298,6 +2402,14 @@
     <message>
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2521,6 +2633,14 @@
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2586,6 +2706,14 @@
     </message>
     <message>
         <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2701,6 +2829,14 @@
     <message>
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3558,6 +3694,14 @@ Applicare la configurazione comunque?</translation>
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
@@ -3616,6 +3760,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Second point:</source>
         <translation>Secondo punto:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3735,6 +3887,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4052,6 +4212,14 @@ Applicare la configurazione comunque?</translation>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -4252,6 +4420,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5222,6 +5398,14 @@ Applicare la configurazione comunque?</translation>
         <source>Take:</source>
         <translation>Prendi:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromCircleAndTangent</name>
@@ -5313,6 +5497,14 @@ Applicare la configurazione comunque?</translation>
         <source>Take:</source>
         <translation>Prendi:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
@@ -5400,6 +5592,14 @@ Applicare la configurazione comunque?</translation>
         <source>End of the line:</source>
         <translation>Fine della linea:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
@@ -5450,6 +5650,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Y: horizontal point:</source>
         <translation>Y: punto orizzontale:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5509,6 +5717,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Tool point of intersetion arcs</source>
         <translation>Strumento punto d&apos;inserzione degli archi</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5617,6 +5833,14 @@ Applicare la configurazione comunque?</translation>
         <source>Tool point of intersection circles</source>
         <translation>Strumento punto d&apos;inserzione cerchi</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCurves</name>
@@ -5655,6 +5879,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Select second curve</source>
         <translation>Seleziona la seconda curva</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5782,6 +6014,14 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6407,6 +6647,14 @@ Applicare la configurazione comunque?</translation>
         <source>Line color:</source>
         <translation>Colore della linea:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -6441,6 +6689,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Choose unique label.</source>
         <translation>Scegli una etichetta.</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6580,6 +6836,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6726,6 +6990,14 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6908,6 +7180,14 @@ Applicare la configurazione comunque?</translation>
         <source>Second point:</source>
         <translation>Secondo punto:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogTrueDarts</name>
@@ -7010,6 +7290,14 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Second new dart point:</source>
         <translation>Secondo nuovo punto della pince:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Strumento</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11574,13 +11862,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
@@ -14472,6 +14753,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Rotation origin point:</source>
         <translation>Ruota punto d&apos;origine:</translation>
     </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished">Note:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -16168,13 +16453,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
