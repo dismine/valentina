@@ -3,6 +3,7 @@
 - Fix issue in VAbstractCurve::CurveIntersectAxis.
 - Improve editing a spline path through control points for locked angles.
 - [smart-pattern/valentina#73] Notes for tools.
+- Fix crash while synchronize measurements.
 
 # Version 0.7.36 October 24, 2020
 - [#892] Show tooltip for piece node point.
@@ -101,6 +102,7 @@
 - Elide a variable description in the formula wizard.
 - Fix removing a pin in the Seam Allowance tool dialog.
 - Fix label size for case with two pins.
+- Fix crash while synchronize measurements.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

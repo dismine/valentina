@@ -271,6 +271,7 @@ private:
     QLabel             *leftGoToStage;
     QLabel             *rightGoToStage;
     QTimer             *autoSaveTimer;
+    QTimer             *measurementsSyncTimer;
     bool               guiEnabled;
     QPointer<QComboBox> dimensionA{nullptr};
     QPointer<QComboBox> dimensionB{nullptr};

@@ -200,7 +200,11 @@ MainWindow::MainWindow(QWidget *parent)
       comboBoxDraws(nullptr), patternPieceLabel(nullptr),
       currentDrawIndex(0), currentToolBoxIndex(0),
       drawMode(true),
-      leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
+      leftGoToStage(nullptr),
+      rightGoToStage(nullptr),
+      autoSaveTimer(nullptr),
+      measurementsSyncTimer(new QTimer(this)),
+      guiEnabled(true),
       toolOptions(nullptr),
       groupsWidget(nullptr),
       detailsWidget(nullptr),
@@ -265,18 +269,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dockWidgetLayoutPages->setVisible(false);
 
     connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
-    connect(qApp, &QApplication::focusChanged, this, [this](QWidget *old, QWidget *now)
+
+    measurementsSyncTimer->setTimerType(Qt::VeryCoarseTimer);
+    connect(measurementsSyncTimer, &QTimer::timeout, this, [this]()
     {
-        if (old == nullptr && isAncestorOf(now) == true)
-        {// focus IN
+        if (isActiveWindow())
+        {
             static bool asking = false;
             if (not asking && mChanges && not mChangesAsked)
             {
                 asking = true;
                 mChangesAsked = true;
-                const auto answer = QMessageBox::question(this, tr("Measurements"),
-                                                 tr("Measurements were changed. Do you want to sync measurements now?"),
-                                                          QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                measurementsSyncTimer->stop();
+                const auto answer =
+                    QMessageBox::question(this, tr("Measurements"),
+                                          tr("Measurements were changed. Do you want to sync measurements now?"),
+                                          QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 if (answer == QMessageBox::Yes)
                 {
                     SyncMeasurements();
@@ -284,10 +292,6 @@ MainWindow::MainWindow(QWidget *parent)
                 asking = false;
             }
         }
-
-        // In case we will need it
-        // else if (isAncestorOf(old) == true && now == nullptr)
-        // focus OUT
     });
 
 #if defined(Q_OS_MAC)
@@ -1968,6 +1972,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     {
         mChanges = true;
         mChangesAsked = false;
+        measurementsSyncTimer->start(1500);
     }
     else
     {
@@ -1977,6 +1982,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
             {
                 mChanges = true;
                 mChangesAsked = false;
+                measurementsSyncTimer->start(1500);
                 break;
             }
             else
@@ -2009,6 +2015,7 @@ void MainWindow::SyncMeasurements()
             doc->LiteParseTree(Document::FullLiteParse);
             mChanges = false;
             mChangesAsked = true;
+            measurementsSyncTimer->stop();
             UpdateWindowTitle();
             ui->actionSyncMeasurements->setEnabled(mChanges);
         }
