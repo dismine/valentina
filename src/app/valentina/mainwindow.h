@@ -264,6 +264,7 @@ private:
     QLabel             *leftGoToStage;
     QLabel             *rightGoToStage;
     QTimer             *autoSaveTimer;
+    QTimer             *measurementsSyncTimer;
     bool               guiEnabled;
     QPointer<QComboBox> gradationHeights;
     QPointer<QComboBox> gradationSizes;

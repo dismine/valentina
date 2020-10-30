@@ -38,6 +38,7 @@
 - Elide a variable description in the formula wizard.
 - Fix removing a pin in the Seam Allowance tool dialog.
 - Fix label size for case with two pins.
+- Fix crash while synchronize measurements.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
