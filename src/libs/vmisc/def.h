@@ -280,8 +280,8 @@ enum class IMD: qint8 // Individual measurement dimension
     N, // None
     X, // height
     Y, // size (chest half circumference)
-    W, // hip half circumference
-    Z  // waist half circumference
+    W, // waist half circumference
+    Z  // hip half circumference
 };
 
 /* QImage supports a maximum of 32768x32768 px images (signed short).

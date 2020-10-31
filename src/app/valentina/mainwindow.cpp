@@ -1815,17 +1815,6 @@ void MainWindow::LoadMultisize()
 
     if (not mPath.isEmpty())
     {
-        QString hText;
-        if (not dimensionA.isNull())
-        {
-            hText = dimensionA->currentText();
-        }
-        QString sText;
-        if (not dimensionB.isNull())
-        {
-            sText = dimensionB->currentText();
-        }
-
         if(LoadMeasurements(mPath))
         {
             if (not doc->MPath().isEmpty())
@@ -1841,19 +1830,6 @@ void MainWindow::LoadMultisize()
             doc->LiteParseTree(Document::FullLiteParse);
 
             UpdateWindowTitle();
-
-            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
-            {
-                if (not hText.isEmpty() && not dimensionA.isNull())
-                {
-                    dimensionA->setCurrentText(hText);
-                }
-
-                if (not sText.isEmpty() && not dimensionB.isNull())
-                {
-                    dimensionB->setCurrentText(sText);
-                }
-            }
         }
     }
 }
@@ -1876,6 +1852,11 @@ void MainWindow::UnloadMeasurements()
 
         m.clear();
 
+        qApp->SetDimensionHeight(0);
+        qApp->SetDimensionSize(0);
+        qApp->SetDimensionHip(0);
+        qApp->SetDimensionWaist(0);
+
         if (oldType == MeasurementsType::Multisize)
         {
             m_currentDimensionA = 0;
@@ -1889,12 +1870,6 @@ void MainWindow::UnloadMeasurements()
             qApp->SetCustomerBirthDate(QDate());
             qApp->SetCustomerEmail(QString());
             qApp->SetCustomerName(QString());
-
-            qApp->SetDimensionHeight(0);
-            qApp->SetDimensionSize(0);
-            qApp->SetDimensionHip(0);
-            qApp->SetDimensionWaist(0);
-
             qApp->SetMeasurementsUnits(Unit::LAST_UNIT_DO_NOT_USE);
             qApp->SetDimensionSizeUnits(Unit::LAST_UNIT_DO_NOT_USE);
         }
