@@ -111,7 +111,16 @@ DEPENDPATH += $$PWD/../../libs/vtest
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtest/$${DESTDIR}/vtest.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtest/$${DESTDIR}/libvtest.a
 
-#VPatternDB static library (depend on vgeometry, vmisc, VLayout)
+# VLayout static library  (depend on IFC, VGeometry, VPatternDB)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
+
+INCLUDEPATH += $$PWD/../../libs/vlayout
+DEPENDPATH += $$PWD/../../libs/vlayout
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+
+#VPatternDB static library (depend on vgeometry, vmisc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
 
 INCLUDEPATH += $$PWD/../../libs/vpatterndb
@@ -128,15 +137,6 @@ DEPENDPATH += $$PWD/../../libs/vmisc
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/vmisc.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/libvmisc.a
-
-# VLayout static library  (depend on IFC, VGeometry)
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
-
-INCLUDEPATH += $$PWD/../../libs/vlayout
-DEPENDPATH += $$PWD/../../libs/vlayout
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
 
 ## VGeometry static library (depend on ifc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
