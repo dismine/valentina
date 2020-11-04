@@ -62,11 +62,21 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     {
         SetValue(curve->GetStartAngle());
         SetName(angle1_V + curve->name());
+
+        if (not curve->GetAlias().isEmpty())
+        {
+            SetAlias(angle1_V + curve->GetAlias());
+        }
     }
     else
     {
         SetValue(curve->GetEndAngle());
         SetName(angle2_V + curve->name());
+
+        if (not curve->GetAlias().isEmpty())
+        {
+            SetAlias(angle2_V + curve->GetAlias());
+        }
     }
 }
 
@@ -103,4 +113,9 @@ VEllipticalArcRotation::VEllipticalArcRotation(const quint32 &id, const quint32 
     SCASSERT(elArc != nullptr)
     SetValue(elArc->GetRotationAngle());
     SetName(rotation_V + elArc->name());
+
+    if (not elArc->GetAlias().isEmpty())
+    {
+        SetAlias(rotation_V + elArc->GetAlias());
+    }
 }

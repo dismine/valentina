@@ -50,6 +50,12 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
     SetType(VarType::CurveLength);
     SCASSERT(curve != nullptr)
     SetName(curve->name());
+
+    if (not curve->GetAlias().isEmpty())
+    {
+        SetAlias(curve->GetAlias());
+    }
+
     SetValue(FromPixel(curve->GetLength(), patternUnit));
 }
 

@@ -61,6 +61,9 @@ public:
     VarType      GetType() const;
     void         SetType(const VarType &type);
 
+    void    SetAlias(const QString &alias);
+    QString GetAlias() const;
+
     virtual bool Filter(quint32 id);
 
     virtual bool IsNotUsed() const;
