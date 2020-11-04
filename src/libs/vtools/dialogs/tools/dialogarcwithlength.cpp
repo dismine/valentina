@@ -47,6 +47,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../../visualization/visualization.h"
 #include "ui_dialogarcwithlength.h"
+#include "../vgeometry/varc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -114,6 +115,8 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId,
     connect(ui->pushButtonGrowLengthRadius, &QPushButton::clicked, this, &DialogArcWithLength::DeployRadiusTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArcWithLength::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthArcLength, &QPushButton::clicked, this, &DialogArcWithLength::DeployLengthTextEdit);
+
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArcWithLength::ValidateAlias);
 
     vis = new VisToolArcWithLength(data);
 
@@ -264,6 +267,19 @@ QString DialogArcWithLength::GetNotes() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetAliasSuffix(const QString &alias)
+{
+    ui->lineEditAlias->setText(alias);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArcWithLength::GetAliasSuffix() const
+{
+    return ui->lineEditAlias->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false)// After first choose we ignore all objects
@@ -372,6 +388,25 @@ void DialogArcWithLength::closeEvent(QCloseEvent *event)
     ui->plainTextEditF1->blockSignals(true);
     ui->plainTextEditLength->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::ValidateAlias()
+{
+    VArc arc;
+    arc.SetAliasSuffix(GetAliasSuffix());
+    if (not GetAliasSuffix().isEmpty() && not data->IsUnique(arc.GetAlias()))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

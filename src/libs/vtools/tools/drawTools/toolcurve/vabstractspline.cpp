@@ -505,9 +505,19 @@ QString VAbstractSpline::GetAliasSuffix() const
 void VAbstractSpline::SetAliasSuffix(const QString &alias)
 {
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+
+    const QString oldAliasSuffix = curve->GetAliasSuffix();
     curve->SetAliasSuffix(alias);
-    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
-    SaveOption(obj);
+
+    if (alias.isEmpty() || VAbstractTool::data.IsUnique(curve->GetAlias()))
+    {
+        QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+        SaveOption(obj);
+    }
+    else
+    {
+        curve->SetAliasSuffix(oldAliasSuffix);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

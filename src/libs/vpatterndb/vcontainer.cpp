@@ -266,6 +266,12 @@ quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
     }
 
     uniqueNames[d->nspace].insert(obj->name());
+
+    if (not obj->GetAlias().isEmpty())
+    {
+        uniqueNames[d->nspace].insert(obj->GetAlias());
+    }
+
     const quint32 id = getNextId();
     obj->setId(id);
 

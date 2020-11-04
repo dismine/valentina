@@ -123,7 +123,7 @@ DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
 
-    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArc::GetAliasSuffix);
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArc::ValidateAlias);
 
     vis = new VisToolArc(data);
 

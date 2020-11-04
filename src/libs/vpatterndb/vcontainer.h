@@ -403,6 +403,11 @@ void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
     SCASSERT(not obj.isNull())
     UpdateObject(id, obj);
     uniqueNames[d->nspace].insert(obj->name());
+
+    if (not obj->GetAlias().isEmpty())
+    {
+        uniqueNames[d->nspace].insert(obj->GetAlias());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1359,6 +1359,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArcWithLength(VPE::VProperty *pr
         case 61: // AttrNotes
             SetNotes<VToolArcWithLength>(property);
             break;
+        case 62: // AttrAlias
+            SetAlias<VToolArcWithLength>(property);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2491,6 +2494,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
@@ -3088,6 +3092,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
 {
     auto *i = qgraphicsitem_cast<VToolArcWithLength *>(currentItem);
 
+    idToProperty[AttrName]->setValue(i->name());
+
     QVariant valueRadius;
     valueRadius.setValue(i->GetFormulaRadius());
     idToProperty[AttrRadius]->setValue(valueRadius);
@@ -3119,6 +3125,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
     idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
