@@ -244,6 +244,36 @@ void VGObject::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGObject::SetAlias(const QString &alias)
+{
+    d->m_alias = alias;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VGObject::GetAlias() const
+{
+    return d->m_alias;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGObject::SetAliasSuffix(const QString &aliasSuffix)
+{
+    d->m_aliasSuffix = aliasSuffix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VGObject::GetAliasSuffix() const
+{
+    return d->m_aliasSuffix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VGObject::ObjectName() const
+{
+    return not d->m_alias.isEmpty() ? QString("%1 (%2)").arg(d->m_alias, d->_name) : d->_name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VGObject::getIdTool() const
 {
     if (d->mode == Draw::Calculation)
