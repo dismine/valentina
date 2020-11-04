@@ -475,7 +475,8 @@ QString VAbstractCubicBezier::NameForHistory(const QString &toolName) const
     {
         name += QString("_%1").arg(GetDuplicate());
     }
-    return name;
+
+    return not GetAlias().isEmpty() ? QString("%1 (%2)").arg(GetAlias(), name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -55,11 +55,21 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
     {
         SetValue(FromPixel(curve->GetC1Length(), patternUnit));
         SetName(c1Length_V + curve->name());
+
+        if (not curve->GetAlias().isEmpty())
+        {
+            SetAlias(c1Length_V + curve->GetAlias());
+        }
     }
     else
     {
         SetValue(FromPixel(curve->GetC2Length(), patternUnit));
         SetName(c2Length_V + curve->name());
+
+        if (not curve->GetAlias().isEmpty())
+        {
+            SetAlias(c2Length_V + curve->GetAlias());
+        }
     }
 }
 

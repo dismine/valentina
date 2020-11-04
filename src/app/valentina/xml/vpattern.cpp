@@ -2618,6 +2618,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         auto p1 = data->GeometricObject<VPointF>(point1);
         auto p2 = data->GeometricObject<VPointF>(point2);
@@ -2633,6 +2634,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetApproximationScale(approximationScale);
+        initData.spline->SetAliasSuffix(alias);
 
         VToolCubicBezier::Create(initData);
     }

@@ -2050,6 +2050,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezier(VPE::VProperty *prop
         case 61: // AttrNotes
             SetNotes<VToolCubicBezier>(property);
             break;
+        case 62: // AttrAlias
+            SetAlias<VToolCubicBezier>(property);
+            break;
         case 55: // AttrPoint1 (read only)
         case 56: // AttrPoint2 (read only)
         case 57: // AttrPoint3 (read only)
@@ -2824,6 +2827,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrPoint2);
     AddPropertyParentPointName(i->ThirdPointName(), tr("Third point:"), AttrPoint3);
     AddPropertyParentPointName(i->ForthPointName(), tr("Fourth point:"), AttrPoint4);
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->getSpline().GetApproximationScale());
@@ -3655,6 +3659,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
     idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -292,4 +292,5 @@ void VToolCubicBezier::SetSplineAttributes(QDomElement &domElement, const VCubic
     doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale,   spl.GetApproximationScale());
     doc->SetAttributeOrRemoveIf(domElement, AttrDuplicate, spl.GetDuplicate(), spl.GetDuplicate() <= 0);
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, spl.GetAliasSuffix(), spl.GetAliasSuffix().isEmpty());
 }
