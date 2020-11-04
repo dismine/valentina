@@ -2012,6 +2012,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VPE::VProperty *property)
         case 61: // AttrNotes
             SetNotes<VToolSpline>(property);
             break;
+        case 62: // AttrAlias
+            SetAlias<VToolSpline>(property);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2812,6 +2815,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     length2.Eval();
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), spl.GetApproximationScale());
@@ -3625,6 +3629,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

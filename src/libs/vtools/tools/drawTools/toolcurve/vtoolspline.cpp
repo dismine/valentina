@@ -227,6 +227,7 @@ VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
     spline->SetColor(initData.color);
     spline->SetPenStyle(initData.penStyle);
     spline->SetApproximationScale(initData.approximationScale);
+    spline->SetAliasSuffix(initData.aliasSuffix);
 
     return VToolSpline::Create(initData, spline);
 }
@@ -651,6 +652,7 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
     doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, spl.GetApproximationScale());
     doc->SetAttributeOrRemoveIf(domElement, AttrDuplicate, spl.GetDuplicate(), spl.GetDuplicate() <= 0);
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, spl.GetAliasSuffix(), spl.GetAliasSuffix().isEmpty());
 
     if (domElement.hasAttribute(AttrKCurve))
     {
