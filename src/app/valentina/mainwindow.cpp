@@ -2116,7 +2116,7 @@ void MainWindow::StoreIndividualMDimensions()
 
     auto StoreDimension = [this, measurements](IMD type)
     {
-        const QString name = m->MeasurementForDimension(type);
+        const QString name = qApp->TrVars()->VarToUser(m->MeasurementForDimension(type));
         const bool valid = not name.isEmpty() && measurements.contains(name);
         switch(type)
         {
