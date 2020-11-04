@@ -151,6 +151,7 @@ public:
     void               UpdateId(quint32 newId) const;
     static void        UpdateId(quint32 newId, const QString &nspace);
 
+    void               RegisterUniqueName(VGObject *obj);
     void               RegisterUniqueName(const QSharedPointer<VGObject> &obj);
 
     quint32            AddGObject(VGObject *obj);

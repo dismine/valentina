@@ -88,6 +88,8 @@ void VToolCutSplinePath::setDialog()
     dialogTool->setSplinePathId(baseCurveId);
     dialogTool->SetPointName(point->name());
     dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix1(m_aliasSuffix1);
+    dialogTool->SetAliasSuffix2(m_aliasSuffix2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,6 +117,8 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const QPointer<DialogTool> &dialo
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
+    initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
 
     VToolCutSplinePath* point = Create(initData);
     if (point != nullptr)
@@ -154,12 +158,18 @@ VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutInitData &initData)
     p->setMy(initData.my);
     p->SetShowLabel(initData.showLabel);
 
+    splPath1->SetAliasSuffix(initData.aliasSuffix1);
+    splPath2->SetAliasSuffix(initData.aliasSuffix2);
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
 
         initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, initData.id);
         initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, initData.id);
+
+        initData.data->RegisterUniqueName(splPath1);
+        initData.data->RegisterUniqueName(splPath2);
     }
     else
     {
@@ -167,6 +177,9 @@ VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutInitData &initData)
 
         initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, initData.id);
         initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, initData.id);
+
+        initData.data->RegisterUniqueName(splPath1);
+        initData.data->RegisterUniqueName(splPath2);
 
         if (initData.parse != Document::FullParse)
         {
@@ -308,6 +321,10 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
+                                dialogTool->GetAliasSuffix1().isEmpty());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
+                                dialogTool->GetAliasSuffix2().isEmpty());
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -376,8 +393,8 @@ QString VToolCutSplinePath::MakeToolTip() const
             .arg(qApp->fromPixel(splPath1->GetLength()))
             .arg(UnitsToStr(qApp->patternUnits(), true), curveStr + QLatin1String("2 ") + lengthStr)
             .arg(qApp->fromPixel(splPath2->GetLength()))
-            .arg(curveStr + QLatin1String(" 1") + tr("label"), splPath1->name(),
-                 curveStr + QLatin1String(" 2") + tr("label"), splPath2->name());
+            .arg(curveStr + QLatin1String(" 1") + tr("label"), splPath1->ObjectName(),
+                 curveStr + QLatin1String(" 2") + tr("label"), splPath2->ObjectName());
 
     delete splPath1;
     delete splPath2;

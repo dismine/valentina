@@ -160,6 +160,8 @@
                           <xs:attribute name="showLabel1" type="xs:boolean"/>
                           <xs:attribute name="showLabel2" type="xs:boolean"/>
                           <xs:attribute name="notes" type="xs:string"/>
+                          <xs:attribute name="alias1" type="xs:string"/>
+                          <xs:attribute name="alias2" type="xs:string"/>
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="line" minOccurs="0" maxOccurs="unbounded">

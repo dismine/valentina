@@ -1576,6 +1576,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VPE::VProperty *pr
         case 61: // AttrNotes
             SetNotes<VToolCutSplinePath>(property);
             break;
+        case 63: // AttrAlias1
+            SetAlias1<VToolCutSplinePath>(property);
+            break;
+        case 64: // AttrAlias2
+            SetAlias2<VToolCutSplinePath>(property);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2661,6 +2667,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyAlias1(i, tr("Alias1:"));
+    AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
@@ -3350,6 +3358,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
     idToProperty[AttrCurve]->setValue(valueCurve);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
+    idToProperty[AttrAlias2]->setValue(i->GetAliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

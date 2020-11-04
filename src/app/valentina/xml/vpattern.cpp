@@ -2086,6 +2086,8 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
         initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSplinePath::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
