@@ -520,14 +520,14 @@ void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &
     if (readOnly)
     {
         auto *itemName = new VPE::VLabelProperty(propertyName);
-        itemName->setValue(qApp->TrVars()->VarToUser(i->name()));
+        itemName->setValue(i->name());
         AddProperty(itemName, AttrName);
     }
     else
     {
         auto *itemName = new VPE::VStringProperty(propertyName);
         itemName->setClearButtonEnable(true);
-        itemName->setValue(qApp->TrVars()->VarToUser(i->name()));
+        itemName->setValue(i->name());
         itemName->setReadOnly(readOnly);
         AddProperty(itemName, AttrName);
     }
@@ -3566,7 +3566,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     auto *i = qgraphicsitem_cast<VToolSpline *>(currentItem);
     const VSpline spl = i->getSpline();
 
-    idToProperty[AttrName]->setValue(qApp->TrVars()->VarToUser(i->name()));
+    idToProperty[AttrName]->setValue(i->name());
 
     VFormula angle1F(spl.GetStartAngleFormula(), i->getData());
     angle1F.setCheckZero(false);
@@ -3624,7 +3624,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
 {
     auto *i = qgraphicsitem_cast<VToolCubicBezier *>(currentItem);
 
-    idToProperty[AttrName]->setValue(qApp->TrVars()->VarToUser(i->name()));
+    idToProperty[AttrName]->setValue(i->name());
 
     {
         const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
@@ -3662,7 +3662,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
 {
     auto *i = qgraphicsitem_cast<VToolSplinePath *>(currentItem);
 
-    idToProperty[AttrName]->setValue(qApp->TrVars()->VarToUser(i->name()));
+    idToProperty[AttrName]->setValue(i->name());
 
     {
         const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
@@ -3684,7 +3684,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
 {
     auto *i = qgraphicsitem_cast<VToolCubicBezierPath *>(currentItem);
 
-    idToProperty[AttrName]->setValue(qApp->TrVars()->VarToUser(i->name()));
+    idToProperty[AttrName]->setValue(i->name());
 
     {
         const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());

@@ -41,6 +41,7 @@
 #include "../vmisc/compatibility.h"
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
+#include "../vmisc/vabstractapplication.h"
 
 namespace
 {
@@ -270,7 +271,9 @@ QString VGObject::GetAliasSuffix() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VGObject::ObjectName() const
 {
-    return not d->m_alias.isEmpty() ? QString("%1 (%2)").arg(d->m_alias, d->_name) : d->_name;
+    const QString alias = qApp->TrVars()->VarToUser(d->m_alias);
+    const QString name = qApp->TrVars()->VarToUser(d->_name);
+    return not d->m_alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
