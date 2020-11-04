@@ -65,6 +65,20 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     return d_ptr->editor;
 }
 
+bool VPE::VStringProperty::setEditorData(QWidget *editor)
+{
+    if (QLineEdit* tmpWidget = qobject_cast<QLineEdit*>(editor))
+    {
+        if (not readOnly)
+        {
+            tmpWidget->setText(d_ptr->VariantValue.toString());
+        }
+        return true;
+    }
+
+    return false;
+}
+
 QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
 {
     const QLineEdit* tmpEditor = qobject_cast<const QLineEdit*>(editor);
