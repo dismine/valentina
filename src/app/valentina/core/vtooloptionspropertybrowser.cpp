@@ -2099,6 +2099,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VPE::VProperty *prope
         case 61: // AttrNotes
             SetNotes<VToolSplinePath>(property);
             break;
+        case 62: // AttrAlias
+            SetAlias<VToolSplinePath>(property);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2849,6 +2852,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     formView->setTitle(tr("Tool for path curve"));
 
     AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->getSplinePath().GetApproximationScale());
@@ -3693,6 +3697,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
     idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

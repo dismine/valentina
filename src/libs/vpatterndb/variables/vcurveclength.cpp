@@ -74,20 +74,32 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName,
+VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *baseCurve,
                              const VSpline &spl, CurveCLength cType, Unit patternUnit, qint32 segment)
     : VCurveVariable(id, parentId)
 {
+    SCASSERT(baseCurve != nullptr)
+
     SetType(VarType::CurveCLength);
     if (cType == CurveCLength::C1)
     {
         SetValue(FromPixel(spl.GetC1Length(), patternUnit));
-        SetName(c1Length_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetName(c1Length_V + baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+
+        if (not baseCurve->GetAlias().isEmpty())
+        {
+            SetAlias(c1Length_V + baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        }
     }
     else
     {
         SetValue(FromPixel(spl.GetC2Length(), patternUnit));
-        SetName(c2Length_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetName(c2Length_V + baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+
+        if (not baseCurve->GetAlias().isEmpty())
+        {
+            SetAlias(c2Length_V + baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        }
     }
 }
 

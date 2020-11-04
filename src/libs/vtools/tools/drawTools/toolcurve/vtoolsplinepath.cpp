@@ -270,6 +270,7 @@ VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
     path->SetColor(initData.color);
     path->SetPenStyle(initData.penStyle);
     path->SetApproximationScale(initData.approximationScale);
+    path->SetAliasSuffix(initData.aliasSuffix);
 
     return VToolSplinePath::Create(initData, path);
 }
@@ -402,6 +403,7 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
     doc->SetAttribute(domElement, AttrColor, path.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, path.GetAliasSuffix(), path.GetAliasSuffix().isEmpty());
 
     UpdatePathPoints(doc, domElement, path);
 }

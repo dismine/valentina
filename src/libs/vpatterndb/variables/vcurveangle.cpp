@@ -81,20 +81,32 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
-                         CurveAngle angle, qint32 segment)
+VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve,
+                         const VSpline &spl, CurveAngle angle, qint32 segment)
     :VCurveVariable(id, parentId)
 {
+    SCASSERT(baseCurve != nullptr)
+
     SetType(VarType::CurveAngle);
     if (angle == CurveAngle::StartAngle)
     {
         SetValue(spl.GetStartAngle());
-        SetName(angle1_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetName(angle1_V + baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+
+        if (not baseCurve->GetAlias().isEmpty())
+        {
+            SetAlias(angle1_V + baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        }
     }
     else
     {
         SetValue(spl.GetEndAngle());
-        SetName(angle2_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetName(angle2_V + baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+
+        if (not baseCurve->GetAlias().isEmpty())
+        {
+            SetAlias(angle2_V + baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        }
     }
 }
 
