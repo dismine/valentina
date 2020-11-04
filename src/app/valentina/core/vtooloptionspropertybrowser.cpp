@@ -2134,6 +2134,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezierPath(VPE::VProperty *
         case 61: // AttrNotes
             SetNotes<VToolCubicBezierPath>(property);
             break;
+        case 62: // AttrAlias
+            SetAlias<VToolCubicBezierPath>(property);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2856,6 +2859,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezierPath(QGraphicsItem *
     formView->setTitle(tr("Tool cubic bezier curve"));
 
     AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->getSplinePath().GetApproximationScale());
@@ -3705,6 +3709,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
     idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

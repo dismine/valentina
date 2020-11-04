@@ -2830,6 +2830,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         QVector<VPointF> points;
 
@@ -2861,6 +2862,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         initData.path->SetColor(color);
         initData.path->SetPenStyle(penStyle);
         initData.path->SetApproximationScale(approximationScale);
+        initData.path->SetAliasSuffix(alias);
 
         VToolCubicBezierPath::Create(initData);
     }

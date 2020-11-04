@@ -80,6 +80,8 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 too
     connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezierPath::currentPointChanged);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezierPath::ValidateAlias);
+
     vis = new VisToolCubicBezierPath(data);
 
     ui->tabWidget->setCurrentIndex(0);
@@ -111,6 +113,9 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    ui->lineEditAlias->setText(path.GetAliasSuffix());
+    ValidateAlias();
 
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
     ChangeCurrentData(ui->comboBoxColor, path.GetColor());
@@ -200,6 +205,7 @@ void DialogCubicBezierPath::SaveData()
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path.SetAliasSuffix(ui->lineEditAlias->text());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -242,6 +248,25 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 
         ui->lineEditSplPathName->setText(tr("Cannot find point with id %1").arg(id));
     }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::ValidateAlias()
+{
+    VCubicBezierPath tempPath = path;
+    tempPath.SetAliasSuffix(ui->lineEditAlias->text());
+    if (not ui->lineEditAlias->text().isEmpty() && not data->IsUnique(tempPath.GetAlias()))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
     CheckState();
 }
 

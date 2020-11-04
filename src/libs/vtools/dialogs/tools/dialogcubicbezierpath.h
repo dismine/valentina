@@ -69,6 +69,7 @@ protected:
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
+    void ValidateAlias();
 
 private:
     Q_DISABLE_COPY(DialogCubicBezierPath)
@@ -80,6 +81,7 @@ private:
     qint32 newDuplicate;
 
     bool flagError;
+    bool flagAlias{true};
 
     void             NewItem(const VPointF &point);
     void             DataPoint(const VPointF &p);
@@ -93,7 +95,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogCubicBezierPath::IsValid() const
 {
-    return flagError;
+    return flagError && flagAlias;
 }
 
 #endif // DIALOGCUBICBEZIERPATH_H
