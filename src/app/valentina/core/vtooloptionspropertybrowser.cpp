@@ -2401,6 +2401,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
         case 27://AttrColor
             SetLineColor<VToolEllipticalArc>(property);
             break;
+        case 62: // AttrAlias
+            SetAlias<VToolEllipticalArc>(property);
+            break;
         case 59: // AttrPenStyle
             SetPenStyle<VToolEllipticalArc>(property);
             break;
@@ -2970,6 +2973,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
@@ -3867,6 +3871,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
 {
     auto *i = qgraphicsitem_cast<VToolEllipticalArc *>(currentItem);
 
+    idToProperty[AttrName]->setValue(i->name());
+
     QVariant valueFormulaRadius1;
     valueFormulaRadius1.setValue(i->GetFormulaRadius1());
     idToProperty[AttrRadius1]->setValue(valueFormulaRadius1);
@@ -3895,6 +3901,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
     idToProperty[AttrCenter]->setValue(valueCenterPoint);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
