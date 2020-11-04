@@ -151,6 +151,8 @@ public:
     void               UpdateId(quint32 newId) const;
     static void        UpdateId(quint32 newId, const QString &nspace);
 
+    void               RegisterUniqueName(const QSharedPointer<VGObject> &obj);
+
     quint32            AddGObject(VGObject *obj);
     quint32            AddGObject(const QSharedPointer<VGObject> &obj);
     quint32            AddPiece(const VPiece &detail);
@@ -402,12 +404,7 @@ void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
 {
     SCASSERT(not obj.isNull())
     UpdateObject(id, obj);
-    uniqueNames[d->nspace].insert(obj->name());
-
-    if (not obj->GetAlias().isEmpty())
-    {
-        uniqueNames[d->nspace].insert(obj->GetAlias());
-    }
+    RegisterUniqueName(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

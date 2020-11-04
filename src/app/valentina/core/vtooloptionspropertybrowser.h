@@ -100,6 +100,12 @@ private:
     void SetAlias(VPE::VProperty *property);
 
     template<class Tool>
+    void SetAlias1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetAlias2(VPE::VProperty *property);
+
+    template<class Tool>
     void SetLineType(VPE::VProperty *property);
 
     template<class Tool>
@@ -134,6 +140,12 @@ private:
 
     template<class Tool>
     void AddPropertyAlias(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyAlias1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyAlias2(Tool *i, const QString &propertyName);
 
     template<class Tool>
     void AddPropertyPointName1(Tool *i, const QString &propertyName);

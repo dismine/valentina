@@ -2030,7 +2030,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
-        VToolCutSplineInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2040,7 +2040,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
 
         VToolCutSpline::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2073,7 +2073,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
 
     try
     {
-        VToolCutSplinePathInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2083,7 +2083,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
 
         VToolCutSplinePath::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2116,7 +2116,7 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
 
     try
     {
-        VToolCutArcInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2126,7 +2126,9 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

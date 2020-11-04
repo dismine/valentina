@@ -93,6 +93,9 @@ DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *pare
 
     connect(ui->comboBoxArc, &QComboBox::currentTextChanged, this, &DialogCutArc::ArcChanged);
 
+    connect(ui->lineEditAlias1, &QLineEdit::textEdited, this, &DialogCutArc::ValidateAlias);
+    connect(ui->lineEditAlias2, &QLineEdit::textEdited, this, &DialogCutArc::ValidateAlias);
+
     vis = new VisToolCutArc(data);
 
     ui->tabWidget->setCurrentIndex(0);
@@ -202,6 +205,55 @@ void DialogCutArc::ArcChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ValidateAlias()
+{
+    VArc arc1;
+    arc1.SetAliasSuffix(GetAliasSuffix1());
+    if (not GetAliasSuffix1().isEmpty() && not data->IsUnique(arc1.GetAlias()))
+    {
+        flagAlias1 = false;
+        ChangeColor(ui->labelAlias1, errorColor);
+    }
+    else
+    {
+        flagAlias1 = true;
+        ChangeColor(ui->labelAlias1, OkColor(this));
+    }
+
+    VArc arc2;
+    arc2.SetAliasSuffix(GetAliasSuffix2());
+    if (not GetAliasSuffix2().isEmpty() && not data->IsUnique(arc2.GetAlias()))
+    {
+        flagAlias2 = false;
+        ChangeColor(ui->labelAlias2, errorColor);
+    }
+    else
+    {
+        flagAlias2 = true;
+        ChangeColor(ui->labelAlias2, OkColor(this));
+    }
+
+    if (arc1.GetAlias() == arc2.GetAlias())
+    {
+        flagAlias1 = false;
+        ChangeColor(ui->labelAlias1, errorColor);
+
+        flagAlias2 = false;
+        ChangeColor(ui->labelAlias2, errorColor);
+    }
+    else
+    {
+        flagAlias1 = true;
+        ChangeColor(ui->labelAlias1, OkColor(this));
+
+        flagAlias2 = true;
+        ChangeColor(ui->labelAlias2, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setArcId set id of arc
  * @param value id
@@ -278,4 +330,30 @@ void DialogCutArc::SetNotes(const QString &notes)
 QString DialogCutArc::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetAliasSuffix1(const QString &alias)
+{
+    ui->lineEditAlias1->setText(alias);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutArc::GetAliasSuffix1() const
+{
+    return ui->lineEditAlias1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetAliasSuffix2(const QString &alias)
+{
+    ui->lineEditAlias2->setText(alias);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutArc::GetAliasSuffix2() const
+{
+    return ui->lineEditAlias2->text();
 }

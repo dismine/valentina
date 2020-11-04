@@ -546,6 +546,26 @@ void VToolOptionsPropertyBrowser::AddPropertyAlias(Tool *i, const QString &prope
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyAlias1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(qApp->TrVars()->VarToUser(i->GetAliasSuffix1()));
+    AddProperty(itemName, AttrAlias1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyAlias2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(qApp->TrVars()->VarToUser(i->GetAliasSuffix2()));
+    AddProperty(itemName, AttrAlias2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyPointName1(Tool *i, const QString &propertyName)
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
@@ -960,6 +980,46 @@ void VToolOptionsPropertyBrowser::SetAlias(VPE::VProperty *property)
         }
 
         i->SetAliasSuffix(notes);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetAlias1(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        if (notes == i->GetAliasSuffix1())
+        {
+            return;
+        }
+
+        i->SetAliasSuffix1(notes);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetAlias2(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        if (notes == i->GetAliasSuffix2())
+        {
+            return;
+        }
+
+        i->SetAliasSuffix2(notes);
     }
     else
     {
@@ -1451,6 +1511,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VPE::VProperty *property)
             break;
         case 61: // AttrNotes
             SetNotes<VToolCutArc>(property);
+            break;
+        case 63: // AttrAlias1
+            SetAlias1<VToolCutArc>(property);
+            break;
+        case 64: // AttrAlias2
+            SetAlias2<VToolCutArc>(property);
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -2559,6 +2625,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->CurveName(), tr("Arc:"), AttrArc);
+    AddPropertyAlias1(i, tr("Alias1:"));
+    AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
@@ -3232,6 +3300,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
     idToProperty[AttrArc]->setValue(valueArc);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
+    idToProperty[AttrAlias2]->setValue(i->GetAliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3995,7 +4066,9 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
         AttrPenStyle,                       /* 59 */
         AttrAScale,                         /* 60 */
         AttrNotes,                          /* 61 */
-        AttrAlias                           /* 62 */
+        AttrAlias,                          /* 62 */
+        AttrAlias1,                         /* 63 */
+        AttrAlias2                          /* 64 */
     };
     return attr;
 }

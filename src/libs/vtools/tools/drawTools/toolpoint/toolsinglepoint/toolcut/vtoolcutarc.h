@@ -43,18 +43,6 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolCutArcInitData : VToolSinglePointInitData
-{
-    VToolCutArcInitData()
-        : VToolSinglePointInitData(),
-          formula(),
-          arcId(NULL_ID)
-    {}
-
-    QString formula;
-    quint32 arcId;
-};
-
 /**
  * @brief The VToolCutArc class tool for cutting arc.
  */
@@ -65,7 +53,7 @@ public:
     virtual void setDialog() override;
     static VToolCutArc*  Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                 VContainer *data);
-    static VToolCutArc*  Create(VToolCutArcInitData &initData);
+    static VToolCutArc*  Create(VToolCutInitData &initData);
     static const QString ToolType;
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutArc)};
@@ -82,7 +70,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCutArc)
 
-    VToolCutArc(const VToolCutArcInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolCutArc(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLCUTARC_H

@@ -242,6 +242,19 @@ quint32 VContainer::GetPieceForPiecePath(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj)
+{
+    SCASSERT(not obj.isNull())
+
+    uniqueNames[d->nspace].insert(obj->name());
+
+    if (not obj->GetAlias().isEmpty())
+    {
+        uniqueNames[d->nspace].insert(obj->GetAlias());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddGObject add new GObject to container
  * @param obj new object
@@ -265,12 +278,7 @@ quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
         return NULL_ID;
     }
 
-    uniqueNames[d->nspace].insert(obj->name());
-
-    if (not obj->GetAlias().isEmpty())
-    {
-        uniqueNames[d->nspace].insert(obj->GetAlias());
-    }
+    RegisterUniqueName(obj);
 
     const quint32 id = getNextId();
     obj->setId(id);
