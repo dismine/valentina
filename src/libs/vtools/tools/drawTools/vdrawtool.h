@@ -139,6 +139,9 @@ protected:
     QString ObjectName(quint32 id) const;
 
     template <class T>
+    QString ObjectAliasSuffix(quint32 id) const;
+
+    template <class T>
     static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
 private:
     Q_DISABLE_COPY(VDrawTool)
@@ -357,14 +360,35 @@ QString VDrawTool::ObjectName(quint32 id) const
 {
     try
     {
-        return data.GeometricObject<T>(id)->name();
+        return data.GeometricObject<T>(id)->ObjectName();
     }
     catch (const VExceptionBadId &e)
     {
         qCDebug(vTool, "Error! Couldn't get object name by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
                 qUtf8Printable(e.ErrorMessage()),
                 qUtf8Printable(e.DetailedInformation()));
-        return QString(QString());// Return empty string for property browser
+        return QString();// Return empty string for property browser
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+/**
+ * @brief ObjectAlias get object (point, curve, arc) alias.
+ * @param id object id in container.
+ */
+QString VDrawTool::ObjectAliasSuffix(quint32 id) const
+{
+    try
+    {
+        return data.GeometricObject<T>(id)->GetAliasSuffix();
+    }
+    catch (const VExceptionBadId &e)
+    {
+        qCDebug(vTool, "Error! Couldn't get object alias suffix by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
+                qUtf8Printable(e.ErrorMessage()),
+                qUtf8Printable(e.DetailedInformation()));
+        return QString();// Return empty string for property browser
     }
 }
 

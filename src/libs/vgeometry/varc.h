@@ -85,6 +85,7 @@ public:
     QPointF CutArc (qreal length) const;
 protected:
     virtual void CreateName() override;
+    virtual void CreateAlias() override;
     virtual void FindF2(qreal length) override;
 private:
     QSharedDataPointer<VArcData> d;

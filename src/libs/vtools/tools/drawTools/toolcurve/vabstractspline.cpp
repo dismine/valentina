@@ -332,6 +332,7 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
     doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
     doc->SetAttribute(tag, AttrAScale, curve->GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(tag, AttrAlias, curve->GetAliasSuffix(), curve->GetAliasSuffix().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -492,6 +493,21 @@ qreal VAbstractSpline::GetApproximationScale() const
 quint32 VAbstractSpline::GetDuplicate() const
 {
     return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetDuplicate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::GetAliasSuffix() const
+{
+    return ObjectAliasSuffix<VAbstractCurve>(m_id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::SetAliasSuffix(const QString &alias)
+{
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    curve->SetAliasSuffix(alias);
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -152,6 +152,7 @@ extern const QString AttrVersion;
 extern const QString AttrFirstToCountour;
 extern const QString AttrLastToCountour;
 extern const QString AttrNotes;
+extern const QString AttrAlias;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;

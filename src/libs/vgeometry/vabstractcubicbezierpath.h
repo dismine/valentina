@@ -74,6 +74,7 @@ public:
 
 protected:
     virtual void CreateName() override;
+    virtual void CreateAlias() override;
 
     virtual VPointF FirstPoint() const =0;
     virtual VPointF LastPoint() const =0;

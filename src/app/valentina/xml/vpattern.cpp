@@ -2992,6 +2992,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

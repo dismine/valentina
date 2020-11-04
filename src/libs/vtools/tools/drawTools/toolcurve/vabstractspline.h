@@ -66,6 +66,7 @@ struct VAbstractSplineInitData : VDrawToolInitData
     QString color;
     QString penStyle;
     qreal approximationScale;
+    QString aliasSuffix{};
 };
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
@@ -95,13 +96,16 @@ public:
 
     quint32 GetDuplicate() const;
 
+    QString GetAliasSuffix() const;
+    void    SetAliasSuffix(const QString &alias);
+
     virtual void GroupVisibility(quint32 object, bool visible) override;
 public slots:
-    virtual void    FullUpdateFromFile () override;
-    virtual void    Disable(bool disable, const QString &namePP) override;
-    virtual void    DetailsMode(bool mode) override;
-    virtual void    AllowHover(bool enabled) override;
-    virtual void    AllowSelecting(bool enabled) override;
+    virtual void FullUpdateFromFile () override;
+    virtual void Disable(bool disable, const QString &namePP) override;
+    virtual void DetailsMode(bool mode) override;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
 signals:
     /**
      * @brief setEnabledPoint disable control points.

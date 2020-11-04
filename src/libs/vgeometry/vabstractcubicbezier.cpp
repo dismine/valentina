@@ -517,6 +517,19 @@ void VAbstractCubicBezier::CreateName()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezier::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(SPL_ + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetCubicBezierPoints return list with cubic bezier curve points.
  * @param p1 first spline point.

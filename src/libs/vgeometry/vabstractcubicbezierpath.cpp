@@ -288,3 +288,16 @@ void VAbstractCubicBezierPath::CreateName()
     }
     setName(name);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezierPath::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(splPath + '_' + aliasSuffix);
+}

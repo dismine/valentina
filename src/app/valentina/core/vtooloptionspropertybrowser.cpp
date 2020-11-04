@@ -517,11 +517,31 @@ void VToolOptionsPropertyBrowser::AddPropertyFormula(const QString &propertyName
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly)
 {
+    if (readOnly)
+    {
+        auto *itemName = new VPE::VLabelProperty(propertyName);
+        itemName->setValue(qApp->TrVars()->VarToUser(i->name()));
+        AddProperty(itemName, AttrName);
+    }
+    else
+    {
+        auto *itemName = new VPE::VStringProperty(propertyName);
+        itemName->setClearButtonEnable(true);
+        itemName->setValue(qApp->TrVars()->VarToUser(i->name()));
+        itemName->setReadOnly(readOnly);
+        AddProperty(itemName, AttrName);
+    }
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyAlias(Tool *i, const QString &propertyName)
+{
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(qApp->TrVars()->VarToUser(i->name()));
-    itemName->setReadOnly(readOnly);
-    AddProperty(itemName, AttrName);
+    itemName->setValue(qApp->TrVars()->VarToUser(i->GetAliasSuffix()));
+    AddProperty(itemName, AttrAlias);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -929,6 +949,26 @@ void VToolOptionsPropertyBrowser::SetNotes(VPE::VProperty *property)
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
+void VToolOptionsPropertyBrowser::SetAlias(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        if (notes == i->GetAliasSuffix())
+        {
+            return;
+        }
+
+        i->SetAliasSuffix(notes);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
 void VToolOptionsPropertyBrowser::SetLineType(VPE::VProperty *property)
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
@@ -1274,6 +1314,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VPE::VProperty *property)
             break;
         case 61: // AttrNotes
             SetNotes<VToolArc>(property);
+            break;
+        case 62: // AttrAlias
+            SetAlias<VToolArc>(property);
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -2429,6 +2472,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
+    AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
@@ -3002,6 +3046,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
 {
     auto *i = qgraphicsitem_cast<VToolArc *>(currentItem);
 
+    idToProperty[AttrName]->setValue(i->name());
+
     QVariant valueRadius;
     valueRadius.setValue(i->GetFormulaRadius());
     idToProperty[AttrRadius]->setValue(valueRadius);
@@ -3033,6 +3079,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3844,67 +3892,70 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VToolOptionsPropertyBrowser::PropertiesList() const
 {
-    static QStringList attr = QStringList() << AttrName                           /* 0 */
-                                            << QLatin1String("position")          /* 1 */
-                                            << AttrBasePoint                      /* 2 */
-                                            << AttrTypeLine                       /* 3 */
-                                            << AttrLength                         /* 4 */
-                                            << AttrAngle                          /* 5 */
-                                            << AttrFirstPoint                     /* 6 */
-                                            << AttrSecondPoint                    /* 7 */
-                                            << AttrRadius                         /* 8 */
-                                            << AttrAngle1                         /* 9 */
-                                            << AttrAngle2                         /* 10 */
-                                            << AttrCenter                         /* 11 */
-                                            << AttrThirdPoint                     /* 12 */
-                                            << AttrArc                            /* 13 */
-                                            << VToolCutSpline::AttrSpline         /* 14 */
-                                            << VToolCutSplinePath::AttrSplinePath /* 15 */
-                                            << AttrP1Line                         /* 16 */
-                                            << AttrP2Line                         /* 17 */
-                                            << AttrP1Line1                        /* 18 */
-                                            << AttrP2Line1                        /* 19 */
-                                            << AttrP1Line2                        /* 20 */
-                                            << AttrP2Line2                        /* 21 */
-                                            << AttrPShoulder                      /* 22 */
-                                            << AttrAxisP1                         /* 23 */
-                                            << AttrAxisP2                         /* 24 */
-                                            << AttrKCurve /*Not used*/            /* 25 */
-                                            << AttrLineColor                      /* 26 */
-                                            << AttrColor                          /* 27 */
-                                            << AttrCrossPoint                     /* 28 */
-                                            << AttrC1Radius                       /* 29 */
-                                            << AttrC2Radius                       /* 30 */
-                                            << AttrCRadius                        /* 31 */
-                                            << AttrName1                          /* 32 */
-                                            << AttrName2                          /* 33 */
-                                            << AttrVCrossPoint                    /* 34 */
-                                            << AttrHCrossPoint                    /* 35 */
-                                            << AttrLength1                        /* 36 */
-                                            << AttrLength2                        /* 37 */
-                                            << AttrSuffix                         /* 38 */
-                                            << AttrAxisType                       /* 39 */
-                                            << AttrRadius1                        /* 40 */
-                                            << AttrRadius2                        /* 41 */
-                                            << AttrRotationAngle                  /* 42 */
-                                            << AttrDartP1                         /* 43 */
-                                            << AttrDartP2                         /* 44 */
-                                            << AttrDartP3                         /* 45 */
-                                            << AttrCurve                          /* 46 */
-                                            << AttrFirstArc                       /* 47 */
-                                            << AttrSecondArc                      /* 48 */
-                                            << AttrC1Center                       /* 49 */
-                                            << AttrC2Center                       /* 50 */
-                                            << AttrCurve1                         /* 51 */
-                                            << AttrCurve2                         /* 52 */
-                                            << AttrCCenter                        /* 53 */
-                                            << AttrTangent                        /* 54 */
-                                            << AttrPoint1                         /* 55 */
-                                            << AttrPoint2                         /* 56 */
-                                            << AttrPoint3                         /* 57 */
-                                            << AttrPoint4                         /* 58 */
-                                            << AttrPenStyle                       /* 59 */
-                                            << AttrAScale                         /* 60 */
-                                            << AttrNotes;                         /* 61 */
+    static QStringList attr{
+        AttrName,                           /* 0 */
+        QLatin1String("position"),          /* 1 */
+        AttrBasePoint,                      /* 2 */
+        AttrTypeLine,                       /* 3 */
+        AttrLength,                         /* 4 */
+        AttrAngle,                          /* 5 */
+        AttrFirstPoint,                     /* 6 */
+        AttrSecondPoint,                    /* 7 */
+        AttrRadius,                         /* 8 */
+        AttrAngle1,                         /* 9 */
+        AttrAngle2,                         /* 10 */
+        AttrCenter,                         /* 11 */
+        AttrThirdPoint,                     /* 12 */
+        AttrArc,                            /* 13 */
+        VToolCutSpline::AttrSpline,         /* 14 */
+        VToolCutSplinePath::AttrSplinePath, /* 15 */
+        AttrP1Line,                         /* 16 */
+        AttrP2Line,                         /* 17 */
+        AttrP1Line1,                        /* 18 */
+        AttrP2Line1,                        /* 19 */
+        AttrP1Line2,                        /* 20 */
+        AttrP2Line2,                        /* 21 */
+        AttrPShoulder,                      /* 22 */
+        AttrAxisP1,                         /* 23 */
+        AttrAxisP2,                         /* 24 */
+        AttrKCurve, /*Not used*/            /* 25 */
+        AttrLineColor,                      /* 26 */
+        AttrColor,                          /* 27 */
+        AttrCrossPoint,                     /* 28 */
+        AttrC1Radius,                       /* 29 */
+        AttrC2Radius,                       /* 30 */
+        AttrCRadius,                        /* 31 */
+        AttrName1,                          /* 32 */
+        AttrName2,                          /* 33 */
+        AttrVCrossPoint,                    /* 34 */
+        AttrHCrossPoint,                    /* 35 */
+        AttrLength1,                        /* 36 */
+        AttrLength2,                        /* 37 */
+        AttrSuffix,                         /* 38 */
+        AttrAxisType,                       /* 39 */
+        AttrRadius1,                        /* 40 */
+        AttrRadius2,                        /* 41 */
+        AttrRotationAngle,                  /* 42 */
+        AttrDartP1,                         /* 43 */
+        AttrDartP2,                         /* 44 */
+        AttrDartP3,                         /* 45 */
+        AttrCurve,                          /* 46 */
+        AttrFirstArc,                       /* 47 */
+        AttrSecondArc,                      /* 48 */
+        AttrC1Center,                       /* 49 */
+        AttrC2Center,                       /* 50 */
+        AttrCurve1,                         /* 51 */
+        AttrCurve2,                         /* 52 */
+        AttrCCenter,                        /* 53 */
+        AttrTangent,                        /* 54 */
+        AttrPoint1,                         /* 55 */
+        AttrPoint2,                         /* 56 */
+        AttrPoint3,                         /* 57 */
+        AttrPoint4,                         /* 58 */
+        AttrPenStyle,                       /* 59 */
+        AttrAScale,                         /* 60 */
+        AttrNotes,                          /* 61 */
+        AttrAlias                           /* 62 */
+    };
     return attr;
 }

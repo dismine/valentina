@@ -378,7 +378,7 @@ QPointF VArc::CutArc(qreal length) const
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::CreateName()
 {
-    QString name = ARC_ + QString("%1").arg(this->GetCenter().name());
+    QString name = ARC_ + this->GetCenter().name();
 
     if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
     {
@@ -395,6 +395,19 @@ void VArc::CreateName()
     }
 
     setName(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(ARC_ + aliasSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

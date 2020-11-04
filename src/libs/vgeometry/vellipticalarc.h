@@ -104,6 +104,7 @@ public:
     static qreal OptimizeAngle(qreal angle);
 protected:
     virtual void CreateName() override;
+    virtual void CreateAlias() override;
     virtual void FindF2(qreal length) override;
 private:
     QSharedDataPointer<VEllipticalArcData> d;

@@ -47,6 +47,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogarc.h"
+#include "../vgeometry/varc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -121,6 +122,8 @@ DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
+
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArc::GetAliasSuffix);
 
     vis = new VisToolArc(data);
 
@@ -238,6 +241,19 @@ QString DialogArc::GetNotes() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetAliasSuffix(const QString &alias)
+{
+    ui->lineEditAlias->setText(alias);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetAliasSuffix() const
+{
+    return ui->lineEditAlias->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetF1 set formula first angle of arc
  * @param value formula
@@ -335,6 +351,25 @@ void DialogArc::closeEvent(QCloseEvent *event)
     ui->plainTextEditF1->blockSignals(true);
     ui->plainTextEditF2->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::ValidateAlias()
+{
+    VArc arc;
+    arc.SetAliasSuffix(GetAliasSuffix());
+    if (not GetAliasSuffix().isEmpty() && not data->IsUnique(arc.GetAlias()))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

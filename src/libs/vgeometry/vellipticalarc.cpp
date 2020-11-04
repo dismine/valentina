@@ -400,6 +400,19 @@ void VEllipticalArc::CreateName()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(ELARC_ + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::FindF2(qreal length)
 {
     qreal gap = 180;
