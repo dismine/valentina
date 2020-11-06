@@ -47,6 +47,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutsplinepath.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -214,9 +215,11 @@ void DialogCutSplinePath::SplinePathChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VSplinePath path1;
     path1.SetAliasSuffix(GetAliasSuffix1());
-    if (not GetAliasSuffix1().isEmpty() && not data->IsUnique(path1.GetAlias()))
+    if (not GetAliasSuffix1().isEmpty() &&
+        (not rx.match(path1.GetAlias()).hasMatch() || not data->IsUnique(path1.GetAlias())))
     {
         flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);

@@ -47,6 +47,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutarc.h"
 #include "../vgeometry/varc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -207,9 +208,11 @@ void DialogCutArc::ArcChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VArc arc1;
     arc1.SetAliasSuffix(GetAliasSuffix1());
-    if (not GetAliasSuffix1().isEmpty() && not data->IsUnique(arc1.GetAlias()))
+    if (not GetAliasSuffix1().isEmpty() &&
+        (not rx.match(arc1.GetAlias()).hasMatch() || not data->IsUnique(arc1.GetAlias())))
     {
         flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);

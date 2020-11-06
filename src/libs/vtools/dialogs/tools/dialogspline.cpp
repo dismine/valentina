@@ -56,6 +56,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogspline.h"
 #include "vtranslatevars.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -437,9 +438,11 @@ void DialogSpline::EvalLength2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VSpline spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
-    if (not ui->lineEditAlias->text().isEmpty() && not data->IsUnique(spline.GetAlias()))
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(spline.GetAlias()).hasMatch() || not data->IsUnique(spline.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

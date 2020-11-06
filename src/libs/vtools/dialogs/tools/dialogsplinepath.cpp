@@ -63,6 +63,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogsplinepath.h"
 #include "vtranslatevars.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -498,9 +499,11 @@ void DialogSplinePath::FXLength2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VSplinePath tempPath = path;
     tempPath.SetAliasSuffix(ui->lineEditAlias->text());
-    if (not ui->lineEditAlias->text().isEmpty() && not data->IsUnique(tempPath.GetAlias()))
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(tempPath.GetAlias()).hasMatch() || not data->IsUnique(tempPath.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

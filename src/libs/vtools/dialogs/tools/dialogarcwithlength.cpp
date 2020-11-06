@@ -48,6 +48,7 @@
 #include "../../visualization/visualization.h"
 #include "ui_dialogarcwithlength.h"
 #include "../vgeometry/varc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -393,9 +394,11 @@ void DialogArcWithLength::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
-    if (not GetAliasSuffix().isEmpty() && not data->IsUnique(arc.GetAlias()))
+    if (not GetAliasSuffix().isEmpty() &&
+        (not rx.match(arc.GetAlias()).hasMatch() || not data->IsUnique(arc.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

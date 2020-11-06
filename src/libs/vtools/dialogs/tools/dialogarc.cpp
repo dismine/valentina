@@ -48,6 +48,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogarc.h"
 #include "../vgeometry/varc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -356,9 +357,11 @@ void DialogArc::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
-    if (not GetAliasSuffix().isEmpty() && not data->IsUnique(arc.GetAlias()))
+    if (not GetAliasSuffix().isEmpty() &&
+        (not rx.match(arc.GetAlias()).hasMatch() || not data->IsUnique(arc.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

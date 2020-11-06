@@ -54,6 +54,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezierpath.h"
+#include "../qmuparser/qmudef.h"
 
 class QWidget;
 
@@ -254,9 +255,11 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VCubicBezierPath tempPath = path;
     tempPath.SetAliasSuffix(ui->lineEditAlias->text());
-    if (not ui->lineEditAlias->text().isEmpty() && not data->IsUnique(tempPath.GetAlias()))
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(tempPath.GetAlias()).hasMatch() || not data->IsUnique(tempPath.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

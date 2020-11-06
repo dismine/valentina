@@ -42,6 +42,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezier.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -265,9 +266,11 @@ void DialogCubicBezier::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::ValidateAlias()
 {
+    QRegularExpression rx(NameRegExp());
     VCubicBezier spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
-    if (not ui->lineEditAlias->text().isEmpty() && not data->IsUnique(spline.GetAlias()))
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(spline.GetAlias()).hasMatch() || not data->IsUnique(spline.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
