@@ -57,7 +57,7 @@ VisOperation::~VisOperation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisOperation::SetObjects(QVector<quint32> objects)
+void VisOperation::SetObjects(const QVector<quint32> &objects)
 {
     this->objects = objects;
 }

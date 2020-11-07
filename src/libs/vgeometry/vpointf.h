@@ -85,6 +85,9 @@ public:
 
     virtual QJsonObject ToJson() const override;
 
+    virtual void SetAlias(const QString &alias) override;
+    virtual void SetAliasSuffix(const QString &aliasSuffix) override;
+
     static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
     static QPointF FlipPF(const QLineF &axis, const QPointF &point);
     static QPointF MovePF(const QPointF &originPoint, qreal length, qreal angle);

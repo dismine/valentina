@@ -40,6 +40,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../../tools/toolsdef.h"
 
 namespace Ui
 {
@@ -63,8 +64,6 @@ public:
     QString GetSuffix() const;
     void    SetSuffix(const QString &value);
 
-    QVector<quint32> GetObjects() const;
-
     QString GetVisibilityGroupName() const;
     void    SetVisibilityGroupName(const QString &name);
 
@@ -81,6 +80,9 @@ public:
 
     virtual void ShowDialog(bool click) override;
 
+    QVector<SourceItem> GetSourceObjects() const;
+    void                SetSourceObjects(const QVector<SourceItem> &value);
+
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
@@ -88,6 +90,8 @@ public slots:
 private slots:
     void SuffixChanged();
     void GroupNameChanged();
+    void ShowSourceDetails(int row);
+    void AliasChanged(const QString &text);
 
 protected:
     virtual void ShowVisualization() override;
@@ -104,7 +108,7 @@ private:
 
     Ui::DialogFlippingByLine *ui;
 
-    QList<quint32> objects;
+    QVector<SourceItem> sourceObjects{};
 
     bool stage1;
 
@@ -113,14 +117,14 @@ private:
     bool flagName;
     bool flagGroupName;
     bool flagError;
+    bool flagAlias{true};
 
     QStringList m_groupTags{};
-};
 
-//---------------------------------------------------------------------------------------------------------------------
-inline bool DialogFlippingByLine::IsValid() const
-{
-    return flagError && flagName && flagGroupName;
-}
+    void FillSourceList();
+
+    void ValidateSourceAliases();
+    void SetAliasValid(quint32 id, bool valid);
+};
 
 #endif // DIALOGFLIPPINGBYLINE_H

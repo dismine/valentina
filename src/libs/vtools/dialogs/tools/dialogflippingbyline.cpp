@@ -64,7 +64,6 @@
 DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogFlippingByLine),
-      objects(),
       stage1(true),
       m_suffix(),
       flagName(true),
@@ -143,12 +142,6 @@ void DialogFlippingByLine::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> DialogFlippingByLine::GetObjects() const
-{
-    return ConvertToVector(objects);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString DialogFlippingByLine::GetVisibilityGroupName() const
 {
     return ui->lineEditVisibilityGroup->text();
@@ -196,7 +189,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
-        if (objects.isEmpty())
+        if (sourceObjects.isEmpty())
         {
             return;
         }
@@ -209,7 +202,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
 
         VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(ConvertToVector(objects));
+        operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
@@ -224,6 +217,8 @@ void DialogFlippingByLine::ShowDialog(bool click)
 
         qApp->getSceneView()->AllowRubberBand(false);
 
+        FillSourceList();
+
         emit ToolTip(tr("Select first line point"));
     }
     else if (not stage1 && prepare && click)
@@ -235,16 +230,35 @@ void DialogFlippingByLine::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<SourceItem> DialogFlippingByLine::GetSourceObjects() const
+{
+    return sourceObjects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetSourceObjects(const QVector<SourceItem> &value)
+{
+    sourceObjects = value;
+    FillSourceList();
+
+    VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetObjects(SourceToObjects(sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not stage1 && not prepare)// After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
+            auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                    [id](const SourceItem &sItem) { return sItem.id == id; });
             switch (number)
             {
                 case 0:
-                    if (objects.contains(id))
+                    if (obj != sourceObjects.end())
                     {
                         emit ToolTip(tr("Select first line point that is not part of the list of objects"));
                         return;
@@ -260,7 +274,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (objects.contains(id))
+                    if (obj != sourceObjects.end())
                     {
                         emit ToolTip(tr("Select second line point that is not part of the list of objects"));
                         return;
@@ -296,16 +310,23 @@ void DialogFlippingByLine::SelectedObject(bool selected, quint32 object, quint32
     Q_UNUSED(tool)
     if (stage1)
     {
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
-            if (not objects.contains(object))
+            if (obj == sourceObjects.cend())
             {
-                objects.append(object);
+                SourceItem item;
+                item.id = object;
+                sourceObjects.append(item);
             }
         }
         else
         {
-            objects.removeOne(object);
+            if (obj != sourceObjects.end())
+            {
+                sourceObjects.erase(obj);
+            }
         }
     }
 }
@@ -321,6 +342,7 @@ void DialogFlippingByLine::SuffixChanged()
         {
             flagName = false;
             ChangeColor(ui->labelSuffix, errorColor);
+            ui->labelStatus->setText(tr("Invalid suffix"));
             CheckState();
             return;
         }
@@ -337,6 +359,7 @@ void DialogFlippingByLine::SuffixChanged()
                     {
                         flagName = false;
                         ChangeColor(ui->labelSuffix, errorColor);
+                        ui->labelStatus->setText(tr("Invalid suffix"));
                         CheckState();
                         return;
                     }
@@ -361,6 +384,7 @@ void DialogFlippingByLine::GroupNameChanged()
         {
             flagGroupName = false;
             ChangeColor(ui->labelGroupName, errorColor);
+            ui->labelStatus->setText(tr("Invalid group name"));
             CheckState();
             return;
         }
@@ -369,6 +393,50 @@ void DialogFlippingByLine::GroupNameChanged()
         ChangeColor(ui->labelGroupName, OkColor(this));
     }
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::ShowSourceDetails(int row)
+{
+    ui->lineEditAlias->setDisabled(true);
+
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    const auto sourceItem = qvariant_cast<SourceItem>(ui->listWidget->item(row)->data(Qt::UserRole));
+
+    const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+    ui->labelAlias->setText(obj->getType() == GOType::Point ? tr("Label:") : tr("Alias:"));
+
+    ui->lineEditAlias->blockSignals(true);
+    ui->lineEditAlias->setText(sourceItem.alias);
+    ui->lineEditAlias->setEnabled(true);
+    ui->lineEditAlias->blockSignals(false);
+
+    SetAliasValid(sourceItem.id, SourceAliasValid(sourceItem, obj, data,
+                                                  OriginAlias(sourceItem.id, sourceObjects, obj)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::AliasChanged(const QString &text)
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.alias = text;
+
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+
+        ValidateSourceAliases();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -382,10 +450,22 @@ void DialogFlippingByLine::SaveData()
 {
     m_suffix = ui->lineEditSuffix->text();
 
+    sourceObjects.clear();
+    sourceObjects.reserve(ui->listWidget->count());
+
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+            sourceObjects.append(sourceItem);
+        }
+    }
+
     VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(ConvertToVector(objects));
+    operation->SetObjects(SourceToObjects(sourceObjects));
     operation->SetFirstLinePointId(GetFirstLinePointId());
     operation->SetSecondLinePointId(GetSecondLinePointId());
     operation->RefreshGeometry();
@@ -411,27 +491,116 @@ void DialogFlippingByLine::PointChanged()
     ChangeColor(ui->labelFirstLinePoint, color);
     ChangeColor(ui->labelSecondLinePoint, color);
 
+    quint32 id1 = getCurrentObjectId(ui->comboBoxFirstLinePoint);
+    auto obj1 = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                            [id1](const SourceItem &sItem) { return sItem.id == id1; });
+
+    quint32 id2 = getCurrentObjectId(ui->comboBoxSecondLinePoint);
+    auto obj2 = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                             [id2](const SourceItem &sItem) { return sItem.id == id2; });
+
     if (getCurrentObjectId(ui->comboBoxFirstLinePoint) == getCurrentObjectId(ui->comboBoxSecondLinePoint))
     {
         flagError = false;
         color = errorColor;
         ChangeColor(ui->labelFirstLinePoint, color);
         ChangeColor(ui->labelSecondLinePoint, color);
+        ui->labelStatus->setText(tr("Invalid line points"));
     }
-    else if (objects.contains(getCurrentObjectId(ui->comboBoxFirstLinePoint)))
+    else if (obj1 != sourceObjects.end())
     {
         flagError = false;
         color = errorColor;
         ChangeColor(ui->labelFirstLinePoint, color);
+        ui->labelStatus->setText(tr("Invalid first line point"));
     }
-    else if (objects.contains(getCurrentObjectId(ui->comboBoxSecondLinePoint)))
+    else if (obj2 != sourceObjects.end())
     {
         flagError = false;
         color = errorColor;
         ChangeColor(ui->labelSecondLinePoint, color);
+        ui->labelStatus->setText(tr("Invalid second line point"));
     }
 
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::FillSourceList()
+{
+    ui->listWidget->blockSignals(true);
+
+    ui->listWidget->clear();
+
+    int row = -1;
+
+    for (auto &sourceItem : sourceObjects)
+    {
+        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+
+        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        item->setToolTip(obj->ObjectName());
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        ui->listWidget->insertItem(++row, item);
+    }
+
+    ui->listWidget->blockSignals(false);
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
+
+    ValidateSourceAliases();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::ValidateSourceAliases()
+{
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
+            {
+                flagAlias = false;
+                ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
+                SetAliasValid(sourceItem.id, false);
+                CheckState();
+                return;
+            }
+            else
+            {
+                SetAliasValid(sourceItem.id, true);
+            }
+        }
+    }
+
+    flagAlias = true;
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetAliasValid(quint32 id, bool valid)
+{
+    if (ui->listWidget->currentRow() != -1)
+    {
+        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
+        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+        if (id == sourceItem.id)
+        {
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+
+            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -444,4 +613,17 @@ void DialogFlippingByLine::SetNotes(const QString &notes)
 QString DialogFlippingByLine::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogFlippingByLine::IsValid() const
+{
+    bool ready = flagError && flagName && flagGroupName && flagAlias;
+
+    if (ready)
+    {
+        ui->labelStatus->setText(tr("Ready"));
+    }
+
+    return ready;
 }

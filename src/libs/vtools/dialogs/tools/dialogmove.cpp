@@ -78,7 +78,6 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
       formulaBaseHeightAngle(0),
       formulaBaseHeightRotationAngle(0),
       formulaBaseHeightLength(0),
-      objects(),
       stage1(true),
       stage2(false),
       m_suffix(),
@@ -142,6 +141,9 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogMove::DeployAngleTextEdit);
     connect(ui->pushButtonGrowRotationAngle, &QPushButton::clicked, this, &DialogMove::DeployRotationAngleTextEdit);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogMove::DeployLengthTextEdit);
+
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogMove::ShowSourceDetails);
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogMove::AliasChanged);
 
     vis = new VisToolMove(data);
 
@@ -258,12 +260,6 @@ void DialogMove::SetRotationOrigPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> DialogMove::GetObjects() const
-{
-    return ConvertToVector(objects);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetVisibilityGroupName() const
 {
     return ui->lineEditVisibilityGroup->text();
@@ -311,7 +307,7 @@ void DialogMove::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
-        if (objects.isEmpty())
+        if (sourceObjects.isEmpty())
         {
             return;
         }
@@ -325,7 +321,7 @@ void DialogMove::ShowDialog(bool click)
 
         VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(ConvertToVector(objects));
+        operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
 
         VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
@@ -343,6 +339,8 @@ void DialogMove::ShowDialog(bool click)
         scene->ToggleSplinePathHover(false);
 
         qApp->getSceneView()->AllowRubberBand(false);
+
+        FillSourceList();
     }
     else if (not stage2 && not stage1 && prepare && click)
     {
@@ -416,16 +414,23 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
     Q_UNUSED(tool)
     if (stage1)
     {
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
-            if (not objects.contains(object))
+            if (obj == sourceObjects.cend())
             {
-                objects.append(object);
+                SourceItem item;
+                item.id = object;
+                sourceObjects.append(item);
             }
         }
         else
         {
-            objects.removeOne(object);
+            if (obj != sourceObjects.end())
+            {
+                sourceObjects.erase(obj);
+            }
         }
     }
 }
@@ -501,6 +506,7 @@ void DialogMove::SuffixChanged()
         {
             flagName = false;
             ChangeColor(ui->labelSuffix, errorColor);
+            ui->labelStatus->setText(tr("Invalid suffix"));
             CheckState();
             return;
         }
@@ -517,6 +523,7 @@ void DialogMove::SuffixChanged()
                     {
                         flagName = false;
                         ChangeColor(ui->labelSuffix, errorColor);
+                        ui->labelStatus->setText(tr("Invalid suffix"));
                         CheckState();
                         return;
                     }
@@ -541,6 +548,7 @@ void DialogMove::GroupNameChanged()
         {
             flagGroupName = false;
             ChangeColor(ui->labelGroupName, errorColor);
+            ui->labelStatus->setText(tr("Invalid group name"));
             CheckState();
             return;
         }
@@ -549,6 +557,50 @@ void DialogMove::GroupNameChanged()
         ChangeColor(ui->labelGroupName, OkColor(this));
     }
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ShowSourceDetails(int row)
+{
+    ui->lineEditAlias->setDisabled(true);
+
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    const auto sourceItem = qvariant_cast<SourceItem>(ui->listWidget->item(row)->data(Qt::UserRole));
+
+    const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+    ui->labelAlias->setText(obj->getType() == GOType::Point ? tr("Label:") : tr("Alias:"));
+
+    ui->lineEditAlias->blockSignals(true);
+    ui->lineEditAlias->setText(sourceItem.alias);
+    ui->lineEditAlias->setEnabled(true);
+    ui->lineEditAlias->blockSignals(false);
+
+    SetAliasValid(sourceItem.id, SourceAliasValid(sourceItem, obj, data,
+                                                  OriginAlias(sourceItem.id, sourceObjects, obj)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::AliasChanged(const QString &text)
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.alias = text;
+
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+
+        ValidateSourceAliases();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -565,10 +617,22 @@ void DialogMove::SaveData()
     formulaRotationAngle = ui->plainTextEditRotationAngle->toPlainText();
     formulaLength = ui->plainTextEditLength->toPlainText();
 
+    sourceObjects.clear();
+    sourceObjects.reserve(ui->listWidget->count());
+
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+            sourceObjects.append(sourceItem);
+        }
+    }
+
     VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(ConvertToVector(objects));
+    operation->SetObjects(SourceToObjects(sourceObjects));
     operation->SetAngle(formulaAngle);
     operation->SetLength(formulaLength);
     operation->SetRotationAngle(formulaRotationAngle);
@@ -598,6 +662,23 @@ void DialogMove::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<SourceItem> DialogMove::GetSourceObjects() const
+{
+    return sourceObjects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
+{
+    sourceObjects = value;
+    FillSourceList();
+
+    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetObjects(SourceToObjects(sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalAngle()
 {
     FormulaData formulaData;
@@ -609,6 +690,11 @@ void DialogMove::EvalAngle()
     formulaData.checkZero = false;
 
     Eval(formulaData, flagAngle);
+
+    if (not flagAngle)
+    {
+        ui->labelStatus->setText(tr("Invalid angle formula"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -623,6 +709,11 @@ void DialogMove::EvalRotationAngle()
     formulaData.checkZero = false;
 
     Eval(formulaData, flagRotationAngle);
+
+    if (not flagRotationAngle)
+    {
+        ui->labelStatus->setText(tr("Invalid rotation angle formula"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -636,6 +727,89 @@ void DialogMove::EvalLength()
     formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagLength);
+
+    if (not flagLength)
+    {
+        ui->labelStatus->setText(tr("Invalid length formula"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::FillSourceList()
+{
+    ui->listWidget->blockSignals(true);
+
+    ui->listWidget->clear();
+
+    int row = -1;
+
+    for (auto &sourceItem : sourceObjects)
+    {
+        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+
+        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        item->setToolTip(obj->ObjectName());
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        ui->listWidget->insertItem(++row, item);
+    }
+
+    ui->listWidget->blockSignals(false);
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
+
+    ValidateSourceAliases();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ValidateSourceAliases()
+{
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
+            {
+                flagAlias = false;
+                ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
+                SetAliasValid(sourceItem.id, false);
+                CheckState();
+                return;
+            }
+            else
+            {
+                SetAliasValid(sourceItem.id, true);
+            }
+        }
+    }
+
+    flagAlias = true;
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetAliasValid(quint32 id, bool valid)
+{
+    if (ui->listWidget->currentRow() != -1)
+    {
+        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
+        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+        if (id == sourceItem.id)
+        {
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+
+            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -648,4 +822,17 @@ void DialogMove::SetNotes(const QString &notes)
 QString DialogMove::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogMove::IsValid() const
+{
+    bool ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName && flagAlias;
+
+    if (ready)
+    {
+        ui->labelStatus->setText(tr("Ready"));
+    }
+
+    return ready;
 }

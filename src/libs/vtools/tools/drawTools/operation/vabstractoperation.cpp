@@ -46,15 +46,15 @@ namespace
  * @param source list with source objects
  * @return visibility group data
  */
-QMap<quint32, quint32> VisibilityGroupDataFromSource(const VContainer *data, const QVector<quint32> &source)
+QMap<quint32, quint32> VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceItem> &source)
 {
     QMap<quint32, quint32> groupData;
 
-    for (auto &sId : source)
+    for (auto &sItem : source)
     {
         try
         {
-            groupData.insert(sId, data->GetGObject(sId)->getIdTool());
+            groupData.insert(sItem.id, data->GetGObject(sItem.id)->getIdTool());
         }
         catch (const VExceptionBadId &)
         {
@@ -98,7 +98,7 @@ QVector<QString> VAbstractOperation::SourceItems() const
     {
         for (auto &item : source)
         {
-            itemNames.append(VAbstractTool::data.GetGObject(item)->name());
+            itemNames.append(VAbstractTool::data.GetGObject(item.id)->ObjectName());
         }
     }
     catch (const VExceptionBadId &e)
@@ -201,27 +201,49 @@ void VAbstractOperation::SetLabelVisible(quint32 id, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData)
 {
+    initData.source = ExtractSourceData(domElement);
+    initData.destination = ExtractDestinationData(domElement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<SourceItem> VAbstractOperation::ExtractSourceData(const QDomElement &domElement)
+{
+    QVector<SourceItem> source;
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement dataElement = nodeList.at(i).toElement();
         if (not dataElement.isNull() && dataElement.tagName() == TagSource)
         {
-            initData.source.clear();
             const QDomNodeList srcList = dataElement.childNodes();
             for (qint32 j = 0; j < srcList.size(); ++j)
             {
                 const QDomElement element = srcList.at(j).toElement();
                 if (not element.isNull())
                 {
-                    initData.source.append(VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR));
+                    SourceItem item;
+                    item.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+                    item.alias = VDomDocument::GetParametrEmptyString(element, AttrAlias);
+                    source.append(item);
                 }
             }
+            return source;
         }
+    }
 
+    return source;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<DestinationItem> VAbstractOperation::ExtractDestinationData(const QDomElement &domElement)
+{
+    QVector<DestinationItem> destination;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement dataElement = nodeList.at(i).toElement();
         if (not dataElement.isNull() && dataElement.tagName() == TagDestination)
         {
-            initData.destination.clear();
             const QDomNodeList srcList = dataElement.childNodes();
             for (qint32 j = 0; j < srcList.size(); ++j)
             {
@@ -233,11 +255,15 @@ void VAbstractOperation::ExtractData(const QDomElement &domElement, VAbstractOpe
                     d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
                     d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
                     d.showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
-                    initData.destination.append(d);
+                    destination.append(d);
                 }
             }
+
+            return destination;
         }
     }
+
+    return destination;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -520,17 +546,15 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
-                                       const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                                       const QString &notes, QGraphicsItem *parent)
-    : VDrawTool(doc, data, id, notes),
+VAbstractOperation::VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent)
+    : VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
       QGraphicsLineItem(parent),
-      suffix(suffix),
-      source(source),
-      destination(destination),
+      suffix(initData.suffix),
+      source(initData.source),
+      destination(initData.destination),
       operatedObjects()
 {
-    connect(doc, &VAbstractPattern::UpdateToolTip, this, [this]()
+    connect(initData.doc, &VAbstractPattern::UpdateToolTip, this, [this]()
     {
         QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
         while (i.hasNext())
@@ -670,6 +694,26 @@ void VAbstractOperation::PerformDelete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::ReadToolAttributes(const QDomElement &domElement)
+{
+    VDrawTool::ReadToolAttributes(domElement);
+
+    source = ExtractSourceData(domElement);
+    destination = ExtractDestinationData(domElement);
+    suffix = doc->GetParametrString(domElement, AttrSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    VDrawTool::SaveOptions(tag, obj);
+
+    doc->SetAttribute(tag, AttrSuffix, suffix);
+
+    SaveSourceDestination(tag);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
     if (operatedObjects.contains(id))
@@ -695,10 +739,11 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     doc->RemoveAllChildren(tag);
 
     QDomElement tagObjects = doc->createElement(TagSource);
-    for (auto id : qAsConst(source))
+    for (auto sItem : qAsConst(source))
     {
         QDomElement item = doc->createElement(TagItem);
-        doc->SetAttribute(item, AttrIdObject, id);
+        doc->SetAttribute(item, AttrIdObject, sItem.id);
+        doc->SetAttributeOrRemoveIf(item, AttrAlias, sItem.alias, sItem.alias.isEmpty());
         tagObjects.appendChild(item);
     }
     tag.appendChild(tagObjects);
@@ -709,13 +754,13 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, dItem.id);
 
-        if (not VFuzzyComparePossibleNulls(dItem.mx, INT_MAX) &&
-            not VFuzzyComparePossibleNulls(dItem.my, INT_MAX))
-        {
-            doc->SetAttribute(item, AttrMx, qApp->fromPixel(dItem.mx));
-            doc->SetAttribute(item, AttrMy, qApp->fromPixel(dItem.my));
-            doc->SetAttribute<bool>(item, AttrShowLabel, dItem.showLabel);
-        }
+        VAbstractSimple *obj = operatedObjects.value(dItem.id);
+
+        doc->SetAttributeOrRemoveIf(item, AttrMx, qApp->fromPixel(dItem.mx),
+                                    obj && obj->GetType() != GOType::Point);
+        doc->SetAttributeOrRemoveIf(item, AttrMy, qApp->fromPixel(dItem.my),
+                                    obj && obj->GetType() != GOType::Point);
+        doc->SetAttributeOrRemoveIf<bool>(item, AttrShowLabel, dItem.showLabel, dItem.showLabel);
 
         tagObjects.appendChild(item);
     }
@@ -888,7 +933,7 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
                                     "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
                                     "%6"
                                     "</table>")
-            .arg(tr("Label"), curve->name(), tr("Length"))
+            .arg(tr("Label"), curve->ObjectName(), tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
             .arg(UnitsToStr(qApp->patternUnits(), true), MakeToolTip());
     return toolTip;

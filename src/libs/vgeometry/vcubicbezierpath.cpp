@@ -104,6 +104,12 @@ VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degr
         curve.append(point.Rotate(originPoint, degrees));
     }
     curve.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        curve.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
@@ -120,6 +126,12 @@ VCubicBezierPath VCubicBezierPath::Flip(const QLineF &axis, const QString &prefi
         curve.append(point.Flip(axis));
     }
     curve.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        curve.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
@@ -136,6 +148,12 @@ VCubicBezierPath VCubicBezierPath::Move(qreal length, qreal angle, const QString
         curve.append(point.Move(length, angle));
     }
     curve.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        curve.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());

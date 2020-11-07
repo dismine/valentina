@@ -183,6 +183,7 @@
                                   <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
                                     <xs:complexType>
                                       <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
+                                      <xs:attribute name="alias" type="xs:string"/>
                                     </xs:complexType>
                                   </xs:element>
                                 </xs:sequence>

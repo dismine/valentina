@@ -249,6 +249,10 @@ void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
 {
     sourceObjects = value;
     FillSourceList();
+
+    VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetObjects(SourceToObjects(sourceObjects));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -392,21 +396,8 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
     ui->lineEditAlias->setEnabled(true);
     ui->lineEditAlias->blockSignals(false);
 
-    QRegularExpression rx(NameRegExp());
-    if (not rx.match(sourceItem.alias).hasMatch() || not data->IsUnique(sourceItem.alias))
-    {
-        flagAlias = false;
-        ChangeColor(ui->labelAlias, errorColor);
-        ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
-        CheckState();
-        return;
-    }
-    else
-    {
-        flagAlias = true;
-        ChangeColor(ui->labelAlias, errorColor);
-        CheckState();
-    }
+    SetAliasValid(sourceItem.id, SourceAliasValid(sourceItem, obj, data,
+                                                  OriginAlias(sourceItem.id, sourceObjects, obj)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -515,8 +506,9 @@ void DialogFlippingByAxis::FillSourceList()
     for (auto &sourceItem : sourceObjects)
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
 
-        auto *item = new QListWidgetItem(obj->ObjectName());
+        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
         item->setToolTip(obj->ObjectName());
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
         ui->listWidget->insertItem(++row, item);
@@ -535,8 +527,6 @@ void DialogFlippingByAxis::FillSourceList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ValidateSourceAliases()
 {
-    QRegularExpression rx(NameRegExp());
-
     for (int i=0; i<ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
@@ -545,27 +535,39 @@ void DialogFlippingByAxis::ValidateSourceAliases()
 
             const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
 
-            QString name;
-
-            if (obj->getType() == GOType::Point)
-            {
-                name = sourceItem.alias;
-            }
-            else
-            {
-                const QString oldAlias = obj->GetAliasSuffix();
-                obj->SetAliasSuffix(sourceItem.alias);
-                name = obj->GetAlias();
-                obj->SetAliasSuffix(oldAlias);
-            }
-
-            if (not rx.match(name).hasMatch() || not data->IsUnique(name))
+            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
             {
                 flagAlias = false;
                 ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
+                SetAliasValid(sourceItem.id, false);
                 CheckState();
                 return;
             }
+            else
+            {
+                SetAliasValid(sourceItem.id, true);
+            }
+        }
+    }
+
+    flagAlias = true;
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetAliasValid(quint32 id, bool valid)
+{
+    if (ui->listWidget->currentRow() != -1)
+    {
+        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
+        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+        if (id == sourceItem.id)
+        {
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+
+            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
         }
     }
 }
