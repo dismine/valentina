@@ -165,21 +165,25 @@ VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutInitData &initData)
     {
         initData.id = initData.data->AddGObject(p);
 
-        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, initData.id);
-        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, initData.id);
+        auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
+        initData.data->AddSpline(path1, NULL_ID, initData.id);
+        initData.data->RegisterUniqueName(path1);
 
-        initData.data->RegisterUniqueName(splPath1);
-        initData.data->RegisterUniqueName(splPath2);
+        auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
+        initData.data->AddSpline(path2, NULL_ID, initData.id);
+        initData.data->RegisterUniqueName(path2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
-        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, initData.id);
-        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, initData.id);
+        auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
+        initData.data->AddSpline(path1, NULL_ID, initData.id);
+        initData.data->RegisterUniqueName(path1);
 
-        initData.data->RegisterUniqueName(splPath1);
-        initData.data->RegisterUniqueName(splPath2);
+        auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
+        initData.data->AddSpline(path2, NULL_ID, initData.id);
+        initData.data->RegisterUniqueName(path2);
 
         if (initData.parse != Document::FullParse)
         {

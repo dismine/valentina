@@ -143,7 +143,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
     {
         const QString errorMsg = tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis"
                                     " through point '%3' with angle %4°")
-                .arg(initData.name, curve->name(), basePoint->name()).arg(angle);
+                .arg(initData.name, curve->ObjectName(), basePoint->name()).arg(angle);
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
                              qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
@@ -403,7 +403,10 @@ void VToolCurveIntersectAxis::InitSegments(GOType curveType, qreal segLength, co
                 delete spl2;
             }
 
+            data->RegisterUniqueName(spline1);
             data->AddSpline(spline1, NULL_ID, p->id());
+
+            data->RegisterUniqueName(spline2);
             data->AddSpline(spline2, NULL_ID, p->id());
             break;
         }
@@ -448,7 +451,10 @@ void VToolCurveIntersectAxis::InitSegments(GOType curveType, qreal segLength, co
                 delete splPath2;
             }
 
+            data->RegisterUniqueName(splP1);
             data->AddSpline(splP1, NULL_ID, p->id());
+
+            data->RegisterUniqueName(splP2);
             data->AddSpline(splP2, NULL_ID, p->id());
             break;
         }

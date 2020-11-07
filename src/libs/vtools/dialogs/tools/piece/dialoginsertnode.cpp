@@ -109,7 +109,7 @@ void DialogInsertNode::SetNode(const VPieceNode &node)
     QString name = tr("Uknown");
     try
     {
-        name = qApp->TrVars()->InternalVarToUser(data->GetGObject(m_node.GetId())->name());
+        name = data->GetGObject(m_node.GetId())->ObjectName();
     }
     catch (const VExceptionBadId &)
     {
