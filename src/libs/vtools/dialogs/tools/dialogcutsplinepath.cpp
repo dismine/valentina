@@ -216,46 +216,37 @@ void DialogCutSplinePath::SplinePathChanged()
 void DialogCutSplinePath::ValidateAlias()
 {
     QRegularExpression rx(NameRegExp());
+
     VSplinePath path1;
     path1.SetAliasSuffix(GetAliasSuffix1());
-    if (not GetAliasSuffix1().isEmpty() &&
-        (not rx.match(path1.GetAlias()).hasMatch() || not data->IsUnique(path1.GetAlias())))
-    {
-        flagAlias1 = false;
-        ChangeColor(ui->labelAlias1, errorColor);
-    }
-    else
-    {
-        flagAlias1 = true;
-        ChangeColor(ui->labelAlias1, OkColor(this));
-    }
 
     VSplinePath path2;
     path2.SetAliasSuffix(GetAliasSuffix2());
-    if (not GetAliasSuffix2().isEmpty() && not data->IsUnique(path2.GetAlias()))
-    {
-        flagAlias2 = false;
-        ChangeColor(ui->labelAlias2, errorColor);
-    }
-    else
-    {
-        flagAlias2 = true;
-        ChangeColor(ui->labelAlias2, OkColor(this));
-    }
 
-    if (path1.GetAlias() == path2.GetAlias())
+    if (not GetAliasSuffix1().isEmpty() &&
+        (not rx.match(path1.GetAlias()).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix1() && not data->IsUnique(path1.GetAlias())) ||
+         path1.GetAlias() == path2.GetAlias()))
     {
         flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);
-
-        flagAlias2 = false;
-        ChangeColor(ui->labelAlias2, errorColor);
     }
     else
     {
         flagAlias1 = true;
         ChangeColor(ui->labelAlias1, OkColor(this));
+    }
 
+    if (not GetAliasSuffix2().isEmpty() &&
+        (not rx.match(path2.GetAlias()).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(path2.GetAlias())) ||
+         path1.GetAlias() == path2.GetAlias()))
+    {
+        flagAlias2 = false;
+        ChangeColor(ui->labelAlias2, errorColor);
+    }
+    else
+    {
         flagAlias2 = true;
         ChangeColor(ui->labelAlias2, OkColor(this));
     }
@@ -338,7 +329,8 @@ QString DialogCutSplinePath::GetNotes() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::SetAliasSuffix1(const QString &alias)
 {
-    ui->lineEditAlias1->setText(alias);
+    originAliasSuffix1 = alias;
+    ui->lineEditAlias1->setText(originAliasSuffix1);
     ValidateAlias();
 }
 
@@ -351,7 +343,8 @@ QString DialogCutSplinePath::GetAliasSuffix1() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::SetAliasSuffix2(const QString &alias)
 {
-    ui->lineEditAlias2->setText(alias);
+    originAliasSuffix2 = alias;
+    ui->lineEditAlias2->setText(originAliasSuffix2);
     ValidateAlias();
 }
 

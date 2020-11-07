@@ -244,7 +244,8 @@ QString DialogArc::GetNotes() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::SetAliasSuffix(const QString &alias)
 {
-    ui->lineEditAlias->setText(alias);
+    originAliasSuffix = alias;
+    ui->lineEditAlias->setText(originAliasSuffix);
     ValidateAlias();
 }
 
@@ -361,7 +362,8 @@ void DialogArc::ValidateAlias()
     VArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
     if (not GetAliasSuffix().isEmpty() &&
-        (not rx.match(arc.GetAlias()).hasMatch() || not data->IsUnique(arc.GetAlias())))
+        (not rx.match(arc.GetAlias()).hasMatch() ||
+         (originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

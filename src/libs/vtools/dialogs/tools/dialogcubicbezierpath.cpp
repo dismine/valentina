@@ -115,7 +115,8 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
 
-    ui->lineEditAlias->setText(path.GetAliasSuffix());
+    originAliasSuffix = path.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
     ValidateAlias();
 
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
@@ -259,7 +260,8 @@ void DialogCubicBezierPath::ValidateAlias()
     VCubicBezierPath tempPath = path;
     tempPath.SetAliasSuffix(ui->lineEditAlias->text());
     if (not ui->lineEditAlias->text().isEmpty() &&
-        (not rx.match(tempPath.GetAlias()).hasMatch() || not data->IsUnique(tempPath.GetAlias())))
+        (not rx.match(tempPath.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(tempPath.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

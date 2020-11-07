@@ -146,6 +146,8 @@ private:
     qreal         angleF1;
     qreal         angleF2;
 
+    QString       originAliasSuffix{};
+
     void          EvalRadius();
     void          EvalF();
 };

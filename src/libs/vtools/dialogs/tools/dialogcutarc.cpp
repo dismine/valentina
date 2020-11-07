@@ -209,46 +209,37 @@ void DialogCutArc::ArcChanged()
 void DialogCutArc::ValidateAlias()
 {
     QRegularExpression rx(NameRegExp());
+
     VArc arc1;
     arc1.SetAliasSuffix(GetAliasSuffix1());
-    if (not GetAliasSuffix1().isEmpty() &&
-        (not rx.match(arc1.GetAlias()).hasMatch() || not data->IsUnique(arc1.GetAlias())))
-    {
-        flagAlias1 = false;
-        ChangeColor(ui->labelAlias1, errorColor);
-    }
-    else
-    {
-        flagAlias1 = true;
-        ChangeColor(ui->labelAlias1, OkColor(this));
-    }
 
     VArc arc2;
     arc2.SetAliasSuffix(GetAliasSuffix2());
-    if (not GetAliasSuffix2().isEmpty() && not data->IsUnique(arc2.GetAlias()))
-    {
-        flagAlias2 = false;
-        ChangeColor(ui->labelAlias2, errorColor);
-    }
-    else
-    {
-        flagAlias2 = true;
-        ChangeColor(ui->labelAlias2, OkColor(this));
-    }
 
-    if (arc1.GetAlias() == arc2.GetAlias())
+    if (not GetAliasSuffix1().isEmpty() &&
+        (not rx.match(arc1.GetAlias()).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix1() && not data->IsUnique(arc1.GetAlias())) ||
+         arc1.GetAlias() == arc2.GetAlias()))
     {
         flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);
-
-        flagAlias2 = false;
-        ChangeColor(ui->labelAlias2, errorColor);
     }
     else
     {
         flagAlias1 = true;
         ChangeColor(ui->labelAlias1, OkColor(this));
+    }
 
+    if (not GetAliasSuffix2().isEmpty() &&
+        (not rx.match(arc2.GetAlias()).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(arc2.GetAlias())) ||
+         arc1.GetAlias() == arc2.GetAlias()))
+    {
+        flagAlias2 = false;
+        ChangeColor(ui->labelAlias2, errorColor);
+    }
+    else
+    {
         flagAlias2 = true;
         ChangeColor(ui->labelAlias2, OkColor(this));
     }
@@ -338,7 +329,8 @@ QString DialogCutArc::GetNotes() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::SetAliasSuffix1(const QString &alias)
 {
-    ui->lineEditAlias1->setText(alias);
+    originAliasSuffix1 = alias;
+    ui->lineEditAlias1->setText(originAliasSuffix1);
     ValidateAlias();
 }
 
@@ -351,7 +343,8 @@ QString DialogCutArc::GetAliasSuffix1() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::SetAliasSuffix2(const QString &alias)
 {
-    ui->lineEditAlias2->setText(alias);
+    originAliasSuffix2 = alias;
+    ui->lineEditAlias2->setText(originAliasSuffix2);
     ValidateAlias();
 }
 

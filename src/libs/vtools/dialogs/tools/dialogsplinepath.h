@@ -115,6 +115,8 @@ private:
     bool flagError;
     bool flagAlias{true};
 
+    QString originAliasSuffix{};
+
     void EvalAngle1();
     void EvalAngle2();
     void EvalLength1();

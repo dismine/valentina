@@ -109,6 +109,9 @@ private:
     bool flagName;
     bool flagAlias1{true};
     bool flagAlias2{true};
+
+    QString originAliasSuffix1{};
+    QString originAliasSuffix2{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

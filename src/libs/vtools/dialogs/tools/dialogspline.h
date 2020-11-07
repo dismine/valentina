@@ -121,6 +121,8 @@ private:
     bool flagError;
     bool flagAlias{true};
 
+    QString originAliasSuffix{};
+
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP4() const;
 

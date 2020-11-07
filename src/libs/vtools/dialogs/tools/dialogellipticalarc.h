@@ -173,6 +173,8 @@ private:
     qreal         angleF2;
     qreal         angleRotation;
 
+    QString       originAliasSuffix{};
+
     void          EvalRadiuses();
     void          EvalAngles();
 };

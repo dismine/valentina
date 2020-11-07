@@ -137,6 +137,8 @@ private:
     int           formulaBaseHeightF1;
     int           formulaBaseHeightLength;
 
+    QString       originAliasSuffix{};
+
     void          Radius();
     void          Length();
     void          EvalF();

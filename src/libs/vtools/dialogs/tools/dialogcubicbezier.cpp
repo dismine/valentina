@@ -109,7 +109,8 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
     ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
     ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
 
-    ui->lineEditAlias->setText(spl.GetAliasSuffix());
+    originAliasSuffix = spl.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
     ValidateAlias();
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
@@ -270,7 +271,8 @@ void DialogCubicBezier::ValidateAlias()
     VCubicBezier spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
     if (not ui->lineEditAlias->text().isEmpty() &&
-        (not rx.match(spline.GetAlias()).hasMatch() || not data->IsUnique(spline.GetAlias())))
+        (not rx.match(spline.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);

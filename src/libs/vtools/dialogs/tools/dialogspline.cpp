@@ -439,10 +439,13 @@ void DialogSpline::EvalLength2()
 void DialogSpline::ValidateAlias()
 {
     QRegularExpression rx(NameRegExp());
+
     VSpline spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
+
     if (not ui->lineEditAlias->text().isEmpty() &&
-        (not rx.match(spline.GetAlias()).hasMatch() || not data->IsUnique(spline.GetAlias())))
+        (not rx.match(spline.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -613,7 +616,8 @@ void DialogSpline::SetSpline(const VSpline &spline)
     ui->plainTextEditLength2F->setPlainText(length2F);
     ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
 
-    ui->lineEditAlias->setText(spl.GetAliasSuffix());
+    originAliasSuffix = spl.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
     ValidateAlias();
 
     auto path = qobject_cast<VisToolSpline *>(vis);

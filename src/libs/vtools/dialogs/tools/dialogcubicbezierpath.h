@@ -83,6 +83,8 @@ private:
     bool flagError;
     bool flagAlias{true};
 
+    QString originAliasSuffix{};
+
     void             NewItem(const VPointF &point);
     void             DataPoint(const VPointF &p);
     void             SavePath();
