@@ -89,25 +89,9 @@ void VAbstractOperation::SetSuffix(const QString &suffix)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QString> VAbstractOperation::SourceItems() const
+QVector<SourceItem> VAbstractOperation::SourceItems() const
 {
-    QVector<QString> itemNames;
-    itemNames.reserve(source.size());
-
-    try
-    {
-        for (auto &item : source)
-        {
-            itemNames.append(VAbstractTool::data.GetGObject(item.id)->ObjectName());
-        }
-    }
-    catch (const VExceptionBadId &e)
-    {
-        qCritical() << e.ErrorMessage()<<Q_FUNC_INFO;
-        return QVector<QString>();
-    }
-
-    return itemNames;
+    return source;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
