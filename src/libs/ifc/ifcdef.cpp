@@ -134,6 +134,9 @@ const QString AttrVersion     = QStringLiteral("version");
 const QString AttrFirstToCountour = QStringLiteral("firstToCountour");
 const QString AttrLastToCountour = QStringLiteral("lastToCountour");
 const QString AttrNotes       = QStringLiteral("notes");
+const QString AttrAlias       = QStringLiteral("alias");
+const QString AttrAlias1      = QStringLiteral("alias1");
+const QString AttrAlias2      = QStringLiteral("alias2");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

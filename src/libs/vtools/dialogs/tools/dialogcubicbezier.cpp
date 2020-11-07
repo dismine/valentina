@@ -42,6 +42,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezier.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -71,6 +72,8 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWi
             this, &DialogCubicBezier::PointNameChanged);
     connect(ui->comboBoxP4, &QComboBox::currentTextChanged,
             this, &DialogCubicBezier::PointNameChanged);
+
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezier::ValidateAlias);
 
     vis = new VisToolCubicBezier(data);
 
@@ -105,6 +108,10 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
 
     ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
     ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
+
+    originAliasSuffix = spl.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
     SCASSERT(path != nullptr)
@@ -241,6 +248,7 @@ void DialogCubicBezier::SaveData()
     spl.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     spl.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     spl.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    spl.SetAliasSuffix(ui->lineEditAlias->text());
 
     const quint32 d = spl.GetDuplicate();//Save previous value
     newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
@@ -254,6 +262,28 @@ void DialogCubicBezier::SaveData()
     path->setObject4Id(p4->id());
     path->SetMode(Mode::Show);
     path->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+    VCubicBezier spline = spl;
+    spline.SetAliasSuffix(ui->lineEditAlias->text());
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(spline.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

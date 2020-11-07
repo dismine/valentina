@@ -64,6 +64,12 @@ public:
 
     void    SetNotes(const QString &notes);
     QString GetNotes() const;
+
+    void    SetAliasSuffix1(const QString &alias);
+    QString GetAliasSuffix1() const;
+
+    void    SetAliasSuffix2(const QString &alias);
+    QString GetAliasSuffix2() const;
 public slots:
     virtual void        ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -82,6 +88,7 @@ protected:
     virtual bool        IsValid() const final;
 private slots:
     void SplineChanged();
+    void ValidateAlias();
 private:
     Q_DISABLE_COPY(DialogCutSpline)
 
@@ -100,12 +107,17 @@ private:
 
     bool flagFormula;
     bool flagName;
+    bool flagAlias1{true};
+    bool flagAlias2{true};
+
+    QString originAliasSuffix1{};
+    QString originAliasSuffix2{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogCutSpline::IsValid() const
 {
-    return flagFormula && flagName;
+    return flagFormula && flagName && flagAlias1 && flagAlias2;
 }
 
 #endif // DIALOGCUTSPLINE_H

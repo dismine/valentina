@@ -265,7 +265,15 @@ QString VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const
             name += QString("_%1").arg(GetDuplicate());
         }
     }
-    return name;
+
+    QString alias;
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        alias = QString("%1 %2").arg(toolName, GetAliasSuffix());
+    }
+
+    return not alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -287,4 +295,17 @@ void VAbstractCubicBezierPath::CreateName()
         }
     }
     setName(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezierPath::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(splPath + '_' + aliasSuffix);
 }

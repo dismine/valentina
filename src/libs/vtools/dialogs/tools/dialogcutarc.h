@@ -54,17 +54,24 @@ public:
     DialogCutArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCutArc() override;
 
-    QString           GetPointName() const;
-    void              SetPointName(const QString &value);
+    QString GetPointName() const;
+    void    SetPointName(const QString &value);
 
-    QString           GetFormula() const;
-    void              SetFormula(const QString &value);
+    QString GetFormula() const;
+    void    SetFormula(const QString &value);
 
-    quint32           getArcId() const;
-    void              setArcId(quint32 value);
+    quint32 getArcId() const;
+    void    setArcId(quint32 value);
 
     void    SetNotes(const QString &notes);
     QString GetNotes() const;
+
+    void    SetAliasSuffix1(const QString &alias);
+    QString GetAliasSuffix1() const;
+
+    void    SetAliasSuffix2(const QString &alias);
+    QString GetAliasSuffix2() const;
+
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -84,6 +91,7 @@ protected:
     virtual bool      IsValid() const final;
 private slots:
     void ArcChanged();
+    void ValidateAlias();
 private:
     Q_DISABLE_COPY(DialogCutArc)
     /** @brief ui keeps information about user interface */
@@ -94,18 +102,23 @@ private:
     QString pointName;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int               formulaBaseHeight;
+    int formulaBaseHeight;
 
     QTimer *timerFormula;
 
     bool flagFormula;
     bool flagName;
+    bool flagAlias1{true};
+    bool flagAlias2{true};
+
+    QString originAliasSuffix1{};
+    QString originAliasSuffix2{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogCutArc::IsValid() const
 {
-    return flagFormula && flagName;
+    return flagFormula && flagName && flagAlias1 && flagAlias2;
 }
 
 #endif // DIALOGCUTARC_H

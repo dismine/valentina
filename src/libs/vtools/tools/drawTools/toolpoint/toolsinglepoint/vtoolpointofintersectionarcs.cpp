@@ -121,7 +121,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(VToolPointOfI
     if (not success)
     {
         const QString errorMsg = tr("Error calculating point '%1'. Arcs '%2' and '%3' have no point of intersection")
-                      .arg(initData.name, firstArc->name(), secondArc->name());
+                      .arg(initData.name, firstArc->ObjectName(), secondArc->ObjectName());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
                              qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }

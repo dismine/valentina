@@ -56,6 +56,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogspline.h"
 #include "vtranslatevars.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -147,6 +148,8 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     connect(ui->pushButtonGrowAngle2, &QPushButton::clicked, this, &DialogSpline::DeployAngle2TextEdit);
     connect(ui->pushButtonGrowLength1, &QPushButton::clicked, this, &DialogSpline::DeployLength1TextEdit);
     connect(ui->pushButtonGrowLength2, &QPushButton::clicked, this, &DialogSpline::DeployLength2TextEdit);
+
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogSpline::ValidateAlias);
 
     vis = new VisToolSpline(data);
     auto path = qobject_cast<VisToolSpline *>(vis);
@@ -433,6 +436,30 @@ void DialogSpline::EvalLength2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+
+    VSpline spline = spl;
+    spline.SetAliasSuffix(ui->lineEditAlias->text());
+
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(spline.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline DialogSpline::CurrentSpline() const
 {
     QString angle1F = ui->plainTextEditAngle1F->toPlainText();
@@ -458,6 +485,7 @@ VSpline DialogSpline::CurrentSpline() const
     spline.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     spline.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     spline.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    spline.SetAliasSuffix(ui->lineEditAlias->text());
 
     return spline;
 }
@@ -587,6 +615,10 @@ void DialogSpline::SetSpline(const VSpline &spline)
     ui->plainTextEditLength1F->setPlainText(length1F);
     ui->plainTextEditLength2F->setPlainText(length2F);
     ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
+
+    originAliasSuffix = spl.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
 
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)

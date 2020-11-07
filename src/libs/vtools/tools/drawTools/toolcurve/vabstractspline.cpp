@@ -203,7 +203,7 @@ QString VAbstractSpline::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Label"), curve->name());
+                                .arg(UnitsToStr(qApp->patternUnits(), true), tr("Label"), curve->ObjectName());
     return toolTip;
 }
 
@@ -332,6 +332,7 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
     doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
     doc->SetAttribute(tag, AttrAScale, curve->GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(tag, AttrAlias, curve->GetAliasSuffix(), curve->GetAliasSuffix().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -492,6 +493,31 @@ qreal VAbstractSpline::GetApproximationScale() const
 quint32 VAbstractSpline::GetDuplicate() const
 {
     return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetDuplicate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::GetAliasSuffix() const
+{
+    return ObjectAliasSuffix<VAbstractCurve>(m_id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::SetAliasSuffix(const QString &alias)
+{
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+
+    const QString oldAliasSuffix = curve->GetAliasSuffix();
+    curve->SetAliasSuffix(alias);
+
+    if (alias.isEmpty() || VAbstractTool::data.IsUnique(curve->GetAlias()))
+    {
+        QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+        SaveOption(obj);
+    }
+    else
+    {
+        curve->SetAliasSuffix(oldAliasSuffix);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

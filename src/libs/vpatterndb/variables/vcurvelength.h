@@ -45,7 +45,7 @@ class VCurveLength : public VCurveVariable
 public:
     VCurveLength();
     VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, Unit patternUnit);
-    VCurveLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+    VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve, const VSpline &spl,
                  Unit patternUnit, qint32 segment);
     VCurveLength(const VCurveLength &var);
     VCurveLength &operator=(const VCurveLength &var);

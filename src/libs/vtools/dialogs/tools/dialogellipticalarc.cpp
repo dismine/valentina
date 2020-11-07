@@ -47,6 +47,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogellipticalarc.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -153,6 +155,8 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId,
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogEllipticalArc::DeployF2TextEdit);
     connect(ui->pushButtonGrowLengthRotationAngle, &QPushButton::clicked,
             this, &DialogEllipticalArc::DeployRotationAngleTextEdit);
+
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogEllipticalArc::ValidateAlias);
 
     vis = new VisToolEllipticalArc(data);
 
@@ -593,6 +597,28 @@ void DialogEllipticalArc::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+    VEllipticalArc arc;
+    arc.SetAliasSuffix(GetAliasSuffix());
+    if (not GetAliasSuffix().isEmpty() &&
+        (not rx.match(arc.GetAlias()).hasMatch() ||
+         (originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArc::SetNotes(const QString &notes)
 {
     ui->plainTextEditToolNotes->setPlainText(notes);
@@ -602,4 +628,18 @@ void DialogEllipticalArc::SetNotes(const QString &notes)
 QString DialogEllipticalArc::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetAliasSuffix(const QString &alias)
+{
+    originAliasSuffix = alias;
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEllipticalArc::GetAliasSuffix() const
+{
+    return ui->lineEditAlias->text();
 }

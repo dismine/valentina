@@ -397,13 +397,10 @@ quint32 DialogTool::DNumber(const QString &baseName) const
 QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmarkDetails) const
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
-    QString name = obj->name();
+    QString name = obj->ObjectName();
 
     if (node.GetTypeTool() != Tool::NodePoint)
     {
-        int bias = 0;
-        qApp->TrVars()->VariablesToUser(name, 0, obj->name(), bias);
-
         if (node.GetReverse())
         {
             name = QStringLiteral("- ") + name;
@@ -706,17 +703,7 @@ void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
 {
     const auto obj = data->GeometricObject<T>(id);
     SCASSERT(obj != nullptr)
-
-    QString newName = obj->name();
-    int bias = 0;
-    if (qApp->TrVars()->VariablesToUser(newName, 0, obj->name(), bias))
-    {
-        list[newName] = id;
-    }
-    else
-    {
-        list[obj->name()] = id;
-    }
+    list[obj->ObjectName()] = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

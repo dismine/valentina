@@ -70,6 +70,17 @@ QWidget *VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionVi
     return d_ptr->editor;
 }
 
+bool VPE::VLabelProperty::setEditorData(QWidget *editor)
+{
+    if (QLabel* tmpWidget = qobject_cast<QLabel*>(editor))
+    {
+        tmpWidget->setText(d_ptr->VariantValue.toString());
+        return true;
+    }
+
+    return false;
+}
+
 QVariant VPE::VLabelProperty::getEditorData(const QWidget *editor) const
 {
     const QLabel* tmpEditor = qobject_cast<const QLabel*>(editor);

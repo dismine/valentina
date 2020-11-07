@@ -122,6 +122,12 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
@@ -147,6 +153,12 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
@@ -172,6 +184,12 @@ VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) 
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());

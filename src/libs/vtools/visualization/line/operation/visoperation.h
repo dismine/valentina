@@ -41,7 +41,7 @@ public:
     explicit VisOperation(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisOperation();
 
-    void SetObjects(QVector<quint32> objects);
+    void SetObjects(const QVector<quint32> &objects);
 
     virtual void VisualMode(const quint32 &pointId = NULL_ID) override;
 

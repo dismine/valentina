@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>DialogMove</class>
  <widget class="QDialog" name="DialogMove">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>411</width>
-    <height>498</height>
+    <width>536</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,6 +31,39 @@
        <string>Tool</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QListWidget" name="listWidget">
+          <property name="editTriggers">
+           <set>QAbstractItemView::CurrentChanged</set>
+          </property>
+         </widget>
+         <widget class="QWidget" name="formLayoutWidget">
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelAlias">
+             <property name="text">
+              <string>Alias:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEditAlias">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item alignment="Qt::AlignLeft">
@@ -654,6 +690,13 @@
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelStatus">
+         <property name="text">
+          <string>Ready</string>
+         </property>
         </widget>
        </item>
        <item>

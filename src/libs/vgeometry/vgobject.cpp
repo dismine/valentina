@@ -41,6 +41,7 @@
 #include "../vmisc/compatibility.h"
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
+#include "../vmisc/vabstractapplication.h"
 
 namespace
 {
@@ -241,6 +242,38 @@ quint32 VGObject::id() const
 void VGObject::setId(const quint32 &id)
 {
     d->_id = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGObject::SetAlias(const QString &alias)
+{
+    d->m_alias = alias;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VGObject::GetAlias() const
+{
+    return d->m_alias;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGObject::SetAliasSuffix(const QString &aliasSuffix)
+{
+    d->m_aliasSuffix = aliasSuffix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VGObject::GetAliasSuffix() const
+{
+    return d->m_aliasSuffix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VGObject::ObjectName() const
+{
+    const QString alias = qApp->TrVars()->VarToUser(d->m_alias);
+    const QString name = qApp->TrVars()->VarToUser(d->_name);
+    return not d->m_alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

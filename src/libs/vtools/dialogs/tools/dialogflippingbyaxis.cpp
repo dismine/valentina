@@ -64,7 +64,6 @@
 DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogFlippingByAxis),
-      objects(),
       stage1(true),
       m_suffix(),
       flagName(true),
@@ -86,6 +85,9 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByAxis::GroupNameChanged);
     connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByAxis::PointChanged);
+
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByAxis::ShowSourceDetails);
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogFlippingByAxis::AliasChanged);
 
     vis = new VisToolFlippingByAxis(data);
 
@@ -148,12 +150,6 @@ void DialogFlippingByAxis::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> DialogFlippingByAxis::GetObjects() const
-{
-    return ConvertToVector(objects);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString DialogFlippingByAxis::GetVisibilityGroupName() const
 {
     return ui->lineEditVisibilityGroup->text();
@@ -201,7 +197,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
-        if (objects.isEmpty())
+        if (sourceObjects.isEmpty())
         {
             return;
         }
@@ -214,7 +210,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(ConvertToVector(objects));
+        operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
@@ -229,6 +225,8 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         qApp->getSceneView()->AllowRubberBand(false);
 
+        FillSourceList();
+
         emit ToolTip(tr("Select origin point"));
     }
     else if (not stage1 && prepare && click)
@@ -241,13 +239,33 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<SourceItem> DialogFlippingByAxis::GetSourceObjects() const
+{
+    return sourceObjects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
+{
+    sourceObjects = value;
+    FillSourceList();
+
+    VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetObjects(SourceToObjects(sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not stage1 && not prepare)// After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
-            if (objects.contains(id))
+            auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                    [id](const SourceItem &sItem) { return sItem.id == id; });
+
+            if (obj != sourceObjects.end())
             {
                 emit ToolTip(tr("Select origin point that is not part of the list of objects"));
                 return;
@@ -272,16 +290,23 @@ void DialogFlippingByAxis::SelectedObject(bool selected, quint32 object, quint32
     Q_UNUSED(tool)
     if (stage1)
     {
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
-            if (not objects.contains(object))
+            if (obj == sourceObjects.cend())
             {
-                objects.append(object);
+                SourceItem item;
+                item.id = object;
+                sourceObjects.append(item);
             }
         }
         else
         {
-            objects.removeOne(object);
+            if (obj != sourceObjects.end())
+            {
+                sourceObjects.erase(obj);
+            }
         }
     }
 }
@@ -297,6 +322,7 @@ void DialogFlippingByAxis::SuffixChanged()
         {
             flagName = false;
             ChangeColor(ui->labelSuffix, errorColor);
+            ui->labelStatus->setText(tr("Invalid suffix"));
             CheckState();
             return;
         }
@@ -313,6 +339,7 @@ void DialogFlippingByAxis::SuffixChanged()
                     {
                         flagName = false;
                         ChangeColor(ui->labelSuffix, errorColor);
+                        ui->labelStatus->setText(tr("Invalid suffix"));
                         CheckState();
                         return;
                     }
@@ -337,6 +364,7 @@ void DialogFlippingByAxis::GroupNameChanged()
         {
             flagGroupName = false;
             ChangeColor(ui->labelGroupName, errorColor);
+            ui->labelStatus->setText(tr("Invalid group name"));
             CheckState();
             return;
         }
@@ -345,6 +373,50 @@ void DialogFlippingByAxis::GroupNameChanged()
         ChangeColor(ui->labelGroupName, OkColor(this));
     }
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::ShowSourceDetails(int row)
+{
+    ui->lineEditAlias->setDisabled(true);
+
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    const auto sourceItem = qvariant_cast<SourceItem>(ui->listWidget->item(row)->data(Qt::UserRole));
+
+    const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+    ui->labelAlias->setText(obj->getType() == GOType::Point ? tr("Label:") : tr("Alias:"));
+
+    ui->lineEditAlias->blockSignals(true);
+    ui->lineEditAlias->setText(sourceItem.alias);
+    ui->lineEditAlias->setEnabled(true);
+    ui->lineEditAlias->blockSignals(false);
+
+    SetAliasValid(sourceItem.id, SourceAliasValid(sourceItem, obj, data,
+                                                  OriginAlias(sourceItem.id, sourceObjects, obj)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::AliasChanged(const QString &text)
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.alias = text;
+
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+
+        ValidateSourceAliases();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -358,10 +430,22 @@ void DialogFlippingByAxis::SaveData()
 {
     m_suffix = ui->lineEditSuffix->text();
 
+    sourceObjects.clear();
+    sourceObjects.reserve(ui->listWidget->count());
+
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+            sourceObjects.append(sourceItem);
+        }
+    }
+
     VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(ConvertToVector(objects));
+    operation->SetObjects(SourceToObjects(sourceObjects));
     operation->SetOriginPointId(GetOriginPointId());
     operation->SetAxisType(GetAxisType());
     operation->RefreshGeometry();
@@ -383,9 +467,13 @@ void DialogFlippingByAxis::SaveData()
 void DialogFlippingByAxis::PointChanged()
 {
     QColor color;
-    if (objects.contains(getCurrentObjectId(ui->comboBoxOriginPoint)))
+    quint32 id = getCurrentObjectId(ui->comboBoxOriginPoint);
+    auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                            [id](const SourceItem &sItem) { return sItem.id == id; });
+    if (obj != sourceObjects.end())
     {
         flagError = false;
+        ui->labelStatus->setText(tr("Invalid point"));
         color = errorColor;
     }
     else
@@ -407,6 +495,84 @@ void DialogFlippingByAxis::FillComboBoxAxisType(QComboBox *box)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::FillSourceList()
+{
+    ui->listWidget->blockSignals(true);
+
+    ui->listWidget->clear();
+
+    int row = -1;
+
+    for (auto &sourceItem : sourceObjects)
+    {
+        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+
+        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        item->setToolTip(obj->ObjectName());
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        ui->listWidget->insertItem(++row, item);
+    }
+
+    ui->listWidget->blockSignals(false);
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
+
+    ValidateSourceAliases();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::ValidateSourceAliases()
+{
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
+            {
+                flagAlias = false;
+                ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
+                SetAliasValid(sourceItem.id, false);
+                CheckState();
+                return;
+            }
+            else
+            {
+                SetAliasValid(sourceItem.id, true);
+            }
+        }
+    }
+
+    flagAlias = true;
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::SetAliasValid(quint32 id, bool valid)
+{
+    if (ui->listWidget->currentRow() != -1)
+    {
+        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
+        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+        if (id == sourceItem.id)
+        {
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+
+            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SetNotes(const QString &notes)
 {
     ui->plainTextEditToolNotes->setPlainText(notes);
@@ -416,4 +582,17 @@ void DialogFlippingByAxis::SetNotes(const QString &notes)
 QString DialogFlippingByAxis::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogFlippingByAxis::IsValid() const
+{
+    bool ready = flagError && flagName && flagGroupName && flagAlias;
+
+    if (ready)
+    {
+        ui->labelStatus->setText(tr("Ready"));
+    }
+
+    return ready;
 }

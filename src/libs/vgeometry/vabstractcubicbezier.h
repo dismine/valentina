@@ -63,6 +63,7 @@ public:
 
 protected:
     virtual void CreateName() override;
+    virtual void CreateAlias() override;
 
     static QVector<QPointF> GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
                                                  const QPointF &p4, qreal approximationScale);

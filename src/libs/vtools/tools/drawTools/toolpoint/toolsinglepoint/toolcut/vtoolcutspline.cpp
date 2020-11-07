@@ -65,8 +65,8 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolCutSpline::VToolCutSpline(const VToolCutSplineInitData &initData, QGraphicsItem *parent)
-    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.splineId, initData.notes, parent)
+VToolCutSpline::VToolCutSpline(const VToolCutInitData &initData, QGraphicsItem *parent)
+    :VToolCut(initData, parent)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -82,9 +82,11 @@ void VToolCutSpline::setDialog()
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFormula(formula);
-    dialogTool->setSplineId(curveCutId);
+    dialogTool->setSplineId(baseCurveId);
     dialogTool->SetPointName(point->name());
     dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix1(m_aliasSuffix1);
+    dialogTool->SetAliasSuffix2(m_aliasSuffix2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,9 +104,9 @@ VToolCutSpline* VToolCutSpline::Create(const QPointer<DialogTool> &dialog, VMain
     const QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
-    VToolCutSplineInitData initData;
+    VToolCutInitData initData;
     initData.formula = dialogTool->GetFormula();
-    initData.splineId = dialogTool->getSplineId();
+    initData.baseCurveId = dialogTool->getSplineId();
     initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
@@ -112,6 +114,8 @@ VToolCutSpline* VToolCutSpline::Create(const QPointer<DialogTool> &dialog, VMain
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
+    initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
 
     VToolCutSpline* point = Create(initData);
     if (point != nullptr)
@@ -126,12 +130,12 @@ VToolCutSpline* VToolCutSpline::Create(const QPointer<DialogTool> &dialog, VMain
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolCutSpline* VToolCutSpline::Create(VToolCutSplineInitData &initData)
+VToolCutSpline* VToolCutSpline::Create(VToolCutInitData &initData)
 {
-    const auto spl = initData.data->GeometricObject<VAbstractCubicBezier>(initData.splineId);
+    const auto spl = initData.data->GeometricObject<VAbstractCubicBezier>(initData.baseCurveId);
 
     //Declare special variable "CurrentLength"
-    VCurveLength *length = new VCurveLength(initData.splineId, initData.splineId, spl.data(),
+    VCurveLength *length = new VCurveLength(initData.baseCurveId, initData.baseCurveId, spl.data(),
                                             *initData.data->GetPatternUnit());
     length->SetName(currentLength);
     initData.data->AddVariable(length);
@@ -147,17 +151,26 @@ VToolCutSpline* VToolCutSpline::Create(VToolCutSplineInitData &initData)
     auto spline1 = QSharedPointer<VAbstractBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
     auto spline2 = QSharedPointer<VAbstractBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
 
+    spline1->SetAliasSuffix(initData.aliasSuffix1);
+    spline2->SetAliasSuffix(initData.aliasSuffix2);
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
         initData.data->AddSpline(spline1, NULL_ID, initData.id);
         initData.data->AddSpline(spline2, NULL_ID, initData.id);
+
+        initData.data->RegisterUniqueName(spline1);
+        initData.data->RegisterUniqueName(spline2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
         initData.data->AddSpline(spline1, NULL_ID, initData.id);
         initData.data->AddSpline(spline2, NULL_ID, initData.id);
+
+        initData.data->RegisterUniqueName(spline1);
+        initData.data->RegisterUniqueName(spline2);
 
         if (initData.parse != Document::FullParse)
         {
@@ -211,12 +224,16 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     const QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    AddDependence(oldDependencies, curveCutId);
+    AddDependence(oldDependencies, baseCurveId);
     AddDependence(newDependencies, dialogTool->getSplineId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
+                                dialogTool->GetAliasSuffix1().isEmpty());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
+                                dialogTool->GetAliasSuffix2().isEmpty());
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -229,7 +246,7 @@ void VToolCutSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrLength, formula);
-    doc->SetAttribute(tag, AttrSpline, curveCutId);
+    doc->SetAttribute(tag, AttrSpline, baseCurveId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -238,7 +255,7 @@ void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
     VToolCut::ReadToolAttributes(domElement);
 
     formula = doc->GetParametrString(domElement, AttrLength, QString());
-    curveCutId = doc->GetParametrUInt(domElement, AttrSpline, NULL_ID_STR);
+    baseCurveId = doc->GetParametrUInt(domElement, AttrSpline, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,10 +266,10 @@ void VToolCutSpline::SetVisualization()
         VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(curveCutId);
+        visual->setObject1Id(baseCurveId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
 
-        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveCutId);
+        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
         visual->setLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
 
         visual->RefreshGeometry();
@@ -262,7 +279,7 @@ void VToolCutSpline::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolCutSpline::MakeToolTip() const
 {
-    const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(curveCutId);
+    const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(baseCurveId);
 
     const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
@@ -286,8 +303,8 @@ QString VToolCutSpline::MakeToolTip() const
             .arg(qApp->fromPixel(spline1.GetLength()))
             .arg(UnitsToStr(qApp->patternUnits(), true), curveStr + QLatin1String("2 ") + lengthStr)
             .arg(qApp->fromPixel(spline2.GetLength()))
-            .arg(curveStr + QLatin1String(" 1") + tr("label"), spline1.name(),
-                 curveStr + QLatin1String(" 2") + tr("label"), spline2.name());
+            .arg(curveStr + QLatin1String(" 1") + tr("label"), spline1.ObjectName(),
+                 curveStr + QLatin1String(" 2") + tr("label"), spline2.ObjectName());
 
     return toolTip;
 }

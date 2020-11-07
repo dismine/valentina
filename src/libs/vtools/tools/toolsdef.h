@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vinternalvariable_p.h
+ **  @file   toolsdef.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 8, 2014
+ **  @date   6 11, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,51 +25,29 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef TOOLSDEF_H
+#define TOOLSDEF_H
 
-#ifndef VINTERNALVARIABLE_P_H
-#define VINTERNALVARIABLE_P_H
+#include <QString>
+#include <QMetaType>
 
-#include <QSharedData>
-#include "../vmisc/def.h"
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/defglobal.h"
+class VGObject;
+class VContainer;
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Weffc++")
-QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
-
-// cppcheck-suppress copyCtorAndEqOperator
-class VInternalVariableData : public QSharedData
+struct SourceItem
 {
-public:
-    VInternalVariableData()
-    {}
-
-    VInternalVariableData(const VInternalVariableData &var)
-        :QSharedData(var),
-         type(var.type),
-         value(var.value),
-         name(var.name),
-         alias(var.alias)
-    {}
-
-    virtual ~VInternalVariableData();
-
-    VarType type{VarType::Unknown};
-
-    /** @brief value variable's value */
-    qreal   value{0};
-
-    QString name{};
+    quint32 id{0};
     QString alias{};
-
-private:
-    Q_DISABLE_ASSIGN(VInternalVariableData)
 };
 
-VInternalVariableData::~VInternalVariableData()
-{}
+Q_DECLARE_METATYPE(SourceItem)
+Q_DECLARE_TYPEINFO(SourceItem, Q_MOVABLE_TYPE);
 
-QT_WARNING_POP
+QVector<quint32> SourceToObjects(const QVector<SourceItem> &source);
 
-#endif // VINTERNALVARIABLE_P_H
+QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj);
+
+bool SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
+                      const QString &originAlias);
+
+#endif // TOOLSDEF_H

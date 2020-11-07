@@ -123,3 +123,15 @@ void VInternalVariable::SetType(const VarType &type)
 {
     d->type = type;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VInternalVariable::SetAlias(const QString &alias)
+{
+    d->alias = alias;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VInternalVariable::GetAlias() const
+{
+    return d->alias;
+}

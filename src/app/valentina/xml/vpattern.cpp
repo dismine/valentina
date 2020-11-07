@@ -2030,7 +2030,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
-        VToolCutSplineInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2040,7 +2040,9 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSpline::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2073,7 +2075,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
 
     try
     {
-        VToolCutSplinePathInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2083,7 +2085,9 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSplinePath::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2116,7 +2120,7 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
 
     try
     {
-        VToolCutArcInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2126,7 +2130,9 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2557,6 +2563,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolSpline *spl = VToolSpline::Create(initData);
 
@@ -2618,6 +2625,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         auto p1 = data->GeometricObject<VPointF>(point1);
         auto p2 = data->GeometricObject<VPointF>(point2);
@@ -2633,6 +2641,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetApproximationScale(approximationScale);
+        initData.spline->SetAliasSuffix(alias);
 
         VToolCubicBezier::Create(initData);
     }
@@ -2736,6 +2745,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -2828,6 +2838,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         QVector<VPointF> points;
 
@@ -2859,6 +2870,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         initData.path->SetColor(color);
         initData.path->SetPenStyle(penStyle);
         initData.path->SetApproximationScale(approximationScale);
+        initData.path->SetAliasSuffix(alias);
 
         VToolCubicBezierPath::Create(initData);
     }
@@ -2992,6 +3004,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3048,6 +3061,7 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolEllipticalArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3181,6 +3195,7 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArcWithLength::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

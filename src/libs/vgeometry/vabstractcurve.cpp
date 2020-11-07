@@ -604,6 +604,13 @@ qreal VAbstractCurve::LengthCurveDirectionArrow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetAliasSuffix(const QString &aliasSuffix)
+{
+    VGObject::SetAliasSuffix(aliasSuffix);
+    CreateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractCurve::PathLength(const QVector<QPointF> &path)
 {
     if (path.size() < 2)

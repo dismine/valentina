@@ -49,7 +49,12 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *a
     SCASSERT(arc != nullptr)
 
     SetType(VarType::ArcRadius);
-    SetName(radius_V + QString("%1").arg(arc->name()));
+    SetName(radius_V + arc->name());
+
+    if (not arc->GetAlias().isEmpty())
+    {
+        SetAlias(radius_V + arc->GetAlias());
+    }
     SetValue(FromPixel(arc->GetRadius(), patternUnit));
 }
 
@@ -62,6 +67,12 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipt
 
     SetType(VarType::ArcRadius);
     SetName(radius_V + QString("%1%2").arg(numberRadius).arg(elArc->name()));
+
+    if (not elArc->GetAlias().isEmpty())
+    {
+        SetAlias(radius_V + elArc->GetAlias());
+    }
+
     if (numberRadius == 1)
     {
         SetValue(FromPixel(elArc->GetRadius1(), patternUnit));

@@ -47,6 +47,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutsplinepath.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -91,6 +92,9 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, quint32 toolId,
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSplinePath::DeployFormulaTextEdit);
     connect(ui->comboBoxSplinePath, &QComboBox::currentTextChanged, this, &DialogCutSplinePath::SplinePathChanged);
+
+    connect(ui->lineEditAlias1, &QLineEdit::textEdited, this, &DialogCutSplinePath::ValidateAlias);
+    connect(ui->lineEditAlias2, &QLineEdit::textEdited, this, &DialogCutSplinePath::ValidateAlias);
 
     vis = new VisToolCutSplinePath(data);
 
@@ -209,6 +213,48 @@ void DialogCutSplinePath::SplinePathChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+
+    VSplinePath path1;
+    path1.SetAliasSuffix(GetAliasSuffix1());
+
+    VSplinePath path2;
+    path2.SetAliasSuffix(GetAliasSuffix2());
+
+    if (not GetAliasSuffix1().isEmpty() &&
+        (not rx.match(path1.GetAlias()).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix1() && not data->IsUnique(path1.GetAlias())) ||
+         path1.GetAlias() == path2.GetAlias()))
+    {
+        flagAlias1 = false;
+        ChangeColor(ui->labelAlias1, errorColor);
+    }
+    else
+    {
+        flagAlias1 = true;
+        ChangeColor(ui->labelAlias1, OkColor(this));
+    }
+
+    if (not GetAliasSuffix2().isEmpty() &&
+        (not rx.match(path2.GetAlias()).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(path2.GetAlias())) ||
+         path1.GetAlias() == path2.GetAlias()))
+    {
+        flagAlias2 = false;
+        ChangeColor(ui->labelAlias2, errorColor);
+    }
+    else
+    {
+        flagAlias2 = true;
+        ChangeColor(ui->labelAlias2, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::DeployFormulaTextEdit()
 {
     DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
@@ -278,4 +324,32 @@ void DialogCutSplinePath::SetNotes(const QString &notes)
 QString DialogCutSplinePath::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::SetAliasSuffix1(const QString &alias)
+{
+    originAliasSuffix1 = alias;
+    ui->lineEditAlias1->setText(originAliasSuffix1);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutSplinePath::GetAliasSuffix1() const
+{
+    return ui->lineEditAlias1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::SetAliasSuffix2(const QString &alias)
+{
+    originAliasSuffix2 = alias;
+    ui->lineEditAlias2->setText(originAliasSuffix2);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutSplinePath::GetAliasSuffix2() const
+{
+    return ui->lineEditAlias2->text();
 }

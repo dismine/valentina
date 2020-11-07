@@ -39,6 +39,7 @@
 
 #include "../vmisc/def.h"
 #include "dialogtool.h"
+#include "../../tools/toolsdef.h"
 
 namespace Ui
 {
@@ -68,8 +69,6 @@ public:
     quint32 GetRotationOrigPointId() const;
     void    SetRotationOrigPointId(const quint32 &value);
 
-    QVector<quint32> GetObjects() const;
-
     QString GetVisibilityGroupName() const;
     void    SetVisibilityGroupName(const QString &name);
 
@@ -85,6 +84,9 @@ public:
     virtual void SetGroupCategories(const QStringList &categories) override;
 
     virtual void ShowDialog(bool click) override;
+
+    QVector<SourceItem> GetSourceObjects() const;
+    void                SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -102,6 +104,9 @@ private slots:
 
     void SuffixChanged();
     void GroupNameChanged();
+
+    void ShowSourceDetails(int row);
+    void AliasChanged(const QString &text);
 
 protected:
     virtual void ShowVisualization() override;
@@ -130,7 +135,7 @@ private:
     int     formulaBaseHeightRotationAngle;
     int     formulaBaseHeightLength;
 
-    QList<quint32> objects;
+    QVector<SourceItem> sourceObjects{};
 
     bool stage1;
     bool stage2;
@@ -145,18 +150,18 @@ private:
     bool flagLength;
     bool flagName;
     bool flagGroupName;
+    bool flagAlias{true};
 
     QStringList m_groupTags{};
 
     void EvalAngle();
     void EvalRotationAngle();
     void EvalLength();
-};
 
-//---------------------------------------------------------------------------------------------------------------------
-inline bool DialogMove::IsValid() const
-{
-    return flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName;
-}
+    void FillSourceList();
+
+    void ValidateSourceAliases();
+    void SetAliasValid(quint32 id, bool valid);
+};
 
 #endif // DIALOGMOVING_H

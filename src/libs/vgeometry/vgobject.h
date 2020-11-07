@@ -78,6 +78,14 @@ public:
     quint32         id() const;
     virtual void    setId(const quint32 &id);
 
+    virtual void    SetAlias(const QString &alias);
+    QString         GetAlias() const;
+
+    virtual void    SetAliasSuffix(const QString &aliasSuffix);
+    QString         GetAliasSuffix() const;
+
+    QString ObjectName() const;
+
     quint32         getIdTool() const;
 
     virtual QJsonObject ToJson() const;

@@ -122,7 +122,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromA
     if (not success)
     {
         const QString errorMsg = tr("Error calculating point '%1'. Tangent to arc '%2' from point '%3' cannot be found")
-                .arg(initData.name, arc.name(), tPoint.name());
+                .arg(initData.name, arc.ObjectName(), tPoint.name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
                              qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }

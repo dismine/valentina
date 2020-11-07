@@ -93,6 +93,7 @@ void VToolEllipticalArc::setDialog()
     dialogTool->SetColor(elArc->GetColor());
     dialogTool->SetPenStyle(elArc->GetPenStyle());
     dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix(elArc->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,6 +126,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const QPointer<DialogTool> &dialo
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix = dialogTool->GetAliasSuffix();
     //initData.approximationScale = dialogTool->GetApproximationScale(); // For future use
 
     VToolEllipticalArc* point = Create(initData);
@@ -159,6 +161,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(VToolEllipticalArcInitData &initD
     elArc->SetColor(initData.color);
     elArc->SetPenStyle(initData.penStyle);
     elArc->SetApproximationScale(initData.approximationScale);
+    elArc->SetAliasSuffix(initData.aliasSuffix);
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -385,6 +388,8 @@ void VToolEllipticalArc::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
+                                dialogTool->GetAliasSuffix().isEmpty());
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -455,7 +460,7 @@ QString VToolEllipticalArc::MakeToolTip() const
             .arg(tr("End angle"))                       // 10
             .arg(elArc->GetEndAngle())                  // 11
             .arg(tr("Label"),                           // 12
-                 elArc->name(),                         // 13
+                 elArc->ObjectName(),                   // 13
                  tr("Rotation"))                        // 14
             .arg(elArc->GetRotationAngle());            // 15
     return toolTip;

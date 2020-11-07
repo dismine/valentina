@@ -153,6 +153,12 @@ VEllipticalArc VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const 
     VEllipticalArc elArc(VAbstractArc::GetCenter(), GetRadius1(), GetRadius2(), VAbstractArc::GetStartAngle(),
                          VAbstractArc::GetEndAngle(), GetRotationAngle());
     elArc.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
@@ -166,6 +172,12 @@ VEllipticalArc VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) c
     VEllipticalArc elArc(VAbstractArc::GetCenter(), GetRadius1(), GetRadius2(), VAbstractArc::GetStartAngle(),
                          VAbstractArc::GetEndAngle(), GetRotationAngle());
     elArc.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(not IsFlipped());
@@ -188,6 +200,12 @@ VEllipticalArc VEllipticalArc::Move(qreal length, qreal angle, const QString &pr
     VEllipticalArc elArc(oldCenter, GetRadius1(), GetRadius2(), VAbstractArc::GetStartAngle(),
                          VAbstractArc::GetEndAngle(), GetRotationAngle());
     elArc.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
@@ -397,6 +415,19 @@ void VEllipticalArc::CreateName()
     }
 
     setName(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(ELARC_ + aliasSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

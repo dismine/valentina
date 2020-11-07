@@ -115,6 +115,9 @@ private:
     template <typename T>
     void CurveAttributes(QDomElement &step, T* tool);
 
+    template <typename T>
+    void CutCurveAttributes(QDomElement &step, T* tool);
+
     QDomElement GroupOperationSource(VAbstractOperation *tool, quint32 id);
 };
 

@@ -181,7 +181,15 @@ QString VAbstractArc::NameForHistory(const QString &toolName) const
     {
         name += QString("_%1").arg(GetDuplicate());
     }
-    return name;
+
+    QString alias;
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        alias = QString("%1 %2").arg(toolName, GetAliasSuffix());
+    }
+
+    return not alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

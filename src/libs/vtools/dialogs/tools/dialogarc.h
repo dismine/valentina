@@ -76,6 +76,9 @@ public:
 
     void    SetNotes(const QString &notes);
     QString GetNotes() const;
+
+    void    SetAliasSuffix(const QString &alias);
+    QString GetAliasSuffix() const;
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -97,6 +100,9 @@ protected:
     virtual void  SaveData() override;
     virtual void  closeEvent(QCloseEvent *event) override;
     virtual bool  IsValid() const final;
+
+private slots:
+    void ValidateAlias();
 private:
     Q_DISABLE_COPY(DialogArc)
 
@@ -111,6 +117,8 @@ private:
 
     /** @brief flagF2 true if value of second angle is correct */
     bool          flagF2;
+
+    bool          flagAlias{true};
 
     /** @brief timerRadius timer of check formula of radius */
     QTimer        *timerRadius;
@@ -138,6 +146,8 @@ private:
     qreal         angleF1;
     qreal         angleF2;
 
+    QString       originAliasSuffix{};
+
     void          EvalRadius();
     void          EvalF();
 };
@@ -145,7 +155,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogArc::IsValid() const
 {
-    return flagRadius && flagF1 && flagF2;
+    return flagRadius && flagF1 && flagF2 && flagAlias;
 }
 
 #endif // DIALOGARC_H

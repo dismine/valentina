@@ -63,6 +63,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogsplinepath.h"
 #include "vtranslatevars.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -125,6 +126,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, quint32 toolId, QWidg
     connect(ui->pushButtonGrowLength1, &QPushButton::clicked, this, &DialogSplinePath::DeployLength1TextEdit);
     connect(ui->pushButtonGrowLength2, &QPushButton::clicked, this, &DialogSplinePath::DeployLength2TextEdit);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogSplinePath::ValidateAlias);
+
     vis = new VisToolSplinePath(data);
     auto path = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(path != nullptr)
@@ -166,6 +169,10 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    originAliasSuffix = path.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
 
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
     ChangeCurrentData(ui->comboBoxColor, path.GetColor());
@@ -488,6 +495,30 @@ void DialogSplinePath::FXLength2()
         MoveCursorToEnd(ui->plainTextEditLength2F);
     }
     delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+
+    VSplinePath tempPath = path;
+    tempPath.SetAliasSuffix(ui->lineEditAlias->text());
+
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(tempPath.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(tempPath.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -874,6 +905,7 @@ void DialogSplinePath::SavePath()
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    path.SetAliasSuffix(ui->lineEditAlias->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -945,7 +977,7 @@ bool DialogSplinePath::IsValid() const
         fLength2 = fLength2 && flagLength2.at(i);
     }
 
-    return fAngle1 && fAngle2 && fLength1 && fLength2 && flagError;
+    return fAngle1 && fAngle2 && fLength1 && fLength2 && flagError && flagAlias;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

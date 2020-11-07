@@ -91,6 +91,7 @@ void VToolArc::setDialog()
     dialogTool->SetPenStyle(arc->GetPenStyle());
     dialogTool->SetApproximationScale(arc->GetApproximationScale());
     dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix(arc->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,6 +123,7 @@ VToolArc* VToolArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScen
     initData.typeCreation = Source::FromGui;
     initData.approximationScale = dialogTool->GetApproximationScale();
     initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix = dialogTool->GetAliasSuffix();
 
     VToolArc* point = Create(initData);
     if (point != nullptr)
@@ -150,6 +152,7 @@ VToolArc* VToolArc::Create(VToolArcInitData &initData)
     arc->SetColor(initData.color);
     arc->SetPenStyle(initData.penStyle);
     arc->SetApproximationScale(initData.approximationScale);
+    arc->SetAliasSuffix(initData.aliasSuffix);
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -338,6 +341,8 @@ void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenci
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
+                                dialogTool->GetAliasSuffix().isEmpty());
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -398,6 +403,6 @@ QString VToolArc::MakeToolTip() const
             .arg(arc->GetStartAngle())
             .arg(tr("End angle"))
             .arg(arc->GetEndAngle())
-            .arg(tr("Label"), arc->name());
+            .arg(tr("Label"), arc->ObjectName());
     return toolTip;
 }

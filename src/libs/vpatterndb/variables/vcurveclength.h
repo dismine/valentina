@@ -46,7 +46,7 @@ public:
     VCurveCLength();
     VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *curve, CurveCLength cType,
                   Unit patternUnit);
-    VCurveCLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+    VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *baseCurve, const VSpline &spl,
                  CurveCLength cType, Unit patternUnit, qint32 segment);
     VCurveCLength(const VCurveCLength &var);
     VCurveCLength &operator=(const VCurveCLength &var);

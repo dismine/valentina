@@ -86,6 +86,17 @@ QWidget *VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionVie
     return d_ptr->editor;
 }
 
+bool VPE::VTextProperty::setEditorData(QWidget *editor)
+{
+    if (QPlainTextEdit* tmpWidget = qobject_cast<QPlainTextEdit*>(editor))
+    {
+        tmpWidget->setPlainText(d_ptr->VariantValue.toString());
+        return true;
+    }
+
+    return false;
+}
+
 QVariant VPE::VTextProperty::getEditorData(const QWidget *editor) const
 {
     const QPlainTextEdit* tmpEditor = qobject_cast<const QPlainTextEdit*>(editor);

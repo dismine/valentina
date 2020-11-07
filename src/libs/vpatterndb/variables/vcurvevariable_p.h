@@ -45,7 +45,6 @@ class VCurveVariableData : public QSharedData
 public:
 
     VCurveVariableData()
-        :id(NULL_ID), parentId(NULL_ID)
     {}
 
     VCurveVariableData(const quint32 &id, const quint32 &parentId)
@@ -53,13 +52,15 @@ public:
     {}
 
     VCurveVariableData(const VCurveVariableData &var)
-        :QSharedData(var), id(var.id), parentId(var.parentId)
+        :QSharedData(var),
+         id(var.id),
+         parentId(var.parentId)
     {}
 
     virtual  ~VCurveVariableData();
 
-    quint32 id;
-    quint32 parentId;
+    quint32 id{NULL_ID};
+    quint32 parentId{NULL_ID};
 
 private:
     Q_DISABLE_ASSIGN(VCurveVariableData)

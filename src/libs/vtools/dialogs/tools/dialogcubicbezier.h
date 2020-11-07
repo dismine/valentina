@@ -68,6 +68,9 @@ protected:
      */
     virtual void  SaveData() override;
     virtual bool  IsValid() const final;
+
+private slots:
+    void ValidateAlias();
 private:
     Q_DISABLE_COPY(DialogCubicBezier)
     Ui::DialogCubicBezier *ui;
@@ -78,6 +81,9 @@ private:
     qint32 newDuplicate;
 
     bool flagError;
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
 
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP2() const;
@@ -88,7 +94,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogCubicBezier::IsValid() const
 {
-    return flagError;
+    return flagError && flagAlias;
 }
 
 #endif // DIALOGCUBICBEZIER_H

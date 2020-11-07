@@ -105,8 +105,11 @@ public:
     static QPainterPath      ShowDirection(const QVector<DirectionArrow> &arrows, qreal width);
 
     static qreal LengthCurveDirectionArrow();
+
+    virtual void SetAliasSuffix(const QString &aliasSuffix) override;
 protected:
-    virtual void             CreateName() =0;
+    virtual void CreateName() =0;
+    virtual void CreateAlias() =0;
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 

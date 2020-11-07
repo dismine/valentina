@@ -242,6 +242,27 @@ quint32 VContainer::GetPieceForPiecePath(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::RegisterUniqueName(VGObject *obj)
+{
+    SCASSERT(obj != nullptr)
+    QSharedPointer<VGObject> pointer(obj);
+    RegisterUniqueName(pointer);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj)
+{
+    SCASSERT(not obj.isNull())
+
+    uniqueNames[d->nspace].insert(obj->name());
+
+    if (not obj->GetAlias().isEmpty())
+    {
+        uniqueNames[d->nspace].insert(obj->GetAlias());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddGObject add new GObject to container
  * @param obj new object
@@ -265,7 +286,8 @@ quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
         return NULL_ID;
     }
 
-    uniqueNames[d->nspace].insert(obj->name());
+    RegisterUniqueName(obj);
+
     const quint32 id = getNextId();
     obj->setId(id);
 
@@ -503,11 +525,11 @@ void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierP
     {
         const VSpline spl = curve->GetSpline(i);
 
-        AddVariable(new VCurveLength(id, parentId, curve->name(), spl, *GetPatternUnit(), i));
-        AddVariable(new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::StartAngle, i));
-        AddVariable(new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::EndAngle, i));
-        AddVariable(new VCurveCLength(id, parentId, curve->name(), spl, CurveCLength::C1, *GetPatternUnit(), i));
-        AddVariable(new VCurveCLength(id, parentId, curve->name(), spl, CurveCLength::C2, *GetPatternUnit(), i));
+        AddVariable(new VCurveLength(id, parentId, curve.data(), spl, *GetPatternUnit(), i));
+        AddVariable(new VCurveAngle(id, parentId, curve.data(), spl, CurveAngle::StartAngle, i));
+        AddVariable(new VCurveAngle(id, parentId, curve.data(), spl, CurveAngle::EndAngle, i));
+        AddVariable(new VCurveCLength(id, parentId, curve.data(), spl, CurveCLength::C1, *GetPatternUnit(), i));
+        AddVariable(new VCurveCLength(id, parentId, curve.data(), spl, CurveCLength::C2, *GetPatternUnit(), i));
     }
 }
 
