@@ -4,6 +4,7 @@
 - Improve editing a spline path through control points for locked angles.
 - [smart-pattern/valentina#73] Notes for tools.
 - Fix crash while synchronize measurements.
+- Object alias.
 
 # Version 0.7.36 October 24, 2020
 - [#892] Show tooltip for piece node point.
