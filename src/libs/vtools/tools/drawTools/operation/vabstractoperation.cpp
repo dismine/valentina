@@ -252,8 +252,8 @@ QVector<DestinationItem> VAbstractOperation::ExtractDestinationData(const QDomEl
                 {
                     DestinationItem d;
                     d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
-                    d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
+                    d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QChar('1')));
+                    d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QChar('1')));
                     d.showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
                     destination.append(d);
                 }
@@ -754,7 +754,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, dItem.id);
 
-        VAbstractSimple *obj = operatedObjects.value(dItem.id);
+        VAbstractSimple *obj = operatedObjects.value(dItem.id, nullptr);
 
         doc->SetAttributeOrRemoveIf(item, AttrMx, qApp->fromPixel(dItem.mx),
                                     obj && obj->GetType() != GOType::Point);

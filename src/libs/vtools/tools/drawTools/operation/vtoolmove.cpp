@@ -629,8 +629,6 @@ DestinationItem VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, q
     }
 
     DestinationItem item;
-    item.mx = INT_MAX;
-    item.my = INT_MAX;
     item.id = data->AddGObject(new Item(moved));
     return item;
 }

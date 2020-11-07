@@ -45,10 +45,10 @@
 
 struct DestinationItem
 {
-    quint32 id;
-    qreal mx;
-    qreal my;
-    bool showLabel;
+    quint32 id{NULL_ID};
+    qreal mx{1};
+    qreal my{1};
+    bool showLabel{true};
 };
 
 struct VAbstractOperationInitData : VDrawToolInitData

@@ -440,8 +440,6 @@ DestinationItem VToolRotation::CreateItem(quint32 idTool, const SourceItem &sIte
     }
 
     DestinationItem item;
-    item.mx = INT_MAX;
-    item.my = INT_MAX;
     item.id = data->AddGObject(new Item(rotated));
     return item;
 }
