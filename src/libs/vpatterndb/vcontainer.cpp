@@ -242,7 +242,7 @@ quint32 VContainer::GetPieceForPiecePath(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::RegisterUniqueName(VGObject *obj)
+void VContainer::RegisterUniqueName(VGObject *obj) const
 {
     SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
@@ -250,7 +250,7 @@ void VContainer::RegisterUniqueName(VGObject *obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj)
+void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj) const
 {
     SCASSERT(not obj.isNull())
 
