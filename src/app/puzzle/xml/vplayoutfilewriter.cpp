@@ -167,7 +167,7 @@ void VPLayoutFileWriter::WritePiece(VPPiece *piece)
     Q_UNUSED(piece);
 
     writeStartElement(ML::TagPiece);
-    SetAttribute(ML::AttrID, piece->GetUuid().toString());
+    SetAttribute(ML::AttrID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
     SetAttribute(ML::AttrMirrored, piece->GetPieceMirrored()); // TODO / Fixme get the right value
     SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine()); // TODO / Fixme get the right value

@@ -33,61 +33,19 @@
 #include <QPoint>
 #include <QTransform>
 
+#include "../vlayout/vlayoutpiece.h"
+
 class VPPieceList;
 
-class VPPiece : public QObject
+class VPPiece : public QObject, public VLayoutPiece
 {
     Q_OBJECT
 public:
     VPPiece();
+    VPPiece(VLayoutPiece layoutPiece);
+
     ~VPPiece();
 
-    /**
-     * @brief GetName Returns the name of the piece
-     * @return the piece's name
-     */
-    QString GetName() const;
-
-    /**
-     * @brief SetName Sets the piece's name to the given name
-     * @param name new name of the piece
-     */
-    void SetName(const QString &name);
-
-    /**
-     * @brief GetUuid Returns the uuid of the piece
-     * @return the uuid of the piece
-     */
-    QUuid GetUuid() const;
-
-    /**
-     * @brief SetUuid Sets the uuid of the piece to the given value
-     */
-    void SetUuid(const QUuid &uuid);
-
-    /**
-     * @brief GetCuttingLine Returns the vector points of the cutting line
-     * @return the vector points of the cutting line
-     */
-    QVector<QPointF> GetCuttingLine() const;
-
-    /**
-     * @brief SetCuttingLine Sets the vector points of the cutting line to the given value
-     * @param cuttingLine the new vector points for the cutting line
-     */
-    void SetCuttingLine(const QVector<QPointF> &cuttingLine);
-
-    /**
-     * @brief GetSeamLine Returns the vector points of the seam line
-     * @return the vector points of the seam line
-     */
-    QVector<QPointF> GetSeamLine() const;
-
-    /**
-     * @brief SetSeamLine Sets the vector points of the seam line to the given value
-     * @param seamLine the new vector points for the seam line
-     */
-    void SetSeamLine(const QVector<QPointF> &seamLine);
 
     /**
      * @brief GetShowSeamLine returns wether the seam line of the piece has to be shown or not
@@ -136,43 +94,6 @@ public:
      * @return the angle of rotation
      */
     qreal GetRotation();
-
-    /**
-     * @brief SetIsGrainlineEnabled Wether the piece has a grainline or not
-     * @param value true or false
-     */
-    void SetIsGrainlineEnabled(bool value);
-
-    /**
-     * @brief GetIsGrainlineEnabled Returns wether the grainline is enabled for this piece
-     * @return true if enabled
-     */
-    bool GetIsGrainlineEnabled();
-
-    /**
-     * @brief SetGrainlineAngle Sets the angle of the grainline
-     * @param value
-     */
-    void SetGrainlineAngle(qreal value);
-
-    /**
-     * @brief GetGrainlineAngle Returns the angle of the grainline for this piece
-     * @return the angle
-     */
-    qreal GetGrainlineAngle();
-
-    /**
-     * @brief SetGrainline Sets the grainline to the given vector of points
-     * @param grainline the grainline
-     */
-    void SetGrainline(QVector<QPointF> grainline);
-
-    /**
-     * @brief GetGrainline Returns the grainline for this piece
-     * @return the vector
-     */
-    QVector<QPointF> GetGrainline();
-
 
     /**
      * @brief SetIsSelected Sets wether the piece is selected
@@ -225,17 +146,17 @@ signals:
      */
     void PropertiesChanged();
 
+
+
 private:
     Q_DISABLE_COPY(VPPiece)
-    QUuid m_uuid{QUuid()};
-    QString m_name{QString()};
-    QVector<QPointF> m_cuttingLine{QVector<QPointF>()};
-    QVector<QPointF> m_seamLine{QVector<QPointF>()};
 
     QVector<QPointF> m_grainline{QVector<QPointF>()};
     bool m_isGrainlineEnabled{false};
     qreal m_grainlineAngle{0};
 
+    // for now separate the position of the piece to the matrix coming from vlayoutpiece
+    // because it's difficult to have the origin of the piece by (0,0)
     QTransform m_transform{QTransform()};
     // use a separate value for now because it's not easy to get the angle from the transform matrix
     qreal m_pieceAngle{0};

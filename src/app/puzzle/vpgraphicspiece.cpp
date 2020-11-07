@@ -74,7 +74,7 @@ void VPGraphicsPiece::Init()
     setCursor(QCursor(Qt::OpenHandCursor));
 
     // initialises the seam line
-    QVector<QPointF> seamLinePoints = m_piece->GetSeamLine();
+    QVector<QPointF> seamLinePoints = m_piece->GetMappedContourPoints();
     if(!seamLinePoints.isEmpty())
     {
         m_seamLine.moveTo(seamLinePoints.first());
@@ -83,7 +83,7 @@ void VPGraphicsPiece::Init()
     }
 
     // initiliases the cutting line
-    QVector<QPointF> cuttingLinepoints = m_piece->GetCuttingLine();
+    QVector<QPointF> cuttingLinepoints = m_piece->GetMappedSeamAllowancePoints();
     if(!cuttingLinepoints.isEmpty())
     {
         m_cuttingLine.moveTo(cuttingLinepoints.first());
@@ -92,12 +92,15 @@ void VPGraphicsPiece::Init()
     }
 
     // initialises the grainline
-    QVector<QPointF> grainLinepoints = m_piece->GetGrainline();
-    if(!grainLinepoints.isEmpty())
+    if(m_piece->IsGrainlineEnabled())
     {
-        m_grainline.moveTo(grainLinepoints.first());
-        for (int i = 1; i < grainLinepoints.size(); ++i)
-            m_grainline.lineTo(grainLinepoints.at(i));
+        QVector<QPointF> grainLinepoints = m_piece->GetGrainline();
+        if(!grainLinepoints.isEmpty())
+        {
+            m_grainline.moveTo(grainLinepoints.first());
+            for (int i = 1; i < grainLinepoints.size(); ++i)
+                m_grainline.lineTo(grainLinepoints.at(i));
+        }
     }
 
     // TODO : initialises the other elements labels, passmarks etc.
