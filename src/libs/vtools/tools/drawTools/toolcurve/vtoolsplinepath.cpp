@@ -358,7 +358,7 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
         VSpline prevSpline = splPath->GetSpline(indexSpline-1);
         if (qmu::QmuTokenParser::IsSingle(prevSpline.GetEndAngleFormula()))
         {
-            p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+            p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
         }
     }
     else
