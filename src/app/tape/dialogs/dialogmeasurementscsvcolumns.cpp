@@ -497,7 +497,7 @@ void DialogMeasurementsCSVColumns::InitColumnsMap()
     QSharedPointer<QxtCsvModel> csv = DialogMeasurementsCSVColumns::CSVModel();
     m_columnsMap.clear();
 
-    auto InitColumn = [this, csv](int column, bool forceSkip=false)
+    auto InitColumn = [this, csv](int column, int &index, bool forceSkip=false)
     {
         if (forceSkip)
         {
@@ -505,13 +505,14 @@ void DialogMeasurementsCSVColumns::InitColumnsMap()
         }
         else
         {
+            ++index;
             if (ColumnMandatory(column))
             {
-                m_columnsMap[column] = column;
+                m_columnsMap[column] = index;
             }
             else
             {
-                m_columnsMap[column] = csv->columnCount() >= column ? column : -1;
+                m_columnsMap[column] = csv->columnCount() >= index ? index : -1;
             }
         }
     };
@@ -519,23 +520,25 @@ void DialogMeasurementsCSVColumns::InitColumnsMap()
     if (m_type == MeasurementsType::Individual)
     {
         m_columnsMap.resize(static_cast<int>(IndividualMeasurementsColumns::LAST_DO_NOT_USE));
+        int index = -1;
 
         for(int column = 0; column < static_cast<int>(IndividualMeasurementsColumns::LAST_DO_NOT_USE); ++column)
         {
-            InitColumn(column);
+            InitColumn(column, index);
         }
     }
     else
     {
         m_columnsMap.resize(static_cast<int>(MultisizeMeasurementsColumns::LAST_DO_NOT_USE));
+        int index = -1;
 
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::Name));
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::ShiftB), m_dimensions.size() < 2);
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::ShiftC), m_dimensions.size() < 3);
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::FullName));
-        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::Description));
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::Name), index);
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::BaseValue), index);
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::ShiftA), index);
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::ShiftB), index, m_dimensions.size() < 2);
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::ShiftC), index, m_dimensions.size() < 3);
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::FullName), index);
+        InitColumn(static_cast<int>(MultisizeMeasurementsColumns::Description), index);
     }
 }
 
