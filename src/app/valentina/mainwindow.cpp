@@ -1977,12 +1977,12 @@ void MainWindow::SyncMeasurements()
     if (mChanges)
     {
         const QString path = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
+
+        // Temporarily remove the path to prevent infinite synchronization after a format conversion.
+        watcher->removePath(path);
+
         if(UpdateMeasurements(path, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
         {
-            if (not watcher->files().contains(path))
-            {
-                watcher->addPath(path);
-            }
             const QString msg = tr("Measurements have been synced");
             qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
             statusBar()->showMessage(msg, 5000);
@@ -1997,6 +1997,11 @@ void MainWindow::SyncMeasurements()
         else
         {
             qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't sync measurements.")));
+        }
+
+        if (not watcher->files().contains(path))
+        {
+            watcher->addPath(path);
         }
     }
 }
