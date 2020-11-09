@@ -579,7 +579,15 @@ void DialogMeasurementsCSVColumns::InitColumnsControls()
         else
         {
             control->blockSignals(false);
-            control->setCurrentIndex(0);
+
+            if (not ColumnMandatory(column))
+            {
+                control->setCurrentIndex(control->findData(-1));
+            }
+            else
+            {
+                control->setCurrentIndex(0);
+            }
         }
     };
 
