@@ -109,7 +109,6 @@ void DialogMeasurementsCSVColumns::showEvent(QShowEvent *event)
         ShowInputPreview();
         InitColumnsControls();
         RetranslateLabels();
-        InitColumnsControls();
         SetDefaultColumns();
         InitImportHeaders();
         ShowImportPreview();
