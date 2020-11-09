@@ -5,6 +5,7 @@
 - [smart-pattern/valentina#73] Notes for tools.
 - Fix crash while synchronize measurements.
 - Object alias.
+- Change value for an uninitialized local variable to NAN.
 
 # Version 0.7.36 October 24, 2020
 - [#892] Show tooltip for piece node point.

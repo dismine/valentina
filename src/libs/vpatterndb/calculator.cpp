@@ -109,7 +109,7 @@ qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
 
     if (a_szName.startsWith('#'))
     {
-        QSharedPointer<qreal> val(new qreal(0));
+        QSharedPointer<qreal> val(new qreal(std::numeric_limits<qreal>::quiet_NaN()));
         calc->m_varsValues.append(val);
         return val.data();
     }
