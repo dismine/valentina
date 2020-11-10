@@ -369,6 +369,9 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         qreal angle = selectedPiece->GetRotation();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+
+        // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+        ui->groupBoxLayoutControl->hide();
     }
     else
     {
@@ -415,6 +418,10 @@ void VPMainWindow::SetPropertyTabSheetData()
 
     // set the checkboxes
     SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->GetFocusedSheet()->GetStickyEdges());
+
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->pushButtonSheetRemoveUnusedLength->hide();
+    ui->groupBoxSheetControl->hide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -434,12 +441,15 @@ void VPMainWindow::SetPropertyTabLayoutData()
     // set controls
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, m_layout->GetWarningPiecesOutOfBound());
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
+
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->groupBoxLayoutControl->hide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabTilesData()
 {
-
+// TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
