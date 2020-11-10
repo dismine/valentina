@@ -628,6 +628,16 @@ DestinationItem VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, q
         moved.SetAliasSuffix(sItem.alias);
     }
 
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        moved.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        moved.SetColor(sItem.color);
+    }
+
     DestinationItem item;
     item.id = data->AddGObject(new Item(moved));
     return item;
@@ -670,6 +680,16 @@ void VToolMove::UpdateItem(quint32 idTool, const SourceItem &sItem, qreal angle,
     if (not sItem.alias.isEmpty())
     {
         moved.SetAliasSuffix(sItem.alias);
+    }
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        moved.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        moved.SetColor(sItem.color);
     }
 
     data->UpdateGObject(id, new Item(moved));

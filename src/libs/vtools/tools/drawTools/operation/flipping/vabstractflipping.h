@@ -93,6 +93,16 @@ DestinationItem VAbstractFlipping::CreateItem(quint32 idTool, const SourceItem &
         rotated.SetAliasSuffix(sItem.alias);
     }
 
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        rotated.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        rotated.SetColor(sItem.color);
+    }
+
     DestinationItem item;
     item.id = data->AddGObject(new Item(rotated));
     return item;
@@ -131,6 +141,16 @@ void VAbstractFlipping::UpdateItem(quint32 idTool, const SourceItem &sItem, cons
     if (not sItem.alias.isEmpty())
     {
         rotated.SetAliasSuffix(sItem.alias);
+    }
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        rotated.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        rotated.SetColor(sItem.color);
     }
 
     data->UpdateGObject(id, new Item(rotated));

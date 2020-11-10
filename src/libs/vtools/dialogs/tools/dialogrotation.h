@@ -94,6 +94,8 @@ private slots:
     void EvalAngle();
     void ShowSourceDetails(int row);
     void AliasChanged(const QString &text);
+    void PenStyleChanged();
+    void ColorChanged();
 
 protected:
     virtual void ShowVisualization() override;

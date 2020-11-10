@@ -38,6 +38,8 @@ struct SourceItem
 {
     quint32 id{0};
     QString alias{};
+    QString penStyle{};
+    QString color{};
 };
 
 Q_DECLARE_METATYPE(SourceItem)
@@ -49,5 +51,7 @@ QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QShared
 
 bool SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
                       const QString &originAlias);
+
+QMap<QString, QIcon> OperationLineStylesPics();
 
 #endif // TOOLSDEF_H

@@ -511,3 +511,16 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
     edit->setTabStopDistance(tabWidthChar * singleCharWidthDouble);
 #endif
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QIcon LineColor(int size, const QString &color)
+{
+    // On Mac pixmap should be little bit smaller.
+#if defined(Q_OS_MAC)
+    size -= 2; // Two pixels should be enough.
+#endif //defined(Q_OS_MAC)
+
+    QPixmap pix(size, size);
+    pix.fill(QColor(color));
+    return QIcon(pix);
+}

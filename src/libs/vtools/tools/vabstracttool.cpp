@@ -273,13 +273,25 @@ int VAbstractTool::ConfirmDeletion()
 //---------------------------------------------------------------------------------------------------------------------
 const QStringList VAbstractTool::Colors()
 {
-    const QStringList colors = QStringList() << ColorBlack          << ColorGreen           << ColorBlue
-                                             << ColorDarkRed        << ColorDarkGreen       << ColorDarkBlue
-                                             << ColorYellow         << ColorLightSalmon     << ColorGoldenRod
-                                             << ColorOrange         << ColorDeepPink        << ColorViolet
-                                             << ColorDarkViolet     << ColorMediumSeaGreen  << ColorLime
-                                             << ColorDeepSkyBlue    << ColorCornFlowerBlue;
-    return colors;
+    return QStringList {
+        ColorBlack,
+        ColorGreen,
+        ColorBlue,
+        ColorDarkRed,
+        ColorDarkGreen,
+        ColorDarkBlue,
+        ColorYellow,
+        ColorLightSalmon,
+        ColorGoldenRod,
+        ColorOrange,
+        ColorDeepPink,
+        ColorViolet,
+        ColorDarkViolet,
+        ColorMediumSeaGreen,
+        ColorLime,
+        ColorDeepSkyBlue,
+        ColorCornFlowerBlue
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------

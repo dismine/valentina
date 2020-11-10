@@ -184,6 +184,8 @@
                                     <xs:complexType>
                                       <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                       <xs:attribute name="alias" type="xs:string"/>
+                                      <xs:attribute name="color" type="operationColors"/>
+                                      <xs:attribute name="penStyle" type="operationPenStyle"/> 
                                     </xs:complexType>
                                   </xs:element>
                                 </xs:sequence>
@@ -821,8 +823,41 @@
       <xs:enumeration value="cornflowerblue"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="operationColors">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default"/>
+      <xs:enumeration value="black"/>
+      <xs:enumeration value="green"/>
+      <xs:enumeration value="blue"/>
+      <xs:enumeration value="darkRed"/>
+      <xs:enumeration value="darkGreen"/>
+      <xs:enumeration value="darkBlue"/>
+      <xs:enumeration value="yellow"/>
+      <xs:enumeration value="lightsalmon"/>
+      <xs:enumeration value="goldenrod"/>
+      <xs:enumeration value="orange"/>
+      <xs:enumeration value="deeppink"/>
+      <xs:enumeration value="violet"/>
+      <xs:enumeration value="darkviolet"/>
+      <xs:enumeration value="mediumseagreen"/>
+      <xs:enumeration value="lime"/>
+      <xs:enumeration value="deepskyblue"/>
+      <xs:enumeration value="cornflowerblue"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="linePenStyle">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="none"/>
+      <xs:enumeration value="hair"/>
+      <xs:enumeration value="dashLine"/>
+      <xs:enumeration value="dotLine"/>
+      <xs:enumeration value="dashDotLine"/>
+      <xs:enumeration value="dashDotDotLine"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="operationPenStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default"/>
       <xs:enumeration value="none"/>
       <xs:enumeration value="hair"/>
       <xs:enumeration value="dashLine"/>

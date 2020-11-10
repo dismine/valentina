@@ -6,6 +6,7 @@
 - Fix crash while synchronize measurements.
 - Object alias.
 - Change value for an uninitialized local variable to NAN.
+- Independent pen style and color after a group operation. 
 
 # Version 0.7.36 October 24, 2020
 - [#892] Show tooltip for piece node point.

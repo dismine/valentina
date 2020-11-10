@@ -59,6 +59,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyline.h"
+#include "../../tools/drawTools/operation/vabstractoperation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -78,6 +79,8 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
 
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, OperationLineStylesPics(), TypeLineDefault);
+    FillComboBoxLineColors(ui->comboBoxColor, VAbstractOperation::OperationColorsList());
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByLine::GroupNameChanged);
@@ -85,6 +88,10 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
             this, &DialogFlippingByLine::PointChanged);
     connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByLine::PointChanged);
+    connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogFlippingByLine::PenStyleChanged);
+    connect(ui->comboBoxColor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogFlippingByLine::ColorChanged);
 
     vis = new VisToolFlippingByLine(data);
 
@@ -399,6 +406,8 @@ void DialogFlippingByLine::GroupNameChanged()
 void DialogFlippingByLine::ShowSourceDetails(int row)
 {
     ui->lineEditAlias->setDisabled(true);
+    ui->comboBoxPenStyle->setDisabled(true);
+    ui->comboBoxColor->setDisabled(true);
 
     if (ui->listWidget->count() == 0)
     {
@@ -409,15 +418,70 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
 
     const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
 
-    ui->labelAlias->setText(obj->getType() == GOType::Point ? tr("Label:") : tr("Alias:"));
+    if (obj->getType() == GOType::Point)
+    {
+        ui->labelAlias->setText(tr("Label:"));
+
+        ui->comboBoxPenStyle->blockSignals(true);
+        ui->comboBoxColor->blockSignals(true);
+
+        ui->comboBoxPenStyle->setCurrentIndex(-1);
+        ui->comboBoxColor->setCurrentIndex(-1);
+
+        ui->comboBoxPenStyle->blockSignals(false);
+        ui->comboBoxColor->blockSignals(false);
+    }
+    else
+    {
+        ui->labelAlias->setText(tr("Alias:"));
+
+        auto SetValue = [sourceItem](QComboBox *box, const QString &value, const QString &def)
+        {
+            box->blockSignals(true);
+
+            int index = box->findData(value);
+            if (index != -1)
+            {
+                box->setCurrentIndex(index);
+            }
+            else
+            {
+                index = box->findData(def);
+                box->setCurrentIndex(index);
+            }
+
+            box->blockSignals(false);
+        };
+
+        SetValue(ui->comboBoxPenStyle, sourceItem.penStyle, TypeLineDefault);
+
+        if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
+        {
+            const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
+            int index = ui->comboBoxPenStyle->currentIndex();
+            ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
+        }
+
+        SetValue(ui->comboBoxColor, sourceItem.color, ColorDefault);
+
+        if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
+        {
+            const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
+            int index = ui->comboBoxColor->currentIndex();
+            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->iconSize().height(), curve->GetColor()));
+        }
+
+        ui->comboBoxPenStyle->setEnabled(true);
+        ui->comboBoxColor->setEnabled(true);
+    }
 
     ui->lineEditAlias->blockSignals(true);
     ui->lineEditAlias->setText(sourceItem.alias);
     ui->lineEditAlias->setEnabled(true);
     ui->lineEditAlias->blockSignals(false);
 
-    SetAliasValid(sourceItem.id, SourceAliasValid(sourceItem, obj, data,
-                                                  OriginAlias(sourceItem.id, sourceObjects, obj)));
+    SetAliasValid(sourceItem.id,
+                  SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,6 +500,38 @@ void DialogFlippingByLine::AliasChanged(const QString &text)
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
 
         ValidateSourceAliases();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::PenStyleChanged()
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.penStyle = GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineDefault);
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::ColorChanged()
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.color = GetComboBoxCurrentData(ui->comboBoxColor, ColorDefault);
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
     }
 }
 

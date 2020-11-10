@@ -98,6 +98,8 @@ public:
     static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
     static QVector<SourceItem> ExtractSourceData(const QDomElement &domElement);
     static QVector<DestinationItem> ExtractDestinationData(const QDomElement &domElement);
+
+    static QMap<QString, QString> OperationColorsList();
 public slots:
     virtual void FullUpdateFromFile() override;
 

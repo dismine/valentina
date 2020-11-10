@@ -28,6 +28,11 @@
 
 #include "toolsdef.h"
 
+#include <QBrush>
+#include <QIcon>
+#include <QPainter>
+#include <QPen>
+#include <QPixmap>
 #include <QRegularExpression>
 #include <QVector>
 
@@ -102,4 +107,12 @@ QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QShared
     }
 
     return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QIcon> OperationLineStylesPics()
+{
+    QMap<QString, QIcon> map = LineStylesPics();
+    map.insert(TypeLineDefault, QIcon());
+    return map;
 }

@@ -1158,6 +1158,20 @@ QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint
         {
             SetAttribute(node, AttrAlias, obj->GetAlias());
         }
+
+        if (obj->getType() != GOType::Point)
+        {
+            if (item.penStyle != TypeLineDefault)
+            {
+                SetAttribute(node, AttrPenStyle, item.penStyle);
+            }
+
+            if (item.color != ColorDefault)
+            {
+                SetAttribute(node, AttrColor, item.color);
+            }
+        }
+
         nodes.appendChild(node);
     }
 

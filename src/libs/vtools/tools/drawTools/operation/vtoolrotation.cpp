@@ -439,6 +439,16 @@ DestinationItem VToolRotation::CreateItem(quint32 idTool, const SourceItem &sIte
         rotated.SetAliasSuffix(sItem.alias);
     }
 
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        rotated.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        rotated.SetColor(sItem.color);
+    }
+
     DestinationItem item;
     item.id = data->AddGObject(new Item(rotated));
     return item;
@@ -505,6 +515,16 @@ void VToolRotation::UpdateItem(quint32 idTool, const SourceItem &sItem, const QP
     if (not sItem.alias.isEmpty())
     {
         rotated.SetAliasSuffix(sItem.alias);
+    }
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        rotated.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        rotated.SetColor(sItem.color);
     }
 
     data->UpdateGObject(id, new Item(rotated));

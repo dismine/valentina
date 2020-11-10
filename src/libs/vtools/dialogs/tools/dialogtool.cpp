@@ -270,7 +270,7 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
  * @brief FillComboBoxTypeLine fill comboBox list of type lines
  * @param box comboBox
  */
-void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const
+void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics, const QString &def) const
 {
     SCASSERT(box != nullptr)
     QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
@@ -280,7 +280,7 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
         ++i;
     }
 
-    const int index = box->findData(QVariant(TypeLineLine));
+    const int index = box->findData(QVariant(def));
     if (index != -1)
     {
         box->setCurrentIndex(index);
@@ -290,22 +290,20 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 {
+    FillComboBoxLineColors(box, VAbstractTool::ColorsList());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxLineColors(QComboBox *box, const QMap<QString, QString> &lineColors) const
+{
     SCASSERT(box != nullptr)
 
     box->clear();
-    int size = box->iconSize().height();
-    // On Mac pixmap should be little bit smaller.
-#if defined(Q_OS_MAC)
-    size -= 2; // Two pixels should be enough.
-#endif //defined(Q_OS_MAC)
 
-    const QMap<QString, QString> map = VAbstractTool::ColorsList();
-    QMap<QString, QString>::const_iterator i = map.constBegin();
-    while (i != map.constEnd())
+    QMap<QString, QString>::const_iterator i = lineColors.constBegin();
+    while (i != lineColors.constEnd())
     {
-        QPixmap pix(size, size);
-        pix.fill(QColor(i.key()));
-        box->addItem(QIcon(pix), i.value(), QVariant(i.key()));
+        box->addItem(LineColor(box->iconSize().height(), i.key()), i.value(), QVariant(i.key()));
         ++i;
     }
 }

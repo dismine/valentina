@@ -208,6 +208,8 @@ QVector<SourceItem> VAbstractOperation::ExtractSourceData(const QDomElement &dom
                     SourceItem item;
                     item.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
                     item.alias = VDomDocument::GetParametrEmptyString(element, AttrAlias);
+                    item.penStyle = VDomDocument::GetParametrString(element, AttrPenStyle, TypeLineDefault);
+                    item.color = VDomDocument::GetParametrString(element, AttrColor, ColorDefault);
                     source.append(item);
                 }
             }
@@ -248,6 +250,14 @@ QVector<DestinationItem> VAbstractOperation::ExtractDestinationData(const QDomEl
     }
 
     return destination;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> VAbstractOperation::OperationColorsList()
+{
+    QMap<QString, QString> list = VAbstractTool::ColorsList();
+    list.insert(ColorDefault, '<' + tr("default") + '>');
+    return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -728,6 +738,8 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, sItem.id);
         doc->SetAttributeOrRemoveIf(item, AttrAlias, sItem.alias, sItem.alias.isEmpty());
+        doc->SetAttributeOrRemoveIf(item, AttrPenStyle, sItem.penStyle, sItem.penStyle == TypeLineDefault);
+        doc->SetAttributeOrRemoveIf(item, AttrColor, sItem.color, sItem.color == ColorDefault);
         tagObjects.appendChild(item);
     }
     tag.appendChild(tagObjects);
