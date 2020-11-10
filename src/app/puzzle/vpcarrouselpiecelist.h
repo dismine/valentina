@@ -38,7 +38,7 @@ class VPCarrouselPieceList : public QListWidget
 {
     Q_OBJECT
 public:
-    VPCarrouselPieceList(QWidget* parent);
+    explicit VPCarrouselPieceList(QWidget* parent);
     ~VPCarrouselPieceList();
 
     /**

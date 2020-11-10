@@ -41,7 +41,7 @@ public:
     ~VPGraphicsSheet();
 
     QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 
     QRectF GetSheetRect() const;

@@ -42,7 +42,7 @@ class VPPiece : public QObject, public VLayoutPiece
     Q_OBJECT
 public:
     VPPiece();
-    VPPiece(VLayoutPiece layoutPiece);
+    explicit VPPiece(VLayoutPiece layoutPiece);
 
     ~VPPiece();
 
