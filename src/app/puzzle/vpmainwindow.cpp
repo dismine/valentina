@@ -356,6 +356,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         // set the value to the current piece
         ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
+        ui->plainTextEditCurrentPieceUUID->setPlainText(selectedPiece->GetUUID().toString());
 
         ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
         ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
