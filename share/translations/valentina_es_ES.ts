@@ -576,11 +576,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -707,10 +707,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -830,10 +834,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -957,11 +965,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -1028,10 +1036,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1083,10 +1095,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1190,11 +1206,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -1273,10 +1289,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1356,10 +1380,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1439,10 +1471,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1744,7 +1784,7 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de dimesion</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1756,7 +1796,7 @@
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensión:</translation>
     </message>
 </context>
 <context>
@@ -1911,14 +1951,6 @@
         <translation>Nombre del archivo de medidas</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Tamaño</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Altura</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation>Extensión de medidas</translation>
     </message>
@@ -2028,47 +2060,47 @@
     </message>
     <message>
         <source>Measurements units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades de medidas</translation>
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades del patrón</translation>
     </message>
     <message>
         <source>Size units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades de Talla</translation>
     </message>
     <message>
         <source>Customer birth date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha nacimiento del cliente</translation>
     </message>
     <message>
         <source>Customer email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo electrónico del cliente</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Medida: %1</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Talla</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cadera</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cintura</translation>
     </message>
 </context>
 <context>
@@ -2302,10 +2334,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2413,11 +2449,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -2643,10 +2679,54 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo lápiz:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Color:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Listo</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2718,10 +2798,62 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo lápiz:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Color:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Listo</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid line points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid first line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2840,11 +2972,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -3703,11 +3835,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -3770,11 +3902,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -3897,11 +4029,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -4032,7 +4164,7 @@ Aplicar características de todos modos?</translation>
     <name>DialogMeasurementsCSVColumns</name>
     <message>
         <source>Setup columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar columnas</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -4040,15 +4172,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Columnas</translation>
     </message>
     <message>
         <source>Full name:</source>
@@ -4060,7 +4192,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Name</source>
@@ -4076,27 +4208,27 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Saltar</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambio (%1)*:</translation>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>La ruta del archivo está vacía</translation>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficientes columnas</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficientes datos para importar</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, seleccione un número único para cada columna</translation>
     </message>
     <message>
         <source>Name</source>
@@ -4126,7 +4258,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Shift (%1):</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cambio (%1)*:</translation>
     </message>
 </context>
 <context>
@@ -4221,10 +4353,62 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo lápiz:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Color:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Listo</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid length formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4430,11 +4614,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -4692,7 +4876,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha nacimiento del cliente:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
@@ -4700,15 +4884,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo electrónico del cliente:</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>El correo electrónico del cliente a partir de medidas individuales</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>La fecha de nacimiento del cliente a partir de medidas individuales</translation>
     </message>
 </context>
 <context>
@@ -5407,11 +5591,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5506,11 +5690,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5601,11 +5785,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5660,11 +5844,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5727,11 +5911,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5842,11 +6026,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5889,11 +6073,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -5926,23 +6110,23 @@ Aplicar características de todos modos?</translation>
     <name>DialogRestrictDimension</name>
     <message>
         <source>Restrict dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Restringir dimensión</translation>
     </message>
     <message>
         <source>Dimension A:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensión A:</translation>
     </message>
     <message>
         <source>Restriction</source>
-        <translation type="unfinished"></translation>
+        <translation>Restricción</translation>
     </message>
     <message>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Min:</translation>
     </message>
     <message>
         <source>Max:</source>
-        <translation type="unfinished"></translation>
+        <translation>Max:</translation>
     </message>
 </context>
 <context>
@@ -6025,10 +6209,62 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo lápiz:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Color:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Listo</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6469,31 +6705,31 @@ Aplicar características de todos modos?</translation>
     <name>DialogSetupMultisize</name>
     <message>
         <source>Setup multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar medidas multitallas</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar circunferencia completa</translation>
     </message>
     <message>
         <source>Min value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor min:</translation>
     </message>
     <message>
         <source>Minimal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor mínimo descrito en la columna</translation>
     </message>
     <message>
         <source>Max value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor max:</translation>
     </message>
     <message>
         <source>Maximal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor máximo descrito en la columna</translation>
     </message>
     <message>
         <source>Step:</source>
-        <translation type="unfinished"></translation>
+        <translation>Paso:</translation>
     </message>
     <message>
         <source>Single-step between the column values</source>
@@ -6525,7 +6761,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Height</source>
@@ -6540,12 +6776,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cintura</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cadera</translation>
     </message>
 </context>
 <context>
@@ -6656,11 +6892,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -6699,11 +6935,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -6846,10 +7082,14 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7001,10 +7241,14 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7189,11 +7433,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -7300,11 +7544,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Herramienta</translation>
+        <translation>Herramienta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
 </context>
 <context>
@@ -11275,7 +11519,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensión:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
@@ -11295,7 +11539,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar circunferencia completa</translation>
     </message>
     <message>
         <source>Restrict second dimension</source>
@@ -11307,7 +11551,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de dimesion</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
@@ -11339,7 +11583,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambio (%1)*:</translation>
     </message>
     <message>
         <source>%1 shift</source>
@@ -11878,13 +12122,6 @@ Quieres guardar los cambios?</translation>
     </message>
 </context>
 <context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Esta compilación de prueba es anterior a %1 días. Para proporcionarle un servicio de mejor calidad, restringimos la duración de la vida útil, puede usar una compilación de prueba. Para continuar usando Tape, actualice a la compilación de prueba más reciente. La aplicación se cerrará.</translation>
-    </message>
-</context>
-<context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
@@ -12178,12 +12415,12 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cintura</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cadera</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
@@ -12402,6 +12639,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Visibility group</source>
         <translation>Grupo de visibilidad</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13438,11 +13679,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadera</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Cintura</translation>
     </message>
 </context>
 <context>
@@ -14865,7 +15106,19 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Notas:</translation>
+        <translation>Notas:</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16618,13 +16871,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Categories: %1.</source>
         <translation>Categoría: %1.</translation>
-    </message>
-</context>
-<context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Esta compilación de prueba es anterior a %1 días. Para proporcionarle un servicio de mejor calidad, restringimos la duración de la vida útil, puede usar una compilación de prueba. Para continuar usando Valentina, actualice a la versión de prueba más reciente. La aplicación se cerrará.</translation>
     </message>
 </context>
 <context>

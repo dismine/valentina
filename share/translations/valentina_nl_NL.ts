@@ -576,11 +576,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -707,10 +707,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -830,10 +834,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -957,11 +965,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -1028,10 +1036,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1083,10 +1095,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1190,11 +1206,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -1273,10 +1289,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1356,10 +1380,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1439,10 +1471,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1756,7 +1796,7 @@
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished">Dimensie:</translation>
+        <translation>Dimensie:</translation>
     </message>
 </context>
 <context>
@@ -1911,14 +1951,6 @@
         <translation>Maten bestandsnaam</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Maat</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Hoogte</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation>Maten uitbreiding</translation>
     </message>
@@ -2047,36 +2079,28 @@
         <translation>Klant e-mail</translation>
     </message>
     <message>
-        <source>Hip</source>
-        <translation type="vanished">Heup</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <translation type="vanished">Taille</translation>
-    </message>
-    <message>
         <source>Measurement: %1</source>
         <translation>Maat: %1</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Hoogte</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Maat</translation>
+        <translation>Maat</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Heup</translation>
+        <translation>Heup</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Taille</translation>
+        <translation>Taille</translation>
     </message>
 </context>
 <context>
@@ -2310,10 +2334,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2421,11 +2449,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -2651,10 +2679,54 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Klaar</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2726,10 +2798,62 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Klaar</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid line points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid first line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2848,11 +2972,11 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -3712,11 +3836,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -3779,11 +3903,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -3906,11 +4030,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -4230,10 +4354,62 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Klaar</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid length formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4439,11 +4615,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5416,11 +5592,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5515,11 +5691,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5610,11 +5786,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5669,11 +5845,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5736,11 +5912,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5851,11 +6027,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -5898,11 +6074,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -6034,10 +6210,62 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Klaar</translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6665,11 +6893,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -6708,11 +6936,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -6855,10 +7083,14 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7010,10 +7242,14 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7198,11 +7434,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -7309,11 +7545,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>
@@ -11885,13 +12121,6 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Deze testversie is ouder dan %1 dagen. Om je een betere dienst te verlenen beperken we de levensduur van een testversie. Om Tape verder te gebruiken, vragen we jou om bij te werken naar een nieuwere testversie. Het programma wordt nu gestopt.</translation>
-    </message>
-</context>
-<context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
@@ -12409,6 +12638,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Visibility group</source>
         <translation>Zichtbaarheid groep</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14872,7 +15105,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Notities:</translation>
+        <translation>Notities:</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16625,13 +16870,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Categories: %1.</source>
         <translation>Categoriëen: %1.</translation>
-    </message>
-</context>
-<context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Deze testversie is ouder dan %1 dagen. Om je een betere dienst te verlenen beperken we de levensduur van een testversie. Om Tape verder te gebruiken, vragen we jou om bij te werken naar een nieuwere testversie. Het programma wordt nu gestopt.</translation>
     </message>
 </context>
 <context>

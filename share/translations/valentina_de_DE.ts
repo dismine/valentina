@@ -576,7 +576,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -707,10 +707,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -830,10 +834,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -957,7 +965,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1028,10 +1036,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1083,10 +1095,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1190,7 +1206,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1273,10 +1289,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1356,10 +1380,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1439,10 +1471,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1911,14 +1951,6 @@
         <translation>Maßdateiname</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Größe</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Höhe</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation>Messwerterweiterung</translation>
     </message>
@@ -2053,12 +2085,12 @@
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Höhe</translation>
+        <translation>Höhe</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2302,10 +2334,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2413,7 +2449,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2643,10 +2679,54 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Zeichenstil:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Farbe:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Invalid point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2718,10 +2798,62 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Zeichenstil:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Farbe:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Invalid line points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid first line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2840,7 +2972,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3703,7 +3835,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3770,7 +3902,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3897,7 +4029,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4221,10 +4353,62 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Zeichenstil:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Farbe:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid length formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4430,7 +4614,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5407,7 +5591,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5506,7 +5690,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5601,7 +5785,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5660,7 +5844,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5727,7 +5911,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5842,7 +6026,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5889,7 +6073,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6025,11 +6209,63 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Zeichenstil:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Farbe:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
     </message>
 </context>
 <context>
@@ -6656,7 +6892,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6699,7 +6935,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6846,10 +7082,14 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7001,10 +7241,14 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7189,7 +7433,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7300,7 +7544,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Werkzeug</translation>
+        <translation>Werkzeug</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -11876,13 +12120,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Diese Testversion ist älter als %1 Tage. Um Ihnen eine bessere Qualität bieten zu können, beschränken wir die Dauer der Nutzung einer Testversion. Um weiterhin Tape verwenden zu können, aktualisieren Sie bitte auf eine neuere Testversion. Die Anwendung wird geschloßen.</translation>
-    </message>
-</context>
-<context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
@@ -12398,6 +12635,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Visibility group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14825,7 +15066,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Notiz:</translation>
+        <translation>Notiz:</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

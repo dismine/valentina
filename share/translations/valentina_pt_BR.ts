@@ -576,7 +576,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -707,10 +707,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -830,10 +834,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -957,7 +965,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1028,10 +1036,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1083,10 +1095,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1190,7 +1206,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1273,10 +1289,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1356,10 +1380,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1439,10 +1471,18 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1911,14 +1951,6 @@
         <translation>Nome do arquivo de medidas</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Tamanho</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Altura</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation>Extensão de medidas</translation>
     </message>
@@ -2053,12 +2085,12 @@
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2302,10 +2334,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2413,7 +2449,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2643,10 +2679,54 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo Caneta:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Cor:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Padrão</translation>
+    </message>
+    <message>
+        <source>Invalid point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2718,10 +2798,62 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo Caneta:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Cor:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Padrão</translation>
+    </message>
+    <message>
+        <source>Invalid line points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid first line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2840,7 +2972,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3700,7 +3832,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3767,7 +3899,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3894,7 +4026,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4218,10 +4350,62 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo Caneta:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Cor:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Padrão</translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid length formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4427,7 +4611,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5404,7 +5588,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5503,7 +5687,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5598,7 +5782,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5657,7 +5841,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5724,7 +5908,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5839,7 +6023,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5886,7 +6070,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6022,11 +6206,63 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Estilo Caneta:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Cor:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Padrão</translation>
     </message>
 </context>
 <context>
@@ -6649,7 +6885,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6692,7 +6928,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6839,10 +7075,14 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6994,10 +7234,14 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7182,7 +7426,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7293,7 +7537,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Ferramenta</translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -12368,6 +12612,10 @@ Deseja salvar suas mudanças?</translation>
         <source>Visibility group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -14782,7 +15030,19 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Notas:</translation>
+        <translation>Notas:</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
