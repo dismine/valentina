@@ -151,6 +151,9 @@ public:
     void               UpdateId(quint32 newId) const;
     static void        UpdateId(quint32 newId, const QString &nspace);
 
+    void               RegisterUniqueName(VGObject *obj) const;
+    void               RegisterUniqueName(const QSharedPointer<VGObject> &obj) const;
+
     quint32            AddGObject(VGObject *obj);
     quint32            AddGObject(const QSharedPointer<VGObject> &obj);
     quint32            AddPiece(const VPiece &detail);
@@ -190,13 +193,6 @@ public:
     void               ClearUniqueIncrementNames() const;
     void               ClearExceptUniqueIncrementNames() const;
 
-    void               SetSize(qreal size) const;
-    void               SetHeight(qreal height) const;
-    qreal              size() const;
-    static qreal       size(const QString &nspace);
-    qreal              height() const;
-    static qreal       height(const QString &nspace);
-
     void               RemoveIncrement(const QString& name);
 
     const QHash<quint32, QSharedPointer<VGObject> >         *CalculationGObjects() const;
@@ -227,14 +223,15 @@ private:
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
     static QMap<QString, quint32> _id;
-    static QMap<QString, qreal>   _size;
-    static QMap<QString, qreal>   _height;
     static QMap<QString, QSet<QString>> uniqueNames;
     static QMap<QString, quint32> copyCounter;
 
     QSharedDataPointer<VContainerData> d;
 
     void AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId = NULL_ID);
+
+    template <typename T>
+    void AddVariable(const QSharedPointer<T> &var, const QString &name);
 
     template <class T>
     uint qHash( const QSharedPointer<T> &p );
@@ -343,25 +340,42 @@ template <typename T>
 void VContainer::AddVariable(const QSharedPointer<T> &var)
 {
     SCASSERT(not var->GetName().isEmpty())
-    if (d->variables.contains(var->GetName()))
+    AddVariable(var, var->GetName());
+
+    if (not var->GetAlias().isEmpty())
     {
-        if (d->variables.value(var->GetName())->GetType() == var->GetType())
+        AddVariable(var, var->GetAlias());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
+{
+    if (name.isEmpty())
+    {
+        return;
+    }
+
+    if (d->variables.contains(name))
+    {
+        if (d->variables.value(name)->GetType() == var->GetType())
         {
-            QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(var->GetName()));
+            QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(name));
             if (v.isNull())
             {
-                throw VExceptionBadId(tr("Can't cast object."), var->GetName());
+                throw VExceptionBadId(tr("Can't cast object."), name);
             }
             *v = *var;
         }
         else
         {
-            throw VExceptionBadId(tr("Can't find object. Type mismatch."), var->GetName());
+            throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
         }
     }
     else
     {
-        d->variables.insert(var->GetName(), var);
+        d->variables.insert(name, var);
     }
 }
 
@@ -391,7 +405,7 @@ void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
 {
     SCASSERT(not obj.isNull())
     UpdateObject(id, obj);
-    uniqueNames[d->nspace].insert(obj->name());
+    RegisterUniqueName(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -106,6 +106,9 @@ DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *
             this, &DialogBisector::PointNameChanged);
 
     vis = new VisToolBisector(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,7 +142,7 @@ void DialogBisector::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -155,7 +158,7 @@ void DialogBisector::EvalFormula()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
 
     Eval(formulaData, flagFormula);
@@ -343,6 +346,18 @@ QString DialogBisector::GetLineColor() const
 void DialogBisector::SetLineColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogBisector::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

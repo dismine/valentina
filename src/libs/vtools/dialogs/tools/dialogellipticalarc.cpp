@@ -47,6 +47,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogellipticalarc.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -154,7 +156,12 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId,
     connect(ui->pushButtonGrowLengthRotationAngle, &QPushButton::clicked,
             this, &DialogEllipticalArc::DeployRotationAngleTextEdit);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogEllipticalArc::ValidateAlias);
+
     vis = new VisToolEllipticalArc(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -387,7 +394,7 @@ void DialogEllipticalArc::EvalRadiuses()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius1;
     formulaData.labelResult = ui->labelResultRadius1;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagRadius1);
@@ -434,7 +441,7 @@ void DialogEllipticalArc::FXRadius1()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius1"));
     dialog->SetFormula(GetRadius1());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius1(dialog->GetFormula());
@@ -448,7 +455,7 @@ void DialogEllipticalArc::FXRadius2()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius2"));
     dialog->SetFormula(GetRadius2());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius2(dialog->GetFormula());
@@ -587,4 +594,52 @@ void DialogEllipticalArc::closeEvent(QCloseEvent *event)
     ui->plainTextEditF2->blockSignals(true);
     ui->plainTextEditRotationAngle->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+    VEllipticalArc arc;
+    arc.SetAliasSuffix(GetAliasSuffix());
+    if (not GetAliasSuffix().isEmpty() &&
+        (not rx.match(arc.GetAlias()).hasMatch() ||
+         (originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEllipticalArc::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetAliasSuffix(const QString &alias)
+{
+    originAliasSuffix = alias;
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEllipticalArc::GetAliasSuffix() const
+{
+    return ui->lineEditAlias->text();
 }

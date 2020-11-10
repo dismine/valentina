@@ -63,11 +63,22 @@ QWidget *VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionVi
 
     QLabel* tmpEditor = new QLabel(parent);
     tmpEditor->setLocale(parent->locale());
-    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     tmpEditor->setText(d_ptr->VariantValue.toString());
 
     d_ptr->editor = tmpEditor;
     return d_ptr->editor;
+}
+
+bool VPE::VLabelProperty::setEditorData(QWidget *editor)
+{
+    if (QLabel* tmpWidget = qobject_cast<QLabel*>(editor))
+    {
+        tmpWidget->setText(d_ptr->VariantValue.toString());
+        return true;
+    }
+
+    return false;
 }
 
 QVariant VPE::VLabelProperty::getEditorData(const QWidget *editor) const

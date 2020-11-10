@@ -268,7 +268,7 @@ void DialogIncrements::FillAnglesCurves()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowUnits()
 {
-    const QString unit = UnitsToStr(qApp->patternUnit());
+    const QString unit = UnitsToStr(qApp->patternUnits());
 
     ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit);// calculated value
     ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit);// formula
@@ -361,7 +361,7 @@ QString DialogIncrements::ClearIncrementName(const QString &name) const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
 {
-    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = UnitsToStr(qApp->patternUnits());//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
@@ -816,6 +816,9 @@ void DialogIncrements::FullUpdateFromFile()
 {
     hasChanges = false;
 
+    const int incrementRow = ui->tableWidgetIncrement->currentRow();
+    const int pcRow = ui->tableWidgetPC->currentRow();
+
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
     ui->tableWidgetAnglesCurves->clearContents();
@@ -835,6 +838,9 @@ void DialogIncrements::FullUpdateFromFile()
 
     search->RefreshList(ui->lineEditFind->text());
     searchPC->RefreshList(ui->lineEditFindPC->text());
+
+    ui->tableWidgetIncrement->selectRow(incrementRow);
+    ui->tableWidgetPC->selectRow(pcRow);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1222,7 +1228,7 @@ void DialogIncrements::SaveIncrFormula()
     {
         QTableWidgetItem *result = table->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
+        const QString postfix = UnitsToStr(qApp->patternUnits());
         labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
@@ -1230,7 +1236,7 @@ void DialogIncrements::SaveIncrFormula()
     if (text.isEmpty())
     {
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
+        const QString postfix = UnitsToStr(qApp->patternUnits());
         labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -1368,7 +1374,7 @@ void DialogIncrements::Fx()
 
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator()));
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnits(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)

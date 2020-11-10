@@ -3,6 +3,7 @@
 
 SOURCES += \
     $$PWD/def.cpp \
+    $$PWD/vabstractvalapplication.cpp \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
     $$PWD/vcommonsettings.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     $$PWD/compatibility.h \
     $$PWD/stable.h \
     $$PWD/def.h \
+    $$PWD/vabstractvalapplication.h \
     $$PWD/vmath.h \
     $$PWD/vabstractapplication.h \
     $$PWD/projectversion.h \

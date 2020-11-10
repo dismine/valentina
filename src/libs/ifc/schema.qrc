@@ -60,12 +60,15 @@
         <file>schema/pattern/v0.8.6.xsd</file>
         <file>schema/pattern/v0.8.7.xsd</file>
         <file>schema/pattern/v0.8.8.xsd</file>
-        <file>schema/standard_measurements/v0.3.0.xsd</file>
-        <file>schema/standard_measurements/v0.4.0.xsd</file>
-        <file>schema/standard_measurements/v0.4.1.xsd</file>
-        <file>schema/standard_measurements/v0.4.2.xsd</file>
-        <file>schema/standard_measurements/v0.4.3.xsd</file>
-        <file>schema/standard_measurements/v0.4.4.xsd</file>
+        <file>schema/pattern/v0.8.9.xsd</file>
+        <file>schema/pattern/v0.8.10.xsd</file>
+        <file>schema/multisize_measurements/v0.3.0.xsd</file>
+        <file>schema/multisize_measurements/v0.4.0.xsd</file>
+        <file>schema/multisize_measurements/v0.4.1.xsd</file>
+        <file>schema/multisize_measurements/v0.4.2.xsd</file>
+        <file>schema/multisize_measurements/v0.4.3.xsd</file>
+        <file>schema/multisize_measurements/v0.4.4.xsd</file>
+        <file>schema/multisize_measurements/v0.5.0.xsd</file>
         <file>schema/individual_measurements/v0.2.0.xsd</file>
         <file>schema/individual_measurements/v0.3.0.xsd</file>
         <file>schema/individual_measurements/v0.3.1.xsd</file>
@@ -73,6 +76,7 @@
         <file>schema/individual_measurements/v0.3.3.xsd</file>
         <file>schema/individual_measurements/v0.4.0.xsd</file>
         <file>schema/individual_measurements/v0.5.0.xsd</file>
+        <file>schema/individual_measurements/v0.5.1.xsd</file>
         <file>schema/label_template/v1.0.0.xsd</file>
         <file>schema/watermark/v1.0.0.xsd</file>
         <file>schema/layout/v0.1.0.xsd</file>

@@ -74,7 +74,7 @@ const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersect
 VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData,
                                                  QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, parent),
+                    initData.basePointId, 0, initData.notes, parent),
       formulaAngle(initData.formulaAngle),
       curveId(initData.curveId)
 {
@@ -95,6 +95,7 @@ void VToolCurveIntersectAxis::setDialog()
     dialogTool->SetBasePointId(basePointId);
     dialogTool->setCurveId(curveId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,6 +119,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolCurveIntersectAxis *point = Create(initData);
     if (point != nullptr)
@@ -141,9 +143,9 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
     {
         const QString errorMsg = tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis"
                                     " through point '%3' with angle %4°")
-                .arg(initData.name, curve->name(), basePoint->name()).arg(angle);
+                .arg(initData.name, curve->ObjectName(), basePoint->name()).arg(angle);
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     const qreal segLength = curve->GetLengthByPoint(fPoint);
@@ -262,6 +264,9 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrCurve, QString().setNum(dialogTool->getCurveId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,6 +283,8 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolLinePoint::ReadToolAttributes(domElement);
+
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
@@ -396,7 +403,10 @@ void VToolCurveIntersectAxis::InitSegments(GOType curveType, qreal segLength, co
                 delete spl2;
             }
 
+            data->RegisterUniqueName(spline1);
             data->AddSpline(spline1, NULL_ID, p->id());
+
+            data->RegisterUniqueName(spline2);
             data->AddSpline(spline2, NULL_ID, p->id());
             break;
         }
@@ -441,7 +451,10 @@ void VToolCurveIntersectAxis::InitSegments(GOType curveType, qreal segLength, co
                 delete splPath2;
             }
 
+            data->RegisterUniqueName(splP1);
             data->AddSpline(splP1, NULL_ID, p->id());
+
+            data->RegisterUniqueName(splP2);
             data->AddSpline(splP2, NULL_ID, p->id());
             break;
         }

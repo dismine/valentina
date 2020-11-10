@@ -48,12 +48,10 @@
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
 #include "../vmisc/projectversion.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
-
-const int FvUpdater::testBuildLifetime = 90;
 
 namespace
 {
@@ -95,57 +93,9 @@ QString FvUpdater::CurrentFeedURL()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FvUpdater::CurrentVersion()
-{
-#ifdef Q_OS_MAC
-    const QString path = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/VERSION");
-#else
-    const QString path = QApplication::applicationDirPath() + QDir::separator() + QLatin1String("VERSION");
-#endif
-
-    QFile file(path);
-    if (file.exists())
-    {
-        if (not file.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            return APP_VERSION;
-        }
-
-        QTextStream in(&file);
-        try
-        {
-            return VAbstractConverter::GetFormatVersion(in.read(15));
-        }
-        catch(const VException &)
-        {
-            return APP_VERSION;
-        }
-    }
-    else
-    {
-        return APP_VERSION;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool FvUpdater::IsTestBuild()
 {
-    const int version = FvUpdater::CurrentVersion();
-    return (version != 0x0 && version != APP_VERSION);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::IsStaledTestBuild()
-{
-    if (IsTestBuild())
-    {
-        QDate builtDate = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
-        return builtDate.daysTo(QDate::currentDate()) > testBuildLifetime;
-    }
-    else
-    {
-        return false;
-    }
+    return (MAJOR_VERSION * 1000 + MINOR_VERSION) % 2 != 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -593,7 +543,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         return true; // Ignore invalid version
     }
 
-    if (decVersion == FvUpdater::CurrentVersion())
+    if (decVersion == APP_VERSION)
     {
         return true;
     }
@@ -608,7 +558,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         }
     }
 
-    if (decVersion > FvUpdater::CurrentVersion())
+    if (decVersion > APP_VERSION)
     {
         // Newer version - do not skip
         return false;
@@ -632,7 +582,7 @@ void FvUpdater::IgnoreVersion(const QString &version)
         return ; // Ignore invalid version
     }
 
-    if (decVersion == FvUpdater::CurrentVersion())
+    if (decVersion == APP_VERSION)
     {
         // Don't ignore the current version
         return;

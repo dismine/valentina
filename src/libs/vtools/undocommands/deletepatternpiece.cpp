@@ -31,7 +31,7 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 

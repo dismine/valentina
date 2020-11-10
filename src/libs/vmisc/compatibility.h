@@ -31,6 +31,7 @@
 #include <QtGlobal>
 #include <QStringList>
 #include <QSet>
+#include <QVector>
 
 class QPointF;
 
@@ -147,15 +148,16 @@ inline QVector<T> ConvertToVector(const QSet<T> &container)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void SwapItemsAt(T &container, int i, int j)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-    container.swapItemsAt(i, j);
-#else
-    container.swap(i, j);
-#endif
-}
+// NOTE: Delete if not necessary anymore
+//template <typename T>
+//inline void SwapItemsAt(T &container, int i, int j)
+//{
+//#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+//    container.swapItemsAt(i, j);
+//#else
+//    container.swap(i, j);
+//#endif
+//}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
@@ -179,6 +181,38 @@ inline void Move(T &vector, int from, int to)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
 
     QT_WARNING_POP
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+QVector<T> Reverse(const QVector<T> &container)
+{
+    if (container.isEmpty())
+    {
+        return container;
+    }
+    QVector<T> reversed(container.size());
+    qint32 j = 0;
+    for (qint32 i = container.size() - 1; i >= 0; --i)
+    {
+        reversed.replace(j, container.at(i));
+        ++j;
+    }
+    return reversed;
+}
+
+template <typename T, template <typename> class C>
+//---------------------------------------------------------------------------------------------------------------------
+C<T> Reverse(const C<T> &container)
+{
+    return ConvertToList(Reverse(ConvertToVector(container)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type* = nullptr>
+T Reverse(const T &container)
+{
+    return Reverse<QString, QList>(container);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

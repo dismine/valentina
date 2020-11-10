@@ -46,7 +46,7 @@ class VCurveAngle : public VCurveVariable
 public:
     VCurveAngle();
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
-    VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+    VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve, const VSpline &spl,
                 CurveAngle angle, qint32 segment);
 protected:
     VCurveAngle(const quint32 &id, const quint32 &parentId);

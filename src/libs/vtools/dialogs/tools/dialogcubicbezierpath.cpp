@@ -54,6 +54,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezierpath.h"
+#include "../qmuparser/qmudef.h"
 
 class QWidget;
 
@@ -80,7 +81,12 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 too
     connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezierPath::currentPointChanged);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezierPath::ValidateAlias);
+
     vis = new VisToolCubicBezierPath(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,6 +114,10 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    originAliasSuffix = path.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
 
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
     ChangeCurrentData(ui->comboBoxColor, path.GetColor());
@@ -197,6 +207,7 @@ void DialogCubicBezierPath::SaveData()
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path.SetAliasSuffix(ui->lineEditAlias->text());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -239,6 +250,28 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 
         ui->lineEditSplPathName->setText(tr("Cannot find point with id %1").arg(id));
     }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+    VCubicBezierPath tempPath = path;
+    tempPath.SetAliasSuffix(ui->lineEditAlias->text());
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(tempPath.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(tempPath.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
     CheckState();
 }
 
@@ -359,4 +392,16 @@ void DialogCubicBezierPath::ValidatePath()
 
     ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCubicBezierPath::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

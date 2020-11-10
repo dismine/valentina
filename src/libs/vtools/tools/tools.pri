@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
+    $$PWD/toolsdef.h \
     $$PWD/vdatatool.h \
     $$PWD/vabstracttool.h \
     $$PWD/tools.h \
@@ -64,6 +65,7 @@ HEADERS += \
     $$PWD/nodeDetails/vtoolplacelabel.h
 
 SOURCES += \
+    $$PWD/toolsdef.cpp \
     $$PWD/vdatatool.cpp \
     $$PWD/vabstracttool.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtooltriangle.cpp \

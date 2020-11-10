@@ -506,40 +506,68 @@ bool VCommandLine::IsGuiEnabled() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsSetGradationSize() const
+bool VCommandLine::IsSetDimensionA() const
 {
-    return IsOptionSet(LONG_OPTION_GRADATIONSIZE);
+    return IsOptionSet(LONG_OPTION_DIMENSION_A);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsSetGradationHeight() const
+bool VCommandLine::IsSetDimensionB() const
 {
-    return IsOptionSet(LONG_OPTION_GRADATIONHEIGHT);
+    return IsOptionSet(LONG_OPTION_DIMENSION_B);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptGradationSize() const
+bool VCommandLine::IsSetDimensionC() const
 {
-    const QString size = OptionValue(LONG_OPTION_GRADATIONSIZE);
-    if (VMeasurement::IsGradationSizeValid(size))
+    return IsOptionSet(LONG_OPTION_DIMENSION_C);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::OptDimensionA() const
+{
+    const QString value = OptionValue(LONG_OPTION_DIMENSION_A);
+
+    bool ok = false;
+    int dimensionAValue = value.toInt(&ok);
+    if(ok && dimensionAValue > 0)
     {
-        return size;
+        return dimensionAValue;
     }
 
-    qCritical() << translate("VCommandLine", "Invalid gradation size value.") << "\n";
+    qCritical() << translate("VCommandLine", "Invalid dimension A value.") << "\n";
     const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptGradationHeight() const
+int VCommandLine::OptDimensionB() const
 {
-    const QString height = OptionValue(LONG_OPTION_GRADATIONHEIGHT);
-    if (VMeasurement::IsGradationHeightValid(height))
+    const QString value = OptionValue(LONG_OPTION_DIMENSION_B);
+
+    bool ok = false;
+    int dimensionBValue = value.toInt(&ok);
+    if(ok && dimensionBValue > 0)
     {
-        return height;
+        return dimensionBValue;
     }
 
-    qCritical() << translate("VCommandLine", "Invalid gradation height value.") << "\n";
+    qCritical() << translate("VCommandLine", "Invalid dimension B value.") << "\n";
+    const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::OptDimensionC() const
+{
+    const QString value = OptionValue(LONG_OPTION_DIMENSION_C);
+
+    bool ok = false;
+    int dimensionCValue = value.toInt(&ok);
+    if(ok && dimensionCValue > 0)
+    {
+        return dimensionCValue;
+    }
+
+    qCritical() << translate("VCommandLine", "Invalid dimension C value.") << "\n";
     const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
 }
 
@@ -635,14 +663,19 @@ void VCommandLine::InitCommandLineOptions()
         {LONG_OPTION_EXPORTSUCHDETAILS,
          translate("VCommandLine", "Export only details that match a piece name regex."),
          translate("VCommandLine", "The name regex")},
-        {{SINGLE_OPTION_GRADATIONSIZE, LONG_OPTION_GRADATIONSIZE},
-         translate("VCommandLine", "Set size value for pattern file, that was opened with multisize measurements "
-         "(export mode). Valid values: %1cm.").arg(VMeasurement::WholeListSizes(Unit::Cm) .join(QStringLiteral(", "))),
-         translate("VCommandLine", "The size value")},
-        {{SINGLE_OPTION_GRADATIONHEIGHT, LONG_OPTION_GRADATIONHEIGHT},
-         translate("VCommandLine", "Set height value for pattern file, that was opened with multisize measurements "
-         "(export mode). Valid values: %1cm.").arg(VMeasurement::WholeListHeights(Unit::Cm).join(QStringLiteral(", "))),
-         translate("VCommandLine", "The height value")},
+
+        {LONG_OPTION_DIMENSION_A,
+         translate("VCommandLine", "Set base for dimension A in the multisize measurements units (export mode)."),
+         translate("VCommandLine", "The dimension A base")},
+
+        {LONG_OPTION_DIMENSION_B,
+         translate("VCommandLine", "Set base for dimension B in the multisize measurements units (export mode)."),
+         translate("VCommandLine", "The dimension B base")},
+
+        {LONG_OPTION_DIMENSION_C,
+         translate("VCommandLine", "Set base for dimension C in the multisize measurements units (export mode)."),
+         translate("VCommandLine", "The dimension C base")},
+
         {LONG_OPTION_USER_MATERIAL,
          translate("VCommandLine", "Use this option to override user material defined in pattern. The value must be in "
          "form <number>@<user matrial name>. The number should be in range from 1 to %1. For example, 1@Fabric2. The "

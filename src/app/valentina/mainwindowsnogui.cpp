@@ -68,6 +68,7 @@
 #include <QtConcurrent>
 #include <functional>
 #include <QPageSize>
+#include <QDebug>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -137,7 +138,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       listDetails(),
       currentScene(nullptr),
       tempSceneLayout(nullptr),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP(), valentinaNamespace)),
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitsP(), valentinaNamespace)),
       doc(nullptr),
       papers(),
       shadows(),
@@ -156,7 +157,6 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       margins(),
       paperSize(),
       m_dialogSaveLayout(),
-      m_mouseCoordinate(),
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
       m_taskbarButton(new QWinTaskbarButton(this)),
       m_taskbarProgress(nullptr),
@@ -836,7 +836,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
     QPainter painter;
     if (not painter.begin(printer))
     { // failed to open file
-        qWarning("failed to open file, is it writable?");
+        qCritical() << tr("Failed to open file, is it writable?");
         return;
     }
 
@@ -935,7 +935,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         {
             const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         }
     }
 
@@ -2072,33 +2072,6 @@ QString MainWindowsNoGUI::FileName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
-{
-    const QHash<QString, QSharedPointer<VInternalVariable> > * vars = pattern->DataVariables();
-
-    if (vars->contains(size_M))
-    {
-        pattern->SetSize(*vars->value(size_M)->GetValue());
-    }
-    else
-    {
-        pattern->SetSize(0);
-    }
-
-    if (vars->contains(height_M))
-    {
-        pattern->SetHeight(*vars->value(height_M)->GetValue());
-    }
-    else
-    {
-        pattern->SetHeight(0);
-    }
-
-    doc->SetPatternWasChanged(true);
-    emit doc->UpdatePatternLabel();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
                                                     const QChar &separator) const
 {
@@ -2215,21 +2188,6 @@ QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QStrin
         }
 
         CheckRequiredMeasurements(m.data());
-
-        if (m->Type() == MeasurementsType::Multisize)
-        {
-            if (m->MUnit() == Unit::Inch)
-            {
-                qCCritical(vMainNoGUIWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
-                          qUtf8Printable(tr("Application doesn't support multisize table with inches.")));
-                m->clear();
-                if (not VApplication::IsGUIMode())
-                {
-                    qApp->exit(V_EX_DATAERR);
-                }
-                return m;
-            }
-        }
     }
     catch (VException &e)
     {

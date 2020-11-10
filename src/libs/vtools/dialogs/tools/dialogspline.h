@@ -58,6 +58,9 @@ public:
     VSpline GetSpline() const;
     void    SetSpline(const VSpline &spline);
 
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void  PointNameChanged() override;
@@ -85,6 +88,8 @@ private slots:
     void EvalAngle2();
     void EvalLength1();
     void EvalLength2();
+
+    void ValidateAlias();
 private:
     Q_DISABLE_COPY(DialogSpline)
 
@@ -114,6 +119,9 @@ private:
     bool flagLength1;
     bool flagLength2;
     bool flagError;
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
 
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP4() const;
@@ -124,7 +132,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogSpline::IsValid() const
 {
-    return flagAngle1 && flagAngle2 && flagLength1 && flagLength2 && flagError;
+    return flagAngle1 && flagAngle2 && flagLength1 && flagLength2 && flagError && flagAlias;
 }
 
 #endif // DIALOGSPLINE_H

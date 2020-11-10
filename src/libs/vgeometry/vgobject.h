@@ -78,6 +78,14 @@ public:
     quint32         id() const;
     virtual void    setId(const quint32 &id);
 
+    virtual void    SetAlias(const QString &alias);
+    QString         GetAlias() const;
+
+    virtual void    SetAliasSuffix(const QString &aliasSuffix);
+    QString         GetAliasSuffix() const;
+
+    QString ObjectName() const;
+
     quint32         getIdTool() const;
 
     virtual QJsonObject ToJson() const;
@@ -103,9 +111,6 @@ public:
     static QPointF CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, 
                                        qreal accuracy = accuracyPointOnLine);
-
-    template <typename T>
-    static QVector<T> GetReversePoints(const QVector<T> &points);
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
 protected:
     static QTransform FlippingMatrix(const QLineF &axis);
@@ -114,29 +119,6 @@ private:
 
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetReversePoint return revers container of points.
- * @param points container with points.
- * @return reverced points.
- */
-template <typename T>
-QVector<T> VGObject::GetReversePoints(const QVector<T> &points)
-{
-    if (points.isEmpty())
-    {
-        return points;
-    }
-    QVector<T> reversePoints(points.size());
-    qint32 j = 0;
-    for (qint32 i = points.size() - 1; i >= 0; --i)
-    {
-        reversePoints.replace(j, points.at(i));
-        ++j;
-    }
-    return reversePoints;
-}
 
 Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE);
 

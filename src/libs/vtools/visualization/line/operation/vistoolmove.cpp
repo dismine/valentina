@@ -170,7 +170,7 @@ void VisToolMove::RefreshGeometry()
     DrawLine(this, line, supportColor2, Qt::DashLine);
     DrawPoint(pointFinish, line.p2(), supportColor);
 
-    static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
+    static const QString prefix = UnitsToStr(qApp->patternUnits(), true);
     if (qFuzzyIsNull(length))
     {
         Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "

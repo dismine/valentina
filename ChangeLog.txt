@@ -1,4 +1,14 @@
-# Version 0.7.0 (unreleased)
+# Version 0.7.37 (unreleased)
+- Fix Tape crash on Mac OS X.
+- Fix issue in VAbstractCurve::CurveIntersectAxis.
+- Improve editing a spline path through control points for locked angles.
+- [smart-pattern/valentina#73] Notes for tools.
+- Fix crash while synchronize measurements.
+- Object alias.
+- Change value for an uninitialized local variable to NAN.
+- Independent pen style and color after a group operation. 
+
+# Version 0.7.36 October 24, 2020
 - [#892] Show tooltip for piece node point.
 - [#894] Quick way to disable a passmark.
 - [#895] Improve path validation. Do not allow repeat the same curve twice.
@@ -50,6 +60,10 @@
 - Improve the property browser. Show full arc name.
 - [smart-pattern/valentina#45] Optimize tool box position for big screen resolutions.
 - [smart-pattern/valentina#40] Invalid name of arc in modeling mode.
+- New warning. Error calculating segment of curve.
+- Improve searching lost measurements. Additional case with underscores instead of regular spaces.
+- Redesign multisize measurements.
+- [smart-pattern/valentina#5] New versioning schema.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
@@ -89,6 +103,9 @@
 - Fix crash after uniting three pieces in sequence.
 - Incorrect conversion to newer curve format.
 - Elide a variable description in the formula wizard.
+- Fix removing a pin in the Seam Allowance tool dialog.
+- Fix label size for case with two pins.
+- Fix crash while synchronize measurements.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

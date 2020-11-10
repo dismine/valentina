@@ -47,6 +47,8 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../../visualization/visualization.h"
 #include "ui_dialogarcwithlength.h"
+#include "../vgeometry/varc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -115,7 +117,12 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId,
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArcWithLength::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthArcLength, &QPushButton::clicked, this, &DialogArcWithLength::DeployLengthTextEdit);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArcWithLength::ValidateAlias);
+
     vis = new VisToolArcWithLength(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,7 +252,33 @@ void DialogArcWithLength::SetApproximationScale(qreal value)
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
-    path->setApproximationScale(value);
+            path->setApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArcWithLength::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetAliasSuffix(const QString &alias)
+{
+    originAliasSuffix = alias;
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArcWithLength::GetAliasSuffix() const
+{
+    return ui->lineEditAlias->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,7 +323,7 @@ void DialogArcWithLength::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -318,7 +351,7 @@ void DialogArcWithLength::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit the arc length"));
     dialog->SetFormula(GetLength());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetLength(dialog->GetFormula());
@@ -360,6 +393,28 @@ void DialogArcWithLength::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+    VArc arc;
+    arc.SetAliasSuffix(GetAliasSuffix());
+    if (not GetAliasSuffix().isEmpty() &&
+        (not rx.match(arc.GetAlias()).hasMatch() ||
+         (originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::Radius()
 {
     FormulaData formulaData;
@@ -367,7 +422,7 @@ void DialogArcWithLength::Radius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius;
     formulaData.labelResult = ui->labelResultRadius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagRadius);
@@ -381,7 +436,7 @@ void DialogArcWithLength::Length()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength;
     formulaData.labelResult = ui->labelResultLength;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagLength);
 }

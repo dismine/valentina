@@ -56,10 +56,11 @@ template <class T> class QSharedPointer;
  * @param data container with variables.
  * @param id object id in container.
  */
-VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
+VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent)
     : VInteractiveTool(doc, data, id, parent),
       nameActivDraw(doc->GetNameActivPP()),
-      m_lineType(TypeLineLine)
+      m_lineType(TypeLineLine),
+      m_notes(notes)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -175,6 +176,7 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     Q_UNUSED(obj)
 
     doc->SetAttribute(tag, VDomDocument::AttrId, m_id);
+    doc->SetAttributeOrRemoveIf(tag, AttrNotes, m_notes, m_notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,6 +210,12 @@ void VDrawTool::ReadAttributes()
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::ReadToolAttributes(const QDomElement &domElement)
+{
+    m_notes = doc->GetParametrEmptyString(domElement, AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,7 +274,7 @@ QString VDrawTool::getLineType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SetTypeLine(const QString &value)
+void VDrawTool::SetLineType(const QString &value)
 {
     m_lineType = value;
 
@@ -279,4 +287,19 @@ bool VDrawTool::IsLabelVisible(quint32 id) const
 {
     Q_UNUSED(id)
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDrawTool::GetNotes() const
+{
+    return m_notes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SetNotes(const QString &notes)
+{
+    m_notes = notes;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
 }

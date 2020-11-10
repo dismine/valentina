@@ -56,6 +56,9 @@ public:
 
     VCubicBezierPath GetPath() const;
     void             SetPath(const VCubicBezierPath &value);
+
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void ShowDialog(bool click) override;
@@ -66,6 +69,7 @@ protected:
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
+    void ValidateAlias();
 
 private:
     Q_DISABLE_COPY(DialogCubicBezierPath)
@@ -77,6 +81,9 @@ private:
     qint32 newDuplicate;
 
     bool flagError;
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
 
     void             NewItem(const VPointF &point);
     void             DataPoint(const VPointF &p);
@@ -90,7 +97,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogCubicBezierPath::IsValid() const
 {
-    return flagError;
+    return flagError && flagAlias;
 }
 
 #endif // DIALOGCUBICBEZIERPATH_H

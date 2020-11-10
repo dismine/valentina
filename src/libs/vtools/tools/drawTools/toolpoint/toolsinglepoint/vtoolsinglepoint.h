@@ -44,10 +44,10 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolSinglePointInitData : VAbstractToolInitData
+struct VToolSinglePointInitData : VDrawToolInitData
 {
     VToolSinglePointInitData()
-        : VAbstractToolInitData(),
+        : VDrawToolInitData(),
           name(),
           mx(5),
           my(10),
@@ -67,7 +67,8 @@ class VToolSinglePoint: public VAbstractPoint, public VScenePoint
 {
     Q_OBJECT
 public:
-    VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
+    VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                     QGraphicsItem * parent = nullptr);
     virtual ~VToolSinglePoint() Q_DECL_EQ_DEFAULT;
 
     virtual int type() const override {return Type;}

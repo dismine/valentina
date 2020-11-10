@@ -270,7 +270,7 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
  * @brief FillComboBoxTypeLine fill comboBox list of type lines
  * @param box comboBox
  */
-void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const
+void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics, const QString &def) const
 {
     SCASSERT(box != nullptr)
     QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
@@ -280,7 +280,7 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
         ++i;
     }
 
-    const int index = box->findData(QVariant(TypeLineLine));
+    const int index = box->findData(QVariant(def));
     if (index != -1)
     {
         box->setCurrentIndex(index);
@@ -290,22 +290,20 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 {
+    FillComboBoxLineColors(box, VAbstractTool::ColorsList());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxLineColors(QComboBox *box, const QMap<QString, QString> &lineColors) const
+{
     SCASSERT(box != nullptr)
 
     box->clear();
-    int size = box->iconSize().height();
-    // On Mac pixmap should be little bit smaller.
-#if defined(Q_OS_MAC)
-    size -= 2; // Two pixels should be enough.
-#endif //defined(Q_OS_MAC)
 
-    const QMap<QString, QString> map = VAbstractTool::ColorsList();
-    QMap<QString, QString>::const_iterator i = map.constBegin();
-    while (i != map.constEnd())
+    QMap<QString, QString>::const_iterator i = lineColors.constBegin();
+    while (i != lineColors.constEnd())
     {
-        QPixmap pix(size, size);
-        pix.fill(QColor(i.key()));
-        box->addItem(QIcon(pix), i.value(), QVariant(i.key()));
+        box->addItem(LineColor(box->iconSize().height(), i.key()), i.value(), QVariant(i.key()));
         ++i;
     }
 }
@@ -397,13 +395,10 @@ quint32 DialogTool::DNumber(const QString &baseName) const
 QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmarkDetails) const
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
-    QString name = obj->name();
+    QString name = obj->ObjectName();
 
     if (node.GetTypeTool() != Tool::NodePoint)
     {
-        int bias = 0;
-        qApp->TrVars()->VariablesToUser(name, 0, obj->name(), bias);
-
         if (node.GetReverse())
         {
             name = QStringLiteral("- ") + name;
@@ -706,17 +701,7 @@ void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
 {
     const auto obj = data->GeometricObject<T>(id);
     SCASSERT(obj != nullptr)
-
-    QString newName = obj->name();
-    int bias = 0;
-    if (qApp->TrVars()->VariablesToUser(newName, 0, obj->name(), bias))
-    {
-        list[newName] = id;
-    }
-    else
-    {
-        list[obj->name()] = id;
-    }
+    list[obj->ObjectName()] = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

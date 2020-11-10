@@ -64,7 +64,7 @@ const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
  * @param parent parent object.
  */
 VToolLineIntersect::VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       p1Line1(initData.p1Line1Id),
       p2Line1(initData.p2Line1Id),
       p1Line2(initData.p1Line2Id),
@@ -88,6 +88,7 @@ void VToolLineIntersect::setDialog()
     dialogTool->SetP1Line2(p1Line2);
     dialogTool->SetP2Line2(p2Line2);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +118,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolLineIntersect* point = Create(initData);
     if (point != nullptr)
@@ -150,7 +152,7 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
                                     "intersection")
                 .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -259,6 +261,9 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));
     doc->SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogTool->GetP1Line2()));
     doc->SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogTool->GetP2Line2()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -276,6 +281,8 @@ void VToolLineIntersect::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     p1Line1 = doc->GetParametrUInt(domElement, AttrP1Line1, NULL_ID_STR);
     p2Line1 = doc->GetParametrUInt(domElement, AttrP2Line1, NULL_ID_STR);
     p1Line2 = doc->GetParametrUInt(domElement, AttrP1Line2, NULL_ID_STR);
@@ -321,7 +328,7 @@ QString VToolLineIntersect::MakeToolTip() const
                                     "</table>")
             .arg(QString("%1->%2").arg(p1L1->name(), current->name()))
             .arg(qApp->fromPixel(p1L1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), QString("%1->%2").arg(current->name(), p2L1->name()))
+            .arg(UnitsToStr(qApp->patternUnits(), true), QString("%1->%2").arg(current->name(), p2L1->name()))
             .arg(qApp->fromPixel(curToP2L1.length()))
             .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
             .arg(qApp->fromPixel(p1L2ToCur.length()))

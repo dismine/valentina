@@ -66,7 +66,7 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
  */
 VToolAlongLine::VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.firstPointId, 0, parent),
+                    initData.firstPointId, 0, initData.notes, parent),
       secondPointId(initData.secondPointId)
 {
     ToolCreation(initData.typeCreation);
@@ -105,6 +105,9 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrFirstPoint, dialogTool->GetFirstPointId());
     doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->GetSecondPointId());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,6 +124,8 @@ void VToolAlongLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolLinePoint::ReadToolAttributes(domElement);
+
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
@@ -162,7 +167,7 @@ QString VToolAlongLine::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QStringLiteral("%1->%2").arg(basePoint->name(), current->name()),
                  QStringLiteral("%1->%2").arg(current->name(), secondPoint->name()))
@@ -207,6 +212,7 @@ void VToolAlongLine::setDialog()
     dialogTool->SetFirstPointId(basePointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -236,6 +242,7 @@ VToolAlongLine* VToolAlongLine::Create(const QPointer<DialogTool> &dialog, VMain
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolAlongLine *point = Create(initData);
     if (point != nullptr)

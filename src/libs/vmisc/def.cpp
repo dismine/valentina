@@ -54,6 +54,8 @@
 #include <QPixmapCache>
 #include <QGraphicsItem>
 #include <QGlobalStatic>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "vabstractapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
@@ -147,17 +149,24 @@ const QStringList builInFunctions = QStringList() << degTorad_F
 
 const QString pl_size          = QStringLiteral("size");
 const QString pl_height        = QStringLiteral("height");
+const QString pl_hip           = QStringLiteral("hip");
+const QString pl_waist         = QStringLiteral("waist");
 const QString pl_date          = QStringLiteral("date");
 const QString pl_time          = QStringLiteral("time");
+const QString pl_birthDate     = QStringLiteral("birthDate");
 const QString pl_patternName   = QStringLiteral("patternName");
 const QString pl_patternNumber = QStringLiteral("patternNumber");
 const QString pl_author        = QStringLiteral("author");
 const QString pl_customer      = QStringLiteral("customer");
+const QString pl_email         = QStringLiteral("email");
 const QString pl_userMaterial  = QStringLiteral("userMaterial");
 const QString pl_pExt          = QStringLiteral("pExt");
+const QString pl_pUnits        = QStringLiteral("pUnits");
 const QString pl_pFileName     = QStringLiteral("pFileName");
 const QString pl_mFileName     = QStringLiteral("mFileName");
 const QString pl_mExt          = QStringLiteral("mExt");
+const QString pl_mUnits        = QStringLiteral("mUnits");
+const QString pl_mSizeUnits    = QStringLiteral("mSizeUnits");
 const QString pl_pLetter       = QStringLiteral("pLetter");
 const QString pl_pAnnotation   = QStringLiteral("pAnnotation");
 const QString pl_pOrientation  = QStringLiteral("pOrientation");
@@ -172,34 +181,7 @@ const QString pl_mInterfacing  = QStringLiteral("mInterfacing");
 const QString pl_mInterlining  = QStringLiteral("mInterlining");
 const QString pl_wCut          = QStringLiteral("wCut");
 const QString pl_wOnFold       = QStringLiteral("wOnFold");
-
-const QStringList labelTemplatePlaceholders = QStringList() << pl_size
-                                                            << pl_height
-                                                            << pl_date
-                                                            << pl_time
-                                                            << pl_patternName
-                                                            << pl_patternNumber
-                                                            << pl_author
-                                                            << pl_customer
-                                                            << pl_userMaterial
-                                                            << pl_pExt
-                                                            << pl_pFileName
-                                                            << pl_mFileName
-                                                            << pl_mExt
-                                                            << pl_pLetter
-                                                            << pl_pAnnotation
-                                                            << pl_pOrientation
-                                                            << pl_pRotation
-                                                            << pl_pTilt
-                                                            << pl_pFoldPosition
-                                                            << pl_pName
-                                                            << pl_pQuantity
-                                                            << pl_mFabric
-                                                            << pl_mLining
-                                                            << pl_mInterfacing
-                                                            << pl_mInterlining
-                                                            << pl_wCut
-                                                            << pl_wOnFold;
+const QString pl_measurement   = QStringLiteral("measurement_");
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
@@ -396,49 +378,19 @@ QPixmap darkenPixmap(const QPixmap &pixmap)
 void ShowInGraphicalShell(const QString &filePath)
 {
 #ifdef Q_OS_MAC
-    QStringList args;
-    args << "-e";
-    args << "tell application \"Finder\"";
-    args << "-e";
-    args << "activate";
-    args << "-e";
-    args << "select POSIX file \""+filePath+"\"";
-    args << "-e";
-    args << "end tell";
-    QProcess::startDetached("osascript", args);
+    QStringList args{
+        "-e", "tell application \"Finder\"",
+        "-e", "activate",
+        "-e", "select POSIX file \""+filePath+"\"",
+        "-e", "end tell"
+    };
+    QProcess::startDetached(QStringLiteral("osascript"), args);
 #elif defined(Q_OS_WIN)
-    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(filePath)));
+    QProcess::startDetached(QStringLiteral("explorer"), QStringList{"/select", QDir::toNativeSeparators(filePath)});
 #else
-    const QString app = "xdg-open %d";
-    QString cmd;
-    for (int i = 0; i < app.size(); ++i)
-    {
-        QChar c = app.at(i);
-        if (c == QLatin1Char('%') && i < app.size()-1)
-        {
-            c = app.at(++i);
-            QString s;
-            if (c == QLatin1Char('d'))
-            {
-                s = QLatin1Char('"') + QFileInfo(filePath).path() + QLatin1Char('"');
-            }
-            else if (c == QLatin1Char('%'))
-            {
-                s = c;
-            }
-            else
-            {
-                s = QLatin1Char('%');
-                s += c;
-            }
-            cmd += s;
-            continue;
-        }
-        cmd += c;
-    }
-    QProcess::startDetached(cmd);
+    // we cannot select a file here, because no file browser really supports it...
+    QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(filePath).path()));
 #endif
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -667,6 +619,8 @@ QString UnitsToStr(const Unit &unit, const bool translate)
         case Unit::Px:
             translate ? result = QObject::tr("px") : result = unitPX;
             break;
+        case Unit::LAST_UNIT_DO_NOT_USE:
+            break;
         case Unit::Cm:
         default:
             translate ? result = QObject::tr("cm") : result = unitCM;
@@ -818,4 +772,26 @@ IncrementType StringToIncrementType(const QString &value)
             break;
     }
     return IncrementType::Increment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList SplitFilePaths(const QString &path)
+{
+    QStringList result;
+    QString subPath = QDir::cleanPath(path);
+    QString lastFileName;
+
+    do
+    {
+        QFileInfo fileInfo(subPath);
+        lastFileName = fileInfo.fileName();
+        if (not lastFileName.isEmpty())
+        {
+            result.prepend(lastFileName);
+            subPath = fileInfo.path();
+        }
+    }
+    while(not lastFileName.isEmpty());
+
+    return result;
 }

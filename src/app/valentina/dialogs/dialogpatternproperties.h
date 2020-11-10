@@ -50,16 +50,10 @@ class DialogPatternProperties : public QDialog
 public:
     explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() override;
-signals:
-    void UpdateGradation();
 private slots:
-    void DefValueChanged();
     void LabelDataChanged();
     void Apply();
     void Ok();
-    void SelectAll(int state);
-    void CheckStateHeight(int state);
-    void CheckStateSize(int state);
     void DescEdited();
     void ChangeImage();
     void SaveImage();
@@ -70,10 +64,6 @@ private:
     Ui::DialogPatternProperties *ui;
     VPattern               *doc;
     VContainer             *pattern;
-    int                    heightsChecked;
-    int                    sizesChecked;
-    QMap<GHeights, bool>   heights;
-    QMap<GSizes, bool>     sizes;
     QMap<QCheckBox *, int> data;
     bool                   descriptionChanged;
     bool                   gradationChanged;
@@ -91,31 +81,13 @@ private:
     QVector<VLabelTemplateLine> templateLines;
     QMap<int, QString>          patternMaterials;
 
-    void         SetHeightsChecked(bool enabled);
-    void         SetSizesChecked(bool enabled);
-    void         InitHeights();
-    void         InitSizes();
-    template<typename Func>
-    void         Init(QCheckBox *check, int val, Func slot);
-    template<typename GVal>
-    void         SetOptions(const QMap<GVal, bool> &option);
-    template<typename GVal>
-    void         InitComboBox(QComboBox *box, const QMap<GVal, bool> &option);
     void         InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
-    void         CheckApplyOk();
     void         SaveDescription();
-    void         SaveGradation();
-    void         SaveDefValues();
     void         SaveLabelData();
     void         SaveTemplateData();
     void         SaveMaterialData();
     void         SaveReadOnlyState();
 
-    void         SetDefaultHeight(const QString &def);
-    void         SetDefaultSize(const QString &def);
-
-    void         UpdateDefHeight();
-    void         UpdateDefSize();
     void         InitImage();
     QImage       GetImage();
 };

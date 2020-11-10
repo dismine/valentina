@@ -46,10 +46,10 @@ template <class T> class QSharedPointer;
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-struct VToolCubicBezierInitData : VAbstractToolInitData
+struct VToolCubicBezierInitData : VDrawToolInitData
 {
     VToolCubicBezierInitData()
-        : VAbstractToolInitData(),
+        : VDrawToolInitData(),
           spline(nullptr)
     {}
 

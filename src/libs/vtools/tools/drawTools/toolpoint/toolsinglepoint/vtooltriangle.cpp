@@ -64,7 +64,7 @@ const QString VToolTriangle::ToolType = QStringLiteral("triangle");
  * @param parent parent object.
  */
 VToolTriangle::VToolTriangle(const VToolTriangleInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       axisP1Id(initData.axisP1Id),
       axisP2Id(initData.axisP2Id),
       firstPointId(initData.firstPointId),
@@ -88,6 +88,7 @@ void VToolTriangle::setDialog()
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +118,7 @@ VToolTriangle* VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolTriangle* point = Create(initData);
     if (point != nullptr)
@@ -148,7 +150,7 @@ VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
         const QString errorMsg = tr("Error calculating point '%1'. Point of intersection cannot be found")
                       .arg(initData.name);
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
@@ -302,6 +304,9 @@ void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->GetAxisP2Id()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -319,6 +324,8 @@ void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     axisP1Id = doc->GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
     axisP2Id = doc->GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);

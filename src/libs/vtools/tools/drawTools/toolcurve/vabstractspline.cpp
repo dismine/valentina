@@ -55,8 +55,9 @@
 #include "../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    :VDrawTool(doc, data, id),
+VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                                 QGraphicsItem *parent)
+    :VDrawTool(doc, data, id, notes),
       QGraphicsPathItem(parent),
       controlPoints(),
       sceneType(SceneObject::Unknown),
@@ -202,7 +203,7 @@ QString VAbstractSpline::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Label"), curve->name());
+                                .arg(UnitsToStr(qApp->patternUnits(), true), tr("Label"), curve->ObjectName());
     return toolTip;
 }
 
@@ -323,12 +324,6 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
-{
-    Q_UNUSED(domElement)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VDrawTool::SaveOptions(tag, obj);
@@ -337,6 +332,7 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
     doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
     doc->SetAttribute(tag, AttrAScale, curve->GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(tag, AttrAlias, curve->GetAliasSuffix(), curve->GetAliasSuffix().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -500,6 +496,31 @@ quint32 VAbstractSpline::GetDuplicate() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::GetAliasSuffix() const
+{
+    return ObjectAliasSuffix<VAbstractCurve>(m_id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::SetAliasSuffix(const QString &alias)
+{
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+
+    const QString oldAliasSuffix = curve->GetAliasSuffix();
+    curve->SetAliasSuffix(alias);
+
+    if (alias.isEmpty() || VAbstractTool::data.IsUnique(curve->GetAlias()))
+    {
+        QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+        SaveOption(obj);
+    }
+    else
+    {
+        curve->SetAliasSuffix(oldAliasSuffix);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
@@ -508,8 +529,9 @@ void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 
 // VToolAbstractArc
 //---------------------------------------------------------------------------------------------------------------------
-VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    : VAbstractSpline(doc, data, id, parent)
+VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                                   QGraphicsItem *parent)
+    : VAbstractSpline(doc, data, id, notes, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

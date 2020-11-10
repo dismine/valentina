@@ -32,6 +32,10 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/dialogtapepreferences.h"
+#include "dialogs/dialogsetupmultisize.h"
+#include "dialogs/dialogrestrictdimension.h"
+#include "dialogs/dialogdimensionlabels.h"
+#include "dialogs/dialogmeasurementscsvcolumns.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
@@ -63,6 +67,7 @@
 #include <QProcess>
 #include <QtNumeric>
 #include <QTextCodec>
+#include <QTimer>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -79,33 +84,30 @@ Q_LOGGING_CATEGORY(tMainWindow, "t.mainwindow")
 
 QT_WARNING_POP
 
+namespace
+{
+enum class MUnits : qint8 { Table, Degrees};
+}
+
 // We need this enum in case we will add or delete a column. And also make code more readable.
-enum {ColumnName = 0, ColumnFullName, ColumnCalcValue, ColumnFormula, ColumnBaseValue, ColumnInSizes, ColumnInHeights};
+enum {
+    ColumnName = 0,
+    ColumnFullName = 1,
+    ColumnCalcValue = 2,
+    ColumnFormula = 3,
+    ColumnBaseValue = 4,
+    ColumnShiftA = 5,
+    ColumnShiftB = 6,
+    ColumnShiftC = 7,
+    ColumnCorrection = 8
+};
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
     : VAbstractMainWindow(parent),
       ui(new Ui::TMainWindow),
-      m(nullptr),
-      data(nullptr),
-      mUnit(Unit::Cm),
-      pUnit(Unit::Cm),
-      mType(MeasurementsType::Individual),
-      currentSize(0),
-      currentHeight(0),
-      curFile(),
-      gradationHeights(nullptr),
-      gradationSizes(nullptr),
-      comboBoxUnits(nullptr),
       formulaBaseHeight(0),
-      lock(nullptr),
-      search(),
-      labelGradationHeights(nullptr),
-      labelGradationSizes(nullptr),
-      labelPatternUnit(nullptr),
-      isInitialized(false),
-      mIsReadOnly(false),
-      hackedWidgets()
+      gradation(new QTimer(this))
 {
     ui->setupUi(this);
 
@@ -127,6 +129,8 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->toolBarGradation->setContextMenuPolicy(Qt::PreventContextMenu);
 
     m_recentFileActs.fill(nullptr);
+
+    connect(gradation, &QTimer::timeout, this, &TMainWindow::GradationChanged);
 
     SetupMenu();
     UpdateWindowTitle();
@@ -174,45 +178,79 @@ void TMainWindow::RetranslateTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetBaseMHeight(int height)
+bool TMainWindow::SetDimensionABase(int base)
 {
-    if (m != nullptr)
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.isEmpty())
     {
-        if (mType == MeasurementsType::Multisize)
-        {
-            const int row = ui->tableWidget->currentRow();
-            currentHeight = UnitConvertor(height, Unit::Cm, mUnit);
-
-            gradationHeights->blockSignals(true);
-            SetDefaultHeight(static_cast<int>(currentHeight));
-            gradationHeights->blockSignals(false);
-
-            RefreshData();
-            search->RefreshList(ui->lineEditFind->text());
-            ui->tableWidget->selectRow(row);
-        }
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't provide dimensions")));
+        return false;
     }
+
+    const qint32 i = gradationDimensionA->findData(base);
+    if (i != -1)
+    {
+        gradationDimensionA->setCurrentIndex(i);
+    }
+
+    if (base != currentDimensionA)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension A")));
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetBaseMSize(int size)
+bool TMainWindow::SetDimensionBBase(int base)
 {
-    if (m != nullptr)
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() <= 1)
     {
-        if (mType == MeasurementsType::Multisize)
-        {
-            const int row = ui->tableWidget->currentRow();
-            currentSize = UnitConvertor(size, Unit::Cm, mUnit);
-
-            gradationSizes->blockSignals(true);
-            SetDefaultSize(static_cast<int>(currentSize));
-            gradationSizes->blockSignals(false);
-
-            RefreshData();
-            search->RefreshList(ui->lineEditFind->text());
-            ui->tableWidget->selectRow(row);
-        }
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension B")));
+        return false;
     }
+
+    const qint32 i = gradationDimensionB->findData(base);
+    if (i != -1)
+    {
+        gradationDimensionB->setCurrentIndex(i);
+    }
+
+    if (base != currentDimensionB)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension B")));
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::SetDimensionCBase(int base)
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() <= 2)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension C")));
+        return false;
+    }
+
+    const qint32 i = gradationDimensionC->findData(base);
+    if (i != -1)
+    {
+        gradationDimensionC->setCurrentIndex(i);
+    }
+
+    if (base != currentDimensionC)
+    {
+        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension C")));
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,8 +335,9 @@ bool TMainWindow::LoadFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            currentSize = m->BaseSize();
-            currentHeight = m->BaseHeight();
+            currentDimensionA = m->DimensionABase();
+            currentDimensionB = m->DimensionBBase();
+            currentDimensionC = m->DimensionCBase();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -371,18 +410,27 @@ void TMainWindow::FileNew()
         pUnit = mUnit;
         mType = measurements.Type();
 
-        data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
-        currentHeight = measurements.BaseHeight();
-        currentSize = measurements.BaseSize();
-
         if (mType == MeasurementsType::Multisize)
         {
-            m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
+            DialogSetupMultisize setup(mUnit, this);
+            if (setup.exec() == QDialog::Rejected)
+            {
+                return;
+            }
+
+            data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
+
+            m = new VMeasurements(mUnit, setup.Dimensions(), data);
+            m->SetFullCircumference(setup.FullCircumference());
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
+
+            SetCurrentDimensionValues();
         }
         else
         {
+            data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
+
             m = new VMeasurements(mUnit, data);
             m_curFileFormatVersion = VVITConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVITConverter::MeasurementMaxVerStr;
@@ -553,16 +601,15 @@ void TMainWindow::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
+        InitMeasurementUnits();
+
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelMType->setText(tr("Multisize measurements"));
-            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QChar(QChar::Space) +
-                                            UnitsToStr(m->MUnit(), true));
-            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QChar(QChar::Space) +
-                                              UnitsToStr(m->MUnit(), true));
 
-            labelGradationHeights->setText(tr("Height (%1):").arg(UnitsToStr(mUnit)));
-            labelGradationSizes->setText(tr("Size (%1):").arg(UnitsToStr(mUnit)));
+            InitDimensionsBaseValue();
+            InitDimensionControls();
+            InitDimesionShifts();
         }
         else
         {
@@ -574,6 +621,8 @@ void TMainWindow::changeEvent(QEvent *event)
             InitGender(ui->comboBoxGender);
             ui->comboBoxGender->setCurrentIndex(index);
             ui->comboBoxGender->blockSignals(false);
+
+            InitMeasurementDimension();
         }
 
         {
@@ -586,7 +635,7 @@ void TMainWindow::changeEvent(QEvent *event)
         }
 
         {
-            labelPatternUnit = new QLabel(tr("Pattern unit:"));
+            labelPatternUnit->setText(tr("Pattern unit:"));
 
             if (comboBoxUnits != nullptr)
             {
@@ -974,16 +1023,34 @@ void TMainWindow::ImportDataFromCSV()
         qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
         qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
 
-        QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
-                        QTextCodec::codecForMib(dialog.GetSelectedMib()));
-
-        if (m->Type() == MeasurementsType::Individual)
+        QSharedPointer<DialogMeasurementsCSVColumns> columns;
+        if (m->Type() == MeasurementsType::Multisize)
         {
-            ImportIndividualMeasurements(csv);
+            const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+            columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m->Type(), dimensions, this);
         }
         else
         {
-            ImportMultisizeMeasurements(csv);
+            columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m->Type(), this);
+        }
+        columns->SetWithHeader(dialog.IsWithHeader());
+        columns->SetSeparator(dialog.GetSeparator());
+        columns->SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
+
+        if (columns->exec() == QDialog::Accepted)
+        {
+            QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
+                            QTextCodec::codecForMib(dialog.GetSelectedMib()));
+            const QVector<int> map = columns->ColumnsMap();
+
+            if (m->Type() == MeasurementsType::Individual)
+            {
+                ImportIndividualMeasurements(csv, map);
+            }
+            else
+            {
+                ImportMultisizeMeasurements(csv, map);
+            }
         }
     }
 }
@@ -1131,22 +1198,32 @@ void TMainWindow::Remove()
         ui->lineEditFullName->setText(QString());
         ui->lineEditFullName->blockSignals(false);
 
+        ui->comboBoxMUnits->blockSignals(true);
+        ui->comboBoxMUnits->setCurrentIndex(-1);
+        ui->comboBoxMUnits->blockSignals(false);
+
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
-            ui->doubleSpinBoxInSizes->blockSignals(true);
-            ui->doubleSpinBoxInHeights->blockSignals(true);
+            ui->doubleSpinBoxCorrection->blockSignals(true);
+            ui->doubleSpinBoxShiftA->blockSignals(true);
+            ui->doubleSpinBoxShiftB->blockSignals(true);
+            ui->doubleSpinBoxShiftC->blockSignals(true);
 
             ui->labelCalculatedValue->setText(QString());
             ui->doubleSpinBoxBaseValue->setValue(0);
-            ui->doubleSpinBoxInSizes->setValue(0);
-            ui->doubleSpinBoxInHeights->setValue(0);
+            ui->doubleSpinBoxCorrection->setValue(0);
+            ui->doubleSpinBoxShiftA->setValue(0);
+            ui->doubleSpinBoxShiftB->setValue(0);
+            ui->doubleSpinBoxShiftC->setValue(0);
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
-            ui->doubleSpinBoxInSizes->blockSignals(false);
-            ui->doubleSpinBoxInHeights->blockSignals(false);
+            ui->doubleSpinBoxCorrection->blockSignals(false);
+            ui->doubleSpinBoxShiftA->blockSignals(false);
+            ui->doubleSpinBoxShiftB->blockSignals(false);
+            ui->doubleSpinBoxShiftC->blockSignals(false);
         }
         else
         {
@@ -1453,20 +1530,54 @@ void TMainWindow::ImportFromPattern()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ChangedSize(const QString &text)
+void TMainWindow::DimensionABaseChanged()
 {
-    const int row = ui->tableWidget->currentRow();
-    currentSize = text.toInt();
-    RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
-    ui->tableWidget->selectRow(row);
+    currentDimensionA = gradationDimensionA->currentData().toInt();
+
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    if (dimensions.size() > 1)
+    {
+        MeasurementDimension_p dimension = dimensions.at(1);
+        InitDimensionGradation(1, dimension, gradationDimensionB);
+
+        if (dimensions.size() > 2)
+        {
+            dimension = dimensions.at(2);
+            InitDimensionGradation(2, dimension, gradationDimensionC);
+        }
+    }
+
+    gradation->start();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ChangedHeight(const QString &text)
+void TMainWindow::DimensionBBaseChanged()
 {
+    currentDimensionB = gradationDimensionB->currentData().toInt();
+
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() > 2)
+    {
+        MeasurementDimension_p dimension = dimensions.at(2);
+        InitDimensionGradation(2, dimension, gradationDimensionC);
+    }
+
+    gradation->start();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::DimensionCBaseChanged()
+{
+    currentDimensionC = gradationDimensionC->currentData().toInt();
+    gradation->start();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::GradationChanged()
+{
+    gradation->stop();
     const int row = ui->tableWidget->currentRow();
-    currentHeight = text.toInt();
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -1529,33 +1640,57 @@ void TMainWindow::ShowNewMData(bool fresh)
         connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
 
+        ui->comboBoxMUnits->blockSignals(true);
+        ui->comboBoxMUnits->setCurrentIndex(
+            ui->comboBoxMUnits->findData(static_cast<int>(meash->IsSpecialUnits() ? MUnits::Degrees : MUnits::Table)));
+        ui->comboBoxMUnits->blockSignals(false);
+
         if (mType == MeasurementsType::Multisize)
         {
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
-            ui->doubleSpinBoxInSizes->blockSignals(true);
-            ui->doubleSpinBoxInHeights->blockSignals(true);
+            ui->doubleSpinBoxCorrection->blockSignals(true);
+            ui->doubleSpinBoxShiftA->blockSignals(true);
+            ui->doubleSpinBoxShiftB->blockSignals(true);
+            ui->doubleSpinBoxShiftC->blockSignals(true);
 
-            const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
-            const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
-                                              pUnit);
-            ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + QChar(QChar::Space) +postfix);
+            QString calculatedValue;
+
+            if (meash->IsSpecialUnits())
+            {
+                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
+                calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + degreeSymbol;
+            }
+            else
+            {
+                const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+                const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
+                                                  pUnit);
+                calculatedValue = qApp->LocaleToString(value) + QChar(QChar::Space) + postfix;
+            }
+            ui->labelCalculatedValue->setText(calculatedValue);
 
             if (fresh)
             {
                 ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
-                ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
-                ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
+                ui->doubleSpinBoxCorrection->setValue(
+                    meash->GetCorrection(currentDimensionA, currentDimensionB, currentDimensionC));
+                ui->doubleSpinBoxShiftA->setValue(meash->GetShiftA());
+                ui->doubleSpinBoxShiftB->setValue(meash->GetShiftB());
+                ui->doubleSpinBoxShiftC->setValue(meash->GetShiftC());
             }
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
-            ui->doubleSpinBoxInSizes->blockSignals(false);
-            ui->doubleSpinBoxInHeights->blockSignals(false);
+            ui->doubleSpinBoxCorrection->blockSignals(false);
+            ui->doubleSpinBoxShiftA->blockSignals(false);
+            ui->doubleSpinBoxShiftB->blockSignals(false);
+            ui->doubleSpinBoxShiftC->blockSignals(false);
         }
         else
         {
-            EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue);
+            EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue,
+                        meash->IsSpecialUnits());
 
             ui->plainTextEditFormula->blockSignals(true);
 
@@ -1563,6 +1698,11 @@ void TMainWindow::ShowNewMData(bool fresh)
 
             ui->plainTextEditFormula->setPlainText(formula);
             ui->plainTextEditFormula->blockSignals(false);
+
+            ui->comboBoxDimension->blockSignals(true);
+            ui->comboBoxDimension->setCurrentIndex(
+                ui->comboBoxDimension->findData(static_cast<int>(meash->GetDimension())));
+            ui->comboBoxDimension->blockSignals(false);
         }
 
         MeasurementGUI();
@@ -1734,7 +1874,7 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    if (not EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue))
+    if (not EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue, meash->IsSpecialUnits()))
     {
         return;
     }
@@ -1790,7 +1930,7 @@ void TMainWindow::SaveMBaseValue(double value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMSizeIncrease(double value)
+void TMainWindow::SaveMShiftA(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -1800,7 +1940,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMShiftA(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWereSaved(false);
 
@@ -1815,7 +1955,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMHeightIncrease(double value)
+void TMainWindow::SaveMShiftB(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -1825,7 +1965,58 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMShiftB(nameField->data(Qt::UserRole).toString(), value);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMShiftC(double value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    m->SetMShiftC(nameField->data(Qt::UserRole).toString(), value);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMCorrectionValue(double value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    m->SetMCorrectionValue(nameField->data(Qt::UserRole).toString(),
+                           currentDimensionA, currentDimensionB, currentDimensionC, value);
 
     MeasurementsWereSaved(false);
 
@@ -1909,6 +2100,205 @@ void TMainWindow::SaveMFullName()
     {
         qCWarning(tMainWindow, "%s", qUtf8Printable(tr("The full name of known measurement forbidden to change.")));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMUnits()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const MUnits units = static_cast<MUnits>(ui->comboBoxMUnits->currentData().toInt());
+    m->SetMSpecialUnits(nameField->data(Qt::UserRole).toString(), units == MUnits::Degrees);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMDimension()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const IMD dimension = static_cast<IMD>(ui->comboBoxDimension->currentData().toInt());
+    m->SetMDimension(nameField->data(Qt::UserRole).toString(), dimension);
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FullCircumferenceChanged(bool checked)
+{
+    m->SetFullCircumference(checked);
+    MeasurementsWereSaved(false);
+    InitDimensionsBaseValue();
+    InitDimensionControls();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ExportToIndividual()
+{
+    QString dir;
+    if (curFile.isEmpty())
+    {
+        dir = qApp->TapeSettings()->GetPathIndividualMeasurements();
+    }
+    else
+    {
+        dir = QFileInfo(curFile).absolutePath();
+    }
+
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
+
+    QString filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
+    QString fName = tr("measurements.vit");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + QChar('/') + fName,
+                                                    filters);
+
+    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
+                                     {
+                                         if (usedNotExistedDir)
+                                         {
+                                             QDir(dir).rmpath(QChar('.'));
+                                         }
+                                     });
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QString suffix = QStringLiteral("vit");
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QChar('.') + suffix;
+    }
+
+    QScopedPointer<VContainer> tmpData(new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace()));
+
+    VMeasurements individualMeasurements(mUnit, tmpData.data());
+
+    const QMap<int, QSharedPointer<VMeasurement> > orderedTable = OrderedMeasurments();
+    QMap<int, QSharedPointer<VMeasurement> >::const_iterator iMap;
+    for (iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
+    {
+        const QSharedPointer<VMeasurement> &meash = iMap.value();
+        individualMeasurements.AddEmpty(meash->GetName());
+        individualMeasurements.SetMValue(meash->GetName(), QString::number(*meash->GetValue()));
+        individualMeasurements.SetMSpecialUnits(meash->GetName(), meash->IsSpecialUnits());
+        if (meash->IsCustom())
+        {
+            individualMeasurements.SetMDescription(meash->GetName(), meash->GetDescription());
+            individualMeasurements.SetMFullName(meash->GetName(), meash->GetGuiText());
+        }
+    }
+
+    QString error;
+    const bool result = individualMeasurements.SaveDocument(fileName, error);
+    if (not result)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save the file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RestrictSecondDimesion()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QMap<QString, QPair<int, int>> restrictions = m->GetRestrictions();
+
+    bool oneDimesionRestriction = true;
+    bool fullCircumference = m->IsFullCircumference();
+
+    DialogRestrictDimension dialog(dimensions, restrictions, oneDimesionRestriction, fullCircumference, this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetRestrictions(dialog.Restrictions());
+    MeasurementsWereSaved(false);
+    DimensionABaseChanged(); // trigger refresh
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RestrictThirdDimesion()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QMap<QString, QPair<int, int>> restrictions = m->GetRestrictions();
+
+    bool oneDimesionRestriction = false;
+    bool fullCircumference = m->IsFullCircumference();
+
+    DialogRestrictDimension dialog(dimensions, restrictions, oneDimesionRestriction, fullCircumference, this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetRestrictions(dialog.Restrictions());
+    MeasurementsWereSaved(false);
+    DimensionABaseChanged(); // trigger refresh
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::EditDimensionLabels()
+{
+    const QMap<MeasurementDimension, MeasurementDimension_p > dimensions = m->Dimensions();
+
+    DialogDimensionLabels dialog(dimensions, m->IsFullCircumference(), this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetDimensionLabels(dialog.Labels());
+
+    MeasurementsWereSaved(false);
+
+    InitDimensionsBaseValue();
+    InitDimensionControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2011,18 +2401,18 @@ void TMainWindow::InitWindow()
     SCASSERT(m != nullptr)
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
-    ui->tabWidget->setCurrentIndex(0);
+    ui->tabWidget->setCurrentIndex(0); // measurements
 
     ui->plainTextEditNotes->setEnabled(true);
     ui->toolBarGradation->setVisible(true);
 
     if (mType == MeasurementsType::Multisize)
     {
+        InitMenu();
         ui->labelMType->setText(tr("Multisize measurements"));
-        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QChar(QChar::Space) +
-                                        UnitsToStr(m->MUnit(), true));
-        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QChar(QChar::Space) +
-                                          UnitsToStr(m->MUnit(), true));
+
+        InitDimensionsBaseValue();
+        HackDimensionBaseValue();
 
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
@@ -2032,6 +2422,8 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->toolButtonExpr);
         HackWidget(&ui->labelFormula);
         HackWidget(&ui->pushButtonGrow);
+        HackWidget(&ui->labelDimension);
+        HackWidget(&ui->comboBoxDimension);
 
         // Tab Information
         HackWidget(&ui->lineEditCustomerName);
@@ -2043,27 +2435,25 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->labelGender);
         HackWidget(&ui->labelEmail);
 
-        const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
-        const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
+        InitDimensionControls();
+        ShowDimensionControls();
+        SetDimensionBases();
 
-        labelGradationHeights = new QLabel(tr("Height (%1):").arg(UnitsToStr(mUnit)));
-        gradationHeights = SetGradationList(labelGradationHeights, listHeights);
-        SetDefaultHeight(static_cast<int>(data->height()));
-        connect(gradationHeights, &QComboBox::currentTextChanged,
-                this, &TMainWindow::ChangedHeight);
-
-        labelGradationSizes = new QLabel(tr("Size (%1):").arg(UnitsToStr(mUnit)));
-        gradationSizes = SetGradationList(labelGradationSizes, listSizes);
-        SetDefaultSize(static_cast<int>(data->size()));
-        connect(gradationSizes, &QComboBox::currentTextChanged,
-                this, &TMainWindow::ChangedSize);
+        InitDimesionShifts();
 
         connect(ui->doubleSpinBoxBaseValue, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMBaseValue);
-        connect(ui->doubleSpinBoxInSizes, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-                this, &TMainWindow::SaveMSizeIncrease);
-        connect(ui->doubleSpinBoxInHeights, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-                this, &TMainWindow::SaveMHeightIncrease);
+        connect(ui->doubleSpinBoxCorrection, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMCorrectionValue);
+
+        connect(ui->doubleSpinBoxShiftA, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMShiftA);
+        connect(ui->doubleSpinBoxShiftB, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMShiftB);
+        connect(ui->doubleSpinBoxShiftC, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMShiftC);
+
+        HackDimensionShifts();
 
         SetDecimals();
     }
@@ -2078,17 +2468,15 @@ void TMainWindow::InitWindow()
 
         // Tab Measurements
         HackWidget(&ui->doubleSpinBoxBaseValue);
-        HackWidget(&ui->doubleSpinBoxInSizes);
-        HackWidget(&ui->doubleSpinBoxInHeights);
+        HackWidget(&ui->doubleSpinBoxCorrection);
         HackWidget(&ui->labelBaseValue);
-        HackWidget(&ui->labelInSizes);
-        HackWidget(&ui->labelInHeights);
+        HackWidget(&ui->labelCorrection);
+        HackDimensionShifts();
 
         // Tab Information
-        HackWidget(&ui->labelBaseSize);
-        HackWidget(&ui->labelBaseSizeValue);
-        HackWidget(&ui->labelBaseHeight);
-        HackWidget(&ui->labelBaseHeightValue);
+        HackDimensionBaseValue();
+        HackWidget(&ui->frameBaseValue);
+        HackWidget(&ui->labelBaseValues);
 
         ui->lineEditCustomerName->setText(m->Customer());
 
@@ -2118,6 +2506,10 @@ void TMainWindow::InitWindow()
                 Qt::UniqueConnection);
 
         connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
+
+        InitMeasurementDimension();
+        connect(ui->comboBoxDimension, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                &TMainWindow::SaveMDimension);
     }
 
     ui->comboBoxPMSystem->setEnabled(true);
@@ -2168,9 +2560,258 @@ void TMainWindow::InitWindow()
         ShowInGraphicalShell(curFile);
     });
 
-    InitUnits();
+    InitPatternUnits();
+    InitMeasurementUnits();
+
+    ui->comboBoxMUnits->blockSignals(true);
+    ui->comboBoxMUnits->setCurrentIndex(-1);
+    ui->comboBoxMUnits->blockSignals(false);
+
+    connect(ui->comboBoxMUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TMainWindow::SaveMUnits);
 
     InitTable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitMenu()
+{
+    if (mType == MeasurementsType::Multisize)
+    {
+        // Measurements
+        ui->actionUseFullCircumference->setVisible(true);
+        ui->actionUseFullCircumference->setEnabled(true);
+        ui->actionUseFullCircumference->setChecked(m->IsFullCircumference());
+        connect(ui->actionUseFullCircumference, &QAction::triggered, this, &TMainWindow::FullCircumferenceChanged);
+
+        QAction *separator = new QAction(this);
+        separator->setSeparator(true);
+        ui->menuMeasurements->insertAction(ui->actionUseFullCircumference, separator);
+
+        const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+        if (dimensions.size() > 1)
+        {
+            ui->actionRestrictSecondDimension->setVisible(true);
+            ui->actionRestrictSecondDimension->setEnabled(true);
+            connect(ui->actionRestrictSecondDimension, &QAction::triggered, this, &TMainWindow::RestrictSecondDimesion);
+
+            if (dimensions.size() > 2)
+            {
+                ui->actionRestrictThirdDimension->setVisible(true);
+                ui->actionRestrictThirdDimension->setEnabled(true);
+                connect(ui->actionRestrictThirdDimension, &QAction::triggered, this,
+                        &TMainWindow::RestrictThirdDimesion);
+            }
+        }
+
+        ui->actionDimensionLabels->setVisible(true);
+        ui->actionDimensionLabels->setEnabled(true);
+        connect(ui->actionDimensionLabels, &QAction::triggered, this, &TMainWindow::EditDimensionLabels);
+
+        // File
+        ui->actionExportToIndividual->setVisible(true);
+        ui->actionExportToIndividual->setEnabled(true);
+        connect(ui->actionExportToIndividual, &QAction::triggered, this, &TMainWindow::ExportToIndividual);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitDimensionsBaseValue()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QString unit = UnitsToStr(m->MUnit(), true);
+    const bool fc = m->IsFullCircumference();
+
+    auto DimensionsBaseValue = [this, dimensions, unit, fc](int index, QLabel *name, QLabel *base)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(base != nullptr)
+
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+            name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                            dimension->IsCircumference(),
+                                                                            m->IsFullCircumference()));
+
+            DimesionLabels labels = dimension->Labels();
+
+            if (labels.contains(dimension->BaseValue()) && not labels.value(dimension->BaseValue()).isEmpty())
+            {
+                base->setText(labels.value(dimension->BaseValue()));
+            }
+            else
+            {
+                if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
+                {
+                    if (dimension->Type() != MeasurementDimension::X && fc)
+                    {
+                        base->setText(QString("%1 %2").arg(dimension->BaseValue()*2).arg(unit));
+                    }
+                    else
+                    {
+                        base->setText(QString("%1 %2").arg(dimension->BaseValue()).arg(unit));
+                    }
+                }
+                else
+                {
+                    base->setText(QString::number(dimension->BaseValue()));
+                }
+            }
+        }
+    };
+
+    DimensionsBaseValue(0, ui->labelDimensionA, ui->labelDimensionABase);
+    DimensionsBaseValue(1, ui->labelDimensionB, ui->labelDimensionBBase);
+    DimensionsBaseValue(2, ui->labelDimensionC, ui->labelDimensionCBase);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QComboBox *control)
+{
+    SCASSERT(control != nullptr)
+
+    const bool fc = m->IsFullCircumference();
+    const QString unit = UnitsToStr(m->MUnit(), true);
+
+    int current = -1;
+    if (control->currentIndex() != -1)
+    {
+        current = control->currentData().toInt();
+    }
+
+    control->blockSignals(true);
+    control->clear();
+
+    const QVector<int> bases = DimensionRestrictedValues(index, dimension);
+    const DimesionLabels labels = dimension->Labels();
+
+    if (dimension->Type() == MeasurementDimension::X)
+    {
+        for(auto base : bases)
+        {
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(base).arg(unit), base);
+            }
+        }
+    }
+    else if (dimension->Type() == MeasurementDimension::Y)
+    {
+        for(auto base : bases)
+        {
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                if (dimension->IsCircumference())
+                {
+                    control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                }
+                else
+                {
+                    control->addItem(QString::number(base), base);
+                }
+            }
+        }
+    }
+    else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
+    {
+        for(auto base : bases)
+        {
+            if (labels.contains(base) && not labels.value(base).isEmpty())
+            {
+                control->addItem(labels.value(base), base);
+            }
+            else
+            {
+                control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+            }
+        }
+    }
+
+    // after initialization the current index is 0. The signal for changing the index will not be triggered if not make
+    // it invalid first
+    control->setCurrentIndex(-1);
+
+    int i = control->findData(current);
+    if (i != -1)
+    {
+        control->setCurrentIndex(i);
+        control->blockSignals(false);
+    }
+    else
+    {
+        control->blockSignals(false);
+        control->setCurrentIndex(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitDimensionControls()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QString unit = UnitsToStr(m->MUnit(), true);
+
+    auto InitControl = [this, dimensions, unit](int index, QLabel *&name, QComboBox *&control)
+    {
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+
+            if (name == nullptr)
+            {
+                name = new QLabel(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+            }
+            else
+            {
+                name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+            }
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                            dimension->IsCircumference(),
+                                                                            m->IsFullCircumference()));
+
+            if (control == nullptr)
+            {
+                control = new QComboBox;
+            }
+
+            InitDimensionGradation(index, dimension, control);
+        }
+    };
+
+    InitControl(0, labelGradationDimensionA, gradationDimensionA);
+    InitControl(1, labelGradationDimensionB, gradationDimensionB);
+    InitControl(2, labelGradationDimensionC, gradationDimensionC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitDimesionShifts()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto InitShift = [this, dimensions](int index, QLabel *name)
+    {
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+
+            name->setText(tr("Shift (%1):").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
+                                                                            dimension->IsCircumference(),
+                                                                            m->IsFullCircumference()));
+        }
+    };
+
+    InitShift(0, ui->labelShiftA);
+    InitShift(1, ui->labelShiftB);
+    InitShift(2, ui->labelShiftC);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2179,12 +2820,45 @@ void TMainWindow::InitTable()
     if (mType == MeasurementsType::Multisize)
     {
         ui->tableWidget->setColumnHidden( ColumnFormula, true );// formula
+
+        const QList< MeasurementDimension_p > dimensions = m->Dimensions().values();
+
+        if (dimensions.size() > 0)
+        {
+            MeasurementDimension_p dimension = dimensions.at(0);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftA)->setText(
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+        }
+
+        if (dimensions.size() < 2)
+        {
+            ui->tableWidget->setColumnHidden( ColumnShiftB, true );
+        }
+        else
+        {
+            MeasurementDimension_p dimension = dimensions.at(1);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftB)->setText(
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+        }
+
+        if (dimensions.size() < 3)
+        {
+            ui->tableWidget->setColumnHidden( ColumnShiftC, true );
+        }
+        else
+        {
+            MeasurementDimension_p dimension = dimensions.at(2);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftC)->setText(
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+        }
     }
     else
     {
         ui->tableWidget->setColumnHidden( ColumnBaseValue, true );// base value
-        ui->tableWidget->setColumnHidden( ColumnInSizes, true );// in sizes
-        ui->tableWidget->setColumnHidden( ColumnInHeights, true );// in heights
+        ui->tableWidget->setColumnHidden( ColumnShiftA, true );
+        ui->tableWidget->setColumnHidden( ColumnShiftB, true );
+        ui->tableWidget->setColumnHidden( ColumnShiftC, true );
+        ui->tableWidget->setColumnHidden( ColumnCorrection, true );
     }
 
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this, &TMainWindow::ShowMData);
@@ -2204,8 +2878,10 @@ void TMainWindow::ShowUnits()
     ShowHeaderUnits(ui->tableWidget, ColumnCalcValue, UnitsToStr(pUnit));// calculated value
     ShowHeaderUnits(ui->tableWidget, ColumnFormula, unit);// formula
     ShowHeaderUnits(ui->tableWidget, ColumnBaseValue, unit);// base value
-    ShowHeaderUnits(ui->tableWidget, ColumnInSizes, unit);// in sizes
-    ShowHeaderUnits(ui->tableWidget, ColumnInHeights, unit);// in heights
+    ShowHeaderUnits(ui->tableWidget, ColumnShiftA, unit);
+    ShowHeaderUnits(ui->tableWidget, ColumnShiftB, unit);
+    ShowHeaderUnits(ui->tableWidget, ColumnShiftC, unit);
+    ShowHeaderUnits(ui->tableWidget, ColumnCorrection, unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2346,51 +3022,11 @@ QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QComboBox *TMainWindow::SetGradationList(QLabel *label, const QStringList &list)
-{
-    ui->toolBarGradation->addWidget(label);
-
-    auto *comboBox = new QComboBox;
-    comboBox->addItems(list);
-    ui->toolBarGradation->addWidget(comboBox);
-
-    return comboBox;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetDefaultHeight(int value)
-{
-    const qint32 index = gradationHeights->findText(QString::number(value));
-    if (index != -1)
-    {
-        gradationHeights->setCurrentIndex(index);
-    }
-    else
-    {
-        currentHeight = gradationHeights->currentText().toInt();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetDefaultSize(int value)
-{
-    const qint32 index = gradationSizes->findText(QString::number(value));
-    if (index != -1)
-    {
-        gradationSizes->setCurrentIndex(index);
-    }
-    else
-    {
-        currentSize = gradationSizes->currentText().toInt();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData(bool freshCall)
 {
     data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
-    m->ReadMeasurements(currentHeight, currentSize);
+    m->ReadMeasurements(currentDimensionA, currentDimensionB, currentDimensionC);
 
     RefreshTable(freshCall);
 }
@@ -2403,15 +3039,7 @@ void TMainWindow::RefreshTable(bool freshCall)
 
     ShowUnits();
 
-    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
-    QMap<int, QSharedPointer<VMeasurement> > orderedTable;
-    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
-    for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
-    {
-        const QSharedPointer<VMeasurement> &meash = iterMap.value();
-        orderedTable.insert(meash->Index(), meash);
-    }
-
+    const QMap<int, QSharedPointer<VMeasurement> > orderedTable = OrderedMeasurments();
     qint32 currentRow = -1;
     QMap<int, QSharedPointer<VMeasurement> >::const_iterator iMap;
     ui->tableWidget->setRowCount ( orderedTable.size() );
@@ -2435,8 +3063,17 @@ void TMainWindow::RefreshTable(bool freshCall)
                 AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
             }
 
-            const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
-            AddCell(locale().toString(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
+            QString calculatedValue;
+            if (meash->IsSpecialUnits())
+            {
+                calculatedValue = locale().toString(*meash->GetValue()) + degreeSymbol;
+            }
+            else
+            {
+                calculatedValue = locale().toString(UnitConvertor(*meash->GetValue(), mUnit, pUnit));
+            }
+
+            AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
             QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -2458,19 +3095,36 @@ void TMainWindow::RefreshTable(bool freshCall)
                 AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
             }
 
-            const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
-                                              pUnit);
-            AddCell(locale().toString(value), currentRow, ColumnCalcValue,
+            QString calculatedValue;
+            if (meash->IsSpecialUnits())
+            {
+                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
+                calculatedValue = locale().toString(value) + degreeSymbol;
+            }
+            else
+            {
+                const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
+                                                  pUnit);
+                calculatedValue = locale().toString(value);
+            }
+
+            AddCell(calculatedValue, currentRow, ColumnCalcValue,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
             AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
                     Qt::AlignHCenter | Qt::AlignVCenter); // base value
 
-            AddCell(locale().toString(meash->GetKsize()), currentRow, ColumnInSizes,
-                    Qt::AlignHCenter | Qt::AlignVCenter); // in sizes
+            AddCell(locale().toString(meash->GetShiftA()), currentRow, ColumnShiftA,
+                    Qt::AlignHCenter | Qt::AlignVCenter);
 
-            AddCell(locale().toString(meash->GetKheight()), currentRow, ColumnInHeights,
-                    Qt::AlignHCenter | Qt::AlignVCenter); // in heights
+            AddCell(locale().toString(meash->GetShiftB()), currentRow, ColumnShiftB,
+                    Qt::AlignHCenter | Qt::AlignVCenter);
+
+            AddCell(locale().toString(meash->GetShiftC()), currentRow, ColumnShiftC,
+                    Qt::AlignHCenter | Qt::AlignVCenter);
+
+            AddCell(locale().toString(meash->GetCorrection(currentDimensionA, currentDimensionB, currentDimensionC)),
+                    currentRow, ColumnCorrection, Qt::AlignHCenter | Qt::AlignVCenter);
         }
     }
 
@@ -2550,18 +3204,22 @@ void TMainWindow::MFields(bool enabled)
     ui->lineEditName->setEnabled(enabled);
     ui->plainTextEditDescription->setEnabled(enabled);
     ui->lineEditFullName->setEnabled(enabled);
+    ui->comboBoxMUnits->setEnabled(enabled);
 
     if (mType == MeasurementsType::Multisize)
     {
         ui->doubleSpinBoxBaseValue->setEnabled(enabled);
-        ui->doubleSpinBoxInSizes->setEnabled(enabled);
-        ui->doubleSpinBoxInHeights->setEnabled(enabled);
+        ui->doubleSpinBoxShiftA->setEnabled(enabled);
+        ui->doubleSpinBoxShiftB->setEnabled(enabled);
+        ui->doubleSpinBoxShiftC->setEnabled(enabled);
+        ui->doubleSpinBoxCorrection->setEnabled(enabled);
     }
     else
     {
         ui->plainTextEditFormula->setEnabled(enabled);
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
+        ui->comboBoxDimension->setEnabled(enabled);
     }
 
     ui->lineEditFind->setEnabled(enabled);
@@ -2643,9 +3301,11 @@ QString TMainWindow::ClearCustomName(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
+bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label,
+                              bool specialUnits)
 {
-    const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = specialUnits ? degreeSymbol : UnitsToStr(pUnit);
+
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + QStringLiteral(" (") + postfix + QStringLiteral("). ") + tr("Empty field."));
@@ -2675,7 +3335,10 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             return false;
         }
 
-        result = UnitConvertor(result, mUnit, pUnit);
+        if (not specialUnits)
+        {
+            result = UnitConvertor(result, mUnit, pUnit);
+        }
 
         label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) +postfix);
         label->setToolTip(tr("Value"));
@@ -2872,8 +3535,9 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            currentHeight = m->BaseHeight();
-            currentSize = m->BaseSize();
+            currentDimensionA = m->DimensionABase();
+            currentDimensionB = m->DimensionBBase();
+            currentDimensionC = m->DimensionCBase();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -3025,6 +3689,50 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::HackDimensionBaseValue()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto DimensionsBaseValue = [this, dimensions](int index, QLabel *name, QLabel *base)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(base != nullptr)
+
+        if (dimensions.size() <= index)
+        {
+            HackWidget(&name);
+            HackWidget(&base);
+        }
+    };
+
+    DimensionsBaseValue(0, ui->labelDimensionA, ui->labelDimensionABase);
+    DimensionsBaseValue(1, ui->labelDimensionB, ui->labelDimensionBBase);
+    DimensionsBaseValue(2, ui->labelDimensionC, ui->labelDimensionCBase);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::HackDimensionShifts()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto HackShift = [this, dimensions](int index, QLabel *&name, QDoubleSpinBox *&shift)
+    {
+        SCASSERT(name != nullptr)
+        SCASSERT(shift != nullptr)
+
+        if (dimensions.size() <= index)
+        {
+            HackWidget(&name);
+            HackWidget(&shift);
+        }
+    };
+
+    HackShift(0, ui->labelShiftA, ui->doubleSpinBoxShiftA);
+    HackShift(1, ui->labelShiftB, ui->doubleSpinBoxShiftB);
+    HackShift(2, ui->labelShiftC, ui->doubleSpinBoxShiftC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedNames) const
 {
     if (name.isEmpty())
@@ -3091,7 +3799,7 @@ void TMainWindow::RefreshDataAfterImport()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
+void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map)
 {
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -3124,7 +3832,8 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
     {
         try
         {
-            const QString name = csv.text(i, 0).simplified();
+            const int nameColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Name));
+            const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
                 ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
@@ -3135,17 +3844,28 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
             const QString mName = CheckMName(qApp->TrVars()->MFromUser(name), importedNames);
             importedNames.insert(mName);
             measurement.name = mName;
-            measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, 1), qApp->Settings()->GetOsSeparator());
 
-            const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
+            const int valueColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Value));
+            measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, valueColumn),
+                                                                   qApp->Settings()->GetOsSeparator());
+
+            const bool custom = name.startsWith(CustomMSign);
             if (columns > 2 && custom)
             {
-                measurement.fullName = csv.text(i, 2).simplified();
+                const int fullNameColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::FullName));
+                if (fullNameColumn >= 0)
+                {
+                    measurement.fullName = csv.text(i, fullNameColumn).simplified();
+                }
             }
 
             if (columns > 3 && custom)
             {
-                measurement.description = csv.text(i, 3).simplified();
+                const int descriptionColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Description));
+                if (descriptionColumn >= 0)
+                {
+                    measurement.description = csv.text(i, descriptionColumn).simplified();
+                }
             }
 
             measurements.append(measurement);
@@ -3176,7 +3896,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
+void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map)
 {
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -3189,9 +3909,10 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
 
     auto ConverToDouble = [](QString text, const QString &error)
     {
+        text.replace(" ", QString());
         text = VTranslateVars::TryFormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         bool ok = false;
-        QLocale::c();
+
         const qreal value = QLocale::c().toDouble(text, &ok);
         if (not ok)
         {
@@ -3210,8 +3931,9 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
 
         QString name;
         qreal base{0};
-        qreal heightIncrease{0};
-        qreal sizeIncrease{0};
+        qreal shiftA{0};
+        qreal shiftB{0};
+        qreal shiftC{0};
         QString fullName;
         QString description;
     };
@@ -3219,11 +3941,14 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     QVector<MultisizeMeasurement> measurements;
     QSet<QString> importedNames;
 
+    const QMap<MeasurementDimension, MeasurementDimension_p > dimensions = m->Dimensions();
+
     for(int i=0; i < rows; ++i)
     {
         try
         {
-            const QString name = csv.text(i, 0).simplified();
+            const int nameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Name));
+            const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
                 ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
@@ -3235,24 +3960,48 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
             importedNames.insert(mName);
             measurement.name = mName;
 
-            measurement.base = ConverToDouble(csv.text(i, 1),
-                                              tr("Cannot convert base size value to double in column 2."));
+            const int baseValueColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
+            measurement.base = ConverToDouble(csv.text(i, baseValueColumn),
+                                              tr("Cannot convert base value to double in column 2."));
 
-            measurement.heightIncrease = ConverToDouble(csv.text(i, 2),
-                                                     tr("Cannot convert height increase value to double in column 3."));
+            const int shiftAColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
+            measurement.shiftA = ConverToDouble(csv.text(i, shiftAColumn),
+                                                tr("Cannot convert shift value to double in column %1.")
+                                                    .arg(shiftAColumn));
 
-            measurement.sizeIncrease = ConverToDouble(csv.text(i, 3),
-                                                      tr("Cannot convert size increase value to double in column 4."));
+            if (dimensions.size() > 1)
+            {
+                const int shiftBColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftB));
+                measurement.shiftB = ConverToDouble(csv.text(i, shiftBColumn),
+                                                    tr("Cannot convert shift value to double in column %1.")
+                                                        .arg(shiftBColumn));
+            }
 
-            const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
+            if (dimensions.size() > 2)
+            {
+                const int shiftCColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftC));
+                measurement.shiftC = ConverToDouble(csv.text(i, shiftCColumn),
+                                                    tr("Cannot convert shift value to double in column %1.")
+                                                        .arg(shiftCColumn));
+            }
+
+            const bool custom = name.startsWith(CustomMSign);
             if (columns > 4 && custom)
             {
-                measurement.fullName = csv.text(i, 4).simplified();
+                const int fullNameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::FullName));
+                if (fullNameColumn >= 0)
+                {
+                    measurement.fullName = csv.text(i, fullNameColumn).simplified();
+                }
             }
 
             if (columns > 5 && custom)
             {
-                measurement.description = csv.text(i, 5).simplified();
+                const int descriptionColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Description));
+                if (descriptionColumn >= 0)
+                {
+                    measurement.description = csv.text(i, descriptionColumn).simplified();
+                }
             }
 
             measurements.append(measurement);
@@ -3268,8 +4017,17 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     {
         m->AddEmpty(mm.name);
         m->SetMBaseValue(mm.name, mm.base);
-        m->SetMSizeIncrease(mm.name, mm.sizeIncrease);
-        m->SetMHeightIncrease(mm.name, mm.heightIncrease);
+        m->SetMShiftA(mm.name, mm.shiftA);
+
+        if (dimensions.size() > 1)
+        {
+            m->SetMShiftB(mm.name, mm.shiftB);
+        }
+
+        if (dimensions.size() > 2)
+        {
+            m->SetMShiftC(mm.name, mm.shiftC);
+        }
 
         if (not mm.fullName.isEmpty())
         {
@@ -3301,6 +4059,160 @@ void TMainWindow::SetCurrentPatternUnit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowDimensionControls()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto ShowControl = [this, dimensions](int index, QLabel *name, QComboBox *control)
+    {
+        if (dimensions.size() > index)
+        {
+            SCASSERT(name != nullptr)
+            SCASSERT(control != nullptr)
+
+            ui->toolBarGradation->addWidget(name);
+            ui->toolBarGradation->addWidget(control);
+        }
+    };
+
+    ShowControl(0, labelGradationDimensionA, gradationDimensionA);
+    ShowControl(1, labelGradationDimensionB, gradationDimensionB);
+    ShowControl(2, labelGradationDimensionC, gradationDimensionC);
+
+    if (gradationDimensionA)
+    {
+        connect(gradationDimensionA, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this, &TMainWindow::DimensionABaseChanged);
+    }
+
+    if (gradationDimensionB)
+    {
+        connect(gradationDimensionB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this, &TMainWindow::DimensionBBaseChanged);
+    }
+
+    if (gradationDimensionC)
+    {
+        connect(gradationDimensionC, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this, &TMainWindow::DimensionCBaseChanged);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetDimensionBases()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    if (dimensions.size() > 0)
+    {
+        MeasurementDimension_p dimension = dimensions.at(0);
+        currentDimensionA = dimension->BaseValue();
+    }
+
+    if (dimensions.size() > 1)
+    {
+        MeasurementDimension_p dimension = dimensions.at(1);
+        currentDimensionB = dimension->BaseValue();
+    }
+
+    if (dimensions.size() > 2)
+    {
+        MeasurementDimension_p dimension = dimensions.at(2);
+        currentDimensionC = dimension->BaseValue();
+    }
+
+    auto SetBase = [dimensions](int index, QComboBox *control, int &value)
+    {
+        if (dimensions.size() > index)
+        {
+            SCASSERT(control != nullptr)
+
+            MeasurementDimension_p dimension = dimensions.at(index);
+
+            const qint32 i = control->findData(value);
+            if (i != -1)
+            {
+                control->setCurrentIndex(i);
+            }
+            else
+            {
+                value = control->currentData().toInt();
+            }
+        }
+    };
+
+    SetBase(0, gradationDimensionA, currentDimensionA);
+    SetBase(1, gradationDimensionB, currentDimensionB);
+    SetBase(2, gradationDimensionC, currentDimensionC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetCurrentDimensionValues()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+    auto SetDimensionValue = [dimensions](int index, int &value)
+    {
+        if (dimensions.size() > index)
+        {
+            MeasurementDimension_p dimension = dimensions.at(index);
+            value = dimension->BaseValue();
+        }
+    };
+
+    SetDimensionValue(0, currentDimensionA);
+    SetDimensionValue(1, currentDimensionB);
+    SetDimensionValue(2, currentDimensionC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<int> TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
+{
+    QPair<int, int> restriction;
+
+    if (index == 0)
+    {
+        return dimension->ValidBases();
+    }
+    else if (index == 1)
+    {
+        restriction = m->Restriction(currentDimensionA);
+    }
+    else
+    {
+        restriction = m->Restriction(currentDimensionA, currentDimensionB);
+    }
+
+    const QVector<int> bases = dimension->ValidBases();
+
+    int min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+    int max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+
+    if (min > max)
+    {
+        min = dimension->MinValue();
+        max = dimension->MaxValue();
+    }
+
+    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<int, QSharedPointer<VMeasurement> > TMainWindow::OrderedMeasurments() const
+{
+    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
+    QMap<int, QSharedPointer<VMeasurement> > orderedTable;
+    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
+    for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
+    {
+        const QSharedPointer<VMeasurement> &meash = iterMap.value();
+        orderedTable.insert(meash->Index(), meash);
+    }
+
+    return orderedTable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetDecimals()
 {
     switch (mUnit)
@@ -3309,31 +4221,49 @@ void TMainWindow::SetDecimals()
             ui->doubleSpinBoxBaseValue->setDecimals(2);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.01);
 
-            ui->doubleSpinBoxInSizes->setDecimals(2);
-            ui->doubleSpinBoxInSizes->setSingleStep(0.01);
+            ui->doubleSpinBoxCorrection->setDecimals(2);
+            ui->doubleSpinBoxCorrection->setSingleStep(0.01);
 
-            ui->doubleSpinBoxInHeights->setDecimals(2);
-            ui->doubleSpinBoxInHeights->setSingleStep(0.01);
+            ui->doubleSpinBoxShiftA->setDecimals(2);
+            ui->doubleSpinBoxShiftA->setSingleStep(0.01);
+
+            ui->doubleSpinBoxShiftB->setDecimals(2);
+            ui->doubleSpinBoxShiftB->setSingleStep(0.01);
+
+            ui->doubleSpinBoxShiftC->setDecimals(2);
+            ui->doubleSpinBoxShiftC->setSingleStep(0.01);
             break;
         case Unit::Mm:
             ui->doubleSpinBoxBaseValue->setDecimals(1);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
 
-            ui->doubleSpinBoxInSizes->setDecimals(1);
-            ui->doubleSpinBoxInSizes->setSingleStep(0.1);
+            ui->doubleSpinBoxCorrection->setDecimals(1);
+            ui->doubleSpinBoxCorrection->setSingleStep(0.1);
 
-            ui->doubleSpinBoxInHeights->setDecimals(1);
-            ui->doubleSpinBoxInHeights->setSingleStep(0.1);
+            ui->doubleSpinBoxShiftA->setDecimals(1);
+            ui->doubleSpinBoxShiftA->setSingleStep(0.1);
+
+            ui->doubleSpinBoxShiftB->setDecimals(1);
+            ui->doubleSpinBoxShiftB->setSingleStep(0.1);
+
+            ui->doubleSpinBoxShiftC->setDecimals(1);
+            ui->doubleSpinBoxShiftC->setSingleStep(0.1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.00001);
 
-            ui->doubleSpinBoxInSizes->setDecimals(5);
-            ui->doubleSpinBoxInSizes->setSingleStep(0.00001);
+            ui->doubleSpinBoxCorrection->setDecimals(5);
+            ui->doubleSpinBoxCorrection->setSingleStep(0.00001);
 
-            ui->doubleSpinBoxInHeights->setDecimals(5);
-            ui->doubleSpinBoxInHeights->setSingleStep(0.00001);
+            ui->doubleSpinBoxShiftA->setDecimals(5);
+            ui->doubleSpinBoxShiftA->setSingleStep(0.00001);
+
+            ui->doubleSpinBoxShiftB->setDecimals(5);
+            ui->doubleSpinBoxShiftB->setSingleStep(0.00001);
+
+            ui->doubleSpinBoxShiftC->setDecimals(5);
+            ui->doubleSpinBoxShiftC->setSingleStep(0.00001);
             break;
         default:
             break;
@@ -3341,7 +4271,7 @@ void TMainWindow::SetDecimals()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::InitUnits()
+void TMainWindow::InitPatternUnits()
 {
     labelPatternUnit = new QLabel(tr("Pattern unit:"));
     ui->toolBarGradation->addWidget(labelPatternUnit);
@@ -3370,12 +4300,81 @@ void TMainWindow::InitComboBoxUnits()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitMeasurementUnits()
+{
+    ui->comboBoxMUnits->blockSignals(true);
+
+    int current = -1;
+    if (ui->comboBoxMUnits->currentIndex() != -1)
+    {
+        current = ui->comboBoxMUnits->currentData().toInt();
+    }
+
+    QString units;
+    switch (m->MUnit())
+    {
+        case Unit::Mm:
+            units = tr("Millimeters");
+            break;
+        case Unit::Inch:
+            units = tr("Inches");
+            break;
+        case Unit::Cm:
+            units = tr("Centimeters");
+            break;
+        default:
+            units = "<Invalid>";
+            break;
+    }
+
+    ui->comboBoxMUnits->clear();
+    ui->comboBoxMUnits->addItem(units, QVariant(static_cast<int>(MUnits::Table)));
+    ui->comboBoxMUnits->addItem(tr("Degrees"), QVariant(static_cast<int>(MUnits::Degrees)));
+
+    int i = ui->comboBoxMUnits->findData(current);
+    if (i != -1)
+    {
+        ui->comboBoxMUnits->setCurrentIndex(i);
+    }
+
+    ui->comboBoxMUnits->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitGender(QComboBox *gender)
 {
     SCASSERT(gender != nullptr)
     gender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
     gender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
     gender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitMeasurementDimension()
+{
+    ui->comboBoxDimension->blockSignals(true);
+
+    int current = -1;
+    if (ui->comboBoxDimension->currentIndex() != -1)
+    {
+        current = ui->comboBoxDimension->currentData().toInt();
+    }
+
+    ui->comboBoxDimension->clear();
+
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::N), QVariant(static_cast<int>(IMD::N)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::X), QVariant(static_cast<int>(IMD::X)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::Y), QVariant(static_cast<int>(IMD::Y)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::W), QVariant(static_cast<int>(IMD::W)));
+    ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::Z), QVariant(static_cast<int>(IMD::Z)));
+
+    int i = ui->comboBoxDimension->findData(current);
+    if (i != -1)
+    {
+        ui->comboBoxDimension->setCurrentIndex(i);
+    }
+
+    ui->comboBoxDimension->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

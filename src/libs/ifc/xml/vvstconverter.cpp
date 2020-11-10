@@ -54,8 +54,8 @@
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.4");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.4.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.5.0");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/multisize_measurements/v0.5.0.xsd");
 
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -75,25 +75,25 @@ VVSTConverter::VVSTConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VVSTConverter::XSDSchema(int ver) const
 {
-    switch (ver)
+    QHash <int, QString> schemas =
     {
-        case (0x000300):
-            return QStringLiteral("://schema/standard_measurements/v0.3.0.xsd");
-        case (0x000400):
-            return QStringLiteral("://schema/standard_measurements/v0.4.0.xsd");
-        case (0x000401):
-            return QStringLiteral("://schema/standard_measurements/v0.4.1.xsd");
-        case (0x000402):
-            return QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
-        case (0x000403):
-            return QStringLiteral("://schema/standard_measurements/v0.4.3.xsd");
-        case (0x000404):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
-            break;
+        std::make_pair(FORMAT_VERSION(0, 3, 0), QStringLiteral("://schema/multisize_measurements/v0.3.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 0), QStringLiteral("://schema/multisize_measurements/v0.4.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 1), QStringLiteral("://schema/multisize_measurements/v0.4.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 2), QStringLiteral("://schema/multisize_measurements/v0.4.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 3), QStringLiteral("://schema/multisize_measurements/v0.4.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 4), QStringLiteral("://schema/multisize_measurements/v0.4.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 5, 0), CurrentSchema),
+    };
+
+    if (schemas.contains(ver))
+    {
+        return schemas.value(ver);
     }
-    return QString();//unreachable code
+    else
+    {
+        InvalidVersion(ver);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,27 +101,31 @@ void VVSTConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (0x000300):
+        case (FORMAT_VERSION(0, 3, 0)):
             ToV0_4_0();
-            ValidateXML(XSDSchema(0x000400));
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 0)));
             Q_FALLTHROUGH();
-        case (0x000400):
+        case (FORMAT_VERSION(0, 4, 0)):
             ToV0_4_1();
-            ValidateXML(XSDSchema(0x000401));
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 1)));
             Q_FALLTHROUGH();
-        case (0x000401):
+        case (FORMAT_VERSION(0, 4, 1)):
             ToV0_4_2();
-            ValidateXML(XSDSchema(0x000402));
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 2)));
             Q_FALLTHROUGH();
-        case (0x000402):
+        case (FORMAT_VERSION(0, 4, 2)):
             ToV0_4_3();
-            ValidateXML(XSDSchema(0x000403));
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 3)));
             Q_FALLTHROUGH();
-        case (0x000403):
+        case (FORMAT_VERSION(0, 4, 3)):
             ToV0_4_4();
-            ValidateXML(XSDSchema(0x000404));
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 4)));
             Q_FALLTHROUGH();
-        case (0x000404):
+        case (FORMAT_VERSION(0, 4, 4)):
+            ToV0_5_0();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 0)));
+            Q_FALLTHROUGH();
+        case (FORMAT_VERSION(0, 5, 0)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -140,7 +144,7 @@ void VVSTConverter::DowngradeToCurrentMaxVersion()
 bool VVSTConverter::IsReadOnly() const
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FORMAT_VERSION(0, 4, 4),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FORMAT_VERSION(0, 5, 0),
                       "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
@@ -309,6 +313,112 @@ void VVSTConverter::ConvertMeasurementsToV0_4_2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::AddNewTagsForV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    QDomElement root = documentElement();
+    const QDomElement pmSystemTag = root.firstChildElement(QStringLiteral("pm_system"));
+    if (pmSystemTag.isNull())
+    {
+        return;
+    }
+
+    QDomElement dimensionsTag = createElement(QStringLiteral("dimensions"));
+
+    auto Base = [this](const QString &base)
+    {
+        const QDomElement root = documentElement();
+        const QDomElement baseTag = root.firstChildElement(base);
+        if (baseTag.isNull())
+        {
+            return 0;
+        }
+
+        return GetParametrInt(baseTag, QStringLiteral("base"), QChar('0'));
+    };
+
+    const Unit units = MUnit();
+
+    {
+        const int step = static_cast<int>(UnitConvertor(6, Unit::Cm, units));
+        const int min = static_cast<int>(UnitConvertor(50, Unit::Cm, units));
+        const int max = static_cast<int>(UnitConvertor(200, Unit::Cm, units));
+
+        QDomElement dimensionX = createElement(QStringLiteral("dimension"));
+        SetAttribute(dimensionX, QStringLiteral("type"), QChar('x'));
+        SetAttribute(dimensionX, QStringLiteral("step"), step);
+        SetAttribute(dimensionX, QStringLiteral("min"), min);
+        SetAttribute(dimensionX, QStringLiteral("max"), max);
+        SetAttribute(dimensionX, QStringLiteral("base"), Base(QStringLiteral("height")));
+        dimensionsTag.appendChild(dimensionX);
+    }
+
+    {
+        const int step = static_cast<int>(UnitConvertor(2, Unit::Cm, units));
+        const int min = static_cast<int>(UnitConvertor(22, Unit::Cm, units));
+        const int max = static_cast<int>(UnitConvertor(72, Unit::Cm, units));
+
+        QDomElement dimensionY = createElement(QStringLiteral("dimension"));
+        SetAttribute(dimensionY, QStringLiteral("type"), QChar('y'));
+        SetAttribute(dimensionY, QStringLiteral("step"), step);
+        SetAttribute(dimensionY, QStringLiteral("min"), min);
+        SetAttribute(dimensionY, QStringLiteral("max"), max);
+        SetAttribute(dimensionY, QStringLiteral("base"), Base(QStringLiteral("size")));
+        SetAttribute(dimensionY, QStringLiteral("circumference"), true);
+        dimensionsTag.appendChild(dimensionY);
+    }
+
+    root.insertAfter(dimensionsTag, pmSystemTag);
+
+    root.insertAfter(createElement(QStringLiteral("restrictions")), dimensionsTag);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::RemoveTagsForV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    QDomElement root = documentElement();
+
+    const QDomElement sizeTag = root.firstChildElement(QStringLiteral("size"));
+    if (not sizeTag.isNull())
+    {
+        root.removeChild(sizeTag);
+    }
+
+    const QDomElement heightTag = root.firstChildElement(QStringLiteral("height"));
+    if (not heightTag.isNull())
+    {
+        root.removeChild(heightTag);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ConvertMeasurementsToV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList measurements = elementsByTagName(QStringLiteral("m"));
+    for (int i = 0; i < measurements.size(); ++i)
+    {
+        QDomElement m = measurements.at(i).toElement();
+
+        SetAttribute(m, QStringLiteral("shiftA"), GetParametrString(m, QStringLiteral("height_increase")));
+        m.removeAttribute(QStringLiteral("height_increase"));
+
+        SetAttribute(m, QStringLiteral("shiftB"), GetParametrString(m, QStringLiteral("size_increase")));
+        m.removeAttribute(QStringLiteral("size_increase"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
@@ -366,5 +476,19 @@ void VVSTConverter::ToV0_4_4()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.4"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ToV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.5.0"));
+    AddNewTagsForV0_5_0();
+    RemoveTagsForV0_5_0();
+    ConvertMeasurementsToV0_5_0();
     Save();
 }

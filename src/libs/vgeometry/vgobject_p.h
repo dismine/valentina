@@ -42,33 +42,44 @@ class VGObjectData : public QSharedData
 {
 public:
     VGObjectData()
-        :_id(NULL_ID), type(GOType::Unknown), idObject(NULL_ID), _name(QString()), mode(Draw::Calculation)
     {}
 
     VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
-        :_id(NULL_ID), type(type), idObject(idObject), _name(QString()), mode(mode)
+        :type(type),
+         idObject(idObject),
+         mode(mode)
     {}
 
     VGObjectData(const VGObjectData &obj)
-        :QSharedData(obj), _id(obj._id), type(obj.type), idObject(obj.idObject), _name(obj._name), mode(obj.mode)
+        :QSharedData(obj),
+        _id(obj._id),
+        type(obj.type),
+        idObject(obj.idObject),
+        _name(obj._name),
+        mode(obj.mode),
+        m_alias(obj.m_alias),
+        m_aliasSuffix(obj.m_aliasSuffix)
     {}
 
     virtual ~VGObjectData();
 
     /** @brief _id id in container. Ned for arcs, spline and spline paths. */
-    quint32 _id;
+    quint32 _id{NULL_ID};
 
     /** @brief type type of graphical object */
-    GOType  type;
+    GOType  type{GOType::Unknown};
 
     /** @brief idObject id of parent object. */
-    quint32 idObject;
+    quint32 idObject{NULL_ID};
 
     /** @brief _name object name */
-    QString _name;
+    QString _name{};
 
     /** @brief mode object created in calculation or drawing mode */
-    Draw    mode;
+    Draw    mode{Draw::Calculation};
+
+    QString m_alias{};
+    QString m_aliasSuffix{};
 
 private:
     Q_DISABLE_ASSIGN(VGObjectData)

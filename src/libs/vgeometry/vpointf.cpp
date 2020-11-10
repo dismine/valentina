@@ -147,6 +147,7 @@ VPointF VPointF::Move(qreal length, qreal angle, const QString &prefix) const
     const QPointF p = MovePF(toQPointF(), length, angle);
     VPointF moved(p, name() + prefix, mx(), my());
     moved.SetShowLabel(IsShowLabel());
+
     return moved;
 }
 
@@ -258,6 +259,20 @@ QJsonObject VPointF::ToJson() const
     object[QLatin1String("mx")] = mx();
     object[QLatin1String("my")] = my();
     return object;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPointF::SetAlias(const QString &alias)
+{
+    Q_UNUSED(alias);
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPointF::SetAliasSuffix(const QString &aliasSuffix)
+{
+    Q_UNUSED(aliasSuffix);
+    // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------

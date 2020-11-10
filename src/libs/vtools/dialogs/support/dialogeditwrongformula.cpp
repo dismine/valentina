@@ -191,44 +191,48 @@ void DialogEditWrongFormula::ValChanged(int row)
         if (ui->radioButtonStandardTable->isChecked())
         {
             const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-            SetDescription(item->text(), *stable->GetValue(), UnitsToStr(qApp->patternUnit(), true),
-                           stable->GetGuiText());
+            SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), stable->GetGuiText());
         }
         else if (ui->radioButtonIncrements->isChecked())
         {
             const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
-            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
-                           incr->GetDescription());
+            const bool specialUnits = false;
+            SetDescription(item->text(), *incr->GetValue(), specialUnits, incr->GetDescription());
         }
         else if (ui->radioButtonPC->isChecked())
         {
             const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
-            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
-                           incr->GetDescription());
+            const bool specialUnits = false;
+            SetDescription(item->text(), *incr->GetValue(), specialUnits, incr->GetDescription());
         }
         else if (ui->radioButtonLengthLine->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VLengthLine>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
+            const bool specialUnits = false;
+            SetDescription(item->text(), *data->GetVariable<VLengthLine>(name)->GetValue(), specialUnits,
+                           tr("Line length"));
         }
         else if (ui->radioButtonLengthSpline->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VCurveLength>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
+            const bool specialUnits = false;
+            SetDescription(item->text(), *data->GetVariable<VCurveLength>(name)->GetValue(), specialUnits,
+                           tr("Curve length"));
         }
         else if (ui->radioButtonAngleLine->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VLineAngle>(name)->GetValue(), degreeSymbol,
+            const bool specialUnits = true;
+            SetDescription(item->text(), *data->GetVariable<VLineAngle>(name)->GetValue(), specialUnits,
                            tr("Line Angle"));
         }
         else if (ui->radioButtonRadiusesArcs->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VArcRadius>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
+            const bool specialUnits = false;
+            SetDescription(item->text(), *data->GetVariable<VArcRadius>(name)->GetValue(), specialUnits,
+                           tr("Arc radius"));
         }
         else if (ui->radioButtonAnglesCurves->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VCurveAngle>(name)->GetValue(), degreeSymbol,
+            const bool specialUnits = true;
+            SetDescription(item->text(), *data->GetVariable<VCurveAngle>(name)->GetValue(), specialUnits,
                            tr("Curve angle"));
         }
         else if (ui->radioButtonFunctions->isChecked())
@@ -503,10 +507,11 @@ void DialogEditWrongFormula::InitVariables()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, const QString &unit,
+void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, bool specialUnits,
                                             const QString &description)
 {
-    const QString desc = QStringLiteral("%1(%2 %3) - %4").arg(name).arg(value).arg(unit, description);
+    const QString unit = specialUnits ? degreeSymbol : " " + UnitsToStr(qApp->patternUnits(), true);
+    const QString desc = QStringLiteral("%1(%2%3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
 }
 

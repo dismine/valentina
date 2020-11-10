@@ -50,18 +50,30 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
     SetType(VarType::CurveLength);
     SCASSERT(curve != nullptr)
     SetName(curve->name());
+
+    if (not curve->GetAlias().isEmpty())
+    {
+        SetAlias(curve->GetAlias());
+    }
+
     SetValue(FromPixel(curve->GetLength(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
-                           Unit patternUnit, qint32 segment)
+VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve,
+                           const VSpline &spl, Unit patternUnit, qint32 segment)
     :VCurveVariable(id, parentId)
 {
-    SCASSERT(not baseCurveName.isEmpty())
+    SCASSERT(baseCurve != nullptr)
 
     SetType(VarType::CurveLength);
-    SetName(baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+    SetName(baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+
+    if (not baseCurve->GetAlias().isEmpty())
+    {
+        SetAlias(baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+    }
+
     SetValue(FromPixel(spl.GetLength(), patternUnit));
 }
 

@@ -574,6 +574,14 @@
         <source>Choose unique label.</source>
         <translation>Zvolte jedinečný popis.</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -697,6 +705,18 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -811,6 +831,18 @@
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -931,6 +963,14 @@
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
@@ -994,6 +1034,18 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -1040,6 +1092,18 @@
     <message>
         <source>Cannot find point with id %1</source>
         <translation>Nelze najít bod s ID %1</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1140,6 +1204,14 @@
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -1214,6 +1286,22 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Barva:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1290,6 +1378,22 @@
         <source>Color:</source>
         <translation type="vanished">Barva:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
@@ -1364,6 +1468,22 @@
     <message>
         <source>Color:</source>
         <translation type="vanished">Barva:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1661,6 +1781,25 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionLabels</name>
+    <message>
+        <source>Dimension labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Hodnota</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Popis</translation>
+    </message>
+</context>
+<context>
     <name>DialogDuplicateDetail</name>
     <message>
         <source>Dialog duplicate detail</source>
@@ -1813,11 +1952,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Výška</translation>
+        <translation type="vanished">Výška</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1926,6 +2065,50 @@
     <message>
         <source>Move on bottom</source>
         <translation>Posunout úplně dolů</translation>
+    </message>
+    <message>
+        <source>Measurements units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer birth date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2157,6 +2340,18 @@
         <source>Pen style:</source>
         <translation>Styl pera:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -2259,6 +2454,14 @@
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2482,6 +2685,58 @@
         <source>Add tags</source>
         <translation>Přidat značky</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Styl pera:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Barva:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
+    </message>
+    <message>
+        <source>Invalid point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2548,6 +2803,66 @@
     <message>
         <source>Add tags</source>
         <translation>Přidat značky</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Styl pera:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Barva:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
+    </message>
+    <message>
+        <source>Invalid line points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid first line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2662,6 +2977,14 @@
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3519,6 +3842,14 @@ Přesto použít nastavení?</translation>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
@@ -3577,6 +3908,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Second point:</source>
         <translation>Druhý bod:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3696,6 +4035,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3823,6 +4170,107 @@ Přesto použít nastavení?</translation>
     </message>
 </context>
 <context>
+    <name>DialogMeasurementsCSVColumns</name>
+    <message>
+        <source>Setup columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Náhled</translation>
+    </message>
+    <message>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name:</source>
+        <translation type="unfinished">Plný název:</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Popis:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Hodnota</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Plný název</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Popis</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Základní hodnota</translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Hodnota</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="unfinished">Základní hodnota</translation>
+    </message>
+    <message>
+        <source>Shift (%1)*:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File path is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough data to import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select unique number for each column</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
@@ -3912,6 +4360,66 @@ Přesto použít nastavení?</translation>
         <source>Add tags</source>
         <translation>Přidat značky</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Styl pera:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Barva:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid length formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -3929,11 +4437,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Base size:</source>
-        <translation>Základní velikost:</translation>
+        <translation type="vanished">Základní velikost:</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Základní výška:</translation>
+        <translation type="vanished">Základní výška:</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -4113,6 +4621,14 @@ Přesto použít nastavení?</translation>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternMaterials</name>
@@ -4153,19 +4669,19 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
-        <translation>Výšky a velikosti</translation>
+        <translation type="vanished">Výšky a velikosti</translation>
     </message>
     <message>
         <source>All heights (cm)</source>
-        <translation>Všechny výšky (cm)</translation>
+        <translation type="vanished">Všechny výšky (cm)</translation>
     </message>
     <message>
         <source>All sizes (cm)</source>
-        <translation>Všechny velikosti (cm)</translation>
+        <translation type="vanished">Všechny velikosti (cm)</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Výchozí výška a velikost</translation>
+        <translation type="vanished">Výchozí výška a velikost</translation>
     </message>
     <message>
         <source>From standard measurements</source>
@@ -4173,15 +4689,15 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Vlastní</translation>
+        <translation type="vanished">Vlastní</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška:</translation>
+        <translation type="vanished">Výška:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Velikost:</translation>
+        <translation type="vanished">Velikost:</translation>
     </message>
     <message>
         <source>Security</source>
@@ -4305,7 +4821,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>From multisize measurements</source>
-        <translation>Z vícevelikostních rozměrů</translation>
+        <translation type="vanished">Z vícevelikostních rozměrů</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -4370,6 +4886,26 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Label language:</source>
         <translation>Jazyk popisu:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">rrrr mm dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5066,6 +5602,14 @@ Přesto použít nastavení?</translation>
         <source>Take:</source>
         <translation>Vzít:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromCircleAndTangent</name>
@@ -5157,6 +5701,14 @@ Přesto použít nastavení?</translation>
         <source>Take:</source>
         <translation>Vzít:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
@@ -5244,6 +5796,14 @@ Přesto použít nastavení?</translation>
         <source>End of the line:</source>
         <translation>Konec čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
@@ -5294,6 +5854,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Y: horizontal point:</source>
         <translation>Y: vodorovný bod:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5353,6 +5921,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Tool point of intersetion arcs</source>
         <translation>Nástroj Průsečík oblouků</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5461,6 +6037,14 @@ Přesto použít nastavení?</translation>
         <source>Tool point of intersection circles</source>
         <translation>Nástroj Průsečík kruhů</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCurves</name>
@@ -5500,6 +6084,14 @@ Přesto použít nastavení?</translation>
         <source>Select second curve</source>
         <translation>Vybrat druhou křivku</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPreferences</name>
@@ -5526,6 +6118,29 @@ Přesto použít nastavení?</translation>
             <numerusform>Následovány %n volby, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
             <numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>DialogRestrictDimension</name>
+    <message>
+        <source>Restrict dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension A:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restriction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5605,6 +6220,66 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Add tags</source>
         <translation>Přidat značky</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished">Styl pera:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Barva:</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid group name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid angle formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
     </message>
 </context>
 <context>
@@ -5811,6 +6486,10 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Numerical control</source>
         <translation>Číslicové ovládání</translation>
+    </message>
+    <message>
+        <source>Raw Layout Data</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6041,6 +6720,89 @@ Přesto použít nastavení?</translation>
     </message>
 </context>
 <context>
+    <name>DialogSetupMultisize</name>
+    <message>
+        <source>Setup multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <source>Min value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimal value described in the column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximal value described in the column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Step:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single-step between the column values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base value for the column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
+        <source>Circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select at least one dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No more than 3 dimensions allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
@@ -6146,6 +6908,14 @@ Přesto použít nastavení?</translation>
         <source>Line color:</source>
         <translation>Barva čáry:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -6180,6 +6950,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Choose unique label.</source>
         <translation>Zvolte jedinečný popis.</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6319,6 +7097,18 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6466,6 +7256,18 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Cannot find point with id %1</source>
         <translation>Nelze najít bod s ID %1</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6648,6 +7450,14 @@ Přesto použít nastavení?</translation>
         <source>Second point:</source>
         <translation>Druhý bod:</translation>
     </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogTrueDarts</name>
@@ -6750,6 +7560,14 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Second new dart point:</source>
         <translation>Druhý nový bod záševku:</translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished">Nástroj</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6935,19 +7753,19 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>The base height</source>
-        <translation>Základní výška</translation>
+        <translation type="vanished">Základní výška</translation>
     </message>
     <message>
         <source>The base size</source>
-        <translation>Základní velikost</translation>
+        <translation type="vanished">Základní velikost</translation>
     </message>
     <message>
         <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation>Nastavit jednotku střihu: cm, mm, palec.</translation>
+        <translation type="vanished">Nastavit jednotku střihu: cm, mm, palec.</translation>
     </message>
     <message>
         <source>The pattern unit</source>
-        <translation>Jednotka střihu</translation>
+        <translation type="vanished">Jednotka střihu</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing a window.</source>
@@ -6971,19 +7789,19 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
-        <translation>Otevřeno se základní velikostí. Platné hodnoty: %1 cm.</translation>
+        <translation type="vanished">Otevřeno se základní velikostí. Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
         <source>Invalid base height argument. Must be %1cm.</source>
-        <translation>Neplatná základní výška. Musí to být %1 cm.</translation>
+        <translation type="vanished">Neplatná základní výška. Musí to být %1 cm.</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be %1cm.</source>
-        <translation>Neplatná základní velikost. Musí to být %1 cm.</translation>
+        <translation type="vanished">Neplatná základní velikost. Musí to být %1 cm.</translation>
     </message>
     <message>
         <source>Open with the base height. Valid values: %1cm.</source>
-        <translation>Otevřeno se základní výškou. Platné hodnoty: %1 cm.</translation>
+        <translation type="vanished">Otevřeno se základní výškou. Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
@@ -6992,6 +7810,50 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Zakázat škálování pro obrazovky s velkým rozlišením. Tuto volbu zvolte, pokud máte potíže se škálováním (ve výchozím nastavení je škálování povoleno). Jinou možností je použít proměnnou prostředí %1.</translation>
+    </message>
+    <message>
+        <source>Set base for dimension A in the table units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension A base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension B in the table units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension B base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension C in the table units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension C base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set pattern file units: cm, mm, inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The pattern units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension A base value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension B base value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension C base value.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7785,7 +8647,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
-        <translation>Jednotka velikosti &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
+        <translation type="vanished">Jednotka velikosti &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
@@ -7793,7 +8655,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
-        <translation>Nepodařilo se stanovit velikost. Soubor nebyl otevřen.</translation>
+        <translation type="vanished">Nepodařilo se stanovit velikost. Soubor nebyl otevřen.</translation>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
@@ -7801,7 +8663,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation>Jednotka výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
+        <translation type="vanished">Jednotka výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
@@ -7809,7 +8671,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
-        <translation>Nepodařilo se stanovit výšku. Soubor nebyl otevřen.</translation>
+        <translation type="vanished">Nepodařilo se stanovit výšku. Soubor nebyl otevřen.</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -8013,11 +8875,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška:</translation>
+        <translation type="vanished">Výška:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Velikost:</translation>
+        <translation type="vanished">Velikost:</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
@@ -8041,7 +8903,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Gradation doesn&apos;t support inches</source>
-        <translation>Odstupňování nepodporuje palce</translation>
+        <translation type="vanished">Odstupňování nepodporuje palce</translation>
     </message>
     <message>
         <source>Measurements have been synced</source>
@@ -8225,11 +9087,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation>Nepodařilo se stanovit velikost. Soubor musí mít vícevelikostní rozměry.</translation>
+        <translation type="vanished">Nepodařilo se stanovit velikost. Soubor musí mít vícevelikostní rozměry.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation>Nepodařilo se stanovit výšku. Soubor musí mít vícevelikostní rozměry.</translation>
+        <translation type="vanished">Nepodařilo se stanovit výšku. Soubor musí mít vícevelikostní rozměry.</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -8471,6 +9333,86 @@ Chcete uložit své změny?</translation>
         <source>Watermark files</source>
         <translation>Soubory vodoznaku</translation>
     </message>
+    <message>
+        <source>Manual Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the Puzzle app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create manual layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished">Aktualizovat</translation>
+    </message>
+    <message>
+        <source>Update manual layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Chcete změnit oprávnění?</translation>
+    </message>
+    <message>
+        <source>Unable to prepare raw layout data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select manual layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8612,11 +9554,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Nesprávné jednotky.</translation>
+        <translation type="vanished">Nesprávné jednotky.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation>Program nepodporuje vícevelikostní tabulku s palci.</translation>
+        <translation type="vanished">Program nepodporuje vícevelikostní tabulku s palci.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -8661,6 +9603,14 @@ Chcete uložit své změny?</translation>
 %1
 
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export raw layout data failed. %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8999,6 +9949,14 @@ Chcete uložit své změny?</translation>
         <source>dark mode</source>
         <translation>Tmavý vzhled</translation>
     </message>
+    <message>
+        <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -9049,6 +10007,10 @@ Chcete uložit své změny?</translation>
     <message>
         <source>My label templates</source>
         <translation>Moje předlohy popisů</translation>
+    </message>
+    <message>
+        <source>My manual layouts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9537,6 +10499,46 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece name &apos;%1&apos; is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find the segment end.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -9838,7 +10840,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation type="vanished">Název</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -9846,19 +10848,19 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Vzorec</translation>
+        <translation type="vanished">Vzorec</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation>Základní hodnota</translation>
+        <translation type="vanished">Základní hodnota</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation>Ve velikostech</translation>
+        <translation type="vanished">Ve velikostech</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation>Ve výškách</translation>
+        <translation type="vanished">Ve výškách</translation>
     </message>
     <message>
         <source>Details</source>
@@ -9882,11 +10884,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>In sizes:</source>
-        <translation>Ve velikostech:</translation>
+        <translation type="vanished">Ve velikostech:</translation>
     </message>
     <message>
         <source>In heights:</source>
-        <translation>Ve výškách:</translation>
+        <translation type="vanished">Ve výškách:</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -9934,19 +10936,19 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Base size:</source>
-        <translation>Základní velikost:</translation>
+        <translation type="vanished">Základní velikost:</translation>
     </message>
     <message>
         <source>Base size value</source>
-        <translation>Hodnota základní velikosti</translation>
+        <translation type="vanished">Hodnota základní velikosti</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Základní výška:</translation>
+        <translation type="vanished">Základní výška:</translation>
     </message>
     <message>
         <source>Base height value</source>
-        <translation>Hodnota základní výšky</translation>
+        <translation type="vanished">Hodnota základní výšky</translation>
     </message>
     <message>
         <source>Given name:</source>
@@ -10220,7 +11222,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation>Plný název</translation>
+        <translation type="vanished">Plný název</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -10519,15 +11521,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Cannot convert base size value to double in column 2.</source>
-        <translation>Nelze převést hodnotu základní velikosti na dvojnásobek ve sloupci 2.</translation>
+        <translation type="vanished">Nelze převést hodnotu základní velikosti na dvojnásobek ve sloupci 2.</translation>
     </message>
     <message>
         <source>Cannot convert height increase value to double in column 3.</source>
-        <translation>Nelze převést hodnotu zvětšení velikosti na dvojnásobek ve sloupci 2.</translation>
+        <translation type="vanished">Nelze převést hodnotu zvětšení velikosti na dvojnásobek ve sloupci 2.</translation>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
-        <translation>Nelze převést hodnotu zvětšení velikosti na dvojnásobek ve sloupci 4.</translation>
+        <translation type="vanished">Nelze převést hodnotu zvětšení velikosti na dvojnásobek ve sloupci 4.</translation>
     </message>
     <message>
         <source>Imported file must not contain the same name twice.</source>
@@ -10595,11 +11597,153 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Height (%1):</source>
-        <translation>Výška (%1):</translation>
+        <translation type="vanished">Výška (%1):</translation>
     </message>
     <message>
         <source>Size (%1):</source>
-        <translation>Velikost (%1):</translation>
+        <translation type="vanished">Velikost (%1):</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Plný název</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vypočítaná hodnota</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vzorec</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Základní hodnota</translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Jednotky:</translation>
+    </message>
+    <message>
+        <source>Shift B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one of the dimensions to later use the measurement value in piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base Values:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use full circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restrict second dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restrict third dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The table doesn&apos;t provide dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base value for dimension A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The table doesn&apos;t support dimension B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base value for dimension B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The table doesn&apos;t support dimension C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base value for dimension C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>measurements.vit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert base value to double in column 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert shift value to double in column %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Palce</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimetry</translation>
+    </message>
+    <message>
+        <source>Degrees</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11071,19 +12215,24 @@ Chcete uložit změny?</translation>
         <comment>seam allowance</comment>
         <translation>Vlastní</translation>
     </message>
+    <message>
+        <source>Piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
         <translation>Dialog</translation>
-    </message>
-</context>
-<context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11255,15 +12404,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Výchozí výška a velikost</translation>
+        <translation type="vanished">Výchozí výška a velikost</translation>
     </message>
     <message>
         <source>Default height:</source>
-        <translation>Výchozí výška:</translation>
+        <translation type="vanished">Výchozí výška:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation>Výchozí velikost:</translation>
+        <translation type="vanished">Výchozí velikost:</translation>
     </message>
     <message>
         <source>With OS options</source>
@@ -11359,6 +12508,80 @@ Chcete uložit změny?</translation>
     <message>
         <source>Do not &amp;show again</source>
         <translation>Příště již nezobrazovat</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstartMeasurementDimension</name>
+    <message>
+        <source>Invalid min/max range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base value invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chest full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chest half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
+        <source>Chest circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip full circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip half circumference</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11542,6 +12765,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Visibility group</source>
         <translation>Skupina viditelnosti</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11873,7 +13100,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>The size value</source>
-        <translation>Hodnota velikosti</translation>
+        <translation type="vanished">Hodnota velikosti</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
@@ -11881,7 +13108,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>The height value</source>
-        <translation>Hodnota výšky</translation>
+        <translation type="vanished">Hodnota výšky</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
@@ -11897,11 +13124,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation>Neplatná hodnota odstupňování velikosti.</translation>
+        <translation type="vanished">Neplatná hodnota odstupňování velikosti.</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation>Neplatná hodnota odstupňování výšky.</translation>
+        <translation type="vanished">Neplatná hodnota odstupňování výšky.</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
@@ -12157,11 +13384,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation>Nastavit hodnotu velikosti pro soubor se střihem, který byl otevřen s vícevelikostními rozměry (režim vyvedení). Platné hodnoty: %1 cm.</translation>
+        <translation type="vanished">Nastavit hodnotu velikosti pro soubor se střihem, který byl otevřen s vícevelikostními rozměry (režim vyvedení). Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
         <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation>Nastavit hodnotu výšky pro soubor se střihem, který byl otevřen s vícevelikostními rozměry (režim vyvedení). Platné hodnoty: %1 cm.</translation>
+        <translation type="vanished">Nastavit hodnotu výšky pro soubor se střihem, který byl otevřen s vícevelikostními rozměry (režim vyvedení). Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
@@ -12251,6 +13478,42 @@ Chcete uložit změny?</translation>
         <source>Prefer one sheet layout solution (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invalid dimension A value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension B value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid dimension C value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension A in the multisize measurements units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension A base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension B in the multisize measurements units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension B base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set base for dimension C in the multisize measurements units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The dimension C base</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -12277,6 +13540,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>patterns</source>
         <translation>Vzory</translation>
+    </message>
+    <message>
+        <source>manual layouts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12535,6 +13802,26 @@ Chcete uložit změny?</translation>
     <message>
         <source>The measurement name is empty!</source>
         <translation>Název měření je prázdný!</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Žádný</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12993,6 +14280,10 @@ Chcete uložit změny?</translation>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Main path of piece %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPoster</name>
@@ -13028,10 +14319,22 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VRawLayout</name>
+    <message>
+        <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VRawLayout::ReadFile() failed.
+Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VSettings</name>
     <message>
         <source>layouts</source>
-        <translation>Rozvržení</translation>
+        <translation type="vanished">Rozvržení</translation>
     </message>
 </context>
 <context>
@@ -13950,6 +15253,22 @@ Chcete uložit změny?</translation>
     <message>
         <source>Rotation origin point:</source>
         <translation>Původní bod otočení:</translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished">Poznámky:</translation>
+    </message>
+    <message>
+        <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15237,12 +16556,12 @@ Chcete uložit změny?</translation>
     <message>
         <source>size</source>
         <comment>placeholder</comment>
-        <translation>Velikost</translation>
+        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation>Výška</translation>
+        <translation type="vanished">Výška</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
@@ -15377,127 +16696,127 @@ Chcete uložit změny?</translation>
     <message>
         <source>date</source>
         <comment>placeholder</comment>
-        <translation>Datum</translation>
+        <translation type="vanished">Datum</translation>
     </message>
     <message>
         <source>time</source>
         <comment>placeholder</comment>
-        <translation>Čas</translation>
+        <translation type="vanished">Čas</translation>
     </message>
     <message>
         <source>patternName</source>
         <comment>placeholder</comment>
-        <translation>NázevStřihu</translation>
+        <translation type="vanished">NázevStřihu</translation>
     </message>
     <message>
         <source>patternNumber</source>
         <comment>placeholder</comment>
-        <translation>ČísloStřihu</translation>
+        <translation type="vanished">ČísloStřihu</translation>
     </message>
     <message>
         <source>author</source>
         <comment>placeholder</comment>
-        <translation>Autor</translation>
+        <translation type="vanished">Autor</translation>
     </message>
     <message>
         <source>customer</source>
         <comment>placeholder</comment>
-        <translation>Zákazník</translation>
+        <translation type="vanished">Zákazník</translation>
     </message>
     <message>
         <source>pExt</source>
         <comment>placeholder</comment>
-        <translation>pExt</translation>
+        <translation type="vanished">pExt</translation>
     </message>
     <message>
         <source>pFileName</source>
         <comment>placeholder</comment>
-        <translation>pNázevSouboru</translation>
+        <translation type="vanished">pNázevSouboru</translation>
     </message>
     <message>
         <source>mFileName</source>
         <comment>placeholder</comment>
-        <translation>mNázevSouboru</translation>
+        <translation type="vanished">mNázevSouboru</translation>
     </message>
     <message>
         <source>mExt</source>
         <comment>placeholder</comment>
-        <translation>mExt</translation>
+        <translation type="vanished">mExt</translation>
     </message>
     <message>
         <source>pLetter</source>
         <comment>placeholder</comment>
-        <translation>pPísmeno</translation>
+        <translation type="vanished">pPísmeno</translation>
     </message>
     <message>
         <source>pAnnotation</source>
         <comment>placeholder</comment>
-        <translation>pVysvětlivka</translation>
+        <translation type="vanished">pVysvětlivka</translation>
     </message>
     <message>
         <source>pOrientation</source>
         <comment>placeholder</comment>
-        <translation>pNatočení</translation>
+        <translation type="vanished">pNatočení</translation>
     </message>
     <message>
         <source>pRotation</source>
         <comment>placeholder</comment>
-        <translation>pOtočení</translation>
+        <translation type="vanished">pOtočení</translation>
     </message>
     <message>
         <source>pTilt</source>
         <comment>placeholder</comment>
-        <translation>pSklon</translation>
+        <translation type="vanished">pSklon</translation>
     </message>
     <message>
         <source>pFoldPosition</source>
         <comment>placeholder</comment>
-        <translation>pPolohaZáhybu</translation>
+        <translation type="vanished">pPolohaZáhybu</translation>
     </message>
     <message>
         <source>pName</source>
         <comment>placeholder</comment>
-        <translation>pNázev</translation>
+        <translation type="vanished">pNázev</translation>
     </message>
     <message>
         <source>pQuantity</source>
         <comment>placeholder</comment>
-        <translation>pMnožství</translation>
+        <translation type="vanished">pMnožství</translation>
     </message>
     <message>
         <source>mFabric</source>
         <comment>placeholder</comment>
-        <translation>pLátka</translation>
+        <translation type="vanished">pLátka</translation>
     </message>
     <message>
         <source>mLining</source>
         <comment>placeholder</comment>
-        <translation>pPodšívka</translation>
+        <translation type="vanished">pPodšívka</translation>
     </message>
     <message>
         <source>mInterfacing</source>
         <comment>placeholder</comment>
-        <translation>mVnitřníVýztuha</translation>
+        <translation type="vanished">mVnitřníVýztuha</translation>
     </message>
     <message>
         <source>mInterlining</source>
         <comment>placeholder</comment>
-        <translation>pVnitřníPodšívka</translation>
+        <translation type="vanished">pVnitřníPodšívka</translation>
     </message>
     <message>
         <source>wCut</source>
         <comment>placeholder</comment>
-        <translation>wStřih</translation>
+        <translation type="vanished">wStřih</translation>
     </message>
     <message>
         <source>wOnFold</source>
         <comment>placeholder</comment>
-        <translation>wVZáhybu</translation>
+        <translation type="vanished">wVZáhybu</translation>
     </message>
     <message>
         <source>userMaterial</source>
         <comment>placeholder</comment>
-        <translation>UživatelskýMateriál</translation>
+        <translation type="vanished">UživatelskýMateriál</translation>
     </message>
     <message>
         <source>r2cm</source>
@@ -15728,6 +17047,13 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VValentinaSettings</name>
+    <message>
+        <source>layouts</source>
+        <translation type="unfinished">Rozvržení</translation>
+    </message>
+</context>
+<context>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
@@ -15826,13 +17152,6 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16143,6 +17462,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Vyskytla se neznámá chyba. Například plný disk zabránil tomu, aby byl soubor se zámkem zapsán. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished">Chcete změnit oprávnění?</translation>
     </message>
 </context>
 <context>

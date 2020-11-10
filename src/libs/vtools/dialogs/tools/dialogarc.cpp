@@ -47,6 +47,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogarc.h"
+#include "../vgeometry/varc.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -122,7 +124,12 @@ DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArc::ValidateAlias);
+
     vis = new VisToolArc(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +226,33 @@ void DialogArc::SetApproximationScale(qreal value)
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setApproximationScale(value);
+            path->setApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetAliasSuffix(const QString &alias)
+{
+    originAliasSuffix = alias;
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetAliasSuffix() const
+{
+    return ui->lineEditAlias->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,12 +356,34 @@ void DialogArc::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArc::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+    VArc arc;
+    arc.SetAliasSuffix(GetAliasSuffix());
+    if (not GetAliasSuffix().isEmpty() &&
+        (not rx.match(arc.GetAlias()).hasMatch() ||
+         (originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::FXRadius()
 {
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -375,7 +430,7 @@ void DialogArc::EvalRadius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius;
     formulaData.labelResult = ui->labelResultRadius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagRadius);
 

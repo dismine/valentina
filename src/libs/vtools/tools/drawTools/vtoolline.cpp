@@ -61,7 +61,7 @@ template <class T> class QSharedPointer;
  * @param parent parent object.
  */
 VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
-    :VDrawTool(initData.doc, initData.data, initData.id),
+    :VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
       VScaledLine(parent),
       firstPoint(initData.firstPoint),
       secondPoint(initData.secondPoint),
@@ -92,6 +92,7 @@ void VToolLine::setDialog()
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,6 +120,7 @@ VToolLine *VToolLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolLine *line = Create(initData);
     if (line != nullptr)
@@ -391,6 +393,9 @@ void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -407,6 +412,8 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 {
+    VDrawTool::ReadToolAttributes(domElement);
+
     firstPoint = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     secondPoint = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
@@ -442,7 +449,7 @@ QString VToolLine::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(line.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
             .arg(line.angle());
     return toolTip;
 }
@@ -473,7 +480,7 @@ void VToolLine::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::SetTypeLine(const QString &value)
+void VToolLine::SetLineType(const QString &value)
 {
     m_lineType = value;
 

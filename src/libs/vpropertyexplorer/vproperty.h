@@ -38,6 +38,8 @@
 #include "vpropertyexplorer_global.h"
 #include "../vmisc/backport/qoverload.h"
 
+#include <ciso646>
+
 template <typename T> class QList;
 
 namespace VPE

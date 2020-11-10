@@ -89,6 +89,9 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget
             this, &DialogTrueDarts::PointNameChanged);
 
     vis = new VisToolTrueDarts(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -425,4 +428,16 @@ void DialogTrueDarts::CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, con
         flagName = true;
         ChangeColor(labelEditNamePoint, OkColor(this));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTrueDarts::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTrueDarts::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

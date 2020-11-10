@@ -83,7 +83,7 @@ const QString VToolSplinePath::OldToolType = QStringLiteral("path");
  * @param parent parent object.
  */
 VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraphicsItem *parent)
-    : VAbstractSpline(initData.doc, initData.data, initData.id, parent),
+    : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent),
       oldPosition(),
       splIndex(-1),
       moved(false),
@@ -111,14 +111,38 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
     {
         const VSpline spl = splPath->GetSpline(i);
 
-        const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula());
+        bool freeAngle1 = true;
+
+        if (i > 1)
+        {
+            const VSpline prevSpl = splPath->GetSpline(i-1);
+            freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula()) &&
+                         qmu::QmuTokenParser::IsSingle(prevSpl.GetEndAngleFormula());
+        }
+        else
+        {
+            freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula());
+        }
+
         const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl.GetC1LengthFormula());
 
         auto *controlPoint = new VControlPointSpline(i, SplinePointPosition::FirstPoint,
                                                      static_cast<QPointF>(spl.GetP2()), freeAngle1, freeLength1, this);
         InitControlPoint(controlPoint);
 
-        const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+        bool freeAngle2 = true;
+
+        if (i < splPath->CountSubSpl())
+        {
+            const VSpline nextSpl = splPath->GetSpline(i+1);
+            freeAngle2 = qmu::QmuTokenParser::IsSingle(nextSpl.GetStartAngleFormula()) &&
+                         qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+        }
+        else
+        {
+            freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+        }
+
         const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
 
         controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
@@ -142,6 +166,7 @@ void VToolSplinePath::setDialog()
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
     dialogTool->SetPath(*splPath);
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,6 +190,7 @@ VToolSplinePath* VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMa
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
@@ -244,6 +270,7 @@ VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
     path->SetColor(initData.color);
     path->SetPenStyle(initData.penStyle);
     path->SetApproximationScale(initData.approximationScale);
+    path->SetAliasSuffix(initData.aliasSuffix);
 
     return VToolSplinePath::Create(initData, path);
 }
@@ -325,12 +352,39 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
                                           qint32 indexSpline) const
 {
     VSplinePoint p = splPath->GetSplinePoint(indexSpline, SplinePointPosition::FirstPoint);
-    p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+
+    if (indexSpline >1)
+    {
+        VSpline prevSpline = splPath->GetSpline(indexSpline-1);
+        if (qmu::QmuTokenParser::IsSingle(prevSpline.GetEndAngleFormula()))
+        {
+            p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+        }
+    }
+    else
+    {
+        p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+    }
+
+
     p.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
     splPath->UpdatePoint(indexSpline, SplinePointPosition::FirstPoint, p);
 
     p = splPath->GetSplinePoint(indexSpline, SplinePointPosition::LastPoint);
-    p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+
+    if (indexSpline < splPath->CountSubSpl())
+    {
+        VSpline nextSpline = splPath->GetSpline(indexSpline+1);
+        if (qmu::QmuTokenParser::IsSingle(nextSpline.GetStartAngleFormula()))
+        {
+            p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+        }
+    }
+    else
+    {
+        p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+    }
+
     p.SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
     splPath->UpdatePoint(indexSpline, SplinePointPosition::LastPoint, p);
 }
@@ -349,6 +403,7 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
     doc->SetAttribute(domElement, AttrColor, path.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, path.GetAliasSuffix(), path.GetAliasSuffix().isEmpty());
 
     UpdatePathPoints(doc, domElement, path);
 }
@@ -484,6 +539,9 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDep
         controlPoints[j-2]->blockSignals(false);
         controlPoints[j-1]->blockSignals(false);
     }
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 
     SetSplinePathAttributes(domElement, splPath);
 }
@@ -700,8 +758,7 @@ bool VToolSplinePath::IsMovable(int index) const
 {
     const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
 
-    //index == -1 - can delete, but decided to left
-    if (index == -1 || index < 1 || index > splPath->CountSubSpl())
+    if (index < 1 || index > splPath->CountSubSpl())
     {
         return false;
     }
@@ -733,7 +790,19 @@ void VToolSplinePath::RefreshCtrlPoints()
         const auto spl = splPath->GetSpline(i);
 
         {
-            const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula());
+            bool freeAngle1 = true;
+
+            if (i > 1)
+            {
+                const VSpline prevSpl = splPath->GetSpline(i-1);
+                freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula()) &&
+                             qmu::QmuTokenParser::IsSingle(prevSpl.GetEndAngleFormula());
+            }
+            else
+            {
+                freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula());
+            }
+
             const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl.GetC1LengthFormula());
 
             const auto splinePoint = spl.GetP1();
@@ -742,7 +811,19 @@ void VToolSplinePath::RefreshCtrlPoints()
         }
 
         {
-            const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+            bool freeAngle2 = true;
+
+            if (i < splPath->CountSubSpl())
+            {
+                const VSpline nextSpl = splPath->GetSpline(i+1);
+                freeAngle2 = qmu::QmuTokenParser::IsSingle(nextSpl.GetStartAngleFormula()) &&
+                             qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+            }
+            else
+            {
+                freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+            }
+
             const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
 
             const auto splinePoint = spl.GetP4();

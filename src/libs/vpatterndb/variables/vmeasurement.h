@@ -50,12 +50,9 @@ class VMeasurementData;
 class VMeasurement :public VVariable
 {
 public:
-    VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
-                 const qreal &ksize, const qreal &kheight, const QString &gui_text = QString(),
-                 const QString &description = QString(), const QString &tagName = QString());
+    VMeasurement(quint32 index, const QString &name, qreal baseA, qreal baseB, qreal baseC, qreal base);
     VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base, const QString &formula,
-                 bool ok, const QString &gui_text = QString(), const QString &description = QString(),
-                 const QString &tagName = QString());
+                 bool ok);
     VMeasurement(const VMeasurement &m);
 
     virtual ~VMeasurement() override;
@@ -67,9 +64,7 @@ public:
 #endif
 
     QString GetGuiText() const;
-
-    QString TagName() const;
-    void    setTagName(const QString &tagName);
+    void    SetGuiText(const QString &guiText);
 
     QString GetFormula() const;
 
@@ -85,30 +80,48 @@ public:
 
     VContainer *GetData();
 
-    void SetSize(qreal size);
-    void SetHeight(qreal height);
+    void SetBaseA(qreal base);
+    void SetBaseB(qreal base);
+    void SetBaseC(qreal base);
 
-    void SetUnit(const Unit *unit);
+    qreal GetBase() const;
+    void  SetBase(qreal value);
 
-    qreal   GetBase() const;
-    void    SetBase(const qreal &value);
+    qreal GetShiftA() const;
+    void  SetShiftA(qreal value);
 
-    qreal   GetKsize() const;
-    void    SetKsize(const qreal &value);
+    qreal GetShiftB() const;
+    void  SetShiftB(qreal value);
 
-    qreal   GetKheight() const;
-    void    SetKheight(const qreal &value);
+    qreal GetShiftC() const;
+    void  SetShiftC(qreal value);
 
-    static QStringList ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit);
-    static QStringList ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit);
-    static QStringList WholeListHeights(Unit patternUnit);
-    static QStringList WholeListSizes(Unit patternUnit);
-    static bool IsGradationSizeValid(const QString &size);
-    static bool IsGradationHeightValid(const QString &height);
+    qreal GetStepA() const;
+    void  SetStepA(qreal value);
+
+    qreal GetStepB() const;
+    void  SetStepB(qreal value);
+
+    qreal GetStepC() const;
+    void  SetStepC(qreal value);
+
+    bool IsSpecialUnits() const;
+    void SetSpecialUnits(bool special);
+
+    IMD  GetDimension() const;
+    void SetDimension(IMD type);
+
+    qreal GetCorrection(int baseA, int baseB, int baseC) const;
+
+    QMap<QString, qreal> GetCorrections() const;
+    void  SetCorrections(const QMap<QString, qreal> &corrections);
+
+    static QString CorrectionHash(qreal baseA, qreal baseB=0, qreal baseC=0);
 private:
     QSharedDataPointer<VMeasurementData> d;
 
     qreal CalcValue() const;
+    qreal Correction() const;
 };
 
 Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);

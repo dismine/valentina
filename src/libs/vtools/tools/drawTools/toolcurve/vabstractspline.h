@@ -54,10 +54,10 @@
 class VControlPointSpline;
 template <class T> class QSharedPointer;
 
-struct VAbstractSplineInitData : VAbstractToolInitData
+struct VAbstractSplineInitData : VDrawToolInitData
 {
     VAbstractSplineInitData()
-        : VAbstractToolInitData(),
+        : VDrawToolInitData(),
           color(ColorBlack),
           penStyle(TypeLineLine),
           approximationScale(defCurveApproximationScale)
@@ -66,13 +66,15 @@ struct VAbstractSplineInitData : VAbstractToolInitData
     QString color;
     QString penStyle;
     qreal approximationScale;
+    QString aliasSuffix{};
 };
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
+    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                    QGraphicsItem * parent = nullptr);
     virtual ~VAbstractSpline() Q_DECL_EQ_DEFAULT;
 
     virtual QPainterPath shape() const override;
@@ -94,13 +96,16 @@ public:
 
     quint32 GetDuplicate() const;
 
+    QString GetAliasSuffix() const;
+    void    SetAliasSuffix(const QString &alias);
+
     virtual void GroupVisibility(quint32 object, bool visible) override;
 public slots:
-    virtual void    FullUpdateFromFile () override;
-    virtual void    Disable(bool disable, const QString &namePP) override;
-    virtual void    DetailsMode(bool mode) override;
-    virtual void    AllowHover(bool enabled) override;
-    virtual void    AllowSelecting(bool enabled) override;
+    virtual void FullUpdateFromFile () override;
+    virtual void Disable(bool disable, const QString &namePP) override;
+    virtual void DetailsMode(bool mode) override;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
 signals:
     /**
      * @brief setEnabledPoint disable control points.
@@ -129,7 +134,6 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event) override;
     virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     ReadToolAttributes(const QDomElement &domElement) override;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void     RefreshCtrlPoints();
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
@@ -250,7 +254,8 @@ void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *too
 class VToolAbstractArc:public VAbstractSpline
 {
 public:
-    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent = nullptr);
+    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                     QGraphicsItem *parent = nullptr);
     virtual ~VToolAbstractArc() = default;
 
     QString CenterPointName() const;

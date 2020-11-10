@@ -104,6 +104,9 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolI
             this, &DialogPointOfContact::PointNameChanged);
 
     vis = new VisToolPointOfContact(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,7 +152,7 @@ void DialogPointOfContact::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(getRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         setRadius(dialog->GetFormula());
@@ -165,7 +168,7 @@ void DialogPointOfContact::EvalFormula()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagFormula);
 }
@@ -380,4 +383,16 @@ quint32 DialogPointOfContact::GetFirstPoint() const
 quint32 DialogPointOfContact::GetSecondPoint() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfContact::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

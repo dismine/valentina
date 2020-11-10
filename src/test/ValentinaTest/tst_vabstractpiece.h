@@ -42,6 +42,8 @@ public:
 private slots:
     void EquidistantRemoveLoop_data();
     void EquidistantRemoveLoop() const;
+    void LayoutAllowanceRemoveLoop_data();
+    void LayoutAllowanceRemoveLoop() const;
     void SumTrapezoids() const;
     void PathRemoveLoop_data() const;
     void PathRemoveLoop() const;

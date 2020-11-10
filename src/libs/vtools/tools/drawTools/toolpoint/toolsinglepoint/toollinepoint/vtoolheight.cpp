@@ -60,7 +60,7 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
  */
 VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, parent),
+                    initData.basePointId, 0, initData.notes, parent),
       p1LineId(initData.p1LineId),
       p2LineId(initData.p2LineId)
 {
@@ -83,6 +83,7 @@ void VToolHeight::setDialog()
     dialogTool->SetP1LineId(p1LineId);
     dialogTool->SetP2LineId(p2LineId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +114,7 @@ VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolHeight *point = Create(initData);
     if (point != nullptr)
@@ -221,6 +223,9 @@ void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1LineId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2LineId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,6 +242,8 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolLinePoint::ReadToolAttributes(domElement);
+
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
@@ -281,7 +288,7 @@ QString VToolHeight::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))

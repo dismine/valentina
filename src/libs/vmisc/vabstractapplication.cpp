@@ -42,36 +42,18 @@
 #include <QWidget>
 #include <QStandardPaths>
 
-#include "../vmisc/def.h"
-#include "../vmisc/customevents.h"
-
 #ifdef Q_OS_UNIX
 #  include <unistd.h>
 #endif
 
-const QString VAbstractApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#   include "appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),
-      undoStack(new QUndoStack(this)),
-      mainWindow(nullptr),
-      settings(nullptr),
-      qtTranslator(nullptr),
-      qtxmlTranslator(nullptr),
-      qtBaseTranslator(nullptr),
-      appTranslator(nullptr),
-      pmsTranslator(nullptr),
-      _patternUnit(Unit::Cm),
-      _patternType(MeasurementsType::Unknown),
-      patternFilePath(),
-      currentScene(nullptr),
-      sceneView(nullptr),
-      doc(nullptr),
-      m_customerName(),
-      m_userMaterials(),
-      openingPattern(false),
-      mode(Draw::Calculation)
+      undoStack(new QUndoStack(this))
 {
     QString rules;
 
@@ -118,10 +100,6 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractApplication::~VAbstractApplication()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief translationsPath return path to the root directory that contain QM files.
  * @param locale used only in Mac OS. If empty return path to the root directory. If not - return path to locale
@@ -163,7 +141,7 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
         }
         else
         {
-            return QStringLiteral("/usr/share/valentina/translations");
+            return PKGDATADIR + trPath;
         }
     }
 #else // Unix
@@ -175,59 +153,14 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     }
     else
     {
-        return QStringLiteral("/usr/share/valentina/translations");
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+        /* Fix path to trasnaltions when run inside AppImage. */
+        return AppImageRoot() + PKGDATADIR + trPath;
+#else
+        return PKGDATADIR + trPath;
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
     }
 #endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-MeasurementsType VAbstractApplication::patternType() const
-{
-    return _patternType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setPatternType(const MeasurementsType &patternType)
-{
-    _patternType = patternType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setCurrentDocument(VAbstractPattern *doc)
-{
-    this->doc = doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractPattern *VAbstractApplication::getCurrentDocument() const
-{
-    SCASSERT(doc != nullptr)
-    return doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::getOpeningPattern() const
-{
-    return openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setOpeningPattern()
-{
-    openingPattern = !openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QWidget *VAbstractApplication::getMainWindow() const
-{
-    return mainWindow;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setMainWindow(QWidget *value)
-{
-    SCASSERT(value != nullptr)
-    mainWindow = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,47 +173,6 @@ QUndoStack *VAbstractApplication::getUndoStack() const
 bool VAbstractApplication::IsPedantic() const
 {
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClearMessage helps to clear a message string from standard Qt function.
- * @param msg the message that contains '"' at the start and at the end
- * @return cleared string
- */
-QString VAbstractApplication::ClearMessage(QString msg)
-{
-    if (msg.startsWith('"') && msg.endsWith('"'))
-    {
-        msg.remove(0, 1);
-        msg.chop(1);
-    }
-
-    return msg;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const Draw &VAbstractApplication::GetDrawMode() const
-{
-    return mode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::SetDrawMode(const Draw &value)
-{
-    mode = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::PostPatternMessage(const QString &message, QtMsgType severity) const
-{
-    QApplication::postEvent(mainWindow, new PatternMessageEvent(VAbstractApplication::ClearMessage(message), severity));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::IsPatternMessage(const QString &message) const
-{
-    return VAbstractApplication::ClearMessage(message).startsWith(patternMessageSignature);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -304,24 +196,6 @@ void VAbstractApplication::WinAttachConsole()
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit VAbstractApplication::patternUnit() const
-{
-    return _patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const Unit *VAbstractApplication::patternUnitP() const
-{
-    return &_patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
-{
-    _patternUnit = patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
@@ -330,43 +204,6 @@ VCommonSettings *VAbstractApplication::Settings()
 {
     SCASSERT(settings != nullptr)
     return settings;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsScene *VAbstractApplication::getCurrentScene() const
-{
-    SCASSERT(*currentScene != nullptr)
-    return *currentScene;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setCurrentScene(QGraphicsScene **value)
-{
-    currentScene = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VMainGraphicsView *VAbstractApplication::getSceneView() const
-{
-    return sceneView;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setSceneView(VMainGraphicsView *value)
-{
-    sceneView = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VAbstractApplication::toPixel(double val) const
-{
-    return ToPixel(val, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VAbstractApplication::fromPixel(double pix) const
-{
-    return FromPixel(pix, _patternUnit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

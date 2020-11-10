@@ -95,7 +95,6 @@ protected:
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override {}
     virtual QString MakeToolTip() const override;
 private slots:

@@ -373,7 +373,7 @@ void DialogFinalMeasurements::SaveFormula()
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
+        const QString postfix = UnitsToStr(qApp->patternUnits());
         ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
@@ -381,7 +381,7 @@ void DialogFinalMeasurements::SaveFormula()
     if (text.isEmpty())
     {
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
+        const QString postfix = UnitsToStr(qApp->patternUnits());
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -455,7 +455,7 @@ void DialogFinalMeasurements::Fx()
     dialog->setWindowTitle(tr("Edit measurement"));
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator()));
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnits(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)
@@ -513,7 +513,7 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::ShowUnits()
 {
-    const QString unit = UnitsToStr(qApp->patternUnit());
+    const QString unit = UnitsToStr(qApp->patternUnits());
 
     {
         // calculated value
@@ -554,7 +554,7 @@ void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, 
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromUser)
 {
-    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = UnitsToStr(qApp->patternUnits());//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));

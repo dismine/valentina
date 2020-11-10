@@ -99,16 +99,17 @@ Q_DECLARE_METATYPE(VLayoutPassmark)
 
 constexpr qreal accuracyPointOnLine = (0.117/*mm*/ / 25.4) * PrintDPI;
 
-Q_REQUIRED_RESULT static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
-static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
+Q_REQUIRED_RESULT static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
+                                                         qreal accuracy = accuracyPointOnLine);
+static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy)
 {
-    return QLineF(p1, p2).length() <= accuracyPointOnLine;
+    return QLineF(p1, p2).length() <= accuracy;
 }
 
-Q_REQUIRED_RESULT static inline bool VFuzzyOnAxis(qreal v1, qreal v2);
-static inline bool VFuzzyOnAxis(qreal v1, qreal v2)
+Q_REQUIRED_RESULT static inline bool VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy = accuracyPointOnLine);
+static inline bool VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy)
 {
-    return qAbs(v1 - v2) <= accuracyPointOnLine;
+    return qAbs(v1 - v2) <= accuracy;
 }
 
 #endif // VGEOMETRYDEF_H

@@ -37,9 +37,6 @@
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))
-
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDefHeight, (QLatin1String("gradation/defHeight")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDefSize, (QLatin1String("gradation/defSize")))
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,28 +56,4 @@ QByteArray VTapeSettings::GetDataBaseGeometry() const
 void VTapeSettings::SetDataBaseGeometry(const QByteArray &value)
 {
     setValue(*settingDataBaseGeometry, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SetDefHeight(int value)
-{
-    setValue(*settingDefHeight, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VTapeSettings::GetDefHeight() const
-{
-    return value(*settingDefHeight, 176).toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SetDefSize(int value)
-{
-    setValue(*settingDefSize, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VTapeSettings::GetDefSize() const
-{
-    return value(*settingDefSize, 50).toInt();
 }

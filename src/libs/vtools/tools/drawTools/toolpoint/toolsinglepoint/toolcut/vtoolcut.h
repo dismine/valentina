@@ -45,17 +45,34 @@
 
 class VFormula;
 
+struct VToolCutInitData : VToolSinglePointInitData
+{
+    VToolCutInitData()
+        : VToolSinglePointInitData()
+    {}
+
+    quint32 baseCurveId{NULL_ID};
+    QString formula{};
+    QString aliasSuffix1{};
+    QString aliasSuffix2{};
+};
+
 class VToolCut : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-             const quint32 &curveCutId, QGraphicsItem * parent = nullptr);
+    explicit VToolCut(const VToolCutInitData &initData, QGraphicsItem * parent = nullptr);
     virtual int   type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
-    VFormula GetFormula() const;
-    void     SetFormula(const VFormula &value);
+    VFormula GetFormulaLength() const;
+    void     SetFormulaLength(const VFormula &value);
+
+    QString GetAliasSuffix1() const;
+    void    SetAliasSuffix1(const QString &alias);
+
+    QString GetAliasSuffix2() const;
+    void    SetAliasSuffix2(const QString &alias);
 
     QString CurveName() const;
 
@@ -67,11 +84,16 @@ protected:
     /** @brief formula keep formula of length */
     QString       formula;
 
-    quint32       curveCutId;
+    quint32       baseCurveId;
     bool          detailsMode;
+
+    QString m_aliasSuffix1{};
+    QString m_aliasSuffix2{};
 
     void          RefreshGeometry();
     virtual void  RemoveReferens() override;
+    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void  ReadToolAttributes(const QDomElement &domElement) override;
 
     template <typename T>
     void ShowToolVisualization(bool show);
@@ -104,7 +126,7 @@ inline void VToolCut::ShowToolVisualization(bool show)
         delete vis;
     }
 
-    VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(curveCutId)->getIdTool());
+    VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(baseCurveId)->getIdTool());
     if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(parent))
     {
         detailsMode ? parentCurve->ShowHandles(detailsMode) : parentCurve->ShowHandles(show);

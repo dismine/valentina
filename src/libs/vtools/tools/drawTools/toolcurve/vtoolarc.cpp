@@ -64,7 +64,7 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param initData init data
  */
 VToolArc::VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent)
-    : VToolAbstractArc(initData.doc, initData.data, initData.id, parent)
+    : VToolAbstractArc(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
     sceneType = SceneObject::Arc;
 
@@ -90,6 +90,8 @@ void VToolArc::setDialog()
     dialogTool->SetColor(arc->GetColor());
     dialogTool->SetPenStyle(arc->GetPenStyle());
     dialogTool->SetApproximationScale(arc->GetApproximationScale());
+    dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix(arc->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,6 +122,8 @@ VToolArc* VToolArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScen
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.approximationScale = dialogTool->GetApproximationScale();
+    initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix = dialogTool->GetAliasSuffix();
 
     VToolArc* point = Create(initData);
     if (point != nullptr)
@@ -148,6 +152,7 @@ VToolArc* VToolArc::Create(VToolArcInitData &initData)
     arc->SetColor(initData.color);
     arc->SetPenStyle(initData.penStyle);
     arc->SetApproximationScale(initData.approximationScale);
+    arc->SetAliasSuffix(initData.aliasSuffix);
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -192,7 +197,7 @@ VFormula VToolArc::GetFormulaRadius() const
     VFormula radius(arc->GetFormulaRadius(), getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -336,6 +341,11 @@ void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenci
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
+                                dialogTool->GetAliasSuffix().isEmpty());
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -387,12 +397,12 @@ QString VToolArc::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(arc->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Radius"))
+            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Radius"))
             .arg(qApp->fromPixel(arc->GetRadius()))
             .arg(tr("Start angle"))
             .arg(arc->GetStartAngle())
             .arg(tr("End angle"))
             .arg(arc->GetEndAngle())
-            .arg(tr("Label"), arc->name());
+            .arg(tr("Label"), arc->ObjectName());
     return toolTip;
 }

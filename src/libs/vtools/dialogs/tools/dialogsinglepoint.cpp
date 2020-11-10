@@ -62,6 +62,9 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWi
         CheckPointLabel(this, ui->lineEditName, ui->labelEditName, pointName, this->data, flagName);
         CheckState();
     });
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,4 +130,16 @@ QPointF DialogSinglePoint::GetPoint() const
 QString DialogSinglePoint::GetPointName() const
 {
     return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSinglePoint::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSinglePoint::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

@@ -59,7 +59,7 @@ const QString VToolPointFromCircleAndTangent::ToolType = QStringLiteral("pointFr
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointFromCircleAndTangentInitData &initData,
                                                                QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       circleCenterId(initData.circleCenterId),
       tangentPointId(initData.tangentPointId),
       circleRadius(initData.circleRadius),
@@ -81,6 +81,7 @@ void VToolPointFromCircleAndTangent::setDialog()
     dialogTool->SetCrossCirclesPoint(crossPoint);
     dialogTool->SetTangentPointId(tangentPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,6 +105,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointFromCircleAndTangent *point = Create(initData);
     if (point != nullptr)
@@ -131,7 +133,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
                 .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
 
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
@@ -206,7 +208,7 @@ VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
     VFormula radius(circleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -290,6 +292,9 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrCRadius, dialogTool->GetCircleRadius());
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,6 +312,8 @@ void VToolPointFromCircleAndTangent::SaveOptions(QDomElement &tag, QSharedPointe
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     circleCenterId = doc->GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
     tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
     circleRadius = doc->GetParametrString(domElement, AttrCRadius);

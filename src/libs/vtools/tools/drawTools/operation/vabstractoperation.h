@@ -41,23 +41,24 @@
 #include "../vdrawtool.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "../../toolsdef.h"
 
 struct DestinationItem
 {
-    quint32 id;
-    qreal mx;
-    qreal my;
-    bool showLabel;
+    quint32 id{NULL_ID};
+    qreal mx{1};
+    qreal my{1};
+    bool showLabel{true};
 };
 
-struct VAbstractOperationInitData : VAbstractToolInitData
+struct VAbstractOperationInitData : VDrawToolInitData
 {
     VAbstractOperationInitData()
-        : VAbstractToolInitData()
+        : VDrawToolInitData()
     {}
 
     QString suffix{};
-    QVector<quint32> source{};
+    QVector<SourceItem> source{};
     QVector<DestinationItem> destination{};
     QString visibilityGroupName{};
     QStringList visibilityGroupTags{};
@@ -85,7 +86,7 @@ public:
     QString Suffix() const;
     void    SetSuffix(const QString &suffix);
 
-    QVector<QString> SourceItems() const;
+    QVector<SourceItem> SourceItems() const;
 
     virtual void GroupVisibility(quint32 object, bool visible) override;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -95,6 +96,10 @@ public:
     virtual void SetLabelVisible(quint32 id, bool visible) override;
 
     static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
+    static QVector<SourceItem> ExtractSourceData(const QDomElement &domElement);
+    static QVector<DestinationItem> ExtractDestinationData(const QDomElement &domElement);
+
+    static QMap<QString, QString> OperationColorsList();
 public slots:
     virtual void FullUpdateFromFile() override;
 
@@ -128,7 +133,7 @@ public slots:
 protected:
     QString suffix;
 
-    QVector<quint32> source;
+    QVector<SourceItem> source;
     QVector<DestinationItem> destination;
 
     QMap<quint32, VAbstractSimple *> operatedObjects;
@@ -137,15 +142,15 @@ protected:
     QString groupName{};
     QStringList groupTags{};
 
-    VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
-                       const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                       QGraphicsItem *parent = nullptr);
+    explicit VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent = nullptr);
 
     virtual void AddToFile() override;
     virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
     virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
                                   const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
     virtual void PerformDelete() override;
+    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
 
     void UpdateNamePosition(quint32 id, const QPointF &pos);
     void SaveSourceDestination(QDomElement &tag);

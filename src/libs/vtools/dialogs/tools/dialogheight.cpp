@@ -90,6 +90,9 @@ DialogHeight::DialogHeight(const VContainer *data, quint32 toolId, QWidget *pare
             this, &DialogHeight::PointNameChanged);
 
     vis = new VisToolHeight(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,4 +346,16 @@ quint32 DialogHeight::GetP1LineId() const
 quint32 DialogHeight::GetP2LineId() const
 {
     return getCurrentObjectId(ui->comboBoxP2Line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHeight::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogHeight::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

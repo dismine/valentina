@@ -49,7 +49,7 @@
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vmath.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
@@ -136,9 +136,11 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
     {
         Calculator cal1;
         labelWidth = cal1.EvalFormula(pattern->DataVariables(), labelData.GetLabelWidth());
+        labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
 
         Calculator cal2;
         labelHeight = cal2.EvalFormula(pattern->DataVariables(), labelData.GetLabelHeight());
+        labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
     }
     catch(qmu::QmuParserError &e)
     {
@@ -152,11 +154,7 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
         try
         {
             const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
-
-            const qreal lWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
-            const qreal lHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
-
-            pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, lWidth, lHeight).center();
+            pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, labelWidth, labelHeight).center();
         }
         catch(const VExceptionBadId &)
         {
@@ -176,7 +174,7 @@ QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
     allowancePoints.reserve(points.size());
-    for(auto point : points)
+    for(auto &point : points)
     {
         allowancePoints.append(VSAPoint(point));
     }
@@ -207,8 +205,9 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
     QStringList text;
     if (labelShape.count() > 2)
     {
-        text.reserve(tm.GetSourceLinesCount());
-        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+        int sourceCount = tm.GetSourceLinesCount();
+        text.reserve(sourceCount);
+        for (int i = 0; i < sourceCount; ++i)
         {
             text.append(tm.GetSourceLine(i).m_qsText);
         }
@@ -220,9 +219,9 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
 QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern)
 {
     QVector<VLayoutPlaceLabel> labels;
-    const QVector<quint32> placeLabels = piece.GetPlaceLabels();
+    const auto placeLabels = piece.GetPlaceLabels();
     labels.reserve(placeLabels.size());
-    for(auto placeLabel : placeLabels)
+    for(auto &placeLabel : placeLabels)
     {
         const auto label = pattern->GeometricObject<VPlaceLabelItem>(placeLabel);
         if (label->IsVisible())
@@ -264,8 +263,33 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
                 if (nodeIndex != -1)
                 {
-                    layoutPassmark.lines = passmark.BuiltInSAPassmark(piece, pattern);
-                    layoutPassmark.baseLine = ConstFirst (passmark.BuiltInSAPassmarkBaseLine(piece));
+                    const QVector<QLineF> lines = passmark.BuiltInSAPassmark(piece, pattern);
+                    if (lines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare builtin passmark '%1' for piece '%2'. Passmark is empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
+
+                    layoutPassmark.lines = lines;
+
+                    const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece);
+                    if (baseLines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare builtin  passmark '%1' for piece '%2'. Passmark base line is "
+                                        "empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
+                    layoutPassmark.baseLine = ConstFirst (baseLines);
+
+
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = true;
 
@@ -277,7 +301,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Passmark '%1' is not part of piece '%2'.")
                             .arg(pData.nodeName, piece.GetName());
                     qApp->IsPedantic() ? throw VException(errorMsg) :
-                                         qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                         qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                 }
             };
 
@@ -295,18 +319,39 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
                 if (nodeIndex != -1)
                 {
-                    QVector<QLineF> lines =
+                    QVector<QLineF> baseLines =
                             passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
+                    if (baseLines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark base line is empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
 
                     if (side == PassmarkSide::All || side == PassmarkSide::Right)
                     {
-                        layoutPassmark.baseLine = lines.first();
+                        layoutPassmark.baseLine = baseLines.first();
                     }
                     else if (side == PassmarkSide::Right)
                     {
-                        layoutPassmark.baseLine = lines.last();
+                        layoutPassmark.baseLine = baseLines.last();
                     }
-                    layoutPassmark.lines = passmark.SAPassmark(piece, pattern, side);
+
+                    const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
+                    if (lines.isEmpty())
+                    {
+                        const QString errorMsg =
+                            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark is empty.")
+                                .arg(pData.nodeName, piece.GetName());
+                        qApp->IsPedantic() ? throw VException(errorMsg) :
+                                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                        return;
+                    }
+
+                    layoutPassmark.lines = lines;
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = false;
 
@@ -318,7 +363,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Passmark '%1' is not part of piece '%2'.")
                             .arg(pData.nodeName, piece.GetName());
                     qApp->IsPedantic() ? throw VException(errorMsg) :
-                                         qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                         qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                 }
             };
 
@@ -465,7 +510,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
         const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.")
                 .arg(piece.GetName());
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     det.SetCountourPoints(futureMainPath.result(),
@@ -509,20 +554,11 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
 template <class T>
 QVector<T> VLayoutPiece::Map(QVector<T> points) const
 {
-    for (int i = 0; i < points.size(); ++i)
-    {
-        points[i] = d->matrix.map(points.at(i));
-    }
-
+    std::transform(points.begin(), points.end(), points.begin(),
+                   [this](const T &point) { return d->matrix.map(point); });
     if (d->mirror)
     {
-        QList<T> list = ConvertToList(points);
-
-        for (int k=0, s=list.size(), max=(s/2); k<max; k++)
-        {
-            SwapItemsAt(list, k, s-(1+k));
-        }
-        points = ConvertToVector(list);
+        std::reverse(points.begin(), points.end());
     }
     return points;
 }
@@ -643,9 +679,6 @@ void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& da
         return;
     }
 
-    labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
-    labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
-
     QVector<QPointF> v;
     v << ptPos
       << QPointF(ptPos.x() + labelWidth, ptPos.y())
@@ -666,7 +699,7 @@ void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& da
     // generate text
     d->m_tmDetail.SetFont(font);
     d->m_tmDetail.SetFontSize(data.GetFontSize());
-    d->m_tmDetail.Update(qsName, data);
+    d->m_tmDetail.Update(qsName, data, pattern);
     // this will generate the lines of text
     d->m_tmDetail.SetFontSize(data.GetFontSize());
     d->m_tmDetail.FitFontSize(labelWidth, labelHeight);
@@ -704,9 +737,6 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelDat
         return;
     }
 
-    labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
-    labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
-
     QVector<QPointF> v;
     v << ptPos
       << QPointF(ptPos.x() + labelWidth, ptPos.y())
@@ -726,7 +756,7 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelDat
     d->m_tmPattern.SetFont(font);
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
 
-    d->m_tmPattern.Update(pDoc);
+    d->m_tmPattern.Update(pDoc, pattern);
 
     // generate lines of text
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
@@ -1409,30 +1439,20 @@ QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// NOTE: Once C++17 is made mandatory, this method can further be refactored with std::optional<int>
 int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const
 {
-    if (p1.isNull())
+    if (p1.isNull() || path.count() < 3)
     {
         return 0;
     }
 
-    if (path.count() < 3)
+    const auto points = Map(path);
+    const auto posIter = std::find_if(points.cbegin(), points.cend(),
+                                      [&p1](const QPointF &point){ return VFuzzyComparePoints(point, p1); });
+    if (posIter != points.cend())
     {
-        return 0;
-    }
-
-    const QVector<QPointF> points = Map(path);
-    for (int i=0; i < points.size(); i++)
-    {
-        if (VFuzzyComparePoints(points.at(i), p1))
-        {
-            int pos = i+1;
-            if (pos > points.size())
-            {
-                pos = 1;
-            }
-            return pos;
-        }
+        return static_cast<int>(posIter - points.cbegin() + 1);
     }
     return 0; // Did not find edge
 }

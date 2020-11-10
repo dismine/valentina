@@ -152,7 +152,12 @@ extern const QString AttrPlaceLabelType;
 extern const QString AttrVersion;
 extern const QString AttrFirstToCountour;
 extern const QString AttrLastToCountour;
+extern const QString AttrNotes;
+extern const QString AttrAlias;
+extern const QString AttrAlias1;
+extern const QString AttrAlias2;
 
+extern const QString TypeLineDefault;
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;
 extern const QString TypeLineDashLine;
@@ -163,9 +168,11 @@ extern const QString TypeLineDashDotDotLine;
 QStringList          StylesList();
 Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
 QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
+QIcon                PenStylePic(Qt::PenStyle style);
 QMap<QString, QIcon> LineStylesPics();
 QMap<QString, QIcon> CurvePenStylesPics();
 
+extern const QString ColorDefault;
 extern const QString ColorBlack;
 extern const QString ColorGreen;
 extern const QString ColorBlue;

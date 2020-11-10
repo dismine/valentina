@@ -51,6 +51,7 @@
 #include <QDateTime>
 #include <QtXmlPatterns>
 #include <QIcon>
+#include <Qt>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -171,7 +172,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     const bool isPatternMessage = qApp->IsPatternMessage(msg);
     if (isPatternMessage)
     {
-        logMsg = logMsg.remove(VAbstractApplication::patternMessageSignature);
+        logMsg = logMsg.remove(VAbstractValApplication::patternMessageSignature);
     }
 
     {
@@ -224,7 +225,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         vStdOut().flush();
         vStdErr().flush();
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         (*qApp->LogFile()) << debugdate <<  endl;
+#else
+        (*qApp->LogFile()) << debugdate <<  Qt::endl;
+#endif
     }
 
     if (isGuiThread)
@@ -266,7 +271,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                             break;
                     }
 
-                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
+                    messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
@@ -304,7 +309,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv),
+    : VAbstractValApplication(argc, argv),
       trVars(nullptr),
       autoSaveTimer(nullptr),
       lockLog(),
@@ -342,7 +347,7 @@ void VApplication::NewValentina(const QString &fileName)
         qCDebug(vApp, "New process without arguments. program = %s",
                 qUtf8Printable(QCoreApplication::applicationFilePath()));
         // Path can contain spaces.
-        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
+        if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList()))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
@@ -355,7 +360,7 @@ void VApplication::NewValentina(const QString &fileName)
     {
         const QString run = QStringLiteral("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
-        if (QProcess::startDetached(run))
+        if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList{fileName}))
         {
             qCDebug(vApp, "The process was started successfully.");
         }

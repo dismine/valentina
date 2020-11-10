@@ -74,6 +74,8 @@ void VToolFlippingByLine::setDialog()
     dialogTool->SetFirstLinePointId(m_firstLinePointId);
     dialogTool->SetSecondLinePointId(m_secondLinePointId);
     dialogTool->SetSuffix(suffix);
+    dialogTool->SetNotes(m_notes);
+    dialogTool->SetSourceObjects(source);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -90,7 +92,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const QPointer<DialogTool> &dia
     initData.firstLinePointId = dialogTool->GetFirstLinePointId();
     initData.secondLinePointId = dialogTool->GetSecondLinePointId();
     initData.suffix = dialogTool->GetSuffix();
-    initData.source = dialogTool->GetObjects();
+    initData.source = dialogTool->GetSourceObjects();
     initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
     initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
     initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
@@ -99,6 +101,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const QPointer<DialogTool> &dia
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolFlippingByLine* operation = Create(initData);
     if (operation != nullptr)
@@ -133,9 +136,9 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(firstPoint.getIdTool());
         initData.doc->IncrementReferens(secondPoint.getIdTool());
-        for (auto idObject : qAsConst(initData.source))
+        for (auto object : qAsConst(initData.source))
         {
-            initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
 
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
@@ -189,7 +192,7 @@ void VToolFlippingByLine::SetVisualization()
         VisToolFlippingByLine *visual = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetObjects(source);
+        visual->SetObjects(SourceToObjects(source));
         visual->SetFirstLinePointId(m_firstLinePointId);
         visual->SetSecondLinePointId(m_secondLinePointId);
         visual->RefreshGeometry();
@@ -213,6 +216,12 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
 
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+
+    source = dialogTool->GetSourceObjects();
+    SaveSourceDestination(domElement);
+
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
 }
@@ -220,22 +229,20 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::ReadToolAttributes(const QDomElement &domElement)
 {
+    VAbstractFlipping::ReadToolAttributes(domElement);
+
     m_firstLinePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
     m_secondLinePointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-    suffix = doc->GetParametrString(domElement, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractFlipping::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrP1Line, QString().setNum(m_firstLinePointId));
     doc->SetAttribute(tag, AttrP2Line, QString().setNum(m_secondLinePointId));
-    doc->SetAttribute(tag, AttrSuffix, suffix);
-
-    SaveSourceDestination(tag);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,8 +258,7 @@ QString VToolFlippingByLine::MakeToolTip() const
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByLine::VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent)
-    : VAbstractFlipping(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                        initData.destination, parent),
+    : VAbstractFlipping(initData, parent),
       m_firstLinePointId(initData.firstLinePointId),
       m_secondLinePointId(initData.secondLinePointId)
 {

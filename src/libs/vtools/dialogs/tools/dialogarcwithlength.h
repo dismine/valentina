@@ -71,6 +71,12 @@ public:
 
     qreal         GetApproximationScale() const;
     void          SetApproximationScale(qreal value);
+
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
+    void    SetAliasSuffix(const QString &alias);
+    QString GetAliasSuffix() const;
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -93,6 +99,9 @@ protected:
     virtual void  closeEvent(QCloseEvent *event) override;
     virtual bool  IsValid() const final;
 
+private slots:
+    void ValidateAlias();
+
 private:
     Q_DISABLE_COPY(DialogArcWithLength)
     Ui::DialogArcWithLength *ui;
@@ -104,6 +113,8 @@ private:
     bool          flagF1;
 
     bool          flagLength;
+
+    bool          flagAlias{true};
 
     /** @brief timerRadius timer of check formula of radius */
     QTimer        *timerRadius;
@@ -126,6 +137,8 @@ private:
     int           formulaBaseHeightF1;
     int           formulaBaseHeightLength;
 
+    QString       originAliasSuffix{};
+
     void          Radius();
     void          Length();
     void          EvalF();
@@ -134,7 +147,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogArcWithLength::IsValid() const
 {
-    return flagRadius && flagF1 && flagLength;
+    return flagRadius && flagF1 && flagLength && flagAlias;
 }
 
 #endif // DIALOGARCWITHLENGTH_H

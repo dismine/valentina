@@ -687,7 +687,7 @@ void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
 void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnit());
+    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -705,7 +705,7 @@ QMarginsF DialogSaveLayout::GetTiledMargins() const
         ui->doubleSpinBoxBottomField->value()
     );
 
-    return UnitConvertor(margins, qApp->patternUnit(), Unit::Mm);
+    return UnitConvertor(margins, qApp->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -817,9 +817,9 @@ bool DialogSaveLayout::TestPdf()
     QProcess proc;
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
     // Seek pdftops in app bundle or near valentin.exe
-    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ PDFTOPS);
+    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ PDFTOPS, QStringList());
 #else
-    proc.start(PDFTOPS); // Seek pdftops in standard path
+    proc.start(PDFTOPS, QStringList()); // Seek pdftops in standard path
 #endif
     if (proc.waitForStarted(15000) && (proc.waitForFinished(15000) || proc.state() == QProcess::NotRunning))
     {
@@ -904,7 +904,7 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
 void DialogSaveLayout::ReadSettings()
 {
     VValentinaSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    const Unit unit = qApp->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -958,7 +958,7 @@ void DialogSaveLayout::WriteSettings() const
     }
 
     VValentinaSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    const Unit unit = qApp->patternUnits();
 
     // write Margins top, right, bottom, left
     QMarginsF margins = QMarginsF(

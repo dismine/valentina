@@ -37,6 +37,7 @@
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/def.h"
+#include "../vmisc/compatibility.h"
 #include "../vgeometry/vgobject.h"
 #include "vsapoint.h"
 #include "testpath.h"
@@ -104,6 +105,9 @@ public:
                                          bool *needRollback = nullptr);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
     static bool             IsAllowanceValid(const QVector<QPointF> &base, const QVector<QPointF> &allowance);
+    template <class T>
+    static bool             IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon,
+                                            qreal accuracy = accuracyPointOnLine);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
@@ -256,6 +260,77 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
     }
 
     return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+bool VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon, qreal accuracy)
+{
+    // Edges must not intersect
+    for (auto i = 0; i < path.count(); ++i)
+    {
+        int nextI = -1;
+        if (i < path.count()-1)
+        {
+            nextI = i + 1;
+        }
+        else
+        {
+            nextI = 0;
+        }
+
+        QLineF baseSegment(path.at(i), path.at(nextI));
+        if (baseSegment.isNull())
+        {
+            continue;
+        }
+
+        for (auto j = 0; j < polygon.count(); ++j)
+        {
+            int nextJ = -1;
+            if (j < polygon.count()-1)
+            {
+                nextJ = j + 1;
+            }
+            else
+            {
+                nextJ = 0;
+            }
+
+            QLineF allowanceSegment(polygon.at(j), polygon.at(nextJ));
+            if (allowanceSegment.isNull())
+            {
+                continue;
+            }
+
+            QPointF crosPoint;
+            const auto type = Intersects(baseSegment, allowanceSegment, &crosPoint);
+
+            if (type == QLineF::BoundedIntersection
+                && not VFuzzyComparePoints(baseSegment.p1(), crosPoint, accuracy)
+                && not VFuzzyComparePoints(baseSegment.p2(), crosPoint, accuracy)
+                && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p1(), baseSegment.p1(), baseSegment.p2(),
+                                                     accuracy)
+                && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p2(), baseSegment.p1(), baseSegment.p2(),
+                                                     accuracy))
+            {
+                return false;
+            }
+        }
+    }
+
+    // Just instersection edges is not enough. The base must be inside of the allowance.
+    QPolygonF allowancePolygon(polygon);
+
+    for (auto &point : path)
+    {
+        if (not allowancePolygon.containsPoint(point, Qt::WindingFill))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 #endif // VABSTRACTPIECE_H

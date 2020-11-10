@@ -113,6 +113,9 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget
 
     // Call after initialization vis!!!!
     SetTypeLine(TypeLineNone);//By default don't show line
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,7 +144,7 @@ void DialogAlongLine::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -157,7 +160,7 @@ void DialogAlongLine::EvalFormula()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
 
     Eval(formulaData, flagFormula);
@@ -294,7 +297,19 @@ void DialogAlongLine::SetSecondPointId(quint32 value)
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject2Id(value);
+            line->setObject2Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogAlongLine::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -68,7 +68,7 @@ const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
  * @param parent parent object.
  */
 VToolPointOfContact::VToolPointOfContact(const VToolPointOfContactInitData &initData, QGraphicsItem *parent)
-    : VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       arcRadius(initData.radius),
       center(initData.center),
       firstPointId(initData.firstPointId),
@@ -92,6 +92,7 @@ void VToolPointOfContact::setDialog()
     dialogTool->SetFirstPoint(firstPointId);
     dialogTool->SetSecondPoint(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,6 +185,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const QPointer<DialogTool> &dia
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfContact *point = Create(initData);
     if (point != nullptr)
@@ -217,7 +219,7 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
                                     "intersection with line (%4;%5)")
                 .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -313,6 +315,9 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -330,6 +335,8 @@ void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     arcRadius = doc->GetParametrString(domElement, AttrRadius, QString());
     center = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
@@ -373,7 +380,7 @@ QString VToolPointOfContact::MakeToolTip() const
                                     "</table>")
             .arg(QStringLiteral("%1->%2").arg(p1->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), QStringLiteral("%1->%2").arg(p2->name(), current->name()))
+            .arg(UnitsToStr(qApp->patternUnits(), true), QStringLiteral("%1->%2").arg(p2->name(), current->name()))
             .arg(qApp->fromPixel(p2ToCur.length()))
             .arg(QStringLiteral("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
             .arg(qApp->fromPixel(centerToCur.length()))
@@ -409,7 +416,7 @@ VFormula VToolPointOfContact::getArcRadius() const
     VFormula radius(arcRadius, this->getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
 
     return radius;

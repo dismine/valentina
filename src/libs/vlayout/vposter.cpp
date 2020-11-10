@@ -43,10 +43,11 @@
 #include <QImageReader>
 #include <QPixmapCache>
 #include <QPainter>
+#include <QFileInfo>
 
 #include "../vmisc/vmath.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexception.h"
 
 namespace
@@ -309,7 +310,7 @@ QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const Po
         {
             const QString errorMsg = tr("Cannot open the watermark image.") + QChar(' ') + error;
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             return data;
         }
 
@@ -319,7 +320,7 @@ QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const Po
     {
         const QString errorMsg = tr("Not supported file suffix '%1'").arg(f.suffix());
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return data;
     }
 
@@ -455,7 +456,7 @@ void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect
 
     const qreal notchHeight = ToPixel(3); // mm
     const qreal shortNotchHeight = ToPixel(1.1); // mm
-    Unit patternUnits = qApp->patternUnit();
+    Unit patternUnits = qApp->patternUnits();
     const qreal step = UnitConvertor(1, patternUnits, Unit::Px);
     double marksCount = rec.width() / step;
     int i = 0;

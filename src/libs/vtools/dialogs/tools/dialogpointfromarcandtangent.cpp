@@ -64,6 +64,9 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
     });
 
     vis = new VisToolPointFromArcAndTangent(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,4 +200,16 @@ void DialogPointFromArcAndTangent::SaveData()
     point->setArcId(GetArcId());
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromArcAndTangent::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointFromArcAndTangent::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

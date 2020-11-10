@@ -97,15 +97,6 @@ public:
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
     virtual QString GenerateSuffix() const override;
 
-    bool IsDefCustom() const;
-    void SetDefCustom(bool value);
-
-    int  GetDefCustomHeight() const;
-    void SetDefCustomHeight(int value);
-
-    int  GetDefCustomSize() const;
-    void SetDefCustomSize(int value);
-
     bool IsReadOnly() const;
     void SetReadOnly(bool rOnly);
 
@@ -178,9 +169,12 @@ private:
     void           ParseIncrementsElement(const QDomNode& node, const Document &parse);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
+    void           DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes);
     void           PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);
     void           PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
+    void           DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my,
+                                    QString &notes);
     void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
                                            quint32 &idTool);
     template <typename T>

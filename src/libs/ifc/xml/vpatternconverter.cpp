@@ -60,8 +60,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.8.8");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.8.8.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.8.10");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.8.10.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -240,7 +240,9 @@ QString VPatternConverter::XSDSchema(int ver) const
         std::make_pair(FORMAT_VERSION(0, 8, 5), QStringLiteral("://schema/pattern/v0.8.5.xsd")),
         std::make_pair(FORMAT_VERSION(0, 8, 6), QStringLiteral("://schema/pattern/v0.8.6.xsd")),
         std::make_pair(FORMAT_VERSION(0, 8, 7), QStringLiteral("://schema/pattern/v0.8.7.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 8, 8), CurrentSchema)
+        std::make_pair(FORMAT_VERSION(0, 8, 8), QStringLiteral("://schema/pattern/v0.8.8.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 8, 9), QStringLiteral("://schema/pattern/v0.8.9.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 8, 10), CurrentSchema)
     };
 
     if (schemas.contains(ver))
@@ -493,6 +495,14 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 8, 8)));
             Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 8, 8)):
+            ToV0_8_9();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 8, 9)));
+            Q_FALLTHROUGH();
+        case (FORMAT_VERSION(0, 8, 9)):
+            ToV0_8_10();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 8, 10)));
+            Q_FALLTHROUGH();
+        case (FORMAT_VERSION(0, 8, 10)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -510,7 +520,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FORMAT_VERSION(0, 8, 8),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FORMAT_VERSION(0, 8, 10),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -1157,7 +1167,28 @@ void VPatternConverter::ToV0_8_8()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 8, 8),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.8.8"));
-    AddPieceUUIDV0_8_8();
+    RemoveGradationV0_8_8();
+    AddPieceUUIDV0_8_8();  
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_8_9()
+{
+    // TODO. Delete if minimal supported version is 0.8.9
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 8, 9),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.8.9"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_8_10()
+{
+    // TODO. Delete if minimal supported version is 0.8.10
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 8, 10),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.8.10"));
     Save();
 }
 
@@ -2677,6 +2708,20 @@ void VPatternConverter::AddTagPreviewCalculationsV0_6_2()
     {
         QDomElement pattern = documentElement();
         pattern.insertAfter(createElement(*strPreviewCalculations), list.at(0));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveGradationV0_8_8()
+{
+    QDomElement patternElement = documentElement();
+    if (patternElement.isElement())
+    {
+        QDomElement gradationTag = patternElement.firstChildElement(*strGradation);
+        if (gradationTag.isElement())
+        {
+            patternElement.removeChild(gradationTag);
+        }
     }
 }
 

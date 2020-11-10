@@ -42,23 +42,26 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VInternalVariableData : public QSharedData
 {
 public:
-
     VInternalVariableData()
-        :type(VarType::Unknown), value(0), name(QString())
     {}
 
     VInternalVariableData(const VInternalVariableData &var)
-        :QSharedData(var), type(var.type), value(var.value), name(var.name)
+        :QSharedData(var),
+         type(var.type),
+         value(var.value),
+         name(var.name),
+         alias(var.alias)
     {}
 
     virtual ~VInternalVariableData();
 
-    VarType type;
+    VarType type{VarType::Unknown};
 
     /** @brief value variable's value */
-    qreal   value;
+    qreal   value{0};
 
-    QString name;
+    QString name{};
+    QString alias{};
 
 private:
     Q_DISABLE_ASSIGN(VInternalVariableData)

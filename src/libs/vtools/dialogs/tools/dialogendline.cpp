@@ -123,6 +123,9 @@ DialogEndLine::DialogEndLine(const VContainer *data, quint32 toolId, QWidget *pa
     connect(timerFormulaAngle, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
 
     vis = new VisToolEndLine(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,7 +153,7 @@ void DialogEndLine::EvalLength()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkLessThanZero = false;
 
     Eval(formulaData, flagFormula);
@@ -188,7 +191,7 @@ void DialogEndLine::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -439,4 +442,16 @@ QString DialogEndLine::GetAngle() const
 quint32 DialogEndLine::GetBasePointId() const
 {
     return getCurrentObjectId(ui->comboBoxBasePoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEndLine::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

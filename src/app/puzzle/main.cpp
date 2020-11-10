@@ -67,17 +67,6 @@ int main(int argc, char *argv[])
     VPApplication app(argc, argv);
     app.InitOptions();
 
-    if (FvUpdater::IsStaledTestBuild())
-    {
-        qWarning() << QApplication::translate("Puzzle",
-                                              "This test build is older than %1 days. To provide you with better "
-                                              "quality service we restrict the lifetime you can use a test build. "
-                                              "To continue using Puzzle please update to newer test build. The "
-                                              "application will be shut down.")
-                       .arg(FvUpdater::testBuildLifetime);
-        return V_EX_UNAVAILABLE;
-    }
-
     QTimer::singleShot(0, &app, &VPApplication::ProcessCMD);
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)

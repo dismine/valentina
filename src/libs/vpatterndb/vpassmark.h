@@ -35,6 +35,8 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/typedef.h"
 
+class QPainterPath;
+
 enum class PassmarkStatus: qint8
 {
     Error = 0,

@@ -79,9 +79,19 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 #BuildRequires: clang-libs
 #%endif
 
-Requires:   poppler-utils
+%if 0%{?mageia} > 0
+Requires: poppler
+%endif
 
-Version:	0.7.0
+%if 0%{?suse_version} > 0
+Requires: poppler-tools
+%endif
+
+%if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
+Requires: poppler-utils
+%endif
+
+Version:	0.7.36
 Release:	0
 URL:		https://gitlab.com/smart-pattern/valentina
 License:	GPL-3.0+
@@ -233,6 +243,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Mon Jun 11 2018 Roman Telezhynskyi
+* Sat Oct 24 2020 Roman Telezhynskyi
  - Auto build
 

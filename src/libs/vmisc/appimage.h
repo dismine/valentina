@@ -28,6 +28,11 @@
 #ifndef APPIMAGE_H
 #define APPIMAGE_H
 
+class QString;
+
 char* IcuDataPath(const char* correction);
+
+QString AppImageRoot();
+QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir);
 
 #endif // APPIMAGE_H

@@ -115,11 +115,13 @@ public:
 
     bool IsGuiEnabled()const;
 
-    bool IsSetGradationSize() const;
-    bool IsSetGradationHeight() const;
+    bool IsSetDimensionA() const;
+    bool IsSetDimensionB() const;
+    bool IsSetDimensionC() const;
 
-    QString OptGradationSize() const;
-    QString OptGradationHeight() const;
+    int OptDimensionA() const;
+    int OptDimensionB() const;
+    int OptDimensionC() const;
     
     QMarginsF TiledPageMargins() const;
     VAbstractLayoutDialog::PaperSizeTemplate OptTiledPaperSize() const;

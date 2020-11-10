@@ -191,19 +191,11 @@ include(../translations.pri)
 
 # Set "make install" command for Unix-like systems.
 unix{
-    # Prefix for binary file.
-    isEmpty(PREFIX){
-        PREFIX = $$DEFAULT_PREFIX
-    }
-
-    unix:!macx{
-        DATADIR =$$PREFIX/share
-        DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
-
+    !macx{
         # Path to bin file after installation
-        target.path = $$PREFIX/bin
+        target.path = $$BINDIR
 
-        rcc_diagrams.path = $$PREFIX/share/valentina/
+        rcc_diagrams.path = $$PKGDATADIR
         rcc_diagrams.files = $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
         rcc_diagrams.CONFIG = no_check_exist
 
@@ -360,7 +352,16 @@ DEPENDPATH += $$PWD/../../libs/vformat
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
 
-#VPatternDB static library (depend on vgeometry, vmisc, VLayout)
+# VLayout static library  (depend on IFC, VGeometry, VPatternDB)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
+
+INCLUDEPATH += $$PWD/../../libs/vlayout
+DEPENDPATH += $$PWD/../../libs/vlayout
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+
+#VPatternDB static library (depend on vgeometry, vmisc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
 
 INCLUDEPATH += $$PWD/../../libs/vpatterndb
@@ -395,15 +396,6 @@ DEPENDPATH += $$PWD/../../libs/vmisc
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/vmisc.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/libvmisc.a
-
-# VLayout static library (depend on VGeometry)
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
-
-INCLUDEPATH += $$PWD/../../libs/vlayout
-DEPENDPATH += $$PWD/../../libs/vlayout
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
 
 # VGeometry static library (depend on ifc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/ -lvgeometry

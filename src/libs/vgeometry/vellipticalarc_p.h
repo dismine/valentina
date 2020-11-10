@@ -2,7 +2,7 @@
 #define VELLIPTICALARC_P
 
 #include <QSharedData>
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/diagnostic.h"
 #include "vpointf.h"
 

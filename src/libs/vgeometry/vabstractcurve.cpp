@@ -36,8 +36,9 @@
 #include <QtDebug>
 
 #include "vabstractcurve_p.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
@@ -81,12 +82,12 @@ VAbstractCurve::~VAbstractCurve()
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin,
-                                                  const QPointF &end, bool reverse)
+                                                  const QPointF &end, bool reverse, QString &error)
 {
     QVector<QPointF> segment = points;
     if (reverse)
     {
-        segment = GetReversePoints(segment);
+        segment = Reverse(segment);
     }
 
     QPointF start = begin;
@@ -98,15 +99,57 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points
         finish = segment.last();
     }
 
-    segment = FromBegin(segment, start);
-    segment = ToEnd(segment, finish);
+    bool ok = false;
+    segment = FromBegin(segment, start, &ok);
+
+    if (not ok)
+    {
+        error = QObject::tr("Could not find the segment start.");
+        return segment;
+    }
+
+    ok = false;
+    segment = ToEnd(segment, finish, &ok);
+
+    if (not ok)
+    {
+        error = QObject::tr("Could not find the segment end.");
+        return segment;
+    }
+
+    if (segment.length() < 2)
+    {
+        error = QObject::tr("Segment is too short.");
+    }
+
     return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
+QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
+                                                  const QString &piece) const
 {
-    return GetSegmentPoints(GetPoints(), begin, end, reverse);
+    QString error;
+    QVector<QPointF> segment = GetSegmentPoints(GetPoints(), begin, end, reverse, error);
+
+    if (not error.isEmpty())
+    {
+        QString errorMsg;
+        if (piece.isEmpty())
+        {
+            errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2")
+                                         .arg(name(), error);
+        }
+        else
+        {
+            errorMsg = QObject::tr("Error in path '%1'. Calculating segment for curve '%2' has failed. %3")
+                           .arg(piece, name(), error);
+        }
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+    }
+
+    return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,9 +227,9 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok)
 {
-    QVector<QPointF> reversed = GetReversePoints(points);
+    QVector<QPointF> reversed = Reverse(points);
     reversed = FromBegin(reversed, end, ok);
-    return GetReversePoints(reversed);
+    return Reverse(reversed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -404,7 +447,10 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
         QPointF crosPoint;
         auto type = Intersects(line, QLineF(points.at(i), points.at(i+1)), &crosPoint);
 
-        if (type == QLineF::BoundedIntersection)
+        // QLineF::intersects not always accurate on edge cases
+        if (type == QLineF::BoundedIntersection ||
+            (VGObject::IsPointOnLineSegment (crosPoint, points.at(i), points.at(i+1)) &&
+             VGObject::IsPointOnLineSegment (crosPoint, line.p1(), line.p2())))
         {
             intersections.append(crosPoint);
         }
@@ -417,6 +463,13 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
                                         QPointF *intersectionPoint)
 {
     SCASSERT(intersectionPoint != nullptr)
+
+    // Normalize an angle
+    {
+        QLineF line(QPointF(10,10), QPointF(100, 10));
+        line.setAngle(angle);
+        angle = line.angle();
+    }
 
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
@@ -548,6 +601,13 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows
 qreal VAbstractCurve::LengthCurveDirectionArrow()
 {
     return qApp->Settings()->GetLineWidth() * 8.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetAliasSuffix(const QString &aliasSuffix)
+{
+    VGObject::SetAliasSuffix(aliasSuffix);
+    CreateAlias();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

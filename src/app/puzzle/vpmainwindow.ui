@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>PuzzleMainWindow</string>
+   <string>Puzzle</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="share/resources/puzzleicon.qrc">
+    <normaloff>:/puzzleicon/64x64/logo.png</normaloff>:/puzzleicon/64x64/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
@@ -32,7 +36,7 @@
      <x>0</x>
      <y>0</y>
      <width>1427</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -230,7 +234,7 @@
               <x>0</x>
               <y>0</y>
               <width>342</width>
-              <height>1264</height>
+              <height>1252</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -505,7 +509,7 @@
         <attribute name="toolTip">
          <string>Layout properties</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayoutLayoutProperty">
+        <layout class="QVBoxLayout" name="verticalLayoutSheetProperty">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -538,7 +542,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>760</height>
+              <height>761</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -954,7 +958,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>760</height>
+              <height>761</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1027,7 +1031,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>760</height>
+              <height>761</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">

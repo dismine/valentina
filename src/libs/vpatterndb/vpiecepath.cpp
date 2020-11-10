@@ -32,7 +32,8 @@
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vabstractpiece.h"
 #include "calculator.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
 #include <qnumeric.h>
@@ -365,7 +366,7 @@ bool VPiecePath::IsLastToCuttingCountour() const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
-    QVector<QPointF> points = NodesToPoints(data, d->m_nodes);
+    QVector<QPointF> points = NodesToPoints(data, d->m_nodes, GetName());
 
     if (GetType() == PiecePathType::InternalPath && not cuttingPath.isEmpty() && points.size() > 1)
     {
@@ -384,15 +385,14 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                                                      "point with cutting countour")
                         .arg(GetName());
                 qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             }
         }
 
         if (IsLastToCuttingCountour())
         {
             QPointF lastConnection;
-            if (IntersectionWithCuttingCountour(cuttingPath, VGObject::GetReversePoints(points),
-                                                &lastConnection))
+            if (IntersectionWithCuttingCountour(cuttingPath, Reverse(points), &lastConnection))
             {
                 extended.append(lastConnection);
             }
@@ -402,7 +402,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                                                      "point with cutting countour")
                         .arg(GetName());
                 qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             }
         }
 
@@ -464,7 +464,7 @@ QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) c
                 const QPointF begin = StartSegment(data, i, at(i).GetReverse());
                 const QPointF end = EndSegment(data, i, at(i).GetReverse());
 
-                curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse()));
+                curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse(), GetName()));
                 break;
             }
             case (Tool::NodePoint):
@@ -498,7 +498,7 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
             case (Tool::NodeSplinePath):
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
-                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width);
+                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width, GetName());
             }
             break;
             default:
@@ -509,7 +509,7 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 
     if (reverse)
     {
-        pointsEkv = VGObject::GetReversePoints(pointsEkv);
+        pointsEkv = Reverse(pointsEkv);
     }
 
     return pointsEkv;
@@ -882,7 +882,7 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
                 const VSAPoint begin = StartSegment(data, d->m_nodes, index, node.GetReverse());
                 const VSAPoint end = EndSegment(data, d->m_nodes, index, node.GetReverse());
 
-                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse());
+                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse(), GetName());
                 if (points.size() > 1)
                 {
                     return points.at(points.size()-2);
@@ -934,7 +934,7 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
                 const VSAPoint begin = StartSegment(data, d->m_nodes, index, node.GetReverse());
                 const VSAPoint end = EndSegment(data, d->m_nodes, index, node.GetReverse());
 
-                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse());
+                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse(), GetName());
                 if (points.size() > 1)
                 {
                     return points.at(1);
@@ -1084,14 +1084,14 @@ VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *d
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                                         const QSharedPointer<VAbstractCurve> &curve, int i,
-                                                        bool reverse, qreal width)
+                                                        bool reverse, qreal width, const QString &piece)
 {
     QVector<VSAPoint> pointsEkv;
 
     const VSAPoint begin = StartSegment(data, nodes, i, reverse);
     const VSAPoint end = EndSegment(data, nodes, i, reverse);
 
-    const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse);
+    const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse, piece);
     if (points.isEmpty())
     {
         return pointsEkv;
@@ -1193,7 +1193,8 @@ QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes)
+QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                           const QString &piece)
 {
     QVector<QPointF> points;
     for (int i = 0; i < nodes.size(); ++i)
@@ -1223,7 +1224,7 @@ QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector
                 const QPointF begin = StartSegment(data, nodes, i, node.GetReverse());
                 const QPointF end = EndSegment(data, nodes, i, node.GetReverse());
 
-                points << curve->GetSegmentPoints(begin, end, node.GetReverse());
+                points << curve->GetSegmentPoints(begin, end, node.GetReverse(), piece);
             }
             break;
             default:

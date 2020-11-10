@@ -58,6 +58,9 @@ public:
 
     VSplinePath GetPath() const;
     void        SetPath(const VSplinePath &value);
+
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void ShowDialog(bool click) override;
@@ -85,6 +88,8 @@ private slots:
     void FXAngle2();
     void FXLength1();
     void FXLength2();
+
+    void ValidateAlias();
 private:
     Q_DISABLE_COPY(DialogSplinePath)
 
@@ -108,6 +113,9 @@ private:
     QVector<bool> flagLength1;
     QVector<bool> flagLength2;
     bool flagError;
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
 
     void EvalAngle1();
     void EvalAngle2();

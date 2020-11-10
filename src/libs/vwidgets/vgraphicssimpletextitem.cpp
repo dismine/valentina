@@ -48,7 +48,7 @@
 #include "global.h"
 #include "vscenepoint.h"
 #include "../vmisc/vmath.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -149,7 +149,6 @@ void VGraphicsSimpleTextItem::SetShowParentTooltip(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress passedByValue
 void VGraphicsSimpleTextItem::SetRealPos(QPointF pos)
 {
     m_realPos = pos;
@@ -201,30 +200,7 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                 {
                     if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                     {
-                        const qreal scale = SceneScale(scene());
-                        int xmargin = qCeil(50/scale);
-                        int ymargin = qCeil(50/scale);
-
-                        const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
-                        const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
-
-                        // If item's rect is bigger than view's rect ensureVisible works very unstable.
-                        if (itemRect.height() + 2*ymargin < viewRect.height() &&
-                            itemRect.width() + 2*xmargin < viewRect.width())
-                        {
-                            view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin, ymargin);
-                        }
-                        else
-                        {
-                            // Ensure visible only small rect around a cursor
-                            VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                            SCASSERT(currentScene)
-                            const QPointF cursorPosition = currentScene->getScenePos();
-
-                            view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
-                                                                10/scale, 10/scale),
-                                                         VMainGraphicsView::scrollDelay);
-                        }
+                        view->EnsureItemVisibleWithDelay(this, VMainGraphicsView::scrollDelay);
                     }
                 }
             }

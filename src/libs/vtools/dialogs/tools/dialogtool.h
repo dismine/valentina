@@ -165,8 +165,10 @@ protected:
     void             FillComboBoxSplines(QComboBox *box)const;
     void             FillComboBoxSplinesPath(QComboBox *box)const;
     void             FillComboBoxCurves(QComboBox *box)const;
-    void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
+    void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics,
+                              const QString &def=TypeLineLine) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
+    void             FillComboBoxLineColors(QComboBox *box, const QMap<QString, QString> &lineColors)const;
     void             FillComboBoxCrossCirclesPoints(QComboBox *box) const;
     void             FillComboBoxVCrossCurvesPoint(QComboBox *box) const;
     void             FillComboBoxHCrossCurvesPoint(QComboBox *box) const;

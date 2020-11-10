@@ -74,6 +74,12 @@ public:
     QString       GetColor() const;
     void          SetColor(const QString &value);
 
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
+    void    SetAliasSuffix(const QString &alias);
+    QString GetAliasSuffix() const;
+
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -100,6 +106,9 @@ protected:
     virtual void  closeEvent(QCloseEvent *event) override;
     virtual bool  IsValid() const final;
 
+private slots:
+    void ValidateAlias();
+
 private:
     Q_DISABLE_COPY(DialogEllipticalArc)
 
@@ -120,6 +129,8 @@ private:
 
     /** @brief flagRotationAngle true if value of rotation angle is correct */
     bool          flagRotationAngle;
+
+    bool          flagAlias{true};
 
     /** @brief timerRadius1 timer of check formula of radius1 */
     QTimer        *timerRadius1;
@@ -162,6 +173,8 @@ private:
     qreal         angleF2;
     qreal         angleRotation;
 
+    QString       originAliasSuffix{};
+
     void          EvalRadiuses();
     void          EvalAngles();
 };
@@ -169,7 +182,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogEllipticalArc::IsValid() const
 {
-    return flagRadius1 && flagRadius2 && flagF1 && flagF2 && flagRotationAngle;
+    return flagRadius1 && flagRadius2 && flagF1 && flagF2 && flagRotationAngle && flagAlias;
 }
 
 #endif // DIALOGELLIPTICALARC_H

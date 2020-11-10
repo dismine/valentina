@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
-    <height>726</height>
+    <width>1188</width>
+    <height>836</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <widget class="QLabel" name="labelToolTip">
       <property name="sizePolicy">
@@ -148,37 +148,47 @@
            </attribute>
            <column>
             <property name="text">
-             <string>Name</string>
+             <string comment="measurement column">Name</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Full name</string>
+             <string comment="measurement column">Full name</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Calculated value</string>
+             <string comment="measurement column">Calculated value</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Formula</string>
+             <string comment="measurement column">Formula</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Base value</string>
+             <string comment="measurement column">Base value</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>In sizes</string>
+             <string notr="true" comment="measurement column">Shift A</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>In heights</string>
+             <string notr="true" comment="measurement column">Shift B</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string notr="true" comment="measurement column">Shift C</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string comment="measurement column">Correction</string>
             </property>
            </column>
           </widget>
@@ -198,173 +208,12 @@
            <property name="title">
             <string>Details</string>
            </property>
-           <layout class="QFormLayout" name="formLayout">
-            <property name="fieldGrowthPolicy">
-             <enum>QFormLayout::ExpandingFieldsGrow</enum>
-            </property>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Name:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="lineEditName">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="toolTip">
-               <string>Measurement's name in a formula</string>
-              </property>
-              <property name="placeholderText">
-               <string>Measurement's name in a formula.</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="labelFormula">
-              <property name="text">
-               <string>Formula:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayoutValue">
-              <item>
-               <widget class="VPlainTextEdit" name="plainTextEditFormula">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="tabChangesFocus">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonGrow">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>18</width>
-                  <height>18</height>
-                 </size>
-                </property>
-                <property name="sizeIncrement">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset theme="go-down">
-                  <normaloff>../../libs/vtools/dialogs/support</normaloff>../../libs/vtools/dialogs/support</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>16</width>
-                  <height>16</height>
-                 </size>
-                </property>
-                <property name="flat">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="toolButtonExpr">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="toolTip">
-                 <string>Function Wizard</string>
-                </property>
-                <property name="text">
-                 <string notr="true">...</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="share/resources/tapeicon.qrc">
-                  <normaloff>:/tapeicon/24x24/fx.png</normaloff>:/tapeicon/24x24/fx.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>24</width>
-                  <height>24</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="labelBaseValue">
-              <property name="text">
-               <string>Base value:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="labelInSizes">
-              <property name="text">
-               <string>In sizes:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="labelInHeights">
-              <property name="text">
-               <string>In heights:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Description:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="1">
-             <widget class="VPlainTextEdit" name="plainTextEditDescription">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-                <horstretch>0</horstretch>
-                <verstretch>1</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>28</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout">
+              <property name="spacing">
+               <number>9</number>
+              </property>
               <item alignment="Qt::AlignLeft">
                <widget class="QToolButton" name="toolButtonTop">
                 <property name="enabled">
@@ -434,36 +283,19 @@
                </widget>
               </item>
               <item>
-               <spacer name="horizontalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>5000</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
                <spacer name="horizontalSpacer">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>5000</width>
+                  <width>40</width>
                   <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item alignment="Qt::AlignRight">
+              <item>
                <widget class="QToolButton" name="toolButtonRemove">
                 <property name="enabled">
                  <bool>false</bool>
@@ -482,81 +314,332 @@
               </item>
              </layout>
             </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="labelCalculated">
-              <property name="text">
-               <string>Calculated value:</string>
+            <item>
+             <layout class="QFormLayout" name="formLayout">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::ExpandingFieldsGrow</enum>
               </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLabel" name="labelCalculatedValue">
-              <property name="toolTip">
-               <string>Calculated value</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1">
-             <widget class="QDoubleSpinBox" name="doubleSpinBoxBaseValue">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimum">
-               <double>-10000.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>10000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="1">
-             <widget class="QDoubleSpinBox" name="doubleSpinBoxInSizes">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimum">
-               <double>-10000.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>10000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1">
-             <widget class="QDoubleSpinBox" name="doubleSpinBoxInHeights">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimum">
-               <double>-10000.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>10000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="labelFullName">
-              <property name="text">
-               <string>Full name:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="1">
-             <widget class="QLineEdit" name="lineEditFullName">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="toolTip">
-               <string/>
-              </property>
-              <property name="placeholderText">
-               <string>Measurement's human-readable name.</string>
-              </property>
-             </widget>
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelMUnits">
+                <property name="text">
+                 <string>Units:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBoxMUnits">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Name:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="lineEditName">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="toolTip">
+                 <string>Measurement's name in a formula</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Measurement's name in a formula.</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="labelCalculated">
+                <property name="text">
+                 <string>Calculated value:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="labelCalculatedValue">
+                <property name="toolTip">
+                 <string>Calculated value</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="labelFormula">
+                <property name="text">
+                 <string>Formula:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayoutValue">
+                <item>
+                 <widget class="VPlainTextEdit" name="plainTextEditFormula">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>28</height>
+                   </size>
+                  </property>
+                  <property name="tabChangesFocus">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonGrow">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>18</width>
+                    <height>18</height>
+                   </size>
+                  </property>
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset theme="go-down">
+                    <normaloff>../../libs/vtools/dialogs/support</normaloff>../../libs/vtools/dialogs/support</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButtonExpr">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Function Wizard</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">...</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="share/resources/tapeicon.qrc">
+                    <normaloff>:/tapeicon/24x24/fx.png</normaloff>:/tapeicon/24x24/fx.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="labelBaseValue">
+                <property name="text">
+                 <string>Base value:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QDoubleSpinBox" name="doubleSpinBoxBaseValue">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="minimum">
+                 <double>-10000.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>10000.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="labelShiftA">
+                <property name="text">
+                 <string notr="true">Shift A</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QDoubleSpinBox" name="doubleSpinBoxShiftA">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="minimum">
+                 <double>-10000.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>10000.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="labelShiftB">
+                <property name="text">
+                 <string>Shift B</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QDoubleSpinBox" name="doubleSpinBoxShiftB">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="minimum">
+                 <double>-10000.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>10000.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="labelShiftC">
+                <property name="text">
+                 <string>Shift C</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QDoubleSpinBox" name="doubleSpinBoxShiftC">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="minimum">
+                 <double>-10000.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>10000.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="labelCorrection">
+                <property name="text">
+                 <string>Correction:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QDoubleSpinBox" name="doubleSpinBoxCorrection">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="minimum">
+                 <double>-10000.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>10000.000000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLabel" name="labelFullName">
+                <property name="text">
+                 <string>Full name:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="1">
+               <widget class="QLineEdit" name="lineEditFullName">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
+                <property name="placeholderText">
+                 <string>Measurement's human-readable name.</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Description:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
+               <widget class="VPlainTextEdit" name="plainTextEditDescription">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                  <horstretch>0</horstretch>
+                  <verstretch>1</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>28</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelDimension">
+                <property name="text">
+                 <string>Dimension:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="comboBoxDimension">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Select one of the dimensions to later use the measurement value in piece label</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -572,260 +655,306 @@
        <attribute name="title">
         <string>Information</string>
        </attribute>
-       <layout class="QFormLayout" name="formLayout_2">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_21">
-          <property name="text">
-           <string>Type:</string>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QFormLayout" name="formLayout_2">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::ExpandingFieldsGrow</enum>
           </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="labelMType">
-          <property name="text">
-           <string>Measurement type</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Path:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayoutPath">
-          <item>
-           <widget class="QLineEdit" name="lineEditPathToFile">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background: transparent;</string>
-            </property>
-            <property name="frame">
-             <bool>false</bool>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string notr="true">Path to the measurement file</string>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>Type:</string>
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignRight">
-           <widget class="QPushButton" name="pushButtonShowInExplorer">
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelMType">
+            <property name="text">
+             <string>Measurement type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Path:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutPath">
+            <item>
+             <widget class="QLineEdit" name="lineEditPathToFile">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: transparent;</string>
+              </property>
+              <property name="frame">
+               <bool>false</bool>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="placeholderText">
+               <string notr="true">Path to the measurement file</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignRight">
+             <widget class="QPushButton" name="pushButtonShowInExplorer">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Show in Explorer</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelPMSystem">
+            <property name="text">
+             <string>PM system:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboBoxPMSystem">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelBaseValues">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Show in Explorer</string>
+             <string>Base Values:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelCustomerName">
+            <property name="text">
+             <string>Customer name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEditCustomerName">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="placeholderText">
+             <string>Customer's name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelBirthDate">
+            <property name="text">
+             <string>Birth date:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QDateEdit" name="dateEditBirthDate">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>124</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="displayFormat">
+             <string notr="true">yyyy-MM-dd</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+            <property name="currentSectionIndex">
+             <number>0</number>
+            </property>
+            <property name="date">
+             <date>
+              <year>1800</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelGender">
+            <property name="text">
+             <string>Gender:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QComboBox" name="comboBoxGender">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelEmail">
+            <property name="text">
+             <string>Email:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="lineEditEmail">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="placeholderText">
+             <string>Customer's email address</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="labelNotes">
+            <property name="text">
+             <string>Notes:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="VPlainTextEdit" name="plainTextEditNotes">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QFrame" name="frameBaseValue">
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
+            </property>
+            <property name="lineWidth">
+             <number>1</number>
+            </property>
+            <layout class="QFormLayout" name="formLayout_4">
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelDimensionA">
+               <property name="text">
+                <string notr="true">A</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="labelDimensionABase">
+               <property name="text">
+                <string notr="true">Base</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelDimensionB">
+               <property name="text">
+                <string notr="true">B</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="labelDimensionBBase">
+               <property name="text">
+                <string notr="true">Base</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelDimensionC">
+               <property name="text">
+                <string notr="true">C</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="labelDimensionCBase">
+               <property name="text">
+                <string notr="true">Base</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
          </layout>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="labelPMSystem">
-          <property name="text">
-           <string>PM system:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QComboBox" name="comboBoxPMSystem">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="labelBaseSize">
-          <property name="text">
-           <string>Base size:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="labelBaseSizeValue">
-          <property name="text">
-           <string>Base size value</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="labelBaseHeight">
-          <property name="text">
-           <string>Base height:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="labelBaseHeightValue">
-          <property name="text">
-           <string>Base height value</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="labelCustomerName">
-          <property name="text">
-           <string>Customer name:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEditCustomerName">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>Customer's name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="labelBirthDate">
-          <property name="text">
-           <string>Birth date:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QDateEdit" name="dateEditBirthDate">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>124</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="displayFormat">
-           <string notr="true">yyyy-MM-dd</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-          <property name="currentSectionIndex">
-           <number>0</number>
-          </property>
-          <property name="date">
-           <date>
-            <year>1800</year>
-            <month>1</month>
-            <day>1</day>
-           </date>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="labelGender">
-          <property name="text">
-           <string>Gender:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QComboBox" name="comboBoxGender">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="labelEmail">
-          <property name="text">
-           <string>Email:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEditEmail">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>Customer's email address</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QLabel" name="labelNotes">
-          <property name="text">
-           <string>Notes:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="VPlainTextEdit" name="plainTextEditNotes">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -838,8 +967,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>835</width>
-     <height>22</height>
+     <width>1188</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -857,6 +986,7 @@
     <addaction name="actionSaveAs"/>
     <addaction name="actionExportToCSV"/>
     <addaction name="actionImportFromCSV"/>
+    <addaction name="actionExportToIndividual"/>
     <addaction name="separator"/>
     <addaction name="actionReadOnly"/>
     <addaction name="separator"/>
@@ -885,6 +1015,10 @@
     <addaction name="actionDatabase"/>
     <addaction name="actionImportFromPattern"/>
     <addaction name="actionMeasurementDiagram"/>
+    <addaction name="actionUseFullCircumference"/>
+    <addaction name="actionRestrictSecondDimension"/>
+    <addaction name="actionRestrictThirdDimension"/>
+    <addaction name="actionDimensionLabels"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -1224,6 +1358,70 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionExportToIndividual">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export to individual</string>
+   </property>
+   <property name="toolTip">
+    <string>Export to individual measurements</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionUseFullCircumference">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Use full circumference</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRestrictSecondDimension">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Restrict second dimension</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRestrictThirdDimension">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Restrict third dimension</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionDimensionLabels">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Dimension labels</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
  </widget>

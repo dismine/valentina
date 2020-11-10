@@ -33,7 +33,7 @@
 #include <QPushButton>
 #include <Qt>
 
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogundo.h"
 

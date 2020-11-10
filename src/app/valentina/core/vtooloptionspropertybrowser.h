@@ -67,34 +67,85 @@ private:
     void ShowItemOptions(QGraphicsItem *item);
 
     template<class Tool>
-    void SetPointName(const QString &name);
+    void SetPointName(VPE::VProperty *property);
 
     template<class Tool>
-    void SetPointName1(const QString &name);
+    void SetPointName1(VPE::VProperty *property);
 
     template<class Tool>
-    void SetPointName2(const QString &name);
+    void SetPointName2(VPE::VProperty *property);
 
     template<class Tool>
-    void SetOperationSuffix(const QString &suffix);
+    void SetOperationSuffix(VPE::VProperty *property);
 
     template<class Type>
     Type GetCrossPoint(const QVariant &value);
 
     template<class Tool>
-    void SetCrossCirclesPoint(const QVariant &value);
+    void SetCrossCirclesPoint(VPE::VProperty *property);
 
     template<class Tool>
-    void SetVCrossCurvesPoint(const QVariant &value);
+    void SetVCrossCurvesPoint(VPE::VProperty *property);
 
     template<class Tool>
-    void SetHCrossCurvesPoint(const QVariant &value);
+    void SetHCrossCurvesPoint(VPE::VProperty *property);
 
     template<class Tool>
-    void SetAxisType(const QVariant &value);
+    void SetAxisType(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetNotes(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetAlias(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetAlias1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetAlias2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetLineType(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetLineColor(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetFormulaLength(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetFormulaAngle(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetFormulaRadius(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetFormulaF1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetFormulaF2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetPenStyle(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetFormulaRotationAngle(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetApproximationScale(VPE::VProperty *property);
 
     template<class Tool>
     void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
+
+    template<class Tool>
+    void AddPropertyAlias(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyAlias1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyAlias2(Tool *i, const QString &propertyName);
 
     template<class Tool>
     void AddPropertyPointName1(Tool *i, const QString &propertyName);
@@ -131,6 +182,7 @@ private:
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
     void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
                                     const QString &propertyAttribure);
+    void AddPropertyText(const QString &propertyName, const QString &text, const QString &attrName);
 
     QStringList PropertiesList() const;
 

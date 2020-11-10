@@ -59,7 +59,7 @@ const QString VToolPointOfIntersectionCircles::ToolType = QStringLiteral("pointO
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(
         const VToolPointOfIntersectionCirclesInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       firstCircleCenterId(initData.firstCircleCenterId),
       secondCircleCenterId(initData.secondCircleCenterId),
       firstCircleRadius(initData.firstCircleRadius),
@@ -83,6 +83,7 @@ void VToolPointOfIntersectionCircles::setDialog()
     dialogTool->SetSecondCircleRadius(secondCircleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,6 +108,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const Q
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfIntersectionCircles *point = Create(initData);
     if (point != nullptr)
@@ -135,7 +137,7 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
         const QString errorMsg = tr("Error calculating point '%1'. Circles with centers in points '%2' and '%3' have "
                                     "no point of intersection").arg(initData.name, c1Point.name(), c2Point.name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
@@ -219,7 +221,7 @@ VFormula VToolPointOfIntersectionCircles::GetFirstCircleRadius() const
     VFormula radius(firstCircleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -244,7 +246,7 @@ VFormula VToolPointOfIntersectionCircles::GetSecondCircleRadius() const
     VFormula radius(secondCircleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -329,6 +331,9 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<
     doc->SetAttribute(domElement, AttrC2Radius, dialogTool->GetSecondCircleRadius());
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -347,6 +352,8 @@ void VToolPointOfIntersectionCircles::SaveOptions(QDomElement &tag, QSharedPoint
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::ReadToolAttributes(const QDomElement &domElement)
 {
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
     firstCircleCenterId = doc->GetParametrUInt(domElement, AttrC1Center, NULL_ID_STR);
     secondCircleCenterId = doc->GetParametrUInt(domElement, AttrC2Center, NULL_ID_STR);
     firstCircleRadius = doc->GetParametrString(domElement, AttrC1Radius);

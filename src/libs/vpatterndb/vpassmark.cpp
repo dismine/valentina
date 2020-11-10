@@ -26,8 +26,10 @@
  **
  *************************************************************************/
 
+#include <QPainterPath>
+
 #include "vpassmark.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -577,7 +579,7 @@ QVector<QLineF> PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const 
                                              "than minimal allowed.")
                 .arg(passmarkData.nodeName, passmarkData.pieceName);
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return QVector<QLineF>();
     }
 
@@ -786,7 +788,7 @@ QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
                                                  "than minimal allowed.")
                     .arg(m_data.nodeName, m_data.pieceName);
             qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             return QVector<QLineF>();
         }
     }
@@ -802,7 +804,7 @@ QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
                                                  "seam allowance. User must manually provide length.")
                     .arg(m_data.nodeName, m_data.pieceName);
             qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             return QVector<QLineF>();
         }
     }
@@ -846,7 +848,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
                                              "empty.").arg(m_data.nodeName, m_data.pieceName);
         qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return QVector<QLineF>(); // Something wrong
     }
 
@@ -858,7 +860,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
                                              "position for a notch.")
                 .arg(m_data.nodeName, m_data.pieceName);
         qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return QVector<QLineF>(); // Something wrong
     }
 
@@ -868,14 +870,19 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
                                              "notch position.")
                 .arg(m_data.nodeName, m_data.pieceName);
         qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     auto PassmarkIntersection = [this, seamAllowance] (QLineF line, qreal width)
     {
         line.setLength(line.length()*100); // Hope 100 is enough
 
+//        DumpVector(seamAllowance, QStringLiteral("points.json.XXXXXX")); // Uncomment for dumping test data
+
         const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, line);
+
+//        DumpVector(intersections, QStringLiteral("intersections.json.XXXXXX")); // Uncomment for dumping test data
+
         if (not intersections.isEmpty())
         {
             if (intersections.last() != m_data.passmarkSAPoint)
@@ -890,7 +897,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
                                                              "less than minimal allowed.")
                                 .arg(m_data.nodeName, m_data.pieceName);
                         qApp->IsPedantic() ? throw VException(errorMsg) :
-                                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
                         return QLineF();
                     }
                     line.setLength(length);
@@ -907,7 +914,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
                                                      "collapse.")
                         .arg(m_data.nodeName, m_data.pieceName);
                 qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
             }
         }
         else
@@ -916,7 +923,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
                                                  "intersection.")
                     .arg(m_data.nodeName, m_data.pieceName);
             qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         }
 
         return QLineF();
@@ -931,7 +938,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
                                                  "than minimal allowed.")
                     .arg(m_data.nodeName, m_data.pieceName);
             qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         }
         else
         {

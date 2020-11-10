@@ -142,96 +142,88 @@ include(../translations.pri)
 
 # Set "make install" command for Unix-like systems.
 unix{
-    # Prefix for binary file.
-    isEmpty(PREFIX){
-        PREFIX = $$DEFAULT_PREFIX
-    }
-
-    unix:!macx{
-        DATADIR =$$PREFIX/share
-        DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
-
+    !macx{
         # Path to bin file after installation
-        target.path = $$PREFIX/bin
+        target.path = $$BINDIR
 
-        tape.path = $$PREFIX/bin
+        tape.path = $$BINDIR
         tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
 
         # .desktop file
-        desktop.path = $$PREFIX/share/applications/
+        desktop.path = $$DATADIR/applications/
         desktop.files += ../../../dist/$${TARGET}.desktop \
         desktop.files += ../../../dist/tape.desktop
 
         # logo
-        hicolor_48_apps.path = $$PREFIX/share/icons/hicolor/48x48/apps/
+        hicolor_48_apps.path = $$DATADIR/icons/hicolor/48x48/apps/
         hicolor_48_apps.files += \
             ../../../share/icons/48x48/apps/$${TARGET}.png \
             ../../../share/icons/48x48/apps/tape.png
 
-        hicolor_48_mimetypes.path = $$PREFIX/share/icons/hicolor/48x48/mimetypes/
+        hicolor_48_mimetypes.path = $$DATADIR/icons/hicolor/48x48/mimetypes/
         hicolor_48_mimetypes.files += \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-s-measurements.png
 
-        hicolor_64_apps.path = $$PREFIX/share/icons/hicolor/64x64/apps/
+        hicolor_64_apps.path = $$DATADIR/icons/hicolor/64x64/apps/
         hicolor_64_apps.files += \
             ../../../share/icons/64x64/apps/$${TARGET}.png \
             ../../../share/icons/64x64/apps/tape.png
 
-        hicolor_64_mimetypes.path = $$PREFIX/share/icons/hicolor/64x64/mimetypes/
+        hicolor_64_mimetypes.path = $$DATADIR/icons/hicolor/64x64/mimetypes/
         hicolor_64_mimetypes.files += \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-s-measurements.png
 
-        hicolor_128_apps.path = $$PREFIX/share/icons/hicolor/128x128/apps/
+        hicolor_128_apps.path = $$DATADIR/icons/hicolor/128x128/apps/
         hicolor_128_apps.files += \
             ../../../share/icons/128x128/apps/$${TARGET}.png \
             ../../../share/icons/128x128/apps/tape.png
 
-        hicolor_128_mimetypes.path = $$PREFIX/share/icons/hicolor/128x128/mimetypes/
+        hicolor_128_mimetypes.path = $$DATADIR/icons/hicolor/128x128/mimetypes/
         hicolor_128_mimetypes.files += \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-s-measurements.png
 
-        hicolor_256_apps.path = $$PREFIX/share/icons/hicolor/256x256/apps/
+        hicolor_256_apps.path = $$DATADIR/icons/hicolor/256x256/apps/
         hicolor_256_apps.files += \
             ../../../share/icons/256x256/apps/$${TARGET}.png \
             ../../../share/icons/256x256/apps/tape.png
 
-        hicolor_256_mimetypes.path = $$PREFIX/share/icons/hicolor/256x256/mimetypes/
+        hicolor_256_mimetypes.path = $$DATADIR/icons/hicolor/256x256/mimetypes/
         hicolor_256_mimetypes.files += \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-s-measurements.png
 
-        hicolor_512_apps.path = $$PREFIX/share/icons/hicolor/512x512/apps/
+        hicolor_512_apps.path = $$DATADIR/icons/hicolor/512x512/apps/
         hicolor_512_apps.files += \
             ../../../share/icons/512x512/apps/$${TARGET}.png \
             ../../../share/icons/512x512/apps/tape.png
 
-        hicolor_512_mimetypes.path = $$PREFIX/share/icons/hicolor/512x512/mimetypes/
+        hicolor_512_mimetypes.path = $$DATADIR/icons/hicolor/512x512/mimetypes/
         hicolor_512_mimetypes.files += \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-s-measurements.png
 
         # Path to translation files after installation
-        translations.path = $$PREFIX/share/$${TARGET}/translations/
+        translations.path = $$PKGDATADIR/translations/
         translations.files = $$INSTALL_TRANSLATIONS
 
         # Path to multisize measurement after installation
-        multisize.path = $$PREFIX/share/$${TARGET}/tables/multisize/
+        multisize.path = $$PKGDATADIR/tables/multisize/
         multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
 
         # Path to templates after installation
-        templates.path = $$PREFIX/share/$${TARGET}/tables/templates/
+        templates.path = $$PKGDATADIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
         # Path to label templates after installation
-        label.path = $$PREFIX/share/$${TARGET}/labels/
+        label.path = $$PKGDATADIR/labels/
         label.files = $$INSTALL_LABEL_TEMPLATES
 
         INSTALLS += \
@@ -591,16 +583,7 @@ DEPENDPATH += $$PWD/../../libs/vformat
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
 
-#VPatternDB static library (depend on vgeometry, vmisc, VLayout)
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
-
-INCLUDEPATH += $$PWD/../../libs/vpatterndb
-DEPENDPATH += $$PWD/../../libs/vpatterndb
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
-
-# VLayout static library  (depend on IFC, VGeometry)
+# VLayout static library  (depend on IFC, VGeometry, VPatternDB)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
 
 INCLUDEPATH += $$PWD/../../libs/vlayout
@@ -608,6 +591,15 @@ DEPENDPATH += $$PWD/../../libs/vlayout
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+
+#VPatternDB static library (depend on vgeometry, vmisc)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
+
+INCLUDEPATH += $$PWD/../../libs/vpatterndb
+DEPENDPATH += $$PWD/../../libs/vpatterndb
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
 
 # VGeometry static library (depend on ifc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/ -lvgeometry

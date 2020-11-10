@@ -115,7 +115,11 @@ QList<QTableWidgetItem *> VTableSearch::FindTableItems(const QString& term)
         if (searchType == QChar('r'))
         {
             QString reSearchString = ".*" % searchString % ".*";
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
             return table->findItems(reSearchString, Qt::MatchRegExp);
+#else
+            return table->findItems(reSearchString, Qt::MatchRegularExpression);
+#endif
         }
 
         return QList<QTableWidgetItem *>();

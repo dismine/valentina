@@ -103,6 +103,9 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
             &DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit);
 
     vis = new VisToolPointFromCircleAndTangent(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,7 +275,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetCircleRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCircleRadius(dialog->GetFormula());
@@ -288,7 +291,7 @@ void DialogPointFromCircleAndTangent::EvalCircleRadius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius;
     formulaData.labelResult = ui->labelResultCircleRadius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagCircleRadius);
 
@@ -329,4 +332,16 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditRadius->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointFromCircleAndTangent::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

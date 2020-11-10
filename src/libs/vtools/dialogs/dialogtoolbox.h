@@ -86,5 +86,7 @@ bool   EachPointLabelIsUnique(QListWidget *listWidget);
 QString DialogWarningIcon();
 QFont  NodeFont(QFont font, bool nodeExcluded = false);
 void   CurrentCurveLength(vidtype curveId, VContainer *data);
+void   SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar=4);
+QIcon  LineColor(int size, const QString &color);
 
 #endif // DIALOGTOOLBOX_H

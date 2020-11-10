@@ -33,6 +33,7 @@
 #include <qnumeric.h>
 #include <QPolygonF>
 #include <QTransform>
+#include <QPainterPath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem::VPlaceLabelItem()

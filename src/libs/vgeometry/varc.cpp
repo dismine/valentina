@@ -33,6 +33,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 #include "../ifc/ifcdef.h"
 #include "vabstractcurve.h"
 #include "varc_p.h"
@@ -144,6 +145,12 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
 
     VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        arc.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(IsFlipped());
@@ -164,6 +171,12 @@ VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
 
     VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        arc.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(not IsFlipped());
@@ -184,6 +197,12 @@ VArc VArc::Move(qreal length, qreal angle, const QString &prefix) const
 
     VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        arc.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(IsFlipped());
@@ -307,7 +326,7 @@ QVector<QPointF> VArc::GetPoints() const
         points << splPoints;
         pStart = lineP4P3.p1();
     }
-    return IsFlipped() ? VGObject::GetReversePoints(points) : points;
+    return IsFlipped() ? Reverse(points) : points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -377,7 +396,7 @@ QPointF VArc::CutArc(qreal length) const
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::CreateName()
 {
-    QString name = ARC_ + QString("%1").arg(this->GetCenter().name());
+    QString name = ARC_ + this->GetCenter().name();
 
     if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
     {
@@ -394,6 +413,19 @@ void VArc::CreateName()
     }
 
     setName(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(ARC_ + aliasSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

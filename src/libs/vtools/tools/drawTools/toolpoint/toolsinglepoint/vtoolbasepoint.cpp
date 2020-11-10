@@ -76,7 +76,8 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  * @param parent parent object.
  */
 VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent )
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent), namePP(initData.nameActivPP)
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+     namePP(initData.nameActivPP)
 {
     m_baseColor = Qt::red;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -96,6 +97,7 @@ void VToolBasePoint::setDialog()
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,29 +196,7 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
             {
                 if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
-                    const qreal scale = SceneScale(scene());
-                    const int xmargin = qCeil(50/scale);
-                    const int ymargin = qCeil(50/scale);
-
-                    const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
-                    const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
-
-                    // If item's rect is bigger than view's rect ensureVisible works very unstable.
-                    if (itemRect.height() + 2*ymargin < viewRect.height() &&
-                        itemRect.width() + 2*xmargin < viewRect.width())
-                    {
-                         view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin, ymargin);
-                    }
-                    else
-                    {
-                        // Ensure visible only small rect around a cursor
-                        VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                        SCASSERT(currentScene)
-                        const QPointF cursorPosition = currentScene->getScenePos();
-                        view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
-                                                            10/scale, 10/scale),
-                                                     VMainGraphicsView::scrollDelay);
-                    }
+                    view->EnsureItemVisibleWithDelay(this, VMainGraphicsView::scrollDelay);
                 }
             }
             changeFinished = true;
@@ -289,6 +269,9 @@ void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,13 +326,6 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
-{
-    Q_UNUSED(domElement)
-    // This tool doesn't need read attributes from file.
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VToolBasePoint::MakeToolTip() const
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
@@ -396,8 +372,9 @@ void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
-void  VToolBasePoint::FullUpdateFromFile()
+void VToolBasePoint::FullUpdateFromFile()
 {
+    ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
 }
 

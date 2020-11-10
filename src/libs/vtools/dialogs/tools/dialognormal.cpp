@@ -114,6 +114,9 @@ DialogNormal::DialogNormal(const VContainer *data, quint32 toolId, QWidget *pare
             this, &DialogNormal::PointNameChanged);
 
     vis = new VisToolNormal(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,7 +144,7 @@ void DialogNormal::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -157,7 +160,7 @@ void DialogNormal::EvalFormula()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagFormula);
 }
@@ -402,4 +405,16 @@ quint32 DialogNormal::GetFirstPointId() const
 quint32 DialogNormal::GetSecondPointId() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogNormal::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

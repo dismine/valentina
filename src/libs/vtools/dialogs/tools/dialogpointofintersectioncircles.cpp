@@ -123,6 +123,9 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
             &DialogPointOfIntersectionCircles::DeployCircle2RadiusTextEdit);
 
     vis = new VisToolPointOfIntersectionCircles(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,7 +326,7 @@ void DialogPointOfIntersectionCircles::FXCircle1Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first circle radius"));
     dialog->SetFormula(GetFirstCircleRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFirstCircleRadius(dialog->GetFormula());
@@ -337,7 +340,7 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second circle radius"));
     dialog->SetFormula(GetSecondCircleRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetSecondCircleRadius(dialog->GetFormula());
@@ -353,7 +356,7 @@ void DialogPointOfIntersectionCircles::EvalCircle1Radius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditCircle1Radius;
     formulaData.labelResult = ui->labelResultCircle1Radius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagCircle1Radius);
 
@@ -376,7 +379,7 @@ void DialogPointOfIntersectionCircles::EvalCircle2Radius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditCircle2Radius;
     formulaData.labelResult = ui->labelResultCircle2Radius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagCircle2Radius);
 
@@ -419,4 +422,16 @@ void DialogPointOfIntersectionCircles::closeEvent(QCloseEvent *event)
     ui->plainTextEditCircle1Radius->blockSignals(true);
     ui->plainTextEditCircle2Radius->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCircles::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

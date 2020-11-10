@@ -31,6 +31,7 @@
 
 #include "vabstractapplication.h"
 #include "projectversion.h"
+#include "../vmisc/vcommonsettings.h"
 
 #if defined(qApp)
 #undef qApp

@@ -44,31 +44,7 @@ DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
     ui->setupUi(this);
 
     InitMTypes();
-    InitUnits(MeasurementsType::Individual);
-    InitHeightsList();
-    InitSizesList();
-
-    const VTapeSettings *settings = qApp->TapeSettings();
-
-    const int height = static_cast<int>(UnitConvertor(settings->GetDefHeight(), Unit::Cm, MUnit()));
-    int index = ui->comboBoxBaseHeight->findText(QString().setNum(height));
-    if (index != -1)
-    {
-        ui->comboBoxBaseHeight->setCurrentIndex(index);
-    }
-
-    const int size = static_cast<int>(UnitConvertor(settings->GetDefSize(), Unit::Cm, MUnit()));
-    index = ui->comboBoxBaseSize->findText(QString().setNum(size));
-    if (index != -1)
-    {
-        ui->comboBoxBaseSize->setCurrentIndex(index);
-    }
-
-    connect(ui->comboBoxMType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogNewMeasurements::CurrentTypeChanged);
-
-    connect(ui->comboBoxUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogNewMeasurements::CurrentUnitChanged);
+    InitUnits();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,18 +66,6 @@ Unit DialogNewMeasurements::MUnit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogNewMeasurements::BaseSize() const
-{
-    return ui->comboBoxBaseSize->currentText().toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int DialogNewMeasurements::BaseHeight() const
-{
-    return ui->comboBoxBaseHeight->currentText().toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
@@ -109,7 +73,7 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
         InitMTypes();
-        InitUnits(static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt()));
+        InitUnits();
     }
 
     // remember to call base class implementation
@@ -138,40 +102,6 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::CurrentTypeChanged(int index)
-{
-    const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->itemData(index).toInt());
-    if (type == MeasurementsType::Multisize)
-    {
-        ui->comboBoxBaseSize->setEnabled(true);
-        ui->comboBoxBaseHeight->setEnabled(true);
-    }
-    else
-    {
-        ui->comboBoxBaseSize->setEnabled(false);
-        ui->comboBoxBaseHeight->setEnabled(false);
-    }
-    InitUnits(type);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::CurrentUnitChanged(int index)
-{
-    Q_UNUSED(index)
-
-    if (MUnit() != Unit::Inch)
-    {
-        int i = ui->comboBoxBaseHeight->currentIndex();
-        InitHeightsList();
-        ui->comboBoxBaseHeight->setCurrentIndex(i);
-
-        i = ui->comboBoxBaseSize->currentIndex();
-        InitSizesList();
-        ui->comboBoxBaseSize->setCurrentIndex(i);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitMTypes()
 {
     int val = static_cast<int>(MeasurementsType::Unknown);
@@ -194,23 +124,7 @@ void DialogNewMeasurements::InitMTypes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitHeightsList()
-{
-    const QStringList list = VMeasurement::WholeListHeights(MUnit());
-    ui->comboBoxBaseHeight->clear();
-    ui->comboBoxBaseHeight->addItems(list);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitSizesList()
-{
-    const QStringList list = VMeasurement::WholeListSizes(MUnit());
-    ui->comboBoxBaseSize->clear();
-    ui->comboBoxBaseSize->addItems(list);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
+void DialogNewMeasurements::InitUnits()
 {
     int val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
@@ -220,12 +134,11 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
 
     ui->comboBoxUnit->blockSignals(true);
     ui->comboBoxUnit->clear();
+
     ui->comboBoxUnit->addItem(tr("Centimeters"), static_cast<int>(Unit::Cm));
     ui->comboBoxUnit->addItem(tr("Millimiters"), static_cast<int>(Unit::Mm));
-    if (type == MeasurementsType::Individual)
-    {
-        ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
-    }
+    ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
+
     ui->comboBoxUnit->setCurrentIndex(-1);
     ui->comboBoxUnit->blockSignals(false);
 

@@ -55,9 +55,10 @@
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 #include "vcontrolpointspline.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "vabstractmainwindow.h"
+#include "global.h"
 
 const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
@@ -75,12 +76,12 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
     if (not numPixels.isNull())
     {
         const qreal mouseScale = settings->GetSensorMouseScale();
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x()) / mouseScale;
+        numSteps = (numPixels.x() == 0 ? numPixels.y() : numPixels.x()) / mouseScale;
     }
     else if (not numDegrees.isNull())
     {
         const qreal mouseScale = settings->GetWheelMouseScale();
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
+        numSteps = (numPixels.x() == 0 ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
     }
 
     return numSteps;
@@ -282,11 +283,12 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
     {
         if (QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event))
         {
-            if (wheel_event->orientation() == Qt::Vertical)
+            const QPoint numDegrees = wheel_event->angleDelta();
+            if (numDegrees.x() == 0)
             {
                 if (QGuiApplication::keyboardModifiers() == _modifiers)
                 {
-                    gentle_zoom(qPow(_zoom_factor_base, wheel_event->angleDelta().y()));
+                    gentle_zoom(qPow(_zoom_factor_base, numDegrees.y()));
                     return true;
                 }
                 else if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
@@ -411,7 +413,7 @@ void GraphicsViewZoom::PinchTriggered(QPinchGesture *gesture)
     }
 }
 
-const unsigned long VMainGraphicsView::scrollDelay = 80;
+const unsigned long VMainGraphicsView::scrollDelay = 160;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -668,6 +670,33 @@ qreal VMainGraphicsView::MaxScale()
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return maxSceneSize / screenSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::EnsureItemVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin,
+                                                   int ymargin)
+{
+    SCASSERT(item != nullptr)
+    const qreal scale = SceneScale(item->scene());
+
+    const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(this);
+    const QRectF itemRect = item->mapToScene(item->boundingRect()).boundingRect();
+
+    // If item's rect is bigger than view's rect ensureVisible works very unstable.
+    if (itemRect.height() + 2*ymargin < viewRect.height() &&
+        itemRect.width() + 2*xmargin < viewRect.width())
+    {
+        EnsureVisibleWithDelay(item, msecs, xmargin, ymargin);
+    }
+    else
+    {
+        // Ensure visible only small rect around a cursor
+        VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(item->scene());
+        SCASSERT(currentScene);
+        const QPointF cursorPosition = currentScene->getScenePos();
+        EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale, 10/scale, 10/scale),
+                               msecs);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

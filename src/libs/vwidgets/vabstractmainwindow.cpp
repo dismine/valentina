@@ -30,6 +30,7 @@
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
 #include "dialogs/dialogexporttocsv.h"
 
 #include <QStyle>
@@ -45,50 +46,11 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QStringList SplitFilePaths(const QString &path)
-{
-    QStringList result;
-    QString subPath = QDir::cleanPath(path);
-    QString lastFileName;
-
-    do
-    {
-        QFileInfo fileInfo(subPath);
-        lastFileName = fileInfo.fileName();
-        if (not lastFileName.isEmpty())
-        {
-            result.prepend(lastFileName);
-            subPath = fileInfo.path();
-        }
-    }
-    while(not lastFileName.isEmpty());
-
-    return result;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList ReverseList(const QStringList &list)
-{
-    if (list.isEmpty())
-    {
-        return list;
-    }
-    QVector<QString> reversedList(list.size());
-    qint32 j = 0;
-    for (qint32 i = list.size() - 1; i >= 0; --i)
-    {
-        reversedList.replace(j, list.at(i));
-        ++j;
-    }
-    return ConvertToList(reversedList);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QStringList SelectNumber(QStringList path, int number)
 {
-    path = ReverseList(path);
+    path = Reverse(path);
     QStringList subPath = path.mid(0, number);
-    return ReverseList(subPath);
+    return Reverse(subPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,25 +166,11 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
+void VAbstractMainWindow::ToolBarStyle(QToolBar *bar) const
 {
     SCASSERT(bar != nullptr)
-    if (qApp->Settings()->GetToolBarStyle())
-    {
-        bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    }
-    else
-    {
-        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    }
-
-#if defined(Q_OS_MAC)
-    // Temporary fix issue with toolbar black background on mac with OpenGL render
-    if (qApp->getSceneView() && qApp->getSceneView()->IsOpenGLRender())
-    {
-        bar->setStyle(QStyleFactory::create("fusion"));
-    }
-#endif
+    qApp->Settings()->GetToolBarStyle() ? bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon)
+                                        : bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

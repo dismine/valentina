@@ -31,7 +31,7 @@
 
 #include <QSharedData>
 #include "vgeometrydef.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/diagnostic.h"
 
 QT_WARNING_PUSH

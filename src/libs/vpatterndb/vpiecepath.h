@@ -133,11 +133,13 @@ public:
 
     static QVector<VSAPoint> CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                                        const QSharedPointer<VAbstractCurve> &curve,
-                                                       int i, bool reverse, qreal width);
+                                                       int i, bool reverse, qreal width,
+                                                       const QString &piece = QString());
 
     static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
 
-    static QVector<QPointF> NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes);
+    static QVector<QPointF> NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                          const QString &piece = QString());
 
 private:
     QSharedDataPointer<VPiecePathData> d;

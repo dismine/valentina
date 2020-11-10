@@ -89,7 +89,7 @@ VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObj
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
     recipeElement.appendChild(createComment(FileComment()));
-    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.1.0"));
+    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.3.0"));
 
     recipeElement.appendChild(Prerequisite());
     recipeElement.appendChild(Content());
@@ -118,7 +118,7 @@ QDomElement VPatternRecipe::Prerequisite()
     QDomElement prerequisiteElement = createElement(QStringLiteral("prerequisite"));
 
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), APP_VERSION_STR));
-    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"), UnitsToStr(qApp->patternUnit())));
+    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"), UnitsToStr(qApp->patternUnits())));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("author"), m_pattern->GetCompanyName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("pattenName"), m_pattern->GetPatternName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("description"), m_pattern->GetDescription()));
@@ -437,7 +437,7 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm)
                                                          tr("Value for final measurtement '%1' is infinite or NaN. "
                                                             "Please, check your calculations.").arg(fm.name));
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
     }
 
     SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);
@@ -808,8 +808,10 @@ QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, AttrArc, tool->CurveName());
+
+    CutCurveAttributes(step, tool);
 
     return step;
 }
@@ -822,8 +824,10 @@ QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, VToolCutSpline::AttrSpline, tool->CurveName());
+
+    CutCurveAttributes(step, tool);
 
     return step;
 }
@@ -836,8 +840,10 @@ QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
-    Formula(step, tool->GetFormula(), AttrLength, AttrLengthValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, VToolCutSplinePath::AttrSplinePath, tool->CurveName());
+
+    CutCurveAttributes(step, tool);
 
     return step;
 }
@@ -1097,6 +1103,16 @@ void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
     SetAttribute(step, AttrPenStyle, tool->GetPenStyle());
     SetAttribute(step, AttrAScale, tool->GetApproximationScale());
     SetAttribute(step, AttrDuplicate, tool->GetDuplicate());
+    SetAttribute(step, AttrAlias, tool->GetAliasSuffix());
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
+{
+    SetAttribute(step, AttrAlias1, tool->GetAliasSuffix1());
+    SetAttribute(step, AttrAlias2, tool->GetAliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1105,6 +1121,7 @@ inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrType, T::ToolType);
     SetAttribute(step, AttrLabel, tool->name());
+    SetAttribute(step, AttrNotes, tool->GetNotes());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1113,17 +1130,48 @@ QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint
     SCASSERT(tool)
 
     QDomElement nodes = createElement(QStringLiteral("nodes"));
-    QVector<QString> names = tool->SourceItems();
+    QVector<SourceItem> items = tool->SourceItems();
 
-    if (names.isEmpty())
+    if (items.isEmpty())
     {
         throw VExceptionInvalidHistory(QObject::tr("Empty list of nodes for tool with id '%1'.").arg(id));
     }
 
-    for (auto &nodeName : names)
+    for (auto &item : items)
     {
         QDomElement node = createElement(QStringLiteral("node"));
-        SetAttribute(node, AttrItem, nodeName);
+
+        QSharedPointer<VGObject> obj;
+
+        try
+        {
+            obj = m_data->GetGObject(item.id);
+        }
+        catch (const VExceptionBadId &e)
+        {
+            qCritical() << e.ErrorMessage()<<Q_FUNC_INFO;
+            continue;
+        }
+
+        SetAttribute(node, AttrItem, obj->name());
+        if (not obj->GetAlias().isEmpty())
+        {
+            SetAttribute(node, AttrAlias, obj->GetAlias());
+        }
+
+        if (obj->getType() != GOType::Point)
+        {
+            if (item.penStyle != TypeLineDefault)
+            {
+                SetAttribute(node, AttrPenStyle, item.penStyle);
+            }
+
+            if (item.color != ColorDefault)
+            {
+                SetAttribute(node, AttrColor, item.color);
+            }
+        }
+
         nodes.appendChild(node);
     }
 

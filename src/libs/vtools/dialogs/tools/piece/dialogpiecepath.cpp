@@ -545,7 +545,7 @@ void DialogPiecePath::PassmarkChanged(int index)
 
                 if (passmarkLength.isEmpty())
                 {
-                    qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+                    qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
                     ui->plainTextEditPassmarkLength->setPlainText(qApp->LocaleToString(length));
                 }
                 else
@@ -555,7 +555,7 @@ void DialogPiecePath::PassmarkChanged(int index)
             }
             else
             {
-                qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+                qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
                 ui->plainTextEditPassmarkLength->setPlainText(qApp->LocaleToString(length));
             }
 
@@ -796,7 +796,7 @@ void DialogPiecePath::EvalWidth()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditWidth;
     formulaData.labelResult = ui->labelResultWidth;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -827,7 +827,7 @@ void DialogPiecePath::EvalWidthBefore()
         formulaData.variables = data->DataVariables();
         formulaData.labelEditFormula = ui->labelEditBefore;
         formulaData.labelResult = ui->labelResultBefore;
-        formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+        formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
         formulaData.checkZero = false;
         formulaData.checkLessThanZero = true;
 
@@ -862,7 +862,7 @@ void DialogPiecePath::EvalWidthAfter()
         formulaData.variables = data->DataVariables();
         formulaData.labelEditFormula = ui->labelEditAfter;
         formulaData.labelResult = ui->labelResultAfter;
-        formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+        formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
         formulaData.checkZero = false;
         formulaData.checkLessThanZero = true;
 
@@ -910,7 +910,7 @@ void DialogPiecePath::EvalPassmarkLength()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditPassmarkLength;
     formulaData.labelResult = ui->labelResultPassmarkLength;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = false;
 
@@ -927,7 +927,7 @@ void DialogPiecePath::FXWidth()
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaSAWidth(dialog->GetFormula());
@@ -941,7 +941,7 @@ void DialogPiecePath::FXWidthBefore()
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaSAWidthBefore());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSABefore(dialog->GetFormula());
@@ -955,7 +955,7 @@ void DialogPiecePath::FXWidthAfter()
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaSAWidthAfter());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSAAfter(dialog->GetFormula());
@@ -980,7 +980,7 @@ void DialogPiecePath::FXPassmarkLength()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark length"));
     dialog->SetFormula(GetFormulaPassmarkLength());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaPassmarkLength(dialog->GetFormula());
@@ -1099,7 +1099,7 @@ void DialogPiecePath::InitSeamAllowanceTab()
     connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogPiecePath::EvalWidthAfter);
 
     // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
-    m_saWidth = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+    m_saWidth = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
     ui->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 
     InitNodesList();
@@ -1154,10 +1154,16 @@ void DialogPiecePath::InitPassmarksTab()
     connect(ui->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogPiecePath::PassmarkChanged);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     connect(ui->buttonGroupMarkType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkAngleTypeChanged);
+#else
+    connect(ui->buttonGroupMarkType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkLineTypeChanged);
+    connect(ui->buttonGroupAngleType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkAngleTypeChanged);
+#endif
+
     connect(ui->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogPiecePath::PassmarkShowSecondChanged);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkLength);

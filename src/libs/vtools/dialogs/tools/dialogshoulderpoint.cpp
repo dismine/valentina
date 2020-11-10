@@ -106,6 +106,9 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId,
             this, &DialogShoulderPoint::PointNameChanged);
 
     vis = new VisToolShoulderPoint(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,7 +142,7 @@ void DialogShoulderPoint::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -155,7 +158,7 @@ void DialogShoulderPoint::EvalFormula()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
 
     Eval(formulaData, flagFormula);
 }
@@ -415,4 +418,16 @@ quint32 DialogShoulderPoint::GetP2Line() const
 quint32 DialogShoulderPoint::GetP3() const
 {
     return getCurrentObjectId(ui->comboBoxP3);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogShoulderPoint::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

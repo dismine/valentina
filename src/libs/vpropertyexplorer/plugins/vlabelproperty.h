@@ -63,6 +63,9 @@ public:
     virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
                                   const QAbstractItemDelegate* delegate) override;
 
+    //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
+    virtual bool setEditorData(QWidget* editor) override;
+
     //! Gets the data from the widget
     virtual QVariant getEditorData(const QWidget* editor) const override;
 

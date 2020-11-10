@@ -28,7 +28,7 @@
 
 #include "vabstractpiece.h"
 #include "vabstractpiece_p.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vgeometry/vpointf.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vmath.h"
@@ -139,16 +139,30 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
 
         if (angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
         {
-            QLineF loop(sp2, bigLine1.p1());
-            loop.setLength(accuracyPointOnLine*2.);
-            points.append(loop.p2());
-            points.append(sp2);
+            if (VGObject::IsPointOnLineSegment(sp2, bigLine2.p1(), bigLine2.p2()))
+            {
+                QLineF loop(bigLine1.p2(), sp2);
+                loop.setLength(loop.length() + accuracyPointOnLine*2.);
+                points.append(loop.p2());
+                points.append(sp2);
+                points.append(VRawSAPoint(bigLine1.p2(), true));
 
-            loop = QLineF(bigLine1.p1(), sp2);
-            loop.setLength(loop.length() + localWidth);
-            VRawSAPoint loopPoint(loop.p2());
-            loopPoint.SetLoopPoint(true);
-            points.append(loopPoint);
+                loop = QLineF(bigLine2.p2(), sp2);
+                loop.setLength(loop.length() + localWidth);
+                points.append(VRawSAPoint(loop.p2(), true));
+            }
+            else
+            {
+                QLineF loop(sp2, bigLine1.p1());
+                loop.setLength(accuracyPointOnLine*2.);
+                points.append(loop.p2());
+                points.append(sp2);
+
+                loop = QLineF(bigLine1.p1(), sp2);
+                loop.setLength(loop.length() + localWidth);
+                points.append(VRawSAPoint(loop.p2(), true));
+                points.append(VRawSAPoint(bigLine2.p1(), true));
+            }
         }
         else
         {
@@ -1058,7 +1072,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     {
         const QString errorMsg = tr("Piece '%1'. Not enough points to build seam allowance.").arg(name);
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
         return QVector<QPointF>();
     }
 
@@ -1460,9 +1474,7 @@ QT_WARNING_POP
 
                             loop = QLineF(crosPoint, bigLine1.p1());
                             loop.setLength(loop.length() + localWidth*2.);
-                            VRawSAPoint loopPoint(loop.p2());
-                            loopPoint.SetLoopPoint(true);
-                            points.append(loopPoint);
+                            points.append(VRawSAPoint(loop.p2(), true));
                         }
 
                         return points;
@@ -1536,69 +1548,7 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
         return false; // Wrong direction
     }
 
-    // Edges must not intersect
-    for (auto i = 0; i < base.count(); ++i)
-    {
-        int nextI = -1;
-        if (i < base.count()-1)
-        {
-            nextI = i + 1;
-        }
-        else
-        {
-            nextI = 0;
-        }
-
-        QLineF baseSegment(base.at(i), base.at(nextI));
-        if (baseSegment.isNull())
-        {
-            continue;
-        }
-
-        for (auto j = 0; j < allowance.count(); ++j)
-        {
-            int nextJ = -1;
-            if (j < allowance.count()-1)
-            {
-                nextJ = j + 1;
-            }
-            else
-            {
-                nextJ = 0;
-            }
-
-            QLineF allowanceSegment(allowance.at(j), allowance.at(nextJ));
-            if (allowanceSegment.isNull())
-            {
-                continue;
-            }
-
-            QPointF crosPoint;
-            const auto type = Intersects(baseSegment, allowanceSegment, &crosPoint);
-
-            if (type == QLineF::BoundedIntersection
-                    && not VFuzzyComparePoints(baseSegment.p1(), crosPoint)
-                    && not VFuzzyComparePoints(baseSegment.p2(), crosPoint)
-                    && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p1(), baseSegment.p1(), baseSegment.p2())
-                    && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p2(), baseSegment.p1(), baseSegment.p2()))
-            {
-                return false;
-            }
-        }
-    }
-
-    // Just instersection edges is not enough. The base must be inside of the allowance.
-    QPolygonF allowancePolygon(allowance);
-
-    for (auto &point : base)
-    {
-        if (not allowancePolygon.containsPoint(point, Qt::WindingFill))
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return IsInsidePolygon(base, allowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1774,7 +1724,7 @@ QVector<VRawSAPoint> VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> 
             {
                 clipped.append(points.at(j));
             }
-            points = VGObject::GetReversePoints(clipped);
+            points = Reverse(clipped);
             *success = true;
             break;
         }

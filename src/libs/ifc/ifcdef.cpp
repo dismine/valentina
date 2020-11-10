@@ -134,7 +134,12 @@ const QString AttrPlaceLabelType = QStringLiteral("placeLabelType");
 const QString AttrVersion     = QStringLiteral("version");
 const QString AttrFirstToCountour = QStringLiteral("firstToCountour");
 const QString AttrLastToCountour = QStringLiteral("lastToCountour");
+const QString AttrNotes       = QStringLiteral("notes");
+const QString AttrAlias       = QStringLiteral("alias");
+const QString AttrAlias1      = QStringLiteral("alias1");
+const QString AttrAlias2      = QStringLiteral("alias2");
 
+const QString TypeLineDefault        = QStringLiteral("default");
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");
 const QString TypeLineDashLine       = QStringLiteral("dashLine");
@@ -149,10 +154,14 @@ const QString TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
  */
 QStringList StylesList()
 {
-    const QStringList styles = QStringList() << TypeLineNone    << TypeLineLine << TypeLineDashLine
-                                             << TypeLineDotLine << TypeLineDashDotLine
-                                             << TypeLineDashDotDotLine;
-    return styles;
+    return QStringList{
+        TypeLineNone,
+        TypeLineLine,
+        TypeLineDashLine,
+        TypeLineDotLine,
+        TypeLineDashDotLine,
+        TypeLineDashDotDotLine
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,6 +217,22 @@ QString PenStyleToLineStyle(Qt::PenStyle penStyle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QIcon PenStylePic(Qt::PenStyle style)
+{
+    QPixmap pix(80, 14);
+    pix.fill(Qt::white);
+
+    QBrush brush(Qt::black);
+    QPen pen(brush, 2.5, style);
+
+    QPainter painter(&pix);
+    painter.setPen(pen);
+    painter.drawLine(2, 7, 78, 7);
+
+    return QIcon(pix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMap<QString, QIcon> LineStylesPics()
 {
     QMap<QString, QIcon> map;
@@ -215,18 +240,7 @@ QMap<QString, QIcon> LineStylesPics()
 
     for (auto &s : styles)
     {
-        const Qt::PenStyle style = LineStyleToPenStyle(s);
-        QPixmap pix(80, 14);
-        pix.fill(Qt::white);
-
-        QBrush brush(Qt::black);
-        QPen pen(brush, 2.5, style);
-
-        QPainter painter(&pix);
-        painter.setPen(pen);
-        painter.drawLine(2, 7, 78, 7);
-
-        map.insert(s, QIcon(pix));
+        map.insert(s, PenStylePic(LineStyleToPenStyle(s)));
     }
     return map;
 }
@@ -239,6 +253,7 @@ QMap<QString, QIcon> CurvePenStylesPics()
     return map;
 }
 
+const QString ColorDefault          = QStringLiteral("default");
 const QString ColorBlack            = QStringLiteral("black");
 const QString ColorGreen            = QStringLiteral("green");
 const QString ColorBlue             = QStringLiteral("blue");

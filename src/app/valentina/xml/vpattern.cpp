@@ -127,7 +127,7 @@ void VPattern::CreateEmptyFile()
 
     patternElement.appendChild(createComment(FileComment()));
     patternElement.appendChild(CreateElementWithText(TagVersion, VPatternConverter::PatternMaxVerStr));
-    patternElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(qApp->patternUnit())));
+    patternElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(qApp->patternUnits())));
 
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
@@ -1167,7 +1167,7 @@ void VPattern::PointsWithLineCommonAttributes(const QDomElement &domElement, VTo
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData)
 {
-    PointsCommonAttributes(domElement, initData.id, initData.mx, initData.my);
+    DrawPointsCommonAttributes(domElement, initData.id, initData.mx, initData.my, initData.notes);
     initData.name = GetParametrString(domElement, AttrName, QChar('A'));
     initData.showLabel = GetParametrBool(domElement, AttrShowLabel, trueStr);
 }
@@ -1176,6 +1176,15 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
+    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("10.0")));
+    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("15.0")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my,
+                                          QString &notes)
+{
+    DrawToolsCommonAttributes(domElement, id, notes);
     mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("10.0")));
     my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("15.0")));
 }
@@ -2022,7 +2031,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
-        VToolCutSplineInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2032,7 +2041,9 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSpline::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2065,7 +2076,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
 
     try
     {
-        VToolCutSplinePathInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2075,7 +2086,9 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSplinePath::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2108,7 +2121,7 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
 
     try
     {
-        VToolCutArcInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2118,7 +2131,9 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
-        initData.arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2549,6 +2564,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolSpline *spl = VToolSpline::Create(initData);
 
@@ -2610,6 +2626,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         auto p1 = data->GeometricObject<VPointF>(point1);
         auto p2 = data->GeometricObject<VPointF>(point2);
@@ -2625,6 +2642,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetApproximationScale(approximationScale);
+        initData.spline->SetAliasSuffix(alias);
 
         VToolCubicBezier::Create(initData);
     }
@@ -2728,6 +2746,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -2820,6 +2839,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         QVector<VPointF> points;
 
@@ -2851,6 +2871,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         initData.path->SetColor(color);
         initData.path->SetPenStyle(penStyle);
         initData.path->SetApproximationScale(approximationScale);
+        initData.path->SetAliasSuffix(alias);
 
         VToolCubicBezierPath::Create(initData);
     }
@@ -2984,6 +3005,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3040,6 +3062,7 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolEllipticalArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3173,6 +3196,7 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArcWithLength::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3260,7 +3284,7 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstLinePointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondLinePointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
@@ -3292,7 +3316,7 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, QChar('1')));
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
@@ -4198,164 +4222,6 @@ QString VPattern::GenerateSuffix() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::IsDefCustom() const
-{
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
-    {
-        return false;
-    }
-
-    const QDomNode domNode = tags.at(0);
-    const QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        return GetParametrBool(domElement, AttrCustom, falseStr);
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetDefCustom(bool value)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
-        return;
-    }
-
-    QDomNode domNode = tags.at(0);
-    QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        if (value == false)
-        {
-            domElement.removeAttribute(AttrDefHeight);
-            SetDefCustomHeight(0);
-            SetDefCustomSize(0);
-        }
-        else
-        {
-            SetAttribute(domElement, AttrCustom, value);
-        }
-        modified = true;
-    }
-    else
-    {
-        qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPattern::GetDefCustomHeight() const
-{
-    if (IsDefCustom())
-    {
-        QDomNodeList tags = elementsByTagName(TagGradation);
-        if (tags.size() == 0)
-        {
-            return 0;
-        }
-
-        const QDomNode domNode = tags.at(0);
-        const QDomElement domElement = domNode.toElement();
-        if (domElement.isNull() == false)
-        {
-            return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QChar('0')));
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetDefCustomHeight(int value)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
-        return;
-    }
-
-    QDomNode domNode = tags.at(0);
-    QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        SetAttributeOrRemoveIf(domElement, AttrDefHeight, value, value == 0);
-        modified = true;
-    }
-    else
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPattern::GetDefCustomSize() const
-{
-    if (IsDefCustom())
-    {
-        QDomNodeList tags = elementsByTagName(TagGradation);
-        if (tags.size() == 0)
-        {
-            return 0;
-        }
-
-        const QDomNode domNode = tags.at(0);
-        const QDomElement domElement = domNode.toElement();
-        if (domElement.isNull() == false)
-        {
-            return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QChar('0')));
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetDefCustomSize(int value)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
-        return;
-    }
-
-    QDomNode domNode = tags.at(0);
-    QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        SetAttributeOrRemoveIf(domElement, AttrDefSize, value, value == 0);
-        modified = true;
-    }
-    else
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::IsReadOnly() const
 {
     const QDomElement pattern = documentElement();
@@ -4455,6 +4321,13 @@ void VPattern::PrepareForParse(const Document &parse)
 void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 {
     id = GetParametrId(domElement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes)
+{
+    ToolsCommonAttributes(domElement, id);
+    notes = GetParametrEmptyString(domElement, AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

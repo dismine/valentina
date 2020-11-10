@@ -93,6 +93,9 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, quint32 toolId,
             this, &DialogLineIntersect::PointNameChanged);
 
     vis = new VisToolLineIntersect(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -402,4 +405,16 @@ quint32 DialogLineIntersect::GetP1Line2() const
 quint32 DialogLineIntersect::GetP2Line2() const
 {
     return getCurrentObjectId(ui->comboBoxP2Line2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersect::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLineIntersect::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

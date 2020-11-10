@@ -56,6 +56,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogspline.h"
 #include "vtranslatevars.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -148,6 +149,8 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     connect(ui->pushButtonGrowLength1, &QPushButton::clicked, this, &DialogSpline::DeployLength1TextEdit);
     connect(ui->pushButtonGrowLength2, &QPushButton::clicked, this, &DialogSpline::DeployLength2TextEdit);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogSpline::ValidateAlias);
+
     vis = new VisToolSpline(data);
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
@@ -156,6 +159,9 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSpline::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSpline::MouseLeftReleased);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,7 +327,7 @@ void DialogSpline::FXLength1()
     QString length1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(length1F);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         length1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -344,7 +350,7 @@ void DialogSpline::FXLength2()
     QString length2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(length2F);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         length2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -407,7 +413,7 @@ void DialogSpline::EvalLength1()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength1;
     formulaData.labelResult = ui->labelResultLength1;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -422,11 +428,35 @@ void DialogSpline::EvalLength2()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength2;
     formulaData.labelResult = ui->labelResultLength2;
-    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagLength2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+
+    VSpline spline = spl;
+    spline.SetAliasSuffix(ui->lineEditAlias->text());
+
+    if (not ui->lineEditAlias->text().isEmpty() &&
+        (not rx.match(spline.GetAlias()).hasMatch() ||
+         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
+    {
+        flagAlias = false;
+        ChangeColor(ui->labelAlias, errorColor);
+    }
+    else
+    {
+        flagAlias = true;
+        ChangeColor(ui->labelAlias, OkColor(this));
+    }
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -455,6 +485,7 @@ VSpline DialogSpline::CurrentSpline() const
     spline.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     spline.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     spline.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    spline.SetAliasSuffix(ui->lineEditAlias->text());
 
     return spline;
 }
@@ -585,6 +616,10 @@ void DialogSpline::SetSpline(const VSpline &spline)
     ui->plainTextEditLength2F->setPlainText(length2F);
     ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
 
+    originAliasSuffix = spl.GetAliasSuffix();
+    ui->lineEditAlias->setText(originAliasSuffix);
+    ValidateAlias();
+
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
 
@@ -596,4 +631,16 @@ void DialogSpline::SetSpline(const VSpline &spline)
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
     path->setApproximationScale(spl.GetApproximationScale());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSpline::GetNotes() const
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

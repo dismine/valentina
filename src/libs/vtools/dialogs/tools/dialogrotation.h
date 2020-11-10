@@ -39,6 +39,7 @@
 
 #include "../vmisc/def.h"
 #include "dialogtool.h"
+#include "../../tools/toolsdef.h"
 
 namespace Ui
 {
@@ -61,8 +62,6 @@ public:
     QString GetSuffix() const;
     void    SetSuffix(const QString &value);
 
-    QVector<quint32> GetObjects() const;
-
     QString GetVisibilityGroupName() const;
     void    SetVisibilityGroupName(const QString &name);
 
@@ -72,9 +71,15 @@ public:
     void        SetVisibilityGroupTags(const QStringList &tags);
     QStringList GetVisibilityGroupTags() const;
 
+    void    SetNotes(const QString &notes);
+    QString GetNotes() const;
+
     virtual void SetGroupCategories(const QStringList &categories) override;
 
     virtual void ShowDialog(bool click) override;
+
+    QVector<SourceItem> GetSourceObjects() const;
+    void                SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -87,6 +92,10 @@ private slots:
     void SuffixChanged();
     void GroupNameChanged();
     void EvalAngle();
+    void ShowSourceDetails(int row);
+    void AliasChanged(const QString &text);
+    void PenStyleChanged();
+    void ColorChanged();
 
 protected:
     virtual void ShowVisualization() override;
@@ -112,7 +121,7 @@ private:
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
     int     formulaBaseHeightAngle;
 
-    QList<quint32> objects;
+    QVector<SourceItem> sourceObjects{};
 
     bool stage1;
 
@@ -125,14 +134,14 @@ private:
     bool flagName;
     bool flagGroupName;
     bool flagError;
+    bool flagAlias{true};
 
     QStringList m_groupTags{};
-};
 
-//---------------------------------------------------------------------------------------------------------------------
-inline bool DialogRotation::IsValid() const
-{
-    return flagAngle && flagName && flagError && flagGroupName;
-}
+    void FillSourceList();
+
+    void ValidateSourceAliases();
+    void SetAliasValid(quint32 id, bool valid);
+};
 
 #endif // DIALOGROTATION_H

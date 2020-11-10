@@ -2,6 +2,9 @@
 # This need for corect working file translations.pro
 
 SOURCES  += \
+    $$PWD/dialogs/dialogdimensionlabels.cpp \
+    $$PWD/dialogs/dialogmeasurementscsvcolumns.cpp \
+    $$PWD/dialogs/dialogrestrictdimension.cpp \
     $$PWD/main.cpp \
     $$PWD/tmainwindow.cpp \
     $$PWD/mapplication.cpp \
@@ -12,11 +15,15 @@ SOURCES  += \
     $$PWD/dialogs/dialogtapepreferences.cpp \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
     $$PWD/dialogs/configpages/tapepreferencespathpage.cpp \
-    $$PWD/vtapesettings.cpp
+    $$PWD/vtapesettings.cpp \
+    $$PWD/dialogs/dialogsetupmultisize.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS  += \
+    $$PWD/dialogs/dialogdimensionlabels.h \
+    $$PWD/dialogs/dialogmeasurementscsvcolumns.h \
+    $$PWD/dialogs/dialogrestrictdimension.h \
     $$PWD/tmainwindow.h \
     $$PWD/stable.h \
     $$PWD/mapplication.h \
@@ -28,13 +35,18 @@ HEADERS  += \
     $$PWD/dialogs/dialogtapepreferences.h \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.h \
     $$PWD/dialogs/configpages/tapepreferencespathpage.h \
-    $$PWD/vtapesettings.h
+    $$PWD/vtapesettings.h \
+    $$PWD/dialogs/dialogsetupmultisize.h
 
 FORMS    += \
+    $$PWD/dialogs/dialogdimensionlabels.ui \
+    $$PWD/dialogs/dialogmeasurementscsvcolumns.ui \
+    $$PWD/dialogs/dialogrestrictdimension.ui \
     $$PWD/tmainwindow.ui \
     $$PWD/dialogs/dialogabouttape.ui \
     $$PWD/dialogs/dialognewmeasurements.ui \
     $$PWD/dialogs/dialogmdatabase.ui \
     $$PWD/dialogs/dialogtapepreferences.ui \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.ui \
-    $$PWD/dialogs/configpages/tapepreferencespathpage.ui
+    $$PWD/dialogs/configpages/tapepreferencespathpage.ui \
+    $$PWD/dialogs/dialogsetupmultisize.ui
