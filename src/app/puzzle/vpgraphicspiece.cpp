@@ -109,6 +109,7 @@ void VPGraphicsPiece::Init()
     connect(m_piece, &VPPiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);
     connect(m_piece, &VPPiece::PositionChanged, this, &VPGraphicsPiece::on_PiecePositionChanged);
     connect(m_piece, &VPPiece::RotationChanged, this, &VPGraphicsPiece::on_PieceRotationChanged);
+    connect(m_piece, &VPPiece::PropertiesChanged, this, &VPGraphicsPiece::on_PiecePropertiesChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,7 +169,7 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     }
 
     // paint the seam line
-    if(!m_seamLine.isEmpty())
+    if(!m_seamLine.isEmpty() && m_piece->GetShowSeamLine())
     {
         painter->drawPath(m_seamLine);
     }
@@ -368,6 +369,15 @@ void VPGraphicsPiece::on_PieceRotationChanged()
 {
     setTransformOriginPoint(boundingRect().center());
     setRotation(-m_piece->GetRotation());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::on_PiecePropertiesChanged()
+{
+    if(scene())
+    {
+        scene()->update();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

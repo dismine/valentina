@@ -63,6 +63,11 @@ public slots:
      */
     void on_PieceRotationChanged();
 
+    /**
+     * @brief on_PiecePropertiesChanged Slot called when the showSeamline / mirrored was changed
+     */
+    void on_PiecePropertiesChanged();
+
 protected:
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
