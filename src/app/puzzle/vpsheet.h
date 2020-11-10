@@ -45,13 +45,13 @@ class VPSheet : public QObject
 {
     Q_OBJECT
 public:
-    VPSheet(VPLayout* layout);
+    explicit VPSheet(VPLayout* layout);
 
     ~VPSheet();
 
     /**
      * @brief GetPieceList returns the piece list of the sheet
-     * @return
+     * @return piece list
      */
     VPPieceList* GetPieceList();
 
