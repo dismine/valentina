@@ -10,5 +10,6 @@
         <file>puzzleicon/64x64/iconGrainlineVertical.png</file>
         <file>puzzleicon/64x64/iconGrainlineHorizontal.png</file>
         <file alias="cursor_rotate">puzzleicon/64x64/cursorRotate.png</file>
+        <file>puzzleicon/64x64/iconProperties.png</file>
     </qresource>
 </RCC>

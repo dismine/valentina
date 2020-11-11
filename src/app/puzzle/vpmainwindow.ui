@@ -176,7 +176,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>
@@ -1018,8 +1018,12 @@
         </layout>
        </widget>
        <widget class="QWidget" name="tabLayoutProperty">
+        <attribute name="icon">
+         <iconset resource="share/resources/puzzleicon.qrc">
+          <normaloff>:/puzzleicon/64x64/iconProperties.png</normaloff>:/puzzleicon/64x64/iconProperties.png</iconset>
+        </attribute>
         <attribute name="title">
-         <string>Prop.</string>
+         <string/>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayoutLayoutProperty">
          <property name="leftMargin">
