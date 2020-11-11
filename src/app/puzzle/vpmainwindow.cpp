@@ -73,6 +73,8 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
+    m_layout->SetTitle(QString("My Test Layout"));
+    m_layout->SetDescription(QString("Description of my Layout"));
     // --------------------------------------------------------
 
     ui->setupUi(this);
@@ -250,6 +252,10 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabLayout()
 {
+    // --------------- init the title and derscription -----------------
+    ui->lineEditLayoutName->setText(m_layout->GetTitle());
+    ui->plainTextEditLayoutDescription->setPlainText(m_layout->GetDescription());
+
     // -------------------- init the unit combobox ---------------------
    ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
    ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));

@@ -176,7 +176,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>3</number>
        </property>
        <property name="iconSize">
         <size>
@@ -1089,7 +1089,7 @@
                   <item row="0" column="1">
                    <widget class="QLineEdit" name="lineEditLayoutName">
                     <property name="text">
-                     <string>My layout</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>

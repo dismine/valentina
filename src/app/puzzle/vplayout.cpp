@@ -142,6 +142,31 @@ bool VPLayout::GetWarningPiecesOutOfBound() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTitle(QString title)
+{
+    m_title = title;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPLayout::GetTitle() const
+{
+    return m_title;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetDescription(QString description)
+{
+    m_description = description;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPLayout::GetDescription() const
+{
+    return m_description;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPLayout::ClearSelection()
 {
     m_unplacedPieceList->ClearSelection();
