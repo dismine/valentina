@@ -120,6 +120,11 @@ private:
     void InitPropertyTabCurrentPiece();
 
     /**
+     * @brief InitPropertyTabCurrentSheet Inits the current sheet tab in the properties;
+     */
+    void InitPropertyTabCurrentSheet();
+
+    /**
      * @brief InitPropertyTabLayout Inits the layout tab in the properties
      */
     void InitPropertyTabLayout();

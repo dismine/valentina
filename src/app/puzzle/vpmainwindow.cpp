@@ -233,6 +233,7 @@ void VPMainWindow::InitMenuBar()
 void VPMainWindow::InitProperties()
 {
     InitPropertyTabCurrentPiece();
+    InitPropertyTabCurrentSheet();
     InitPropertyTabLayout();
     InitPropertyTabTiles();
 }
@@ -240,6 +241,10 @@ void VPMainWindow::InitProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentPiece()
 {
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->groupBoxLayoutControl->hide();
+    ui->groupBoxCurrentPieceGeometry->hide();
+
 
     // ------------------------------ placement -----------------------------------
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
@@ -248,13 +253,21 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
             &VPMainWindow::on_CurrentPiecePositionEdited);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitPropertyTabCurrentSheet()
+{
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->pushButtonSheetRemoveUnusedLength->hide();
+    ui->groupBoxSheetControl->hide();
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabLayout()
 {
-    // --------------- init the title and derscription -----------------
-    ui->lineEditLayoutName->setText(m_layout->GetTitle());
-    ui->plainTextEditLayoutDescription->setPlainText(m_layout->GetDescription());
+
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->groupBoxLayoutControl->hide();
 
     // -------------------- init the unit combobox ---------------------
    ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
@@ -375,9 +388,6 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         qreal angle = selectedPiece->GetRotation();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
-
-        // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-        ui->groupBoxLayoutControl->hide();
     }
     else
     {
@@ -424,16 +434,14 @@ void VPMainWindow::SetPropertyTabSheetData()
 
     // set the checkboxes
     SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->GetFocusedSheet()->GetStickyEdges());
-
-    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-    ui->pushButtonSheetRemoveUnusedLength->hide();
-    ui->groupBoxSheetControl->hide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabLayoutData()
 {
-    // TODO FIXME : Set name and description
+    // set the title and description
+    ui->lineEditLayoutName->setText(m_layout->GetTitle());
+    ui->plainTextEditLayoutDescription->setPlainText(m_layout->GetDescription());
 
     // set Unit
     int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->GetUnit())));
@@ -447,9 +455,6 @@ void VPMainWindow::SetPropertyTabLayoutData()
     // set controls
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, m_layout->GetWarningPiecesOutOfBound());
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
-
-    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-    ui->groupBoxLayoutControl->hide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
