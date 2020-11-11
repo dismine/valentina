@@ -91,7 +91,7 @@ Requires: poppler-tools
 Requires: poppler-utils
 %endif
 
-Version:	0.7.36
+Version:	0.7.37
 Release:	0
 URL:		https://gitlab.com/smart-pattern/valentina
 License:	GPL-3.0+
