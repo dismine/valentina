@@ -564,8 +564,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>356</width>
-              <height>760</height>
+              <width>342</width>
+              <height>731</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -981,7 +981,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>760</height>
+              <height>717</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1058,7 +1058,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>760</height>
+              <height>717</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1182,6 +1182,24 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QToolBar" name="toolBarTools">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
+   <addaction name="actionOriginalZoom"/>
+   <addaction name="actionZoomSheet"/>
+  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>&amp;Open</string>
@@ -1258,6 +1276,45 @@
    </property>
    <property name="text">
     <string>Properties</string>
+   </property>
+  </action>
+  <action name="actionZoomIn">
+   <property name="icon">
+    <iconset theme="zoom-in">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="icon">
+    <iconset theme="zoom-out">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionOriginalZoom">
+   <property name="icon">
+    <iconset theme="zoom-original">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom 1:1</string>
+   </property>
+  </action>
+  <action name="actionZoomSheet">
+   <property name="icon">
+    <iconset theme="zoom-fit-best">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom sheet</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom sheet</string>
    </property>
   </action>
  </widget>
