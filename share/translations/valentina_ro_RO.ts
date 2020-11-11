@@ -2476,7 +2476,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Culoare:</translation>
+        <translation>Culoare:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2591,7 +2591,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Culoare:</translation>
+        <translation>Culoare:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4038,7 +4038,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Culoare:</translation>
+        <translation>Culoare:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -5651,7 +5651,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Culoare:</translation>
+        <translation>Culoare:</translation>
     </message>
     <message>
         <source>Ready</source>

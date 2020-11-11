@@ -2691,11 +2691,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Тип пера:</translation>
+        <translation>Тип пера:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Колір:</translation>
+        <translation>Колір:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2715,7 +2715,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">По замовчуванню</translation>
+        <translation>По замовчуванню</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2810,11 +2810,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Тип пера:</translation>
+        <translation>Тип пера:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Колір:</translation>
+        <translation>Колір:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2834,7 +2834,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">По замовчуванню</translation>
+        <translation>По замовчуванню</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4364,11 +4364,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Тип пера:</translation>
+        <translation>Тип пера:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Колір:</translation>
+        <translation>Колір:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4388,7 +4388,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">По замовчуванню</translation>
+        <translation>По замовчуванню</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6221,11 +6221,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Тип пера:</translation>
+        <translation>Тип пера:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Колір:</translation>
+        <translation>Колір:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -6265,7 +6265,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">По замовчуванню</translation>
+        <translation>По замовчуванню</translation>
     </message>
 </context>
 <context>

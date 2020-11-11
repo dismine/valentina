@@ -2691,11 +2691,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo Caneta:</translation>
+        <translation>Estilo Caneta:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Cor:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2715,7 +2715,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Padrão</translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2810,11 +2810,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo Caneta:</translation>
+        <translation>Estilo Caneta:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Cor:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2834,7 +2834,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Padrão</translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4362,11 +4362,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo Caneta:</translation>
+        <translation>Estilo Caneta:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Cor:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4386,7 +4386,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Padrão</translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6218,11 +6218,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo Caneta:</translation>
+        <translation>Estilo Caneta:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Cor:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -6262,7 +6262,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Padrão</translation>
+        <translation>Padrão</translation>
     </message>
 </context>
 <context>

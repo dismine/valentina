@@ -2647,11 +2647,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
+        <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Χρώμα:</translation>
+        <translation>Χρώμα:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2671,7 +2671,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2766,11 +2766,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
+        <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Χρώμα:</translation>
+        <translation>Χρώμα:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2790,7 +2790,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4293,11 +4293,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
+        <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Χρώμα:</translation>
+        <translation>Χρώμα:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4317,7 +4317,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6137,11 +6137,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
+        <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Χρώμα:</translation>
+        <translation>Χρώμα:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -6181,7 +6181,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
 </context>
 <context>
