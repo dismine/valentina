@@ -362,7 +362,7 @@ int AbstractTest::RunTimeout(int defMsecs)
         return defMsecs;
     }
 #else
-    QString timeout = qEnvironmentVariable("VTEST_RUN_TIMEOUT", QString::number(msecs));
+    QString timeout = qEnvironmentVariable("VTEST_RUN_TIMEOUT", QString::number(defMsecs));
 #endif
 
     bool ok = false;
