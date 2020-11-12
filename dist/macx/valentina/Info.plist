@@ -19,9 +19,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>io.bitbucket.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.7.37</string>
+	<string>0.7.38</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.37.0</string>
+	<string>0.7.38.0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDocumentTypes</key>
