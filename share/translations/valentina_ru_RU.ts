@@ -580,7 +580,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -711,11 +711,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -838,11 +838,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -969,7 +969,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -1040,11 +1040,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -1099,11 +1099,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -1210,7 +1210,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -1293,15 +1293,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 2:</translation>
     </message>
 </context>
 <context>
@@ -1384,15 +1384,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 2:</translation>
     </message>
 </context>
 <context>
@@ -1475,15 +1475,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 2:</translation>
     </message>
 </context>
 <context>
@@ -2338,11 +2338,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -2453,7 +2453,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -2683,11 +2683,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2703,15 +2703,15 @@
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный суффикс</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное имя группы</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2719,15 +2719,15 @@
     </message>
     <message>
         <source>Invalid point</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная точка</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная метка</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный псевдоним</translation>
     </message>
 </context>
 <context>
@@ -2802,11 +2802,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2822,15 +2822,15 @@
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный суффикс</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное имя группы</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2838,7 +2838,7 @@
     </message>
     <message>
         <source>Invalid line points</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильные точки линии</translation>
     </message>
     <message>
         <source>Invalid first line point</source>
@@ -2850,11 +2850,11 @@
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная метка</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный псевдоним</translation>
     </message>
 </context>
 <context>
@@ -2976,7 +2976,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -3840,7 +3840,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -3907,7 +3907,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -4034,7 +4034,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -4358,11 +4358,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -4378,15 +4378,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный суффикс</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное имя группы</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -4394,23 +4394,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная формула угла</translation>
     </message>
     <message>
         <source>Invalid rotation angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная формула угла поворота</translation>
     </message>
     <message>
         <source>Invalid length formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная формула длины</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная метка</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный псевдоним</translation>
     </message>
 </context>
 <context>
@@ -4619,7 +4619,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -5596,7 +5596,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -5695,7 +5695,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -5790,7 +5790,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -5849,7 +5849,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -5916,7 +5916,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -6031,7 +6031,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -6078,7 +6078,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -6215,11 +6215,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6235,35 +6235,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный суффикс</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное имя группы</translation>
     </message>
     <message>
         <source>Invalid rotation point</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная точка вращения</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная метка</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный псевдоним</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная формула угла</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка:</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6898,7 +6898,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -6941,7 +6941,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -7088,11 +7088,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -7247,11 +7247,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
 </context>
 <context>
@@ -7440,7 +7440,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -7551,7 +7551,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
 </context>
 <context>
@@ -10452,7 +10452,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя детали &quot;%1&quot; не уникальное.</translation>
     </message>
     <message>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
@@ -12643,7 +12643,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>по умолчанию</translation>
     </message>
 </context>
 <context>
@@ -14145,7 +14145,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Main path of piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Главный контур детали %1</translation>
     </message>
 </context>
 <context>
@@ -14164,7 +14164,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемый суффикс файла &apos;%1&apos;</translation>
     </message>
     <message>
         <source>cm</source>
@@ -15111,15 +15111,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним 2:</translation>
     </message>
 </context>
 <context>
