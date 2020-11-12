@@ -353,8 +353,28 @@ QString AbstractTest::TranslationsPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int AbstractTest::RunTimeout(int defMsecs)
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+    QString timeout = QString::fromLocal8Bit(qgetenv("VTEST_RUN_TIMEOUT"));
+    if (timeout.isEmpty())
+    {
+        return defMsecs;
+    }
+#else
+    QString timeout = qEnvironmentVariable("VTEST_RUN_TIMEOUT", QString::number(msecs));
+#endif
+
+    bool ok = false;
+    int msecs = timeout.toInt(&ok);
+    return ok ? msecs : defMsecs;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int AbstractTest::Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs)
 {
+    msecs = AbstractTest::RunTimeout(msecs);
+
     const QString parameters = QStringLiteral("Program: %1 \nArguments: %2.")
             .arg(program, arguments.join(QStringLiteral(", ")));
 
