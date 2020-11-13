@@ -2695,11 +2695,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2723,7 +2723,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2814,11 +2814,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2842,7 +2842,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4370,11 +4370,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4398,7 +4398,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6231,11 +6231,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -6279,7 +6279,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
 </context>
 <context>

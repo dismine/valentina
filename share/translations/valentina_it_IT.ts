@@ -2687,11 +2687,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Stile di penna:</translation>
+        <translation>Stile penna:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Colore:</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2715,7 +2715,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Default</translation>
+        <translation>Default</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2806,11 +2806,11 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Stile di penna:</translation>
+        <translation>Stile penna:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Colore:</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2834,7 +2834,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Default</translation>
+        <translation>Default</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4362,11 +4362,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Stile di penna:</translation>
+        <translation>Stile penna:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Colore:</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4390,7 +4390,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Default</translation>
+        <translation>Default</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6222,11 +6222,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Stile di penna:</translation>
+        <translation>Stile penna:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Colore:</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -6270,7 +6270,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Default</translation>
+        <translation>Default</translation>
     </message>
 </context>
 <context>

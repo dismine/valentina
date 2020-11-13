@@ -88,6 +88,9 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
             this, &DialogFlippingByLine::PointChanged);
     connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByLine::PointChanged);
+
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByLine::ShowSourceDetails);
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogFlippingByLine::AliasChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogFlippingByLine::PenStyleChanged);
     connect(ui->comboBoxColor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,

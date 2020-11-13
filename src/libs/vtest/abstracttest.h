@@ -85,6 +85,8 @@ protected:
     QString TapePath() const;
     QString TranslationsPath() const;
 
+    static int RunTimeout(int defMsecs);
+
     int Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs = 120000);
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 
