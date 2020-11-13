@@ -79,8 +79,8 @@ public:
 
     virtual bool IsLabelVisible(quint32 id) const;
 
-    QString GetNotes() const;
-    void    SetNotes(const QString &notes);
+    QString      GetNotes() const;
+    virtual void SetNotes(const QString &notes);
 
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);

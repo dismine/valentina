@@ -85,6 +85,8 @@ public:
     QString GetLineColor() const;
     void    SetLineColor(const QString &value);
 
+    virtual void SetNotes(const QString &notes) override;
+
     virtual void     ShowVisualization(bool show) override;
 
     virtual void     SetLineType(const QString &value) override;
