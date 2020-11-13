@@ -2695,15 +2695,15 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo lápiz:</translation>
+        <translation>Estilo lápiz:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2723,7 +2723,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2814,15 +2814,15 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo lápiz:</translation>
+        <translation>Estilo lápiz:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2842,7 +2842,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4369,15 +4369,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo lápiz:</translation>
+        <translation>Estilo lápiz:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4397,7 +4397,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6229,15 +6229,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Estilo lápiz:</translation>
+        <translation>Estilo lápiz:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6277,7 +6277,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
 </context>
 <context>

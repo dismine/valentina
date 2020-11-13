@@ -107,6 +107,9 @@ DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
     connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged,
             this, &DialogRotation::PointChanged);
+
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogRotation::ShowSourceDetails);
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogRotation::AliasChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogRotation::PenStyleChanged);
     connect(ui->comboBoxColor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,

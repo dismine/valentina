@@ -31,15 +31,17 @@
 #include <QString>
 #include <QMetaType>
 
+#include "../ifc/ifcdef.h"
+
 class VGObject;
 class VContainer;
 
 struct SourceItem
 {
-    quint32 id{0};
+    quint32 id{NULL_ID};
     QString alias{};
-    QString penStyle{};
-    QString color{};
+    QString penStyle{TypeLineDefault};
+    QString color{ColorDefault};
 };
 
 Q_DECLARE_METATYPE(SourceItem)

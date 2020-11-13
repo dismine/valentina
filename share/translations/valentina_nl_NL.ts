@@ -2695,15 +2695,15 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Pen stijl:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2723,7 +2723,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Invalid point</source>
@@ -2814,15 +2814,15 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Pen stijl:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2842,7 +2842,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Invalid line points</source>
@@ -4370,15 +4370,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Pen stijl:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4398,7 +4398,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
@@ -6230,15 +6230,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Pen stijl:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6278,7 +6278,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
 </context>
 <context>
