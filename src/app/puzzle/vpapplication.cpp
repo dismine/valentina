@@ -363,6 +363,7 @@ VPMainWindow *VPApplication::NewMainWindow(const VPCommandLinePtr &cmd)
     {
         puzzle->show();
     }
+    puzzle->InitZoom();
     return puzzle;
 }
 

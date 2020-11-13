@@ -74,6 +74,11 @@ public:
      */
     void ImportRawLayouts(const QStringList &rawLayouts);
 
+    /**
+     * @brief InitZoom Initialises the zoom to fit best
+     */
+    void InitZoom();
+
 public slots:
     /**
      * @brief on_actionNew_triggered When the menu action File > New
@@ -143,6 +148,11 @@ private:
      * @brief InitMainGraphics Initialises the puzzle main graphics
      */
     void InitMainGraphics();
+
+    /**
+     * @brief InitToolBar Initialises the tool bar
+     */
+    void InitToolBar();
 
     /**
      * @brief SetPropertiesData Sets the values of UI elements

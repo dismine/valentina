@@ -1197,8 +1197,8 @@
    </attribute>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
-   <addaction name="actionOriginalZoom"/>
-   <addaction name="actionZoomSheet"/>
+   <addaction name="actionZoomOriginal"/>
+   <addaction name="actionZoomFitBest"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -1296,7 +1296,7 @@
     <string>Zoom out</string>
    </property>
   </action>
-  <action name="actionOriginalZoom">
+  <action name="actionZoomOriginal">
    <property name="icon">
     <iconset theme="zoom-original">
      <normaloff>.</normaloff>.</iconset>
@@ -1305,7 +1305,7 @@
     <string>Zoom 1:1</string>
    </property>
   </action>
-  <action name="actionZoomSheet">
+  <action name="actionZoomFitBest">
    <property name="icon">
     <iconset theme="zoom-fit-best">
      <normaloff>.</normaloff>.</iconset>

@@ -84,6 +84,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     InitCarrousel();
     InitMainGraphics();
 
+    InitToolBar();
 
     SetPropertiesData();
 
@@ -183,6 +184,12 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitZoom()
+{
+    m_graphicsView->ZoomFitBest();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -472,6 +479,32 @@ void VPMainWindow::InitMainGraphics()
     m_graphicsView->RefreshLayout();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitToolBar()
+{
+    QList<QKeySequence> zoomInShortcuts;
+    zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
+    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+    ui->actionZoomIn->setShortcuts(zoomInShortcuts);
+    connect(ui->actionZoomIn, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomIn);
+
+    QList<QKeySequence> zoomOutShortcuts;
+    zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
+    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+    ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
+    connect(ui->actionZoomOut, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOut);
+
+    QList<QKeySequence> zoomOriginalShortcuts;
+    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
+    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
+    connect(ui->actionZoomOriginal, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOriginal);
+
+    QList<QKeySequence> zoomFitBestShortcuts;
+    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
+    connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
