@@ -484,7 +484,7 @@ void VToolLine::SetLineType(const QString &value)
 {
     m_lineType = value;
 
-    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
+    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send an empty object.
     SaveOption(obj);
 }
 
@@ -499,7 +499,16 @@ void VToolLine::SetLineColor(const QString &value)
 {
     lineColor = value;
 
-    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
+    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send an empty object.
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::SetNotes(const QString &notes)
+{
+    m_notes = notes;
+
+    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send an empty object.
     SaveOption(obj);
 }
 
