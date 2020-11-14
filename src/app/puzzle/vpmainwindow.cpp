@@ -78,6 +78,12 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->SetWarningSuperpositionOfPieces(true);
     m_layout->SetTitle(QString("My Test Layout"));
     m_layout->SetDescription(QString("Description of my Layout"));
+
+    m_layout->SetTilesSizeConverted(21,29.7);
+    m_layout->SetTilesOrientation(PageOrientation::Portrait);
+    m_layout->SetTilesMarginsConverted(1,1,1,1);
+    m_layout->SetShowTiles(true);
+
     // --------------------------------------------------------
 
     ui->setupUi(this);
@@ -269,27 +275,6 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     // FIXME ---- For MVP we hide a few things. To be displayed when functions there
     ui->pushButtonSheetRemoveUnusedLength->hide();
     ui->groupBoxSheetControl->hide();
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitPropertyTabLayout()
-{
-
-    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-    ui->groupBoxLayoutControl->hide();
-
-    // -------------------- init the unit combobox ---------------------
-   ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
-   ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
-   ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
-
-   // set default unit - TODO when we have the setting for the unit
-//    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
-//    if (indexUnit != -1)
-//    {
-//        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
-//    }
 
     // some of the UI Elements are connected to the slots via auto-connect
    // see https://doc.qt.io/qt-5/designer-using-a-ui-file.html#widgets-and-dialogs-with-auto-connect
@@ -326,14 +311,52 @@ void VPMainWindow::InitPropertyTabLayout()
 
     // TODO init the file format export combobox
 
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabTiles()
 {
-    // for the MVP we don't want the tiles tab.
-    // we remove it. As soon as we need it, update this code
-    ui->tabWidgetProperties->removeTab(2); // remove tiles
+    // -------------------- layout width, length, orientation  ------------------------
+    connect(ui->doubleSpinBoxSheetWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesSizeChanged);
+    connect(ui->doubleSpinBoxSheetLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesSizeChanged);
+    connect(ui->radioButtonSheetPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_TilesOrientationChanged);
+    connect(ui->radioButtonSheetLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_TilesOrientationChanged);
+
+    // -------------------- margins  ------------------------
+    connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitPropertyTabLayout()
+{
+
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->groupBoxLayoutControl->hide();
+
+    // -------------------- init the unit combobox ---------------------
+   ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+   ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+   ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+
+   // set default unit - TODO when we have the setting for the unit
+//    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
+//    if (indexUnit != -1)
+//    {
+//        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -423,7 +446,7 @@ void VPMainWindow::SetPropertyTabSheetData()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, size.height());
 
     // Set Orientation
-    if(size.width() <= size.height())
+    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
     {
         ui->radioButtonSheetPortrait->setChecked(true);
     }
@@ -444,6 +467,36 @@ void VPMainWindow::SetPropertyTabSheetData()
 
     // set the checkboxes
     SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->GetFocusedSheet()->GetStickyEdges());
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetPropertyTabTilesData()
+{
+    // set Width / Length
+    QSizeF size = m_layout->GetTilesSizeConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesWidth, size.width());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesLength, size.height());
+
+    // Set Orientation
+    if(m_layout->GetTilesOrientation() == PageOrientation::Portrait)
+    {
+        ui->radioButtonSheetPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->radioButtonSheetLandscape->setChecked(true);
+    }
+
+    // set margins
+    QMarginsF margins = m_layout->GetTilesMarginsConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginLeft, margins.left());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginTop, margins.top());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginRight, margins.right());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginBottom, margins.bottom());
+
+    // set "show tiles" checkbox
+    ui->checkBoxTilesShowTiles->setChecked(m_layout->GetShowTiles());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -467,11 +520,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::SetPropertyTabTilesData()
-{
-// TODO
-}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitMainGraphics()
@@ -934,6 +983,62 @@ void VPMainWindow::on_SheetMarginChanged()
                 ui->doubleSpinBoxSheetMarginRight->value(),
                 ui->doubleSpinBoxSheetMarginBottom->value()
             );
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_TilesSizeChanged()
+{
+    m_layout->SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(), ui->doubleSpinBoxTilesLength->value());
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_TilesOrientationChanged()
+{
+    // Updates the orientation
+    if(ui->radioButtonTilesPortrait->isChecked())
+    {
+        m_layout->SetTilesOrientation(PageOrientation::Portrait);
+    }
+    else
+    {
+        m_layout->SetTilesOrientation(PageOrientation::Landscape);
+    }
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_TilesMarginChanged()
+{
+    m_layout->GetFocusedSheet()->SetSheetMarginsConverted(
+                ui->doubleSpinBoxTilesMarginLeft->value(),
+                ui->doubleSpinBoxTilesMarginTop->value(),
+                ui->doubleSpinBoxTilesMarginRight->value(),
+                ui->doubleSpinBoxTilesMarginBottom->value()
+            );
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
+{
+    m_layout->SetShowTiles(checked);
 
     // TODO Undo / Redo
 

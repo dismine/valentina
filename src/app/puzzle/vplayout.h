@@ -138,6 +138,111 @@ public:
     VPSheet* GetFocusedSheet();
 
 
+    /**
+     * @brief SetTilesSize sets the size of the tiles, the values have to be in Unit::Px
+     * @param width tiles width
+     * @param height tiles height
+     */
+    void SetTilesSize(qreal width, qreal height);
+
+    /**
+     * @brief SetTilesSizeConverted sets the size of the sheet, the values have to be in the layout's unit
+     * @param width tiles width
+     * @param height tiles height
+     */
+    void SetTilesSizeConverted(qreal width, qreal height);
+
+    /**
+     * @brief SetTilesSize sets the size of the tiles, the values have to be in Unit::Px
+     * @param size sheet size
+     */
+    void SetTilesSize(const QSizeF &size);
+    /**
+     * @brief SetTilesSizeConverted sets the size of the tiles, the values have to be in the layout's unit
+     * @param size sheet size
+     */
+    void SetTilesSizeConverted(const QSizeF &size);
+
+    /**
+     * @brief GetTilesSize Returns the size of the tiles in Unit::Px
+     * @return sheet size in Unit::Px
+     */
+    QSizeF GetTilesSize() const;
+
+    /**
+     * @brief GetTilesSizeConverted Returns the size of the tiles in the layout's unit
+     * @return the size in the layout's unit
+     */
+    QSizeF GetTilesSizeConverted() const;
+
+    /**
+     * @brief GetOrientation Returns the orientation of the tiles
+     * @return orientation of the tiles
+     */
+    PageOrientation GetTilesOrientation();
+
+    /**
+     * @brief SetOrientation Sets the orientation of the tiles to the given value
+     * @param orientation the new tiles orientation
+     */
+    void SetTilesOrientation(PageOrientation orientation);
+
+    /**
+     * @brief SetTilesMargins, set the margins of the tiles, the values have to be in Unit::Px
+     * @param left in Unit::Px
+     * @param top in Unit::Px
+     * @param right in Unit::Px
+     * @param bottom in Unit::Px
+     */
+    void SetTilesMargins(qreal left, qreal top, qreal right, qreal bottom);
+
+    /**
+     * @brief SetSheetMargins, set the margins of the tiles, the values have to be in the unit of the layout
+     * @param left in Unit::Px
+     * @param top in Unit::Px
+     * @param right in Unit::Px
+     * @param bottom in Unit::Px
+     */
+    void SetTilesMarginsConverted(qreal left, qreal top, qreal right, qreal bottom);
+
+    /**
+     * @brief SetTilesMargins set the margins of the tiles, the values have to be in Unit::Px
+     * @param margins tiles margins
+     */
+    void SetTilesMargins(const QMarginsF &margins);
+
+    /**
+     * @brief SetTilesMarginsConverted set the margins of the tiles, the values have to be in the unit of the layout
+     * @param margins tiles margins
+     */
+    void SetTilesMarginsConverted(const QMarginsF &margins);
+
+    /**
+     * @brief GetTilesMargins Returns margins of the tiles in Unit::Px
+     * @return the size in Unit::Px
+     */
+    QMarginsF GetTilesMargins() const;
+
+    /**
+     * @brief GetTilesMarginsConverted Returns the margins of the tiles in the layout's unit
+     * @return the margins in the tiles's unit
+     */
+    QMarginsF GetTilesMarginsConverted() const;
+
+    /**
+     * @brief GetShowTiles Returns true if the tiles has to be shown on the current sheet
+     * @return
+     */
+    bool GetShowTiles();
+
+    /**
+     * @brief SetShowTiles Sets wether to show the tiles on the current sheet or not
+     * @param value true to show the tiles
+     */
+    void SetShowTiles(bool value);
+
+
+
 signals:
 
     void PieceMovedToPieceList(VPPiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
@@ -169,6 +274,23 @@ private:
     QString m_description{};
 
 
+    /**
+     * @brief m_size the Size of the tiles in Unit::Px
+     */
+    QSizeF m_tilesSize{};
+
+    /**
+     * @brief holds the orientation of the tiles
+     */
+    PageOrientation m_tilesOrientation {PageOrientation::Portrait};
+
+    // margins
+    /**
+     * @brief m_margins the margins of the tiles in Unit::Px
+     */
+    QMarginsF m_tilesMargins{};
+
+    bool m_showTiles{false};
 };
 
 #endif // VPLAYOUT_H

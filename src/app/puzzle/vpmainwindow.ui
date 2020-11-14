@@ -176,7 +176,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <property name="iconSize">
         <size>
@@ -530,7 +530,7 @@
          <string/>
         </attribute>
         <attribute name="toolTip">
-         <string>Layout properties</string>
+         <string>Sheet properties</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayoutSheetProperty">
          <property name="leftMargin">
@@ -1198,6 +1198,9 @@
         </attribute>
         <attribute name="title">
          <string/>
+        </attribute>
+        <attribute name="toolTip">
+         <string>Layout properties</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayoutLayoutProperty">
          <property name="leftMargin">

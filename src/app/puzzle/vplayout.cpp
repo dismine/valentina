@@ -230,3 +230,120 @@ VPSheet* VPLayout::GetFocusedSheet()
 {
     return m_focusedSheet;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesSize(qreal width, qreal height)
+{
+    m_tilesSize.setWidth(width);
+    m_tilesSize.setHeight(height);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesSizeConverted(qreal width, qreal height)
+{
+    m_tilesSize.setWidth(UnitConvertor(width, GetUnit(), Unit::Px));
+    m_tilesSize.setHeight(UnitConvertor(height, GetUnit(), Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesSize(const QSizeF &size)
+{
+    m_tilesSize = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesSizeConverted(const QSizeF &size)
+{
+    m_tilesSize = QSizeF(
+                UnitConvertor(size.width(), GetUnit(), Unit::Px),
+                UnitConvertor(size.height(), GetUnit(), Unit::Px)
+                );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSizeF VPLayout::GetTilesSize() const
+{
+    return m_tilesSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSizeF VPLayout::GetTilesSizeConverted() const
+{
+    QSizeF convertedSize = QSizeF(
+                UnitConvertor(m_tilesSize.width(), Unit::Px, GetUnit()),
+                UnitConvertor(m_tilesSize.height(), Unit::Px, GetUnit())
+                );
+
+    return convertedSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PageOrientation VPLayout::GetTilesOrientation()
+{
+    return m_tilesOrientation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesOrientation(PageOrientation orientation)
+{
+    if(orientation != m_tilesOrientation)
+    {
+        m_tilesOrientation = orientation;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesMargins(qreal left, qreal top, qreal right, qreal bottom)
+{
+    m_tilesMargins.setLeft(left);
+    m_tilesMargins.setTop(top);
+    m_tilesMargins.setRight(right);
+    m_tilesMargins.setBottom(bottom);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
+{
+    m_tilesMargins.setLeft(UnitConvertor(left, GetUnit(), Unit::Px));
+    m_tilesMargins.setTop(UnitConvertor(top, GetUnit(), Unit::Px));
+    m_tilesMargins.setRight(UnitConvertor(right, GetUnit(), Unit::Px));
+    m_tilesMargins.setBottom(UnitConvertor(bottom, GetUnit(), Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesMargins(const QMarginsF &margins)
+{
+    m_tilesMargins = margins;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTilesMarginsConverted(const QMarginsF &margins)
+{
+    m_tilesMargins = UnitConvertor(margins, GetUnit(), Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VPLayout::GetTilesMargins() const
+{
+    return m_tilesMargins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VPLayout::GetTilesMarginsConverted() const
+{
+    return UnitConvertor(m_tilesMargins, Unit::Px, GetUnit());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPLayout::GetShowTiles()
+{
+    return m_showTiles;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetShowTiles(bool value)
+{
+    m_showTiles = value;
+}
