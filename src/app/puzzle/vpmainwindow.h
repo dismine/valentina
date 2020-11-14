@@ -40,6 +40,7 @@
 #include "vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "vpcommandline.h"
+#include "../vlayout/vlayoutdef.h"
 
 namespace Ui
 {
@@ -215,6 +216,7 @@ private:
     void WriteSettings();
 
     bool MaybeSave();
+
 
 private slots:
     /**

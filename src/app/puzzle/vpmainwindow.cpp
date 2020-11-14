@@ -45,6 +45,7 @@
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
+#include <QtSvg>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -993,14 +994,42 @@ void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::on_pushButtonSheetExport_clicked");
-    int ret = msgBox.exec();
+    m_graphicsView->PrepareForExport();
 
-    Q_UNUSED(ret);
+    // svg export to do some test for the first test
 
-    // TODO
+    QString dir = QDir::homePath();
+    QString filters(tr("SVG Files") + QLatin1String("(*.svg)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".svg"),
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
+
+
+
+        const QSizeF s = m_layout->GetFocusedSheet()->GetSheetSize();
+        const QRectF r = QRectF(0, 0, s.width(), s.height());
+
+        QSvgGenerator generator;
+        generator.setFileName(fileName);
+        generator.setSize(QSize(qFloor(s.width()),qFloor(s.height())));
+        generator.setViewBox(r);
+        generator.setTitle(tr("Pattern"));
+        generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
+        generator.setResolution(static_cast<int>(PrintDPI));
+
+        QPainter painter;
+        painter.begin(&generator);
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+        m_graphicsView->GetScene()->render(&painter, r, r, Qt::IgnoreAspectRatio);
+        painter.end();
+
+        m_graphicsView->CleanAfterExport();
 
 }
 

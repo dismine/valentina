@@ -80,6 +80,24 @@ VMainGraphicsScene* VPMainGraphicsView::GetScene()
     return m_scene;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::PrepareForExport()
+{
+    m_graphicsSheet->SetShowBorder(false);
+    m_graphicsSheet->SetShowMargin(false);
+    RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::CleanAfterExport()
+{
+    m_graphicsSheet->SetShowBorder(true);
+    m_graphicsSheet->SetShowMargin(true);
+    RefreshLayout();
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {

@@ -55,6 +55,16 @@ public:
      */
     VMainGraphicsScene* GetScene();
 
+    /**
+     * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
+     */
+    void PrepareForExport();
+
+    /**
+     * @brief CleanAfterExport cleans the graphic for an export (i.e show margin etc)
+     */
+    void CleanAfterExport();
+
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;

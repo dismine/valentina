@@ -55,12 +55,18 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     painter->setPen(pen);
     painter->setBrush(noBrush);
 
-    painter->drawRect(GetMarginsRect());
+    if(m_showMargin)
+    {
+        painter->drawRect(GetMarginsRect());
+    }
 
-    pen.setColor(Qt::black);
+    if(m_showBorder)
+    {
+        pen.setColor(Qt::black);
 
-    painter->setPen(pen);
-    painter->drawRect(GetSheetRect());
+        painter->setPen(pen);
+        painter->drawRect(GetSheetRect());
+    }
 
     m_boundingRect = GetSheetRect();
 }
@@ -94,6 +100,18 @@ QRectF VPGraphicsSheet::GetMarginsRect() const
                     QPointF(size.width()-margins.right(), size.height()-margins.bottom())
                 );
     return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsSheet::SetShowMargin(bool value)
+{
+    m_showMargin = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsSheet::SetShowBorder(bool value)
+{
+   m_showBorder = value;
 }
 
 
