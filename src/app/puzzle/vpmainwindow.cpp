@@ -994,8 +994,6 @@ void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
-    m_graphicsView->PrepareForExport();
-
     // svg export to do some test for the first test
 
     QString dir = QDir::homePath();
@@ -1008,7 +1006,9 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
 #endif
                                                     );
 
-
+    if(not fileName.isEmpty())
+    {
+        m_graphicsView->PrepareForExport();
 
         const QSizeF s = m_layout->GetFocusedSheet()->GetSheetSize();
         const QRectF r = QRectF(0, 0, s.width(), s.height());
@@ -1030,6 +1030,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
         painter.end();
 
         m_graphicsView->CleanAfterExport();
+    }
 
 }
 
