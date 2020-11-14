@@ -103,6 +103,9 @@ private:
     VPLayout *m_layout{nullptr};
     QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
+    QLabel* m_mouseCoordinate{nullptr};
+    QPointer<QDoubleSpinBox> m_doubleSpinBoxScale{nullptr};
+
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
      * @param rawPiece the raw piece data
@@ -152,7 +155,7 @@ private:
     /**
      * @brief InitToolBar Initialises the tool bar
      */
-    void InitToolBar();
+    void InitZoomToolBar();
 
     /**
      * @brief SetPropertiesData Sets the values of UI elements
@@ -394,6 +397,11 @@ private slots:
      * @brief on_PieceRotationChanged When the current piece rotation has changed
      */
     void on_PieceRotationChanged();
+
+    /**
+     * @brief on_ScaleChanged
+     */
+    void on_ScaleChanged(qreal scale);
 
 };
 

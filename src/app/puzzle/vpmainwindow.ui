@@ -1182,7 +1182,7 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QToolBar" name="toolBarTools">
+  <widget class="QToolBar" name="toolBarZoom">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -1311,7 +1311,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Zoom sheet</string>
+    <string>Zoom fit best</string>
    </property>
    <property name="toolTip">
     <string>Zoom sheet</string>

@@ -29,6 +29,7 @@
 
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QtMath>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -84,7 +85,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     InitCarrousel();
     InitMainGraphics();
 
-    InitToolBar();
+    InitZoomToolBar();
 
     SetPropertiesData();
 
@@ -477,11 +478,15 @@ void VPMainWindow::InitMainGraphics()
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
+
+    connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitToolBar()
+void VPMainWindow::InitZoomToolBar()
 {
+
+    // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
     zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
@@ -504,6 +509,28 @@ void VPMainWindow::InitToolBar()
     zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
+
+    // defined the scale
+    ui->toolBarZoom->addSeparator();
+    QLabel* zoomScale = new QLabel(tr("Scale:"), this);
+    ui->toolBarZoom->addWidget(zoomScale);
+
+    m_doubleSpinBoxScale = new QDoubleSpinBox(this);
+    m_doubleSpinBoxScale->setDecimals(1);
+    m_doubleSpinBoxScale->setSuffix("%");
+    on_ScaleChanged(m_graphicsView->transform().m11());
+    connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](double d){m_graphicsView->Zoom(d/100.0);});
+    ui->toolBarZoom->addWidget(m_doubleSpinBoxScale);
+
+
+    // define the mouse position
+    ui->toolBarZoom->addSeparator();
+
+    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
+    ui->toolBarZoom->addWidget(m_mouseCoordinate);
+    ui->toolBarZoom->addSeparator();
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1055,5 +1082,20 @@ void VPMainWindow::on_PieceRotationChanged()
         qreal angle = piece->GetRotation();
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ScaleChanged(qreal scale)
+{
+    if (not m_doubleSpinBoxScale.isNull())
+    {
+        m_doubleSpinBoxScale->blockSignals(true);
+        m_doubleSpinBoxScale->setMaximum(qFloor(VPMainGraphicsView::MaxScale()*1000)/10.0);
+        m_doubleSpinBoxScale->setMinimum(qFloor(VPMainGraphicsView::MinScale()*1000)/10.0);
+        m_doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
+        m_doubleSpinBoxScale->setSingleStep(1);
+        m_doubleSpinBoxScale->blockSignals(false);
     }
 }
