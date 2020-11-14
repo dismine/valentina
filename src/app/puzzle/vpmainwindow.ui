@@ -1106,10 +1106,18 @@
                  </widget>
                 </item>
                 <item row="1" column="4">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginRight"/>
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginRight">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="2">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginLeft"/>
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginLeft">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
                 </item>
                 <item row="0" column="2">
                  <widget class="QLabel" name="labelTilesMarginTop">
@@ -1122,7 +1130,11 @@
                  </widget>
                 </item>
                 <item row="0" column="3">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginTop"/>
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginTop">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
                 </item>
                 <item row="2" column="2">
                  <widget class="QLabel" name="labelTilesMarginBottom">
@@ -1135,7 +1147,11 @@
                  </widget>
                 </item>
                 <item row="2" column="3">
-                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginBottom"/>
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginBottom">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </widget>

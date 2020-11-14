@@ -50,6 +50,12 @@ public:
     ~VPSheet();
 
     /**
+     * @brief GetLayout Returns the Layout of the sheet
+     * @return
+     */
+    VPLayout* GetLayout();
+
+    /**
      * @brief GetPieceList returns the piece list of the sheet
      * @return piece list
      */
@@ -202,6 +208,7 @@ public:
 
     void SetStickyEdges(bool state);
     bool GetStickyEdges() const;
+
 
 private:
     Q_DISABLE_COPY(VPSheet)

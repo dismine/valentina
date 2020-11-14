@@ -349,6 +349,10 @@ private slots:
      */
     void on_checkBoxTilesShowTiles_toggled(bool checked);
 
+    /**
+     * @brief on_pushButtonTilesExport_clicked When the export tiles button is clicked
+     */
+    void on_pushButtonTilesExport_clicked();
 
     /**
      * @brief on_checkBoxLayoutWarningPiecesSuperposition_toggled When the

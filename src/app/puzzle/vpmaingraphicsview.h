@@ -99,6 +99,11 @@ private:
 
     QList<VPGraphicsPiece*> m_graphicsPieces{};
 
+    /**
+     * variable to hold temporarly hte value of the show tiles
+     */
+    bool m_showTilesTmp{false};
+
 };
 
 #endif // VPMAINGRAPHICSVIEW_H

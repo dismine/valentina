@@ -318,23 +318,23 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
 void VPMainWindow::InitPropertyTabTiles()
 {
     // -------------------- layout width, length, orientation  ------------------------
-    connect(ui->doubleSpinBoxSheetWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxTilesWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesSizeChanged);
-    connect(ui->doubleSpinBoxSheetLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxTilesLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesSizeChanged);
-    connect(ui->radioButtonSheetPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
+    connect(ui->radioButtonTilesPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
             &VPMainWindow::on_TilesOrientationChanged);
-    connect(ui->radioButtonSheetLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
+    connect(ui->radioButtonTilesLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
             &VPMainWindow::on_TilesOrientationChanged);
 
     // -------------------- margins  ------------------------
-    connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxTilesMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesMarginChanged);
-    connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxTilesMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesMarginChanged);
-    connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxTilesMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesMarginChanged);
-    connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxTilesMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesMarginChanged);
 }
 
@@ -1021,7 +1021,7 @@ void VPMainWindow::on_TilesOrientationChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_TilesMarginChanged()
 {
-    m_layout->GetFocusedSheet()->SetSheetMarginsConverted(
+    m_layout->SetTilesMarginsConverted(
                 ui->doubleSpinBoxTilesMarginLeft->value(),
                 ui->doubleSpinBoxTilesMarginTop->value(),
                 ui->doubleSpinBoxTilesMarginRight->value(),
@@ -1034,7 +1034,6 @@ void VPMainWindow::on_TilesMarginChanged()
 }
 
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
 {
@@ -1044,6 +1043,36 @@ void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
 
     m_graphicsView->RefreshLayout();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonTilesExport_clicked()
+{
+    // svg export to do some test for the first test
+
+    QString dir = QDir::homePath();
+    QString filters(tr("PDF Files") + QLatin1String("(*.pdf)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".pdf"),
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
+
+    if(not fileName.isEmpty())
+    {
+        m_graphicsView->PrepareForExport();
+
+
+
+        // TODO : Tiles export
+
+
+
+        m_graphicsView->CleanAfterExport();
+    }
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -84,8 +84,14 @@ VMainGraphicsScene* VPMainGraphicsView::GetScene()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::PrepareForExport()
 {
+    m_layout->ClearSelection();
+
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
+
+    m_showTilesTmp = m_layout->GetShowTiles();
+    m_layout->SetShowTiles(false);
+
     RefreshLayout();
 }
 
@@ -94,6 +100,9 @@ void VPMainGraphicsView::CleanAfterExport()
 {
     m_graphicsSheet->SetShowBorder(true);
     m_graphicsSheet->SetShowMargin(true);
+
+    m_layout->SetShowTiles(m_showTilesTmp);
+
     RefreshLayout();
 }
 

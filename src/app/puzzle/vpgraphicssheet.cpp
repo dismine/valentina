@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vpgraphicssheet.h"
+#include "vplayout.h"
+#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsSheet::VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent):
@@ -66,6 +68,66 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
         painter->setPen(pen);
         painter->drawRect(GetSheetRect());
+    }
+
+    // show the tiles grid. Maybe it shouldn't be in the graphics sheet, maybe better in maingraphicsview
+    VPLayout* layout = m_sheet->GetLayout();
+    if(layout->GetShowTiles())
+    {
+       pen.setColor(QColor(255,0,0,127));
+       pen.setStyle(Qt::DashLine);
+       painter->setPen(pen);
+
+       QSizeF tilesSize = layout->GetTilesSize();
+       QSizeF sheetSize = m_sheet->GetSheetSize();
+
+       QMarginsF tilesMargins = layout->GetTilesMargins();
+
+       PageOrientation tilesOrientation = layout->GetTilesOrientation();
+       PageOrientation sheetOrientation = m_sheet->GetOrientation();
+
+       qreal colWidth = 0;
+       qreal rowHeight = 0;
+       if(tilesOrientation == PageOrientation::Portrait)
+       {
+           colWidth = tilesSize.width() - (tilesMargins.left()+ tilesMargins.right() + UnitConvertor(1, Unit::Cm, Unit::Px));
+           rowHeight = tilesSize.height() - (tilesMargins.top()+ tilesMargins.bottom() + UnitConvertor(1, Unit::Cm, Unit::Px));
+       }
+       else
+       {
+           colWidth = tilesSize.height() - (tilesMargins.left()+ tilesMargins.right() + UnitConvertor(1, Unit::Cm, Unit::Px));
+           rowHeight = tilesSize.width() - (tilesMargins.top()+ tilesMargins.bottom() + UnitConvertor(1, Unit::Cm, Unit::Px));
+       }
+       // the "+ UnitConvertor(1, Unit::Cm, Unit::Px)" is because of the part for gluing and where we
+       // have infos of the single tile. Maybe it's not the right value, to be corrected.
+
+
+       qreal drawingWidth = 0;
+       qreal drawingHeight = 0;
+
+       if(sheetOrientation == PageOrientation::Portrait)
+       {
+            drawingWidth = sheetSize.width();
+            drawingHeight = sheetSize.height();
+       }
+       else
+       {
+           drawingWidth = sheetSize.height();
+           drawingHeight = sheetSize.width();
+       }
+
+       int nbCol = qCeil(drawingWidth/colWidth);
+       int nbRow = qCeil(drawingHeight/rowHeight);
+
+       for(int i=0;i<=nbCol;i++)
+       {
+           painter->drawLine(QPointF(i*colWidth, 0), QPointF(i*colWidth,nbRow*rowHeight));
+       }
+
+       for(int j=0;j<=nbRow;j++)
+       {
+            painter->drawLine(QPointF(0, j*rowHeight), QPointF(nbCol*colWidth, j*rowHeight));
+       }
     }
 
     m_boundingRect = GetSheetRect();
