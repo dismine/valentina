@@ -31,6 +31,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QDoubleSpinBox>
+#include <QPointer>
 
 #include "../vmisc/def.h"
 #include "vpcarrousel.h"
@@ -103,8 +104,15 @@ private:
     VPLayout *m_layout{nullptr};
     QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
-    QLabel* m_mouseCoordinate{nullptr};
+    /**
+     * @brief spin box with the scale factor of the graphic view
+     */
     QPointer<QDoubleSpinBox> m_doubleSpinBoxScale{nullptr};
+
+    /**
+     * @brief mouseCoordinate pointer to label who show mouse coordinate.
+     */
+    QLabel* m_mouseCoordinate{nullptr};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
@@ -399,10 +407,15 @@ private slots:
     void on_PieceRotationChanged();
 
     /**
-     * @brief on_ScaleChanged
+     * @brief on_ScaleChanged When the scale of the graphic view is changed
      */
     void on_ScaleChanged(qreal scale);
 
+    /**
+     * @brief mouseMove save mouse position and show user.
+     * @param scenePos position mouse.
+     */
+    void on_MouseMoved(const QPointF &scenePos);
 };
 
 #endif // VPMAINWINDOW_H

@@ -48,6 +48,14 @@ public:
      */
     void RefreshLayout();
 
+
+    /**
+     * @brief GetScene Returns the scene of the view
+     * @return
+     */
+    VMainGraphicsScene* GetScene();
+
+
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;

@@ -41,6 +41,7 @@
 #include "../vmisc/projectversion.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../ifc/exception/vexception.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
@@ -480,11 +481,21 @@ void VPMainWindow::InitMainGraphics()
     m_graphicsView->RefreshLayout();
 
     connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
+    connect(m_graphicsView->GetScene(), &VMainGraphicsScene::mouseMove, this, &VPMainWindow::on_MouseMoved);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitZoomToolBar()
 {
+    if (not m_doubleSpinBoxScale.isNull())
+    {
+        delete m_doubleSpinBoxScale;
+    }
+
+    if (m_mouseCoordinate != nullptr)
+    {
+        delete m_mouseCoordinate;
+    }
 
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
@@ -530,7 +541,6 @@ void VPMainWindow::InitZoomToolBar()
     m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
     ui->toolBarZoom->addWidget(m_mouseCoordinate);
     ui->toolBarZoom->addSeparator();
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1097,5 +1107,17 @@ void VPMainWindow::on_ScaleChanged(qreal scale)
         m_doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
         m_doubleSpinBoxScale->setSingleStep(1);
         m_doubleSpinBoxScale->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_MouseMoved(const QPointF &scenePos)
+{
+    if (m_mouseCoordinate != nullptr)
+    {
+        m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
+                                   .arg(static_cast<qint32>(FromPixel(scenePos.x(), m_layout->GetUnit())))
+                                   .arg(static_cast<qint32>(FromPixel(scenePos.y(), m_layout->GetUnit())))
+                                   .arg(UnitsToStr(m_layout->GetUnit(), true)));
     }
 }

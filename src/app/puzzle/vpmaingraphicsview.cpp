@@ -75,6 +75,12 @@ void VPMainGraphicsView::RefreshLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VMainGraphicsScene* VPMainGraphicsView::GetScene()
+{
+    return m_scene;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
     const QMimeData *mime = event->mimeData();
