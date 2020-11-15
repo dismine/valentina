@@ -64,6 +64,7 @@ before_install:
       unset SSL_CERT_FILE;
       brew untap homebrew/versions;
       brew update > /dev/null;
+      brew upgrade > /dev/null;
       brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/8e2743e6382fefaabfa37da00633ff801477b53c/qt5.rb;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
