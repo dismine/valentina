@@ -217,6 +217,12 @@ private:
 
     bool MaybeSave();
 
+    /**
+     * @brief generateTiledPdf Generates the tiled Pdf in the given filename
+     * @param filename
+     */
+    void generateTiledPdf(QString fileName);
+
 
 private slots:
     /**
