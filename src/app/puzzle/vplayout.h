@@ -154,20 +154,26 @@ public:
 
     /**
      * @brief SetTilesSize sets the size of the tiles, the values have to be in Unit::Px
-     * @param size sheet size
+     * @param size tiles size
      */
     void SetTilesSize(const QSizeF &size);
     /**
      * @brief SetTilesSizeConverted sets the size of the tiles, the values have to be in the layout's unit
-     * @param size sheet size
+     * @param size tiles size
      */
     void SetTilesSizeConverted(const QSizeF &size);
 
     /**
      * @brief GetTilesSize Returns the size of the tiles in Unit::Px
-     * @return sheet size in Unit::Px
+     * @return tiles size in Unit::Px
      */
     QSizeF GetTilesSize() const;
+
+    /**
+     * @brief GetTilesSize Returns the size of the tiles in given Unit
+     * @return tiles size
+     */
+    QSizeF GetTilesSize(Unit unit) const;
 
     /**
      * @brief GetTilesSizeConverted Returns the size of the tiles in the layout's unit
@@ -219,9 +225,16 @@ public:
 
     /**
      * @brief GetTilesMargins Returns margins of the tiles in Unit::Px
-     * @return the size in Unit::Px
+     * @return the margins in Unit::Px
      */
     QMarginsF GetTilesMargins() const;
+
+    /**
+     * @brief GetTilesMargins Returns margins of the tiles in the given unit
+     * @param unit the unit in which we want the margins
+     * @return the margins in the given unit
+     */
+    QMarginsF GetTilesMargins(Unit unit) const;
 
     /**
      * @brief GetTilesMarginsConverted Returns the margins of the tiles in the layout's unit

@@ -1014,7 +1014,11 @@
                    </widget>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesWidth"/>
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesWidth">
+                    <property name="maximum">
+                     <double>100000.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                   <item row="1" column="0">
                    <widget class="QLabel" name="labelTilesLength">
@@ -1024,7 +1028,11 @@
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesLength"/>
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesLength">
+                    <property name="maximum">
+                     <double>100000.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                   <item row="2" column="0">
                    <widget class="QLabel" name="labelTilesOrientation">

@@ -496,7 +496,7 @@ void VPMainWindow::SetPropertyTabTilesData()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginBottom, margins.bottom());
 
     // set "show tiles" checkbox
-    ui->checkBoxTilesShowTiles->setChecked(m_layout->GetShowTiles());
+    SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->GetShowTiles());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -913,8 +913,9 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
         m_layout->SetUnit(Unit::Inch);
     }
 
-    SetPropertyTabSheetData();
     SetPropertyTabCurrentPieceData();
+    SetPropertyTabSheetData();
+    SetPropertyTabTilesData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1061,13 +1062,96 @@ void VPMainWindow::on_pushButtonTilesExport_clicked()
 
     if(not fileName.isEmpty())
     {
+        // tests for now, later we want this in a separated function
+
         m_graphicsView->PrepareForExport();
 
+        PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
+        QSizeF tilesSize =  m_layout->GetTilesSize();
+        QMarginsF tilesMargins = m_layout->GetTilesMargins();
 
 
-        // TODO : Tiles export
+        // -------------  Set up the printer
+        QPrinter* printer = new QPrinter();
+
+        printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
+                            QCoreApplication::applicationVersion());
+        printer->setOrientation(QPrinter::Portrait); // in the pdf file the pages should always be in portrait
+
+        // here we might need to so some rounding for the size.
+        printer->setPageSize(QPageSize(m_layout->GetTilesSize(Unit::Mm),
+                                                           QPageSize::Millimeter));
+        printer->setFullPage(true);
+        const bool success = printer->setPageMargins(m_layout->GetTilesMargins(Unit::Mm), QPageLayout::Millimeter);
+        if (not success)
+        {
+            qWarning() << tr("Cannot set printer margins");
+        }
+
+        #ifdef Q_OS_MAC
+        printer->setOutputFormat(QPrinter::NativeFormat);
+        #else
+        printer->setOutputFormat(QPrinter::PdfFormat);
+        #endif
+
+        printer->setOutputFileName(fileName);
+        printer->setResolution(static_cast<int>(PrintDPI));
+
+        printer->setDocName("Test");
 
 
+        // -------------  Set up the painter
+        QPainter painter;
+        if (not painter.begin(printer))
+        { // failed to open file
+            qCritical() << tr("Failed to open file, is it writable?");
+            return;
+        }
+        painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+
+        if(tilesOrientation == PageOrientation::Landscape)
+        {
+            // The landscape tiles have to be rotated, because the pages
+            // stay portrait in the pdf
+            painter.rotate(90);
+            painter.translate(0, -ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm));
+        }
+
+
+        // -------------  Perform the Tiling
+        qreal tilesDrawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
+                        tilesSize.height() : tilesSize.width();
+        tilesDrawingAreaHeight -=
+                tilesMargins.top() + tilesMargins.bottom() + UnitConvertor(1, Unit::Cm, Unit::Px);
+
+        // the -1cm is for test purpuses, it correspondings to the overlaping  for gluing the parts,
+        // later we'll have a proper abstract value
+
+        qreal tilesDrawingAreaWidth = (tilesOrientation == PageOrientation::Portrait)?
+                    tilesSize.width() : tilesSize.height();
+        tilesDrawingAreaWidth -=
+                tilesMargins.left() + tilesMargins.right() + UnitConvertor(1, Unit::Cm, Unit::Px);
+
+
+        QRectF source = QRectF(0,0,tilesDrawingAreaWidth, tilesDrawingAreaHeight);
+
+        QRectF target = QRectF(m_layout->GetTilesMargins().left(), m_layout->GetTilesMargins().top(),
+                               source.width(), source.height());
+        m_graphicsView->GetScene()->render(&painter, target, source, Qt::IgnoreAspectRatio);
+
+        if (not printer->newPage())
+        {
+            qWarning("failed in flushing page to disk, disk full?");
+            return;
+        }
+
+        source = QRectF(tilesDrawingAreaWidth,0,tilesDrawingAreaWidth, tilesDrawingAreaHeight);
+        m_graphicsView->GetScene()->render(&painter, target, source, Qt::IgnoreAspectRatio);
+
+        painter.end();
 
         m_graphicsView->CleanAfterExport();
     }

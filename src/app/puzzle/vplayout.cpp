@@ -268,14 +268,20 @@ QSizeF VPLayout::GetTilesSize() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayout::GetTilesSizeConverted() const
+QSizeF VPLayout::GetTilesSize(Unit unit) const
 {
     QSizeF convertedSize = QSizeF(
-                UnitConvertor(m_tilesSize.width(), Unit::Px, GetUnit()),
-                UnitConvertor(m_tilesSize.height(), Unit::Px, GetUnit())
+                UnitConvertor(m_tilesSize.width(), Unit::Px, unit),
+                UnitConvertor(m_tilesSize.height(), Unit::Px, unit)
                 );
 
     return convertedSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSizeF VPLayout::GetTilesSizeConverted() const
+{
+    return GetTilesSize(GetUnit());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,6 +334,12 @@ void VPLayout::SetTilesMarginsConverted(const QMarginsF &margins)
 QMarginsF VPLayout::GetTilesMargins() const
 {
     return m_tilesMargins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VPLayout::GetTilesMargins(Unit unit) const
+{
+    return UnitConvertor(m_tilesMargins, Unit::Px, unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
