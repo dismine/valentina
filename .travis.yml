@@ -62,6 +62,7 @@ before_install:
       brew install qt5;
     else
       unset SSL_CERT_FILE;
+      brew untap homebrew/versions;
       brew update > /dev/null;
       brew tap-new valentina/team; 
       brew extract --version 5.9 qt valentina/team; 
