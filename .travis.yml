@@ -64,9 +64,7 @@ before_install:
       unset SSL_CERT_FILE;
       brew untap homebrew/versions;
       brew update > /dev/null;
-      brew tap-new valentina/team; 
-      brew extract --version 5.9 qt valentina/team; 
-      brew install valentina/team/qt@5.9;
+      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/13d52537d1e0e5f913de46390123436d220035f6/Formula/qt.rb;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
   fi
