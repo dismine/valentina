@@ -41,6 +41,9 @@ win32{
 macx{
     # Check which minimal OSX version supports current Qt version
     # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
+    # For qt 5.14 https://doc.qt.io/qt-5.14/supported-platforms.html
+    # For Qt 5.13 https://doc.qt.io/archives/qt-5.13/supported-platforms.html
+    # For Qt 5.12 https://doc-snapshots.qt.io/qt5-5.12/supported-platforms.html
     # For older versions https://doc.qt.io/qt-5.11/supported-platforms-and-configurations.html
     equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 13) {# Qt 5.14
         QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
