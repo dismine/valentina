@@ -35,7 +35,7 @@ jobs:
     env:
     - DEPLOY=true
     - LEGACY=true
-    osx_image: xcode8.3
+    osx_image: xcode8
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -62,9 +62,10 @@ before_install:
       brew install qt5;
     else
       unset SSL_CERT_FILE;
-      brew untap homebrew/versions;
       brew update > /dev/null;
-      brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/8e2743e6382fefaabfa37da00633ff801477b53c/qt5.rb;
+      brew tap-new valentina/team; 
+      brew extract --version 5.9 qt valentina/team; 
+      brew install valentina/team/qt@5.9;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
   fi
