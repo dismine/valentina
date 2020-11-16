@@ -76,7 +76,7 @@ before_install:
       chmod -R 755 /usr/local/opt/qt5/*
     else
       unset SSL_CERT_FILE;
-      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/3a81dee54b03b43cdbb19e173b4ec1402c388bfb/qt.rb;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/f553c39bbc5f3a2b231a767924e846bdd2a56d8d/qt.rb;
       brew link qt --force;
       chmod -R 755 /usr/local/opt/qt/*
     fi
