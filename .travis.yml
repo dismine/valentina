@@ -62,7 +62,6 @@ before_install:
       brew install qt5;
     else
       unset SSL_CERT_FILE;
-      brew untap homebrew/versions;
       brew update > /dev/null;
       brew tap-new ${USER}/local-qt;
       brew extract --version 5.11 qt ${USER}/local-qt; 
