@@ -73,11 +73,12 @@ before_install:
     if [[ "$LEGACY" = false ]]; then
       brew update > /dev/null;
       brew install qt5;
-      chmod -R 755 /usr/local/opt/qt5/*
+      chmod -R 755 '/usr/local/opt/qt5/*';
     else
       unset SSL_CERT_FILE;
       HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/3a81dee54b03b43cdbb19e173b4ec1402c388bfb/qt.rb;
-      chmod -R 755 /usr/local/opt/qt/*
+      brew link qt --force;
+      chmod -R 755 '/usr/local/opt/qt/*';
     fi
   fi
 before_script:
