@@ -76,7 +76,7 @@ before_install:
     else
       unset SSL_CERT_FILE;
       brew tap-new ${USER}/local-qt;
-      brew update > /dev/null;
+      brew update --verbose;
       brew extract --version 5.11 qt ${USER}/local-qt; 
       brew install ${USER}/local-qt/qt@5.11;
     fi
