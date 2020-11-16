@@ -954,6 +954,44 @@ void VPMainWindow::generateTiledPdf(QString fileName)
 
                 painter.setPen(penTileDrawing);
                 m_graphicsView->GetScene()->render(&painter, target, source, Qt::IgnoreAspectRatio);
+
+                QTextDocument td;
+
+                td.documentLayout()->setPaintDevice(printer);
+                td.setPageSize(QSizeF(tilesDrawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), tilesDrawingAreaHeight));
+
+
+                const QString grid = tr("Grid ( %1 , %2 )").arg(row+1).arg(col+1);
+                const QString page = tr("Page %1 of %2").arg(row*nbCol+col+1).arg(nbCol*nbRow);
+
+                td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
+                                   "<tr>"
+                                   "<td align='center'>%1</td>"
+                                   "</tr>"
+                                   "</table>")
+                           .arg(grid));
+                painter.setPen(penTileInfos);
+                painter.save();
+                painter.translate(QPointF(tilesMargins.left()+ UnitConvertor(1, Unit::Cm, Unit::Px),
+                                          tilesDrawingAreaHeight + tilesMargins.top()
+                                          ));
+                td.drawContents(&painter);
+                painter.restore();
+
+                td.setPageSize(QSizeF(tilesDrawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), tilesDrawingAreaWidth));
+                td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
+                                   "<tr>"
+                                   "<td align='center'>%1 - %2</td>"
+                                   "</tr>"
+                                   "</table>")
+                           .arg(page).arg(m_layout->GetFocusedSheet()->GetName()));
+                painter.save();
+                painter.rotate(-90);
+                painter.translate(QPointF(-(tilesDrawingAreaHeight+tilesMargins.top()) + UnitConvertor(1, Unit::Cm, Unit::Px),
+                                         tilesDrawingAreaWidth + tilesMargins.left()
+                                         ));
+                td.drawContents(&painter);
+                painter.restore();
             }
         }
 
