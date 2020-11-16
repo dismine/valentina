@@ -75,10 +75,7 @@ before_install:
       brew install qt5;
     else
       unset SSL_CERT_FILE;
-      brew tap-new ${USER}/local-qt;
-      brew update --verbose;
-      brew extract --version 5.11 qt ${USER}/local-qt; 
-      brew install ${USER}/local-qt/qt@5.11;
+      brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/3d6d7b3e67138ca19ada7152df2155de6690c089/qt5.rb;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
   fi
