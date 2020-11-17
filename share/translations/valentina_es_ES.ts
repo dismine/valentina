@@ -8929,7 +8929,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Variables Table</source>
-        <translation>Mesa de variables</translation>
+        <translation>Tabla de variables</translation>
     </message>
     <message>
         <source>Contains information about increments and internal variables</source>

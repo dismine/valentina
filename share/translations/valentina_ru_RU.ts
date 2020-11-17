@@ -2842,11 +2842,11 @@
     </message>
     <message>
         <source>Invalid first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная первая точка линии</translation>
     </message>
     <message>
         <source>Invalid second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная вторая точка линии</translation>
     </message>
     <message>
         <source>Invalid label</source>
