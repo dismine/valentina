@@ -235,10 +235,6 @@ Source: ".\valentina\*.ini"; DestDir: "{app}"; Flags: ignoreversion
 Type: filesandordirs; Name: "{app}\translations"
 Type: files; Name: "{userappdata}\ValentinaTeam\*.ini"; Tasks: deletesettings
 
-[UninstallDelete]
-Type: files; Name: "{userappdata}\ValentinaTeam\*.ini"
-Type: filesandordirs; Name: "{userappdata}\ValentinaTeam"
-
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
@@ -357,6 +353,12 @@ english.ManageSettings = Manage settings
 russian.ManageSettings = Управление настройками
 ukrainian.ManageSettings = Керування налаштуваннями
 german.ManageSettings = Einstellungen verwalten
+
+QuestionRemoveAnyExistingSettings = Do you want to remove any existing settings?
+english.QuestionRemoveAnyExistingSettings = Do you want to remove any existing settings?
+russian.QuestionRemoveAnyExistingSettings = Вы хотите удалить существующие настройки?
+ukrainian.QuestionRemoveAnyExistingSettings = Видалити будь-які існуючі налаштування?
+german.QuestionRemoveAnyExistingSettings = Möchten Sie vorhandene Einstellungen entfernen?
 
 [Code]
 const
@@ -563,5 +565,17 @@ var
     begin
       MsgBox( UninstallationCanceledMessage, mbInformation, MB_OK );
     end;  
+  end;
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  if CurUninstallStep = usPostUninstall then
+  begin
+    if MsgBox(ExpandConstant('{cm:QuestionRemoveAnyExistingSettings}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+    //this is the msg that will display after uninstall 
+    begin
+        DelTree(ExpandConstant('{userappdata}\ValentinaTeam'), True, True, True);
+    end;
   end;
 end;
