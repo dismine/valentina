@@ -31,16 +31,19 @@
 
 #include "vpgraphicssheet.h"
 #include "vpgraphicspiece.h"
+#include "vptilefactory.h"
+#include "vpgraphicstilegrid.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 class VMainGraphicsScene;
 
+class VPTileFactory;
 
 class VPMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
-    VPMainGraphicsView(VPLayout *layout, QWidget *parent);
+    VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFactory, QWidget *parent);
     ~VPMainGraphicsView() = default;
 
     /**
@@ -74,6 +77,8 @@ protected:
 
     void keyPressEvent(QKeyEvent *event) override;
 
+    void drawTilesLine();
+
 private slots:
     /**
      * @brief on_PieceMovedToPieceList The slot is called when the given piece was moved from the given piece list to the other
@@ -95,6 +100,9 @@ private:
     VMainGraphicsScene *m_scene{nullptr};
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
+
+    VPGraphicsTileGrid *m_graphicsTileGrid{nullptr};
+
     VPLayout *m_layout{nullptr};
 
     QList<VPGraphicsPiece*> m_graphicsPieces{};

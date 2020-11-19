@@ -37,6 +37,7 @@
 #include "vplayout.h"
 #include "vpsheet.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "vptilefactory.h"
 
 #include <QLoggingCategory>
 
@@ -44,7 +45,7 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, QWidget *parent) :
+VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFactory, QWidget *parent) :
     VMainGraphicsView(parent),
     m_layout(layout)
 {
@@ -58,6 +59,9 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, QWidget *parent) :
 
     setAcceptDrops(true);
 
+    m_graphicsTileGrid = new VPGraphicsTileGrid(layout, tileFactory);
+    m_scene->addItem(m_graphicsTileGrid);
+
     // add the connections
     connect(m_layout, &VPLayout::PieceMovedToPieceList, this, &VPMainGraphicsView::on_PieceMovedToPieceList);
     connect(m_scene, &VMainGraphicsScene::selectionChanged, this,
@@ -70,6 +74,8 @@ void VPMainGraphicsView::RefreshLayout()
     // FIXME: Is that the way to go?
 
     m_graphicsSheet->update();
+
+    m_graphicsTileGrid->update();
 
     m_scene->update();
 }

@@ -30,6 +30,7 @@
 #include <QFileDialog>
 #include <QCloseEvent>
 #include <QtMath>
+#include <QSvgGenerator>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -45,7 +46,6 @@
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
-#include <QtSvg>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -91,6 +91,11 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     InitMenuBar();
     InitProperties();
     InitCarrousel();
+
+    // init the tile factory
+    m_tileFactory = new VPTileFactory(m_layout, qApp->Settings());
+    m_tileFactory->refreshTileInfos();
+
     InitMainGraphics();
 
     InitZoomToolBar();
@@ -98,6 +103,8 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     SetPropertiesData();
 
     ReadSettings();
+
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -525,7 +532,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitMainGraphics()
 {
-    m_graphicsView = new VPMainGraphicsView(m_layout, this);
+    m_graphicsView = new VPMainGraphicsView(m_layout, m_tileFactory, this);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
@@ -708,10 +715,9 @@ void VPMainWindow::generateTiledPdf(QString fileName)
     if(not fileName.isEmpty())
     {
         m_graphicsView->PrepareForExport();
+        m_tileFactory->refreshTileInfos();
 
         PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
-        QSizeF tilesSize =  m_layout->GetTilesSize();
-        QMarginsF tilesMargins = m_layout->GetTilesMargins();
 
         // -------------  Set up the printer
         QPrinter* printer = new QPrinter();
@@ -724,11 +730,6 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         printer->setPageSize(QPageSize(m_layout->GetTilesSize(Unit::Mm),
                                                            QPageSize::Millimeter));
         printer->setFullPage(true);
-        const bool success = printer->setPageMargins(m_layout->GetTilesMargins(Unit::Mm), QPageLayout::Millimeter);
-        if (not success)
-        {
-            qWarning() << tr("Cannot set printer margins");
-        }
 
         #ifdef Q_OS_MAC
         printer->setOutputFormat(QPrinter::NativeFormat);
@@ -740,7 +741,6 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         printer->setResolution(static_cast<int>(PrintDPI));
         printer->setDocName("Test"); // FIXME
 
-
         // -------------  Set up the painter
         QPainter painter;
         if (not painter.begin(printer))
@@ -751,9 +751,6 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
         painter.setRenderHint(QPainter::Antialiasing, true);
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        QPen penTileInfos = QPen(QColor(180,180,180), qApp->Settings()->WidthHairLine(), Qt::DashLine, Qt::RoundCap, Qt::RoundJoin);
-        QPen penTileDrawing = QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-
 
         if(tilesOrientation == PageOrientation::Landscape)
         {
@@ -763,99 +760,9 @@ void VPMainWindow::generateTiledPdf(QString fileName)
             painter.translate(0, -ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm));
         }
 
-
-        // -------------  Prepare infos for the tiling
-        qreal tilesDrawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
-                        tilesSize.height() : tilesSize.width();
-        tilesDrawingAreaHeight -=
-                tilesMargins.top() + tilesMargins.bottom() + UnitConvertor(1, Unit::Cm, Unit::Px);
-
-        // the -1cm is for test purpuses, it correspondings to the overlaping  for gluing the parts,
-        // later we'll have a proper abstract value
-
-        qreal tilesDrawingAreaWidth = (tilesOrientation == PageOrientation::Portrait)?
-                    tilesSize.width() : tilesSize.height();
-        tilesDrawingAreaWidth -=
-                tilesMargins.left() + tilesMargins.right() + UnitConvertor(1, Unit::Cm, Unit::Px);
-
-
-        QSizeF sheetSize = m_layout->GetFocusedSheet()->GetSheetSize();
-        qreal drawingWidth = 0;
-        qreal drawingHeight = 0;
-
-        if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
+        for(int row=0;row<m_tileFactory->getRowNb();row++)  // for each row of the tiling grid
         {
-             drawingWidth = sheetSize.width();
-             drawingHeight = sheetSize.height();
-        }
-        else
-        {
-            drawingWidth = sheetSize.height();
-            drawingHeight = sheetSize.width();
-        }
-
-        int nbCol = qCeil(drawingWidth/tilesDrawingAreaWidth);
-        int nbRow = qCeil(drawingHeight/tilesDrawingAreaHeight);
-
-
-        // ------------- prepare triangles for positioning
-        // top triangle
-        QRectF rectTop = QRectF(tilesMargins.left()+ tilesDrawingAreaWidth/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                             tilesMargins.top(),
-                             UnitConvertor(1, Unit::Cm, Unit::Px),
-                             UnitConvertor(0.5, Unit::Cm, Unit::Px)
-                             );
-        QPainterPath triangleTop;
-        triangleTop.moveTo(rectTop.topLeft());
-        triangleTop.lineTo(rectTop.topRight());
-        triangleTop.lineTo(rectTop.left() + (rectTop.width() / 2), rectTop.bottom());
-        triangleTop.lineTo(rectTop.topLeft());
-
-        // left triangle
-        QRectF rectLeft = QRectF(tilesMargins.left(),
-                             tilesMargins.top() + tilesDrawingAreaHeight/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                             UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                             UnitConvertor(1, Unit::Cm, Unit::Px)
-                             );
-        QPainterPath triangleLeft;
-        triangleLeft.moveTo(rectLeft.topLeft());
-        triangleLeft.lineTo(rectLeft.right(), rectLeft.top() + (rectLeft.height() / 2));
-        triangleLeft.lineTo(rectLeft.bottomLeft());
-        triangleLeft.lineTo(rectLeft.topLeft());
-
-        // bottom triangle
-        QRectF rectBottom = QRectF(tilesMargins.left()+ tilesDrawingAreaWidth/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                             tilesMargins.top()+tilesDrawingAreaHeight - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                             UnitConvertor(1, Unit::Cm, Unit::Px),
-                             UnitConvertor(0.5, Unit::Cm, Unit::Px)
-                             );
-        QPainterPath triangleBottom;
-        triangleBottom.moveTo(rectBottom.bottomLeft());
-        triangleBottom.lineTo(rectBottom.left() + (rectBottom.width() / 2), rectBottom.top());
-        triangleBottom.lineTo(rectBottom.bottomRight());
-        triangleBottom.lineTo(rectBottom.bottomLeft());
-
-        // right triangle
-        QRectF rectRight = QRectF(tilesMargins.left() + tilesDrawingAreaWidth - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                                  tilesMargins.top() + tilesDrawingAreaHeight/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                                  UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                                  UnitConvertor(1, Unit::Cm, Unit::Px)
-                                  );
-        QPainterPath triangleRight;
-        triangleRight.moveTo(rectRight.topRight());
-        triangleRight.lineTo(rectRight.bottomRight());
-        triangleRight.lineTo(rectRight.left(), rectRight.top() + (rectRight.height() / 2));
-        triangleRight.lineTo(rectRight.topRight());
-
-        QBrush triangleBush = QBrush(QColor(200,200,200));
-
-
-        // -------------  Perform the tiling
-        QSvgRenderer* svgRenderer = new QSvgRenderer();
-
-        for(int row=0;row<nbRow;row++)  // for each row of the tiling grid
-        {
-            for(int col=0;col<nbCol;col++) // for each column of tiling grid
+            for(int col=0;col<m_tileFactory->getColNb();col++) // for each column of tiling grid
             {
                 if(not (row == 0 && col == 0))
                 {
@@ -866,132 +773,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
                     }
                 }
 
-                // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
-                penTileInfos.setStyle(Qt::DashLine);
-                painter.setPen(penTileInfos);
-
-                if(row > 0)
-                {
-                    // add top triangle
-                    painter.fillPath(triangleTop, triangleBush);
-
-                    //  scissors along the top line
-                    svgRenderer->load(QStringLiteral("://puzzleicon/svg/icon_scissors_horizontal.svg"));
-                    svgRenderer->render(&painter, QRectF(tilesMargins.left()+tilesDrawingAreaWidth,
-                                                         tilesMargins.top(),
-                                                         UnitConvertor(1, Unit::Cm, Unit::Px),
-                                                         UnitConvertor(0.56, Unit::Cm, Unit::Px)
-                                                         ));
-
-                    // top line
-                    painter.drawLine(QPointF(tilesMargins.left(),
-                                             tilesMargins.top()),
-                                    QPointF(tilesMargins.left() + tilesDrawingAreaWidth + UnitConvertor(1, Unit::Cm, Unit::Px),
-                                            tilesMargins.top())
-                                     );
-                }
-                if(col > 0)
-                {
-                    // add left triangle
-                    painter.fillPath(triangleLeft, triangleBush);
-
-                    //  scissors along the left line
-                    svgRenderer->load(QStringLiteral("://puzzleicon/svg/icon_scissors_vertical.svg"));
-                    svgRenderer->render(&painter, QRectF(tilesMargins.left(),
-                                                         tilesMargins.top()+tilesDrawingAreaHeight,
-                                                         UnitConvertor(0.56, Unit::Cm, Unit::Px),
-                                                         UnitConvertor(1, Unit::Cm, Unit::Px)
-                                                         ));
-
-                    // left line
-                    painter.drawLine(QPointF(tilesMargins.left(),
-                                             tilesMargins.top()),
-                                    QPointF(tilesMargins.left(),
-                                            tilesMargins.top() + tilesDrawingAreaHeight + UnitConvertor(1, Unit::Cm, Unit::Px))
-                                     );
-                }
-
-                penTileInfos.setStyle(Qt::DotLine);
-                painter.setPen(penTileInfos);
-
-                if(row < nbRow-1)
-                {
-                    // add bottom triangle
-                    painter.fillPath(triangleBottom, triangleBush);
-
-                    // bottom line
-                    painter.drawLine(QPointF(tilesMargins.left(),
-                                             tilesMargins.top() + tilesDrawingAreaHeight),
-                                    QPointF(tilesMargins.left() + tilesDrawingAreaWidth + UnitConvertor(1, Unit::Cm, Unit::Px),
-                                            tilesMargins.top() + tilesDrawingAreaHeight)
-                                     );
-                }
-
-                if(col < nbCol-1)
-                {
-                    // add right triangle
-                    painter.fillPath(triangleRight, triangleBush);
-
-                    // right line
-                    painter.drawLine(QPointF(tilesMargins.left() + tilesDrawingAreaWidth,
-                                             tilesMargins.top()),
-                                    QPointF(tilesMargins.left() + tilesDrawingAreaWidth,
-                                            tilesMargins.top()+ tilesDrawingAreaHeight + UnitConvertor(1, Unit::Cm, Unit::Px))
-                                     );
-                }
-
-                // paint the page
-                QRectF source = QRectF(col*tilesDrawingAreaWidth,
-                                       row*tilesDrawingAreaHeight,
-                                       tilesDrawingAreaWidth + UnitConvertor(1, Unit::Cm, Unit::Px),
-                                       tilesDrawingAreaHeight + UnitConvertor(1, Unit::Cm, Unit::Px)
-                                       );
-                QRectF target = QRectF(tilesMargins.left(),
-                                       tilesMargins.top(),
-                                       source.width(),
-                                       source.height()
-                                       );
-
-                painter.setPen(penTileDrawing);
-                m_graphicsView->GetScene()->render(&painter, target, source, Qt::IgnoreAspectRatio);
-
-                QTextDocument td;
-
-                td.documentLayout()->setPaintDevice(printer);
-                td.setPageSize(QSizeF(tilesDrawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), tilesDrawingAreaHeight));
-
-
-                const QString grid = tr("Grid ( %1 , %2 )").arg(row+1).arg(col+1);
-                const QString page = tr("Page %1 of %2").arg(row*nbCol+col+1).arg(nbCol*nbRow);
-
-                td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
-                                   "<tr>"
-                                   "<td align='center'>%1</td>"
-                                   "</tr>"
-                                   "</table>")
-                           .arg(grid));
-                painter.setPen(penTileInfos);
-                painter.save();
-                painter.translate(QPointF(tilesMargins.left()+ UnitConvertor(1, Unit::Cm, Unit::Px),
-                                          tilesDrawingAreaHeight + tilesMargins.top()
-                                          ));
-                td.drawContents(&painter);
-                painter.restore();
-
-                td.setPageSize(QSizeF(tilesDrawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), tilesDrawingAreaWidth));
-                td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
-                                   "<tr>"
-                                   "<td align='center'>%1 - %2</td>"
-                                   "</tr>"
-                                   "</table>")
-                           .arg(page).arg(m_layout->GetFocusedSheet()->GetName()));
-                painter.save();
-                painter.rotate(-90);
-                painter.translate(QPointF(-(tilesDrawingAreaHeight+tilesMargins.top()) + UnitConvertor(1, Unit::Cm, Unit::Px),
-                                         tilesDrawingAreaWidth + tilesMargins.left()
-                                         ));
-                td.drawContents(&painter);
-                painter.restore();
+                m_tileFactory->drawTile(&painter, m_graphicsView, row, col);
             }
         }
 
@@ -1237,7 +1019,12 @@ void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_SheetSizeChanged()
 {
-    m_layout->GetFocusedSheet()->SetSheetSizeConverted(ui->doubleSpinBoxSheetWidth->value(), ui->doubleSpinBoxSheetLength->value());
+    m_layout->GetFocusedSheet()->SetSheetSizeConverted(
+                ui->doubleSpinBoxSheetWidth->value(),
+                ui->doubleSpinBoxSheetLength->value()
+                );
+
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
@@ -1256,6 +1043,7 @@ void VPMainWindow::on_SheetOrientationChanged()
     {
         m_layout->GetFocusedSheet()->SetOrientation(PageOrientation::Landscape);
     }
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
@@ -1296,6 +1084,7 @@ void VPMainWindow::on_SheetMarginChanged()
 void VPMainWindow::on_TilesSizeChanged()
 {
     m_layout->SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(), ui->doubleSpinBoxTilesLength->value());
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
@@ -1314,6 +1103,7 @@ void VPMainWindow::on_TilesOrientationChanged()
     {
         m_layout->SetTilesOrientation(PageOrientation::Landscape);
     }
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
@@ -1329,6 +1119,7 @@ void VPMainWindow::on_TilesMarginChanged()
                 ui->doubleSpinBoxTilesMarginRight->value(),
                 ui->doubleSpinBoxTilesMarginBottom->value()
             );
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
