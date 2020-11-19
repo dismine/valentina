@@ -195,7 +195,10 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     // paint the grainline
     if(!m_grainline.isEmpty())
     {
-        painter->setBrush(blackBrush);
+        // here to fill the grainlines arrow. Not wanted for mvp
+        // later maybe if it's configurable
+//        painter->setBrush(blackBrush);
+
         painter->drawPath(m_grainline);
     }
 
