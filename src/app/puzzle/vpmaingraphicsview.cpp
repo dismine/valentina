@@ -232,9 +232,22 @@ void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *p
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::on_SceneSelectionChanged()
 {
-    // most of the selection behaviour taks place automatically
+    // most of the selection behaviour takes place automatically
     // but we need to make sure that the unplaced pieces are unselected when the scene selection has changed
     // because as they are not part of the scene, they are not updated
-
     m_layout->GetUnplacedPieceList()->ClearSelection();
+
+
+    // make sure, that the selected items are on top
+    // FIXME: maybe there is a more proper way to do it
+    for(auto graphicPiece : m_graphicsPieces)
+    {
+        if(!graphicPiece->GetPiece()->GetIsSelected())
+        {
+            if(!m_scene->selectedItems().isEmpty())
+            {
+                graphicPiece->stackBefore(m_scene->selectedItems().first());
+            }
+        }
+    }
 }

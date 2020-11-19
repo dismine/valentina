@@ -71,6 +71,7 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
 
     QSvgRenderer* svgRenderer = new QSvgRenderer();
 
+    // FIXME here instead of creating 4 triangle, maybe create one and rotate it
 
     // ------------- prepare triangles for positioning
 
@@ -263,10 +264,10 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
 
     // prepare the painting for the text information
     QTextDocument td;
-
-//    td.documentLayout()->setPaintDevice(printer); ??
-
-    td.setPageSize(QSizeF(m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaHeight));
+    td.setPageSize(QSizeF(
+                       m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px),
+                       m_drawingAreaHeight
+                       ));
 
     // paint the grid information
     const QString grid = tr("Grid ( %1 , %2 )").arg(row+1).arg(col+1);
