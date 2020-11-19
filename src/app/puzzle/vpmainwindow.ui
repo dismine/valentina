@@ -176,7 +176,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <property name="iconSize">
         <size>
@@ -1521,12 +1521,51 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>tabWidgetProperties</tabstop>
+  <tabstop>scrollAreaCurrentPiece</tabstop>
   <tabstop>scrollAreaSheet</tabstop>
+  <tabstop>scrollAreaTiles</tabstop>
+  <tabstop>scrollAreaLayout</tabstop>
+  <tabstop>lineEditCurrentPieceName</tabstop>
+  <tabstop>plainTextEditCurrentPieceUUID</tabstop>
+  <tabstop>checkBoxCurrentPieceShowSeamline</tabstop>
+  <tabstop>checkBoxCurrentPieceMirrorPiece</tabstop>
+  <tabstop>doubleSpinBoxCurrentPieceAngle</tabstop>
+  <tabstop>doubleSpinBoxCurrentPieceBoxPositionX</tabstop>
+  <tabstop>doubleSpinBoxCurrentPieceBoxPositionY</tabstop>
+  <tabstop>lineEditSheetName</tabstop>
+  <tabstop>comboBoxSheetTemplate</tabstop>
+  <tabstop>doubleSpinBoxSheetWidth</tabstop>
+  <tabstop>doubleSpinBoxSheetLength</tabstop>
+  <tabstop>radioButtonSheetPortrait</tabstop>
+  <tabstop>radioButtonSheetLandscape</tabstop>
+  <tabstop>pushButtonSheetRemoveUnusedLength</tabstop>
   <tabstop>doubleSpinBoxSheetMarginTop</tabstop>
   <tabstop>doubleSpinBoxSheetMarginLeft</tabstop>
   <tabstop>doubleSpinBoxSheetMarginRight</tabstop>
   <tabstop>doubleSpinBoxSheetMarginBottom</tabstop>
-  <tabstop>scrollAreaTiles</tabstop>
+  <tabstop>radioButtonSheetFollowGrainlineNo</tabstop>
+  <tabstop>radioButtonSheetFollowGrainlineVertical</tabstop>
+  <tabstop>radioButtonSheetFollowGrainlineHorizontal</tabstop>
+  <tabstop>doubleSpinBoxSheetPiecesGap</tabstop>
+  <tabstop>checkBoxSheetStickyEdges</tabstop>
+  <tabstop>comboBoxSheetExportFormat</tabstop>
+  <tabstop>pushButtonSheetExport</tabstop>
+  <tabstop>doubleSpinBoxTilesWidth</tabstop>
+  <tabstop>doubleSpinBoxTilesLength</tabstop>
+  <tabstop>radioButtonTilesPortrait</tabstop>
+  <tabstop>radioButtonTilesLandscape</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginTop</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginLeft</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginRight</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginBottom</tabstop>
+  <tabstop>checkBoxTilesShowTiles</tabstop>
+  <tabstop>pushButtonTilesExport</tabstop>
+  <tabstop>lineEditLayoutName</tabstop>
+  <tabstop>plainTextEditLayoutDescription</tabstop>
+  <tabstop>comboBoxLayoutUnit</tabstop>
+  <tabstop>checkBoxLayoutWarningPiecesSuperposition</tabstop>
+  <tabstop>checkBoxLayoutWarningPiecesOutOfBound</tabstop>
  </tabstops>
  <resources>
   <include location="share/resources/puzzleicon.qrc"/>
