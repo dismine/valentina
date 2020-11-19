@@ -98,8 +98,10 @@ private:
     QPainterPath m_seamLine;
     QPainterPath m_grainline;
 
-    QPointF m_rotationStartPoint;
+    QVector<QPainterPath> m_internalPaths;
+    QVector<Qt::PenStyle> m_internalPathsPenStyle;
 
+    QPointF m_rotationStartPoint;
 };
 
 #endif // VPGRAPHICSPIECE_H

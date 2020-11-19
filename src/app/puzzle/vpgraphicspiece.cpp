@@ -44,6 +44,8 @@
 #include "vplayout.h"
 #include "vpsheet.h"
 
+#include "vlayoutpiecepath.h"
+
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 
@@ -54,6 +56,8 @@ VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
     m_cuttingLine(QPainterPath()),
     m_seamLine(QPainterPath()),
     m_grainline(QPainterPath()),
+    m_internalPaths(QVector<QPainterPath>()),
+    m_internalPathsPenStyle(QVector<Qt::PenStyle>()),
     m_rotationStartPoint(QPointF())
 {
     Init();
@@ -78,7 +82,7 @@ void VPGraphicsPiece::Init()
     if(!seamLinePoints.isEmpty())
     {
         m_seamLine.moveTo(seamLinePoints.first());
-        for (int i = 1; i < seamLinePoints.size(); ++i)
+        for (int i = 0; i < seamLinePoints.size(); i++)
             m_seamLine.lineTo(seamLinePoints.at(i));
     }
 
@@ -87,7 +91,7 @@ void VPGraphicsPiece::Init()
     if(!cuttingLinepoints.isEmpty())
     {
         m_cuttingLine.moveTo(cuttingLinepoints.first());
-        for (int i = 1; i < cuttingLinepoints.size(); ++i)
+        for (int i = 0; i < cuttingLinepoints.size(); i++)
             m_cuttingLine.lineTo(cuttingLinepoints.at(i));
     }
 
@@ -98,9 +102,19 @@ void VPGraphicsPiece::Init()
         if(!grainLinepoints.isEmpty())
         {
             m_grainline.moveTo(grainLinepoints.first());
-            for (int i = 1; i < grainLinepoints.size(); ++i)
+            for (int i = 0; i < grainLinepoints.size(); i++)
                 m_grainline.lineTo(grainLinepoints.at(i));
         }
+    }
+
+    // initialises the internal paths
+    QVector<VLayoutPiecePath> internalPaths = m_piece->GetInternalPaths();
+    for (int i = 0; i < internalPaths.size(); i++)
+    {
+        VLayoutPiecePath piecePath = internalPaths.at(i);
+        QPainterPath path = m_piece->GetMatrix().map(piecePath.GetPainterPath());
+        m_internalPaths.append(path);
+        m_internalPathsPenStyle.append(piecePath.PenStyle());
     }
 
     // TODO : initialises the other elements labels, passmarks etc.
@@ -149,9 +163,11 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush noBrush(Qt::NoBrush);
     QBrush selectionBrush(QColor(255,160,160,60));
+    QBrush blackBrush(Qt::black);
 
     painter->setPen(pen);
 
+    // selection
     if(isSelected())
     {
        painter->setBrush(selectionBrush);
@@ -179,8 +195,27 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     // paint the grainline
     if(!m_grainline.isEmpty())
     {
+        painter->setBrush(blackBrush);
         painter->drawPath(m_grainline);
     }
+
+    // paint the internal paths
+    painter->setBrush(noBrush);
+    if(!m_internalPaths.isEmpty())
+    {
+        Qt::PenStyle penStyleTmp = pen.style();
+
+        for (int i = 0; i < m_internalPaths.size(); i++)
+        {
+            painter->setPen(m_internalPathsPenStyle.at(i));
+            painter->drawPath(m_internalPaths.at(i));
+        }
+        pen.setStyle(penStyleTmp);
+    }
+
+
+    // when using m_piece->GetItem(), the results were quite bad
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
