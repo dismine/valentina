@@ -88,13 +88,13 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     ui->setupUi(this);
 
-    InitMenuBar();
-    InitProperties();
-    InitCarrousel();
-
     // init the tile factory
     m_tileFactory = new VPTileFactory(m_layout, qApp->Settings());
     m_tileFactory->refreshTileInfos();
+
+    InitMenuBar();
+    InitProperties();
+    InitCarrousel();
 
     InitMainGraphics();
 
@@ -314,11 +314,33 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     connect(ui->radioButtonSheetFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
             &VPMainWindow::on_SheetFollowGrainlineChanged);
 
-    // -------------------- export ---------------------------
+    // -------------------- sheet template ---------------------------
 
-    // TODO init the file format export combobox
+    // FIXME: find a nicer way to initiliase it
+    QVector<PaperSizeTemplate> sheetTemplates = QVector<PaperSizeTemplate>();
+    sheetTemplates.append(PaperSizeTemplate::A0);
+    sheetTemplates.append(PaperSizeTemplate::A1);
+    sheetTemplates.append(PaperSizeTemplate::A2);
+    sheetTemplates.append(PaperSizeTemplate::A3);
+    sheetTemplates.append(PaperSizeTemplate::A4);
+    sheetTemplates.append(PaperSizeTemplate::Letter);
+    sheetTemplates.append(PaperSizeTemplate::Legal);
+    sheetTemplates.append(PaperSizeTemplate::Tabloid);
+    sheetTemplates.append(PaperSizeTemplate::Roll24in);
+    sheetTemplates.append(PaperSizeTemplate::Roll30in);
+    sheetTemplates.append(PaperSizeTemplate::Roll36in);
+    sheetTemplates.append(PaperSizeTemplate::Roll42in);
+    sheetTemplates.append(PaperSizeTemplate::Roll44in);
+    sheetTemplates.append(PaperSizeTemplate::Roll48in);
+    sheetTemplates.append(PaperSizeTemplate::Roll62in);
+    sheetTemplates.append(PaperSizeTemplate::Roll72in);
+    sheetTemplates.append(PaperSizeTemplate::Custom);
 
+    ui->comboBoxSheetTemplate->blockSignals(true);
+    VPSheet::PopulateComboBox(&sheetTemplates, ui->comboBoxSheetTemplate);
+    ui->comboBoxSheetTemplate->blockSignals(false);
 
+    ui->comboBoxSheetTemplate->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,6 +355,24 @@ void VPMainWindow::InitPropertyTabTiles()
             &VPMainWindow::on_TilesOrientationChanged);
     connect(ui->radioButtonTilesLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
             &VPMainWindow::on_TilesOrientationChanged);
+
+    // -------------------- tiles template
+    QVector<PaperSizeTemplate> tilesTemplates = QVector<PaperSizeTemplate>();
+    tilesTemplates.append(PaperSizeTemplate::A0);
+    tilesTemplates.append(PaperSizeTemplate::A1);
+    tilesTemplates.append(PaperSizeTemplate::A2);
+    tilesTemplates.append(PaperSizeTemplate::A3);
+    tilesTemplates.append(PaperSizeTemplate::A4);
+    tilesTemplates.append(PaperSizeTemplate::Letter);
+    tilesTemplates.append(PaperSizeTemplate::Legal);
+    tilesTemplates.append(PaperSizeTemplate::Custom);
+
+    ui->comboBoxTilesTemplate->blockSignals(true);
+    VPSheet::PopulateComboBox(&tilesTemplates, ui->comboBoxTilesTemplate);
+    ui->comboBoxTilesTemplate->blockSignals(false);
+
+    ui->comboBoxTilesTemplate->setCurrentIndex(4); //A4
+
 
     // -------------------- margins  ------------------------
     connect(ui->doubleSpinBoxTilesMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
@@ -1004,25 +1044,45 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::SheetTemplateChanged");
-    int ret = msgBox.exec();
+    PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
+                ui->comboBoxSheetTemplate->itemData(index).toInt()
+                );
 
-    Q_UNUSED(index);
-    Q_UNUSED(ret);
+    QSizeF tmplSize = VPSheet::GetTemplateSize(tmpl);
+    if(!tmplSize.isEmpty())
+    {
+        ui->doubleSpinBoxSheetWidth->blockSignals(true);
+        ui->doubleSpinBoxSheetLength->blockSignals(true);
 
+        ui->doubleSpinBoxSheetWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px, m_layout->GetUnit()));
+        ui->doubleSpinBoxSheetLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px, m_layout->GetUnit()));
 
-    // TODO
+        on_SheetSizeChanged(false);
+
+        ui->doubleSpinBoxSheetWidth->blockSignals(false);
+        ui->doubleSpinBoxSheetLength->blockSignals(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_SheetSizeChanged()
+void VPMainWindow::on_SheetSizeChanged(bool changedViaSizeCombobox)
 {
     m_layout->GetFocusedSheet()->SetSheetSizeConverted(
                 ui->doubleSpinBoxSheetWidth->value(),
                 ui->doubleSpinBoxSheetLength->value()
                 );
+
+    if(changedViaSizeCombobox)
+    {
+        ui->comboBoxSheetTemplate->blockSignals(true);
+
+        // we don't try to get the right size, because it doesn't work well because of mm / inch conversion
+        int index = ui->comboBoxSheetTemplate->findData(
+                    QVariant(static_cast<int>(PaperSizeTemplate::Custom)));
+
+        ui->comboBoxSheetTemplate->setCurrentIndex(index);
+        ui->comboBoxSheetTemplate->blockSignals(false);
+    }
 
     m_tileFactory->refreshTileInfos();
 
@@ -1079,16 +1139,53 @@ void VPMainWindow::on_SheetMarginChanged()
     m_graphicsView->RefreshLayout();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
+{
+    PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
+                ui->comboBoxTilesTemplate->itemData(index).toInt()
+                );
+
+    QSizeF tmplSize = VPSheet::GetTemplateSize(tmpl);
+    if(!tmplSize.isEmpty())
+    {
+        ui->doubleSpinBoxTilesWidth->blockSignals(true);
+        ui->doubleSpinBoxTilesLength->blockSignals(true);
+
+        ui->doubleSpinBoxTilesWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px, m_layout->GetUnit()));
+        ui->doubleSpinBoxTilesLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px, m_layout->GetUnit()));
+
+        on_TilesSizeChanged(false);
+
+        ui->doubleSpinBoxTilesWidth->blockSignals(false);
+        ui->doubleSpinBoxTilesLength->blockSignals(false);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_TilesSizeChanged()
+void VPMainWindow::on_TilesSizeChanged(bool changedViaSizeCombobox)
 {
     m_layout->SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(), ui->doubleSpinBoxTilesLength->value());
     m_tileFactory->refreshTileInfos();
 
+    if(changedViaSizeCombobox)
+    {
+        ui->comboBoxTilesTemplate->blockSignals(true);
+
+        // we don't try to get the right size, because it doesn't work well because of mm / inch conversion
+        int index = ui->comboBoxTilesTemplate->findData(
+                    QVariant(static_cast<int>(PaperSizeTemplate::Custom)));
+
+        ui->comboBoxTilesTemplate->setCurrentIndex(index);
+        ui->comboBoxTilesTemplate->blockSignals(false);
+    }
+
     // TODO Undo / Redo
 
-    m_graphicsView->RefreshLayout();
+    if(m_graphicsView != nullptr)
+    {
+        m_graphicsView->RefreshLayout();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -287,7 +287,7 @@ private slots:
 
     /**
      * @brief on_comboBoxLayoutTemplate_currentIndexChanged When the template is
-     * changed in the layout property tab.
+     * changed in the sheet property tab.
      * The slot is automatically connected through name convention.
      * @param index the index of the selected templated
      */
@@ -296,8 +296,9 @@ private slots:
     /**
      * @brief on_SheetSizeChanged When the width or the length has been changed in
      * the sheet property tab
+     * @param changedViaSizeCombobox true if the change happened through the combobox
      */
-    void on_SheetSizeChanged();
+    void on_SheetSizeChanged(bool changedViaSizeCombobox = true);
 
     /**
      * @brief on_SheetOrientationChanged When one of the radio boxes for the sheet
@@ -332,12 +333,20 @@ private slots:
      */
     void on_doubleSpinBoxSheetPiecesGap_valueChanged(double value);
 
+    /**
+     * @brief on_comboBoxTilesTemplate_currentIndexChanged When the template is
+     * changed in the tiles property tab.
+     * The slot is automatically connected through name convention.
+     * @param index the index of the selected templated
+     */
+    void on_comboBoxTilesTemplate_currentIndexChanged(int index);
 
     /**
      * @brief on_TilesSizeChanged When the width or the length has been changed in
      * the tiles property tab
+     * @param changedViaSizeCombobox true if the change happened through the combobox
      */
-    void on_TilesSizeChanged();
+    void on_TilesSizeChanged(bool changedViaSizeCombobox = true);
 
     /**
      * @brief on_TilesOrientationChanged When one of the radio boxes for the tiles

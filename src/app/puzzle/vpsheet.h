@@ -32,11 +32,36 @@
 #include <QSizeF>
 #include <QMarginsF>
 #include <QList>
+#include <QComboBox>
 
 #include "def.h"
 
 // is this the right place for the definition?
-enum class FollowGrainline : qint8 { No = 0, Follow90 = 1, Follow180 = 2};
+enum class FollowGrainline : qint8 {
+    No = 0,
+    Follow90 = 1,
+    Follow180 = 2
+};
+
+enum class PaperSizeTemplate : qint8 {
+    A0 = 0,
+    A1,
+    A2,
+    A3,
+    A4,
+    Letter,
+    Legal,
+    Tabloid,
+    Roll24in,
+    Roll30in,
+    Roll36in,
+    Roll42in,
+    Roll44in,
+    Roll48in,
+    Roll62in,
+    Roll72in,
+    Custom
+};
 
 class VPLayout;
 class VPPieceList;
@@ -45,9 +70,46 @@ class VPSheet : public QObject
 {
     Q_OBJECT
 public:
+
+
     explicit VPSheet(VPLayout* layout);
 
     ~VPSheet();
+
+    /**
+     * @brief GetTemplateSize Returns the size in Px of the given template
+     * @param tmpl
+     * @return the size in Px
+     */
+    static QSizeF GetTemplateSize(PaperSizeTemplate tmpl);
+
+    /**
+     * @brief GetTemplateName Returns the name of the given template
+     * @param tmpl
+     * @return
+     */
+    static QString GetTemplateName(PaperSizeTemplate tmpl);
+
+    /**
+     * @brief GetTemplate GetTemplate Returns the template that corresponds to the given size
+     * @param size the Size in Px
+     * @return
+     */
+    static PaperSizeTemplate GetTemplate(QSizeF size);
+
+    /**
+     * @brief PopulateComboBox Populates the given combo with the given templates
+     * @param tmpls
+     * @param comboBox
+     */
+    static void PopulateComboBox(QVector<PaperSizeTemplate> *tmpls, QComboBox* comboBox);
+
+    /**
+     * @brief isRollTemplate Returns wether the given template is a roll or not.
+     * @param tmpl
+     * @return
+     */
+    static bool isRollTemplate(PaperSizeTemplate tmpl);
 
     /**
      * @brief GetLayout Returns the Layout of the sheet

@@ -176,7 +176,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <property name="iconSize">
         <size>
@@ -632,6 +632,9 @@
                   </item>
                   <item row="1" column="1">
                    <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetWidth">
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
@@ -646,6 +649,9 @@
                   </item>
                   <item row="2" column="1">
                    <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetLength">
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
@@ -1006,42 +1012,42 @@
                <layout class="QVBoxLayout" name="verticalLayout_18">
                 <item>
                  <layout class="QFormLayout" name="formLayoutTilesFormat">
-                  <item row="0" column="0">
+                  <item row="1" column="0">
                    <widget class="QLabel" name="labelTilesWidth">
                     <property name="text">
                      <string>Width</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="0" column="1">
+                  <item row="1" column="1">
                    <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesWidth">
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="0">
+                  <item row="2" column="0">
                    <widget class="QLabel" name="labelTilesLength">
                     <property name="text">
                      <string>Length</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
+                  <item row="2" column="1">
                    <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesLength">
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0">
+                  <item row="3" column="0">
                    <widget class="QLabel" name="labelTilesOrientation">
                     <property name="text">
                      <string>Orientation</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
+                  <item row="3" column="1">
                    <layout class="QHBoxLayout" name="horizontalLayoutTilesOrientation">
                     <item>
                      <widget class="QRadioButton" name="radioButtonTilesPortrait">
@@ -1081,6 +1087,16 @@
                      </widget>
                     </item>
                    </layout>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelTilesTemplate">
+                    <property name="text">
+                     <string>Template</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="comboBoxTilesTemplate"/>
                   </item>
                  </layout>
                 </item>

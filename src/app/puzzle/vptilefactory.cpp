@@ -25,40 +25,43 @@ VPTileFactory::~VPTileFactory()
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::refreshTileInfos()
 {
-    PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
-    QSizeF tilesSize =  m_layout->GetTilesSize();
-    QMarginsF tilesMargins = m_layout->GetTilesMargins();
-
-    // sets the drawing height
-    m_drawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
-                    tilesSize.height() : tilesSize.width();
-    m_drawingAreaHeight -=
-            tilesMargins.top() + tilesMargins.bottom() + m_infoStripeWidth;
-
-    // sets the drawing width
-    m_drawingAreaWidth = (tilesOrientation == PageOrientation::Portrait)?
-                tilesSize.width() : tilesSize.height();
-    m_drawingAreaWidth -=
-            tilesMargins.left() + tilesMargins.right() + m_infoStripeWidth;
-
-
-    QSizeF sheetSize = m_layout->GetFocusedSheet()->GetSheetSize();
-    qreal totalDrawingWidth = 0;
-    qreal totaldrawingHeight = 0;
-
-    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
+    if(m_layout != nullptr)
     {
-         totalDrawingWidth = sheetSize.width();
-         totaldrawingHeight = sheetSize.height();
-    }
-    else
-    {
-        totalDrawingWidth = sheetSize.height();
-        totaldrawingHeight = sheetSize.width();
-    }
+        PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
+        QSizeF tilesSize =  m_layout->GetTilesSize();
+        QMarginsF tilesMargins = m_layout->GetTilesMargins();
 
-    m_nbCol = qCeil(totalDrawingWidth/m_drawingAreaWidth);
-    m_nbRow = qCeil(totaldrawingHeight/m_drawingAreaHeight);
+        // sets the drawing height
+        m_drawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
+                        tilesSize.height() : tilesSize.width();
+        m_drawingAreaHeight -=
+                tilesMargins.top() + tilesMargins.bottom() + m_infoStripeWidth;
+
+        // sets the drawing width
+        m_drawingAreaWidth = (tilesOrientation == PageOrientation::Portrait)?
+                    tilesSize.width() : tilesSize.height();
+        m_drawingAreaWidth -=
+                tilesMargins.left() + tilesMargins.right() + m_infoStripeWidth;
+
+
+        QSizeF sheetSize = m_layout->GetFocusedSheet()->GetSheetSize();
+        qreal totalDrawingWidth = 0;
+        qreal totaldrawingHeight = 0;
+
+        if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
+        {
+             totalDrawingWidth = sheetSize.width();
+             totaldrawingHeight = sheetSize.height();
+        }
+        else
+        {
+            totalDrawingWidth = sheetSize.height();
+            totaldrawingHeight = sheetSize.width();
+        }
+
+        m_nbCol = qCeil(totalDrawingWidth/m_drawingAreaWidth);
+        m_nbRow = qCeil(totaldrawingHeight/m_drawingAreaHeight);
+    }
 }
 
 
