@@ -97,9 +97,12 @@ private:
     QPainterPath m_cuttingLine;
     QPainterPath m_seamLine;
     QPainterPath m_grainline;
+    QPainterPath m_passmarks;
 
     QVector<QPainterPath> m_internalPaths;
     QVector<Qt::PenStyle> m_internalPathsPenStyle;
+
+    QVector<QPainterPath> m_placeLabels;
 
     QPointF m_rotationStartPoint;
 };

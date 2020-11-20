@@ -45,6 +45,7 @@
 #include "vpsheet.h"
 
 #include "vlayoutpiecepath.h"
+#include "vplacelabelitem.h"
 
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
@@ -56,8 +57,10 @@ VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
     m_cuttingLine(QPainterPath()),
     m_seamLine(QPainterPath()),
     m_grainline(QPainterPath()),
+    m_passmarks(QPainterPath()),
     m_internalPaths(QVector<QPainterPath>()),
     m_internalPathsPenStyle(QVector<Qt::PenStyle>()),
+    m_placeLabels(QVector<QPainterPath>()),
     m_rotationStartPoint(QPointF())
 {
     Init();
@@ -117,7 +120,28 @@ void VPGraphicsPiece::Init()
         m_internalPathsPenStyle.append(piecePath.PenStyle());
     }
 
-    // TODO : initialises the other elements labels, passmarks etc.
+    // initialises the passmarks
+    QVector<VLayoutPassmark> passmarks = m_piece->GetPassmarks();
+    for(auto &passmark : passmarks)
+    {
+        for (auto &line : passmark.lines)
+        {
+            m_passmarks.moveTo(line.p1());
+            m_passmarks.lineTo(line.p2());
+        }
+    }
+
+    // initialises the place labels (buttons etc)
+    QVector<VLayoutPlaceLabel> placeLabels = m_piece->GetPlaceLabels();
+    for(auto &placeLabel : placeLabels)
+    {
+        QPainterPath path = VPlaceLabelItem::LabelShapePath(placeLabel.shape);
+        m_placeLabels.append(path);
+    }
+
+    // TODO : initialises the text labels
+
+
 
     // Initialises the connectors
     connect(m_piece, &VPPiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);
@@ -213,8 +237,26 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             painter->setPen(m_internalPathsPenStyle.at(i));
             painter->drawPath(m_internalPaths.at(i));
         }
-        pen.setStyle(penStyleTmp);
+        painter->setPen(penStyleTmp);
     }
+
+    // paint the passmarks
+    if(!m_passmarks.isEmpty())
+    {
+        painter->drawPath(m_passmarks);
+    }
+
+    // paint the place labels (buttons etc)
+    if(!m_placeLabels.isEmpty())
+    {
+        for(auto &placeLabel : m_placeLabels)
+        {
+            painter->drawPath(placeLabel);
+        }
+    }
+
+
+    // TODO Detail & Piece Label
 
 
     // when using m_piece->GetItem(), the results were quite bad
