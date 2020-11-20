@@ -129,6 +129,31 @@ inline QString QmuParserErrorMsg::operator[] ( int a_iIdx ) const
     return m_vErrMsg.value(a_iIdx).translate(QString());
 }
 
+class QMUPARSERSHARED_EXPORT QmuParserWarning : public QException
+{
+public:
+    explicit QmuParserWarning ( const QString &sMsg );
+    QmuParserWarning ( const QmuParserWarning &a_Obj );
+    QmuParserWarning& operator= ( const QmuParserWarning &a_Obj );
+    virtual ~QmuParserWarning() QMUP_NOEXCEPT_EXPR (true) override {}
+
+    const QString& GetMsg() const;
+
+    Q_NORETURN virtual void   raise() const override;
+    Q_REQUIRED_RESULT virtual QmuParserWarning *clone() const override;
+private:
+    QString m_sMsg;      ///< The message string
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the message string for this error.
+ */
+inline const QString& QmuParserWarning::GetMsg() const
+{
+    return m_sMsg;
+}
+
 //---------------------------------------------------------------------------
 /** @brief Error class of the parser.
     @author Ingo Berg

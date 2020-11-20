@@ -29,6 +29,7 @@
 #include <QtGlobal>
 #include <sstream>
 #include <string>
+#include <QtDebug>
 
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
@@ -414,10 +415,7 @@ QmuParser::QmuParser():QmuParserBase()
 {
     AddValIdent(IsVal);
 
-    InitCharSets();
-    InitFun();
-    InitConst();
-    InitOprt();
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

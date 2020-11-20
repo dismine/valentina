@@ -39,7 +39,7 @@ enum CustomEventType {
     UndoEventType = 1,
     LiteParseEventType = 2,
     FitBestCurrentEventType = 3,
-    PatternMessageEventType = 4,
+    WarningMessageEventType = 4,
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,19 +84,19 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-const QEvent::Type PATTERN_MESSAGE_EVENT = static_cast<QEvent::Type>(QEvent::User +
-                                                                      CustomEventType::PatternMessageEventType);
+const QEvent::Type WARNING_MESSAGE_EVENT = static_cast<QEvent::Type>(QEvent::User +
+                                                                      CustomEventType::WarningMessageEventType);
 
-class PatternMessageEvent : public QEvent
+class WarningMessageEvent : public QEvent
 {
 public:
-    PatternMessageEvent(const QString &message, QtMsgType severity)
-        : QEvent(PATTERN_MESSAGE_EVENT),
+    WarningMessageEvent(const QString &message, QtMsgType severity)
+        : QEvent(WARNING_MESSAGE_EVENT),
           m_message(message),
           m_severity(severity)
     {}
 
-    virtual ~PatternMessageEvent() =default;
+    virtual ~WarningMessageEvent() =default;
 
     QString Message() const;
 
@@ -107,12 +107,12 @@ private:
     QtMsgType m_severity;
 };
 
-inline QString PatternMessageEvent::Message() const
+inline QString WarningMessageEvent::Message() const
 {
     return m_message;
 }
 
-inline QtMsgType PatternMessageEvent::Severity() const
+inline QtMsgType WarningMessageEvent::Severity() const
 {
     return m_severity;
 }

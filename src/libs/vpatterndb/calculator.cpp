@@ -33,10 +33,12 @@
 #include <QStringDataPtr>
 #include <QStringList>
 #include <QSharedPointer>
+#include <QtDebug>
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "variables/vinternalvariable.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -63,6 +65,8 @@ Calculator::Calculator()
     // set value to 0.
     SetVarFactory(VarFactory, this);
     SetSepForEval();
+
+    DefineFun(QStringLiteral("warning"), Warning);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,4 +119,13 @@ qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
     }
 
     throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal Calculator::Warning(const QString &warningMsg, qreal value)
+{
+    qApp->IsPedantic() ? throw qmu::QmuParserWarning(warningMsg)
+                       : qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;
+
+    return value;
 }

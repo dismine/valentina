@@ -301,4 +301,45 @@ QmuParserError *QmuParserError::clone() const
     return new QmuParserError(*this);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QmuParserWarning::QmuParserWarning(const QString &sMsg)
+    : QException(), m_sMsg ( sMsg )
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+QmuParserWarning::QmuParserWarning(const QmuParserWarning &a_Obj)
+    : QException(), m_sMsg(a_Obj.m_sMsg)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+QmuParserWarning &QmuParserWarning::operator=(const QmuParserWarning &a_Obj)
+{
+    if ( this == &a_Obj )
+    {
+        return *this;
+    }
+
+    m_sMsg = a_Obj.m_sMsg;
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief raise method raise for exception
+ */
+Q_NORETURN void QmuParserWarning::raise() const
+{
+    throw *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief clone clone exception
+ * @return new exception
+ */
+QmuParserWarning *QmuParserWarning::clone() const
+{
+    return new QmuParserWarning(*this);
+}
+
 } // namespace qmu

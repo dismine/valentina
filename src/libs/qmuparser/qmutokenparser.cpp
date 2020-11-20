@@ -63,6 +63,8 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
     SetVarFactory(AddVariable, this);
     SetSepForTr(osSeparator, fromUser);
 
+    DefineFun(QStringLiteral("warning"), Warning);
+
     // Fix for issue #776. Valentina cannot recognize translated functions.
     QMap<QString, QString>::const_iterator i = translatedFunctions.constBegin();
     while (i != translatedFunctions.constEnd())
@@ -98,6 +100,14 @@ bool QmuTokenParser::IsSingle(const QString &formula)
     bool ok = false;
     c.toDouble(formula, &ok);
     return ok;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuTokenParser::Warning(const QString &warningMsg, qreal value)
+{
+    Q_UNUSED(warningMsg);
+
+    return value;
 }
 
 }// namespace qmu

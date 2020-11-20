@@ -30,8 +30,6 @@
 
 #include <QWidget>
 
-const QString VAbstractValApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractValApplication::VAbstractValApplication(int &argc, char **argv)
     : VAbstractApplication(argc, argv)
@@ -50,31 +48,8 @@ double VAbstractValApplication::fromPixel(double pix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractValApplication::PostPatternMessage(const QString &message, QtMsgType severity) const
+void VAbstractValApplication::PostWarningMessage(const QString &message, QtMsgType severity) const
 {
     QApplication::postEvent(mainWindow,
-                            new PatternMessageEvent(VAbstractValApplication::ClearMessage(message), severity));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClearMessage helps to clear a message string from standard Qt function.
- * @param msg the message that contains '"' at the start and at the end
- * @return cleared string
- */
-QString VAbstractValApplication::ClearMessage(QString msg)
-{
-    if (msg.startsWith('"') && msg.endsWith('"'))
-    {
-        msg.remove(0, 1);
-        msg.chop(1);
-    }
-
-    return msg;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractValApplication::IsPatternMessage(const QString &message) const
-{
-    return VAbstractValApplication::ClearMessage(message).startsWith(patternMessageSignature);
+                            new WarningMessageEvent(VAbstractValApplication::ClearMessage(message), severity));
 }

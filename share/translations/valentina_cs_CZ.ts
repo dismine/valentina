@@ -7855,6 +7855,10 @@ Přesto použít nastavení?</translation>
         <source>Invalid dimension C base value.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -10539,6 +10543,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12939,6 +12947,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Neplatný zářez.</translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17021,6 +17033,16 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <comment>Calculation warning</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a warning in calculations</source>
+        <comment>function warning</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

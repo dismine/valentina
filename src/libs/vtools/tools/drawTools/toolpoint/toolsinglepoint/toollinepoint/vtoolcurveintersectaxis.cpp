@@ -145,7 +145,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
                                     " through point '%3' with angle %4°")
                 .arg(initData.name, curve->ObjectName(), basePoint->name()).arg(angle);
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     const qreal segLength = curve->GetLengthByPoint(fPoint);

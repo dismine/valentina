@@ -1383,7 +1383,6 @@ void QmuParserBase::CreateRPN() const
                 stVal.push(opt);
                 const QString &str = opt.GetAsString();
                 m_vStringBuf.push_back(str); // Store string in internal buffer
-                m_Tokens.insert(m_pTokenReader->GetPos()-str.length(), str);
                 break;
             }
             case cmVAR:

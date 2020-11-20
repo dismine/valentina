@@ -4200,7 +4200,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Listo</translation>
     </message>
     <message>
         <source>Name</source>
@@ -6797,7 +6797,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Listo</translation>
     </message>
 </context>
 <context>
@@ -7850,6 +7850,10 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8945,7 +8949,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Variables Table</source>
-        <translation>Mesa de variables</translation>
+        <translation>Tabla de variables</translation>
     </message>
     <message>
         <source>Contains information about increments and internal variables</source>
@@ -10535,6 +10539,10 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12944,6 +12952,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Pique invalido.</translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17027,6 +17039,16 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
         <translation>Devuelve el resto de punto flotante de numerador/denominador (redondeado hacia cero)</translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <comment>Calculation warning</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a warning in calculations</source>
+        <comment>function warning</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
