@@ -204,6 +204,7 @@ VToolSeamAllowance *VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &in
     dupDetail.SetInternalPaths(DuplicateInternalPaths(initData.detail.GetInternalPaths(), initData));
     dupDetail.SetPins(DuplicatePins(initData.detail.GetPins(), initData));
     dupDetail.SetPlaceLabels(DuplicatePlaceLabels(initData.detail.GetPlaceLabels(), initData));
+    dupDetail.SetUUID(QUuid::createUuid());
 
     initData.detail = dupDetail;
     return VToolSeamAllowance::Create(initData);
