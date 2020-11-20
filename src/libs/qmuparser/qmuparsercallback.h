@@ -28,6 +28,7 @@
 #include <QTypeInfo>
 #include <QSharedDataPointer>
 
+#include "qmuparser_global.h"
 #include "qmuparserdef.h"
 #include "qmuparsercallback_p.h"
 
@@ -49,7 +50,7 @@ namespace qmu
  *
  * @author (C) 2004-2011 Ingo Berg
  */
-class QmuParserCallback
+class QMUPARSERSHARED_EXPORT QmuParserCallback
 {
 public:
     QmuParserCallback(fun_type0  a_pFun, bool a_bAllowOpti);
