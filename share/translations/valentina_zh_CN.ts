@@ -6284,6 +6284,10 @@ Apply settings anyway?</source>
         <source>Invalid dimension C base value.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -8427,6 +8431,10 @@ This option will take an affect after restart.</source>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -10463,6 +10471,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13884,6 +13896,16 @@ Do you want to save your changes?</source>
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <comment>Calculation warning</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a warning in calculations</source>
+        <comment>function warning</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

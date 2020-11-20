@@ -7837,6 +7837,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Invalid dimension C base value.</source>
         <translation>Ongeldige waarde voor dimensie C basis.</translation>
     </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -10456,6 +10460,10 @@ Deze optie wordt actief na een herstart..</translation>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation>Fout in pad &apos;%1&apos;. Berekening van segment voor boog &apos;%2&apos; is mislukt. %3</translation>
     </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12812,6 +12820,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Ongeldige inkeping.</translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16746,6 +16758,16 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
         <translation>Brengt het drijvende-punt restant van numerator/denominator terug ( afgerond naar nul)</translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <comment>Calculation warning</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a warning in calculations</source>
+        <comment>function warning</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

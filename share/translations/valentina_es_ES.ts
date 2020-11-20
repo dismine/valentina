@@ -7836,6 +7836,10 @@ Aplicar características de todos modos?</translation>
         <source>Invalid dimension C base value.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -10457,6 +10461,10 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12813,6 +12821,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Pique invalido.</translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16747,6 +16759,16 @@ Quieres guardar los cambios?</translation>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
         <translation>Devuelve el resto de punto flotante de numerador/denominador (redondeado hacia cero)</translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <comment>Calculation warning</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a warning in calculations</source>
+        <comment>function warning</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
