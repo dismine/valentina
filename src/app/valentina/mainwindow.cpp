@@ -174,7 +174,7 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
         {
             const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(pieceName);
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                               qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
 
         ++i;
@@ -1629,7 +1629,7 @@ void MainWindow::customEvent(QEvent *event)
     {
         ZoomFitBestCurrent();
     }
-    else if (event->type() == PATTERN_MESSAGE_EVENT)
+    else if (event->type() == WARNING_MESSAGE_EVENT)
     {
         PrintPatternMessage(event);
     }
@@ -6523,7 +6523,7 @@ void MainWindow::ToolSelectDetail()
 void MainWindow::PrintPatternMessage(QEvent *event)
 {
     SCASSERT(event != nullptr)
-    auto *patternMessage = static_cast<PatternMessageEvent *>(event);
+    auto *patternMessage = static_cast<WarningMessageEvent *>(event);
 
     QString severity;
 

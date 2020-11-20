@@ -1321,7 +1321,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
             const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.")
                     .arg(detail.GetName());
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
         path.addPath(detail.SeamAllowancePath(futureSeamAllowance.result()));
         path.setFillRule(Qt::OddEvenFill);

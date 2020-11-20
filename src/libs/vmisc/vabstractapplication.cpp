@@ -50,6 +50,8 @@
 #   include "appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
+const QString VAbstractApplication::warningMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),
@@ -287,4 +289,27 @@ void VAbstractApplication::ClearTranslation()
         removeTranslator(pmsTranslator);
         delete pmsTranslator;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClearMessage helps to clear a message string from standard Qt function.
+ * @param msg the message that contains '"' at the start and at the end
+ * @return cleared string
+ */
+QString VAbstractApplication::ClearMessage(QString msg)
+{
+    if (msg.startsWith('"') && msg.endsWith('"'))
+    {
+        msg.remove(0, 1);
+        msg.chop(1);
+    }
+
+    return msg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractApplication::IsWarningMessage(const QString &message) const
+{
+    return VAbstractApplication::ClearMessage(message).startsWith(warningMessageSignature);
 }

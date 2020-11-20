@@ -437,7 +437,7 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm)
                                                          tr("Value for final measurtement '%1' is infinite or NaN. "
                                                             "Please, check your calculations.").arg(fm.name));
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                           qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);

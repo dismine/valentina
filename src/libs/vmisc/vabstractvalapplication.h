@@ -98,12 +98,7 @@ public:
     bool getOpeningPattern() const;
     void setOpeningPattern();
 
-    void PostPatternMessage(const QString &message, QtMsgType severity) const;
-
-    static QString ClearMessage(QString msg);
-
-    static const QString patternMessageSignature;
-    bool IsPatternMessage(const QString &message) const;
+    void PostWarningMessage(const QString &message, QtMsgType severity) const;
 
     qreal GetDimensionHeight() const;
     void  SetDimensionHeight(qreal dimensionHeight);

@@ -42,6 +42,9 @@ public:
 
     static bool IsSingle(const QString &formula);
 
+protected:
+    static qreal Warning(const QString &warningMsg, qreal value);
+
 private:
     Q_DISABLE_COPY(QmuTokenParser)
     QmuTokenParser();

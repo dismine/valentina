@@ -310,7 +310,7 @@ QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const Po
         {
             const QString errorMsg = tr("Cannot open the watermark image.") + QChar(' ') + error;
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             return data;
         }
 
@@ -320,7 +320,7 @@ QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const Po
     {
         const QString errorMsg = tr("Not supported file suffix '%1'").arg(f.suffix());
         qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return data;
     }
 

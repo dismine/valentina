@@ -150,23 +150,30 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
+    QString logMsg = msg;
+    const bool isWarningMessage = qApp->IsWarningMessage(msg);
+    if (isWarningMessage)
+    {
+        logMsg = logMsg.remove(VAbstractApplication::warningMessageSignature);
+    }
+
     switch (type)
     {
         case QtDebugMsg:
-            vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
+            vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << logMsg << "\n";
             return;
         case QtWarningMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
+            vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << logMsg << "\n";
             break;
         case QtCriticalMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
+            vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << logMsg << "\n";
             break;
         case QtFatalMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
+            vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << logMsg << "\n";
             break;
         #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         case QtInfoMsg:
-            vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
+            vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << logMsg << "\n";
             break;
         #endif
         default:
@@ -216,7 +223,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             {
                 if (topWinAllowsPop)
                 {
-                    messageBox.setText(msg);
+                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
@@ -334,6 +341,11 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return true;
+    }
+    catch (const qmu::QmuParserWarning &e)
+    {
+        qCCritical(mApp, "%s", qUtf8Printable(tr("Formula warning: %1. Program will be terminated.").arg(e.GetMsg())));
+        exit(V_EX_DATAERR);
     }
     // These last two cases special. I found that we can't show here modal dialog with error message.
     // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
