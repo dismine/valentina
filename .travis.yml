@@ -28,7 +28,27 @@ jobs:
     compiler: clang
     env:
     - DEPLOY=true
+    - LEGACY=false
     osx_image: xcode11
+    cache:
+      directories:
+      - $HOME/Library/Caches/Homebrew
+      - /usr/local/Homebrew
+  - os: osx
+    compiler: clang
+    env:
+    - DEPLOY=true
+    - LEGACY=true
+    osx_image: xcode8
+    cache:
+      directories:
+      - $HOME/Library/Caches/Homebrew
+      - /usr/local/Homebrew
+before_cache:
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
+# Credit https://discourse.brew.sh/t/best-practice-for-homebrew-on-travis-brew-update-is-5min-to-build-time/5215/9
+# Cache only .git files under "/usr/local/Homebrew" so "brew update" does not take 5min every build
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then find /usr/local/Homebrew \! -regex ".+\.git.+" -delete; fi
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -50,9 +70,16 @@ before_install:
     wget https://launchpad.net/ubuntu/+archive/primary/+files/ccache_3.3.4-1_amd64.deb;
     sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
-    brew update > /dev/null;
-    brew install qt5;
-    chmod -R 755 /usr/local/opt/qt5/*
+    if [[ "$LEGACY" = false ]]; then
+      brew update > /dev/null;
+      brew install qt5;
+      chmod -R 755 /usr/local/opt/qt5/*
+    else
+      unset SSL_CERT_FILE;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/f553c39bbc5f3a2b231a767924e846bdd2a56d8d/qt.rb;
+      brew link qt --force;
+      chmod -R 755 /usr/local/opt/qt/*
+    fi
   fi
 before_script:
 - |
@@ -102,7 +129,11 @@ before_deploy:
 - |
   if [[ "$DEPLOY" == "true" ]]; then
     ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
-    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
+    if [[ "$LEGACY" = false ]]; then
+      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
+    else
+      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz Valentina.app/;
+    fi
   fi
 deploy:
   provider: bintray

@@ -66,6 +66,7 @@ public:
     qreal EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QString &formula);
 protected:
     static qreal* VarFactory(const QString &a_szName, void *a_pUserData);
+    static qreal Warning(const QString &warningMsg, qreal value);
 private:
     Q_DISABLE_COPY(Calculator)
     QVector<QSharedPointer<qreal>> m_varsValues;

@@ -152,7 +152,7 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
                                     "intersection")
                 .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

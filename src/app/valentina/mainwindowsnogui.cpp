@@ -935,7 +935,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         {
             const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
             qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     }
 

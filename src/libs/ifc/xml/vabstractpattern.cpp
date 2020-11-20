@@ -193,6 +193,12 @@ QList<QString> GetTokens(const VFormulaField &formula)
                       .arg(formula.expression, e.GetMsg());
         return QList<QString>();
     }
+    catch (const qmu::QmuParserWarning &e)
+    {
+        qWarning() << QObject::tr("Cannot get tokens from formula '%1'. Formula error: %2.")
+                          .arg(formula.expression, e.GetMsg());
+        return QList<QString>();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

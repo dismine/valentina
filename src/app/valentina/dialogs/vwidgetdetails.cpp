@@ -297,7 +297,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         catch (const VExceptionBadId &)
         {
             const QString errorMsg = tr("Cannot find piece by id '%1'").arg(id);
-            qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     }
 

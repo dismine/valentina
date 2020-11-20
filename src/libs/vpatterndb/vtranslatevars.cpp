@@ -533,6 +533,9 @@ void VTranslateVars::InitFunctions()
     functionsDescriptions.insert(fmod_F, translate("VTranslateVars", "Returns the floating-point remainder of "
                                                                     "numer/denom (rounded towards zero)",
                                                   "function fmod"));
+    functions.insert(warning_F, translate("VTranslateVars", "warning", "Calculation warning"));
+    functionsDescriptions.insert(warning_F, translate("VTranslateVars", "Show a warning in calculations",
+                                                      "function warning"));
 }
 
 #undef translate

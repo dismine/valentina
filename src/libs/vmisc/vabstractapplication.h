@@ -77,6 +77,11 @@ public:
     virtual bool IsAppInGUIMode()const =0;
     virtual bool IsPedantic() const;
 
+    static QString ClearMessage(QString msg);
+
+    static const QString warningMessageSignature;
+    bool IsWarningMessage(const QString &message) const;
+
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();
 #endif

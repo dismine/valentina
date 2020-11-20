@@ -1,3 +1,11 @@
+# Version 0.7.40 (unreleased)
+- New function Warning.
+
+# Version 0.7.39 Nov 17, 2020
+- Fix crash for Line tool notes.
+- Restored support for Mac OS 10.11+.
+- Updated translations.
+
 # Version 0.7.38 Nov 12, 2020
 - Bug fixes.
 

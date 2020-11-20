@@ -4201,7 +4201,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Готово</translation>
     </message>
     <message>
         <source>Name</source>
@@ -6799,7 +6799,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Готово</translation>
     </message>
 </context>
 <context>
@@ -7853,6 +7853,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10500,7 +10504,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Имя детали &quot;%1&quot; не уникальное.</translation>
     </message>
     <message>
         <source>Could not find the segment start.</source>
@@ -10539,8 +10543,8 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation>Имя детали &quot;%1&quot; не уникальное.</translation>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12949,6 +12953,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid notch.</source>
         <translation>Неправильная надсечка.</translation>
+    </message>
+    <message>
+        <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17036,6 +17044,16 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <comment>Calculation warning</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a warning in calculations</source>
+        <comment>function warning</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -219,7 +219,7 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
                                     "intersection with line (%4;%5)")
                 .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

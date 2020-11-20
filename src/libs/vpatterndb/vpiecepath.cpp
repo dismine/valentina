@@ -385,7 +385,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                                                      "point with cutting countour")
                         .arg(GetName());
                 qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
 
@@ -402,7 +402,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                                                      "point with cutting countour")
                         .arg(GetName());
                 qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                     qWarning() << VAbstractValApplication::patternMessageSignature + errorMsg;
+                                     qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
 

@@ -169,10 +169,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     QString logMsg = msg;
-    const bool isPatternMessage = qApp->IsPatternMessage(msg);
+    const bool isPatternMessage = qApp->IsWarningMessage(msg);
     if (isPatternMessage)
     {
-        logMsg = logMsg.remove(VAbstractValApplication::patternMessageSignature);
+        logMsg = logMsg.remove(VAbstractValApplication::warningMessageSignature);
     }
 
     {
@@ -188,7 +188,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtWarningMsg:
                 if (isPatternMessage)
                 {
-                    qApp->PostPatternMessage(logMsg, type);
+                    qApp->PostWarningMessage(logMsg, type);
                 }
                 debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
@@ -197,7 +197,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtCriticalMsg:
                 if (isPatternMessage)
                 {
-                    qApp->PostPatternMessage(logMsg, type);
+                    qApp->PostWarningMessage(logMsg, type);
                 }
                 debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
@@ -212,7 +212,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtInfoMsg:
                 if (isPatternMessage)
                 {
-                    qApp->PostPatternMessage(logMsg, type);
+                    qApp->PostWarningMessage(logMsg, type);
                 }
                 debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
@@ -433,6 +433,11 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return true;
+    }
+    catch (const qmu::QmuParserWarning &e)
+    {
+        qCCritical(vApp, "%s", qUtf8Printable(tr("Formula warning: %1. Program will be terminated.").arg(e.GetMsg())));
+        exit(V_EX_DATAERR);
     }
     // These last two cases are special. I found that we can't show here a modal dialog with an error message.
     // Somehow program doesn't wait until an error dialog will be closed. But if ignore the exception the program will
