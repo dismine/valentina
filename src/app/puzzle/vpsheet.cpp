@@ -204,25 +204,28 @@ QString VPSheet::GetTemplateName(PaperSizeTemplate tmpl)
 //---------------------------------------------------------------------------------------------------------------------
 PaperSizeTemplate VPSheet::GetTemplate(QSizeF size)
 {
-    const int max = static_cast<int>(PaperSizeTemplate::Custom);
+    // TODO, float comparision not safe and problems with
+    // inch / cm
 
-    for (int i=0; i < max; i++)
-    {
-        PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(i);
-        const QSizeF tmplSize = GetTemplateSize(tmpl);
+//    const int max = static_cast<int>(PaperSizeTemplate::Custom);
 
-        if(size.width() == tmplSize.width())
-        {
-            if(isRollTemplate(tmpl))
-            {
-                return tmpl;
-            }
-            else if(size.height() == tmplSize.height())
-            {
-                return tmpl;
-            }
-        }
-    }
+//    for (int i=0; i < max; i++)
+//    {
+//        PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(i);
+//        const QSizeF tmplSize = GetTemplateSize(tmpl);
+
+//        if(size.width() == tmplSize.width())
+//        {
+//            if(isRollTemplate(tmpl))
+//            {
+//                return tmpl;
+//            }
+//            else if(size.height() == tmplSize.height())
+//            {
+//                return tmpl;
+//            }
+//        }
+//    }
 
     return PaperSizeTemplate::Custom;
 }
@@ -248,9 +251,14 @@ bool VPSheet::isRollTemplate(PaperSizeTemplate tmpl)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::PopulateComboBox(QVector<PaperSizeTemplate> *tmpls, QComboBox* comboBox)
 {
+    const QIcon icoPaper("://puzzleicon/16x16/template.png");
+    const QIcon icoRoll("://puzzleicon/16x16/roll.png");
+
+    QIcon icon;
     for (auto tmpl : *tmpls)
     {
-       comboBox->addItem(GetTemplateName(tmpl), QVariant(static_cast<int>(tmpl)));
+        icon = (isRollTemplate(tmpl))? icoRoll : icoPaper;
+        comboBox->addItem(icon, GetTemplateName(tmpl), QVariant(static_cast<int>(tmpl)));
     }
 }
 

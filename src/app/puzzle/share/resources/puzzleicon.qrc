@@ -14,5 +14,7 @@
         <file>puzzleicon/svg/icon_scissors.svg</file>
         <file>puzzleicon/svg/icon_scissors_vertical.svg</file>
         <file>puzzleicon/svg/icon_scissors_horizontal.svg</file>
+        <file>puzzleicon/16x16/roll.png</file>
+        <file>puzzleicon/16x16/template.png</file>
     </qresource>
 </RCC>
