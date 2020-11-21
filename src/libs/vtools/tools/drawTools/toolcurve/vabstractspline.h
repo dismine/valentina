@@ -97,7 +97,7 @@ public:
     quint32 GetDuplicate() const;
 
     QString GetAliasSuffix() const;
-    void    SetAliasSuffix(const QString &alias);
+    void    SetAliasSuffix(QString alias);
 
     virtual void GroupVisibility(quint32 object, bool visible) override;
 public slots:

@@ -69,10 +69,10 @@ public:
     void     SetFormulaLength(const VFormula &value);
 
     QString GetAliasSuffix1() const;
-    void    SetAliasSuffix1(const QString &alias);
+    void    SetAliasSuffix1(QString alias);
 
     QString GetAliasSuffix2() const;
-    void    SetAliasSuffix2(const QString &alias);
+    void    SetAliasSuffix2(QString alias);
 
     QString CurveName() const;
 

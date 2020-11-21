@@ -42,6 +42,7 @@
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
@@ -108,14 +109,17 @@ QString VToolCut::GetAliasSuffix1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SetAliasSuffix1(const QString &alias)
+void VToolCut::SetAliasSuffix1(QString alias)
 {
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
+    alias = alias.simplified().replace(QChar(QChar::Space), QChar('_'));
     curve->SetAliasSuffix(alias);
 
-    if (alias.isEmpty() || VAbstractTool::data.IsUnique(curve->GetAlias()))
+    QRegularExpression rx(NameRegExp());
+
+    if (alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
     {
         m_aliasSuffix1 = alias;
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
@@ -134,14 +138,17 @@ QString VToolCut::GetAliasSuffix2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SetAliasSuffix2(const QString &alias)
+void VToolCut::SetAliasSuffix2(QString alias)
 {
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
+    alias = alias.simplified().replace(QChar(QChar::Space), QChar('_'));
     curve->SetAliasSuffix(alias);
 
-    if (alias.isEmpty() || VAbstractTool::data.IsUnique(curve->GetAlias()))
+    QRegularExpression rx(NameRegExp());
+
+    if (alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
     {
         m_aliasSuffix2 = alias;
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
