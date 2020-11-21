@@ -1042,6 +1042,17 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_lineEditSheetName_textChanged(const QString &text)
+{
+    m_layout->GetFocusedSheet()->SetName(text);
+
+    if(m_carrousel != nullptr)
+    {
+        m_carrousel->RefreshFocusedSheetName();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
 {
     PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(

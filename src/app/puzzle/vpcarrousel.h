@@ -66,6 +66,11 @@ public:
     void Refresh();
 
     /**
+     * @brief RefreshFocusedSheetName refreshes the name of the focused sheet
+     */
+    void RefreshFocusedSheetName();
+
+    /**
      * @brief Clear Clears the carrousel (removes everything)
      */
     void Clear();

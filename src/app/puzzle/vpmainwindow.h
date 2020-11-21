@@ -286,6 +286,13 @@ private slots:
     void on_comboBoxLayoutUnit_currentIndexChanged(int index);
 
     /**
+     * @brief on_lineEditSheetName_textChanged When the name of the sheet is changed
+     * in the sheet layout tab
+     * @param text
+     */
+    void on_lineEditSheetName_textChanged(const QString &text);
+
+    /**
      * @brief on_comboBoxLayoutTemplate_currentIndexChanged When the template is
      * changed in the sheet property tab.
      * The slot is automatically connected through name convention.

@@ -258,6 +258,12 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
     // TODO Detail & Piece Label
 
+//    QPointF position = m_piece->GetPatternTextPosition();
+//    QStringList texts = m_piece->GetPatternText();
+
+//    painter->drawText();
+
+
 
     // when using m_piece->GetItem(), the results were quite bad
 
