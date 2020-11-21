@@ -141,69 +141,93 @@ QSizeF VPSheet::GetTemplateSize(PaperSizeTemplate tmpl)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPSheet::GetTemplateName(PaperSizeTemplate tmpl)
 {
+    QString tmplName;
     switch (tmpl)
     {
         case PaperSizeTemplate::A0:
-            return QString("A0");
+            tmplName = QString("A0");
+        break;
 
         case PaperSizeTemplate::A1:
-            return QString("A1");
+            tmplName = QString("A1");
+        break;
 
         case PaperSizeTemplate::A2:
-            return QString("A2");
+            tmplName = QString("A2");
+        break;
 
         case PaperSizeTemplate::A3:
-            return QString("A3");
+            tmplName = QString("A3");
+        break;
 
         case PaperSizeTemplate::A4:
-            return QString("A4");
+            tmplName = QString("A4");
+        break;
 
         case PaperSizeTemplate::Letter:
-            return tr("Letter");
+            tmplName = tr("Letter");
+        break;
 
         case PaperSizeTemplate::Legal:
-            return tr("Legal");
+            tmplName = tr("Legal");
+        break;
 
         case PaperSizeTemplate::Tabloid:
-            return tr("Tabloid");
+            tmplName = tr("Tabloid");
+        break;
 
         case PaperSizeTemplate::Roll24in:
-            return tr("Roll 24in");
+            tmplName = tr("Roll 24in");
+        break;
 
         case PaperSizeTemplate::Roll30in:
-            return tr("Roll 30in");
+            tmplName = tr("Roll 30in");
+        break;
 
         case PaperSizeTemplate::Roll36in:
-            return tr("Roll 36in");
+            tmplName = tr("Roll 36in");
+        break;
 
         case PaperSizeTemplate::Roll42in:
-            return tr("Roll 42in");
+            tmplName = tr("Roll 42in");
+        break;
 
         case PaperSizeTemplate::Roll44in:
-            return tr("Roll 44in");
+            tmplName = tr("Roll 44in");
+        break;
 
         case PaperSizeTemplate::Roll48in:
-            return tr("Roll 48in");
+            tmplName = tr("Roll 48in");
+        break;
 
         case PaperSizeTemplate::Roll62in:
-            return tr("Roll 62in");
+            tmplName = tr("Roll 62in");
+        break;
 
         case PaperSizeTemplate::Roll72in:
-            return tr("Roll 72in");
+            tmplName = tr("Roll 72in");
+        break;
 
         case PaperSizeTemplate::Custom:
-            return tr("Custom");
+            tmplName = tr("Custom");
+        break;
 
         default:
             break;
     }
 
-    return QString("");
+    if(not tmplName.isEmpty())
+    {
+        tmplName += " " + QStringLiteral("(%1ppi)").arg(PrintDPI);
+    }
+
+    return tmplName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 PaperSizeTemplate VPSheet::GetTemplate(QSizeF size)
 {
+    Q_UNUSED(size);
     // TODO, float comparision not safe and problems with
     // inch / cm
 
