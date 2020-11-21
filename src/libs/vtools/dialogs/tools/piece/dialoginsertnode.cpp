@@ -30,24 +30,24 @@
 #include "ui_dialoginsertnode.h"
 #include "../vpatterndb/vcontainer.h"
 
+#include <QMenu>
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogInsertNode),
-      m_node(),
-      m_flagItem(false),
-      m_flagError(false)
+      ui(new Ui::DialogInsertNode)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
 
     CheckPieces();
-    CheckItem();
 
     connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         CheckPieces();
     });
+
+    connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogInsertNode::ShowContextMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,71 +96,132 @@ void DialogInsertNode::SetPieceId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode DialogInsertNode::GetNode() const
+QVector<VPieceNode> DialogInsertNode::GetNodes() const
 {
-    return m_node;
+    QVector<VPieceNode> nodes;
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
+        nodes.append(qvariant_cast<VPieceNode>(ui->listWidget->item(i)->data(Qt::UserRole)));
+    }
+    return nodes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogInsertNode::SetNode(const VPieceNode &node)
+void DialogInsertNode::ShowDialog(bool click)
 {
-    m_node = node;
-    m_flagItem = true;
-    QString name = tr("Uknown");
-    try
+    if (not click)
     {
-        name = data->GetGObject(m_node.GetId())->ObjectName();
-    }
-    catch (const VExceptionBadId &)
-    {
-        m_flagItem = false;
-        // Broken id
-    }
-
-    ui->labelItemName->setText(name);
-    ui->labelItemName->setToolTip(name);
-
-    CheckItem();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
-{
-    if (not prepare)
-    {
-        VPieceNode node;
-        switch (type)
+        if (m_nodes.isEmpty())
         {
-            case SceneObject::Arc:
-                node = VPieceNode(id, Tool::NodeArc);
-                break;
-            case SceneObject::ElArc:
-                node = VPieceNode(id, Tool::NodeElArc);
-                break;
-            case SceneObject::Point:
-                node = VPieceNode(id, Tool::NodePoint);
-                break;
-            case SceneObject::Spline:
-                node = VPieceNode(id, Tool::NodeSpline);
-                break;
-            case SceneObject::SplinePath:
-                node = VPieceNode(id, Tool::NodeSplinePath);
-                break;
-            case (SceneObject::Line):
-            case (SceneObject::Detail):
-            case (SceneObject::Unknown):
-            default:
-                qDebug() << "Got wrong scene object. Ignore.";
-                return;
+            return;
         }
 
-        node.SetExcluded(true);
-        SetNode(node);
+        for (auto &node : m_nodes)
+        {
+            NewNodeItem(ui->listWidget, node, false, false);
+        }
+
+        m_nodes.clear();
+
+        CheckNodes();
 
         prepare = true;
-        this->setModal(true);
-        this->show();
+        setModal(true);
+        emit ToolTip(QString());
+        show();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogInsertNode::SelectedObject(bool selected, quint32 object, quint32 tool)
+{
+    Q_UNUSED(tool)
+
+    if (prepare)
+    {
+        return;
+    }
+
+    auto nodeIterator = std::find_if(m_nodes.begin(), m_nodes.end(),
+                                     [object](const VPieceNode &node) { return node.GetId() == object; });
+    if (selected)
+    {
+        if (nodeIterator == m_nodes.cend())
+        {
+            GOType type = GOType::Unknown;
+            try
+            {
+                type = data->GetGObject(object)->getType();
+            }
+            catch (const VExceptionBadId &)
+            {
+                qDebug() << "Cannot find an object with id" << object;
+                return;
+            }
+
+            VPieceNode node;
+            switch (type)
+            {
+                case GOType::Arc:
+                    node = VPieceNode(object, Tool::NodeArc);
+                    break;
+                case GOType::EllipticalArc:
+                    node = VPieceNode(object, Tool::NodeElArc);
+                    break;
+                case GOType::Point:
+                    node = VPieceNode(object, Tool::NodePoint);
+                    break;
+                case GOType::Spline:
+                case GOType::CubicBezier:
+                    node = VPieceNode(object, Tool::NodeSpline);
+                    break;
+                case GOType::SplinePath:
+                case GOType::CubicBezierPath:
+                    node = VPieceNode(object, Tool::NodeSplinePath);
+                    break;
+                case GOType::Unknown:
+                case GOType::PlaceLabel:
+                default:
+                    qDebug() << "Got unexpected object type. Ignore.";
+                    return;
+            }
+
+            node.SetExcluded(true);
+            m_nodes.append(node);
+        }
+    }
+    else
+    {
+        if (nodeIterator != m_nodes.end())
+        {
+            m_nodes.erase(nodeIterator);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogInsertNode::ShowContextMenu(const QPoint &pos)
+{
+    const int row = ui->listWidget->currentRow();
+    if (ui->listWidget->count() == 0 || row == -1 || row >= ui->listWidget->count())
+    {
+        return;
+    }
+
+    QScopedPointer<QMenu> menu(new QMenu());
+
+    QListWidgetItem *rowItem = ui->listWidget->item(row);
+    SCASSERT(rowItem != nullptr);
+
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+
+    QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
+    if (selectedAction == actionDelete)
+    {
+        delete rowItem;
+    }
+
+    CheckNodes();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,10 +243,8 @@ void DialogInsertNode::CheckPieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogInsertNode::CheckItem()
+void DialogInsertNode::CheckNodes()
 {
-    QColor color;
-    m_flagItem ? color = OkColor(this) : color = errorColor;
-    ChangeColor(ui->labelItem, color);
+    m_flagNodes = ui->listWidget->count() > 0;
     CheckState();
 }

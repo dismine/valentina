@@ -225,14 +225,14 @@ void VToolSeamAllowance::RemoveWithConfirm(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene,
+void VToolSeamAllowance::InsertNode(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
                                     VContainer *data, VAbstractPattern *doc)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(data != nullptr)
     SCASSERT(doc != nullptr)
 
-    if (pieceId > NULL_ID)
+    if (pieceId > NULL_ID && not nodes.isEmpty())
     {
         VPiece oldDet;
         try
@@ -246,20 +246,23 @@ void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraph
 
         VPiece newDet = oldDet;
 
-        const quint32 id = PrepareNode(node, scene, doc, data);
-        if (id == NULL_ID)
+        for (auto node : nodes)
         {
-            return;
+            const quint32 id = PrepareNode(node, scene, doc, data);
+            if (id == NULL_ID)
+            {
+                return;
+            }
+
+            node.SetId(id);
+            newDet.GetPath().Append(node);
+
+            // Seam allowance tool already initializated and can't init the node
+            VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
+            SCASSERT(saTool != nullptr);
+
+            InitNode(node, scene, data, doc, saTool);
         }
-
-        node.SetId(id);
-        newDet.GetPath().Append(node);
-
-        // Seam allowance tool already initializated and can't init the node
-        VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
-        SCASSERT(saTool != nullptr);
-
-        InitNode(node, scene, data, doc, saTool);
 
         qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
     }
