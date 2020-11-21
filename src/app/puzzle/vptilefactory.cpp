@@ -74,59 +74,20 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
 
     QSvgRenderer* svgRenderer = new QSvgRenderer();
 
-    // FIXME here instead of creating 4 triangle, maybe create one and rotate it
-
-    // ------------- prepare triangles for positioning
-
-    // top triangle
-    QRectF rectTop = QRectF(tilesMargins.left()+ m_drawingAreaWidth/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                         tilesMargins.top(),
+    // ------------- prepare triangles for position marks
+    QRectF rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px),
+                         0,
                          UnitConvertor(1, Unit::Cm, Unit::Px),
                          UnitConvertor(0.5, Unit::Cm, Unit::Px)
                          );
-    QPainterPath triangleTop;
-    triangleTop.moveTo(rectTop.topLeft());
-    triangleTop.lineTo(rectTop.topRight());
-    triangleTop.lineTo(rectTop.left() + (rectTop.width() / 2), rectTop.bottom());
-    triangleTop.lineTo(rectTop.topLeft());
-
-    // left triangle
-    QRectF rectLeft = QRectF(tilesMargins.left(),
-                         tilesMargins.top() + m_drawingAreaHeight/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                         UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                         UnitConvertor(1, Unit::Cm, Unit::Px)
-                         );
-    QPainterPath triangleLeft;
-    triangleLeft.moveTo(rectLeft.topLeft());
-    triangleLeft.lineTo(rectLeft.right(), rectLeft.top() + (rectLeft.height() / 2));
-    triangleLeft.lineTo(rectLeft.bottomLeft());
-    triangleLeft.lineTo(rectLeft.topLeft());
-
-    // bottom triangle
-    QRectF rectBottom = QRectF(tilesMargins.left()+ m_drawingAreaWidth/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                         tilesMargins.top()+m_drawingAreaHeight - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                         UnitConvertor(1, Unit::Cm, Unit::Px),
-                         UnitConvertor(0.5, Unit::Cm, Unit::Px)
-                         );
-    QPainterPath triangleBottom;
-    triangleBottom.moveTo(rectBottom.bottomLeft());
-    triangleBottom.lineTo(rectBottom.left() + (rectBottom.width() / 2), rectBottom.top());
-    triangleBottom.lineTo(rectBottom.bottomRight());
-    triangleBottom.lineTo(rectBottom.bottomLeft());
-
-    // right triangle
-    QRectF rectRight = QRectF(tilesMargins.left() + m_drawingAreaWidth - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                              tilesMargins.top() + m_drawingAreaHeight/2 - UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                              UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                              UnitConvertor(1, Unit::Cm, Unit::Px)
-                              );
-    QPainterPath triangleRight;
-    triangleRight.moveTo(rectRight.topRight());
-    triangleRight.lineTo(rectRight.bottomRight());
-    triangleRight.lineTo(rectRight.left(), rectRight.top() + (rectRight.height() / 2));
-    triangleRight.lineTo(rectRight.topRight());
+    QPainterPath triangleBasic;
+    triangleBasic.moveTo(rectBasic.topLeft());
+    triangleBasic.lineTo(rectBasic.topRight());
+    triangleBasic.lineTo(rectBasic.left() + (rectBasic.width() / 2), rectBasic.bottom());
+    triangleBasic.lineTo(rectBasic.topLeft());
 
     QBrush triangleBush = QBrush(QColor(200,200,200));
+
 
     // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
     painter->setPen(penTileInfos);
@@ -134,6 +95,10 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
     if(row > 0)
     {
         // add top triangle
+        QPainterPath triangleTop =
+                QTransform()
+                .translate(tilesMargins.left()+m_drawingAreaWidth/2, tilesMargins.top())
+                .map(triangleBasic);
         painter->fillPath(triangleTop, triangleBush);
 
         //  scissors along the top line
@@ -168,6 +133,11 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
     if(col > 0)
     {
         // add left triangle
+        QPainterPath triangleLeft =
+                QTransform()
+                .translate(tilesMargins.left(), tilesMargins.top()+ m_drawingAreaHeight/2)
+                .rotate(-90)
+                .map(triangleBasic);
         painter->fillPath(triangleLeft, triangleBush);
 
         //  scissors along the left line
@@ -202,6 +172,12 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
     if(row < m_nbRow-1)
     {
         // add bottom triangle
+        QPainterPath triangleBottom =
+                QTransform()
+                .translate(tilesMargins.left()+ m_drawingAreaWidth/2, tilesMargins.top()+ m_drawingAreaHeight)
+                .rotate(180)
+                .map(triangleBasic);
+
         painter->fillPath(triangleBottom, triangleBush);
 
         // dotted bottom line (for glueing)
@@ -227,6 +203,11 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
     if(col < m_nbCol-1)
     {
         // add right triangle
+        QPainterPath triangleRight =
+                QTransform()
+                .translate(tilesMargins.left()+ m_drawingAreaWidth, tilesMargins.top()+ m_drawingAreaHeight/2)
+                .rotate(90)
+                .map(triangleBasic);
         painter->fillPath(triangleRight, triangleBush);
 
         // dotted right line (for glueing)
