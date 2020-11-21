@@ -47,7 +47,7 @@ VPCarrouselPieceList::VPCarrouselPieceList(QWidget* parent) :
     QListWidget(parent),
     m_dragStart(QPoint())
 {
-    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  QListWidget::item:selected {border: 2px solid red;}");
+    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
     setContextMenuPolicy(Qt::DefaultContextMenu);
     setSelectionMode(QAbstractItemView::MultiSelection);
     setViewMode(QListView::IconMode);
@@ -163,7 +163,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         mimeData->SetPiecePtr(piece);
         mimeData->setObjectName("piecePointer");
 
-        QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120,120)).pixmap(QSize(120,120));
+        QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120,120), true).pixmap(QSize(120,120));
 
         drag->setPixmap(pixmap);
         drag->setMimeData(mimeData);

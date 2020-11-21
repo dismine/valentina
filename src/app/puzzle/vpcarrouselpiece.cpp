@@ -74,7 +74,7 @@ void VPCarrouselPiece::RefreshSelection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size) const
+QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
 {
     QVector<QPointF> points = m_piece->GetMappedContourPoints(); // seamline
     if(points.isEmpty())
@@ -92,31 +92,66 @@ QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size) const
     qreal dx = canvas.center().x() - boundingRect.center().x();
     qreal dy = canvas.center().y() - boundingRect.center().y();
 
-    QPixmap pixmap(size);
-    pixmap.fill(QColor("white"));
+    QVector<QIcon::Mode> iconModes;
+    iconModes.append(QIcon::Normal);
 
-    QPainter painter;
-    painter.begin(&pixmap);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-
-    int spacing = 2;
-    painter.translate(spacing, spacing);
-
-    qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing*2) / 100;
-    qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing*2) / 100;
-    painter.scale(1./scaleFactorX, 1./scaleFactorY);
-    painter.setPen(QPen(Qt::black, 0.8*qMax(scaleFactorX, scaleFactorY)));
-
-    painter.translate(dx, dy);
-
-    painter.drawPolygon(shape);
-    painter.end();
+    if(not isDragIcon)
+    {
+        iconModes.append(QIcon::Selected);
+    }
 
     QIcon icon;
 
-    icon.addPixmap(pixmap,QIcon::Normal);
-    icon.addPixmap(pixmap,QIcon::Selected);
+    for(auto iconMode : iconModes)
+    {
+        QPixmap pixmap(size);
+
+        if(not isDragIcon)
+        {
+            pixmap.fill(QColor(Qt::white));
+        }
+        else
+        {
+            pixmap.fill(QColor(Qt::transparent));
+        }
+
+        QPainter painter;
+        painter.begin(&pixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+        int spacing = 2;
+
+        painter.translate(spacing, spacing);
+
+        qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing*2) / 100;
+        qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing*2) / 100;
+        painter.scale(1./scaleFactorX, 1./scaleFactorY);
+        painter.setPen(QPen(Qt::black, 0.8*qMax(scaleFactorX, scaleFactorY)));
+
+        if(not isDragIcon)
+        {
+            painter.translate(dx, dy);
+        }
+        else
+        {
+            painter.translate(-boundingRect.topLeft().x()+spacing, -boundingRect.topLeft().y()+spacing);
+        }
+
+        if(iconMode == QIcon::Selected)
+        {
+            painter.setBrush(QBrush(QColor(255,160,160,60)));
+        }
+        else
+        {
+            painter.setBrush(QBrush(Qt::white));
+        }
+
+        painter.drawPolygon(shape);
+        painter.end();
+
+        icon.addPixmap(pixmap,iconMode);
+    }
 
     return icon;
 }

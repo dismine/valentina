@@ -56,7 +56,7 @@ public:
      * @param size of the icon
      * @return the created icon
      */
-    QIcon CreatePieceIcon(const QSize &size) const;
+    QIcon CreatePieceIcon(const QSize &size, bool isDragIcon = false) const;
 
 
 private:
