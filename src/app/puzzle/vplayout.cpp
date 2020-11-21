@@ -38,6 +38,7 @@ Q_LOGGING_CATEGORY(pLayout, "p.layout")
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout() :
     m_unplacedPieceList(new VPPieceList(this)),
+    m_trashPieceList(new VPPieceList(this)),
     m_sheets(QList<VPSheet*>())
 {
     m_unplacedPieceList->SetName(QObject::tr("Unplaced pieces"));
@@ -48,12 +49,19 @@ VPLayout::~VPLayout()
 {
     qDeleteAll(m_sheets);
     delete m_unplacedPieceList;
+    delete m_trashPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPPieceList* VPLayout::GetUnplacedPieceList()
 {
     return m_unplacedPieceList;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPPieceList* VPLayout::GetTrashPieceList()
+{
+    return m_trashPieceList;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,7 +216,7 @@ void VPLayout::MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList)
     pieceList->AddPiece(piece);
 
     // signal, that a piece was moved
-    emit PieceMovedToPieceList(piece, pieceListBefore,pieceList);
+    emit PieceMovedToPieceList(piece, pieceListBefore, pieceList);
 }
 
 

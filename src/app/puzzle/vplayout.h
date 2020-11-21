@@ -50,6 +50,12 @@ public:
      */
     VPPieceList* GetUnplacedPieceList();
 
+    /**
+     * @brief GetTrashPieceList Returns the piece list of the trash
+     * @return the pieces list of trashed pieces.
+     */
+    VPPieceList* GetTrashPieceList();
+
     VPSheet* AddSheet();
     VPSheet* AddSheet(VPSheet *sheet);
     QList<VPSheet *> GetSheets();
@@ -265,16 +271,12 @@ private:
 
     VPPieceList *m_unplacedPieceList;
 
-    QList<VPSheet*> m_sheets;
-
     /**
-     TODO : To be replaced by m_focusedSheet
-     * @brief m_focusedPieceList pointer the the focused piece list, to which pieces will be
-     * added via drag and drop, or if no piece list is defined.
+     * @brief m_trashPieceList Holds the pieces that were deleted
      */
-    VPPieceList *m_focusedPieceList{nullptr};
+    VPPieceList *m_trashPieceList;
 
-
+    QList<VPSheet*> m_sheets;
     VPSheet *m_focusedSheet{nullptr};
 
     // format

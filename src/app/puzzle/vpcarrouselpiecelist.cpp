@@ -197,10 +197,16 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
         {
             VPPieceList* sheetPieces = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetFocusedSheet()->GetPieceList();
             QAction *moveAction = contextMenu.addAction(tr("Move to Sheet"));
-            QVariant data = QVariant::fromValue(sheetPieces);
-            moveAction->setData(data);
+            QVariant moveData = QVariant::fromValue(sheetPieces);
+            moveAction->setData(moveData);
+
+            VPPieceList* trashPieceList = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetTrashPieceList();
+            QAction *deleteAction = contextMenu.addAction(tr("Delete"));
+            QVariant deleteData = QVariant::fromValue(trashPieceList);
+            deleteAction->setData(deleteData);
 
             connect(moveAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
+            connect(deleteAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
         }
 
         // remove from piece list action
@@ -234,8 +240,6 @@ void VPCarrouselPieceList::on_ActionPieceMovedToPieceList()
         }
     }
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::on_PieceAdded(VPPiece* piece)

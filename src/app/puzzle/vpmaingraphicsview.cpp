@@ -213,7 +213,7 @@ void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *p
         scene()->removeItem(_graphicsPiece);
         m_graphicsPieces.removeAll(_graphicsPiece);
     }
-    else if(pieceListAfter != m_layout->GetUnplacedPieceList())
+    else if(pieceListAfter != m_layout->GetUnplacedPieceList() && pieceListAfter != m_layout->GetTrashPieceList())
     {
         if(_graphicsPiece == nullptr)
         {
