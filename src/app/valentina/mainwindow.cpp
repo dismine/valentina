@@ -1336,7 +1336,7 @@ void MainWindow::ClosedDialogInsertNode(int result)
     {
         const QPointer<DialogInsertNode> dTool = qobject_cast<DialogInsertNode *>(dialogTool);
         SCASSERT(not dTool.isNull())
-        VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), sceneDetails, pattern, doc);
+        VToolSeamAllowance::InsertNode(dTool->GetNodes(), dTool->GetPieceId(), sceneDetails, pattern, doc);
     }
     ArrowTool(true);
     doc->LiteParseTree(Document::LiteParse);
@@ -1493,9 +1493,12 @@ void MainWindow::ToolTrueDarts(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolInsertNode(bool checked)
 {
-    ToolSelectAllDrawObjects();
+    ToolSelectOperationObjects();
+    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
+                               "<b>%2</b> - finish creation")
+                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButton<DialogInsertNode>(checked, Tool::InsertNode, "://cursor/insert_node_cursor.png",
-                                    tr("Select an item to insert"), &MainWindow::ClosedDialogInsertNode);
+                                    tooltip, &MainWindow::ClosedDialogInsertNode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

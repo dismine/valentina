@@ -1,5 +1,6 @@
 # Version 0.7.40 (unreleased)
 - New function Warning.
+- [smart-pattern/valentina#80] Allow insertion of multiple nodes.
 
 # Version 0.7.39 Nov 17, 2020
 - Fix crash for Line tool notes.

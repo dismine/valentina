@@ -214,7 +214,8 @@ protected:
     virtual void     SaveData() {}
     quint32          DNumber(const QString &baseName) const;
     QString          GetNodeName(const VPieceNode &node, bool showPassmarkDetails = false) const;
-    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true);
+    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true,
+                     bool showExclusion = true);
 
     void             InitNodeAngles(QComboBox *box);
 private:

@@ -449,7 +449,7 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmarkDetails
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark)
+void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark, bool showExclusion)
 {
     SCASSERT(listWidget != nullptr);
     SCASSERT(node.GetId() > NULL_ID);
@@ -485,7 +485,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bo
     if(canAddNewPoint)
     {
         QListWidgetItem *item = new QListWidgetItem(name);
-        item->setFont(NodeFont(item->font(), node.IsExcluded()));
+        item->setFont(NodeFont(item->font(), showExclusion ? node.IsExcluded() : false));
         item->setData(Qt::UserRole, QVariant::fromValue(node));
         listWidget->addItem(item);
         listWidget->setCurrentRow(listWidget->count()-1);
