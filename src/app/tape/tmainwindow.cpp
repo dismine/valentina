@@ -635,9 +635,12 @@ void TMainWindow::changeEvent(QEvent *event)
         }
 
         {
-            labelPatternUnit->setText(tr("Pattern unit:"));
+            if (labelPatternUnit)
+            {
+                labelPatternUnit->setText(tr("Pattern unit:"));
+            }
 
-            if (comboBoxUnits != nullptr)
+            if (comboBoxUnits)
             {
                 const qint32 index = comboBoxUnits->currentIndex();
                 comboBoxUnits->blockSignals(true);
@@ -4302,6 +4305,11 @@ void TMainWindow::InitComboBoxUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitMeasurementUnits()
 {
+    if (not m)
+    {
+        return;
+    }
+
     ui->comboBoxMUnits->blockSignals(true);
 
     int current = -1;
