@@ -163,7 +163,7 @@ void VToolCut::SetAliasSuffix2(QString alias)
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolCut::CurveName() const
 {
-    return VAbstractTool::data.GetGObject(baseCurveId)->name();
+    return VAbstractTool::data.GetGObject(baseCurveId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
