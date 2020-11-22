@@ -31,18 +31,21 @@
 #include <QPen>
 #include <QBrush>
 #include <QPainter>
-#include <QCursor>
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QMenu>
 #include <QtMath>
 #include <QGraphicsScene>
+#include <QApplication>
 
 #include "vppiece.h"
 #include "vppiecelist.h"
 #include "vplayout.h"
 #include "vpsheet.h"
+
+#include "vlayoutpiecepath.h"
+#include "vplacelabelitem.h"
 
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
@@ -54,8 +57,17 @@ VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
     m_cuttingLine(QPainterPath()),
     m_seamLine(QPainterPath()),
     m_grainline(QPainterPath()),
-    m_rotationStartPoint(QPointF())
+    m_passmarks(QPainterPath()),
+    m_internalPaths(QVector<QPainterPath>()),
+    m_internalPathsPenStyle(QVector<Qt::PenStyle>()),
+    m_placeLabels(QVector<QPainterPath>()),
+    m_rotationStartPoint(QPointF()),
+    m_rotateCursor(QCursor())
 {
+
+    QPixmap cursor_pixmap = QIcon("://puzzleicon/svg/cursor_rotate.svg").pixmap(QSize(32,32));
+    m_rotateCursor= QCursor(cursor_pixmap, 16, 16);
+
     Init();
 }
 
@@ -78,7 +90,7 @@ void VPGraphicsPiece::Init()
     if(!seamLinePoints.isEmpty())
     {
         m_seamLine.moveTo(seamLinePoints.first());
-        for (int i = 1; i < seamLinePoints.size(); ++i)
+        for (int i = 0; i < seamLinePoints.size(); i++)
             m_seamLine.lineTo(seamLinePoints.at(i));
     }
 
@@ -87,7 +99,7 @@ void VPGraphicsPiece::Init()
     if(!cuttingLinepoints.isEmpty())
     {
         m_cuttingLine.moveTo(cuttingLinepoints.first());
-        for (int i = 1; i < cuttingLinepoints.size(); ++i)
+        for (int i = 0; i < cuttingLinepoints.size(); i++)
             m_cuttingLine.lineTo(cuttingLinepoints.at(i));
     }
 
@@ -98,17 +110,49 @@ void VPGraphicsPiece::Init()
         if(!grainLinepoints.isEmpty())
         {
             m_grainline.moveTo(grainLinepoints.first());
-            for (int i = 1; i < grainLinepoints.size(); ++i)
+            for (int i = 0; i < grainLinepoints.size(); i++)
                 m_grainline.lineTo(grainLinepoints.at(i));
         }
     }
 
-    // TODO : initialises the other elements labels, passmarks etc.
+    // initialises the internal paths
+    QVector<VLayoutPiecePath> internalPaths = m_piece->GetInternalPaths();
+    for (int i = 0; i < internalPaths.size(); i++)
+    {
+        VLayoutPiecePath piecePath = internalPaths.at(i);
+        QPainterPath path = m_piece->GetMatrix().map(piecePath.GetPainterPath());
+        m_internalPaths.append(path);
+        m_internalPathsPenStyle.append(piecePath.PenStyle());
+    }
+
+    // initialises the passmarks
+    QVector<VLayoutPassmark> passmarks = m_piece->GetPassmarks();
+    for(auto &passmark : passmarks)
+    {
+        for (auto &line : passmark.lines)
+        {
+            m_passmarks.moveTo(line.p1());
+            m_passmarks.lineTo(line.p2());
+        }
+    }
+
+    // initialises the place labels (buttons etc)
+    QVector<VLayoutPlaceLabel> placeLabels = m_piece->GetPlaceLabels();
+    for(auto &placeLabel : placeLabels)
+    {
+        QPainterPath path = VPlaceLabelItem::LabelShapePath(placeLabel.shape);
+        m_placeLabels.append(path);
+    }
+
+    // TODO : initialises the text labels
+
+
 
     // Initialises the connectors
     connect(m_piece, &VPPiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);
     connect(m_piece, &VPPiece::PositionChanged, this, &VPGraphicsPiece::on_PiecePositionChanged);
     connect(m_piece, &VPPiece::RotationChanged, this, &VPGraphicsPiece::on_PieceRotationChanged);
+    connect(m_piece, &VPPiece::PropertiesChanged, this, &VPGraphicsPiece::on_PiecePropertiesChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,9 +192,11 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     QPen pen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush noBrush(Qt::NoBrush);
     QBrush selectionBrush(QColor(255,160,160,60));
+    QBrush blackBrush(Qt::black);
 
     painter->setPen(pen);
 
+    // selection
     if(isSelected())
     {
        painter->setBrush(selectionBrush);
@@ -168,7 +214,7 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     }
 
     // paint the seam line
-    if(!m_seamLine.isEmpty())
+    if(!m_seamLine.isEmpty() && m_piece->GetShowSeamLine())
     {
         painter->drawPath(m_seamLine);
     }
@@ -178,8 +224,54 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     // paint the grainline
     if(!m_grainline.isEmpty())
     {
+        // here to fill the grainlines arrow. Not wanted for mvp
+        // later maybe if it's configurable
+//        painter->setBrush(blackBrush);
+
         painter->drawPath(m_grainline);
     }
+
+    // paint the internal paths
+    painter->setBrush(noBrush);
+    if(!m_internalPaths.isEmpty())
+    {
+        Qt::PenStyle penStyleTmp = pen.style();
+
+        for (int i = 0; i < m_internalPaths.size(); i++)
+        {
+            painter->setPen(m_internalPathsPenStyle.at(i));
+            painter->drawPath(m_internalPaths.at(i));
+        }
+        painter->setPen(penStyleTmp);
+    }
+
+    // paint the passmarks
+    if(!m_passmarks.isEmpty())
+    {
+        painter->drawPath(m_passmarks);
+    }
+
+    // paint the place labels (buttons etc)
+    if(!m_placeLabels.isEmpty())
+    {
+        for(auto &placeLabel : m_placeLabels)
+        {
+            painter->drawPath(placeLabel);
+        }
+    }
+
+
+    // TODO Detail & Piece Label
+
+//    QPointF position = m_piece->GetPatternTextPosition();
+//    QStringList texts = m_piece->GetPatternText();
+
+//    painter->drawText();
+
+
+
+    // when using m_piece->GetItem(), the results were quite bad
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,11 +281,24 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //perform the default behaviour
     QGraphicsItem::mousePressEvent(event);
 
-    // change the cursor when clicking left button
+    // change the cursor when clicking the left button
+    if((event->button() == Qt::LeftButton))
+    {
+        if(event->modifiers() & Qt::AltModifier)
+        {
+            setCursor(m_rotateCursor);
+        }
+        else
+        {
+            setCursor(Qt::ClosedHandCursor);
+        }
+    }
+
+
+    // change the selected state when clicking left button
     if (event->button() == Qt::LeftButton)
     {
         setSelected(true);
-        setCursor(Qt::ClosedHandCursor);
 
         if (event->modifiers() & Qt::ControlModifier)
         {
@@ -208,12 +313,6 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if((event->button() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
     {
         m_rotationStartPoint = event->scenePos();
-
-        QPixmap cursor_pixmap = QPixmap(":/cursor_rotate");
-        cursor_pixmap = cursor_pixmap.scaledToWidth(32);
-        QCursor cursor_rotate = QCursor(cursor_pixmap, 16, 16);
-
-        setCursor(cursor_rotate);
     }
 }
 
@@ -222,6 +321,8 @@ void VPGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     if((event->buttons() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
     {
+        //FIXME: it flickers between the arrow cursor and the rotate cursor
+        setCursor(m_rotateCursor);
 
         QPointF rotationNewPoint = event->scenePos();
         QPointF rotationCenter = sceneBoundingRect().center();
@@ -278,20 +379,14 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-
     if(event->modifiers() & Qt::AltModifier)
     {
-        // TODO FIXME: find a more efficient way
-
-        QPixmap cursor_pixmap = QPixmap(":/cursor_rotate");
-        cursor_pixmap = cursor_pixmap.scaledToWidth(32);
-        QCursor cursor_rotate = QCursor(cursor_pixmap, 16, 16);
-
-        setCursor(cursor_rotate);
+        //FIXME: it flickers between the arrow cursor and the rotate cursor
+        setCursor(m_rotateCursor);
     }
     else
     {
-        setCursor(QCursor(Qt::OpenHandCursor));
+        setCursor(Qt::OpenHandCursor);
     }
 }
 
@@ -368,6 +463,15 @@ void VPGraphicsPiece::on_PieceRotationChanged()
 {
     setTransformOriginPoint(boundingRect().center());
     setRotation(-m_piece->GetRotation());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::on_PiecePropertiesChanged()
+{
+    if(scene())
+    {
+        scene()->update();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

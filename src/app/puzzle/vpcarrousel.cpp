@@ -84,6 +84,15 @@ void VPCarrousel::Refresh()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPCarrousel::RefreshFocusedSheetName()
+{
+    // FIXME : This implementation will need a refactoring when we have multiple sheets, now it's not very nice!!
+
+    ui->comboBoxPieceList->setItemText(1, tr("Pieces of ") + m_layout->GetFocusedSheet()->GetName());
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Clear()
 {
     // remove the combobox entries

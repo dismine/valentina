@@ -12,6 +12,7 @@ SOURCES += \
     $$PWD/vpcommands.cpp \
     $$PWD/vpgraphicspiece.cpp \
     $$PWD/vpgraphicssheet.cpp \
+    $$PWD/vpgraphicstilegrid.cpp \
     $$PWD/vplayout.cpp \
     $$PWD/vpmaingraphicsview.cpp \
     $$PWD/vpmainwindow.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     $$PWD/vppiecelist.cpp \
     $$PWD/vpsettings.cpp \
     $$PWD/vpsheet.cpp \
+    $$PWD/vptilefactory.cpp \
     $$PWD/xml/vplayoutfilereader.cpp \
     $$PWD/xml/vplayoutfilewriter.cpp \
     $$PWD/xml/vplayoutliterals.cpp
@@ -36,6 +38,7 @@ HEADERS += \
     $$PWD/vpcommands.h \
     $$PWD/vpgraphicspiece.h \
     $$PWD/vpgraphicssheet.h \
+    $$PWD/vpgraphicstilegrid.h \
     $$PWD/vplayout.h \
     $$PWD/vpmaingraphicsview.h \
     $$PWD/vpmainwindow.h \
@@ -45,6 +48,7 @@ HEADERS += \
     $$PWD/vpsettings.h \
     $$PWD/vpsheet.h \
     $$PWD/vpstable.h \
+    $$PWD/vptilefactory.h \
     $$PWD/xml/vplayoutfilereader.h \
     $$PWD/xml/vplayoutfilewriter.h \
     $$PWD/xml/vplayoutliterals.h

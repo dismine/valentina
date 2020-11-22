@@ -31,22 +31,43 @@
 
 #include "vpgraphicssheet.h"
 #include "vpgraphicspiece.h"
+#include "vptilefactory.h"
+#include "vpgraphicstilegrid.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 class VMainGraphicsScene;
 
+class VPTileFactory;
 
 class VPMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
-    VPMainGraphicsView(VPLayout *layout, QWidget *parent);
+    VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFactory, QWidget *parent);
     ~VPMainGraphicsView() = default;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
      */
     void RefreshLayout();
+
+
+    /**
+     * @brief GetScene Returns the scene of the view
+     * @return
+     */
+    VMainGraphicsScene* GetScene();
+
+    /**
+     * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
+     */
+    void PrepareForExport();
+
+    /**
+     * @brief CleanAfterExport cleans the graphic for an export (i.e show margin etc)
+     */
+    void CleanAfterExport();
+
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
@@ -55,6 +76,8 @@ protected:
     void dropEvent(QDropEvent *event) override;
 
     void keyPressEvent(QKeyEvent *event) override;
+
+    void drawTilesLine();
 
 private slots:
     /**
@@ -77,9 +100,17 @@ private:
     VMainGraphicsScene *m_scene{nullptr};
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
+
+    VPGraphicsTileGrid *m_graphicsTileGrid{nullptr};
+
     VPLayout *m_layout{nullptr};
 
     QList<VPGraphicsPiece*> m_graphicsPieces{};
+
+    /**
+     * variable to hold temporarly hte value of the show tiles
+     */
+    bool m_showTilesTmp{false};
 
 };
 

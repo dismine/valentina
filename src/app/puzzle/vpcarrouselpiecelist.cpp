@@ -47,7 +47,7 @@ VPCarrouselPieceList::VPCarrouselPieceList(QWidget* parent) :
     QListWidget(parent),
     m_dragStart(QPoint())
 {
-    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  QListWidget::item:selected {border: 2px solid red;}");
+    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
     setContextMenuPolicy(Qt::DefaultContextMenu);
     setSelectionMode(QAbstractItemView::MultiSelection);
     setViewMode(QListView::IconMode);
@@ -163,7 +163,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         mimeData->SetPiecePtr(piece);
         mimeData->setObjectName("piecePointer");
 
-        QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120,120)).pixmap(QSize(120,120));
+        QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120,120), true).pixmap(QSize(120,120));
 
         drag->setPixmap(pixmap);
         drag->setMimeData(mimeData);
@@ -187,33 +187,42 @@ void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent* e)
 void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 {
     QListWidgetItem* _item = currentItem();
-    if(_item->type() == 1001)
+    if(_item != nullptr)
     {
-        VPCarrouselPiece *pieceItem = static_cast<VPCarrouselPiece *> (_item);
-
-        QMenu contextMenu;
-
-        if(m_pieceList->GetSheet() == nullptr)
+        if(_item->type() == 1001)
         {
-            VPPieceList* sheetPieces = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetFocusedSheet()->GetPieceList();
-            QAction *moveAction = contextMenu.addAction(tr("Move to Sheet"));
-            QVariant data = QVariant::fromValue(sheetPieces);
-            moveAction->setData(data);
+            VPCarrouselPiece *pieceItem = static_cast<VPCarrouselPiece *> (_item);
 
-            connect(moveAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
+            QMenu contextMenu;
+
+            if(m_pieceList->GetSheet() == nullptr)
+            {
+                VPPieceList* sheetPieces = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetFocusedSheet()->GetPieceList();
+                QAction *moveAction = contextMenu.addAction(tr("Move to Sheet"));
+                QVariant moveData = QVariant::fromValue(sheetPieces);
+                moveAction->setData(moveData);
+
+                VPPieceList* trashPieceList = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetTrashPieceList();
+                QAction *deleteAction = contextMenu.addAction(tr("Delete"));
+                QVariant deleteData = QVariant::fromValue(trashPieceList);
+                deleteAction->setData(deleteData);
+
+                connect(moveAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
+                connect(deleteAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
+            }
+
+            // remove from piece list action
+            if(m_pieceList->GetSheet() != nullptr)
+            {
+                VPPieceList* unplacedPieces = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetUnplacedPieceList();
+                QAction *removeAction = contextMenu.addAction(tr("Remove from Sheet"));
+                QVariant data = QVariant::fromValue(unplacedPieces);
+                removeAction->setData(data);
+                connect(removeAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
+            }
+
+            contextMenu.exec(event->globalPos());
         }
-
-        // remove from piece list action
-        if(m_pieceList->GetSheet() != nullptr)
-        {
-            VPPieceList* unplacedPieces = pieceItem->GetPiece()->GetPieceList()->GetLayout()->GetUnplacedPieceList();
-            QAction *removeAction = contextMenu.addAction(tr("Remove from Sheet"));
-            QVariant data = QVariant::fromValue(unplacedPieces);
-            removeAction->setData(data);
-            connect(removeAction, &QAction::triggered, this, &VPCarrouselPieceList::on_ActionPieceMovedToPieceList);
-        }
-
-        contextMenu.exec(event->globalPos());
     }
 }
 
@@ -234,8 +243,6 @@ void VPCarrouselPieceList::on_ActionPieceMovedToPieceList()
         }
     }
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::on_PieceAdded(VPPiece* piece)

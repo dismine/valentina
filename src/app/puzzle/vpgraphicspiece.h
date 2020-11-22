@@ -30,6 +30,7 @@
 #define VPGRAPHICSPIECE_H
 
 #include <QGraphicsItem>
+#include <QCursor>
 
 class VPPiece;
 
@@ -63,6 +64,11 @@ public slots:
      */
     void on_PieceRotationChanged();
 
+    /**
+     * @brief on_PiecePropertiesChanged Slot called when the showSeamline / mirrored was changed
+     */
+    void on_PiecePropertiesChanged();
+
 protected:
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
@@ -92,9 +98,16 @@ private:
     QPainterPath m_cuttingLine;
     QPainterPath m_seamLine;
     QPainterPath m_grainline;
+    QPainterPath m_passmarks;
+
+    QVector<QPainterPath> m_internalPaths;
+    QVector<Qt::PenStyle> m_internalPathsPenStyle;
+
+    QVector<QPainterPath> m_placeLabels;
 
     QPointF m_rotationStartPoint;
 
+    QCursor m_rotateCursor;
 };
 
 #endif // VPGRAPHICSPIECE_H

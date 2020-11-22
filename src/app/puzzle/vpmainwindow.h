@@ -31,6 +31,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QDoubleSpinBox>
+#include <QPointer>
 
 #include "../vmisc/def.h"
 #include "vpcarrousel.h"
@@ -38,7 +39,9 @@
 #include "vplayout.h"
 #include "vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
+#include "vptilefactory.h"
 #include "vpcommandline.h"
+#include "../vlayout/vlayoutdef.h"
 
 namespace Ui
 {
@@ -74,6 +77,11 @@ public:
      */
     void ImportRawLayouts(const QStringList &rawLayouts);
 
+    /**
+     * @brief InitZoom Initialises the zoom to fit best
+     */
+    void InitZoom();
+
 public slots:
     /**
      * @brief on_actionNew_triggered When the menu action File > New
@@ -98,6 +106,18 @@ private:
     VPLayout *m_layout{nullptr};
     QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
+    VPTileFactory *m_tileFactory{nullptr};
+
+    /**
+     * @brief spin box with the scale factor of the graphic view
+     */
+    QPointer<QDoubleSpinBox> m_doubleSpinBoxScale{nullptr};
+
+    /**
+     * @brief mouseCoordinate pointer to label who show mouse coordinate.
+     */
+    QLabel* m_mouseCoordinate{nullptr};
+
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
      * @param rawPiece the raw piece data
@@ -120,6 +140,11 @@ private:
     void InitPropertyTabCurrentPiece();
 
     /**
+     * @brief InitPropertyTabCurrentSheet Inits the current sheet tab in the properties;
+     */
+    void InitPropertyTabCurrentSheet();
+
+    /**
      * @brief InitPropertyTabLayout Inits the layout tab in the properties
      */
     void InitPropertyTabLayout();
@@ -138,6 +163,11 @@ private:
      * @brief InitMainGraphics Initialises the puzzle main graphics
      */
     void InitMainGraphics();
+
+    /**
+     * @brief InitToolBar Initialises the tool bar
+     */
+    void InitZoomToolBar();
 
     /**
      * @brief SetPropertiesData Sets the values of UI elements
@@ -189,6 +219,13 @@ private:
     void WriteSettings();
 
     bool MaybeSave();
+
+    /**
+     * @brief generateTiledPdf Generates the tiled Pdf in the given filename
+     * @param filename
+     */
+    void generateTiledPdf(QString fileName);
+
 
 private slots:
     /**
@@ -249,41 +286,49 @@ private slots:
     void on_comboBoxLayoutUnit_currentIndexChanged(int index);
 
     /**
+     * @brief on_lineEditSheetName_textChanged When the name of the sheet is changed
+     * in the sheet layout tab
+     * @param text
+     */
+    void on_lineEditSheetName_textChanged(const QString &text);
+
+    /**
      * @brief on_comboBoxLayoutTemplate_currentIndexChanged When the template is
-     * changed in the layout property tab.
+     * changed in the sheet property tab.
      * The slot is automatically connected through name convention.
      * @param index the index of the selected templated
      */
     void on_comboBoxSheetTemplate_currentIndexChanged(int index);
 
     /**
-     * @brief LayoutSizeChanged When the width or the length has been changed in
-     * the layout property tab
+     * @brief on_SheetSizeChanged When the width or the length has been changed in
+     * the sheet property tab
+     * @param changedViaSizeCombobox true if the change happened through the combobox
      */
-    void on_SheetSizeChanged();
+    void on_SheetSizeChanged(bool changedViaSizeCombobox = true);
 
     /**
-     * @brief LayoutOrientationChanged When one of the radio boxes for the layout
+     * @brief on_SheetOrientationChanged When one of the radio boxes for the sheet
      * orientation has been clicked
      */
     void on_SheetOrientationChanged();
 
     /**
      * @brief on_pushButtonLayoutRemoveUnusedLength_clicked When the button
-     * "Remove unused length" in the layout property tab is clicked.
+     * "Remove unused length" in the sheet property tab is clicked.
      * The slot is automatically connected through name convention.
      */
     void on_pushButtonSheetRemoveUnusedLength_clicked();
 
     /**
-     * @brief on_LayoutMarginChanged When one of the margin values has been changed
-     * in the layout property tab.
+     * @brief on_SheetMarginChanged When one of the margin values has been changed
+     * in the sheet property tab.
      */
     void on_SheetMarginChanged();
 
     /**
      * @brief LayoutFollowGrainlineChanged When one of the radio boxes for the
-     * "Follow grainline" has been clicked in the layout property tab.
+     * "Follow grainline" has been clicked in the sheet property tab.
      */
     void on_SheetFollowGrainlineChanged();
 
@@ -294,6 +339,45 @@ private slots:
      * @param value the new value of the pieces gap
      */
     void on_doubleSpinBoxSheetPiecesGap_valueChanged(double value);
+
+    /**
+     * @brief on_comboBoxTilesTemplate_currentIndexChanged When the template is
+     * changed in the tiles property tab.
+     * The slot is automatically connected through name convention.
+     * @param index the index of the selected templated
+     */
+    void on_comboBoxTilesTemplate_currentIndexChanged(int index);
+
+    /**
+     * @brief on_TilesSizeChanged When the width or the length has been changed in
+     * the tiles property tab
+     * @param changedViaSizeCombobox true if the change happened through the combobox
+     */
+    void on_TilesSizeChanged(bool changedViaSizeCombobox = true);
+
+    /**
+     * @brief on_TilesOrientationChanged When one of the radio boxes for the tiles
+     * orientation has been clicked
+     */
+    void on_TilesOrientationChanged();
+
+    /**
+     * @brief on_TilesMarginChanged When one of the margin values has been changed
+     * in the tiles property tab.
+     */
+    void on_TilesMarginChanged();
+
+    /**
+     * @brief on_checkBoxTilesShowTiles_toggled When the checkbox "show tiles" is
+     * clicked
+     * @param checked´
+     */
+    void on_checkBoxTilesShowTiles_toggled(bool checked);
+
+    /**
+     * @brief on_pushButtonTilesExport_clicked When the export tiles button is clicked
+     */
+    void on_pushButtonTilesExport_clicked();
 
     /**
      * @brief on_checkBoxLayoutWarningPiecesSuperposition_toggled When the
@@ -380,6 +464,16 @@ private slots:
      */
     void on_PieceRotationChanged();
 
+    /**
+     * @brief on_ScaleChanged When the scale of the graphic view is changed
+     */
+    void on_ScaleChanged(qreal scale);
+
+    /**
+     * @brief mouseMove save mouse position and show user.
+     * @param scenePos position mouse.
+     */
+    void on_MouseMoved(const QPointF &scenePos);
 };
 
 #endif // VPMAINWINDOW_H

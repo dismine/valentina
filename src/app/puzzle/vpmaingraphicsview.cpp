@@ -37,6 +37,7 @@
 #include "vplayout.h"
 #include "vpsheet.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "vptilefactory.h"
 
 #include <QLoggingCategory>
 
@@ -44,7 +45,7 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, QWidget *parent) :
+VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFactory, QWidget *parent) :
     VMainGraphicsView(parent),
     m_layout(layout)
 {
@@ -57,6 +58,9 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, QWidget *parent) :
     m_scene->addItem(m_graphicsSheet);
 
     setAcceptDrops(true);
+
+    m_graphicsTileGrid = new VPGraphicsTileGrid(layout, tileFactory);
+    m_scene->addItem(m_graphicsTileGrid);
 
     // add the connections
     connect(m_layout, &VPLayout::PieceMovedToPieceList, this, &VPMainGraphicsView::on_PieceMovedToPieceList);
@@ -71,8 +75,43 @@ void VPMainGraphicsView::RefreshLayout()
 
     m_graphicsSheet->update();
 
+    m_graphicsTileGrid->update();
+
     m_scene->update();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VMainGraphicsScene* VPMainGraphicsView::GetScene()
+{
+    return m_scene;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::PrepareForExport()
+{
+    m_layout->ClearSelection();
+
+    m_graphicsSheet->SetShowBorder(false);
+    m_graphicsSheet->SetShowMargin(false);
+
+    m_showTilesTmp = m_layout->GetShowTiles();
+    m_layout->SetShowTiles(false);
+
+    RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::CleanAfterExport()
+{
+    m_graphicsSheet->SetShowBorder(true);
+    m_graphicsSheet->SetShowMargin(true);
+
+    m_layout->SetShowTiles(m_showTilesTmp);
+
+    RefreshLayout();
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
@@ -174,7 +213,7 @@ void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *p
         scene()->removeItem(_graphicsPiece);
         m_graphicsPieces.removeAll(_graphicsPiece);
     }
-    else if(pieceListAfter != m_layout->GetUnplacedPieceList())
+    else if(pieceListAfter != m_layout->GetUnplacedPieceList() && pieceListAfter != m_layout->GetTrashPieceList())
     {
         if(_graphicsPiece == nullptr)
         {
@@ -193,9 +232,22 @@ void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *p
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::on_SceneSelectionChanged()
 {
-    // most of the selection behaviour taks place automatically
+    // most of the selection behaviour takes place automatically
     // but we need to make sure that the unplaced pieces are unselected when the scene selection has changed
     // because as they are not part of the scene, they are not updated
-
     m_layout->GetUnplacedPieceList()->ClearSelection();
+
+
+    // make sure, that the selected items are on top
+    // FIXME: maybe there is a more proper way to do it
+    for(auto graphicPiece : m_graphicsPieces)
+    {
+        if(!graphicPiece->GetPiece()->GetIsSelected())
+        {
+            if(!m_scene->selectedItems().isEmpty())
+            {
+                graphicPiece->stackBefore(m_scene->selectedItems().first());
+            }
+        }
+    }
 }

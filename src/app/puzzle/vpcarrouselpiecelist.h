@@ -108,7 +108,6 @@ private slots:
      * @brief on_ActionPieceMovedToPieceList when a piece is moved to another piece list via a context menu
      */
     void on_ActionPieceMovedToPieceList();
-
 };
 
 #endif // VPCARROUSELPIECELIST_H

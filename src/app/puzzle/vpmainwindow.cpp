@@ -29,6 +29,8 @@
 
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QtMath>
+#include <QSvgGenerator>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -40,6 +42,7 @@
 #include "../vmisc/projectversion.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../ifc/exception/vexception.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
@@ -73,19 +76,35 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
+    m_layout->SetTitle(QString("My Test Layout"));
+    m_layout->SetDescription(QString("Description of my Layout"));
+
+    m_layout->SetTilesSizeConverted(21,29.7);
+    m_layout->SetTilesOrientation(PageOrientation::Portrait);
+    m_layout->SetTilesMarginsConverted(1,1,1,1);
+    m_layout->SetShowTiles(true);
+
     // --------------------------------------------------------
 
     ui->setupUi(this);
 
+    // init the tile factory
+    m_tileFactory = new VPTileFactory(m_layout, qApp->Settings());
+    m_tileFactory->refreshTileInfos();
+
     InitMenuBar();
     InitProperties();
     InitCarrousel();
+
     InitMainGraphics();
 
+    InitZoomToolBar();
 
     SetPropertiesData();
 
     ReadSettings();
+
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,6 +203,12 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitZoom()
+{
+    m_graphicsView->ZoomFitBest();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 {
     VPPiece *piece = new VPPiece(rawPiece);
@@ -231,6 +256,7 @@ void VPMainWindow::InitMenuBar()
 void VPMainWindow::InitProperties()
 {
     InitPropertyTabCurrentPiece();
+    InitPropertyTabCurrentSheet();
     InitPropertyTabLayout();
     InitPropertyTabTiles();
 }
@@ -238,6 +264,10 @@ void VPMainWindow::InitProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentPiece()
 {
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->groupBoxLayoutControl->hide();
+    ui->groupBoxCurrentPieceGeometry->hide();
+
 
     // ------------------------------ placement -----------------------------------
     connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
@@ -246,21 +276,12 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
             &VPMainWindow::on_CurrentPiecePositionEdited);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitPropertyTabLayout()
+void VPMainWindow::InitPropertyTabCurrentSheet()
 {
-    // -------------------- init the unit combobox ---------------------
-   ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
-   ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
-   ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
-
-   // set default unit - TODO when we have the setting for the unit
-//    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
-//    if (indexUnit != -1)
-//    {
-//        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
-//    }
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->pushButtonSheetRemoveUnusedLength->hide();
+    ui->groupBoxSheetControl->hide();
 
     // some of the UI Elements are connected to the slots via auto-connect
    // see https://doc.qt.io/qt-5/designer-using-a-ui-file.html#widgets-and-dialogs-with-auto-connect
@@ -293,18 +314,96 @@ void VPMainWindow::InitPropertyTabLayout()
     connect(ui->radioButtonSheetFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
             &VPMainWindow::on_SheetFollowGrainlineChanged);
 
-    // -------------------- export ---------------------------
+    // -------------------- sheet template ---------------------------
 
-    // TODO init the file format export combobox
+    // FIXME: find a nicer way to initiliase it
+    QVector<PaperSizeTemplate> sheetTemplates = QVector<PaperSizeTemplate>();
+    sheetTemplates.append(PaperSizeTemplate::A0);
+    sheetTemplates.append(PaperSizeTemplate::A1);
+    sheetTemplates.append(PaperSizeTemplate::A2);
+    sheetTemplates.append(PaperSizeTemplate::A3);
+    sheetTemplates.append(PaperSizeTemplate::A4);
+    sheetTemplates.append(PaperSizeTemplate::Letter);
+    sheetTemplates.append(PaperSizeTemplate::Legal);
+    sheetTemplates.append(PaperSizeTemplate::Tabloid);
+    sheetTemplates.append(PaperSizeTemplate::Roll24in);
+    sheetTemplates.append(PaperSizeTemplate::Roll30in);
+    sheetTemplates.append(PaperSizeTemplate::Roll36in);
+    sheetTemplates.append(PaperSizeTemplate::Roll42in);
+    sheetTemplates.append(PaperSizeTemplate::Roll44in);
+    sheetTemplates.append(PaperSizeTemplate::Roll48in);
+    sheetTemplates.append(PaperSizeTemplate::Roll62in);
+    sheetTemplates.append(PaperSizeTemplate::Roll72in);
+    sheetTemplates.append(PaperSizeTemplate::Custom);
 
+    ui->comboBoxSheetTemplate->blockSignals(true);
+    VPSheet::PopulateComboBox(&sheetTemplates, ui->comboBoxSheetTemplate);
+    ui->comboBoxSheetTemplate->blockSignals(false);
+
+    ui->comboBoxSheetTemplate->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabTiles()
 {
-    // for the MVP we don't want the tiles tab.
-    // we remove it. As soon as we need it, update this code
-    ui->tabWidgetProperties->removeTab(2); // remove tiles
+    // -------------------- layout width, length, orientation  ------------------------
+    connect(ui->doubleSpinBoxTilesWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesSizeChanged);
+    connect(ui->doubleSpinBoxTilesLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesSizeChanged);
+    connect(ui->radioButtonTilesPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_TilesOrientationChanged);
+    connect(ui->radioButtonTilesLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
+            &VPMainWindow::on_TilesOrientationChanged);
+
+    // -------------------- tiles template
+    QVector<PaperSizeTemplate> tilesTemplates = QVector<PaperSizeTemplate>();
+    tilesTemplates.append(PaperSizeTemplate::A0);
+    tilesTemplates.append(PaperSizeTemplate::A1);
+    tilesTemplates.append(PaperSizeTemplate::A2);
+    tilesTemplates.append(PaperSizeTemplate::A3);
+    tilesTemplates.append(PaperSizeTemplate::A4);
+    tilesTemplates.append(PaperSizeTemplate::Letter);
+    tilesTemplates.append(PaperSizeTemplate::Legal);
+    tilesTemplates.append(PaperSizeTemplate::Custom);
+
+    ui->comboBoxTilesTemplate->blockSignals(true);
+    VPSheet::PopulateComboBox(&tilesTemplates, ui->comboBoxTilesTemplate);
+    ui->comboBoxTilesTemplate->blockSignals(false);
+
+    ui->comboBoxTilesTemplate->setCurrentIndex(4); //A4
+
+
+    // -------------------- margins  ------------------------
+    connect(ui->doubleSpinBoxTilesMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxTilesMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxTilesMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxTilesMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitPropertyTabLayout()
+{
+
+    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
+    ui->groupBoxLayoutControl->hide();
+
+    // -------------------- init the unit combobox ---------------------
+   ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+   ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+   ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+
+   // set default unit - TODO when we have the setting for the unit
+//    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
+//    if (indexUnit != -1)
+//    {
+//        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,6 +455,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         // set the value to the current piece
         ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
+        ui->plainTextEditCurrentPieceUUID->setPlainText(selectedPiece->GetUUID().toString());
 
         ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
         ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
@@ -393,7 +493,7 @@ void VPMainWindow::SetPropertyTabSheetData()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, size.height());
 
     // Set Orientation
-    if(size.width() <= size.height())
+    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
     {
         ui->radioButtonSheetPortrait->setChecked(true);
     }
@@ -416,10 +516,42 @@ void VPMainWindow::SetPropertyTabSheetData()
     SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->GetFocusedSheet()->GetStickyEdges());
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetPropertyTabTilesData()
+{
+    // set Width / Length
+    QSizeF size = m_layout->GetTilesSizeConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesWidth, size.width());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesLength, size.height());
+
+    // Set Orientation
+    if(m_layout->GetTilesOrientation() == PageOrientation::Portrait)
+    {
+        ui->radioButtonSheetPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->radioButtonSheetLandscape->setChecked(true);
+    }
+
+    // set margins
+    QMarginsF margins = m_layout->GetTilesMarginsConverted();
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginLeft, margins.left());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginTop, margins.top());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginRight, margins.right());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginBottom, margins.bottom());
+
+    // set "show tiles" checkbox
+    SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->GetShowTiles());
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabLayoutData()
 {
-    // TODO FIXME : Set name and description
+    // set the title and description
+    ui->lineEditLayoutName->setText(m_layout->GetTitle());
+    ui->plainTextEditLayoutDescription->setPlainText(m_layout->GetDescription());
 
     // set Unit
     int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->GetUnit())));
@@ -435,21 +567,78 @@ void VPMainWindow::SetPropertyTabLayoutData()
     SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::SetPropertyTabTilesData()
-{
 
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitMainGraphics()
 {
-    m_graphicsView = new VPMainGraphicsView(m_layout, this);
+    m_graphicsView = new VPMainGraphicsView(m_layout, m_tileFactory, this);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
+
+    connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
+    connect(m_graphicsView->GetScene(), &VMainGraphicsScene::mouseMove, this, &VPMainWindow::on_MouseMoved);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitZoomToolBar()
+{
+    if (not m_doubleSpinBoxScale.isNull())
+    {
+        delete m_doubleSpinBoxScale;
+    }
+
+    if (m_mouseCoordinate != nullptr)
+    {
+        delete m_mouseCoordinate;
+    }
+
+    // connect the zoom buttons and shortcuts to the slots
+    QList<QKeySequence> zoomInShortcuts;
+    zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
+    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+    ui->actionZoomIn->setShortcuts(zoomInShortcuts);
+    connect(ui->actionZoomIn, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomIn);
+
+    QList<QKeySequence> zoomOutShortcuts;
+    zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
+    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+    ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
+    connect(ui->actionZoomOut, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOut);
+
+    QList<QKeySequence> zoomOriginalShortcuts;
+    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
+    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
+    connect(ui->actionZoomOriginal, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOriginal);
+
+    QList<QKeySequence> zoomFitBestShortcuts;
+    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
+    connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
+
+    // defined the scale
+    ui->toolBarZoom->addSeparator();
+    QLabel* zoomScale = new QLabel(tr("Scale:"), this);
+    ui->toolBarZoom->addWidget(zoomScale);
+
+    m_doubleSpinBoxScale = new QDoubleSpinBox(this);
+    m_doubleSpinBoxScale->setDecimals(1);
+    m_doubleSpinBoxScale->setSuffix("%");
+    on_ScaleChanged(m_graphicsView->transform().m11());
+    connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](double d){m_graphicsView->Zoom(d/100.0);});
+    ui->toolBarZoom->addWidget(m_doubleSpinBoxScale);
+
+
+    // define the mouse position
+    ui->toolBarZoom->addSeparator();
+
+    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
+    ui->toolBarZoom->addWidget(m_mouseCoordinate);
+    ui->toolBarZoom->addSeparator();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
@@ -561,6 +750,81 @@ bool VPMainWindow::MaybeSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::generateTiledPdf(QString fileName)
+{
+    if(not fileName.isEmpty())
+    {
+        m_graphicsView->PrepareForExport();
+        m_tileFactory->refreshTileInfos();
+
+        PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
+
+        // -------------  Set up the printer
+        QPrinter* printer = new QPrinter();
+
+        printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
+                            QCoreApplication::applicationVersion());
+        printer->setOrientation(QPrinter::Portrait); // in the pdf file the pages should always be in portrait
+
+        // here we might need to so some rounding for the size.
+        printer->setPageSize(QPageSize(m_layout->GetTilesSize(Unit::Mm),
+                                                           QPageSize::Millimeter));
+        printer->setFullPage(true);
+
+        #ifdef Q_OS_MAC
+        printer->setOutputFormat(QPrinter::NativeFormat);
+        #else
+        printer->setOutputFormat(QPrinter::PdfFormat);
+        #endif
+
+        printer->setOutputFileName(fileName);
+        printer->setResolution(static_cast<int>(PrintDPI));
+        printer->setDocName("Test"); // FIXME
+
+        // -------------  Set up the painter
+        QPainter painter;
+        if (not painter.begin(printer))
+        { // failed to open file
+            qCritical() << tr("Failed to open file, is it writable?");
+            return;
+        }
+        painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+
+        if(tilesOrientation == PageOrientation::Landscape)
+        {
+            // The landscape tiles have to be rotated, because the pages
+            // stay portrait in the pdf
+            painter.rotate(90);
+            painter.translate(0, -ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm));
+        }
+
+        for(int row=0;row<m_tileFactory->getRowNb();row++)  // for each row of the tiling grid
+        {
+            for(int col=0;col<m_tileFactory->getColNb();col++) // for each column of tiling grid
+            {
+                if(not (row == 0 && col == 0))
+                {
+                    if (not printer->newPage())
+                    {
+                        qWarning("failed in flushing page to disk, disk full?");
+                        return;
+                    }
+                }
+
+                m_tileFactory->drawTile(&painter, m_graphicsView, row, col);
+            }
+        }
+
+        painter.end();
+
+        m_graphicsView->CleanAfterExport();
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
     // just for test purpuses, to be removed:
@@ -669,7 +933,8 @@ void VPMainWindow::on_actionSave_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionSaveAs_triggered()
 {
-    // TODO / FIXME : See valentina how the save is done over there. we need to add the extension .vlt, check for empty file names etc.
+    // TODO / FIXME : See valentina how the save is done over there. we need to add the
+    // extension .vlt, check for empty file names etc.
 
     //Get list last open files
     QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
@@ -771,29 +1036,66 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
         m_layout->SetUnit(Unit::Inch);
     }
 
-    SetPropertyTabSheetData();
     SetPropertyTabCurrentPieceData();
+    SetPropertyTabSheetData();
+    SetPropertyTabTilesData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_lineEditSheetName_textChanged(const QString &text)
+{
+    m_layout->GetFocusedSheet()->SetName(text);
+
+    if(m_carrousel != nullptr)
+    {
+        m_carrousel->RefreshFocusedSheetName();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::SheetTemplateChanged");
-    int ret = msgBox.exec();
+    PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
+                ui->comboBoxSheetTemplate->itemData(index).toInt()
+                );
 
-    Q_UNUSED(index);
-    Q_UNUSED(ret);
+    QSizeF tmplSize = VPSheet::GetTemplateSize(tmpl);
+    if(!tmplSize.isEmpty())
+    {
+        ui->doubleSpinBoxSheetWidth->blockSignals(true);
+        ui->doubleSpinBoxSheetLength->blockSignals(true);
 
+        ui->doubleSpinBoxSheetWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px, m_layout->GetUnit()));
+        ui->doubleSpinBoxSheetLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px, m_layout->GetUnit()));
 
-    // TODO
+        on_SheetSizeChanged(false);
+
+        ui->doubleSpinBoxSheetWidth->blockSignals(false);
+        ui->doubleSpinBoxSheetLength->blockSignals(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_SheetSizeChanged()
+void VPMainWindow::on_SheetSizeChanged(bool changedViaSizeCombobox)
 {
-    m_layout->GetFocusedSheet()->SetSheetSizeConverted(ui->doubleSpinBoxSheetWidth->value(), ui->doubleSpinBoxSheetLength->value());
+    m_layout->GetFocusedSheet()->SetSheetSizeConverted(
+                ui->doubleSpinBoxSheetWidth->value(),
+                ui->doubleSpinBoxSheetLength->value()
+                );
+
+    if(changedViaSizeCombobox)
+    {
+        ui->comboBoxSheetTemplate->blockSignals(true);
+
+        // we don't try to get the right size, because it doesn't work well because of mm / inch conversion
+        int index = ui->comboBoxSheetTemplate->findData(
+                    QVariant(static_cast<int>(PaperSizeTemplate::Custom)));
+
+        ui->comboBoxSheetTemplate->setCurrentIndex(index);
+        ui->comboBoxSheetTemplate->blockSignals(false);
+    }
+
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
@@ -812,6 +1114,7 @@ void VPMainWindow::on_SheetOrientationChanged()
     {
         m_layout->GetFocusedSheet()->SetOrientation(PageOrientation::Landscape);
     }
+    m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
 
@@ -846,6 +1149,120 @@ void VPMainWindow::on_SheetMarginChanged()
 
     m_graphicsView->RefreshLayout();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
+{
+    PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
+                ui->comboBoxTilesTemplate->itemData(index).toInt()
+                );
+
+    QSizeF tmplSize = VPSheet::GetTemplateSize(tmpl);
+    if(!tmplSize.isEmpty())
+    {
+        ui->doubleSpinBoxTilesWidth->blockSignals(true);
+        ui->doubleSpinBoxTilesLength->blockSignals(true);
+
+        ui->doubleSpinBoxTilesWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px, m_layout->GetUnit()));
+        ui->doubleSpinBoxTilesLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px, m_layout->GetUnit()));
+
+        on_TilesSizeChanged(false);
+
+        ui->doubleSpinBoxTilesWidth->blockSignals(false);
+        ui->doubleSpinBoxTilesLength->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_TilesSizeChanged(bool changedViaSizeCombobox)
+{
+    m_layout->SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(), ui->doubleSpinBoxTilesLength->value());
+    m_tileFactory->refreshTileInfos();
+
+    if(changedViaSizeCombobox)
+    {
+        ui->comboBoxTilesTemplate->blockSignals(true);
+
+        // we don't try to get the right size, because it doesn't work well because of mm / inch conversion
+        int index = ui->comboBoxTilesTemplate->findData(
+                    QVariant(static_cast<int>(PaperSizeTemplate::Custom)));
+
+        ui->comboBoxTilesTemplate->setCurrentIndex(index);
+        ui->comboBoxTilesTemplate->blockSignals(false);
+    }
+
+    // TODO Undo / Redo
+
+    if(m_graphicsView != nullptr)
+    {
+        m_graphicsView->RefreshLayout();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_TilesOrientationChanged()
+{
+    // Updates the orientation
+    if(ui->radioButtonTilesPortrait->isChecked())
+    {
+        m_layout->SetTilesOrientation(PageOrientation::Portrait);
+    }
+    else
+    {
+        m_layout->SetTilesOrientation(PageOrientation::Landscape);
+    }
+    m_tileFactory->refreshTileInfos();
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_TilesMarginChanged()
+{
+    m_layout->SetTilesMarginsConverted(
+                ui->doubleSpinBoxTilesMarginLeft->value(),
+                ui->doubleSpinBoxTilesMarginTop->value(),
+                ui->doubleSpinBoxTilesMarginRight->value(),
+                ui->doubleSpinBoxTilesMarginBottom->value()
+            );
+    m_tileFactory->refreshTileInfos();
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
+{
+    m_layout->SetShowTiles(checked);
+
+    // TODO Undo / Redo
+
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonTilesExport_clicked()
+{
+    // svg export to do some test for the first test
+
+    QString dir = QDir::homePath();
+    QString filters(tr("PDF Files") + QLatin1String("(*.pdf)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".pdf"),
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
+
+    generateTiledPdf(fileName);
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -901,14 +1318,43 @@ void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::on_pushButtonSheetExport_clicked");
-    int ret = msgBox.exec();
+    // svg export to do some test for the first test
 
-    Q_UNUSED(ret);
+    QString dir = QDir::homePath();
+    QString filters(tr("SVG Files") + QLatin1String("(*.svg)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".svg"),
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
 
-    // TODO
+    if(not fileName.isEmpty())
+    {
+        m_graphicsView->PrepareForExport();
+
+        const QSizeF s = m_layout->GetFocusedSheet()->GetSheetSize();
+        const QRectF r = QRectF(0, 0, s.width(), s.height());
+
+        QSvgGenerator generator;
+        generator.setFileName(fileName);
+        generator.setSize(QSize(qFloor(s.width()),qFloor(s.height())));
+        generator.setViewBox(r);
+        generator.setTitle(tr("Pattern"));
+        generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
+        generator.setResolution(static_cast<int>(PrintDPI));
+
+        QPainter painter;
+        painter.begin(&generator);
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+        m_graphicsView->GetScene()->render(&painter, r, r, Qt::IgnoreAspectRatio);
+        painter.end();
+
+        m_graphicsView->CleanAfterExport();
+    }
 
 }
 
@@ -1000,5 +1446,32 @@ void VPMainWindow::on_PieceRotationChanged()
         qreal angle = piece->GetRotation();
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ScaleChanged(qreal scale)
+{
+    if (not m_doubleSpinBoxScale.isNull())
+    {
+        m_doubleSpinBoxScale->blockSignals(true);
+        m_doubleSpinBoxScale->setMaximum(qFloor(VPMainGraphicsView::MaxScale()*1000)/10.0);
+        m_doubleSpinBoxScale->setMinimum(qFloor(VPMainGraphicsView::MinScale()*1000)/10.0);
+        m_doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
+        m_doubleSpinBoxScale->setSingleStep(1);
+        m_doubleSpinBoxScale->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_MouseMoved(const QPointF &scenePos)
+{
+    if (m_mouseCoordinate != nullptr)
+    {
+        m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
+                                   .arg(static_cast<qint32>(FromPixel(scenePos.x(), m_layout->GetUnit())))
+                                   .arg(static_cast<qint32>(FromPixel(scenePos.y(), m_layout->GetUnit())))
+                                   .arg(UnitsToStr(m_layout->GetUnit(), true)));
     }
 }

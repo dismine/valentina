@@ -36,7 +36,7 @@
      <x>0</x>
      <y>0</y>
      <width>1427</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -176,7 +176,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>
@@ -234,7 +234,7 @@
               <x>0</x>
               <y>0</y>
               <width>342</width>
-              <height>1252</height>
+              <height>1318</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -275,6 +275,13 @@
                    <string>Infos</string>
                   </property>
                   <layout class="QFormLayout" name="formLayout_4">
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="labelCurrentPieceName">
+                     <property name="text">
+                      <string>Name:</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="1" column="1">
                     <widget class="QLineEdit" name="lineEditCurrentPieceName">
                      <property name="text">
@@ -285,10 +292,26 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="labelCurrentPieceName">
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="labelCurrentPieceUUID">
                      <property name="text">
-                      <string>Name:</string>
+                      <string>UUID:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QPlainTextEdit" name="plainTextEditCurrentPieceUUID">
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>48</height>
+                      </size>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
+                     <property name="plainText">
+                      <string>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</string>
                      </property>
                     </widget>
                    </item>
@@ -507,7 +530,7 @@
          <string/>
         </attribute>
         <attribute name="toolTip">
-         <string>Layout properties</string>
+         <string>Sheet properties</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayoutSheetProperty">
          <property name="leftMargin">
@@ -541,8 +564,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>356</width>
-              <height>761</height>
+              <width>342</width>
+              <height>731</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -609,6 +632,9 @@
                   </item>
                   <item row="1" column="1">
                    <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetWidth">
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
@@ -623,6 +649,9 @@
                   </item>
                   <item row="2" column="1">
                    <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetLength">
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
                     <property name="maximum">
                      <double>100000.000000000000000</double>
                     </property>
@@ -958,7 +987,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>761</height>
+              <height>717</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -968,11 +997,219 @@
                 <string notr="true">font-weight: bold;</string>
                </property>
                <property name="text">
-                <string>Tiles of current sheet</string>
+                <string>Tiled Pdf Export</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxTilesFormat">
+               <property name="title">
+                <string>Format</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_18">
+                <item>
+                 <layout class="QFormLayout" name="formLayoutTilesFormat">
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelTilesWidth">
+                    <property name="text">
+                     <string>Width</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesWidth">
+                    <property name="maximum">
+                     <double>100000.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="labelTilesLength">
+                    <property name="text">
+                     <string>Length</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesLength">
+                    <property name="maximum">
+                     <double>100000.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="labelTilesOrientation">
+                    <property name="text">
+                     <string>Orientation</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <layout class="QHBoxLayout" name="horizontalLayoutTilesOrientation">
+                    <item>
+                     <widget class="QRadioButton" name="radioButtonTilesPortrait">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="share/resources/puzzleicon.qrc">
+                        <normaloff>:/puzzleicon/64x64/iconPortrait.png</normaloff>:/puzzleicon/64x64/iconPortrait.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>32</width>
+                        <height>32</height>
+                       </size>
+                      </property>
+                      <property name="checked">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QRadioButton" name="radioButtonTilesLandscape">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="share/resources/puzzleicon.qrc">
+                        <normaloff>:/puzzleicon/64x64/iconLandscape.png</normaloff>:/puzzleicon/64x64/iconLandscape.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>32</width>
+                        <height>32</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelTilesTemplate">
+                    <property name="text">
+                     <string>Template</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="comboBoxTilesTemplate"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxTilesMargin">
+               <property name="title">
+                <string>Margins</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_2">
+                <item row="1" column="3">
+                 <widget class="QLabel" name="labelTilesMarginRight">
+                  <property name="text">
+                   <string>Right:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="labelTilesMarginLeft">
+                  <property name="text">
+                   <string>Left:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="4">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginRight">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginLeft">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLabel" name="labelTilesMarginTop">
+                  <property name="text">
+                   <string>Top:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginTop">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLabel" name="labelTilesMarginBottom">
+                  <property name="text">
+                   <string>Bottom:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTilesMarginBottom">
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxTilesControl">
+               <property name="title">
+                <string>Control</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_19">
+                <item>
+                 <widget class="QCheckBox" name="checkBoxTilesShowTiles">
+                  <property name="text">
+                   <string>Show Tiles on sheet</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxTilesExport">
+               <property name="title">
+                <string>Export</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_20">
+                <item>
+                 <widget class="QPushButton" name="pushButtonTilesExport">
+                  <property name="text">
+                   <string>Export Tiled Pdf</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
              <item>
@@ -995,8 +1232,15 @@
         </layout>
        </widget>
        <widget class="QWidget" name="tabLayoutProperty">
+        <attribute name="icon">
+         <iconset resource="share/resources/puzzleicon.qrc">
+          <normaloff>:/puzzleicon/64x64/iconProperties.png</normaloff>:/puzzleicon/64x64/iconProperties.png</iconset>
+        </attribute>
         <attribute name="title">
-         <string>Prop.</string>
+         <string/>
+        </attribute>
+        <attribute name="toolTip">
+         <string>Layout properties</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayoutLayoutProperty">
          <property name="leftMargin">
@@ -1031,7 +1275,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>761</height>
+              <height>717</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1066,7 +1310,7 @@
                   <item row="0" column="1">
                    <widget class="QLineEdit" name="lineEditLayoutName">
                     <property name="text">
-                     <string>My layout</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -1155,6 +1399,24 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QToolBar" name="toolBarZoom">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
+   <addaction name="actionZoomOriginal"/>
+   <addaction name="actionZoomFitBest"/>
+  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>&amp;Open</string>
@@ -1233,15 +1495,93 @@
     <string>Properties</string>
    </property>
   </action>
+  <action name="actionZoomIn">
+   <property name="icon">
+    <iconset theme="zoom-in">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="icon">
+    <iconset theme="zoom-out">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionZoomOriginal">
+   <property name="icon">
+    <iconset theme="zoom-original">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom 1:1</string>
+   </property>
+  </action>
+  <action name="actionZoomFitBest">
+   <property name="icon">
+    <iconset theme="zoom-fit-best">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom fit best</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom sheet</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>tabWidgetProperties</tabstop>
+  <tabstop>scrollAreaCurrentPiece</tabstop>
   <tabstop>scrollAreaSheet</tabstop>
+  <tabstop>scrollAreaTiles</tabstop>
+  <tabstop>scrollAreaLayout</tabstop>
+  <tabstop>lineEditCurrentPieceName</tabstop>
+  <tabstop>plainTextEditCurrentPieceUUID</tabstop>
+  <tabstop>checkBoxCurrentPieceShowSeamline</tabstop>
+  <tabstop>checkBoxCurrentPieceMirrorPiece</tabstop>
+  <tabstop>doubleSpinBoxCurrentPieceAngle</tabstop>
+  <tabstop>doubleSpinBoxCurrentPieceBoxPositionX</tabstop>
+  <tabstop>doubleSpinBoxCurrentPieceBoxPositionY</tabstop>
+  <tabstop>lineEditSheetName</tabstop>
+  <tabstop>comboBoxSheetTemplate</tabstop>
+  <tabstop>doubleSpinBoxSheetWidth</tabstop>
+  <tabstop>doubleSpinBoxSheetLength</tabstop>
+  <tabstop>radioButtonSheetPortrait</tabstop>
+  <tabstop>radioButtonSheetLandscape</tabstop>
+  <tabstop>pushButtonSheetRemoveUnusedLength</tabstop>
   <tabstop>doubleSpinBoxSheetMarginTop</tabstop>
   <tabstop>doubleSpinBoxSheetMarginLeft</tabstop>
   <tabstop>doubleSpinBoxSheetMarginRight</tabstop>
   <tabstop>doubleSpinBoxSheetMarginBottom</tabstop>
-  <tabstop>scrollAreaTiles</tabstop>
+  <tabstop>radioButtonSheetFollowGrainlineNo</tabstop>
+  <tabstop>radioButtonSheetFollowGrainlineVertical</tabstop>
+  <tabstop>radioButtonSheetFollowGrainlineHorizontal</tabstop>
+  <tabstop>doubleSpinBoxSheetPiecesGap</tabstop>
+  <tabstop>checkBoxSheetStickyEdges</tabstop>
+  <tabstop>comboBoxSheetExportFormat</tabstop>
+  <tabstop>pushButtonSheetExport</tabstop>
+  <tabstop>doubleSpinBoxTilesWidth</tabstop>
+  <tabstop>doubleSpinBoxTilesLength</tabstop>
+  <tabstop>radioButtonTilesPortrait</tabstop>
+  <tabstop>radioButtonTilesLandscape</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginTop</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginLeft</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginRight</tabstop>
+  <tabstop>doubleSpinBoxTilesMarginBottom</tabstop>
+  <tabstop>checkBoxTilesShowTiles</tabstop>
+  <tabstop>pushButtonTilesExport</tabstop>
+  <tabstop>lineEditLayoutName</tabstop>
+  <tabstop>plainTextEditLayoutDescription</tabstop>
+  <tabstop>comboBoxLayoutUnit</tabstop>
+  <tabstop>checkBoxLayoutWarningPiecesSuperposition</tabstop>
+  <tabstop>checkBoxLayoutWarningPiecesOutOfBound</tabstop>
  </tabstops>
  <resources>
   <include location="share/resources/puzzleicon.qrc"/>

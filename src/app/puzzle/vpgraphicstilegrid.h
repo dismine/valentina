@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpgraphicssheet.h
+ **  @file   vpgraphicstilegrid.h
  **  @author Ronan Le Tiec
- **  @date   3 5, 2020
+ **  @date   19 11, 2020
  **
  **  @brief
  **  @copyright
@@ -26,49 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef VPGRAPHICSSHEET_H
-#define VPGRAPHICSSHEET_H
+#ifndef VPGRAPHICSTILEGRID_H
+#define VPGRAPHICSTILEGRID_H
 
 #include <QGraphicsItem>
 #include <QPainter>
 
-#include "vpsheet.h"
+#include "../vmisc/def.h"
 
-class VPGraphicsSheet : public QGraphicsItem
+class VPTileFactory;
+class VPLayout;
+
+class VPGraphicsTileGrid : public QGraphicsItem
 {
 public:
-    explicit VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsSheet();
+    explicit VPGraphicsTileGrid(VPLayout* layout, VPTileFactory *tileFactory, QGraphicsItem *parent = nullptr);
+    ~VPGraphicsTileGrid();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 
-    QRectF GetSheetRect() const;
-    QRectF GetMarginsRect() const;
-
-    /**
-     * @brief ShowMargin Sets Wether we see the margin
-     * @param value true to show the margin
-     */
-    void SetShowMargin(bool value);
-
-    /**
-     * @brief ShowBorder Sets whether we see the border of the sheet
-     * @param value true to show the border
-     */
-    void SetShowBorder(bool value);
-
-
-
 private:
-    Q_DISABLE_COPY(VPGraphicsSheet)
+    Q_DISABLE_COPY(VPGraphicsTileGrid)
 
-    VPSheet *m_sheet{nullptr};
-    QRectF m_boundingRect;
-
-    bool m_showMargin{true};
-    bool m_showBorder{true};
+    VPTileFactory *m_tileFactory{nullptr};
+    VPLayout *m_layout{nullptr};
 };
 
-#endif // VPGRAPHICSSHEET_H
+#endif // VPGRAPHICSTILEGRID_H
