@@ -30,6 +30,7 @@
 #define VPGRAPHICSPIECE_H
 
 #include <QGraphicsItem>
+#include <QCursor>
 
 class VPPiece;
 
@@ -105,6 +106,8 @@ private:
     QVector<QPainterPath> m_placeLabels;
 
     QPointF m_rotationStartPoint;
+
+    QCursor m_rotateCursor;
 };
 
 #endif // VPGRAPHICSPIECE_H

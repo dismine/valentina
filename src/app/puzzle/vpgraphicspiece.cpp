@@ -31,13 +31,13 @@
 #include <QPen>
 #include <QBrush>
 #include <QPainter>
-#include <QCursor>
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QMenu>
 #include <QtMath>
 #include <QGraphicsScene>
+#include <QApplication>
 
 #include "vppiece.h"
 #include "vppiecelist.h"
@@ -61,8 +61,13 @@ VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
     m_internalPaths(QVector<QPainterPath>()),
     m_internalPathsPenStyle(QVector<Qt::PenStyle>()),
     m_placeLabels(QVector<QPainterPath>()),
-    m_rotationStartPoint(QPointF())
+    m_rotationStartPoint(QPointF()),
+    m_rotateCursor(QCursor())
 {
+
+    QPixmap cursor_pixmap = QIcon("://puzzleicon/svg/cursor_rotate.svg").pixmap(QSize(32,32));
+    m_rotateCursor= QCursor(cursor_pixmap, 16, 16);
+
     Init();
 }
 
@@ -276,11 +281,24 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //perform the default behaviour
     QGraphicsItem::mousePressEvent(event);
 
-    // change the cursor when clicking left button
+    // change the cursor when clicking the left button
+    if((event->button() == Qt::LeftButton))
+    {
+        if(event->modifiers() & Qt::AltModifier)
+        {
+            setCursor(m_rotateCursor);
+        }
+        else
+        {
+            setCursor(Qt::ClosedHandCursor);
+        }
+    }
+
+
+    // change the selected state when clicking left button
     if (event->button() == Qt::LeftButton)
     {
         setSelected(true);
-        setCursor(Qt::ClosedHandCursor);
 
         if (event->modifiers() & Qt::ControlModifier)
         {
@@ -295,12 +313,6 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if((event->button() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
     {
         m_rotationStartPoint = event->scenePos();
-
-        QPixmap cursor_pixmap = QPixmap(":/cursor_rotate");
-        cursor_pixmap = cursor_pixmap.scaledToWidth(32);
-        QCursor cursor_rotate = QCursor(cursor_pixmap, 16, 16);
-
-        setCursor(cursor_rotate);
     }
 }
 
@@ -309,6 +321,8 @@ void VPGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     if((event->buttons() == Qt::LeftButton) && (event->modifiers() & Qt::AltModifier))
     {
+        //FIXME: it flickers between the arrow cursor and the rotate cursor
+        setCursor(m_rotateCursor);
 
         QPointF rotationNewPoint = event->scenePos();
         QPointF rotationCenter = sceneBoundingRect().center();
@@ -365,20 +379,14 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-
     if(event->modifiers() & Qt::AltModifier)
     {
-        // TODO FIXME: find a more efficient way
-
-        QPixmap cursor_pixmap = QPixmap(":/cursor_rotate");
-        cursor_pixmap = cursor_pixmap.scaledToWidth(32);
-        QCursor cursor_rotate = QCursor(cursor_pixmap, 16, 16);
-
-        setCursor(cursor_rotate);
+        //FIXME: it flickers between the arrow cursor and the rotate cursor
+        setCursor(m_rotateCursor);
     }
     else
     {
-        setCursor(QCursor(Qt::OpenHandCursor));
+        setCursor(Qt::OpenHandCursor);
     }
 }
 
