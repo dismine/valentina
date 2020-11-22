@@ -50,31 +50,35 @@ public:
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
 
-    VPieceNode GetNode() const;
-    void       SetNode(const VPieceNode &node);
+    QVector<VPieceNode> GetNodes() const;
+
+    virtual void ShowDialog(bool click) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
     virtual bool IsValid() const final;
+
+private slots:
+    void ShowContextMenu(const QPoint &pos);
 
 private:
     Q_DISABLE_COPY(DialogInsertNode)
     Ui::DialogInsertNode *ui;
 
-    VPieceNode m_node;
-    bool m_flagItem;
-    bool m_flagError;
+    QVector<VPieceNode> m_nodes{};
+    bool m_flagNodes{false};
+    bool m_flagError{false};
 
     void CheckPieces();
-    void CheckItem();
+    void CheckNodes();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogInsertNode::IsValid() const
 {
-    return m_flagItem && m_flagError;
+    return m_flagNodes && m_flagError;
 }
 
 #endif // DIALOGINSERTNODE_H

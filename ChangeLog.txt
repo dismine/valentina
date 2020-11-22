@@ -1,5 +1,7 @@
 # Version 0.7.40 (unreleased)
 - New function Warning.
+- [smart-pattern/valentina#80] Allow insertion of multiple nodes.
+- [smart-pattern/valentina#81] Tape crash on opening.
 
 # Version 0.7.39 Nov 17, 2020
 - Fix crash for Line tool notes.
