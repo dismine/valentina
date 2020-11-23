@@ -715,7 +715,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -842,7 +842,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -1044,7 +1044,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -1103,7 +1103,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -1297,11 +1297,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2:</translation>
     </message>
 </context>
 <context>
@@ -1388,11 +1388,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2:</translation>
     </message>
 </context>
 <context>
@@ -1479,11 +1479,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2:</translation>
     </message>
 </context>
 <context>
@@ -2342,7 +2342,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -2687,7 +2687,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2703,15 +2703,15 @@
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig achtervoegsel</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige groepsnaam</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2719,15 +2719,15 @@
     </message>
     <message>
         <source>Invalid point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig punt</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige label</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige alias</translation>
     </message>
 </context>
 <context>
@@ -2806,7 +2806,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2822,15 +2822,15 @@
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig achtervoegsel</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige groepsnaam</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2838,23 +2838,23 @@
     </message>
     <message>
         <source>Invalid line points</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig lijnpunt</translation>
     </message>
     <message>
         <source>Invalid first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig eerste lijnpunt</translation>
     </message>
     <message>
         <source>Invalid second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig tweede lijnpunt</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige label</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige alias</translation>
     </message>
 </context>
 <context>
@@ -3361,11 +3361,11 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation>Voeg knooppunt in</translation>
+        <translation type="vanished">Voeg knooppunt in</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation>Item:</translation>
+        <translation type="vanished">Item:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3373,11 +3373,19 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation>Onbekend</translation>
+        <translation type="vanished">Onbekend</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>De lijst van patroondelen is leeg. Gelieve ten minste één patroondeel aan te maken voor het huidig patroon.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4362,7 +4370,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -4378,15 +4386,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig achtervoegsel</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige groepsnaam</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -4394,23 +4402,23 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige hoek formule</translation>
     </message>
     <message>
         <source>Invalid rotation angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige draaihoek formule</translation>
     </message>
     <message>
         <source>Invalid length formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige lengte formule</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige label</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige alias</translation>
     </message>
 </context>
 <context>
@@ -6218,7 +6226,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6234,35 +6242,35 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig achtervoegsel</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige groepsnaam</translation>
     </message>
     <message>
         <source>Invalid rotation point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig draaipunt</translation>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige label</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige alias</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige hoek formule</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Label:</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -7091,7 +7099,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -7250,7 +7258,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
 </context>
 <context>
@@ -7839,7 +7847,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
 </context>
 <context>
@@ -9008,7 +9016,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation>Selecteer een item om in te voegen</translation>
+        <translation type="vanished">Selecteer een item om in te voegen</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -10462,7 +10470,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen teken van de formule &apos;%1&apos; verkrijgen. Formule fout: %2.</translation>
     </message>
 </context>
 <context>
@@ -12649,7 +12657,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>standaardwaarde</translation>
     </message>
 </context>
 <context>
@@ -12823,7 +12831,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
 </context>
 <context>
@@ -15121,15 +15129,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2:</translation>
     </message>
 </context>
 <context>
@@ -16762,12 +16770,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>warning</source>
         <comment>Calculation warning</comment>
-        <translation type="unfinished"></translation>
+        <translation>waarschuwing</translation>
     </message>
     <message>
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
-        <translation type="unfinished"></translation>
+        <translation>Toon een waarschuwing in berekeningen</translation>
     </message>
 </context>
 <context>

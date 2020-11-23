@@ -3384,24 +3384,20 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Delete</translation>
     </message>
 </context>
 <context>
@@ -9211,10 +9207,6 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Insert node tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

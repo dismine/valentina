@@ -3309,11 +3309,11 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation>Εισάγετε κόμβο</translation>
+        <translation type="vanished">Εισάγετε κόμβο</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation>Αντικείμενο:</translation>
+        <translation type="vanished">Αντικείμενο:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3321,11 +3321,19 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation>Άγνωστο</translation>
+        <translation type="vanished">Άγνωστο</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
     </message>
 </context>
 <context>
@@ -8857,10 +8865,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Insert node tool</source>
         <translation>Εισάγετε εργαλείο κόμβου</translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

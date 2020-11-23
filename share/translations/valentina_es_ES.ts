@@ -3361,11 +3361,11 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation>Inserte nodo</translation>
+        <translation type="vanished">Inserte nodo</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation>Elemento:</translation>
+        <translation type="vanished">Elemento:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3373,11 +3373,19 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation>Desconocido</translation>
+        <translation type="vanished">Desconocido</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>La lista de piezas esta vacía. Por favor, primero cree al menos una pieza para el actual patrón de piezas.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9009,7 +9017,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation>Seleccionar un elemento para insertar</translation>
+        <translation type="vanished">Seleccionar un elemento para insertar</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

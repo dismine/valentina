@@ -3361,11 +3361,11 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation>Вставить узел</translation>
+        <translation type="vanished">Вставить узел</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation>Объект:</translation>
+        <translation type="vanished">Объект:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3373,11 +3373,19 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation>Неизвестное</translation>
+        <translation type="vanished">Неизвестное</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Список пуст. Пожалуйста, создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Удалить</translation>
     </message>
 </context>
 <context>
@@ -9010,7 +9018,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation>Выберите объект для вставки</translation>
+        <translation type="vanished">Выберите объект для вставки</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

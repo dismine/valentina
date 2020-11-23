@@ -3361,11 +3361,11 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation>Vložit uzel</translation>
+        <translation type="vanished">Vložit uzel</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation>Položka:</translation>
+        <translation type="vanished">Položka:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3373,11 +3373,19 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation>Neznámý</translation>
+        <translation type="vanished">Neznámý</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Seznam dílů je prázdný. Nejprve, prosím, vytvořte alespoň jeden díl pro nynější střih.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Smazat</translation>
     </message>
 </context>
 <context>
@@ -9011,7 +9019,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation>Vyberte položku k vložení</translation>
+        <translation type="vanished">Vyberte položku k vložení</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
