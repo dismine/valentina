@@ -3148,10 +3148,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Uknown</source>
-        <translation type="vanished">Nieznany</translation>
-    </message>
-    <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3161,7 +3157,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Usuń</translation>
+        <translation>Usuń</translation>
     </message>
 </context>
 <context>
@@ -6967,6 +6963,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

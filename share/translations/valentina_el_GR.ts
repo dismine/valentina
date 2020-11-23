@@ -3308,20 +3308,8 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation type="vanished">Εισάγετε κόμβο</translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation type="vanished">Αντικείμενο:</translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation>Κομμάτι:</translation>
-    </message>
-    <message>
-        <source>Uknown</source>
-        <translation type="vanished">Άγνωστο</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -3333,7 +3321,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Διαγραφή</translation>
+        <translation>Διαγραφή</translation>
     </message>
 </context>
 <context>
@@ -7561,6 +7549,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

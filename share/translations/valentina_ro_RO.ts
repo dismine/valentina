@@ -3126,7 +3126,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
 </context>
 <context>
@@ -6944,6 +6944,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

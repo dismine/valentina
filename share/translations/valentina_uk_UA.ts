@@ -3360,20 +3360,8 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation type="vanished">Вставити вузол</translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation type="vanished">Обєкт:</translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation>Деталь:</translation>
-    </message>
-    <message>
-        <source>Uknown</source>
-        <translation type="vanished">Невідоме</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -3385,7 +3373,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
@@ -7660,6 +7648,10 @@ Apply settings anyway?</source>
         <source>%1 update is available!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
@@ -9013,10 +9005,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Insert node tool</source>
         <translation>Інструмент вставка вузла</translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
-        <translation type="vanished">Виберіть обєкт для вставки</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

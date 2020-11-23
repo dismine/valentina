@@ -70,7 +70,7 @@ bool FvUpdateWindow::UpdateWindowWithCurrentProposedUpdate()
     QString downloadString;
     if (FvUpdater::IsTestBuild())
     {
-        downloadString = QString("New %1 test build is now available. Would you like to download it now?")
+        downloadString = tr("New %1 test version is now available. Would you like to download it now?")
                 .arg(QGuiApplication::applicationDisplayName());
     }
     else
