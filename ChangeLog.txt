@@ -1,3 +1,6 @@
+# Version 0.7.41 (unreleased)
+- Bug fixes.
+
 # Version 0.7.40 Nov 23, 2020
 - New function Warning.
 - [smart-pattern/valentina#80] Allow insertion of multiple nodes.

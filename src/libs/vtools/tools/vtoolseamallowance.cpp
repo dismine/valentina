@@ -1788,7 +1788,6 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
                 tool->setParentItem(parent);
                 tool->SetParentType(ParentType::Item);
                 tool->SetExluded(node.IsExcluded());
-                doc->IncrementReferens(node.GetId());
             }
             tool->setVisible(not node.IsExcluded());//Hide excluded point
             break;
@@ -1797,7 +1796,7 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-            doc->IncrementReferens(data->GetGObject(node.GetId())->getIdTool());
+            // Do nothing
             break;
         default:
             qDebug()<<"Get wrong tool type. Ignore.";
