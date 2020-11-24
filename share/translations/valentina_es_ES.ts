@@ -3368,24 +3368,20 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation>Inserte nodo</translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation>Elemento:</translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation>Pieza:</translation>
     </message>
     <message>
-        <source>Uknown</source>
-        <translation>Desconocido</translation>
-    </message>
-    <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>La lista de piezas esta vacía. Por favor, primero cree al menos una pieza para el actual patrón de piezas.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>
@@ -7667,6 +7663,10 @@ Aplicar características de todos modos?</translation>
         <source>%1 update is available!</source>
         <translation>¡%1 actualización esta disponible!</translation>
     </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
@@ -9022,10 +9022,6 @@ el patrón.</translation>
     <message>
         <source>Insert node tool</source>
         <translation>Insertar herramienta nodo</translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
-        <translation>Seleccionar un elemento para insertar</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

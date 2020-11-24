@@ -3368,24 +3368,20 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation>Inserir nó</translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation>Item:</translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation>Peça:</translation>
     </message>
     <message>
-        <source>Uknown</source>
-        <translation>Desconhecido</translation>
-    </message>
-    <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Excluir</translation>
     </message>
 </context>
 <context>
@@ -7660,6 +7656,10 @@ Aplicar configurações de qualquer forma?</translation>
         <source>%1 update is available!</source>
         <translation>%1 atualização está disponível!</translation>
     </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
@@ -9014,10 +9014,6 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Insert node tool</source>
         <translation>Inserir ferramenta de nó</translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
-        <translation>Selecione um item para inserir</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

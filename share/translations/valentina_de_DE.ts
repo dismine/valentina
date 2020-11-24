@@ -3368,24 +3368,20 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation>Knoten einfügen</translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation>Item:</translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation>Stück:</translation>
     </message>
     <message>
-        <source>Uknown</source>
-        <translation>Unbekannt</translation>
-    </message>
-    <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Die Liste an Schnittteilen ist leer. Bitte erstellen Sie erst mindestens ein Schnittteile für das aktuelle Schnittteil.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>
@@ -7667,6 +7663,10 @@ Einstellungen trotzdem anwenden?</translation>
         <source>%1 update is available!</source>
         <translation>%1 Update ist verfügbar!</translation>
     </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
@@ -9021,10 +9021,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Insert node tool</source>
         <translation>Knoten einfügen Werkzeug</translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
-        <translation>Wählen Sie ein Item zum Einfügen aus</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>

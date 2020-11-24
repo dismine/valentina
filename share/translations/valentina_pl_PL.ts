@@ -3152,24 +3152,20 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Uknown</source>
-        <translation>Nieznany</translation>
-    </message>
-    <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Usuń</translation>
     </message>
 </context>
 <context>
@@ -6981,6 +6977,10 @@ Apply settings anyway?</source>
         <source>%1 update is available!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
@@ -8104,10 +8104,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Insert node tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

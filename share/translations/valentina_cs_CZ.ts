@@ -3368,24 +3368,20 @@
 <context>
     <name>DialogInsertNode</name>
     <message>
-        <source>Insert node</source>
-        <translation>Vložit uzel</translation>
-    </message>
-    <message>
-        <source>Item:</source>
-        <translation>Položka:</translation>
-    </message>
-    <message>
         <source>Piece:</source>
         <translation>Díl:</translation>
     </message>
     <message>
-        <source>Uknown</source>
-        <translation>Neznámý</translation>
-    </message>
-    <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Seznam dílů je prázdný. Nejprve, prosím, vytvořte alespoň jeden díl pro nynější střih.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Smazat</translation>
     </message>
 </context>
 <context>
@@ -7670,6 +7666,10 @@ Přesto použít nastavení?</translation>
         <source>%1 update is available!</source>
         <translation>Je dostupná aktualizace %1!</translation>
     </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
@@ -9024,10 +9024,6 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Insert node tool</source>
         <translation>Nástroj Vložit uzel</translation>
-    </message>
-    <message>
-        <source>Select an item to insert</source>
-        <translation>Vyberte položku k vložení</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
