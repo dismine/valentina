@@ -202,8 +202,7 @@ private:
                                                 qreal &rotationAngle, QPointF &pos);
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
-    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                         VToolSeamAllowance *parent);
+    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent);
     void InitCSAPaths(const VPiece &detail) const;
     void InitInternalPaths(const VPiece &detail);
     void InitSpecialPoints(const QVector<quint32> &points) const;

@@ -259,7 +259,7 @@ void VToolSeamAllowance::InsertNode(const QVector<VPieceNode> &nodes, quint32 pi
             VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
             SCASSERT(saTool != nullptr);
 
-            InitNode(node, scene, doc, saTool);
+            InitNode(node, scene, saTool);
         }
 
         qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
@@ -1744,16 +1744,14 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
 {
     for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
     {
-        InitNode(detail.GetPath().at(i), scene, doc, this);
+        InitNode(detail.GetPath().at(i), scene, this);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                  VToolSeamAllowance *parent)
+void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent)
 {
     SCASSERT(scene != nullptr)
-    SCASSERT(doc != nullptr)
     SCASSERT(parent != nullptr)
 
     switch (node.GetTypeTool())
