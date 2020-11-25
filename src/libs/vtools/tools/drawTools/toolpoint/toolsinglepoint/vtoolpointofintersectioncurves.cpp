@@ -283,13 +283,13 @@ bool VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1Poi
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolPointOfIntersectionCurves::FirstCurveName() const
 {
-    return VAbstractTool::data.GetGObject(firstCurveId)->name();
+    return VAbstractTool::data.GetGObject(firstCurveId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolPointOfIntersectionCurves::SecondCurveName() const
 {
-    return VAbstractTool::data.GetGObject(secondCurveId)->name();
+    return VAbstractTool::data.GetGObject(secondCurveId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

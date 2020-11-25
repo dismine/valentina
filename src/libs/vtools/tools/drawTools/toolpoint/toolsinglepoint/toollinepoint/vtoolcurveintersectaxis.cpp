@@ -222,7 +222,7 @@ void VToolCurveIntersectAxis::SetFormulaAngle(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolCurveIntersectAxis::CurveName() const
 {
-    return VAbstractTool::data.GetGObject(curveId)->name();
+    return VAbstractTool::data.GetGObject(curveId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
