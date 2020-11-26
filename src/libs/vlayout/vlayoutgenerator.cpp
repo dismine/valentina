@@ -267,6 +267,11 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
     {
         UnitePages();
     }
+
+    if (bank->FailedToArrange() == 0)
+    {
+        state = LayoutErrors::NoError;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

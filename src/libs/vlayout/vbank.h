@@ -80,7 +80,7 @@ public:
 
     int AllDetailsCount() const;
     int LeftToArrange() const;
-    int ArrangedCount() const;
+    int FailedToArrange() const;
 
     qreal GetBiggestDiagonal() const;
 

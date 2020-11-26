@@ -438,15 +438,15 @@ int VBank::LeftToArrange() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VBank::GetBiggestDiagonal() const
+int VBank::FailedToArrange() const
 {
-    return diagonal;
+    return CountDetails(unsorted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::ArrangedCount() const
+qreal VBank::GetBiggestDiagonal() const
 {
-    return details.size() - AllDetailsCount();
+    return diagonal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
