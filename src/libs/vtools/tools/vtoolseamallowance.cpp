@@ -1744,7 +1744,9 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
 {
     for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
     {
-        InitNode(detail.GetPath().at(i), scene, this);
+        const VPieceNode &node = detail.GetPath().at(i);
+        InitNode(node, scene, this);
+        doc->IncrementReferens(VAbstractTool::data.GetGObject(node.GetId())->getIdTool());
     }
 }
 
