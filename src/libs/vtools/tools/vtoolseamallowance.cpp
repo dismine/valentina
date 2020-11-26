@@ -223,8 +223,8 @@ void VToolSeamAllowance::RemoveWithConfirm(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InsertNode(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
-                                    VContainer *data, VAbstractPattern *doc)
+void VToolSeamAllowance::InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+                                     VContainer *data, VAbstractPattern *doc)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(data != nullptr)

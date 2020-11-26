@@ -91,7 +91,7 @@ public:
 
     void RemoveWithConfirm(bool ask);
 
-    static void InsertNode(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+    static void InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
                            VContainer *data, VAbstractPattern *doc);
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
