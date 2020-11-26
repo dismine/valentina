@@ -250,13 +250,13 @@ bool VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2,
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolPointOfIntersectionArcs::FirstArcName() const
 {
-    return VAbstractTool::data.GetGObject(firstArcId)->name();
+    return VAbstractTool::data.GetGObject(firstArcId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolPointOfIntersectionArcs::SecondArcName() const
 {
-    return VAbstractTool::data.GetGObject(secondArcId)->name();
+    return VAbstractTool::data.GetGObject(secondArcId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
