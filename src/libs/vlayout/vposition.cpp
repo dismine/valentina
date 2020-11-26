@@ -446,6 +446,11 @@ void VPosition::RotateOnAngle(qreal angle)
 
     if (CheckRotationEdges(workDetail, m_data.j, m_data.i, angle))
     {
+        if (stop->load())
+        {
+            return;
+        }
+
 #ifdef LAYOUT_DEBUG
 #   ifdef SHOW_CANDIDATE_BEST
         DumpFrame(m_data.gContour, workDetail, m_data.mutex, m_data.details);
@@ -592,6 +597,11 @@ void VPosition::FollowGrainline()
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::FindBestPosition()
 {
+    if (stop->load())
+    {
+        return;
+    }
+
     if (not m_data.followGrainline || not m_data.detail.IsGrainlineEnabled())
     {
         // We should use copy of the detail.
@@ -600,6 +610,11 @@ void VPosition::FindBestPosition()
         int dEdge = m_data.i;// For mirror detail edge will be different
         if (CheckCombineEdges(workDetail, m_data.j, dEdge))
         {
+            if (stop->load())
+            {
+                return;
+            }
+
 #ifdef LAYOUT_DEBUG
 #   ifdef SHOW_CANDIDATE_BEST
             DumpFrame(m_data.gContour, workDetail, m_data.mutex, m_data.details);

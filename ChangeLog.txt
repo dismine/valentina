@@ -1,5 +1,6 @@
 # Version 0.7.41 (unreleased)
 - Bug fixes.
+- Improve canceling nesting.
 
 # Version 0.7.40 Nov 23, 2020
 - New function Warning.
