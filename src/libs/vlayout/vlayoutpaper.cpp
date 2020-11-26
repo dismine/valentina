@@ -43,6 +43,10 @@
 #include <Qt>
 #include <QtAlgorithms>
 
+#ifdef LAYOUT_DEBUG
+#include <QMutex>
+#endif
+
 #include "vbestsquare.h"
 #include "vcontour.h"
 #include "vlayoutpiece.h"
@@ -239,6 +243,10 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
         d->localRotationNumber = d->globalRotationNumber;
     }
 
+#ifdef LAYOUT_DEBUG
+    QMutex mutex;
+#endif
+
     VPositionData data;
     data.gContour = d->globalContour;
     data.detail = detail;
@@ -247,9 +255,17 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
     data.followGrainline = d->followGrainline;
     data.positionsCache = d->positionsCache;
     data.isOriginPaperOrientationPortrait = d->originPaperOrientation;
+#ifdef LAYOUT_DEBUG
+    data.details = d->details;
+    data.mutex = &mutex;
+#endif
 
     const VBestSquare result = VPosition::ArrangeDetail(data, &stop, d->saveLength);
+#ifdef LAYOUT_DEBUG
+    return SaveResult(result, detail, &mutex);
+#else
     return SaveResult(result, detail);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -259,7 +275,11 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail)
+bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail
+#ifdef LAYOUT_DEBUG
+                              , QMutex *mutex
+#endif
+                              )
 {
     if (bestResult.HasValidResult())
     {
@@ -287,6 +307,12 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
         positionChache.layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
         d->positionsCache.append(positionChache);
+
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_BEST
+        VPosition::DumpFrame(d->globalContour, workDetail, mutex, d->details);
+#   endif
+#endif
     }
     else if (bestResult.IsTerminatedByException())
     {

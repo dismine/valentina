@@ -293,6 +293,13 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
 
     QCoreApplication::processEvents();
 
+#ifdef LAYOUT_DEBUG
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
+    QDir debugDir(path);
+    debugDir.removeRecursively();
+    debugDir.mkpath(path);
+#endif
+
     forever
     {
         if (IsTimeout())
@@ -307,7 +314,9 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
             break;
         }
 
-        switch (lGenerator.State())
+        nestingState = lGenerator.State();
+
+        switch (nestingState)
         {
             case LayoutErrors::NoError:
                 if (lGenerator.PapersCount() <= papersCount)
