@@ -2,6 +2,7 @@
 - Bug fixes.
 - Improve canceling nesting.
 - Fix incorrect nesting status for valid cases.
+- Improve crossing check for the layout algorithm.
 
 # Version 0.7.40 Nov 23, 2020
 - New function Warning.

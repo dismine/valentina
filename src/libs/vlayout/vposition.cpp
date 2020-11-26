@@ -480,10 +480,11 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 
     for(auto &position : m_data.positionsCache)
     {
-        if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect))
+        if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect)
+            || detailBoundingRect.contains(position.boundingRect))
         {
-            if (position.layoutAllowancePath.contains(contourPath) ||
-                    position.layoutAllowancePath.intersects(layoutAllowancePath))
+            if (position.layoutAllowancePath.contains(contourPath) || contourPath.contains(position.layoutAllowancePath)
+                || position.layoutAllowancePath.intersects(layoutAllowancePath))
             {
                 return CrossingType::Intersection;
             }
