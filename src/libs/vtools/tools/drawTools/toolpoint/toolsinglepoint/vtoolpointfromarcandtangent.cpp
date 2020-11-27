@@ -234,7 +234,7 @@ QString VToolPointFromArcAndTangent::TangentPointName() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolPointFromArcAndTangent::ArcName() const
 {
-    return VAbstractTool::data.GetGObject(arcId)->name();
+    return VAbstractTool::data.GetGObject(arcId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
