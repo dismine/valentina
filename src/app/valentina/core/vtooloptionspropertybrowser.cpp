@@ -2752,7 +2752,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *i
 {
     auto *i = qgraphicsitem_cast<VToolPointOfContact *>(item);
     i->ShowVisualization(true);
-    formView->setTitle(tr("Point at intersection of arc and line"));
+    formView->setTitle(tr("Point of intersection circle and segment"));
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->ArcCenterPointName(), tr("Center of arc:"), AttrCenter);
