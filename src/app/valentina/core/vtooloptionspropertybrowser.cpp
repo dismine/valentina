@@ -2473,6 +2473,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
 
     switch (PropertiesList().indexOf(id))
     {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
         case 40://AttrRadius1
             SetFormulaRadius1(property);
             break;
@@ -3067,6 +3070,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Elliptical arc"));
 
+    AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius1(), AttrRadius1);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius2(), AttrRadius2);
