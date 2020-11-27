@@ -91,7 +91,7 @@ public:
 
     void RemoveWithConfirm(bool ask);
 
-    static void InsertNode(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+    static void InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
                            VContainer *data, VAbstractPattern *doc);
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
@@ -202,8 +202,7 @@ private:
                                                 qreal &rotationAngle, QPointF &pos);
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
-    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data, VAbstractPattern *doc,
-                         VToolSeamAllowance *parent);
+    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent);
     void InitCSAPaths(const VPiece &detail) const;
     void InitInternalPaths(const VPiece &detail);
     void InitSpecialPoints(const QVector<quint32> &points) const;

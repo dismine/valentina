@@ -225,8 +225,8 @@ void VToolSeamAllowance::RemoveWithConfirm(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InsertNode(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
-                                    VContainer *data, VAbstractPattern *doc)
+void VToolSeamAllowance::InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+                                     VContainer *data, VAbstractPattern *doc)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(data != nullptr)
@@ -261,7 +261,7 @@ void VToolSeamAllowance::InsertNode(const QVector<VPieceNode> &nodes, quint32 pi
             VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
             SCASSERT(saTool != nullptr);
 
-            InitNode(node, scene, data, doc, saTool);
+            InitNode(node, scene, saTool);
         }
 
         qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
@@ -1747,17 +1747,16 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
 {
     for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
     {
-        InitNode(detail.GetPath().at(i), scene, &(VAbstractTool::data), doc, this);
+        const VPieceNode &node = detail.GetPath().at(i);
+        InitNode(node, scene, this);
+        doc->IncrementReferens(VAbstractTool::data.GetGObject(node.GetId())->getIdTool());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data,
-                                  VAbstractPattern *doc, VToolSeamAllowance *parent)
+void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent)
 {
     SCASSERT(scene != nullptr)
-    SCASSERT(data != nullptr)
-    SCASSERT(doc != nullptr)
     SCASSERT(parent != nullptr)
 
     switch (node.GetTypeTool())

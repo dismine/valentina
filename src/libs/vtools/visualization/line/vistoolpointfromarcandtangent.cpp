@@ -98,16 +98,16 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
     const qreal radius = arc->GetRadius();
     const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
 
-    QLineF r1Arc(center, p1);
-    r1Arc.setLength(radius+10);
-
-    QLineF r2Arc(center, p2);
-    r2Arc.setLength(radius+10);
-
     switch(res)
     {
         case 2:
         {
+            QLineF r1Arc(center, p1);
+            r1Arc.setLength(radius+10);
+
+            QLineF r2Arc(center, p2);
+            r2Arc.setLength(radius+10);
+
             int localRes = 0;
             bool flagP1 = false;
 

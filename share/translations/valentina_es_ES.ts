@@ -14821,7 +14821,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Punto de intersección del arco y la línea</translation>
+        <translation type="vanished">Punto de intersección del arco y la línea</translation>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
@@ -15282,6 +15282,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
+        <translation type="unfinished">Punto de intersección circulo y segmento</translation>
     </message>
 </context>
 <context>

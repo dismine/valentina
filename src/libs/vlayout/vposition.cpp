@@ -61,6 +61,85 @@
 #include <QScopeGuard>
 #endif
 
+namespace
+{
+#ifdef LAYOUT_DEBUG
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath ShowDirection(const QLineF &edge)
+{
+    const int arrowLength = 14;
+    QPainterPath path;
+    if (edge.length()/arrowLength < 5)
+    {
+        return  path;
+    }
+
+    QLineF arrow = edge;
+    arrow.setLength(edge.length()/2.0);
+
+    //Reverse line because we want start arrow from this point
+    arrow = QLineF(arrow.p2(), arrow.p1());
+    const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
+    arrow.setLength(arrowLength);//arrow length in pixels
+
+    arrow.setAngle(angle-35);
+    path.moveTo(arrow.p1());
+    path.lineTo(arrow.p2());
+
+    arrow.setAngle(angle+35);
+    path.moveTo(arrow.p1());
+    path.lineTo(arrow.p2());
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath DumpContour(const QVector<QPointF> &points)
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+    if (points.count() >= 2)
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.moveTo(points.at(i));
+            path.lineTo(points.at(i+1));
+        }
+        path.lineTo(points.at(0));
+
+#ifdef SHOW_DIRECTION
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.addPath(ShowDirection(QLineF(points.at(i), points.at(i+1))));
+        }
+#endif
+
+#ifdef SHOW_VERTICES
+        for (qint32 i = 0; i < points.count(); ++i)
+        {
+            path.addRect(points.at(i).x()-3, points.at(i).y()-3, 6, 6);
+        }
+#endif
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath DumpDetails(const QVector<VLayoutPiece> &details)
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+    if (details.count() > 0)
+    {
+        for (auto &detail : details)
+        {
+            path.addPath(detail.ContourPath());
+        }
+    }
+    return path;
+}
+#endif
+} //anonymous namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition()
 {}
@@ -246,6 +325,12 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 
     CombineEdges(detail, globalEdge, dEdge);
 
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_COMBINE
+    DumpFrame(m_data.gContour, detail, m_data.mutex, m_data.details);
+#   endif
+#endif
+
     CrossingType type = CrossingType::Intersection;
     if (not detail.IsForceFlipping() && SheetContains(detail.DetailBoundingRect()))
     {
@@ -276,6 +361,12 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 
     if (flagMirror && not detail.IsForbidFlipping())
     {
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_MIRROR
+        DumpFrame(m_data.gContour, detail, m_data.mutex, m_data.details);
+#   endif
+#endif
+
         dEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
 
         if (dEdge <= 0)
@@ -319,6 +410,12 @@ bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal
 
     RotateEdges(detail, globalEdge, dEdge, angle);
 
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_ROTATION
+    DumpFrame(m_data.gContour, detail, m_data.mutex, m_data.details);
+#   endif
+#endif
+
     CrossingType type = CrossingType::Intersection;
     if (SheetContains(detail.DetailBoundingRect()))
     {
@@ -349,6 +446,17 @@ void VPosition::RotateOnAngle(qreal angle)
 
     if (CheckRotationEdges(workDetail, m_data.j, m_data.i, angle))
     {
+        if (stop->load())
+        {
+            return;
+        }
+
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_CANDIDATE_BEST
+        DumpFrame(m_data.gContour, workDetail, m_data.mutex, m_data.details);
+#   endif
+#endif
+
         SaveCandidate(m_bestResult, workDetail, m_data.j, m_data.i, BestFrom::Rotation);
     }
 }
@@ -372,10 +480,11 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 
     for(auto &position : m_data.positionsCache)
     {
-        if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect))
+        if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect)
+            || detailBoundingRect.contains(position.boundingRect))
         {
-            if (position.layoutAllowancePath.contains(contourPath) ||
-                    position.layoutAllowancePath.intersects(layoutAllowancePath))
+            if (position.layoutAllowancePath.contains(contourPath) || contourPath.contains(position.layoutAllowancePath)
+                || position.layoutAllowancePath.intersects(layoutAllowancePath))
             {
                 return CrossingType::Intersection;
             }
@@ -489,6 +598,11 @@ void VPosition::FollowGrainline()
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::FindBestPosition()
 {
+    if (stop->load())
+    {
+        return;
+    }
+
     if (not m_data.followGrainline || not m_data.detail.IsGrainlineEnabled())
     {
         // We should use copy of the detail.
@@ -497,6 +611,17 @@ void VPosition::FindBestPosition()
         int dEdge = m_data.i;// For mirror detail edge will be different
         if (CheckCombineEdges(workDetail, m_data.j, dEdge))
         {
+            if (stop->load())
+            {
+                return;
+            }
+
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_CANDIDATE_BEST
+            DumpFrame(m_data.gContour, workDetail, m_data.mutex, m_data.details);
+#   endif
+#endif
+
             SaveCandidate(m_bestResult, workDetail, m_data.j, dEdge, BestFrom::Combine);
         }
 
@@ -515,3 +640,92 @@ void VPosition::FindBestPosition()
         FollowGrainline();
     }
 }
+
+#ifdef LAYOUT_DEBUG
+//---------------------------------------------------------------------------------------------------------------------
+void VPosition::DumpFrame(const VContour &contour, const VLayoutPiece &detail, QMutex *mutex,
+                          const QVector<VLayoutPiece> &details = QVector<VLayoutPiece>())
+{
+    auto Bias = [](int length, int maxLength)
+    {
+        return length < maxLength && length*2 < maxLength ? length : maxLength-length;
+    };
+
+    const int biasWidth = Bias(contour.GetWidth(), QIMAGE_MAX);
+    const int biasHeight = Bias(contour.GetHeight(), QIMAGE_MAX);
+
+    QPicture picture;
+    QPainter paint;
+    paint.begin(&picture);
+
+    paint.setPen(QPen(Qt::black, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    QPainterPath p;
+    if (contour.GetContour().isEmpty())
+    {
+        p = DumpContour(contour.CutEmptySheetEdge());
+        p.translate(biasWidth/2, biasHeight/2);
+        paint.drawPath(p);
+    }
+    else
+    {
+        p = DumpContour(contour.GetContour());
+        p.translate(biasWidth/2, biasHeight/2);
+        paint.drawPath(p);
+    }
+
+#ifdef SHOW_CANDIDATE
+    paint.setPen(QPen(Qt::darkGreen, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    p = DumpContour(detail.GetLayoutAllowancePoints());
+    p.translate(biasWidth/2, biasHeight/2);
+    paint.drawPath(p);
+#else
+    Q_UNUSED(detail)
+    Q_UNUSED(details)
+#endif
+
+#ifdef ARRANGED_DETAILS
+    paint.setPen(QPen(Qt::blue, 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    p = DumpDetails(details);
+    p.translate(biasWidth/2, biasHeight/2);
+    paint.drawPath(p);
+#else
+    Q_UNUSED(details)
+#endif
+
+    // Calculate bounding rect before draw sheet rect
+    const QRect pictureRect = picture.boundingRect();
+
+    // Sheet
+#ifdef SHOW_SHEET
+    paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.drawRect(QRectF(biasWidth/2, biasHeight/2, contour.GetWidth(), contour.GetHeight()));
+#endif
+
+    paint.end();
+
+    // Dump frame to image
+    // Note. If program was build with Address Sanitizer possible crashes. Address Sanitizer doesn't support big
+    // allocations. See page https://bitbucket.org/dismine/valentina/wiki/developers/Address_Sanitizer
+    QImage frameImage(pictureRect.width()+biasWidth, pictureRect.height()+biasHeight, QImage::Format_RGB32);
+
+    if (frameImage.isNull())
+    {
+        return;
+    }
+
+    frameImage.fill(Qt::white);
+
+    QPainter paintFrameImage;
+    paintFrameImage.begin(&frameImage);
+    paintFrameImage.drawPicture(0, 0, picture);
+    paintFrameImage.end();
+
+    QMutexLocker locker(mutex);
+
+    static int frame = 0;
+    ++frame;
+
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/%1.png").arg(frame);
+    frameImage.save (path);
+}
+#endif

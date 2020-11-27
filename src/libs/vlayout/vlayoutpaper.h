@@ -44,6 +44,7 @@ class VLayoutPiece;
 class QGraphicsRectItem;
 class QRectF;
 class QGraphicsItem;
+class QMutex;
 template <typename T> class QList;
 template <typename T> class QVector;
 
@@ -107,7 +108,11 @@ public:
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail);
+    bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail
+#ifdef LAYOUT_DEBUG
+                    , QMutex *mutex
+#endif
+                   );
 
 };
 

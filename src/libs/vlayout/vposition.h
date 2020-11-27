@@ -35,6 +35,10 @@
 #include <QtGlobal>
 #include <atomic>
 
+#ifdef LAYOUT_DEBUG
+#include <QMutex>
+#endif
+
 #include "vbestsquare.h"
 #include "vcontour.h"
 #include "vlayoutdef.h"
@@ -51,6 +55,10 @@ struct VPositionData
     bool followGrainline{false};
     QVector<VCachedPositions> positionsCache{};
     bool isOriginPaperOrientationPortrait{true};
+#ifdef LAYOUT_DEBUG
+    QVector<VLayoutPiece> details{};
+    QMutex *mutex{nullptr};
+#endif
 };
 
 QT_WARNING_PUSH
@@ -71,6 +79,11 @@ public:
     VBestSquare getBestResult() const;
 
     static VBestSquare ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
+
+#ifdef LAYOUT_DEBUG
+    static void DumpFrame(const VContour &contour, const VLayoutPiece &detail, QMutex *mutex,
+                          const QVector<VLayoutPiece> &details);
+#endif
 
 private:
     bool m_isValid{false};

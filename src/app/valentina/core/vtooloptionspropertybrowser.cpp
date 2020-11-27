@@ -2473,6 +2473,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
 
     switch (PropertiesList().indexOf(id))
     {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
         case 40://AttrRadius1
             SetFormulaRadius1(property);
             break;
@@ -2749,7 +2752,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *i
 {
     auto *i = qgraphicsitem_cast<VToolPointOfContact *>(item);
     i->ShowVisualization(true);
-    formView->setTitle(tr("Point at intersection of arc and line"));
+    formView->setTitle(tr("Point of intersection circle and segment"));
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->ArcCenterPointName(), tr("Center of arc:"), AttrCenter);
@@ -3067,6 +3070,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Elliptical arc"));
 
+    AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius1(), AttrRadius1);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius2(), AttrRadius2);
