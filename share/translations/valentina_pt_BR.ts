@@ -14590,7 +14590,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Ponto de interseção entre arco e linha</translation>
+        <translation type="vanished">Ponto de interseção entre arco e linha</translation>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
@@ -15050,6 +15050,10 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

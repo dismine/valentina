@@ -14634,7 +14634,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Laufender Schnittpunkt auf Kreisbogen</translation>
+        <translation type="vanished">Laufender Schnittpunkt auf Kreisbogen</translation>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
@@ -15087,6 +15087,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
+        <translation type="unfinished">Punkt am Schnittpunkt von Kreis und Abschnitt</translation>
     </message>
 </context>
 <context>

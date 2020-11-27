@@ -3369,7 +3369,7 @@
     </message>
     <message>
         <source>Insert nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Knooppunt invoegen</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -4737,7 +4737,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>zonder titel</translation>
+        <translation>naamloos</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -7650,7 +7650,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>New %1 test version is now available. Would you like to download it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe %1 test versie is beschikbaar. Wens je die nu te downloaden?</translation>
     </message>
 </context>
 <context>
@@ -8254,7 +8254,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>untitled.val</source>
-        <translation>zonder titel.val</translation>
+        <translation>naamloos.val</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -10981,7 +10981,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>untitled %1</source>
-        <translation>zonder titel %1</translation>
+        <translation>naamloos %1</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
@@ -11053,7 +11053,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">zonder titel</translation>
+        <translation type="vanished">naamloos</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -14665,7 +14665,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Kruispunt van boog en lijn</translation>
+        <translation type="vanished">Kruispunt van boog en lijn</translation>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
@@ -15126,6 +15126,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
+        <translation type="unfinished">Kruispunt van cirkel en segment</translation>
     </message>
 </context>
 <context>
@@ -17169,7 +17173,7 @@ Deze wijziging opslaan?</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
-        <translation>untitled.vwm</translation>
+        <translation>naamloos.vwm</translation>
     </message>
     <message>
         <source>Confirm format rewriting</source>
