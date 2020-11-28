@@ -5279,6 +5279,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         ActionDraw(true);
 
         qApp->setOpeningPattern();// End opening file
+        m_statusLabel->setText(QString());
         return true;
     }
     else
