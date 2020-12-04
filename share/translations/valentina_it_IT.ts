@@ -13492,6 +13492,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Show label</source>
         <translation>Mostra etichetta</translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>

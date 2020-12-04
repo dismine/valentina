@@ -13576,6 +13576,10 @@ Do you want to save your changes?</translation>
         <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>

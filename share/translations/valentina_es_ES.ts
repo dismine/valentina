@@ -13583,6 +13583,10 @@ Quieres guardar los cambios?</translation>
         <source>Show label</source>
         <translation>Mostrar estiqueta</translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -15130,7 +15134,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Punto de intersección circulo y segmento</translation>
+        <translation>Punto de intersección circulo y segmento</translation>
     </message>
 </context>
 <context>

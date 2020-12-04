@@ -13582,6 +13582,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Show label</source>
         <translation>Vertoon label</translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -15129,7 +15133,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Kruispunt van cirkel en segment</translation>
+        <translation>Kruispunt van cirkel en segment</translation>
     </message>
 </context>
 <context>

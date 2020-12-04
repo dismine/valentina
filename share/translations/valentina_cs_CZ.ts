@@ -13585,6 +13585,10 @@ Chcete uložit změny?</translation>
         <source>Show label</source>
         <translation>Ukázat popis</translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -15132,7 +15136,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Průsečík kruhu a části</translation>
+        <translation>Průsečík kruhu a části</translation>
     </message>
 </context>
 <context>

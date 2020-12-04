@@ -8870,7 +8870,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
-        <translation>Файл меток &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не найден. Вы хотите обновить данные о местоположении файла?</translation>
+        <translation>Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не найден. Вы хотите обновить данные о местоположении файла?</translation>
     </message>
     <message>
         <source>Flipping objects by line</source>
@@ -13584,6 +13584,10 @@ Do you want to save your changes?</source>
         <source>Show label</source>
         <translation>Показать метку</translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -15131,7 +15135,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Точка пересечения окружности и отрезка</translation>
+        <translation>Точка пересечения окружности и отрезка</translation>
     </message>
 </context>
 <context>
