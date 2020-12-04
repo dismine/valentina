@@ -1,4 +1,4 @@
-# Version 0.7.41 (unreleased)
+# Version 0.7.41 Dec 4, 2020
 - Bug fixes.
 - Improve canceling nesting.
 - Fix incorrect nesting status for valid cases.
