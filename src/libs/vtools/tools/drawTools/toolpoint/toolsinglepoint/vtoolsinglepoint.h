@@ -49,8 +49,8 @@ struct VToolSinglePointInitData : VDrawToolInitData
     VToolSinglePointInitData()
         : VDrawToolInitData(),
           name(),
-          mx(5),
-          my(10),
+          mx(labelMX),
+          my(labelMY),
           showLabel(true)
     {}
 

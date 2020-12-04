@@ -186,6 +186,13 @@ QString VDrawTool::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::UpdateNamePosition(quint32 id, const QPointF &pos)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(pos)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDrawTool::CorrectDisable(bool disable, const QString &namePP) const
 {
     if (disable)

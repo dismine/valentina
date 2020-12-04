@@ -4,6 +4,7 @@
 - Fix incorrect nesting status for valid cases.
 - Improve crossing check for the layout algorithm.
 - Fix crash after creating an elliptical arc.
+- New option Reset label position.
 
 # Version 0.7.40 Nov 23, 2020
 - New function Warning.

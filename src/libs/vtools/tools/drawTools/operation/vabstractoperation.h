@@ -152,7 +152,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
 
-    void UpdateNamePosition(quint32 id, const QPointF &pos);
+    virtual void UpdateNamePosition(quint32 id, const QPointF &pos) override;
     void SaveSourceDestination(QDomElement &tag);
 
     template <typename T>
