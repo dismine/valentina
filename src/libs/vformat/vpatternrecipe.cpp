@@ -174,7 +174,7 @@ QDomElement VPatternRecipe::Increments()
     QDomElement increments = createElement(QStringLiteral("increments"));
 
     VContainer data = m_pattern->GetCompleteData();
-    QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrements().values();
+    QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrementsWithSeparators().values();
 
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
@@ -198,7 +198,7 @@ QDomElement VPatternRecipe::PreviewCalculations()
     QDomElement previewCalculations = createElement(QStringLiteral("previewCalculations"));
 
     VContainer data = m_pattern->GetCompleteData();
-    QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrements().values();
+    QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrementsWithSeparators().values();
 
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
