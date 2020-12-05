@@ -230,6 +230,9 @@ public:
 
     QString PieceDrawName(quint32 id);
 
+    virtual VContainer GetCompleteData() const;
+    virtual VContainer GetCompletePPData(const QString &name) const;
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;

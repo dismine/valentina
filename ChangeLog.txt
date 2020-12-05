@@ -1,3 +1,6 @@
+# Version 0.7.42 (unreleased)
+- Fix export of pattern recipe.
+
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.
 - Improve canceling nesting.

@@ -58,7 +58,9 @@ public:
 
     void           setCurrentData();
     virtual void   UpdateToolData(const quint32 &id, VContainer *data) override;
-    VContainer     GetCompleteData() const;
+
+    virtual VContainer GetCompleteData() const override;
+    virtual VContainer GetCompletePPData(const QString &name) const override;
 
     virtual void   IncrementReferens(quint32 id) const override;
     virtual void   DecrementReferens(quint32 id) const override;
@@ -256,6 +258,7 @@ private:
 
     QString LastDrawName() const;
     quint32 LastToolId() const;
+    quint32 PPLastToolId(const QString &name) const;
 };
 
 #endif // VPATTERN_H

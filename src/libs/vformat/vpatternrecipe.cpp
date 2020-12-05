@@ -79,12 +79,10 @@ T *GetPatternTool(quint32 id)
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObject *parent)
+VPatternRecipe::VPatternRecipe(VAbstractPattern *pattern, QObject *parent)
     : VDomDocument(parent),
-      m_data(data),
       m_pattern(pattern)
 {
-    SCASSERT(data != nullptr)
     SCASSERT(pattern != nullptr)
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
@@ -135,7 +133,8 @@ QDomElement VPatternRecipe::Measurements()
 {
     QDomElement measurements = createElement(QStringLiteral("measurements"));
 
-    QList<QSharedPointer<VMeasurement>> patternMeasurements = m_data->DataMeasurements().values();
+    VContainer data = m_pattern->GetCompleteData();
+    QList<QSharedPointer<VMeasurement>> patternMeasurements = data.DataMeasurements().values();
 
     // Resore order
     std::sort(patternMeasurements.begin(), patternMeasurements.end(),
@@ -174,7 +173,8 @@ QDomElement VPatternRecipe::Increments()
 {
     QDomElement increments = createElement(QStringLiteral("increments"));
 
-    QList<QSharedPointer<VIncrement>> patternIncrements = m_data->DataIncrements().values();
+    VContainer data = m_pattern->GetCompleteData();
+    QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrements().values();
 
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
@@ -197,7 +197,8 @@ QDomElement VPatternRecipe::PreviewCalculations()
 {
     QDomElement previewCalculations = createElement(QStringLiteral("previewCalculations"));
 
-    QList<QSharedPointer<VIncrement>> patternIncrements = m_data->DataIncrements().values();
+    VContainer data = m_pattern->GetCompleteData();
+    QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrements().values();
 
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
@@ -266,12 +267,14 @@ QDomElement VPatternRecipe::Draft(const QDomElement &draft)
     const QString draftName = draft.attribute(QStringLiteral("name"));
     SetAttribute(recipeDraft, QStringLiteral("name"), draftName);
 
+    VContainer data = m_pattern->GetCompletePPData(draftName);
+
     QVector<VToolRecord> *history = m_pattern->getHistory();
     for (auto &record : *history)
     {
         if (record.getNameDraw() == draftName)
         {
-            QDomElement step = Step(record);
+            QDomElement step = Step(record, data);
             if (not step.isNull())
             {
                 recipeDraft.appendChild(step);
@@ -283,7 +286,7 @@ QDomElement VPatternRecipe::Draft(const QDomElement &draft)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Step(const VToolRecord &tool)
+QDomElement VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data)
 {
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used in history.");
@@ -371,13 +374,13 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case Tool::EllipticalArc:
                 return EllipticalArc(tool);
             case Tool::Rotation:
-                return Rotation(tool);
+                return Rotation(tool, data);
             case Tool::FlippingByLine:
-                return FlippingByLine(tool);
+                return FlippingByLine(tool, data);
             case Tool::FlippingByAxis:
-                return FlippingByAxis(tool);
+                return FlippingByAxis(tool, data);
             case Tool::Move:
-                return Move(tool);
+                return Move(tool, data);
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Piece:
@@ -411,17 +414,18 @@ QDomElement VPatternRecipe::FinalMeasurements()
     QDomElement recipeFinalMeasurements = createElement(QStringLiteral("finalMeasurements"));
 
     const QVector<VFinalMeasurement> measurements = m_pattern->GetFinalMeasurements();
+    VContainer data = m_pattern->GetCompleteData();
 
     for (auto &m : measurements)
     {
-        recipeFinalMeasurements.appendChild(FinalMeasurement(m));
+        recipeFinalMeasurements.appendChild(FinalMeasurement(m, data));
     }
 
     return recipeFinalMeasurements;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm)
+QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContainer &data)
 {
     QDomElement recipeFinalMeasurement = createElement(QStringLiteral("finalMeasurement"));
 
@@ -430,7 +434,7 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm)
     SetAttribute(recipeFinalMeasurement, QStringLiteral("formula"), fm.formula); // TODO: localize
 
     QScopedPointer<Calculator> cal(new Calculator());
-    const qreal result = cal->EvalFormula(m_data->DataVariables(), fm.formula);
+    const qreal result = cal->EvalFormula(data.DataVariables(), fm.formula);
     if (qIsInf(result) || qIsNaN(result))
     {
         const QString errorMsg = QString("%1\n\n%1").arg(tr("Reading final measurements error."),
@@ -1002,7 +1006,7 @@ QDomElement VPatternRecipe::EllipticalArc(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Rotation(const VToolRecord &record)
+QDomElement VPatternRecipe::Rotation(const VToolRecord &record, const VContainer &data)
 {
     auto *tool = GetPatternTool<VToolRotation>(record.getId());
 
@@ -1013,13 +1017,13 @@ QDomElement VPatternRecipe::Rotation(const VToolRecord &record)
     Formula(step, tool->GetFormulaAngle(), AttrAngle, AttrAngleValue);
     SetAttribute(step, AttrSuffix, tool->Suffix());
 
-    step.appendChild(GroupOperationSource(tool, record.getId()));
+    step.appendChild(GroupOperationSource(tool, record.getId(), data));
 
     return step;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FlippingByLine(const VToolRecord &record)
+QDomElement VPatternRecipe::FlippingByLine(const VToolRecord &record, const VContainer &data)
 {
     auto *tool = GetPatternTool<VToolFlippingByLine>(record.getId());
 
@@ -1030,13 +1034,13 @@ QDomElement VPatternRecipe::FlippingByLine(const VToolRecord &record)
     SetAttribute(step, AttrP2Line, tool->SecondLinePointName());
     SetAttribute(step, AttrSuffix, tool->Suffix());
 
-    step.appendChild(GroupOperationSource(tool, record.getId()));
+    step.appendChild(GroupOperationSource(tool, record.getId(), data));
 
     return step;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FlippingByAxis(const VToolRecord &record)
+QDomElement VPatternRecipe::FlippingByAxis(const VToolRecord &record, const VContainer &data)
 {
     auto *tool = GetPatternTool<VToolFlippingByAxis>(record.getId());
 
@@ -1047,13 +1051,13 @@ QDomElement VPatternRecipe::FlippingByAxis(const VToolRecord &record)
     SetAttribute(step, AttrAxisType, static_cast<int>(tool->GetAxisType()));
     SetAttribute(step, AttrSuffix, tool->Suffix());
 
-    step.appendChild(GroupOperationSource(tool, record.getId()));
+    step.appendChild(GroupOperationSource(tool, record.getId(), data));
 
     return step;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Move(const VToolRecord &record)
+QDomElement VPatternRecipe::Move(const VToolRecord &record, const VContainer &data)
 {
     auto *tool = GetPatternTool<VToolMove>(record.getId());
 
@@ -1066,7 +1070,7 @@ QDomElement VPatternRecipe::Move(const VToolRecord &record)
     SetAttribute(step, AttrCenter, tool->OriginPointName());
     SetAttribute(step, AttrSuffix, tool->Suffix());
 
-    step.appendChild(GroupOperationSource(tool, record.getId()));
+    step.appendChild(GroupOperationSource(tool, record.getId(), data));
 
     return step;
 }
@@ -1103,7 +1107,7 @@ void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
     SetAttribute(step, AttrPenStyle, tool->GetPenStyle());
     SetAttribute(step, AttrAScale, tool->GetApproximationScale());
     SetAttribute(step, AttrDuplicate, tool->GetDuplicate());
-    SetAttribute(step, AttrAlias, tool->GetAliasSuffix());
+    SetAttributeOrRemoveIf(step, AttrAlias, tool->GetAliasSuffix(), tool->GetAliasSuffix().isEmpty());
 }
 
 
@@ -1111,8 +1115,8 @@ void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
 template<typename T>
 void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
 {
-    SetAttribute(step, AttrAlias1, tool->GetAliasSuffix1());
-    SetAttribute(step, AttrAlias2, tool->GetAliasSuffix2());
+    SetAttributeOrRemoveIf(step, AttrAlias1, tool->GetAliasSuffix1(), tool->GetAliasSuffix1().isEmpty());
+    SetAttributeOrRemoveIf(step, AttrAlias2, tool->GetAliasSuffix2(), tool->GetAliasSuffix2().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1125,7 +1129,7 @@ inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id)
+QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, const VContainer &data)
 {
     SCASSERT(tool)
 
@@ -1145,7 +1149,7 @@ QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint
 
         try
         {
-            obj = m_data->GetGObject(item.id);
+            obj = data.GetGObject(item.id);
         }
         catch (const VExceptionBadId &e)
         {
@@ -1153,11 +1157,8 @@ QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint
             continue;
         }
 
-        SetAttribute(node, AttrItem, obj->name());
-        if (not obj->GetAlias().isEmpty())
-        {
-            SetAttribute(node, AttrAlias, obj->GetAlias());
-        }
+        SetAttribute(node, AttrItem, obj->ObjectName());
+        SetAttributeOrRemoveIf(node, AttrAlias, item.alias, item.alias.isEmpty());
 
         if (obj->getType() != GOType::Point)
         {
@@ -1171,6 +1172,34 @@ QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint
                 SetAttribute(node, AttrColor, item.color);
             }
         }
+
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        switch(static_cast<GOType>(obj->getType()))
+        {
+            case GOType::Point:
+                SetAttribute(node, AttrType, QStringLiteral("point"));
+                break;
+            case GOType::Arc:
+                SetAttribute(node, AttrType, QStringLiteral("arc"));
+                break;
+            case GOType::EllipticalArc:
+                SetAttribute(node, AttrType, QStringLiteral("elArc"));
+                break;
+            case GOType::Spline:
+            case GOType::CubicBezier:
+                SetAttribute(node, AttrType, QStringLiteral("spline"));
+                break;
+            case GOType::SplinePath:
+            case GOType::CubicBezierPath:
+                SetAttribute(node, AttrType, QStringLiteral("splinePath"));
+                break;
+            case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
+                break;
+        }
+        QT_WARNING_POP
 
         nodes.appendChild(node);
     }

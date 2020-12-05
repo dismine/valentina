@@ -348,6 +348,41 @@ VContainer VPattern::GetCompleteData() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VContainer VPattern::GetCompletePPData(const QString &name) const
+{
+    const int countPP = CountPP();
+    if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    const quint32 id = (countPP == 1 ? history.last().getId() : PPLastToolId(name));
+
+    if (id == NULL_ID)
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    try
+    {
+        ToolExists(id);
+    }
+    catch (VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    const VDataTool *vTool = tools.value(id);
+    SCASSERT(vTool != nullptr)
+    VContainer lastData = vTool->getData();
+    //Delete special variables if exist
+    lastData.RemoveVariable(currentLength);
+    lastData.RemoveVariable(currentSeamAllowance);
+    return lastData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SPointActiveDraw return id base point current pattern peace.
  * @return id base point.
@@ -3615,6 +3650,12 @@ quint32 VPattern::LastToolId() const
         return NULL_ID;
     }
 
+    return PPLastToolId(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VPattern::PPLastToolId(const QString &name) const
+{
     const QVector<VToolRecord> localHistory = getLocalHistory(name);
 
     return (not localHistory.isEmpty() ? localHistory.last().getId() : NULL_ID);

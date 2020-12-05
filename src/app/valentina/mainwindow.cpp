@@ -4768,7 +4768,7 @@ void MainWindow::CreateActions()
             return;
         }
 
-        VPatternRecipe recipe(pattern, doc);
+        VPatternRecipe recipe(doc);
         QString error;
         if (not recipe.SaveDocument(fileName, error))
         {

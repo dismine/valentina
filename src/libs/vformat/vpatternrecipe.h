@@ -43,13 +43,12 @@ class VPatternRecipe : public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VPatternRecipe)
 public:
-    VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObject *parent = nullptr);
+    explicit VPatternRecipe(VAbstractPattern *pattern, QObject *parent = nullptr);
     virtual ~VPatternRecipe() Q_DECL_EQ_DEFAULT;
 
 private:
     Q_DISABLE_COPY(VPatternRecipe)
 
-    VContainer *m_data;
     VAbstractPattern *m_pattern;
 
     QDomElement Prerequisite();
@@ -64,10 +63,10 @@ private:
     QDomElement Content();
 
     QDomElement Draft(const QDomElement &draft);
-    QDomElement Step(const VToolRecord &tool);
+    QDomElement Step(const VToolRecord &tool, const VContainer &data);
 
     QDomElement FinalMeasurements();
-    QDomElement FinalMeasurement(const VFinalMeasurement &fm);
+    QDomElement FinalMeasurement(const VFinalMeasurement &fm, const VContainer &data);
 
     QDomElement BasePoint(const VToolRecord &record);
     QDomElement EndLine(const VToolRecord &record);
@@ -99,10 +98,10 @@ private:
     QDomElement PointFromArcAndTangent(const VToolRecord &record);
     QDomElement TrueDarts(const VToolRecord &record);
     QDomElement EllipticalArc(const VToolRecord &record);
-    QDomElement Rotation(const VToolRecord &record);
-    QDomElement FlippingByLine(const VToolRecord &record);
-    QDomElement FlippingByAxis(const VToolRecord &record);
-    QDomElement Move(const VToolRecord &record);
+    QDomElement Rotation(const VToolRecord &record, const VContainer &data);
+    QDomElement FlippingByLine(const VToolRecord &record, const VContainer &data);
+    QDomElement FlippingByAxis(const VToolRecord &record, const VContainer &data);
+    QDomElement Move(const VToolRecord &record, const VContainer &data);
 
     void Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr, const QString &formulaValue);
 
@@ -118,7 +117,7 @@ private:
     template <typename T>
     void CutCurveAttributes(QDomElement &step, T* tool);
 
-    QDomElement GroupOperationSource(VAbstractOperation *tool, quint32 id);
+    QDomElement GroupOperationSource(VAbstractOperation *tool, quint32 id, const VContainer &data);
 };
 
 #endif // VPATTERNRECIPE_H

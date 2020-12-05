@@ -2443,6 +2443,19 @@ QString VAbstractPattern::PieceDrawName(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VContainer VAbstractPattern::GetCompleteData() const
+{
+    return VContainer(nullptr, nullptr, VContainer::UniqueNamespace());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VContainer VAbstractPattern::GetCompletePPData(const QString &name) const
+{
+    Q_UNUSED(name)
+    return VContainer(nullptr, nullptr, VContainer::UniqueNamespace());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::FilterGroupTags(const QString &tags)
 {
     if (tags.isEmpty())
