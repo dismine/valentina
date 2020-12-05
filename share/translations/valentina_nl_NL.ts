@@ -13584,7 +13584,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Restore label position</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel label positie</translation>
     </message>
 </context>
 <context>

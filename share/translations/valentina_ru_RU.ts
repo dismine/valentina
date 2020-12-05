@@ -3369,7 +3369,7 @@
     </message>
     <message>
         <source>Insert nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить узлы</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -13586,7 +13586,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Restore label position</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить положение метки</translation>
     </message>
 </context>
 <context>
@@ -16773,12 +16773,12 @@ Do you want to save your changes?</source>
     <message>
         <source>warning</source>
         <comment>Calculation warning</comment>
-        <translation type="unfinished"></translation>
+        <translation>предупреждение</translation>
     </message>
     <message>
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
-        <translation type="unfinished"></translation>
+        <translation>Показывать предупреждение в расчетах</translation>
     </message>
 </context>
 <context>
