@@ -2,6 +2,7 @@
 - Fix export of pattern recipe.
 - Update translations.
 - Fix a regression in tool Segment a spline path. 
+- Fix invalid visualization for tool Point of intersection circles.
 
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.

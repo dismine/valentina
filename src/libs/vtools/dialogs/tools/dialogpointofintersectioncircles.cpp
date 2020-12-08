@@ -410,7 +410,7 @@ void DialogPointOfIntersectionCircles::SaveData()
 
     point->setObject1Id(GetFirstCircleCenterId());
     point->setObject2Id(GetSecondCircleCenterId());
-    point->setC1Radius(ui->plainTextEditCircle2Radius->toPlainText());
+    point->setC1Radius(ui->plainTextEditCircle1Radius->toPlainText());
     point->setC2Radius(ui->plainTextEditCircle2Radius->toPlainText());
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
