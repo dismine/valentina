@@ -300,11 +300,7 @@ void DialogEditLabel::ExportTemplate()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
                                                     path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+                                                    filters, nullptr, qApp->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -353,11 +349,8 @@ void DialogEditLabel::ImportTemplate()
     QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
     //Use standard path to label templates
     const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr
-#ifdef Q_OS_LINUX
-                                                          , QFileDialog::DontUseNativeDialog
-#endif
-                                                          );
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
+                                                          qApp->NativeFileDialog());
     if (fileName.isEmpty())
     {
         return;

@@ -170,19 +170,22 @@
          <property name="title">
           <string>User Interface</string>
          </property>
-         <widget class="QCheckBox" name="darkModeCheck">
-          <property name="geometry">
-           <rect>
-            <x>20</x>
-            <y>30</y>
-            <width>351</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Activate dark mode</string>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QCheckBox" name="darkModeCheck">
+            <property name="text">
+             <string>Activate dark mode</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxDontUseNativeDialog">
+            <property name="text">
+             <string>Don't use the native file dialog</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>

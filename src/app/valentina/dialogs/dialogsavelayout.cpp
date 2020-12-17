@@ -127,13 +127,9 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
             usedNotExistedDir = directory.mkpath(QChar('.'));
         }
 
-        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), dirPath,
-                                                              QFileDialog::ShowDirsOnly
-                                                              | QFileDialog::DontResolveSymlinks
-#ifdef Q_OS_LINUX
-                                                              | QFileDialog::DontUseNativeDialog
-#endif
-                                                              );
+        const QString dir = QFileDialog::getExistingDirectory(
+            this, tr("Select folder"), dirPath,
+            qApp->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
         if (not dir.isEmpty())
         {// If paths equal the signal will not be called, we will do this manually
             dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);

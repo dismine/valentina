@@ -53,7 +53,10 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     ui->osOptionCheck->setChecked(qApp->TapeSettings()->GetOsSeparator());
 
     // Theme
-     ui->darkModeCheck->setChecked(qApp->TapeSettings()->GetDarkMode());
+    ui->darkModeCheck->setChecked(qApp->TapeSettings()->GetDarkMode());
+
+    // Native dialogs
+    ui->checkBoxDontUseNativeDialog->setChecked(qApp->TapeSettings()->IsDontUseNativeDialog());
 
     //---------------------- Pattern making system
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
@@ -104,6 +107,11 @@ QStringList TapePreferencesConfigurationPage::Apply()
     {
         settings->SetDarkMode(ui->darkModeCheck->isChecked());
         preferences.append(tr("dark mode"));
+    }
+
+    if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
+    {
+        settings->SetDontUseNativeDialog(ui->checkBoxDontUseNativeDialog->isChecked());
     }
 
     if (m_langChanged || m_systemChanged)

@@ -214,6 +214,9 @@ public:
     bool IsPieceShowMainPath() const;
     void SetPieceShowMainPath(bool value);
 
+    bool IsDontUseNativeDialog() const;
+    void SetDontUseNativeDialog(bool value);
+
     static qreal DefaultLineWidth();
     static qreal MinimalLineWidth();
     static qreal MaximalLineWidth();

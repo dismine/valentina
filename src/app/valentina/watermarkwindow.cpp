@@ -93,7 +93,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
     {
         const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
         const QString fileName = QFileDialog::getOpenFileName(this, tr("Watermark image"), QString(), filter,
-                                                              nullptr);
+                                                              nullptr, qApp->NativeFileDialog());
         if (not fileName.isEmpty())
         {
             ui->lineEditPath->setText(fileName);
@@ -284,7 +284,7 @@ bool WatermarkWindow::on_actionSaveAs_triggered()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("watermark") + QLatin1String(".vwm"),
-                                                    filters, nullptr);
+                                                    filters, nullptr, qApp->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -426,7 +426,8 @@ void WatermarkWindow::on_actionOpen_triggered()
     const QString filter(tr("Watermark files") + QLatin1String(" (*.vwm)"));
     QString dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
+                                                          qApp->NativeFileDialog());
     if (filePath.isEmpty())
     {
         return;

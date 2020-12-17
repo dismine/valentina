@@ -66,6 +66,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmFormatRewrit
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle, (QLatin1String("configuration/tool_bar_style")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode, (QLatin1String("configuration/freeCurveMode")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDoubleClickZoomFitBestCurrentPP, (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDontUseNativeDialog, (QLatin1String("configuration/dontUseNativeDialog")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, (QLatin1String("pattern/undo")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping, (QLatin1String("pattern/forbidFlipping")))
@@ -1168,6 +1169,21 @@ void VCommonSettings::SetPieceShowMainPath(bool value)
 {
     pieceShowMainPath = value;
     setValue(*settingPatternPieceShowMainPath, pieceShowMainPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsDontUseNativeDialog() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingConfigurationDontUseNativeDialog, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDontUseNativeDialog(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingConfigurationDontUseNativeDialog, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

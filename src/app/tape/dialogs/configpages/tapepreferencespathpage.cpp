@@ -149,8 +149,9 @@ void TapePreferencesPathPage::EditPath()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    const QString dir = QFileDialog::getExistingDirectory(
+        this, tr("Open Directory"), path,
+        qApp->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)

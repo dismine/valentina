@@ -39,6 +39,7 @@
 #include <QString>
 #include <QtGlobal>
 #include <QTranslator>
+#include <QFileDialog>
 
 #include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -81,6 +82,8 @@ public:
 
     static const QString warningMessageSignature;
     bool IsWarningMessage(const QString &message) const;
+
+    QFileDialog::Options NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const;
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();

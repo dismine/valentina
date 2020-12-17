@@ -33,9 +33,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-161</y>
+            <y>-189</y>
             <width>624</width>
-            <height>717</height>
+            <height>745</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -280,6 +280,13 @@
                 </property>
                 <property name="text">
                  <string>Tool panel scaling</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxDontUseNativeDialog">
+                <property name="text">
+                 <string>Don't use the native file dialog</string>
                 </property>
                </widget>
               </item>
