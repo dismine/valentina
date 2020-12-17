@@ -586,10 +586,26 @@ void DialogEditLabel::InitPlaceholders()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogEditLabel::ReplacePlaceholders(QString line) const
 {
+    QChar per('%');
+
+    auto TestDimension = [per, this, line](const QString &placeholder, const QString &errorMsg)
+    {
+        if (line.contains(per+placeholder+per) && m_placeholders.value(placeholder).second == QChar('0'))
+        {
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    };
+
+    TestDimension(pl_height, tr("No data for the height dimension."));
+    TestDimension(pl_size, tr("No data for the size dimension."));
+    TestDimension(pl_hip, tr("No data for the hip dimension."));
+    TestDimension(pl_waist, tr("No data for the waist dimension."));
+
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
     {
-        line.replace(QChar('%')+i.key()+QChar('%'), i.value().second);
+        line.replace(per+i.key()+per, i.value().second);
         ++i;
     }
     return line;
