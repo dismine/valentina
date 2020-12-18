@@ -5,6 +5,7 @@
 - Fix invalid visualization for tool Point of intersection circles.
 - New warning. Warn about empty measurements dimension value when preparing placeholders.
 - New option "Don't use the native file dialog".
+- Improve the layout option "Auto crop unused width".
 
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.
