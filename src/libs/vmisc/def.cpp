@@ -315,24 +315,21 @@ QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer)
+auto GetPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF
 {
     if (printer.isNull())
     {
-        return QMarginsF();
+        return {};
     }
 
-    qreal left = 0;
-    qreal top = 0;
-    qreal right = 0;
-    qreal bottom = 0;
-    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
     // We can't use Unit::Px because our dpi in most cases is different
+    const QMarginsF m = printer->pageLayout().margins(QPageLayout::Millimeter);
+
     QMarginsF def;
-    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
-    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
-    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
-    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
+    def.setLeft(UnitConvertor(m.left(), Unit::Mm, Unit::Px));
+    def.setRight(UnitConvertor(m.right(), Unit::Mm, Unit::Px));
+    def.setTop(UnitConvertor(m.top(), Unit::Mm, Unit::Px));
+    def.setBottom(UnitConvertor(m.bottom(), Unit::Mm, Unit::Px));
     return def;
 }
 

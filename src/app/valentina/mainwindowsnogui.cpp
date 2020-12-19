@@ -1308,7 +1308,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     }
 
     QPainter painter;
-    if (painter.begin( &printer ) == false)
+    if (not painter.begin( &printer ))
     { // failed to open file
         qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
         return;

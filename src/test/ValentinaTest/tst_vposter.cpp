@@ -45,15 +45,13 @@ TST_VPoster::TST_VPoster(QObject *parent) :
 void TST_VPoster::BigPoster()
 {
     QPrinter printer;
-    printer.setResolution(96);// By default
+    printer.setResolution(static_cast<int>(PrintDPI));// By default
     printer.setPageSize(QPageSize(QPageSize::A4));
     printer.setFullPage(true);
     // We need to set full page because otherwise QPrinter->pageRect returns different values in Windows and Linux
 
     //sets the margins to 0 to perform the test.
-    const qreal left = 0, top = 0, right = 0, bottom = 0;
-    printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
-
+    printer.setPageMargins(QMarginsF(), QPageLayout::Millimeter);
 
     const QSize image(2622, 3178); // Little bit bigger than A1
     VPoster posterazor(&printer);
