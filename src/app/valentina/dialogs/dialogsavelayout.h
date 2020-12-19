@@ -33,14 +33,6 @@
 #include "vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
 
-#ifndef PDFTOPS
-#ifdef Q_OS_WIN
-#   define PDFTOPS QStringLiteral("pdftops.exe")
-#else
-#   define PDFTOPS QStringLiteral("pdftops")
-#endif
-#endif
-
 namespace Ui
 {
     class DialogSaveLAyout;
@@ -115,7 +107,6 @@ private:
     static bool havePdf;
     static bool tested;
     static bool SupportPSTest();
-    static bool TestPdf();
     static QVector<std::pair<QString, LayoutExportFormats> > InitFormats();
 
     void RemoveFormatFromList(LayoutExportFormats format);

@@ -169,29 +169,10 @@ private:
                                                 const QList<QGraphicsItem *> &shadows,
                                                 const QList<QList<QGraphicsItem *> > &details);
 
-    void SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, const QMarginsF &margins)const;
-    void PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, const QMarginsF &margins)const;
-    void PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
-                 const QMarginsF &margins)const;
     void PdfTiledFile(const QString &name);
-    void EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
-                 const QMarginsF &margins)const;
-    void PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
-                const QMarginsF &margins)const;
-    void PdfToPs(const QStringList &params)const;
-    void ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
-    void FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
-                 const QList<QList<QGraphicsItem *> > &details)const;
-    void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
-                     const QVector<VLayoutPiece> &details) const;
-    void ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
-                     const QVector<VLayoutPiece> &details) const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
-
-    void PrepareTextForDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
-    void RestoreTextAfterDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
 
     void PrintPreview();
     void LayoutPrint();

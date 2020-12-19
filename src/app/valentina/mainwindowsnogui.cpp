@@ -43,6 +43,7 @@
 #include "dialogs/dialogsavelayout.h"
 #include "dialogs/dialoglayoutscale.h"
 #include "../vlayout/vposter.h"
+#include "../vlayout/vlayoutexporter.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
@@ -81,14 +82,6 @@ QT_WARNING_DISABLE_INTEL(1418)
 Q_LOGGING_CATEGORY(vMainNoGUIWindow, "v.mainnoguiwindow")
 
 QT_WARNING_POP
-
-#ifndef PDFTOPS
-#ifdef Q_OS_WIN
-#   define PDFTOPS QStringLiteral("pdftops.exe")
-#else
-#   define PDFTOPS QStringLiteral("pdftops")
-#endif
-#endif
 
 namespace
 {
@@ -684,61 +677,86 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     qApp->ValentinaSettings()->SetPathLayout(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
+    VLayoutExporter exporter;
+    exporter.SetFileName(name);
+    exporter.SetImageRect(QRectF(0, 0, size.width(), size.height()));
+    exporter.SetXScale(m_dialogSaveLayout->GetXScale());
+    exporter.SetYScale(m_dialogSaveLayout->GetYScale());
+    exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
+
     switch (format)
     {
         case LayoutExportFormats::DXF_AC1006_ASTM:
-            ASTMDxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1006);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1009_ASTM:
-            ASTMDxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1009);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1012_ASTM:
-            ASTMDxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1012);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1014_ASTM:
-            ASTMDxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1014);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1015_ASTM:
-            ASTMDxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1015);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1018_ASTM:
-            ASTMDxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1018);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1021_ASTM:
-            ASTMDxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1021);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1024_ASTM:
-            ASTMDxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1024);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1027_ASTM:
-            ASTMDxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1027);
+            exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AC1006_AAMA:
-            AAMADxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1006);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1009_AAMA:
-            AAMADxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1009);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1012_AAMA:
-            AAMADxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1012);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1014_AAMA:
-            AAMADxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1014);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1015_AAMA:
-            AAMADxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1015);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1018_AAMA:
-            AAMADxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1018);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1021_AAMA:
-            AAMADxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1021);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1024_AAMA:
-            AAMADxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1024);
+            exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::DXF_AC1027_AAMA:
-            AAMADxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            exporter.SetDxfVersion(DRW::AC1027);
+            exporter.ExportToAAMADXF(details);
             break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
@@ -1218,111 +1236,6 @@ QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SvgFile save layout to svg file.
- * @param name name layout file.
- */
-void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
-                               const QMarginsF &margins) const
-{
-    const QRectF r = paper->rect();
-    QSvgGenerator generator;
-    generator.setFileName(name);
-    generator.setSize(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right()),
-                            qFloor(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom())));
-    generator.setViewBox(QRectF(0, 0, r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right(),
-                                r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom()));
-    generator.setTitle(tr("Pattern"));
-    generator.setDescription(doc->GetDescription().toHtmlEscaped());
-    generator.setResolution(static_cast<int>(PrintDPI));
-    QPainter painter;
-    painter.begin(&generator);
-    painter.translate(margins.left(), margins.top());
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
-    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
-    painter.end();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PngFile save layout to png file.
- * @param name name layout file.
- */
-void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
-                               const QMarginsF &margins) const
-{
-    const QRectF r = paper->rect();
-    // Create the image with the exact size of the shrunk scene
-    QImage image(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right()),
-                       qFloor(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom())),
-                 QImage::Format_ARGB32);
-    image.fill(Qt::white);
-    QPainter painter(&image);
-    painter.translate(margins.left(), margins.top());
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
-    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
-    image.save(name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PdfFile save layout to pdf file.
- * @param name name layout file.
- */
-void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
-                               bool ignorePrinterFields, const QMarginsF &margins) const
-{
-    QPrinter printer;
-    printer.setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
-                       QCoreApplication::applicationVersion());
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(name);
-    printer.setDocName(FileName());
-    const QRectF r = paper->rect();
-    printer.setResolution(static_cast<int>(PrintDPI));
-    printer.setOrientation(QPrinter::Portrait);
-    printer.setFullPage(ignorePrinterFields);
-
-    qreal width = FromPixel(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right(), Unit::Mm);
-    qreal height = FromPixel(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom(), Unit::Mm);
-
-    if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
-    {
-        qWarning() << tr("Cannot set printer page size");
-    }
-
-    const qreal left = FromPixel(margins.left(), Unit::Mm);
-    const qreal top = FromPixel(margins.top(), Unit::Mm);
-    const qreal right = FromPixel(margins.right(), Unit::Mm);
-    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
-
-    if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
-    {
-        qWarning() << tr("Cannot set printer margins");
-    }
-
-    QPainter painter;
-    if (not painter.begin( &printer ))
-    { // failed to open file
-        qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
-        return;
-    }
-    painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
-    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
-    painter.end();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PdfTiledFile(const QString &name)
 {
     isTiled = true;
@@ -1350,154 +1263,6 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     printer.setResolution(static_cast<int>(PrintDPI));
     PrintPages(&printer);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief EpsFile save layout to eps file.
- * @param name name layout file.
- */
-void MainWindowsNoGUI::EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
-                               bool ignorePrinterFields, const QMarginsF &margins) const
-{
-    QTemporaryFile tmp;
-    if (tmp.open())
-    {
-        PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
-        QStringList params = QStringList() << QStringLiteral("-eps") << tmp.fileName() << name;
-        PdfToPs(params);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PsFile save layout to ps file.
- * @param name name layout file.
- */
-void MainWindowsNoGUI::PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool
-                              ignorePrinterFields, const QMarginsF &margins) const
-{
-    QTemporaryFile tmp;
-    if (tmp.open())
-    {
-        PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
-        QStringList params = QStringList() << tmp.fileName() << name;
-        PdfToPs(params);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps format.
- * @param params string with parameter for tool. Parameters have format: "-eps input_file out_file". Use -eps when
- * need create eps file.
- */
-void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
-{
-#ifndef QT_NO_CURSOR
-    QGuiApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
-    QProcess proc;
-#if defined(Q_OS_MAC)
-    // Fix issue #594. Broken export on Mac.
-    proc.setWorkingDirectory(qApp->applicationDirPath());
-    proc.start(QLatin1String("./") + PDFTOPS, params);
-#else
-    proc.start(PDFTOPS, params);
-#endif
-    if (proc.waitForStarted(15000))
-    {
-        proc.waitForFinished(15000);
-    }
-#ifndef QT_NO_CURSOR
-    QGuiApplication::restoreOverrideCursor();
-#endif
-
-    QFile f(params.last());
-    if (f.exists() == false)
-    {
-        const QString msg = tr("Creating file '%1' failed! %2").arg(params.last(), proc.errorString());
-        QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
-        msgBox.exec();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
-{
-    VObjPaintDevice generator;
-    generator.setFileName(name);
-    generator.setSize(paper->rect().size().toSize());
-    generator.setResolution(static_cast<int>(PrintDPI));
-    QPainter painter;
-    painter.begin(&generator);
-    scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-    painter.end();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
-void MainWindowsNoGUI::FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper,
-                               QGraphicsScene *scene, const QList<QList<QGraphicsItem *> > &details) const
-{
-    PrepareTextForDXF(endStringPlaceholder, details);
-    VDxfPaintDevice generator;
-    generator.setFileName(name);
-
-    const QRectF r = paper->rect();
-    generator.setSize(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale()),
-                            qFloor(r.height() * m_dialogSaveLayout->GetYScale())));
-
-    generator.setResolution(PrintDPI);
-    generator.SetVersion(static_cast<DRW::Version>(version));
-    generator.SetBinaryFormat(binary);
-    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
-
-    QPainter painter;
-    if (painter.begin(&generator))
-    {
-        painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
-        scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
-    }
-    RestoreTextAfterDXF(endStringPlaceholder, details);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
-                                   const QVector<VLayoutPiece> &details) const
-{
-    VDxfPaintDevice generator;
-    generator.setFileName(name);
-    generator.setSize(QSize(qCeil(size.width() * m_dialogSaveLayout->GetXScale()),
-                            qCeil(size.height() * m_dialogSaveLayout->GetYScale())));
-    generator.setResolution(PrintDPI);
-    generator.SetVersion(static_cast<DRW::Version>(version));
-    generator.SetBinaryFormat(binary);
-    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
-    generator.SetXScale(m_dialogSaveLayout->GetXScale());
-    generator.SetYScale(m_dialogSaveLayout->GetYScale());
-    generator.ExportToAAMA(details);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
-                                   const QVector<VLayoutPiece> &details) const
-{
-    VDxfPaintDevice generator;
-    generator.setFileName(name);
-    generator.setSize(size);
-    generator.setResolution(PrintDPI);
-    generator.SetVersion(static_cast<DRW::Version>(version));
-    generator.SetBinaryFormat(binary);
-    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
-    generator.SetXScale(m_dialogSaveLayout->GetXScale());
-    generator.SetYScale(m_dialogSaveLayout->GetYScale());
-    generator.ExportToASTM(details);
-}
-
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PreparePaper(int index) const
@@ -1545,70 +1310,6 @@ void MainWindowsNoGUI::RestorePaper(int index) const
         QTransform m = detail->transform();
         m *= matrix;
         detail->setTransform(m);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PrepareTextForDXF prepare QGraphicsSimpleTextItem items for export to flat dxf.
- *
- * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
- * placholder. This method append it.
- *
- * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
- */
-void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder,
-                                         const QList<QList<QGraphicsItem *> > &details) const
-{
-    for (auto &paperItems : details)
-    {
-        for (auto item : paperItems)
-        {
-            QList<QGraphicsItem *> pieceChildren = item->childItems();
-            for (auto child : pieceChildren)
-            {
-                if (child->type() == QGraphicsSimpleTextItem::Type)
-                {
-                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
-                    {
-                        textItem->setText(textItem->text() + placeholder);
-                    }
-                }
-            }
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief MainWindowsNoGUI::RestoreTextAfterDXF restore QGraphicsSimpleTextItem items after export to flat dxf.
- *
- * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
- * placholder. This method remove it.
- *
- * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
- */
-void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder,
-                                           const QList<QList<QGraphicsItem *> > &details) const
-{
-    for (auto &paperItems : details)
-    {
-        for (auto item : paperItems)
-        {
-            QList<QGraphicsItem *> pieceChildren = item->childItems();
-            for (auto child : pieceChildren)
-            {
-                if (child->type() == QGraphicsSimpleTextItem::Type)
-                {
-                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
-                    {
-                        QString text = textItem->text();
-                        text.replace(placeholder, QString());
-                        textItem->setText(text);
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -1951,87 +1652,119 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                                    const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
                                    const QMarginsF &margins) const
 {
+    VLayoutExporter exporter;
+    exporter.SetMargins(margins);
+    exporter.SetXScale(m_dialogSaveLayout->GetXScale());
+    exporter.SetYScale(m_dialogSaveLayout->GetYScale());
+    exporter.SetTitle(tr("Pattern"));
+    exporter.SetDescription(doc->GetDescription().toHtmlEscaped());
+    exporter.SetIgnorePrinterMargins(ignorePrinterFields);
+    exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
+
     for (int i=0; i < scenes.size(); ++i)
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (paper)
+        auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+        if (paper != nullptr)
         {
             const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
                     QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
-            QBrush *brush = new QBrush();
+            auto *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             QGraphicsScene *scene = scenes.at(i);
             scene->setBackgroundBrush( *brush );
             shadows[i]->setVisible(false);
-            paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
+            const qreal thinPen = 0.1;
+            paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), thinPen, Qt::NoPen));
+
+            exporter.SetFileName(name);
+            exporter.SetImageRect(paper->rect());
 
             switch (m_dialogSaveLayout->Format())
             {
                 case LayoutExportFormats::SVG:
                     paper->setVisible(false);
-                    SvgFile(name, paper, scene, margins);
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
+                                         Qt::RoundJoin));
+                    exporter.ExportToSVG(scene);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PDF:
-                    PdfFile(name, paper, scene, ignorePrinterFields, margins);
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                         Qt::RoundJoin));
+                    exporter.ExportToPDF(scene);
                     break;
                 case LayoutExportFormats::PNG:
-                    PngFile(name, paper, scene, margins);
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                         Qt::RoundJoin));
+                    exporter.ExportToPNG(scene);
                     break;
                 case LayoutExportFormats::OBJ:
                     paper->setVisible(false);
-                    ObjFile(name, paper, scene);
+                    exporter.ExportToOBJ(scene);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PS:
-                    PsFile(name, paper, scene, ignorePrinterFields, margins);
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                         Qt::RoundJoin));
+                    exporter.ExportToPS(scene);
                     break;
                 case LayoutExportFormats::EPS:
-                    EpsFile(name, paper, scene, ignorePrinterFields, margins);
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                         Qt::RoundJoin));
+                    exporter.ExportToEPS(scene);
                     break;
                 case LayoutExportFormats::DXF_AC1006_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1006);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1009_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1009);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1012_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1012);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1014_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1014);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1015_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1015);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1018_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1018);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1021_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1021);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1024_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1024);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1027_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    exporter.SetDxfVersion(DRW::AC1027);
+                    exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
                 default:

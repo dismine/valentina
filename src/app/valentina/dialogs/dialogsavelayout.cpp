@@ -31,6 +31,7 @@
 #include "../core/vapplication.h"
 #include "../vmisc/vsettings.h"
 #include "../ifc/exception/vexception.h"
+#include "../vlayout/vlayoutexporter.h"
 
 #include <QDir>
 #include <QFileDialog>
@@ -788,33 +789,10 @@ bool DialogSaveLayout::SupportPSTest()
 {
     if (!tested)
     {
-        havePdf = TestPdf();
+        havePdf = VLayoutExporter::SupportPDFConversion();
         tested = true;
     }
     return havePdf;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::TestPdf()
-{
-    bool res = false;
-
-    QProcess proc;
-#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    // Seek pdftops in app bundle or near valentin.exe
-    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ PDFTOPS, QStringList());
-#else
-    proc.start(PDFTOPS, QStringList()); // Seek pdftops in standard path
-#endif
-    if (proc.waitForStarted(15000) && (proc.waitForFinished(15000) || proc.state() == QProcess::NotRunning))
-    {
-        res = true;
-    }
-    else
-    {
-        qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
-    }
-    return res;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

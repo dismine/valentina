@@ -4,6 +4,7 @@
 HEADERS += \
     $$PWD/stable.h \
     $$PWD/testpath.h \
+    $$PWD/vlayoutexporter.h \
     $$PWD/vlayoutgenerator.h \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
@@ -28,6 +29,7 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/testpath.cpp \
+    $$PWD/vlayoutexporter.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutpaper.cpp \
     $$PWD/vbank.cpp \
