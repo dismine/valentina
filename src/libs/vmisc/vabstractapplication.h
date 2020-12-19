@@ -52,7 +52,7 @@ class VCommonSettings;
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<VAbstractApplication*>(QCoreApplication::instance()))
+#define qApp (qobject_cast<VAbstractApplication*>(QCoreApplication::instance()))
 
 class VAbstractApplication : public QApplication
 {

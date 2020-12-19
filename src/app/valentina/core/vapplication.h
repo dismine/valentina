@@ -41,7 +41,7 @@ class VApplication;// use in define
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<VApplication*>(VAbstractApplication::instance()))
+#define qApp (qobject_cast<VApplication*>(VAbstractApplication::instance()))
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
