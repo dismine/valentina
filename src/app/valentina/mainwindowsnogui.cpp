@@ -1339,7 +1339,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     SetPrinterSettings(&printer, PrintType::PrintPDF);
 
     // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
-    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
+    if (not isTiled && not IsPagesFit(printer.pageLayout().paintRectPixels(printer.resolution()).size()))
     {
         qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
     }
