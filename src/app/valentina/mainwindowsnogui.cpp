@@ -852,8 +852,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
     // Get printer rect acording to our dpi.
     const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
                                  ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
-    const double xscale = printer->pageRect().width() / printerPageRect.width();
-    const double yscale = printer->pageRect().height() / printerPageRect.height();
+    const QRect pageRect = printer->pageLayout().paintRectPixels(printer->resolution());
+    const double xscale = pageRect.width() / printerPageRect.width();
+    const double yscale = pageRect.height() / printerPageRect.height();
 
     QPainter painter;
     if (not painter.begin(printer))
@@ -1251,7 +1252,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     SetPrinterSettings(&printer, PrintType::PrintPDF);
 
     // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
-    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
+    if (not isTiled && not IsPagesFit(printer.pageLayout().paintRectPixels(printer.resolution()).size()))
     {
         qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
     }
@@ -1408,7 +1409,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
                         QCoreApplication::applicationVersion());
 
-    printer->setOrientation(isLayoutPortrait ? QPrinter::Portrait : QPrinter::Landscape);
+    printer->setPageOrientation(isLayoutPortrait ? QPageLayout::Portrait : QPageLayout::Landscape);
 
     if (not isTiled)
     {
