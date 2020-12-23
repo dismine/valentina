@@ -28,10 +28,11 @@
 
 #include "dialoglayoutscale.h"
 #include "ui_dialoglayoutscale.h"
-#include "../core/vapplication.h"
-#include "../core/vvalentinasettings.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vcommonsettings.h"
 
 #include <QPushButton>
+#include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
@@ -40,7 +41,7 @@ DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -180,7 +181,7 @@ void DialogLayoutScale::VerticalScaleChanged(double d)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::ReadSettings()
 {
-    VValentinaSettings *settings = qApp->ValentinaSettings();
+    VCommonSettings *settings = qApp->Settings();
     const Unit unit = qApp->patternUnits();
 
     // read Margins top, right, bottom, left
@@ -200,7 +201,7 @@ void DialogLayoutScale::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::WriteSettings() const
 {
-    VValentinaSettings *settings = qApp->ValentinaSettings();
+    VCommonSettings *settings = qApp->Settings();
     const Unit unit = qApp->patternUnits();
 
     // write Margins top, right, bottom, left

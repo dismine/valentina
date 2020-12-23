@@ -263,6 +263,11 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
         GatherPages();
     }
 
+    if (autoCropWidth)
+    {
+        OptimizeWidth();
+    }
+
     if (IsUnitePages())
     {
         UnitePages();
@@ -504,6 +509,27 @@ void VLayoutGenerator::GatherPages()
 
     papers.clear();
     papers = nPapers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::OptimizeWidth()
+{
+    QVector<VLayoutPiece> newDetails;
+    for (auto &paper : papers)
+    {
+        const QRectF rec = paper.DetailsBoundingRect();
+        QVector<VLayoutPiece> details = paper.GetDetails();
+
+        newDetails.resize(0); // resize(0) preserves capacity, unlike QVector::clear()
+        newDetails.reserve(details.size());
+        for (auto &d : details)
+        {
+            IsPortrait() ? d.Translate(-rec.x()+1, 0) : d.Translate(0, -rec.y()+1);
+            newDetails.append(d);
+        }
+
+        paper.SetDetails(newDetails);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -785,6 +811,7 @@ void VLayoutGenerator::SetAutoCropLength(bool value)
     autoCropLength = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutGenerator::GetAutoCropWidth() const
 {
     return autoCropWidth;

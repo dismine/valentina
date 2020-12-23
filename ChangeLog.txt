@@ -1,9 +1,19 @@
-# Version 0.7.41 (unreleased)
+# Version 0.7.42 (unreleased)
+- Fix export of pattern recipe.
+- Update translations.
+- Fix a regression in tool Segment a spline path. 
+- Fix invalid visualization for tool Point of intersection circles.
+- New warning. Warn about empty measurements dimension value when preparing placeholders.
+- New option "Don't use the native file dialog".
+- Improve the layout option "Auto crop unused width".
+
+# Version 0.7.41 Dec 4, 2020
 - Bug fixes.
 - Improve canceling nesting.
 - Fix incorrect nesting status for valid cases.
 - Improve crossing check for the layout algorithm.
 - Fix crash after creating an elliptical arc.
+- New option Reset label position.
 
 # Version 0.7.40 Nov 23, 2020
 - New function Warning.

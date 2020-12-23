@@ -169,6 +169,7 @@ private:
     int PageHeight() const;
     int PageWidth() const;
 
+    void OptimizeWidth();
     void GatherPages();
     void UnitePages();
     void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const;

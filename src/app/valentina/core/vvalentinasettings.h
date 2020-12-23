@@ -135,17 +135,11 @@ public:
     void SetRememberPatternMaterials(bool value);
 
     // settings for the tiled PDFs
-    QMarginsF GetTiledPDFMargins(const Unit &unit) const;
-    void      SetTiledPDFMargins(const QMarginsF &value, const Unit &unit);
-
     qreal GetTiledPDFPaperHeight(const Unit &unit) const;
     void  SetTiledPDFPaperHeight(qreal value, const Unit &unit);
 
     qreal GetTiledPDFPaperWidth(const Unit &unit) const;
     void  SetTiledPDFPaperWidth(qreal value, const Unit &unit);
-
-    PageOrientation GetTiledPDFOrientation() const;
-    void            SetTiledPDFOrientation(PageOrientation value);
 
     bool IsDockWidgetGroupsActive() const;
     static bool GetDefDockWidgetGroupsActive();
@@ -175,6 +169,9 @@ public:
 
 private:
     Q_DISABLE_COPY(VValentinaSettings)
+
+    template <typename T>
+    T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;  
 };
 
 #endif // VVALENTINASETTINGS_H

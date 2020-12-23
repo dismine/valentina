@@ -116,7 +116,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogCutSplinePath::IsValid() const
 {
-    return flagFormula && flagAlias1 && flagAlias2;
+    return flagFormula && flagAlias1 && flagAlias2 && flagName;
 }
 
 #endif // DIALOGCUTSPLINEPATH_H

@@ -68,8 +68,6 @@ public slots:
 protected:
     void SetPointName(quint32 id, const QString &name);
 
-    virtual void UpdateNamePosition(quint32 id, const QPointF &pos)=0;
-
     template <typename T>
     static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 

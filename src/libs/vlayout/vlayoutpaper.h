@@ -99,6 +99,7 @@ public:
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;
 
     QVector<VLayoutPiece> GetDetails() const;
+    void                  SetDetails(const QVector<VLayoutPiece>& details);
     void                  SetDetails(const QList<VLayoutPiece>& details);
 
     QRectF DetailsBoundingRect() const;

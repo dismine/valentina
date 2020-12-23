@@ -180,11 +180,8 @@ QString VAbstractMainWindow::CSVFilePath()
     const QString suffix("csv");
     const QString path = QDir::homePath() + QChar('/') + tr("values") + QChar('.') + suffix;
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters, nullptr,
+                                                    qApp->NativeFileDialog());
 
     if (fileName.isEmpty())
     {

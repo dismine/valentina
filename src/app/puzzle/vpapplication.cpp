@@ -39,12 +39,13 @@
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 
 #include <QMessageBox>
+#include <QLoggingCategory>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(mApp, "m.application")
+Q_LOGGING_CATEGORY(pApp, "p.application")
 
 QT_WARNING_POP
 
@@ -271,50 +272,50 @@ bool VPApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
+        qCCritical(pApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VExceptionBadId &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
+        qCCritical(pApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VExceptionConversionError &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
+        qCCritical(pApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
+        qCCritical(pApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VExceptionWrongId &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
+        qCCritical(pApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VExceptionToolWasDeleted &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s",
+        qCCritical(pApp, "%s\n\n%s\n\n%s",
                    qUtf8Printable("Unhadled deleting tool. Continue use object after deleting!"),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
+        qCCritical(pApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return true;
     }
     catch (std::exception &e)
     {
-        qCCritical(mApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
+        qCCritical(pApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
         exit(V_EX_SOFTWARE);
     }
     return false;
@@ -374,12 +375,12 @@ void VPApplication::InitOptions()
 
     OpenSettings();
 
-    qCDebug(mApp, "Version: %s", qUtf8Printable(APP_VERSION_STR));
-    qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
-    qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
-    qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
-    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
-    qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
+    qCDebug(pApp, "Version: %s", qUtf8Printable(APP_VERSION_STR));
+    qCDebug(pApp, "Build revision: %s", BUILD_REVISION);
+    qCDebug(pApp, "%s", qUtf8Printable(buildCompatibilityString()));
+    qCDebug(pApp, "Built on %s at %s", __DATE__, __TIME__);
+    qCDebug(pApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
+    qCDebug(pApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 
@@ -450,7 +451,7 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
         socket.connectToServer(serverName);
         if (socket.waitForConnected(1000))
         {
-            qCDebug(mApp, "Connected to the server '%s'", qUtf8Printable(serverName));
+            qCDebug(pApp, "Connected to the server '%s'", qUtf8Printable(serverName));
             QTextStream stream(&socket);
             stream << arguments.join(";;");
             stream.flush();
@@ -459,20 +460,20 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
             return;
         }
 
-        qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
+        qCDebug(pApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
 
         localServer = new QLocalServer(this);
         connect(localServer, &QLocalServer::newConnection, this, &VPApplication::NewLocalSocketConnection);
         if (not localServer->listen(serverName))
         {
-            qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
+            qCDebug(pApp, "Can't begin to listen for incoming connections on name '%s'",
                     qUtf8Printable(serverName));
             if (localServer->serverError() == QAbstractSocket::AddressInUseError)
             {
                 QLocalServer::removeServer(serverName);
                 if (not localServer->listen(serverName))
                 {
-                    qCWarning(mApp, "%s",
+                    qCWarning(pApp, "%s",
                      qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
                 }
             }
@@ -493,13 +494,13 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
     {
         if (not cmd->IsGuiEnabled() && args.count() > 1)
         {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Export mode doesn't support openning several files.")));
+            qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support openning several files.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
         if (args.count() > 1 && rawLayouts.size() > 0)
         {
-            qCCritical(mApp, "%s\n",
+            qCCritical(pApp, "%s\n",
                        qPrintable(tr("Import raw layout data does not support penning several layout files.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
@@ -527,7 +528,7 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
     {
         if (cmd->IsTestModeEnabled())
         {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
+            qCCritical(pApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 

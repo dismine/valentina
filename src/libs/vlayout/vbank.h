@@ -38,6 +38,7 @@
 
 #include "../vmisc/typedef.h"
 #include "vlayoutpiece.h"
+#include "vlayoutdef.h"
 
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
@@ -48,8 +49,6 @@
 #endif
 
 Q_DECLARE_LOGGING_CATEGORY(lBank)
-
-enum class Cases : qint8 { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
 
 class VBank
 {

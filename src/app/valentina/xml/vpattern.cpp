@@ -348,6 +348,41 @@ VContainer VPattern::GetCompleteData() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VContainer VPattern::GetCompletePPData(const QString &name) const
+{
+    const int countPP = CountPP();
+    if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    const quint32 id = (countPP == 1 ? history.last().getId() : PPLastToolId(name));
+
+    if (id == NULL_ID)
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    try
+    {
+        ToolExists(id);
+    }
+    catch (VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    const VDataTool *vTool = tools.value(id);
+    SCASSERT(vTool != nullptr)
+    VContainer lastData = vTool->getData();
+    //Delete special variables if exist
+    lastData.RemoveVariable(currentLength);
+    lastData.RemoveVariable(currentSeamAllowance);
+    return lastData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SPointActiveDraw return id base point current pattern peace.
  * @return id base point.
@@ -1176,8 +1211,8 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
-    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("10.0")));
-    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("15.0")));
+    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
+    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1185,8 +1220,8 @@ void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32
                                           QString &notes)
 {
     DrawToolsCommonAttributes(domElement, id, notes);
-    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("10.0")));
-    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("15.0")));
+    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
+    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2460,13 +2495,13 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.dartP3Id = GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
 
         initData.name1 = GetParametrString(domElement, AttrName1, QChar('A'));
-        initData.mx1 = qApp->toPixel(GetParametrDouble(domElement, AttrMx1, QStringLiteral("10.0")));
-        initData.my1 = qApp->toPixel(GetParametrDouble(domElement, AttrMy1, QStringLiteral("15.0")));
+        initData.mx1 = qApp->toPixel(GetParametrDouble(domElement, AttrMx1, QString::number(labelMX)));
+        initData.my1 = qApp->toPixel(GetParametrDouble(domElement, AttrMy1, QString::number(labelMY)));
         initData.showLabel1 = GetParametrBool(domElement, AttrShowLabel1, trueStr);
 
         initData.name2 = GetParametrString(domElement, AttrName2, QChar('A'));
-        initData.mx2 = qApp->toPixel(GetParametrDouble(domElement, AttrMx2, QStringLiteral("10.0")));
-        initData.my2 = qApp->toPixel(GetParametrDouble(domElement, AttrMy2, QStringLiteral("15.0")));
+        initData.mx2 = qApp->toPixel(GetParametrDouble(domElement, AttrMx2, QString::number(labelMX)));
+        initData.my2 = qApp->toPixel(GetParametrDouble(domElement, AttrMy2, QString::number(labelMY)));
         initData.showLabel2 = GetParametrBool(domElement, AttrShowLabel2, trueStr);
 
         VToolTrueDarts::Create(initData);
@@ -3616,6 +3651,12 @@ quint32 VPattern::LastToolId() const
         return NULL_ID;
     }
 
+    return PPLastToolId(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VPattern::PPLastToolId(const QString &name) const
+{
     const QVector<VToolRecord> localHistory = getLocalHistory(name);
 
     return (not localHistory.isEmpty() ? localHistory.last().getId() : NULL_ID);

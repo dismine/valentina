@@ -436,6 +436,12 @@ QVector<VLayoutPiece> VLayoutPaper::GetDetails() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetDetails(const QVector<VLayoutPiece> &details)
+{
+    d->details = details;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 {
     d->details = ConvertToVector(details);

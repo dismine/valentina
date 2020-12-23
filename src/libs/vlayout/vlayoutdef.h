@@ -116,6 +116,8 @@ struct VCachedPositions
     QPainterPath layoutAllowancePath{};
 };
 
+enum class Cases : qint8 { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
+
 /* Warning! Debugging doesn't work stable in debug mode. If you need big allocation use release mode. Or disable
  * Address Sanitizer. See page https://bitbucket.org/dismine/valentina/wiki/developers/Address_Sanitizer
  */

@@ -130,6 +130,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     // Tool panel
     ui->checkBoxToolPanelScaling->setChecked(settings->GetToolPanelScaling());
 
+    // Native dialogs
+    ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
+
     // Tab Scrolling
     ui->spinBoxDuration->setMinimum(VValentinaSettings::scrollingDurationMin);
     ui->spinBoxDuration->setMaximum(VValentinaSettings::scrollingDurationMax);
@@ -184,6 +187,11 @@ QStringList PreferencesConfigurationPage::Apply()
     if (settings->GetToolPanelScaling() != ui->checkBoxToolPanelScaling->isChecked())
     {
         settings->SetToolPanelScaling(ui->checkBoxToolPanelScaling->isChecked());
+    }
+
+    if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
+    {
+        settings->SetDontUseNativeDialog(ui->checkBoxDontUseNativeDialog->isChecked());
     }
 
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());

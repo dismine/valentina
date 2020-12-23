@@ -520,7 +520,8 @@ void TMainWindow::CreateFromExisting()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter, nullptr,
+                                                       qApp->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {
@@ -889,7 +890,8 @@ bool TMainWindow::FileSaveAs()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
+                                                    qApp->NativeFileDialog());
 
     auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
     {
@@ -997,11 +999,8 @@ void TMainWindow::ImportDataFromCSV()
     const QString filters = tr("Comma-Separated Values") + QStringLiteral(" (*.csv)");
     const QString suffix = QStringLiteral("csv");
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
+                                                    qApp->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -1471,7 +1470,8 @@ void TMainWindow::ImportFromPattern()
     //Use standard path to individual measurements
     QString pathTo = qApp->TapeSettings()->GetPathPattern();
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter, nullptr,
+                                                       qApp->NativeFileDialog());
     if (mPath.isEmpty())
     {
         return;
@@ -2189,7 +2189,7 @@ void TMainWindow::ExportToIndividual()
     QString filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
     QString fName = tr("measurements.vit");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + QChar('/') + fName,
-                                                    filters);
+                                                    filters, nullptr, qApp->NativeFileDialog());
 
     auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
                                      {
@@ -3358,7 +3358,8 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::Open(const QString &pathTo, const QString &filter)
 {
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
+                                                       qApp->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {

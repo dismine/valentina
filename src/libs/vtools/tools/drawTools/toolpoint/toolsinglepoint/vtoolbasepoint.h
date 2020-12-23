@@ -50,8 +50,8 @@ struct VToolBasePointInitData : VToolSinglePointInitData
     VToolBasePointInitData()
         : VToolSinglePointInitData(),
           nameActivPP(),
-          x(10),
-          y(10)
+          x(labelMX),
+          y(labelMY)
     {}
 
     QString nameActivPP;

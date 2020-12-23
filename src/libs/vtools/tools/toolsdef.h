@@ -47,6 +47,10 @@ struct SourceItem
 Q_DECLARE_METATYPE(SourceItem)
 Q_DECLARE_TYPEINFO(SourceItem, Q_MOVABLE_TYPE);
 
+// Default label position
+const int labelMX = 10;
+const int labelMY = 15;
+
 QVector<quint32> SourceToObjects(const QVector<SourceItem> &source);
 
 QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj);

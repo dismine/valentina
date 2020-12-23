@@ -1,9 +1,13 @@
 # ADD TO EACH PATH $$PWD VARIABLE!!!!!!
 # This need for corect working file translations.pro
 
+# Suport subdirectories. Just better project code tree.
+include(dialogs/dialogs.pri)
+
 HEADERS += \
     $$PWD/stable.h \
     $$PWD/testpath.h \
+    $$PWD/vlayoutexporter.h \
     $$PWD/vlayoutgenerator.h \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
@@ -13,7 +17,8 @@ HEADERS += \
     $$PWD/vcontour_p.h \
     $$PWD/vbestsquare.h \
     $$PWD/vposition.h \
-    $$PWD/vrawlayout.h \
+    $$PWD/vrawlayout.h \ 
+    $$PWD/vprintlayout.h \
     $$PWD/vsapoint.h \
     $$PWD/vtextmanager.h \
     $$PWD/vposter.h \
@@ -29,13 +34,15 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/testpath.cpp \
+    $$PWD/vlayoutexporter.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutpaper.cpp \
     $$PWD/vbank.cpp \
     $$PWD/vcontour.cpp \
     $$PWD/vbestsquare.cpp \
     $$PWD/vposition.cpp \
-    $$PWD/vrawlayout.cpp \
+    $$PWD/vrawlayout.cpp \  
+    $$PWD/vprintlayout.cpp \
     $$PWD/vtextmanager.cpp \
     $$PWD/vposter.cpp \
     $$PWD/vgraphicsfillitem.cpp \

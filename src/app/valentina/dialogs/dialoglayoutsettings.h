@@ -32,7 +32,7 @@
 #include <QCloseEvent>
 #include <QMargins>
 
-#include "vabstractlayoutdialog.h"
+#include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vbank.h"
 
 namespace Ui

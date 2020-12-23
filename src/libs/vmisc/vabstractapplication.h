@@ -39,6 +39,7 @@
 #include <QString>
 #include <QtGlobal>
 #include <QTranslator>
+#include <QFileDialog>
 
 #include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -51,7 +52,7 @@ class VCommonSettings;
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<VAbstractApplication*>(QCoreApplication::instance()))
+#define qApp (qobject_cast<VAbstractApplication*>(QCoreApplication::instance()))
 
 class VAbstractApplication : public QApplication
 {
@@ -81,6 +82,8 @@ public:
 
     static const QString warningMessageSignature;
     bool IsWarningMessage(const QString &message) const;
+
+    QFileDialog::Options NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const;
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();

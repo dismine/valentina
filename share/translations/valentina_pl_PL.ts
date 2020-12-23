@@ -12342,6 +12342,10 @@ Do you want to save your changes?</source>
         <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -15364,27 +15368,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznaczono wszystko</translation>
     </message>
     <message>
         <source>Select none</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznaczenie jest puste</translation>
     </message>
     <message>
         <source>select all details</source>
-        <translation type="unfinished"></translation>
+        <translation>wybrano wszystkie szczegóły</translation>
     </message>
     <message>
         <source>select none details</source>
-        <translation type="unfinished"></translation>
+        <translation>nie wybrano szczegółów</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Odwróć zaznaczenie</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Odwróć zaznaczenie</translation>
     </message>
     <message>
         <source>Hide not in layout</source>
@@ -15755,7 +15759,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>INFO:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORMACJA:</translation>
+    </message>
+    <message>
+        <source>Warning.</source>
+        <translation type="vanished">Ostrzeżenie.</translation>
+    </message>
+    <message>
+        <source>Critical error.</source>
+        <translation type="vanished">Błąd krytyczny.</translation>
+    </message>
+    <message>
+        <source>Fatal error.</source>
+        <translation type="vanished">Błąd krytyczny.</translation>
     </message>
     <message>
         <source>Information.</source>
@@ -15763,15 +15779,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzeżenie</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd krytyczny</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd krytyczny</translation>
     </message>
     <message>
         <source>Information</source>
@@ -15798,7 +15814,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>INFO:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORMACJA:</translation>
+    </message>
+    <message>
+        <source>Warning.</source>
+        <translation type="vanished">Ostrzeżenie.</translation>
+    </message>
+    <message>
+        <source>Critical error.</source>
+        <translation type="vanished">Błąd krytyczny.</translation>
+    </message>
+    <message>
+        <source>Fatal error.</source>
+        <translation type="vanished">Błąd krytyczny.</translation>
     </message>
     <message>
         <source>Information.</source>
@@ -15806,15 +15834,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzeżenie</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd krytyczny</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd krytyczny</translation>
     </message>
     <message>
         <source>Information</source>

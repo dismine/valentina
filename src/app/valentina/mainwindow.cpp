@@ -1641,10 +1641,7 @@ void MainWindow::customEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CleanLayout()
 {
-    qDeleteAll (scenes);
-    scenes.clear();
-    shadows.clear();
-    papers.clear();
+    m_layoutSettings->CleanLayout();
     gcontours.clear();
     ui->listWidget->clear();
     SetLayoutModeActions();
@@ -1654,14 +1651,14 @@ void MainWindow::CleanLayout()
 void MainWindow::PrepareSceneList(PreviewQuatilty quality)
 {
     ui->listWidget->clear();
-    for (int i=1; i<=scenes.size(); ++i)
+    for (int i=1; i<=m_layoutSettings->LayoutScenes().size(); ++i)
     {
         QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1, ui->listWidget->iconSize(), quality),
                                                     QString::number(i));
         ui->listWidget->addItem(item);
     }
 
-    if (not scenes.isEmpty())
+    if (not m_layoutSettings->LayoutScenes().isEmpty())
     {
         ui->listWidget->setCurrentRow(0);
         SetLayoutModeActions();
@@ -1769,11 +1766,8 @@ void MainWindow::LoadIndividual()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
-#ifdef Q_OS_LINUX
-                                                       , QFileDialog::DontUseNativeDialog
-#endif
-                                                       );
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                       qApp->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {
@@ -1810,11 +1804,8 @@ void MainWindow::LoadMultisize()
     //Use standard path to multisize measurements
     QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
     path = VCommonSettings::PrepareMultisizeTables(path);
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
-#ifdef Q_OS_LINUX
-                                                       , QFileDialog::DontUseNativeDialog
-#endif
-                                                       );
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                       qApp->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {
@@ -2034,7 +2025,8 @@ void MainWindow::LoadWatermark()
     const QString filter(tr("Watermark files") + QLatin1String(" (*.vwm)"));
     QString dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
+                                                          qApp->NativeFileDialog());
     if (filePath.isEmpty())
     {
         return;
@@ -3067,7 +3059,7 @@ void MainWindow::ActionLayout(bool checked)
 
         ShowPaper(ui->listWidget->currentRow());
 
-        if (scenes.isEmpty() || isLayoutStale)
+        if (m_layoutSettings->LayoutScenes().isEmpty() || m_layoutSettings->IsLayoutStale())
         {
             ui->toolButtonLayoutSettings->click();
         }
@@ -3108,11 +3100,7 @@ bool MainWindow::on_actionSaveAs_triggered()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+                                                    filters, nullptr, qApp->NativeFileDialog());
 
     auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
     {
@@ -3305,11 +3293,8 @@ void MainWindow::on_actionOpen_triggered()
         dir = QFileInfo(files.first()).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr
-#ifdef Q_OS_LINUX
-                                                          , QFileDialog::DontUseNativeDialog
-#endif
-                                                          );
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
+                                                          qApp->NativeFileDialog());
     if (filePath.isEmpty())
     {
         return;
@@ -3975,7 +3960,7 @@ void MainWindow::PatternChangesWereSaved(bool saved)
         const bool state = doc->IsModified() || !saved;
         setWindowModified(state);
         not patternReadOnly ? ui->actionSave->setEnabled(state): ui->actionSave->setEnabled(false);
-        isLayoutStale = true;
+        m_layoutSettings->SetLayoutStale(true);
         isNeedAutosave = not saved;
     }
 }
@@ -4335,7 +4320,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetLayoutModeActions()
 {
-    const bool enabled = not scenes.isEmpty();
+    const bool enabled = not m_layoutSettings->LayoutScenes().isEmpty();
 
     ui->toolButtonLayoutExportAs->setEnabled(enabled);
     ui->actionExportAs->setEnabled(enabled);
@@ -4908,13 +4893,13 @@ void MainWindow::CreateActions()
         QString fileName =
                 QFileDialog::getSaveFileName(this, tr("Export recipe"),
                                              QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
-                                             filters, nullptr);
+                                             filters, nullptr, qApp->NativeFileDialog());
         if (fileName.isEmpty())
         {
             return;
         }
 
-        VPatternRecipe recipe(pattern, doc);
+        VPatternRecipe recipe(doc);
         QString error;
         if (not recipe.SaveDocument(fileName, error))
         {
@@ -5169,7 +5154,6 @@ bool MainWindow::PatternPieceName(QString &name)
 MainWindow::~MainWindow()
 {
     CancelTool();
-    qDeleteAll (scenes);
 
     delete doc;
     delete ui;
@@ -5425,6 +5409,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         ActionDraw(true);
 
         qApp->setOpeningPattern();// End opening file
+        m_statusLabel->setText(QString());
         return true;
     }
     else
@@ -5494,13 +5479,13 @@ void MainWindow::ToolBoxSizePolicy()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
-    if (index < 0 || index >= scenes.size())
+    if (index < 0 || index >= m_layoutSettings->LayoutScenes().size())
     {
         ui->view->setScene(tempSceneLayout);
     }
     else
     {
-        ui->view->setScene(scenes.at(index));
+        ui->view->setScene(m_layoutSettings->LayoutScenes().at(index));
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
@@ -5557,9 +5542,9 @@ void MainWindow::ExportLayoutAs()
 {
     auto Uncheck = qScopeGuard([this] {ui->toolButtonLayoutExportAs->setChecked(false);});
 
-    if (isLayoutStale)
+    if (m_layoutSettings->IsLayoutStale())
     {
-        if (ContinueIfLayoutStale() == QMessageBox::No)
+        if (VPrintLayout::ContinueIfLayoutStale(this) == QMessageBox::No)
         {
             return;
         }
@@ -5567,8 +5552,8 @@ void MainWindow::ExportLayoutAs()
 
     try
     {
-        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(scenes.size(), Draw::Layout,
-                                                                                   FileName(), this));
+        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
+                    new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(), Draw::Layout, FileName(), this));
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -5714,6 +5699,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         QFileDialog dialog(this, tr("Open file"), dirPath, filter);
         dialog.selectFile(selectedName);
         dialog.setFileMode(QFileDialog::ExistingFile);
+        dialog.setOption(QFileDialog::DontUseNativeDialog, qApp->Settings()->IsDontUseNativeDialog());
         if (dialog.exec() == QDialog::Accepted)
         {
             mPath = dialog.selectedFiles().value(0);
@@ -5985,9 +5971,9 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             try
             {
-                m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(scenes.size(), Draw::Layout,
-                                                                                           expParams->OptBaseName(),
-                                                                                           this));
+                m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
+                            new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(),
+                                                 Draw::Layout, expParams->OptBaseName(), this));
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());

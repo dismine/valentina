@@ -15,10 +15,10 @@
     },
 
     "version": {
-        "name": "0.7.40",
+        "name": "0.7.41",
         "desc": "Test branch release",
-        "released": "2020-11-23",
-        "vcs_tag": "v0.7.40",
+        "released": "2020-12-4",
+        "vcs_tag": "v0.7.41",
         "gpgSign": false
     },
 

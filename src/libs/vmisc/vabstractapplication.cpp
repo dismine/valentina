@@ -313,3 +313,14 @@ bool VAbstractApplication::IsWarningMessage(const QString &message) const
 {
     return VAbstractApplication::ClearMessage(message).startsWith(warningMessageSignature);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options options) const
+{
+    if (settings->IsDontUseNativeDialog())
+    {
+        options |= QFileDialog::DontUseNativeDialog;
+    }
+
+    return options;
+}

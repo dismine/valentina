@@ -82,10 +82,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("lay
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingdockWidgetGroupsActive, (QLatin1String("dockWidget/groupsActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
@@ -481,33 +479,6 @@ void VValentinaSettings::SetRememberPatternMaterials(bool value)
 // settings for the tiled PDFs
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetTiledPDFMargins returns the tiled pdf margins in the given unit. When the setting is
- * called for the first time, the 4 default margins are 10mm.
- * @param unit the unit in which are the value. Necessary because we save the values
- * internaly as mm so there is conversion beeing made.
- * @return tiled pdf margins
- */
-QMarginsF VValentinaSettings::GetTiledPDFMargins(const Unit &unit) const
-{
-    // default value is 10mm. We save the margins in mm in the setting.
-    return UnitConvertor(ValueOrDef<QMarginsF>(*this, *settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm,
-                         unit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetTiledPDFMargins sets the setting tiled pdf margins to the given value.
- * @param value the margins to save
- * @param unit the unit in which are the value. Necessary because we save the values
- * internaly as mm so there is conversion beeing made.
- */
-void VValentinaSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
-{
-    setValue(*settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetTiledPDFPaperHeight returns the paper height of tiled pdf in the desired unit.
  * @param unit the unit in which are the value. Necessary because we save the values
  * internaly as mm so there is conversion beeing made.
@@ -551,21 +522,6 @@ void VValentinaSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 {
     setValue(*settingTiledPDFPaperWidth, UnitConvertor(value,unit, Unit::Mm));
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-PageOrientation VValentinaSettings::GetTiledPDFOrientation() const
-{
-    bool defaultValue = static_cast<bool>(PageOrientation::Portrait);
-    bool result = value(*settingTiledPDFOrientation, defaultValue).toBool();
-    return static_cast<PageOrientation>(result);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VValentinaSettings::SetTiledPDFOrientation(PageOrientation value)
-{
-    setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
-}
-
 
 
 //---------------------------------------------------------------------------------------------------------------------

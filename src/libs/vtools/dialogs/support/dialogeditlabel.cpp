@@ -300,11 +300,7 @@ void DialogEditLabel::ExportTemplate()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
                                                     path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+                                                    filters, nullptr, qApp->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -353,11 +349,8 @@ void DialogEditLabel::ImportTemplate()
     QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
     //Use standard path to label templates
     const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr
-#ifdef Q_OS_LINUX
-                                                          , QFileDialog::DontUseNativeDialog
-#endif
-                                                          );
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
+                                                          qApp->NativeFileDialog());
     if (fileName.isEmpty())
     {
         return;
@@ -586,10 +579,26 @@ void DialogEditLabel::InitPlaceholders()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogEditLabel::ReplacePlaceholders(QString line) const
 {
+    QChar per('%');
+
+    auto TestDimension = [per, this, line](const QString &placeholder, const QString &errorMsg)
+    {
+        if (line.contains(per+placeholder+per) && m_placeholders.value(placeholder).second == QChar('0'))
+        {
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    };
+
+    TestDimension(pl_height, tr("No data for the height dimension."));
+    TestDimension(pl_size, tr("No data for the size dimension."));
+    TestDimension(pl_hip, tr("No data for the hip dimension."));
+    TestDimension(pl_waist, tr("No data for the waist dimension."));
+
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
     {
-        line.replace(QChar('%')+i.key()+QChar('%'), i.value().second);
+        line.replace(per+i.key()+per, i.value().second);
         ++i;
     }
     return line;

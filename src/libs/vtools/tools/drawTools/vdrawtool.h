@@ -52,6 +52,7 @@
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
 #include "../vtools/undocommands/undogroup.h"
+#include "../toolsdef.h"
 
 struct VDrawToolInitData : VAbstractToolInitData
 {
@@ -120,6 +121,7 @@ protected:
     void            SaveOption(QSharedPointer<VGObject> &obj);
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
     virtual QString MakeToolTip() const;
+    virtual void    UpdateNamePosition(quint32 id, const QPointF &pos);
 
     bool         CorrectDisable(bool disable, const QString &namePP) const;
 
@@ -241,6 +243,9 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
        actionShowLabel->setVisible(false);
     }
 
+    QAction *actionRestoreLabelPosition = menu.addAction(VDrawTool::tr("Restore label position"));
+    actionRestoreLabelPosition->setVisible(itemType == GOType::Point);
+
     QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), VDrawTool::tr("Delete"));
     if (showRemove == RemoveOption::Enable)
     {
@@ -298,6 +303,10 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     else if (selectedAction == actionShowLabel)
     {
         ChangeLabelVisibility(itemId, selectedAction->isChecked());
+    }
+    else if (selectedAction == actionRestoreLabelPosition)
+    {
+        UpdateNamePosition(itemId, QPointF(labelMX, labelMY));
     }
     else if (selectedAction->actionGroup() == actionsAddToGroup)
     {

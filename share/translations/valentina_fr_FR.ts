@@ -13639,6 +13639,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>

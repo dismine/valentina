@@ -284,6 +284,21 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 QString ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line)
 {
     QChar per('%');
+
+    auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
+    {
+        if (line.contains(per+placeholder+per) && placeholders.value(placeholder) == QChar('0'))
+        {
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    };
+
+    TestDimension(pl_height, QObject::tr("No data for the height dimension."));
+    TestDimension(pl_size, QObject::tr("No data for the size dimension."));
+    TestDimension(pl_hip, QObject::tr("No data for the hip dimension."));
+    TestDimension(pl_waist, QObject::tr("No data for the waist dimension."));
+
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {

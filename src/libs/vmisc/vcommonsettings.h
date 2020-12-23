@@ -38,7 +38,10 @@
 #include <QStringList>
 #include <QtGlobal>
 
-#include "../vlayout/vbank.h"
+#include "../vmisc/def.h"
+#include "../vlayout/vlayoutdef.h"
+
+class QMarginsF;
 
 class VCommonSettings : public QSettings
 {
@@ -220,6 +223,9 @@ public:
     bool IsPieceShowMainPath() const;
     void SetPieceShowMainPath(bool value);
 
+    bool IsDontUseNativeDialog() const;
+    void SetDontUseNativeDialog(bool value);
+
     static qreal DefaultLineWidth();
     static qreal MinimalLineWidth();
     static qreal MaximalLineWidth();
@@ -227,6 +233,13 @@ public:
     void  SetLineWidth(qreal width);
     qreal WidthMainLine() const;
     qreal WidthHairLine() const;
+
+    // settings for the tiled PDFs
+    auto GetTiledPDFMargins(const Unit &unit) const -> QMarginsF;
+    void SetTiledPDFMargins(const QMarginsF &value, const Unit &unit);
+
+    auto GetTiledPDFOrientation() const -> PageOrientation;
+    void SetTiledPDFOrientation(PageOrientation value);
 
     static const int defaultScrollingDuration;
     static const int scrollingDurationMin;

@@ -67,6 +67,8 @@ const qreal VCommonSettings::defaultScrollingAcceleration = 1.3;
 const qreal VCommonSettings::scrollingAccelerationMin = 1.0;
 const qreal VCommonSettings::scrollingAccelerationMax = 10.0;
 
+Q_DECLARE_METATYPE(QMarginsF)
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements, (QLatin1String("paths/individual_measurements")))
@@ -87,6 +89,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmFormatRewrit
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle, (QLatin1String("configuration/tool_bar_style")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode, (QLatin1String("configuration/freeCurveMode")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDoubleClickZoomFitBestCurrentPP, (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDontUseNativeDialog, (QLatin1String("configuration/dontUseNativeDialog")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, (QLatin1String("pattern/undo")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping, (QLatin1String("pattern/forbidFlipping")))
@@ -133,6 +136,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale,
                           (QLatin1String("scrolling/sensorMouseScale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
 
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
@@ -1224,6 +1230,21 @@ void VCommonSettings::SetPieceShowMainPath(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsDontUseNativeDialog() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingConfigurationDontUseNativeDialog, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDontUseNativeDialog(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingConfigurationDontUseNativeDialog, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VCommonSettings::GetLineWidth() const
 {
     if (lineWidthCached <= 0)
@@ -1367,4 +1388,45 @@ void VCommonSettings::SetGraphicalOutput(const bool &value)
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPatternGraphicalOutput, value);
     settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetTiledPDFMargins returns the tiled pdf margins in the given unit. When the setting is
+ * called for the first time, the 4 default margins are 10mm.
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ * @return tiled pdf margins
+ */
+auto VCommonSettings::GetTiledPDFMargins(const Unit &unit) const -> QMarginsF
+{
+    // default value is 10mm. We save the margins in mm in the setting.
+    return UnitConvertor(
+                ValueOrDef<QMarginsF>(*this, *settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm, unit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetTiledPDFMargins sets the setting tiled pdf margins to the given value.
+ * @param value the margins to save
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ */
+void VCommonSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
+{
+    setValue(*settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetTiledPDFOrientation() const -> PageOrientation
+{
+    bool defaultValue = static_cast<bool>(PageOrientation::Portrait);
+    bool result = value(*settingTiledPDFOrientation, defaultValue).toBool();
+    return static_cast<PageOrientation>(result);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetTiledPDFOrientation(PageOrientation value)
+{
+    setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
 }

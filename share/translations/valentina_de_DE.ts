@@ -13714,6 +13714,10 @@ Do you want to save your changes?</source>
         <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -15230,7 +15234,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Punkt am Schnittpunkt von Kreis und Abschnitt</translation>
+        <translation>Punkt am Schnittpunkt von Kreis und Abschnitt</translation>
     </message>
 </context>
 <context>

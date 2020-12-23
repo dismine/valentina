@@ -909,9 +909,6 @@ QSizeF DialogLayoutSettings::GetTemplateSize(const PaperSizeTemplate &tmpl, cons
     }
 }
 
-
-
-
 //---------------------------------------------------------------------------------------------------------------------
 QMarginsF DialogLayoutSettings::MinPrinterFields() const
 {
