@@ -47,6 +47,8 @@
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/pmsystems.h"
 
+Q_DECLARE_METATYPE(QMarginsF)
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements, (QLatin1String("paths/individual_measurements")))
@@ -104,6 +106,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelDateFormat, (QLatin1String(
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserDateFormats, (QLatin1String("label/userDateFormats")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelTimeFormat, (QLatin1String("label/timeFormat")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserTimeFormats, (QLatin1String("label/userTimeFormats")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
 
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
@@ -1215,4 +1220,44 @@ qreal VCommonSettings::WidthMainLine() const
 qreal VCommonSettings::WidthHairLine() const
 {
     return WidthMainLine()/3.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetTiledPDFMargins returns the tiled pdf margins in the given unit. When the setting is
+ * called for the first time, the 4 default margins are 10mm.
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ * @return tiled pdf margins
+ */
+auto VCommonSettings::GetTiledPDFMargins(const Unit &unit) const -> QMarginsF
+{
+    // default value is 10mm. We save the margins in mm in the setting.
+    return UnitConvertor(ValueOrDef<QMarginsF>(*settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm, unit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetTiledPDFMargins sets the setting tiled pdf margins to the given value.
+ * @param value the margins to save
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ */
+void VCommonSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
+{
+    setValue(*settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetTiledPDFOrientation() const -> PageOrientation
+{
+    bool defaultValue = static_cast<bool>(PageOrientation::Portrait);
+    bool result = value(*settingTiledPDFOrientation, defaultValue).toBool();
+    return static_cast<PageOrientation>(result);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetTiledPDFOrientation(PageOrientation value)
+{
+    setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
 }

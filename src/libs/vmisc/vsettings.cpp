@@ -104,10 +104,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("lay
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
@@ -146,30 +144,6 @@ VSettings::VSettings(const QString &fileName, QSettings::Format format, QObject 
     :VCommonSettings(fileName, format, parent)
 {
     qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline T VSettings::ValueOrDef(const QString &setting, const T &defValue) const
-{
-    const QVariant val = value(setting, QVariant::fromValue(defValue));
-    return val.canConvert<T>() ? val.value<T>() : defValue;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <>
-inline Cases VSettings::ValueOrDef<Cases>(const QString &setting, const Cases &defValue) const
-{
-    const QVariant val = value(setting, QVariant::fromValue(static_cast<int>(defValue)));
-    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
-    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
-    {
-        return defValue;
-    }
-    else
-    {
-        return static_cast<Cases>(g);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -565,32 +539,6 @@ void VSettings::SetRememberPatternMaterials(bool value)
 // settings for the tiled PDFs
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetTiledPDFMargins returns the tiled pdf margins in the given unit. When the setting is
- * called for the first time, the 4 default margins are 10mm.
- * @param unit the unit in which are the value. Necessary because we save the values
- * internaly as mm so there is conversion beeing made.
- * @return tiled pdf margins
- */
-QMarginsF VSettings::GetTiledPDFMargins(const Unit &unit) const
-{
-    // default value is 10mm. We save the margins in mm in the setting.
-    return UnitConvertor(ValueOrDef<QMarginsF>(*settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm, unit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetTiledPDFMargins sets the setting tiled pdf margins to the given value.
- * @param value the margins to save
- * @param unit the unit in which are the value. Necessary because we save the values
- * internaly as mm so there is conversion beeing made.
- */
-void VSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
-{
-    setValue(*settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetTiledPDFPaperHeight returns the paper height of tiled pdf in the desired unit.
  * @param unit the unit in which are the value. Necessary because we save the values
  * internaly as mm so there is conversion beeing made.
@@ -633,20 +581,6 @@ qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
 void VSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 {
     setValue(*settingTiledPDFPaperWidth, UnitConvertor(value,unit, Unit::Mm));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-PageOrientation VSettings::GetTiledPDFOrientation() const
-{
-    bool defaultValue = static_cast<bool>(PageOrientation::Portrait);
-    bool result = value(*settingTiledPDFOrientation, defaultValue).toBool();
-    return static_cast<PageOrientation>(result);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetTiledPDFOrientation(PageOrientation value)
-{
-    setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

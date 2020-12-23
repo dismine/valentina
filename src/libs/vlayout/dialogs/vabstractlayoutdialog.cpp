@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vabstractlayoutdialog.h"
-#include "../core/vapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 
 //must be the same order as PaperSizeTemplate constants
@@ -61,8 +61,8 @@ VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
 void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 {
     SCASSERT(comboBoxTemplates != nullptr)
-    const QIcon icoPaper("://icon/16x16/template.png");
-    const QIcon icoRoll("://icon/16x16/roll.png");
+    const QIcon icoPaper(QLatin1String("://icon/16x16/template.png"));
+    const QIcon icoRoll(QLatin1String("://icon/16x16/roll.png"));
     const QString pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
@@ -85,7 +85,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VAbstractLayoutDialog::GetTemplateSize(PaperSizeTemplate tmpl, Unit unit)
+auto VAbstractLayoutDialog::GetTemplateSize(PaperSizeTemplate tmpl, Unit unit) -> QSizeF
 {
     qreal width = 0;
     qreal height = 0;
@@ -159,11 +159,11 @@ QSizeF VAbstractLayoutDialog::GetTemplateSize(PaperSizeTemplate tmpl, Unit unit)
         default:
             break;
     }
-    return QSizeF();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VAbstractLayoutDialog::RoundTemplateSize(qreal width, qreal height, Unit unit)
+auto VAbstractLayoutDialog::RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF
 {
     qreal w = 0;
     qreal h = 0;
@@ -175,14 +175,14 @@ QSizeF VAbstractLayoutDialog::RoundTemplateSize(qreal width, qreal height, Unit 
         case Unit::Px:
             w = vRound(width, 2);
             h = vRound(height, 2);
-            return QSizeF(w, h);
+            return {w, h};
         case Unit::Inch:
             w = vRound(width, 5);
             h = vRound(height, 5);
-            return QSizeF(w, h);
+            return {w, h};
         default:
             break;
     }
 
-    return QSizeF(width, height);
+    return {width, height};
 }

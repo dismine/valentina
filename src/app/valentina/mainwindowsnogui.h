@@ -40,6 +40,7 @@
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vlayout/vtextmanager.h"
+#include "../vlayout/vprintlayout.h"
 
 class QGraphicsScene;
 struct PosterData;
@@ -98,13 +99,9 @@ protected:
     /** @brief doc dom document container */
     VPattern           *doc;
 
-    QList<QGraphicsItem *> papers;
-    QList<QGraphicsItem *> shadows;
-    QList<QGraphicsScene *> scenes;
-    QList<QList<QGraphicsItem *> > details;
-    QList<QGraphicsItem *> gcontours;
+    QList<QGraphicsItem *> gcontours{};
 
-    QVector<QVector<VLayoutPiece> > detailsOnLayout;
+    QVector<QVector<VLayoutPiece> > detailsOnLayout{};
 
     QAction *undoAction;
     QAction *redoAction;
@@ -112,12 +109,8 @@ protected:
     QAction *actionDockWidgetGroups;
 
     bool isNoScaling;
-    bool isLayoutStale;
     bool isNeedAutosave;
-    bool ignorePrinterFields;
-    bool isLayoutPortrait{true};
-    QMarginsF margins;
-    QSizeF paperSize;
+    VPrintLayout *m_layoutSettings{new VPrintLayout(this)};
 
     QSharedPointer<DialogSaveLayout> m_dialogSaveLayout;
 
@@ -140,7 +133,6 @@ protected:
     virtual QStringList RecentFileList() const override;
     QIcon ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const;
     bool GenerateLayout(VLayoutGenerator& lGenerator);
-    int ContinueIfLayoutStale();
     QString FileName() const;
 
     bool ExportFMeasurementsToCSVData(const QString &fileName,
@@ -149,60 +141,15 @@ protected:
     QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
 
     void CheckRequiredMeasurements(const VMeasurements *m) const;
-private slots:
-    void PrintPages (QPrinter *printer);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
-
-    bool isTiled;
-    bool isAutoCropLength;
-    bool isAutoCropWidth;
-    bool isUnitePages;
-
-    QString layoutPrinterName;
-
-    qreal m_xscale{1};
-    qreal m_yscale{1};
 
     static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
     static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,
                                                 const QList<QGraphicsItem *> &shadows,
                                                 const QList<QList<QGraphicsItem *> > &details);
 
-    void SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, const QMarginsF &margins)const;
-    void PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, const QMarginsF &margins)const;
-    void PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
-                 const QMarginsF &margins)const;
     void PdfTiledFile(const QString &name);
-    void EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
-                 const QMarginsF &margins)const;
-    void PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
-                const QMarginsF &margins)const;
-    void PdfToPs(const QStringList &params)const;
-    void ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
-    void FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
-                 const QList<QList<QGraphicsItem *> > &details)const;
-    void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
-                     const QVector<VLayoutPiece> &details) const;
-    void ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
-                     const QVector<VLayoutPiece> &details) const;
-
-    void PreparePaper(int index) const;
-    void RestorePaper(int index) const;
-
-    void PrepareTextForDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
-    void RestoreTextAfterDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
-
-    void PrintPreview();
-    void LayoutPrint();
-
-    enum class PrintType : qint8 {PrintPDF, PrintPreview, PrintNative};
-
-    void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
-    QPageSize::PageSizeId FindPageSizeId(const QSizeF &size) const;
-
-    bool isPagesUniform() const;
-    bool IsPagesFit(const QSizeF &printPaper) const;
 
     void ExportScene(const QList<QGraphicsScene *> &scenes,
                      const QList<QGraphicsItem *> &papers,

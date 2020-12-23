@@ -40,7 +40,7 @@ class QGraphicsScene;
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<VAbstractValApplication*>(QCoreApplication::instance()))
+#define qApp (qobject_cast<VAbstractValApplication*>(QCoreApplication::instance()))
 
 class VAbstractValApplication : public VAbstractApplication
 {
