@@ -30,7 +30,7 @@
 #define DIALOGSAVELAYOUT_H
 
 #include "../vgeometry/vgeometrydef.h"
-#include "vabstractlayoutdialog.h"
+#include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
 
 namespace Ui

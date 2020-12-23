@@ -278,28 +278,6 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode)
-{
-    QPrinterInfo tmpInfo = info;
-    if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
-    {
-        const QStringList list = QPrinterInfo::availablePrinterNames();
-        if(list.isEmpty())
-        {
-            return QSharedPointer<QPrinter>();
-        }
-        else
-        {
-            tmpInfo = QPrinterInfo::printerInfo(list.first());
-        }
-    }
-
-    auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
-    printer->setResolution(static_cast<int>(PrintDPI));
-    return printer;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
 {
     QPageLayout layout = printer->pageLayout();

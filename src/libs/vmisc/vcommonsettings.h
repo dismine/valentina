@@ -38,6 +38,11 @@
 #include <QStringList>
 #include <QtGlobal>
 
+#include "../vmisc/def.h"
+#include "../vlayout/vlayoutdef.h"
+
+class QMarginsF;
+
 class VCommonSettings : public QSettings
 {
     Q_OBJECT
@@ -224,6 +229,18 @@ public:
     void  SetLineWidth(qreal width);
     qreal WidthMainLine() const;
     qreal WidthHairLine() const;
+
+    // settings for the tiled PDFs
+   auto GetTiledPDFMargins(const Unit &unit) const -> QMarginsF;
+   void SetTiledPDFMargins(const QMarginsF &value, const Unit &unit);
+
+   auto GetTiledPDFOrientation() const -> PageOrientation;
+   void SetTiledPDFOrientation(PageOrientation value);
+
+protected:
+   template <class T>
+   T ValueOrDef(const QString &setting, const T &defValue) const;
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };
@@ -244,6 +261,30 @@ inline qreal VCommonSettings::MinimalLineWidth()
 inline qreal VCommonSettings::MaximalLineWidth()
 {
     return 5.0; // mm
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline T VCommonSettings::ValueOrDef(const QString &setting, const T &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(defValue));
+    return val.canConvert<T>() ? val.value<T>() : defValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline Cases VCommonSettings::ValueOrDef<Cases>(const QString &setting, const Cases &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(static_cast<int>(defValue)));
+    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
+    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
+    {
+        return defValue;
+    }
+    else
+    {
+        return static_cast<Cases>(g);
+    }
 }
 
 #endif // VCOMMONSETTINGS_H

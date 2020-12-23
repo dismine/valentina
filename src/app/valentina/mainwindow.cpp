@@ -1641,10 +1641,7 @@ void MainWindow::customEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CleanLayout()
 {
-    qDeleteAll (scenes);
-    scenes.clear();
-    shadows.clear();
-    papers.clear();
+    m_layoutSettings->CleanLayout();
     gcontours.clear();
     ui->listWidget->clear();
     SetLayoutModeActions();
@@ -1654,14 +1651,14 @@ void MainWindow::CleanLayout()
 void MainWindow::PrepareSceneList(PreviewQuatilty quality)
 {
     ui->listWidget->clear();
-    for (int i=1; i<=scenes.size(); ++i)
+    for (int i=1; i<=m_layoutSettings->LayoutScenes().size(); ++i)
     {
         QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1, ui->listWidget->iconSize(), quality),
                                                     QString::number(i));
         ui->listWidget->addItem(item);
     }
 
-    if (not scenes.isEmpty())
+    if (not m_layoutSettings->LayoutScenes().isEmpty())
     {
         ui->listWidget->setCurrentRow(0);
         SetLayoutModeActions();
@@ -3062,7 +3059,7 @@ void MainWindow::ActionLayout(bool checked)
 
         ShowPaper(ui->listWidget->currentRow());
 
-        if (scenes.isEmpty() || isLayoutStale)
+        if (m_layoutSettings->LayoutScenes().isEmpty() || m_layoutSettings->IsLayoutStale())
         {
             ui->toolButtonLayoutSettings->click();
         }
@@ -3817,7 +3814,7 @@ void MainWindow::PatternChangesWereSaved(bool saved)
         const bool state = doc->IsModified() || !saved;
         setWindowModified(state);
         not patternReadOnly ? ui->actionSave->setEnabled(state): ui->actionSave->setEnabled(false);
-        isLayoutStale = true;
+        m_layoutSettings->SetLayoutStale(true);
         isNeedAutosave = not saved;
     }
 }
@@ -4177,7 +4174,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetLayoutModeActions()
 {
-    const bool enabled = not scenes.isEmpty();
+    const bool enabled = not m_layoutSettings->LayoutScenes().isEmpty();
 
     ui->toolButtonLayoutExportAs->setEnabled(enabled);
     ui->actionExportAs->setEnabled(enabled);
@@ -5011,7 +5008,6 @@ bool MainWindow::PatternPieceName(QString &name)
 MainWindow::~MainWindow()
 {
     CancelTool();
-    qDeleteAll (scenes);
 
     delete doc;
     delete ui;
@@ -5337,13 +5333,13 @@ void MainWindow::ToolBoxSizePolicy()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
-    if (index < 0 || index >= scenes.size())
+    if (index < 0 || index >= m_layoutSettings->LayoutScenes().size())
     {
         ui->view->setScene(tempSceneLayout);
     }
     else
     {
-        ui->view->setScene(scenes.at(index));
+        ui->view->setScene(m_layoutSettings->LayoutScenes().at(index));
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
@@ -5400,9 +5396,9 @@ void MainWindow::ExportLayoutAs()
 {
     auto Uncheck = qScopeGuard([this] {ui->toolButtonLayoutExportAs->setChecked(false);});
 
-    if (isLayoutStale)
+    if (m_layoutSettings->IsLayoutStale())
     {
-        if (ContinueIfLayoutStale() == QMessageBox::No)
+        if (VPrintLayout::ContinueIfLayoutStale(this) == QMessageBox::No)
         {
             return;
         }
@@ -5410,8 +5406,8 @@ void MainWindow::ExportLayoutAs()
 
     try
     {
-        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(scenes.size(), Draw::Layout,
-                                                                                   FileName(), this));
+        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
+                    new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(), Draw::Layout, FileName(), this));
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -5829,9 +5825,9 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             try
             {
-                m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(scenes.size(), Draw::Layout,
-                                                                                           expParams->OptBaseName(),
-                                                                                           this));
+                m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
+                            new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(),
+                                                 Draw::Layout, expParams->OptBaseName(), this));
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());

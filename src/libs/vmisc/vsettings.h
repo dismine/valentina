@@ -141,17 +141,11 @@ public:
     void SetRememberPatternMaterials(bool value);
 
     // settings for the tiled PDFs
-    QMarginsF GetTiledPDFMargins(const Unit &unit) const;
-    void      SetTiledPDFMargins(const QMarginsF &value, const Unit &unit);
-
     qreal GetTiledPDFPaperHeight(const Unit &unit) const;
     void  SetTiledPDFPaperHeight(qreal value, const Unit &unit);
 
     qreal GetTiledPDFPaperWidth(const Unit &unit) const;
     void  SetTiledPDFPaperWidth(qreal value, const Unit &unit);
-
-    PageOrientation GetTiledPDFOrientation() const;
-    void            SetTiledPDFOrientation(PageOrientation value);
 
     static const int defaultScrollingDuration;
     static const int scrollingDurationMin;
@@ -213,10 +207,7 @@ private:
     Q_DISABLE_COPY(VSettings)
 
     template <typename T>
-    T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;
-
-    template <class T>
-    T ValueOrDef(const QString &setting, const T &defValue) const;
+    T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;  
 };
 
 #endif // VSETTINGS_H

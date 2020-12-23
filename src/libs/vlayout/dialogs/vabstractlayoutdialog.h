@@ -59,16 +59,16 @@ public:
 
     explicit VAbstractLayoutDialog(QWidget *parent = nullptr);
 
-    static QSizeF GetTemplateSize(PaperSizeTemplate tmpl, Unit unit);
+    static auto GetTemplateSize(PaperSizeTemplate tmpl, Unit unit) -> QSizeF;
 
 protected:
     typedef QStringList FormatsVector;
     const static FormatsVector pageFormatNames;
     typedef int VIndexType;
 
-    static QSizeF RoundTemplateSize(qreal width, qreal height, Unit unit);
+    static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;
 
-    void InitTemplates(QComboBox *comboBoxTemplates);
+    static void InitTemplates(QComboBox *comboBoxTemplates);
 private:
     Q_DISABLE_COPY(VAbstractLayoutDialog)
 };

@@ -602,9 +602,6 @@ Q_REQUIRED_RESULT QString AbsoluteMPath(const QString &patternPath, const QStrin
 
 QStringList SplitFilePaths(const QString &path);
 
-Q_REQUIRED_RESULT QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
-                                                          QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
-
 QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer);
 QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
 
