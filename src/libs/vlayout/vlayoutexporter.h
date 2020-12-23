@@ -86,6 +86,7 @@ public:
     void ExportToFlatDXF(QGraphicsScene *scene, const QList<QList<QGraphicsItem *> > &details) const;
     void ExportToAAMADXF(const QVector<VLayoutPiece> &details) const;
     void ExportToASTMDXF(const QVector<VLayoutPiece> &details) const;
+    void ExportToRLD(const QVector<VLayoutPiece> &details) const;
 
     static auto SupportPDFConversion() -> bool;
 

@@ -142,7 +142,6 @@ protected:
 
     void CheckRequiredMeasurements(const VMeasurements *m) const;
 
-    void RLDFile(const QString &name, QVector<VLayoutPiece> details, qreal xScale=1, qreal yScale=1) const;
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 

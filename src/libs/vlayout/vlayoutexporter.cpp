@@ -44,6 +44,9 @@
 #include "../vmisc/def.h"
 #include "../vobj/vobjpaintdevice.h"
 #include "../vdxf/vdxfpaintdevice.h"
+#include "vrawlayout.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../ifc/exception/vexception.h"
 
 namespace
 {
@@ -302,6 +305,25 @@ void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) cons
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     generator.ExportToASTM(details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportToRLD(const QVector<VLayoutPiece> &details) const
+{
+    for(auto detail : details)
+    {
+        detail.Scale(m_xScale, m_yScale);
+    }
+
+    VRawLayoutData layoutData;
+    layoutData.pieces = details;
+
+    VRawLayout generator;
+    if (not generator.WriteFile(m_fileName, layoutData))
+    {
+        const QString errorMsg = tr("Export raw layout data failed. %1.").arg(generator.ErrorString());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qCritical() << errorMsg;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

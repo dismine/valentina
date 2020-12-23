@@ -753,7 +753,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
             exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::RLD:
-            RLDFile(name, details, m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
+            exporter.ExportToRLD(details);
             break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
@@ -1094,25 +1094,6 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
 
     m_layoutSettings->SetWatermarkPath(AbsoluteMPath(qApp->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PdfTiledFile(name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::RLDFile(const QString &name, QVector<VLayoutPiece> details, qreal xScale, qreal yScale) const
-{
-    for(auto detail : details)
-    {
-        detail.Scale(xScale, yScale);
-    }
-
-    VRawLayoutData layoutDate;
-    layoutDate.pieces = details;
-
-    VRawLayout generator;
-    if (not generator.WriteFile(name, layoutDate))
-    {
-        const QString errorMsg = tr("Export raw layout data failed. %1.").arg(generator.ErrorString());
-        qApp->IsPedantic() ? throw VException(errorMsg) : qCritical() << errorMsg;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -66,6 +66,7 @@
 #include "../vformat/vpatternrecipe.h"
 #include "watermarkwindow.h"
 #include "../vmisc/backport/qoverload.h"
+#include "../vlayout/vlayoutexporter.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -3346,7 +3347,11 @@ void MainWindow::on_actionCreateManualLayout_triggered()
             return;
         }
 
-        RLDFile(rldFile.fileName(), listDetails);
+        VLayoutExporter exporter;
+        exporter.SetFileName(rldFile.fileName());
+//        exporter.SetXScale(m_dialogSaveLayout->GetXScale());
+//        exporter.SetYScale(m_dialogSaveLayout->GetYScale());
+        exporter.ExportToRLD(listDetails);
 
         QStringList arguments {"-r", rldFile.fileName()};
         if (isNoScaling)
@@ -3424,7 +3429,11 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
             return;
         }
 
-        RLDFile(rldFile.fileName(), listDetails);
+        VLayoutExporter exporter;
+        exporter.SetFileName(rldFile.fileName());
+//        exporter.SetXScale(m_dialogSaveLayout->GetXScale());
+//        exporter.SetYScale(m_dialogSaveLayout->GetYScale());
+        exporter.ExportToRLD(listDetails);
 
         QStringList arguments {filePath, "-r", rldFile.fileName()};
         if (isNoScaling)
