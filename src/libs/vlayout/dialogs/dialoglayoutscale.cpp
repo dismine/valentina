@@ -32,6 +32,7 @@
 #include "../vmisc/vsettings.h"
 
 #include <QPushButton>
+#include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
