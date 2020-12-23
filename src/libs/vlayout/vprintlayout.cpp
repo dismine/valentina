@@ -312,14 +312,6 @@ void VPrintLayout::PrintPreview()
 //---------------------------------------------------------------------------------------------------------------------
 void VPrintLayout::PrintPages(QPrinter *printer)
 {
-    // Here we try understand difference between printer's dpi and our.
-    // Get printer rect acording to our dpi.
-    const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
-                                 ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
-    const QRect pageRect = printer->pageLayout().paintRectPixels(printer->resolution());
-    const double xscale = pageRect.width() / printerPageRect.width();
-    const double yscale = pageRect.height() / printerPageRect.height();
-
     QPainter painter;
     if (not painter.begin(printer))
     { // failed to open file
@@ -391,29 +383,15 @@ void VPrintLayout::PrintPages(QPrinter *printer)
         copyCount = printer->copyCount();
     }
 
-    VWatermarkData data;
-    if (not m_watermarkPath.isEmpty())
-    {
-        try
-        {
-            VWatermarkConverter converter(m_watermarkPath);
-            VWatermark watermark;
-            watermark.setXMLContent(converter.Convert());
-            data = watermark.GetWatermark();
+    VWatermarkData data = WatermarkData();
 
-            if (not data.path.isEmpty())
-            {
-                // Clean previous cache
-                QPixmapCache::remove(AbsoluteMPath(m_watermarkPath, data.path));
-            }
-        }
-        catch (VException &e)
-        {
-            const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
-            qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-        }
-    }
+    // Here we try understand difference between printer's dpi and our.
+    // Get printer rect acording to our dpi.
+    const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
+                                 ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
+    const QRect pageRect = printer->pageLayout().paintRectPixels(printer->resolution());
+    const double xscale = pageRect.width() / printerPageRect.width();
+    const double yscale = pageRect.height() / printerPageRect.height();
 
     for (int i = 0; i < copyCount; ++i)
     {
@@ -465,8 +443,8 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                     QPageLayout layout = printer->pageLayout();
                     layout.setUnits(QPageLayout::Millimeter);
                     QMarginsF printerMargins = layout.margins();
-                    x = qFloor(ToPixel(printerMargins.left(),Unit::Mm));
-                    y = qFloor(ToPixel(printerMargins.top(),Unit::Mm));
+                    x = qFloor(ToPixel(printerMargins.left(), Unit::Mm));
+                    y = qFloor(ToPixel(printerMargins.top(), Unit::Mm));
                 }
                 else
                 {
@@ -734,6 +712,36 @@ auto VPrintLayout::IsPagesFit(QSizeF printPaper) const -> bool
     SCASSERT(p != nullptr)
     const QSizeF pSize = p->rect().size();
     return pSize.height() <= printPaper.height() && pSize.width() <= printPaper.width();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPrintLayout::WatermarkData() const -> VWatermarkData
+{
+    VWatermarkData data;
+    if (m_isTiled && not m_watermarkPath.isEmpty())
+    {
+        try
+        {
+            VWatermarkConverter converter(m_watermarkPath);
+            VWatermark watermark;
+            watermark.setXMLContent(converter.Convert());
+            data = watermark.GetWatermark();
+
+            if (not data.path.isEmpty())
+            {
+                // Clean previous cache
+                QPixmapCache::remove(AbsoluteMPath(m_watermarkPath, data.path));
+            }
+        }
+        catch (VException &e)
+        {
+            const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+
+    return data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

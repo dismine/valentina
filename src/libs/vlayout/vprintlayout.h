@@ -38,6 +38,7 @@ enum class PrintType : qint8 {PrintPDF, PrintPreview, PrintNative};
 
 class QPrinter;
 class QGraphicsScene;
+struct VWatermarkData;
 
 class VPrintLayout : public QObject
 {
@@ -168,6 +169,8 @@ private:
 
     bool IsPagesUniform() const;
     bool IsPagesFit(QSizeF printPaper) const;
+
+    auto WatermarkData() const -> VWatermarkData;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
