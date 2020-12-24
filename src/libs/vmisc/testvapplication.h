@@ -29,7 +29,7 @@
 #ifndef TESTVAPPLICATION_H
 #define TESTVAPPLICATION_H
 
-#include "vabstractapplication.h"
+#include "vabstractvalapplication.h"
 #include "projectversion.h"
 #include "../vmisc/vsettings.h"
 
@@ -40,12 +40,12 @@
 
 class VTestSettings;
 
-class TestVApplication : public VAbstractApplication
+class TestVApplication : public VAbstractValApplication
 {
     Q_OBJECT
 public:
     TestVApplication(int &argc, char ** argv)
-        : VAbstractApplication(argc, argv),
+        : VAbstractValApplication(argc, argv),
           m_trVars(nullptr)
     {
         setApplicationName("ValentinaTest");
