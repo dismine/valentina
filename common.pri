@@ -346,27 +346,22 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]/QtConcurrent"
 
 } else {
-ISYSTEM += \
-    -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXml.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXml.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtGui.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtGui.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtPrintSupport.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtPrintSupport.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtSvg.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtSvg.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Versions/5/Headers/"
+LIBS_USED_FOR_QT = \
+    QtCore \
+    QtSvg \
+    QtXml \
+    QtPrintSupport \
+    QtXmlPatterns \
+    QtWidgets \
+    QtGui \
+    QtNetwork \
+    QtTest \
+    QtConcurrent
+
+for(somelib, $$list($$LIBS_USED_FOR_QT)) {
+    ISYSTEM += -isystem $$[QT_INSTALL_LIBS]/lib/$${somelib}.framework/Versions/5/Headers/
+    ISYSTEM += -isystem $$[QT_INSTALL_LIBS]/lib/$${somelib}.framework/Headers/
+}
 }
 
 # Usefull GCC warnings keys.
