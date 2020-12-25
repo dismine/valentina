@@ -64,7 +64,7 @@ CONFIG(debug, debug|release){
     # Debug mode
 }else{
     # Release mode
-    !*msvc*:CONFIG += silent
+    !*msvc*:!macx:CONFIG += silent
     DEFINES += V_NO_ASSERT
     !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll

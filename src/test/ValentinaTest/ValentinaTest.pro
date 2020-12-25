@@ -113,7 +113,7 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !*msvc*:CONFIG += silent
+    !*msvc*:!macx:CONFIG += silent
     DEFINES += V_NO_ASSERT
     !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
