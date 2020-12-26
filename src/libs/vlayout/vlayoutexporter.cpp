@@ -182,7 +182,7 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene) const
     printer.setOutputFileName(m_fileName);
     printer.setDocName(QFileInfo(m_fileName).fileName());
     printer.setResolution(static_cast<int>(PrintDPI));
-    printer.setOrientation(QPrinter::Portrait);
+    printer.setPageOrientation(QPageLayout::Portrait);
     printer.setFullPage(m_ignorePrinterMargins);
 
     qreal width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);

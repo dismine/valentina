@@ -128,22 +128,10 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
     : VAbstractMainWindow(parent),
-      listDetails(),
-      currentScene(nullptr),
-      tempSceneLayout(nullptr),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitsP(), valentinaNamespace)),
-      doc(nullptr),
-      undoAction(nullptr),
-      redoAction(nullptr),
-      actionDockWidgetToolOptions(nullptr),
-      actionDockWidgetGroups(nullptr),
-      isNoScaling(false),
-      isNeedAutosave(false),
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitsP(), valentinaNamespace))
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-      m_taskbarButton(new QWinTaskbarButton(this)),
-      m_taskbarProgress(nullptr),
+      ,m_taskbarButton(new QWinTaskbarButton(this))
 #endif
-      m_dialogSaveLayout()
 {
     InitTempLayoutScene();
 

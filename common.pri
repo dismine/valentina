@@ -329,44 +329,30 @@ defineReplace(FindLatestTagDistance){
 # In debug mode on Unix system we use all usefull for us compilers keys for checking errors.
 # Also trying make all possible for speed up build time.
 unix {
+LIBS_USED_FOR_QT = \
+    QtCore \
+    QtSvg \
+    QtXml \
+    QtPrintSupport \
+    QtXmlPatterns \
+    QtWidgets \
+    QtGui \
+    QtNetwork \
+    QtTest \
+    QtConcurrent
 
-!macx{
-# Key -isystem disable checking errors in system headers. Mark ignore warnings Qt headers.
-ISYSTEM += \
-    -isystem "$$[QT_INSTALL_HEADERS]" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtWidgets" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtXml" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtPrintSupport" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtSvg" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtNetwork" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtTest" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtConcurrent"
+# Key -isystem disable checking errors in system headers. Marking ignore for warnings in Qt headers.
+!macx{ 
+ISYSTEM += -isystem "$$[QT_INSTALL_HEADERS]"
 
+for(somelib, $$list($$LIBS_USED_FOR_QT)) {
+    ISYSTEM += -isystem "$$[QT_INSTALL_HEADERS]/$${somelib}"
+}
 } else {
-ISYSTEM += \
-    -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXml.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXml.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtGui.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtGui.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtPrintSupport.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtPrintSupport.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtSvg.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtSvg.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Versions/5/Headers/"
+for(somelib, $$list($$LIBS_USED_FOR_QT)) {
+    ISYSTEM += -isystem "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers"
+    ISYSTEM += -isystem "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers"
+}
 }
 
 # Usefull GCC warnings keys.

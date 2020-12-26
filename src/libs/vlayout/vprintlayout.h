@@ -44,8 +44,8 @@ class VPrintLayout : public QObject
 {
     Q_OBJECT
 public:
-    VPrintLayout(QObject *parent = nullptr);
-    ~VPrintLayout();
+    explicit VPrintLayout(QObject *parent = nullptr);
+    virtual ~VPrintLayout();
 
     auto FileName() const -> QString;
     void SetFileName(const QString &fileName);

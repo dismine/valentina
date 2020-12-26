@@ -86,41 +86,41 @@ public slots:
 protected slots:
     void ExportFMeasurementsToCSV();
 protected:
-    QVector<VLayoutPiece> listDetails;
+    QVector<VLayoutPiece> listDetails{};
 
     /** @brief currentScene pointer to current scene. */
-    QGraphicsScene *currentScene;
+    QGraphicsScene *currentScene{nullptr};
 
-    QGraphicsScene *tempSceneLayout;
+    QGraphicsScene *tempSceneLayout{nullptr};
 
     /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
     VContainer         *pattern;
 
     /** @brief doc dom document container */
-    VPattern           *doc;
+    VPattern           *doc{nullptr};
 
     QList<QGraphicsItem *> gcontours{};
 
     QVector<QVector<VLayoutPiece> > detailsOnLayout{};
 
-    QAction *undoAction;
-    QAction *redoAction;
-    QAction *actionDockWidgetToolOptions;
-    QAction *actionDockWidgetGroups;
+    QAction *undoAction{nullptr};
+    QAction *redoAction{nullptr};
+    QAction *actionDockWidgetToolOptions{nullptr};
+    QAction *actionDockWidgetGroups{nullptr};
 
-    bool isNoScaling;
-    bool isNeedAutosave;
+    bool isNoScaling{false};
+    bool isNeedAutosave{false};
     VPrintLayout *m_layoutSettings{new VPrintLayout(this)};
-
-    QSharedPointer<DialogSaveLayout> m_dialogSaveLayout;
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QPointer<QLabel> m_mouseCoordinate{nullptr};
     QPointer<QLabel> m_unreadPatternMessage{nullptr};
 
+    QSharedPointer<DialogSaveLayout> m_dialogSaveLayout{};
+
 #if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QWinTaskbarButton *m_taskbarButton;
-    QWinTaskbarProgress *m_taskbarProgress;
+    QWinTaskbarProgress *m_taskbarProgress{nullptr};
 #endif
 
     static QVector<VLayoutPiece> PrepareDetailsForLayout(const QVector<DetailForLayout> &details);

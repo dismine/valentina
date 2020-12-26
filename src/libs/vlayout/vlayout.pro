@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += core gui widgets printsupport xml concurrent
+QT += core gui widgets printsupport xml concurrent svg
 
 # Name of library
 TARGET = vlayout
