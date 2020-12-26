@@ -127,6 +127,7 @@ message(Data files: $$[QT_INSTALL_DATA])
 message(Translation files: $$[QT_INSTALL_TRANSLATIONS])
 message(Settings: $$[QT_INSTALL_SETTINGS])
 message(Examples: $$[QT_INSTALL_EXAMPLES])
+message(Default include dirs: $${QMAKE_DEFAULT_INCDIRS})
 
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
