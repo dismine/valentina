@@ -71,7 +71,7 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !*msvc*:!macx:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += QT_NO_DEBUG_OUTPUT
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols

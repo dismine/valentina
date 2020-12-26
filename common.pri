@@ -329,23 +329,6 @@ defineReplace(FindLatestTagDistance){
 # In debug mode on Unix system we use all usefull for us compilers keys for checking errors.
 # Also trying make all possible for speed up build time.
 unix {
-
-!macx{
-# Key -isystem disable checking errors in system headers. Mark ignore warnings Qt headers.
-ISYSTEM += \
-    -isystem "$$[QT_INSTALL_HEADERS]" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtWidgets" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtXml" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtPrintSupport" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtSvg" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtNetwork" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtTest" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtConcurrent"
-
-} else {
 LIBS_USED_FOR_QT = \
     QtCore \
     QtSvg \
@@ -358,12 +341,17 @@ LIBS_USED_FOR_QT = \
     QtTest \
     QtConcurrent
 
-for(somelib, $$list($$LIBS_USED_FOR_QT)) {
-    QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers"
-    QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers"
+# Key -isystem disable checking errors in system headers. Marking ignore for warnings in Qt headers.
+!macx{ 
+ISYSTEM += -isystem "$$[QT_INSTALL_HEADERS]"
 
-    ISYSTEM += -isystem $$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers
-    ISYSTEM += -isystem $$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers
+for(somelib, $$list($$LIBS_USED_FOR_QT)) {
+    ISYSTEM += -isystem "$$[QT_INSTALL_HEADERS]/$${somelib}"
+}
+} else {
+for(somelib, $$list($$LIBS_USED_FOR_QT)) {
+    ISYSTEM += -isystem "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers"
+    ISYSTEM += -isystem "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers"
 }
 }
 
