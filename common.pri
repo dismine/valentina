@@ -361,6 +361,9 @@ LIBS_USED_FOR_QT = \
 for(somelib, $$list($$LIBS_USED_FOR_QT)) {
     QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers"
     QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers"
+
+    ISYSTEM += -isystem $$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers
+    ISYSTEM += -isystem $$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers
 }
 }
 
