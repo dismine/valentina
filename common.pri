@@ -359,13 +359,8 @@ LIBS_USED_FOR_QT = \
     QtConcurrent
 
 for(somelib, $$list($$LIBS_USED_FOR_QT)) {
-    contains( QMAKE_DEFAULT_INCDIRS, "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers" ) {
-        QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers"
-    }
-
-    contains( QMAKE_DEFAULT_INCDIRS, "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers" ) {
-        QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers"
-    }
+    QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Versions/5/Headers"
+    QMAKE_DEFAULT_INCDIRS += "$$[QT_INSTALL_LIBS]/$${somelib}.framework/Headers"
 }
 }
 
