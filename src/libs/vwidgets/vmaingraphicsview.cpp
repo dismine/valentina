@@ -55,7 +55,7 @@
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 #include "vcontrolpointspline.h"
-#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsettings.h"
 #include "vabstractmainwindow.h"
 #include "global.h"
@@ -645,10 +645,7 @@ void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && qApp->Settings()->IsDoubleClickZoomFitBestCurrentPP())
     {
-        if (VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow()))
-        {
-            window->ZoomFitBestCurrent();
-        }
+        emit ZoomFitBestCurrent();
     }
 
     QGraphicsView::mouseDoubleClickEvent(event);
