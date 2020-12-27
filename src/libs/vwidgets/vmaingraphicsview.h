@@ -149,6 +149,7 @@ signals:
     void     MouseRelease();
     void     itemClicked(QGraphicsItem *item);
     void     ScaleChanged(qreal scale);
+    void     ZoomFitBestCurrent();
 public slots:
     void     Zoom(qreal scale);
     void     ZoomIn();

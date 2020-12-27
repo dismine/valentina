@@ -504,6 +504,7 @@ void MainWindow::InitScenes()
 
     connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this](){EndVisualization(true);});
     connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
+    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this](){ZoomFitBestCurrent();});
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
