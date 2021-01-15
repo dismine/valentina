@@ -40,6 +40,17 @@
           </xs:complexType>
         </xs:element>
         <xs:element name="restrictions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="restriction" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="coordinates" type="xs:string" use="required"/>
+                  <xs:attribute name="min" type="dimesionValue" use="required"/>
+                  <xs:attribute name="max" type="dimesionValue" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
         </xs:element>
         <xs:element name="body-measurements">
           <xs:complexType>
