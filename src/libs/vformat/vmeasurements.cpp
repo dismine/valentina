@@ -1274,7 +1274,6 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
     if (type == MeasurementsType::Multisize)
     {
         SetAttribute(element, AttrBase, QChar('0'));
-        SetAttribute(element, AttrShiftA, QChar('0'));
     }
     else
     {
