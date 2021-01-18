@@ -45,8 +45,8 @@
               <xs:element name="restriction" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:attribute name="coordinates" type="xs:string" use="required"/>
-                  <xs:attribute name="min" type="dimesionValue" use="required"/>
-                  <xs:attribute name="max" type="dimesionValue" use="required"/>
+                  <xs:attribute name="min" type="dimesionValue"/>
+                  <xs:attribute name="max" type="dimesionValue"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -122,13 +122,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="dimesionValue">
-    <xs:restriction base="xs:unsignedInt">
+    <xs:restriction base="xs:double">
       <xs:minInclusive value="6"/>
       <xs:maxInclusive value="2720"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="dimensionStep">
-    <xs:restriction base="xs:unsignedInt">
+    <xs:restriction base="xs:double">
       <xs:minInclusive value="0"/>
       <xs:maxInclusive value="80"/>
     </xs:restriction>

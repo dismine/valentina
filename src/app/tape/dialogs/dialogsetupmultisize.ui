@@ -48,27 +48,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="spinBoxXDimensionMinValue">
-            <property name="toolTip">
-             <string>Minimal value described in the column</string>
-            </property>
-            <property name="suffix">
-             <string/>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
              <string>Max value:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBoxXDimensionMaxValue">
-            <property name="toolTip">
-             <string>Maximal value described in the column</string>
             </property>
            </widget>
           </item>
@@ -112,6 +95,26 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxXDimensionMinValue">
+            <property name="toolTip">
+             <string>Minimal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxXDimensionMaxValue">
+            <property name="toolTip">
+             <string>Maximal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -141,24 +144,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="spinBoxYDimensionMinValue">
-            <property name="toolTip">
-             <string>Minimal value described in the column</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_6">
             <property name="text">
              <string>Max value:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBoxYDimensionMaxValue">
-            <property name="toolTip">
-             <string>Maximal value described in the column</string>
             </property>
            </widget>
           </item>
@@ -202,6 +191,26 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxYDimensionMinValue">
+            <property name="toolTip">
+             <string>Minimal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxYDimensionMaxValue">
+            <property name="toolTip">
+             <string>Maximal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -241,24 +250,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="spinBoxWDimensionMinValue">
-            <property name="toolTip">
-             <string>Minimal value described in the column</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_14">
             <property name="text">
              <string>Max value:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBoxWDimensionMaxValue">
-            <property name="toolTip">
-             <string>Maximal value described in the column</string>
             </property>
            </widget>
           </item>
@@ -302,6 +297,26 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxWDimensionMinValue">
+            <property name="toolTip">
+             <string>Minimal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxWDimensionMaxValue">
+            <property name="toolTip">
+             <string>Maximal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -331,24 +346,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="spinBoxZDimensionMinValue">
-            <property name="toolTip">
-             <string>Minimal value described in the column</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_10">
             <property name="text">
              <string>Max value:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBoxZDimensionMaxValue">
-            <property name="toolTip">
-             <string>Maximal value described in the column</string>
             </property>
            </widget>
           </item>
@@ -392,6 +393,26 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxZDimensionMinValue">
+            <property name="toolTip">
+             <string>Minimal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxZDimensionMaxValue">
+            <property name="toolTip">
+             <string>Maximal value described in the column</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -420,23 +441,23 @@
  </widget>
  <tabstops>
   <tabstop>groupBoxXDimension</tabstop>
-  <tabstop>spinBoxXDimensionMinValue</tabstop>
-  <tabstop>spinBoxXDimensionMaxValue</tabstop>
+  <tabstop>doubleSpinBoxXDimensionMinValue</tabstop>
+  <tabstop>doubleSpinBoxXDimensionMaxValue</tabstop>
   <tabstop>comboBoxXDimensionStep</tabstop>
   <tabstop>comboBoxXDimensionBase</tabstop>
   <tabstop>groupBoxYDimension</tabstop>
-  <tabstop>spinBoxYDimensionMinValue</tabstop>
-  <tabstop>spinBoxYDimensionMaxValue</tabstop>
+  <tabstop>doubleSpinBoxYDimensionMinValue</tabstop>
+  <tabstop>doubleSpinBoxYDimensionMaxValue</tabstop>
   <tabstop>comboBoxYDimensionStep</tabstop>
   <tabstop>comboBoxYDimensionBase</tabstop>
   <tabstop>groupBoxWDimension</tabstop>
-  <tabstop>spinBoxWDimensionMinValue</tabstop>
-  <tabstop>spinBoxWDimensionMaxValue</tabstop>
+  <tabstop>doubleSpinBoxWDimensionMinValue</tabstop>
+  <tabstop>doubleSpinBoxWDimensionMaxValue</tabstop>
   <tabstop>comboBoxWDimensionStep</tabstop>
   <tabstop>comboBoxWDimensionBase</tabstop>
   <tabstop>groupBoxZDimension</tabstop>
-  <tabstop>spinBoxZDimensionMinValue</tabstop>
-  <tabstop>spinBoxZDimensionMaxValue</tabstop>
+  <tabstop>doubleSpinBoxZDimensionMinValue</tabstop>
+  <tabstop>doubleSpinBoxZDimensionMaxValue</tabstop>
   <tabstop>comboBoxZDimensionStep</tabstop>
   <tabstop>comboBoxZDimensionBase</tabstop>
  </tabstops>

@@ -54,16 +54,16 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
     InitZDimension();
 
     // height
-    connect(ui->spinBoxXDimensionMinValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxXDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMinValueChanged(value, ui->spinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
+                DimensionMinValueChanged(value, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
                                          ui->comboBoxXDimensionBase, m_xDimension);
             });
-    connect(ui->spinBoxXDimensionMaxValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxXDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMaxValueChanged(value, ui->spinBoxXDimensionMinValue, ui->comboBoxXDimensionStep,
+                DimensionMaxValueChanged(value, ui->doubleSpinBoxXDimensionMinValue, ui->comboBoxXDimensionStep,
                                          ui->comboBoxXDimensionBase, m_xDimension);
             });
     connect(ui->comboBoxXDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -78,16 +78,16 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
             });
 
     // size
-    connect(ui->spinBoxYDimensionMinValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxYDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMinValueChanged(value, ui->spinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
+                DimensionMinValueChanged(value, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                                          ui->comboBoxYDimensionBase, m_yDimension);
             });
-    connect(ui->spinBoxYDimensionMaxValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxYDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMaxValueChanged(value, ui->spinBoxYDimensionMinValue, ui->comboBoxYDimensionStep,
+                DimensionMaxValueChanged(value, ui->doubleSpinBoxYDimensionMinValue, ui->comboBoxYDimensionStep,
                                          ui->comboBoxYDimensionBase, m_yDimension);
             });
     connect(ui->comboBoxYDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -102,16 +102,16 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
             });
 
     // hip
-    connect(ui->spinBoxWDimensionMinValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxWDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMinValueChanged(value, ui->spinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
+                DimensionMinValueChanged(value, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
                                          ui->comboBoxWDimensionBase, m_wDimension);
             });
-    connect(ui->spinBoxWDimensionMaxValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxWDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMaxValueChanged(value, ui->spinBoxWDimensionMinValue, ui->comboBoxWDimensionStep,
+                DimensionMaxValueChanged(value, ui->doubleSpinBoxWDimensionMinValue, ui->comboBoxWDimensionStep,
                                          ui->comboBoxWDimensionBase, m_wDimension);
             });
     connect(ui->comboBoxWDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -126,16 +126,16 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
             });
 
     // waist
-    connect(ui->spinBoxZDimensionMinValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxZDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMinValueChanged(value, ui->spinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
+                DimensionMinValueChanged(value, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
                                          ui->comboBoxZDimensionBase, m_zDimension);
             });
-    connect(ui->spinBoxZDimensionMaxValue, QOverload<int>::of(&QSpinBox::valueChanged),
-            this, [this](int value)
+    connect(ui->doubleSpinBoxZDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](qreal value)
             {
-                DimensionMaxValueChanged(value, ui->spinBoxZDimensionMinValue, ui->comboBoxZDimensionStep,
+                DimensionMaxValueChanged(value, ui->doubleSpinBoxZDimensionMinValue, ui->comboBoxZDimensionStep,
                                          ui->comboBoxZDimensionBase, m_zDimension);
             });
     connect(ui->comboBoxZDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -170,7 +170,7 @@ DialogSetupMultisize::~DialogSetupMultisize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<MeasurementDimension_p> DialogSetupMultisize::Dimensions() const
+auto DialogSetupMultisize::Dimensions() const -> QVector<MeasurementDimension_p>
 {
     QVector<MeasurementDimension_p> dimensions;
 
@@ -198,7 +198,7 @@ QVector<MeasurementDimension_p> DialogSetupMultisize::Dimensions() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSetupMultisize::FullCircumference() const
+auto DialogSetupMultisize::FullCircumference() const -> bool
 {
     return ui->checkBoxFullCircumference->isChecked();
 }
@@ -240,16 +240,16 @@ void DialogSetupMultisize::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::ShowFullCircumference()
 {
-    auto ShowDimensionFullCircumference = [this](QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue,
-                                                 QComboBox *comboBoxStep, QComboBox *comboBoxBase,
-                                                 const MeasurementDimension_p &dimension)
+    auto ShowDimensionFullCircumference = [this](QDoubleSpinBox *doubleSpinBoxMinValue,
+            QDoubleSpinBox *doubleSpinBoxMaxValue, QComboBox *comboBoxStep, QComboBox *comboBoxBase,
+            const MeasurementDimension_p &dimension)
     {
-        SCASSERT(spinboxMinValue != nullptr)
-        SCASSERT(spinboxMaxValue != nullptr)
+        SCASSERT(doubleSpinBoxMinValue != nullptr)
+        SCASSERT(doubleSpinBoxMaxValue != nullptr)
         SCASSERT(comboBoxStep != nullptr)
         SCASSERT(comboBoxBase != nullptr)
 
-        InitDimension(spinboxMinValue, spinboxMaxValue, comboBoxStep, dimension);
+        InitDimension(doubleSpinBoxMinValue, doubleSpinBoxMaxValue, comboBoxStep, dimension);
         UpdateBase(comboBoxBase, dimension);
 
         comboBoxBase->blockSignals(true);
@@ -257,11 +257,11 @@ void DialogSetupMultisize::ShowFullCircumference()
         comboBoxBase->blockSignals(false);
     };
 
-    ShowDimensionFullCircumference(ui->spinBoxYDimensionMinValue, ui->spinBoxYDimensionMaxValue,
+    ShowDimensionFullCircumference(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue,
                                    ui->comboBoxYDimensionStep, ui->comboBoxYDimensionBase, m_yDimension);
-    ShowDimensionFullCircumference(ui->spinBoxWDimensionMinValue, ui->spinBoxWDimensionMaxValue,
+    ShowDimensionFullCircumference(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue,
                                    ui->comboBoxWDimensionStep, ui->comboBoxWDimensionBase, m_wDimension);
-    ShowDimensionFullCircumference(ui->spinBoxZDimensionMinValue, ui->spinBoxZDimensionMaxValue,
+    ShowDimensionFullCircumference(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue,
                                    ui->comboBoxZDimensionStep, ui->comboBoxZDimensionBase, m_zDimension);
 
     CheckState();
@@ -276,10 +276,10 @@ void DialogSetupMultisize::YDimensionCircumferenceChanged()
     const bool c = m_yDimension->IsCircumference();
     const QString unitStr = c ? " " + UnitsToStr(m_yDimension->Units()) : QString();
 
-    ui->spinBoxYDimensionMinValue->setSuffix(unitStr);
-    ui->spinBoxYDimensionMaxValue->setSuffix(unitStr);
+    ui->doubleSpinBoxYDimensionMinValue->setSuffix(unitStr);
+    ui->doubleSpinBoxYDimensionMaxValue->setSuffix(unitStr);
 
-    InitDimension(ui->spinBoxYDimensionMinValue, ui->spinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
+    InitDimension(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                   m_yDimension);
 
     UpdateBase(ui->comboBoxYDimensionBase, m_yDimension);
@@ -289,7 +289,7 @@ void DialogSetupMultisize::YDimensionCircumferenceChanged()
     ui->comboBoxYDimensionBase->blockSignals(false);
 
     bool ok = false;
-    const int base = ui->comboBoxYDimensionBase->currentData().toInt(&ok);
+    const qreal base = ui->comboBoxYDimensionBase->currentData().toDouble(&ok);
     m_yDimension->SetBaseValue(ok ? base : -1);
 
     CheckState();
@@ -351,11 +351,12 @@ void DialogSetupMultisize::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue,
+void DialogSetupMultisize::InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinValue,
+                                               QDoubleSpinBox *doubleSpinBoxMaxValue,
                                                const MeasurementDimension_p &dimension)
 {
-    SCASSERT(spinboxMinValue != nullptr)
-    SCASSERT(spinboxMaxValue != nullptr)
+    SCASSERT(doubleSpinBoxMinValue != nullptr)
+    SCASSERT(doubleSpinBoxMaxValue != nullptr)
 
     dimension->SetMinValue(dimension->RangeMin());
     dimension->SetMaxValue(dimension->RangeMax());
@@ -363,28 +364,31 @@ void DialogSetupMultisize::InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinB
     const bool fc = ui->checkBoxFullCircumference->isChecked();
     const bool c = dimension->IsCircumference();
 
-    spinboxMinValue->blockSignals(true);
+    doubleSpinBoxMinValue->blockSignals(true);
     const QString unitStr = " " + UnitsToStr(dimension->Units());
     if (c || dimension->Type() == MeasurementDimension::X)
     {
-        spinboxMinValue->setSuffix(unitStr);
+        doubleSpinBoxMinValue->setSuffix(unitStr);
     }
 
-    spinboxMinValue->setMinimum(c && fc ? dimension->RangeMin()*2 : dimension->RangeMin());
-    spinboxMinValue->setMaximum(c && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
-    spinboxMinValue->setValue(c && fc ? dimension->MinValue()*2 : dimension->MinValue());
-    spinboxMinValue->blockSignals(false);
+    doubleSpinBoxMinValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
+    doubleSpinBoxMinValue->setMinimum(c && fc ? dimension->RangeMin()*2 : dimension->RangeMin());
+    doubleSpinBoxMinValue->setMaximum(c && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
+    doubleSpinBoxMinValue->setValue(c && fc ? dimension->MinValue()*2 : dimension->MinValue());
+    doubleSpinBoxMinValue->blockSignals(false);
 
-    spinboxMaxValue->blockSignals(true);
+    doubleSpinBoxMaxValue->blockSignals(true);
     if (c || dimension->Type() == MeasurementDimension::X)
     {
-        spinboxMaxValue->setSuffix(unitStr);
+        doubleSpinBoxMaxValue->setSuffix(unitStr);
     }
-    spinboxMaxValue->setMinimum(c && fc ? dimension->MinValue()*2 : dimension->MinValue());
-    spinboxMaxValue->setMaximum(c && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
-    spinboxMaxValue->setValue(c && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
-    spinboxMaxValue->setValue(c && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
-    spinboxMaxValue->blockSignals(false);
+
+    doubleSpinBoxMaxValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
+    doubleSpinBoxMaxValue->setMinimum(c && fc ? dimension->MinValue()*2 : dimension->MinValue());
+    doubleSpinBoxMaxValue->setMaximum(c && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
+    doubleSpinBoxMaxValue->setValue(c && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
+    doubleSpinBoxMaxValue->setValue(c && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
+    doubleSpinBoxMaxValue->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -400,11 +404,11 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
     dimension->SetStep(-1);
 
     comboBoxStep->blockSignals(true);
-    const QVector<int> steps = dimension->ValidSteps();
+    const QVector<qreal> steps = dimension->ValidSteps();
     comboBoxStep->clear();
     for(auto step : steps)
     {
-        comboBoxStep->addItem(QString("%1%2").arg(c && fc ? step*2 : step)
+        comboBoxStep->addItem(QStringLiteral("%1%2").arg(c && fc ? step*2 : step)
                                   .arg(c || dimension->Type() == MeasurementDimension::X ? unitStr : QString()), step);
     }
 
@@ -412,52 +416,52 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
     comboBoxStep->blockSignals(false);
 
     bool ok = false;
-    const int step = comboBoxStep->currentData().toInt(&ok);
+    const qreal step = comboBoxStep->currentData().toDouble(&ok);
     dimension->SetStep(ok ? step : -1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::InitDimension(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
-                                         const MeasurementDimension_p &dimension)
+void DialogSetupMultisize::InitDimension(QDoubleSpinBox *doubleSpinBoxMinValue, QDoubleSpinBox *doubleSpinBoxMaxValue,
+                                         QComboBox *comboBoxStep, const MeasurementDimension_p &dimension)
 {
-    InitDimensionMinMax(spinboxMinValue, spinboxMaxValue, dimension);
+    InitDimensionMinMax(doubleSpinBoxMinValue, doubleSpinBoxMaxValue, dimension);
     InitDimensionStep(comboBoxStep, dimension);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitXDimension()
 {
-    InitDimension(ui->spinBoxXDimensionMinValue, ui->spinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
+    InitDimension(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
                   m_xDimension);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitYDimension()
 {
-    InitDimension(ui->spinBoxYDimensionMinValue, ui->spinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
+    InitDimension(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                   m_yDimension);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitWDimension()
 {
-    InitDimension(ui->spinBoxWDimensionMinValue, ui->spinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
+    InitDimension(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
                   m_wDimension);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitZDimension()
 {
-    InitDimension(ui->spinBoxZDimensionMinValue, ui->spinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
+    InitDimension(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
                   m_zDimension);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::DimensionMinValueChanged(int value, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
-                                                    QComboBox *comboBoxBase,
+void DialogSetupMultisize::DimensionMinValueChanged(qreal value, QDoubleSpinBox *doubleSpinBoxMaxValue,
+                                                    QComboBox *comboBoxStep, QComboBox *comboBoxBase,
                                                     const MeasurementDimension_p &dimension)
 {
-    SCASSERT(spinboxMaxValue != nullptr)
+    SCASSERT(doubleSpinBoxMaxValue != nullptr)
     SCASSERT(comboBoxStep != nullptr)
     SCASSERT(comboBoxBase != nullptr)
 
@@ -466,11 +470,11 @@ void DialogSetupMultisize::DimensionMinValueChanged(int value, QSpinBox *spinbox
 
     dimension->SetMinValue(c && fc ? value / 2 : value);
 
-    spinboxMaxValue->blockSignals(true);
-    spinboxMaxValue->setMinimum(value);
-    spinboxMaxValue->blockSignals(false);
+    doubleSpinBoxMaxValue->blockSignals(true);
+    doubleSpinBoxMaxValue->setMinimum(value);
+    doubleSpinBoxMaxValue->blockSignals(false);
 
-    dimension->SetMaxValue(c && fc ? spinboxMaxValue->value() / 2 : spinboxMaxValue->value());
+    dimension->SetMaxValue(c && fc ? doubleSpinBoxMaxValue->value() / 2 : doubleSpinBoxMaxValue->value());
 
     UpdateSteps(comboBoxStep, dimension);
     UpdateBase(comboBoxBase, dimension);
@@ -479,11 +483,11 @@ void DialogSetupMultisize::DimensionMinValueChanged(int value, QSpinBox *spinbox
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::DimensionMaxValueChanged(int value, QSpinBox *spinboxMinValue, QComboBox *comboBoxStep,
-                                                    QComboBox *comboBoxBase,
+void DialogSetupMultisize::DimensionMaxValueChanged(qreal value, QDoubleSpinBox *doubleSpinBoxMinValue,
+                                                    QComboBox *comboBoxStep, QComboBox *comboBoxBase,
                                                     const MeasurementDimension_p &dimension)
 {
-    SCASSERT(spinboxMinValue != nullptr)
+    SCASSERT(doubleSpinBoxMinValue != nullptr)
     SCASSERT(comboBoxStep != nullptr)
     SCASSERT(comboBoxBase != nullptr)
 
@@ -492,11 +496,11 @@ void DialogSetupMultisize::DimensionMaxValueChanged(int value, QSpinBox *spinbox
 
     dimension->SetMaxValue(c && fc ? value / 2 : value);
 
-    spinboxMinValue->blockSignals(true);
-    spinboxMinValue->setMaximum(value);
-    spinboxMinValue->blockSignals(false);
+    doubleSpinBoxMinValue->blockSignals(true);
+    doubleSpinBoxMinValue->setMaximum(value);
+    doubleSpinBoxMinValue->blockSignals(false);
 
-    dimension->SetMinValue(c && fc ? spinboxMinValue->value() / 2 : spinboxMinValue->value());
+    dimension->SetMinValue(c && fc ? doubleSpinBoxMinValue->value() / 2 : doubleSpinBoxMinValue->value());
 
     UpdateSteps(comboBoxStep, dimension);
     UpdateBase(comboBoxBase, dimension);
@@ -512,7 +516,7 @@ void DialogSetupMultisize::DimensionStepChanged(int index, QComboBox *comboBoxSt
     SCASSERT(comboBoxBase != nullptr)
 
     bool ok = false;
-    const int step = comboBoxStep->itemData(index).toInt(&ok);
+    const qreal step = comboBoxStep->itemData(index).toDouble(&ok);
     dimension->SetStep(ok ? step : -1);
 
     UpdateBase(comboBoxBase, dimension);
@@ -527,7 +531,7 @@ void DialogSetupMultisize::DimensionBaseChanged(int index, QComboBox *comboBoxBa
     SCASSERT(comboBoxBase != nullptr)
 
     bool ok = false;
-    const int base = comboBoxBase->itemData(index).toInt(&ok);
+    const qreal base = comboBoxBase->itemData(index).toDouble(&ok);
     dimension->SetBaseValue(ok ? base : -1);
 
     CheckState();
@@ -539,16 +543,16 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
 {
     SCASSERT(comboBoxStep != nullptr)
 
-    int oldStep = -1;
+    qreal oldStep = -1;
     if (comboBoxStep->currentIndex() != -1)
     {
-        oldStep = comboBoxStep->currentData().toInt();
+        oldStep = comboBoxStep->currentData().toDouble();
     }
 
     comboBoxStep->blockSignals(true);
 
     const QString unitStr = " " + UnitsToStr(dimension->Units());
-    const QVector<int> steps = dimension->ValidSteps();
+    const QVector<qreal> steps = dimension->ValidSteps();
     comboBoxStep->clear();
 
     const bool fc = ui->checkBoxFullCircumference->isChecked();
@@ -556,7 +560,7 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
 
     for(auto step : steps)
     {
-        comboBoxStep->addItem(QString("%1%2").arg(c && fc ? step * 2 : step)
+        comboBoxStep->addItem(QStringLiteral("%1%2").arg(c && fc ? step * 2 : step)
                                   .arg(c ? unitStr : QString()), step);
     }
 
@@ -564,7 +568,7 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
     comboBoxStep->blockSignals(false);
 
     bool ok = false;
-    const int step = comboBoxStep->currentData().toInt(&ok);
+    const qreal step = comboBoxStep->currentData().toDouble(&ok);
     dimension->SetStep(ok ? step : -1);
 }
 
@@ -574,23 +578,23 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
 {
     SCASSERT(comboBoxBase != nullptr)
 
-    int oldBase = -1;
+    qreal oldBase = -1;
     if (comboBoxBase->currentIndex() != -1)
     {
-        oldBase = comboBoxBase->currentData().toInt();
+        oldBase = comboBoxBase->currentData().toDouble();
     }
 
     comboBoxBase->blockSignals(true);
 
     const QString unitStr = " " + UnitsToStr(dimension->Units());
-    const QVector<int> bases = dimension->ValidBases();
+    const QVector<qreal> bases = dimension->ValidBases();
     comboBoxBase->clear();
     const bool fc = ui->checkBoxFullCircumference->isChecked();
     const bool c = dimension->IsCircumference();
 
     for(auto base : bases)
     {
-        comboBoxBase->addItem(QString("%1%2").arg(c && fc ? base * 2 : base)
+        comboBoxBase->addItem(QStringLiteral("%1%2").arg(c && fc ? base * 2 : base)
                                   .arg(c || dimension->Type() == MeasurementDimension::X ? unitStr : QString()), base);
     }
 
@@ -598,7 +602,7 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
     comboBoxBase->blockSignals(false);
 
     bool ok = false;
-    const int base = comboBoxBase->currentData().toInt(&ok);
+    const qreal base = comboBoxBase->currentData().toDouble(&ok);
     dimension->SetBaseValue(ok ? base : -1);
 }
 

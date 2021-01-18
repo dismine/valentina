@@ -45,7 +45,7 @@ class VAbstartMeasurementDimension;
 template <class T> class QSharedPointer;
 
 using MeasurementDimension_p = QSharedPointer<VAbstartMeasurementDimension>;
-using DimesionLabels = QMap<int, QString>;
+using DimesionLabels = QMap<qreal, QString>;
 
 class VAbstartMeasurementDimension
 {
@@ -53,128 +53,128 @@ class VAbstartMeasurementDimension
 public:
     VAbstartMeasurementDimension() =default;
     explicit VAbstartMeasurementDimension(Unit units);
-    VAbstartMeasurementDimension(Unit units, int min, int max, int step);
+    VAbstartMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
     virtual ~VAbstartMeasurementDimension() =default;
 
     virtual MeasurementDimension Type() const =0;
 
     virtual bool IsValid();
 
-    int  MinValue() const;
-    void SetMinValue(int minValue);
+    auto MinValue() const -> qreal;
+    void SetMinValue(qreal minValue);
 
-    int  MaxValue() const;
-    void SetMaxValue(int maxValue);
+    auto MaxValue() const -> qreal;
+    void SetMaxValue(qreal maxValue);
 
-    int  Step() const;
-    void SetStep(int step);
+    auto Step() const -> qreal;
+    void SetStep(qreal step);
 
-    int  BaseValue() const;
-    void SetBaseValue(int baseValue);
+    auto BaseValue() const -> qreal;
+    void SetBaseValue(qreal baseValue);
 
-    QString Error() const;
+    auto Error() const -> QString;
 
-    Unit Units() const;
+    auto Units() const -> Unit;
 
-    virtual bool IsCircumference() const;
+    virtual auto IsCircumference() const -> bool;
 
-    virtual int RangeMin() const =0;
-    virtual int RangeMax() const =0;
+    virtual auto RangeMin() const -> int =0;
+    virtual auto RangeMax() const -> int =0;
 
-    QVector<int> ValidSteps() const;
-    QVector<int> ValidBases() const;
-    QStringList  ValidBasesList() const;
+    auto ValidSteps() const -> QVector<qreal>;
+    auto ValidBases() const -> QVector<qreal>;
+    auto ValidBasesList() const -> QStringList;
 
-    static QVector<int> ValidBases(int min, int max, int step);
-    static QString DimensionName(MeasurementDimension type);
-    static QString DimensionToolTip(MeasurementDimension type, bool circumference, bool fc);
+    static auto ValidBases(qreal min, qreal max, qreal step) -> QVector<qreal>;
+    static auto DimensionName(MeasurementDimension type) -> QString;
+    static auto DimensionToolTip(MeasurementDimension type, bool circumference, bool fc) -> QString;
 
-    DimesionLabels Labels() const;
-    void           SetLabels(const DimesionLabels &labels);
+    auto Labels() const -> DimesionLabels;
+    void SetLabels(const DimesionLabels &labels);
 
 protected:
     Unit           m_units{Unit::Cm};
-    int            m_minValue{0};
-    int            m_maxValue{0};
-    int            m_step{-1};
-    int            m_baseValue{0};
+    qreal          m_minValue{0};
+    qreal          m_maxValue{0};
+    qreal          m_step{-1};
+    qreal          m_baseValue{0};
     QString        m_error{};
     DimesionLabels m_labels{};
 
-    bool IsRangeValid();
-    bool IsStepValid();
-    bool IsBaseValid();
-    bool IsUnitsValid() const;
+    auto IsRangeValid() -> bool;
+    auto IsStepValid() -> bool;
+    auto IsBaseValid() -> bool;
+    auto IsUnitsValid() const -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VAbstartMeasurementDimension::MinValue() const
+inline auto VAbstartMeasurementDimension::MinValue() const -> qreal
 {
     return m_minValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstartMeasurementDimension::SetMinValue(int minValue)
+inline void VAbstartMeasurementDimension::SetMinValue(qreal minValue)
 {
     m_minValue = minValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VAbstartMeasurementDimension::MaxValue() const
+inline auto VAbstartMeasurementDimension::MaxValue() const -> qreal
 {
     return m_maxValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstartMeasurementDimension::SetMaxValue(int maxValue)
+inline void VAbstartMeasurementDimension::SetMaxValue(qreal maxValue)
 {
     m_maxValue = maxValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VAbstartMeasurementDimension::Step() const
+inline auto VAbstartMeasurementDimension::Step() const -> qreal
 {
     return m_step;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstartMeasurementDimension::SetStep(int step)
+inline void VAbstartMeasurementDimension::SetStep(qreal step)
 {
     m_step = step;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VAbstartMeasurementDimension::BaseValue() const
+inline auto VAbstartMeasurementDimension::BaseValue() const -> qreal
 {
     return m_baseValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstartMeasurementDimension::SetBaseValue(int baseValue)
+inline void VAbstartMeasurementDimension::SetBaseValue(qreal baseValue)
 {
     m_baseValue = baseValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstartMeasurementDimension::Error() const
+inline auto VAbstartMeasurementDimension::Error() const -> QString
 {
     return m_error;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Unit VAbstartMeasurementDimension::Units() const
+inline auto VAbstartMeasurementDimension::Units() const -> Unit
 {
     return m_units;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VAbstartMeasurementDimension::IsCircumference() const
+inline auto VAbstartMeasurementDimension::IsCircumference() const -> bool
 {
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline DimesionLabels VAbstartMeasurementDimension::Labels() const
+inline auto VAbstartMeasurementDimension::Labels() const -> DimesionLabels
 {
     return m_labels;
 }
@@ -192,18 +192,18 @@ class VXMeasurementDimension : public VAbstartMeasurementDimension
 public:
     VXMeasurementDimension() =default;
     explicit VXMeasurementDimension(Unit units);
-    VXMeasurementDimension(Unit units, int min, int max, int step);
+    VXMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
 
-    virtual MeasurementDimension Type() const override;
+    virtual auto Type() const -> MeasurementDimension override;
 
-    virtual int RangeMin() const override;
-    virtual int RangeMax() const override;
+    virtual auto RangeMin() const -> int override;
+    virtual auto RangeMax() const -> int override;
 
     virtual bool IsCircumference() const override;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VXMeasurementDimension::IsCircumference() const
+inline auto VXMeasurementDimension::IsCircumference() const -> bool
 {
     return false;
 }
@@ -215,14 +215,14 @@ class VYMeasurementDimension : public VAbstartMeasurementDimension
 public:
     VYMeasurementDimension() =default;
     explicit VYMeasurementDimension(Unit units);
-    VYMeasurementDimension(Unit units, int min, int max, int step);
+    VYMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
 
-    virtual MeasurementDimension Type() const override;
+    virtual auto Type() const -> MeasurementDimension override;
 
-    virtual int RangeMin() const override;
-    virtual int RangeMax() const override;
+    virtual auto RangeMin() const -> int override;
+    virtual auto RangeMax() const -> int override;
 
-    virtual bool IsCircumference() const override;
+    virtual auto IsCircumference() const -> bool override;
     void SetCircumference(bool circumference);
 
 private:
@@ -248,12 +248,12 @@ class VWMeasurementDimension : public VAbstartMeasurementDimension
 public:
     VWMeasurementDimension() =default;
     explicit VWMeasurementDimension(Unit units);
-    VWMeasurementDimension(Unit units, int min, int max, int step);
+    VWMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
 
-    virtual MeasurementDimension Type() const override;
+    virtual auto Type() const -> MeasurementDimension override;
 
-    virtual int RangeMin() const override;
-    virtual int RangeMax() const override;
+    virtual auto RangeMin() const -> int override;
+    virtual auto RangeMax() const -> int override;
 };
 
 // VZMeasurementDimension
@@ -263,12 +263,12 @@ class VZMeasurementDimension : public VAbstartMeasurementDimension
 public:
     VZMeasurementDimension() =default;
     explicit VZMeasurementDimension(Unit units);
-    VZMeasurementDimension(Unit units, int min, int max, int step);
+    VZMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
 
-    virtual MeasurementDimension Type() const override;
+    virtual auto Type() const -> MeasurementDimension override;
 
-    virtual int RangeMin() const override;
-    virtual int RangeMax() const override;
+    virtual auto RangeMin() const -> int override;
+    virtual auto RangeMax() const -> int override;
 };
 
 #endif // VDIMENSIONS_H

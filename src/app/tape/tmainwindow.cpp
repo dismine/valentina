@@ -194,7 +194,7 @@ bool TMainWindow::SetDimensionABase(int base)
         gradationDimensionA->setCurrentIndex(i);
     }
 
-    if (base != currentDimensionA)
+    if (not VFuzzyComparePossibleNulls(base, currentDimensionA))
     {
         qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension A")));
         return false;
@@ -219,7 +219,7 @@ bool TMainWindow::SetDimensionBBase(int base)
         gradationDimensionB->setCurrentIndex(i);
     }
 
-    if (base != currentDimensionB)
+    if (not VFuzzyComparePossibleNulls(base, currentDimensionB))
     {
         qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension B")));
         return false;
@@ -245,7 +245,7 @@ bool TMainWindow::SetDimensionCBase(int base)
         gradationDimensionC->setCurrentIndex(i);
     }
 
-    if (base != currentDimensionC)
+    if (not VFuzzyComparePossibleNulls(base, currentDimensionC))
     {
         qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension C")));
         return false;
@@ -1535,7 +1535,7 @@ void TMainWindow::ImportFromPattern()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::DimensionABaseChanged()
 {
-    currentDimensionA = gradationDimensionA->currentData().toInt();
+    currentDimensionA = gradationDimensionA->currentData().toDouble();
 
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
     if (dimensions.size() > 1)
@@ -1556,7 +1556,7 @@ void TMainWindow::DimensionABaseChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::DimensionBBaseChanged()
 {
-    currentDimensionB = gradationDimensionB->currentData().toInt();
+    currentDimensionB = gradationDimensionB->currentData().toDouble();
 
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
@@ -1572,7 +1572,7 @@ void TMainWindow::DimensionBBaseChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::DimensionCBaseChanged()
 {
-    currentDimensionC = gradationDimensionC->currentData().toInt();
+    currentDimensionC = gradationDimensionC->currentData().toDouble();
     gradation->start();
 }
 
@@ -2249,7 +2249,7 @@ void TMainWindow::ExportToIndividual()
 void TMainWindow::RestrictSecondDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QMap<QString, QPair<int, int>> restrictions = m->GetRestrictions();
+    const QMap<QString, QPair<qreal, qreal>> restrictions = m->GetRestrictions();
 
     bool oneDimesionRestriction = true;
     bool fullCircumference = m->IsFullCircumference();
@@ -2269,7 +2269,7 @@ void TMainWindow::RestrictSecondDimesion()
 void TMainWindow::RestrictThirdDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QMap<QString, QPair<int, int>> restrictions = m->GetRestrictions();
+    const QMap<QString, QPair<qreal, qreal>> restrictions = m->GetRestrictions();
 
     bool oneDimesionRestriction = false;
     bool fullCircumference = m->IsFullCircumference();
@@ -2677,16 +2677,16 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     const bool fc = m->IsFullCircumference();
     const QString unit = UnitsToStr(m->MUnit(), true);
 
-    int current = -1;
+    qreal current = -1;
     if (control->currentIndex() != -1)
     {
-        current = control->currentData().toInt();
+        current = control->currentData().toDouble();
     }
 
     control->blockSignals(true);
     control->clear();
 
-    const QVector<int> bases = DimensionRestrictedValues(index, dimension);
+    const QVector<qreal> bases = DimensionRestrictedValues(index, dimension);
     const DimesionLabels labels = dimension->Labels();
 
     if (dimension->Type() == MeasurementDimension::X)
@@ -4125,7 +4125,7 @@ void TMainWindow::SetDimensionBases()
         currentDimensionC = dimension->BaseValue();
     }
 
-    auto SetBase = [dimensions](int index, QComboBox *control, int &value)
+    auto SetBase = [dimensions](int index, QComboBox *control, qreal &value)
     {
         if (dimensions.size() > index)
         {
@@ -4140,7 +4140,7 @@ void TMainWindow::SetDimensionBases()
             }
             else
             {
-                value = control->currentData().toInt();
+                value = control->currentData().toDouble();
             }
         }
     };
@@ -4155,7 +4155,7 @@ void TMainWindow::SetCurrentDimensionValues()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    auto SetDimensionValue = [dimensions](int index, int &value)
+    auto SetDimensionValue = [dimensions](int index, qreal &value)
     {
         if (dimensions.size() > index)
         {
@@ -4170,27 +4170,20 @@ void TMainWindow::SetCurrentDimensionValues()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
+QVector<qreal> TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
 {
-    QPair<int, int> restriction;
-
     if (index == 0)
     {
         return dimension->ValidBases();
     }
-    else if (index == 1)
-    {
-        restriction = m->Restriction(currentDimensionA);
-    }
-    else
-    {
-        restriction = m->Restriction(currentDimensionA, currentDimensionB);
-    }
 
-    const QVector<int> bases = dimension->ValidBases();
+    QPair<qreal, qreal> restriction = index == 1 ? m->Restriction(currentDimensionA)
+                                                 : m->Restriction(currentDimensionA, currentDimensionB);
 
-    int min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
-    int max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+    const QVector<qreal> bases = dimension->ValidBases();
+
+    qreal min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+    qreal max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
 
     if (min > max)
     {
@@ -4222,22 +4215,6 @@ void TMainWindow::SetDecimals()
     switch (mUnit)
     {
         case Unit::Cm:
-            ui->doubleSpinBoxBaseValue->setDecimals(2);
-            ui->doubleSpinBoxBaseValue->setSingleStep(0.01);
-
-            ui->doubleSpinBoxCorrection->setDecimals(2);
-            ui->doubleSpinBoxCorrection->setSingleStep(0.01);
-
-            ui->doubleSpinBoxShiftA->setDecimals(2);
-            ui->doubleSpinBoxShiftA->setSingleStep(0.01);
-
-            ui->doubleSpinBoxShiftB->setDecimals(2);
-            ui->doubleSpinBoxShiftB->setSingleStep(0.01);
-
-            ui->doubleSpinBoxShiftC->setDecimals(2);
-            ui->doubleSpinBoxShiftC->setSingleStep(0.01);
-            break;
-        case Unit::Mm:
             ui->doubleSpinBoxBaseValue->setDecimals(1);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
 
@@ -4252,6 +4229,22 @@ void TMainWindow::SetDecimals()
 
             ui->doubleSpinBoxShiftC->setDecimals(1);
             ui->doubleSpinBoxShiftC->setSingleStep(0.1);
+            break;
+        case Unit::Mm:
+            ui->doubleSpinBoxBaseValue->setDecimals(0);
+            ui->doubleSpinBoxBaseValue->setSingleStep(1);
+
+            ui->doubleSpinBoxCorrection->setDecimals(0);
+            ui->doubleSpinBoxCorrection->setSingleStep(1);
+
+            ui->doubleSpinBoxShiftA->setDecimals(0);
+            ui->doubleSpinBoxShiftA->setSingleStep(1);
+
+            ui->doubleSpinBoxShiftB->setDecimals(0);
+            ui->doubleSpinBoxShiftB->setSingleStep(1);
+
+            ui->doubleSpinBoxShiftC->setDecimals(0);
+            ui->doubleSpinBoxShiftC->setSingleStep(1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);

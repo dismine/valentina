@@ -37,16 +37,16 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> FilterByMinimum(const QVector<int> &base, int restriction)
+auto FilterByMinimum(const QVector<qreal> &base, qreal restriction) -> QVector<qreal>
 {
     if (restriction <= 0)
     {
         return base;
     }
 
-    QVector<int> filtered;
+    QVector<qreal> filtered;
     filtered.reserve(base.size());
-    for(auto &b : base)
+    for(const auto &b : base)
     {
         if (b >= restriction)
         {
@@ -57,16 +57,16 @@ QVector<int> FilterByMinimum(const QVector<int> &base, int restriction)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> FilterByMaximum(const QVector<int> &base, int restriction)
+auto FilterByMaximum(const QVector<qreal> &base, qreal restriction) -> QVector<qreal>
 {
     if (restriction <= 0)
     {
         return base;
     }
 
-    QVector<int> filtered;
+    QVector<qreal> filtered;
     filtered.reserve(base.size());
-    for(auto &b : base)
+    for(const auto &b : base)
     {
         if (b <= restriction)
         {
@@ -75,11 +75,11 @@ QVector<int> FilterByMaximum(const QVector<int> &base, int restriction)
     }
     return filtered;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogRestrictDimension::DialogRestrictDimension(const QList<MeasurementDimension_p> &dimensions,
-                                                 const QMap<QString, QPair<int, int>> &restrictions,
+                                                 const QMap<QString, QPair<qreal, qreal>> &restrictions,
                                                  bool oneDimesionRestriction, bool fullCircumference,
                                                  QWidget *parent) :
     QDialog(parent),
@@ -157,15 +157,15 @@ void DialogRestrictDimension::RowSelected()
 
     QTableWidgetItem *item = ui->tableWidget->currentItem();
 
-    if (item)
+    if (item != nullptr)
     {
-        int base1 = 0;
-        int base2 = 0;
+        qreal base1 = 0;
+        qreal base2 = 0;
         MeasurementDimension_p dimension;
 
         if (m_oneDimesionRestriction)
         {
-            base1 = item->data(Qt::UserRole).toInt();
+            base1 = item->data(Qt::UserRole).toDouble();
 
             if (m_dimensions.size() > 1)
             {
@@ -174,8 +174,8 @@ void DialogRestrictDimension::RowSelected()
         }
         else
         {
-            base1 = ui->comboBoxDimensionA->currentData().toInt();
-            base2 = item->data(Qt::UserRole).toInt();
+            base1 = ui->comboBoxDimensionA->currentData().toDouble();
+            base2 = item->data(Qt::UserRole).toDouble();
 
             if (m_dimensions.size() > 2)
             {
@@ -183,19 +183,19 @@ void DialogRestrictDimension::RowSelected()
             }
         }
 
-        QPair<int, int> restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2),
-                                                           QPair<int, int>(0, 0));
+        QPair<qreal, qreal> restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2),
+                                                           QPair<qreal, qreal>(0, 0));
 
         if (dimension.isNull())
         {
             return;
         }
 
-        const QVector<int> bases = dimension->ValidBases();
+        const QVector<qreal> bases = dimension->ValidBases();
 
         ui->comboBoxMin->blockSignals(true);
         ui->comboBoxMin->clear();
-        QVector<int> filtered = FilterByMaximum(bases, restriction.second);
+        QVector<qreal> filtered = FilterByMaximum(bases, restriction.second);
         FillBases(filtered, dimension, ui->comboBoxMin);
         int index = ui->comboBoxMin->findData(restriction.first);
         ui->comboBoxMin->setCurrentIndex(index != -1 ? index : 0);
@@ -224,25 +224,25 @@ void DialogRestrictDimension::MinRestrictionChanged()
 {
     QTableWidgetItem *item = ui->tableWidget->currentItem();
 
-    if (item)
+    if (item != nullptr)
     {
-        int base1 = 0;
-        int base2 = 0;
+        qreal base1 = 0;
+        qreal base2 = 0;
 
         if (m_oneDimesionRestriction)
         {
-            base1 = item->data(Qt::UserRole).toInt();
+            base1 = item->data(Qt::UserRole).toDouble();
         }
         else
         {
-            base1 = ui->comboBoxDimensionA->currentData().toInt();
-            base2 = item->data(Qt::UserRole).toInt();
+            base1 = ui->comboBoxDimensionA->currentData().toDouble();
+            base2 = item->data(Qt::UserRole).toDouble();
         }
 
         const QString coordinates = VMeasurement::CorrectionHash(base1, base2);
-        QPair<int, int> restriction = m_restrictions.value(coordinates, QPair<int, int>(0, 0));
+        QPair<qreal, qreal> restriction = m_restrictions.value(coordinates, QPair<qreal, qreal>(0, 0));
 
-        restriction.first = ui->comboBoxMin->currentData().toInt();
+        restriction.first = ui->comboBoxMin->currentData().toDouble();
         m_restrictions.insert(coordinates, restriction);
 
         const int currentRow = ui->tableWidget->currentRow();
@@ -261,25 +261,25 @@ void DialogRestrictDimension::MaxRestrictionChanged()
 {
     QTableWidgetItem *item = ui->tableWidget->currentItem();
 
-    if (item)
+    if (item != nullptr)
     {
-        int base1 = 0;
-        int base2 = 0;
+        qreal base1 = 0;
+        qreal base2 = 0;
 
         if (m_oneDimesionRestriction)
         {
-            base1 = item->data(Qt::UserRole).toInt();
+            base1 = item->data(Qt::UserRole).toDouble();
         }
         else
         {
-            base1 = ui->comboBoxDimensionA->currentData().toInt();
-            base2 = item->data(Qt::UserRole).toInt();
+            base1 = ui->comboBoxDimensionA->currentData().toDouble();
+            base2 = item->data(Qt::UserRole).toDouble();
         }
 
         const QString coordinates = VMeasurement::CorrectionHash(base1, base2);
-        QPair<int, int> restriction = m_restrictions.value(coordinates, QPair<int, int>(0, 0));
+        QPair<qreal, qreal> restriction = m_restrictions.value(coordinates, QPair<qreal, qreal>(0, 0));
 
-        restriction.second = ui->comboBoxMax->currentData().toInt();
+        restriction.second = ui->comboBoxMax->currentData().toDouble();
         m_restrictions.insert(coordinates, restriction);
 
         const int currentRow = ui->tableWidget->currentRow();
@@ -304,7 +304,6 @@ void DialogRestrictDimension::InitDimensionsBaseValues()
         if (m_dimensions.size() > index)
         {
             MeasurementDimension_p dimension = m_dimensions.at(index);
-            const QString unit = UnitsToStr(dimension->Units(), true);
             name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
                                                                             dimension->IsCircumference(),
@@ -316,7 +315,7 @@ void DialogRestrictDimension::InitDimensionsBaseValues()
 
     if (not m_oneDimesionRestriction)
     {
-        if (m_dimensions.size() > 0)
+        if (not m_dimensions.empty())
         {
             DimensionsBaseValue(0, ui->labelDimensionA, ui->comboBoxDimensionA);
         }
@@ -338,10 +337,10 @@ void DialogRestrictDimension::InitDimensionGradation(const MeasurementDimension_
 {
     SCASSERT(control != nullptr)
 
-    int current = -1;
+    qreal current = -1;
     if (control->currentIndex() != -1)
     {
-        current = control->currentData().toInt();
+        current = control->currentData().toDouble();
     }
 
     control->blockSignals(true);
@@ -373,12 +372,12 @@ void DialogRestrictDimension::InitTable()
         if (m_dimensions.size() > index)
         {
             MeasurementDimension_p dimensionA = m_dimensions.at(index-1);
-            const QVector<int> basesA = dimensionA->ValidBases();
+            const QVector<qreal> basesA = dimensionA->ValidBases();
             ui->tableWidget->setRowCount(basesA.size());
             ui->tableWidget->setVerticalHeaderLabels(DimensionLabels(basesA, dimensionA));
 
             MeasurementDimension_p dimensionB = m_dimensions.at(index);
-            const QVector<int> basesB = dimensionB->ValidBases();
+            const QVector<qreal> basesB = dimensionB->ValidBases();
             ui->tableWidget->setColumnCount(basesB.size());
             ui->tableWidget->setHorizontalHeaderLabels(DimensionLabels(basesB, dimensionB));
         }
@@ -394,8 +393,8 @@ void DialogRestrictDimension::InitTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRestrictDimension::RefreshTable()
 {
-    QVector<int> basesRow;
-    QVector<int> basesColumn;
+    QVector<qreal> basesRow;
+    QVector<qreal> basesColumn;
 
     if (m_oneDimesionRestriction)
     {
@@ -446,15 +445,15 @@ void DialogRestrictDimension::RefreshTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRestrictDimension::AddCell(int row, int column, int rowValue, int columnValue)
+void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal columnValue)
 {
     auto *item = new QTableWidgetItem();
     item->setData(Qt::UserRole, rowValue);
 
-    int base1 = 0;
-    int base2 = 0;
+    qreal base1 = 0;
+    qreal base2 = 0;
     MeasurementDimension_p dimension;
-    QVector<int> bases;
+    QVector<qreal> bases;
 
     if (m_oneDimesionRestriction)
     {
@@ -468,7 +467,7 @@ void DialogRestrictDimension::AddCell(int row, int column, int rowValue, int col
     }
     else
     {
-        base1 = ui->comboBoxDimensionA->currentData().toInt();
+        base1 = ui->comboBoxDimensionA->currentData().toDouble();
         base2 = rowValue;
 
         if (m_dimensions.size() >= 3)
@@ -478,10 +477,10 @@ void DialogRestrictDimension::AddCell(int row, int column, int rowValue, int col
         }
     }
 
-    QPair<int, int> restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2),
-                                                       QPair<int, int>(0, 0));
-    int min = INT32_MIN;
-    int max = INT32_MAX;
+    QPair<qreal, qreal> restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2),
+                                                           QPair<qreal, qreal>(0, 0));
+    qreal min = INT32_MIN;
+    qreal max = INT32_MAX;
 
     if (not dimension.isNull())
     {
@@ -500,11 +499,11 @@ void DialogRestrictDimension::AddCell(int row, int column, int rowValue, int col
 
     if (leftRestriction && rightRestriction)
     {
-        item->setIcon(QIcon("://icon/24x24/star.png"));
+        item->setIcon(QIcon(QStringLiteral("://icon/24x24/star.png")));
     }
     else
     {
-        item->setIcon(QIcon("://icon/24x24/close.png"));
+        item->setIcon(QIcon(QStringLiteral("://icon/24x24/close.png")));
     }
 
     // set the item non-editable (view only), and non-selectable
@@ -533,8 +532,8 @@ void DialogRestrictDimension::EnableRestrictionControls(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRestrictDimension::FillBases(const QVector<int> &bases, const MeasurementDimension_p &dimension,
-                                        QComboBox *control)
+void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension,
+                                        QComboBox *control) const
 {
     SCASSERT(control != nullptr)
 
@@ -551,7 +550,7 @@ void DialogRestrictDimension::FillBases(const QVector<int> &bases, const Measure
             }
             else
             {
-                control->addItem(QString("%1 %2").arg(base).arg(units), base);
+                control->addItem(QStringLiteral("%1 %2").arg(base).arg(units), base);
             }
         }
     }
@@ -567,7 +566,7 @@ void DialogRestrictDimension::FillBases(const QVector<int> &bases, const Measure
             {
                 if (dimension->IsCircumference())
                 {
-                    control->addItem(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
+                    control->addItem(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
                 }
                 else
                 {
@@ -586,14 +585,15 @@ void DialogRestrictDimension::FillBases(const QVector<int> &bases, const Measure
             }
             else
             {
-                control->addItem(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
+                control->addItem(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, const MeasurementDimension_p &dimension)
+auto DialogRestrictDimension::DimensionLabels(const QVector<qreal> &bases,
+                                              const MeasurementDimension_p &dimension) const -> QStringList
 {
     const bool showUnits = dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X;
     const QString units = showUnits ? UnitsToStr(dimension->Units(), true) : QString();
@@ -611,7 +611,7 @@ QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, 
             }
             else
             {
-                labels.append(QString("%1 %2").arg(base).arg(units));
+                labels.append(QStringLiteral("%1 %2").arg(base).arg(units));
             }
         }
     }
@@ -627,7 +627,7 @@ QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, 
             {
                 if (dimension->IsCircumference())
                 {
-                    labels.append(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+                    labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
                 }
                 else
                 {
@@ -646,7 +646,7 @@ QStringList DialogRestrictDimension::DimensionLabels(const QVector<int> &bases, 
             }
             else
             {
-                labels.append(QString("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+                labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
             }
         }
     }

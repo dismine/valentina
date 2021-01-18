@@ -96,11 +96,11 @@ void DialogDimensionLabels::DimensionChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDimensionLabels::LabelChanged(QTableWidgetItem *item)
 {
-    if (item)
+    if (item != nullptr)
     {
         MeasurementDimension type =
             static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
-        int value = item->data(Qt::UserRole).toInt();
+        qreal value = item->data(Qt::UserRole).toDouble();
 
         DimesionLabels labels = m_labels.value(type);
         labels.insert(value, item->text());
@@ -116,7 +116,7 @@ void DialogDimensionLabels::InitLabels()
 
     const QList<MeasurementDimension_p> dimensions = m_dimensions.values();
 
-    for(auto &dimension : dimensions)
+    for(const auto &dimension : dimensions)
     {
         m_labels.insert(dimension->Type(), dimension->Labels());
     }
@@ -158,7 +158,7 @@ void DialogDimensionLabels::InitTable()
         return;
     }
 
-    const QVector<int> bases = dimension->ValidBases();
+    const QVector<qreal> bases = dimension->ValidBases();
 
     ui->tableWidget->setRowCount(bases.size());
 
@@ -166,7 +166,7 @@ void DialogDimensionLabels::InitTable()
 
     for(int row = 0; row < bases.size(); ++row)
     {
-        const int base = bases.at(row);
+        const qreal base = bases.at(row);
 
         {
             auto *itemValue = new QTableWidgetItem(DimensionValue(dimension, base));
@@ -195,7 +195,7 @@ void DialogDimensionLabels::InitTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dimension, int value)
+auto DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dimension, qreal value) const -> QString
 {
     QStringList labels;
 
@@ -203,18 +203,19 @@ QString DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dime
     {
         return QString::number(value);
     }
-    else if (dimension->Type() == MeasurementDimension::Y)
+
+    if (dimension->Type() == MeasurementDimension::Y)
     {
         if (dimension->IsCircumference())
         {
             return QString::number(m_fullCircumference ? value*2 : value);
         }
-        else
-        {
-            return QString::number(value);
-        }
+
+        return QString::number(value);
+
     }
-    else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
+
+    if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
     {
         return QString::number(m_fullCircumference ? value*2 : value);
     }

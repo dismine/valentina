@@ -111,7 +111,7 @@ public:
     IMD  GetDimension() const;
     void SetDimension(IMD type);
 
-    qreal GetCorrection(int baseA, int baseB, int baseC) const;
+    qreal GetCorrection(qreal baseA, qreal baseB, qreal baseC) const;
 
     QMap<QString, qreal> GetCorrections() const;
     void  SetCorrections(const QMap<QString, qreal> &corrections);

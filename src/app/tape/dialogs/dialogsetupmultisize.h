@@ -33,7 +33,7 @@
 #include "../vformat/vdimensions.h"
 #include "../vmisc/def.h"
 
-class QSpinBox;
+class QDoubleSpinBox;
 
 namespace Ui
 {
@@ -48,9 +48,9 @@ public:
     explicit DialogSetupMultisize(Unit unit, QWidget *parent = nullptr);
     ~DialogSetupMultisize();
 
-    QVector<MeasurementDimension_p> Dimensions() const;
+    auto Dimensions() const -> QVector<MeasurementDimension_p>;
 
-    bool FullCircumference() const;
+    auto FullCircumference() const -> bool;
 
 protected:
     virtual void changeEvent(QEvent* event) override;
@@ -71,23 +71,21 @@ private:
 
     void CheckState();
 
-    void InitDimensionMinMax(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue,
+    void InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinValue, QDoubleSpinBox *doubleSpinBoxMaxValue,
                              const MeasurementDimension_p &dimension);
     void InitDimensionStep(QComboBox *comboBoxStep,const MeasurementDimension_p &dimension);
 
-    void InitDimension(QSpinBox *spinboxMinValue, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
-                       const MeasurementDimension_p &dimension);
+    void InitDimension(QDoubleSpinBox *doubleSpinBoxMinValue, QDoubleSpinBox *doubleSpinBoxMaxValue,
+                       QComboBox *comboBoxStep, const MeasurementDimension_p &dimension);
     void InitXDimension();
     void InitYDimension();
     void InitWDimension();
     void InitZDimension();
 
-    void DimensionMinValueChanged(int value, QSpinBox *spinboxMaxValue, QComboBox *comboBoxStep,
-                                  QComboBox *comboBoxBase,
-                                  const MeasurementDimension_p &dimension);
-    void DimensionMaxValueChanged(int value, QSpinBox *spinboxMinValue, QComboBox *comboBoxStep,
-                                  QComboBox *comboBoxBase,
-                                  const MeasurementDimension_p &dimension);
+    void DimensionMinValueChanged(qreal value, QDoubleSpinBox *doubleSpinBoxMaxValue, QComboBox *comboBoxStep,
+                                  QComboBox *comboBoxBase, const MeasurementDimension_p &dimension);
+    void DimensionMaxValueChanged(qreal value, QDoubleSpinBox *doubleSpinBoxMinValue, QComboBox *comboBoxStep,
+                                  QComboBox *comboBoxBase, const MeasurementDimension_p &dimension);
 
     void DimensionStepChanged(int index, QComboBox *comboBoxStep, QComboBox *comboBoxBase,
                               const MeasurementDimension_p &dimension);

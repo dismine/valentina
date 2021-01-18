@@ -571,7 +571,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::UpdateMeasurements(const QString &path, int baseA, int baseB, int baseC)
+bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal baseB, qreal baseC)
 {
     m = OpenMeasurementFile(path);
 
@@ -2072,7 +2072,7 @@ void MainWindow::StoreMultisizeMDimensions()
 
     QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    auto StoreDimension = [this, dimensions](int index, int currentBase)
+    auto StoreDimension = [this, dimensions](int index, qreal currentBase)
     {
         if (dimensions.size() > index)
         {
@@ -2146,9 +2146,9 @@ void MainWindow::StoreIndividualMDimensions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> MainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
+QVector<qreal> MainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
 {
-    QPair<int, int> restriction;
+    QPair<qreal, qreal> restriction;
 
     if (index == 0)
     {
@@ -2163,10 +2163,10 @@ QVector<int> MainWindow::DimensionRestrictedValues(int index, const MeasurementD
         restriction = m->Restriction(m_currentDimensionA, m_currentDimensionB);
     }
 
-    const QVector<int> bases = dimension->ValidBases();
+    const QVector<qreal> bases = dimension->ValidBases();
 
-    int min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
-    int max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+    qreal min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+    qreal max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
 
     if (min > max)
     {
@@ -2182,7 +2182,7 @@ void MainWindow::SetDimensionBases()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    auto SetBase = [dimensions](int index, QPointer<QComboBox> control, int &value)
+    auto SetBase = [dimensions](int index, QPointer<QComboBox> control, double &value)
     {
         if (dimensions.size() > index)
         {
@@ -2199,7 +2199,7 @@ void MainWindow::SetDimensionBases()
             }
             else
             {
-                value = control->currentData().toInt();
+                value = control->currentData().toDouble();
             }
 
             control->blockSignals(false);
@@ -3439,9 +3439,8 @@ void MainWindow::FullParseFile()
             futureTestUniqueId.waitForFinished();
         }
     }
-    catch (const VExceptionUndo &e)
+    catch (const VExceptionUndo &)
     {
-        Q_UNUSED(e)
         /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
          * myself. Later in method customEvent call undo.*/
         if (qApp->getOpeningPattern())
@@ -3823,7 +3822,7 @@ void MainWindow::PatternChangesWereSaved(bool saved)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionABaseChanged()
 {
-    m_currentDimensionA = dimensionA->currentData().toInt();
+    m_currentDimensionA = dimensionA->currentData().toDouble();
 
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
     if (dimensions.size() > 1)
@@ -3844,7 +3843,7 @@ void MainWindow::DimensionABaseChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionBBaseChanged()
 {
-    m_currentDimensionB = dimensionB->currentData().toInt();
+    m_currentDimensionB = dimensionB->currentData().toDouble();
 
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
@@ -3860,7 +3859,7 @@ void MainWindow::DimensionBBaseChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionCBaseChanged()
 {
-    m_currentDimensionC = dimensionC->currentData().toInt();
+    m_currentDimensionC = dimensionC->currentData().toDouble();
     m_gradation->start();
 }
 
@@ -3996,23 +3995,24 @@ void MainWindow::InitDimensionControls()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QPointer<QComboBox> control)
+void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p &dimension,
+                                        const QPointer<QComboBox> &control)
 {
     SCASSERT(control != nullptr)
 
     const bool fc = m->IsFullCircumference();
     const QString unit = UnitsToStr(qApp->MeasurementsUnits(), true);
 
-    int current = -1;
+    qreal current = -1;
     if (control->currentIndex() != -1)
     {
-        current = control->currentData().toInt();
+        current = control->currentData().toDouble();
     }
 
     control->blockSignals(true);
     control->clear();
 
-    const QVector<int> bases = DimensionRestrictedValues(index, dimension);
+    const QVector<qreal> bases = DimensionRestrictedValues(index, dimension);
     const DimesionLabels labels = dimension->Labels();
 
     if (dimension->Type() == MeasurementDimension::X)

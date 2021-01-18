@@ -153,9 +153,9 @@ private:
     Unit             mUnit{Unit::Cm};
     Unit             pUnit{Unit::Cm};
     MeasurementsType mType{MeasurementsType::Individual};
-    int              currentDimensionA{0};
-    int              currentDimensionB{0};
-    int              currentDimensionC{0};
+    qreal            currentDimensionA{0};
+    qreal            currentDimensionB{0};
+    qreal            currentDimensionC{0};
     QString          curFile{};
     QComboBox       *gradationDimensionA{nullptr};
     QComboBox       *gradationDimensionB{nullptr};
@@ -248,7 +248,7 @@ private:
     void SetDimensionBases();
     void SetCurrentDimensionValues();
 
-    QVector<int> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
+    QVector<double> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
 
     QMap<int, QSharedPointer<VMeasurement> > OrderedMeasurments() const;
 };
