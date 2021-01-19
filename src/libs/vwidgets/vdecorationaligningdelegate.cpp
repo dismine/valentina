@@ -39,10 +39,17 @@ void VDecorationAligningDelegate::paint(QPainter *painter, const QStyleOptionVie
 {
     QIcon icon = QIcon(qvariant_cast<QIcon>(index.data(Qt::DecorationRole)));
 
-    if (option.state & QStyle::State_Selected)
+    if ((option.state & QStyle::State_Selected) != 0U)
     {
         painter->fillRect(option.rect, option.palette.highlight());
     }
 
-    icon.paint(painter, option.rect, m_alignment);
+    if ((index.flags() & Qt::ItemIsEnabled) != 0U)
+    {
+        icon.paint(painter, option.rect, m_alignment);
+    }
+    else
+    {
+        icon.paint(painter, option.rect, m_alignment, QIcon::Disabled);
+    }
 }

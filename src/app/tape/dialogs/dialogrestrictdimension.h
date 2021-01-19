@@ -84,6 +84,8 @@ private:
     void FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension, QComboBox *control) const;
 
     auto DimensionLabels(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;
+    auto DimensionRestrictedValues(const MeasurementDimension_p &dimension) const -> QVector<qreal>;
+    auto StartRow() const -> int;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

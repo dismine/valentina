@@ -387,7 +387,7 @@ void DialogRestrictDimension::InitTable()
     ui->tableWidget->blockSignals(false);
 
     RefreshTable();
-    ui->tableWidget->selectRow(0);
+    ui->tableWidget->selectRow(StartRow());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -415,11 +415,11 @@ void DialogRestrictDimension::RefreshTable()
     {
         if (m_dimensions.size() >= 3)
         {
-            MeasurementDimension_p dimensionA = m_dimensions.at(1);
-            basesRow = dimensionA->ValidBases();
+            MeasurementDimension_p dimensionB = m_dimensions.at(1);
+            basesRow = dimensionB->ValidBases();
 
-            MeasurementDimension_p dimensionB = m_dimensions.at(2);
-            basesColumn = dimensionB->ValidBases();
+            MeasurementDimension_p dimensionC = m_dimensions.at(2);
+            basesColumn = dimensionC->ValidBases();
         }
         else
         {
@@ -454,6 +454,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
     qreal base2 = 0;
     MeasurementDimension_p dimension;
     QVector<qreal> bases;
+    QVector<qreal> validRows;
 
     if (m_oneDimesionRestriction)
     {
@@ -461,6 +462,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
 
         if (m_dimensions.size() >= 2)
         {
+            validRows = m_dimensions.at(0)->ValidBases();
             dimension = m_dimensions.at(1);
             bases = dimension->ValidBases();
         }
@@ -472,6 +474,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
 
         if (m_dimensions.size() >= 3)
         {
+            validRows = DimensionRestrictedValues(m_dimensions.at(1));
             dimension = m_dimensions.at(2);
             bases = dimension->ValidBases();
         }
@@ -494,16 +497,27 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
         }
     }
 
-    const bool leftRestriction = columnValue >= min;
-    const bool rightRestriction = columnValue <= max;
-
-    if (leftRestriction && rightRestriction)
+    if (validRows.contains(rowValue))
     {
-        item->setIcon(QIcon(QStringLiteral("://icon/24x24/star.png")));
+        const bool leftRestriction = columnValue >= min;
+        const bool rightRestriction = columnValue <= max;
+
+        if (leftRestriction && rightRestriction)
+        {
+            item->setIcon(QIcon(QStringLiteral("://icon/24x24/star.png")));
+        }
+        else
+        {
+            item->setIcon(QIcon(QStringLiteral("://icon/24x24/close.png")));
+        }
     }
     else
     {
         item->setIcon(QIcon(QStringLiteral("://icon/24x24/close.png")));
+
+        Qt::ItemFlags flags = item->flags();
+        flags &= ~(Qt::ItemIsEnabled);
+        item->setFlags(flags);
     }
 
     // set the item non-editable (view only), and non-selectable
@@ -652,4 +666,58 @@ auto DialogRestrictDimension::DimensionLabels(const QVector<qreal> &bases,
     }
 
     return labels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogRestrictDimension::DimensionRestrictedValues(const MeasurementDimension_p &dimension) const -> QVector<qreal>
+{
+    QPair<qreal, qreal> restriction;
+
+    if (not m_oneDimesionRestriction)
+    {
+        qreal base1 = ui->comboBoxDimensionA->currentData().toDouble();
+        restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1), QPair<qreal, qreal>(0, 0));
+    }
+
+    const QVector<qreal> bases = dimension->ValidBases();
+
+    qreal min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
+    qreal max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+
+    if (min > max)
+    {
+        min = dimension->MinValue();
+        max = dimension->MaxValue();
+    }
+
+    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogRestrictDimension::StartRow() const -> int
+{
+    if (m_oneDimesionRestriction)
+    {
+        return 0;
+    }
+
+    QVector<qreal> basesRow;
+
+    if (m_dimensions.size() >= 3)
+    {
+        MeasurementDimension_p dimensionB = m_dimensions.at(1);
+        basesRow = dimensionB->ValidBases();
+
+        QVector<qreal> validRows = DimensionRestrictedValues(dimensionB);
+
+        for(int i=0; i < basesRow.size(); ++i)
+        {
+            if (validRows.contains(basesRow.at(i)))
+            {
+                return i;
+            }
+        }
+    }
+
+    return 0;
 }
