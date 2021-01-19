@@ -232,7 +232,9 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
     }
     return false;
 }
-}
+
+Unit mUnitCached = Unit::LAST_UNIT_DO_NOT_USE;
+}  // namespace
 
 Q_LOGGING_CATEGORY(vXML, "v.xml")
 
@@ -586,19 +588,18 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     bool ok = false;
     qreal param = 0;
 
-    const QString message = QObject::tr("Can't convert toDouble parameter");
     try
     {
         QString parametr = GetParametrString(domElement, name, defValue);
         param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
         if (ok == false)
         {
-            throw VExceptionConversionError(message, name);
+            throw VExceptionConversionError(QObject::tr("Can't convert toDouble parameter"), name);
         }
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        VExceptionConversionError excep(message, name);
+        VExceptionConversionError excep(QObject::tr("Can't convert toDouble parameter"), name);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
@@ -638,14 +639,17 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::MUnit() const
 {
-    Unit unit = StrToUnits(UniqueTagText(TagUnit, unitCM));
-
-    if (unit == Unit::Px)
+    if (mUnitCached == Unit::LAST_UNIT_DO_NOT_USE)
     {
-        unit = Unit::Cm;
+        mUnitCached = StrToUnits(UniqueTagText(TagUnit, unitCM));
+
+        if (mUnitCached == Unit::Px)
+        {
+            mUnitCached = Unit::Cm;
+        }
     }
 
-    return unit;
+    return mUnitCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
