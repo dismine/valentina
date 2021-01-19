@@ -8,6 +8,7 @@
 - Improve the layout option "Auto crop unused width".
 - Improve multisize measurements format. Allow decimal step 0.5.
 - Improve restrict dimension dialog. Disable not available combinations.
+- Improve multisize measurements format. Allow excluding combinations inside min/max range.
 
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.

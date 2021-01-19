@@ -2148,11 +2148,10 @@ void MainWindow::StoreIndividualMDimensions()
 //---------------------------------------------------------------------------------------------------------------------
 QVector<qreal> MainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
 {
-    QPair<qreal, qreal> restriction;
-
+    VDimensionRestriction restriction;
     if (index == 0)
     {
-        return dimension->ValidBases();
+        restriction = m->Restriction(0);
     }
     else if (index == 1)
     {
@@ -2165,8 +2164,8 @@ QVector<qreal> MainWindow::DimensionRestrictedValues(int index, const Measuremen
 
     const QVector<qreal> bases = dimension->ValidBases();
 
-    qreal min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
-    qreal max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+    qreal min = bases.indexOf(restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
+    qreal max = bases.indexOf(restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
 
     if (min > max)
     {
@@ -2174,7 +2173,7 @@ QVector<qreal> MainWindow::DimensionRestrictedValues(int index, const Measuremen
         max = dimension->MaxValue();
     }
 
-    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step());
+    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step(), restriction.GetExcludeValues());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

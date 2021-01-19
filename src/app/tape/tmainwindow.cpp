@@ -2246,15 +2246,35 @@ void TMainWindow::ExportToIndividual()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RestrictFirstDimesion()
+{
+    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+    const QMap<QString, VDimensionRestriction> restrictions = m->GetRestrictions();
+    bool fullCircumference = m->IsFullCircumference();
+
+    DialogRestrictDimension dialog(dimensions, restrictions, RestrictDimension::First, fullCircumference, this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetRestrictions(dialog.Restrictions());
+    MeasurementsWereSaved(false);
+
+    if (not dimensions.isEmpty())
+    {
+        InitDimensionGradation(0, dimensions.at(0), gradationDimensionA);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RestrictSecondDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QMap<QString, QPair<qreal, qreal>> restrictions = m->GetRestrictions();
-
-    bool oneDimesionRestriction = true;
+    const QMap<QString, VDimensionRestriction> restrictions = m->GetRestrictions();
     bool fullCircumference = m->IsFullCircumference();
 
-    DialogRestrictDimension dialog(dimensions, restrictions, oneDimesionRestriction, fullCircumference, this);
+    DialogRestrictDimension dialog(dimensions, restrictions, RestrictDimension::Second, fullCircumference, this);
     if (dialog.exec() == QDialog::Rejected)
     {
         return;
@@ -2269,12 +2289,10 @@ void TMainWindow::RestrictSecondDimesion()
 void TMainWindow::RestrictThirdDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QMap<QString, QPair<qreal, qreal>> restrictions = m->GetRestrictions();
-
-    bool oneDimesionRestriction = false;
+    const QMap<QString, VDimensionRestriction> restrictions = m->GetRestrictions();
     bool fullCircumference = m->IsFullCircumference();
 
-    DialogRestrictDimension dialog(dimensions, restrictions, oneDimesionRestriction, fullCircumference, this);
+    DialogRestrictDimension dialog(dimensions, restrictions, RestrictDimension::Third, fullCircumference, this);
     if (dialog.exec() == QDialog::Rejected)
     {
         return;
@@ -2591,18 +2609,26 @@ void TMainWindow::InitMenu()
         ui->menuMeasurements->insertAction(ui->actionUseFullCircumference, separator);
 
         const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-        if (dimensions.size() > 1)
+        if (dimensions.size() > 0)
         {
-            ui->actionRestrictSecondDimension->setVisible(true);
-            ui->actionRestrictSecondDimension->setEnabled(true);
-            connect(ui->actionRestrictSecondDimension, &QAction::triggered, this, &TMainWindow::RestrictSecondDimesion);
+            ui->actionRestrictFirstDimension->setVisible(true);
+            ui->actionRestrictFirstDimension->setEnabled(true);
+            connect(ui->actionRestrictFirstDimension, &QAction::triggered, this, &TMainWindow::RestrictFirstDimesion);
 
-            if (dimensions.size() > 2)
+            if (dimensions.size() > 1)
             {
-                ui->actionRestrictThirdDimension->setVisible(true);
-                ui->actionRestrictThirdDimension->setEnabled(true);
-                connect(ui->actionRestrictThirdDimension, &QAction::triggered, this,
-                        &TMainWindow::RestrictThirdDimesion);
+                ui->actionRestrictSecondDimension->setVisible(true);
+                ui->actionRestrictSecondDimension->setEnabled(true);
+                connect(ui->actionRestrictSecondDimension, &QAction::triggered, this,
+                        &TMainWindow::RestrictSecondDimesion);
+
+                if (dimensions.size() > 2)
+                {
+                    ui->actionRestrictThirdDimension->setVisible(true);
+                    ui->actionRestrictThirdDimension->setEnabled(true);
+                    connect(ui->actionRestrictThirdDimension, &QAction::triggered, this,
+                            &TMainWindow::RestrictThirdDimesion);
+                }
             }
         }
 
@@ -4176,18 +4202,24 @@ void TMainWindow::SetCurrentDimensionValues()
 //---------------------------------------------------------------------------------------------------------------------
 QVector<qreal> TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension)
 {
+    VDimensionRestriction restriction;
     if (index == 0)
     {
-        return dimension->ValidBases();
+        restriction = m->Restriction(0);
     }
-
-    QPair<qreal, qreal> restriction = index == 1 ? m->Restriction(currentDimensionA)
-                                                 : m->Restriction(currentDimensionA, currentDimensionB);
+    else if (index == 1)
+    {
+        restriction = m->Restriction(currentDimensionA);
+    }
+    else
+    {
+        restriction = m->Restriction(currentDimensionA, currentDimensionB);
+    }
 
     const QVector<qreal> bases = dimension->ValidBases();
 
-    qreal min = bases.indexOf(restriction.first) != -1 ? restriction.first : dimension->MinValue();
-    qreal max = bases.indexOf(restriction.second) != -1 ? restriction.second : dimension->MaxValue();
+    qreal min = bases.indexOf(restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
+    qreal max = bases.indexOf(restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
 
     if (min > max)
     {
@@ -4195,7 +4227,7 @@ QVector<qreal> TMainWindow::DimensionRestrictedValues(int index, const Measureme
         max = dimension->MaxValue();
     }
 
-    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step());
+    return VAbstartMeasurementDimension::ValidBases(min, max, dimension->Step(), restriction.GetExcludeValues());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

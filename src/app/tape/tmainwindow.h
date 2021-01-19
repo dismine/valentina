@@ -140,6 +140,7 @@ private slots:
 
     void ExportToIndividual();
 
+    void RestrictFirstDimesion();
     void RestrictSecondDimesion();
     void RestrictThirdDimesion();
 

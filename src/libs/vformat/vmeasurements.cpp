@@ -84,6 +84,7 @@ const QString VMeasurements::AttrShiftB            = QStringLiteral("shiftB");
 const QString VMeasurements::AttrShiftC            = QStringLiteral("shiftC");
 const QString VMeasurements::AttrCorrection        = QStringLiteral("correction");
 const QString VMeasurements::AttrCoordinates       = QStringLiteral("coordinates");
+const QString VMeasurements::AttrExclude           = QStringLiteral("exclude");
 const QString VMeasurements::AttrSpecialUnits      = QStringLiteral("specialUnits");
 const QString VMeasurements::AttrDescription       = QStringLiteral("description");
 const QString VMeasurements::AttrName              = QStringLiteral("name");
@@ -903,9 +904,9 @@ auto VMeasurements::Dimensions() const -> QMap<MeasurementDimension, Measurement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::GetRestrictions() const -> QMap<QString, QPair<qreal, qreal> >
+auto VMeasurements::GetRestrictions() const -> QMap<QString, VDimensionRestriction >
 {
-    QMap<QString, QPair<qreal, qreal> > restrictions;
+    QMap<QString, VDimensionRestriction > restrictions;
 
     const QDomNodeList list = elementsByTagName(TagRestriction);
     for (int i=0; i < list.size(); ++i)
@@ -915,15 +916,16 @@ auto VMeasurements::GetRestrictions() const -> QMap<QString, QPair<qreal, qreal>
         QString coordinates = GetParametrString(res, AttrCoordinates);
         const qreal min = GetParametrDouble(res, AttrMin, QChar('0'));
         const qreal max = GetParametrDouble(res, AttrMax, QChar('0'));
+        const QString exclude = GetParametrEmptyString(res, AttrExclude);
 
-        restrictions.insert(coordinates, qMakePair(min, max));
+        restrictions.insert(coordinates, VDimensionRestriction(min, max, exclude));
     }
 
     return restrictions;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetRestrictions(const QMap<QString, QPair<qreal, qreal> > &restrictions)
+void VMeasurements::SetRestrictions(const QMap<QString, VDimensionRestriction> &restrictions)
 {
     QDomElement root = documentElement();
     QDomElement restrictionsTag = root.firstChildElement(TagRestrictions);
@@ -941,8 +943,10 @@ void VMeasurements::SetRestrictions(const QMap<QString, QPair<qreal, qreal> > &r
         QDomElement restrictionTag = createElement(TagRestriction);
 
         SetAttribute(restrictionTag, AttrCoordinates, i.key());
-        SetAttributeOrRemoveIf(restrictionTag, AttrMin, i.value().first, qFuzzyIsNull(i.value().first));
-        SetAttributeOrRemoveIf(restrictionTag, AttrMax, i.value().second, qFuzzyIsNull(i.value().second));
+        SetAttributeOrRemoveIf(restrictionTag, AttrMin, i.value().GetMin(), qFuzzyIsNull(i.value().GetMin()));
+        SetAttributeOrRemoveIf(restrictionTag, AttrMax, i.value().GetMax(), qFuzzyIsNull(i.value().GetMax()));
+        SetAttributeOrRemoveIf(restrictionTag, AttrExclude, i.value().GetExcludeString(),
+                               i.value().GetExcludeString().isEmpty());
 
         restrictionsTag.appendChild(restrictionTag);
         ++i;
@@ -950,11 +954,11 @@ void VMeasurements::SetRestrictions(const QMap<QString, QPair<qreal, qreal> > &r
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::Restriction(qreal base, qreal base2) const -> QPair<qreal, qreal>
+auto VMeasurements::Restriction(qreal base, qreal base2) const -> VDimensionRestriction
 {
-    const QMap<QString, QPair<qreal, qreal> > restrictions = GetRestrictions();
+    const QMap<QString, VDimensionRestriction > restrictions = GetRestrictions();
     const QString hash = VMeasurement::CorrectionHash(base, base2, 0);
-    return restrictions.value(hash, QPair<qreal, qreal>(0, 0));
+    return restrictions.value(hash);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

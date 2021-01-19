@@ -1016,6 +1016,7 @@
     <addaction name="actionImportFromPattern"/>
     <addaction name="actionMeasurementDiagram"/>
     <addaction name="actionUseFullCircumference"/>
+    <addaction name="actionRestrictFirstDimension"/>
     <addaction name="actionRestrictSecondDimension"/>
     <addaction name="actionRestrictThirdDimension"/>
     <addaction name="actionDimensionLabels"/>
@@ -1401,6 +1402,9 @@
    <property name="visible">
     <bool>false</bool>
    </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
   </action>
   <action name="actionRestrictThirdDimension">
    <property name="enabled">
@@ -1412,6 +1416,9 @@
    <property name="visible">
     <bool>false</bool>
    </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
   </action>
   <action name="actionDimensionLabels">
    <property name="enabled">
@@ -1422,6 +1429,20 @@
    </property>
    <property name="visible">
     <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRestrictFirstDimension">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Restrict first dimension</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
    </property>
   </action>
  </widget>
@@ -1448,8 +1469,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>764</x>
-     <y>377</y>
+     <x>1187</x>
+     <y>457</y>
     </hint>
    </hints>
   </connection>
@@ -1460,8 +1481,8 @@
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>734</x>
-     <y>384</y>
+     <x>1187</x>
+     <y>464</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>

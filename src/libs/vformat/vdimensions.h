@@ -30,6 +30,7 @@
 
 #include <QCoreApplication>
 #include <QMap>
+#include <QSet>
 
 #include "../vmisc/def.h"
 
@@ -85,7 +86,7 @@ public:
     auto ValidBases() const -> QVector<qreal>;
     auto ValidBasesList() const -> QStringList;
 
-    static auto ValidBases(qreal min, qreal max, qreal step) -> QVector<qreal>;
+    static auto ValidBases(qreal min, qreal max, qreal step, const QSet<qreal> &exclude) -> QVector<qreal>;
     static auto DimensionName(MeasurementDimension type) -> QString;
     static auto DimensionToolTip(MeasurementDimension type, bool circumference, bool fc) -> QString;
 
@@ -270,5 +271,71 @@ public:
     virtual auto RangeMin() const -> int override;
     virtual auto RangeMax() const -> int override;
 };
+
+class VDimensionRestriction
+{
+public:
+    VDimensionRestriction()
+    {}
+
+    VDimensionRestriction(qreal min, qreal max, const QString &exclude = QString()) :
+        m_min(min),
+        m_max(max)
+    {
+        SetExcludeString(exclude);
+    }
+
+    void SetMin(qreal min);
+    auto GetMin() const -> qreal;
+
+    void SetMax(qreal max);
+    auto GetMax() const -> qreal;
+
+    void SetExcludeString(const QString &exclude);
+    auto GetExcludeString() const -> QString;
+
+    void SetExcludeValues(const QSet<qreal> &exclude);
+    auto GetExcludeValues() const -> QSet<qreal>;
+private:
+    qreal m_min{0};
+    qreal m_max{0};
+    QSet<qreal> m_exclude{};
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VDimensionRestriction::SetMin(qreal min)
+{
+    m_min = min;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VDimensionRestriction::GetMin() const -> qreal
+{
+    return m_min;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VDimensionRestriction::SetMax(qreal max)
+{
+    m_max = max;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VDimensionRestriction::GetMax() const -> qreal
+{
+    return m_max;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VDimensionRestriction::SetExcludeValues(const QSet<qreal> &exclude)
+{
+    m_exclude = exclude;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VDimensionRestriction::GetExcludeValues() const -> QSet<qreal>
+{
+    return m_exclude;
+}
 
 #endif // VDIMENSIONS_H

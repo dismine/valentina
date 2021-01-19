@@ -40,6 +40,13 @@ class DialogRestrictDimension;
 
 class QTableWidgetItem;
 
+enum class RestrictDimension: qint8
+{
+    First = 0,
+    Second = 1,
+    Third = 2
+};
+
 
 class DialogRestrictDimension : public QDialog
 {
@@ -47,11 +54,11 @@ class DialogRestrictDimension : public QDialog
 
 public:
     DialogRestrictDimension(const QList<MeasurementDimension_p> &dimensions,
-                            const QMap<QString, QPair<qreal, qreal>> &restrictions, bool oneDimesionRestriction,
+                            const QMap<QString, VDimensionRestriction> &restrictions, RestrictDimension restrictionType,
                             bool fullCircumference, QWidget *parent = nullptr);
     virtual ~DialogRestrictDimension();
 
-    auto Restrictions() const -> QMap<QString, QPair<qreal, qreal> >;
+    auto Restrictions() const -> QMap<QString, VDimensionRestriction>;
 
 protected:
     virtual void changeEvent(QEvent* event) override;
@@ -62,14 +69,17 @@ protected slots:
     void MinRestrictionChanged();
     void MaxRestrictionChanged();
 
+private slots:
+    void CellContextMenu(QPoint pos);
+
 private:
     Q_DISABLE_COPY(DialogRestrictDimension)
     Ui::DialogRestrictDimension *ui;
 
-    bool m_oneDimesionRestriction;
+    RestrictDimension m_restrictionType;
     bool m_fullCircumference;
     QList<MeasurementDimension_p> m_dimensions;
-    QMap<QString, QPair<qreal, qreal>> m_restrictions;
+    QMap<QString, VDimensionRestriction> m_restrictions;
 
     void InitDimensionsBaseValues();
     void InitDimensionGradation(const MeasurementDimension_p &dimension, QComboBox *control);
@@ -89,7 +99,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto DialogRestrictDimension::Restrictions() const -> QMap<QString, QPair<qreal, qreal> >
+inline auto DialogRestrictDimension::Restrictions() const -> QMap<QString, VDimensionRestriction >
 {
     return m_restrictions;
 }

@@ -119,9 +119,9 @@ public:
 
     auto Dimensions() const -> QMap<MeasurementDimension, MeasurementDimension_p >;
 
-    auto GetRestrictions() const -> QMap<QString, QPair<qreal, qreal> >;
-    void SetRestrictions(const QMap<QString, QPair<qreal, qreal> > &restrictions);
-    auto Restriction(qreal base, qreal base2=0) const -> QPair<double, double>;
+    auto GetRestrictions() const -> QMap<QString, VDimensionRestriction >;
+    void SetRestrictions(const QMap<QString, VDimensionRestriction > &restrictions);
+    auto Restriction(qreal base, qreal base2=0) const -> VDimensionRestriction;
 
     void SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels);
 
@@ -153,6 +153,7 @@ public:
     static const QString AttrShiftC;
     static const QString AttrCorrection;
     static const QString AttrCoordinates;
+    static const QString AttrExclude;
     static const QString AttrSpecialUnits;
     static const QString AttrDescription;
     static const QString AttrName;

@@ -87,7 +87,7 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::ValidBases() const -> QVector<qreal>
 {
-    return VAbstartMeasurementDimension::ValidBases(m_minValue, m_maxValue, m_step);
+    return VAbstartMeasurementDimension::ValidBases(m_minValue, m_maxValue, m_step, QSet<qreal>());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,8 @@ auto VAbstartMeasurementDimension::ValidBasesList() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step) -> QVector<qreal>
+auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
+                                              const QSet<qreal> &exclude) -> QVector<qreal>
 {
     QVector<qreal> validBases;
 
@@ -124,10 +125,24 @@ auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step) 
     qreal value = min;
     do
     {
-        validBases.append(value);
+        if (not exclude.contains(value))
+        {
+            validBases.append(value);
+        }
         value += step;
     }
     while(value < max + step);
+
+    if (validBases.isEmpty())
+    {
+        value = min;
+        do
+        {
+            validBases.append(value);
+            value += step;
+        }
+        while(value < max + step);
+    }
 
     return validBases;
 }
@@ -462,4 +477,37 @@ auto VZMeasurementDimension::RangeMax() const -> int
         default:
             return 0;
     }
+}
+
+// VDimensionRestriction
+//---------------------------------------------------------------------------------------------------------------------
+void VDimensionRestriction::SetExcludeString(const QString &exclude)
+{
+    m_exclude.clear();
+
+    QStringList values = exclude.split(';');
+    for(auto &value : values)
+    {
+        bool ok = false;
+        qreal val = value.toDouble(&ok);
+
+        if (ok)
+        {
+            m_exclude.insert(val);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDimensionRestriction::GetExcludeString() const -> QString
+{
+    QList<qreal> list = m_exclude.values();
+    QStringList excludeList;
+
+    for(auto &value : list)
+    {
+        excludeList.append(QString::number(value));
+    }
+
+    return excludeList.join(';');
 }

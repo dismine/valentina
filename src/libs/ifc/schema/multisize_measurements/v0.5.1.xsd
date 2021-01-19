@@ -47,6 +47,7 @@
                   <xs:attribute name="coordinates" type="xs:string" use="required"/>
                   <xs:attribute name="min" type="dimesionValue"/>
                   <xs:attribute name="max" type="dimesionValue"/>
+                  <xs:attribute name="exclude" type="xs:string"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
