@@ -3027,11 +3027,15 @@ QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column,
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData(bool freshCall)
 {
+    QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
     data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
     m->ReadMeasurements(currentDimensionA, currentDimensionB, currentDimensionC);
 
     RefreshTable(freshCall);
+
+    QGuiApplication::restoreOverrideCursor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
