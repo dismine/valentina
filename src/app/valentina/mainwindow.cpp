@@ -593,6 +593,13 @@ bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
     try
     {
         pattern->ClearVariables(VarType::Measurement);
+
+        if (not m->Dimensions().isEmpty())
+        {
+            InitDimensionGradation(0, m->Dimensions().values().at(0), dimensionA);
+            DimensionABaseChanged();
+        }
+
         m->StoreNames(false);
         m->ReadMeasurements(baseA, baseB, baseC);
         if (m->Type() == MeasurementsType::Individual)
