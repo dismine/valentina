@@ -1638,6 +1638,22 @@
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -5076,6 +5092,14 @@ Apply settings anyway?</source>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -7736,55 +7760,11 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
 <context>
     <name>MainWindowsNoGUI</name>
     <message>
-        <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Critical error!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>unnamed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The layout is stale.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t open printer %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set printer margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7856,27 +7836,7 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8112,6 +8072,10 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8627,6 +8591,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9589,6 +9569,10 @@ Do you want to save your changes?</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10169,6 +10153,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11284,6 +11272,25 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -11793,6 +11800,73 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

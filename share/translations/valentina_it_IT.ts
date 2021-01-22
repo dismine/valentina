@@ -2094,6 +2094,22 @@
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -6117,6 +6133,14 @@ Applicare la configurazione comunque?</translation>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -9352,11 +9376,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Creare file &apos;%1&apos; respinto! %2</translation>
+        <translation type="vanished">Creare file &apos;%1&apos; respinto! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Errore critico!</translation>
+        <translation type="vanished">Errore critico!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9368,11 +9392,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Errore di stampa</translation>
+        <translation type="vanished">Errore di stampa</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Impossibile procedere perché non ci sono stampanti disponibili nel sistema.</translation>
+        <translation type="vanished">Impossibile procedere perché non ci sono stampanti disponibili nel sistema.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9380,11 +9404,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>Il layout è datato.</translation>
+        <translation type="vanished">Il layout è datato.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Il layout non è stato aggiornato dall&apos;ultima modifica del pattern. Vuoi continuare?</translation>
+        <translation type="vanished">Il layout non è stato aggiornato dall&apos;ultima modifica del pattern. Vuoi continuare?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9396,7 +9420,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Impossibile aprire stampante %1</translation>
+        <translation type="vanished">Impossibile aprire stampante %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9408,15 +9432,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Per avere l&apos;anteprima dei documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione.</translation>
+        <translation type="vanished">Per avere l&apos;anteprima dei documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Per stampare documenti con pagine multiple tutti i fogli devono avere la stessa dimensione.</translation>
+        <translation type="vanished">Per stampare documenti con pagine multiple tutti i fogli devono avere la stessa dimensione.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
+        <translation type="vanished">Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9424,7 +9448,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Margini di stampa impossibili da impostare</translation>
+        <translation type="vanished">Margini di stampa impossibili da impostare</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9495,27 +9519,7 @@ Vuoi salvare i cambiamenti?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9861,6 +9865,10 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10443,6 +10451,22 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11631,6 +11655,10 @@ Vuoi salvare le tue modifiche?</translation>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -12290,6 +12318,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13570,6 +13602,25 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Margini di stampa impossibili da impostare</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Creare file &apos;%1&apos; respinto! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14099,6 +14150,73 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Per stampare documenti con pagine multiple tutti i fogli devono avere la stessa dimensione.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Per avere l&apos;anteprima dei documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Errore di stampa</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Impossibile procedere perché non ci sono stampanti disponibili nel sistema.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Margini di stampa impossibili da impostare</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">Il layout è datato.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">Il layout non è stato aggiornato dall&apos;ultima modifica del pattern. Vuoi continuare?</translation>
     </message>
 </context>
 <context>

@@ -2102,6 +2102,22 @@
         <comment>dimension</comment>
         <translation>Cintura</translation>
     </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -6124,6 +6140,14 @@ Aplicar características de todos modos?</translation>
         <source>Max:</source>
         <translation>Max:</translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished">Excluir</translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -6737,15 +6761,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The base value for the column</source>
-        <translation type="unfinished"></translation>
+        <translation>El valor base para la columna</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Circunferencia</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, proporcione los datos correctos para las dimensiones</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -6753,7 +6777,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>No more than 3 dimensions allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>No se permiten más de 3 dimensiones</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -7798,7 +7822,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>La base de dimensión A</translation>
     </message>
     <message>
         <source>Set base for dimension B in the table units.</source>
@@ -7806,7 +7830,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>La base de dimensión B</translation>
     </message>
     <message>
         <source>Set base for dimension C in the table units.</source>
@@ -7814,7 +7838,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>La base de la dimensión C</translation>
     </message>
     <message>
         <source>Set pattern file units: cm, mm, inch.</source>
@@ -7830,7 +7854,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Invalid dimension B base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor base de dimensión B no válido.</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
@@ -9341,7 +9365,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo establecer la dimensión C. Necesita un archivo con medidas multitallas.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
@@ -9364,11 +9388,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>¡La creación del archivo &apos;%1&apos; falló! %2</translation>
+        <translation type="vanished">¡La creación del archivo &apos;%1&apos; falló! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>¡Error crítico!</translation>
+        <translation type="vanished">¡Error crítico!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9380,11 +9404,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Error de impresión</translation>
+        <translation type="vanished">Error de impresión</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>No se puede continuar porque no hay impresoras disponibles en su sistema.</translation>
+        <translation type="vanished">No se puede continuar porque no hay impresoras disponibles en su sistema.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9392,11 +9416,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>El diseño es obsoleto.</translation>
+        <translation type="vanished">El diseño es obsoleto.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>El diseño no se actualizo desde la última modificación del patrón. ¿Desea continuar?</translation>
+        <translation type="vanished">El diseño no se actualizo desde la última modificación del patrón. ¿Desea continuar?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9408,7 +9432,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>No se puede abrir la impresora %1</translation>
+        <translation type="vanished">No se puede abrir la impresora %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9420,15 +9444,15 @@ el patrón.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Para pre-visualizar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+        <translation type="vanished">Para pre-visualizar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Para imprimir documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+        <translation type="vanished">Para imprimir documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
+        <translation type="vanished">Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9436,7 +9460,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>No se pueden introducir márgenes de impresora</translation>
+        <translation type="vanished">No se pueden introducir márgenes de impresora</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9508,11 +9532,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation>No se puede establecer el tamaño de página de la impresora</translation>
+        <translation type="vanished">No se puede establecer el tamaño de página de la impresora</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation>No se puede establecer el tamaño de página de la impresora personalizada</translation>
+        <translation type="vanished">No se puede establecer el tamaño de página de la impresora personalizada</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -9524,15 +9548,11 @@ el patrón.</translation>
 %1
 
 %2</source>
-        <translation>Error archivo.
+        <translation type="vanished">Error archivo.
 
 %1
 
 %2</translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9878,6 +9898,10 @@ el patrón.</translation>
     <message>
         <source>Tool panel scaling</source>
         <translation>Escala de panel de herramientas</translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10443,7 +10467,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede preparar pique &apos;%1&apos; para la pieza &apos;%2&apos;. El pique de la línea base esta vacía.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
@@ -10459,6 +10483,22 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11519,7 +11559,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Corrección:</translation>
     </message>
     <message>
         <source>Dimension:</source>
@@ -11535,7 +11575,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Export to individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar a individual</translation>
     </message>
     <message>
         <source>Export to individual measurements</source>
@@ -11559,7 +11599,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>La tabla no provee dimensiones</translation>
     </message>
     <message>
         <source>Invalid base value for dimension A</source>
@@ -11579,7 +11619,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Invalid base value for dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor base no válido para la dimensión C</translation>
     </message>
     <message>
         <source>measurements.vit</source>
@@ -11615,7 +11655,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Grados</translation>
     </message>
     <message>
         <source>Name</source>
@@ -11645,6 +11685,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Correction</source>
         <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restrict first dimension</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12308,6 +12352,10 @@ Quieres guardar los cambios?</translation>
         <source>dark mode</source>
         <translation>modo oscuro</translation>
     </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -12392,11 +12440,11 @@ Quieres guardar los cambios?</translation>
     <name>VAbstartMeasurementDimension</name>
     <message>
         <source>Invalid min/max range</source>
-        <translation type="unfinished"></translation>
+        <translation>Rango min/max invalido</translation>
     </message>
     <message>
         <source>Invalid step</source>
-        <translation type="unfinished"></translation>
+        <translation>Paso invalido</translation>
     </message>
     <message>
         <source>Base value invalid</source>
@@ -13370,7 +13418,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>La dimensión base A</translation>
     </message>
     <message>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
@@ -13378,7 +13426,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>La base de dimensión B</translation>
     </message>
     <message>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
@@ -13386,7 +13434,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>La base de la dimensión C</translation>
     </message>
 </context>
 <context>
@@ -13658,6 +13706,25 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Formula</source>
         <translation>Fórmula</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">No se puede establecer el tamaño de página de la impresora</translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">No se pueden introducir márgenes de impresora</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">¡La creación del archivo &apos;%1&apos; falló! %2</translation>
     </message>
 </context>
 <context>
@@ -14190,6 +14257,77 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Cannot open the watermark image.</source>
         <translation>No se puede abrir la imagen de marca de agua.</translation>
+    </message>
+</context>
+<context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Para imprimir documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Para pre-visualizar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Error de impresión</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">No se puede continuar porque no hay impresoras disponibles en su sistema.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">No se pueden introducir márgenes de impresora</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished">No se puede establecer el tamaño de página de la impresora personalizada</translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">No se puede establecer el tamaño de página de la impresora</translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished">Error archivo.
+
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">El diseño es obsoleto.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">El diseño no se actualizo desde la última modificación del patrón. ¿Desea continuar?</translation>
     </message>
 </context>
 <context>

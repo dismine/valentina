@@ -2102,6 +2102,22 @@
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -6124,6 +6140,14 @@ Apply settings anyway?</source>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -9363,11 +9387,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Створення файлу &apos;%1&apos; не вдалося! %2</translation>
+        <translation type="vanished">Створення файлу &apos;%1&apos; не вдалося! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Критична помилка!</translation>
+        <translation type="vanished">Критична помилка!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9379,11 +9403,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Помилка друку</translation>
+        <translation type="vanished">Помилка друку</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+        <translation type="vanished">Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9391,11 +9415,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>Розкладка застаріла.</translation>
+        <translation type="vanished">Розкладка застаріла.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
+        <translation type="vanished">Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9407,7 +9431,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Не вдалося відкрити принтер %1</translation>
+        <translation type="vanished">Не вдалося відкрити принтер %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9419,15 +9443,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
+        <translation type="vanished">Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
+        <translation type="vanished">Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
+        <translation type="vanished">Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9435,7 +9459,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Не вдалося встановити поля принтеру</translation>
+        <translation type="vanished">Не вдалося встановити поля принтеру</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9506,27 +9530,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9872,6 +9876,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10453,6 +10461,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11641,6 +11665,10 @@ Do you want to save your changes?</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -12300,6 +12328,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13653,6 +13685,25 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Не вдалося встановити поля принтеру</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Створення файлу &apos;%1&apos; не вдалося! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14182,6 +14233,73 @@ Do you want to save your changes?</source>
     <message>
         <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Помилка друку</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Не вдалося встановити поля принтеру</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">Розкладка застаріла.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
     </message>
 </context>
 <context>

@@ -54,21 +54,21 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>renomear grupo</translation>
     </message>
 </context>
 <context>
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>alterar a visibilidade do grupo</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>alterar a visibilidade de vários grupos</translation>
     </message>
 </context>
 <context>
@@ -580,7 +580,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -711,11 +711,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -838,11 +838,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -969,7 +969,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -1040,11 +1040,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -1091,7 +1091,7 @@
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Não consigo encontrar o ponto com id %1</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -1099,11 +1099,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -1210,7 +1210,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -1293,15 +1293,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo2:</translation>
     </message>
 </context>
 <context>
@@ -1384,15 +1384,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo2:</translation>
     </message>
 </context>
 <context>
@@ -1475,15 +1475,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo2:</translation>
     </message>
 </context>
 <context>
@@ -1784,7 +1784,7 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Rótulos de dimensão</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1796,7 +1796,7 @@
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensão:</translation>
     </message>
 </context>
 <context>
@@ -1868,7 +1868,7 @@
     </message>
     <message>
         <source>Insert placeholders</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir marcadores de posição</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -2100,6 +2100,22 @@
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2338,11 +2354,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -2453,7 +2469,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -2683,11 +2699,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2802,11 +2818,11 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2976,7 +2992,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -3832,7 +3848,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -3899,7 +3915,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -4026,7 +4042,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -4350,11 +4366,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -4611,7 +4627,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -5588,7 +5604,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -5687,7 +5703,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -5782,7 +5798,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -5841,7 +5857,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -5908,7 +5924,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -6023,7 +6039,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -6070,7 +6086,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -6119,6 +6135,14 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Max:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished">Excluir</translation>
+    </message>
+    <message>
+        <source>Include</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6206,7 +6230,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -6254,7 +6278,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6885,7 +6909,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -6928,7 +6952,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -7075,11 +7099,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -7226,7 +7250,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Não consigo encontrar o ponto com id %1</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -7234,11 +7258,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
 </context>
 <context>
@@ -7426,7 +7450,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -7537,7 +7561,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotações</translation>
     </message>
 </context>
 <context>
@@ -9348,11 +9372,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Criação do arquivo &apos;%1&apos; falhou! %2</translation>
+        <translation type="vanished">Criação do arquivo &apos;%1&apos; falhou! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Erro crítico!</translation>
+        <translation type="vanished">Erro crítico!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9364,11 +9388,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Erro de impressão</translation>
+        <translation type="vanished">Erro de impressão</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Impossível continuar porque não existem impressoras disponíveis no seu sistema.</translation>
+        <translation type="vanished">Impossível continuar porque não existem impressoras disponíveis no seu sistema.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9376,11 +9400,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>O layout está obsoleto.</translation>
+        <translation type="vanished">O layout está obsoleto.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>O layout não foi atualizado desde a última modificação do molde. Você deseja continuar?</translation>
+        <translation type="vanished">O layout não foi atualizado desde a última modificação do molde. Você deseja continuar?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9392,23 +9416,15 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Impossível abrir impressora %1</translation>
+        <translation type="vanished">Impossível abrir impressora %1</translation>
     </message>
     <message>
         <source>Export error.</source>
         <translation type="vanished">Erro de exportação.</translation>
     </message>
     <message>
-        <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>As páginas serão cortadas porque não correspondem ao tamanho do papel da impressora.</translation>
+        <translation type="vanished">As páginas serão cortadas porque não correspondem ao tamanho do papel da impressora.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9416,7 +9432,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Impossível definir as margens da impressora</translation>
+        <translation type="vanished">Impossível definir as margens da impressora</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9487,27 +9503,7 @@ Você quer salvar suas mudanças?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9853,6 +9849,10 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10437,6 +10437,22 @@ Esta opção terá um efeito após o reinício.</translation>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -10660,7 +10676,7 @@ Esta opção terá um efeito após o reinício.</translation>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>renomear grupo</translation>
     </message>
 </context>
 <context>
@@ -11499,7 +11515,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensão:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
@@ -11531,7 +11547,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Rótulos de dimensão</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
@@ -11621,6 +11637,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Correction</source>
         <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restrict first dimension</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12282,6 +12302,10 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13585,6 +13609,25 @@ Deseja salvar suas mudanças?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Impossível definir as margens da impressora</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Criação do arquivo &apos;%1&apos; falhou! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14114,6 +14157,73 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">As páginas serão cortadas porque não correspondem ao tamanho do papel da impressora.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Erro de impressão</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Impossível continuar porque não existem impressoras disponíveis no seu sistema.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Impossível definir as margens da impressora</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">O layout está obsoleto.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">O layout não foi atualizado desde a última modificação do molde. Você deseja continuar?</translation>
     </message>
 </context>
 <context>
@@ -15046,15 +15156,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo:</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudônimo2:</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>

@@ -2102,6 +2102,22 @@
         <comment>dimension</comment>
         <translation>Taille</translation>
     </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -6125,6 +6141,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Max:</source>
         <translation>Max:</translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished">Uitsluiten</translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -9363,11 +9387,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
+        <translation type="vanished">Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Cruciale fout!</translation>
+        <translation type="vanished">Cruciale fout!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9379,11 +9403,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Afdruk fout</translation>
+        <translation type="vanished">Afdruk fout</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
+        <translation type="vanished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9391,11 +9415,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>De opmaak is verouderd.</translation>
+        <translation type="vanished">De opmaak is verouderd.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
+        <translation type="vanished">De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9407,7 +9431,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Kan printer niet openen %1</translation>
+        <translation type="vanished">Kan printer niet openen %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9419,15 +9443,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
+        <translation type="vanished">Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
+        <translation type="vanished">Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
+        <translation type="vanished">Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9435,7 +9459,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Kan de printer marges niet bepalen</translation>
+        <translation type="vanished">Kan de printer marges niet bepalen</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9507,11 +9531,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation>Kan paginagrootte op printer niet instellen</translation>
+        <translation type="vanished">Kan paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation>Kan aangepaste paginagrootte op printer niet instellen</translation>
+        <translation type="vanished">Kan aangepaste paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -9523,7 +9547,7 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation>Bestandsfout.
+        <translation type="vanished">Bestandsfout.
 
 %1
 
@@ -9531,7 +9555,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation>Kan bestand niet openen. Is het beschrijfbaar?</translation>
+        <translation type="vanished">Kan bestand niet openen. Is het beschrijfbaar?</translation>
     </message>
 </context>
 <context>
@@ -9877,6 +9901,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Tool panel scaling</source>
         <translation>Paneel herschalings gereedschap</translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10459,6 +10487,22 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
         <translation>Kan geen teken van de formule &apos;%1&apos; verkrijgen. Formule fout: %2.</translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11646,6 +11690,10 @@ Wil je deze veranderingen opslaan?</translation>
         <comment>measurement column</comment>
         <translation>Aanpassing</translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -12306,6 +12354,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>dark mode</source>
         <translation>Donkere modus</translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13660,6 +13712,25 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Kan paginagrootte op printer niet instellen</translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Kan de printer marges niet bepalen</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14189,6 +14260,77 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Cannot open the watermark image.</source>
         <translation>Kan de watermerk afbeelding niet openen.</translation>
+    </message>
+</context>
+<context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Afdruk fout</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished">Kan bestand niet openen. Is het beschrijfbaar?</translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Kan de printer marges niet bepalen</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished">Kan aangepaste paginagrootte op printer niet instellen</translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Kan paginagrootte op printer niet instellen</translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished">Bestandsfout.
+
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">De opmaak is verouderd.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
     </message>
 </context>
 <context>
