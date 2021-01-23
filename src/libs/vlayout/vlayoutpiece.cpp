@@ -1152,12 +1152,16 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 
         QPen pen = pathItem->pen();
         pen.setStyle(path.PenStyle());
+        pen.setWidthF(qApp->Settings()->WidthHairLine());
         pathItem->setPen(pen);
     }
 
     for (auto &label : d->m_placeLabels)
     {
         QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
+        QPen pen = pathItem->pen();
+        pen.setWidthF(qApp->Settings()->WidthHairLine());
+        pathItem->setPen(pen);
         pathItem->setPath(d->matrix.map(VPlaceLabelItem::LabelShapePath(label.shape)));
     }
 
@@ -1322,13 +1326,14 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
     {
         return;
     }
-    VGraphicsFillItem* item = new VGraphicsFillItem(parent);
+    auto* item = new VGraphicsFillItem(parent);
+    item->SetWidth(qApp->Settings()->WidthHairLine());
 
     QPainterPath path;
 
     QVector<QPointF> gPoints = GetGrainline();
     path.moveTo(gPoints.at(0));
-    for (auto p : gPoints)
+    for (auto p : qAsConst(gPoints))
     {
         path.lineTo(p);
     }
@@ -1352,6 +1357,9 @@ QVector<QPointF> VLayoutPiece::DetailPath() const
 QGraphicsPathItem *VLayoutPiece::GetMainItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
+    QPen pen = item->pen();
+    pen.setWidthF(qApp->Settings()->WidthHairLine());
+    item->setPen(pen);
     item->setPath(ContourPath());
     return item;
 }
@@ -1360,6 +1368,9 @@ QGraphicsPathItem *VLayoutPiece::GetMainItem() const
 QGraphicsPathItem *VLayoutPiece::GetMainPathItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
+    QPen pen = item->pen();
+    pen.setWidthF(qApp->Settings()->WidthHairLine());
+    item->setPen(pen);
 
     QPainterPath path;
 

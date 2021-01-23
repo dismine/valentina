@@ -50,6 +50,24 @@ public:
      * @param widget unused
      */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    auto GetWidth() const -> qreal;
+    void SetWidth(const qreal &value);
+
+private:
+    qreal width{1};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsFillItem::GetWidth() const -> qreal
+{
+    return width;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsFillItem::SetWidth(const qreal &value)
+{
+    width = value;
+}
 
 #endif // VGRAPHICSFILLITEM_H

@@ -1122,12 +1122,12 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PDF:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
                                          Qt::RoundJoin));
                     exporter.ExportToPDF(scene);
                     break;
                 case LayoutExportFormats::PNG:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
                                          Qt::RoundJoin));
                     exporter.ExportToPNG(scene);
                     break;
@@ -1137,12 +1137,12 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PS:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
                                          Qt::RoundJoin));
                     exporter.ExportToPS(scene);
                     break;
                 case LayoutExportFormats::EPS:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
                                          Qt::RoundJoin));
                     exporter.ExportToEPS(scene);
                     break;
@@ -1201,7 +1201,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::TIF:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
                                          Qt::RoundJoin));
                     exporter.ExportToTIF(scene);
                     break;

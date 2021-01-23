@@ -78,7 +78,6 @@ private:
     QPolygonF                     m_polyBound;
     QPointF                       m_ptStartPos;
     QPointF                       m_ptStartMove;
-    qreal                         m_dScale;
     QPolygonF                     m_polyResize;
     qreal                         m_dStartLength;
     QPointF                       m_ptStart;
@@ -86,9 +85,7 @@ private:
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
     GrainlineArrowDirection                     m_eArrowType;
-    int                           m_penWidth;
-
-    qreal GetScale() const;
+    double                        m_penWidth{1};
 
     QLineF    MainLine() const;
     QPolygonF FirstArrow(qreal dArrLen) const;

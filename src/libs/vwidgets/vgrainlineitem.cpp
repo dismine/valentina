@@ -37,6 +37,8 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "global.h"
 
 #include "vgrainlineitem.h"
 
@@ -61,7 +63,6 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_polyBound(),
       m_ptStartPos(),
       m_ptStartMove(),
-      m_dScale(1),
       m_polyResize(),
       m_dStartLength(0),
       m_ptStart(),
@@ -69,7 +70,7 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_ptCenter(),
       m_dAngle(0),
       m_eArrowType(GrainlineArrowDirection::atBoth),
-      m_penWidth(LINE_PEN_WIDTH)
+      m_penWidth(qApp->Settings()->WidthMainLine())
 {
     setAcceptHoverEvents(true);
     m_inactiveZ = 5;
@@ -105,7 +106,9 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     Q_UNUSED(pWidget)
     pP->save();
     QColor clr = Qt::black;
-    pP->setPen(QPen(clr, m_penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
+    const qreal width = ScaleWidth(qApp->Settings()->WidthHairLine(), SceneScale(scene()));
+    pP->setPen(QPen(clr, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
     pP->setRenderHints(QPainter::Antialiasing);
     // line
@@ -114,8 +117,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
 
     pP->setBrush(clr);
 
-    m_dScale = GetScale();
-    qreal dArrLen = ARROW_LENGTH*m_dScale;
+    qreal dArrLen = ARROW_LENGTH;
     if (m_eArrowType != GrainlineArrowDirection::atRear)
     {
         // first arrow
@@ -153,7 +155,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
         if (m_eMode == mRotate)
         {
             QPointF ptC = (m_polyBound.at(0) + m_polyBound.at(2))/2;
-            qreal dRad = m_dScale * ROTATE_CIRC_R;
+            qreal dRad = ROTATE_CIRC_R;
             pP->setBrush(clr);
             pP->drawEllipse(ptC, dRad, dRad);
 
@@ -526,7 +528,7 @@ void VGrainlineItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        m_penWidth = LINE_PEN_WIDTH + 1;
+        m_penWidth = qApp->Settings()->WidthMainLine() + 1;
     }
     VPieceItem::hoverEnterEvent(pME);
 }
@@ -536,7 +538,7 @@ void VGrainlineItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *pME)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        m_penWidth = LINE_PEN_WIDTH;
+        m_penWidth = qApp->Settings()->WidthMainLine();
     }
     VPieceItem::hoverLeaveEvent(pME);
 }
@@ -625,29 +627,6 @@ QPointF VGrainlineItem::GetInsideCorner(int i, qreal dDist) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetScale gets the scale for keeping the arrows of constant size
- */
-qreal VGrainlineItem::GetScale() const
-{
-    if (scene()->views().count() > 0)
-    {
-        const QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
-        const QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
-        const QPoint p = pt - pt0;
-        qreal dScale = qSqrt(QPoint::dotProduct(p, p));
-        dScale = 100.0/dScale;
-        if (dScale < 1.0)
-        {
-            dScale = 1.0;
-        }
-        return dScale;
-    }
-
-    return 1.0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QLineF VGrainlineItem::MainLine() const
 {
     QPointF pt1;
@@ -696,7 +675,7 @@ QPainterPath VGrainlineItem::MainShape() const
     path.addPath((stroker.createStroke(linePath) + linePath).simplified());
     path.closeSubpath();
 
-    const qreal dArrLen = ARROW_LENGTH*GetScale();
+    const qreal dArrLen = ARROW_LENGTH;
     if (m_eArrowType != GrainlineArrowDirection::atRear)
     {
         // first arrow
@@ -761,7 +740,7 @@ void VGrainlineItem::UpdatePolyResize()
     m_polyResize.clear();
     QPointF ptA = m_polyBound.at(1);
     m_polyResize << ptA;
-    const double dSize = m_dScale * RESIZE_RECT_SIZE;
+    const double dSize = RESIZE_RECT_SIZE;
 
     ptA.setX(ptA.x() - dSize*cos(m_dRotation - M_PI/2));
     ptA.setY(ptA.y() + dSize*sin(m_dRotation - M_PI/2));
