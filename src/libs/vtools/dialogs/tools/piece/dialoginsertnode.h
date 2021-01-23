@@ -62,6 +62,8 @@ protected:
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
+    void NodeSelected();
+    void NodeNumberChanged(int val);
 
 private:
     Q_DISABLE_COPY(DialogInsertNode)
@@ -70,6 +72,8 @@ private:
     QVector<VPieceNode> m_nodes{};
     bool m_flagNodes{false};
     bool m_flagError{false};
+
+    QMap<quint32, int> nodeNumbers{};
 
     void CheckPieces();
     void CheckNodes();

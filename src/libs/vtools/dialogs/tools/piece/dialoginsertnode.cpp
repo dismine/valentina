@@ -48,6 +48,9 @@ DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidg
     });
 
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogInsertNode::ShowContextMenu);
+    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogInsertNode::NodeSelected);
+    connect(ui->spinBoxNodeNumber, QOverload<int>::of(&QSpinBox::valueChanged), this,
+            &DialogInsertNode::NodeNumberChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,7 +104,11 @@ QVector<VPieceNode> DialogInsertNode::GetNodes() const
     QVector<VPieceNode> nodes;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
-        nodes.append(qvariant_cast<VPieceNode>(ui->listWidget->item(i)->data(Qt::UserRole)));
+        VPieceNode node = qvariant_cast<VPieceNode>(ui->listWidget->item(i)->data(Qt::UserRole));
+        for(int n = 1; n <= nodeNumbers.value(node.GetId(), 1); ++n)
+        {
+            nodes.append(node);
+        }
     }
     return nodes;
 }
@@ -222,6 +229,41 @@ void DialogInsertNode::ShowContextMenu(const QPoint &pos)
     }
 
     CheckNodes();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogInsertNode::NodeSelected()
+{
+    QListWidgetItem *item = ui->listWidget->currentItem();
+
+    if (item == nullptr)
+    {
+        ui->spinBoxNodeNumber->setDisabled(true);
+        ui->spinBoxNodeNumber->blockSignals(true);
+        ui->spinBoxNodeNumber->setValue(1);
+        ui->spinBoxNodeNumber->blockSignals(false);
+        return;
+    }
+
+    VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+    ui->spinBoxNodeNumber->setEnabled(true);
+    ui->spinBoxNodeNumber->blockSignals(true);
+    ui->spinBoxNodeNumber->setValue(nodeNumbers.value(node.GetId(), 1));
+    ui->spinBoxNodeNumber->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogInsertNode::NodeNumberChanged(int val)
+{
+    QListWidgetItem *item = ui->listWidget->currentItem();
+
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+    nodeNumbers[node.GetId()] = val;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
