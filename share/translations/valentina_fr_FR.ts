@@ -11907,10 +11907,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11952,6 +11948,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13668,7 +13668,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Création du fichier &apos;%1&apos; A échoué ! %2</translation>
+        <translation>Création du fichier &apos;%1&apos; A échoué ! %2</translation>
     </message>
 </context>
 <context>
@@ -14207,23 +14207,23 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Pour imprimer un document multipages, toutes les feuilles doivent faire la même taille.</translation>
+        <translation>Pour imprimer un document multipages, toutes les feuilles doivent faire la même taille.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Pour avoir un aperçu d&apos;un document multipages, toutes les feuilles doivent faire la même taille.</translation>
+        <translation>Pour avoir un aperçu d&apos;un document multipages, toutes les feuilles doivent faire la même taille.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Les pages vont être tronquées du fait de la taille du papier de l&apos;imprimante.</translation>
+        <translation>Les pages vont être tronquées du fait de la taille du papier de l&apos;imprimante.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Erreur d&apos;impression</translation>
+        <translation>Erreur d&apos;impression</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Impossible de continuer car il n&apos;y a aucune imprimantes disponibles.</translation>
+        <translation>Impossible de continuer car il n&apos;y a aucune imprimantes disponibles.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14263,11 +14263,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Le plan de coupe est figée.</translation>
+        <translation>Le plan de coupe est figée.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Le plan de coupe n&apos;a pas été mise à jour depuis la dernière modification du patron. Voulez-vous continuer ?</translation>
+        <translation>Le plan de coupe n&apos;a pas été mise à jour depuis la dernière modification du patron. Voulez-vous continuer ?</translation>
     </message>
 </context>
 <context>

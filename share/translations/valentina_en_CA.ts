@@ -11930,10 +11930,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11975,6 +11971,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13693,7 +13693,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Cannot set printer margins</translation>
+        <translation>Cannot set printer margins</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13701,7 +13701,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Creating file &apos;%1&apos; failed! %2</translation>
+        <translation>Creating file &apos;%1&apos; failed! %2</translation>
     </message>
 </context>
 <context>
@@ -14240,23 +14240,23 @@ Do you want to save your changes?</translation>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">For printing multipages document all sheet should have the same size.</translation>
+        <translation>For printing multipages document all sheet should have the same size.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">For previewing multipage document all sheet should have the same size.</translation>
+        <translation>For previewing multipage document all sheet should have the same size.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Pages will be cropped because they do not fit printer paper size.</translation>
+        <translation>Pages will be cropped because they do not fit printer paper size.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Print error</translation>
+        <translation>Print error</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Cannot proceed because there are no available printers in your system.</translation>
+        <translation>Cannot proceed because there are no available printers in your system.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14268,7 +14268,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Cannot set printer margins</translation>
+        <translation>Cannot set printer margins</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
@@ -14296,11 +14296,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">The layout is stale.</translation>
+        <translation>The layout is stale.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">The layout was not updated since last pattern modification. Do you want to continue?</translation>
+        <translation>The layout was not updated since last pattern modification. Do you want to continue?</translation>
     </message>
 </context>
 <context>

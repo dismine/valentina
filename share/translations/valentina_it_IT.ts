@@ -11921,10 +11921,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Intersezione 2 (solo destra)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11966,6 +11962,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13609,7 +13609,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Margini di stampa impossibili da impostare</translation>
+        <translation>Margini di stampa impossibili da impostare</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13617,7 +13617,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Creare file &apos;%1&apos; respinto! %2</translation>
+        <translation>Creare file &apos;%1&apos; respinto! %2</translation>
     </message>
 </context>
 <context>
@@ -14156,23 +14156,23 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Per stampare documenti con pagine multiple tutti i fogli devono avere la stessa dimensione.</translation>
+        <translation>Per stampare documenti con pagine multiple tutti i fogli devono avere la stessa dimensione.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Per avere l&apos;anteprima dei documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione.</translation>
+        <translation>Per avere l&apos;anteprima dei documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
+        <translation>Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Errore di stampa</translation>
+        <translation>Errore di stampa</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Impossibile procedere perché non ci sono stampanti disponibili nel sistema.</translation>
+        <translation>Impossibile procedere perché non ci sono stampanti disponibili nel sistema.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14184,7 +14184,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Margini di stampa impossibili da impostare</translation>
+        <translation>Margini di stampa impossibili da impostare</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
@@ -14212,11 +14212,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Il layout è datato.</translation>
+        <translation>Il layout è datato.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Il layout non è stato aggiornato dall&apos;ultima modifica del pattern. Vuoi continuare?</translation>
+        <translation>Il layout non è stato aggiornato dall&apos;ultima modifica del pattern. Vuoi continuare?</translation>
     </message>
 </context>
 <context>

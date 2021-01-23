@@ -6142,7 +6142,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished">Excluir</translation>
+        <translation>Excluir</translation>
     </message>
     <message>
         <source>Include</source>
@@ -9531,28 +9531,8 @@ el patrón.</translation>
         <translation>Tiempo agotado.</translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="vanished">No se puede establecer el tamaño de página de la impresora</translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="vanished">No se puede establecer el tamaño de página de la impresora personalizada</translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
         <translation>El proceso se ha detenido debido a una excepción.</translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="vanished">Error archivo.
-
-%1
-
-%2</translation>
     </message>
 </context>
 <context>
@@ -11954,7 +11934,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation>Angulo agudo que se ve dentro de la pieza</translation>
+        <translation type="vanished">Angulo agudo que se ve dentro de la pieza</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -11999,6 +11979,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Lista de todos los piques definidos. Para definir un pique regrese a la pestaña de Ruta Principal, llame al menú de contexto por un punto del articulo y hágalo un pique.</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Angulo agudo que se ve dentro de la pieza</translation>
     </message>
 </context>
 <context>
@@ -13712,11 +13696,11 @@ Quieres guardar los cambios?</translation>
     <name>VLayoutExporter</name>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">No se puede establecer el tamaño de página de la impresora</translation>
+        <translation>No se puede establecer el tamaño de página de la impresora</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">No se pueden introducir márgenes de impresora</translation>
+        <translation>No se pueden introducir márgenes de impresora</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13724,7 +13708,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">¡La creación del archivo &apos;%1&apos; falló! %2</translation>
+        <translation>¡La creación del archivo &apos;%1&apos; falló! %2</translation>
     </message>
 </context>
 <context>
@@ -14263,23 +14247,23 @@ Quieres guardar los cambios?</translation>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Para imprimir documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+        <translation>Para imprimir documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Para pre-visualizar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+        <translation>Para pre-visualizar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
+        <translation>Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Error de impresión</translation>
+        <translation>Error de impresión</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">No se puede continuar porque no hay impresoras disponibles en su sistema.</translation>
+        <translation>No se puede continuar porque no hay impresoras disponibles en su sistema.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14291,15 +14275,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">No se pueden introducir márgenes de impresora</translation>
+        <translation>No se pueden introducir márgenes de impresora</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished">No se puede establecer el tamaño de página de la impresora personalizada</translation>
+        <translation>No se puede establecer el tamaño de página de la impresora personalizada</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">No se puede establecer el tamaño de página de la impresora</translation>
+        <translation>No se puede establecer el tamaño de página de la impresora</translation>
     </message>
     <message>
         <source>Cannot set printer tiled page size</source>
@@ -14315,7 +14299,7 @@ Quieres guardar los cambios?</translation>
 %1
 
 %2</source>
-        <translation type="unfinished">Error archivo.
+        <translation>Error archivo.
 
 %1
 
@@ -14323,11 +14307,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">El diseño es obsoleto.</translation>
+        <translation>El diseño es obsoleto.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">El diseño no se actualizo desde la última modificación del patrón. ¿Desea continuar?</translation>
+        <translation>El diseño no se actualizó desde la última modificación del patrón. ¿Desea continuar?</translation>
     </message>
 </context>
 <context>

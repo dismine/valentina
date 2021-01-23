@@ -11650,10 +11650,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11695,6 +11691,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13225,7 +13225,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
+        <translation>Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
     </message>
 </context>
 <context>
@@ -13776,11 +13776,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Σφάλμα εκτύπωσης</translation>
+        <translation>Σφάλμα εκτύπωσης</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
+        <translation>Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -13824,7 +13824,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
+        <translation>Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
     </message>
 </context>
 <context>

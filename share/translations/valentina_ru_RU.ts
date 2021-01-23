@@ -2104,19 +2104,19 @@
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения рост.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения размер.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения бёдра.</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения талия.</translation>
     </message>
 </context>
 <context>
@@ -2624,7 +2624,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск финальных измерений по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска финальных измерений по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -3358,11 +3358,11 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск прибавок по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска прибавок по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск предварительных расчетов по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска предварительных расчетов по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Increment</source>
@@ -3793,7 +3793,7 @@ Apply settings anyway?</source>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"></translation>
+        <translation>мин</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
@@ -4229,7 +4229,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к файлу пуст</translation>
     </message>
     <message>
         <source>Not enough columns</source>
@@ -6136,19 +6136,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Мин:</translation>
     </message>
     <message>
         <source>Max:</source>
-        <translation type="unfinished"></translation>
+        <translation>Макс:</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished">Исключить</translation>
+        <translation>Исключить</translation>
     </message>
     <message>
         <source>Include</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить</translation>
     </message>
 </context>
 <context>
@@ -6493,7 +6493,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Numerical control</source>
-        <translation type="unfinished"></translation>
+        <translation>Числовое управление</translation>
     </message>
 </context>
 <context>
@@ -7290,9 +7290,9 @@ Apply settings anyway?</source>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Следующий %n параметр требует перезапуск, чтобы вступить в силу: %1.</numerusform>
-            <numerusform>Следующие %n параметры требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
+            <numerusform>Следующие %n параметра требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
             <numerusform>Следующие %n параметров требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
         </translation>
     </message>
@@ -7676,7 +7676,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New %1 test version is now available. Would you like to download it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая тестовая версия %1 доступна для скачивания. Хотите скачать ее сейчас?</translation>
     </message>
 </context>
 <context>
@@ -7853,19 +7853,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение измерения A.</translation>
     </message>
     <message>
         <source>Invalid dimension B base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение измерения В.</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение измерения С.</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение в формуле: %1. Программа будет завершена.</translation>
     </message>
 </context>
 <context>
@@ -9198,7 +9198,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -9266,7 +9266,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Globally show pieces main path</source>
-        <translation type="unfinished"></translation>
+        <translation>На глобальном уровне показать основной контур деталей</translation>
     </message>
     <message>
         <source>Pattern messages</source>
@@ -9338,7 +9338,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемое значение измерения А &quot;%1&quot; для данного файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
@@ -9350,7 +9350,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемое значение измерения B &quot;%1&quot; для данного файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
@@ -9362,7 +9362,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемое значение измерения C &quot;%1&quot; для данного файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
@@ -9532,32 +9532,8 @@ Do you want to save your changes?</source>
         <translation>Закончилось время.</translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="vanished">Невозможно установить размер страницы принтера</translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="vanished">Невозможно установить пользовательский размер страницы принтера</translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Процесс был остановлен из-за исключения.</translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="vanished">Ошибка файла.
-
-%1
-
-%2</translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="vanished">Не удалось открыть файл, доступен ли он для записи?</translation>
     </message>
 </context>
 <context>
@@ -9906,7 +9882,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t use the native file dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Не использовать родной диалог файлов</translation>
     </message>
 </context>
 <context>
@@ -10163,75 +10139,75 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VLayoutPassmark: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPassmark compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VLayoutPassmark: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VLayoutPlaceLabel: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VLayoutPlaceLabel: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VAbstractPieceData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VAbstractPieceData: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VRawLayoutData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VRawLayoutData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VRawLayoutData: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VLayoutPiecePathData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VLayoutPiecePathData: actualClassVersion = %1, а classVersion = %2</translation>
     </message>
     <message>
         <source>TextLine prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса TextLine: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>TextLine compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости TextLine: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VTextManager: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VTextManager compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VTextManager: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несоответствия префикса CustomSARecord: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости CustomSARecord: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VPieceNodeData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VPieceNodeData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VPieceNodeData: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -10368,7 +10344,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу получить токены из формулы &quot;%1&quot;. Ошибка парсера: %2.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -10396,7 +10372,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos; имеет недействительный припуск на раскладку. Пожалуйста, проверьте припуск на шов, чтобы проверить, как ведет себя припуск на шов.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
@@ -10432,11 +10408,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot cast tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно преобразовать инструмент с id &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Empty list of nodes for tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустой список узлов для инструмента с id &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
@@ -10444,7 +10420,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Не может преобразовать параметр toInt</translation>
     </message>
     <message>
         <source>Could not find the segment start.</source>
@@ -10464,19 +10440,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно подготовить встроенную надсечку &apos;%1&apos; для детали &apos;%2&apos;. Надсечка пуста.</translation>
     </message>
     <message>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно приготовить встроенную надсечку &apos;%1&apos; для детали &apos;%2&apos;. Базовая линия надсечки пуста.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно приготовить надсечку &apos;%1&apos; для детали &apos;%2&apos;. Базовая линия надсечки пуста.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно приготовить надсечку &apos;%1&apos; для детали &apos;%2&apos;. Надсечка пустая.</translation>
     </message>
     <message>
         <source>Piece name &apos;%1&apos; is not unique.</source>
@@ -10484,27 +10460,27 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в кривой &quot;%1&quot;. Не удалось вычислить сегмент для кривой &apos;%2&apos;. %3</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу получить токены из формулы &quot;%1&quot;. Ошибка формулы: %2.</translation>
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения рост.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения размер.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения бёдра.</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения Талия.</translation>
     </message>
 </context>
 <context>
@@ -11540,7 +11516,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск мерок по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска мерок по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -11548,7 +11524,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -11640,11 +11616,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot convert base value to double in column 2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно преобразовать базовое значение в дробное число во втором столбце 2.</translation>
     </message>
     <message>
         <source>Cannot convert shift value to double in column %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно преобразовать значение сдвига в дробное число в столбце %1.</translation>
     </message>
     <message>
         <source>Millimeters</source>
@@ -11694,7 +11670,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Restrict first dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить первое измерение</translation>
     </message>
 </context>
 <context>
@@ -11958,10 +11934,6 @@ Do you want to save your changes?</source>
         <translation>Пересечение 2 (только справа)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation>Острый угол, который смотрит наружу детали</translation>
     </message>
@@ -12004,6 +11976,10 @@ Do you want to save your changes?</source>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Список всех установленных надсечек. Чтобы поставить надсечку, вернитесь во вкладку «Главный контур», вызовите контекстное меню у нужной точки и поставьте галочку в строке &quot;Надсечка&quot;.</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Острый угол, который смотрит внутрь детали</translation>
     </message>
 </context>
 <context>
@@ -12359,7 +12335,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t use the native file dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Не использовать родной диалог файлов</translation>
     </message>
 </context>
 <context>
@@ -12445,7 +12421,7 @@ Do you want to save your changes?</source>
     <name>VAbstartMeasurementDimension</name>
     <message>
         <source>Invalid min/max range</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимый мин/макс диапазон</translation>
     </message>
     <message>
         <source>Invalid step</source>
@@ -12620,7 +12596,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Tabloid</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>Таблоид</translation>
     </message>
     <message>
         <source>Roll 24in</source>
@@ -12873,18 +12849,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение в формуле: %1. Программа будет завершена.</translation>
     </message>
 </context>
 <context>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка подготовки данных к раскладке: Деталь &apos;%1&apos; площадь &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка подготовки данных к раскладке: лист раскладки бумаги &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
@@ -13367,7 +13343,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Follow manual priority over priority by square (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Следовать ручному приоритету над приоритетом по площади (режим экспорта).</translation>
     </message>
     <message>
         <source>Nest quantity copies of each piece (export mode).</source>
@@ -13660,7 +13636,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Math parser error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка математического анализатора: %1</translation>
     </message>
     <message>
         <source>Result is infinite</source>
@@ -13668,7 +13644,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Result is NaN</source>
-        <translation type="unfinished"></translation>
+        <translation>Результат - NaN</translation>
     </message>
     <message>
         <source>Result is zero</source>
@@ -13684,14 +13660,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вычислено</translation>
     </message>
 </context>
 <context>
     <name>VFormulaData</name>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вычислено</translation>
     </message>
     <message>
         <source>Error</source>
@@ -13717,19 +13693,19 @@ Do you want to save your changes?</source>
     <name>VLayoutExporter</name>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+        <translation>Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Невозможно установить поля принтера</translation>
+        <translation>Невозможно установить поля принтера</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удаётся открыть файл &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Ошибка при создании файла «%1»! %2</translation>
+        <translation>Ошибка при создании файла «%1»! %2</translation>
     </message>
 </context>
 <context>
@@ -14179,7 +14155,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Контур детали не содержит узлов</translation>
     </message>
 </context>
 <context>
@@ -14213,7 +14189,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение для финальной мерки &quot;%1&quot; бесконечно или NaN. Пожалуйста, проверьте свои расчеты.</translation>
     </message>
 </context>
 <context>
@@ -14268,51 +14244,51 @@ Do you want to save your changes?</source>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">При печати многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation>При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
+        <translation>Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Ошибка печати</translation>
+        <translation>Ошибка печати</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Невозможно продолжить, в системе нет доступных принтеров.</translation>
+        <translation>Невозможно продолжить, в системе нет доступных принтеров.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished">Не удалось открыть файл, доступен ли он для записи?</translation>
+        <translation>Не удалось открыть файл, доступен ли он для записи?</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось записать страницу на диск, диск заполнен?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Невозможно установить поля принтера</translation>
+        <translation>Невозможно установить поля принтера</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished">Невозможно установить пользовательский размер страницы принтера</translation>
+        <translation>Невозможно установить пользовательский размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+        <translation>Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer tiled page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно установить размер страницы плитки для принтера</translation>
     </message>
     <message>
         <source>unamed</source>
-        <translation type="unfinished"></translation>
+        <translation>неназванный</translation>
     </message>
     <message>
         <source>File error.
@@ -14320,7 +14296,7 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation type="unfinished">Ошибка файла.
+        <translation>Ошибка файла.
 
 %1
 
@@ -14328,11 +14304,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Раскладка устарела.</translation>
+        <translation>Раскладка устарела.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
+        <translation>Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
     </message>
 </context>
 <context>
@@ -14624,7 +14600,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>отразить объект по линии</translation>
     </message>
 </context>
 <context>
@@ -14722,7 +14698,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить</translation>
     </message>
 </context>
 <context>
@@ -16780,22 +16756,22 @@ Do you want to save your changes?</source>
     <message>
         <source>hyperbolic tangens function</source>
         <comment>function tanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция тангенса</translation>
     </message>
     <message>
         <source>hyperbolic arcus sine function</source>
         <comment>function asinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция арксинуса</translation>
     </message>
     <message>
         <source>hyperbolic arcus cosine function</source>
         <comment>function acosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция арккосинуса</translation>
     </message>
     <message>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция арктангенса</translation>
     </message>
     <message>
         <source>sine function working with degrees</source>
@@ -16830,27 +16806,27 @@ Do you want to save your changes?</source>
     <message>
         <source>logarithm to the base 2</source>
         <comment>function log2</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию 2</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log10</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию 10</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию 10</translation>
     </message>
     <message>
         <source>logarithm to base e (2.71828...)</source>
         <comment>function ln</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию е (2.71828...)</translation>
     </message>
     <message>
         <source>e raised to the power of x</source>
         <comment>function exp</comment>
-        <translation type="unfinished"></translation>
+        <translation>е возведённый в степень х</translation>
     </message>
     <message>
         <source>square root of a value</source>
@@ -16860,7 +16836,7 @@ Do you want to save your changes?</source>
     <message>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
         <comment>function sign</comment>
-        <translation type="unfinished"></translation>
+        <translation>функция знака -1 если x&lt;0; 1 если x&gt;0</translation>
     </message>
     <message>
         <source>round to nearest integer</source>
@@ -16910,7 +16886,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает остаток с плавающей точкой от числа/делитель (округленного до нуля)</translation>
     </message>
     <message>
         <source>warning</source>
@@ -17090,7 +17066,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Точка на расстоянии и под углом&lt;/b&gt;: угол = %1°, длина = %2%3; &lt;b&gt;%4&lt;/b&gt; - фиксация угла, &lt;b&gt;%5&lt;/b&gt; - окончание создания</translation>
     </message>
 </context>
 <context>
@@ -17112,11 +17088,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина = %1%2, угол = %3°, &lt;b&gt;%4&lt;/b&gt; - фиксация угла, &lt;b&gt;клик мыши&lt;/b&gt; - завершение выбора позиции</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина = %1%2, угол = %3°, угол вращения = %4°, &lt;b&gt;%5&lt;/b&gt; - фиксация угла, &lt;b&gt;%6&lt;/b&gt; - изменение начальной точки вращения, &lt;b&gt;клик мыши&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
@@ -17127,7 +17103,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол поворота = %1°, &lt;b&gt;%2&lt;/b&gt; - фиксация угла, &lt;b&gt;клик мыши&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
@@ -17138,7 +17114,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте &lt;b&gt;%1&lt;/b&gt; для фиксации угла!</translation>
     </message>
 </context>
 <context>
@@ -17161,7 +17137,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте &lt;b&gt;%1&lt;/b&gt; для фиксации угла!</translation>
     </message>
 </context>
 <context>

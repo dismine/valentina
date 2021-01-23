@@ -9835,10 +9835,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9880,6 +9876,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

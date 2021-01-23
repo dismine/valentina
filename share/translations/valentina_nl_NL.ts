@@ -6143,7 +6143,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished">Uitsluiten</translation>
+        <translation>Uitsluiten</translation>
     </message>
     <message>
         <source>Include</source>
@@ -9530,32 +9530,8 @@ Do you want to save your changes?</source>
         <translation>Time-out.</translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="vanished">Kan paginagrootte op printer niet instellen</translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="vanished">Kan aangepaste paginagrootte op printer niet instellen</translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Proces werd onderbroken ten gevolge van een uitzondering.</translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="vanished">Bestandsfout.
-
-%1
-
-%2</translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="vanished">Kan bestand niet openen. Is het beschrijfbaar?</translation>
     </message>
 </context>
 <context>
@@ -11957,7 +11933,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation>Scherpe hoek naar de binnenkant van een patroondeel</translation>
+        <translation type="vanished">Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -12002,6 +11978,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Lijst van alle gedefiniëerde markeerpunten. Om een markeerpunt te definiëren ga terug naar de hoofdpad tab, roep de context menu op (rechter muisknop) voor een punt en maak er een markeerpunt.</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
 </context>
 <context>
@@ -13715,11 +13695,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VLayoutExporter</name>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Kan paginagrootte op printer niet instellen</translation>
+        <translation>Kan paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Kan de printer marges niet bepalen</translation>
+        <translation>Kan de printer marges niet bepalen</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13727,7 +13707,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
+        <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
     </message>
 </context>
 <context>
@@ -14266,27 +14246,27 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
+        <translation>Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
+        <translation>Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
+        <translation>Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Afdruk fout</translation>
+        <translation>Afdruk fout</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
+        <translation>Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished">Kan bestand niet openen. Is het beschrijfbaar?</translation>
+        <translation>Kan bestand niet openen. Is het beschrijfbaar?</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
@@ -14294,15 +14274,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Kan de printer marges niet bepalen</translation>
+        <translation>Kan de printer marges niet bepalen</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished">Kan aangepaste paginagrootte op printer niet instellen</translation>
+        <translation>Kan aangepaste paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Kan paginagrootte op printer niet instellen</translation>
+        <translation>Kan paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Cannot set printer tiled page size</source>
@@ -14318,7 +14298,7 @@ Wil je deze veranderingen opslaan?</translation>
 %1
 
 %2</source>
-        <translation type="unfinished">Bestandsfout.
+        <translation>Bestandsfout.
 
 %1
 
@@ -14326,11 +14306,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">De opmaak is verouderd.</translation>
+        <translation>De opmaak is verouderd.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
+        <translation>De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
     </message>
 </context>
 <context>

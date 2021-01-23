@@ -6144,7 +6144,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished">Vyloučit</translation>
+        <translation>Vyloučit</translation>
     </message>
     <message>
         <source>Include</source>
@@ -9533,28 +9533,8 @@ Chcete uložit své změny?</translation>
         <translation>Vypršení času.</translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="vanished">Nelze nastavit velikost strany tiskárny</translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="vanished">Nelze nastavit vlastní velikost strany tiskárny</translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Postup byl kvůli výjimce zastaven.</translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="vanished">Chyba souboru.
-
-%1
-
-%2</translation>
     </message>
 </context>
 <context>
@@ -11956,7 +11936,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation>Ostrý úhel, který vypadá, že je uvnitř střihu</translation>
+        <translation type="vanished">Ostrý úhel, který vypadá, že je uvnitř střihu</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -12001,6 +11981,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Ostrý úhel, který vypadá, že je uvnitř dílu</translation>
     </message>
 </context>
 <context>
@@ -13714,11 +13698,11 @@ Chcete uložit změny?</translation>
     <name>VLayoutExporter</name>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Nelze nastavit velikost strany tiskárny</translation>
+        <translation>Nelze nastavit velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Nelze nastavit okraje tiskárny</translation>
+        <translation>Nelze nastavit okraje tiskárny</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13726,7 +13710,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
+        <translation>Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
     </message>
 </context>
 <context>
@@ -14265,23 +14249,23 @@ Chcete uložit změny?</translation>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+        <translation>Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Pro náhled vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+        <translation>Pro náhled vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Strany budou ořezány, protože se neshodují s velikostí papíru tiskárny.</translation>
+        <translation>Strany budou ořezány, protože se neshodují s velikostí papíru tiskárny.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Chyba při tisku</translation>
+        <translation>Chyba při tisku</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
+        <translation>Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14293,15 +14277,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Nelze nastavit okraje tiskárny</translation>
+        <translation>Nelze nastavit okraje tiskárny</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished">Nelze nastavit vlastní velikost strany tiskárny</translation>
+        <translation>Nelze nastavit vlastní velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Nelze nastavit velikost strany tiskárny</translation>
+        <translation>Nelze nastavit velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Cannot set printer tiled page size</source>
@@ -14317,7 +14301,7 @@ Chcete uložit změny?</translation>
 %1
 
 %2</source>
-        <translation type="unfinished">Chyba souboru.
+        <translation>Chyba souboru.
 
 %1
 
@@ -14325,11 +14309,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Rozvržení je zastaralé.</translation>
+        <translation>Rozvržení je zastaralé.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Rozvržení nebylo od poslední změny střihu aktualizováno. Chcete pokračovat?</translation>
+        <translation>Rozvržení nebylo od poslední změny střihu aktualizováno. Chcete pokračovat?</translation>
     </message>
 </context>
 <context>

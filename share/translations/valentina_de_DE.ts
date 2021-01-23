@@ -9530,28 +9530,8 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Zeitüberschreitung.</translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="vanished">Kann die Seitengröße für den Druck nicht einstellen</translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="vanished">Kann keine selbsterstellte Druck Seitengröße einstellen</translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Vorgang wurde wegen eines Fehlers unterbrochen.</translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="vanished">Datei Fehler.
-
-%1
-
-%2</translation>
     </message>
 </context>
 <context>
@@ -11952,7 +11932,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation>Spitzer Winkel der in das Schnittteil hinein geht</translation>
+        <translation type="vanished">Spitzer Winkel der in das Schnittteil hinein geht</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -11997,6 +11977,10 @@ Do you want to save your changes?</source>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Liste aller definierten Passmarken. Um eine Passmarke zu definieren gehe auf den Reiter Hauptpfad, rufe das Kontext Menü für ein Punktelement auf und wähle Passmarke aus.</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Spitzer Winkel der in das Schnittteil hinein geht</translation>
     </message>
 </context>
 <context>
@@ -13708,11 +13692,11 @@ Do you want to save your changes?</source>
     <name>VLayoutExporter</name>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Kann die Seitengröße für den Druck nicht einstellen</translation>
+        <translation>Kann die Seitengröße für den Druck nicht einstellen</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Kann Druckränder nicht setzen</translation>
+        <translation>Kann Druckränder nicht setzen</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13720,7 +13704,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Fehler beim Erstellen der Datei &apos;%1&apos;! %2</translation>
+        <translation>Fehler beim Erstellen der Datei &apos;%1&apos;! %2</translation>
     </message>
 </context>
 <context>
@@ -14259,23 +14243,23 @@ Do you want to save your changes?</source>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Zum Drucken eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
+        <translation>Zum Drucken eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
+        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Seiten werden zugeschnitten, da sie nicht mit der Papiergröße des Drucker übereinstimmen.</translation>
+        <translation>Seiten werden zugeschnitten weil sie nicht mit der Papiergröße des Druckers übereinstimmen.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Druckfehler</translation>
+        <translation>Druckfehler</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Prozess kann nicht fortgesetzt werden, da keine verfügbaren Drucker in Ihrem System vorhanden sind.</translation>
+        <translation>Prozess kann nicht fortgesetzt werden, da keine verfügbaren Drucker in Ihrem System vorhanden sind.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14287,15 +14271,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Kann Druckränder nicht setzen</translation>
+        <translation>Kann Druckränder nicht setzen</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished">Kann keine selbsterstellte Druck Seitengröße einstellen</translation>
+        <translation>Kann keine selbsterstellte Druck Seitengröße einstellen</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Kann die Seitengröße für den Druck nicht einstellen</translation>
+        <translation>Kann die Seitengröße für den Druck nicht einstellen</translation>
     </message>
     <message>
         <source>Cannot set printer tiled page size</source>
@@ -14311,7 +14295,7 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation type="unfinished">Datei Fehler.
+        <translation>Datei Fehler.
 
 %1
 
@@ -14319,11 +14303,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Das Layout ist veraltet.</translation>
+        <translation>Das Layout ist veraltet.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Das Layout wurde seit der letzten Änderung nicht aktualisiert. Möchten Sie fortfahren?</translation>
+        <translation>Das Layout wurde seit der letzten Änderung nicht aktualisiert. Möchten Sie fortfahren?</translation>
     </message>
 </context>
 <context>

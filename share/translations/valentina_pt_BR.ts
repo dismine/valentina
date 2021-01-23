@@ -6139,7 +6139,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished">Excluir</translation>
+        <translation>Excluir</translation>
     </message>
     <message>
         <source>Include</source>
@@ -11905,10 +11905,6 @@ Deseja salvar suas mudanças?</translation>
         <translation>Interseção 2 (apenas à direita)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11950,6 +11946,10 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13616,7 +13616,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Impossível definir as margens da impressora</translation>
+        <translation>Impossível definir as margens da impressora</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13624,7 +13624,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Criação do arquivo &apos;%1&apos; falhou! %2</translation>
+        <translation>Criação do arquivo &apos;%1&apos; falhou! %2</translation>
     </message>
 </context>
 <context>
@@ -14171,15 +14171,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">As páginas serão cortadas porque não correspondem ao tamanho do papel da impressora.</translation>
+        <translation>As páginas serão cortadas porque não correspondem ao tamanho do papel da impressora.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Erro de impressão</translation>
+        <translation>Erro de impressão</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Impossível continuar porque não existem impressoras disponíveis no seu sistema.</translation>
+        <translation>Impossível continuar porque não existem impressoras disponíveis no seu sistema.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -14191,7 +14191,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Impossível definir as margens da impressora</translation>
+        <translation>Impossível definir as margens da impressora</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
@@ -14219,11 +14219,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">O layout está obsoleto.</translation>
+        <translation>O layout está obsoleto.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">O layout não foi atualizado desde a última modificação do molde. Você deseja continuar?</translation>
+        <translation>O layout não foi atualizado desde a última modificação do molde. Você deseja continuar?</translation>
     </message>
 </context>
 <context>
