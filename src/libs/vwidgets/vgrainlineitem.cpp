@@ -189,7 +189,7 @@ void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal
     qreal dX;
     qreal dY;
     QPointF pt = ptPos;
-    if (IsContained(pt, m_dRotation, dX, dY) == false)
+    if (not IsContained(pt, m_dRotation, dX, dY))
     {
         pt.setX(pt.x() + dX);
         pt.setY(pt.y() + dY);

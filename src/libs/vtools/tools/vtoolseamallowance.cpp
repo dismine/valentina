@@ -664,14 +664,14 @@ void VToolSeamAllowance::UpdateGrainline()
     const VGrainlineData& geom = detail.GetGrainlineGeometry();
     const QVector<quint32> &pins = detail.GetPins();
 
-    if (geom.IsVisible() == true)
+    if (geom.IsVisible())
     {
         QPointF pos;
         qreal dRotation = 0;
         qreal dLength = 0;
 
         const VGrainlineItem::MoveTypes type = FindGrainlineGeometry(geom, pins, dLength, dRotation, pos);
-        if (type & VGrainlineItem::Error)
+        if ((type & VGrainlineItem::Error) != 0U)
         {
             m_grainLine->hide();
             return;
