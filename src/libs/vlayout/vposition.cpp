@@ -471,12 +471,12 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 
     const QVector<QPointF> layoutPoints = detail.GetLayoutAllowancePoints();
     const QRectF layoutBoundingRect = VLayoutPiece::BoundingRect(layoutPoints);
-    const QPainterPath layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
+    const QPainterPath layoutAllowancePath = VAbstractPiece::PainterPath(layoutPoints);
 
     const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
                 detail.GetMappedSeamAllowancePoints() : detail.GetMappedContourPoints();
     const QRectF detailBoundingRect = VLayoutPiece::BoundingRect(contourPoints);
-    const QPainterPath contourPath = VLayoutPiece::PainterPath(contourPoints);
+    const QPainterPath contourPath = VAbstractPiece::PainterPath(contourPoints);
 
     for(auto &position : m_data.positionsCache)
     {

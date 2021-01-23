@@ -50,6 +50,8 @@ public:
 
     bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
 
+    QLineF Grainline() const;
+
 signals:
     void SignalResized(qreal dLength);
     void SignalRotated(qreal dRot, const QPointF& ptNewPos);

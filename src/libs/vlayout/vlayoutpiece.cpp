@@ -1141,22 +1141,6 @@ QPainterPath VLayoutPiece::LayoutAllowancePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::PainterPath(const QVector<QPointF> &points)
-{
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-
-    path.moveTo(points.at(0));
-    for (qint32 i = 1; i < points.count(); ++i)
-    {
-        path.lineTo(points.at(i));
-    }
-    path.lineTo(points.at(0));
-
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 {
     QGraphicsPathItem *item = GetMainItem();

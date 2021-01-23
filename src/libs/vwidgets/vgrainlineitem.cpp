@@ -265,6 +265,12 @@ bool VGrainlineItem::IsContained(const QPointF& pt, qreal dRot, qreal &dX, qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QLineF VGrainlineItem::Grainline() const
+{
+    return {m_ptStart, m_ptFinish};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGrainlineItem::mousePressEvent handles left button mouse press events
  * @param pME pointer to QGraphicsSceneMouseEvent object

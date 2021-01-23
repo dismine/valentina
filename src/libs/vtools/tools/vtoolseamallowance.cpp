@@ -681,6 +681,14 @@ void VToolSeamAllowance::UpdateGrainline()
         m_grainLine->UpdateGeometry(pos, dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
                                     geom.GetArrowType());
         m_grainLine->show();
+
+        if (m_geometryIsReady && not IsGrainlinePositionValid())
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Grainline is not valid.")
+                    .arg(detail.GetName());
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
     }
     else
     {
@@ -1366,6 +1374,9 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     m_passmarks->setPath(futurePassmarks.result());
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    // Now we can start checking validity of the grainline
+    m_geometryIsReady = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1948,6 +1959,20 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
     }
 
     return tools;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
+{
+    QLineF grainLine = m_grainLine->Grainline();
+    QPainterPath grainLinePath = VAbstractPiece::PainterPath(QVector<QPointF>{grainLine.p1(), grainLine.p2()});
+
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
+                detail.SeamAllowancePoints(getData()) : detail.MainPathPoints(getData());
+    const QPainterPath contourPath = VAbstractPiece::PainterPath(contourPoints);
+
+    return contourPath.contains(grainLinePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

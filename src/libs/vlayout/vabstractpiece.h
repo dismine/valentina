@@ -114,6 +114,8 @@ public:
     static QVector<QPointF> GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
                                             const QRectF &boundingRect, qreal &dAng);
 
+    static QPainterPath PainterPath(const QVector<QPointF> &points);
+
     friend QDataStream& operator<< (QDataStream& dataStream, const VAbstractPiece& piece);
     friend QDataStream& operator>> (QDataStream& dataStream, VAbstractPiece& piece);
 
