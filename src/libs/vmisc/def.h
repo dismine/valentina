@@ -437,6 +437,7 @@ extern const QString pl_mInterlining;
 extern const QString pl_wCut;
 extern const QString pl_wOnFold;
 extern const QString pl_measurement;
+extern const QString pl_finalMeasurement;
 
 // Don't forget to syncronize with XSD schema.
 const int userMaterialPlaceholdersQuantity = 20;

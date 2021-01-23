@@ -36,6 +36,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/calculator.h"
 #include "../tools/dialogtool.h"
 
 #include <QDir>
@@ -549,14 +550,40 @@ void DialogEditLabel::InitPlaceholders()
         m_placeholders.insert(pl_userMaterial + number, qMakePair(materialDescription + number, value));
     }
 
-    const QMap<QString, QSharedPointer<VMeasurement> > measurements = m_data->DataMeasurements();
-    auto i = measurements.constBegin();
-    while (i != measurements.constEnd())
     {
-        QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
-        m_placeholders.insert(pl_measurement + i.key(), qMakePair(tr("Measurement: %1").arg(description),
-                                                                  QString::number(*i.value()->GetValue())));
-        ++i;
+        const QMap<QString, QSharedPointer<VMeasurement> > measurements = m_data->DataMeasurements();
+        auto i = measurements.constBegin();
+        while (i != measurements.constEnd())
+        {
+            QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+            m_placeholders.insert(pl_measurement + i.key(), qMakePair(tr("Measurement: %1").arg(description),
+                                                                      QString::number(*i.value()->GetValue())));
+            ++i;
+        }
+    }
+
+    {
+        const QVector<VFinalMeasurement> measurements = m_doc->GetFinalMeasurements();
+        const VContainer completeData = m_doc->GetCompleteData();
+
+        for (int i=0; i < measurements.size(); ++i)
+        {
+            const VFinalMeasurement &m = measurements.at(i);
+
+            try
+            {
+                QScopedPointer<Calculator> cal(new Calculator());
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
+
+                m_placeholders.insert(pl_finalMeasurement + m.name, qMakePair(tr("Final measurement: %1").arg(m.name),
+                                                                              QString::number(result)));
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qCritical("%s\n\n%s", qUtf8Printable(QObject::tr("Failed to prepare final measurement placeholder.")),
+                          qUtf8Printable(QObject::tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+            }
+        }
     }
 
     // Piece tags

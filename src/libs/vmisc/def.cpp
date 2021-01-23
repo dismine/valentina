@@ -169,6 +169,7 @@ const QString pl_mInterlining  = QStringLiteral("mInterlining");
 const QString pl_wCut          = QStringLiteral("wCut");
 const QString pl_wOnFold       = QStringLiteral("wOnFold");
 const QString pl_measurement   = QStringLiteral("measurement_");
+const QString pl_finalMeasurement = QStringLiteral("finalMeasurement_");
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");

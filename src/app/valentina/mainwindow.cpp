@@ -4820,6 +4820,7 @@ void MainWindow::CreateActions()
                 if (result == QDialog::Accepted)
                 {
                     doc->SetFinalMeasurements(dialogFMeasurements->FinalMeasurements());
+                    emit doc->UpdatePatternLabel();
                 }
                 dialogFMeasurements->close();
             });

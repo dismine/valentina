@@ -12,6 +12,7 @@
 - New warning. Grainline is not valid.
 - [smart-pattern/valentina#87] Add support for TIFF format.
 - [smart-pattern/valentina#88] Allow insertion of multiple nodes by setting their number.
+- [smart-pattern/valentina#85] Final measurement printout on pattern piece.
 
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.

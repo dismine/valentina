@@ -43,6 +43,7 @@
 #   include "../vmisc/vdatastreamenum.h"
 #endif
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/calculator.h"
 #include "vtextmanager.h"
 
 const quint32 TextLine::streamHeader = 0xA3881E49; // CRC-32Q string "TextLine"
@@ -234,13 +235,38 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc, const VC
         placeholders.insert(pl_userMaterial + number, value);
     }
 
-    const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
-    auto i = measurements.constBegin();
-    while (i != measurements.constEnd())
     {
-        QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
-        placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
-        ++i;
+        const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
+        auto i = measurements.constBegin();
+        while (i != measurements.constEnd())
+        {
+            QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+            placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+            ++i;
+        }
+    }
+
+    {
+        const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
+        const VContainer completeData = doc->GetCompleteData();
+
+        for (int i=0; i < measurements.size(); ++i)
+        {
+            const VFinalMeasurement &m = measurements.at(i);
+
+            try
+            {
+                QScopedPointer<Calculator> cal(new Calculator());
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
+
+                placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qCritical("%s\n\n%s", qUtf8Printable(QObject::tr("Failed to prepare final measurement placeholder.")),
+                          qUtf8Printable(QObject::tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+            }
+        }
     }
 
     // Piece tags
