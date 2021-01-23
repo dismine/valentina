@@ -43,9 +43,9 @@
 #include <QGlobalStatic>
 
 #ifndef Q_OS_WIN
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^/]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$")))
 #else
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|/<>]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$")))
 #endif
 
 bool DialogSaveLayout::havePdf = false;
