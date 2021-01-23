@@ -39,6 +39,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../vmisc/vsettings.h"
 
 #include <QtDebug>
 #include <QDir>
@@ -745,25 +746,6 @@ void VApplication::AboutToQuit()
     // instance. Solution is to call sync() before quit.
     // Connect this slot with VApplication::aboutToQuit.
     Settings()->sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VApplication::OpenSettings()
-{
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                             QCoreApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSettings *VApplication::ValentinaSettings()
-{
-    SCASSERT(settings != nullptr)
-    return qobject_cast<VSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

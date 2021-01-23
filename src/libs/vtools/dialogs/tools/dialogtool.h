@@ -86,6 +86,7 @@ public:
     virtual void     ShowDialog(bool click);
     virtual void     Build(const Tool &type);
     virtual void     SetPiecesList(const QVector<quint32> &list);
+    virtual void     SetPatternDoc(VAbstractPattern *doc);
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);

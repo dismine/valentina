@@ -49,7 +49,8 @@ HEADERS += \
     $$PWD/support/dialogeditlabel.h \
     $$PWD/tools/piece/dialogplacelabel.h \
     $$PWD/tools/piece/dialogduplicatedetail.h \
-    $$PWD/dialogtoolbox.h
+    $$PWD/dialogtoolbox.h \
+    $$PWD/tools/piece/dialogpatternmaterials.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -98,7 +99,8 @@ SOURCES += \
     $$PWD/support/dialogeditlabel.cpp \
     $$PWD/tools/piece/dialogplacelabel.cpp \
     $$PWD/tools/piece/dialogduplicatedetail.cpp \
-    $$PWD/dialogtoolbox.cpp
+    $$PWD/dialogtoolbox.cpp \
+    $$PWD/tools/piece/dialogpatternmaterials.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -151,4 +153,5 @@ FORMS += \
     $$PWD/support/dialogeditlabel.ui \
     $$PWD/tools/piece/dialogplacelabel.ui \
     $$PWD/tools/piece/tabs/tabplacelabels.ui \
-    $$PWD/tools/piece/dialogduplicatedetail.ui
+    $$PWD/tools/piece/dialogduplicatedetail.ui \
+    $$PWD/tools/piece/dialogpatternmaterials.ui

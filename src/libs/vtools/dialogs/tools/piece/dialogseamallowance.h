@@ -56,7 +56,7 @@ class DialogSeamAllowance : public DialogTool
     Q_OBJECT
 
 public:
-    DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, quint32 toolId,
+    DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
                         QWidget *parent = nullptr);
     DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSeamAllowance();
@@ -82,6 +82,7 @@ protected:
     virtual void showEvent( QShowEvent *event ) override;
     virtual void resizeEvent(QResizeEvent *event) override;
     virtual bool IsValid() const final;
+    virtual void SetPatternDoc(VAbstractPattern *doc) final;
 
 private slots:
     void NameDetailChanged();
@@ -155,8 +156,12 @@ private slots:
     void DetailPinPointChanged();
     void PatternPinPointChanged();
 
-    void EditLabel();
+    void EditPieceLabel();
     void SetMoveControls();
+
+    void PatternLabelDataChanged();
+    void EditPatternLabel();
+    void ManagePatternMaterials();
 
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
@@ -194,9 +199,17 @@ private:
     bool   flagName;
     bool   flagFormula;
     bool   m_bAddMode;
+    bool   m_patternLabelDataChanged{false};
+    bool   m_askSavePatternLabelData{false};
+    bool   m_patternTemplateDataChanged{false};
+    bool   m_patternMaterialsChanged{false};
 
     QPointer<DialogTool>   m_dialog;
     QPointer<VisPieceSpecialPoints> m_visSpecialPoints;
+
+    QVector<VLabelTemplateLine> m_patternTemplateLines{};
+
+    QMap<int, QString> m_patternMaterials{};
 
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
@@ -222,6 +235,8 @@ private:
     QVector<QPointer<VUndoCommand>> m_undoStack;
     QHash<quint32, VPlaceLabelItem> m_newPlaceLabels;
     QHash<quint32, VPiecePath> m_newPaths;
+
+    VAbstractPattern *m_doc{nullptr};
 
     VPiece CreatePiece() const;
 
@@ -287,6 +302,10 @@ private:
     void EnableGrainlineFormulaControls(bool enable);
     void EnableDetailLabelFormulaControls(bool enable);
     void EnablePatternLabelFormulaControls(bool enable);
+
+    void SavePatternLabelData();
+    void SavePatternTemplateData();
+    void SavePatternMaterialData();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

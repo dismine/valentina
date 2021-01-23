@@ -32,7 +32,6 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "vsettings.h"
 #include "vcmdexport.h"
 #include "vlockguard.h"
 
@@ -74,9 +73,6 @@ public:
     bool static IsGUIMode();
     virtual bool IsAppInGUIMode() const override;
     virtual bool IsPedantic() const override;
-
-    virtual void OpenSettings() override;
-    VSettings *ValentinaSettings();
 
 protected:
     virtual void       InitTrVars() override;

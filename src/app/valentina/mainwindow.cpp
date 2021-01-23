@@ -695,6 +695,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::Group:
                 dialogTool->SetGroupCategories(doc->GetGroupCategories());
                 break;
+            case Tool::Piece:
+                dialogTool->SetPatternDoc(doc);
             default:
                 break;
         }

@@ -30,8 +30,9 @@
 #include "ui_dialogpatternmaterials.h"
 
 #include "../vmisc/def.h"
-#include "../core/vapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vcomboboxdelegate.h"
+#include "../vmisc/vsettings.h"
 
 namespace
 {

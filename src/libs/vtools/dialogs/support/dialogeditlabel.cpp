@@ -45,7 +45,7 @@
 #include <QDate>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, const VContainer *data, QWidget *parent)
+DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogEditLabel),
       m_placeholdersMenu(new QMenu(this)),

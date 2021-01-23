@@ -32,6 +32,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
+#include "../vmisc/vsettings.h"
 
 #include <QMessageBox>
 #include <QDate>

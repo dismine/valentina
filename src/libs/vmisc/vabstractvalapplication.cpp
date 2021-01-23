@@ -26,7 +26,8 @@
  **
  *************************************************************************/
 #include "vabstractvalapplication.h"
-#include "../vmisc/customevents.h"
+#include "customevents.h"
+#include "vsettings.h"
 
 #include <QWidget>
 
@@ -52,4 +53,23 @@ void VAbstractValApplication::PostWarningMessage(const QString &message, QtMsgTy
 {
     QApplication::postEvent(mainWindow,
                             new WarningMessageEvent(VAbstractValApplication::ClearMessage(message), severity));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief OpenSettings get acsses to application settings.
+ *
+ * Because we can create object in constructor we open file separately.
+ */
+void VAbstractValApplication::OpenSettings()
+{
+    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                             QCoreApplication::applicationName(), this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSettings *VAbstractValApplication::ValentinaSettings()
+{
+    SCASSERT(settings != nullptr)
+    return qobject_cast<VSettings *>(settings);
 }

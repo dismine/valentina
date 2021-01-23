@@ -50,8 +50,12 @@
 #include "../vgeometry/vplacelabelitem.h"
 #include "../../dialogtoolbox.h"
 #include "../vmisc/vmodifierkey.h"
+#include "dialogpatternmaterials.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vsettings.h"
 
 #include <QMenu>
+#include <QMessageBox>
 #include <QTimer>
 #include <QtNumeric>
 
@@ -76,15 +80,36 @@ QString GetFormulaFromUser(QPlainTextEdit *textEdit)
     SCASSERT(textEdit != nullptr)
     return qApp->TrVars()->TryFormulaFromUser(textEdit->toPlainText(), qApp->Settings()->GetOsSeparator());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat)
+{
+    SCASSERT(box != nullptr)
+
+    box->blockSignals(true);
+    box->addItems(items);
+    int index = box->findText(currentFormat);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+    else
+    {
+        box->setCurrentIndex(0);
+    }
+    box->blockSignals(false);
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, quint32 toolId,
+DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
                                          QWidget *parent)
     : DialogSeamAllowance(data, toolId, parent)
 {
     SCASSERT(doc != nullptr)
-    uiTabLabels->groupBoxPatternLabel->setEnabled(not doc->GetPatternLabelTemplate().isEmpty());
+    m_doc = doc;
+
+    uiTabLabels->groupBoxPatternLabel->setEnabled(not m_doc->GetPatternLabelTemplate().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -478,7 +503,13 @@ void DialogSeamAllowance::ShowDialog(bool click)
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SaveData()
-{}
+{
+    SavePatternLabelData();
+    SavePatternTemplateData();
+    SavePatternMaterialData();
+
+    emit m_doc->UpdatePatternLabel();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CheckState()
@@ -578,6 +609,19 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
+    if (m_doc != nullptr)
+    {
+        VSettings *settings = qApp->ValentinaSettings();
+        m_patternMaterials = m_doc->GetPatternMaterials();
+
+        InitComboBoxFormats(uiTabLabels->comboBoxDateFormat,
+                            VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
+                            m_doc->GetLabelDateFormat());
+        InitComboBoxFormats(uiTabLabels->comboBoxTimeFormat,
+                            VCommonSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
+                            m_doc->GetLabelTimeFormat());
+    }
+
     const QSize sz = qApp->Settings()->GetToolSeamAllowanceDialogSize();
     if (not sz.isEmpty())
     {
@@ -598,6 +642,13 @@ void DialogSeamAllowance::resizeEvent(QResizeEvent *event)
         qApp->Settings()->SetToolSeamAllowanceDialogSize(size());
     }
     DialogTool::resizeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetPatternDoc(VAbstractPattern *doc)
+{
+    SCASSERT(doc != nullptr)
+    m_doc = doc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2426,7 +2477,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::EditLabel()
+void DialogSeamAllowance::EditPieceLabel()
 {
     DialogEditLabel editor(qApp->getCurrentDocument(), data);
     editor.SetTemplate(m_templateLines);
@@ -3053,7 +3104,7 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
     uiTabLabels->lineEditTilt->setClearButtonEnabled(true);
     uiTabLabels->lineEditFoldPosition->setClearButtonEnabled(true);
 
-    connect(uiTabLabels->pushButtonEditPieceLabel, &QPushButton::clicked, this, &DialogSeamAllowance::EditLabel);
+    connect(uiTabLabels->pushButtonEditPieceLabel, &QPushButton::clicked, this, &DialogSeamAllowance::EditPieceLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3126,6 +3177,52 @@ void DialogSeamAllowance::InitLabelsTab()
     connect(uiTabLabels->pushButtonShowPLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLAngle);
 
     EnabledPatternLabel();
+
+    // Pattern label data
+    uiTabLabels->lineEditCustomerEmail->setClearButtonEnabled(true);
+
+    uiTabLabels->lineEditPatternName->setText(m_doc->GetPatternName());
+    uiTabLabels->lineEditPatternNumber->setText(m_doc->GetPatternNumber());
+    uiTabLabels->lineEditCompanyName->setText(m_doc->GetCompanyName());
+
+    uiTabLabels->lineEditCustomerName->setText(qApp->GetCustomerName());
+    uiTabLabels->lineEditCustomerEmail->setText(qApp->CustomerEmail());
+    uiTabLabels->dateEditCustomerBirthDate->setDate(qApp->GetCustomerBirthDate());
+
+    if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
+    {
+        uiTabLabels->lineEditCustomerName->setDisabled(true);
+        uiTabLabels->lineEditCustomerName->setToolTip(tr("The customer name from individual measurements"));
+
+        uiTabLabels->lineEditCustomerEmail->setDisabled(true);
+        uiTabLabels->lineEditCustomerEmail->setToolTip(tr("The customer email from individual measurements"));
+
+        uiTabLabels->dateEditCustomerBirthDate->setDisabled(true);
+        uiTabLabels->dateEditCustomerBirthDate->setToolTip(tr("The customer birth date from individual measurements"));
+    }
+
+    connect(uiTabLabels->lineEditPatternName, &QLineEdit::editingFinished, this,
+            &DialogSeamAllowance::PatternLabelDataChanged);
+    connect(uiTabLabels->lineEditPatternNumber, &QLineEdit::editingFinished, this,
+            &DialogSeamAllowance::PatternLabelDataChanged);
+    connect(uiTabLabels->lineEditCompanyName, &QLineEdit::editingFinished, this,
+            &DialogSeamAllowance::PatternLabelDataChanged);
+    connect(uiTabLabels->lineEditCustomerName, &QLineEdit::editingFinished, this,
+            &DialogSeamAllowance::PatternLabelDataChanged);
+    connect(uiTabLabels->lineEditCustomerEmail, &QLineEdit::editingFinished, this,
+            &DialogSeamAllowance::PatternLabelDataChanged);
+    connect(uiTabLabels->dateEditCustomerBirthDate, &QDateEdit::editingFinished, this,
+            &DialogSeamAllowance::PatternLabelDataChanged);
+
+    connect(uiTabLabels->pushButtonEditPatternLabel, &QPushButton::clicked, this,
+            &DialogSeamAllowance::EditPatternLabel);
+    connect(uiTabLabels->pushButtonPatternMaterials, &QPushButton::clicked, this,
+            &DialogSeamAllowance::ManagePatternMaterials);
+
+    connect(uiTabLabels->comboBoxDateFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PatternLabelDataChanged);
+    connect(uiTabLabels->comboBoxTimeFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PatternLabelDataChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3617,6 +3714,48 @@ void DialogSeamAllowance::EnablePatternLabelFormulaControls(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SavePatternLabelData()
+{
+    if (m_patternLabelDataChanged)
+    {
+        m_doc->SetPatternName(uiTabLabels->lineEditPatternName->text());
+        m_doc->SetPatternNumber(uiTabLabels->lineEditPatternNumber->text());
+        m_doc->SetCompanyName(uiTabLabels->lineEditCompanyName->text());
+        if (qApp->GetMeasurementsType() != MeasurementsType::Individual)
+        {
+            m_doc->SetCustomerName(uiTabLabels->lineEditCustomerName->text());
+            m_doc->SetCustomerBirthDate(uiTabLabels->dateEditCustomerBirthDate->date());
+            m_doc->SetCustomerEmail(uiTabLabels->lineEditCustomerEmail->text());
+        }
+        m_doc->SetLabelDateFormat(uiTabLabels->comboBoxDateFormat->currentText());
+        m_doc->SetLabelTimeFormat(uiTabLabels->comboBoxTimeFormat->currentText());
+
+        m_patternLabelDataChanged = false;
+        m_askSavePatternLabelData = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SavePatternTemplateData()
+{
+    if (m_patternTemplateDataChanged)
+    {
+        m_doc->SetPatternLabelTemplate(m_patternTemplateLines);
+        m_patternTemplateDataChanged = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SavePatternMaterialData()
+{
+    if (m_patternMaterialsChanged)
+    {
+        m_doc->SetPatternMaterials(m_patternMaterials);
+        m_patternMaterialsChanged = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetMoveControls()
 {
     uiTabPaths->toolButtonTop->setEnabled(false);
@@ -3642,6 +3781,63 @@ void DialogSeamAllowance::SetMoveControls()
             uiTabPaths->toolButtonUp->setEnabled(true);
             uiTabPaths->toolButtonDown->setEnabled(true);
             uiTabPaths->toolButtonBottom->setEnabled(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PatternLabelDataChanged()
+{
+    m_patternLabelDataChanged = true;
+    m_askSavePatternLabelData = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EditPatternLabel()
+{
+    if (m_patternLabelDataChanged && m_askSavePatternLabelData)
+    {
+        QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Save label data."),
+                                 tr("Label data were changed. Do you want to save them before editing label template?"),
+                                                                   QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+
+        if (answer == QMessageBox::Yes)
+        {
+            SavePatternLabelData();
+        }
+        else
+        {
+            m_askSavePatternLabelData = false;
+        }
+    }
+
+    DialogEditLabel editor(m_doc, data);
+
+    m_patternTemplateDataChanged ? editor.SetTemplate(m_patternTemplateLines)
+                                 : editor.SetTemplate(m_doc->GetPatternLabelTemplate());
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        m_patternTemplateLines = editor.GetTemplate();
+        m_patternTemplateDataChanged = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ManagePatternMaterials()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+
+    DialogPatternMaterials editor(m_patternMaterials, settings->IsRememberPatternMaterials());
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        m_patternMaterials = editor.GetPatternMaterials();
+        m_patternMaterialsChanged = true;
+
+        if (settings->IsRememberPatternMaterials())
+        {
+            settings->SetKnownMaterials(editor.GetKnownMaterials());
         }
     }
 }

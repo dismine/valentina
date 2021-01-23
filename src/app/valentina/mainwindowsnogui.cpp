@@ -54,6 +54,7 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vwatermarkconverter.h"
+#include "../vmisc/vsettings.h"
 
 #include <QFileDialog>
 #include <QFileInfo>

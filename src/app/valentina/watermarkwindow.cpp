@@ -41,6 +41,7 @@
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
+#include "../vmisc/vsettings.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :

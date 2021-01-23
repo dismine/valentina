@@ -30,6 +30,7 @@
 #include "ui_preferencesconfigurationpage.h"
 #include "../../core/vapplication.h"
 #include "../vpatterndb/pmsystems.h"
+#include "../vmisc/vsettings.h"
 
 #include <QDir>
 #include <QDirIterator>
