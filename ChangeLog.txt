@@ -10,6 +10,7 @@
 - Improve restrict dimension dialog. Disable not available combinations.
 - Improve multisize measurements format. Allow excluding combinations inside min/max range.
 - New warning. Grainline is not valid.
+- [smart-pattern/valentina#87] Add support for TIFF format.
 
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.

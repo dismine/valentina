@@ -43,6 +43,8 @@ BuildRequires: libproxy-pacrunner
 BuildRequires: qttools5
 BuildRequires: qtbase5-common-devel >= 5.4.0
 
+Requires:      qtimageformats5
+
 %if 0%{?mageia} == 6
 BuildRequires: pkgconfig(openssl)
 %else
@@ -57,6 +59,8 @@ BuildRequires: libqt5-qtbase-devel
 BuildRequires: libqt5-qttools
 BuildRequires: libQt5Svg-devel
 BuildRequires: update-desktop-files
+
+Requires:      libqt5-qtimageformats
 
 %if 0%{?suse_version} == 1310
 BuildRequires: libQt5XmlPatterns-devel

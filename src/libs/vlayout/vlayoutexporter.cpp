@@ -38,6 +38,7 @@
 #include <QtDebug>
 #include <QCursor>
 #include <QGraphicsItem>
+#include <QImageWriter>
 
 #include "../vmisc/vmath.h"
 #include "../vmisc/defglobal.h"
@@ -167,6 +168,38 @@ void VLayoutExporter::ExportToPNG(QGraphicsScene *scene) const
 
     scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
     image.save(m_fileName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportToTIF(QGraphicsScene *scene) const
+{
+    // Create the image with the exact size of the shrunk scene
+    QSize drawingSize;
+    drawingSize.setWidth(qFloor(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right()));
+    drawingSize.setHeight(qFloor(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom()));
+
+    QImage image(drawingSize, QImage::Format_ARGB32);
+    image.fill(Qt::white);
+
+    QPainter painter(&image);
+    painter.translate(m_margins.left(), m_margins.top());
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(m_pen);
+    painter.setBrush(QBrush(Qt::NoBrush));
+    painter.scale(m_xScale, m_yScale);
+
+    scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
+
+    QImageWriter writer;
+    writer.setFormat("TIF");
+    writer.setCompression(1); // LZW-compression
+    writer.setFileName(m_fileName);
+
+    if (not writer.write(image))
+    { // failed to save file
+        qCritical() << qUtf8Printable(tr("Can't save file '%1'. Error: %2.").arg(m_fileName, writer.errorString()));
+        return;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

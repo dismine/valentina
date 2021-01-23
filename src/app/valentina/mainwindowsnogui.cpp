@@ -1200,6 +1200,11 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     exporter.ExportToFlatDXF(scene, details);
                     paper->setVisible(true);
                     break;
+                case LayoutExportFormats::TIF:
+                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                         Qt::RoundJoin));
+                    exporter.ExportToTIF(scene);
+                    break;
                 default:
                     qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
                     break;

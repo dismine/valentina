@@ -235,6 +235,7 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
+        case LayoutExportFormats::TIF:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -282,6 +283,7 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
+        case LayoutExportFormats::TIF:
         default:
             return false;
     }
@@ -421,6 +423,8 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
             return QStringLiteral("PDF %1 %2 (*.pdf)").arg(tr("tiled"), filesStr);
         case LayoutExportFormats::NC:
             return QStringLiteral("%1 %2 (*.nc)").arg(tr("Numerical control"), filesStr);
+        case LayoutExportFormats::TIF:
+            return QStringLiteral("TIFF %1 (*.tif)").arg(filesStr);
         default:
             return QString();
     }
@@ -474,6 +478,8 @@ QString DialogSaveLayout::ExportFormatSuffix(LayoutExportFormats format)
             return QStringLiteral(".dxf");
         case LayoutExportFormats::NC:
             return QStringLiteral(".nc");
+        case LayoutExportFormats::TIF:
+            return QStringLiteral(".tif");
         default:
             return QString();
     }
@@ -606,6 +612,7 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
+        case LayoutExportFormats::TIF:
         default:
             break;
     }
@@ -843,6 +850,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
     InitFormat(LayoutExportFormats::PDFTiled); 
 //    InitFormat(LayoutExportFormats::NC);
+    InitFormat(LayoutExportFormats::TIF);
 
     return list;
 }
