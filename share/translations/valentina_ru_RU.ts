@@ -2118,6 +2118,10 @@
         <source>No data for the waist dimension.</source>
         <translation>Нет данных для измерения талия.</translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3390,6 +3394,10 @@
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4781,19 +4789,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Название модели:</translation>
+        <translation type="vanished">Название модели:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Номер модели:</translation>
+        <translation type="vanished">Номер модели:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Название компании / имя разработчика:</translation>
+        <translation type="vanished">Название компании / имя разработчика:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Имя клиента:</translation>
+        <translation type="vanished">Имя клиента:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4833,55 +4841,55 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Данные метки</translation>
+        <translation type="vanished">Данные метки</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Шаблон метки:</translation>
+        <translation type="vanished">Шаблон метки:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Редактировать метку выкройки</translation>
+        <translation type="vanished">Редактировать метку выкройки</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Редактировать шаблон</translation>
+        <translation type="vanished">Редактировать шаблон</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Формат даты:</translation>
+        <translation type="vanished">Формат даты:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Формат времени:</translation>
+        <translation type="vanished">Формат времени:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Сохранить данные метки.</translation>
+        <translation type="vanished">Сохранить данные метки.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
+        <translation type="vanished">Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Материалы</translation>
+        <translation type="vanished">Материалы</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Материалы выкройки:</translation>
+        <translation type="vanished">Материалы выкройки:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Управлять списком материалов выкройки</translation>
+        <translation type="vanished">Управлять списком материалов выкройки</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Управление</translation>
+        <translation type="vanished">Управление</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>Имя клиента из индивидуальных мерок</translation>
+        <translation type="vanished">Имя клиента из индивидуальных мерок</translation>
     </message>
     <message>
         <source>Label language:</source>
@@ -4889,23 +4897,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation>Дата рождения клиента:</translation>
+        <translation type="vanished">Дата рождения клиента:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>гггг-мм-дд</translation>
+        <translation type="vanished">гггг-мм-дд</translation>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation>Электронная почта клиента:</translation>
+        <translation type="vanished">Электронная почта клиента:</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation>Электронная почта клиента с индивидуальными мерками</translation>
+        <translation type="vanished">Электронная почта клиента с индивидуальными мерками</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation>Дата рождения клиента с индивидуальными мерками</translation>
+        <translation type="vanished">Дата рождения клиента с индивидуальными мерками</translation>
     </message>
 </context>
 <context>
@@ -6721,6 +6729,26 @@ Apply settings anyway?</source>
     <message>
         <source>Edit passmark length</source>
         <translation>Изменить длину надсечки</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">Имя клиента из индивидуальных мерок</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished">Электронная почта клиента с индивидуальными мерками</translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished">Дата рождения клиента с индивидуальными мерками</translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Сохранить данные метки.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
     </message>
 </context>
 <context>
@@ -10482,6 +10510,18 @@ This option will take an affect after restart.</source>
         <source>No data for the waist dimension.</source>
         <translation>Нет данных для измерения Талия.</translation>
     </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished">Ошибка разбора в строке %1: %2.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11744,7 +11784,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Видимость метки детали</translation>
+        <translation type="vanished">Видимость метки детали</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11845,6 +11885,70 @@ Do you want to save your changes?</source>
     <message>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Опция контроля позиции метки выкройки &lt;b&gt;Недоступно, если шаблон метки выкройки пустой&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Редактировать метку выкройки</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Название модели:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Номер модели:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Название компании / имя разработчика:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Имя клиента:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Формат даты:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Формат времени:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished">Дата рождения клиента:</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">гггг-мм-дд</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished">Электронная почта клиента:</translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Материалы</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Материалы выкройки:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Управлять списком материалов выкройки</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Управление</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11979,7 +12083,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished">Острый угол, который смотрит внутрь детали</translation>
+        <translation>Острый угол, который смотрит внутрь детали</translation>
     </message>
 </context>
 <context>
@@ -13706,6 +13810,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Ошибка при создании файла «%1»! %2</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

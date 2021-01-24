@@ -2118,6 +2118,10 @@
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3390,6 +3394,10 @@
     <message>
         <source>Delete</source>
         <translation>Verwijder</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4781,19 +4789,19 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Patroon naam:</translation>
+        <translation type="vanished">Patroon naam:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Patroon nummer:</translation>
+        <translation type="vanished">Patroon nummer:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Bedrijfs/ontwerpers naam:</translation>
+        <translation type="vanished">Bedrijfs/ontwerpers naam:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Klant naam:</translation>
+        <translation type="vanished">Klant naam:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4833,55 +4841,55 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Gegevens label</translation>
+        <translation type="vanished">Gegevens label</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Sjabloon label:</translation>
+        <translation type="vanished">Sjabloon label:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Verander patroon label</translation>
+        <translation type="vanished">Verander patroon label</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Verander sjabloon</translation>
+        <translation type="vanished">Verander sjabloon</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Datum indeling:</translation>
+        <translation type="vanished">Datum indeling:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Tijdsindeling:</translation>
+        <translation type="vanished">Tijdsindeling:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Sla gegevens label op.</translation>
+        <translation type="vanished">Sla gegevens label op.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
+        <translation type="vanished">Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Materialen</translation>
+        <translation type="vanished">Materialen</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Patroon materialen:</translation>
+        <translation type="vanished">Patroon materialen:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Beheren van patroon materiaallijst</translation>
+        <translation type="vanished">Beheren van patroon materiaallijst</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Beheren</translation>
+        <translation type="vanished">Beheren</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>De naam van de klant van individuele maten</translation>
+        <translation type="vanished">De naam van de klant van individuele maten</translation>
     </message>
     <message>
         <source>Label language:</source>
@@ -4889,23 +4897,23 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation>Klant geboortedatum:</translation>
+        <translation type="vanished">Klant geboortedatum:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
+        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation>Klant e-mail:</translation>
+        <translation type="vanished">Klant e-mail:</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation>E-mail klant uit persoonlijke maten</translation>
+        <translation type="vanished">E-mail klant uit persoonlijke maten</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation>Geboortedatum klant uit persoonlijke maten</translation>
+        <translation type="vanished">Geboortedatum klant uit persoonlijke maten</translation>
     </message>
 </context>
 <context>
@@ -6720,6 +6728,26 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Edit passmark length</source>
         <translation>Pas lengte markeerpunt aan</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">De naam van de klant van individuele maten</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished">E-mail klant uit persoonlijke maten</translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished">Geboortedatum klant uit persoonlijke maten</translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Sla gegevens label op.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
     </message>
 </context>
 <context>
@@ -10480,6 +10508,18 @@ Deze optie wordt actief na een herstart..</translation>
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished">Opsplitsfout op lijn %1: %2.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11742,7 +11782,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Zichtbare detail label</translation>
+        <translation type="vanished">Zichtbare detail label</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11844,6 +11884,70 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Opties om de positie van een patroon label te controleren. &lt;b&gt;Niet beschikbaar als een patroon label sjabloon leeg is.&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Verander patroon label</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Patroon naam:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Patroon nummer:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Bedrijfs/ontwerpers naam:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Klant naam:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Datum indeling:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Tijdsindeling:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished">Klant geboortedatum:</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished">Klant e-mail:</translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Materialen</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Patroon materialen:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Beheren van patroon materiaallijst</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Beheren</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -11932,10 +12036,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Intersectie 2 (enkel rechts)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="vanished">Scherpe hoek naar de binnenkant van een patroondeel</translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation>Scherpe hoek naar de buitenkant van een patroondeel</translation>
     </message>
@@ -11981,7 +12081,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished">Scherpe hoek naar de binnenkant van een patroondeel</translation>
+        <translation>Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
 </context>
 <context>
@@ -13708,6 +13808,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

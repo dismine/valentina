@@ -2118,6 +2118,10 @@
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3390,6 +3394,10 @@
     <message>
         <source>Delete</source>
         <translation>Entfernen</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4780,19 +4788,19 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Name des Schnittmusters:</translation>
+        <translation type="vanished">Name des Schnittmusters:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Nummer des Schnittmusters:</translation>
+        <translation type="vanished">Nummer des Schnittmusters:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Name der Firma/des Designers:</translation>
+        <translation type="vanished">Name der Firma/des Designers:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Name des Kunden:</translation>
+        <translation type="vanished">Name des Kunden:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4832,79 +4840,63 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Bezeichnungsdaten</translation>
+        <translation type="vanished">Bezeichnungsdaten</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Bezeichnungsvorlage:</translation>
+        <translation type="vanished">Bezeichnungsvorlage:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Musterbezeichnung bearbeiten</translation>
+        <translation type="vanished">Musterbezeichnung bearbeiten</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Vorlage bearbeiten</translation>
+        <translation type="vanished">Vorlage bearbeiten</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Datumsformat:</translation>
+        <translation type="vanished">Datumsformat:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Zeitformat:</translation>
+        <translation type="vanished">Zeitformat:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Bezeichnungsdaten speichern.</translation>
+        <translation type="vanished">Bezeichnungsdaten speichern.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Bezeichnungsdaten wurden angepasst. Möchten Sie diese Speichern bevor Sie die Bezeichnungsvorlage editieren?</translation>
+        <translation type="vanished">Bezeichnungsdaten wurden angepasst. Möchten Sie diese Speichern bevor Sie die Bezeichnungsvorlage editieren?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Materialien</translation>
+        <translation type="vanished">Materialien</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Schnittmustermaterialien:</translation>
+        <translation type="vanished">Schnittmustermaterialien:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Liste an Schnittmustermaterialien verwalten</translation>
+        <translation type="vanished">Liste an Schnittmustermaterialien verwalten</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Verwalten</translation>
+        <translation type="vanished">Verwalten</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>Der Name des Kunden von individuellen Maßen</translation>
+        <translation type="vanished">Der Name des Kunden von individuellen Maßen</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Bezeichnungs Sprache:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
 </context>
 <context>
@@ -6719,6 +6711,26 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Edit passmark length</source>
         <translation>Ändern der Passmarken Länge</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">Der Name des Kunden von individuellen Maßen</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Bezeichnungsdaten speichern.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Bezeichnungsdaten wurden angepasst. Möchten Sie diese Speichern bevor Sie die Bezeichnungsvorlage editieren?</translation>
     </message>
 </context>
 <context>
@@ -10480,6 +10492,18 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished">Fehler beim Lesen in Zeile %1: %2.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11741,7 +11765,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Detailbeschriftung sichtbar</translation>
+        <translation type="vanished">Detailbeschriftung sichtbar</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11843,6 +11867,70 @@ Do you want to save your changes?</source>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Optionen um die Position einer Schnittmuster Bezeichnung anzupassen. &lt;b&gt;Nicht verfügbar, wenn die Schnittmuster Bezeichnungsvorlage leer ist&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Musterbezeichnung bearbeiten</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Name des Schnittmusters:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Nummer des Schnittmusters:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Name der Firma/des Designers:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Datumsformat:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Zeitformat:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Materialien</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Schnittmustermaterialien:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Liste an Schnittmustermaterialien verwalten</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Verwalten</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -11931,10 +12019,6 @@ Do you want to save your changes?</source>
         <translation>Überschneidung 2 (nur rechts)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="vanished">Spitzer Winkel der in das Schnittteil hinein geht</translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation>Spitzer Winkel der aus dem Schnittteil heraus schaut</translation>
     </message>
@@ -11980,7 +12064,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished">Spitzer Winkel der in das Schnittteil hinein geht</translation>
+        <translation>Spitzer Winkel der in das Schnittteil hinein geht</translation>
     </message>
 </context>
 <context>
@@ -13705,6 +13789,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Fehler beim Erstellen der Datei &apos;%1&apos;! %2</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

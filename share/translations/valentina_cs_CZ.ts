@@ -2118,6 +2118,10 @@
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3390,6 +3394,10 @@
     <message>
         <source>Delete</source>
         <translation>Smazat</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4781,19 +4789,19 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Název střihu:</translation>
+        <translation type="vanished">Název střihu:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Číslo střihu:</translation>
+        <translation type="vanished">Číslo střihu:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Jméno společnosti/návrháře:</translation>
+        <translation type="vanished">Jméno společnosti/návrháře:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Jméno zákazníka:</translation>
+        <translation type="vanished">Jméno zákazníka:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4833,79 +4841,63 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Data popisu</translation>
+        <translation type="vanished">Data popisu</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Předloha popisu:</translation>
+        <translation type="vanished">Předloha popisu:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Upravit popis střihu</translation>
+        <translation type="vanished">Upravit popis střihu</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Upravit předlohu</translation>
+        <translation type="vanished">Upravit předlohu</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Formát data:</translation>
+        <translation type="vanished">Formát data:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Formát času:</translation>
+        <translation type="vanished">Formát času:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Uložit data popisu.</translation>
+        <translation type="vanished">Uložit data popisu.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
+        <translation type="vanished">Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Materiály</translation>
+        <translation type="vanished">Materiály</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Materiály střihu:</translation>
+        <translation type="vanished">Materiály střihu:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Spravovat seznam materiálů střihů</translation>
+        <translation type="vanished">Spravovat seznam materiálů střihů</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Spravovat</translation>
+        <translation type="vanished">Spravovat</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>Jméno zákazníka jednotlivých rozměrů</translation>
+        <translation type="vanished">Jméno zákazníka jednotlivých rozměrů</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Jazyk popisu:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation>rrrr mm dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">rrrr mm dd</translation>
     </message>
 </context>
 <context>
@@ -6721,6 +6713,26 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Edit passmark length</source>
         <translation>Upravit délku značky sestavení</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">Jméno zákazníka jednotlivých rozměrů</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Uložit data popisu.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
 </context>
 <context>
@@ -10483,6 +10495,18 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished">Chyba při zpracování na řádku %1: %2.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11745,7 +11769,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Popis jednotlivosti (dílu střihu) viditelný</translation>
+        <translation type="vanished">Popis jednotlivosti (dílu střihu) viditelný</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11847,6 +11871,70 @@ Chcete uložit změny?</translation>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Volby pro ovládání polohy popisu střihu. &lt;b&gt;Nedostupné, pokud je předloha střihu prázdná&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Upravit popis střihu</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Název střihu:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Číslo střihu:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Jméno společnosti/návrháře:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Jméno zákazníka:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Formát data:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Formát času:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">rrrr mm dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Materiály</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Materiály střihu:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Spravovat seznam materiálů střihů</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Spravovat</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -11935,10 +12023,6 @@ Chcete uložit změny?</translation>
         <translation>Průsečík 2 (pouze pravý)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="vanished">Ostrý úhel, který vypadá, že je uvnitř střihu</translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation>Ostrý úhel, který vypadá, že je vně střihu</translation>
     </message>
@@ -11984,7 +12068,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished">Ostrý úhel, který vypadá, že je uvnitř dílu</translation>
+        <translation>Ostrý úhel, který vypadá, že je uvnitř dílu</translation>
     </message>
 </context>
 <context>
@@ -13711,6 +13795,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

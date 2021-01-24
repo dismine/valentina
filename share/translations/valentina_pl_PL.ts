@@ -1970,6 +1970,10 @@
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3206,6 +3210,10 @@
     <message>
         <source>Delete</source>
         <translation>Usuń</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4468,19 +4476,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Nazwa wykroju:</translation>
+        <translation type="vanished">Nazwa wykroju:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Numer wykroju:</translation>
+        <translation type="vanished">Numer wykroju:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Firma/Nazwa projektanta:</translation>
+        <translation type="vanished">Firma/Nazwa projektanta:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Nazwa klienta:</translation>
+        <translation type="vanished">Nazwa klienta:</translation>
     </message>
     <message>
         <source>Pattern size:</source>
@@ -4503,80 +4511,24 @@ Apply settings anyway?</source>
         <translation>Notatki techniczne</translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit pattern label</source>
-        <translation>Edytuj etykietę wykroju</translation>
+        <translation type="vanished">Edytuj etykietę wykroju</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Edytuj szablon</translation>
+        <translation type="vanished">Edytuj szablon</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Format daty:</translation>
+        <translation type="vanished">Format daty:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Format czasu:</translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer name from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Format czasu:</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Język etykiet:</translation>
-    </message>
-    <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6195,6 +6147,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit passmark length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9483,6 +9455,18 @@ This option will take an affect after restart.</source>
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -10646,10 +10630,6 @@ Czy chcesz zapisać zmiany?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Szerokość:</translation>
     </message>
@@ -10747,6 +10727,70 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Edytuj etykietę wykroju</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Nazwa wykroju:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Numer wykroju:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Firma/Nazwa projektanta:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Nazwa klienta:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Format daty:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Format czasu:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12392,6 +12436,10 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

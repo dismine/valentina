@@ -2118,6 +2118,10 @@
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3390,6 +3394,10 @@
     <message>
         <source>Delete</source>
         <translation>Excluir</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4777,19 +4785,19 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Nome do molde:</translation>
+        <translation type="vanished">Nome do molde:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Número do molde:</translation>
+        <translation type="vanished">Número do molde:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Nome da Empresa/Modelista:</translation>
+        <translation type="vanished">Nome da Empresa/Modelista:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Nome do cliente:</translation>
+        <translation type="vanished">Nome do cliente:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4829,79 +4837,63 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Dados do rótulo</translation>
+        <translation type="vanished">Dados do rótulo</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Modelo de rótulo:</translation>
+        <translation type="vanished">Modelo de rótulo:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Editar o rótulo do molde</translation>
+        <translation type="vanished">Editar o rótulo do molde</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Editar modelo</translation>
+        <translation type="vanished">Editar modelo</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Formato da data:</translation>
+        <translation type="vanished">Formato da data:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Formato do tempo:</translation>
+        <translation type="vanished">Formato do tempo:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Salvar dados do rótulo.</translation>
+        <translation type="vanished">Salvar dados do rótulo.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Os dados do rótulo foram alterados. Deseja salvá-los antes de editar o modelo de rótulo?</translation>
+        <translation type="vanished">Os dados do rótulo foram alterados. Deseja salvá-los antes de editar o modelo de rótulo?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Materiais</translation>
+        <translation type="vanished">Materiais</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Materiais do molde:</translation>
+        <translation type="vanished">Materiais do molde:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Gerenciar lista de materiais do molde</translation>
+        <translation type="vanished">Gerenciar lista de materiais do molde</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Gerenciar</translation>
+        <translation type="vanished">Gerenciar</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>O nome do cliente das medidas individuais</translation>
+        <translation type="vanished">O nome do cliente das medidas individuais</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Idioma:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
 </context>
 <context>
@@ -6712,6 +6704,26 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Edit passmark length</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">O nome do cliente das medidas individuais</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Salvar dados do rótulo.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Os dados do rótulo foram alterados. Deseja salvá-los antes de editar o modelo de rótulo?</translation>
     </message>
 </context>
 <context>
@@ -10453,6 +10465,18 @@ Esta opção terá um efeito após o reinício.</translation>
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished">Erro de análise na linha %1: %2.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11715,7 +11739,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Etiqueta de detalhes visível</translation>
+        <translation type="vanished">Etiqueta de detalhes visível</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11816,6 +11840,70 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Opções para controlar a posição de etiqueta do molde. &lt;b&gt;Não disponível se o modelo de etiqueta do molde estiver vazio&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Editar o rótulo do molde</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Nome do molde:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Número do molde:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Nome da Empresa/Modelista:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Nome do cliente:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Formato da data:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Formato do tempo:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Materiais</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Materiais do molde:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Gerenciar lista de materiais do molde</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Gerenciar</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13625,6 +13713,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Criação do arquivo &apos;%1&apos; falhou! %2</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
