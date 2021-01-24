@@ -4840,80 +4840,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Voor technische aantekeningen</translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="vanished">Gegevens label</translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="vanished">Sjabloon label:</translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Verander patroon label</translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="vanished">Verander sjabloon</translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="vanished">Datum indeling:</translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="vanished">Tijdsindeling:</translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="vanished">Sla gegevens label op.</translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="vanished">Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="vanished">Materialen</translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="vanished">Patroon materialen:</translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="vanished">Beheren van patroon materiaallijst</translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="vanished">Beheren</translation>
-    </message>
-    <message>
-        <source>The customer name from individual measurements</source>
-        <translation type="vanished">De naam van de klant van individuele maten</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Taal label:</translation>
-    </message>
-    <message>
-        <source>Customer birth date:</source>
-        <translation type="vanished">Klant geboortedatum:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">yyyy-MM-dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="vanished">Klant e-mail:</translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="vanished">E-mail klant uit persoonlijke maten</translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="vanished">Geboortedatum klant uit persoonlijke maten</translation>
     </message>
 </context>
 <context>
@@ -6731,23 +6659,23 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation type="unfinished">De naam van de klant van individuele maten</translation>
+        <translation>De naam van de klant van individuele maten</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation type="unfinished">E-mail klant uit persoonlijke maten</translation>
+        <translation>E-mail klant uit persoonlijke maten</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished">Geboortedatum klant uit persoonlijke maten</translation>
+        <translation>Geboortedatum klant uit persoonlijke maten</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished">Sla gegevens label op.</translation>
+        <translation>Sla gegevens label op.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished">Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
+        <translation>Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
     </message>
 </context>
 <context>
@@ -10514,7 +10442,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Parser error at line %1: %2.</source>
-        <translation type="unfinished">Opsplitsfout op lijn %1: %2.</translation>
+        <translation>Opsplitsfout op lijn %1: %2.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
@@ -11781,10 +11709,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Labels</translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Zichtbare detail label</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
@@ -11890,59 +11814,59 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished">Verander patroon label</translation>
+        <translation>Verander patroon label</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Patroon naam:</translation>
+        <translation>Patroon naam:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Patroon nummer:</translation>
+        <translation>Patroon nummer:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Bedrijfs/ontwerpers naam:</translation>
+        <translation>Bedrijfs/ontwerpers naam:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Klant naam:</translation>
+        <translation>Klant naam:</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished">Datum indeling:</translation>
+        <translation>Datum indeling:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished">Tijdsindeling:</translation>
+        <translation>Tijdsindeling:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation type="unfinished">Klant geboortedatum:</translation>
+        <translation>Klant geboortedatum:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation type="unfinished">Klant e-mail:</translation>
+        <translation>Klant e-mail:</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished">Materialen</translation>
+        <translation>Materialen</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished">Patroon materialen:</translation>
+        <translation>Patroon materialen:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished">Beheren van patroon materiaallijst</translation>
+        <translation>Beheren van patroon materiaallijst</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished">Beheren</translation>
+        <translation>Beheren</translation>
     </message>
     <message>
         <source>Piece label visible</source>

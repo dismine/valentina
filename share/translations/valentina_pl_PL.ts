@@ -4511,22 +4511,6 @@ Apply settings anyway?</source>
         <translation>Notatki techniczne</translation>
     </message>
     <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Edytuj etykietę wykroju</translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="vanished">Edytuj szablon</translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="vanished">Format daty:</translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="vanished">Format czasu:</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Język etykiet:</translation>
     </message>
@@ -10735,31 +10719,31 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished">Edytuj etykietę wykroju</translation>
+        <translation>Edytuj etykietę wykroju</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Nazwa wykroju:</translation>
+        <translation>Nazwa wykroju:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Numer wykroju:</translation>
+        <translation>Numer wykroju:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Firma/Nazwa projektanta:</translation>
+        <translation>Firma/Nazwa projektanta:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Nazwa klienta:</translation>
+        <translation>Nazwa klienta:</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished">Format daty:</translation>
+        <translation>Format daty:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished">Format czasu:</translation>
+        <translation>Format czasu:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>

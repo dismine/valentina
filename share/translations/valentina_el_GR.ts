@@ -4766,10 +4766,6 @@ Apply settings anyway?</source>
         <source>Label language:</source>
         <translation>Γλώσσα ετικέτας:</translation>
     </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">χχχχ-ΜΜ-ηη</translation>
-    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -11540,19 +11536,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Όνομα πατρόν:</translation>
+        <translation>Όνομα πατρόν:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Αριθμός πατρόν:</translation>
+        <translation>Αριθμός πατρόν:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Όνομα Επιχείρησης/Σχεδιαστή:</translation>
+        <translation>Όνομα Επιχείρησης/Σχεδιαστή:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Όνομα πελάτη:</translation>
+        <translation>Όνομα πελάτη:</translation>
     </message>
     <message>
         <source>Date format:</source>
@@ -11568,7 +11564,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">χχχχ-ΜΜ-ηη</translation>
+        <translation>χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Customer email:</source>

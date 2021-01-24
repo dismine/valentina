@@ -4839,64 +4839,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Für technische Notizen</translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="vanished">Bezeichnungsdaten</translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="vanished">Bezeichnungsvorlage:</translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Musterbezeichnung bearbeiten</translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="vanished">Vorlage bearbeiten</translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="vanished">Datumsformat:</translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="vanished">Zeitformat:</translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="vanished">Bezeichnungsdaten speichern.</translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="vanished">Bezeichnungsdaten wurden angepasst. Möchten Sie diese Speichern bevor Sie die Bezeichnungsvorlage editieren?</translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="vanished">Materialien</translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="vanished">Schnittmustermaterialien:</translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="vanished">Liste an Schnittmustermaterialien verwalten</translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="vanished">Verwalten</translation>
-    </message>
-    <message>
-        <source>The customer name from individual measurements</source>
-        <translation type="vanished">Der Name des Kunden von individuellen Maßen</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Bezeichnungs Sprache:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
 </context>
 <context>
@@ -6714,7 +6658,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation type="unfinished">Der Name des Kunden von individuellen Maßen</translation>
+        <translation>Der Name des Kunden von individuellen Maßen</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
@@ -6726,11 +6670,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished">Bezeichnungsdaten speichern.</translation>
+        <translation>Bezeichnungsdaten speichern.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished">Bezeichnungsdaten wurden angepasst. Möchten Sie diese Speichern bevor Sie die Bezeichnungsvorlage editieren?</translation>
+        <translation>Bezeichnungsdaten wurden angepasst. Möchten Sie diese Speichern bevor Sie die Bezeichnungsvorlage editieren?</translation>
     </message>
 </context>
 <context>
@@ -10498,7 +10442,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Parser error at line %1: %2.</source>
-        <translation type="unfinished">Fehler beim Lesen in Zeile %1: %2.</translation>
+        <translation>Fehler beim Lesen in Zeile %1: %2.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
@@ -11764,10 +11708,6 @@ Do you want to save your changes?</source>
         <translation>Beschriftungen</translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Detailbeschriftung sichtbar</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Breite:</translation>
     </message>
@@ -11873,31 +11813,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished">Musterbezeichnung bearbeiten</translation>
+        <translation>Musterbezeichnung bearbeiten</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Name des Schnittmusters:</translation>
+        <translation>Name des Schnittmusters:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Nummer des Schnittmusters:</translation>
+        <translation>Nummer des Schnittmusters:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Name der Firma/des Designers:</translation>
+        <translation>Name der Firma/des Designers:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kundenname:</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished">Datumsformat:</translation>
+        <translation>Datumsformat:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished">Zeitformat:</translation>
+        <translation>Zeitformat:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
@@ -11905,7 +11845,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -11913,19 +11853,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished">Materialien</translation>
+        <translation>Materialien</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished">Schnittmustermaterialien:</translation>
+        <translation>Schnittmustermaterialien:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished">Liste an Schnittmustermaterialien verwalten</translation>
+        <translation>Liste an Schnittmustermaterialien verwalten</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished">Verwalten</translation>
+        <translation>Verwalten</translation>
     </message>
     <message>
         <source>Piece label visible</source>

@@ -4841,10 +4841,6 @@ Apply settings anyway?</source>
         <source>Label language:</source>
         <translation>Label language:</translation>
     </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">yyyy-MM-dd</translation>
-    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -11711,10 +11707,6 @@ Do you want to save your changes?</translation>
         <translation>Labels</translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Detail label visible</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Width:</translation>
     </message>
@@ -11824,19 +11816,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Pattern name:</translation>
+        <translation>Pattern name:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Pattern number:</translation>
+        <translation>Pattern number:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Company/Designer name:</translation>
+        <translation>Company/Designer name:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Customer name:</translation>
+        <translation>Customer name:</translation>
     </message>
     <message>
         <source>Date format:</source>
@@ -11852,7 +11844,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>

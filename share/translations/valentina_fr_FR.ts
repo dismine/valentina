@@ -4835,24 +4835,8 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="vanished">Données de l&apos;étiquette</translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="vanished">Matières</translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="vanished">Gérer</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Langue:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
 </context>
 <context>
@@ -11700,10 +11684,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Etiquettes</translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">étiquette pièce de patron visible</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Largeur :</translation>
     </message>
@@ -11813,19 +11793,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Nom du patron :</translation>
+        <translation>Nom du patron :</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Numéro de patron :</translation>
+        <translation>Numéro de patron :</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Nom de Société/Modéliste :</translation>
+        <translation>Nom de Société/Modéliste :</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Nom du client :</translation>
+        <translation>Nom du client :</translation>
     </message>
     <message>
         <source>Date format:</source>
@@ -11841,7 +11821,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -11849,7 +11829,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished">Matières</translation>
+        <translation>Matières</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
@@ -11861,7 +11841,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished">Gérer</translation>
+        <translation>Gérer</translation>
     </message>
     <message>
         <source>Piece label visible</source>

@@ -4832,60 +4832,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Per note tecniche</translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="vanished">Dati di etichetta</translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="vanished">Modello etichetta:</translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Modifica il modello dell&apos;etichetta</translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="vanished">Modifica formato</translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="vanished">Formato Data:</translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="vanished">Formato Ora:</translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="vanished">Salva i dati di etichetta.</translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="vanished">I dati dell&apos;etichetta sono stati modificati. Vuoi salvarli prima di modificare il formato dell&apos;etichetta?</translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="vanished">Materiali</translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="vanished">Materiali modello:</translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="vanished">Gestisci la lista di materiali di modello</translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="vanished">Gestisci</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Lingua etichetta:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">aaaa-MM-gg</translation>
     </message>
 </context>
 <context>
@@ -6715,11 +6663,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished">Salva i dati di etichetta.</translation>
+        <translation>Salva i dati di etichetta.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished">I dati dell&apos;etichetta sono stati modificati. Vuoi salvarli prima di modificare il formato dell&apos;etichetta?</translation>
+        <translation>I dati dell&apos;etichetta sono stati modificati. Vuoi salvarli prima di modificare il formato dell&apos;etichetta?</translation>
     </message>
 </context>
 <context>
@@ -10483,7 +10431,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Parser error at line %1: %2.</source>
-        <translation type="unfinished">Errore Parser alla linea %1: %2.</translation>
+        <translation>Errore Parser alla linea %1: %2.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
@@ -11750,10 +11698,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Etichetta</translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Attiva/Disattiva Etichetta del Dettaglio</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Larghezza:</translation>
     </message>
@@ -11859,31 +11803,31 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished">Modifica il modello dell&apos;etichetta</translation>
+        <translation>Modifica il modello dell&apos;etichetta</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Nome modello:</translation>
+        <translation>Nome modello:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Numero modello:</translation>
+        <translation>Numero modello:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Nome Azienda/Stilista:</translation>
+        <translation>Nome Azienda/Stilista:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Nome cliente:</translation>
+        <translation>Nome cliente:</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished">Formato Data:</translation>
+        <translation>Formato Data:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished">Formato Ora:</translation>
+        <translation>Formato Ora:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
@@ -11891,7 +11835,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">aaaa-MM-gg</translation>
+        <translation>aaaa-MM-gg</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -11899,19 +11843,19 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished">Materiali</translation>
+        <translation>Materiali</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished">Materiali modello:</translation>
+        <translation>Materiali modello:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished">Gestisci la lista di materiali di modello</translation>
+        <translation>Gestisci la lista di materiali di modello</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished">Gestisci</translation>
+        <translation>Gestisci</translation>
     </message>
     <message>
         <source>Piece label visible</source>

@@ -4840,64 +4840,8 @@ Přesto použít nastavení?</translation>
         <translation>Technické poznámky</translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="vanished">Data popisu</translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="vanished">Předloha popisu:</translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Upravit popis střihu</translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="vanished">Upravit předlohu</translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="vanished">Formát data:</translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="vanished">Formát času:</translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="vanished">Uložit data popisu.</translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="vanished">Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="vanished">Materiály</translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="vanished">Materiály střihu:</translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="vanished">Spravovat seznam materiálů střihů</translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="vanished">Spravovat</translation>
-    </message>
-    <message>
-        <source>The customer name from individual measurements</source>
-        <translation type="vanished">Jméno zákazníka jednotlivých rozměrů</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Jazyk popisu:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">rrrr mm dd</translation>
     </message>
 </context>
 <context>
@@ -6716,7 +6660,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation type="unfinished">Jméno zákazníka jednotlivých rozměrů</translation>
+        <translation>Jméno zákazníka jednotlivých rozměrů</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
@@ -6728,11 +6672,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished">Uložit data popisu.</translation>
+        <translation>Uložit data popisu.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished">Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
+        <translation>Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
 </context>
 <context>
@@ -10501,7 +10445,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Parser error at line %1: %2.</source>
-        <translation type="unfinished">Chyba při zpracování na řádku %1: %2.</translation>
+        <translation>Chyba při zpracování na řádku %1: %2.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
@@ -11768,10 +11712,6 @@ Chcete uložit změny?</translation>
         <translation>Popisy</translation>
     </message>
     <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Popis jednotlivosti (dílu střihu) viditelný</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Šířka:</translation>
     </message>
@@ -11877,31 +11817,31 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished">Upravit popis střihu</translation>
+        <translation>Upravit popis střihu</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Název střihu:</translation>
+        <translation>Název střihu:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Číslo střihu:</translation>
+        <translation>Číslo střihu:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Jméno společnosti/návrháře:</translation>
+        <translation>Jméno společnosti/návrháře:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Jméno zákazníka:</translation>
+        <translation>Jméno zákazníka:</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished">Formát data:</translation>
+        <translation>Formát data:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished">Formát času:</translation>
+        <translation>Formát času:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
@@ -11909,7 +11849,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">rrrr mm dd</translation>
+        <translation>rrrr mm dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -11917,19 +11857,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished">Materiály</translation>
+        <translation>Materiály</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished">Materiály střihu:</translation>
+        <translation>Materiály střihu:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished">Spravovat seznam materiálů střihů</translation>
+        <translation>Spravovat seznam materiálů střihů</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished">Spravovat</translation>
+        <translation>Spravovat</translation>
     </message>
     <message>
         <source>Piece label visible</source>
