@@ -1,4 +1,4 @@
-# Version 0.7.42 (unreleased)
+# Version 0.7.42 Jan 26, 2021
 - Fix export of pattern recipe.
 - Update translations.
 - Fix a regression in tool Segment a spline path. 
