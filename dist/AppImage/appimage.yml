@@ -32,27 +32,31 @@ build:
 
 # resources which will become available as part of the source.
 # The "appimage" source service needs to be enabled to process these.
-  git:
-    - https://github.com/dismine/Valentina_git.git
+#  git:
+#    - https://gitlab.com/smart-pattern/valentina.git
 #  hg:
 #    - ....
 #  svn:
 #    - ....
 #
-#  files:
-#    - http://myserver.org/myfile
+  files:
+    - "https://gitlab.com/smart-pattern/valentina/repository/archive.tar.gz?ref=develop"
 
 # OPTIONAL: ingredient packages are packages which become part of the AppImage.
 #           you may want to remove parts of their content in script section.
- ingredients:
-   packages:
-     - libqt5-qtimageformats
+ingredients:
+  packages:
+    - libqt5-qtimageformats
 
 script:
 # OPTIONAL: compile or modify the AppDir. The environment variables:
 #           - $BUILD_SOURCE_DIR point to the source directory
 #           - $BUILD_APPDIR point to the AppDir. This directory will become the content of the AppImage
-  - cd $BUILD_SOURCE_DIR/Valentina_git
+  - cd $BUILD_SOURCE_DIR
+  - mv -v "archive.tar.gz?ref=develop" valentina-develop.tar.gz
+  - tar zxvf $BUILD_SOURCE_DIR/valentina-develop.tar.gz
+  - mv -v valentina-develop-* valentina
+  - cd $BUILD_SOURCE_DIR/valentina
   - qmake-qt5 PREFIX=/usr PREFIX_LIB=/usr/lib LRELEASE=lrelease-qt5 Valentina.pro -r DEFINES+=APPIMAGE "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
   - make -j$(nproc)
   - make INSTALL_ROOT=$BUILD_APPDIR -j$(nproc) install
@@ -63,6 +67,6 @@ script:
 # bundle icu's data
   - mkdir -p $BUILD_APPDIR/usr/share/icu
   - cp /usr/share/icu/*/icudt*.dat $BUILD_APPDIR/usr/share/icu/
-  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/valentina.desktop -bundle-non-qt-libs -verbose=2
+  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/valentina.desktop -bundle-non-qt-libs -verbose=2 -no-strip
 # Show what we have done
   - find $BUILD_APPDIR/
