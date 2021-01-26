@@ -697,6 +697,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
                 break;
             case Tool::Piece:
                 dialogTool->SetPatternDoc(doc);
+                break;
             default:
                 break;
         }
