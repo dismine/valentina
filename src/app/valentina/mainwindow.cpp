@@ -3831,45 +3831,58 @@ void MainWindow::PatternChangesWereSaved(bool saved)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionABaseChanged()
 {
+    const qreal oldValue = m_currentDimensionA;
     m_currentDimensionA = dimensionA->currentData().toDouble();
 
-    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    if (dimensions.size() > 1)
+    if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionA))
     {
-        MeasurementDimension_p dimension = dimensions.at(1);
-        InitDimensionGradation(1, dimension, dimensionB);
-
-        if (dimensions.size() > 2)
+        const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+        if (dimensions.size() > 1)
         {
-            dimension = dimensions.at(2);
-            InitDimensionGradation(2, dimension, dimensionC);
-        }
-    }
+            MeasurementDimension_p dimension = dimensions.at(1);
+            InitDimensionGradation(1, dimension, dimensionB);
 
-    m_gradation->start();
+            if (dimensions.size() > 2)
+            {
+                dimension = dimensions.at(2);
+                InitDimensionGradation(2, dimension, dimensionC);
+            }
+        }
+
+        m_gradation->start();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionBBaseChanged()
 {
+    const qreal oldValue = m_currentDimensionB;
     m_currentDimensionB = dimensionB->currentData().toDouble();
 
-    const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-
-    if (dimensions.size() > 2)
+    if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionB))
     {
-        MeasurementDimension_p dimension = dimensions.at(2);
-        InitDimensionGradation(2, dimension, dimensionC);
-    }
+        const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    m_gradation->start();
+        if (dimensions.size() > 2)
+        {
+            const MeasurementDimension_p& dimension = dimensions.at(2);
+            InitDimensionGradation(2, dimension, dimensionC);
+        }
+
+        m_gradation->start();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionCBaseChanged()
 {
+    const qreal oldValue = m_currentDimensionC;
     m_currentDimensionC = dimensionC->currentData().toDouble();
-    m_gradation->start();
+
+    if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionC))
+    {
+        m_gradation->start();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
