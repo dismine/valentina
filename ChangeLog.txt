@@ -1,3 +1,6 @@
+# Version 0.7.43 (unreleased)
+- Improve Windows installer. Avoid crashing on checking if a program is still running.
+
 # Version 0.7.42 Jan 26, 2021
 - Fix export of pattern recipe.
 - Update translations.
