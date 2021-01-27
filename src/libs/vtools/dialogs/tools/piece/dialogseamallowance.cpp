@@ -508,7 +508,10 @@ void DialogSeamAllowance::SaveData()
     SavePatternTemplateData();
     SavePatternMaterialData();
 
-    emit m_doc->UpdatePatternLabel();
+    if (m_doc != nullptr)
+    {
+        emit m_doc->UpdatePatternLabel();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -611,6 +614,10 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
 
     if (m_doc != nullptr)
     {
+        uiTabLabels->lineEditPatternName->setText(m_doc->GetPatternName());
+        uiTabLabels->lineEditPatternNumber->setText(m_doc->GetPatternNumber());
+        uiTabLabels->lineEditCompanyName->setText(m_doc->GetCompanyName());
+
         VSettings *settings = qApp->ValentinaSettings();
         m_patternMaterials = m_doc->GetPatternMaterials();
 
@@ -3181,10 +3188,6 @@ void DialogSeamAllowance::InitLabelsTab()
     // Pattern label data
     uiTabLabels->lineEditCustomerEmail->setClearButtonEnabled(true);
 
-    uiTabLabels->lineEditPatternName->setText(m_doc->GetPatternName());
-    uiTabLabels->lineEditPatternNumber->setText(m_doc->GetPatternNumber());
-    uiTabLabels->lineEditCompanyName->setText(m_doc->GetCompanyName());
-
     uiTabLabels->lineEditCustomerName->setText(qApp->GetCustomerName());
     uiTabLabels->lineEditCustomerEmail->setText(qApp->CustomerEmail());
     uiTabLabels->dateEditCustomerBirthDate->setDate(qApp->GetCustomerBirthDate());
@@ -3716,7 +3719,7 @@ void DialogSeamAllowance::EnablePatternLabelFormulaControls(bool enable)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SavePatternLabelData()
 {
-    if (m_patternLabelDataChanged)
+    if (m_patternLabelDataChanged && m_doc != nullptr)
     {
         m_doc->SetPatternName(uiTabLabels->lineEditPatternName->text());
         m_doc->SetPatternNumber(uiTabLabels->lineEditPatternNumber->text());
@@ -3738,7 +3741,7 @@ void DialogSeamAllowance::SavePatternLabelData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SavePatternTemplateData()
 {
-    if (m_patternTemplateDataChanged)
+    if (m_patternTemplateDataChanged && m_doc != nullptr)
     {
         m_doc->SetPatternLabelTemplate(m_patternTemplateLines);
         m_patternTemplateDataChanged = false;
@@ -3748,7 +3751,7 @@ void DialogSeamAllowance::SavePatternTemplateData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SavePatternMaterialData()
 {
-    if (m_patternMaterialsChanged)
+    if (m_patternMaterialsChanged && m_doc != nullptr)
     {
         m_doc->SetPatternMaterials(m_patternMaterials);
         m_patternMaterialsChanged = false;
@@ -3809,6 +3812,11 @@ void DialogSeamAllowance::EditPatternLabel()
         {
             m_askSavePatternLabelData = false;
         }
+    }
+
+    if (m_doc == nullptr)
+    {
+        return;
     }
 
     DialogEditLabel editor(m_doc, data);
