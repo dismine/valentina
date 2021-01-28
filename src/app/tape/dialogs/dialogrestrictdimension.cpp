@@ -637,7 +637,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
 
             if (m_dimensions.size() >= 2)
             {
-                validRows = m_dimensions.at(0)->ValidBases();
+                validRows = DimensionRestrictedValues(m_dimensions.at(0));
                 dimension = m_dimensions.at(1);
                 bases = dimension->ValidBases();
             }
@@ -855,7 +855,7 @@ auto DialogRestrictDimension::DimensionRestrictedValues(const MeasurementDimensi
 {
     VDimensionRestriction restriction;
 
-    if (m_restrictionType == RestrictDimension::First)
+    if (m_restrictionType == RestrictDimension::First || m_restrictionType == RestrictDimension::Second)
     {
         restriction = m_restrictions.value(QChar('0'));
     }
