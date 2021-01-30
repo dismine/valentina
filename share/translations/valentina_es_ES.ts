@@ -10438,15 +10438,15 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to prepare final measurement placeholder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Parser error at line %1: %2.</source>
-        <translation>Error en análisis en línea %1: %2.</translation>
+        <translation type="vanished">Error en análisis en línea %1: %2.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12672,6 +12672,29 @@ Quieres guardar los cambios?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractMainWindow</name>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished">Confirmar reescritura de formato</translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished">Este archivo esta usando un formato de version previo v%1. El actual es v%2. Guardando el archivo con esta version de la aplicación actualizara el formato de version para este archivo. Esto puede impedir que pueda abrir el archivo con versiones anteriores de la aplicación. ¿Realmente quieres continuar?</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Valores separados por coma</translation>
+    </message>
+    <message>
+        <source>values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Exportar a CSV</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -12892,6 +12915,13 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
         <translation>Preparación de datos para el error de diseño: la lista de detalles está vacía</translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14347,6 +14377,13 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>layouts</source>
         <translation>diseños</translation>
+    </message>
+</context>
+<context>
+    <name>VSimpleCurve</name>
+    <message>
+        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

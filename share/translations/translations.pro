@@ -20,7 +20,8 @@ DEPENDPATH +=  \
             ../../src/libs/vmisc \
             ../../src/libs/vtools \
             ../../src/libs/vformat \
-            ../../src/libs/fervor
+            ../../src/libs/fervor \
+            ../../src/libs/vwidgets
 
 include(../../src/app/valentina/valentina.pri)
 include(../../src/app/tape/tape.pri)
@@ -35,6 +36,7 @@ include(../../src/libs/vmisc/vmisc.pri)
 include(../../src/libs/vtools/vtools.pri)
 include(../../src/libs/vformat/vformat.pri)
 include(../../src/libs/fervor/fervor.pri)
+include(../../src/libs/vwidgets/vwidgets.pri)
 
 # Add here path to new translation file with name "valentina_*_*.ts" if you want to add new language.
 # Same paths in variable INSTALL_TRANSLATIONS (translations.pri).

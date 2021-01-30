@@ -10412,15 +10412,11 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to prepare final measurement placeholder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parser error at line %1: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12641,6 +12637,29 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractMainWindow</name>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Valeur de signe de séparation</translation>
+    </message>
+    <message>
+        <source>values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Exporter vers CVS</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -12856,6 +12875,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14306,6 +14332,13 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VSettings</name>
     <message>
         <source>layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VSimpleCurve</name>
+    <message>
+        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
