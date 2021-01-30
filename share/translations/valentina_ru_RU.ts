@@ -11872,7 +11872,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece label visible</source>
-        <translation>Данные метки выкройки</translation>
+        <translation>Видимость метки детали</translation>
     </message>
 </context>
 <context>

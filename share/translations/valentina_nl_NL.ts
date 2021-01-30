@@ -3397,7 +3397,7 @@
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer:</translation>
     </message>
 </context>
 <context>
@@ -13727,7 +13727,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestand &apos;%1&apos; niet openen</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -13735,7 +13735,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestand &apos;%1&apos; niet opslaan. Fout %2.</translation>
     </message>
 </context>
 <context>
@@ -14318,7 +14318,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>unamed</source>
-        <translation type="unfinished"></translation>
+        <translation>naamloos</translation>
     </message>
     <message>
         <source>File error.
