@@ -263,8 +263,10 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc, const VC
             }
             catch (qmu::QmuParserError &e)
             {
-                qCritical("%s\n\n%s", qUtf8Printable(QObject::tr("Failed to prepare final measurement placeholder.")),
-                          qUtf8Printable(QObject::tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+                const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
+                                                     "line %1: %2.").arg(i+1).arg(e.GetMsg());
+                qApp->IsPedantic() ? throw VException(errorMsg) :
+                                     qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
     }
