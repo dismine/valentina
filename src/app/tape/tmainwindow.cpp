@@ -781,7 +781,13 @@ bool TMainWindow::FileSave()
         return false;
     }
 
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
     const bool isFileWritable = QFileInfo(curFile).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
     if (not isFileWritable)
     {
         QMessageBox messageBox(this);
@@ -3277,7 +3283,13 @@ void TMainWindow::UpdateWindowTitle()
     bool isFileWritable = true;
     if (not curFile.isEmpty())
     {
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
         isFileWritable = QFileInfo(curFile).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
         showName = StrippedName(curFile);
     }
     else

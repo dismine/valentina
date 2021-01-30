@@ -3221,7 +3221,13 @@ bool MainWindow::on_actionSave_triggered()
             return false;
         }
 
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
         const bool isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
         if (not isFileWritable)
         {
             QMessageBox messageBox(this);
@@ -6177,7 +6183,13 @@ void MainWindow::UpdateWindowTitle()
     bool isFileWritable = true;
     if (not qApp->GetPatternPath().isEmpty())
     {
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
         isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
     }
 
     if (not patternReadOnly && isFileWritable)
