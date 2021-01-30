@@ -527,11 +527,7 @@ void VPrintLayout::SetPrinterOutputFileName(QPrinter *printer, PrintType printTy
         {
             const QString outputFileName = filePath.isEmpty() ? QDir::homePath() + QDir::separator() + DocName()
                                                               : filePath;
-#ifdef Q_OS_WIN
-            printer->setOutputFileName(outputFileName);
-#else
             printer->setOutputFileName(outputFileName + QStringLiteral(".pdf"));
-#endif
 
 #ifdef Q_OS_MAC
             printer->setOutputFormat(QPrinter::NativeFormat);
