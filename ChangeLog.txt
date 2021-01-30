@@ -3,6 +3,7 @@
 - Fix regression. Changing dimension value caused an infinite loop.
 - Fix regression. Export to tiled PDF has no suffix.
 - Fix warning about missing EUDC font om Wondows.
+- Fix regression in Pattern properties dialog. Tab Security is disabled for pattern with individual measurements.
 
 # Version 0.7.42 Jan 26, 2021
 - Fix export of pattern recipe.
