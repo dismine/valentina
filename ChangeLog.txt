@@ -2,6 +2,7 @@
 - Improve Windows installer. Avoid crashing on checking if a program is still running.
 - Fix regression. Changing dimension value caused an infinite loop.
 - Fix regression. Export to tiled PDF has no suffix.
+- Fix warning about missing EUDC font om Wondows.
 
 # Version 0.7.42 Jan 26, 2021
 - Fix export of pattern recipe.

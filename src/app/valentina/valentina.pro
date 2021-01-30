@@ -328,6 +328,7 @@ win32:*g++* {
         $$PWD/../../../dist/win/s-measurements.ico \
         $$PWD/../../../dist/win/pattern.ico \
         $$PWD/../../../dist/win/pdftops.exe \
+        $$PWD/../../../dist/win/EUDC.TTE \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
         $$PWD/../../../README.txt \
