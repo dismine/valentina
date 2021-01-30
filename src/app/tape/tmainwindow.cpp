@@ -954,6 +954,17 @@ bool TMainWindow::FileSaveAs()
         return false;
     }
 
+    if (mType == MeasurementsType::Multisize)
+    {
+        m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
+        m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
+    }
+    else
+    {
+        m_curFileFormatVersion = VVITConverter::MeasurementMaxVer;
+        m_curFileFormatVersionStr = VVITConverter::MeasurementMaxVerStr;
+    }
+
     UpdatePadlock(false);
     UpdateWindowTitle();
 

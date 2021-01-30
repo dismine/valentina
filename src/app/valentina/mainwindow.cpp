@@ -3177,6 +3177,8 @@ bool MainWindow::on_actionSaveAs_triggered()
         QFile::remove(oldFilePath + *autosavePrefix);
     }
 
+    m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
+    m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
     patternReadOnly = false;
 
     qCDebug(vMainWindow, "Locking file");
