@@ -12371,7 +12371,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Τιμές χωρισμένες με κόμμα</translation>
+        <translation>Τιμές χωρισμένες με κόμμα</translation>
     </message>
     <message>
         <source>values</source>
@@ -12379,7 +12379,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Εξαγωγή σε CSV</translation>
+        <translation>Εξαγωγή σε CSV</translation>
     </message>
 </context>
 <context>

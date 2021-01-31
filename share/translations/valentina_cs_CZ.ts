@@ -10440,10 +10440,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parser error at line %1: %2.</source>
-        <translation type="vanished">Chyba při zpracování na řádku %1: %2.</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12677,7 +12673,7 @@ Chcete uložit změny?</translation>
     <name>VAbstractMainWindow</name>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished">Potvrdit přepsání formátu</translation>
+        <translation>Potvrdit přepsání formátu</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
@@ -12685,7 +12681,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Čárkou oddělené hodnoty</translation>
+        <translation>Čárkou oddělené hodnoty</translation>
     </message>
     <message>
         <source>values</source>
@@ -12693,7 +12689,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Vyvést do CSV</translation>
+        <translation>Vyvést do CSV</translation>
     </message>
 </context>
 <context>
@@ -12923,7 +12919,7 @@ Chcete uložit změny?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat materiál</translation>
     </message>
 </context>
 <context>

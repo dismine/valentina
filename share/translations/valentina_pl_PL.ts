@@ -11570,7 +11570,7 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Eksportuj do CSV</translation>
+        <translation>Eksportuj do CSV</translation>
     </message>
 </context>
 <context>

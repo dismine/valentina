@@ -10410,10 +10410,6 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parser error at line %1: %2.</source>
-        <translation type="vanished">Erro de análise na linha %1: %2.</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12651,7 +12647,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Valores separados por vírgula</translation>
+        <translation>Valores separados por vírgula</translation>
     </message>
     <message>
         <source>values</source>
@@ -12659,7 +12655,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Exportar para CSV</translation>
+        <translation>Exportar para CSV</translation>
     </message>
 </context>
 <context>
@@ -12889,7 +12885,7 @@ Deseja salvar suas mudanças?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar material</translation>
     </message>
 </context>
 <context>

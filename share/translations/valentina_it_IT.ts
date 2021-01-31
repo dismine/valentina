@@ -10426,10 +10426,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parser error at line %1: %2.</source>
-        <translation type="vanished">Errore Parser alla linea %1: %2.</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12666,7 +12662,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Virgola-Valori Separati</translation>
+        <translation>Virgola-Valori Separati</translation>
     </message>
     <message>
         <source>values</source>
@@ -12674,7 +12670,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Esporta in CSV</translation>
+        <translation>Esporta in CSV</translation>
     </message>
 </context>
 <context>
@@ -12904,7 +12900,7 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona materiale</translation>
     </message>
 </context>
 <context>

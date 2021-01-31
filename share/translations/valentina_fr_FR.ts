@@ -12648,7 +12648,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Valeur de signe de séparation</translation>
+        <translation>Valeur de signe de séparation</translation>
     </message>
     <message>
         <source>values</source>
@@ -12656,7 +12656,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Exporter vers CVS</translation>
+        <translation>Exporter vers CVS</translation>
     </message>
 </context>
 <context>

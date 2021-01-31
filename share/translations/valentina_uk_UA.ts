@@ -12676,7 +12676,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Comma-Separated Values</translation>
+        <translation>Comma-Separated Values</translation>
     </message>
     <message>
         <source>values</source>
@@ -12684,7 +12684,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Експортувати до CSV</translation>
+        <translation>Експортувати до CSV</translation>
     </message>
 </context>
 <context>

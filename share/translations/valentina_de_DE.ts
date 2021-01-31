@@ -10437,10 +10437,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parser error at line %1: %2.</source>
-        <translation type="vanished">Fehler beim Lesen in Zeile %1: %2.</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12680,7 +12676,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Komma-Separierte Werte</translation>
+        <translation>Komma-Separierte Werte</translation>
     </message>
     <message>
         <source>values</source>
@@ -12688,7 +12684,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Als CSV exportieren</translation>
+        <translation>Als CSV exportieren</translation>
     </message>
 </context>
 <context>

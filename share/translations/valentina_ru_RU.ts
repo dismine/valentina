@@ -10439,20 +10439,12 @@ This option will take an affect after restart.</source>
         <translation>Нет данных для измерения Талия.</translation>
     </message>
     <message>
-        <source>Failed to prepare final measurement placeholder.</source>
-        <translation type="vanished">Не удалось подготовить заполнитель для финального измерения.</translation>
-    </message>
-    <message>
-        <source>Parser error at line %1: %2.</source>
-        <translation type="vanished">Ошибка разбора в строке %1: %2.</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Деталь &quot;%1&quot;. Долевая линия неправильная.</translation>
     </message>
     <message>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось подготовить заполнитель для финального измерения. Ошибка синтаксического анализатора в строке %1: %2.</translation>
     </message>
 </context>
 <context>
@@ -12680,23 +12672,23 @@ Do you want to save your changes?</source>
     <name>VAbstractMainWindow</name>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished">Подтвердите изменение формата</translation>
+        <translation>Подтвердите изменение формата</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished">Этот файл использует предыдущую версию формата v%1. Текущая версия -  v%2. При сохранении файла с этой версией приложения будет обновлена ​​версия формата для этого файла. Это может помешать вам открыть файл со старыми версиями приложения. Вы действительно хотите продолжить?</translation>
+        <translation>Этот файл использует предыдущую версию формата v%1. Текущая версия -  v%2. При сохранении файла с этой версией приложения будет обновлена ​​версия формата для этого файла. Это может помешать вам открыть файл со старыми версиями приложения. Вы действительно хотите продолжить?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Значения, разделенные запятыми</translation>
+        <translation>Значения, разделенные запятыми</translation>
     </message>
     <message>
         <source>values</source>
-        <translation type="unfinished"></translation>
+        <translation>значения</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Экспорт в CSV</translation>
+        <translation>Экспорт в CSV</translation>
     </message>
 </context>
 <context>
@@ -12926,7 +12918,7 @@ Do you want to save your changes?</source>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать материал</translation>
     </message>
 </context>
 <context>
@@ -14388,7 +14380,7 @@ Do you want to save your changes?</source>
     <name>VSimpleCurve</name>
     <message>
         <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation type="unfinished"></translation>
+        <translation>VSimpleCurve::RefreshGeometry: указатель на кривую нуль.</translation>
     </message>
 </context>
 <context>
