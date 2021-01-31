@@ -1,4 +1,4 @@
-# Version 0.7.43 (unreleased)
+# Version 0.7.43 Sun 31, 2021
 - Improve Windows installer. Avoid crashing on checking if a program is still running.
 - Fix regression. Changing dimension value caused an infinite loop.
 - Fix regression. Export to tiled PDF has no suffix.
