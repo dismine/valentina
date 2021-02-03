@@ -1096,9 +1096,9 @@ QString VMeasurements::IMDName(IMD type)
         case IMD::Y:
             return tr("Size");
         case IMD::W:
-            return tr("Hip");
-        case IMD::Z:
             return tr("Waist");
+        case IMD::Z:
+            return tr("Hip");
         default:
             return QString();
     }

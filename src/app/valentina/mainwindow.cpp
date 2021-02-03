@@ -2142,10 +2142,10 @@ void MainWindow::StoreIndividualMDimensions()
                 qApp->SetDimensionSize(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::W:
-                qApp->SetDimensionHip(valid ? *measurements.value(name)->GetValue() : 0);
+                qApp->SetDimensionWaist(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::Z:
-                qApp->SetDimensionWaist(valid ? *measurements.value(name)->GetValue() : 0);
+                qApp->SetDimensionHip(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::N:
             default:

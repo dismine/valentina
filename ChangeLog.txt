@@ -1,5 +1,6 @@
 # Version 0.7.44 (unreleased)
-- Placeholder %size% has incorrect value. 
+- Placeholder %size% has incorrect value.
+- Values for waist and hip swapped for individual measurements. 
 
 # Version 0.7.43 Jan 31, 2021
 - Improve Windows installer. Avoid crashing on checking if a program is still running.
