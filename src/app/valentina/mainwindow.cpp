@@ -2086,7 +2086,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (dimensions.size() > index)
         {
-            MeasurementDimension_p dimension = dimensions.at(index);
+            const MeasurementDimension_p& dimension = dimensions.at(index);
 
             switch(dimension->Type())
             {
@@ -2102,11 +2102,15 @@ void MainWindow::StoreMultisizeMDimensions()
                     break;
                 }
                 case MeasurementDimension::W:
-                    Q_FALLTHROUGH();
+                {
+                    const bool fc = m->IsFullCircumference();
+                    qApp->SetDimensionWaist(fc ? currentBase*2 : currentBase);
+                    break;
+                }
                 case MeasurementDimension::Z:
                 {
                     const bool fc = m->IsFullCircumference();
-                    qApp->SetDimensionSize(fc ? currentBase*2 : currentBase);
+                    qApp->SetDimensionHip(fc ? currentBase*2 : currentBase);
                     break;
                 }
                 default:
