@@ -256,7 +256,13 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
             auto PreapreBuiltInSAPassmark = [pData, passmark, piece, &layoutPassmarks, pattern]()
             {
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wnoexcept")
+                // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
                 VLayoutPassmark layoutPassmark;
+
+                QT_WARNING_POP
 
                 const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
