@@ -89,6 +89,15 @@ void VAbstractOperation::SetSuffix(const QString &suffix)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::SetNotes(const QString &notes)
+{
+    m_notes = notes;
+
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<SourceItem> VAbstractOperation::SourceItems() const
 {
     return source;

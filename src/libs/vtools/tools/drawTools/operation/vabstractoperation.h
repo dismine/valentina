@@ -86,6 +86,8 @@ public:
     QString Suffix() const;
     void    SetSuffix(const QString &suffix);
 
+    virtual void SetNotes(const QString &notes) override;
+
     QVector<SourceItem> SourceItems() const;
 
     virtual void GroupVisibility(quint32 object, bool visible) override;
