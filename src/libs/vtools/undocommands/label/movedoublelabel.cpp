@@ -44,7 +44,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
     : MoveAbstractLabel(doc, pointId, pos, parent),
       m_type(type),
       m_idTool(toolId),
-      m_scene(qApp->getCurrentScene())
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     if (type == MoveDoublePoint::FirstPoint)
     {
@@ -60,16 +60,20 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
     {
         if (type == MoveDoublePoint::FirstPoint)
         {
-            m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
-            m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
+            m_oldPos.rx() =
+                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
+            m_oldPos.ry() =
+                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
 
             qCDebug(vUndo, "Label old Mx1 %f", m_oldPos.x());
             qCDebug(vUndo, "Label old My1 %f", m_oldPos.y());
         }
         else
         {
-            m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
-            m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
+            m_oldPos.rx() =
+                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
+            m_oldPos.ry() =
+                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
 
             qCDebug(vUndo, "Label old Mx2 %f", m_oldPos.x());
             qCDebug(vUndo, "Label old My2 %f", m_oldPos.y());
@@ -134,13 +138,17 @@ void MoveDoubleLabel::Do(const QPointF &pos)
     {
         if (m_type == MoveDoublePoint::FirstPoint)
         {
-            doc->SetAttribute(domElement, AttrMx1, QString().setNum(qApp->fromPixel(pos.x())));
-            doc->SetAttribute(domElement, AttrMy1, QString().setNum(qApp->fromPixel(pos.y())));
+            doc->SetAttribute(domElement, AttrMx1,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+            doc->SetAttribute(domElement, AttrMy1,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
         }
         else
         {
-            doc->SetAttribute(domElement, AttrMx2, QString().setNum(qApp->fromPixel(pos.x())));
-            doc->SetAttribute(domElement, AttrMy2, QString().setNum(qApp->fromPixel(pos.y())));
+            doc->SetAttribute(domElement, AttrMx2,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+            doc->SetAttribute(domElement, AttrMy2,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
         }
 
         if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))

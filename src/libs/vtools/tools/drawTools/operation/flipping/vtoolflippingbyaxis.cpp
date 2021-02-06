@@ -133,7 +133,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
     {
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
-            qApp->getUndoStack()->beginMacro(tr("Flipping by axis"));
+            VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("Flipping by axis"));
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByAxis, initData.doc);
@@ -150,7 +150,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
             VAbstractOperation::CreateVisibilityGroup(initData);
-            qApp->getUndoStack()->endMacro();
+            VAbstractApplication::VApp()->getUndoStack()->endMacro();
         }
 
         return tool;

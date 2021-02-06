@@ -198,7 +198,8 @@ void DialogEllipticalArc::SetCenter(const quint32 &value)
  */
 QString DialogEllipticalArc::GetRadius1() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(radius1, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(radius1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,7 +209,8 @@ QString DialogEllipticalArc::GetRadius1() const
  */
 void DialogEllipticalArc::SetRadius1(const QString &value)
 {
-    radius1 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    radius1 = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius1.length() > 80)
     {
@@ -230,7 +232,8 @@ void DialogEllipticalArc::SetRadius1(const QString &value)
  */
 QString DialogEllipticalArc::GetRadius2() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(radius2, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(radius2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,7 +243,8 @@ QString DialogEllipticalArc::GetRadius2() const
  */
 void DialogEllipticalArc::SetRadius2(const QString &value)
 {
-    radius2 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    radius2 = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius2.length() > 80)
     {
@@ -262,7 +266,8 @@ void DialogEllipticalArc::SetRadius2(const QString &value)
  */
 QString DialogEllipticalArc::GetF1() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(f1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,7 +277,8 @@ QString DialogEllipticalArc::GetF1() const
  */
 void DialogEllipticalArc::SetF1(const QString &value)
 {
-    f1 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    f1 = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f1.length() > 80)
     {
@@ -294,7 +300,8 @@ void DialogEllipticalArc::SetF1(const QString &value)
  */
 QString DialogEllipticalArc::GetF2() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(f2, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(f2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -304,7 +311,8 @@ QString DialogEllipticalArc::GetF2() const
  */
 void DialogEllipticalArc::SetF2(const QString &value)
 {
-    f2 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    f2 = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f2.length() > 80)
     {
@@ -326,7 +334,8 @@ void DialogEllipticalArc::SetF2(const QString &value)
  */
 QString DialogEllipticalArc::GetRotationAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(rotationAngle, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(rotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,7 +345,8 @@ QString DialogEllipticalArc::GetRotationAngle() const
  */
 void DialogEllipticalArc::SetRotationAngle(const QString &value)
 {
-    rotationAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    rotationAngle = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (rotationAngle.length() > 80)
     {
@@ -394,7 +404,7 @@ void DialogEllipticalArc::EvalRadiuses()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius1;
     formulaData.labelResult = ui->labelResultRadius1;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagRadius1);
@@ -441,7 +451,7 @@ void DialogEllipticalArc::FXRadius1()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius1"));
     dialog->SetFormula(GetRadius1());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius1(dialog->GetFormula());
@@ -455,7 +465,7 @@ void DialogEllipticalArc::FXRadius2()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius2"));
     dialog->SetFormula(GetRadius2());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius2(dialog->GetFormula());

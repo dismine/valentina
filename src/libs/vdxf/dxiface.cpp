@@ -467,5 +467,6 @@ void dx_iface::AddBlock(dx_ifaceBlock *block)
 std::string dx_iface::LocaleToISO()
 {
     QMap <QString, QString> locMap = LocaleMap();
-    return locMap.value(QLocale(qApp->Settings()->GetLocale()).name(), "ISO8859-1").toStdString();
+    return locMap.value(QLocale(VAbstractApplication::VApp()->Settings()->GetLocale()).name(),
+                        "ISO8859-1").toStdString();
 }

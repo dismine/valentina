@@ -43,9 +43,9 @@ DialogUndo::DialogUndo(QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    bool opening = qApp->getOpeningPattern();
+    bool opening = VAbstractValApplication::VApp()->getOpeningPattern();
     if (opening)
     {
         ui->pushButtonUndo->setDisabled(opening);

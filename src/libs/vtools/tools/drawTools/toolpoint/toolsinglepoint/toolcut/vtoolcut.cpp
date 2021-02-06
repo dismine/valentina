@@ -49,7 +49,7 @@ VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
     : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
       formula(initData.formula),
       baseCurveId(initData.baseCurveId),
-      detailsMode(qApp->Settings()->IsShowCurveDetails()),
+      detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails()),
       m_aliasSuffix1(initData.aliasSuffix1),
       m_aliasSuffix2(initData.aliasSuffix2)
 {
@@ -85,7 +85,7 @@ VFormula VToolCut::GetFormulaLength() const
     VFormula val(formula, getData());
     val.setCheckZero(true);
     val.setToolId(m_id);
-    val.setPostfix(UnitsToStr(qApp->patternUnits()));
+    val.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     val.Eval();
     return val;
 }

@@ -41,7 +41,7 @@ DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -72,7 +72,7 @@ DialogLayoutScale::~DialogLayoutScale()
 void DialogLayoutScale::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnits());
+    margins = UnitConvertor(margins, Unit::Mm, VAbstractValApplication::VApp()->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -90,7 +90,7 @@ QMarginsF DialogLayoutScale::GetTiledMargins() const
         ui->doubleSpinBoxBottomField->value()
         );
 
-    return UnitConvertor(margins, qApp->patternUnits(), Unit::Mm);
+    return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,8 +181,8 @@ void DialogLayoutScale::VerticalScaleChanged(double d)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::ReadSettings()
 {
-    VCommonSettings *settings = qApp->Settings();
-    const Unit unit = qApp->patternUnits();
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -201,8 +201,8 @@ void DialogLayoutScale::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::WriteSettings() const
 {
-    VCommonSettings *settings = qApp->Settings();
-    const Unit unit = qApp->patternUnits();
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
     QMarginsF margins = QMarginsF(

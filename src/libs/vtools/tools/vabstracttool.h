@@ -210,7 +210,7 @@ template <typename T>
 inline void VAbstractTool::AddVisualization()
 {
     T *visual = new T(getData());
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
     scene->addItem(visual);
 

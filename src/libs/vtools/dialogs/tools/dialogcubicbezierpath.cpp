@@ -112,7 +112,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
         NewItem(path.at(i));
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+    ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
 
     originAliasSuffix = path.GetAliasSuffix();
@@ -157,7 +157,8 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            VAbstractMainWindow *window =
+                    qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(visPath, &VisToolCubicBezierPath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -374,7 +375,7 @@ void DialogCubicBezierPath::ValidatePath()
         if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints()-1).id())
         {
             newDuplicate = -1;
-            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+            ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
         }
         else
         {
@@ -386,7 +387,7 @@ void DialogCubicBezierPath::ValidatePath()
                 newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
             }
 
-            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
+            ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(newPath.name()));
         }
     }
 

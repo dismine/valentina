@@ -148,7 +148,7 @@ void VToolDoublePoint::SetLabelVisible(quint32 id, bool visible)
         firstPoint->RefreshPointGeometry(*point);
         if (QGraphicsScene *sc = firstPoint->scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), firstPoint);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), firstPoint);
         }
     }
     else if (p2id == id)
@@ -158,7 +158,7 @@ void VToolDoublePoint::SetLabelVisible(quint32 id, bool visible)
         secondPoint->RefreshPointGeometry(*point);
         if (QGraphicsScene *sc = secondPoint->scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), secondPoint);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), secondPoint);
         }
     }
 }
@@ -238,7 +238,7 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 
         if (QGraphicsScene *sc = firstPoint->scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), firstPoint);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), firstPoint);
         }
     }
     else if (id == p2id)
@@ -250,7 +250,7 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 
         if (QGraphicsScene *sc = secondPoint->scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), secondPoint);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), secondPoint);
         }
     }
 }
@@ -296,11 +296,13 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
 {    
     if (id == p1id)
     {
-        qApp->getUndoStack()->push(new MoveDoubleLabel(doc, pos, MoveDoublePoint::FirstPoint, m_id, p1id));
+        VAbstractApplication::VApp()->getUndoStack()->push(
+                    new MoveDoubleLabel(doc, pos, MoveDoublePoint::FirstPoint, m_id, p1id));
     }
     else if (id == p2id)
     {
-        qApp->getUndoStack()->push(new MoveDoubleLabel(doc, pos, MoveDoublePoint::SecondPoint, m_id, p2id));
+        VAbstractApplication::VApp()->getUndoStack()->push(
+                    new MoveDoubleLabel(doc, pos, MoveDoublePoint::SecondPoint, m_id, p2id));
     }
 }
 
@@ -369,16 +371,16 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     auto SavePoint1 = [this](QDomElement &tag, const QSharedPointer<VPointF> &point)
     {
         doc->SetAttribute(tag, AttrName1, point->name());
-        doc->SetAttribute(tag, AttrMx1, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(tag, AttrMy1, qApp->fromPixel(point->my()));
+        doc->SetAttribute(tag, AttrMx1, VAbstractValApplication::VApp()->fromPixel(point->mx()));
+        doc->SetAttribute(tag, AttrMy1, VAbstractValApplication::VApp()->fromPixel(point->my()));
         doc->SetAttribute<bool>(tag, AttrShowLabel1, point->IsShowLabel());
     };
 
     auto SavePoint2 = [this](QDomElement &tag, const QSharedPointer<VPointF> &point)
     {
         doc->SetAttribute(tag, AttrName2, point->name());
-        doc->SetAttribute(tag, AttrMx2, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(tag, AttrMy2, qApp->fromPixel(point->my()));
+        doc->SetAttribute(tag, AttrMx2, VAbstractValApplication::VApp()->fromPixel(point->mx()));
+        doc->SetAttribute(tag, AttrMy2, VAbstractValApplication::VApp()->fromPixel(point->my()));
         doc->SetAttribute<bool>(tag, AttrShowLabel2, point->IsShowLabel());
     };
 
@@ -420,11 +422,13 @@ void VToolDoublePoint::ChangeLabelVisibility(quint32 id, bool visible)
 {
     if (id == p1id)
     {
-        qApp->getUndoStack()->push(new ShowDoubleLabel(doc, m_id, p1id, visible, ShowDoublePoint::FirstPoint));
+        VAbstractApplication::VApp()->getUndoStack()->push(
+                    new ShowDoubleLabel(doc, m_id, p1id, visible, ShowDoublePoint::FirstPoint));
     }
     else if (id == p2id)
     {
-        qApp->getUndoStack()->push(new ShowDoubleLabel(doc, m_id, p2id, visible, ShowDoublePoint::SecondPoint));
+        VAbstractApplication::VApp()->getUndoStack()->push(
+                    new ShowDoubleLabel(doc, m_id, p2id, visible, ShowDoublePoint::SecondPoint));
     }
 }
 

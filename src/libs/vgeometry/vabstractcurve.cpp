@@ -145,8 +145,8 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
             errorMsg = QObject::tr("Error in path '%1'. Calculating segment for curve '%2' has failed. %3")
                            .arg(piece, name(), error);
         }
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     return segment;
@@ -600,7 +600,7 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows
 //---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractCurve::LengthCurveDirectionArrow()
 {
-    return qApp->Settings()->GetLineWidth() * 8.0;
+    return VAbstractApplication::VApp()->Settings()->GetLineWidth() * 8.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

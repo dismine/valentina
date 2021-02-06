@@ -61,8 +61,10 @@ VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAb
 //---------------------------------------------------------------------------------------------------------------------
 VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
 {
-    const qreal w = qAbs(qApp->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
-    const qreal h = qAbs(qApp->toPixel(CheckFormula(initData.id, initData.height, initData.data)));
+    const qreal w =
+            qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
+    const qreal h =
+            qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.height, initData.data)));
     const qreal a = CheckFormula(initData.id, initData.angle, initData.data);
     const qreal v = CheckFormula(initData.id, initData.visibilityTrigger, initData.data);
 
@@ -203,7 +205,7 @@ void VToolPlaceLabel::AddToFile()
 
         newDet.GetPlaceLabels().append(m_id);
         incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
-        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
+        VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
 

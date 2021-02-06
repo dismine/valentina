@@ -36,10 +36,11 @@
 #include <QString>
 #include <QTableWidgetItem>
 #include <QtGlobal>
-
-#include "../tools/dialogtool.h"
+#include <QDialog>
 
 class VMeasurement;
+struct FormulaData;
+class VContainer;
 
 namespace Ui
 {
@@ -54,7 +55,7 @@ class DialogEditWrongFormula;
  *
  * Don't implemant button "Apply" for this dialog!!
  */
-class DialogEditWrongFormula : public DialogTool
+class DialogEditWrongFormula : public QDialog
 {
     Q_OBJECT
 public:
@@ -70,8 +71,8 @@ public:
     void         SetIncrementsMode();
     void         SetPreviewCalculationsMode();
 public slots:
-    virtual void DialogAccepted() override;
-    virtual void DialogRejected() override;
+    virtual void DialogAccepted();
+    virtual void DialogRejected();
     void         EvalFormula();
     void         ValChanged(int row);
     void         PutHere();
@@ -87,16 +88,31 @@ public slots:
     void         Increments();
     void         PreviewCalculations();
     void         Functions();
+signals:
+    /**
+     * @brief DialogClosed signal dialog closed
+     * @param result keep result
+     */
+    void DialogClosed(int result);
+    /**
+     * @brief DialogApplied emit signal dialog apply changes
+     */
+    void DialogApplied();
 protected:
     virtual bool IsValid() const final;
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void showEvent( QShowEvent *event ) override;
     virtual void resizeEvent(QResizeEvent *event) override;
+    virtual void CheckState();
 private slots:
     void FilterVariablesEdited(const QString &filter);
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;
+
+    const VContainer *m_data;
+
+    quint32 m_toolId;
 
     /** @brief formula string with formula */
     QString           formula;
@@ -113,6 +129,9 @@ private:
 
     bool flagFormula;
 
+    /** @brief m_isInitialized true if window is initialized */
+    bool m_isInitialized{false};
+
     void InitVariables();
 
     template <class key, class val>
@@ -122,6 +141,8 @@ private:
     void ShowIncrementsInPreviewCalculation(bool show);
 
     void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description);
+
+    qreal Eval(const FormulaData &formulaData, bool &flag);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

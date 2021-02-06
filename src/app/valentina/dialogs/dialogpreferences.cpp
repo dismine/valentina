@@ -52,7 +52,7 @@ DialogPreferences::DialogPreferences(QWidget *parent)
     setWindowFlags(Qt::Window);
 #endif
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -91,7 +91,7 @@ void DialogPreferences::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize sz = qApp->Settings()->GetPreferenceDialogSize();
+    QSize sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
     if (sz.isEmpty() == false)
     {
         resize(sz);
@@ -109,7 +109,7 @@ void DialogPreferences::resizeEvent(QResizeEvent *event)
     // dialog creating, which would
     if (m_isInitialized)
     {
-        qApp->Settings()->SetPreferenceDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetPreferenceDialogSize(size());
     }
 }
 
@@ -155,7 +155,8 @@ void DialogPreferences::Apply()
 
     m_patternPage->InitDefaultSeamAllowance();
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }

@@ -1071,8 +1071,8 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     if ( points.size() < 3 )
     {
         const QString errorMsg = tr("Piece '%1'. Not enough points to build seam allowance.").arg(name);
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return QVector<QPointF>();
     }
 

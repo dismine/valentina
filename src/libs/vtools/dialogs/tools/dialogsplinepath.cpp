@@ -132,7 +132,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, quint32 toolId, QWidg
     auto path = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(path != nullptr)
 
-    auto scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    auto scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSplinePath::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSplinePath::MouseLeftReleased);
@@ -167,7 +167,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
         NewItem(path.at(i));
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+    ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
 
     originAliasSuffix = path.GetAliasSuffix();
@@ -215,7 +215,8 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            VAbstractMainWindow *window =
+                    qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(visPath, &VisToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -296,7 +297,9 @@ void DialogSplinePath::Angle1Changed()
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText();
         const qreal angle1 = Visualization::FindValFromUser(angle1F, data->DataVariables());
-        p.SetAngle1(angle1, VTranslateVars::TryFormulaFromUser(angle1F, qApp->Settings()->GetOsSeparator()));
+        p.SetAngle1(angle1,
+                    VTranslateVars::TryFormulaFromUser(angle1F,
+                                                       VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -305,8 +308,9 @@ void DialogSplinePath::Angle1Changed()
         if (row != ui->listWidget->count()-1)
         {
             ui->plainTextEditAngle2F->blockSignals(true);
-            ui->plainTextEditAngle2F->setPlainText(qApp->TrVars()->FormulaToUser(p.Angle2Formula(),
-                                                                                 qApp->Settings()->GetOsSeparator()));
+            ui->plainTextEditAngle2F->setPlainText(
+                        VAbstractApplication::VApp()->TrVars()
+                        ->FormulaToUser(p.Angle2Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
             EvalAngle2();
             ui->plainTextEditAngle2F->blockSignals(false);
         }
@@ -330,7 +334,9 @@ void DialogSplinePath::Angle2Changed()
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText();
         const qreal angle2 = Visualization::FindValFromUser(angle2F, data->DataVariables());
-        p.SetAngle2(angle2, VTranslateVars::TryFormulaFromUser(angle2F, qApp->Settings()->GetOsSeparator()));
+        p.SetAngle2(angle2,
+                    VTranslateVars::TryFormulaFromUser(angle2F,
+                                                       VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -339,8 +345,9 @@ void DialogSplinePath::Angle2Changed()
         if (row != 0)
         {
             ui->plainTextEditAngle1F->blockSignals(true);
-            ui->plainTextEditAngle1F->setPlainText(qApp->TrVars()->FormulaToUser(p.Angle1Formula(),
-                                                                                 qApp->Settings()->GetOsSeparator()));
+            ui->plainTextEditAngle1F->setPlainText(
+                        VAbstractApplication::VApp()->TrVars()
+                        ->FormulaToUser(p.Angle1Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
             EvalAngle1();
             ui->plainTextEditAngle1F->blockSignals(false);
         }
@@ -364,7 +371,9 @@ void DialogSplinePath::Length1Changed()
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText();
         const qreal length1 = Visualization::FindLengthFromUser(length1F, data->DataVariables());
-        p.SetLength1(length1, VTranslateVars::TryFormulaFromUser(length1F, qApp->Settings()->GetOsSeparator()));
+        p.SetLength1(length1,
+                     VTranslateVars::TryFormulaFromUser(length1F,
+                                                        VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -389,7 +398,9 @@ void DialogSplinePath::Length2Changed()
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText();
         const qreal length2 = Visualization::FindLengthFromUser(length2F, data->DataVariables());
-        p.SetLength2(length2, VTranslateVars::TryFormulaFromUser(length2F, qApp->Settings()->GetOsSeparator()));
+        p.SetLength2(length2,
+                     VTranslateVars::TryFormulaFromUser(length2F,
+                                                        VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -404,13 +415,14 @@ void DialogSplinePath::FXAngle1()
     dialog->setWindowTitle(tr("Edit first control point angle"));
 
     QString angle1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText(),
-                                                         qApp->Settings()->GetOsSeparator());
+                                                         VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle1F);
     dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        angle1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(),
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle1F.length() > 80)
         {
@@ -429,13 +441,14 @@ void DialogSplinePath::FXAngle2()
     dialog->setWindowTitle(tr("Edit second control point angle"));
 
     QString angle2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText(),
-                                                         qApp->Settings()->GetOsSeparator());
+                                                         VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle2F);
     dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        angle2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(),
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle2F.length() > 80)
         {
@@ -454,13 +467,14 @@ void DialogSplinePath::FXLength1()
     dialog->setWindowTitle(tr("Edit first control point length"));
 
     QString length1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText(),
-                                                          qApp->Settings()->GetOsSeparator());
+                                                          VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length1F);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        length1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(),
+                                                    VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length1F.length() > 80)
         {
@@ -479,13 +493,14 @@ void DialogSplinePath::FXLength2()
     dialog->setWindowTitle(tr("Edit second control point length"));
 
     QString length2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText(),
-                                                          qApp->Settings()->GetOsSeparator());
+                                                          VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length2F);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        length2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(),
+                                                    VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length2F.length() > 80)
         {
@@ -587,7 +602,7 @@ void DialogSplinePath::EvalLength1()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength1;
     formulaData.labelResult = ui->labelResultLength1;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -614,7 +629,7 @@ void DialogSplinePath::EvalLength2()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength2;
     formulaData.labelResult = ui->labelResultLength2;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -683,7 +698,7 @@ void DialogSplinePath::currentPointChanged(int index)
             if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints()-1).P().id())
             {
                 newDuplicate = -1;
-                ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+                ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
             }
             else
             {
@@ -695,7 +710,7 @@ void DialogSplinePath::currentPointChanged(int index)
                     newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
                 }
 
-                ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
+                ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(newPath.name()));
             }
         }
     }
@@ -813,11 +828,13 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
 
         ui->plainTextEditAngle2F->blockSignals(true);
         ui->plainTextEditLength2F->blockSignals(true);
-        ui->plainTextEditAngle2F->setPlainText(qApp->TrVars()->FormulaToUser(p.Angle2Formula(),
-                                                                             qApp->Settings()->GetOsSeparator()));
+        ui->plainTextEditAngle2F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Angle2Formula(),VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         EvalAngle2();
-        ui->plainTextEditLength2F->setPlainText(qApp->TrVars()->FormulaToUser(p.Length2Formula(),
-                                                                              qApp->Settings()->GetOsSeparator()));
+        ui->plainTextEditLength2F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Length2Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         EvalLength2();
         ui->plainTextEditAngle2F->blockSignals(false);
         ui->plainTextEditLength2F->blockSignals(false);
@@ -850,11 +867,13 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
 
         ui->plainTextEditAngle1F->blockSignals(true);
         ui->plainTextEditLength1F->blockSignals(true);
-        ui->plainTextEditAngle1F->setPlainText(qApp->TrVars()->FormulaToUser(p.Angle1Formula(),
-                                                                             qApp->Settings()->GetOsSeparator()));
+        ui->plainTextEditAngle1F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Angle1Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         EvalAngle1();
-        ui->plainTextEditLength1F->setPlainText(qApp->TrVars()->FormulaToUser(p.Length1Formula(),
-                                                                              qApp->Settings()->GetOsSeparator()));
+        ui->plainTextEditLength1F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Length1Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         EvalLength1();
         ui->plainTextEditAngle1F->blockSignals(false);
         ui->plainTextEditLength1F->blockSignals(false);
@@ -876,14 +895,18 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
         ui->plainTextEditAngle2F->blockSignals(true);
         ui->plainTextEditLength2F->blockSignals(true);
 
-        ui->plainTextEditAngle1F->setPlainText(qApp->TrVars()->FormulaToUser(p.Angle1Formula(),
-                                                                             qApp->Settings()->GetOsSeparator()));
-        ui->plainTextEditAngle2F->setPlainText(qApp->TrVars()->FormulaToUser(p.Angle2Formula(),
-                                                                             qApp->Settings()->GetOsSeparator()));
-        ui->plainTextEditLength1F->setPlainText(qApp->TrVars()->FormulaToUser(p.Length1Formula(),
-                                                                              qApp->Settings()->GetOsSeparator()));
-        ui->plainTextEditLength2F->setPlainText(qApp->TrVars()->FormulaToUser(p.Length2Formula(),
-                                                                              qApp->Settings()->GetOsSeparator()));
+        ui->plainTextEditAngle1F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Angle1Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        ui->plainTextEditAngle2F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Angle2Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        ui->plainTextEditLength1F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Length1Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        ui->plainTextEditLength2F->setPlainText(
+                    VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(p.Length2Formula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         EvalAngle1();
         EvalLength1();

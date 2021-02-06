@@ -286,7 +286,7 @@ inline void DialogTool::InitOkCancel(T *ui)
     SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,7 +295,8 @@ inline void DialogTool::AddVisualization()
 {
     if (prepare == false)
     {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        VMainGraphicsScene *scene =
+                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
         T *toolVis = qobject_cast<T *>(vis);

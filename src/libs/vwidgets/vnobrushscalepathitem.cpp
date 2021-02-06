@@ -37,7 +37,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VNoBrushScalePathItem::VNoBrushScalePathItem(QGraphicsItem *parent) :
     QGraphicsPathItem(parent),
-    m_defaultWidth(qApp->Settings()->WidthHairLine())
+    m_defaultWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine())
 {
 }
 

@@ -40,7 +40,7 @@ ShowLabel::ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoComma
     : VUndoCommand(QDomElement(), doc, parent),
       m_visible(visible),
       m_oldVisible(true),
-      m_scene(qApp->getCurrentScene())
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("toggle label"));
 
@@ -49,7 +49,7 @@ ShowLabel::ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoComma
     QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel, trueStr);
+        m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel, trueStr);
     }
     else
     {

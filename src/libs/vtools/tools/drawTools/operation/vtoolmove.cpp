@@ -176,7 +176,8 @@ VToolMove *VToolMove::Create(VToolMoveInitData &initData)
 
     calcAngle = CheckFormula(initData.id, initData.formulaAngle, initData.data);
     calcRotationAngle = CheckFormula(initData.id, initData.formulaRotationAngle, initData.data);
-    calcLength = qApp->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data));
+    calcLength = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.formulaLength,
+                                                                       initData.data));
 
     QPointF rotationOrigin;
     QSharedPointer<VPointF> originPoint;
@@ -319,7 +320,7 @@ QT_WARNING_POP
     {
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
-            qApp->getUndoStack()->beginMacro(tr("move"));
+            VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("move"));
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::Move, initData.doc);
@@ -341,7 +342,7 @@ QT_WARNING_POP
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
             VAbstractOperation::CreateVisibilityGroup(initData);
-            qApp->getUndoStack()->endMacro();
+            VAbstractApplication::VApp()->getUndoStack()->endMacro();
         }
 
         return tool;
@@ -401,7 +402,7 @@ VFormula VToolMove::GetFormulaLength() const
     VFormula fLength(formulaLength, getData());
     fLength.setCheckZero(true);
     fLength.setToolId(m_id);
-    fLength.setPostfix(UnitsToStr(qApp->patternUnits()));
+    fLength.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     fLength.Eval();
     return fLength;
 }
@@ -460,10 +461,13 @@ void VToolMove::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->SetObjects(SourceToObjects(source));
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-        visual->SetRotationAngle(qApp->TrVars()->FormulaToUser(formulaRotationAngle,
-                                                               qApp->Settings()->GetOsSeparator()));
-        visual->SetLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
+                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetRotationAngle(VAbstractApplication::VApp()->TrVars()
+                                 ->FormulaToUser(formulaRotationAngle,
+                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetRotationOriginPointId(origPointId);
         visual->RefreshGeometry();
     }
@@ -530,7 +534,7 @@ QString VToolMove::MakeToolTip() const
             .arg(GetFormulaAngle().getDoubleValue())         // 2
             .arg(tr("Length"))                               // 3
             .arg(GetFormulaLength().getDoubleValue())        // 4
-            .arg(UnitsToStr(qApp->patternUnits(), true),     // 5
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),     // 5
                  tr("Rotation angle"))                       // 6
             .arg(GetFormulaRotationAngle().getDoubleValue()) // 7
             .arg(tr("Rotation origin point"),                // 8

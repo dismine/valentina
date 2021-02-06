@@ -144,8 +144,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
         const QString errorMsg = tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis"
                                     " through point '%3' with angle %4°")
                 .arg(initData.name, curve->ObjectName(), basePoint->name()).arg(angle);
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     const qreal segLength = curve->GetLengthByPoint(fPoint);
@@ -302,7 +302,8 @@ void VToolCurveIntersectAxis::SetVisualization()
 
         visual->setObject1Id(curveId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
+                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }

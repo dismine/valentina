@@ -62,7 +62,7 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
       controlPoints(),
       sceneType(SceneObject::Unknown),
       m_isHovered(false),
-      detailsMode(qApp->Settings()->IsShowCurveDetails()),
+      detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails()),
       m_acceptHoverEvents(true),
       m_parentRefresh(false)
 {
@@ -96,7 +96,8 @@ QPainterPath VAbstractSpline::shape() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal width = ScaleWidth(m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+    const qreal width = ScaleWidth(m_isHovered ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
+                                               : VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                    SceneScale(scene()));
 
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
@@ -202,8 +203,8 @@ QString VAbstractSpline::MakeToolTip() const
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(curve->GetLength()))
-                                .arg(UnitsToStr(qApp->patternUnits(), true), tr("Label"), curve->ObjectName());
+            .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Label"), curve->ObjectName());
     return toolTip;
 }
 
@@ -364,7 +365,7 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
         QString newAngle1F = QString().setNum(newAngle1);
 
         qreal newLength1 = line.length();
-        QString newLength1F = QString().setNum(qApp->fromPixel(newLength1));
+        QString newLength1F = QString().setNum(VAbstractValApplication::VApp()->fromPixel(newLength1));
 
         if (not qmu::QmuTokenParser::IsSingle(spline.GetStartAngleFormula()))
         {
@@ -394,7 +395,7 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
         QString newAngle2F = QString().setNum(newAngle2);
 
         qreal newLength2 = line.length();
-        QString newLength2F = QString().setNum(qApp->fromPixel(newLength2));
+        QString newLength2F = QString().setNum(VAbstractValApplication::VApp()->fromPixel(newLength2));
 
         if (not qmu::QmuTokenParser::IsSingle(spline.GetEndAngleFormula()))
         {

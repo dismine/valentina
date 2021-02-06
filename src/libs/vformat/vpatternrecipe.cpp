@@ -116,7 +116,8 @@ QDomElement VPatternRecipe::Prerequisite()
     QDomElement prerequisiteElement = createElement(QStringLiteral("prerequisite"));
 
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), APP_VERSION_STR));
-    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"), UnitsToStr(qApp->patternUnits())));
+    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"),
+                                                          UnitsToStr(VAbstractValApplication::VApp()->patternUnits())));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("author"), m_pattern->GetCompanyName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("pattenName"), m_pattern->GetPatternName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("description"), m_pattern->GetDescription()));
@@ -440,8 +441,8 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const 
         const QString errorMsg = QString("%1\n\n%1").arg(tr("Reading final measurements error."),
                                                          tr("Value for final measurtement '%1' is infinite or NaN. "
                                                             "Please, check your calculations.").arg(fm.name));
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);
@@ -595,10 +596,10 @@ QDomElement VPatternRecipe::Spline(const VToolRecord &record)
     SetAttribute(step, AttrAngle2Value, spl.GetEndAngle());
 
     SetAttribute(step, AttrLength1, spl.GetC1LengthFormula());
-    SetAttribute(step, AttrLength1Value, qApp->fromPixel(spl.GetC1Length()));
+    SetAttribute(step, AttrLength1Value, VAbstractValApplication::VApp()->fromPixel(spl.GetC1Length()));
 
     SetAttribute(step, AttrLength2, spl.GetC2LengthFormula());
-    SetAttribute(step, AttrLength2Value, qApp->fromPixel(spl.GetC2Length()));
+    SetAttribute(step, AttrLength2Value, VAbstractValApplication::VApp()->fromPixel(spl.GetC2Length()));
 
     CurveAttributes(step, tool);
 
@@ -693,10 +694,10 @@ QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
         SetAttribute(node, AttrAngle2Value, pathNode.Angle2());
 
         SetAttribute(node, AttrLength1, pathNode.Length1Formula());
-        SetAttribute(node, AttrLength1Value, qApp->fromPixel(pathNode.Length1()));
+        SetAttribute(node, AttrLength1Value, VAbstractValApplication::VApp()->fromPixel(pathNode.Length1()));
 
         SetAttribute(node, AttrLength2, pathNode.Length2Formula());
-        SetAttribute(node, AttrLength2Value, qApp->fromPixel(pathNode.Length2()));
+        SetAttribute(node, AttrLength2Value, VAbstractValApplication::VApp()->fromPixel(pathNode.Length2()));
 
         nodes.appendChild(node);
     }

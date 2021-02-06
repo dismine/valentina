@@ -177,7 +177,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
                                 "<b>%2</b> - finish creation")
                              .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
 
-                if (not qApp->getCurrentScene()->items().contains(visPath))
+                if (not VAbstractValApplication::VApp()->getCurrentScene()->items().contains(visPath))
                 {
                     visPath->VisualMode(NULL_ID);
                 }
@@ -465,7 +465,8 @@ void DialogPiecePath::NodeChanged(int index)
             {
                 this->DeployWidthBeforeFormulaTextEdit();
             }
-            w1Formula = qApp->TrVars()->FormulaToUser(w1Formula, qApp->Settings()->GetOsSeparator());
+            w1Formula = VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(w1Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             ui->plainTextEditFormulaWidthBefore->setPlainText(w1Formula);
             MoveCursorToEnd(ui->plainTextEditFormulaWidthBefore);
 
@@ -482,7 +483,8 @@ void DialogPiecePath::NodeChanged(int index)
             {
                 this->DeployWidthAfterFormulaTextEdit();
             }
-            w2Formula = qApp->TrVars()->FormulaToUser(w2Formula, qApp->Settings()->GetOsSeparator());
+            w2Formula = VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(w2Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             ui->plainTextEditFormulaWidthAfter->setPlainText(w2Formula);
             MoveCursorToEnd(ui->plainTextEditFormulaWidthAfter);
 
@@ -537,7 +539,8 @@ void DialogPiecePath::PassmarkChanged(int index)
                 ui->groupBoxManualLength->setChecked(true);
 
                 QString passmarkLength = node.GetFormulaPassmarkLength();
-                passmarkLength = qApp->TrVars()->FormulaToUser(passmarkLength, qApp->Settings()->GetOsSeparator());
+                passmarkLength = VAbstractApplication::VApp()->TrVars()
+                        ->FormulaToUser(passmarkLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
                 if (passmarkLength.length() > 80)// increase height if needed.
                 {
                     this->DeployPassmarkLength();
@@ -545,8 +548,8 @@ void DialogPiecePath::PassmarkChanged(int index)
 
                 if (passmarkLength.isEmpty())
                 {
-                    qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
-                    ui->plainTextEditPassmarkLength->setPlainText(qApp->LocaleToString(length));
+                    qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+                    ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
                 }
                 else
                 {
@@ -555,8 +558,8 @@ void DialogPiecePath::PassmarkChanged(int index)
             }
             else
             {
-                qreal length = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
-                ui->plainTextEditPassmarkLength->setPlainText(qApp->LocaleToString(length));
+                qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+                ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
             }
 
             MoveCursorToEnd(ui->plainTextEditPassmarkLength);
@@ -643,7 +646,8 @@ void DialogPiecePath::PassmarkChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefBefore()
 {
-    const QString def = qApp->TrVars()->FormulaToUser(currentSeamAllowance, qApp->Settings()->GetOsSeparator());
+    const QString def = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormulaWidthBefore->setPlainText(def);
     if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
     {
@@ -654,7 +658,8 @@ void DialogPiecePath::ReturnDefBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefAfter()
 {
-    const QString def = qApp->TrVars()->FormulaToUser(currentSeamAllowance, qApp->Settings()->GetOsSeparator());
+    const QString def = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormulaWidthAfter->setPlainText(def);
     if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
     {
@@ -796,7 +801,7 @@ void DialogPiecePath::EvalWidth()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditWidth;
     formulaData.labelResult = ui->labelResultWidth;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
@@ -827,7 +832,7 @@ void DialogPiecePath::EvalWidthBefore()
         formulaData.variables = data->DataVariables();
         formulaData.labelEditFormula = ui->labelEditBefore;
         formulaData.labelResult = ui->labelResultBefore;
-        formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
         formulaData.checkZero = false;
         formulaData.checkLessThanZero = true;
 
@@ -862,7 +867,7 @@ void DialogPiecePath::EvalWidthAfter()
         formulaData.variables = data->DataVariables();
         formulaData.labelEditFormula = ui->labelEditAfter;
         formulaData.labelResult = ui->labelResultAfter;
-        formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
         formulaData.checkZero = false;
         formulaData.checkLessThanZero = true;
 
@@ -910,14 +915,15 @@ void DialogPiecePath::EvalPassmarkLength()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditPassmarkLength;
     formulaData.labelResult = ui->labelResultPassmarkLength;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkZero = false;
     formulaData.checkLessThanZero = false;
 
     Eval(formulaData, m_flagFormulaPassmarkLength);
 
-    UpdateNodePassmarkLength(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditPassmarkLength->toPlainText(),
-                                                                qApp->Settings()->GetOsSeparator()));
+    UpdateNodePassmarkLength(VAbstractApplication::VApp()->TrVars()
+                             ->TryFormulaFromUser(ui->plainTextEditPassmarkLength->toPlainText(),
+                                                  VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -927,7 +933,7 @@ void DialogPiecePath::FXWidth()
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaSAWidth(dialog->GetFormula());
@@ -941,7 +947,7 @@ void DialogPiecePath::FXWidthBefore()
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaSAWidthBefore());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSABefore(dialog->GetFormula());
@@ -955,7 +961,7 @@ void DialogPiecePath::FXWidthAfter()
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaSAWidthAfter());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSAAfter(dialog->GetFormula());
@@ -980,7 +986,7 @@ void DialogPiecePath::FXPassmarkLength()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark length"));
     dialog->SetFormula(GetFormulaPassmarkLength());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaPassmarkLength(dialog->GetFormula());
@@ -1099,8 +1105,8 @@ void DialogPiecePath::InitSeamAllowanceTab()
     connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogPiecePath::EvalWidthAfter);
 
     // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
-    m_saWidth = UnitConvertor(1, Unit::Cm, qApp->patternUnits());
-    ui->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
+    m_saWidth = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+    ui->plainTextEditFormulaWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(m_saWidth));
 
     InitNodesList();
     connect(ui->comboBoxNodes, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
@@ -1499,7 +1505,8 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
         return;
     }
 
-    const QString width = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -1556,7 +1563,8 @@ void DialogPiecePath::SetPieceId(quint32 id)
 QString DialogPiecePath::GetFormulaSAWidth() const
 {
     QString width = ui->plainTextEditFormulaWidth->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1666,27 +1674,31 @@ void DialogPiecePath::NewItem(const VPieceNode &node)
 QString DialogPiecePath::GetFormulaSAWidthBefore() const
 {
     QString width = ui->plainTextEditFormulaWidthBefore->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPiecePath::GetFormulaSAWidthAfter() const
 {
     QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPiecePath::GetFormulaVisible() const
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetFormulaVisible(const QString &formula)
 {
-    const QString f = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {
@@ -1700,13 +1712,15 @@ void DialogPiecePath::SetFormulaVisible(const QString &formula)
 QString DialogPiecePath::GetFormulaPassmarkLength() const
 {
     QString formula = ui->plainTextEditPassmarkLength->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetFormulaPassmarkLength(const QString &formula)
 {
-    const QString f = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {

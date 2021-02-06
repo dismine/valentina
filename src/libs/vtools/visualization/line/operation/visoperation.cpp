@@ -66,7 +66,7 @@ void VisOperation::SetObjects(const QVector<quint32> &objects)
 void VisOperation::VisualMode(const quint32 &pointId)
 {
     Q_UNUSED(pointId)
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
 
     Visualization::scenePos = scene->getScenePos();

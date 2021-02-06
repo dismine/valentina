@@ -599,7 +599,8 @@ void InitLanguages(QComboBox *combobox)
     combobox->clear();
 
     QStringList fileNames;
-    QDirIterator it(qApp->translationsPath(), QStringList("valentina_*.qm"), QDir::Files, QDirIterator::Subdirectories);
+    QDirIterator it(VAbstractApplication::VApp()->translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
+                    QDirIterator::Subdirectories);
     while (it.hasNext())
     {
         it.next();
@@ -636,7 +637,7 @@ void InitLanguages(QComboBox *combobox)
     }
 
     // set default translators and language checked
-    qint32 index = combobox->findData(qApp->Settings()->GetLocale());
+    qint32 index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetLocale());
     if (index != -1)
     {
         combobox->setCurrentIndex(index);

@@ -39,7 +39,7 @@ const qreal minVisibleFontSize = 5;
 
 inline qreal DefPointRadiusPixel()
 {
-    return (qApp->Settings()->GetLineWidth() + 0.8) / 25.4 * PrintDPI;
+    return (VAbstractApplication::VApp()->Settings()->GetLineWidth() + 0.8) / 25.4 * PrintDPI;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

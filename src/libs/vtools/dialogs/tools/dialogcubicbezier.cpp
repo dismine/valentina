@@ -106,7 +106,7 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
     ChangeCurrentData(ui->comboBoxPenStyle, spl.GetPenStyle());
     ChangeCurrentData(ui->comboBoxColor, spl.GetColor());
 
-    ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
+    ui->lineEditSplineName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(spl.name()));
     ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
 
     originAliasSuffix = spl.GetAliasSuffix();
@@ -200,7 +200,7 @@ void DialogCubicBezier::PointNameChanged()
             getCurrentObjectId(ui->comboBoxP4) == spl.GetP4().id())
         {
             newDuplicate = -1;
-            ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
+            ui->lineEditSplineName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(spl.name()));
         }
         else
         {
@@ -213,7 +213,7 @@ void DialogCubicBezier::PointNameChanged()
                     newDuplicate = static_cast<qint32>(DNumber(spline.name()));
                     spline.SetDuplicate(static_cast<quint32>(newDuplicate));
                 }
-                ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spline.name()));
+                ui->lineEditSplineName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(spline.name()));
             }
             catch (const VExceptionBadId &)
             {

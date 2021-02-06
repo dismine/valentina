@@ -297,11 +297,12 @@ void DialogEditLabel::NewTemplate()
 void DialogEditLabel::ExportTemplate()
 {
     QString filters(tr("Label template") + QLatin1String("(*.xml)"));
-    const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
+    const QString path =
+            VCommonSettings::PrepareLabelTemplates(VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
                                                     path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
-                                                    filters, nullptr, qApp->NativeFileDialog());
+                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -349,9 +350,10 @@ void DialogEditLabel::ImportTemplate()
 
     QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
     //Use standard path to label templates
-    const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
+    const QString path =
+            VCommonSettings::PrepareLabelTemplates(VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
-                                                          qApp->NativeFileDialog());
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (fileName.isEmpty())
     {
         return;
@@ -483,7 +485,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
 void DialogEditLabel::InitPlaceholders()
 {
     // Pattern tags
-    QLocale locale(qApp->Settings()->GetLocale());
+    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
 
     const QString date = locale.toString(QDate::currentDate(), m_doc->GetLabelDateFormat());
     m_placeholders.insert(pl_date, qMakePair(tr("Date"), date));
@@ -495,18 +497,25 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_patternNumber, qMakePair(tr("Pattern number"), m_doc->GetPatternNumber()));
     m_placeholders.insert(pl_author, qMakePair(tr("Company name or designer name"), m_doc->GetCompanyName()));
 
-    m_placeholders.insert(pl_mUnits, qMakePair(tr("Measurements units"), UnitsToStr(qApp->MeasurementsUnits(), true)));
-    m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"), UnitsToStr(qApp->patternUnits(), true)));
-    m_placeholders.insert(pl_mSizeUnits, qMakePair(tr("Size units"), UnitsToStr(qApp->DimensionSizeUnits(), true)));
+    m_placeholders.insert(pl_mUnits, qMakePair(tr("Measurements units"),
+                                               UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true)));
+    m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"),
+                                               UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
+    m_placeholders.insert(pl_mSizeUnits, qMakePair(tr("Size units"),
+                                                   UnitsToStr(VAbstractValApplication::VApp()->DimensionSizeUnits(),
+                                                              true)));
 
-    if (qApp->GetMeasurementsType() == MeasurementsType::Individual)
+    if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
     {
-        m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), qApp->GetCustomerName()));
+        m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"),
+                                                     VAbstractValApplication::VApp()->GetCustomerName()));
 
-        const QString birthDate = locale.toString(qApp->GetCustomerBirthDate(), m_doc->GetLabelDateFormat());
+        const QString birthDate = locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(),
+                                                  m_doc->GetLabelDateFormat());
         m_placeholders.insert(pl_birthDate, qMakePair(tr("Customer birth date"), birthDate));
 
-        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"), qApp->CustomerEmail()));
+        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"),
+                                                  VAbstractValApplication::VApp()->CustomerEmail()));
     }
     else
     {
@@ -520,20 +529,24 @@ void DialogEditLabel::InitPlaceholders()
 
     m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
 
-    const QString patternFilePath = QFileInfo(qApp->GetPatternPath()).baseName();
+    const QString patternFilePath = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).baseName();
     m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"), patternFilePath));
 
     const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
 
-    m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), QString::number(qApp->GetDimensionHeight())));
-    m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"), QString::number(qApp->GetDimensionSize())));
-    m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), QString::number(qApp->GetDimensionHip())));
-    m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), QString::number(qApp->GetDimensionWaist())));
+    m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"),
+                                               QString::number(VAbstractValApplication::VApp()->GetDimensionHeight())));
+    m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"),
+                                             QString::number(VAbstractValApplication::VApp()->GetDimensionSize())));
+    m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"),
+                                            QString::number(VAbstractValApplication::VApp()->GetDimensionHip())));
+    m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"),
+                                              QString::number(VAbstractValApplication::VApp()->GetDimensionWaist())));
     m_placeholders.insert(pl_mExt,
                           qMakePair(tr("Measurments extension"),
-                                    qApp->GetMeasurementsType() == MeasurementsType::Multisize ? QString("vst")
-                                                                                               : QString("vit")));
+                                   VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
+                                    ? QString("vst") : QString("vit")));
 
     const QString materialDescription = tr("User material");
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();
@@ -582,8 +595,8 @@ void DialogEditLabel::InitPlaceholders()
             {
                 const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
                                                      "line %1: %2.").arg(i+1).arg(e.GetMsg());
-                qApp->IsPedantic() ? throw VException(errorMsg) :
-                                     qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
     }
@@ -614,8 +627,8 @@ QString DialogEditLabel::ReplacePlaceholders(QString line) const
     {
         if (line.contains(per+placeholder+per) && m_placeholders.value(placeholder).second == QChar('0'))
         {
-            qApp->IsPedantic() ? throw VException(errorMsg) :
-                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     };
 

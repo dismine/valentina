@@ -62,7 +62,7 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int posit
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
     {
-        if (token == i.value().translate(qApp->Settings()->GetLocale()))
+        if (token == i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()))
         {
             newFormula.replace(position, token.length(), i.key());
             bias = token.length() - i.key().length();
@@ -79,7 +79,7 @@ QString VTranslateMeasurements::MFromUser(const QString &measurement) const
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
     {
-        const QString translated = i.value().translate(qApp->Settings()->GetLocale());
+        const QString translated = i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale());
         if (measurement == translated)
         {
             return i.key();
@@ -94,7 +94,7 @@ QString VTranslateMeasurements::MToUser(const QString &measurement) const
 {
     if (measurements.contains(measurement))
     {
-        return measurements.value(measurement).translate(qApp->Settings()->GetLocale());
+        return measurements.value(measurement).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
     }
     else
     {
@@ -126,7 +126,7 @@ QString VTranslateMeasurements::GuiText(const QString &measurement) const
 {
     if (guiTexts.contains(measurement))
     {
-        return guiTexts.value(measurement).translate(qApp->Settings()->GetLocale());
+        return guiTexts.value(measurement).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
     }
     else
     {
@@ -139,7 +139,7 @@ QString VTranslateMeasurements::Description(const QString &measurement) const
 {
     if (descriptions.contains(measurement))
     {
-        return descriptions.value(measurement).translate(qApp->Settings()->GetLocale());
+        return descriptions.value(measurement).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
     }
     else
     {

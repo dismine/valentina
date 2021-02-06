@@ -50,7 +50,8 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
     //moved from ReadSettings - well...it seems it can be done once only (i.e. constructor) because Init funcs dont
     //even cleanse lists before adding
@@ -764,8 +765,9 @@ void DialogLayoutSettings::InitPaperUnits()
     ui->comboBoxPaperSizeUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
 
     // set default unit
-    oldPaperUnit = StrToUnits(qApp->ValentinaSettings()->GetUnit());
-    const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(qApp->ValentinaSettings()->GetUnit());
+    oldPaperUnit = StrToUnits(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxPaperSizeUnit->setCurrentIndex(indexUnit);
@@ -780,8 +782,9 @@ void DialogLayoutSettings::InitLayoutUnits()
     ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
 
     // set default unit
-    oldLayoutUnit = StrToUnits(qApp->ValentinaSettings()->GetUnit());
-    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
+    oldLayoutUnit = StrToUnits(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
@@ -1016,7 +1019,7 @@ void DialogLayoutSettings::MinimumLayoutSize()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::ReadSettings()
 {
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     SetLayoutWidth(settings->GetLayoutWidth());
     SetNestingTime(settings->GetNestingTime());
     SetEfficiencyCoefficient(settings->GetEfficiencyCoefficient());
@@ -1048,7 +1051,7 @@ void DialogLayoutSettings::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::WriteSettings() const
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetLayoutWidth(GetLayoutWidth());
     settings->SetLayoutGroup(GetGroup());
     settings->SetLayoutPaperHeight(GetPaperHeight());

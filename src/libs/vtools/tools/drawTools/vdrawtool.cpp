@@ -132,7 +132,7 @@ void VDrawTool::ApplyToolOptions(const QList<quint32> &oldDependencies, const QL
         SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
                                                            newDependencies, doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
+        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
     }
 }
 
@@ -162,7 +162,7 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
         SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(),
                                                            QList<quint32>(), doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
+        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
     }
     else
     {
@@ -261,7 +261,7 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
 
     AddToCalc *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(addToCal);
+    VAbstractApplication::VApp()->getUndoStack()->push(addToCal);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

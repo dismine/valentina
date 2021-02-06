@@ -38,11 +38,6 @@ class VMainGraphicsView;
 class QGraphicsScene;
 class VSettings;
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (qobject_cast<VAbstractValApplication*>(QCoreApplication::instance()))
-
 class VAbstractValApplication : public VAbstractApplication
 {
     Q_OBJECT
@@ -115,6 +110,8 @@ public:
 
     virtual void OpenSettings() override;
     VSettings *ValentinaSettings();
+
+    static VAbstractValApplication *VApp();
 
 protected:
     QString m_customerName{};

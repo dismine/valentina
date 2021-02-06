@@ -72,7 +72,7 @@ VScaledEllipse *InitPointItem(const QColor &color, QGraphicsItem *parent, qreal 
     visPen.setColor(color);
 
     point->setPen(visPen);
-    point->setRect(PointRect(ScaledRadius(SceneScale(qApp->getCurrentScene()))));
+    point->setRect(PointRect(ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))));
     point->setPos(QPointF());
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
     point->setZValue(z);
@@ -133,7 +133,7 @@ void Visualization::setScenePos(const QPointF &value)
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::VisualMode(const quint32 &pointId)
 {
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
 
     this->object1Id = pointId;
@@ -184,7 +184,7 @@ VScaledEllipse *Visualization::InitPoint(const QColor &color, QGraphicsItem *par
 qreal Visualization::FindLengthFromUser(const QString &expression,
                                         const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
 {
-    return qApp->toPixel(FindValFromUser(expression, vars, fromUser));
+    return VAbstractValApplication::VApp()->toPixel(FindValFromUser(expression, vars, fromUser));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,7 +204,8 @@ qreal Visualization::FindValFromUser(const QString &expression,
             QString formula = expression;
             if (fromUser)
             {
-                formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+                formula = VAbstractApplication::VApp()->TrVars()
+                        ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             }
 
             QScopedPointer<Calculator> cal(new Calculator());

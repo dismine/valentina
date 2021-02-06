@@ -209,17 +209,18 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
     const qreal result = CheckFormula(initData.id, initData.radius, initData.data);
 
     QPointF fPoint;
-    const bool success = VToolPointOfContact::FindPoint(qApp->toPixel(result), static_cast<QPointF>(*centerP),
+    const bool success = VToolPointOfContact::FindPoint(VAbstractValApplication::VApp()->toPixel(result),
+                                                        static_cast<QPointF>(*centerP),
                                                         static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP),
                                                         &fPoint);
 
     if (not success)
     {
-        const QString errorMsg = tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't have "
-                                    "intersection with line (%4;%5)")
+        const QString errorMsg = tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't "
+                                    "have intersection with line (%4;%5)")
                 .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -354,7 +355,8 @@ void VToolPointOfContact::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setLineP2Id(secondPointId);
         visual->setRadiusId(center);
-        visual->setRadius(qApp->TrVars()->FormulaToUser(arcRadius, qApp->Settings()->GetOsSeparator()));
+        visual->setRadius(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(arcRadius, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }
@@ -379,11 +381,12 @@ QString VToolPointOfContact::MakeToolTip() const
                                     "<tr> <td><b>%8:</b> %9°</td> </tr>"
                                     "</table>")
             .arg(QStringLiteral("%1->%2").arg(p1->name(), current->name()))
-            .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), QStringLiteral("%1->%2").arg(p2->name(), current->name()))
-            .arg(qApp->fromPixel(p2ToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(p1ToCur.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                 QStringLiteral("%1->%2").arg(p2->name(), current->name()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(p2ToCur.length()))
             .arg(QStringLiteral("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
-            .arg(qApp->fromPixel(centerToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(centerToCur.length()))
             .arg(QStringLiteral("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
             .arg(centerToCur.angle())
             .arg(tr("Label"), current->name());
@@ -416,7 +419,7 @@ VFormula VToolPointOfContact::getArcRadius() const
     VFormula radius(arcRadius, this->getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
 
     return radius;

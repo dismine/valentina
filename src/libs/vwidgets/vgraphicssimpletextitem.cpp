@@ -91,9 +91,9 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     };
 
     QFont font = this->font();
-    if (font.pointSize() != qApp->Settings()->GetLabelFontSize())
+    if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetLabelFontSize())
     {
-        font.setPointSize(qApp->Settings()->GetLabelFontSize());
+        font.setPointSize(VAbstractApplication::VApp()->Settings()->GetLabelFontSize());
         setFont(font);
     }
 
@@ -239,7 +239,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     }
     else
     {
-        setCursor(qApp->getSceneView()->viewport()->cursor());
+        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
     }
 
     this->setBrush(Qt::green);
@@ -369,8 +369,8 @@ void VGraphicsSimpleTextItem::Init()
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
-    font.setPointSize(qApp->Settings()->GetLabelFontSize());
+    font.setPointSize(VAbstractApplication::VApp()->Settings()->GetLabelFontSize());
     setFont(font);
-    m_oldScale = minVisibleFontSize / qApp->Settings()->GetLabelFontSize();
+    m_oldScale = minVisibleFontSize / VAbstractApplication::VApp()->Settings()->GetLabelFontSize();
     setScale(m_oldScale);
 }

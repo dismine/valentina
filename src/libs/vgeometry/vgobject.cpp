@@ -271,8 +271,8 @@ QString VGObject::GetAliasSuffix() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VGObject::ObjectName() const
 {
-    const QString alias = qApp->TrVars()->VarToUser(d->m_alias);
-    const QString name = qApp->TrVars()->VarToUser(d->_name);
+    const QString alias = VAbstractApplication::VApp()->TrVars()->VarToUser(d->m_alias);
+    const QString name = VAbstractApplication::VApp()->TrVars()->VarToUser(d->_name);
     return not d->m_alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
 }
 

@@ -39,7 +39,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 QStringList PrepareKnowMaterials(const QStringList &patternMaterials, bool rememberPM)
 {
-    QStringList knownMaterials = qApp->ValentinaSettings()->GetKnownMaterials();
+    QStringList knownMaterials = VAbstractValApplication::VApp()->ValentinaSettings()->GetKnownMaterials();
 
     if (rememberPM)
     {

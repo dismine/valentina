@@ -143,7 +143,7 @@ VToolCutSpline* VToolCutSpline::Create(VToolCutInitData &initData)
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
+    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -267,7 +267,8 @@ void VToolCutSpline::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(baseCurveId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
         visual->setLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
@@ -281,11 +282,12 @@ QString VToolCutSpline::MakeToolTip() const
 {
     const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(baseCurveId);
 
-    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString expression = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(qApp->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3);
+    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3);
 
     VSpline spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
     VSpline spline2 = VSpline(VPointF(point), spl2p2, spl2p3, spl->GetP4());
@@ -300,9 +302,10 @@ QString VToolCutSpline::MakeToolTip() const
                                     "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                                     "</table>")
             .arg(curveStr + QLatin1String("1 ") + lengthStr)
-            .arg(qApp->fromPixel(spline1.GetLength()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), curveStr + QLatin1String("2 ") + lengthStr)
-            .arg(qApp->fromPixel(spline2.GetLength()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(spline1.GetLength()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                 curveStr + QLatin1String("2 ") + lengthStr)
+            .arg(VAbstractValApplication::VApp()->fromPixel(spline2.GetLength()))
             .arg(curveStr + QLatin1String(" 1") + tr("label"), spline1.ObjectName(),
                  curveStr + QLatin1String(" 2") + tr("label"), spline2.ObjectName());
 

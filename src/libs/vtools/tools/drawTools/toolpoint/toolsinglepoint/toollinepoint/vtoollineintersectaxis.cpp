@@ -136,8 +136,8 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisIni
         const QString errorMsg = tr("Error calculating point '%1'. Line (%2;%3) doesn't have intersection with axis "
                                     "through point '%4' and angle %5°")
                       .arg(initData.name, firstPoint->name(), secondPoint->name(), basePoint->name()).arg(axis.angle());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -322,7 +322,8 @@ void VToolLineIntersectAxis::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
+                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
@@ -348,13 +349,13 @@ QString VToolLineIntersectAxis::MakeToolTip() const
                                     "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QString("%1->%2").arg(firstPoint->name(), current->name()))
-            .arg(qApp->fromPixel(firstToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(firstToCur.length()))
             .arg(QString("%1->%2").arg(current->name(), secondPoint->name()))
-            .arg(qApp->fromPixel(curToSecond.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curToSecond.length()))
             .arg(tr("Label"), current->name());
     return toolTip;
 }

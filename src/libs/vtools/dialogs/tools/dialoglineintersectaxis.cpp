@@ -77,7 +77,8 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, quint32
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    ui->lineEditNamePoint->setText(
+                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -149,13 +150,15 @@ void DialogLineIntersectAxis::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogLineIntersectAxis::GetAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::SetAngle(const QString &value)
 {
-    formulaAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaAngle = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formulaAngle.length() > 80)
@@ -247,13 +250,14 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
             }
 
             /*We will ignore click if poinet is in point circle*/
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            VMainGraphicsScene *scene =
+                    qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            if (line.length() <= ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
             {
                 return;
             }
@@ -286,7 +290,8 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         number++;
                         line->VisualMode(id);
-                        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+                        VAbstractMainWindow *window =
+                                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(line, &VisToolLineIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                     }

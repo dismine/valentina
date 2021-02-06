@@ -35,6 +35,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/calculator.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "../core/vapplication.h"
 #include <qnumeric.h>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
@@ -66,9 +67,8 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
     const bool freshCall = true;
@@ -151,7 +151,7 @@ bool DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event)
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
             if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
-                if (qApp->Settings()->GetOsSeparator())
+                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
                     textEdit->insert(QLocale().decimalPoint());
                 }
@@ -186,7 +186,7 @@ void DialogFinalMeasurements::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = qApp->Settings()->GetFinalMeasurementsDialogSize();
+    const QSize sz = VAbstractApplication::VApp()->Settings()->GetFinalMeasurementsDialogSize();
     if (not sz.isEmpty())
     {
         resize(sz);
@@ -203,7 +203,7 @@ void DialogFinalMeasurements::resizeEvent(QResizeEvent *event)
     // dialog creating, which would
     if (m_isInitialized)
     {
-        qApp->Settings()->SetFinalMeasurementsDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetFinalMeasurementsDialogSize(size());
     }
     QDialog::resizeEvent(event);
 }
@@ -228,7 +228,8 @@ void DialogFinalMeasurements::ShowFinalMeasurementDetails()
         EvalUserFormula(m.formula, false);
         ui->plainTextEditFormula->blockSignals(true);
 
-        const QString formula = VTranslateVars::TryFormulaToUser(m.formula, qApp->Settings()->GetOsSeparator());
+        const QString formula =
+                VTranslateVars::TryFormulaToUser(m.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         ui->plainTextEditFormula->setPlainText(formula);
         ui->plainTextEditFormula->blockSignals(false);
@@ -373,7 +374,7 @@ void DialogFinalMeasurements::SaveFormula()
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnits());
+        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
         ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
@@ -381,7 +382,7 @@ void DialogFinalMeasurements::SaveFormula()
     if (text.isEmpty())
     {
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnits());
+        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -393,7 +394,8 @@ void DialogFinalMeasurements::SaveFormula()
 
     try
     {
-        m_measurements[row].formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
+        m_measurements[row].formula = VAbstractApplication::VApp()->TrVars()
+                ->FormulaFromUser(text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {
@@ -453,9 +455,10 @@ void DialogFinalMeasurements::Fx()
 
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
     dialog->setWindowTitle(tr("Edit measurement"));
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
-                                                          qApp->Settings()->GetOsSeparator()));
-    const QString postfix = UnitsToStr(qApp->patternUnits(), true);
+    dialog->SetFormula(VAbstractApplication::VApp()->TrVars()
+                       ->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)
@@ -494,9 +497,12 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 
         bool ok = true;
         const qreal result = EvalFormula(m.formula, ok);
-        AddCell(qApp->LocaleToString(result), i, 1, Qt::AlignHCenter | Qt::AlignVCenter, ok); // calculated value
+        AddCell(VAbstractApplication::VApp()
+                ->LocaleToString(result), i, 1, Qt::AlignHCenter | Qt::AlignVCenter, ok); // calculated value
 
-        const QString formula = VTranslateVars::TryFormulaFromUser(m.formula, qApp->Settings()->GetOsSeparator());
+        const QString formula =
+                VTranslateVars::TryFormulaFromUser(m.formula,
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         AddCell(formula, i, 2, Qt::AlignVCenter); // formula
 
     }
@@ -513,7 +519,7 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::ShowUnits()
 {
-    const QString unit = UnitsToStr(qApp->patternUnits());
+    const QString unit = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
 
     {
         // calculated value
@@ -554,7 +560,8 @@ void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, 
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromUser)
 {
-    const QString postfix = UnitsToStr(qApp->patternUnits());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix =
+            UnitsToStr(VAbstractValApplication::VApp()->patternUnits());//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
@@ -569,7 +576,8 @@ bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromU
             // Replace line return character with spaces for calc if exist
             if (fromUser)
             {
-                f = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+                f = VAbstractApplication::VApp()->TrVars()
+                        ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             }
             else
             {
@@ -586,7 +594,8 @@ bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromU
                 return false;
             }
 
-            ui->labelCalculatedValue->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + postfix);
+            ui->labelCalculatedValue->setText(
+                        VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
             ui->labelCalculatedValue->setToolTip(tr("Value"));
             return true;
         }

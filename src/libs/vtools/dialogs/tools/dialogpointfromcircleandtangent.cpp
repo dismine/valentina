@@ -68,7 +68,8 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    ui->lineEditNamePoint->setText(
+                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     this->formulaBaseHeightCircleRadius = ui->plainTextEditRadius->height();
 
@@ -146,14 +147,16 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointFromCircleAndTangent::GetCircleRadius() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditRadius->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(ui->plainTextEditRadius->toPlainText(),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -275,7 +278,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetCircleRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCircleRadius(dialog->GetFormula());
@@ -291,7 +294,7 @@ void DialogPointFromCircleAndTangent::EvalCircleRadius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius;
     formulaData.labelResult = ui->labelResultCircleRadius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagCircleRadius);
 

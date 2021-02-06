@@ -76,8 +76,9 @@ void AddToCalc::undo()
         return;
     }
     emit NeedFullParsing();
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
     }
@@ -118,7 +119,8 @@ void AddToCalc::redo()
         return;
     }
     RedoFullParsing();
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,7 +129,7 @@ void AddToCalc::RedoFullParsing()
     if (redoFlag)
     {
         emit NeedFullParsing();
-        if (qApp->GetDrawMode() == Draw::Calculation)
+        if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
             emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
         }

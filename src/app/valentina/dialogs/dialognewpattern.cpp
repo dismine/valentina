@@ -46,7 +46,8 @@ DialogNewPattern::DialogNewPattern(VContainer *data, const QString &patternPiece
 
     ui->lineEditName->setClearButtonEnabled(true);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
     QRect position = this->frameGeometry();
     position.moveCenter(QGuiApplication::primaryScreen()->availableGeometry().center());
@@ -115,7 +116,8 @@ void DialogNewPattern::InitUnits()
     ui->comboBoxUnits->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
 
     // set default unit
-    const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->ValentinaSettings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxUnits->findData(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxUnits->setCurrentIndex(indexUnit);

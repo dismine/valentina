@@ -124,8 +124,8 @@ VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initD
 {
     qreal calcRadius = 0, calcF1 = 0, calcLength = 0;
 
-    calcRadius = qApp->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
-    calcLength = qApp->toPixel(CheckFormula(initData.id, initData.length, initData.data));
+    calcRadius = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
+    calcLength = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.length, initData.data));
     calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
@@ -178,7 +178,7 @@ VFormula VToolArcWithLength::GetFormulaRadius() const
     VFormula radius(arc->GetFormulaRadius(), getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -237,7 +237,7 @@ VFormula VToolArcWithLength::GetFormulaLength() const
     VFormula radius(arc->GetFormulaLength(), getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -351,11 +351,14 @@ void VToolArcWithLength::SetVisualization()
         VisToolArcWithLength *visual = qobject_cast<VisToolArcWithLength *>(vis);
         SCASSERT(visual != nullptr)
 
-        const VTranslateVars *trVars = qApp->TrVars();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
         visual->setObject1Id(arc->GetCenter().id());
-        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), qApp->Settings()->GetOsSeparator()));
-        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
-        visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength(), qApp->Settings()->GetOsSeparator()));
+        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(),
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(),
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength(),
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
         visual->setApproximationScale(arc->GetApproximationScale());
         visual->RefreshGeometry();
@@ -375,9 +378,9 @@ QString VToolArcWithLength::MakeToolTip() const
                                     "<tr> <td><b>%8:</b> %9°</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(arc->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Radius"))
-            .arg(qApp->fromPixel(arc->GetRadius()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetLength()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Radius"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetRadius()))
             .arg(tr("Start angle"))
             .arg(arc->GetStartAngle())
             .arg(tr("End angle"))

@@ -151,7 +151,7 @@ void VToolPin::AddToFile()
         newDet.GetPins().append(m_id);
         incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
 
-        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
+        VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
 

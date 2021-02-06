@@ -71,7 +71,7 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
     qreal numSteps = 0;
-    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    VSettings *settings = qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings());
 
     if (not numPixels.isNull())
     {
@@ -106,7 +106,8 @@ qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
         scheduledScrollings += numSteps;
     }
 
-    scheduledScrollings *= qobject_cast<VSettings *>(qApp->Settings())->GetScrollingAcceleration();
+    scheduledScrollings *=
+            qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings())->GetScrollingAcceleration();
 
     return scheduledScrollings;
 }
@@ -198,7 +199,7 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::InitScrollingAnimation()
 {
-    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    VSettings *settings = qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings());
 
     if (not verticalScrollAnim.isNull())
     {
@@ -429,7 +430,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
       m_oldCursor(),
       m_currentCursor(Qt::ArrowCursor)
 {
-    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    VSettings *settings = qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings());
     if (settings && settings->IsOpenGLRender())
     {
         QOpenGLWidget *viewport = new QOpenGLWidget();
@@ -643,7 +644,8 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && qApp->Settings()->IsDoubleClickZoomFitBestCurrentPP())
+    if (event->button() == Qt::LeftButton &&
+            VAbstractApplication::VApp()->Settings()->IsDoubleClickZoomFitBestCurrentPP())
     {
         emit ZoomFitBestCurrent();
     }

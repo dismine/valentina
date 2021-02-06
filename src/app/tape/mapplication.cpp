@@ -151,7 +151,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     QString logMsg = msg;
-    const bool isWarningMessage = qApp->IsWarningMessage(msg);
+    const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
     if (isWarningMessage)
     {
         logMsg = logMsg.remove(VAbstractApplication::warningMessageSignature);
@@ -219,7 +219,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            if (not qApp->IsTestMode())
+            if (not MApplication::VApp()->IsTestMode())
             {
                 if (topWinAllowsPop)
                 {
@@ -432,7 +432,7 @@ void MApplication::InitOptions()
 
 void MApplication::ActivateDarkMode()
 {
-    VTapeSettings *settings = qApp->TapeSettings();
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
      if (settings->GetDarkMode())
      {
          QFile f(":qdarkstyle/style.qss");
@@ -840,11 +840,17 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto MApplication::VApp() -> MApplication *
+{
+    return qobject_cast<MApplication*>(QCoreApplication::instance());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 TMainWindow *MApplication::NewMainWindow()
 {
     TMainWindow *tape = new TMainWindow();
     mainWindows.prepend(tape);
-    if (not qApp->IsTestMode())
+    if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
     }

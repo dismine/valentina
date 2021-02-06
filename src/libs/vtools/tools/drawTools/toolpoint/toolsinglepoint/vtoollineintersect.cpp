@@ -151,8 +151,8 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
         const QString errorMsg = tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
                                     "intersection")
                 .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -327,13 +327,14 @@ QString VToolLineIntersect::MakeToolTip() const
                                     "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
                                     "</table>")
             .arg(QString("%1->%2").arg(p1L1->name(), current->name()))
-            .arg(qApp->fromPixel(p1L1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), QString("%1->%2").arg(current->name(), p2L1->name()))
-            .arg(qApp->fromPixel(curToP2L1.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(p1L1ToCur.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                 QString("%1->%2").arg(current->name(), p2L1->name()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L1.length()))
             .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
-            .arg(qApp->fromPixel(p1L2ToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(p1L2ToCur.length()))
             .arg(QString("%1->%2").arg(current->name(), p2L2->name()))
-            .arg(qApp->fromPixel(curToP2L2.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L2.length()))
             .arg(tr("Label"), current->name());
     return toolTip;
 }

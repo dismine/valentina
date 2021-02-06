@@ -177,7 +177,8 @@ VToolBisector* VToolBisector::Create(VToolBisectorInitData &initData)
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF fPoint = VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
-                                              static_cast<QPointF>(*thirdPoint), qApp->toPixel(result));
+                                              static_cast<QPointF>(*thirdPoint),
+                                              VAbstractValApplication::VApp()->toPixel(result));
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -304,7 +305,8 @@ void VToolBisector::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setObject2Id(basePointId);
         visual->setObject3Id(thirdPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }

@@ -88,7 +88,7 @@ void VisToolPointOfIntersectionArcs::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionArcs::VisualMode(const quint32 &id)
 {
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
 
     this->arc1Id = id;

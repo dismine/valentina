@@ -139,7 +139,7 @@ void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
         RefreshPointGeometry(*point);
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
     }
 }
@@ -162,7 +162,7 @@ void VToolSinglePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
     {
-        qApp->getUndoStack()->push(new MoveLabel(doc, pos, id));
+        VAbstractApplication::VApp()->getUndoStack()->push(new MoveLabel(doc, pos, id));
     }
 }
 
@@ -320,8 +320,8 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrName, point->name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute(tag, AttrMx, VAbstractValApplication::VApp()->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, VAbstractValApplication::VApp()->fromPixel(point->my()));
     doc->SetAttribute<bool>(tag, AttrShowLabel, point->IsShowLabel());
 }
 
@@ -330,7 +330,7 @@ void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
 {
     if (id == m_id)
     {
-        qApp->getUndoStack()->push(new ShowLabel(doc, id, visible));
+        VAbstractApplication::VApp()->getUndoStack()->push(new ShowLabel(doc, id, visible));
     }
 }
 
@@ -347,7 +347,7 @@ void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
     }
 }

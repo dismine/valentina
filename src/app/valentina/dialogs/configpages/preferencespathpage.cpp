@@ -65,7 +65,7 @@ PreferencesPathPage::~PreferencesPathPage()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList PreferencesPathPage::Apply()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
@@ -137,23 +137,23 @@ void PreferencesPathPage::EditPath()
     switch (row)
     {
         case 0: // individual measurements
-            path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements();
             break;
         case 1: // multisize measurements
-            path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
             path = VCommonSettings::PrepareMultisizeTables(path);
             break;
         case 2: // pattern path
-            path = qApp->ValentinaSettings()->GetPathPattern();
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathPattern();
             break;
         case 3: // layout path
-            path = qApp->ValentinaSettings()->GetPathLayout();
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout();
             break;
         case 4: // templates
-            path = qApp->ValentinaSettings()->GetPathTemplate();
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathTemplate();
             break;
         case 5: // label templates
-            path = qApp->ValentinaSettings()->GetPathLabelTemplate();
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate();
             break;
         default:
             break;
@@ -168,7 +168,7 @@ void PreferencesPathPage::EditPath()
 
     const QString dir = QFileDialog::getExistingDirectory(
         this, tr("Open Directory"), path,
-        qApp->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
+        VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)
@@ -195,7 +195,7 @@ void PreferencesPathPage::InitTable()
     ui->pathTable->setRowCount(6);
     ui->pathTable->setColumnCount(2);
 
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     {
         ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));

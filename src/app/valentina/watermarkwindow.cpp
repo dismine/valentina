@@ -53,7 +53,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
     ui->setupUi(this);
     m_okPathColor = ui->lineEditPath->palette().color(ui->lineEditPath->foregroundRole());
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     UpdateWindowTitle();
 
     m_curFileFormatVersion = VWatermarkConverter::WatermarkMaxVer;
@@ -94,7 +94,8 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
     {
         const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
         const QString fileName = QFileDialog::getOpenFileName(this, tr("Watermark image"), QString(), filter,
-                                                              nullptr, qApp->NativeFileDialog());
+                                                              nullptr,
+                                                              VAbstractApplication::VApp()->NativeFileDialog());
         if (not fileName.isEmpty())
         {
             ui->lineEditPath->setText(fileName);
@@ -241,7 +242,7 @@ void WatermarkWindow::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize sz = qApp->ValentinaSettings()->GetWatermarkEditorSize();
+    QSize sz = VAbstractValApplication::VApp()->ValentinaSettings()->GetWatermarkEditorSize();
     if (sz.isEmpty() == false)
     {
         resize(sz);
@@ -258,7 +259,7 @@ void WatermarkWindow::resizeEvent(QResizeEvent *event)
     // window creating, which would
     if (m_isInitialized)
     {
-        qApp->ValentinaSettings()->SetWatermarkEditorSize(size());
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetWatermarkEditorSize(size());
     }
     QMainWindow::resizeEvent(event);
 }
@@ -285,7 +286,7 @@ bool WatermarkWindow::on_actionSaveAs_triggered()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("watermark") + QLatin1String(".vwm"),
-                                                    filters, nullptr, qApp->NativeFileDialog());
+                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -434,7 +435,7 @@ void WatermarkWindow::on_actionOpen_triggered()
     QString dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
-                                                          qApp->NativeFileDialog());
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (filePath.isEmpty())
     {
         return;
@@ -555,7 +556,7 @@ QString WatermarkWindow::GetWatermarkFileName()
 //---------------------------------------------------------------------------------------------------------------------
 bool WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion)
 {
-    if (qApp->Settings()->GetConfirmFormatRewriting())
+    if (VAbstractApplication::VApp()->Settings()->GetConfirmFormatRewriting())
     {
         Utils::CheckableMessageBox msgBox(this);
         msgBox.setWindowTitle(tr("Confirm format rewriting"));
@@ -571,7 +572,7 @@ bool WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
 
         if (dialogResult == QDialog::Accepted)
         {
-            qApp->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
+            VAbstractApplication::VApp()->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
             return true;
         }
         else
@@ -732,7 +733,7 @@ void WatermarkWindow::ValidatePath()
 void WatermarkWindow::ToolBarStyle(QToolBar *bar)
 {
     SCASSERT(bar != nullptr)
-    if (qApp->Settings()->GetToolBarStyle())
+    if (VAbstractApplication::VApp()->Settings()->GetToolBarStyle())
     {
         bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     }

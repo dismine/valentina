@@ -460,7 +460,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
         default:
             break;
     }
-    qApp->getSceneView()->update();
+    VAbstractValApplication::VApp()->getSceneView()->update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -540,7 +540,7 @@ void VToolOptionsPropertyBrowser::AddPropertyAlias(Tool *i, const QString &prope
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(qApp->TrVars()->VarToUser(i->GetAliasSuffix()));
+    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetAliasSuffix()));
     AddProperty(itemName, AttrAlias);
 }
 
@@ -550,7 +550,7 @@ void VToolOptionsPropertyBrowser::AddPropertyAlias1(Tool *i, const QString &prop
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(qApp->TrVars()->VarToUser(i->GetAliasSuffix1()));
+    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetAliasSuffix1()));
     AddProperty(itemName, AttrAlias1);
 }
 
@@ -560,7 +560,7 @@ void VToolOptionsPropertyBrowser::AddPropertyAlias2(Tool *i, const QString &prop
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(qApp->TrVars()->VarToUser(i->GetAliasSuffix2()));
+    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetAliasSuffix2()));
     AddProperty(itemName, AttrAlias2);
 }
 
@@ -2066,14 +2066,16 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VPE::VProperty *property)
         case 36: // AttrLength1
             if (not f.error() && f.getDoubleValue() >= 0)
             {
-                spl.SetC1Length(qApp->toPixel(f.getDoubleValue()), f.GetFormula(FormulaType::FromUser));
+                spl.SetC1Length(VAbstractValApplication::VApp()->toPixel(f.getDoubleValue()),
+                                f.GetFormula(FormulaType::FromUser));
                 i->setSpline(spl);
             }
             break;
         case 37: // AttrLength2
             if (not f.error() && f.getDoubleValue() >= 0)
             {
-                spl.SetC2Length(qApp->toPixel(f.getDoubleValue()), f.GetFormula(FormulaType::FromUser));
+                spl.SetC2Length(VAbstractValApplication::VApp()->toPixel(f.getDoubleValue()),
+                                f.GetFormula(FormulaType::FromUser));
                 i->setSpline(spl);
             }
             break;
@@ -2887,7 +2889,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VFormula length1(spl.GetC1LengthFormula(), i->getData());
     length1.setCheckZero(false);
     length1.setToolId(i->getId());
-    length1.setPostfix(UnitsToStr(qApp->patternUnits()));
+    length1.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length1.Eval();
     AddPropertyFormula(tr("C1: length:"), length1, AttrLength1);
 
@@ -2901,7 +2903,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VFormula length2(spl.GetC2LengthFormula(), i->getData());
     length2.setCheckZero(false);
     length2.setToolId(i->getId());
-    length2.setPostfix(UnitsToStr(qApp->patternUnits()));
+    length2.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length2.Eval();
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
@@ -3693,7 +3695,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     VFormula length1F(spl.GetC1LengthFormula(), i->getData());
     length1F.setCheckZero(false);
     length1F.setToolId(i->getId());
-    length1F.setPostfix(UnitsToStr(qApp->patternUnits()));
+    length1F.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length1F.Eval();
     QVariant length1;
     length1.setValue(length1F);
@@ -3711,7 +3713,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     VFormula length2F(spl.GetC2LengthFormula(), i->getData());
     length2F.setCheckZero(false);
     length2F.setToolId(i->getId());
-    length2F.setPostfix(UnitsToStr(qApp->patternUnits()));
+    length2F.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length2F.Eval();
     QVariant length2;
     length2.setValue(length2F);

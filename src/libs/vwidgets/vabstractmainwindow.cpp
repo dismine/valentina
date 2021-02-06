@@ -138,7 +138,7 @@ VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
 bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
                                                 const QString &maxFormatVersion)
 {
-    if (qApp->Settings()->GetConfirmFormatRewriting())
+    if (VAbstractApplication::VApp()->Settings()->GetConfirmFormatRewriting())
     {
         Utils::CheckableMessageBox msgBox(this);
         msgBox.setWindowTitle(tr("Confirm format rewriting"));
@@ -154,7 +154,7 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
 
         if (dialogResult == QDialog::Accepted)
         {
-            qApp->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
+            VAbstractApplication::VApp()->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
             return true;
         }
         else
@@ -169,8 +169,8 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
 void VAbstractMainWindow::ToolBarStyle(QToolBar *bar) const
 {
     SCASSERT(bar != nullptr)
-    qApp->Settings()->GetToolBarStyle() ? bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon)
-                                        : bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    VAbstractApplication::VApp()->Settings()->GetToolBarStyle() ? bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon)
+                                                                : bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,7 +181,7 @@ QString VAbstractMainWindow::CSVFilePath()
     const QString path = QDir::homePath() + QChar('/') + tr("values") + QChar('.') + suffix;
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters, nullptr,
-                                                    qApp->NativeFileDialog());
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -222,7 +222,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMainWindow::WindowsLocale()
 {
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -236,17 +236,17 @@ void VAbstractMainWindow::ExportDataToCSV()
     }
 
     DialogExportToCSV dialog(this);
-    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
-    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
-    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+    dialog.SetWithHeader(VAbstractApplication::VApp()->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(VAbstractApplication::VApp()->Settings()->GetCSVCodec());
+    dialog.SetSeparator(VAbstractApplication::VApp()->Settings()->GetCSVSeparator());
 
     if (dialog.exec() == QDialog::Accepted)
     {
         ExportToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
 
-        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
-        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
-        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+        VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
     }
 }
 

@@ -149,9 +149,9 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
                  << "Expression:  " << e.GetExpr() << "\n"
                  << "--------------------------------------";
 
-        if (qApp->IsAppInGUIMode())
+        if (VAbstractApplication::VApp()->IsAppInGUIMode())
         {
-            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(qApp->getMainWindow()));
+            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(VAbstractValApplication::VApp()->getMainWindow()));
             forever
             {
                 if (dialogUndo->exec() == QDialog::Accepted)
@@ -159,7 +159,8 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
                     const UndoButton resultUndo = dialogUndo->Result();
                     if (resultUndo == UndoButton::Fix)
                     {
-                        auto *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
+                        auto *dialog = new DialogEditWrongFormula(data, toolId,
+                                                                  VAbstractValApplication::VApp()->getMainWindow());
                         dialog->setWindowTitle(tr("Edit wrong formula"));
                         dialog->SetFormula(formula);
                         if (dialog->exec() == QDialog::Accepted)
@@ -213,7 +214,7 @@ void VAbstractTool::DeleteToolWithConfirm(bool ask)
     if (_referens == 0)
     {
         qCDebug(vTool, "No children.");
-        emit qApp->getSceneView()->itemClicked(nullptr);
+        emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
             qCDebug(vTool, "Asking.");
@@ -242,18 +243,18 @@ void VAbstractTool::PerformDelete()
     qCDebug(vTool, "Begin deleting.");
     DelTool *delTool = new DelTool(doc, m_id);
     connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(delTool);
+    VAbstractApplication::VApp()->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VAbstractTool::ConfirmDeletion()
 {
-    if (false == qApp->Settings()->GetConfirmItemDelete())
+    if (false == VAbstractApplication::VApp()->Settings()->GetConfirmItemDelete())
     {
         return QMessageBox::Yes;
     }
 
-    Utils::CheckableMessageBox msgBox(qApp->getMainWindow());
+    Utils::CheckableMessageBox msgBox(VAbstractValApplication::VApp()->getMainWindow());
     msgBox.setWindowTitle(tr("Confirm deletion"));
     msgBox.setText(tr("Do you really want to delete?"));
     msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
@@ -264,7 +265,7 @@ int VAbstractTool::ConfirmDeletion()
 
     if (dialogResult == QDialog::Accepted)
     {
-        qApp->Settings()->SetConfirmItemDelete(not msgBox.isChecked());
+        VAbstractApplication::VApp()->Settings()->SetConfirmItemDelete(not msgBox.isChecked());
     }
 
     return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;

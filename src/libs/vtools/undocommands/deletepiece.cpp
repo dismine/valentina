@@ -102,7 +102,7 @@ void DeletePiece::undo()
     m_scene->addItem(m_tool);
     m_tool->ConnectOutsideSignals();
     m_tool->show();
-    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
+    VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
     m_tool.clear();
     emit doc->UpdateInLayoutList();
 }

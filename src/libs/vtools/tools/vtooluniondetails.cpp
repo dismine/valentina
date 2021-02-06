@@ -1766,9 +1766,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const QPointer<DialogTool> &dialog,
     initData.typeCreation = Source::FromGui;
     initData.retainPieces = dialogTool->RetainPieces();
 
-    qApp->getUndoStack()->beginMacro(tr("union details"));
+    VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("union details"));
     VToolUnionDetails* tool = Create(initData);
-    qApp->getUndoStack()->endMacro();
+    VAbstractApplication::VApp()->getUndoStack()->endMacro();
     return tool;
 }
 

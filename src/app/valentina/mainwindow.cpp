@@ -173,8 +173,8 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
         else
         {
             const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(pieceName);
-            qApp->IsPedantic() ? throw VException(errorMsg) :
-                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
 
         ++i;
@@ -236,7 +236,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
     connect(doc, &VPattern::MadeProgress, this, &MainWindow::ShowProgress);
-    qApp->setCurrentDocument(doc);
+    VAbstractValApplication::VApp()->setCurrentDocument(doc);
 
     InitDocksContain();
     CreateMenus();
@@ -254,7 +254,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ToolBarTools();
 
-    connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternChangesWereSaved);
+    connect(VAbstractApplication::VApp()->getUndoStack(), &QUndoStack::cleanChanged, this,
+            &MainWindow::PatternChangesWereSaved);
 
     InitAutoSave();
 
@@ -327,7 +328,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonMessagesZoomInFont, &QToolButton::clicked, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         QFont f = ui->plainTextEditPatternMessages->font();
         if (f.pointSize() < settings->GetDefMaxPatternMessageFontSize())
         {
@@ -339,7 +340,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonMessagesZoomOutFont, &QToolButton::clicked, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         QFont f = ui->plainTextEditPatternMessages->font();
         if (f.pointSize() > settings->GetDefMinPatternMessageFontSize())
         {
@@ -356,10 +357,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonClearMessages, &QToolButton::clicked, this, &MainWindow::ClearPatternMessages);
 
-    ui->toolButtonAutoRefresh->setChecked(qApp->ValentinaSettings()->GetAutoRefreshPatternMessage());
+    ui->toolButtonAutoRefresh->setChecked(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetAutoRefreshPatternMessage());
     connect(ui->toolButtonAutoRefresh, &QToolButton::clicked, this, [](bool checked)
     {
-        qApp->ValentinaSettings()->SetAutoRefreshPatternMessage(checked);
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetAutoRefreshPatternMessage(checked);
     });
 
     connect(doc, &VPattern::PreParseState, this, [this]()
@@ -461,7 +463,7 @@ void MainWindow::InitScenes()
 {
     sceneDraw = new VMainGraphicsScene(this);
     currentScene = sceneDraw;
-    qApp->setCurrentScene(&currentScene);
+    VAbstractValApplication::VApp()->setCurrentScene(&currentScene);
     connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
     connect(this, &MainWindow::ItemsSelection, sceneDraw, &VMainGraphicsScene::ItemsSelection);
 
@@ -507,7 +509,7 @@ void MainWindow::InitScenes()
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
-    qApp->setSceneView(ui->view);
+    VAbstractValApplication::VApp()->setSceneView(ui->view);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -522,12 +524,12 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     try
     {
-        qApp->SetMeasurementsType(m->Type());
+        VAbstractValApplication::VApp()->SetMeasurementsType(m->Type());
         if (m->Type() == MeasurementsType::Individual)
         {
-            qApp->SetCustomerName(m->Customer());
-            qApp->SetCustomerBirthDate(m->BirthDate());
-            qApp->SetCustomerEmail(m->Email());
+            VAbstractValApplication::VApp()->SetCustomerName(m->Customer());
+            VAbstractValApplication::VApp()->SetCustomerBirthDate(m->BirthDate());
+            VAbstractValApplication::VApp()->SetCustomerEmail(m->Email());
         }
         else if (m->Type() == MeasurementsType::Multisize)
         {
@@ -580,7 +582,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
         return false;
     }
 
-    if (qApp->GetMeasurementsType() != m->Type())
+    if (VAbstractValApplication::VApp()->GetMeasurementsType() != m->Type())
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Measurement files types have not match.")));
         if (not VApplication::IsGUIMode())
@@ -604,9 +606,9 @@ bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
         m->ReadMeasurements(baseA, baseB, baseC);
         if (m->Type() == MeasurementsType::Individual)
         {
-            qApp->SetCustomerName(m->Customer());
-            qApp->SetCustomerBirthDate(m->BirthDate());
-            qApp->SetCustomerEmail(m->Email());
+            VAbstractValApplication::VApp()->SetCustomerName(m->Customer());
+            VAbstractValApplication::VApp()->SetCustomerBirthDate(m->BirthDate());
+            VAbstractValApplication::VApp()->SetCustomerEmail(m->Email());
         }
     }
     catch (VExceptionEmptyParameter &e)
@@ -1297,7 +1299,7 @@ void MainWindow::ClosedDialogGroup(int result)
         {
             AddGroup *addGroup = new AddGroup(group, doc);
             connect(addGroup, &AddGroup::UpdateGroups, groupsWidget, &VWidgetGroups::UpdateGroups);
-            qApp->getUndoStack()->push(addGroup);
+            VAbstractApplication::VApp()->getUndoStack()->push(addGroup);
         }
     }
     ArrowTool(true);
@@ -1581,7 +1583,7 @@ void MainWindow::changeEvent(QEvent *event)
         statusBar()->showMessage(tr("Changes applied."), 5000);
         patternPieceLabel->setText(tr("Pattern Piece:"));
 
-        if (qApp->GetDrawMode() == Draw::Calculation)
+        if (VApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
             ui->dockWidgetGroups->setWindowTitle(tr("Groups of visibility"));
             ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
@@ -1637,7 +1639,7 @@ void MainWindow::customEvent(QEvent *event)
 {
     if (event->type() == UNDO_EVENT)
     {
-        qApp->getUndoStack()->undo();
+        VAbstractApplication::VApp()->getUndoStack()->undo();
     }
     else if (event->type() == FIT_BEST_CURRENT_EVENT)
     {
@@ -1719,10 +1721,12 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
 
             csv.insertRow(currentRow);
             csv.setText(currentRow, 0, incr->GetName()); // name
-            csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
+            csv.setText(currentRow, 1,
+                        VAbstractApplication::VApp()->LocaleToString(*incr->GetValue())); // calculated value
 
-            QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
-                                                               qApp->Settings()->GetOsSeparator());
+            QString formula =
+                    VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                                     VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             csv.setText(currentRow, 2, formula); // formula
         }
     };
@@ -1741,7 +1745,8 @@ void MainWindow::ToolBarStyle(QToolBar *bar) const
 
 #if defined(Q_OS_MAC)
     // Temporary fix issue with toolbar black background on mac with OpenGL render
-    if (qApp->getSceneView() && qApp->getSceneView()->IsOpenGLRender())
+    if (VAbstractValApplication::VApp()->getSceneView() &&
+            VAbstractValApplication::VApp()->getSceneView()->IsOpenGLRender())
     {
         bar->setStyle(QStyleFactory::create("fusion"));
     }
@@ -1768,7 +1773,7 @@ void MainWindow::LoadIndividual()
     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") + tr("Multisize measurements") +
                            QLatin1String(" (*.vst)");
     //Use standard path to individual measurements
-    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+    const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements();
 
     bool usedNotExistedDir = false;
     QDir directory(path);
@@ -1778,7 +1783,7 @@ void MainWindow::LoadIndividual()
     }
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       qApp->NativeFileDialog());
+                                                       VAbstractApplication::VApp()->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {
@@ -1786,10 +1791,10 @@ void MainWindow::LoadIndividual()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
+                watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
             }
             ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetMPath(RelativeMPath(qApp->GetPatternPath(), mPath));
+            doc->SetMPath(RelativeMPath(VAbstractValApplication::VApp()->GetPatternPath(), mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
@@ -1813,10 +1818,10 @@ void MainWindow::LoadMultisize()
     const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
                            QLatin1String("(*.vit)");
     //Use standard path to multisize measurements
-    QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
+    QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
     path = VCommonSettings::PrepareMultisizeTables(path);
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       qApp->NativeFileDialog());
+                                                       VAbstractApplication::VApp()->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {
@@ -1824,10 +1829,10 @@ void MainWindow::LoadMultisize()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
+                watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
             }
             ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetMPath(RelativeMPath(qApp->GetPatternPath(), mPath));
+            doc->SetMPath(RelativeMPath(VAbstractValApplication::VApp()->GetPatternPath(), mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
@@ -1850,17 +1855,17 @@ void MainWindow::UnloadMeasurements()
 
     if (doc->ListMeasurements().isEmpty())
     {
-        watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
+        watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
 
-        const MeasurementsType oldType = qApp->GetMeasurementsType();
-        qApp->SetMeasurementsType(MeasurementsType::Unknown);
+        const MeasurementsType oldType = VAbstractValApplication::VApp()->GetMeasurementsType();
+        VAbstractValApplication::VApp()->SetMeasurementsType(MeasurementsType::Unknown);
 
         m.clear();
 
-        qApp->SetDimensionHeight(0);
-        qApp->SetDimensionSize(0);
-        qApp->SetDimensionHip(0);
-        qApp->SetDimensionWaist(0);
+        VAbstractValApplication::VApp()->SetDimensionHeight(0);
+        VAbstractValApplication::VApp()->SetDimensionSize(0);
+        VAbstractValApplication::VApp()->SetDimensionHip(0);
+        VAbstractValApplication::VApp()->SetDimensionWaist(0);
 
         if (oldType == MeasurementsType::Multisize)
         {
@@ -1872,11 +1877,11 @@ void MainWindow::UnloadMeasurements()
         }
         else if (oldType == MeasurementsType::Individual)
         {
-            qApp->SetCustomerBirthDate(QDate());
-            qApp->SetCustomerEmail(QString());
-            qApp->SetCustomerName(QString());
-            qApp->SetMeasurementsUnits(Unit::LAST_UNIT_DO_NOT_USE);
-            qApp->SetDimensionSizeUnits(Unit::LAST_UNIT_DO_NOT_USE);
+            VAbstractValApplication::VApp()->SetCustomerBirthDate(QDate());
+            VAbstractValApplication::VApp()->SetCustomerEmail(QString());
+            VAbstractValApplication::VApp()->SetCustomerName(QString());
+            VAbstractValApplication::VApp()->SetMeasurementsUnits(Unit::LAST_UNIT_DO_NOT_USE);
+            VAbstractValApplication::VApp()->SetDimensionSizeUnits(Unit::LAST_UNIT_DO_NOT_USE);
         }
 
         doc->SetMPath(QString());
@@ -1900,14 +1905,14 @@ void MainWindow::ShowMeasurements()
 {
     if (not doc->MPath().isEmpty())
     {
-        const QString absoluteMPath = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
+        const QString absoluteMPath = AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath());
 
         QStringList arguments;
         arguments.append(absoluteMPath);
         arguments.append("-u");
-        arguments.append(UnitsToStr(qApp->patternUnits()));
+        arguments.append(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
 
-        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+        if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             if (m_currentDimensionA > 0)
             {
@@ -1933,7 +1938,7 @@ void MainWindow::ShowMeasurements()
             arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
         }
 
-        const QString tape = qApp->TapeFilePath();
+        const QString tape = VApplication::VApp()->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
         QProcess::startDetached(tape, arguments, workingDirectory);
     }
@@ -1981,7 +1986,7 @@ void MainWindow::SyncMeasurements()
 {
     if (mChanges)
     {
-        const QString path = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
+        const QString path = AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath());
 
         // Temporarily remove the path to prevent infinite synchronization after a format conversion.
         watcher->removePath(path);
@@ -2037,7 +2042,7 @@ void MainWindow::LoadWatermark()
     QString dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
-                                                          qApp->NativeFileDialog());
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (filePath.isEmpty())
     {
         return;
@@ -2078,7 +2083,7 @@ void MainWindow::CleanWaterkmarkEditors()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::StoreMultisizeMDimensions()
 {
-    qApp->SetMeasurementsUnits(m->MUnit());
+    VAbstractValApplication::VApp()->SetMeasurementsUnits(m->MUnit());
 
     QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
@@ -2091,26 +2096,27 @@ void MainWindow::StoreMultisizeMDimensions()
             switch(dimension->Type())
             {
                 case MeasurementDimension::X:
-                    qApp->SetDimensionHeight(currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionHeight(currentBase);
                     break;
                 case MeasurementDimension::Y:
                 {
                     const bool fc = m->IsFullCircumference();
-                    qApp->SetDimensionSize(fc ? currentBase*2 : currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionSize(fc ? currentBase*2 : currentBase);
                     const bool circumference = dimension->IsCircumference();
-                    qApp->SetDimensionSizeUnits(circumference ? m->MUnit() : Unit::LAST_UNIT_DO_NOT_USE);
+                    VAbstractValApplication::VApp()
+                            ->SetDimensionSizeUnits(circumference ? m->MUnit() : Unit::LAST_UNIT_DO_NOT_USE);
                     break;
                 }
                 case MeasurementDimension::W:
                 {
                     const bool fc = m->IsFullCircumference();
-                    qApp->SetDimensionWaist(fc ? currentBase*2 : currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionWaist(fc ? currentBase*2 : currentBase);
                     break;
                 }
                 case MeasurementDimension::Z:
                 {
                     const bool fc = m->IsFullCircumference();
-                    qApp->SetDimensionHip(fc ? currentBase*2 : currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionHip(fc ? currentBase*2 : currentBase);
                     break;
                 }
                 default:
@@ -2131,21 +2137,21 @@ void MainWindow::StoreIndividualMDimensions()
 
     auto StoreDimension = [this, measurements](IMD type)
     {
-        const QString name = qApp->TrVars()->VarToUser(m->MeasurementForDimension(type));
+        const QString name = VAbstractApplication::VApp()->TrVars()->VarToUser(m->MeasurementForDimension(type));
         const bool valid = not name.isEmpty() && measurements.contains(name);
         switch(type)
         {
             case IMD::X:
-                qApp->SetDimensionHeight(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionHeight(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::Y:
-                qApp->SetDimensionSize(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionSize(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::W:
-                qApp->SetDimensionWaist(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionWaist(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::Z:
-                qApp->SetDimensionHip(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionHip(valid ? *measurements.value(name)->GetValue() : 0);
                 break;
             case IMD::N:
             default:
@@ -2228,8 +2234,9 @@ void MainWindow::SetDimensionBases()
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
-    const QString path = qApp->GetPatternPath().left(qApp->GetPatternPath().indexOf(where->text())) + where->text();
-    if (path == qApp->GetPatternPath())
+    const QString path = VAbstractValApplication::VApp()->GetPatternPath()
+            .left(VAbstractValApplication::VApp()->GetPatternPath().indexOf(where->text())) + where->text();
+    if (path == VAbstractValApplication::VApp()->GetPatternPath())
     {
         return;
     }
@@ -2281,7 +2288,8 @@ void MainWindow::ToolBarOption()
 
     ui->toolBarOption->addSeparator();
 
-    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnits(), true)));
+    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)")
+                                   .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
     ui->toolBarOption->addWidget(m_mouseCoordinate);
 
     ui->toolBarOption->addSeparator();
@@ -2326,7 +2334,7 @@ void MainWindow::ToolBarDraws()
         {
             return;
         }
-        qApp->getUndoStack()->push(new RenamePP(doc, draw, comboBoxDraws));
+        VAbstractApplication::VApp()->getUndoStack()->push(new RenamePP(doc, draw, comboBoxDraws));
     });
 }
 
@@ -2372,7 +2380,7 @@ void MainWindow::ToolBarTools()
     ui->actionIncreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetLabelFontSize() + 1);
         if (sceneDraw)
         {
@@ -2388,7 +2396,7 @@ void MainWindow::ToolBarTools()
     ui->actionDecreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetLabelFontSize() - 1);
         if (sceneDraw)
         {
@@ -2404,7 +2412,7 @@ void MainWindow::ToolBarTools()
     ui->actionOriginalLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_0));
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetDefLabelFontSize());
         if (sceneDraw)
         {
@@ -2420,7 +2428,7 @@ void MainWindow::ToolBarTools()
     ui->actionHideLabels->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_L));
     connect(ui->actionHideLabels, &QAction::triggered, this, [this](bool checked)
     {
-        qApp->ValentinaSettings()->SetHideLabels(checked);
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetHideLabels(checked);
         if (sceneDraw)
         {
             sceneDraw->update();
@@ -2513,9 +2521,9 @@ void MainWindow::MouseMove(const QPointF &scenePos)
     if (not m_mouseCoordinate.isNull())
     {
         m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
-                                   .arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
-                                   .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                   .arg(UnitsToStr(qApp->patternUnits(), true)));
+                                   .arg(static_cast<qint32>(VAbstractValApplication::VApp()->fromPixel(scenePos.x())))
+                                   .arg(static_cast<qint32>(VAbstractValApplication::VApp()->fromPixel(scenePos.y())))
+                                   .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
     }
 }
 
@@ -2707,8 +2715,8 @@ void MainWindow::CancelTool()
     // Crash: using CRTL+Z while using line tool.
     // related bug report:
     // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
-    undoAction->setEnabled(qApp->getUndoStack()->canUndo());
-    redoAction->setEnabled(qApp->getUndoStack()->canRedo());
+    undoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canUndo());
+    redoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canRedo());
 }
 
 QT_WARNING_POP
@@ -2801,7 +2809,8 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
  */
 void MainWindow::SaveCurrentScene()
 {
-    if (qApp->GetDrawMode() == Draw::Calculation || qApp->GetDrawMode() == Draw::Modeling)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ||
+            VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr)
@@ -2858,7 +2867,7 @@ void MainWindow::ActionDraw(bool checked)
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
-        qApp->SetDrawMode(Draw::Calculation);
+        VAbstractValApplication::VApp()->SetDrawMode(Draw::Calculation);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
         drawMode = true;
 
@@ -2866,7 +2875,7 @@ void MainWindow::ActionDraw(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
 
-        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+        if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(true);
         }
@@ -2910,7 +2919,7 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionDetails->setChecked(true);
         ui->actionLayout->setChecked(false);
 
-        if(not qApp->getOpeningPattern())
+        if(not VAbstractValApplication::VApp()->getOpeningPattern())
         {
             if (pattern->DataPieces()->count() == 0)
             {
@@ -2932,16 +2941,16 @@ void MainWindow::ActionDetails(bool checked)
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
-        if (qApp->GetDrawMode() == Draw::Calculation)
+        if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
             currentToolBoxIndex = ui->toolBox->currentIndex();
         }
-        qApp->SetDrawMode(Draw::Modeling);
+        VAbstractValApplication::VApp()->SetDrawMode(Draw::Modeling);
         SetEnableTool(true);
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->detailPage));
 
-        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+        if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(true);
         }
@@ -2991,7 +3000,7 @@ void MainWindow::ActionLayout(bool checked)
         ui->actionLayout->setChecked(true);
 
         QVector<DetailForLayout> details;
-        if(not qApp->getOpeningPattern())
+        if(not VAbstractValApplication::VApp()->getOpeningPattern())
         {
             const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
             if (allDetails->count() == 0)
@@ -3012,7 +3021,8 @@ void MainWindow::ActionLayout(bool checked)
                     QMessageBox::information(this, tr("Layout mode"),  tr("You can't use Layout mode yet. Please, "
                                                                           "include at least one detail in layout."),
                                              QMessageBox::Ok, QMessageBox::Ok);
-                    qApp->GetDrawMode() == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
+                    VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ? ActionDraw(true)
+                                                                                        : ActionDetails(true);
                     return;
                 }
             }
@@ -3034,7 +3044,8 @@ void MainWindow::ActionLayout(bool checked)
             QMessageBox::warning(this, tr("Layout mode"),
                                  tr("You can't use Layout mode yet.") + QLatin1String(" \n") + e.ErrorMessage(),
                                  QMessageBox::Ok, QMessageBox::Ok);
-            qApp->GetDrawMode() == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
+            VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ? ActionDraw(true)
+                                                                                : ActionDetails(true);
             return;
         }
 
@@ -3042,11 +3053,11 @@ void MainWindow::ActionLayout(bool checked)
         emit ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
 
-        if (qApp->GetDrawMode() == Draw::Calculation)
+        if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
             currentToolBoxIndex = ui->toolBox->currentIndex();
         }
-        qApp->SetDrawMode(Draw::Layout);
+        VAbstractValApplication::VApp()->SetDrawMode(Draw::Layout);
         SetEnableTool(true);
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->layoutPage));
@@ -3056,7 +3067,7 @@ void MainWindow::ActionLayout(bool checked)
             m_mouseCoordinate->setText(QString());
         }
 
-        if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+        if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(false);
         }
@@ -3093,16 +3104,16 @@ void MainWindow::ActionLayout(bool checked)
  */
 bool MainWindow::on_actionSaveAs_triggered()
 {
-    const QString oldFilePath = qApp->GetPatternPath();
+    const QString oldFilePath = VAbstractValApplication::VApp()->GetPatternPath();
     QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
     QString dir;
-    if (qApp->GetPatternPath().isEmpty())
+    if (VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
-        dir = qApp->ValentinaSettings()->GetPathPattern();
+        dir = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathPattern();
     }
     else
     {
-        dir = QFileInfo(qApp->GetPatternPath()).absolutePath();
+        dir = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).absolutePath();
     }
 
     bool usedNotExistedDir = false;
@@ -3114,7 +3125,7 @@ bool MainWindow::on_actionSaveAs_triggered()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
-                                                    filters, nullptr, qApp->NativeFileDialog());
+                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
     {
@@ -3136,7 +3147,7 @@ bool MainWindow::on_actionSaveAs_triggered()
         fileName += QLatin1String(".val");
     }
 
-    if (f.exists() && qApp->GetPatternPath() != fileName)
+    if (f.exists() && VAbstractValApplication::VApp()->GetPatternPath() != fileName)
     {
         // Temporary try to lock the file before saving
         // Also help to rewite current read-only pattern
@@ -3175,9 +3186,9 @@ bool MainWindow::on_actionSaveAs_triggered()
     else if (not oldFilePath.isEmpty())
     {
         qCDebug(vMainWindow, "Updating restore file list.");
-        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
+        QStringList restoreFiles = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
         restoreFiles.removeAll(oldFilePath);
-        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetRestoreFileList(restoreFiles);
         QFile::remove(oldFilePath + *autosavePrefix);
     }
 
@@ -3186,7 +3197,7 @@ bool MainWindow::on_actionSaveAs_triggered()
     patternReadOnly = false;
 
     qCDebug(vMainWindow, "Locking file");
-    if (qApp->GetPatternPath() == fileName && not lock.isNull())
+    if (VAbstractValApplication::VApp()->GetPatternPath() == fileName && not lock.isNull())
     {
         lock->Unlock();
     }
@@ -3215,7 +3226,7 @@ bool MainWindow::on_actionSaveAs_triggered()
  */
 bool MainWindow::on_actionSave_triggered()
 {
-    if (qApp->GetPatternPath().isEmpty() || patternReadOnly)
+    if (VAbstractValApplication::VApp()->GetPatternPath().isEmpty() || patternReadOnly)
     {
         return on_actionSaveAs_triggered();
     }
@@ -3230,7 +3241,7 @@ bool MainWindow::on_actionSave_triggered()
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
+        const bool isFileWritable = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).isWritable();
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
@@ -3248,8 +3259,10 @@ bool MainWindow::on_actionSave_triggered()
 #ifdef Q_OS_WIN32
                 qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
-                bool changed = QFile::setPermissions(qApp->GetPatternPath(),
-                                                    QFileInfo(qApp->GetPatternPath()).permissions() | QFileDevice::WriteUser);
+                bool changed =
+                        QFile::setPermissions(VAbstractValApplication::VApp()->GetPatternPath(),
+                                              QFileInfo(VAbstractValApplication::VApp()
+                                                        ->GetPatternPath()).permissions() | QFileDevice::WriteUser);
 #ifdef Q_OS_WIN32
                 qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
@@ -3258,7 +3271,8 @@ bool MainWindow::on_actionSave_triggered()
                 {
                     QMessageBox messageBox(this);
                     messageBox.setIcon(QMessageBox::Warning);
-                    messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(qApp->GetPatternPath()));
+                    messageBox.setText(tr("Cannot set permissions for %1 to writable.")
+                                       .arg(VAbstractValApplication::VApp()->GetPatternPath()));
                     messageBox.setInformativeText(tr("Could not save the file."));
                     messageBox.setDefaultButton(QMessageBox::Ok);
                     messageBox.setStandardButtons(QMessageBox::Ok);
@@ -3273,10 +3287,10 @@ bool MainWindow::on_actionSave_triggered()
         }
 
         QString error;
-        bool result = SavePattern(qApp->GetPatternPath(), error);
+        bool result = SavePattern(VAbstractValApplication::VApp()->GetPatternPath(), error);
         if (result)
         {
-            QFile::remove(qApp->GetPatternPath() + *autosavePrefix);
+            QFile::remove(VAbstractValApplication::VApp()->GetPatternPath() + *autosavePrefix);
             m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
             m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
         }
@@ -3303,7 +3317,7 @@ void MainWindow::on_actionOpen_triggered()
     qCDebug(vMainWindow, "Openning new file.");
     const QString filter(tr("Pattern files") + QLatin1String(" (*.val)"));
     //Get list last open files
-    const QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
+    const QStringList files = VAbstractValApplication::VApp()->ValentinaSettings()->GetRecentFileList();
     QString dir;
     if (files.isEmpty())
     {
@@ -3316,7 +3330,7 @@ void MainWindow::on_actionOpen_triggered()
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
-                                                          qApp->NativeFileDialog());
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (filePath.isEmpty())
     {
         return;
@@ -3338,9 +3352,9 @@ void MainWindow::Clear()
     setCurrentFile(QString());// Keep before cleaning a pattern data to prevent a crash
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
-    if (not qApp->GetPatternPath().isEmpty() && not doc->MPath().isEmpty())
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() && not doc->MPath().isEmpty())
     {
-        watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
+        watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
     }
     doc->Clear();
     UpdateWindowTitle();
@@ -3380,15 +3394,15 @@ void MainWindow::Clear()
     ui->actionPreviousPatternPiece->setEnabled(false);
     ui->actionNextPatternPiece->setEnabled(false);
     SetEnableTool(false);
-    qApp->SetPatternUnits(Unit::Cm);
-    qApp->SetMeasurementsType(MeasurementsType::Unknown);
+    VAbstractValApplication::VApp()->SetPatternUnits(Unit::Cm);
+    VAbstractValApplication::VApp()->SetMeasurementsType(MeasurementsType::Unknown);
     ui->toolBarOption->clear();
 #ifndef QT_NO_CURSOR
     QGuiApplication::restoreOverrideCursor();
 #endif
     CleanLayout();
     listDetails.clear(); // don't move to CleanLayout()
-    qApp->getUndoStack()->clear();
+    VAbstractApplication::VApp()->getUndoStack()->clear();
     toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
     m_progressBar->setVisible(false);
@@ -3412,17 +3426,17 @@ void MainWindow::FileClosedCorrect()
     WriteSettings();
 
     //File was closed correct.
-    QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
-    restoreFiles.removeAll(qApp->GetPatternPath());
-    qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
+    QStringList restoreFiles = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
+    restoreFiles.removeAll(VAbstractValApplication::VApp()->GetPatternPath());
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
-    QFile autofile(qApp->GetPatternPath() + *autosavePrefix);
+    QFile autofile(VAbstractValApplication::VApp()->GetPatternPath() + *autosavePrefix);
     if (autofile.exists())
     {
         autofile.remove();
     }
-    qCDebug(vMainWindow, "File %s closed correct.", qUtf8Printable(qApp->GetPatternPath()));
+    qCDebug(vMainWindow, "File %s closed correct.", qUtf8Printable(VAbstractValApplication::VApp()->GetPatternPath()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3447,7 +3461,7 @@ void MainWindow::FullParseFile()
 
     try
     {
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             futureTestUniqueId = QtConcurrent::run(static_cast<VDomDocument *>(doc), &VDomDocument::TestUniqueId);
         }
@@ -3455,7 +3469,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(true);
         doc->Parse(Document::FullParse);
 
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             futureTestUniqueId.waitForFinished();
         }
@@ -3464,7 +3478,7 @@ void MainWindow::FullParseFile()
     {
         /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
          * myself. Later in method customEvent call undo.*/
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             try
             {
@@ -3490,7 +3504,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             WaitForFutureFinish(futureTestUniqueId);
         }
@@ -3505,7 +3519,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             WaitForFutureFinish(futureTestUniqueId);
         }
@@ -3520,7 +3534,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             WaitForFutureFinish(futureTestUniqueId);
         }
@@ -3535,7 +3549,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             WaitForFutureFinish(futureTestUniqueId);
         }
@@ -3550,7 +3564,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             WaitForFutureFinish(futureTestUniqueId);
         }
@@ -3564,7 +3578,7 @@ void MainWindow::FullParseFile()
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         SetEnabledGUI(false);
-        if (qApp->getOpeningPattern())
+        if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
             WaitForFutureFinish(futureTestUniqueId);
         }
@@ -3607,8 +3621,8 @@ void MainWindow::FullParseFile()
     SetEnableTool(comboBoxDraws->count() > 0);
     detailsWidget->UpdateList();
 
-    VMainGraphicsView::NewSceneRect(sceneDraw, qApp->getSceneView());
-    VMainGraphicsView::NewSceneRect(sceneDetails, qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDraw, VAbstractValApplication::VApp()->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDetails, VAbstractValApplication::VApp()->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3705,7 +3719,7 @@ void MainWindow::SetEnabledGUI(bool enabled)
         if (enabled == false)
         {
             ArrowTool(true);
-            qApp->getUndoStack()->clear();
+            VAbstractApplication::VApp()->getUndoStack()->clear();
         }
         SetEnableWidgets(enabled);
 
@@ -3726,8 +3740,8 @@ void MainWindow::SetEnabledGUI(bool enabled)
  */
 void MainWindow::SetEnableWidgets(bool enable)
 {
-    const bool drawStage = (qApp->GetDrawMode() == Draw::Calculation);
-    const bool detailsStage = (qApp->GetDrawMode() == Draw::Modeling);
+    const bool drawStage = (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation);
+    const bool detailsStage = (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling);
     const bool designStage = (drawStage || detailsStage);
 
     comboBoxDraws->setEnabled(enable && drawStage);
@@ -3770,8 +3784,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
     actionDockWidgetGroups->setEnabled(enable && designStage);
 
-    undoAction->setEnabled(enable && designStage && qApp->getUndoStack()->canUndo());
-    redoAction->setEnabled(enable && designStage && qApp->getUndoStack()->canRedo());
+    undoAction->setEnabled(enable && designStage && VAbstractApplication::VApp()->getUndoStack()->canUndo());
+    redoAction->setEnabled(enable && designStage && VAbstractApplication::VApp()->getUndoStack()->canRedo());
 
     //Now we don't want allow user call context menu
     sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
@@ -3795,7 +3809,7 @@ void MainWindow::on_actionNew_triggered()
         if (newPattern.exec() == QDialog::Accepted)
         {
             patternPieceName = newPattern.name();
-            qApp->SetPatternUnits(newPattern.PatternUnit());
+            VAbstractValApplication::VApp()->SetPatternUnits(newPattern.PatternUnit());
             qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
         }
         else
@@ -3810,7 +3824,8 @@ void MainWindow::on_actionNew_triggered()
 
         AddPP(patternPieceName);
 
-        m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnits(), true)));
+        m_mouseCoordinate = new QLabel(QString("0, 0 (%1)")
+                                       .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
         ui->toolBarOption->addWidget(m_mouseCoordinate);
 
         m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
@@ -3901,8 +3916,8 @@ void MainWindow::DimensionCBaseChanged()
 void MainWindow::GradationChanged()
 {
     m_gradation->stop();
-    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), m_currentDimensionA,
-                           m_currentDimensionB, m_currentDimensionC))
+    if (UpdateMeasurements(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()),
+                           m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
     {
         doc->LiteParseTree(Document::FullLiteParse);
         emit sceneDetails->DimensionsChanged();
@@ -3967,10 +3982,10 @@ void MainWindow::InitDimensionControls()
         delete dimensionCLabel;
     }
 
-    if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+    if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
     {
         const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-        const QString unit = UnitsToStr(qApp->MeasurementsUnits(), true);
+        const QString unit = UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true);
 
         auto InitControl = [this, dimensions, unit](int index, QPointer<QLabel> &name, QPointer<QComboBox> &control)
         {
@@ -4035,7 +4050,7 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
     SCASSERT(control != nullptr)
 
     const bool fc = m->IsFullCircumference();
-    const QString unit = UnitsToStr(qApp->MeasurementsUnits(), true);
+    const QString unit = UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true);
 
     qreal current = -1;
     if (control->currentIndex() != -1)
@@ -4129,7 +4144,7 @@ void MainWindow::SetEnableTool(bool enable)
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
-    switch (qApp->GetDrawMode())
+    switch (VAbstractValApplication::VApp()->GetDrawMode())
     {
         case Draw::Calculation:
             drawTools = enable;
@@ -4242,8 +4257,8 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     qCDebug(vMainWindow, "Saving pattern file %s.", qUtf8Printable(fileName));
     QFileInfo tempInfo(fileName);
 
-    const QString mPath = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
-    if (not mPath.isEmpty() && qApp->GetPatternPath() != fileName)
+    const QString mPath = AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath());
+    if (not mPath.isEmpty() && VAbstractValApplication::VApp()->GetPatternPath() != fileName)
     {
         doc->SetMPath(RelativeMPath(fileName, mPath));
     }
@@ -4274,11 +4289,11 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
  */
 void MainWindow::AutoSavePattern()
 {
-    if (not qApp->GetPatternPath().isEmpty() && isWindowModified() && isNeedAutosave)
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() && isWindowModified() && isNeedAutosave)
     {
         qCDebug(vMainWindow, "Autosaving pattern.");
         QString error;
-        if (SavePattern(qApp->GetPatternPath() + *autosavePrefix, error))
+        if (SavePattern(VAbstractValApplication::VApp()->GetPatternPath() + *autosavePrefix, error))
         {
             isNeedAutosave = false;
         }
@@ -4294,15 +4309,15 @@ void MainWindow::AutoSavePattern()
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     qCDebug(vMainWindow, "Set current name to \"%s\"", qUtf8Printable(fileName));
-    qApp->SetPatternPath(fileName);
+    VAbstractValApplication::VApp()->SetPatternPath(fileName);
     doc->SetPatternWasChanged(true);
     emit doc->UpdatePatternLabel();
-    qApp->getUndoStack()->setClean();
+    VAbstractApplication::VApp()->getUndoStack()->setClean();
 
-    if (not qApp->GetPatternPath().isEmpty() && VApplication::IsGUIMode())
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() && VApplication::IsGUIMode())
     {
         qCDebug(vMainWindow, "Updating recent file list.");
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -4331,7 +4346,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -4347,7 +4362,7 @@ void MainWindow::ReadSettings()
         ui->view->SetAntialiasing(settings->GetGraphicalOutput());
 
         // Stack limit
-        qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
+        VAbstractApplication::VApp()->getUndoStack()->setUndoLimit(settings->GetUndoCount());
 
         // Text under tool buton icon
         ToolBarStyles();
@@ -4376,7 +4391,7 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));
@@ -4411,7 +4426,8 @@ bool MainWindow::MaybeSave()
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
         messageBox->setButtonText(QMessageBox::Yes,
-                                  qApp->GetPatternPath().isEmpty() || patternReadOnly ? tr("Save…") : tr("Save"));
+                                  VAbstractValApplication::VApp()
+                                  ->GetPatternPath().isEmpty() || patternReadOnly ? tr("Save…") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
@@ -4452,14 +4468,14 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 
     //Add Undo/Redo actions.
-    undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    undoAction = VAbstractApplication::VApp()->getUndoStack()->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
-    redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    redoAction = VAbstractApplication::VApp()->getUndoStack()->createRedoAction(this, tr("&Redo"));
     connect(redoAction, &QAction::triggered, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
@@ -4735,7 +4751,7 @@ void MainWindow::InitDocksContain()
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::OpenNewValentina(const QString &fileName) const
 {
-    if (this->isWindowModified() || qApp->GetPatternPath().isEmpty() == false)
+    if (this->isWindowModified() || VAbstractValApplication::VApp()->GetPatternPath().isEmpty() == false)
     {
         VApplication::NewValentina(fileName);
         return true;
@@ -4782,7 +4798,7 @@ void MainWindow::CreateActions()
         QString fileName =
                 QFileDialog::getSaveFileName(this, tr("Export recipe"),
                                              QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
-                                             filters, nullptr, qApp->NativeFileDialog());
+                                             filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
         if (fileName.isEmpty())
         {
             return;
@@ -4897,18 +4913,18 @@ void MainWindow::CreateActions()
         }
     });
 
-    ui->actionShowCurveDetails->setChecked(qApp->ValentinaSettings()->IsShowCurveDetails());
+    ui->actionShowCurveDetails->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails());
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, [this](bool checked)
     {
         emit ui->view->itemClicked(nullptr);
         sceneDraw->EnableDetailsMode(checked);
-        qApp->ValentinaSettings()->SetShowCurveDetails(checked);
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetShowCurveDetails(checked);
     });
 
-    ui->actionShowMainPath->setChecked(qApp->ValentinaSettings()->IsPieceShowMainPath());
+    ui->actionShowMainPath->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsPieceShowMainPath());
     connect(ui->actionShowMainPath, &QAction::triggered, this, [this](bool checked)
     {
-        qApp->ValentinaSettings()->SetPieceShowMainPath(checked);
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetPieceShowMainPath(checked);
         const QList<quint32> ids = pattern->DataPieces()->keys();
         const bool updateChildren = false;
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -4932,7 +4948,7 @@ void MainWindow::CreateActions()
 
     connect(ui->actionOpenTape, &QAction::triggered, this, [this]()
     {
-        const QString tape = qApp->TapeFilePath();
+        const QString tape = VApplication::VApp()->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
 
         QStringList arguments;
@@ -4997,13 +5013,13 @@ void MainWindow::InitAutoSave()
     connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     autoSaveTimer->stop();
 
-    if (qApp->ValentinaSettings()->GetAutosaveState())
+    if (VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveState())
     {
-        const qint32 autoTime = qApp->ValentinaSettings()->GetAutosaveTime();
+        const qint32 autoTime = VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveTime();
         autoSaveTimer->start(autoTime*60000);
         qCDebug(vMainWindow, "Autosaving each %d minutes.", autoTime);
     }
-    qApp->setAutoSaveTimer(autoSaveTimer);
+    VApplication::VApp()->setAutoSaveTimer(autoSaveTimer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5094,7 +5110,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
         if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
         {
-            const QString tape = qApp->TapeFilePath();
+            const QString tape = VApplication::VApp()->TapeFilePath();
             const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
 
             QStringList arguments = QStringList() << fileName;
@@ -5139,7 +5155,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
     VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
-    qApp->setOpeningPattern();//Begin opening file
+    VAbstractValApplication::VApp()->setOpeningPattern();//Begin opening file
     try
     {
         // Quick reading measurements
@@ -5158,7 +5174,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         {
             doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
         }
-        qApp->SetPatternUnits(doc->MUnit());
+        VAbstractValApplication::VApp()->SetPatternUnits(doc->MUnit());
 
         QString path = AbsoluteMPath(fileName, doc->MPath());
         QString fixedMPath;
@@ -5171,7 +5187,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             fixedMPath = CheckPathToMeasurements(fileName, fakeName);
             if (fixedMPath.isEmpty())
             {
-                qApp->setOpeningPattern();// End opening file
+                VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
                 Clear();
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
                                                              .arg(fakeName)));
@@ -5193,7 +5209,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             fixedMPath = CheckPathToMeasurements(fileName, path);
             if (fixedMPath.isEmpty())
             {
-                qApp->setOpeningPattern();// End opening file
+                VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
                 Clear();
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
                                                              .arg(path)));
@@ -5209,7 +5225,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found or "
                                                                 "provides not enough information.")
                                                              .arg(fixedMPath)));
-                qApp->setOpeningPattern();// End opening file
+                VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
                 Clear();
                 if (not VApplication::IsGUIMode())
                 {
@@ -5225,7 +5241,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             }
         }
 
-        if (qApp->GetMeasurementsType() == MeasurementsType::Unknown)
+        if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Unknown)
         {// Show toolbar only if was not uploaded any measurements.
             ToolBarOption();
         }
@@ -5245,14 +5261,14 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             {
                 doc->SetMPath(RelativeMPath(fileName, fixedMPath));
             }
-            qApp->SetPatternUnits(doc->MUnit());
+            VAbstractValApplication::VApp()->SetPatternUnits(doc->MUnit());
         }
     }
     catch (VException &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        qApp->setOpeningPattern();// End opening file
+        VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
         Clear();
         if (not VApplication::IsGUIMode())
         {
@@ -5281,7 +5297,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
     if (guiEnabled)
     { // No errors occurred
-        if (qApp->IsGUIMode())
+        if (VApplication::VApp()->IsGUIMode())
         {
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
              * a reference. */
@@ -5298,13 +5314,13 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
         ActionDraw(true);
 
-        qApp->setOpeningPattern();// End opening file
+        VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
         m_statusLabel->setText(QString());
         return true;
     }
     else
     {
-        qApp->setOpeningPattern();// End opening file
+        VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
         return false;
     }
 }
@@ -5314,7 +5330,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 {
     QStringList restoreFiles;
     //Take all files that need to be restored
-    QStringList files = qApp->ValentinaSettings()->GetRestoreFileList();
+    QStringList files = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
         for (auto &file : files)
@@ -5343,7 +5359,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
             }
         }
 
-        qApp->ValentinaSettings()->SetRestoreFileList(filtered);
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetRestoreFileList(filtered);
     }
     return restoreFiles;
 }
@@ -5362,8 +5378,8 @@ void MainWindow::ToolBarStyles()
 void MainWindow::ToolBoxSizePolicy()
 {
     ui->toolBox->setSizePolicy(ui->toolBox->sizePolicy().horizontalPolicy(),
-                               qApp->ValentinaSettings()->GetToolPanelScaling() ? QSizePolicy::Fixed
-                                                                                : QSizePolicy::Preferred);
+                               VAbstractValApplication::VApp()->ValentinaSettings()->GetToolPanelScaling()
+                               ? QSizePolicy::Fixed : QSizePolicy::Preferred);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5414,7 +5430,7 @@ void MainWindow::Preferences()
 #if defined(Q_OS_MAC)
 void MainWindow::CreateMeasurements()
 {
-    const QString tape = qApp->TapeFilePath();
+    const QString tape = VApplication::VApp()->TapeFilePath();
     const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
 
     QStringList arguments;
@@ -5589,7 +5605,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         QFileDialog dialog(this, tr("Open file"), dirPath, filter);
         dialog.selectFile(selectedName);
         dialog.setFileMode(QFileDialog::ExistingFile);
-        dialog.setOption(QFileDialog::DontUseNativeDialog, qApp->Settings()->IsDontUseNativeDialog());
+        dialog.setOption(QFileDialog::DontUseNativeDialog,
+                         VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
         if (dialog.exec() == QDialog::Accepted)
         {
             mPath = dialog.selectedFiles().value(0);
@@ -5663,7 +5680,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                                            tr("Individual measurements") + QLatin1String(" (*.vit)");
                     //Use standard path to multisize measurements
                     QString selectedName;
-                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathMultisizeMeasurements(),
+                    const QString dirPath = DirPath(VAbstractValApplication::VApp()
+                                                    ->ValentinaSettings()->GetPathMultisizeMeasurements(),
                                                     selectedName);
                     mPath = FindLocation(filter, dirPath, selectedName);
                 }
@@ -5673,7 +5691,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                                            tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to individual measurements
                     QString selectedName;
-                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathIndividualMeasurements(),
+                    const QString dirPath = DirPath(VAbstractValApplication::VApp()
+                                                    ->ValentinaSettings()->GetPathIndividualMeasurements(),
                                                     selectedName);
                     mPath = FindLocation(filter, dirPath, selectedName);
                 }
@@ -5714,7 +5733,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
                     CheckRequiredMeasurements(m.data());
 
-                    qApp->SetMeasurementsType(patternType);
+                    VAbstractValApplication::VApp()->SetMeasurementsType(patternType);
                     doc->SetMPath(RelativeMPath(patternPath, mPath));
                     return mPath;
                 }
@@ -5795,7 +5814,7 @@ void MainWindow::ZoomFirstShow()
 bool MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
     QVector<DetailForLayout> details;
-    if(not qApp->getOpeningPattern())
+    if(not VAbstractValApplication::VApp()->getOpeningPattern())
     {
         const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
         if (allDetails->count() == 0)
@@ -5949,9 +5968,9 @@ bool MainWindow::SetDimensionA(int value)
 {
     if (not VApplication::IsGUIMode())
     {
-        if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
+        if (this->isWindowModified() || not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
         {
-            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+            if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
             {
                 const qint32 index = dimensionA->findData(value);
                 if (index != -1)
@@ -5992,9 +6011,9 @@ bool MainWindow::SetDimensionB(int value)
 {
     if (not VApplication::IsGUIMode())
     {
-        if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
+        if (this->isWindowModified() || not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
         {
-            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+            if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
             {
                 const qint32 index = dimensionB->findData(value);
                 if (index != -1)
@@ -6035,9 +6054,9 @@ bool MainWindow::SetDimensionC(int value)
 {
     if (not VApplication::IsGUIMode())
     {
-        if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
+        if (this->isWindowModified() || not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
         {
-            if (qApp->GetMeasurementsType() == MeasurementsType::Multisize)
+            if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
             {
                 const qint32 index = dimensionC->findData(value);
                 if (index != -1)
@@ -6076,7 +6095,7 @@ bool MainWindow::SetDimensionC(int value)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ProcessCMD()
 {
-    const VCommandLinePtr cmd = qApp->CommandLine();
+    const VCommandLinePtr cmd = VApplication::VApp()->CommandLine();
     auto args = cmd->OptInputFileNames();
 
     isNoScaling = cmd->IsNoScalingEnabled();
@@ -6099,7 +6118,7 @@ void MainWindow::ProcessCMD()
             return;
         }
 
-        qApp->SetUserMaterials(cmd->OptUserMaterials());
+        VAbstractValApplication::VApp()->SetUserMaterials(cmd->OptUserMaterials());
 
         const bool loaded = LoadPattern(args.first(), cmd->OptMeasurePath());
 
@@ -6153,9 +6172,9 @@ void MainWindow::ProcessCMD()
 QString MainWindow::GetPatternFileName()
 {
     QString shownName = tr("untitled.val");
-    if(not qApp->GetPatternPath().isEmpty())
+    if(not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
-        shownName = StrippedName(qApp->GetPatternPath());
+        shownName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
     }
     shownName += QLatin1String("[*]");
     return shownName;
@@ -6171,7 +6190,7 @@ QString MainWindow::GetMeasurementFileName()
     else
     {
         QString shownName(" [");
-        shownName += StrippedName(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
+        shownName += StrippedName(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
 
         if(mChanges)
         {
@@ -6187,12 +6206,12 @@ QString MainWindow::GetMeasurementFileName()
 void MainWindow::UpdateWindowTitle()
 {
     bool isFileWritable = true;
-    if (not qApp->GetPatternPath().isEmpty())
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
-        isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
+        isFileWritable = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).isWritable();
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
@@ -6207,13 +6226,13 @@ void MainWindow::UpdateWindowTitle()
         setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + QLatin1String(" (") + tr("read only") +
                        QLatin1String(")"));
     }
-    setWindowFilePath(qApp->GetPatternPath());
+    setWindowFilePath(VAbstractValApplication::VApp()->GetPatternPath());
 
 #if defined(Q_OS_MAC)
     static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
                                   QLatin1String("/../Resources/Valentina.icns"));
     QIcon icon;
-    if (not qApp->GetPatternPath().isEmpty())
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
         if (not isWindowModified())
         {
@@ -6597,14 +6616,14 @@ void MainWindow::OpenWatermark(const QString &path)
     for (i = m_watermarkEditors.begin(); i != m_watermarkEditors.end(); ++i)
     {
         if (not (*i).isNull() && not (*i)->CurrentFile().isEmpty()
-                && (*i)->CurrentFile() == AbsoluteMPath(qApp->GetPatternPath(), path))
+                && (*i)->CurrentFile() == AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), path))
         {
             (*i)->show();
             return;
         }
     }
 
-    auto *watermark = new WatermarkWindow(qApp->GetPatternPath(), this);
+    auto *watermark = new WatermarkWindow(VAbstractValApplication::VApp()->GetPatternPath(), this);
     connect(watermark, &WatermarkWindow::New, this, [this](){OpenWatermark();});
     connect(watermark, &WatermarkWindow::OpenAnother, this, [this](const QString &path){OpenWatermark(path);});
     m_watermarkEditors.append(watermark);

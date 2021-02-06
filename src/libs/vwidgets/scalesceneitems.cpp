@@ -48,7 +48,8 @@ VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
 void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen lPen = pen();
-    const qreal width = ScaleWidth(m_isBoldLine ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+    const qreal width = ScaleWidth(m_isBoldLine ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
+                                                : VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                    SceneScale(scene()));
     lPen.setWidthF(qRound(width*100.)/100.);
     setPen(lPen);
@@ -77,7 +78,7 @@ VScaledEllipse::VScaledEllipse(QGraphicsItem *parent)
 void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const qreal scale = SceneScale(scene());
-    const qreal width = ScaleWidth(qApp->Settings()->WidthMainLine(), scale);
+    const qreal width = ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine(), scale);
 
     QPen visPen = pen();
     visPen.setWidthF(width);

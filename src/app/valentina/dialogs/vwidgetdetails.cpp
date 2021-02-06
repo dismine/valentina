@@ -140,7 +140,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
 
     TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
     connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
-    qApp->getUndoStack()->push(togglePrint);
+    VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
             {
                 TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
-                qApp->getUndoStack()->push(togglePrint);
+                VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
             }
         }
     }
@@ -334,20 +334,20 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     if (selectedAction == actionSelectAll)
     {
         select = true;
-        qApp->getUndoStack()->beginMacro(tr("select all details"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("select all details"));
         ToggleSectionDetails(select);
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
     else if (selectedAction == actionSelectNone)
     {
         select = false;
-        qApp->getUndoStack()->beginMacro(tr("select none details"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("select none details"));
         ToggleSectionDetails(select);
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
     else if (selectedAction == actionInvertSelection)
     {
-        qApp->getUndoStack()->beginMacro(tr("invert selection"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("invert selection"));
 
         for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
         {
@@ -359,11 +359,11 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 
                 TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
-                qApp->getUndoStack()->push(togglePrint);
+                VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
             }
         }
 
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
     else if (pieceMode && selectedAction == actionPieceOptions)
     {

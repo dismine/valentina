@@ -67,10 +67,10 @@ VEllipticalArcData::VEllipticalArcData(qreal radius1, qreal radius2, const QStri
 VEllipticalArcData::VEllipticalArcData(qreal radius1, qreal radius2, qreal rotationAngle)
     : radius1(radius1),
       radius2(radius2),
-      formulaRadius1(QString().number(qApp->fromPixel(radius1))),
-      formulaRadius2(QString().number(qApp->fromPixel(radius2))),
+      formulaRadius1(QString().number(VAbstractValApplication::VApp()->fromPixel(radius1))),
+      formulaRadius2(QString().number(VAbstractValApplication::VApp()->fromPixel(radius2))),
       rotationAngle(rotationAngle),
-      formulaRotationAngle(QString().number(qApp->fromPixel(rotationAngle))),
+      formulaRotationAngle(QString().number(VAbstractValApplication::VApp()->fromPixel(rotationAngle))),
       m_transform()
 {}
 

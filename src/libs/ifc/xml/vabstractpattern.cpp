@@ -215,7 +215,7 @@ void GatherTokens(QSet<QString> &tokens, const QList<QString> &tokenList)
  */
 QMap<int, QString> AdjustMaterials(QMap<int, QString> materials)
 {
-    const QMap<int, QString> cliMaterials = qApp->GetUserMaterials();
+    const QMap<int, QString> cliMaterials = VAbstractValApplication::VApp()->GetUserMaterials();
     QMap<int, QString>::const_iterator i = cliMaterials.constBegin();
     while (i != cliMaterials.constEnd())
     {
@@ -1045,7 +1045,7 @@ QString VAbstractPattern::GetLabelDateFormat() const
 {
     if (*labelDateFormatCached == unknownCharacter)
     {
-        const QString globalLabelDateFormat = qApp->Settings()->GetLabelDateFormat();
+        const QString globalLabelDateFormat = VAbstractApplication::VApp()->Settings()->GetLabelDateFormat();
 
         const QDomNodeList list = elementsByTagName(TagPatternLabel);
         if (list.isEmpty())
@@ -1079,7 +1079,7 @@ void VAbstractPattern::SetLabelDateFormat(const QString &format)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetLabelTimeFormat() const
 {
-    QString globalLabelTimeFormat = qApp->Settings()->GetLabelTimeFormat();
+    QString globalLabelTimeFormat = VAbstractApplication::VApp()->Settings()->GetLabelTimeFormat();
 
     const QDomNodeList list = elementsByTagName(TagPatternLabel);
     if (list.isEmpty())

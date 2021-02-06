@@ -142,7 +142,8 @@ void VToolAlongLine::SetVisualization()
         SCASSERT(visual != nullptr)
         visual->setObject1Id(basePointId);
         visual->setObject2Id(secondPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
@@ -166,12 +167,12 @@ QString VToolAlongLine::MakeToolTip() const
                                     "<tr> <td><b>%7:</b> %8 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QStringLiteral("%1->%2").arg(basePoint->name(), current->name()),
                  QStringLiteral("%1->%2").arg(current->name(), secondPoint->name()))
-            .arg(qApp->fromPixel(curToSecond.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curToSecond.length()))
             .arg(tr("Label"), current->name());
     return toolTip;
 }
@@ -269,7 +270,8 @@ VToolAlongLine* VToolAlongLine::Create(VToolAlongLineInitData &initData)
     length->SetName(currentLength);
     initData.data->AddVariable(length);
 
-    line.setLength(qApp->toPixel(CheckFormula(initData.id, initData.formula, initData.data)));
+    line.setLength(VAbstractValApplication::VApp()->toPixel(
+                       CheckFormula(initData.id, initData.formula, initData.data)));
 
     VPointF *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);

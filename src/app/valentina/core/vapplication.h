@@ -37,11 +37,6 @@
 
 class VApplication;// use in define
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (qobject_cast<VApplication*>(VAbstractApplication::instance()))
-
 /**
  * @brief The VApplication class reimplamentation QApplication class.
  */
@@ -73,6 +68,8 @@ public:
     bool static IsGUIMode();
     virtual bool IsAppInGUIMode() const override;
     virtual bool IsPedantic() const override;
+
+    static VApplication *VApp();
 
 protected:
     virtual void       InitTrVars() override;

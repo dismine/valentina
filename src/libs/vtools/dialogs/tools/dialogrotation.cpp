@@ -86,7 +86,7 @@ DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
-    ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
+    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
 
     timerAngle->setSingleShot(true);
     connect(timerAngle, &QTimer::timeout, this, &DialogRotation::EvalAngle);
@@ -145,13 +145,15 @@ void DialogRotation::SetOrigPointId(quint32 value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogRotation::GetAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::SetAngle(const QString &value)
 {
-    formulaAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaAngle = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaAngle.length() > 80)
     {
@@ -234,7 +236,8 @@ void DialogRotation::ShowDialog(bool click)
 
         stage1 = false;
 
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        VMainGraphicsScene *scene =
+                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
@@ -253,7 +256,7 @@ void DialogRotation::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        qApp->getSceneView()->AllowRubberBand(false);
+        VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
         FillSourceList();
 
@@ -270,7 +273,8 @@ void DialogRotation::ShowDialog(bool click)
         }
 
         /*We will ignore click if pointer is in point circle*/
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        VMainGraphicsScene *scene =
+                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         try
         {
@@ -278,7 +282,7 @@ void DialogRotation::ShowDialog(bool click)
             const QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            if (line.length() <= ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
             {
                 return;
             }
@@ -347,7 +351,8 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 
             if (SetObject(id, ui->comboBoxOriginPoint, QString()))
             {
-                VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+                VAbstractMainWindow *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                 SCASSERT(window != nullptr)
                 connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 

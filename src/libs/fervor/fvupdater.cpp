@@ -128,7 +128,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
     hideUpdaterWindow();
 
     // Create a new window
-    m_updaterWindow = new FvUpdateWindow(qApp->getMainWindow());
+    m_updaterWindow = new FvUpdateWindow(VAbstractValApplication::VApp()->getMainWindow());
     m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
     m_updaterWindow->exec();
 }
@@ -209,7 +209,7 @@ void FvUpdater::RemindMeLater()
 {
     qDebug() << "Remind me later";
 
-    qApp->Settings()->SetDateOfLastRemind(QDate::currentDate());
+    VAbstractApplication::VApp()->Settings()->SetDateOfLastRemind(QDate::currentDate());
 
     hideUpdaterWindow();
 }
@@ -283,7 +283,7 @@ bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
 //---------------------------------------------------------------------------------------------------------------------
 bool FvUpdater::CheckForUpdatesSilent()
 {
-    if (qApp->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
+    if (VAbstractApplication::VApp()->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
     {
         const bool success = CheckForUpdates(true);
         if (m_dropOnFinnish && not success)
@@ -548,7 +548,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         return true;
     }
 
-    const int lastSkippedVersion = qApp->Settings()->GetLatestSkippedVersion();
+    const int lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
     if (lastSkippedVersion != 0x0)
     {
         if (decVersion == lastSkippedVersion)
@@ -588,7 +588,7 @@ void FvUpdater::IgnoreVersion(const QString &version)
         return;
     }
 
-    qApp->Settings()->SetLatestSkippedVersion(decVersion);
+    VAbstractApplication::VApp()->Settings()->SetLatestSkippedVersion(decVersion);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

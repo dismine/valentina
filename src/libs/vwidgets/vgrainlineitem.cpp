@@ -70,7 +70,7 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_ptCenter(),
       m_dAngle(0),
       m_eArrowType(GrainlineArrowDirection::atBoth),
-      m_penWidth(qApp->Settings()->WidthMainLine())
+      m_penWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine())
 {
     setAcceptHoverEvents(true);
     m_inactiveZ = 5;
@@ -107,7 +107,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     pP->save();
     QColor clr = Qt::black;
 
-    const qreal width = ScaleWidth(qApp->Settings()->WidthHairLine(), SceneScale(scene()));
+    const qreal width = ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine(), SceneScale(scene()));
     pP->setPen(QPen(clr, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
     pP->setRenderHints(QPainter::Antialiasing);
@@ -528,7 +528,7 @@ void VGrainlineItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        m_penWidth = qApp->Settings()->WidthMainLine() + 1;
+        m_penWidth = VAbstractApplication::VApp()->Settings()->WidthMainLine() + 1;
     }
     VPieceItem::hoverEnterEvent(pME);
 }
@@ -538,7 +538,7 @@ void VGrainlineItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *pME)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        m_penWidth = qApp->Settings()->WidthMainLine();
+        m_penWidth = VAbstractApplication::VApp()->Settings()->WidthMainLine();
     }
     VPieceItem::hoverLeaveEvent(pME);
 }

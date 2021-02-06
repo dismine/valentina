@@ -80,7 +80,7 @@ void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
                       : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
         }
     });
-    qApp->getUndoStack()->push(changeGroup);
+    VAbstractApplication::VApp()->getUndoStack()->push(changeGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
         }
 
     });
-    qApp->getUndoStack()->push(changeGroups);
+    VAbstractApplication::VApp()->getUndoStack()->push(changeGroups);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ void VWidgetGroups::RenameGroup(int row, int column)
     const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
     ::RenameGroup *renameGroup = new ::RenameGroup(doc, id, ui->tableWidget->item(row, column)->text());
     connect(renameGroup, &RenameGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
-    qApp->getUndoStack()->push(renameGroup);
+    VAbstractApplication::VApp()->getUndoStack()->push(renameGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,7 +230,8 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     }
     else if (selectedAction == actionPreferences)
     {
-        QScopedPointer<VContainer> fackeContainer(new VContainer(qApp->TrVars(), qApp->patternUnitsP(),
+        QScopedPointer<VContainer> fackeContainer(new VContainer(VAbstractApplication::VApp()->TrVars(),
+                                                                 VAbstractValApplication::VApp()->patternUnitsP(),
                                                                  VContainer::UniqueNamespace()));
         QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), NULL_ID, this));
         dialog->SetName(doc->GetGroupName(id));
@@ -243,14 +244,14 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
             ChangeGroupOptions *changeGroupOptions = new ChangeGroupOptions(doc, id, dialog->GetName(),
                                                                             dialog->GetTags());
             connect(changeGroupOptions, &ChangeGroupOptions::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
-            qApp->getUndoStack()->push(changeGroupOptions);
+            VAbstractApplication::VApp()->getUndoStack()->push(changeGroupOptions);
         }
     }
     else if (selectedAction == actionDelete)
     {
         DelGroup *delGroup = new DelGroup(doc, id);
         connect(delGroup, &DelGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
-        qApp->getUndoStack()->push(delGroup);
+        VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
     }
     else if (selectedAction == actionHideAll)
     {//all groups in "group" make unvisible

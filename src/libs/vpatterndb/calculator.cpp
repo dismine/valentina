@@ -48,7 +48,7 @@
  * Use this constuctor for evaluation formula. All formulas must be converted to internal look.
  * Example:
  *
- * const QString formula = qApp->FormulaFromUser(edit->text());
+ * const QString formula = VAbstractApplication::VApp()->FormulaFromUser(edit->text());
  * Calculator *cal = new Calculator(data, patternType);
  * const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
  * delete cal;
@@ -124,8 +124,8 @@ qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
 //---------------------------------------------------------------------------------------------------------------------
 qreal Calculator::Warning(const QString &warningMsg, qreal value)
 {
-    qApp->IsPedantic() ? throw qmu::QmuParserWarning(warningMsg)
-                       : qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;
+    VAbstractApplication::VApp()->IsPedantic() ? throw qmu::QmuParserWarning(warningMsg) :
+                                               qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;
 
     return value;
 }

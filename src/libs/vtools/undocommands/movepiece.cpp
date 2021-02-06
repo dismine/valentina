@@ -55,8 +55,8 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
-        m_oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldX = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldY = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
     }
     else
     {
@@ -117,7 +117,7 @@ void MovePiece::Do(qreal x, qreal y)
         {
             tool->Move(x, y);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), tool);
     }
     else
     {
@@ -128,6 +128,6 @@ void MovePiece::Do(qreal x, qreal y)
 //---------------------------------------------------------------------------------------------------------------------
 void MovePiece::SaveCoordinates(QDomElement &domElement, double x, double y)
 {
-    doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(x)));
-    doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(y)));
+    doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
+    doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 }

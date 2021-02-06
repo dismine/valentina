@@ -174,7 +174,8 @@ void DialogArc::SetCenter(const quint32 &value)
  */
 void DialogArc::SetF2(const QString &value)
 {
-    f2 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    f2 = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f2.length() > 80)
     {
@@ -262,7 +263,8 @@ QString DialogArc::GetAliasSuffix() const
  */
 void DialogArc::SetF1(const QString &value)
 {
-    f1 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    f1 = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f1.length() > 80)
     {
@@ -284,7 +286,8 @@ void DialogArc::SetF1(const QString &value)
  */
 void DialogArc::SetRadius(const QString &value)
 {
-    radius = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    radius = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius.length() > 80)
     {
@@ -383,7 +386,7 @@ void DialogArc::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -430,7 +433,7 @@ void DialogArc::EvalRadius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditRadius;
     formulaData.labelResult = ui->labelResultRadius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagRadius);
 
@@ -485,7 +488,8 @@ quint32 DialogArc::GetCenter() const
  */
 QString DialogArc::GetRadius() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(radius, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -495,7 +499,8 @@ QString DialogArc::GetRadius() const
  */
 QString DialogArc::GetF1() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(f1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -505,5 +510,6 @@ QString DialogArc::GetF1() const
  */
 QString DialogArc::GetF2() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(f2, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(f2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }

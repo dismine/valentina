@@ -128,7 +128,8 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
     : VAbstractMainWindow(parent),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitsP(), valentinaNamespace))
+      pattern(new VContainer(VAbstractApplication::VApp()->TrVars(), VAbstractValApplication::VApp()->patternUnitsP(),
+                             valentinaNamespace))
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
       ,m_taskbarButton(new QWinTaskbarButton(this))
 #endif
@@ -468,17 +469,17 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSV()
     }
 
     DialogExportToCSV dialog(this);
-    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
-    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
-    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+    dialog.SetWithHeader(VAbstractApplication::VApp()->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(VAbstractApplication::VApp()->Settings()->GetCSVCodec());
+    dialog.SetSeparator(VAbstractApplication::VApp()->Settings()->GetCSVSeparator());
 
     if (dialog.exec() == QDialog::Accepted)
     {
         ExportFMeasurementsToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
 
-        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
-        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
-        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+        VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
     }
 }
 
@@ -554,7 +555,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
         return;
     }
 
-    qApp->ValentinaSettings()->SetPathLayout(path);
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
@@ -655,7 +656,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
         return;
     }
 
-    qApp->ValentinaSettings()->SetPathLayout(path);
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     VLayoutExporter exporter;
@@ -848,14 +849,15 @@ void MainWindowsNoGUI::PrintPreviewTiled()
     }
     else
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
                                                       settings->GetTiledPDFPaperHeight(Unit::Mm)));
     }
 
-    m_layoutSettings->SetWatermarkPath(AbsoluteMPath(qApp->GetPatternPath(), doc->GetWatermarkPath()));
+    m_layoutSettings->SetWatermarkPath(
+                AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PrintPreviewTiled();
 }
 
@@ -881,14 +883,15 @@ void MainWindowsNoGUI::PrintTiled()
     }
     else
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
                                                       settings->GetTiledPDFPaperHeight(Unit::Mm)));
     }
 
-    m_layoutSettings->SetWatermarkPath(AbsoluteMPath(qApp->GetPatternPath(), doc->GetWatermarkPath()));
+    m_layoutSettings->SetWatermarkPath(
+                AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PrintTiled();
 }
 
@@ -919,7 +922,7 @@ QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<De
 
     futureWatcher.setFuture(QtConcurrent::mapped(details, PrepareDetail));
 
-    if (qApp->IsGUIMode())
+    if (VApplication::VApp()->IsGUIMode())
     {
         progress.exec();
     }
@@ -949,7 +952,7 @@ void MainWindowsNoGUI::InitTempLayoutScene()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList MainWindowsNoGUI::RecentFileList() const
 {
-    return qApp->ValentinaSettings()->GetRecentFileList();
+    return VAbstractValApplication::VApp()->ValentinaSettings()->GetRecentFileList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -977,8 +980,8 @@ QIcon MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty qual
                 QPainter painter(&image);
                 painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
                 painter.setRenderHint(QPainter::Antialiasing, true);
-                painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
-                                    Qt::RoundJoin));
+                painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
+                                    Qt::RoundCap, Qt::RoundJoin));
                 painter.setBrush ( QBrush ( Qt::NoBrush ) );
                 m_layoutSettings->LayoutScenes().at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
                 painter.end();
@@ -1067,7 +1070,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     }
     else
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
@@ -1076,7 +1079,8 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
         m_layoutSettings->SetYScale(1);
     }
 
-    m_layoutSettings->SetWatermarkPath(AbsoluteMPath(qApp->GetPatternPath(), doc->GetWatermarkPath()));
+    m_layoutSettings->SetWatermarkPath(
+                AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PdfTiledFile(name);
 }
 
@@ -1117,19 +1121,19 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
             {
                 case LayoutExportFormats::SVG:
                     paper->setVisible(false);
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                                         Qt::RoundJoin));
+                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                     exporter.ExportToSVG(scene);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PDF:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                                         Qt::RoundJoin));
+                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                     exporter.ExportToPDF(scene);
                     break;
                 case LayoutExportFormats::PNG:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                                         Qt::RoundJoin));
+                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                     exporter.ExportToPNG(scene);
                     break;
                 case LayoutExportFormats::OBJ:
@@ -1138,13 +1142,13 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PS:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                                         Qt::RoundJoin));
+                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                     exporter.ExportToPS(scene);
                     break;
                 case LayoutExportFormats::EPS:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                                         Qt::RoundJoin));
+                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                     exporter.ExportToEPS(scene);
                     break;
                 case LayoutExportFormats::DXF_AC1006_Flat:
@@ -1202,8 +1206,8 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::TIF:
-                    exporter.SetPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                                         Qt::RoundJoin));
+                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                     exporter.ExportToTIF(scene);
                     break;
                 default:
@@ -1224,7 +1228,8 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
 QString MainWindowsNoGUI::FileName() const
 {
     QString fileName;
-    qApp->GetPatternPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPatternPath();
+    VAbstractValApplication::VApp()->GetPatternPath().isEmpty()
+            ? fileName = tr("unnamed") : fileName = VAbstractValApplication::VApp()->GetPatternPath();
     return QFileInfo(fileName).baseName();
 }
 
@@ -1262,7 +1267,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                 QScopedPointer<Calculator> cal(new Calculator());
                 const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
-                csv.setText(i, 1, qApp->LocaleToString(result)); // value
+                csv.setText(i, 1, VAbstractApplication::VApp()->LocaleToString(result)); // value
 
                 if (qIsInf(result) || qIsNaN(result))
                 {
@@ -1371,7 +1376,7 @@ void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
         QList<QString> list = ConvertToList(match);
         for (int i = 0; i < list.size(); ++i)
         {
-            list[i] = qApp->TrVars()->MToUser(list.at(i));
+            list[i] = VAbstractApplication::VApp()->TrVars()->MToUser(list.at(i));
         }
 
         VException e(tr("Measurement file doesn't include all required measurements."));

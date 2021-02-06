@@ -126,14 +126,16 @@ void DialogPlaceLabel::SetLabelType(PlaceLabelType type)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetWidth() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetWidth(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -152,14 +154,16 @@ void DialogPlaceLabel::SetWidth(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetHeight() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetHeight(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -178,14 +182,16 @@ void DialogPlaceLabel::SetHeight(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetAngle(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -315,7 +321,7 @@ void DialogPlaceLabel::EvalWidth()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormulaWidth;
     formulaData.labelResult = ui->labelResultCalculationWidth;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, m_flagWidth);
@@ -329,7 +335,7 @@ void DialogPlaceLabel::EvalHeight()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormulaHeight;
     formulaData.labelResult = ui->labelResultCalculationHeight;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, m_flagHeight);
@@ -370,7 +376,7 @@ void DialogPlaceLabel::FXWidth()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetWidth());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetWidth(dialog->GetFormula());
@@ -383,7 +389,7 @@ void DialogPlaceLabel::FXHeight()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetHeight());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetHeight(dialog->GetFormula());
@@ -429,8 +435,10 @@ void DialogPlaceLabel::InitPlaceLabelTab()
     ui->plainTextEditFormulaHeight->installEventFilter(this);
     ui->plainTextEditFormulaAngle->installEventFilter(this);
 
-    ui->plainTextEditFormulaWidth->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnits())));
-    ui->plainTextEditFormulaHeight->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnits())));
+    ui->plainTextEditFormulaWidth->setPlainText(
+                QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
+    ui->plainTextEditFormulaHeight->setPlainText(
+                QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
 
     connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPlaceLabel::FXWidth);
     connect(ui->toolButtonExprHeight, &QPushButton::clicked, this, &DialogPlaceLabel::FXHeight);
@@ -542,13 +550,15 @@ void DialogPlaceLabel::CheckPoint()
 QString DialogPlaceLabel::GetFormulaVisible() const
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetFormulaVisible(const QString &formula)
 {
-    const QString f = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {

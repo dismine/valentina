@@ -71,5 +71,11 @@ void VAbstractValApplication::OpenSettings()
 VSettings *VAbstractValApplication::ValentinaSettings()
 {
     SCASSERT(settings != nullptr)
-    return qobject_cast<VSettings *>(settings);
+            return qobject_cast<VSettings *>(settings);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractValApplication::VApp() -> VAbstractValApplication *
+{
+    return qobject_cast<VAbstractValApplication*>(QCoreApplication::instance());
 }

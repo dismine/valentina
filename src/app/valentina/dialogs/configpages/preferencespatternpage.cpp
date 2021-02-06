@@ -64,7 +64,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->setupUi(this);
     RetranslateUi();
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
@@ -126,12 +126,12 @@ QStringList PreferencesPatternPage::Apply()
 {
     QStringList preferences;
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     // Scene antialiasing
     if (settings->GetGraphicalOutput() != ui->graphOutputCheck->isChecked())
     {
-        if (qApp->getSceneView()->IsOpenGLRender())
+        if (VAbstractValApplication::VApp()->getSceneView()->IsOpenGLRender())
         {
             preferences.append(tr("antialiasing"));
         }
@@ -147,7 +147,7 @@ QStringList PreferencesPatternPage::Apply()
 
     settings->SetCurveApproximationScale(ui->doubleSpinBoxCurveApproximation->value());
     settings->SetLineWidth(UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, Unit::Mm));
-    qApp->getSceneView()->SetAntialiasing(ui->graphOutputCheck->isChecked());
+    VAbstractValApplication::VApp()->getSceneView()->SetAntialiasing(ui->graphOutputCheck->isChecked());
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
@@ -163,7 +163,7 @@ QStringList PreferencesPatternPage::Apply()
     if (settings->IsDoublePassmark() != ui->doublePassmarkCheck->isChecked())
     {
         settings->SetDoublePassmark(ui->doublePassmarkCheck->isChecked());
-        qApp->getCurrentDocument()->LiteParseTree(Document::LiteParse);
+        VAbstractValApplication::VApp()->getCurrentDocument()->LiteParseTree(Document::LiteParse);
     }
 
     settings->SetLabelDateFormat(ui->comboBoxDateFormats->currentText());
@@ -181,8 +181,9 @@ QStringList PreferencesPatternPage::Apply()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitDefaultSeamAllowance()
 {
-    ui->defaultSeamAllowance->setValue(qApp->ValentinaSettings()->GetDefaultSeamAllowance());
-    ui->defaultSeamAllowance->setSuffix(UnitsToStr(StrToUnits(qApp->ValentinaSettings()->GetUnit()), true));
+    ui->defaultSeamAllowance->setValue(VAbstractValApplication::VApp()->ValentinaSettings()->GetDefaultSeamAllowance());
+    ui->defaultSeamAllowance->setSuffix(
+                UnitsToStr(StrToUnits(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit()), true));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -201,7 +202,7 @@ void PreferencesPatternPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::EditDateTimeFormats()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     if (button == ui->pushButtonEditDateFormats)
@@ -231,7 +232,7 @@ void PreferencesPatternPage::ManageKnownMaterials()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitLabelDateTimeFormats()
 {
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     InitComboBoxFormats(ui->comboBoxDateFormats,
                         VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),

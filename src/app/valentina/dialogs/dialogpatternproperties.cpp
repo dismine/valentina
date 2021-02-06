@@ -67,10 +67,10 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     SCASSERT(doc != nullptr)
 
-    VSettings *settings = qApp->ValentinaSettings();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    if (qApp->GetPatternPath().isEmpty())
+    if (VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
@@ -78,15 +78,15 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     }
     else
     {
-        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(qApp->GetPatternPath()));
-        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(qApp->GetPatternPath()));
+        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(VAbstractValApplication::VApp()->GetPatternPath()));
+        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(VAbstractValApplication::VApp()->GetPatternPath()));
         ui->pushButtonShowInExplorer->setEnabled(true);
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
     connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, []()
     {
-        ShowInGraphicalShell(qApp->GetPatternPath());
+        ShowInGraphicalShell(VAbstractValApplication::VApp()->GetPatternPath());
     });
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
@@ -98,7 +98,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
         ui->comboBoxLabelLanguage->addItem(QLocale(name).nativeLanguageName(), name);
     }
 
-    int index = ui->comboBoxLabelLanguage->findData(qApp->ValentinaSettings()->GetLabelLanguage());
+    int index = ui->comboBoxLabelLanguage->findData(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
     if (index != -1)
     {
         ui->comboBoxLabelLanguage->setCurrentIndex(index);
@@ -277,7 +278,7 @@ void DialogPatternProperties::ChangeImage()
 {
     const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), filter, nullptr,
-                                                          qApp->NativeFileDialog());
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
         QImage image;
@@ -319,7 +320,7 @@ void DialogPatternProperties::SaveImage()
     const QString extension = doc->GetImageExtension().prepend(QChar('.'));
     QString filter = tr("Images") + QStringLiteral(" (*") + extension + QChar(')');
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter,
-                                                    qApp->NativeFileDialog());
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
         if (not filename.endsWith(extension.toUpper()))

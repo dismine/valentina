@@ -69,7 +69,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     ui->lineEditPath->setClearButtonEnabled(true);
     ui->lineEditFileName->setClearButtonEnabled(true);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -120,7 +121,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
             this, &DialogSaveLayout::ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
     {
-        const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
+        const QString dirPath = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout();
         bool usedNotExistedDir = false;
         QDir directory(dirPath);
         if (not directory.exists())
@@ -130,7 +131,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
         const QString dir = QFileDialog::getExistingDirectory(
             this, tr("Select folder"), dirPath,
-            qApp->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
+            VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly |
+                                                           QFileDialog::DontResolveSymlinks));
         if (not dir.isEmpty())
         {// If paths equal the signal will not be called, we will do this manually
             dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
@@ -144,7 +146,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
-    ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
+    ui->lineEditPath->setText(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout());
 
     InitTemplates(ui->comboBoxTemplates);
 
@@ -680,7 +682,7 @@ void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
 void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnits());
+    margins = UnitConvertor(margins, Unit::Mm, VAbstractValApplication::VApp()->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -698,7 +700,7 @@ QMarginsF DialogSaveLayout::GetTiledMargins() const
         ui->doubleSpinBoxBottomField->value()
     );
 
-    return UnitConvertor(margins, qApp->patternUnits(), Unit::Mm);
+    return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -873,8 +875,8 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
  */
 void DialogSaveLayout::ReadSettings()
 {
-    VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnits();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -927,8 +929,8 @@ void DialogSaveLayout::WriteSettings() const
         return;
     }
 
-    VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnits();
+    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
     QMarginsF margins = QMarginsF(

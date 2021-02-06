@@ -139,7 +139,8 @@ VToolEndLine* VToolEndLine::Create(VToolEndLineInitData &initData)
     QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
 
     line.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data)); //First set angle.
-    line.setLength(qApp->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
+    line.setLength(VAbstractValApplication::VApp()
+                   ->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
 
     VPointF *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -229,8 +230,10 @@ void VToolEndLine::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(basePointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
+                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }

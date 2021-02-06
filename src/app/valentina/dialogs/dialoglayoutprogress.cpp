@@ -48,7 +48,8 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
     ui->progressBar->setMaximum(static_cast<int>(timeout/1000));
     ui->progressBar->setValue(0);
