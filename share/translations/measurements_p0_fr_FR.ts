@@ -3527,7 +3527,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1822"/>
         <source>From Waist Side along curve to Hip level then straight down to  Knee level. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height Knee&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Du Côté de la Taille le long de la courbe de la Hanche et jusqu&apos;au genou. (&apos;Jambe : Coté de la Taille jusqu&apos;au genou&apos; - &apos;Genou&apos;).</translation>
+        <translation>Du Côté de la Taille le long de la courbe de la Hanche et jusqu&apos;au genou. (&apos;Jambe :&#xa0;Coté de la Taille jusqu&apos;au genou&apos; - &apos;Genou&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1862"/>

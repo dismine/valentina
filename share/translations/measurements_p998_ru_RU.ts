@@ -127,7 +127,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="252"/>
         <source>Vertical distance from the Gluteal fold, where the Gluteal muscle meets the top of the back thigh, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Номер размерного признака в стандарте №12. Расстояние но вертикали от пола до середины подъягодичной складки </translation>
+        <translation>Номер размерного признака в стандарте №12. Расстояние но вертикали от пола до середины подъягодичной складки&#xa0;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="256"/>

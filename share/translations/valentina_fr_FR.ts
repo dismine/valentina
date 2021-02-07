@@ -1807,7 +1807,7 @@
     </message>
     <message>
         <source>Click to place duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Clickez pour placer la copie</translation>
     </message>
 </context>
 <context>
@@ -1976,7 +1976,7 @@
     </message>
     <message>
         <source>Piece fold position</source>
-        <translation type="unfinished"></translation>
+        <translation>Position du pli de la pièce</translation>
     </message>
     <message>
         <source>Piece name</source>
@@ -2020,7 +2020,7 @@
     </message>
     <message>
         <source>Word: Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot : Couper</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -2028,7 +2028,7 @@
     </message>
     <message>
         <source>Word: on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot : au pli</translation>
     </message>
     <message>
         <source>on fold</source>
@@ -2036,7 +2036,7 @@
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Tissu de l&apos;utilisateur</translation>
     </message>
     <message>
         <source>Insert…</source>
@@ -2064,7 +2064,7 @@
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unités du patron</translation>
     </message>
     <message>
         <source>Size units</source>
@@ -2076,11 +2076,11 @@
     </message>
     <message>
         <source>Customer email</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse email du client</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensuration : %1</translation>
     </message>
     <message>
         <source>Height</source>
@@ -2104,23 +2104,23 @@
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure de la hauteur.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure de la taille.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure du tour de hanche.</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure du tour de taille.</translation>
     </message>
     <message>
         <source>Final measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension finale : %1</translation>
     </message>
 </context>
 <context>
@@ -2274,7 +2274,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <source>Radius1:</source>
-        <translation>Rayon1 :</translation>
+        <translation>Rayon1&#xa0;:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2294,7 +2294,7 @@
     </message>
     <message>
         <source>Radius2:</source>
-        <translation>Rayon2 :</translation>
+        <translation>Rayon2&#xa0;:</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -2588,11 +2588,11 @@
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation type="unfinished">Déplacer la mesure vers le haut</translation>
+        <translation>Augmentez la dimension</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation type="unfinished">Déplacer la mesure vers le bas</translation>
+        <translation>Diminuez la dimension</translation>
     </message>
     <message>
         <source>measurement</source>
@@ -2616,7 +2616,7 @@
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Résultat  non valide. La valeur est infinie ou NaN. Veuillez revoir vos calculs.</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2624,7 +2624,7 @@
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Erreur d&apos;analyse : %1</translation>
+        <translation>Erreur de l&apos;interpréteur : %1</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2667,15 +2667,15 @@
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Symétrie axiale</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe de visibilité</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2691,11 +2691,11 @@
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séparez chaque balise par une virgule.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des balises</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -2727,7 +2727,7 @@
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de groupe non valide</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -2786,15 +2786,15 @@
     </message>
     <message>
         <source>Flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Symétrie par rapport à une ligne</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe de visibilité</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2810,11 +2810,11 @@
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séparez chaque balise par une virgule.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des balises</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -2846,7 +2846,7 @@
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de groupe non valide</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -2858,15 +2858,15 @@
     </message>
     <message>
         <source>Invalid line points</source>
-        <translation type="unfinished"></translation>
+        <translation>Points de la ligne non valides</translation>
     </message>
     <message>
         <source>Invalid first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Premier point de la ligne non valide</translation>
     </message>
     <message>
         <source>Invalid second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Second point de la ligne non valide</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -2905,11 +2905,11 @@
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séparez chaque balise par une virgule.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des balises</translation>
     </message>
 </context>
 <context>
@@ -3342,7 +3342,7 @@
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Résultat invalide. La valeur est infinie ou NaN. Veuillez revoir vos calculs.</translation>
     </message>
     <message>
         <source>Refresh a pattern with all changes you made</source>
@@ -3416,7 +3416,7 @@
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Tissu de l&apos;utilisateur</translation>
     </message>
 </context>
 <context>
@@ -4341,11 +4341,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe de visibilité</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4361,11 +4361,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séparez chaque balise par une virgule.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des balises</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -4397,7 +4397,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de groupe non valide</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -6137,11 +6137,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe de visibilité</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -6153,11 +6153,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séparez chaque balise par une virgule.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des balises</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -6189,7 +6189,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de groupe non valide</translation>
     </message>
     <message>
         <source>Invalid rotation point</source>
@@ -6470,7 +6470,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Erreur d&apos;analyse : %1</translation>
+        <translation>Erreur de l&apos;interpréteur : %1</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -10285,7 +10285,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Résultat invalide. La valeur est infinie ou NaN. Veuillez revoir vos calculs.</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
@@ -10397,19 +10397,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure de la hauteur.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure de la taille.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure de la hanche.</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de valeur pour la mesure du tour de taille.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
@@ -11341,7 +11341,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Résultat invalide. La valeur est infinie ou NaN. Veuillez revoir vos calculs.</translation>
     </message>
     <message>
         <source>Empty</source>
@@ -13317,7 +13317,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Tissu de l&apos;utilisateur</translation>
     </message>
     <message>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
@@ -14601,7 +14601,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Symétrie axiale</translation>
     </message>
 </context>
 <context>
@@ -17015,7 +17015,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séparez chaque balise par une virgule.</translation>
     </message>
     <message>
         <source>Filter by tags</source>

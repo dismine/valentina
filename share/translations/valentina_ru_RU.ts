@@ -7597,7 +7597,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Retain original pieces</source>
-        <translation>Сохранить оригинальную выкройку</translation>
+        <translation>Сохранить оригинальные детали</translation>
     </message>
 </context>
 <context>

@@ -959,7 +959,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="646"/>
         <source>Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Circunferência da Cintura </translation>
+        <translation>Circunferência da Cintura&#xa0;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="647"/>

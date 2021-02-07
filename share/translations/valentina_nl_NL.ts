@@ -10390,7 +10390,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
-        <translation>Fout bij berekenen segment voor boog &apos;%1&apos;. %2 </translation>
+        <translation>Fout bij berekenen segment voor boog &apos;%1&apos;. %2&#xa0;</translation>
     </message>
     <message>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
