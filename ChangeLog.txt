@@ -2,6 +2,7 @@
 - Placeholder %size% has incorrect value.
 - Values for waist and hip swapped for individual measurements. 
 - Fix crash when edit a group operation notes.
+- Fix bug. Undo Union details hide piece node points.
 
 # Version 0.7.43 Jan 31, 2021
 - Improve Windows installer. Avoid crashing on checking if a program is still running.

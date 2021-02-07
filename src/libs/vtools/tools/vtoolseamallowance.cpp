@@ -2021,7 +2021,7 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
     {
         case (Tool::NodePoint):
         {
-            const QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(gobj);
+            auto point = QSharedPointer<VPointF>(new VPointF(*qSharedPointerDynamicCast<VPointF>(gobj).data()));
             initNodeData.id = VAbstractTool::CreateNodePoint(initData.data, gobj->getIdObject(), point);
             VNodePoint::Create(initNodeData);
             break;
