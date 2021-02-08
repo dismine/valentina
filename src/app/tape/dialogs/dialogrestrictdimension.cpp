@@ -161,7 +161,7 @@ void DialogRestrictDimension::RowSelected()
 
     QTableWidgetItem *item = ui->tableWidget->currentItem();
 
-    if (item != nullptr)
+    if (item != nullptr && (item->flags() & Qt::ItemIsEnabled) != 0U)
     {
         qreal base1 = 0;
         qreal base2 = 0;
