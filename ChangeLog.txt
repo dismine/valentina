@@ -1,4 +1,4 @@
-# Version 0.7.44 (unreleased)
+# Version 0.7.44 Feb 9, 2021
 - Placeholder %size% has incorrect value.
 - Values for waist and hip swapped for individual measurements. 
 - Fix crash when edit a group operation notes.

@@ -1,7 +1,7 @@
 <services>
   <service name="tar_scm">
     <param name="url">git://github.com/dismine/Valentina_git.git</param>
-    <param name="versionprefix">0.7.43</param>
+    <param name="versionprefix">0.7.44</param>
     <param name="filename">valentina</param>
     <param name="scm">git</param>
     <param name="exclude">.git</param>
