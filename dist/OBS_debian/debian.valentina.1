@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "22 March, 2020" "valentina man page"
+.TH valentina 1 "3 February, 2021" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -654,6 +654,13 @@ The path to output destination folder. By default the directory at which the app
 .IP Arguments: 
 .I filename
 \- a pattern file.
+.SH EXAMPLE
+.IP "Export a layout to tiled PDF:" 
+.SB "valentina --basename test --destination /home/user/tiled --format 33 --mfile /home/user/measurements/m1.vit --pedantic"
+.IP "Export pieces to DXF AAMA bypassing the layout stage:"
+.SB "valentina --basename test --destination /home/user/aama --format 18 --mfile /home/user/measurements/m1.vit --exportOnlyDetails --pedantic --exportSuchDetails ." 
+.IP "Export a layout to tiled PDF with final measurements:" 
+.SB "valentina --basename test --destination /home/user/tiled --format 33 --mfile /home/user/measurements/m1.vit --pedantic --csvExportFM /home/user/tiled/test.csv"
 .SH AUTHOR
 .RI "This  manual  page  was  written  by Roman Telezhynskyi <" dismine@gmail.com ">"
 .SH "SEE ALSO"
