@@ -538,8 +538,7 @@ void DialogEditWrongFormula::InitVariables()
 void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, bool specialUnits,
                                             const QString &description)
 {
-    const QString unit = specialUnits ? degreeSymbol
-                                      : " " + UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    const QString unit = specialUnits ? degreeSymbol : ' ' + postfix;
     const QString desc = QStringLiteral("%1(%2%3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
 }
