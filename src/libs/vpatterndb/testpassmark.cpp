@@ -67,6 +67,16 @@ void DumpPassmarkData(const VPiecePassmarkData &data, const QString &templateNam
 
     if (temp.open())
     {
+#if defined(Q_OS_LINUX)
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+//        On Linux, QTemporaryFile will attempt to create unnamed temporary
+//        files. If that succeeds, open() will return true but exists() will be
+//        false. If you call fileName() or any function that calls it,
+//        QTemporaryFile will give the file a name, so most applications will
+//        not see a difference.
+        temp.fileName(); // call to create a file on disk
+    #endif
+#endif
         QJsonObject dataObject
         {
             {"data", data.toJson()},
@@ -92,6 +102,16 @@ void DumpPassmarkShape(const QVector<QLineF> &shape, const QString &templateName
 
     if (temp.open())
     {
+#if defined(Q_OS_LINUX)
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+//        On Linux, QTemporaryFile will attempt to create unnamed temporary
+//        files. If that succeeds, open() will return true but exists() will be
+//        false. If you call fileName() or any function that calls it,
+//        QTemporaryFile will give the file a name, so most applications will
+//        not see a difference.
+        temp.fileName(); // call to create a file on disk
+    #endif
+#endif
         QJsonObject shapeObject
         {
             {"shape", PassmarkShapeToJson(shape)},

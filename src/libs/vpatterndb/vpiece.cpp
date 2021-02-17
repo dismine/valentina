@@ -1178,6 +1178,16 @@ void VPiece::DumpPiece(const VPiece &piece, const VContainer *data)
     temp.setAutoRemove(false); // Remove dump manually
     if (temp.open())
     {
+#if defined(Q_OS_LINUX)
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+//        On Linux, QTemporaryFile will attempt to create unnamed temporary
+//        files. If that succeeds, open() will return true but exists() will be
+//        false. If you call fileName() or any function that calls it,
+//        QTemporaryFile will give the file a name, so most applications will
+//        not see a difference.
+        temp.fileName(); // call to create a file on disk
+    #endif
+#endif
         QJsonObject testCase
         {
             {"bd", piece.DBToJson(data)},
