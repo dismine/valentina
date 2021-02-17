@@ -860,7 +860,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         {
             bool success = false;
             QVector<VRawSAPoint> temp = ekvPoints;
-            temp.insert(ekvPoints.size()-1, bigLine1.p2());
+            temp.append(bigLine1.p2());
             temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
             if (success)

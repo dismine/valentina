@@ -1075,6 +1075,12 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://Issue_937_case_5/input.json"),
                      QStringLiteral("://Issue_937_case_5/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/busty.val (private collection)
+    ASSERT_TEST_CASE("Busty",
+                     QStringLiteral("://busty/input.json"),
+                     QStringLiteral("://busty/output.json"),
+                     0 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

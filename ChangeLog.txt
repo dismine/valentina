@@ -1,3 +1,6 @@
+# Version 0.7.45 (unreleased)
+- Fix incorrect seam allowance for angle type second edge right angle.
+
 # Version 0.7.44 Feb 9, 2021
 - Placeholder %size% has incorrect value.
 - Values for waist and hip swapped for individual measurements. 
