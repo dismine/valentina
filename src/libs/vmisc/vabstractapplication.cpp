@@ -305,6 +305,8 @@ QString VAbstractApplication::ClearMessage(QString msg)
         msg.chop(1);
     }
 
+    msg.replace("\\\"", "\"");
+
     return msg;
 }
 
