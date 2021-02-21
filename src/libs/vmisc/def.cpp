@@ -623,7 +623,8 @@ void InitLanguages(QComboBox *combobox)
 
         QLocale loc = QLocale(locale);
         QString lang = loc.nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(loc.country())));
+        // Since Qt 5.12 country names have spaces
+        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(loc.country()).remove(' ')));
 
         combobox->addItem(ico, lang, locale);
     }
@@ -631,7 +632,8 @@ void InitLanguages(QComboBox *combobox)
     if (combobox->count() == 0 || not englishUS)
     {
         // English language is internal and doens't have own *.qm file.
-        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(QLocale::UnitedStates)));
+        // Since Qt 5.12 country names have spaces
+        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
         QString lang = QLocale(en_US).nativeLanguageName();
         combobox->addItem(ico, lang, en_US);
     }
