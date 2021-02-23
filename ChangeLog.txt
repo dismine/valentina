@@ -1,6 +1,7 @@
 # Version 0.7.45 (unreleased)
 - Fix incorrect seam allowance for angle type second edge right angle.
 - Fix regression with country flags.
+- Fix bug in seam allowance.
 
 # Version 0.7.44 Feb 9, 2021
 - Placeholder %size% has incorrect value.

@@ -1081,6 +1081,18 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://busty/input.json"),
                      QStringLiteral("://busty/output.json"),
                      0 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/panties.val (private collection)
+    ASSERT_TEST_CASE("Panties. Piece Case 1",
+                     QStringLiteral("://panties_case1/input.json"),
+                     QStringLiteral("://panties_case1/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/panties.val (private collection)
+    ASSERT_TEST_CASE("Panties. Piece Case 2",
+                     QStringLiteral("://panties_case2/input.json"),
+                     QStringLiteral("://panties_case2/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

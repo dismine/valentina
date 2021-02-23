@@ -17,7 +17,7 @@
     <finalMeasurements/>
     <measurements>smart_pattern_#36.vit</measurements>
     <increments>
-        <increment description="" formula="29&#10;+#stojka_shyrina_shva_snizu&#10;+ #stojka_shyrina_shva_sverxu" name="#model_stojka_shyrina"/>
+        <increment description="" formula="29" name="#model_stojka_shyrina"/>
     </increments>
     <previewCalculations/>
     <draw name="Стойка">
