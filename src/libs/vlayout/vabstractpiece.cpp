@@ -1067,6 +1067,9 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
 //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
+    // Fix distorsion. Must be done before the correction
+    points = CorrectPathDistortion(points);
+
     points = CorrectEquidistantPoints(points);
     if ( points.size() < 3 )
     {
@@ -1075,9 +1078,6 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return QVector<QPointF>();
     }
-
-    // Fix distorsion
-    points = CorrectPathDistortion(points);
 
     if (points.last().toPoint() != points.first().toPoint())
     {
