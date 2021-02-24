@@ -73,7 +73,7 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
 {
     ui->setupUi(this);
 
-    ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
+    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
 
     InitOkCancelApply(ui);
 
@@ -206,7 +206,8 @@ void DialogFlippingByLine::ShowDialog(bool click)
 
         stage1 = false;
 
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        VMainGraphicsScene *scene =
+                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
@@ -225,7 +226,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        qApp->getSceneView()->AllowRubberBand(false);
+        VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
         FillSourceList();
 

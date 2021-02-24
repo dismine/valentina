@@ -299,7 +299,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     }
     else
     {
-        setCursor(qApp->getSceneView()->viewport()->cursor());
+        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
     }
 }
 
@@ -448,8 +448,8 @@ QString VToolLine::MakeToolTip() const
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(line.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
             .arg(line.angle());
     return toolTip;
 }

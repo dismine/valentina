@@ -39,6 +39,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "vvalentinasettings.h"
 
 #include <QtDebug>
 #include <QDir>
@@ -169,7 +170,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     QString logMsg = msg;
-    const bool isPatternMessage = qApp->IsWarningMessage(msg);
+    const bool isPatternMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
     if (isPatternMessage)
     {
         logMsg = logMsg.remove(VAbstractValApplication::warningMessageSignature);
@@ -188,7 +189,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtWarningMsg:
                 if (isPatternMessage)
                 {
-                    qApp->PostWarningMessage(logMsg, type);
+                    VAbstractValApplication::VApp()->PostWarningMessage(logMsg, type);
                 }
                 debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
@@ -197,7 +198,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtCriticalMsg:
                 if (isPatternMessage)
                 {
-                    qApp->PostWarningMessage(logMsg, type);
+                    VAbstractValApplication::VApp()->PostWarningMessage(logMsg, type);
                 }
                 debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
@@ -212,7 +213,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtInfoMsg:
                 if (isPatternMessage)
                 {
-                    qApp->PostWarningMessage(logMsg, type);
+                    VAbstractValApplication::VApp()->PostWarningMessage(logMsg, type);
                 }
                 debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
@@ -226,9 +227,9 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         vStdErr().flush();
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        (*qApp->LogFile()) << debugdate <<  endl;
+        (*VApplication::VApp()->LogFile()) << debugdate <<  endl;
 #else
-        (*qApp->LogFile()) << debugdate <<  Qt::endl;
+        (*VApplication::VApp()->LogFile()) << debugdate <<  Qt::endl;
 #endif
     }
 
@@ -458,7 +459,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::ActivateDarkMode()
 {
-     VValentinaSettings *settings = qApp->ValentinaSettings();
+     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
      if (settings->GetDarkMode())
      {
          QFile f(QStringLiteral(":qdarkstyle/style.qss"));
@@ -729,25 +730,6 @@ void VApplication::AboutToQuit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VApplication::OpenSettings()
-{
-    settings = new VValentinaSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                                      QCoreApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VValentinaSettings *VApplication::ValentinaSettings()
-{
-    SCASSERT(settings != nullptr)
-    return qobject_cast<VValentinaSettings *>(settings);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool VApplication::IsGUIMode()
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
@@ -766,6 +748,12 @@ bool VApplication::IsAppInGUIMode() const
 bool VApplication::IsPedantic() const
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsPedantic();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::VApp() -> VApplication *
+{
+    return qobject_cast<VApplication*>(QCoreApplication::instance());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,7 +29,7 @@
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
 #include "../vwidgets/vwidgetpopup.h"
-#include "../core/vvalentinasettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -90,7 +90,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     formulaBaseHeightPC = ui->plainTextEditFormulaPC->height();
     ui->plainTextEditFormulaPC->installEventFilter(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
@@ -214,7 +214,7 @@ void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget 
         item->setFont(font);
         table->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(qApp->LocaleToString(length));
+        item = new QTableWidgetItem(VAbstractApplication::VApp()->LocaleToString(length));
         item->setTextAlignment(Qt::AlignHCenter);
         table->setItem(currentRow, 1, item);
     }
@@ -268,7 +268,7 @@ void DialogIncrements::FillAnglesCurves()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowUnits()
 {
-    const QString unit = UnitsToStr(qApp->patternUnits());
+    const QString unit = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
 
     ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit);// calculated value
     ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit);// formula
@@ -340,7 +340,8 @@ QString DialogIncrements::GetCustomName() const
     QString name;
     do
     {
-        name = CustomIncrSign + qApp->TrVars()->InternalVarToUser(increment_) + QString().number(num);
+        name = CustomIncrSign + VAbstractApplication::VApp()->TrVars()->InternalVarToUser(increment_) +
+                QString().number(num);
         num++;
     } while (not data->IsUnique(name));
     return name;
@@ -361,7 +362,8 @@ QString DialogIncrements::ClearIncrementName(const QString &name) const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
 {
-    const QString postfix = UnitsToStr(qApp->patternUnits());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix =
+            UnitsToStr(VAbstractValApplication::VApp()->patternUnits());//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
@@ -376,7 +378,8 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
             // Replace line return character with spaces for calc if exist
             if (fromUser)
             {
-                f = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+                f = VAbstractApplication::VApp()->TrVars()
+                        ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             }
             else
             {
@@ -392,7 +395,7 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
                 return false;
             }
 
-            label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + postfix);
+            label->setText(VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
             label->setToolTip(tr("Value"));
             return true;
         }
@@ -729,7 +732,9 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue);
         plainTextEditFormula->blockSignals(true);
 
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+        QString formula =
+                VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         plainTextEditFormula->setPlainText(formula);
         plainTextEditFormula->blockSignals(false);
@@ -906,10 +911,13 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
         if (incr->GetType() == VarType::Increment)
         {
             AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-            AddCell(table, qApp->LocaleToString(*incr->GetValue()), currentRow, 1, Qt::AlignCenter,
+            AddCell(table, VAbstractApplication::VApp()->
+                    LocaleToString(*incr->GetValue()), currentRow, 1, Qt::AlignCenter,
                     incr->IsFormulaOk()); // calculated value
 
-            QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+            QString formula =
+                    VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                                     VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
             AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
 
@@ -1228,7 +1236,7 @@ void DialogIncrements::SaveIncrFormula()
     {
         QTableWidgetItem *result = table->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnits());
+        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
         labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
@@ -1236,7 +1244,7 @@ void DialogIncrements::SaveIncrFormula()
     if (text.isEmpty())
     {
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnits());
+        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
         labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -1254,7 +1262,8 @@ void DialogIncrements::SaveIncrFormula()
 
     try
     {
-        const QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
+        const QString formula = VAbstractApplication::VApp()->TrVars()
+                ->FormulaFromUser(text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         doc->SetIncrementFormula(nameField->text(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
@@ -1372,9 +1381,10 @@ void DialogIncrements::Fx()
     dialog->setWindowTitle(tr("Edit increment"));
     incrementMode ? dialog->SetIncrementsMode() : dialog->SetPreviewCalculationsMode();
 
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText(),
-                                                          qApp->Settings()->GetOsSeparator()));
-    const QString postfix = UnitsToStr(qApp->patternUnits(), true);
+    dialog->SetFormula(VAbstractApplication::VApp()->TrVars()
+                       ->TryFormulaFromUser(plainTextEditFormula->toPlainText(),
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)
@@ -1434,7 +1444,7 @@ bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
             if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
-                if (qApp->Settings()->GetOsSeparator())
+                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
                     textEdit->insert(QLocale().decimalPoint());
                 }
@@ -1467,7 +1477,7 @@ void DialogIncrements::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = qApp->Settings()->GetIncrementsDialogSize();
+    const QSize sz = VAbstractApplication::VApp()->Settings()->GetIncrementsDialogSize();
     if (not sz.isEmpty())
     {
         resize(sz);
@@ -1484,7 +1494,7 @@ void DialogIncrements::resizeEvent(QResizeEvent *event)
     // dialog creating, which would
     if (isInitialized)
     {
-        qApp->Settings()->SetIncrementsDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetIncrementsDialogSize(size());
     }
     DialogTool::resizeEvent(event);
 }

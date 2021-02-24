@@ -351,7 +351,7 @@ void VMeasurement::SetDimension(IMD type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetCorrection(int baseA, int baseB, int baseC) const
+qreal VMeasurement::GetCorrection(qreal baseA, qreal baseB, qreal baseC) const
 {
     return d->corrections.value(VMeasurement::CorrectionHash(baseA, baseB, baseC), 0);
 }

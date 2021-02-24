@@ -71,13 +71,13 @@ public:
     void ClearForExport();
 
     MeasurementsType Type() const;
-    int DimensionABase() const;
-    int DimensionBBase() const;
-    int DimensionCBase() const;
+    qreal DimensionABase() const;
+    qreal DimensionBBase() const;
+    qreal DimensionCBase() const;
 
-    int DimensionAStep() const;
-    int DimensionBStep() const;
-    int DimensionCStep() const;
+    qreal DimensionAStep() const;
+    qreal DimensionBStep() const;
+    qreal DimensionCStep() const;
 
     QString Notes() const;
     void    SetNotes(const QString &text);
@@ -117,12 +117,11 @@ public:
 
     QString MeasurementForDimension(IMD type) const;
 
-    QMap<MeasurementDimension, MeasurementDimension_p > Dimensions() const;
+    auto Dimensions() const -> QMap<MeasurementDimension, MeasurementDimension_p >;
 
-    QMap<QString, QPair<int, int> > GetRestrictions() const;
-    void                            SetRestrictions(const QMap<QString, QPair<int, int> > &restrictions);
-
-    QPair<int, int> Restriction(int base, int base2=0) const;
+    auto GetRestrictions() const -> QMap<QString, VDimensionRestriction >;
+    void SetRestrictions(const QMap<QString, VDimensionRestriction > &restrictions);
+    auto Restriction(qreal base, qreal base2=0) const -> VDimensionRestriction;
 
     void SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels);
 
@@ -154,6 +153,7 @@ public:
     static const QString AttrShiftC;
     static const QString AttrCorrection;
     static const QString AttrCoordinates;
+    static const QString AttrExclude;
     static const QString AttrSpecialUnits;
     static const QString AttrDescription;
     static const QString AttrName;

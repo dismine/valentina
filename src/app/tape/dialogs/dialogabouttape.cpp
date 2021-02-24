@@ -52,7 +52,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     RetranslateUi();
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
     {
-        if ( not QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)))
+        if (not QDesktopServices::openUrl(QUrl(QStringLiteral("https://%1").arg(VER_COMPANYDOMAIN_STR))))
         {
             qWarning() << tr("Cannot open your default browser");
         }

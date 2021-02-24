@@ -49,11 +49,6 @@ class QUndoStack;
 class VAbstractApplication;// use in define
 class VCommonSettings;
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (qobject_cast<VAbstractApplication*>(QCoreApplication::instance()))
-
 class VAbstractApplication : public QApplication
 {
     Q_OBJECT
@@ -89,6 +84,8 @@ public:
     static void WinAttachConsole();
 #endif
 
+    static VAbstractApplication *VApp();
+
 protected:
     QUndoStack *undoStack;
 
@@ -119,7 +116,7 @@ template <typename T>
 inline QString VAbstractApplication::LocaleToString(const T &value)
 {
     QLocale loc;
-    qApp->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
     return loc.toString(value);
 }
 

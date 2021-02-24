@@ -49,7 +49,7 @@ public:
                                    bool fullCircumference, QWidget *parent = nullptr);
     virtual ~DialogDimensionLabels();
 
-    QMap<MeasurementDimension, DimesionLabels> Labels() const;
+    auto Labels() const -> QMap<MeasurementDimension, DimesionLabels>;
 
 protected:
     virtual void changeEvent(QEvent* event) override;
@@ -70,11 +70,11 @@ private:
     void InitDimensions();
     void InitTable();
 
-    QString DimensionValue(const MeasurementDimension_p &dimension, int value);
+    auto DimensionValue(const MeasurementDimension_p &dimension, qreal value) const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<MeasurementDimension, DimesionLabels> DialogDimensionLabels::Labels() const
+inline auto DialogDimensionLabels::Labels() const -> QMap<MeasurementDimension, DimesionLabels>
 {
     return m_labels;
 }

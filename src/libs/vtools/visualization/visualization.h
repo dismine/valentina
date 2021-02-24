@@ -125,7 +125,7 @@ template <typename Item>
 inline void Visualization::AddItem(Item *item)
 {
     SCASSERT(item != nullptr)
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
 
     scene->addItem(item);

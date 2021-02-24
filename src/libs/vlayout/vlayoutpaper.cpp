@@ -305,7 +305,7 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         VCachedPositions positionChache;
         QVector<QPointF> layoutPoints = workDetail.GetLayoutAllowancePoints();
         positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
-        positionChache.layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
+        positionChache.layoutAllowancePath = VAbstractPiece::PainterPath(layoutPoints);
         d->positionsCache.append(positionChache);
 
 #ifdef LAYOUT_DEBUG

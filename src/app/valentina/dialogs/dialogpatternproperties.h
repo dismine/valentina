@@ -51,14 +51,11 @@ public:
     explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() override;
 private slots:
-    void LabelDataChanged();
     void Apply();
     void Ok();
     void DescEdited();
     void ChangeImage();
     void SaveImage();
-    void EditLabel();
-    void ManagePatternMaterials();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -69,23 +66,12 @@ private:
     bool                   gradationChanged;
     bool                   defaultChanged;
     bool                   securityChanged;
-    bool                   labelDataChanged;
-    bool                   askSaveLabelData;
-    bool                   templateDataChanged;
-    bool                   patternMaterialsChanged;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
     QAction                *showImageAction;
 
-    QVector<VLabelTemplateLine> templateLines;
-    QMap<int, QString>          patternMaterials;
-
-    void         InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void         SaveDescription();
-    void         SaveLabelData();
-    void         SaveTemplateData();
-    void         SaveMaterialData();
     void         SaveReadOnlyState();
 
     void         InitImage();

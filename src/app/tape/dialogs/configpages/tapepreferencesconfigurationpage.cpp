@@ -50,29 +50,30 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     });
 
     //-------------------- Decimal separator setup
-    ui->osOptionCheck->setChecked(qApp->TapeSettings()->GetOsSeparator());
+    ui->osOptionCheck->setChecked(MApplication::VApp()->TapeSettings()->GetOsSeparator());
 
     // Theme
-    ui->darkModeCheck->setChecked(qApp->TapeSettings()->GetDarkMode());
+    ui->darkModeCheck->setChecked(MApplication::VApp()->TapeSettings()->GetDarkMode());
 
     // Native dialogs
-    ui->checkBoxDontUseNativeDialog->setChecked(qApp->TapeSettings()->IsDontUseNativeDialog());
+    ui->checkBoxDontUseNativeDialog->setChecked(MApplication::VApp()->TapeSettings()->IsDontUseNativeDialog());
 
     //---------------------- Pattern making system
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
     connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_systemChanged = true;
-        QString text = qApp->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
+        QString text = VAbstractApplication::VApp()->TrVars()
+                ->PMSystemAuthor(ui->systemCombo->currentData().toString());
         ui->systemAuthorValueLabel->setText(text);
         ui->systemAuthorValueLabel->setToolTip(text);
 
-        text = qApp->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
+        text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
         ui->systemBookValueLabel->setPlainText(text);
     });
 
     // set default pattern making system
-    int index = ui->systemCombo->findData(qApp->TapeSettings()->GetPMSystemCode());
+    int index = ui->systemCombo->findData(MApplication::VApp()->TapeSettings()->GetPMSystemCode());
     if (index != -1)
     {
         ui->systemCombo->setCurrentIndex(index);
@@ -81,11 +82,11 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     //----------------------------- Measurements Editing
     connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
-        qApp->TapeSettings()->SetConfirmFormatRewriting(true);
+        MApplication::VApp()->TapeSettings()->SetConfirmFormatRewriting(true);
     });
 
     //----------------------- Toolbar
-    ui->toolBarStyleCheck->setChecked(qApp->TapeSettings()->GetToolBarStyle());
+    ui->toolBarStyleCheck->setChecked(MApplication::VApp()->TapeSettings()->GetToolBarStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,7 +99,7 @@ TapePreferencesConfigurationPage::~TapePreferencesConfigurationPage()
 QStringList TapePreferencesConfigurationPage::Apply()
 {
     QStringList preferences;
-    VTapeSettings *settings = qApp->TapeSettings();
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
 
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
@@ -124,12 +125,12 @@ QStringList TapePreferencesConfigurationPage::Apply()
         settings->SetPMSystemCode(code);
         m_systemChanged = false;
 
-        qApp->LoadTranslation(locale);
+        VAbstractApplication::VApp()->LoadTranslation(locale);
         qApp->processEvents();// force to call changeEvent
 
         // Part about measurments will not be updated automatically
-        qApp->RetranslateTables();
-        qApp->RetranslateGroups();
+        MApplication::VApp()->RetranslateTables();
+        MApplication::VApp()->RetranslateGroups();
     }
 
     return preferences;

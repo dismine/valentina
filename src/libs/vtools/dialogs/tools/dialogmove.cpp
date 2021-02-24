@@ -100,7 +100,7 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     this->formulaBaseHeightLength = ui->plainTextEditLength->height();
     ui->plainTextEditLength->installEventFilter(this);
 
-    ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
+    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
 
     timerAngle->setSingleShot(true);
     connect(timerAngle, &QTimer::timeout, this, &DialogMove::EvalAngle);
@@ -168,13 +168,15 @@ DialogMove::~DialogMove()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetAngle(const QString &value)
 {
-    formulaAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaAngle = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaAngle.length() > 80)
     {
@@ -192,13 +194,15 @@ void DialogMove::SetAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetLength() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetLength(const QString &value)
 {
-    formulaLength = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaLength = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaLength.length() > 80)
     {
@@ -216,13 +220,15 @@ void DialogMove::SetLength(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetRotationAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaRotationAngle, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(formulaRotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetRotationAngle(const QString &value)
 {
-    formulaRotationAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaRotationAngle = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaRotationAngle.length() > 80)
     {
@@ -321,7 +327,8 @@ void DialogMove::ShowDialog(bool click)
         stage1 = false;
         prepare = true;
 
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        VMainGraphicsScene *scene =
+                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
@@ -330,7 +337,8 @@ void DialogMove::ShowDialog(bool click)
         operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
 
-        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        VAbstractMainWindow *window =
+                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         connect(operation, &VisToolMove::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -344,7 +352,7 @@ void DialogMove::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        qApp->getSceneView()->AllowRubberBand(false);
+        VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
         FillSourceList();
     }
@@ -355,8 +363,10 @@ void DialogMove::ShowDialog(bool click)
 
         if (operation->LengthValue() > 0)
         {
-            formulaAngle = qApp->TrVars()->FormulaToUser(operation->Angle(), qApp->Settings()->GetOsSeparator());
-            formulaLength = qApp->TrVars()->FormulaToUser(operation->Length(), qApp->Settings()->GetOsSeparator());
+            formulaAngle = VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(operation->Angle(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            formulaLength = VAbstractApplication::VApp()->TrVars()
+                    ->FormulaToUser(operation->Length(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             operation->SetAngle(formulaAngle);
             operation->SetLength(formulaLength);
             operation->RefreshGeometry();
@@ -381,8 +391,10 @@ void DialogMove::ShowDialog(bool click)
         }
         else
         {
-            SetAngle(qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-            SetLength(qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+            SetAngle(VAbstractApplication::VApp()->TrVars()
+                     ->FormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+            SetLength(VAbstractApplication::VApp()->TrVars()
+                      ->FormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
             SetRotationAngle(operation->RotationAngle());
             setModal(true);
             emit ToolTip(QString());
@@ -493,7 +505,7 @@ void DialogMove::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetLength());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetLength(dialog->GetFormula());
@@ -819,7 +831,7 @@ void DialogMove::EvalLength()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditLength;
     formulaData.labelResult = ui->labelResultLength;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
     Eval(formulaData, flagLength);
 

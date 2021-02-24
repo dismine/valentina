@@ -161,8 +161,8 @@ qreal VPieceNode::GetSABefore(const VContainer *data) const
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
                 .arg(nodeName, formula.Reason());
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
     return formula.getDoubleValue();
@@ -192,8 +192,8 @@ qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
                 .arg(nodeName, formula.Reason());
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
 
@@ -244,8 +244,8 @@ qreal VPieceNode::GetSAAfter(const VContainer *data) const
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
                 .arg(nodeName, formula.Reason());
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
 
@@ -276,8 +276,8 @@ qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: ")
                 .arg(nodeName, formula.Reason());
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
 
@@ -342,8 +342,8 @@ qreal VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const
 
             const QString errorMsg = QObject::tr("Cannot calculate passmark length for point '%1'. Reason: %2.")
                     .arg(nodeName, formula.Reason());
-            qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             return VSAPoint::maxPassmarkLength;
         }
 

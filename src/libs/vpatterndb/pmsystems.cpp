@@ -161,14 +161,15 @@ void InitPMSystems(QComboBox *systemCombo)
     QMap<QString, QString> systems;
     for (auto &sys : listSystems)
     {
-        systems.insert(qApp->TrVars()->PMSystemName(sys) + QLatin1String(" (") + sys + QLatin1String(")"), sys);
+        systems.insert(VAbstractApplication::VApp()->TrVars()->PMSystemName(sys) + QLatin1String(" (") + sys +
+                       QLatin1String(")"), sys);
     }
 
 // * The default option (blank field or 'None') should appear at the top of the list.
 // * The list should be sorted alphabetically so users can find their system easily.
 
     SCASSERT(systemCombo != nullptr)
-    systemCombo->addItem(qApp->TrVars()->PMSystemName(listSystems.at(listSystems.size()-1)),
+    systemCombo->addItem(VAbstractApplication::VApp()->TrVars()->PMSystemName(listSystems.at(listSystems.size()-1)),
                          listSystems.at(listSystems.size()-1));
 
     QMap<QString, QString>::const_iterator i = systems.constBegin();

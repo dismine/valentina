@@ -41,7 +41,7 @@ OperationShowLabel::OperationShowLabel(VAbstractPattern *doc, quint32 idTool, qu
     : VUndoCommand(QDomElement(), doc, parent),
       m_visible(visible),
       m_oldVisible(not visible),
-      m_scene(qApp->getCurrentScene()),
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
       m_idTool(idTool)
 {
     nodeId = idPoint;
@@ -90,7 +90,7 @@ void OperationShowLabel::Do(bool visible)
         {
             tool->SetLabelVisible(nodeId, visible);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView());
     }
     else
     {

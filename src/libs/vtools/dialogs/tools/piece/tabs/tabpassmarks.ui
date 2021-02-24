@@ -345,7 +345,7 @@
                <bool>true</bool>
               </property>
               <property name="toolTip">
-               <string>Acute angle that looks intside of piece</string>
+               <string>Acute angle that looks inside of piece</string>
               </property>
               <property name="text">
                <string>V mark</string>

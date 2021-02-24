@@ -191,6 +191,9 @@ private:
 
     bool m_acceptHoverEvents;
 
+    /** @brief m_geometryIsReady is true when a piece's geometry is ready and checks for validity can be enabled. */
+    bool m_geometryIsReady{false};
+
     VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();
@@ -212,6 +215,8 @@ private:
     void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle);
 
     QList<VToolSeamAllowance *> SelectedTools() const;
+
+    bool IsGrainlinePositionValid() const;
 
     static void AddPointRecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &records,
                                 const QString &tag);

@@ -936,8 +936,8 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -975,8 +975,8 @@ bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index,
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -1059,8 +1059,8 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return VPassmark();
     }
 
@@ -1178,6 +1178,16 @@ void VPiece::DumpPiece(const VPiece &piece, const VContainer *data)
     temp.setAutoRemove(false); // Remove dump manually
     if (temp.open())
     {
+#if defined(Q_OS_LINUX)
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+//        On Linux, QTemporaryFile will attempt to create unnamed temporary
+//        files. If that succeeds, open() will return true but exists() will be
+//        false. If you call fileName() or any function that calls it,
+//        QTemporaryFile will give the file a name, so most applications will
+//        not see a difference.
+        temp.fileName(); // call to create a file on disk
+    #endif
+#endif
         QJsonObject testCase
         {
             {"bd", piece.DBToJson(data)},

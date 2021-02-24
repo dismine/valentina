@@ -89,6 +89,15 @@ void VAbstractOperation::SetSuffix(const QString &suffix)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::SetNotes(const QString &notes)
+{
+    m_notes = notes;
+
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<SourceItem> VAbstractOperation::SourceItems() const
 {
     return source;
@@ -140,7 +149,7 @@ void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
 
             if (QGraphicsScene *sc = item->scene())
             {
-                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), item);
+                VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), item);
             }
         }
     }
@@ -176,7 +185,7 @@ void VAbstractOperation::SetLabelVisible(quint32 id, bool visible)
             item->RefreshPointGeometry(*point);
             if (QGraphicsScene *sc = item->scene())
             {
-                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), item);
+                VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), item);
             }
         }
     }
@@ -238,8 +247,10 @@ QVector<DestinationItem> VAbstractOperation::ExtractDestinationData(const QDomEl
                 {
                     DestinationItem d;
                     d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QChar('1')));
-                    d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QChar('1')));
+                    d.mx = VAbstractValApplication::VApp()
+                            ->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QChar('1')));
+                    d.my = VAbstractValApplication::VApp()
+                            ->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QChar('1')));
                     d.showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
                     destination.append(d);
                 }
@@ -593,7 +604,7 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
             {
                 dItem->showLabel = visible;
             }
-            qApp->getUndoStack()->push(new OperationShowLabel(doc, m_id, id, visible));
+            VAbstractApplication::VApp()->getUndoStack()->push(new OperationShowLabel(doc, m_id, id, visible));
         }
     }
 }
@@ -608,7 +619,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
 
     if (updateToolOptions && updateVisibilityOptions)
     {
-        qApp->getUndoStack()->beginMacro(tr("operation options"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("operation options"));
     }
 
     if (updateToolOptions)
@@ -616,7 +627,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
         SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
                                                            newDependencies, doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
+        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
     }
 
     if (updateVisibilityOptions)
@@ -629,7 +640,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
             {
                 ChangeGroupOptions *groupOptions = new ChangeGroupOptions(doc, group, groupName, groupTags);
                 connect(groupOptions, &ChangeGroupOptions::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
-                qApp->getUndoStack()->push(groupOptions);
+                VAbstractApplication::VApp()->getUndoStack()->push(groupOptions);
             }
             else
             {
@@ -649,13 +660,13 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
         {
             DelGroup *delGroup = new DelGroup(doc, group);
             connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
-            qApp->getUndoStack()->push(delGroup);
+            VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
         }
     }
 
     if (updateToolOptions && updateVisibilityOptions)
     {
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
 }
 
@@ -668,22 +679,22 @@ void VAbstractOperation::PerformDelete()
     qCDebug(vTool, "Begin deleting.");
     if (deleteGroup)
     {
-        qApp->getUndoStack()->beginMacro(tr("delete operation"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("delete operation"));
 
         qCDebug(vTool, "Deleting the linked group.");
         DelGroup *delGroup = new DelGroup(doc, group);
         connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
-        qApp->getUndoStack()->push(delGroup);
+        VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
     }
 
     qCDebug(vTool, "Deleting the tool.");
     DelTool *delTool = new DelTool(doc, m_id);
     connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(delTool);
+    VAbstractApplication::VApp()->getUndoStack()->push(delTool);
 
     if (deleteGroup)
     {
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
 }
 
@@ -722,7 +733,7 @@ void VAbstractOperation::UpdateNamePosition(quint32 id, const QPointF &pos)
                 dItem->mx = pos.x();
                 dItem->my = pos.y();
             }
-            qApp->getUndoStack()->push(new OperationMoveLabel(m_id, doc, pos, id));
+            VAbstractApplication::VApp()->getUndoStack()->push(new OperationMoveLabel(m_id, doc, pos, id));
         }
     }
 }
@@ -752,9 +763,9 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
 
         VAbstractSimple *obj = operatedObjects.value(dItem.id, nullptr);
 
-        doc->SetAttributeOrRemoveIf(item, AttrMx, qApp->fromPixel(dItem.mx),
+        doc->SetAttributeOrRemoveIf(item, AttrMx, VAbstractValApplication::VApp()->fromPixel(dItem.mx),
                                     obj && obj->GetType() != GOType::Point);
-        doc->SetAttributeOrRemoveIf(item, AttrMy, qApp->fromPixel(dItem.my),
+        doc->SetAttributeOrRemoveIf(item, AttrMy, VAbstractValApplication::VApp()->fromPixel(dItem.my),
                                     obj && obj->GetType() != GOType::Point);
         doc->SetAttributeOrRemoveIf<bool>(item, AttrShowLabel, dItem.showLabel, dItem.showLabel);
 
@@ -930,8 +941,8 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
                                     "%6"
                                     "</table>")
             .arg(tr("Label"), curve->ObjectName(), tr("Length"))
-            .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), MakeToolTip());
+            .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), MakeToolTip());
     return toolTip;
 }
 
@@ -964,7 +975,7 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
     {
         AddGroup *addGroup = new AddGroup(group, initData.doc);
         connect(addGroup, &AddGroup::UpdateGroups, initData.doc, &VAbstractPattern::UpdateVisiblityGroups);
-        qApp->getUndoStack()->push(addGroup);
+        VAbstractApplication::VApp()->getUndoStack()->push(addGroup);
     }
 
     return;

@@ -165,7 +165,7 @@ void VToolBasePoint::AddToFile()
     AddPatternPiece *addPP = new AddPatternPiece(patternPiece, doc, namePP);
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VAbstractPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(addPP);
+    VAbstractApplication::VApp()->getUndoStack()->push(addPP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,7 +190,7 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
 
             MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), m_id, this->scene());
             connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-            qApp->getUndoStack()->push(moveSP);
+            VAbstractApplication::VApp()->getUndoStack()->push(moveSP);
             const QList<QGraphicsView *> viewList = scene()->views();
             if (not viewList.isEmpty())
             {
@@ -209,7 +209,7 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
 QPointF VToolBasePoint::GetBasePointPos() const
 {
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
-    QPointF pos(qApp->fromPixel(p->x()), qApp->fromPixel(p->y()));
+    QPointF pos(VAbstractValApplication::VApp()->fromPixel(p->x()), VAbstractValApplication::VApp()->fromPixel(p->y()));
     return pos;
 }
 
@@ -217,8 +217,8 @@ QPointF VToolBasePoint::GetBasePointPos() const
 void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 {
     QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
-    p->setX(qApp->toPixel(pos.x()));
-    p->setY(qApp->toPixel(pos.y()));
+    p->setX(VAbstractValApplication::VApp()->toPixel(pos.x()));
+    p->setY(VAbstractValApplication::VApp()->toPixel(pos.y()));
 
     QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(p);
 
@@ -229,7 +229,7 @@ void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
     qCDebug(vTool, "Deleting base point.");
-    emit qApp->getSceneView()->itemClicked(nullptr);
+    emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
     if (ask)
     {
         qCDebug(vTool, "Asking.");
@@ -243,7 +243,7 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
     qCDebug(vTool, "Begin deleting.");
     DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
     connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(deletePP);
+    VAbstractApplication::VApp()->getUndoStack()->push(deletePP);
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
     VExceptionToolWasDeleted e("Tool was used after deleting.");
@@ -267,8 +267,8 @@ void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     const QPointF p = dialogTool->GetPoint();
     const QString name = dialogTool->GetPointName();
     doc->SetAttribute(domElement, AttrName, name);
-    doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
-    doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
+    doc->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(p.x())));
+    doc->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(p.y())));
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -321,8 +321,8 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
     SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrX, qApp->fromPixel(point->x()));
-    doc->SetAttribute(tag, AttrY, qApp->fromPixel(point->y()));
+    doc->SetAttribute(tag, AttrX, VAbstractValApplication::VApp()->fromPixel(point->x()));
+    doc->SetAttribute(tag, AttrY, VAbstractValApplication::VApp()->fromPixel(point->y()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

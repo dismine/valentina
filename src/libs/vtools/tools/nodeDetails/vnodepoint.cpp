@@ -186,7 +186,7 @@ void VNodePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         RefreshLine();
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
     }
 }
@@ -201,7 +201,7 @@ void VNodePoint::SetLabelVisible(quint32 id, bool visible)
         RefreshPointGeometry(*point);
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
     }
 }
@@ -240,8 +240,8 @@ void VNodePoint::AddToFile()
     doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, VAbstractValApplication::VApp()->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, VAbstractValApplication::VApp()->fromPixel(point->my()));
     doc->SetAttribute<bool>(domElement, AttrShowLabel, point->IsShowLabel());
     if (idTool != NULL_ID)
     {
@@ -287,7 +287,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    qApp->getUndoStack()->push(new MoveLabel(doc, pos - this->pos(), m_id));
+    VAbstractApplication::VApp()->getUndoStack()->push(new MoveLabel(doc, pos - this->pos(), m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -607,7 +607,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 }
                 return;//Leave this method immediately after call!!!
             case ContextMenuOption::ShowLabel:
-                qApp->getUndoStack()->push(new ShowLabel(doc, m_id, selectedAction->isChecked()));
+                VAbstractApplication::VApp()->getUndoStack()->push(
+                            new ShowLabel(doc, m_id, selectedAction->isChecked()));
                 break;
             case ContextMenuOption::Exclude:
                 emit ToggleExcludeState(m_id);

@@ -182,7 +182,7 @@ bool FilterObject(QObject *object, QEvent *event)
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
             if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
-                if (qApp->Settings()->GetOsSeparator())
+                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
                     plainTextEdit->insertPlainText(QLocale().decimalPoint());
                 }
@@ -218,7 +218,9 @@ qreal EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag)
         try
         {
             // Translate to internal look.
-            QString formula = qApp->TrVars()->FormulaFromUser(data.formula, qApp->Settings()->GetOsSeparator());
+            QString formula = VAbstractApplication::VApp()
+                    ->TrVars()->FormulaFromUser(data.formula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             QScopedPointer<Calculator> cal(new Calculator());
             result = cal->EvalFormula(data.variables, formula);
 
@@ -249,7 +251,8 @@ qreal EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag)
                 }
                 else
                 {
-                    data.labelResult->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + data.postfix);
+                    data.labelResult->setText(VAbstractApplication::VApp()
+                                              ->LocaleToString(result) + QChar(QChar::Space) + data.postfix);
                     flag = true;
                     ChangeColor(data.labelEditFormula, OkColor(dialog));
                     data.labelResult->setToolTip(QObject::tr("Value"));

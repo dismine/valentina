@@ -157,8 +157,8 @@ QString VToolLinePoint::MakeToolTip() const
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(line.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
             .arg(line.angle())
             .arg(tr("Label"), second->name());
     return toolTip;
@@ -217,7 +217,7 @@ VFormula VToolLinePoint::GetFormulaLength() const
     VFormula fLength(formulaLength, this->getData());
     fLength.setCheckZero(false);
     fLength.setToolId(m_id);
-    fLength.setPostfix(UnitsToStr(qApp->patternUnits()));
+    fLength.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     fLength.Eval();
 
     return fLength;

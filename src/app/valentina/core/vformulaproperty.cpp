@@ -45,7 +45,7 @@ VFormulaProperty::VFormulaProperty(const QString &name)
     addChild(tmpFormula);
     tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
-    tmpFormula->setOsSeparator(qApp->Settings()->GetOsSeparator());
+    tmpFormula->setOsSeparator(VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     // Cannot use virtual function setValue in constructor
     SetFormula(QVariant(0).value<VFormula>());

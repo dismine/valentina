@@ -41,7 +41,7 @@ ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 
     : VUndoCommand(QDomElement(), doc, parent),
       m_visible(visible),
       m_oldVisible(not visible),
-      m_scene(qApp->getCurrentScene()),
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
       m_type(type),
       m_idTool(toolId)
 {
@@ -110,7 +110,7 @@ void ShowDoubleLabel::Do(bool visible)
         {
             tool->SetLabelVisible(nodeId, visible);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView());
     }
     else
     {

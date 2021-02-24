@@ -141,7 +141,7 @@ VToolCutArc* VToolCutArc::Create(VToolCutInitData &initData)
 
     VArc arc1;
     VArc arc2;
-    QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
+    QPointF point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2);
 
     arc1.SetAliasSuffix(initData.aliasSuffix1);
     arc1.SetAliasSuffix(initData.aliasSuffix2);
@@ -270,7 +270,8 @@ void VToolCutArc::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(baseCurveId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
         visual->setLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
@@ -284,7 +285,8 @@ QString VToolCutArc::MakeToolTip() const
 {
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(baseCurveId);
 
-    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString expression = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     const QString arcStr = tr("Arc");
@@ -295,7 +297,7 @@ QString VToolCutArc::MakeToolTip() const
 
     VArc ar1;
     VArc ar2;
-    arc->CutArc(qApp->toPixel(length), ar1, ar2);
+    arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), ar1, ar2);
     ar1.setId(m_id + 1);
     ar2.setId(m_id + 2);
 
@@ -308,9 +310,10 @@ QString VToolCutArc::MakeToolTip() const
                            "<tr> <td><b>%6:</b> %7°</td> </tr>"
                            "<tr> <td><b>%8:</b> %9°</td> </tr>")
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
-                    .arg(qApp->fromPixel(arc.GetLength()))
-                    .arg(UnitsToStr(qApp->patternUnits(), true), arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
-                    .arg(qApp->fromPixel(arc.GetRadius()))
+                    .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))
+                    .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                         arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
+                    .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetRadius()))
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)
                     .arg(arc.GetStartAngle())
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)

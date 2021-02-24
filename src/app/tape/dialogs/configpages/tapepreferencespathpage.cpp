@@ -65,7 +65,7 @@ TapePreferencesPathPage::~TapePreferencesPathPage()
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesPathPage::Apply()
 {
-    VTapeSettings *settings = qApp->TapeSettings();
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
@@ -126,17 +126,17 @@ void TapePreferencesPathPage::EditPath()
     switch (row)
     {
         case 0: // individual measurements
-            path = qApp->TapeSettings()->GetPathIndividualMeasurements();
+            path = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
             break;
         case 1: // multisize measurements
-            path = qApp->TapeSettings()->GetPathMultisizeMeasurements();
+            path = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
             path = VCommonSettings::PrepareMultisizeTables(path);
             break;
         case 2: // pattern path
-            path = qApp->TapeSettings()->GetPathPattern();
+            path = MApplication::VApp()->TapeSettings()->GetPathPattern();
             break;
         case 3: // templates
-            path = qApp->TapeSettings()->GetPathTemplate();
+            path = MApplication::VApp()->TapeSettings()->GetPathTemplate();
             break;
         default:
             break;
@@ -151,7 +151,7 @@ void TapePreferencesPathPage::EditPath()
 
     const QString dir = QFileDialog::getExistingDirectory(
         this, tr("Open Directory"), path,
-        qApp->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
+        VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)
@@ -174,7 +174,7 @@ void TapePreferencesPathPage::InitTable()
     ui->pathTable->setRowCount(4);
     ui->pathTable->setColumnCount(2);
 
-    const VTapeSettings *settings = qApp->TapeSettings();
+    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     {
         ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));

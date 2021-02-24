@@ -1,4 +1,25 @@
-# Version 0.7.42 (unreleased)
+# Version 0.7.45 (unreleased)
+- Fix incorrect seam allowance for angle type second edge right angle.
+- Fix regression with country flags.
+- Fix bug in seam allowance.
+- [smart-pattern/valentina#99] Incorrect fix of seam allowance distortion.
+- Enabling Show Curve Details option causes constant redraw.
+
+# Version 0.7.44 Feb 9, 2021
+- Placeholder %size% has incorrect value.
+- Values for waist and hip swapped for individual measurements. 
+- Fix crash when edit a group operation notes.
+- Fix bug. Undo Union details hide piece node points.
+
+# Version 0.7.43 Jan 31, 2021
+- Improve Windows installer. Avoid crashing on checking if a program is still running.
+- Fix regression. Changing dimension value caused an infinite loop.
+- Fix regression. Export to tiled PDF has no suffix.
+- Fix warning about missing EUDC font om Wondows.
+- Fix regression in Pattern properties dialog. Tab Security is disabled for pattern with individual measurements.
+- Don't warn about a file format update after Save as.
+
+# Version 0.7.42 Jan 26, 2021
 - Fix export of pattern recipe.
 - Update translations.
 - Fix a regression in tool Segment a spline path. 
@@ -6,6 +27,13 @@
 - New warning. Warn about empty measurements dimension value when preparing placeholders.
 - New option "Don't use the native file dialog".
 - Improve the layout option "Auto crop unused width".
+- Improve multisize measurements format. Allow decimal step 0.5.
+- Improve restrict dimension dialog. Disable not available combinations.
+- Improve multisize measurements format. Allow excluding combinations inside min/max range.
+- New warning. Grainline is not valid.
+- [smart-pattern/valentina#87] Add support for TIFF format.
+- [smart-pattern/valentina#88] Allow insertion of multiple nodes by setting their number.
+- [smart-pattern/valentina#85] Final measurement printout on pattern piece.
 
 # Version 0.7.41 Dec 4, 2020
 - Bug fixes.
@@ -137,6 +165,8 @@
 - Fix removing a pin in the Seam Allowance tool dialog.
 - Fix label size for case with two pins.
 - Fix crash while synchronize measurements.
+- Fix incorrect filename regular expressions.
+- Enabling Show Curve Details option causes constant redraw.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

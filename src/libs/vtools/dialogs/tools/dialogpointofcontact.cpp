@@ -75,7 +75,8 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolI
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    ui->lineEditNamePoint->setText(
+                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -152,7 +153,7 @@ void DialogPointOfContact::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(getRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         setRadius(dialog->GetFormula());
@@ -168,7 +169,7 @@ void DialogPointOfContact::EvalFormula()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
     Eval(formulaData, flagFormula);
 }
@@ -319,7 +320,8 @@ void DialogPointOfContact::setCenter(quint32 value)
  */
 void DialogPointOfContact::setRadius(const QString &value)
 {
-    radius = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    radius = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius.length() > 80)
     {
@@ -352,7 +354,8 @@ void DialogPointOfContact::SetPointName(const QString &value)
  */
 QString DialogPointOfContact::getRadius() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(radius, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

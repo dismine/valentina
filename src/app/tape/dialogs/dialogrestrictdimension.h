@@ -40,6 +40,13 @@ class DialogRestrictDimension;
 
 class QTableWidgetItem;
 
+enum class RestrictDimension: qint8
+{
+    First = 0,
+    Second = 1,
+    Third = 2
+};
+
 
 class DialogRestrictDimension : public QDialog
 {
@@ -47,11 +54,11 @@ class DialogRestrictDimension : public QDialog
 
 public:
     DialogRestrictDimension(const QList<MeasurementDimension_p> &dimensions,
-                            const QMap<QString, QPair<int, int>> &restrictions, bool oneDimesionRestriction,
+                            const QMap<QString, VDimensionRestriction> &restrictions, RestrictDimension restrictionType,
                             bool fullCircumference, QWidget *parent = nullptr);
     virtual ~DialogRestrictDimension();
 
-    QMap<QString, QPair<int, int> > Restrictions() const;
+    auto Restrictions() const -> QMap<QString, VDimensionRestriction>;
 
 protected:
     virtual void changeEvent(QEvent* event) override;
@@ -62,14 +69,17 @@ protected slots:
     void MinRestrictionChanged();
     void MaxRestrictionChanged();
 
+private slots:
+    void CellContextMenu(QPoint pos);
+
 private:
     Q_DISABLE_COPY(DialogRestrictDimension)
     Ui::DialogRestrictDimension *ui;
 
-    bool m_oneDimesionRestriction;
+    RestrictDimension m_restrictionType;
     bool m_fullCircumference;
-    QList<MeasurementDimension_p>  m_dimensions;
-    QMap<QString, QPair<int, int>> m_restrictions;
+    QList<MeasurementDimension_p> m_dimensions;
+    QMap<QString, VDimensionRestriction> m_restrictions;
 
     void InitDimensionsBaseValues();
     void InitDimensionGradation(const MeasurementDimension_p &dimension, QComboBox *control);
@@ -77,17 +87,19 @@ private:
 
     void RefreshTable();
 
-    void AddCell(int row, int column, int rowValue, int columnValue);
+    void AddCell(int row, int column, qreal rowValue, qreal columnValue);
 
     void EnableRestrictionControls(bool enable);
 
-    void FillBases(const QVector<int> &bases, const MeasurementDimension_p &dimension, QComboBox *control);
+    void FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension, QComboBox *control) const;
 
-    QStringList DimensionLabels(const QVector<int> &bases, const MeasurementDimension_p &dimension);
+    auto DimensionLabels(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;
+    auto DimensionRestrictedValues(const MeasurementDimension_p &dimension) const -> QVector<qreal>;
+    auto StartRow() const -> int;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<QString, QPair<int, int> > DialogRestrictDimension::Restrictions() const
+inline auto DialogRestrictDimension::Restrictions() const -> QMap<QString, VDimensionRestriction >
 {
     return m_restrictions;
 }

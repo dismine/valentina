@@ -479,7 +479,7 @@ void VEllipticalArc::FindF2(qreal length)
         SetFormulaF2(QString::number(endAngle), endAngle);
         lenBez = GetLength();
     }
-    SetFormulaLength(QString::number(qApp->fromPixel(lenBez)));
+    SetFormulaLength(QString::number(VAbstractValApplication::VApp()->fromPixel(lenBez)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

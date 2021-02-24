@@ -149,8 +149,6 @@ public:
     QPainterPath ContourPath() const;
     QPainterPath LayoutAllowancePath() const;
 
-    static QPainterPath PainterPath(const QVector<QPointF> &points);
-
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
 
     bool IsLayoutAllowanceValid() const;

@@ -45,7 +45,7 @@ MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline &oldSpl, const VSpli
     : VUndoCommand(QDomElement(), doc, parent),
       oldSpline(oldSpl),
       newSpline(newSpl),
-      scene(qApp->getCurrentScene())
+      scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move spline"));
     nodeId = id;

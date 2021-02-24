@@ -96,7 +96,7 @@ QVector<QPointF> PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3,
     double m_approximation_scale = approximationScale;
     if(m_approximation_scale < minCurveApproximationScale || m_approximation_scale > maxCurveApproximationScale)
     {
-        m_approximation_scale = qApp->Settings()->GetCurveApproximationScale();
+        m_approximation_scale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
     }
 
     double m_distance_tolerance_square;

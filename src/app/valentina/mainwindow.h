@@ -297,16 +297,16 @@ private:
 
     QList<QPointer<WatermarkWindow>> m_watermarkEditors{};
 
-    int m_currentDimensionA{0};
-    int m_currentDimensionB{0};
-    int m_currentDimensionC{0};
+    qreal m_currentDimensionA{0};
+    qreal m_currentDimensionB{0};
+    qreal m_currentDimensionC{0};
 
     QSharedPointer<VMeasurements> m{};
 
     QTimer *m_gradation;
 
     void InitDimensionControls();
-    void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QPointer<QComboBox> control);
+    void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, const QPointer<QComboBox> &control);
 
     void               ToolBarOption();
     void               ToolBarStages();
@@ -377,7 +377,7 @@ private:
     void               InitScenes();
 
     bool               LoadMeasurements(const QString &path);
-    bool               UpdateMeasurements(const QString &path, int baseA, int baseB, int baseC);
+    bool               UpdateMeasurements(const QString &path, qreal baseA, qreal baseB, qreal baseC);
 
     void               ReopenFilesAfterCrash(QStringList &args);
     bool               DoExport(const VCommandLinePtr& expParams);
@@ -415,7 +415,7 @@ private:
     void StoreMultisizeMDimensions();
     void StoreIndividualMDimensions();
 
-    QVector<int> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
+    QVector<qreal> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
     void SetDimensionBases();
 };
 

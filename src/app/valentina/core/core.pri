@@ -6,13 +6,11 @@ HEADERS += \
     $$PWD/vformulaproperty.h \
     $$PWD/vformulapropertyeditor.h \
     $$PWD/vtooloptionspropertybrowser.h \
-    $$PWD/vcmdexport.h \
-    $$PWD/vvalentinasettings.h
+    $$PWD/vcmdexport.h 
 
 SOURCES += \
     $$PWD/vapplication.cpp \
     $$PWD/vformulaproperty.cpp \
     $$PWD/vformulapropertyeditor.cpp \
     $$PWD/vtooloptionspropertybrowser.cpp \
-    $$PWD/vcmdexport.cpp \
-    $$PWD/vvalentinasettings.cpp
+    $$PWD/vcmdexport.cpp

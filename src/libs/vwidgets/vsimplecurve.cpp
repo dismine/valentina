@@ -175,7 +175,8 @@ void VSimpleCurve::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::ScalePenWidth()
 {
-    qreal width = m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine();
+    qreal width = m_isHovered ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
+                              : VAbstractApplication::VApp()->Settings()->WidthHairLine();
     width = ScaleWidth(width, SceneScale(scene()));
     setPen(QPen(CorrectColor(this, m_curve->GetColor()), width, LineStyleToPenStyle(m_curve->GetPenStyle())));
 }

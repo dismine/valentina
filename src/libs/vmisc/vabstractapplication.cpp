@@ -305,6 +305,8 @@ QString VAbstractApplication::ClearMessage(QString msg)
         msg.chop(1);
     }
 
+    msg.replace("\\\"", "\"");
+
     return msg;
 }
 
@@ -323,4 +325,10 @@ QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options
     }
 
     return options;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::VApp() -> VAbstractApplication *
+{
+    return qobject_cast<VAbstractApplication*>(QCoreApplication::instance());
 }

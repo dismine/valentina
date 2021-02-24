@@ -35,6 +35,7 @@
 #include <QtDebug>
 #include "../core/vapplication.h"
 #include "../fervor/fvupdater.h"
+#include "../vmisc/vvalentinasettings.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
@@ -44,7 +45,8 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
     ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));
@@ -62,7 +64,7 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
     {
-        if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
+        if (not QDesktopServices::openUrl(QUrl(QStringLiteral("https://%1").arg(VER_COMPANYDOMAIN_STR))))
         {
             qWarning() << tr("Cannot open your default browser");
         }

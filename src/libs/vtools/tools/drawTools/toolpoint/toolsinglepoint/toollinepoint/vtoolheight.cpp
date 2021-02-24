@@ -287,13 +287,13 @@ QString VToolHeight::MakeToolTip() const
                                     "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
-            .arg(qApp->fromPixel(p1ToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(p1ToCur.length()))
             .arg(QString("%1->%2").arg(p2Line->name(), current->name()))
-            .arg(qApp->fromPixel(p2ToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(p2ToCur.length()))
             .arg(tr("Label"), current->name());
     return toolTip;
 }

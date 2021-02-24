@@ -30,6 +30,7 @@
 #include "ui_preferencesconfigurationpage.h"
 #include "../../core/vapplication.h"
 #include "../vpatterndb/pmsystems.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QDir>
 #include <QDirIterator>
@@ -50,7 +51,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->tabWidget->setCurrentIndex(0);
 
     // Tab General
-    ui->autoSaveCheck->setChecked(qApp->ValentinaSettings()->GetAutosaveState());
+    ui->autoSaveCheck->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveState());
 
     InitLanguages(ui->langCombo);
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
@@ -59,11 +60,11 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     });
 
     //-------------------- Decimal separator setup
-    ui->osOptionCheck->setChecked(qApp->ValentinaSettings()->GetOsSeparator());
+    ui->osOptionCheck->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator());
 
     //----------------------- Unit setup
     // set default unit
-    const qint32 indexUnit = ui->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());
+    const qint32 indexUnit = ui->unitCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->unitCombo->setCurrentIndex(indexUnit);
@@ -77,7 +78,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     //----------------------- Label language
     SetLabelComboBox(VApplication::LabelLanguages());
 
-    int index = ui->labelCombo->findData(qApp->ValentinaSettings()->GetLabelLanguage());
+    int index = ui->labelCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
     if (index != -1)
     {
         ui->labelCombo->setCurrentIndex(index);
@@ -92,16 +93,17 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_systemChanged = true;
-        QString text = qApp->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
+        QString text = VAbstractApplication::VApp()->TrVars()
+                ->PMSystemAuthor(ui->systemCombo->currentData().toString());
         ui->systemAuthorValueLabel->setText(text);
         ui->systemAuthorValueLabel->setToolTip(text);
 
-        text = qApp->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
+        text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
         ui->systemBookValueLabel->setPlainText(text);
     });
 
     // set default pattern making system
-    index = ui->systemCombo->findData(qApp->ValentinaSettings()->GetPMSystemCode());
+    index = ui->systemCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetPMSystemCode());
     if (index != -1)
     {
         ui->systemCombo->setCurrentIndex(index);
@@ -110,13 +112,13 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     //----------------------------- Pattern Editing
     connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
-        VValentinaSettings *settings = qApp->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
         settings->SetConfirmItemDelete(true);
         settings->SetConfirmFormatRewriting(true);
     });
 
-    VValentinaSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
     ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
@@ -166,11 +168,11 @@ QStringList PreferencesConfigurationPage::Apply()
 {
     // Tab General
     QStringList preferences;
-    VValentinaSettings *settings = qApp->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetAutosaveState(ui->autoSaveCheck->isChecked());
     settings->SetAutosaveTime(ui->autoTime->value());
 
-    QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
+    QTimer *autoSaveTimer = VApplication::VApp()->getAutoSaveTimer();
     SCASSERT(autoSaveTimer)
 
     ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(ui->autoTime->value()*60000) : autoSaveTimer->stop();
@@ -207,7 +209,7 @@ QStringList PreferencesConfigurationPage::Apply()
         settings->SetPMSystemCode(code);
         m_systemChanged = false;
 
-        qApp->LoadTranslation(locale);
+        VAbstractApplication::VApp()->LoadTranslation(locale);
     }
     if (m_unitChanged)
     {

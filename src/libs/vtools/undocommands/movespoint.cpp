@@ -52,8 +52,8 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     QDomElement domElement = doc->elementById(id, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrX, "0.0"));
-        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrY, "0.0"));
+        oldX = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrX, "0.0"));
+        oldY = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrY, "0.0"));
 
         qCDebug(vUndo, "SPoint oldX %f", oldX);
         qCDebug(vUndo, "SPoint oldY %f", oldY);
@@ -121,8 +121,8 @@ void MoveSPoint::Do(double x, double y)
     QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(x)));
-        doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(y)));
+        doc->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
+        doc->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 
         emit NeedLiteParsing(Document::LitePPParse);
     }

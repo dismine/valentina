@@ -82,7 +82,7 @@ void DeletePatternPiece::undo()
     }
 
     emit NeedFullParsing();
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(namePP);//Without this user will not see this change
     }
@@ -93,7 +93,7 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(namePP);//Without this user will not see this change
     }

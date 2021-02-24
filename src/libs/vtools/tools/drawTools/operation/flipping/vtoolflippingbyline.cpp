@@ -126,7 +126,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
     {
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
-            qApp->getUndoStack()->beginMacro(tr("flipping by line"));
+            VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("flipping by line"));
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByLine, initData.doc);
@@ -144,7 +144,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
             VAbstractOperation::CreateVisibilityGroup(initData);
-            qApp->getUndoStack()->endMacro();
+            VAbstractApplication::VApp()->getUndoStack()->endMacro();
         }
 
         return tool;

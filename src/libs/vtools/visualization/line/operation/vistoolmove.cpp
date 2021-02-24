@@ -145,7 +145,7 @@ void VisToolMove::RefreshGeometry()
             qreal cursorLength = rLine.length();
             rLine.setP2(Ray(origin, rLine.angle()));
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal minL = ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5;
+            qreal minL = ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5;
             if (cursorLength > minL)
             {
                tempRoationAngle = rLine.angle();
@@ -164,19 +164,21 @@ void VisToolMove::RefreshGeometry()
         DrawLine(rotationLine, rLine, supportColor3, Qt::DashLine);
         DrawLine(xAxis, QLineF(origin, Ray(origin, 0)), supportColor3, Qt::DashLine);
 
-        VArc arc(VPointF(origin), ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempRoationAngle);
+        VArc arc(VPointF(origin),
+                 ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*2, 0, tempRoationAngle);
         DrawPath(angleArc, arc.GetPath(), supportColor3, Qt::SolidLine, Qt::RoundCap);
     }
     DrawLine(this, line, supportColor2, Qt::DashLine);
     DrawPoint(pointFinish, line.p2(), supportColor);
 
-    static const QString prefix = UnitsToStr(qApp->patternUnits(), true);
+    static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     if (qFuzzyIsNull(length))
     {
         Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish selecting a position")
-                .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
-                                                   qApp->Settings()->GetOsSeparator()), prefix)
+                .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                         QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
+                         VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
                 .arg(tempAngle)
                 .arg(VModifierKey::Shift());
     }
@@ -184,8 +186,9 @@ void VisToolMove::RefreshGeometry()
     {
         Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
                                     "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
-                .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
-                                                   qApp->Settings()->GetOsSeparator()), prefix)
+                .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                         QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
+                         VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
                 .arg(tempAngle)
                 .arg(tempRoationAngle)
                 .arg(VModifierKey::Shift(), VModifierKey::Control());
@@ -227,7 +230,7 @@ QString VisToolMove::Length() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VisToolMove::LengthValue() const
 {
-    return qApp->fromPixel(line().length());
+    return VAbstractValApplication::VApp()->fromPixel(line().length());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -94,7 +94,7 @@ QString VFormula::GetFormula(FormulaType type) const
 {
     if (type == FormulaType::ToUser)
     {
-        return VTranslateVars::TryFormulaToUser(d->formula, qApp->Settings()->GetOsSeparator());
+        return VTranslateVars::TryFormulaToUser(d->formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     }
     else
     {
@@ -109,7 +109,8 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::FromUser)
         {
-            d->formula = VTranslateVars::TryFormulaFromUser(value, qApp->Settings()->GetOsSeparator());
+            d->formula = VTranslateVars::TryFormulaFromUser(value,
+                                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
         else
         {
@@ -262,7 +263,7 @@ void VFormula::Eval()
         }
         else
         {
-            d->strValue = qApp->LocaleToString(result) + QLatin1Char(' ') + d->postfix;
+            d->strValue = VAbstractApplication::VApp()->LocaleToString(result) + QLatin1Char(' ') + d->postfix;
             d->error = false;
         }
     }

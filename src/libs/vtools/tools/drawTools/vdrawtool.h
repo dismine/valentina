@@ -283,8 +283,8 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     else if (selectedAction == actionOption)
     {
         qCDebug(vTool, "Show options.");
-        emit qApp->getSceneView()->itemClicked(nullptr);
-        m_dialog = QPointer<Dialog>(new Dialog(getData(), m_id, qApp->getMainWindow()));
+        emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
+        m_dialog = QPointer<Dialog>(new Dialog(getData(), m_id, VAbstractValApplication::VApp()->getMainWindow()));
         m_dialog->setModal(true);
 
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
@@ -313,17 +313,19 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         quint32 groupId = selectedAction->data().toUInt();
         QDomElement item = doc->AddItemToGroup(this->getId(), itemId, groupId);
 
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        VMainGraphicsScene *scene =
+                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
-        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        VAbstractMainWindow *window =
+                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         {
             AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
             connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window,
                     &VAbstractMainWindow::UpdateVisibilityGroups);
-            qApp->getUndoStack()->push(addItemToGroup);
+            VAbstractApplication::VApp()->getUndoStack()->push(addItemToGroup);
         }
     }
     else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
@@ -331,13 +333,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         quint32 groupId = selectedAction->data().toUInt();
         QDomElement item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
 
-        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        VAbstractMainWindow *window =
+                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         {
             RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
             connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window,
                     &VAbstractMainWindow::UpdateVisibilityGroups);
-            qApp->getUndoStack()->push(removeItemFromGroup);
+            VAbstractApplication::VApp()->getUndoStack()->push(removeItemFromGroup);
         }
     }
 }

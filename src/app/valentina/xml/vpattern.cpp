@@ -40,7 +40,7 @@
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/customevents.h"
-#include "../core/vvalentinasettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/compatibility.h"
@@ -98,7 +98,7 @@ void GatherCount(int &count, const int nodes)
 //---------------------------------------------------------------------------------------------------------------------
 QString DefLabelLanguage()
 {
-    QString def = qApp->ValentinaSettings()->GetLabelLanguage();
+    QString def = VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage();
     if (not ConvertToSet<QString>(VApplication::LabelLanguages()).contains(def))
     {
         def = QStringLiteral("en");
@@ -127,7 +127,8 @@ void VPattern::CreateEmptyFile()
 
     patternElement.appendChild(createComment(FileComment()));
     patternElement.appendChild(CreateElementWithText(TagVersion, VPatternConverter::PatternMaxVerStr));
-    patternElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(qApp->patternUnits())));
+    patternElement.appendChild(CreateElementWithText(TagUnit,
+                                                     UnitsToStr(VAbstractValApplication::VApp()->patternUnits())));
 
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
@@ -227,11 +228,11 @@ void VPattern::Parse(const Document &parse)
         }
         domNode = domNode.nextSibling();
     }
-    if (qApp->IsGUIMode())
+    if (VApplication::VApp()->IsGUIMode())
     {
         QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
     }
-    else if (qApp->CommandLine()->IsTestModeEnabled())
+    else if (VApplication::VApp()->CommandLine()->IsTestModeEnabled())
     {
         RefreshPieceGeometry();
     }
@@ -249,7 +250,7 @@ void VPattern::Parse(const Document &parse)
  */
 void VPattern::setCurrentData()
 {
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         const int countPP = CountPP();
         if (countPP > 1)//don't need upadate data if we have only one pattern piece
@@ -670,8 +671,8 @@ void VPattern::LiteParseTree(const Document &parse)
     setCurrentData();
     emit FullUpdateFromFile();
     // Recalculate scene rect
-    VMainGraphicsView::NewSceneRect(sceneDraw, qApp->getSceneView());
-    VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDraw, VAbstractValApplication::VApp()->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
     qCDebug(vXML, "Scene size updated.");
 }
 
@@ -681,7 +682,7 @@ void VPattern::customEvent(QEvent *event)
 {
     if (event->type() == UNDO_EVENT)
     {
-        qApp->getUndoStack()->undo();
+        VAbstractApplication::VApp()->getUndoStack()->undo();
     }
     else if (event->type() == LITE_PARSE_EVENT)
     {
@@ -865,18 +866,23 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.id = GetParametrId(domElement);
         initData.detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
         initData.detail.SetUUID(GetParametrEmptyString(domElement, AttrUUID));
-        initData.detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
-        initData.detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("0.0"))));
+        initData.detail.SetMx(VAbstractValApplication::VApp()
+                              ->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
+        initData.detail.SetMy(VAbstractValApplication::VApp()
+                              ->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("0.0"))));
         initData.detail.SetSeamAllowance(GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowance, falseStr));
         initData.detail.SetHideMainPath(GetParametrBool(domElement, VToolSeamAllowance::AttrHideMainPath,
-                                               QString().setNum(qApp->ValentinaSettings()->IsHideMainPath())));
+                                               QString().setNum(VAbstractValApplication::VApp()
+                                                                ->ValentinaSettings()->IsHideMainPath())));
         initData.detail.SetSeamAllowanceBuiltIn(GetParametrBool(domElement,
                                                                 VToolSeamAllowance::AttrSeamAllowanceBuiltIn,
                                                                 falseStr));
         initData.detail.SetForbidFlipping(GetParametrBool(domElement, AttrForbidFlipping,
-                                          QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
+                                          QString().setNum(VAbstractValApplication::VApp()
+                                                           ->ValentinaSettings()->GetForbidWorkpieceFlipping())));
         initData.detail.SetForceFlipping(GetParametrBool(domElement, AttrForceFlipping,
-                                         QString().setNum(qApp->ValentinaSettings()->GetForceWorkpieceFlipping())));
+                                         QString().setNum(VAbstractValApplication::VApp()
+                                                          ->ValentinaSettings()->GetForceWorkpieceFlipping())));
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
         initData.detail.SetPriority(GetParametrUInt(domElement, VToolSeamAllowance::AttrPiecePriority, QChar('0')));
@@ -1211,8 +1217,8 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
-    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
-    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
+    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1220,8 +1226,8 @@ void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32
                                           QString &notes)
 {
     DrawToolsCommonAttributes(domElement, id, notes);
-    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
-    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
+    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1490,8 +1496,10 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
         initData.typeCreation = Source::FromFile;
 
         PointsCommonAttributes(domElement, initData);
-        initData.x = qApp->toPixel(GetParametrDouble(domElement, AttrX, QStringLiteral("10.0")));
-        initData.y = qApp->toPixel(GetParametrDouble(domElement, AttrY, QStringLiteral("10.0")));
+        initData.x = VAbstractValApplication::VApp()
+                ->toPixel(GetParametrDouble(domElement, AttrX, QStringLiteral("10.0")));
+        initData.y = VAbstractValApplication::VApp()
+                ->toPixel(GetParametrDouble(domElement, AttrY, QStringLiteral("10.0")));
 
         spoint = VToolBasePoint::Create(initData);
     }
@@ -2495,13 +2503,17 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.dartP3Id = GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
 
         initData.name1 = GetParametrString(domElement, AttrName1, QChar('A'));
-        initData.mx1 = qApp->toPixel(GetParametrDouble(domElement, AttrMx1, QString::number(labelMX)));
-        initData.my1 = qApp->toPixel(GetParametrDouble(domElement, AttrMy1, QString::number(labelMY)));
+        initData.mx1 = VAbstractValApplication::VApp()
+                ->toPixel(GetParametrDouble(domElement, AttrMx1, QString::number(labelMX)));
+        initData.my1 = VAbstractValApplication::VApp()
+                ->toPixel(GetParametrDouble(domElement, AttrMy1, QString::number(labelMY)));
         initData.showLabel1 = GetParametrBool(domElement, AttrShowLabel1, trueStr);
 
         initData.name2 = GetParametrString(domElement, AttrName2, QChar('A'));
-        initData.mx2 = qApp->toPixel(GetParametrDouble(domElement, AttrMx2, QString::number(labelMX)));
-        initData.my2 = qApp->toPixel(GetParametrDouble(domElement, AttrMy2, QString::number(labelMY)));
+        initData.mx2 = VAbstractValApplication::VApp()
+                ->toPixel(GetParametrDouble(domElement, AttrMx2, QString::number(labelMX)));
+        initData.my2 = VAbstractValApplication::VApp()
+                ->toPixel(GetParametrDouble(domElement, AttrMy2, QString::number(labelMY)));
         initData.showLabel2 = GetParametrBool(domElement, AttrShowLabel2, trueStr);
 
         VToolTrueDarts::Create(initData);
@@ -2605,7 +2617,8 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
 
         if (spl != nullptr)
         {
-            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            VAbstractMainWindow *window =
+                    qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSpline::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -2814,7 +2827,8 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 
         if (spl != nullptr)
         {
-            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            VAbstractMainWindow *window =
+                    qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -3668,17 +3682,17 @@ void VPattern::RefreshPieceGeometry()
     auto CleanRefreshList = qScopeGuard([this]()
     {
         updatePieces.clear();
-        VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
     });
 
-    if (qApp->IsGUIMode() && m_parsing)
+    if (VApplication::VApp()->IsGUIMode() && m_parsing)
     {
         return;
     }
 
     for(auto pieceId : qAsConst(updatePieces))
     {
-        if (qApp->IsGUIMode() && m_parsing)
+        if (VApplication::VApp()->IsGUIMode() && m_parsing)
         {
             return;
         }
@@ -3697,7 +3711,7 @@ void VPattern::RefreshPieceGeometry()
 
         QApplication::processEvents();
 
-        if (qApp->IsGUIMode() && m_parsing)
+        if (VApplication::VApp()->IsGUIMode() && m_parsing)
         {
             return;
         }

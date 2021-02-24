@@ -118,7 +118,8 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPo
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitData &initData)
 {
-    const qreal radius = qApp->toPixel(CheckFormula(initData.id, initData.circleRadius, initData.data));
+    const qreal radius =
+            VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.circleRadius, initData.data));
     const VPointF cPoint = *initData.data->GeometricObject<VPointF>(initData.circleCenterId);
     const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
 
@@ -132,8 +133,8 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
                                     "from point '%4' cannot be found")
                 .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
 
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
@@ -208,7 +209,7 @@ VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
     VFormula radius(circleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnits()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
     return radius;
 }

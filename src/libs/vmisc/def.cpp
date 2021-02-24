@@ -169,6 +169,7 @@ const QString pl_mInterlining  = QStringLiteral("mInterlining");
 const QString pl_wCut          = QStringLiteral("wCut");
 const QString pl_wOnFold       = QStringLiteral("wOnFold");
 const QString pl_measurement   = QStringLiteral("measurement_");
+const QString pl_finalMeasurement = QStringLiteral("finalMeasurement_");
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
@@ -598,7 +599,8 @@ void InitLanguages(QComboBox *combobox)
     combobox->clear();
 
     QStringList fileNames;
-    QDirIterator it(qApp->translationsPath(), QStringList("valentina_*.qm"), QDir::Files, QDirIterator::Subdirectories);
+    QDirIterator it(VAbstractApplication::VApp()->translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
+                    QDirIterator::Subdirectories);
     while (it.hasNext())
     {
         it.next();
@@ -621,7 +623,8 @@ void InitLanguages(QComboBox *combobox)
 
         QLocale loc = QLocale(locale);
         QString lang = loc.nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(loc.country())));
+        // Since Qt 5.12 country names have spaces
+        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(loc.country()).remove(' ')));
 
         combobox->addItem(ico, lang, locale);
     }
@@ -629,13 +632,14 @@ void InitLanguages(QComboBox *combobox)
     if (combobox->count() == 0 || not englishUS)
     {
         // English language is internal and doens't have own *.qm file.
-        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(QLocale::UnitedStates)));
+        // Since Qt 5.12 country names have spaces
+        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
         QString lang = QLocale(en_US).nativeLanguageName();
         combobox->addItem(ico, lang, en_US);
     }
 
     // set default translators and language checked
-    qint32 index = combobox->findData(qApp->Settings()->GetLocale());
+    qint32 index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetLocale());
     if (index != -1)
     {
         combobox->setCurrentIndex(index);

@@ -87,8 +87,9 @@ void AddGroup::undo()
         return;
     }
 
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
     }
@@ -114,7 +115,8 @@ void AddGroup::redo()
         return;
     }
 
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
 }
 
 //RenameGroup
@@ -238,7 +240,7 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
         }
 
         doc->SetModified(true);
-        emit qApp->getCurrentDocument()->patternChanged(false);
+        emit VAbstractValApplication::VApp()->getCurrentDocument()->patternChanged(false);
 
         QDomElement groups = doc->CreateGroups();
         if (not groups.isNull())
@@ -258,8 +260,9 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
         return;
     }
 
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
     }
@@ -322,7 +325,7 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
         }
 
         doc->SetModified(true);
-        emit qApp->getCurrentDocument()->patternChanged(false);
+        emit VAbstractValApplication::VApp()->getCurrentDocument()->patternChanged(false);
 
         QDomElement groups = doc->CreateGroups();
         if (not groups.isNull())
@@ -342,9 +345,10 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
         return;
     }
 
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
     }
@@ -404,7 +408,8 @@ void ChangeGroupVisibility::Do(bool visible)
 
         emit UpdateGroup(nodeId, visible);
 
-        VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                        VAbstractValApplication::VApp()->getSceneView());
     }
     else
     {
@@ -471,7 +476,8 @@ void ChangeMultipleGroupsVisibility::undo()
             doc->ParseGroups(groups);
         }
 
-        VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                        VAbstractValApplication::VApp()->getSceneView());
 
         emit UpdateMultipleGroups(groupsState);
     }
@@ -508,7 +514,8 @@ void ChangeMultipleGroupsVisibility::redo()
             doc->ParseGroups(groups);
         }
 
-        VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                        VAbstractValApplication::VApp()->getSceneView());
 
         emit UpdateMultipleGroups(groupsState);
     }
@@ -529,7 +536,7 @@ void DelGroup::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     }
@@ -547,7 +554,8 @@ void DelGroup::undo()
         return;
     }
 
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -555,7 +563,7 @@ void DelGroup::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {//Keep first!
         emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     }
@@ -592,5 +600,6 @@ void DelGroup::redo()
         return;
     }
 
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
 }

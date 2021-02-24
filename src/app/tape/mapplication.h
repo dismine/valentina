@@ -39,11 +39,6 @@ class MApplication;// use in define
 class TMainWindow;
 class QLocalServer;
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast<MApplication*>(VAbstractApplication::instance()))
-
 enum class SocketConnection : bool {Client = false, Server = true};
 
 class MApplication : public VAbstractApplication
@@ -77,6 +72,8 @@ public:
     void RetranslateTables();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
+
+    static MApplication *VApp();
 
 public slots:
     void ProcessCMD();

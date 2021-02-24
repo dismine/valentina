@@ -142,7 +142,7 @@ VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
-                                            qApp->toPixel(result), initData.angle);
+                                            VAbstractValApplication::VApp()->toPixel(result), initData.angle);
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -274,7 +274,8 @@ void VToolNormal::SetVisualization()
 
         visual->setObject1Id(basePointId);
         visual->setObject2Id(secondPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetAngle(angle);
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();

@@ -49,7 +49,7 @@ class DialogEditLabel : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogEditLabel(VAbstractPattern *doc, const VContainer *data, QWidget *parent = nullptr);
+    explicit DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent = nullptr);
     virtual ~DialogEditLabel();
 
     QVector<VLabelTemplateLine> GetTemplate() const;
@@ -75,7 +75,7 @@ private:
     Q_DISABLE_COPY(DialogEditLabel)
     Ui::DialogEditLabel *ui;
     QMenu               *m_placeholdersMenu;
-    VAbstractPattern    *m_doc;
+    const VAbstractPattern *m_doc;
     const VContainer    *m_data;
 
     QMap<QString, QPair<QString, QString>> m_placeholders;

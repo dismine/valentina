@@ -112,8 +112,8 @@ void DRW_TextCodec::setCodePage(const std::string *c, bool dxfFormat){
     {
         const QString errorMsg = QCoreApplication::translate("DRW_TextCodec", "No available codec for code page '%1'.")
                 .arg(cp.c_str());
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
 
         if (version < DRW::AC1021 && cp == "UTF-8")
         {

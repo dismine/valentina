@@ -32,16 +32,10 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "vvalentinasettings.h"
 #include "vcmdexport.h"
 #include "vlockguard.h"
 
 class VApplication;// use in define
-
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (qobject_cast<VApplication*>(VAbstractApplication::instance()))
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
@@ -76,8 +70,7 @@ public:
     virtual bool IsAppInGUIMode() const override;
     virtual bool IsPedantic() const override;
 
-    virtual void OpenSettings() override;
-    VValentinaSettings *ValentinaSettings();
+    static VApplication *VApp();
 
 protected:
     virtual void       InitTrVars() override;

@@ -193,7 +193,8 @@ VToolShoulderPoint* VToolShoulderPoint::Create(VToolShoulderPointInitData &initD
 
     QPointF fPoint = VToolShoulderPoint::FindPoint(static_cast<QPointF>(*firstPoint),
                                                    static_cast<QPointF>(*secondPoint),
-                                                   static_cast<QPointF>(*shoulderPoint), qApp->toPixel(result));
+                                                   static_cast<QPointF>(*shoulderPoint),
+                                                   VAbstractValApplication::VApp()->toPixel(result));
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -322,7 +323,8 @@ void VToolShoulderPoint::SetVisualization()
         visual->setObject1Id(pShoulder);
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->setLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
@@ -345,11 +347,11 @@ QString VToolShoulderPoint::MakeToolTip() const
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
-            .arg(qApp->fromPixel(firstToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnits(), true), tr("Angle"))
+            .arg(VAbstractValApplication::VApp()->fromPixel(firstToCur.length()))
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
             .arg(firstToCur.angle())
             .arg(QString("%1->%2").arg(second->name(), current->name()))
-            .arg(qApp->fromPixel(secondToCur.length()))
+            .arg(VAbstractValApplication::VApp()->fromPixel(secondToCur.length()))
             .arg(tr("Label"), current->name());
     return toolTip;
 }

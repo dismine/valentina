@@ -72,7 +72,8 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    ui->lineEditNamePoint->setText(
+                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     this->formulaBaseHeightCircle1Radius = ui->plainTextEditCircle1Radius->height();
     this->formulaBaseHeightCircle2Radius = ui->plainTextEditCircle2Radius->height();
@@ -182,14 +183,16 @@ void DialogPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &va
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointOfIntersectionCircles::GetFirstCircleRadius() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditCircle1Radius->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(ui->plainTextEditCircle1Radius->toPlainText(),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractValApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -207,14 +210,16 @@ void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointOfIntersectionCircles::GetSecondCircleRadius() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditCircle2Radius->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VAbstractApplication::VApp()->TrVars()
+            ->TryFormulaFromUser(ui->plainTextEditCircle2Radius->toPlainText(),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()
+            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -326,7 +331,7 @@ void DialogPointOfIntersectionCircles::FXCircle1Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first circle radius"));
     dialog->SetFormula(GetFirstCircleRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFirstCircleRadius(dialog->GetFormula());
@@ -340,7 +345,7 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second circle radius"));
     dialog->SetFormula(GetSecondCircleRadius());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnits(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetSecondCircleRadius(dialog->GetFormula());
@@ -356,7 +361,7 @@ void DialogPointOfIntersectionCircles::EvalCircle1Radius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditCircle1Radius;
     formulaData.labelResult = ui->labelResultCircle1Radius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagCircle1Radius);
 
@@ -379,7 +384,7 @@ void DialogPointOfIntersectionCircles::EvalCircle2Radius()
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditCircle2Radius;
     formulaData.labelResult = ui->labelResultCircle2Radius;
-    formulaData.postfix = UnitsToStr(qApp->patternUnits(), true);
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
     const qreal radius = Eval(formulaData, flagCircle2Radius);
 

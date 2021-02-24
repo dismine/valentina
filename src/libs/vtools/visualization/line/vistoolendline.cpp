@@ -79,12 +79,13 @@ void VisToolEndLine::RefreshGeometry()
         DrawPoint(point, line.p2(), mainColor);
     }
     DrawLine(this, line, mainColor, lineStyle);
-    static const QString prefix = UnitsToStr(qApp->patternUnits(), true);
+    static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     Visualization::toolTip = tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
                                 "<b>%4</b> - sticking angle, <b>%5</b> - finish creation")
             .arg(this->line().angle())
-            .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length())),
-                                               qApp->Settings()->GetOsSeparator()),
+            .arg(VAbstractApplication::VApp()->TrVars()
+                 ->FormulaToUser(QString::number(VAbstractValApplication::VApp()->fromPixel(this->line().length())),
+                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()),
                  prefix, VModifierKey::Shift(), VModifierKey::EnterKey());
 }
 
@@ -103,7 +104,7 @@ void VisToolEndLine::SetAngle(const QString &expression)
 //---------------------------------------------------------------------------------------------------------------------
 QString VisToolEndLine::Length() const
 {
-    return QString::number(qApp->fromPixel(this->line().length()));
+    return QString::number(VAbstractValApplication::VApp()->fromPixel(this->line().length()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

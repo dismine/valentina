@@ -43,10 +43,12 @@ void VGraphicsFillItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*
     Q_UNUSED(option)
     Q_UNUSED(widget)
     painter->save();
+
+    QPen pen = painter->pen();
+    pen.setWidthF(width);
+    painter->setPen(pen);
+
     painter->setBrush(painter->pen().color());
     painter->drawPath(path());
     painter->restore();
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-

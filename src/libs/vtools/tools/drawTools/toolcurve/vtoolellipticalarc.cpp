@@ -147,8 +147,8 @@ VToolEllipticalArc* VToolEllipticalArc::Create(VToolEllipticalArcInitData &initD
 {
     qreal calcRadius1 = 0, calcRadius2 = 0, calcF1 = 0, calcF2 = 0, calcRotationAngle = 0;
 
-    calcRadius1 = qApp->toPixel(CheckFormula(initData.id, initData.radius1, initData.data));
-    calcRadius2 = qApp->toPixel(CheckFormula(initData.id, initData.radius2, initData.data));
+    calcRadius1 = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.radius1, initData.data));
+    calcRadius2 = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.radius2, initData.data));
 
     calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
     calcF2 = CheckFormula(initData.id, initData.f2, initData.data);
@@ -206,7 +206,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius1() const
     VFormula radius1(elArc->GetFormulaRadius1(), getData());
     radius1.setCheckZero(true);
     radius1.setToolId(m_id);
-    radius1.setPostfix(UnitsToStr(qApp->patternUnits()));
+    radius1.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius1.Eval();
     return radius1;
 }
@@ -235,7 +235,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius2() const
     VFormula radius2(elArc->GetFormulaRadius2(), getData());
     radius2.setCheckZero(true);
     radius2.setToolId(m_id);
-    radius2.setPostfix(UnitsToStr(qApp->patternUnits()));
+    radius2.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius2.Eval();
     return radius2;
 }
@@ -421,14 +421,18 @@ void VToolEllipticalArc::SetVisualization()
         VisToolEllipticalArc *visual = qobject_cast<VisToolEllipticalArc *>(vis);
         SCASSERT(visual != nullptr)
 
-        const VTranslateVars *trVars = qApp->TrVars();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
         visual->setObject1Id(elArc->GetCenter().id());
-        visual->setRadius1(trVars->FormulaToUser(elArc->GetFormulaRadius1(), qApp->Settings()->GetOsSeparator()));
-        visual->setRadius2(trVars->FormulaToUser(elArc->GetFormulaRadius2(), qApp->Settings()->GetOsSeparator()));
-        visual->setF1(trVars->FormulaToUser(elArc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
-        visual->setF2(trVars->FormulaToUser(elArc->GetFormulaF2(), qApp->Settings()->GetOsSeparator()));
+        visual->setRadius1(trVars->FormulaToUser(elArc->GetFormulaRadius1(),
+                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setRadius2(trVars->FormulaToUser(elArc->GetFormulaRadius2(),
+                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setF1(trVars->FormulaToUser(elArc->GetFormulaF1(),
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setF2(trVars->FormulaToUser(elArc->GetFormulaF2(),
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(),
-                                                       qApp->Settings()->GetOsSeparator()));
+                                                       VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
         visual->RefreshGeometry();
     }
@@ -449,12 +453,12 @@ QString VToolEllipticalArc::MakeToolTip() const
                                     "<tr> <td><b>%14:</b> %15°</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))                          // 1
-            .arg(qApp->fromPixel(elArc->GetLength()))   // 2
-            .arg(UnitsToStr(qApp->patternUnits(), true), // 3
+            .arg(VAbstractValApplication::VApp()->fromPixel(elArc->GetLength()))   // 2
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // 3
                  tr("Radius") + QLatin1Char('1'))       // 4
-            .arg(qApp->fromPixel(elArc->GetRadius1()))  // 5
+            .arg(VAbstractValApplication::VApp()->fromPixel(elArc->GetRadius1()))  // 5
             .arg(tr("Radius") + QLatin1Char('2'))       // 6
-            .arg(qApp->fromPixel(elArc->GetRadius2()))  // 7
+            .arg(VAbstractValApplication::VApp()->fromPixel(elArc->GetRadius2()))  // 7
             .arg(tr("Start angle"))                     // 8
             .arg(elArc->GetStartAngle())                // 9
             .arg(tr("End angle"))                       // 10

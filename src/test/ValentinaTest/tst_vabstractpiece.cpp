@@ -342,6 +342,12 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#58/input.json"),
                      QStringLiteral("://smart_pattern_#58/output.json"),
                      18.897637795275593 /*seam allowance width (0.5 cm)*/);
+
+    // See file src/app/share/collection/test/smart_pattern_#99.val
+    ASSERT_TEST_CASE("Incorrect fix of distortion",
+                     QStringLiteral("://smart_pattern_#99/input.json"),
+                     QStringLiteral("://smart_pattern_#99/output.json"),
+                     28.346456692913389 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1075,6 +1081,24 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://Issue_937_case_5/input.json"),
                      QStringLiteral("://Issue_937_case_5/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/busty.val (private collection)
+    ASSERT_TEST_CASE("Busty",
+                     QStringLiteral("://busty/input.json"),
+                     QStringLiteral("://busty/output.json"),
+                     0 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/panties.val (private collection)
+    ASSERT_TEST_CASE("Panties. Piece Case 1",
+                     QStringLiteral("://panties_case1/input.json"),
+                     QStringLiteral("://panties_case1/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/panties.val (private collection)
+    ASSERT_TEST_CASE("Panties. Piece Case 2",
+                     QStringLiteral("://panties_case2/input.json"),
+                     QStringLiteral("://panties_case2/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

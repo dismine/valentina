@@ -33,11 +33,6 @@
 #include "projectversion.h"
 #include "../vmisc/vcommonsettings.h"
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast<TestVApplication*>(QCoreApplication::instance()))
-
 class VTestSettings : public VCommonSettings
 {
     Q_OBJECT
@@ -88,6 +83,11 @@ public:
     void SetTrVars(VTranslateVars *trVars)
     {
         m_trVars = trVars;
+    }
+
+    static TestVApplication *VApp()
+    {
+        return static_cast<TestVApplication*>(QCoreApplication::instance());
     }
 
 protected slots:

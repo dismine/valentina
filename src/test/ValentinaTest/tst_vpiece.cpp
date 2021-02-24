@@ -51,7 +51,7 @@ void TST_VPiece::Issue620()
     // Check main path
     const Unit unit = Unit::Cm;
     QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
-    qApp->SetPatternUnits(unit);
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
 
     VPiece detail;
     AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);

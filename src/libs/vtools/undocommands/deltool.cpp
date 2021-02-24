@@ -59,7 +59,7 @@ void DelTool::undo()
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {//Keep last!
         emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     }
@@ -70,7 +70,7 @@ void DelTool::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {//Keep first!
         emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     }

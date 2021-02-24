@@ -860,7 +860,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         {
             bool success = false;
             QVector<VRawSAPoint> temp = ekvPoints;
-            temp.insert(ekvPoints.size()-1, bigLine1.p2());
+            temp.append(bigLine1.p2());
             temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
             if (success)
@@ -1067,17 +1067,17 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
 //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
+    // Fix distorsion. Must be done before the correction
+    points = CorrectPathDistortion(points);
+
     points = CorrectEquidistantPoints(points);
     if ( points.size() < 3 )
     {
         const QString errorMsg = tr("Piece '%1'. Not enough points to build seam allowance.").arg(name);
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return QVector<QPointF>();
     }
-
-    // Fix distorsion
-    points = CorrectPathDistortion(points);
 
     if (points.last().toPoint() != points.first().toPoint())
     {
@@ -1937,4 +1937,20 @@ QVector<QPointF> VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, con
     }
 
     return CorrectPosition(boundingRect, v);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractPiece::PainterPath(const QVector<QPointF> &points)
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    path.moveTo(points.at(0));
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
+        path.lineTo(points.at(i));
+    }
+    path.lineTo(points.at(0));
+
+    return path;
 }

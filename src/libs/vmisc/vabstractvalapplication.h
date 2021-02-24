@@ -36,11 +36,7 @@ class VAbstractValApplication;// use in define
 class VAbstractPattern;
 class VMainGraphicsView;
 class QGraphicsScene;
-
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (qobject_cast<VAbstractValApplication*>(QCoreApplication::instance()))
+class VValentinaSettings;
 
 class VAbstractValApplication : public VAbstractApplication
 {
@@ -111,6 +107,11 @@ public:
 
     qreal GetDimensionWaist() const;
     void  SetDimensionWaist(qreal dimensionWaist);
+
+    virtual void OpenSettings() override;
+    VValentinaSettings *ValentinaSettings();
+
+    static VAbstractValApplication *VApp();
 
 protected:
     QString m_customerName{};

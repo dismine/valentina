@@ -260,7 +260,7 @@ QT_WARNING_POP
     {
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
-            qApp->getUndoStack()->beginMacro(tr("rotate"));
+            VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("rotate"));
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::Rotation, initData.doc);
@@ -277,7 +277,7 @@ QT_WARNING_POP
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
             VAbstractOperation::CreateVisibilityGroup(initData);
-            qApp->getUndoStack()->endMacro();
+            VAbstractApplication::VApp()->getUndoStack()->endMacro();
         }
 
         return tool;
@@ -344,7 +344,8 @@ void VToolRotation::SetVisualization()
 
         visual->SetObjects(SourceToObjects(source));
         visual->SetOriginPointId(origPointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
+                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }

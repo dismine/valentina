@@ -72,7 +72,7 @@ VArcData::VArcData(qreal radius, const QString &formulaRadius)
 //---------------------------------------------------------------------------------------------------------------------
 VArcData::VArcData(qreal radius)
     : radius(radius),
-      formulaRadius(QString().number(qApp->fromPixel(radius)))
+      formulaRadius(QString().number(VAbstractValApplication::VApp()->fromPixel(radius)))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

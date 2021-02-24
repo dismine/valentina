@@ -45,7 +45,7 @@ class DialogFinalMeasurements : public QDialog
     Q_OBJECT
 
 public:
-    DialogFinalMeasurements(VPattern *doc, QWidget *parent = nullptr);
+    explicit DialogFinalMeasurements(VPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogFinalMeasurements();
 
     QVector<VFinalMeasurement> FinalMeasurements() const;

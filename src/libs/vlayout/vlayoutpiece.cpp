@@ -257,7 +257,13 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
             auto PreapreBuiltInSAPassmark = [pData, passmark, piece, &layoutPassmarks, pattern]()
             {
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wnoexcept")
+                // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
                 VLayoutPassmark layoutPassmark;
+
+                QT_WARNING_POP
 
                 const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
@@ -269,8 +275,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                         const QString errorMsg =
                             QObject::tr("Cannot prepare builtin passmark '%1' for piece '%2'. Passmark is empty.")
                                 .arg(pData.nodeName, piece.GetName());
-                        qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                         return;
                     }
 
@@ -283,8 +289,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                             QObject::tr("Cannot prepare builtin  passmark '%1' for piece '%2'. Passmark base line is "
                                         "empty.")
                                 .arg(pData.nodeName, piece.GetName());
-                        qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                         return;
                     }
                     layoutPassmark.baseLine = ConstFirst (baseLines);
@@ -300,8 +306,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                     const QString errorMsg =
                             QObject::tr("Passmark '%1' is not part of piece '%2'.")
                             .arg(pData.nodeName, piece.GetName());
-                    qApp->IsPedantic() ? throw VException(errorMsg) :
-                                         qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                    VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                 }
             };
 
@@ -326,8 +332,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                         const QString errorMsg =
                             QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark base line is empty.")
                                 .arg(pData.nodeName, piece.GetName());
-                        qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                         return;
                     }
 
@@ -346,8 +352,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                         const QString errorMsg =
                             QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark is empty.")
                                 .arg(pData.nodeName, piece.GetName());
-                        qApp->IsPedantic() ? throw VException(errorMsg) :
-                                           qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                         return;
                     }
 
@@ -362,8 +368,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                     const QString errorMsg =
                             QObject::tr("Passmark '%1' is not part of piece '%2'.")
                             .arg(pData.nodeName, piece.GetName());
-                    qApp->IsPedantic() ? throw VException(errorMsg) :
-                                         qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                    VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                 }
             };
 
@@ -399,8 +405,9 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                     }
                 }
 
-                if (qApp->Settings()->IsDoublePassmark()
-                        && (qApp->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath())
+                if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark()
+                        && (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() ||
+                            not piece.IsHideMainPath())
                         && pData.isMainPathNode
                         && pData.passmarkAngleType != PassmarkAngleType::Intersection
                         && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft
@@ -500,7 +507,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     det.SetName(piece.GetName());
     det.SetUUID(piece.GetUUID());
 
-    det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
+    det.SetSAWidth(VAbstractValApplication::VApp()->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
     det.SetForceFlipping(piece.IsForceFlipping());
     det.SetId(id);
@@ -509,12 +516,13 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     {
         const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.")
                 .arg(piece.GetName());
-        qApp->IsPedantic() ? throw VException(errorMsg) :
-                             qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     det.SetCountourPoints(futureMainPath.result(),
-                          qApp->Settings()->IsPieceShowMainPath() ? false : piece.IsHideMainPath());
+                          VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() ? false
+                                                                                          : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(futureInternalPaths.result());
     det.SetPassmarks(futurePassmarks.result());
@@ -531,14 +539,14 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     det.SetQuantity(data.GetQuantity());
     if (data.IsVisible())
     {
-        det.SetPieceText(piece.GetName(), data, qApp->Settings()->GetLabelFont(), pattern);
+        det.SetPieceText(piece.GetName(), data, VAbstractApplication::VApp()->Settings()->GetLabelFont(), pattern);
     }
 
     const VPatternLabelData& geom = piece.GetPatternInfo();
     if (geom.IsVisible())
     {
-        VAbstractPattern* pDoc = qApp->getCurrentDocument();
-        det.SetPatternInfo(pDoc, geom, qApp->Settings()->GetLabelFont(), pattern);
+        VAbstractPattern* pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
+        det.SetPatternInfo(pDoc, geom, VAbstractApplication::VApp()->Settings()->GetLabelFont(), pattern);
     }
 
     const VGrainlineData& grainlineGeom = piece.GetGrainlineGeometry();
@@ -1143,22 +1151,6 @@ QPainterPath VLayoutPiece::LayoutAllowancePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::PainterPath(const QVector<QPointF> &points)
-{
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-
-    path.moveTo(points.at(0));
-    for (qint32 i = 1; i < points.count(); ++i)
-    {
-        path.lineTo(points.at(i));
-    }
-    path.lineTo(points.at(0));
-
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 {
     QGraphicsPathItem *item = GetMainItem();
@@ -1170,12 +1162,16 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 
         QPen pen = pathItem->pen();
         pen.setStyle(path.PenStyle());
+        pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
         pathItem->setPen(pen);
     }
 
     for (auto &label : d->m_placeLabels)
     {
         QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
+        QPen pen = pathItem->pen();
+        pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+        pathItem->setPen(pen);
         pathItem->setPath(d->matrix.map(VPlaceLabelItem::LabelShapePath(label.shape)));
     }
 
@@ -1340,13 +1336,14 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
     {
         return;
     }
-    VGraphicsFillItem* item = new VGraphicsFillItem(parent);
+    auto* item = new VGraphicsFillItem(parent);
+    item->SetWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine());
 
     QPainterPath path;
 
     QVector<QPointF> gPoints = GetGrainline();
     path.moveTo(gPoints.at(0));
-    for (auto p : gPoints)
+    for (auto p : qAsConst(gPoints))
     {
         path.lineTo(p);
     }
@@ -1370,6 +1367,9 @@ QVector<QPointF> VLayoutPiece::DetailPath() const
 QGraphicsPathItem *VLayoutPiece::GetMainItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
+    QPen pen = item->pen();
+    pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+    item->setPen(pen);
     item->setPath(ContourPath());
     return item;
 }
@@ -1378,6 +1378,9 @@ QGraphicsPathItem *VLayoutPiece::GetMainItem() const
 QGraphicsPathItem *VLayoutPiece::GetMainPathItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
+    QPen pen = item->pen();
+    pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+    item->setPen(pen);
 
     QPainterPath path;
 

@@ -79,6 +79,7 @@ public:
 
     void ExportToSVG(QGraphicsScene *scene) const;
     void ExportToPNG(QGraphicsScene *scene) const;
+    void ExportToTIF(QGraphicsScene *scene) const;
     void ExportToPDF(QGraphicsScene *scene) const;
     void ExportToOBJ(QGraphicsScene *scene) const;
     void ExportToPS(QGraphicsScene *scene) const;

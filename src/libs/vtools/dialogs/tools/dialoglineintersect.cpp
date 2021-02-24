@@ -71,7 +71,8 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, quint32 toolId,
 
     number = 0;
     InitOkCancelApply(ui);
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    ui->lineEditNamePoint->setText(
+                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     FillComboBoxPoints(ui->comboBoxP1Line1);
     FillComboBoxPoints(ui->comboBoxP2Line1);

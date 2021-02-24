@@ -181,7 +181,8 @@ void DialogMDataBase::RetranslateGroups()
 QString DialogMDataBase::ImgTag(const QString &number)
 {
     QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
-    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(qApp->TrVars(), number));
+    const QString filePath = QString("://diagrams/%1.svg")
+            .arg(MapDiagrams(VAbstractApplication::VApp()->TrVars(), number));
     if (QFileInfo::exists(filePath))
     {
         // Load your SVG
@@ -508,7 +509,8 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
         UpdateChecks(m, 0);
     }
 
-    const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
+    const QString text = VAbstractApplication::VApp()->TrVars()->MNumber(name) + ". " +
+            VAbstractApplication::VApp()->TrVars()->MToUser(name);
     m->setText(0, text);
     m->setToolTip(0, text);
     m->setData(0, Qt::UserRole, name);
@@ -517,13 +519,13 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::ReadSettings()
 {
-    restoreGeometry(qApp->TapeSettings()->GetDataBaseGeometry());
+    restoreGeometry(MApplication::VApp()->TapeSettings()->GetDataBaseGeometry());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::WriteSettings()
 {
-    qApp->TapeSettings()->SetDataBaseGeometry(saveGeometry());
+    MApplication::VApp()->TapeSettings()->SetDataBaseGeometry(saveGeometry());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -540,7 +542,7 @@ QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showIma
         return QString();
     }
 
-    const QString number = qApp->TrVars()->MNumber(name);
+    const QString number = VAbstractApplication::VApp()->TrVars()->MNumber(name);
 
     QString imgTag;
     if (showImage)
@@ -552,7 +554,8 @@ QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showIma
                                  "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
                                  "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
                                  "normal\">%4</p>")
-            .arg(imgTag, number, qApp->TrVars()->GuiText(name), qApp->TrVars()->Description(name));
+            .arg(imgTag, number, VAbstractApplication::VApp()->TrVars()->GuiText(name),
+                 VAbstractApplication::VApp()->TrVars()->Description(name));
 
     return text;
 }
@@ -572,7 +575,8 @@ void DialogMDataBase::RetranslateGroup(QTreeWidgetItem *group, const QString &gr
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name)
 {
-    const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
+    const QString text = VAbstractApplication::VApp()->TrVars()->MNumber(name) + ". " +
+            VAbstractApplication::VApp()->TrVars()->MToUser(name);
 
     QTreeWidgetItem *m = group->child(index);
     m->setText(0, text);

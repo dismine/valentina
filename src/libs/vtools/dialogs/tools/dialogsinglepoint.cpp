@@ -53,8 +53,8 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWi
 
     ui->lineEditName->setClearButtonEnabled(true);
 
-    ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));
-    ui->doubleSpinBoxY->setRange(0, qApp->fromPixel(SceneSize));
+    ui->doubleSpinBoxX->setRange(0, VAbstractValApplication::VApp()->fromPixel(SceneSize));
+    ui->doubleSpinBoxY->setRange(0, VAbstractValApplication::VApp()->fromPixel(SceneSize));
     InitOkCancel(ui);
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, [this]()
@@ -76,21 +76,22 @@ void DialogSinglePoint::mousePress(const QPointF &scenePos)
 {
     if (isInitialized == false)
     {
-        ui->doubleSpinBoxX->setValue(qApp->fromPixel(scenePos.x()));
-        ui->doubleSpinBoxY->setValue(qApp->fromPixel(scenePos.y()));
+        ui->doubleSpinBoxX->setValue(VAbstractValApplication::VApp()->fromPixel(scenePos.x()));
+        ui->doubleSpinBoxY->setValue(VAbstractValApplication::VApp()->fromPixel(scenePos.y()));
         this->show();
     }
     else
     {
-        ui->doubleSpinBoxX->setValue(qApp->fromPixel(scenePos.x()));
-        ui->doubleSpinBoxY->setValue(qApp->fromPixel(scenePos.y()));
+        ui->doubleSpinBoxX->setValue(VAbstractValApplication::VApp()->fromPixel(scenePos.x()));
+        ui->doubleSpinBoxY->setValue(VAbstractValApplication::VApp()->fromPixel(scenePos.y()));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSinglePoint::SaveData()
 {
-    point = QPointF(qApp->toPixel(ui->doubleSpinBoxX->value()), qApp->toPixel(ui->doubleSpinBoxY->value()));
+    point = QPointF(VAbstractValApplication::VApp()->toPixel(ui->doubleSpinBoxX->value()),
+                    VAbstractValApplication::VApp()->toPixel(ui->doubleSpinBoxY->value()));
     pointName = ui->lineEditName->text();
 }
 
@@ -106,8 +107,8 @@ void DialogSinglePoint::SetData(const QString &name, const QPointF &point)
     this->point = point;
     isInitialized = true;
     ui->lineEditName->setText(name);
-    ui->doubleSpinBoxX->setValue(qApp->fromPixel(point.x()));
-    ui->doubleSpinBoxY->setValue(qApp->fromPixel(point.y()));
+    ui->doubleSpinBoxX->setValue(VAbstractValApplication::VApp()->fromPixel(point.x()));
+    ui->doubleSpinBoxY->setValue(VAbstractValApplication::VApp()->fromPixel(point.y()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

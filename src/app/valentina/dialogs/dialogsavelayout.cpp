@@ -29,7 +29,7 @@
 #include "dialogsavelayout.h"
 #include "ui_dialogsavelayout.h"
 #include "../core/vapplication.h"
-#include "../core/vvalentinasettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../ifc/exception/vexception.h"
 #include "../vlayout/vlayoutexporter.h"
 
@@ -43,9 +43,9 @@
 #include <QGlobalStatic>
 
 #ifndef Q_OS_WIN
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^/]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$")))
 #else
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|/<>]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$")))
 #endif
 
 bool DialogSaveLayout::havePdf = false;
@@ -69,7 +69,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     ui->lineEditPath->setClearButtonEnabled(true);
     ui->lineEditFileName->setClearButtonEnabled(true);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -121,7 +122,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
             this, &DialogSaveLayout::ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
     {
-        const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
+        const QString dirPath = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout();
         bool usedNotExistedDir = false;
         QDir directory(dirPath);
         if (not directory.exists())
@@ -131,7 +132,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
         const QString dir = QFileDialog::getExistingDirectory(
             this, tr("Select folder"), dirPath,
-            qApp->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
+            VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly |
+                                                           QFileDialog::DontResolveSymlinks));
         if (not dir.isEmpty())
         {// If paths equal the signal will not be called, we will do this manually
             dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
@@ -145,7 +147,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
-    ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
+    ui->lineEditPath->setText(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout());
 
     InitTemplates(ui->comboBoxTemplates);
 
@@ -237,6 +239,7 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
         case LayoutExportFormats::RLD:
+        case LayoutExportFormats::TIF:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -285,6 +288,7 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
         case LayoutExportFormats::RLD:
+        case LayoutExportFormats::TIF:
         default:
             return false;
     }
@@ -426,6 +430,8 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
             return QStringLiteral("%1 %2 (*.nc)").arg(tr("Numerical control"), filesStr);
         case LayoutExportFormats::RLD:
             return QStringLiteral("%1 %2 (*.rld)").arg(tr("Raw Layout Data"), filesStr);
+        case LayoutExportFormats::TIF:
+            return QStringLiteral("TIFF %1 (*.tif)").arg(filesStr);
         default:
             return QString();
     }
@@ -481,6 +487,8 @@ QString DialogSaveLayout::ExportFormatSuffix(LayoutExportFormats format)
             return QStringLiteral(".nc");
         case LayoutExportFormats::RLD:
             return QStringLiteral(".rld");
+        case LayoutExportFormats::TIF:
+            return QStringLiteral(".tif");
         default:
             return QString();
     }
@@ -617,6 +625,7 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::NC:
+        case LayoutExportFormats::TIF:
         default:
             break;
     }
@@ -684,7 +693,7 @@ void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
 void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnits());
+    margins = UnitConvertor(margins, Unit::Mm, VAbstractValApplication::VApp()->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -702,7 +711,7 @@ QMarginsF DialogSaveLayout::GetTiledMargins() const
         ui->doubleSpinBoxBottomField->value()
     );
 
-    return UnitConvertor(margins, qApp->patternUnits(), Unit::Mm);
+    return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -855,6 +864,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::PDFTiled); 
 //    InitFormat(LayoutExportFormats::NC);
     InitFormat(LayoutExportFormats::RLD);
+    InitFormat(LayoutExportFormats::TIF);
 
     return list;
 }
@@ -877,8 +887,8 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
  */
 void DialogSaveLayout::ReadSettings()
 {
-    VValentinaSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnits();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -931,8 +941,8 @@ void DialogSaveLayout::WriteSettings() const
         return;
     }
 
-    VValentinaSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnits();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
     QMarginsF margins = QMarginsF(

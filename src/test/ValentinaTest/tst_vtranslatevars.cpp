@@ -45,7 +45,7 @@ TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
 void TST_VTranslateVars::initTestCase()
 {
     m_trMs = new VTranslateVars();
-    qApp->SetTrVars(m_trMs);
+    TestVApplication::VApp()->SetTrVars(m_trMs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

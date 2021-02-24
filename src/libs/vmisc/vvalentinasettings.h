@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vsettings.h
+ **  @file   vvalentinasettings.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   22 11, 2014
  **

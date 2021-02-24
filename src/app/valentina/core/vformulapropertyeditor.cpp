@@ -39,6 +39,7 @@
 
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "vapplication.h"
 
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,8 +88,9 @@ void VFormulaPropertyEditor::SetFormula(const VFormula& formula)
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaPropertyEditor::onToolButtonClicked()
 {
-    QScopedPointer<DialogEditWrongFormula> tmpWidget(new DialogEditWrongFormula(formula.getData(), formula.getToolId(),
-                                                                                qApp->getMainWindow()));
+    QScopedPointer<DialogEditWrongFormula> tmpWidget(
+                new DialogEditWrongFormula(formula.getData(), formula.getToolId(),
+                                           VAbstractValApplication::VApp()->getMainWindow()));
     tmpWidget->setCheckZero(formula.getCheckZero());
     tmpWidget->setPostfix(formula.getPostfix());
     tmpWidget->SetFormula(formula.GetFormula(FormulaType::FromUser));

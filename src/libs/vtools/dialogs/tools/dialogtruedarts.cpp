@@ -66,8 +66,9 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget
     ui->lineEditFirstNewDartPoint->setClearButtonEnabled(true);
     ui->lineEditSecondNewDartPoint->setClearButtonEnabled(true);
 
-    const QString name1 = qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel);
-    const QString name2 = qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel, name1);
+    const QString name1 = VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel);
+    const QString name2 =
+            VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel, name1);
     ui->lineEditFirstNewDartPoint->setText(name1);
     ui->lineEditSecondNewDartPoint->setText(name2);
 

@@ -7,6 +7,7 @@ SOURCES += \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
     $$PWD/vcommonsettings.cpp \
+    $$PWD/vvalentinasettings.cpp \
     $$PWD/commandoptions.cpp \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     $$PWD/vabstractapplication.h \
     $$PWD/projectversion.h \
     $$PWD/vcommonsettings.h \
+    $$PWD/vvalentinasettings.h \
     $$PWD/debugbreak.h \
     $$PWD/vlockguard.h \
     $$PWD/vsysexits.h \

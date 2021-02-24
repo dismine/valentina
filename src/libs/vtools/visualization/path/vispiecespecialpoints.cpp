@@ -55,7 +55,7 @@ VisPieceSpecialPoints::VisPieceSpecialPoints(const VContainer *data, QGraphicsIt
       supportColor2(Qt::darkGreen)
 {
     m_rectItem = InitItem<VCurvePathItem>(supportColor2, this);
-    m_rectItem->SetWidth(qApp->Settings()->WidthHairLine());
+    m_rectItem->SetWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

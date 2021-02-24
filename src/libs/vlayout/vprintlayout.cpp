@@ -320,7 +320,8 @@ void VPrintLayout::PrintPages(QPrinter *printer)
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
+                        Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
 
     int count = 0;
@@ -527,11 +528,7 @@ void VPrintLayout::SetPrinterOutputFileName(QPrinter *printer, PrintType printTy
         {
             const QString outputFileName = filePath.isEmpty() ? QDir::homePath() + QDir::separator() + DocName()
                                                               : filePath;
-#ifdef Q_OS_WIN
-            printer->setOutputFileName(outputFileName);
-#else
             printer->setOutputFileName(outputFileName + QStringLiteral(".pdf"));
-#endif
 
 #ifdef Q_OS_MAC
             printer->setOutputFormat(QPrinter::NativeFormat);
@@ -736,8 +733,8 @@ auto VPrintLayout::WatermarkData() const -> VWatermarkData
         catch (VException &e)
         {
             const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
-            qApp->IsPedantic() ? throw VException(errorMsg) :
-                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     }
 

@@ -84,6 +84,7 @@ const QString VMeasurements::AttrShiftB            = QStringLiteral("shiftB");
 const QString VMeasurements::AttrShiftC            = QStringLiteral("shiftC");
 const QString VMeasurements::AttrCorrection        = QStringLiteral("correction");
 const QString VMeasurements::AttrCoordinates       = QStringLiteral("coordinates");
+const QString VMeasurements::AttrExclude           = QStringLiteral("exclude");
 const QString VMeasurements::AttrSpecialUnits      = QStringLiteral("specialUnits");
 const QString VMeasurements::AttrDescription       = QStringLiteral("description");
 const QString VMeasurements::AttrName              = QStringLiteral("name");
@@ -433,7 +434,7 @@ MeasurementsType VMeasurements::Type() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::DimensionABase() const
+qreal VMeasurements::DimensionABase() const
 {
     if (type == MeasurementsType::Multisize)
     {
@@ -448,7 +449,7 @@ int VMeasurements::DimensionABase() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::DimensionBBase() const
+qreal VMeasurements::DimensionBBase() const
 {
     if (type == MeasurementsType::Multisize)
     {
@@ -463,7 +464,7 @@ int VMeasurements::DimensionBBase() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::DimensionCBase() const
+qreal VMeasurements::DimensionCBase() const
 {
     if (type == MeasurementsType::Multisize)
     {
@@ -478,7 +479,7 @@ int VMeasurements::DimensionCBase() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::DimensionAStep() const
+qreal VMeasurements::DimensionAStep() const
 {
     if (type == MeasurementsType::Multisize)
     {
@@ -493,7 +494,7 @@ int VMeasurements::DimensionAStep() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::DimensionBStep() const
+qreal VMeasurements::DimensionBStep() const
 {
     if (type == MeasurementsType::Multisize)
     {
@@ -508,7 +509,7 @@ int VMeasurements::DimensionBStep() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::DimensionCStep() const
+qreal VMeasurements::DimensionCStep() const
 {
     if (type == MeasurementsType::Multisize)
     {
@@ -845,7 +846,7 @@ QString VMeasurements::MeasurementForDimension(IMD type) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() const
+auto VMeasurements::Dimensions() const -> QMap<MeasurementDimension, MeasurementDimension_p >
 {
     if (type != MeasurementsType::Multisize)
     {
@@ -860,10 +861,10 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
         {
             const QDomElement dom = list.at(i).toElement();
             const MeasurementDimension type = StrToDimensionType(GetParametrString(dom, AttrType));
-            const int min = GetParametrInt(dom, AttrMin, QChar('0'));
-            const int max = GetParametrInt(dom, AttrMax, QChar('0'));
-            const int step = GetParametrInt(dom, AttrStep, QString("-1"));
-            const int base = GetParametrInt(dom, AttrBase, QChar('0'));
+            const qreal min = GetParametrDouble(dom, AttrMin, QChar('0'));
+            const qreal max = GetParametrDouble(dom, AttrMax, QChar('0'));
+            const qreal step = GetParametrDouble(dom, AttrStep, QStringLiteral("-1"));
+            const qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
 
             const DimesionLabels labels = ReadDimensionLabels(dom);
 
@@ -903,9 +904,9 @@ QMap<MeasurementDimension, MeasurementDimension_p > VMeasurements::Dimensions() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QPair<int, int> > VMeasurements::GetRestrictions() const
+auto VMeasurements::GetRestrictions() const -> QMap<QString, VDimensionRestriction >
 {
-    QMap<QString, QPair<int, int> > restrictions;
+    QMap<QString, VDimensionRestriction > restrictions;
 
     const QDomNodeList list = elementsByTagName(TagRestriction);
     for (int i=0; i < list.size(); ++i)
@@ -913,17 +914,18 @@ QMap<QString, QPair<int, int> > VMeasurements::GetRestrictions() const
         const QDomElement res = list.at(i).toElement();
 
         QString coordinates = GetParametrString(res, AttrCoordinates);
-        const int min = GetParametrInt(res, AttrMin, QChar('0'));
-        const int max = GetParametrInt(res, AttrMax, QChar('0'));
+        const qreal min = GetParametrDouble(res, AttrMin, QChar('0'));
+        const qreal max = GetParametrDouble(res, AttrMax, QChar('0'));
+        const QString exclude = GetParametrEmptyString(res, AttrExclude);
 
-        restrictions.insert(coordinates, qMakePair(min, max));
+        restrictions.insert(coordinates, VDimensionRestriction(min, max, exclude));
     }
 
     return restrictions;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetRestrictions(const QMap<QString, QPair<int, int> > &restrictions)
+void VMeasurements::SetRestrictions(const QMap<QString, VDimensionRestriction> &restrictions)
 {
     QDomElement root = documentElement();
     QDomElement restrictionsTag = root.firstChildElement(TagRestrictions);
@@ -935,14 +937,16 @@ void VMeasurements::SetRestrictions(const QMap<QString, QPair<int, int> > &restr
 
     RemoveAllChildren(restrictionsTag);
 
-    QMap<QString, QPair<int, int> >::const_iterator i = restrictions.constBegin();
+    auto i = restrictions.constBegin();
     while (i != restrictions.constEnd())
     {
         QDomElement restrictionTag = createElement(TagRestriction);
 
         SetAttribute(restrictionTag, AttrCoordinates, i.key());
-        SetAttribute(restrictionTag, AttrMin, i.value().first);
-        SetAttribute(restrictionTag, AttrMax, i.value().second);
+        SetAttributeOrRemoveIf(restrictionTag, AttrMin, i.value().GetMin(), qFuzzyIsNull(i.value().GetMin()));
+        SetAttributeOrRemoveIf(restrictionTag, AttrMax, i.value().GetMax(), qFuzzyIsNull(i.value().GetMax()));
+        SetAttributeOrRemoveIf(restrictionTag, AttrExclude, i.value().GetExcludeString(),
+                               i.value().GetExcludeString().isEmpty());
 
         restrictionsTag.appendChild(restrictionTag);
         ++i;
@@ -950,11 +954,11 @@ void VMeasurements::SetRestrictions(const QMap<QString, QPair<int, int> > &restr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPair<int, int> VMeasurements::Restriction(int base, int base2) const
+auto VMeasurements::Restriction(qreal base, qreal base2) const -> VDimensionRestriction
 {
-    const QMap<QString, QPair<int, int> > restrictions = GetRestrictions();
+    const QMap<QString, VDimensionRestriction > restrictions = GetRestrictions();
     const QString hash = VMeasurement::CorrectionHash(base, base2, 0);
-    return restrictions.value(hash, QPair<int, int>(0, 0));
+    return restrictions.value(hash);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1092,9 +1096,9 @@ QString VMeasurements::IMDName(IMD type)
         case IMD::Y:
             return tr("Size");
         case IMD::W:
-            return tr("Hip");
-        case IMD::Z:
             return tr("Waist");
+        case IMD::Z:
+            return tr("Hip");
         default:
             return QString();
     }
@@ -1274,7 +1278,6 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
     if (type == MeasurementsType::Multisize)
     {
         SetAttribute(element, AttrBase, QChar('0'));
-        SetAttribute(element, AttrShiftA, QChar('0'));
     }
     else
     {
@@ -1505,7 +1508,7 @@ DimesionLabels VMeasurements::ReadDimensionLabels(const QDomElement &dElement) c
         if (labelTag.isElement())
         {
             const QDomElement l = labelTag.toElement();
-            const int value = GetParametrInt(l, AttrValue, QChar('0'));
+            const qreal value = GetParametrDouble(l, AttrValue, QChar('0'));
             const QString label = GetParametrEmptyString(l, AttrLabel);
 
             if (value > 0 && not label.isEmpty())

@@ -29,6 +29,7 @@
 
 #include <QSet>
 #include <QVector>
+#include <cmath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units)
@@ -36,7 +37,7 @@ VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units, int min, int max, int step)
+VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
     : m_units(units),
       m_minValue(min),
       m_maxValue(max),
@@ -44,48 +45,57 @@ VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units, int min, 
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstartMeasurementDimension::IsValid()
+auto VAbstartMeasurementDimension::IsValid() -> bool
 {
     m_error.clear();
     return IsUnitsValid() && IsRangeValid() && IsStepValid() && IsBaseValid();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> VAbstartMeasurementDimension::ValidSteps() const
+auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
 {
-    QVector<int> steps;
+    const qreal stepBarrier = 8.5;
+    const qreal s = 0.5;
 
-    const int diff = m_maxValue - m_minValue;
-    if (diff == 0)
+    QVector<qreal> steps;
+    steps.reserve(qRound((stepBarrier - s) * 2 - 1));
+
+    const qreal diff = m_maxValue - m_minValue;
+    if (qFuzzyIsNull(diff))
     {
         steps.append(0); // only one possible value
     }
     else if (diff > 0)
     {
-        for (int i=1; i < 9; ++i)
+        qreal candidate = 1;
+        do
         {
-            const int step = (m_units == Unit::Mm ? i * 10 : i);
-            if (diff % step == 0)
+            const qreal step = (m_units == Unit::Mm ? candidate * 10 : candidate);
+            qreal intpart;
+            if (qFuzzyIsNull(std::modf(diff / step, &intpart)))
             {
                 steps.append(step);
             }
+            candidate += s;
         }
+        while(candidate < stepBarrier);
     }
 
     return steps;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> VAbstartMeasurementDimension::ValidBases() const
+auto VAbstartMeasurementDimension::ValidBases() const -> QVector<qreal>
 {
-    return VAbstartMeasurementDimension::ValidBases(m_minValue, m_maxValue, m_step);
+    return VAbstartMeasurementDimension::ValidBases(m_minValue, m_maxValue, m_step, QSet<qreal>());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VAbstartMeasurementDimension::ValidBasesList() const
+auto VAbstartMeasurementDimension::ValidBasesList() const -> QStringList
 {
-    QVector<int> bases = ValidBases();
+    QVector<qreal> bases = ValidBases();
     QStringList list;
+    list.reserve(bases.size());
     for(auto &base : bases)
     {
         list.append(QString::number(base));
@@ -95,29 +105,50 @@ QStringList VAbstartMeasurementDimension::ValidBasesList() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<int> VAbstartMeasurementDimension::ValidBases(int min, int max, int step)
+auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
+                                              const QSet<qreal> &exclude) -> QVector<qreal>
 {
-    QVector<int> validBases;
+    QVector<qreal> validBases;
 
-    if (step < 0)
+    if (step < 0 || min > max)
     {
         return validBases;
     }
-    else if (step == 0)
+
+    if (qFuzzyIsNull(step))
     {
         step = 1;
     }
 
-    for (int value = min; value <= max; value += step)
+    validBases.reserve(qRound((max - min) / step));
+
+    qreal value = min;
+    do
     {
-        validBases.append(value);
+        if (not exclude.contains(value))
+        {
+            validBases.append(value);
+        }
+        value += step;
+    }
+    while(value < max + step);
+
+    if (validBases.isEmpty())
+    {
+        value = min;
+        do
+        {
+            validBases.append(value);
+            value += step;
+        }
+        while(value < max + step);
     }
 
     return validBases;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstartMeasurementDimension::IsRangeValid()
+auto VAbstartMeasurementDimension::IsRangeValid() -> bool
 {
     bool valid = m_minValue > 0 && m_maxValue > 0 && m_minValue >= RangeMin() && m_minValue <= RangeMax()
                  && m_minValue <= m_maxValue;
@@ -131,7 +162,7 @@ bool VAbstartMeasurementDimension::IsRangeValid()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstartMeasurementDimension::IsStepValid()
+auto VAbstartMeasurementDimension::IsStepValid() -> bool
 {
     bool valid = ValidSteps().indexOf(m_step) != -1;
     if (not valid)
@@ -143,7 +174,7 @@ bool VAbstartMeasurementDimension::IsStepValid()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstartMeasurementDimension::IsBaseValid()
+auto VAbstartMeasurementDimension::IsBaseValid() -> bool
 {
     bool valid = ValidBases().indexOf(m_baseValue) != -1;
     if (not valid)
@@ -155,13 +186,13 @@ bool VAbstartMeasurementDimension::IsBaseValid()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstartMeasurementDimension::IsUnitsValid() const
+auto VAbstartMeasurementDimension::IsUnitsValid() const -> bool
 {
     return m_units == Unit::Cm || m_units == Unit::Mm || m_units == Unit::Inch;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstartMeasurementDimension::DimensionName(MeasurementDimension type)
+auto VAbstartMeasurementDimension::DimensionName(MeasurementDimension type) -> QString
 {
     switch(type)
     {
@@ -179,7 +210,7 @@ QString VAbstartMeasurementDimension::DimensionName(MeasurementDimension type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstartMeasurementDimension::DimensionToolTip(MeasurementDimension type, bool circumference, bool fc)
+auto VAbstartMeasurementDimension::DimensionToolTip(MeasurementDimension type, bool circumference, bool fc) -> QString
 {
     switch(type)
     {
@@ -211,43 +242,51 @@ VXMeasurementDimension::VXMeasurementDimension(Unit units)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VXMeasurementDimension::VXMeasurementDimension(Unit units, int min, int max, int step)
+VXMeasurementDimension::VXMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementDimension VXMeasurementDimension::Type() const
+auto VXMeasurementDimension::Type() const -> MeasurementDimension
 {
     return MeasurementDimension::X;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VXMeasurementDimension::RangeMin() const
+auto VXMeasurementDimension::RangeMin() const -> int
 {
+    const int rangeMinCm = 50;
+    const int rangeMinMm = 500;
+    const int rangeMinInch = 19;
+
     switch(m_units)
     {
         case Unit::Cm:
-            return 50;
+            return rangeMinCm;
         case Unit::Mm:
-            return 500;
+            return rangeMinMm;
         case Unit::Inch:
-            return 19;
+            return rangeMinInch;
         default:
             return 0;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VXMeasurementDimension::RangeMax() const
+auto VXMeasurementDimension::RangeMax() const -> int
 {
+    const int rangeMaxCm = 272;
+    const int rangeMaxMm = 2720;
+    const int rangeMaxInch = 107;
+
     switch(m_units)
     {
         case Unit::Cm:
-            return 272;
+            return rangeMaxCm;
         case Unit::Mm:
-            return 2720;
+            return rangeMaxMm;
         case Unit::Inch:
-            return 107;
+            return rangeMaxInch;
         default:
             return 0;
     }
@@ -260,59 +299,69 @@ VYMeasurementDimension::VYMeasurementDimension(Unit units)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VYMeasurementDimension::VYMeasurementDimension(Unit units, int min, int max, int step)
+VYMeasurementDimension::VYMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementDimension VYMeasurementDimension::Type() const
+auto VYMeasurementDimension::Type() const -> MeasurementDimension
 {
     return MeasurementDimension::Y;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VYMeasurementDimension::RangeMin() const
+auto VYMeasurementDimension::RangeMin() const -> int
 {
     if (m_circumference)
     {
+        const int rangeMinCm = 22;
+        const int rangeMinMm = 220;
+        const int rangeMinInch = 8;
+
         switch(m_units)
         {
             case Unit::Cm:
-                return 22;
+                return rangeMinCm;
             case Unit::Mm:
-                return 220;
+                return rangeMinMm;
             case Unit::Inch:
-                return 8;
+                return rangeMinInch;
             default:
                 return 0;
         }
     }
     else
     {
-        return 6;
+        const int rangeMinCir = 6;
+        return rangeMinCir;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VYMeasurementDimension::RangeMax() const
+auto VYMeasurementDimension::RangeMax() const -> int
 {
     if (m_circumference)
     {
+        const int rangeMaxCm = 72;
+        const int rangeMaxMm = 720;
+        const int rangeMaxInch = 29;
+
         switch(m_units)
         {
             case Unit::Cm:
-                return 72;
+                return rangeMaxCm;
             case Unit::Mm:
-                return 720;
+                return rangeMaxMm;
             case Unit::Inch:
-                return 29;
+                return rangeMaxInch;
             default:
                 return 0;
         }
     }
     else
     {
-        return 60;
+        const int rangeMaxCir = 60;
+        return rangeMaxCir;
     }
 }
 
@@ -323,43 +372,51 @@ VWMeasurementDimension::VWMeasurementDimension(Unit units)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VWMeasurementDimension::VWMeasurementDimension(Unit units, int min, int max, int step)
+VWMeasurementDimension::VWMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementDimension VWMeasurementDimension::Type() const
+auto VWMeasurementDimension::Type() const -> MeasurementDimension
 {
     return MeasurementDimension::W;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VWMeasurementDimension::RangeMin() const
+auto VWMeasurementDimension::RangeMin() const -> int
 {
+    const int rangeMinCm = 20;
+    const int rangeMinMm = 200;
+    const int rangeMinInch = 8;
+
     switch(m_units)
     {
         case Unit::Cm:
-            return 20;
+            return rangeMinCm;
         case Unit::Mm:
-            return 200;
+            return rangeMinMm;
         case Unit::Inch:
-            return 8;
+            return rangeMinInch;
         default:
             return 0;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VWMeasurementDimension::RangeMax() const
+auto VWMeasurementDimension::RangeMax() const -> int
 {
+    const int rangeMaxCm = 65;
+    const int rangeMaxMm = 650;
+    const int rangeMaxInch = 26;
+
     switch(m_units)
     {
         case Unit::Cm:
-            return 65;
+            return rangeMaxCm;
         case Unit::Mm:
-            return 650;
+            return rangeMaxMm;
         case Unit::Inch:
-            return 26;
+            return rangeMaxInch;
         default:
             return 0;
     }
@@ -372,44 +429,85 @@ VZMeasurementDimension::VZMeasurementDimension(Unit units)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VZMeasurementDimension::VZMeasurementDimension(Unit units, int min, int max, int step)
+VZMeasurementDimension::VZMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementDimension VZMeasurementDimension::Type() const
+auto VZMeasurementDimension::Type() const -> MeasurementDimension
 {
     return MeasurementDimension::Z;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VZMeasurementDimension::RangeMin() const
+auto VZMeasurementDimension::RangeMin() const -> int
 {
+    const int rangeMinCm = 20;
+    const int rangeMinMm = 200;
+    const int rangeMinInch = 8;
+
     switch(m_units)
     {
         case Unit::Cm:
-            return 20;
+            return rangeMinCm;
         case Unit::Mm:
-            return 200;
+            return rangeMinMm;
         case Unit::Inch:
-            return 8;
+            return rangeMinInch;
         default:
             return 0;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VZMeasurementDimension::RangeMax() const
+auto VZMeasurementDimension::RangeMax() const -> int
 {
+    const int rangeMaxCm = 75;
+    const int rangeMaxMm = 750;
+    const int rangeMaxInch = 30;
+
     switch(m_units)
     {
         case Unit::Cm:
-            return 75;
+            return rangeMaxCm;
         case Unit::Mm:
-            return 750;
+            return rangeMaxMm;
         case Unit::Inch:
-            return 30;
+            return rangeMaxInch;
         default:
             return 0;
     }
+}
+
+// VDimensionRestriction
+//---------------------------------------------------------------------------------------------------------------------
+void VDimensionRestriction::SetExcludeString(const QString &exclude)
+{
+    m_exclude.clear();
+
+    QStringList values = exclude.split(';');
+    for(auto &value : values)
+    {
+        bool ok = false;
+        qreal val = value.toDouble(&ok);
+
+        if (ok)
+        {
+            m_exclude.insert(val);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDimensionRestriction::GetExcludeString() const -> QString
+{
+    QList<qreal> list = m_exclude.values();
+    QStringList excludeList;
+
+    for(auto &value : list)
+    {
+        excludeList.append(QString::number(value));
+    }
+
+    return excludeList.join(';');
 }
