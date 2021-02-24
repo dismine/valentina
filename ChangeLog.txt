@@ -41,6 +41,7 @@
 - Fix crash while synchronize measurements.
 - Fix incorrect filename regular expressions.
 - Enabling Show Curve Details option causes constant redraw.
+- Fix regression with country flags.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
