@@ -3,6 +3,7 @@
 - Fix regression with country flags.
 - Fix bug in seam allowance.
 - [smart-pattern/valentina#99] Incorrect fix of seam allowance distortion.
+- Enabling Show Curve Details option causes constant redraw.
 
 # Version 0.7.44 Feb 9, 2021
 - Placeholder %size% has incorrect value.
@@ -165,6 +166,7 @@
 - Fix label size for case with two pins.
 - Fix crash while synchronize measurements.
 - Fix incorrect filename regular expressions.
+- Enabling Show Curve Details option causes constant redraw.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

@@ -115,6 +115,8 @@ VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *par
                                                   static_cast<QPointF>(spl->GetP3()), freeAngle2, freeLength2, this);
     InitControlPoint(controlPoint2);
 
+    VToolSpline::RefreshCtrlPoints();
+
     ShowHandles(detailsMode);
 
     ToolCreation(initData.typeCreation);

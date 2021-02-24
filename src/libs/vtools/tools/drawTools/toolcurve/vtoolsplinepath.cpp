@@ -150,6 +150,8 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
         InitControlPoint(controlPoint);
     }
 
+    VToolSplinePath::RefreshCtrlPoints();
+
     ShowHandles(detailsMode);
 
     ToolCreation(initData.typeCreation);

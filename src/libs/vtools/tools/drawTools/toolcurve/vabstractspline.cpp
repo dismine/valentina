@@ -63,8 +63,7 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
       sceneType(SceneObject::Unknown),
       m_isHovered(false),
       detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails()),
-      m_acceptHoverEvents(true),
-      m_parentRefresh(false)
+      m_acceptHoverEvents(true)
 {
     InitDefShape();
     setAcceptHoverEvents(m_acceptHoverEvents);
@@ -125,17 +124,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
     };
 
-    if (not m_parentRefresh)
-    {
-        RefreshCtrlPoints();
-        m_parentRefresh = true;
-        PaintSpline(painter, option, widget);
-    }
-    else
-    {
-        m_parentRefresh = false;
-        PaintSpline(painter, option, widget);
-    }
+    PaintSpline(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
