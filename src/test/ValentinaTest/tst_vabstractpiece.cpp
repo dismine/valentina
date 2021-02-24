@@ -343,11 +343,13 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#58/output.json"),
                      18.897637795275593 /*seam allowance width (0.5 cm)*/);
 
+#if !(defined(Q_OS_WIN) && defined(Q_PROCESSOR_X86_64))
     // See file src/app/share/collection/test/smart_pattern_#99.val
     ASSERT_TEST_CASE("Incorrect fix of distortion",
                      QStringLiteral("://smart_pattern_#99/input.json"),
                      QStringLiteral("://smart_pattern_#99/output.json"),
                      28.346456692913389 /*seam allowance width*/);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
