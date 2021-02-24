@@ -151,8 +151,6 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractSpline)
 
-    bool m_parentRefresh;
-
     void InitDefShape();
 };
 
