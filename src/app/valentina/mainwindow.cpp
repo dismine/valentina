@@ -554,20 +554,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
-    if (m->Type() == MeasurementsType::Multisize)
-    {
-        StoreMultisizeMDimensions();
-
-        doc->SetPatternWasChanged(true);
-        emit doc->UpdatePatternLabel();
-    }
-    else if (m->Type() == MeasurementsType::Individual)
-    {
-        StoreIndividualMDimensions();
-
-        doc->SetPatternWasChanged(true);
-        emit doc->UpdatePatternLabel();
-    }
+    StoreDimensions();
 
     return true;
 }
@@ -622,20 +609,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
         return false;
     }
 
-    if (m->Type() == MeasurementsType::Multisize)
-    {
-        StoreMultisizeMDimensions();
 
-        doc->SetPatternWasChanged(true);
-        emit doc->UpdatePatternLabel();
-    }
-    else if (m->Type() == MeasurementsType::Individual)
-    {
-        StoreIndividualMDimensions();
-
-        doc->SetPatternWasChanged(true);
-        emit doc->UpdatePatternLabel();
-    }
 
     return true;
 }
@@ -1998,6 +1972,7 @@ void MainWindow::SyncMeasurements()
             statusBar()->showMessage(msg, 5000);
             VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::FullLiteParse);
+            StoreDimensions();
             mChanges = false;
             mChangesAsked = true;
             measurementsSyncTimer->stop();
@@ -2228,6 +2203,25 @@ void MainWindow::SetDimensionBases()
     SetBase(0, dimensionA, m_currentDimensionA);
     SetBase(1, dimensionB, m_currentDimensionB);
     SetBase(2, dimensionC, m_currentDimensionC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::StoreDimensions()
+{
+    if (m->Type() == MeasurementsType::Multisize)
+    {
+        StoreMultisizeMDimensions();
+
+        doc->SetPatternWasChanged(true);
+        emit doc->UpdatePatternLabel();
+    }
+    else if (m->Type() == MeasurementsType::Individual)
+    {
+        StoreIndividualMDimensions();
+
+        doc->SetPatternWasChanged(true);
+        emit doc->UpdatePatternLabel();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3920,6 +3914,7 @@ void MainWindow::GradationChanged()
                            m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
     {
         doc->LiteParseTree(Document::FullLiteParse);
+        StoreDimensions();
         emit sceneDetails->DimensionsChanged();
     }
     else
