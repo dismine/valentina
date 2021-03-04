@@ -57,10 +57,8 @@ private slots:
     void CorrectEquidistantPoints() const;
     void TestCorrectEquidistantPoints_data();
     void TestCorrectEquidistantPoints() const;
-#ifndef Q_OS_WIN // Disabled due to "undefined behavior" problem
     void PossibleInfiniteClearLoops_data() const;
     void PossibleInfiniteClearLoops() const;
-#endif
 
 private:
     QVector<VSAPoint> InputPointsCase3() const;
@@ -69,12 +67,6 @@ private:
     void Case3() const;
     void Case4() const;
     void Case5() const;
-
-    QVector<VSAPoint> InputPointsIssue548Case2() const;
-    QVector<QPointF> OutputPointsIssue548Case2() const;
-
-    QVector<VSAPoint> InputPointsIssue548Case3() const;
-    QVector<QPointF> OutputPointsIssue548Case3() const;
 
     QVector<QPointF> InputPointsCase3a() const;
     QVector<QPointF> InputPointsCase4a() const;
