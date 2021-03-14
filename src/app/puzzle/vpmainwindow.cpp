@@ -509,6 +509,11 @@ void VPMainWindow::SetPropertyTabSheetData()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
 
+    // set placement grid
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, m_layout->GetFocusedSheet()->GetGridColWidthConverted());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, m_layout->GetFocusedSheet()->GetGridRowHeightConverted());
+    SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->GetFocusedSheet()->GetShowGrid());
+
     // set pieces gap
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->GetFocusedSheet()->GetPiecesGapConverted());
 
