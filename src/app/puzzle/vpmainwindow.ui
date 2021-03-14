@@ -17,6 +17,9 @@
    <iconset resource="share/resources/puzzleicon.qrc">
     <normaloff>:/puzzleicon/64x64/logo.png</normaloff>:/puzzleicon/64x64/logo.png</iconset>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
     <bool>true</bool>
@@ -176,7 +179,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -234,7 +237,7 @@
               <x>0</x>
               <y>0</y>
               <width>342</width>
-              <height>1318</height>
+              <height>1370</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -359,14 +362,14 @@
                    <string>Rotation</string>
                   </property>
                   <layout class="QFormLayout" name="formLayout_5">
-                   <item row="0" column="0">
+                   <item row="2" column="0">
                     <widget class="QLabel" name="labelCurrentPieceAngle">
                      <property name="text">
                       <string>Angle:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1">
+                   <item row="2" column="1">
                     <widget class="QDoubleSpinBox" name="doubleSpinBoxCurrentPieceAngle">
                      <property name="maximum">
                       <double>360.000000000000000</double>
@@ -375,6 +378,90 @@
                       <double>1.000000000000000</double>
                      </property>
                     </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <layout class="QHBoxLayout" name="horizontalLayoutCurrentPieceAngleShortcuts">
+                     <item>
+                      <widget class="QPushButton" name="pushButtonCurrentPieceRotate90Clockwise">
+                       <property name="toolTip">
+                        <string>Rotate the piece by 90° clockwise</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="share/resources/puzzleicon.qrc">
+                         <normaloff>:/puzzleicon/64x64/iconRotate90Clockwise.png</normaloff>:/puzzleicon/64x64/iconRotate90Clockwise.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>32</width>
+                         <height>32</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="pushButtonCurrentPieceRotate90Anticlockwise">
+                       <property name="toolTip">
+                        <string>Rotate the piece by 90° anti-clockwise</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="share/resources/puzzleicon.qrc">
+                         <normaloff>:/puzzleicon/64x64/iconRotate90Anticlockwise.png</normaloff>:/puzzleicon/64x64/iconRotate90Anticlockwise.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>32</width>
+                         <height>32</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="pushButtonCurrentPieceRotateGrainlineVertical">
+                       <property name="toolTip">
+                        <string>Rotate the piece so that the grainline is vertical</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="share/resources/puzzleicon.qrc">
+                         <normaloff>:/puzzleicon/64x64/iconRotateGrainlineVertical.png</normaloff>:/puzzleicon/64x64/iconRotateGrainlineVertical.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>32</width>
+                         <height>32</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="pushButtonCurrentPieceRotateGrainlineHorizontal">
+                       <property name="toolTip">
+                        <string>Rotate the piece so that the grainline is horizontal</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="share/resources/puzzleicon.qrc">
+                         <normaloff>:/puzzleicon/64x64/iconRotateGrainlineHorizontal.png</normaloff>:/puzzleicon/64x64/iconRotateGrainlineHorizontal.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>32</width>
+                         <height>32</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                   </layout>
                  </widget>
@@ -565,7 +652,7 @@
               <x>0</x>
               <y>0</y>
               <width>342</width>
-              <height>731</height>
+              <height>870</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -799,6 +886,49 @@
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxSheetGrid">
+               <property name="title">
+                <string>Placement Grid</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_21">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_9">
+                  <item row="0" column="0" colspan="2">
+                   <widget class="QCheckBox" name="checkBoxSheetShowGrid">
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="text">
+                     <string>Show Grid</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelSheetGridColWidth">
+                    <property name="text">
+                     <string>Column width</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetGridColWidth"/>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="labelSheetGridRowHeight">
+                    <property name="text">
+                     <string>Row height</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetGridRowHeight"/>
+                  </item>
+                 </layout>
                 </item>
                </layout>
               </widget>

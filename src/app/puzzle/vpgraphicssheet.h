@@ -48,18 +48,16 @@ public:
     QRectF GetMarginsRect() const;
 
     /**
-     * @brief ShowMargin Sets Wether we see the margin
+     * @brief SetShowMargin Sets Wether we see the margin
      * @param value true to show the margin
      */
     void SetShowMargin(bool value);
 
     /**
-     * @brief ShowBorder Sets whether we see the border of the sheet
+     * @brief SetShowBorder Sets whether we see the border of the sheet
      * @param value true to show the border
      */
     void SetShowBorder(bool value);
-
-
 
 private:
     Q_DISABLE_COPY(VPGraphicsSheet)

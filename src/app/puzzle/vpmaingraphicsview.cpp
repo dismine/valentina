@@ -95,6 +95,9 @@ void VPMainGraphicsView::PrepareForExport()
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
 
+    m_showGridTmp = m_layout->GetFocusedSheet()->GetShowGrid();
+    m_layout->GetFocusedSheet()->SetShowGrid(false);
+
     m_showTilesTmp = m_layout->GetShowTiles();
     m_layout->SetShowTiles(false);
 
@@ -106,6 +109,8 @@ void VPMainGraphicsView::CleanAfterExport()
 {
     m_graphicsSheet->SetShowBorder(true);
     m_graphicsSheet->SetShowMargin(true);
+
+    m_layout->GetFocusedSheet()->SetShowGrid(m_showGridTmp);
 
     m_layout->SetShowTiles(m_showTilesTmp);
 

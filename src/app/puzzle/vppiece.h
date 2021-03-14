@@ -96,6 +96,23 @@ public:
     qreal GetRotation();
 
     /**
+     * @brief rotateBy adds the given angle to the current rotation (anti-clockwise)
+     * @param angle the angle to add
+     */
+    void RotateBy(qreal angle);
+
+    /**
+     * @brief RotateToGrainline  rotates the piece, so that the grainline has
+     * the given angle
+     *
+     * @param angleOfGrainline
+     * @param add180IfAlreadyInPosition, automatically adds 180, if the piece is
+     * already in the grainline position
+     */
+    void RotateToGrainline(qreal angleOfGrainline, bool add180IfAlreadyInPosition = false);
+
+
+    /**
      * @brief SetIsSelected Sets wether the piece is selected
      * @param value true if the piece is selected
      */
@@ -153,7 +170,6 @@ private:
 
     QVector<QPointF> m_grainline{QVector<QPointF>()};
     bool m_isGrainlineEnabled{false};
-    qreal m_grainlineAngle{0};
 
     // for now separate the position of the piece to the matrix coming from vlayoutpiece
     // because it's difficult to have the origin of the piece by (0,0)

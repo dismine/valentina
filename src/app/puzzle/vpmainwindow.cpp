@@ -82,7 +82,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->SetTilesSizeConverted(21,29.7);
     m_layout->SetTilesOrientation(PageOrientation::Portrait);
     m_layout->SetTilesMarginsConverted(1,1,1,1);
-    m_layout->SetShowTiles(true);
+//    m_layout->SetShowTiles(true);
 
     // --------------------------------------------------------
 
@@ -1151,6 +1151,27 @@ void VPMainWindow::on_SheetMarginChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_checkBoxSheetShowGrid_toggled(bool checked)
+{
+    m_layout->GetFocusedSheet()->SetShowGrid(checked);
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_doubleSpinBoxSheetGridColWidth_valueChanged(double value)
+{
+    m_layout->GetFocusedSheet()->SetGridColWidthConverted(value);
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_doubleSpinBoxSheetGridRowHeight_valueChanged(double value)
+{
+    m_layout->GetFocusedSheet()->SetGridRowHeightConverted(value);
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
 {
     PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
@@ -1373,6 +1394,42 @@ void VPMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
     if(m_selectedPieces.count() == 1)
     {
         m_selectedPieces.first()->SetPieceMirrored(checked);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotate90Anticlockwise_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateBy(90);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotate90Clockwise_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateBy(-90);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineVertical_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateToGrainline(90, true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateToGrainline(0, true);
     }
 }
 
