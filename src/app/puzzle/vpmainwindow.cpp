@@ -65,7 +65,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     // create a standard sheet
     VPSheet *sheet = new VPSheet(m_layout);
-    sheet->SetName(QObject::tr("Sheet #1"));
+    sheet->SetName(QObject::tr("Sheet 1"));
     m_layout->AddSheet(sheet);
     m_layout->SetFocusedSheet();
 
@@ -1279,7 +1279,7 @@ void VPMainWindow::on_pushButtonTilesExport_clicked()
     QString dir = QDir::homePath();
     QString filters(tr("PDF Files") + QLatin1String("(*.pdf)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".pdf"),
+                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + QLatin1String(".pdf"),
                                                     filters, nullptr
 #ifdef Q_OS_LINUX
                                                     , QFileDialog::DontUseNativeDialog
@@ -1349,7 +1349,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
     QString dir = QDir::homePath();
     QString filters(tr("SVG Files") + QLatin1String("(*.svg)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".svg"),
+                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + QLatin1String(".svg"),
                                                     filters, nullptr
 #ifdef Q_OS_LINUX
                                                     , QFileDialog::DontUseNativeDialog
