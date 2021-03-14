@@ -784,7 +784,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
 
         printer->setOutputFileName(fileName);
         printer->setResolution(static_cast<int>(PrintDPI));
-        printer->setDocName("Test"); // FIXME
+        printer->setDocName(m_layout->GetFocusedSheet()->GetName());
 
         // -------------  Set up the painter
         QPainter painter;
@@ -1367,7 +1367,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
         generator.setFileName(fileName);
         generator.setSize(QSize(qFloor(s.width()),qFloor(s.height())));
         generator.setViewBox(r);
-        generator.setTitle(tr("Pattern"));
+        generator.setTitle(m_layout->GetFocusedSheet()->GetName());
         generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
         generator.setResolution(static_cast<int>(PrintDPI));
 
