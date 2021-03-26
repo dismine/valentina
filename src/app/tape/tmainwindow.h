@@ -190,6 +190,8 @@ private:
     void InitGender(QComboBox *gender);
     void InitMeasurementDimension();
 
+    void RetranslateTableHeaders();
+
     void ShowNewMData(bool fresh);
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);

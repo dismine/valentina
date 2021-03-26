@@ -611,6 +611,7 @@ void TMainWindow::changeEvent(QEvent *event)
             InitDimensionsBaseValue();
             InitDimensionControls();
             InitDimesionShifts();
+            RetranslateTableHeaders();
         }
         else
         {
@@ -2874,36 +2875,7 @@ void TMainWindow::InitTable()
     {
         ui->tableWidget->setColumnHidden( ColumnFormula, true );// formula
 
-        const QList< MeasurementDimension_p > dimensions = m->Dimensions().values();
-
-        if (dimensions.size() > 0)
-        {
-            MeasurementDimension_p dimension = dimensions.at(0);
-            ui->tableWidget->horizontalHeaderItem(ColumnShiftA)->setText(
-                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
-        }
-
-        if (dimensions.size() < 2)
-        {
-            ui->tableWidget->setColumnHidden( ColumnShiftB, true );
-        }
-        else
-        {
-            MeasurementDimension_p dimension = dimensions.at(1);
-            ui->tableWidget->horizontalHeaderItem(ColumnShiftB)->setText(
-                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
-        }
-
-        if (dimensions.size() < 3)
-        {
-            ui->tableWidget->setColumnHidden( ColumnShiftC, true );
-        }
-        else
-        {
-            MeasurementDimension_p dimension = dimensions.at(2);
-            ui->tableWidget->horizontalHeaderItem(ColumnShiftC)->setText(
-                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
-        }
+        RetranslateTableHeaders();
     }
     else
     {
@@ -4450,6 +4422,44 @@ void TMainWindow::InitMeasurementDimension()
     }
 
     ui->comboBoxDimension->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RetranslateTableHeaders()
+{
+    if (mType == MeasurementsType::Multisize)
+    {
+        const QList< MeasurementDimension_p > dimensions = m->Dimensions().values();
+
+        if (not dimensions.isEmpty())
+        {
+            const MeasurementDimension_p& dimension = dimensions.at(0);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftA)->setText(
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+        }
+
+        if (dimensions.size() < 2)
+        {
+            ui->tableWidget->setColumnHidden( ColumnShiftB, true );
+        }
+        else
+        {
+            const MeasurementDimension_p &dimension = dimensions.at(1);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftB)->setText(
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+        }
+
+        if (dimensions.size() < 3)
+        {
+            ui->tableWidget->setColumnHidden( ColumnShiftC, true );
+        }
+        else
+        {
+            const MeasurementDimension_p &dimension = dimensions.at(2);
+            ui->tableWidget->horizontalHeaderItem(ColumnShiftC)->setText(
+                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
