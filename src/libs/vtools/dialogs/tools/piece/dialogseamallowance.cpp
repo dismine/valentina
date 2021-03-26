@@ -375,6 +375,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     SetDLAngle(ppData.GetRotation());
 
     const VPatternLabelData &patternInfo = piece.GetPatternInfo();
+    uiTabLabels->groupBoxPatternLabel->setEnabled(not m_doc->GetPatternLabelTemplate().isEmpty());
     uiTabLabels->groupBoxPatternLabel->setChecked(patternInfo.IsVisible());
     ChangeCurrentData(uiTabLabels->comboBoxPLCenterPin, patternInfo.CenterPin());
     ChangeCurrentData(uiTabLabels->comboBoxPLTopLeftPin, patternInfo.TopLeftPin());
@@ -3862,6 +3863,7 @@ void DialogSeamAllowance::EditPatternLabel()
     if (QDialog::Accepted == editor.exec())
     {
         m_patternTemplateLines = editor.GetTemplate();
+        uiTabLabels->groupBoxPatternLabel->setEnabled(not m_patternTemplateLines.isEmpty());
         m_patternTemplateDataChanged = true;
     }
 }
