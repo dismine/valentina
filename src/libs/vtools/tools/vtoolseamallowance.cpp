@@ -86,6 +86,57 @@ const QString VToolSeamAllowance::AttrTopPin               = QStringLiteral("top
 const QString VToolSeamAllowance::AttrBottomPin            = QStringLiteral("bottomPin");
 const QString VToolSeamAllowance::AttrPiecePriority        = QStringLiteral("priority");
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+auto FixLabelPins(T itemData, const QMap<quint32, quint32> &mappedPins) -> T
+{
+    itemData.SetCenterPin(mappedPins.value(itemData.CenterPin(), NULL_ID));
+    itemData.SetTopLeftPin(mappedPins.value(itemData.TopLeftPin(), NULL_ID));
+    itemData.SetBottomRightPin(mappedPins.value(itemData.BottomRightPin(), NULL_ID));
+    return itemData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+auto FixGrainlinePins(T itemData, const QMap<quint32, quint32> &mappedPins) -> T
+{
+    itemData.SetCenterPin(mappedPins.value(itemData.CenterPin(), NULL_ID));
+    itemData.SetTopPin(mappedPins.value(itemData.TopPin(), NULL_ID));
+    itemData.SetBottomPin(mappedPins.value(itemData.BottomPin(), NULL_ID));
+    return itemData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DuplicatePins(const QVector<quint32> &pins, const VToolSeamAllowanceInitData &initData) -> QMap<quint32, quint32>
+{
+    QMap<quint32, quint32> newPins;
+    for(auto p : pins)
+    {
+        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(p);
+
+        auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(p));
+        SCASSERT(tool != nullptr)
+
+        VToolPinInitData initNodeData;
+        initNodeData.id = initData.data->AddGObject(new VPointF(*pin));
+        initNodeData.pointId = pin->getIdObject();
+        initNodeData.idObject = NULL_ID; // piece id
+        initNodeData.doc = initData.doc;
+        initNodeData.data = initData.data;
+        initNodeData.parse = Document::FullParse;
+        initNodeData.typeCreation = Source::FromTool;
+        initNodeData.drawName = initData.drawName;
+        initNodeData.idTool = tool->GetIdTool();
+
+        VToolPin::Create(initNodeData);
+        newPins.insert(p, initNodeData.id);
+    }
+    return newPins;
+}
+}  // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data)
@@ -192,7 +243,7 @@ VToolSeamAllowance *VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &di
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *
 {
     VPiece dupDetail = initData.detail;
 
@@ -201,8 +252,13 @@ VToolSeamAllowance *VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &in
     dupDetail.SetCustomSARecords(DuplicateCustomSARecords(initData.detail.GetCustomSARecords(), initData,
                                                           replacements));
     dupDetail.SetInternalPaths(DuplicateInternalPaths(initData.detail.GetInternalPaths(), initData));
-    dupDetail.SetPins(DuplicatePins(initData.detail.GetPins(), initData));
     dupDetail.SetPlaceLabels(DuplicatePlaceLabels(initData.detail.GetPlaceLabels(), initData));
+
+    const QMap<quint32, quint32> mappedPins = DuplicatePins(initData.detail.GetPins(), initData);
+    dupDetail.SetPins(mappedPins.values().toVector());
+    dupDetail.SetPatternPieceData(FixLabelPins(initData.detail.GetPatternPieceData(), mappedPins));
+    dupDetail.SetPatternInfo(FixLabelPins(initData.detail.GetPatternInfo(), mappedPins));
+    dupDetail.SetGrainlineGeometry(FixGrainlinePins(initData.detail.GetGrainlineGeometry(), mappedPins));
 
     initData.detail = dupDetail;
     return VToolSeamAllowance::Create(initData);
@@ -2106,36 +2162,6 @@ QVector<quint32> VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint3
         newPaths.append(DuplicatePiecePath(iPath, initData));
     }
     return newPaths;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
-                                                   const VToolSeamAllowanceInitData &initData)
-{
-    QVector<quint32> newPins;
-    newPins.reserve(pins.size());
-    for(auto p : pins)
-    {
-        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(p);
-
-        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(p));
-        SCASSERT(tool != nullptr)
-
-        VToolPinInitData initNodeData;
-        initNodeData.id = initData.data->AddGObject(new VPointF(*pin));
-        initNodeData.pointId = pin->getIdObject();
-        initNodeData.idObject = NULL_ID; // piece id
-        initNodeData.doc = initData.doc;
-        initNodeData.data = initData.data;
-        initNodeData.parse = Document::FullParse;
-        initNodeData.typeCreation = Source::FromTool;
-        initNodeData.drawName = initData.drawName;
-        initNodeData.idTool = tool->GetIdTool();
-
-        VToolPin::Create(initNodeData);
-        newPins.append(initNodeData.id);
-    }
-    return newPins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

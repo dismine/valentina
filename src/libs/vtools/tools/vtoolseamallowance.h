@@ -66,7 +66,7 @@ public:
     static VToolSeamAllowance* Create(VToolSeamAllowanceInitData &initData);
     static VToolSeamAllowance* Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                          VAbstractPattern *doc);
-    static VToolSeamAllowance* Duplicate(VToolSeamAllowanceInitData &initData);
+    static auto Duplicate(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *;
 
     static const quint8 pieceVersion;
 
@@ -194,7 +194,7 @@ private:
     /** @brief m_geometryIsReady is true when a piece's geometry is ready and checks for validity can be enabled. */
     bool m_geometryIsReady{false};
 
-    VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
+    explicit VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();
     void UpdateInternalPaths();
@@ -233,7 +233,6 @@ private:
 
     static QVector<quint32> DuplicateInternalPaths(const QVector<quint32> &iPaths,
                                                    const VToolSeamAllowanceInitData &initData);
-    static QVector<quint32> DuplicatePins(const QVector<quint32> &pins, const VToolSeamAllowanceInitData &initData);
     static QVector<quint32> DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
                                                  const VToolSeamAllowanceInitData &initData);
 };
