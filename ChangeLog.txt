@@ -1,5 +1,6 @@
 # Version 0.7.46 (unreleased)
 - Fix incorrect calculation of value for multisize measurements in Valentina.
+- [smart-pattern/valentina#109] Pattern label template placeholder with dimension label value.
 
 # Version 0.7.45 Feb 26, 2021
 - Fix incorrect seam allowance for angle type second edge right angle.

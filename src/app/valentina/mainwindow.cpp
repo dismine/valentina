@@ -1841,6 +1841,11 @@ void MainWindow::UnloadMeasurements()
         VAbstractValApplication::VApp()->SetDimensionHip(0);
         VAbstractValApplication::VApp()->SetDimensionWaist(0);
 
+        VAbstractValApplication::VApp()->SetDimensionHeightLabel(QString());
+        VAbstractValApplication::VApp()->SetDimensionSizeLabel(QString());
+        VAbstractValApplication::VApp()->SetDimensionHipLabel(QString());
+        VAbstractValApplication::VApp()->SetDimensionWaistLabel(QString());
+
         if (oldType == MeasurementsType::Multisize)
         {
             m_currentDimensionA = 0;
@@ -2067,16 +2072,21 @@ void MainWindow::StoreMultisizeMDimensions()
         if (dimensions.size() > index)
         {
             const MeasurementDimension_p& dimension = dimensions.at(index);
+            const DimesionLabels labels = dimension->Labels();
 
             switch(dimension->Type())
             {
                 case MeasurementDimension::X:
                     VAbstractValApplication::VApp()->SetDimensionHeight(currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionHeightLabel(
+                                labels.value(currentBase, QString::number(currentBase)));
                     break;
                 case MeasurementDimension::Y:
                 {
                     const bool fc = m->IsFullCircumference();
                     VAbstractValApplication::VApp()->SetDimensionSize(fc ? currentBase*2 : currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionSizeLabel(
+                                labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
                     const bool circumference = dimension->IsCircumference();
                     VAbstractValApplication::VApp()
                             ->SetDimensionSizeUnits(circumference ? m->MUnit() : Unit::LAST_UNIT_DO_NOT_USE);
@@ -2086,12 +2096,16 @@ void MainWindow::StoreMultisizeMDimensions()
                 {
                     const bool fc = m->IsFullCircumference();
                     VAbstractValApplication::VApp()->SetDimensionWaist(fc ? currentBase*2 : currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionWaistLabel(
+                                labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
                     break;
                 }
                 case MeasurementDimension::Z:
                 {
                     const bool fc = m->IsFullCircumference();
                     VAbstractValApplication::VApp()->SetDimensionHip(fc ? currentBase*2 : currentBase);
+                    VAbstractValApplication::VApp()->SetDimensionHipLabel(
+                                labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
                     break;
                 }
                 default:
@@ -2114,19 +2128,24 @@ void MainWindow::StoreIndividualMDimensions()
     {
         const QString name = VAbstractApplication::VApp()->TrVars()->VarToUser(m->MeasurementForDimension(type));
         const bool valid = not name.isEmpty() && measurements.contains(name);
+        const qreal value = valid ? *measurements.value(name)->GetValue() : 0;
         switch(type)
         {
             case IMD::X:
-                VAbstractValApplication::VApp()->SetDimensionHeight(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionHeight(value);
+                VAbstractValApplication::VApp()->SetDimensionHeightLabel(QString::number(value));
                 break;
             case IMD::Y:
-                VAbstractValApplication::VApp()->SetDimensionSize(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionSize(value);
+                VAbstractValApplication::VApp()->SetDimensionSizeLabel(QString::number(value));
                 break;
             case IMD::W:
-                VAbstractValApplication::VApp()->SetDimensionWaist(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionWaist(value);
+                VAbstractValApplication::VApp()->SetDimensionWaistLabel(QString::number(value));
                 break;
             case IMD::Z:
-                VAbstractValApplication::VApp()->SetDimensionHip(valid ? *measurements.value(name)->GetValue() : 0);
+                VAbstractValApplication::VApp()->SetDimensionHip(value);
+                VAbstractValApplication::VApp()->SetDimensionHipLabel(QString::number(value));
                 break;
             case IMD::N:
             default:

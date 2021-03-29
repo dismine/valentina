@@ -215,12 +215,34 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc, const VC
     placeholders.insert(pl_pFileName, QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).baseName());
     placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
 
-    placeholders.insert(pl_height, QString::number(VAbstractValApplication::VApp()->GetDimensionHeight()));
-    placeholders.insert(pl_size, QString::number(VAbstractValApplication::VApp()->GetDimensionSize()));
-    placeholders.insert(pl_hip, QString::number(VAbstractValApplication::VApp()->GetDimensionHip()));
-    placeholders.insert(pl_waist, QString::number(VAbstractValApplication::VApp()->GetDimensionWaist()));
+    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    placeholders.insert(pl_height, heightValue);
+
+    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    placeholders.insert(pl_size, sizeValue);
+
+    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    placeholders.insert(pl_hip, hipValue);
+
+    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    placeholders.insert(pl_waist, waistValue);
+
+    {
+        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+        placeholders.insert(pl_heightLabel, not label.isEmpty() ? label : heightValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+        placeholders.insert(pl_sizeLabel, not label.isEmpty() ? label : sizeValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+        placeholders.insert(pl_hipLabel, not label.isEmpty() ? label : hipValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+        placeholders.insert(pl_waistLabel, not label.isEmpty() ? label : waistValue);
+    }
+
     placeholders.insert(pl_mExt, VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
-                        ? QString("vst") : QString("vit"));
+                        ? QStringLiteral("vst") : QStringLiteral("vit"));
 
     const QMap<int, QString> materials = doc->GetPatternMaterials();
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
@@ -241,7 +263,6 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc, const VC
         auto i = measurements.constBegin();
         while (i != measurements.constEnd())
         {
-            QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
             placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
             ++i;
         }

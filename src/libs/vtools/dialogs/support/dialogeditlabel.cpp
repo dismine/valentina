@@ -535,18 +535,41 @@ void DialogEditLabel::InitPlaceholders()
     const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
 
-    m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"),
-                                               QString::number(VAbstractValApplication::VApp()->GetDimensionHeight())));
-    m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"),
-                                             QString::number(VAbstractValApplication::VApp()->GetDimensionSize())));
-    m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"),
-                                            QString::number(VAbstractValApplication::VApp()->GetDimensionHip())));
-    m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"),
-                                              QString::number(VAbstractValApplication::VApp()->GetDimensionWaist())));
+    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
+
+    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"), sizeValue));
+
+    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), hipValue));
+
+    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), waistValue));
+
+    {
+        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+        m_placeholders.insert(pl_heightLabel, qMakePair(tr("Height label", "dimension"),
+                                                        not label.isEmpty() ? label : heightValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+        m_placeholders.insert(pl_sizeLabel, qMakePair(tr("Size label", "dimension"),
+                                                      not label.isEmpty() ? label : sizeValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+        m_placeholders.insert(pl_hipLabel, qMakePair(tr("Hip label", "dimension"),
+                                                     not label.isEmpty() ? label : hipValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+        m_placeholders.insert(pl_waistLabel, qMakePair(tr("Waist label", "dimension"),
+                                                       not label.isEmpty() ? label : waistValue));
+    }
+
+
     m_placeholders.insert(pl_mExt,
                           qMakePair(tr("Measurments extension"),
                                    VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
-                                    ? QString("vst") : QString("vit")));
+                                    ? QStringLiteral("vst") : QStringLiteral("vit")));
 
     const QString materialDescription = tr("User material");
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();
