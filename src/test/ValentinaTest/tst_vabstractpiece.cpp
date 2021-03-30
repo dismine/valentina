@@ -1029,6 +1029,12 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://panties_case2/input.json"),
                      QStringLiteral("://panties_case2/output.json"),
                      26.45669291338583 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/smart_pattern_#113.val (private collection)
+    ASSERT_TEST_CASE("Эдит 6",
+                     QStringLiteral("://smart_pattern_#113/input.json"),
+                     QStringLiteral("://smart_pattern_#113/output.json"),
+                     0.56692913385826771 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
