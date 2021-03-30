@@ -1929,12 +1929,15 @@ QPainterPath VAbstractPiece::PainterPath(const QVector<QPointF> &points)
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
 
-    path.moveTo(points.at(0));
-    for (qint32 i = 1; i < points.count(); ++i)
+    if (not points.isEmpty())
     {
-        path.lineTo(points.at(i));
+        path.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            path.lineTo(points.at(i));
+        }
+        path.lineTo(points.at(0));
     }
-    path.lineTo(points.at(0));
 
     return path;
 }
