@@ -43,7 +43,7 @@ do
 done
 
 end=$(date +%s)
-runtime=$(python -c "print 'Time passed %u:%02u seconds' % ((${end} - ${start})/60, (${end} - ${start})%60)")
+runtime=$(python -c "print('Time passed %u:%02u seconds' % ((${end} - ${start})/60, (${end} - ${start})%60))")
 echo $runtime
 echo For updating files run: build all.
 
