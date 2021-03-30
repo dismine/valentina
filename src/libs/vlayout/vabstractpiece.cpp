@@ -1213,70 +1213,48 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
  */
 auto VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<QPointF>
 {
-//    DumpVector(points); // Uncomment for dumping test data
+//    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
-    int count = points.size();
     /*If we got less than 4 points no need seek loops.*/
-    if (count < 4)
+    if (points.size() < 4)
     {
         return CleanLoopArtifacts(points);
     }
 
-    const bool pathClosed = (points.first() == points.last());
+    bool loopFound = false;
 
-    QVector<VRawSAPoint> ekvPoints;
-    ekvPoints.reserve(points.size());
-
-    QVector<qint32> uniqueVertices;
-    uniqueVertices.reserve(4);
-
-    qint32 i, j, jNext = 0;
-    for (i = 0; i < count; ++i)
+    auto CheckLoop = [&loopFound](const QVector<VRawSAPoint> &points)
     {
-        /*Last three points no need to check.*/
-        /*Triangle can not contain a loop*/
-        if (i > count-3)
+        loopFound = false;
+
+        const bool pathClosed = (points.first() == points.last());
+
+        QVector<VRawSAPoint> ekvPoints;
+        ekvPoints.reserve(points.size());
+
+        qint32 i;
+        for (i = 0; i < points.size(); ++i)
         {
-            ekvPoints.append(points.at(i));
-            continue;
-        }
-
-        enum LoopIntersectType { NoIntersection, BoundedIntersection, ParallelIntersection };
-
-        QPointF crosPoint;
-        LoopIntersectType status = NoIntersection;
-        const QLineF line1(points.at(i), points.at(i+1));
-        // Because a path can contains several loops we will seek the last and only then remove the loop(s)
-        // That's why we parse from the end
-        for (j = count-1; j >= i+2; --j)
-        {
-            j == count-1 ? jNext = 0 : jNext = j+1;
-            QLineF line2(points.at(j), points.at(jNext));
-
-            if(qFuzzyIsNull(line2.length()))
-            {//If a path is closed the edge (count-1;0) length will be 0
+            /*Last three points no need to check.*/
+            /*Triangle can not contain a loop*/
+            if (loopFound || i > points.size()-4)
+            {
+                ekvPoints.append(points.at(i));
                 continue;
             }
 
-            uniqueVertices.clear();
+            enum LoopIntersectType { NoIntersection, BoundedIntersection, ParallelIntersection };
 
-            auto AddUniqueIndex = [&uniqueVertices](qint32 i)
+            QPointF crosPoint;
+            LoopIntersectType status = NoIntersection;
+            const QLineF line1(points.at(i), points.at(i+1));
+
+            const int limit = pathClosed && i == 0 ? 2 : 1;
+            qint32 j;
+            for (j = i+2; j < points.size()-limit; ++j)
             {
-                if (not uniqueVertices.contains(i))
-                {
-                    uniqueVertices.append(i);
-                }
-            };
+                QLineF line2(points.at(j), points.at(j+1));
 
-            AddUniqueIndex(i);
-            AddUniqueIndex(i+1);
-            AddUniqueIndex(j);
-
-            // For closed path last point is equal to first. Using index of the first.
-            pathClosed && jNext == count-1 ? AddUniqueIndex(0) : AddUniqueIndex(jNext);
-
-            if (uniqueVertices.size() == 4)
-            {// Lines are not neighbors
                 const QLineF::IntersectType intersect = Intersects(line1, line2, &crosPoint);
                 if (intersect == QLineF::NoIntersection)
                 { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
@@ -1294,32 +1272,48 @@ auto VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<Q
                     break;
                 }
             }
-            status = NoIntersection;
-        }
 
-        switch (status)
-        {
-            case ParallelIntersection:
-                /*We have found a loop.*/
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(points.at(jNext));
-                jNext > j ? i = jNext : i = j; // Skip a loop
-                break;
-            case BoundedIntersection:
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(crosPoint);
-                i = j;
-                break;
-            case NoIntersection:
-                /*We have not found loop.*/
-                ekvPoints.append(points.at(i));
-                break;
-            default:
-                break;
+            switch (status)
+            {
+                case ParallelIntersection:
+                    /*We have found a loop.*/
+                    ekvPoints.append(points.at(i));
+                    ekvPoints.append(points.at(j+1));
+                    i = j+1; // Skip a loop
+                    loopFound = true;
+                    break;
+                case BoundedIntersection:
+                    ekvPoints.append(points.at(i));
+                    ekvPoints.append(crosPoint);
+                    i = j;
+                    loopFound = true;
+                    break;
+                case NoIntersection:
+                    /*We have not found loop.*/
+                    ekvPoints.append(points.at(i));
+                    break;
+                default:
+                    break;
+            }
         }
-    }    
+        return ekvPoints;
+    };
+
+    QVector<VRawSAPoint> ekvPoints = points;
+    qint32 i;
+    const int maxLoops = 10000; // limit number of loops to be removed
+
+    for (i = 0; i < maxLoops; ++i)
+    {
+        ekvPoints = CheckLoop(ekvPoints);
+        if (not loopFound)
+        {
+            break;
+        }
+    }
+
     const QVector<QPointF> cleaned = CleanLoopArtifacts(ekvPoints);
-//    DumpVector(cleaned); // Uncomment for dumping test data
+//    DumpVector(cleaned, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return cleaned;
 }
 

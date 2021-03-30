@@ -61,6 +61,7 @@ class VSplinePoint;
 class VPieceNode;
 enum class GOType : qint8;
 struct VPiecePassmarkData;
+class VRawSAPoint;
 
 class AbstractTest : public QObject
 {
@@ -68,8 +69,9 @@ class AbstractTest : public QObject
 public:
     explicit AbstractTest(QObject *parent = nullptr);
 
-    void VectorFromJson(const QString &json, QVector<QPointF>& vector);
-    void VectorFromJson(const QString &json, QVector<VSAPoint>& vector);
+    void VectorFromJson(const QString &json, QVector<QPointF>& vector) const;
+    void VectorFromJson(const QString &json, QVector<VSAPoint>& vector) const;
+    void VectorFromJson(const QString &json, QVector<VRawSAPoint>& vector) const;
 
     void PieceFromJson(const QString &json, VPiece &piece, QSharedPointer<VContainer> &data);
 
@@ -91,30 +93,31 @@ protected:
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 
     void PrepareDocument(const QString &json, QByteArray &data) const;
-    void TestRoot(const QJsonObject &root, const QString &attribute, const QString &file);
+    void TestRoot(const QJsonObject &root, const QString &attribute, const QString &file) const;
 
     template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type* = nullptr>
     void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
-                         const QString &defaultValue = QString());
+                         const QString &defaultValue = QString()) const;
     template <typename T, typename std::enable_if<std::is_enum<T>::value>::type* = nullptr>
     void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
-                         const QString &defaultValue = QString());
+                         const QString &defaultValue = QString()) const;
     template <typename T, typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
     void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
-                         const QString &defaultValue = QString());
+                         const QString &defaultValue = QString()) const;
     void ReadStringValue(const QJsonObject &itemObject, const QString &attribute, QString &value,
-                         const QString &defaultValue = QString());
+                         const QString &defaultValue = QString()) const;
     void ReadBooleanValue(const QJsonObject &itemObject, const QString &attribute, bool &value,
-                          const QString &defaultValue = QString());
+                          const QString &defaultValue = QString()) const;
     void ReadPointValue(const QJsonObject &itemObject, const QString &attribute, VPointF &value);
     void ReadSplinePointValues(const QJsonObject &itemObject, const QString &attribute, QVector<VSplinePoint> &points);
     void ReadSplinePointValue(const QJsonObject &itemObject, VSplinePoint &point);
     void ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode &node);
 
-    void QPointFromJson(const QJsonObject &itemObject, QPointF &point);
+    void QPointFromJson(const QJsonObject &itemObject, QPointF &point) const;
     void VPointFromJson(const QJsonObject &itemObject, VPointF &point);
     void QLineFromJson(const QJsonObject &itemObject, QLineF &line);
-    void SAPointFromJson(const QJsonObject &itemObject, VSAPoint &point);
+    void SAPointFromJson(const QJsonObject &itemObject, VSAPoint &point) const;
+    void RawSAPointFromJson(const QJsonObject &itemObject, VRawSAPoint &point) const;
     void SplineFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
     void SplinePathFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
 

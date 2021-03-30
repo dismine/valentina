@@ -28,6 +28,7 @@
 
 #include "tst_vabstractpiece.h"
 #include "../vlayout/vabstractpiece.h"
+#include "../vlayout/vrawsapoint.h"
 
 #include <QPointF>
 #include <QVector>
@@ -372,6 +373,39 @@ void TST_VAbstractPiece::SumTrapezoids() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::RawPathRemoveLoop_data() const
+{
+    QTest::addColumn<QVector<VRawSAPoint>>("path");
+    QTest::addColumn<QVector<QPointF>>("expect");
+
+    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
+    {
+        QVector<VRawSAPoint> inputPoints;
+        AbstractTest::VectorFromJson(input, inputPoints);
+
+        QVector<QPointF> outputPoints;
+        AbstractTest::VectorFromJson(output, outputPoints);
+
+        QTest::newRow(title) << inputPoints << outputPoints;
+    };
+
+    // See file src/app/share/collection/bugs/smart_pattern_#112.val (private collection)
+    ASSERT_TEST_CASE("Loop intersection",
+                     QStringLiteral("://smart_pattern_#112/input.json"),
+                     QStringLiteral("://smart_pattern_#112/output.json"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::RawPathRemoveLoop() const
+{
+    QFETCH(QVector<VRawSAPoint>, path);
+    QFETCH(QVector<QPointF>, expect);
+
+    QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
+    Comparison(res, expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::PathRemoveLoop_data() const
 {
     QTest::addColumn<QVector<QPointF>>("path");
@@ -417,11 +451,6 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("One loop, closed a path (four unique points)") << path << res;
 
-    path.removeLast();
-    res.removeLast();
-
-    QTest::newRow("One loop, unclosed a path (four unique points)") << path << res;
-
     path.clear();
     path << QPointF(20, 10);
     path << QPointF(20, 20);
@@ -438,11 +467,6 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("Two loops, closed a path (six unique points)") << path << res;
 
-    path.removeLast();
-    res.removeLast();
-
-    QTest::newRow("Two loops, unclosed a path (six unique points)") << path << res;
-
     path.clear();
     path << QPointF(20, 10);
     path << QPointF(20, 20);
@@ -458,10 +482,6 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(15, 15);
     res << QPointF(20, 10);
     QTest::newRow("One loop, the first loop, closed a path (six unique points)") << path << res;
-
-    path.removeLast();
-    res.removeLast();
-    QTest::newRow("One loop, the first loop, unclosed a path (six unique points)") << path << res;
 
     path.clear();
     path << QPointF(20, 10);
