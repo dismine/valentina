@@ -895,7 +895,7 @@ QVector<QPointF> CleanLoopArtifacts(const QVector<VRawSAPoint> &points)
 {
     QVector<QPointF> cleaned;
     cleaned.reserve(points.size());
-    for (auto &point : points)
+    for (const auto &point : points)
     {
         if (not point.LoopPoint())
         {
@@ -1211,7 +1211,7 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
  * @param points vector of points of equidistant.
  * @return vector of points of equidistant.
  */
-QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points)
+auto VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<QPointF>
 {
 //    DumpVector(points); // Uncomment for dumping test data
 

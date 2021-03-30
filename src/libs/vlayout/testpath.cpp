@@ -40,7 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
-QJsonObject PointToJson(const QPointF &point)
+auto PointToJson(const QPointF &point) -> QJsonObject
 {
     QJsonObject pointObject
     {
