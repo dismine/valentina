@@ -580,7 +580,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -711,7 +711,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -838,7 +838,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -969,7 +969,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -1040,7 +1040,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1099,7 +1099,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1210,7 +1210,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -1293,7 +1293,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1384,7 +1384,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1475,7 +1475,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -2122,6 +2122,26 @@
         <source>Final measurement: %1</source>
         <translation>Dimension finale : %1</translation>
     </message>
+    <message>
+        <source>Height label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -2358,7 +2378,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2473,7 +2493,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -2568,11 +2588,11 @@
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished">Formule:</translation>
+        <translation>Formule :</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2703,7 +2723,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2739,7 +2759,7 @@
     </message>
     <message>
         <source>Invalid point</source>
-        <translation type="unfinished"></translation>
+        <translation>Point invalide</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -2747,7 +2767,7 @@
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias invalide</translation>
     </message>
 </context>
 <context>
@@ -2822,7 +2842,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2874,7 +2894,7 @@
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias invalide</translation>
     </message>
 </context>
 <context>
@@ -2996,7 +3016,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -3346,7 +3366,7 @@
     </message>
     <message>
         <source>Refresh a pattern with all changes you made</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour du patron après toutes les modifications</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -3385,7 +3405,7 @@
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>La liste des pièces est vide. Créer d&apos;abord au moins une pièce pour le patron en cours.</translation>
     </message>
     <message>
         <source>Insert nodes</source>
@@ -3466,7 +3486,7 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Left:</source>
@@ -3741,7 +3761,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Ignore margins</source>
@@ -3759,7 +3779,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure</translation>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
@@ -3855,7 +3875,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -3922,7 +3942,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -4049,7 +4069,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -4173,7 +4193,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner la mensuration</translation>
     </message>
 </context>
 <context>
@@ -4192,11 +4212,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Colonne</translation>
     </message>
     <message>
         <source>Full name:</source>
@@ -4228,23 +4248,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Shift (%1)*:</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche Majuscule (%1)*:</translation>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Le chemin d&apos;accès du ficihier est vide.</translation>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de colonnes insuffisant</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de données à importer insuffisant</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner pour chaque colonne un nombre unique</translation>
     </message>
     <message>
         <source>Name</source>
@@ -4274,7 +4294,7 @@ Apply settings anyway?</source>
     <message>
         <source>Shift (%1):</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Majuscule (%1):</translation>
     </message>
 </context>
 <context>
@@ -4333,7 +4353,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Rotation origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point d&apos;origine de la rotation:</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -4373,7 +4393,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -4409,7 +4429,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>La formule de l&apos;angle est invalide</translation>
     </message>
     <message>
         <source>Invalid rotation angle formula</source>
@@ -4417,7 +4437,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid length formula</source>
-        <translation type="unfinished"></translation>
+        <translation>La formule de la longueur est invalide.</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -4425,7 +4445,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias invalide</translation>
     </message>
 </context>
 <context>
@@ -4472,7 +4492,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Multi-tailles</translation>
     </message>
 </context>
 <context>
@@ -4634,7 +4654,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -5142,7 +5162,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout droit</translation>
     </message>
     <message>
         <source>Bisector</source>
@@ -5178,7 +5198,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection</translation>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
@@ -5206,11 +5226,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Visible</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -5222,7 +5242,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle de la visibilité</translation>
     </message>
     <message>
         <source>Intersection 2</source>
@@ -5238,7 +5258,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier la spécificité</translation>
     </message>
     <message>
         <source>Move on top</source>
@@ -5270,7 +5290,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>La liste des pièces est vide. Créer d&apos;abord au moins une pièce pour le patron en cours.</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
@@ -5282,7 +5302,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished"></translation>
+        <translation>Exclus</translation>
     </message>
     <message>
         <source>The same curve repeats twice!</source>
@@ -5337,7 +5357,7 @@ Apply settings anyway?</source>
     <name>DialogPin</name>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Epingle</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -5349,11 +5369,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Epingle</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>La liste des pièces est vide. Créer d&apos;abord au moins une pièce pour le patron en cours.</translation>
     </message>
 </context>
 <context>
@@ -5372,7 +5392,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5380,11 +5400,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>0</source>
@@ -5408,15 +5428,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer l&apos;angle</translation>
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Segment</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Rectangle</translation>
     </message>
     <message>
         <source>Cross</source>
@@ -5432,11 +5452,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Triangle</translation>
     </message>
     <message>
         <source>H-shaped</source>
@@ -5444,19 +5464,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation type="unfinished"></translation>
+        <translation>Placer l&apos;étiquette</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Visible</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -5468,15 +5488,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>La liste des pièces est vide. Créer d&apos;abord au moins une pièce pour le patron en cours.</translation>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle de la visibilité</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Cercle</translation>
     </message>
 </context>
 <context>
@@ -5539,7 +5559,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -5638,7 +5658,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -5733,7 +5753,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -5792,7 +5812,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -5859,7 +5879,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -5974,7 +5994,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -6021,14 +6041,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
     <name>DialogPreferences</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -6054,7 +6074,7 @@ Apply settings anyway?</source>
     <name>DialogRestrictDimension</name>
     <message>
         <source>Restrict dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Restreindre les dimensions</translation>
     </message>
     <message>
         <source>Dimension A:</source>
@@ -6062,7 +6082,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Restriction</source>
-        <translation type="unfinished"></translation>
+        <translation>Restriction</translation>
     </message>
     <message>
         <source>Min:</source>
@@ -6074,11 +6094,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished"></translation>
+        <translation>Exclure</translation>
     </message>
     <message>
         <source>Include</source>
-        <translation type="unfinished"></translation>
+        <translation>Inclure</translation>
     </message>
 </context>
 <context>
@@ -6133,7 +6153,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce point ne peut pas être le point de départ. Sélectionner un autre point de départ.</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
@@ -6165,7 +6185,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -6193,7 +6213,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid rotation point</source>
-        <translation type="unfinished"></translation>
+        <translation>Point de rotation invalide.</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -6201,11 +6221,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias invalide</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>La formule de l&apos;angle est invalide</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -6284,15 +6304,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Droite:</translation>
+        <translation>Droit:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Gauche:</translation>
+        <translation>Gauche:</translation>
     </message>
     <message>
         <source>Top:</source>
@@ -6304,11 +6324,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished">Format du papier</translation>
+        <translation>Format du papier</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <source>cm</source>
@@ -6458,7 +6478,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur : le chemin d&apos;accès de la pièce ne peut pas être sauvegardé.</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
@@ -6466,7 +6486,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation type="unfinished">La longueur doit être positive</translation>
+        <translation>La longueur indiquée doit être positive</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -6494,11 +6514,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished">Vous devez choisir les points dans le sens des aiguilles d&apos;une montre!</translation>
+        <translation>Vous devez choisir les points dans le sens des aiguilles d&apos;une montre!</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished">Le premier point ne peut être identique au dernier!</translation>
+        <translation>Le premier point ne peut être identique au dernier!</translation>
     </message>
     <message>
         <source>You have double points!</source>
@@ -6514,7 +6534,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>custom seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnaliser la marge de couture</translation>
     </message>
     <message>
         <source>Both</source>
@@ -6530,11 +6550,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pins</source>
-        <translation type="unfinished"></translation>
+        <translation>Epingles</translation>
     </message>
     <message>
         <source>no pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;épingle</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -6546,19 +6566,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer longueur</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer l&apos;angle</translation>
     </message>
     <message>
         <source>Edit height</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la stature</translation>
     </message>
     <message>
         <source>Edit width</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -6566,7 +6586,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished"></translation>
+        <translation>Exclus</translation>
     </message>
     <message>
         <source>Passmark</source>
@@ -6574,7 +6594,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaque point indiqué doit être unique !</translation>
     </message>
     <message>
         <source>Passmarks</source>
@@ -6586,11 +6606,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Segment</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Rectangle</translation>
     </message>
     <message>
         <source>Cross</source>
@@ -6606,11 +6626,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Triangle</translation>
     </message>
     <message>
         <source>H-shaped</source>
@@ -6618,15 +6638,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation type="unfinished"></translation>
+        <translation>Placer l&apos;étiquette</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier la spécificité</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
@@ -6646,7 +6666,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Cercle</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
@@ -6677,31 +6697,31 @@ Apply settings anyway?</source>
     <name>DialogSetupMultisize</name>
     <message>
         <source>Setup multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir les mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser une circonférence entière</translation>
     </message>
     <message>
         <source>Min value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valaur minimale :</translation>
     </message>
     <message>
         <source>Minimal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur minimale définie dans la colonne</translation>
     </message>
     <message>
         <source>Max value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur maximale : </translation>
     </message>
     <message>
         <source>Maximal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Valaue maximale définie dans la colonne</translation>
     </message>
     <message>
         <source>Step:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etape :</translation>
     </message>
     <message>
         <source>Single-step between the column values</source>
@@ -6709,7 +6729,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Base:</source>
-        <translation type="unfinished"></translation>
+        <translation>Base :</translation>
     </message>
     <message>
         <source>The base value for the column</source>
@@ -6717,15 +6737,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Circonférence</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de fournir des dimensions correctes</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de sélectionner au moins une dimension</translation>
     </message>
     <message>
         <source>No more than 3 dimensions allowed</source>
@@ -6868,7 +6888,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -6911,7 +6931,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -7058,7 +7078,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -7217,7 +7237,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -7228,7 +7248,7 @@ Apply settings anyway?</source>
     <name>DialogTapePreferences</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -7409,7 +7429,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -7520,7 +7540,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarques</translation>
     </message>
 </context>
 <context>
@@ -7798,19 +7818,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unités du patron</translation>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension invalide de base A</translation>
     </message>
     <message>
         <source>Invalid dimension B base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension invalide de base B</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension invalide de base C</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
@@ -8856,19 +8876,23 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Move objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer des objets</translation>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mensurations ont changées. Voulez-vous les resynchroniser maintenant?</translation>
+    </message>
+    <message>
+        <source>Gradation doesn&apos;t support inches</source>
+        <translation type="vanished">Gradation en pouces impossible</translation>
     </message>
     <message>
         <source>Measurements have been synced</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mensurations sont synchronisées</translation>
     </message>
     <message>
         <source>Tools for creating elliptical arcs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Outils pour créer des élipses.</translation>
     </message>
     <message>
         <source>Elliptical Arc</source>
@@ -8876,7 +8900,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Select point of center of elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le point central de l&apos;élipse</translation>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
@@ -8884,7 +8908,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le document n&apos;est pas accessible en écriture.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -8892,11 +8916,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;a pas pu etre enregistré</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;a pas pu etre enregistré</translation>
     </message>
     <message>
         <source>read only</source>
@@ -8940,7 +8964,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniser</translation>
     </message>
     <message>
         <source>Synchronize linked to the pattern measurements after change</source>
@@ -8956,19 +8980,19 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Mesures individuelles</translation>
+        <translation>Mensurations individuelles</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Pattern files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers de patron</translation>
     </message>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Epingle</translation>
     </message>
     <message>
         <source>Select pin point</source>
@@ -8976,7 +9000,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Insert node tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Insérer un noeud</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -9000,11 +9024,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous ne pouvez pas utiliser le mode Détails. Créez au moins un élément de patron.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous ne pouvez pas utiliser le mode plan de coupe maintenant. Créez au moins une pièce de patron.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
@@ -9032,11 +9056,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export details</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les détails</translation>
     </message>
     <message>
         <source>Can&apos;t export details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;exporter les détails</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -9052,11 +9076,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>Report Bug…</source>
-        <translation type="unfinished"></translation>
+        <translation>Reporter un bug</translation>
     </message>
     <message>
         <source>Export As…</source>
@@ -9064,7 +9088,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer...</translation>
     </message>
     <message>
         <source>Final measurements</source>
@@ -9088,7 +9112,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Next pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièce de patron suivante</translation>
     </message>
     <message>
         <source>Ctrl+PgDown</source>
@@ -9096,7 +9120,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Previous pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièce de patron précédente</translation>
     </message>
     <message>
         <source>Ctrl+PgUp</source>
@@ -9104,11 +9128,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Place label tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Placer une étiquette</translation>
     </message>
     <message>
         <source>Duplicate detail tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Dupliquer les détails</translation>
     </message>
     <message>
         <source>Select placelabel center point</source>
@@ -9120,11 +9144,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Use these tools to create a pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisez ces outils pour créer un patron</translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle :</translation>
     </message>
     <message>
         <source>Create new pattern piece to start working.</source>
@@ -9136,7 +9160,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les réglages ne peuvent pas être enregistrés. Accès refusé.</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -9144,7 +9168,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture des réglages impossible à cause d&apos;un fichier .INI invalide.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -9164,19 +9188,19 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Increase label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Augmenter la taille de la police de caractères de l&apos;étiquette</translation>
     </message>
     <message>
         <source>Decrease label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuer la taille de la police de caractères de l&apos;étiquette</translation>
     </message>
     <message>
         <source>Original label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Police par défaut de l&apos;étiquette</translation>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher les étiquettes</translation>
     </message>
     <message>
         <source>Groups of visibility</source>
@@ -9228,11 +9252,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation type="unfinished"></translation>
+        <translation>DEBUGAGE :</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT:</translation>
     </message>
     <message>
         <source>CRITICAL</source>
@@ -9264,15 +9288,15 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Edit current</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer les mesures en cours d&apos;utilisation</translation>
     </message>
     <message>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editeur</translation>
     </message>
     <message>
         <source>Create or edit a watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer ou éditer un filigrane</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -9280,7 +9304,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous modifier les autorisations ? </translation>
     </message>
     <message>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
@@ -9406,8 +9430,12 @@ Voulez-vous sauvegarder les changements?</translation>
         <translation type="vanished">Impossible de créer l&apos;emplacement</translation>
     </message>
     <message>
+        <source>Cannot set printer margins</source>
+        <translation type="vanished">Impossible de définir les marges d&apos;impression</translation>
+    </message>
+    <message>
         <source>Can&apos;t create a path</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de créer l&apos;emplacement</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -9443,7 +9471,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Description du patron</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
@@ -9471,11 +9499,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Délai</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;opération a été stoppée en raison d&apos;une exception.</translation>
     </message>
 </context>
 <context>
@@ -9623,6 +9651,10 @@ Voulez-vous sauvegarder les changements?</translation>
     <message>
         <source>Delete all</source>
         <translation type="vanished">Tout effacer</translation>
+    </message>
+    <message>
+        <source>Workpiece</source>
+        <translation type="vanished">Pièce en cours</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -9827,7 +9859,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Chemin</translation>
+        <translation>Chemin</translation>
     </message>
     <message>
         <source>Default</source>
@@ -9839,7 +9871,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Ouvrir un dossier</translation>
+        <translation>Ouvrir Dossier</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -9851,11 +9883,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes patrons</translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes plans de coupe</translation>
     </message>
     <message>
         <source>My Templates</source>
@@ -9863,22 +9895,22 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>My label templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes modèles d&apos;étiquette</translation>
     </message>
 </context>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished">Sortie graphique</translation>
+        <translation>Sortie graphique</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished">Utiliser l&apos;antialiasing</translation>
+        <translation>Utiliser l&apos;antialiasing</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
@@ -9886,11 +9918,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièce en cours</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Rotation interdite</translation>
+        <translation>Rotation interdite</translation>
     </message>
     <message>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
@@ -9910,19 +9942,19 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher le chemin principal</translation>
     </message>
     <message>
         <source>Label font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Police de caractères d&apos;étiquette</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Marge de couture</translation>
+        <translation>Marge de couture</translation>
     </message>
     <message>
         <source>Default value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur par défaut</translation>
     </message>
     <message>
         <source>Label data/time format</source>
@@ -9930,15 +9962,15 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Date :</translation>
     </message>
     <message>
         <source>Edit formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer les formats</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure :</translation>
     </message>
     <message>
         <source>Materials</source>
@@ -9966,11 +9998,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Curve approximation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Courbe approximative :</translation>
     </message>
     <message>
         <source>Set default curve approximation scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir les réglages par défaut de l&apos;échelle approximative de la courbe</translation>
     </message>
     <message>
         <source>Bold line width</source>
@@ -9999,7 +10031,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>antialiasing</source>
-        <translation type="unfinished"></translation>
+        <translation>antialiasing</translation>
     </message>
     <message>
         <source>scene render</source>
@@ -10185,7 +10217,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished">Mauvais nom de tag &apos;%1&apos;.</translation>
+        <translation>Mauvais nom de tag &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -10197,11 +10229,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="unfinished">Paramètre vide</translation>
+        <translation>Paramètre vide</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="unfinished">Conversion du paramètre impossible vers toDouble</translation>
+        <translation>Conversion du paramètre impossible vers toDouble</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
@@ -10209,11 +10241,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>United detail</source>
-        <translation type="unfinished">Pièces de patron fusionnées</translation>
+        <translation>Pièces de patron fusionnées</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Tissu</translation>
+        <translation>Tissu</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -11325,11 +11357,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de sauvegarder le fichier</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;a pas pu etre enregistré</translation>
     </message>
     <message>
         <source>read only</source>
@@ -11337,7 +11369,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -11365,7 +11397,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer...</translation>
     </message>
     <message>
         <source>Import from CSV</source>
@@ -11409,7 +11441,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les préférences ne peuvent pas être enregistrées. Accès refusé.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -11457,11 +11489,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous modifier les autorisations ? </translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture des réglages impossible à cause d&apos;un fichier .INI invalide.</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -11501,7 +11533,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser une circonférence entière</translation>
     </message>
     <message>
         <source>Restrict second dimension</source>
@@ -11545,7 +11577,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Majuscule (%1):</translation>
     </message>
     <message>
         <source>%1 shift</source>
@@ -11701,7 +11733,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur:</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -11717,7 +11749,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
@@ -11876,7 +11908,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout droit</translation>
     </message>
     <message>
         <source>Bisector</source>
@@ -11892,7 +11924,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
@@ -11995,7 +12027,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Rotation interdite</translation>
+        <translation>Rotation interdite</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -12003,7 +12035,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Marge de couture</translation>
+        <translation>Marge de couture</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -12051,7 +12083,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -12083,7 +12115,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher le chemin principal</translation>
     </message>
     <message>
         <source>Name of detail:</source>
@@ -12347,7 +12379,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Chemin</translation>
+        <translation>Chemin</translation>
     </message>
     <message>
         <source>Default</source>
@@ -12359,7 +12391,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Ouvrir un dossier</translation>
+        <translation>Ouvrir Dossier</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -12375,7 +12407,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes patrons</translation>
     </message>
 </context>
 <context>
@@ -12674,7 +12706,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>operation options</source>
@@ -12716,7 +12748,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VAbstractPiece</name>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece &apos;%1&apos;. Il n&apos;y pas assez de points pour établir la marge de couture.</translation>
     </message>
 </context>
 <context>
@@ -12730,7 +12762,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VAbstractSpline</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12777,7 +12809,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>light salmon</source>
-        <translation type="unfinished"></translation>
+        <translation>saumon clair</translation>
     </message>
     <message>
         <source>orange</source>
@@ -12785,27 +12817,27 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>deep pink</source>
-        <translation type="unfinished"></translation>
+        <translation>rose foncé</translation>
     </message>
     <message>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violet</translation>
     </message>
     <message>
         <source>dark violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violet foncé</translation>
     </message>
     <message>
         <source>medium sea green</source>
-        <translation type="unfinished"></translation>
+        <translation>vert de mer moyen</translation>
     </message>
     <message>
         <source>lime</source>
-        <translation type="unfinished"></translation>
+        <translation>citron</translation>
     </message>
     <message>
         <source>deep sky blue</source>
-        <translation type="unfinished"></translation>
+        <translation>bleu ciel</translation>
     </message>
     <message>
         <source>corn flower blue</source>
@@ -12856,7 +12888,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cran invalide</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
@@ -12882,7 +12914,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le tissus</translation>
     </message>
 </context>
 <context>
@@ -13221,7 +13253,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Codec name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du code</translation>
     </message>
     <message>
         <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
@@ -13237,7 +13269,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Path to csv file</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin d&apos;accès du fichier csv</translation>
     </message>
     <message>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
@@ -13257,7 +13289,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>La marge de gauche</translation>
     </message>
     <message>
         <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
@@ -13265,7 +13297,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>La marge de droite</translation>
     </message>
     <message>
         <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
@@ -13273,7 +13305,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The top margin</source>
-        <translation type="unfinished"></translation>
+        <translation>La marge du haut</translation>
     </message>
     <message>
         <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
@@ -13281,7 +13313,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The bottom margin</source>
-        <translation type="unfinished"></translation>
+        <translation>La marge du bas</translation>
     </message>
     <message>
         <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
@@ -13325,11 +13357,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le tissu &apos;%1&apos; de l&apos;utilisateur est invalide : séparateur manquant.</translation>
     </message>
     <message>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le tissu &apos;%1&apos; de l&apos;utilisateur est invalide : numéro de tissu erroné.</translation>
     </message>
     <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
@@ -13337,7 +13369,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The page height</source>
-        <translation type="unfinished"></translation>
+        <translation>La hauteur de page</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
@@ -13353,11 +13385,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
+        <translation>Coefficient</translation>
     </message>
     <message>
         <source>Time must be in range from 1 minute to 60 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le temps indiqué doit être compris entre 1 et 60 minutes.</translation>
     </message>
     <message>
         <source>Follow manual priority over priority by square (export mode).</source>
@@ -13373,7 +13405,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le coefficient doit être compris entre 0 et 100. </translation>
     </message>
     <message>
         <source>Auto crop unused width (export mode).</source>
@@ -13714,7 +13746,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de définir les marges d&apos;impression</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -13783,7 +13815,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished"></translation>
+        <translation>Exclure</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -13835,7 +13867,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout droit</translation>
     </message>
     <message>
         <source>Bisector</source>
@@ -13843,7 +13875,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
@@ -14293,7 +14325,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de définir les marges d&apos;impression</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
@@ -14388,7 +14420,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -14403,7 +14435,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -14426,7 +14458,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolArcWithLength</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -14570,7 +14602,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -14623,7 +14655,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolHeight</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -14638,7 +14670,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -14660,7 +14692,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -14679,7 +14711,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolLinePoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -14698,7 +14730,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -15017,7 +15049,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -15245,7 +15277,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Rotation origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point d&apos;origine de la rotation:</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -15286,7 +15318,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -15420,7 +15452,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -17191,7 +17223,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <source>Gray color</source>
@@ -17211,7 +17243,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -17263,7 +17295,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le document n&apos;est pas autorisé en écritures.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -17271,11 +17303,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de sauvegarder le fichier</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;a pas pu etre enregistré</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -17332,7 +17364,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous modifier les autorisations ? </translation>
     </message>
 </context>
 <context>

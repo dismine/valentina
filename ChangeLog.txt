@@ -6,6 +6,7 @@
 - [smart-pattern/valentina#113] Incorrect seam allowance.
 - [smart-pattern/valentina#114] Incorrect seam allowance.
 - Fixed bugs.
+- Updated translations.
 
 # Version 0.7.45 Feb 26, 2021
 - Fix incorrect seam allowance for angle type second edge right angle.

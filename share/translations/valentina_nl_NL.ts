@@ -2104,11 +2104,11 @@
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor de lengte</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor de grootte</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
@@ -2116,10 +2116,30 @@
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor de taille</translation>
     </message>
     <message>
         <source>Final measurement: %1</source>
+        <translation>Definitieve maten: %1</translation>
+    </message>
+    <message>
+        <source>Height label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist label</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6083,7 +6103,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Include</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoort bij</translation>
     </message>
 </context>
 <context>
@@ -10422,11 +10442,11 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor de lengte</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor de grootte</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
@@ -10434,7 +10454,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor de taille</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
@@ -11632,7 +11652,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Restrict first dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperk eerste meting</translation>
     </message>
 </context>
 <context>
@@ -12682,7 +12702,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>values</source>
-        <translation type="unfinished"></translation>
+        <translation>waarden</translation>
     </message>
     <message>
         <source>Export to CSV</source>
@@ -14378,7 +14398,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VSimpleCurve</name>
     <message>
         <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation type="unfinished"></translation>
+        <translation>VSimpleCurve::RefreshGeometry: pointer naar boog is null.</translation>
     </message>
 </context>
 <context>
