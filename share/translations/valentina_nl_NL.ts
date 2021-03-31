@@ -2104,11 +2104,11 @@
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation>Geen gegevens voor de lengte</translation>
+        <translation>Geen gegevens voor de lengte.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation>Geen gegevens voor de grootte</translation>
+        <translation>Geen gegevens voor de grootte.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
@@ -2116,7 +2116,7 @@
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation>Geen gegevens voor de taille</translation>
+        <translation>Geen gegevens voor de taille.</translation>
     </message>
     <message>
         <source>Final measurement: %1</source>
@@ -10442,11 +10442,11 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation>Geen gegevens voor de lengte</translation>
+        <translation>Geen gegevens voor de lengte.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation>Geen gegevens voor de grootte</translation>
+        <translation>Geen gegevens voor de grootte.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
@@ -10454,7 +10454,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation>Geen gegevens voor de taille</translation>
+        <translation>Geen gegevens voor de taille.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>

@@ -3779,7 +3779,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Time:</source>
-        <translation>Heure</translation>
+        <translation>Heure:</translation>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
@@ -4252,7 +4252,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation>Le chemin d&apos;accès du ficihier est vide.</translation>
+        <translation>Le chemin d&apos;accès du ficihier est vide</translation>
     </message>
     <message>
         <source>Not enough columns</source>
@@ -4437,7 +4437,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid length formula</source>
-        <translation>La formule de la longueur est invalide.</translation>
+        <translation>La formule de la longueur est invalide</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -6153,7 +6153,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation>Ce point ne peut pas être le point de départ. Sélectionner un autre point de départ.</translation>
+        <translation>Ce point ne peut pas être le point de départ. Sélectionner un autre point de départ</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
@@ -6213,7 +6213,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid rotation point</source>
-        <translation>Point de rotation invalide.</translation>
+        <translation>Point de rotation invalide</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -6328,7 +6328,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Browse…</source>
-        <translation>Parcourir...</translation>
+        <translation>Parcourir…</translation>
     </message>
     <message>
         <source>cm</source>
@@ -6713,7 +6713,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Max value:</source>
-        <translation>Valeur maximale : </translation>
+        <translation>Valeur maximale:</translation>
     </message>
     <message>
         <source>Maximal value described in the column</source>
@@ -7822,15 +7822,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
-        <translation>Dimension invalide de base A</translation>
+        <translation>Dimension invalide de base A.</translation>
     </message>
     <message>
         <source>Invalid dimension B base value.</source>
-        <translation>Dimension invalide de base B</translation>
+        <translation>Dimension invalide de base B.</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
-        <translation>Dimension invalide de base C</translation>
+        <translation>Dimension invalide de base C.</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
@@ -8916,7 +8916,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation>Le fichier n&apos;a pas pu etre enregistré</translation>
+        <translation>Le fichier n&apos;a pas pu etre enregistré.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -9060,7 +9060,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Can&apos;t export details.</source>
-        <translation>Impossible d&apos;exporter les détails</translation>
+        <translation>Impossible d&apos;exporter les détails.</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -9076,11 +9076,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation>Enregistrer sous</translation>
+        <translation>Enregistrer sous…</translation>
     </message>
     <message>
         <source>Report Bug…</source>
-        <translation>Reporter un bug</translation>
+        <translation>Reporter un bug…</translation>
     </message>
     <message>
         <source>Export As…</source>
@@ -9088,7 +9088,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation>Enregistrer...</translation>
+        <translation>Enregistrer…</translation>
     </message>
     <message>
         <source>Final measurements</source>
@@ -9252,11 +9252,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation>DEBUGAGE :</translation>
+        <translation>DEBUGAGE</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation>AVERTISSEMENT:</translation>
+        <translation>AVERTISSEMENT</translation>
     </message>
     <message>
         <source>CRITICAL</source>
@@ -9304,7 +9304,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Voulez-vous modifier les autorisations ? </translation>
+        <translation>Voulez-vous modifier les autorisations?</translation>
     </message>
     <message>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
@@ -9499,7 +9499,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Timeout.</source>
-        <translation>Délai</translation>
+        <translation>Délai.</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -9946,7 +9946,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Label font:</source>
-        <translation>Police de caractères d&apos;étiquette</translation>
+        <translation>Police de caractères d&apos;étiquette:</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -9954,7 +9954,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Default value:</source>
-        <translation>Valeur par défaut</translation>
+        <translation>Valeur par défaut:</translation>
     </message>
     <message>
         <source>Label data/time format</source>
@@ -11357,7 +11357,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation>Impossible de sauvegarder le fichier</translation>
+        <translation>Impossible de sauvegarder le fichier.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -11397,7 +11397,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation>Enregistrer...</translation>
+        <translation>Enregistrer…</translation>
     </message>
     <message>
         <source>Import from CSV</source>
@@ -11489,7 +11489,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Voulez-vous modifier les autorisations ? </translation>
+        <translation>Voulez-vous modifier les autorisations?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -12888,7 +12888,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation>Cran invalide</translation>
+        <translation>Cran invalide.</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
@@ -13405,7 +13405,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
-        <translation>Le coefficient doit être compris entre 0 et 100. </translation>
+        <translation>Le coefficient doit être compris entre 0 et 100.</translation>
     </message>
     <message>
         <source>Auto crop unused width (export mode).</source>
@@ -17223,7 +17223,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation>Parcourir...</translation>
+        <translation>Parcourir…</translation>
     </message>
     <message>
         <source>Gray color</source>
@@ -17243,7 +17243,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation>Enregistrer sous</translation>
+        <translation>Enregistrer sous…</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -17303,7 +17303,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation>Impossible de sauvegarder le fichier</translation>
+        <translation>Impossible de sauvegarder le fichier.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -17364,14 +17364,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Voulez-vous modifier les autorisations ? </translation>
+        <translation>Voulez-vous modifier les autorisations?</translation>
     </message>
 </context>
 <context>
     <name>mNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation>DEBUGAGE :</translation>
+        <translation>DEBUGAGE:</translation>
     </message>
     <message>
         <source>WARNING:</source>
@@ -17426,7 +17426,7 @@ Do you want to save your changes?</source>
     <name>vNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation>DEBUGAGE :</translation>
+        <translation>DEBUGAGE:</translation>
     </message>
     <message>
         <source>WARNING:</source>
