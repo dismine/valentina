@@ -1,4 +1,4 @@
-# Version 0.7.46 (unreleased)
+# Version 0.7.46 Mar 31, 2021
 - Fix incorrect calculation of value for multisize measurements in Valentina.
 - [smart-pattern/valentina#109] Pattern label template placeholder with dimension label value.
 - Incorrect duplication of a piece. Missing restoring pins.
