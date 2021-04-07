@@ -1,3 +1,6 @@
+# Version 0.7.47 (unreleased)
+- [smart-pattern/valentina#118] Incorrect seam allowance.
+
 # Version 0.7.46 Mar 31, 2021
 - Fix incorrect calculation of value for multisize measurements in Valentina.
 - [smart-pattern/valentina#109] Pattern label template placeholder with dimension label value.

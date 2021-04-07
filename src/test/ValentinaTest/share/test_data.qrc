@@ -137,5 +137,7 @@
         <file>smart_pattern_#112/output.json</file>
         <file>smart_pattern_#113/input.json</file>
         <file>smart_pattern_#113/output.json</file>
+        <file>smart_pattern_#118/input.json</file>
+        <file>smart_pattern_#118/output.json</file>
     </qresource>
 </RCC>

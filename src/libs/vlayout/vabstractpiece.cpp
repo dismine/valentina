@@ -597,9 +597,21 @@ QVector<VRawSAPoint> AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPoint
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
 
-        if (IsSameDirection(bigLine1.p1(), bigLine1.p2(), px))
+        // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+        bool success = false;
+        const int countBefore = points.size();
+        QVector<VRawSAPoint> temp = points;
+        temp.append(bigLine1.p2());
+        temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
+
+        if (success)
         {
-            points.append(px);
+            points = temp;
+            px = points.last();
+        }
+
+        if (countBefore > 0)
+        {
             QLineF seam(px, p3);
             seam.setAngle(seam.angle()+90);
             seam.setLength(p.GetSAAfter(width));
@@ -607,36 +619,17 @@ QVector<VRawSAPoint> AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPoint
         }
         else
         {
-            // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
-            bool success = false;
-            const int countBefore = points.size();
-            QVector<VRawSAPoint> temp = points;
-            temp.append(bigLine1.p2());
-            temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
-
-            if (success)
+            if (needRollback != nullptr)
             {
-                points = temp;
+                *needRollback = not success;
             }
-
-            if (success)
+            else if (IsSameDirection(bigLine1.p1(), bigLine1.p2(), px))
             {
-                px = points.last();
-            }
-
-            if (countBefore > 0)
-            {
+                points.append(px);
                 QLineF seam(px, p3);
                 seam.setAngle(seam.angle()+90);
                 seam.setLength(p.GetSAAfter(width));
                 points.append(seam.p2());
-            }
-            else
-            {
-                if (needRollback != nullptr)
-                {
-                    *needRollback = not success;
-                }
             }
         }
     }
