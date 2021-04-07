@@ -246,14 +246,15 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
     {
         if (VFuzzyComparePoints(p.at(i), p.at(i+1)))
         {
-            if (not removeFirstAndLast && (i == p.size()-1))
+            if (not removeFirstAndLast && (i == p.size()-2))
             {
-                continue;
+                p.erase(p.begin() + i);
             }
-
-            p.erase(p.begin() + i + 1);
+            else
+            {
+                p.erase(p.begin() + i + 1);
+            }
             --i;
-            continue;
         }
     }
 
