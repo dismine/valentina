@@ -28,7 +28,7 @@
 
 #include "vcontainer.h"
 
-#include <limits.h>
+#include <climits>
 #include <QVector>
 #include <QtDebug>
 #include <QUuid>

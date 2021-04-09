@@ -28,7 +28,7 @@
 
 #include "vtoolcurveintersectaxis.h"
 
-#include <limits.h>
+#include <climits>
 #include <QLineF>
 #include <QMap>
 #include <QRectF>

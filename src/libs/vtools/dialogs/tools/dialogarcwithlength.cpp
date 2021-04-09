@@ -28,7 +28,7 @@
 
 #include "dialogarcwithlength.h"
 
-#include <limits.h>
+#include <climits>
 #include <QDialog>
 #include <QLabel>
 #include <QPlainTextEdit>

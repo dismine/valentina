@@ -28,7 +28,7 @@
 
 #include "vtoolmove.h"
 
-#include <limits.h>
+#include <climits>
 #include <qiterator.h>
 #include <QColor>
 #include <QDomNode>
