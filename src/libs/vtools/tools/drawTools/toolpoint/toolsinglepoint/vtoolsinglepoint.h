@@ -106,8 +106,55 @@ protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void     ChangeLabelVisibility(quint32 id, bool visible) override;
+
+    template <class Item>
+    static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
+    static void InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data);
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class Item>
+inline void VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId)
+{
+    QSharedPointer<Item> a1;
+    QSharedPointer<Item> a2;
+
+    const QSharedPointer<Item> arc = data->GeometricObject<Item>(curveId);
+    Item arc1;
+    Item arc2;
+
+    if (not VFuzzyComparePossibleNulls(segLength, -1))
+    {
+        arc->CutArc(segLength, arc1, arc2);
+    }
+    else
+    {
+        arc->CutArc(0, arc1, arc2);
+    }
+
+    // Arc highly depend on id. Need for creating the name.
+    arc1.setId(p->id() + 1);
+    arc2.setId(p->id() + 2);
+
+    if (not VFuzzyComparePossibleNulls(segLength, -1))
+    {
+        a1 = QSharedPointer<Item>(new Item(arc1));
+        a2 = QSharedPointer<Item>(new Item(arc2));
+    }
+    else
+    {
+        a1 = QSharedPointer<Item>(new Item());
+        a2 = QSharedPointer<Item>(new Item());
+
+        // Take names for empty arcs from donors.
+        a1->setName(arc1.name());
+        a2->setName(arc2.name());
+    }
+
+    data->AddArc(a1, arc1.id(), p->id());
+    data->AddArc(a2, arc2.id(), p->id());
+}
 
 #endif // VTOOLSINGLEPOINT_H
