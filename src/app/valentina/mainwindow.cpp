@@ -3431,6 +3431,7 @@ void MainWindow::Clear()
     ui->actionLoadWatermark->setEnabled(false);
     ui->actionRemoveWatermark->setEnabled(false);
     ui->actionEditCurrentWatermark->setEnabled(false);
+    PatternChangesWereSaved(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
