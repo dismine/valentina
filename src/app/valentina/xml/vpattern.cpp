@@ -691,6 +691,13 @@ void VPattern::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::Clear()
+{
+    m_parsing = true;
+    VAbstractPattern::Clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
 {
     const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
