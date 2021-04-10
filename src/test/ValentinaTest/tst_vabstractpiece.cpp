@@ -346,6 +346,18 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#99/input.json"),
                      QStringLiteral("://smart_pattern_#99/output.json"),
                      28.346456692913389 /*seam allowance width*/);
+
+    // See file src/app/share/collection/test/smart_pattern_#120.val (private collection)
+    ASSERT_TEST_CASE("Piece 1",
+                     QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
+                     QStringLiteral("://smart_pattern_#120_piece_1/output.json"),
+                     37.795275590551185);
+
+    // See file src/app/share/collection/test/smart_pattern_#120.val (private collection)
+    ASSERT_TEST_CASE("Piece 2",
+                     QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
+                     QStringLiteral("://smart_pattern_#120_piece_2/output.json"),
+                     37.795275590551185);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
