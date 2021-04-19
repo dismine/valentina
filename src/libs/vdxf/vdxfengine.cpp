@@ -714,7 +714,7 @@ void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiec
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    if (not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
+    if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
         if (DRW_Entity *e = AAMAPolygon(detail.GetMappedContourPoints(), QChar('8'), true))
         {
@@ -927,7 +927,7 @@ void VDxfEngine::ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayo
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    if (not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
+    if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
         QVector<QPointF> sewLine = detail.GetMappedContourPoints();
 
