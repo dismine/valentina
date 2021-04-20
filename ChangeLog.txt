@@ -3,6 +3,7 @@
 - [smart-pattern/valentina#119] Improve tool Point of intersection curves.
 - [smart-pattern/valentina#120] Incorrect seam allowance.
 - Fix export to DXF AAMA/ASTM.
+- [smart-pattern/valentina#121] Incorrect elliptical arc end angle.
 
 # Version 0.7.46 Mar 31, 2021
 - Fix incorrect calculation of value for multisize measurements in Valentina.

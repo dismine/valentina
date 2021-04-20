@@ -311,23 +311,18 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
 
     for (int i=0; i < ekv.size(); i++)
     {
-        const QPointF p1 = ekv.at(i);
-        const QPointF p2 = ekvOrig.at(i);
-        const QString msg = QStringLiteral("Index: %1. Got '%2;%3', Expected '%4;%5'. Distance between points %6 mm.")
-                .arg(i).arg(p1.x()).arg(p1.y()).arg(p2.x()).arg(p2.y())
-                .arg(UnitConvertor(QLineF(p1, p2).length(), Unit::Px, Unit::Mm));
-        // Check each point. Don't use comparison float values
-        QVERIFY2(VFuzzyComparePoints(p1, p2, testAccuracy), qUtf8Printable(msg));
+        Comparison(ekv.at(i), ekvOrig.at(i), testAccuracy);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::Comparison(const QPointF &result, const QPointF &expected) const
+void AbstractTest::Comparison(const QPointF &result, const QPointF &expected, qreal testAccuracy) const
 {
-    const QString msg = QStringLiteral("Got '%2;%3', Expected '%4;%5'.")
-            .arg(result.x()).arg(result.y()).arg(expected.x()).arg(expected.y());
+    const QString msg = QStringLiteral("Actual '%2;%3', Expected '%4;%5'. Distance between points %6 mm.")
+            .arg(result.x()).arg(result.y()).arg(expected.x()).arg(expected.y())
+            .arg(UnitConvertor(QLineF(result, expected).length(), Unit::Px, Unit::Mm));
     // Check each point. Don't use comparison float values
-    QVERIFY2(VFuzzyComparePoints(result, expected), qUtf8Printable(msg));
+    QVERIFY2(VFuzzyComparePoints(result, expected, testAccuracy), qUtf8Printable(msg));
 }
 
 
