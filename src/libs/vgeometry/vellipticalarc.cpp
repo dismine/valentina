@@ -271,7 +271,7 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     QLineF endLine = startLine;
 
     startLine.setAngle(VAbstractArc::GetStartAngle());
-    endLine.setAngle(VAbstractArc::GetEndAngle());
+    endLine.setAngle(RealEndAngle());
     qreal sweepAngle = startLine.angleTo(endLine);
 
     if (qFuzzyIsNull(sweepAngle))
@@ -478,6 +478,26 @@ QPointF VEllipticalArc::GetP(qreal angle) const
 
     line2.setAngle(line2.angle() + GetRotationAngle());
     return line2.p2() + VAbstractArc::GetCenter().toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VEllipticalArc::RealEndAngle() const
+{
+    qreal endAngle = VEllipticalArc::OptimizeAngle(VAbstractArc::GetEndAngle());
+
+    if (qFuzzyIsNull(endAngle) ||
+            VFuzzyComparePossibleNulls(endAngle, 90) ||
+            VFuzzyComparePossibleNulls(endAngle, 180) ||
+            VFuzzyComparePossibleNulls(endAngle, 270) ||
+            VFuzzyComparePossibleNulls(endAngle, 360))
+    {
+        return endAngle;
+    }
+
+    endAngle = qRadiansToDegrees(qAtan2(d->radius1 * qSin(qDegreesToRadians(endAngle)),
+                                        d->radius2 * qCos(qDegreesToRadians(endAngle))));
+
+    return endAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

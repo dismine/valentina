@@ -466,10 +466,11 @@ static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
 
 constexpr qreal accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
 
-Q_REQUIRED_RESULT Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
-Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
+Q_REQUIRED_RESULT Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
+                                                                          qreal accuracy = accuracyPointOnLine);
+Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy)
 {
-    return qAbs(p1.x() - p2.x()) <= accuracyPointOnLine && qAbs(p1.y() - p2.y()) <= accuracyPointOnLine;
+    return qAbs(p1.x() - p2.x()) <= accuracy && qAbs(p1.y() - p2.y()) <= accuracy;
 }
 
 /**
