@@ -915,6 +915,8 @@ void DialogSaveLayout::ReadSettings()
     {
         ui->toolButtonLandscape->setChecked(true);
     }
+
+    SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -957,5 +959,7 @@ void DialogSaveLayout::WriteSettings() const
     {
         settings->SetTiledPDFOrientation(PageOrientation::Landscape);
     }
+
+    settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
 }
 

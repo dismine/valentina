@@ -5,6 +5,7 @@
 - Fix export to DXF AAMA/ASTM.
 - [smart-pattern/valentina#121] Incorrect elliptical arc end angle.
 - [smart-pattern/valentina#122] Extend piece bounding rect.
+- Remember last selected export format.
 
 # Version 0.7.46 Mar 31, 2021
 - Fix incorrect calculation of value for multisize measurements in Valentina.
