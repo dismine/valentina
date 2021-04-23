@@ -932,14 +932,12 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VToolSeamAllowance::boundingRect() const
 {
-    if (m_mainPathRect.isNull())
+    if (m_pieceBoundingRect.isNull())
     {
         return QGraphicsPathItem::boundingRect();
     }
-    else
-    {
-        return m_mainPathRect;
-    }
+
+    return m_pieceBoundingRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1270,7 +1268,6 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     : VInteractiveTool(initData.doc, initData.data, initData.id),
       QGraphicsPathItem(parent),
       m_mainPath(),
-      m_mainPathRect(),
       m_sceneDetails(initData.scene),
       m_drawName(initData.drawName),
       m_seamAllowance(new VNoBrushScalePathItem(this)),
@@ -1366,7 +1363,6 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
             || not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
     {
         m_mainPath = QPainterPath();
-        m_mainPathRect = QRectF();
         m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
         path = futurePath.result();
     }
@@ -1375,7 +1371,6 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
         // need for returning a bounding rect when main path is not visible
         m_mainPath = futurePath.result();
-        m_mainPathRect = m_mainPath.controlPointRect();
         path = QPainterPath();
     }
 
@@ -1395,10 +1390,14 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         path.addPath(detail.SeamAllowancePath(futureSeamAllowance.result()));
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);
+
+        m_pieceBoundingRect = m_seamAllowance->path().controlPointRect();
     }
     else
     {
         m_seamAllowance->setPath(QPainterPath());
+
+        m_pieceBoundingRect = m_mainPath.controlPointRect();
     }
 
     if (VAbstractApplication::VApp()->IsAppInGUIMode())

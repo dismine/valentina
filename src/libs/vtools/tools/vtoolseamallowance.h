@@ -176,7 +176,7 @@ private:
     Q_DISABLE_COPY(VToolSeamAllowance)
 
     QPainterPath m_mainPath; // Must be first to prevent crash
-    QRectF       m_mainPathRect;
+    QRectF       m_pieceBoundingRect{};
 
     /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *m_sceneDetails;
