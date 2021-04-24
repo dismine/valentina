@@ -2130,6 +2130,26 @@
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3402,6 +3422,10 @@
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4793,19 +4817,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Название модели:</translation>
+        <translation type="vanished">Название модели:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Номер модели:</translation>
+        <translation type="vanished">Номер модели:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Название компании / имя разработчика:</translation>
+        <translation type="vanished">Название компании / имя разработчика:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Имя клиента:</translation>
+        <translation type="vanished">Имя клиента:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4849,79 +4873,63 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Данные метки</translation>
+        <translation type="vanished">Данные метки</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Шаблон метки:</translation>
+        <translation type="vanished">Шаблон метки:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Редактировать метку выкройки</translation>
+        <translation type="vanished">Редактировать метку выкройки</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Редактировать шаблон</translation>
+        <translation type="vanished">Редактировать шаблон</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Формат даты:</translation>
+        <translation type="vanished">Формат даты:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Формат времени:</translation>
+        <translation type="vanished">Формат времени:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Сохранить данные метки.</translation>
+        <translation type="vanished">Сохранить данные метки.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
+        <translation type="vanished">Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Материалы</translation>
+        <translation type="vanished">Материалы</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Материалы выкройки:</translation>
+        <translation type="vanished">Материалы выкройки:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Управлять списком материалов выкройки</translation>
+        <translation type="vanished">Управлять списком материалов выкройки</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Управление</translation>
+        <translation type="vanished">Управление</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>Имя клиента из индивидуальных мерок</translation>
+        <translation type="vanished">Имя клиента из индивидуальных мерок</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Язык метки точки:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">гггг-мм-дд</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">гггг-мм-дд</translation>
     </message>
 </context>
 <context>
@@ -6158,6 +6166,14 @@ Apply settings anyway?</source>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished">Исключить</translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -6733,6 +6749,26 @@ Apply settings anyway?</source>
     <message>
         <source>Edit passmark length</source>
         <translation>Изменить длину надсечки</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">Имя клиента из индивидуальных мерок</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Сохранить данные метки.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
     </message>
 </context>
 <context>
@@ -9449,11 +9485,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Ошибка при создании файла «%1»! %2</translation>
+        <translation type="vanished">Ошибка при создании файла «%1»! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Критическая ошибка!</translation>
+        <translation type="vanished">Критическая ошибка!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9465,11 +9501,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Ошибка печати</translation>
+        <translation type="vanished">Ошибка печати</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Невозможно продолжить, в системе нет доступных принтеров.</translation>
+        <translation type="vanished">Невозможно продолжить, в системе нет доступных принтеров.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9477,11 +9513,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>Раскладка устарела.</translation>
+        <translation type="vanished">Раскладка устарела.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
+        <translation type="vanished">Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9493,7 +9529,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Невозможно открыть принтер %1</translation>
+        <translation type="vanished">Невозможно открыть принтер %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9505,15 +9541,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation type="vanished">При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation type="vanished">При печати многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
+        <translation type="vanished">Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9521,7 +9557,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Невозможно установить поля принтера</translation>
+        <translation type="vanished">Невозможно установить поля принтера</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9601,11 +9637,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation>Невозможно установить размер страницы принтера</translation>
+        <translation type="vanished">Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation>Невозможно установить пользовательский размер страницы принтера</translation>
+        <translation type="vanished">Невозможно установить пользовательский размер страницы принтера</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -9617,19 +9653,11 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation>Ошибка файла.
+        <translation type="vanished">Ошибка файла.
 
 %1
 
 %2</translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export raw layout data failed. %1.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9974,6 +10002,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10560,6 +10592,30 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11768,6 +11824,10 @@ Do you want to save your changes?</source>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -11840,7 +11900,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Видимость метки детали</translation>
+        <translation type="vanished">Видимость метки детали</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11942,6 +12002,70 @@ Do you want to save your changes?</source>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Опция контроля позиции метки выкройки &lt;b&gt;Недоступно, если шаблон метки выкройки пустой&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Редактировать метку выкройки</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Название модели:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Номер модели:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Название компании / имя разработчика:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Имя клиента:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Формат даты:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Формат времени:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">гггг-мм-дд</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Материалы</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Материалы выкройки:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Управлять списком материалов выкройки</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Управление</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -12030,10 +12154,6 @@ Do you want to save your changes?</source>
         <translation>Пересечение 2 (только справа)</translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12076,6 +12196,10 @@ Do you want to save your changes?</source>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Список всех установленных надсечек. Чтобы поставить надсечку, вернитесь во вкладку «Главный контур», вызовите контекстное меню у нужной точки и поставьте галочку в строке &quot;Надсечка&quot;.</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12460,6 +12584,10 @@ Do you want to save your changes?</source>
         <source>dark mode</source>
         <translation>тёмный режим</translation>
     </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -12768,6 +12896,29 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractMainWindow</name>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished">Подтвердите изменение формата</translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished">Этот файл использует предыдущую версию формата v%1. Текущая версия -  v%2. При сохранении файла с этой версией приложения будет обновлена ​​версия формата для этого файла. Это может помешать вам открыть файл со старыми версиями приложения. Вы действительно хотите продолжить?</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Значения, разделенные запятыми</translation>
+    </message>
+    <message>
+        <source>values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Экспорт в CSV</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -12988,6 +13139,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
         <translation>Ошибка подготовки данных для раскладки: список деталей пуст</translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13825,6 +13983,33 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Невозможно установить поля принтера</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export raw layout data failed. %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Ошибка при создании файла «%1»! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14357,6 +14542,77 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">При печати многостраничного документа все страницы должны быть одного размера.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Ошибка печати</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Невозможно продолжить, в системе нет доступных принтеров.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Невозможно установить поля принтера</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished">Невозможно установить пользовательский размер страницы принтера</translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished">Ошибка файла.
+
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">Раскладка устарела.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
+    </message>
+</context>
+<context>
     <name>VRawLayout</name>
     <message>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
@@ -14373,6 +14629,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>layouts</source>
         <translation type="vanished">раскладки</translation>
+    </message>
+</context>
+<context>
+    <name>VSimpleCurve</name>
+    <message>
+        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

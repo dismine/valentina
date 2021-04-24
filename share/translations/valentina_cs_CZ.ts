@@ -2130,6 +2130,26 @@
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3402,6 +3422,10 @@
     <message>
         <source>Delete</source>
         <translation>Smazat</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4793,19 +4817,19 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Název střihu:</translation>
+        <translation type="vanished">Název střihu:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Číslo střihu:</translation>
+        <translation type="vanished">Číslo střihu:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Jméno společnosti/návrháře:</translation>
+        <translation type="vanished">Jméno společnosti/návrháře:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Jméno zákazníka:</translation>
+        <translation type="vanished">Jméno zákazníka:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4849,79 +4873,63 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Data popisu</translation>
+        <translation type="vanished">Data popisu</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Předloha popisu:</translation>
+        <translation type="vanished">Předloha popisu:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Upravit popis střihu</translation>
+        <translation type="vanished">Upravit popis střihu</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Upravit předlohu</translation>
+        <translation type="vanished">Upravit předlohu</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Formát data:</translation>
+        <translation type="vanished">Formát data:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Formát času:</translation>
+        <translation type="vanished">Formát času:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Uložit data popisu.</translation>
+        <translation type="vanished">Uložit data popisu.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
+        <translation type="vanished">Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Materiály</translation>
+        <translation type="vanished">Materiály</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Materiály střihu:</translation>
+        <translation type="vanished">Materiály střihu:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Spravovat seznam materiálů střihů</translation>
+        <translation type="vanished">Spravovat seznam materiálů střihů</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Spravovat</translation>
+        <translation type="vanished">Spravovat</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>Jméno zákazníka jednotlivých rozměrů</translation>
+        <translation type="vanished">Jméno zákazníka jednotlivých rozměrů</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Jazyk popisu:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">rrrr mm dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">rrrr mm dd</translation>
     </message>
 </context>
 <context>
@@ -6158,6 +6166,14 @@ Přesto použít nastavení?</translation>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished">Vyloučit</translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -6733,6 +6749,26 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Edit passmark length</source>
         <translation>Upravit délku značky sestavení</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">Jméno zákazníka jednotlivých rozměrů</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Uložit data popisu.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
 </context>
 <context>
@@ -9450,11 +9486,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
+        <translation type="vanished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Vážná chyba!</translation>
+        <translation type="vanished">Vážná chyba!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9466,11 +9502,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Chyba při tisku</translation>
+        <translation type="vanished">Chyba při tisku</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
+        <translation type="vanished">Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9478,11 +9514,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>Rozvržení je zastaralé.</translation>
+        <translation type="vanished">Rozvržení je zastaralé.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Rozvržení nebylo od poslední změny střihu aktualizováno. Chcete pokračovat?</translation>
+        <translation type="vanished">Rozvržení nebylo od poslední změny střihu aktualizováno. Chcete pokračovat?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9494,7 +9530,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Nelze otevřít tiskárnu %1</translation>
+        <translation type="vanished">Nelze otevřít tiskárnu %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9506,15 +9542,15 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Pro náhled vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+        <translation type="vanished">Pro náhled vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+        <translation type="vanished">Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Strany budou ořezány, protože se neshodují s velikostí papíru tiskárny.</translation>
+        <translation type="vanished">Strany budou ořezány, protože se neshodují s velikostí papíru tiskárny.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9522,7 +9558,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Nelze nastavit okraje tiskárny</translation>
+        <translation type="vanished">Nelze nastavit okraje tiskárny</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9602,11 +9638,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation>Nelze nastavit velikost strany tiskárny</translation>
+        <translation type="vanished">Nelze nastavit velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation>Nelze nastavit vlastní velikost strany tiskárny</translation>
+        <translation type="vanished">Nelze nastavit vlastní velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -9618,19 +9654,11 @@ Chcete uložit své změny?</translation>
 %1
 
 %2</source>
-        <translation>Chyba souboru.
+        <translation type="vanished">Chyba souboru.
 
 %1
 
 %2</translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export raw layout data failed. %1.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9975,6 +10003,10 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10561,6 +10593,30 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11769,6 +11825,10 @@ Chcete uložit změny?</translation>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -11841,7 +11901,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Popis jednotlivosti (dílu střihu) viditelný</translation>
+        <translation type="vanished">Popis jednotlivosti (dílu střihu) viditelný</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11943,6 +12003,70 @@ Chcete uložit změny?</translation>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Volby pro ovládání polohy popisu střihu. &lt;b&gt;Nedostupné, pokud je předloha střihu prázdná&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Upravit popis střihu</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Název střihu:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Číslo střihu:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Jméno společnosti/návrháře:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Jméno zákazníka:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Formát data:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Formát času:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">rrrr mm dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Materiály</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Materiály střihu:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Spravovat seznam materiálů střihů</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Spravovat</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -12032,7 +12156,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation>Ostrý úhel, který vypadá, že je uvnitř střihu</translation>
+        <translation type="vanished">Ostrý úhel, který vypadá, že je uvnitř střihu</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -12077,6 +12201,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Ostrý úhel, který vypadá, že je uvnitř dílu</translation>
     </message>
 </context>
 <context>
@@ -12454,6 +12582,10 @@ Chcete uložit změny?</translation>
         <source>dark mode</source>
         <translation>Tmavý vzhled</translation>
     </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -12762,6 +12894,29 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractMainWindow</name>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished">Potvrdit přepsání formátu</translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Čárkou oddělené hodnoty</translation>
+    </message>
+    <message>
+        <source>values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Vyvést do CSV</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -12981,6 +13136,13 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13819,6 +13981,33 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Nelze nastavit velikost strany tiskárny</translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Nelze nastavit okraje tiskárny</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export raw layout data failed. %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14351,6 +14540,77 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Pro náhled vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Strany budou ořezány, protože se neshodují s velikostí papíru tiskárny.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Chyba při tisku</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Nelze nastavit okraje tiskárny</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished">Nelze nastavit vlastní velikost strany tiskárny</translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Nelze nastavit velikost strany tiskárny</translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished">Chyba souboru.
+
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">Rozvržení je zastaralé.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">Rozvržení nebylo od poslední změny střihu aktualizováno. Chcete pokračovat?</translation>
+    </message>
+</context>
+<context>
     <name>VRawLayout</name>
     <message>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
@@ -14367,6 +14627,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>layouts</source>
         <translation type="vanished">Rozvržení</translation>
+    </message>
+</context>
+<context>
+    <name>VSimpleCurve</name>
+    <message>
+        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
