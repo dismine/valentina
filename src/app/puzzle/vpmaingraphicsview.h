@@ -112,6 +112,11 @@ private:
      */
     bool m_showTilesTmp{false};
 
+    /**
+     * variable to hold temporarly hte value of the show grid
+     */
+    bool m_showGridTmp{false};
+
 };
 
 #endif // VPMAINGRAPHICSVIEW_H

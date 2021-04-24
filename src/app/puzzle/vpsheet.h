@@ -268,6 +268,70 @@ public:
      */
     void ClearSelection();
 
+    /**
+     * @brief GetShowGrid Returns true if the placement grid has to be shown on the current sheet
+     * @return
+     */
+    bool GetShowGrid();
+
+    /**
+     * @brief SetShowGrid Returns true if the placement grid has to be shown on the current sheet
+     * @param value whether to show the grid or not
+     */
+    void SetShowGrid(bool value);
+
+    /**
+    * @brief GetGridColWidth returns the placement grid column width in Unit::Px
+    * @return the placement grid column width in Unit::Px
+    */
+    qreal GetGridColWidth() const;
+
+    /**
+    * @brief GetGridColWidth returns the placement grid column width in the layout's unit
+    * @return the placement grid column width in the layout's unit
+    */
+    qreal GetGridColWidthConverted() const;
+
+    /**
+     * @brief SetGridColWidth sets the placement grid column width to the given value, the unit has to be Unit::Px
+     * @param value the placement grid column width in Unit::Px
+     */
+    void SetGridColWidth(qreal value);
+
+    /**
+     * @brief SetGridColWidthConverted sets the placement grid column width to the given value, the unit has to be in the layout's unit
+     * @param value the placement grid column width in the layout's unit
+     */
+    void SetGridColWidthConverted(qreal value);
+
+    /**
+    * @brief GetGridRowHeight returns the placement grid row height in Unit::Px
+    * @return the placement grid row height in Unit::Px
+    */
+    qreal GetGridRowHeight() const;
+
+    /**
+    * @brief GetGridRowHeightConverted returns the placement grid row height in the layout's unit
+    * @return the placement grid row height in the layout's unit
+    */
+    qreal GetGridRowHeightConverted() const;
+
+    /**
+     * @brief SetGridRowHeight sets the placement grid row height to the given value, the unit has to be Unit::Px
+     * @param value the placement grid row height in Unit::Px
+     */
+    void SetGridRowHeight(qreal value);
+
+    /**
+     * @brief SetGridRowHeightConverted sets the placement grid row height to the given value, the unit has to be in the layout's unit
+     * @param value the placement grid row height in the layout's unit
+     */
+    void SetGridRowHeightConverted(qreal value);
+
+
+
+
+
     void SetStickyEdges(bool state);
     bool GetStickyEdges() const;
 
@@ -304,6 +368,21 @@ private:
      * @brief m_piecesGap the pieces gap in Unit::Px
      */
     qreal m_piecesGap{0};
+
+    // placement grid
+    /**
+     * @brief GetShowGrid Returns true if the placement grid has to be shown on the current sheet
+     */
+    bool m_showGrid{false};
+    /**
+     * @brief m_gridColWidth the column width of the placement grid in Unit::Px
+     */
+    qreal m_gridColWidth{0};
+
+    /**
+     * @brief m_gridRowHeight the row height of the placement grid in Unit::Px
+     */
+    qreal m_gridRowHeight{0};
 
     bool m_stickyEdges{false};
 };

@@ -65,7 +65,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     // create a standard sheet
     VPSheet *sheet = new VPSheet(m_layout);
-    sheet->SetName(QObject::tr("Sheet #1"));
+    sheet->SetName(QObject::tr("Sheet 1"));
     m_layout->AddSheet(sheet);
     m_layout->SetFocusedSheet();
 
@@ -82,7 +82,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->SetTilesSizeConverted(21,29.7);
     m_layout->SetTilesOrientation(PageOrientation::Portrait);
     m_layout->SetTilesMarginsConverted(1,1,1,1);
-    m_layout->SetShowTiles(true);
+//    m_layout->SetShowTiles(true);
 
     // --------------------------------------------------------
 
@@ -509,6 +509,11 @@ void VPMainWindow::SetPropertyTabSheetData()
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
 
+    // set placement grid
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, m_layout->GetFocusedSheet()->GetGridColWidthConverted());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, m_layout->GetFocusedSheet()->GetGridRowHeightConverted());
+    SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->GetFocusedSheet()->GetShowGrid());
+
     // set pieces gap
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->GetFocusedSheet()->GetPiecesGapConverted());
 
@@ -779,7 +784,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
 
         printer->setOutputFileName(fileName);
         printer->setResolution(static_cast<int>(PrintDPI));
-        printer->setDocName("Test"); // FIXME
+        printer->setDocName(m_layout->GetFocusedSheet()->GetName());
 
         // -------------  Set up the painter
         QPainter painter;
@@ -1151,6 +1156,27 @@ void VPMainWindow::on_SheetMarginChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_checkBoxSheetShowGrid_toggled(bool checked)
+{
+    m_layout->GetFocusedSheet()->SetShowGrid(checked);
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_doubleSpinBoxSheetGridColWidth_valueChanged(double value)
+{
+    m_layout->GetFocusedSheet()->SetGridColWidthConverted(value);
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_doubleSpinBoxSheetGridRowHeight_valueChanged(double value)
+{
+    m_layout->GetFocusedSheet()->SetGridRowHeightConverted(value);
+    m_graphicsView->RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
 {
     PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
@@ -1253,7 +1279,7 @@ void VPMainWindow::on_pushButtonTilesExport_clicked()
     QString dir = QDir::homePath();
     QString filters(tr("PDF Files") + QLatin1String("(*.pdf)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".pdf"),
+                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + QLatin1String(".pdf"),
                                                     filters, nullptr
 #ifdef Q_OS_LINUX
                                                     , QFileDialog::DontUseNativeDialog
@@ -1323,7 +1349,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
     QString dir = QDir::homePath();
     QString filters(tr("SVG Files") + QLatin1String("(*.svg)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".svg"),
+                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + QLatin1String(".svg"),
                                                     filters, nullptr
 #ifdef Q_OS_LINUX
                                                     , QFileDialog::DontUseNativeDialog
@@ -1341,7 +1367,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
         generator.setFileName(fileName);
         generator.setSize(QSize(qFloor(s.width()),qFloor(s.height())));
         generator.setViewBox(r);
-        generator.setTitle(tr("Pattern"));
+        generator.setTitle(m_layout->GetFocusedSheet()->GetName());
         generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
         generator.setResolution(static_cast<int>(PrintDPI));
 
@@ -1373,6 +1399,42 @@ void VPMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
     if(m_selectedPieces.count() == 1)
     {
         m_selectedPieces.first()->SetPieceMirrored(checked);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotate90Anticlockwise_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateBy(90);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotate90Clockwise_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateBy(-90);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineVertical_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateToGrainline(90, true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked()
+{
+    if(m_selectedPieces.count() == 1)
+    {
+         m_selectedPieces.first()->RotateToGrainline(0, true);
     }
 }
 

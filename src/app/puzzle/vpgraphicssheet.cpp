@@ -57,6 +57,8 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     painter->setPen(pen);
     painter->setBrush(noBrush);
 
+    QRectF sheetRect = GetSheetRect();
+
     if(m_showMargin)
     {
         painter->drawRect(GetMarginsRect());
@@ -67,10 +69,41 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         pen.setColor(Qt::black);
 
         painter->setPen(pen);
-        painter->drawRect(GetSheetRect());
+        painter->drawRect(sheetRect);
     }
 
-    m_boundingRect = GetSheetRect();
+    if(m_sheet->GetShowGrid())
+    {
+        pen.setColor(QColor(204,204,204));
+        painter->setPen(pen);
+
+        qreal colWidth = m_sheet->GetGridColWidth();
+        if(colWidth > 0)
+        {
+            qreal colX = colWidth;
+            while (colX < sheetRect.right())
+            {
+                QLineF line = QLineF(colX, 0, colX, sheetRect.bottom());
+                painter->drawLine(line);
+                colX += colWidth;
+            }
+        }
+
+        qreal rowHeight = m_sheet->GetGridRowHeight();
+        if(rowHeight > 0)
+        {
+            qreal rowY = rowHeight;
+
+            while (rowY < sheetRect.bottom())
+            {
+                QLineF line = QLineF(0, rowY, sheetRect.right(), rowY);
+                painter->drawLine(line);
+                rowY += rowHeight;
+            }
+        }
+    }
+
+    m_boundingRect = sheetRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,7 +148,6 @@ void VPGraphicsSheet::SetShowBorder(bool value)
 {
    m_showBorder = value;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsSheet::boundingRect() const

@@ -136,6 +136,31 @@ void VPPiece::SetRotation(qreal angle)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::RotateBy(qreal angle)
+{
+    SetRotation(m_pieceAngle + angle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::RotateToGrainline(qreal angleOfGrainline, bool add180IfAlreadyInPosition)
+{
+    qreal newAngle = -GrainlineAngle() + angleOfGrainline;
+    if(newAngle < 0)
+    {
+        newAngle += 360;
+    }
+
+    if(not VFuzzyComparePossibleNulls(m_pieceAngle, newAngle))
+    {
+        SetRotation(newAngle);
+    }
+    else if(add180IfAlreadyInPosition)
+    {
+        newAngle += 180;
+        SetRotation(newAngle);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPPiece::GetRotation()

@@ -327,6 +327,29 @@ private slots:
     void on_SheetMarginChanged();
 
     /**
+     * @brief on_checkBoxSheetShowGrid_toggled When the checkbox "show grid" is
+     * clicked
+     * @param checked
+     */
+    void on_checkBoxSheetShowGrid_toggled(bool checked);
+
+    /**
+     * @brief on_doubleSpinBoxSheetGridColWidth_valueChanged When the "grid placement
+     * column width" value is changed in the layout property tab.
+     * The slot is automatically connected through name convention.
+     * @param value the new value of the grid placement column width
+     */
+    void on_doubleSpinBoxSheetGridColWidth_valueChanged(double value);
+
+    /**
+     * @brief on_doubleSpinBoxSheetGridRowHeight_valueChanged When the "grid placement
+     * row height" value is changed in the layout property tab.
+     * The slot is automatically connected through name convention.
+     * @param value the new value of the grid placement row height
+     */
+    void on_doubleSpinBoxSheetGridRowHeight_valueChanged(double value);
+
+    /**
      * @brief LayoutFollowGrainlineChanged When one of the radio boxes for the
      * "Follow grainline" has been clicked in the sheet property tab.
      */
@@ -370,7 +393,7 @@ private slots:
     /**
      * @brief on_checkBoxTilesShowTiles_toggled When the checkbox "show tiles" is
      * clicked
-     * @param checked´
+     * @param checked
      */
     void on_checkBoxTilesShowTiles_toggled(bool checked);
 
@@ -427,6 +450,30 @@ private slots:
      * @param checked the new checked value
      */
     void on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked);
+
+    /**
+     * @brief on_pushButtonCurrentPieceRotate90Antilockwise_clicked When the 90
+     * anticlockwise angle button is clicked
+     */
+    void on_pushButtonCurrentPieceRotate90Anticlockwise_clicked();
+
+    /**
+     * @brief on_pushButtonCurrentPieceRotate90Clockwise_clicked When the 90
+     * clockwise angle button is clicked
+     */
+    void on_pushButtonCurrentPieceRotate90Clockwise_clicked();
+
+    /**
+     * @brief on_pushButtonCurrentPieceRotateGrainlineVertical_clicked
+     * When the grainline vertical angle button is clicked
+     */
+    void on_pushButtonCurrentPieceRotateGrainlineVertical_clicked();
+
+    /**
+     * @brief on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked
+     * When the grainline horizontal angle button is clicked
+     */
+    void on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked();
 
     /**
      * @brief on_doubleSpinBoxCurrentPieceAngle_valueChanged When the

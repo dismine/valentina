@@ -467,3 +467,64 @@ void VPSheet::ClearSelection()
 {
     m_pieceList->ClearSelection();
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPSheet::GetShowGrid()
+{
+    return m_showGrid;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetShowGrid(bool value)
+{
+    m_showGrid = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPSheet::GetGridColWidth() const
+{
+    return m_gridColWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPSheet::GetGridColWidthConverted() const
+{
+    return UnitConvertor(m_gridColWidth, Unit::Px, m_layout->GetUnit());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetGridColWidth(qreal value)
+{
+    m_gridColWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetGridColWidthConverted(qreal value)
+{
+    m_gridColWidth = UnitConvertor(value, m_layout->GetUnit(), Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPSheet::GetGridRowHeight() const
+{
+    return m_gridRowHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPSheet::GetGridRowHeightConverted() const
+{
+    return UnitConvertor(m_gridRowHeight, Unit::Px, m_layout->GetUnit());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetGridRowHeight(qreal value)
+{
+    m_gridRowHeight = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetGridRowHeightConverted(qreal value)
+{
+    m_gridRowHeight = UnitConvertor(value, m_layout->GetUnit(), Unit::Px);
+}
