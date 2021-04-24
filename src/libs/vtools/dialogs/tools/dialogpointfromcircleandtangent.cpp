@@ -28,7 +28,7 @@
 
 #include "dialogpointfromcircleandtangent.h"
 
-#include <limits.h>
+#include <climits>
 #include <QColor>
 #include <QComboBox>
 #include <QDialog>

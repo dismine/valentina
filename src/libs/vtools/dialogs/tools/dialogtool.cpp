@@ -28,7 +28,7 @@
 
 #include "dialogtool.h"
 
-#include <limits.h>
+#include <climits>
 #include <qiterator.h>
 #include <qnumeric.h>
 #include <QCloseEvent>

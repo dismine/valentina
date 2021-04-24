@@ -417,6 +417,8 @@ private:
 
     QVector<qreal> DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension);
     void SetDimensionBases();
+
+    void StoreDimensions();
 };
 
 #endif // MAINWINDOW_H

@@ -691,6 +691,13 @@ void VPattern::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::Clear()
+{
+    m_parsing = true;
+    VAbstractPattern::Clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
 {
     const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
@@ -1368,7 +1375,7 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
     try
     {
         VToolLineInitData initData;
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstPoint = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         initData.secondPoint = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
         initData.typeLine = GetParametrString(domElement, AttrTypeLine, TypeLineLine);
@@ -2491,7 +2498,7 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
 
         initData.p1id = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         initData.p2id = GetParametrUInt(domElement, AttrPoint2, NULL_ID_STR);
@@ -2542,7 +2549,7 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         const quint32 point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         const quint32 point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
         const qreal angle1 = GetParametrDouble(domElement, AttrAngle1, QStringLiteral("270.0"));
@@ -2591,7 +2598,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         initData.point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
 
@@ -2663,7 +2670,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
 
         const quint32 point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         const quint32 point2 = GetParametrUInt(domElement, AttrPoint2, NULL_ID_STR);
@@ -2717,7 +2724,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, QStringLiteral("1.0"));
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
@@ -2789,7 +2796,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
@@ -2883,7 +2890,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
@@ -3043,7 +3050,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.radius = GetParametrString(domElement, AttrRadius, QStringLiteral("10"));
         const QString r = initData.radius;//need for saving fixed formula;
@@ -3096,7 +3103,7 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.radius1 = GetParametrString(domElement, AttrRadius1, QStringLiteral("10"));
         initData.radius2 = GetParametrString(domElement, AttrRadius2, QStringLiteral("10"));
@@ -3234,7 +3241,7 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.radius = GetParametrString(domElement, AttrRadius, QStringLiteral("10"));
         const QString r = initData.radius;//need for saving fixed formula;
@@ -3287,7 +3294,7 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.origin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.angle = GetParametrString(domElement, AttrAngle, QStringLiteral("10"));
         const QString a = initData.angle;//need for saving fixed formula;
@@ -3397,7 +3404,7 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.formulaAngle = GetParametrString(domElement, AttrAngle, QChar('0'));
         const QString a = initData.formulaAngle;//need for saving fixed formula;
         initData.formulaRotationAngle = GetParametrString(domElement, AttrRotationAngle, QChar('0'));

@@ -30,20 +30,23 @@
 
 #include <QDir>
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QJsonObject>
 #include <QString>
 #include <QTemporaryFile>
 #include <QTextStream>
 
 class QPointF;
-class QJsonObject;
 template <class T> class QVector;
 class VSAPoint;
+class VRawSAPoint;
 
 #if !defined(V_NO_ASSERT)
 QJsonObject PointToJson(const QPointF &point);
 void VectorToJson(const QVector<QPointF> &points, QJsonObject &json);
-void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json);
+
+template <class T>
+void VectorToJson(const QVector<T> &points, QJsonObject &json);
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
@@ -78,6 +81,17 @@ void DumpVector(const QVector<T> &points, const QString &templateName=QString())
         out.flush();
     }
 }
-#endif // !defined(V_NO_ASSERT)
 
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+void VectorToJson(const QVector<T> &points, QJsonObject &json)
+{
+    QJsonArray pointsArray;
+    for (auto point: points)
+    {
+        pointsArray.append(point.toJson());
+    }
+    json[QLatin1String("vector")] = pointsArray;
+}
+#endif // !defined(V_NO_ASSERT)
 #endif // TESTPATH_H

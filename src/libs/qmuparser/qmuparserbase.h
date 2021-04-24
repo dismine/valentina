@@ -22,7 +22,7 @@
 #ifndef QMUQPARSERBASE_H
 #define QMUQPARSERBASE_H
 
-#include <limits.h>
+#include <climits>
 #include <qcompilerdetection.h>
 #include <QChar>
 #include <QMap>

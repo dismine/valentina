@@ -28,7 +28,7 @@
 
 #include "vistoolmove.h"
 
-#include <limits.h>
+#include <climits>
 #include <QGraphicsLineItem>
 #include <QGraphicsPathItem>
 #include <QGuiApplication>

@@ -119,9 +119,9 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
     auto curve1 = initData.data->GeometricObject<VAbstractCurve>(initData.firstCurveId);
     auto curve2 = initData.data->GeometricObject<VAbstractCurve>(initData.secondCurveId);
 
-    QPointF point;
+    QPointF fPoint;
     const bool success = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(),
-                                                                   initData.vCrossPoint, initData.hCrossPoint, &point);
+                                                                   initData.vCrossPoint, initData.hCrossPoint, &fPoint);
 
     if (not success)
     {
@@ -131,16 +131,26 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    const qreal segLength1 = curve1->GetLengthByPoint(fPoint);
+    const qreal segLength2 = curve2->GetLengthByPoint(fPoint);
+
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
+
+        VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p, initData.firstCurveId, initData.data);
+        VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p, initData.secondCurveId, initData.data);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+
+        VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p, initData.firstCurveId, initData.data);
+        VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p, initData.secondCurveId, initData.data);
+
         if (initData.parse != Document::FullParse)
         {
             initData.doc->UpdateToolData(initData.id, initData.data);

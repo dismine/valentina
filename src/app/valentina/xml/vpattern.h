@@ -98,6 +98,7 @@ public:
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
     virtual QString GenerateSuffix() const override;
+    virtual void    Clear() override;
 
     bool IsReadOnly() const;
     void SetReadOnly(bool rOnly);

@@ -1559,6 +1559,26 @@
         <source>Measurement: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Height label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
