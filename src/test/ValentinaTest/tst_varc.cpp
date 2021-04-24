@@ -454,5 +454,5 @@ void TST_VArc::TestCurveIntersectAxis()
     const bool found = VAbstractCurve::CurveIntersectAxis(basePoint, angle, curvePoints, &intersectionPoint);
     QCOMPARE(found, result);
 
-    Comparison(intersectionPoint, crosPoint);
+    Comparison(intersectionPoint, crosPoint, accuracyPointOnLine);
 }

@@ -112,6 +112,8 @@ private:
     qreal MaxLength() const;
 
     QPointF GetP(qreal angle) const;
+
+    qreal RealEndAngle() const;
 };
 
 Q_DECLARE_METATYPE(VEllipticalArc)

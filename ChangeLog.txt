@@ -1,4 +1,23 @@
-# Version 0.7.45 (unreleased)
+# Version 0.7.47 (unreleased)
+- [smart-pattern/valentina#118] Incorrect seam allowance.
+- [smart-pattern/valentina#119] Improve tool Point of intersection curves.
+- [smart-pattern/valentina#120] Incorrect seam allowance.
+- Fix export to DXF AAMA/ASTM.
+- [smart-pattern/valentina#121] Incorrect elliptical arc end angle.
+- [smart-pattern/valentina#122] Extend piece bounding rect.
+- Remember last selected export format.
+
+# Version 0.7.46 Mar 31, 2021
+- Fix incorrect calculation of value for multisize measurements in Valentina.
+- [smart-pattern/valentina#109] Pattern label template placeholder with dimension label value.
+- Incorrect duplication of a piece. Missing restoring pins.
+- [smart-pattern/valentina#112] Incorrect seam allowance.
+- [smart-pattern/valentina#113] Incorrect seam allowance.
+- [smart-pattern/valentina#114] Incorrect seam allowance.
+- Fixed bugs.
+- Updated translations.
+
+# Version 0.7.45 Feb 26, 2021
 - Fix incorrect seam allowance for angle type second edge right angle.
 - Fix regression with country flags.
 - Fix bug in seam allowance.

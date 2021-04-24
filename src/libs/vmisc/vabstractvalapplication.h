@@ -108,6 +108,18 @@ public:
     qreal GetDimensionWaist() const;
     void  SetDimensionWaist(qreal dimensionWaist);
 
+    QString GetDimensionHeightLabel() const;
+    void    SetDimensionHeightLabel(const QString &label);
+
+    QString GetDimensionSizeLabel() const;
+    void    SetDimensionSizeLabel(const QString &label);
+
+    QString GetDimensionHipLabel() const;
+    void    SetDimensionHipLabel(const QString &label);
+
+    QString GetDimensionWaistLabel() const;
+    void    SetDimensionWaistLabel(const QString &label);
+
     virtual void OpenSettings() override;
     VValentinaSettings *ValentinaSettings();
 
@@ -131,6 +143,11 @@ protected:
     qreal m_dimensionSize{0};
     qreal m_dimensionHip{0};
     qreal m_dimensionWaist{0};
+
+    QString m_dimensionHeightLabel{};
+    QString m_dimensionSizeLabel{};
+    QString m_dimensionHipLabel{};
+    QString m_dimensionWaistLabel{};
 
     Unit m_dimensionSizeUnits{Unit::Cm};
 
@@ -361,6 +378,54 @@ inline qreal VAbstractValApplication::GetDimensionWaist() const
 inline void VAbstractValApplication::SetDimensionWaist(qreal dimensionWaist)
 {
     m_dimensionWaist = dimensionWaist;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractValApplication::GetDimensionHeightLabel() const
+{
+    return m_dimensionHeightLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractValApplication::SetDimensionHeightLabel(const QString &label)
+{
+    m_dimensionHeightLabel = label;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractValApplication::GetDimensionSizeLabel() const
+{
+    return m_dimensionSizeLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractValApplication::SetDimensionSizeLabel(const QString &label)
+{
+    m_dimensionSizeLabel = label;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractValApplication::GetDimensionHipLabel() const
+{
+    return m_dimensionHipLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractValApplication::SetDimensionHipLabel(const QString &label)
+{
+    m_dimensionHipLabel = label;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractValApplication::GetDimensionWaistLabel() const
+{
+    return m_dimensionWaistLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractValApplication::SetDimensionWaistLabel(const QString &label)
+{
+    m_dimensionWaistLabel = label;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

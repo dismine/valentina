@@ -43,7 +43,7 @@ class VPTileFactory : QObject
     Q_OBJECT
 
 public:
-    VPTileFactory(VPLayout *layout, VCommonSettings *settings);
+    VPTileFactory(VPLayout *layout, VCommonSettings *commonSettings);
 
     ~VPTileFactory();
 

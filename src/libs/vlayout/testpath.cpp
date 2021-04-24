@@ -28,7 +28,6 @@
 #include "testpath.h"
 
 #include <QVector>
-#include <QJsonArray>
 #include <QTemporaryFile>
 #include <QJsonObject>
 #include <QTextStream>
@@ -40,7 +39,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
-QJsonObject PointToJson(const QPointF &point)
+auto PointToJson(const QPointF &point) -> QJsonObject
 {
     QJsonObject pointObject
     {
@@ -58,17 +57,6 @@ void VectorToJson(const QVector<QPointF> &points, QJsonObject &json)
     for (auto point: points)
     {
         pointsArray.append(PointToJson(point));
-    }
-    json[QLatin1String("vector")] = pointsArray;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json)
-{
-    QJsonArray pointsArray;
-    for (auto point: points)
-    {
-        pointsArray.append(point.toJson());
     }
     json[QLatin1String("vector")] = pointsArray;
 }

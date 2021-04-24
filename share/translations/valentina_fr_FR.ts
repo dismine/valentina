@@ -2110,6 +2110,46 @@
         <source>Measurement: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Height label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -2262,7 +2302,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <source>Radius1:</source>
-        <translation>Rayon1 :</translation>
+        <translation>Rayon1&#xa0;:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2282,7 +2322,7 @@
     </message>
     <message>
         <source>Radius2:</source>
-        <translation>Rayon2 :</translation>
+        <translation>Rayon2&#xa0;:</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -3382,6 +3422,10 @@
     <message>
         <source>Delete</source>
         <translation>Effacer</translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4768,19 +4812,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Nom du patron :</translation>
+        <translation type="vanished">Nom du patron :</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Numéro de patron :</translation>
+        <translation type="vanished">Numéro de patron :</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Nom de Société/Modéliste :</translation>
+        <translation type="vanished">Nom de Société/Modéliste :</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Nom du client :</translation>
+        <translation type="vanished">Nom du client :</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4820,79 +4864,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Données de l&apos;étiquette</translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Données de l&apos;étiquette</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Matières</translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Matières</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Gérer</translation>
-    </message>
-    <message>
-        <source>The customer name from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Gérer</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Langue:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">yyyy-MM-dd</translation>
     </message>
 </context>
 <context>
@@ -6128,6 +6116,14 @@ Apply settings anyway?</source>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -6702,6 +6698,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit passmark length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9407,11 +9423,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Création du fichier &apos;%1&apos; A échoué ! %2</translation>
+        <translation type="vanished">Création du fichier &apos;%1&apos; A échoué ! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Erreur critique!</translation>
+        <translation type="vanished">Erreur critique!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9423,11 +9439,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Erreur d&apos;impression</translation>
+        <translation type="vanished">Erreur d&apos;impression</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Impossible de continuer car il n&apos;y a aucune imprimantes disponibles.</translation>
+        <translation type="vanished">Impossible de continuer car il n&apos;y a aucune imprimantes disponibles.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9435,11 +9451,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>Le plan de coupe est figée.</translation>
+        <translation type="vanished">Le plan de coupe est figée.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Le plan de coupe n&apos;a pas été mise à jour depuis la dernière modification du patron. Voulez-vous continuer ?</translation>
+        <translation type="vanished">Le plan de coupe n&apos;a pas été mise à jour depuis la dernière modification du patron. Voulez-vous continuer ?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9451,7 +9467,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Impossible d&apos;utiiser l&apos;imprimante %1</translation>
+        <translation type="vanished">Impossible d&apos;utiiser l&apos;imprimante %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9463,23 +9479,19 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Pour avoir un aperçu d&apos;un document multipages, toutes les feuilles doivent faire la même taille.</translation>
+        <translation type="vanished">Pour avoir un aperçu d&apos;un document multipages, toutes les feuilles doivent faire la même taille.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Pour imprimer un document multipages, toutes les feuilles doivent faire la même taille.</translation>
+        <translation type="vanished">Pour imprimer un document multipages, toutes les feuilles doivent faire la même taille.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Les pages vont être tronquées du fait de la taille du papier de l&apos;imprimante.</translation>
+        <translation type="vanished">Les pages vont être tronquées du fait de la taille du papier de l&apos;imprimante.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
         <translation type="vanished">Impossible de créer l&apos;emplacement</translation>
-    </message>
-    <message>
-        <source>Cannot set printer margins</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9554,31 +9566,7 @@ Voulez-vous sauvegarder les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export raw layout data failed. %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9912,6 +9900,10 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10497,6 +10489,30 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11685,6 +11701,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -11757,7 +11777,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>étiquette pièce de patron visible</translation>
+        <translation type="vanished">étiquette pièce de patron visible</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11859,6 +11879,70 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Nom du patron :</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Numéro de patron :</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Nom de Société/Modéliste :</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Nom du client :</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Matières</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Gérer</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -11947,10 +12031,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11992,6 +12072,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12370,6 +12454,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>dark mode</source>
         <translation>Mode nuit</translation>
     </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -12673,6 +12761,29 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractMainWindow</name>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Valeur de signe de séparation</translation>
+    </message>
+    <message>
+        <source>values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Exporter vers CVS</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -12888,6 +12999,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13717,6 +13835,33 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export raw layout data failed. %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Création du fichier &apos;%1&apos; A échoué ! %2</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
@@ -14249,6 +14394,73 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Pour imprimer un document multipages, toutes les feuilles doivent faire la même taille.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Pour avoir un aperçu d&apos;un document multipages, toutes les feuilles doivent faire la même taille.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Les pages vont être tronquées du fait de la taille du papier de l&apos;imprimante.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Erreur d&apos;impression</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Impossible de continuer car il n&apos;y a aucune imprimantes disponibles.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">Le plan de coupe est figée.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">Le plan de coupe n&apos;a pas été mise à jour depuis la dernière modification du patron. Voulez-vous continuer ?</translation>
+    </message>
+</context>
+<context>
     <name>VRawLayout</name>
     <message>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
@@ -14257,6 +14469,13 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VSimpleCurve</name>
+    <message>
+        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

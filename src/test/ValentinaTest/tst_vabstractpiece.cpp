@@ -28,6 +28,7 @@
 
 #include "tst_vabstractpiece.h"
 #include "../vlayout/vabstractpiece.h"
+#include "../vlayout/vrawsapoint.h"
 
 #include <QPointF>
 #include <QVector>
@@ -116,12 +117,10 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     // https://bitbucket.org/dismine/valentina/issue/298/segmented-curve-isnt-selected-in-seam
     // See file src/app/share/collection/TestPuzzle.val
     // Code should clean loops in path.
-#if !defined(Q_PROCESSOR_S390) && !defined(Q_PROCESSOR_S390_X)
     ASSERT_TEST_CASE("Issue 298. Case1",
                      QStringLiteral("://Issue_298_case1/input.json"),
                      QStringLiteral("://Issue_298_case1/output.json"),
                      75.59055118110237 /*seam allowance width*/);
-#endif
 
     ASSERT_TEST_CASE("Issue 298. Case2",
                      QStringLiteral("://Issue_298_case2/input.json"),
@@ -138,16 +137,15 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://Issue_548_case1/output.json"),
                      11.338582677165354 /*seam allowance width (0.3 cm)*/);
 
-    // Disabled due to "undefined behavior" problem
-#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64)
-    QTest::newRow("Issue 548. Case2") << InputPointsIssue548Case2()
-                                      << 37.795275590551185 // seam allowance width (1.0 cm)
-                                      << OutputPointsIssue548Case2();
+    ASSERT_TEST_CASE("Issue 548. Case2",
+                     QStringLiteral("://Issue_548_case2/input.json"),
+                     QStringLiteral("://Issue_548_case2/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    QTest::newRow("Issue 548. Case3") << InputPointsIssue548Case3()
-                                      << 75.59055118110237 // seam allowance width (2.0 cm)
-                                      << OutputPointsIssue548Case3();
-#endif
+    ASSERT_TEST_CASE("Issue 548. Case3",
+                     QStringLiteral("://Issue_548_case3/input.json"),
+                     QStringLiteral("://Issue_548_case3/output.json"),
+                     75.59055118110237 /*seam allowance width (2.0 cm)*/);
 
     // See file src/app/share/collection/bugs/Issue_#646.val
     ASSERT_TEST_CASE("Issue 646.",
@@ -343,11 +341,23 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#58/output.json"),
                      18.897637795275593 /*seam allowance width (0.5 cm)*/);
 
-    // See file src/app/share/collection/test/smart_pattern_#99.val
+    // See file src/app/share/collection/bugs/smart_pattern_#99.val
     ASSERT_TEST_CASE("Incorrect fix of distortion",
                      QStringLiteral("://smart_pattern_#99/input.json"),
                      QStringLiteral("://smart_pattern_#99/output.json"),
                      28.346456692913389 /*seam allowance width*/);
+
+    // See file src/app/share/collection/test/smart_pattern_#120.val (private collection)
+    ASSERT_TEST_CASE("Piece 1",
+                     QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
+                     QStringLiteral("://smart_pattern_#120_piece_1/output.json"),
+                     37.795275590551185);
+
+    // See file src/app/share/collection/test/smart_pattern_#120.val (private collection)
+    ASSERT_TEST_CASE("Piece 2",
+                     QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
+                     QStringLiteral("://smart_pattern_#120_piece_2/output.json"),
+                     37.795275590551185);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,6 +382,39 @@ void TST_VAbstractPiece::SumTrapezoids() const
     Case3();
     Case4();
     Case5();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::RawPathRemoveLoop_data() const
+{
+    QTest::addColumn<QVector<VRawSAPoint>>("path");
+    QTest::addColumn<QVector<QPointF>>("expect");
+
+    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
+    {
+        QVector<VRawSAPoint> inputPoints;
+        AbstractTest::VectorFromJson(input, inputPoints);
+
+        QVector<QPointF> outputPoints;
+        AbstractTest::VectorFromJson(output, outputPoints);
+
+        QTest::newRow(title) << inputPoints << outputPoints;
+    };
+
+    // See file src/app/share/collection/bugs/smart_pattern_#112.val (private collection)
+    ASSERT_TEST_CASE("Loop intersection",
+                     QStringLiteral("://smart_pattern_#112/input.json"),
+                     QStringLiteral("://smart_pattern_#112/output.json"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::RawPathRemoveLoop() const
+{
+    QFETCH(QVector<VRawSAPoint>, path);
+    QFETCH(QVector<QPointF>, expect);
+
+    QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
+    Comparison(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,11 +463,6 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("One loop, closed a path (four unique points)") << path << res;
 
-    path.removeLast();
-    res.removeLast();
-
-    QTest::newRow("One loop, unclosed a path (four unique points)") << path << res;
-
     path.clear();
     path << QPointF(20, 10);
     path << QPointF(20, 20);
@@ -441,11 +479,6 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("Two loops, closed a path (six unique points)") << path << res;
 
-    path.removeLast();
-    res.removeLast();
-
-    QTest::newRow("Two loops, unclosed a path (six unique points)") << path << res;
-
     path.clear();
     path << QPointF(20, 10);
     path << QPointF(20, 20);
@@ -461,10 +494,6 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(15, 15);
     res << QPointF(20, 10);
     QTest::newRow("One loop, the first loop, closed a path (six unique points)") << path << res;
-
-    path.removeLast();
-    res.removeLast();
-    QTest::newRow("One loop, the first loop, unclosed a path (six unique points)") << path << res;
 
     path.clear();
     path << QPointF(20, 10);
@@ -865,91 +894,6 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
-    // For more details see the file "collection/bugs/GAVAUDAN Laure - corsage - figure 4.val".
-    // We will test only one detail. The second require too accurate data that we cannot get from debuger.
-    // The test check an open equdistant of correct detail.
-    QVector<VSAPoint> points;// Input points.
-
-    VSAPoint p = VSAPoint(787.5835464566929, 1701.3138897637796);
-    p.SetSAAfter(-1);
-    p.SetSABefore(0);
-    points.append(p);
-
-    p = VSAPoint(863.1740976377953, 1701.3138897637796);
-    p.SetSAAfter(-1);
-    p.SetSAAfter(-1);
-    points.append(p);
-
-    points.append(VSAPoint(938.7646488188976, 1701.3138897637796));
-    points.append(VSAPoint(928.6149944255945, 1732.4440762118775));
-    points.append(VSAPoint(910.0209054382323, 1792.3369946802652));
-    points.append(VSAPoint(893.3643210561819, 1849.7845240486258));
-    points.append(VSAPoint(878.5243977752426, 1905.2261712206746));
-    points.append(VSAPoint(865.3802920912136, 1959.1014431001254));
-    points.append(VSAPoint(853.8111604998944, 2011.8498465906928));
-    points.append(VSAPoint(843.6961594970844, 2063.910888596092));
-    points.append(VSAPoint(834.9144455785826, 2115.7240760200366));
-    points.append(VSAPoint(827.3451752401882, 2167.7289157662426));
-    points.append(VSAPoint(820.8675049777007, 2220.364914738423));
-    points.append(VSAPoint(815.3605912869193, 2274.0715798402925));
-    points.append(VSAPoint(810.703590663643, 2329.2884179755656));
-    points.append(VSAPoint(806.7756596036716, 2386.454936047957));
-    points.append(VSAPoint(803.455954602804, 2446.0106409611817));
-    points.append(VSAPoint(800.6236321568394, 2508.395039618954));
-    points.append(VSAPoint(798.1578487615775, 2574.047638924988));
-    points.append(VSAPoint(797.0323653543306, 2608.4005039370077));
-    points.append(VSAPoint(929.3158299212598, 2608.4005039370077));
-    points.append(VSAPoint(927.9285659612306, 2548.9599884455793));
-    points.append(VSAPoint(925.157717598664, 2463.8329634071292));
-    points.append(VSAPoint(922.7222742526749, 2408.6782012856274));
-    points.append(VSAPoint(919.6220036804666, 2354.5469017384876));
-    points.append(VSAPoint(915.706969354324, 2301.1170261784787));
-    points.append(VSAPoint(910.8272347465313, 2248.066536018368));
-    points.append(VSAPoint(904.8328633293736, 2195.073392670922));
-    points.append(VSAPoint(897.5739185751353, 2141.8155575489095));
-    points.append(VSAPoint(888.9004639561011, 2087.9709920650976));
-    points.append(VSAPoint(878.6625629445558, 2033.2176576322527));
-    points.append(VSAPoint(866.7102790127839, 1977.233515663143));
-    points.append(VSAPoint(852.8936756330698, 1919.696527570536));
-    points.append(VSAPoint(837.0628162776984, 1860.284654767199));
-    points.append(VSAPoint(819.0677644189545, 1798.675858665899));
-    points.append(VSAPoint(798.7585835291225, 1734.548100679404));
-    points.append(VSAPoint(787.5835464566929, 1701.3138897637796));
-
-    p = VSAPoint(797.0323653543306, 2608.4005039370077);
-    p.SetSAAfter(0);
-    p.SetSABefore(-1);
-    points.append(p);
-
-    QVector<QPointF> ekvOrig;
-    ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
-    ekvOrig.append(QPointF(863.1740976377953, 1663.5186141732283));
-    ekvOrig.append(QPointF(990.8407796109454, 1663.5186141732283));
-    ekvOrig.append(QPointF(964.6314897747087, 1743.9055956070622));
-    ekvOrig.append(QPointF(946.222111945205, 1803.203545947388));
-    ekvOrig.append(QPointF(929.7733236875301, 1859.9343993344141));
-    ekvOrig.append(QPointF(915.1430683369846, 1914.5927314447797));
-    ekvOrig.append(QPointF(902.2033477151627, 1967.6302665424967));
-    ekvOrig.append(QPointF(890.8261161082305, 2019.5037195040304));
-    ekvOrig.append(QPointF(880.8841829577946, 2070.673996127427));
-    ekvOrig.append(QPointF(872.2520522462703, 2121.604624314014));
-    ekvOrig.append(QPointF(864.8064761358401, 2172.759620123457));
-    ekvOrig.append(QPointF(864.2562272534083, 2177.2308109121955));
-    ekvOrig.append(QPointF(860.1867773842832, 2147.3738416825267));
-    ekvOrig.append(QPointF(851.6617474319463, 2094.450692409028));
-    ekvOrig.append(QPointF(841.5996933370075, 2040.6378051462616));
-    ekvOrig.append(QPointF(829.8479530577714, 1985.5930036729653));
-    ekvOrig.append(QPointF(828.2738301865061, 1979.0378260789357));
-    ekvOrig.append(QPointF(834.4319111572987, 2570.213599275029));
-    ekvOrig.append(QPointF(796.554931640625, 2597.28125));
-    ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
-
-    // Disabled due to "undefined behavior" problem
-#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64) && !defined(Q_PROCESSOR_S390) \
-    && !defined(Q_PROCESSOR_S390_X)
-    QTest::newRow("GAVAUDAN Laure.") << points << 37.795275590551185 << ekvOrig;
-#endif
-
     // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
     ASSERT_TEST_CASE("Issue #604.",
                      QStringLiteral("://Issue_604/input.json"),
@@ -962,13 +906,11 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://Issue_627/output.json"),
                      56.692913385826778 /*seam allowance width*/);
 
-#if !defined (Q_PROCESSOR_S390) && !defined(Q_PROCESSOR_S390_X)
     // See the file "collection/bugs/Issue_#687.val"
     ASSERT_TEST_CASE("Issue #687.",
                      QStringLiteral("://Issue_687/input.json"),
                      QStringLiteral("://Issue_687/output.json"),
                      37.795275590551185 /*seam allowance width*/);
-#endif
 
     // See private test cases in file jacket_issue_#767.val, piece "Fabric_TopCollar"
     // Curve approximation scale 0.5
@@ -1099,6 +1041,18 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://panties_case2/input.json"),
                      QStringLiteral("://panties_case2/output.json"),
                      26.45669291338583 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/smart_pattern_#113.val (private collection)
+    ASSERT_TEST_CASE("Эдит 6",
+                     QStringLiteral("://smart_pattern_#113/input.json"),
+                     QStringLiteral("://smart_pattern_#113/output.json"),
+                     0.56692913385826771 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/smart_pattern_#118.val (private collection)
+    ASSERT_TEST_CASE("Ретро стринги 3",
+                     QStringLiteral("://smart_pattern_#118/input.json"),
+                     QStringLiteral("://smart_pattern_#118/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1189,7 +1143,6 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints() const
     Comparison(after, expect);
 }
 
-#ifndef Q_OS_WIN
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::PossibleInfiniteClearLoops_data() const
 {
@@ -1306,7 +1259,6 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops() const
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
     Comparison(res, expect);
 }
-#endif //#ifndef Q_OS_WIN
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::Case3() const
@@ -1333,64 +1285,6 @@ void TST_VAbstractPiece::Case5() const
 
     const qreal result = VAbstractPiece::SumTrapezoids(points);
     QVERIFY(qFuzzyIsNull(result));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue548Case2() const
-{
-    QVector<VSAPoint> points;
-    points << VSAPoint(99.86433649395013, 10.166060970128015);
-    points << VSAPoint(176.0178302829931, 57.36978169486653);
-    points << VSAPoint(115.46606095399079, 156.67924434657942);
-    points << VSAPoint(197.43414263641347, 70.64467660756823);
-    points << VSAPoint(247.18110236220474, 101.48031496062993);
-    points << VSAPoint(29.858267716535437, 300.85039370078744);
-
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case2() const
-{
-    QVector<QPointF> points;
-    points << QPointF(75.35612582031402, -49.49247429729551);
-    points << QPointF(207.99390662262346, 32.7230151178754);
-    points << QPointF(309.47290565612207, 95.62474281894228);
-    points << QPointF(34.78597607721976, 347.62014343263024);
-    points << QPointF(-13.438975506560153, 319.209057294505);
-    points << QPointF(75.35612582031402, -49.49247429729551);
-
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue548Case3() const
-{
-    QVector<VSAPoint> points;
-
-    points += VSAPoint(99.86433649395013, 10.166060970128015);
-    points += VSAPoint(176.0178302829931, 57.36978169486653);
-    points += VSAPoint(115.46606095399079, 156.67924434657942);
-    points += VSAPoint(197.43414263641347, 70.64467660756823);
-    points += VSAPoint(247.18110236220474, 101.48031496062993);
-    points += VSAPoint(29.858267716535437, 300.85039370078744);
-
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case3() const
-{
-    QVector<QPointF> points;
-
-    points += QPointF(50.84791514667799, -109.15100956471929);
-    points += QPointF(220.96071459087483, -3.7066408675763003);
-    points += QPointF(371.76470895003956, 89.76917067725468);
-    points += QPointF(39.71368443790398, 394.38989316447305);
-    points += QPointF(-56.73621872965576, 337.56772088822254);
-    points += QPointF(50.84791514667799, -109.15100956471929);
-
-    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

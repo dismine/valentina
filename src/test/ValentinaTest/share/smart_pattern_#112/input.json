@@ -1,0 +1,232 @@
+{
+    "vector": [
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3124.2446685548284,
+            "y": -340.15748031496076
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3111.699943251791,
+            "y": -396.7401714170824
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2725.3596865816003,
+            "y": -585.8267716535435
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2687.564410991049,
+            "y": -585.8267716535435
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2677.58560358191,
+            "y": -569.3428170188263
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2665.1502732124804,
+            "y": -552.0412529412208
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2654.7385639979766,
+            "y": -539.3532784199779
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2642.6534846020877,
+            "y": -526.5369475528651
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2629.0304140300964,
+            "y": -514.3953398593414
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2621.6288162143724,
+            "y": -508.90682548803926
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2617.633216578171,
+            "y": -506.2259849672243
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2607.5875815658464,
+            "y": -500.78291850199804
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2589.3518167947404,
+            "y": -492.6769341780546
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2562.160275286112,
+            "y": -482.74399225847844
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2536.9822947561124,
+            "y": -474.79665668016196
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2527.256410822591,
+            "y": -472.0553685667312
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2506.5962179242733,
+            "y": -340.15748031496076
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2515.110032578323,
+            "y": -335.7555078847252
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2535.9026816577343,
+            "y": -327.4893541781814
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2559.9139093453923,
+            "y": -319.92499126438355
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2585.699887733156,
+            "y": -313.12513181892416
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2624.7774917122233,
+            "y": -304.38080998706323
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2669.6720177906936,
+            "y": -296.12066401328417
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2698.5135894968607,
+            "y": -291.6966931721503
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2733.7651077284,
+            "y": -288.0502381685658
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2778.001039243382,
+            "y": -285.2249501336674
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2830.958905626066,
+            "y": -283.6151470999638
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2883.9661070936895,
+            "y": -283.5584406781999
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2901.245682896105,
+            "y": -284.5648866073816
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2928.8761792613104,
+            "y": -287.3856894036893
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2964.3753054127446,
+            "y": -292.55631940653257
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -2991.658167915314,
+            "y": -297.4313269801869
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3042.8109922236317,
+            "y": -308.3088184858541
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3067.2435220244433,
+            "y": -314.8760955596215
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3083.7898789348988,
+            "y": -320.39818087512595
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3100.269407664129,
+            "y": -327.1484210254447
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3116.4133322750586,
+            "y": -335.3579733766769
+        },
+        {
+            "loopPoint": false,
+            "type": "VRawSAPoint",
+            "x": -3124.2446685548284,
+            "y": -340.15748031496076
+        }
+    ]
+}

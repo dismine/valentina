@@ -2110,6 +2110,46 @@
         <source>Measurement: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Height label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -3369,11 +3409,11 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation>Voeg knooppunt in</translation>
+        <translation type="vanished">Voeg knooppunt in</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation>Item:</translation>
+        <translation type="vanished">Item:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3381,11 +3421,23 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation>Onbekend</translation>
+        <translation type="vanished">Onbekend</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>De lijst van patroondelen is leeg. Gelieve ten minste één patroondeel aan te maken voor het huidig patroon.</translation>
+    </message>
+    <message>
+        <source>Insert nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4777,19 +4829,19 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Patroon naam:</translation>
+        <translation type="vanished">Patroon naam:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Patroon nummer:</translation>
+        <translation type="vanished">Patroon nummer:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Bedrijfs/ontwerpers naam:</translation>
+        <translation type="vanished">Bedrijfs/ontwerpers naam:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Klant naam:</translation>
+        <translation type="vanished">Klant naam:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -4833,79 +4885,63 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation>Gegevens label</translation>
+        <translation type="vanished">Gegevens label</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation>Sjabloon label:</translation>
+        <translation type="vanished">Sjabloon label:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Verander patroon label</translation>
+        <translation type="vanished">Verander patroon label</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation>Verander sjabloon</translation>
+        <translation type="vanished">Verander sjabloon</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation>Datum indeling:</translation>
+        <translation type="vanished">Datum indeling:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation>Tijdsindeling:</translation>
+        <translation type="vanished">Tijdsindeling:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation>Sla gegevens label op.</translation>
+        <translation type="vanished">Sla gegevens label op.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation>Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
+        <translation type="vanished">Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation>Materialen</translation>
+        <translation type="vanished">Materialen</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation>Patroon materialen:</translation>
+        <translation type="vanished">Patroon materialen:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation>Beheren van patroon materiaallijst</translation>
+        <translation type="vanished">Beheren van patroon materiaallijst</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation>Beheren</translation>
+        <translation type="vanished">Beheren</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>De naam van de klant van individuele maten</translation>
+        <translation type="vanished">De naam van de klant van individuele maten</translation>
     </message>
     <message>
         <source>Label language:</source>
         <translation>Taal label:</translation>
     </message>
     <message>
-        <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
-    </message>
-    <message>
-        <source>Customer email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">yyyy-MM-dd</translation>
     </message>
 </context>
 <context>
@@ -6141,6 +6177,14 @@ Toch de instellingen aanpassen?</translation>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished">Uitsluiten</translation>
+    </message>
+    <message>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -6716,6 +6760,26 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Edit passmark length</source>
         <translation>Pas lengte markeerpunt aan</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished">De naam van de klant van individuele maten</translation>
+    </message>
+    <message>
+        <source>The customer email from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer birth date from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished">Sla gegevens label op.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished">Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
     </message>
 </context>
 <context>
@@ -7667,6 +7731,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>%1 update is available!</source>
         <translation>%1 bijwerking is beschikbaar!</translation>
+    </message>
+    <message>
+        <source>New %1 test version is now available. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9024,7 +9092,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation>Selecteer een item om in te voegen</translation>
+        <translation type="vanished">Selecteer een item om in te voegen</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -9431,11 +9499,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
+        <translation type="vanished">Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Cruciale fout!</translation>
+        <translation type="vanished">Cruciale fout!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -9447,11 +9515,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Afdruk fout</translation>
+        <translation type="vanished">Afdruk fout</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
+        <translation type="vanished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -9459,11 +9527,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation>De opmaak is verouderd.</translation>
+        <translation type="vanished">De opmaak is verouderd.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
+        <translation type="vanished">De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -9475,7 +9543,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Kan printer niet openen %1</translation>
+        <translation type="vanished">Kan printer niet openen %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -9487,15 +9555,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
+        <translation type="vanished">Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
+        <translation type="vanished">Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
+        <translation type="vanished">Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -9503,7 +9571,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation>Kan de printer marges niet bepalen</translation>
+        <translation type="vanished">Kan de printer marges niet bepalen</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -9583,11 +9651,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation>Kan paginagrootte op printer niet instellen</translation>
+        <translation type="vanished">Kan paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation>Kan aangepaste paginagrootte op printer niet instellen</translation>
+        <translation type="vanished">Kan aangepaste paginagrootte op printer niet instellen</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -9599,19 +9667,11 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation>Bestandsfout.
+        <translation type="vanished">Bestandsfout.
 
 %1
 
 %2</translation>
-    </message>
-    <message>
-        <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export raw layout data failed. %1.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9956,6 +10016,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool panel scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10542,6 +10606,30 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11750,6 +11838,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -11822,7 +11914,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Zichtbare detail label</translation>
+        <translation type="vanished">Zichtbare detail label</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11924,6 +12016,70 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Opties om de positie van een patroon label te controleren. &lt;b&gt;Niet beschikbaar als een patroon label sjabloon leeg is.&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Pattern label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished">Verander patroon label</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished">Patroon naam:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished">Patroon nummer:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished">Bedrijfs/ontwerpers naam:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Klant naam:</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished">Datum indeling:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished">Tijdsindeling:</translation>
+    </message>
+    <message>
+        <source>Customer birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>Customer email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished">Materialen</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished">Patroon materialen:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished">Beheren van patroon materiaallijst</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished">Beheren</translation>
+    </message>
+    <message>
+        <source>Piece label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPassmarks</name>
@@ -12013,7 +12169,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation>Scherpe hoek naar de binnenkant van een patroondeel</translation>
+        <translation type="vanished">Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -12058,6 +12214,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Lijst van alle gedefiniëerde markeerpunten. Om een markeerpunt te definiëren ga terug naar de hoofdpad tab, roep de context menu op (rechter muisknop) voor een punt en maak er een markeerpunt.</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished">Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
 </context>
 <context>
@@ -12442,6 +12602,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>dark mode</source>
         <translation>Donkere modus</translation>
     </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -12750,6 +12914,29 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractMainWindow</name>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished">Bevestig herschrijven formaat</translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished">Dit bestand gebruikt een vorig formaat versie v%1. De huidige versie is v%2. Het opslaan van het bestand met deze applicatie zal het formaat voor dit bestand bijwerken. Dat kan je beletten om dit bestand met een oudere applicatie te openen. Verder gaan?</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Komma-scheidingsteken waardes</translation>
+    </message>
+    <message>
+        <source>values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Exporteer naar CSV</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -12970,6 +13157,13 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
         <translation>Fout bij het voorbereiden van gegevens voor lay-out: Detail lijst is leeg</translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13729,6 +13923,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Show label</source>
         <translation>Vertoon label</translation>
     </message>
+    <message>
+        <source>Restore label position</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -13800,6 +13998,33 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Formula</source>
         <translation>Formule</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutExporter</name>
+    <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Kan paginagrootte op printer niet instellen</translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Kan de printer marges niet bepalen</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export raw layout data failed. %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
     </message>
 </context>
 <context>
@@ -14335,6 +14560,77 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VPrintLayout</name>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished">Voor de voorbeeldweergave van een multipagina document, moeten alle bladen dezelfde maat hebben.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished">Pagina&apos;s zullen bijgesneden worden omdat deze niet het papierformaat van de printer hebben.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Afdruk fout</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Kan de printer marges niet bepalen</translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
+        <translation type="unfinished">Kan aangepaste paginagrootte op printer niet instellen</translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished">Kan paginagrootte op printer niet instellen</translation>
+    </message>
+    <message>
+        <source>Cannot set printer tiled page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished">Bestandsfout.
+
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished">De opmaak is verouderd.</translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished">De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
+    </message>
+</context>
+<context>
     <name>VRawLayout</name>
     <message>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
@@ -14351,6 +14647,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>layouts</source>
         <translation type="vanished">opmaak</translation>
+    </message>
+</context>
+<context>
+    <name>VSimpleCurve</name>
+    <message>
+        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14824,7 +15127,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Kruispunt van boog en lijn</translation>
+        <translation type="vanished">Kruispunt van boog en lijn</translation>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
@@ -15285,6 +15588,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
+        <translation type="unfinished">Kruispunt van cirkel en segment</translation>
     </message>
 </context>
 <context>

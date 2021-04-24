@@ -87,8 +87,11 @@ DialogHistory::~DialogHistory()
 void DialogHistory::DialogAccepted()
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
-    quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    emit ShowHistoryTool(id, false);
+    if (item != nullptr)
+    {
+        auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+        emit ShowHistoryTool(id, false);
+    }
     emit DialogClosed(QDialog::Accepted);
 }
 

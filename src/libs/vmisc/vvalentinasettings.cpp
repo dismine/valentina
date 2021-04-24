@@ -81,6 +81,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingMultiplier, (QLatin1String("layo
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("layout/textAsPaths")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
@@ -639,4 +640,16 @@ bool VValentinaSettings::GetToolPanelScaling() const
 void VValentinaSettings::SetToolPanelScaling(const bool &value)
 {
     setValue(*settingToolPanelScaling, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetLayoutExportFormat() const -> qint8
+{
+    return qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetLayoutExportFormat(qint8 format)
+{
+    setValue(*settingLayoutExportFormat, format);
 }

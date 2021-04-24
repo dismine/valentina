@@ -167,6 +167,9 @@ public:
     bool GetToolPanelScaling() const;
     void SetToolPanelScaling(const bool &value);
 
+    auto GetLayoutExportFormat() const -> qint8;
+    void SetLayoutExportFormat(qint8 format);
+
 private:
     Q_DISABLE_COPY(VValentinaSettings)
 
