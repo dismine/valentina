@@ -92,7 +92,7 @@ public:
 
     /**
      * @brief GetTitle Returns the title of the layout
-     * @return
+     * @return title of the layout
      */
     QString GetTitle() const;
 
@@ -104,7 +104,7 @@ public:
 
     /**
      * @brief GetDescription Returns the description of the layout.
-     * @return
+     * @return description of the layout
      */
     QString GetDescription() const;
 
@@ -250,7 +250,7 @@ public:
 
     /**
      * @brief GetShowTiles Returns true if the tiles has to be shown on the current sheet
-     * @return
+     * @return true if the tiles has to be shown on the current sheet
      */
     bool GetShowTiles();
 

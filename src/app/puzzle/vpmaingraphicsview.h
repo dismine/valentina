@@ -54,7 +54,7 @@ public:
 
     /**
      * @brief GetScene Returns the scene of the view
-     * @return
+     * @return scene of the view
      */
     VMainGraphicsScene* GetScene();
 

@@ -86,14 +86,14 @@ public:
     /**
      * @brief GetTemplateName Returns the name of the given template
      * @param tmpl
-     * @return
+     * @return name of the given template
      */
     static QString GetTemplateName(PaperSizeTemplate tmpl);
 
     /**
      * @brief GetTemplate GetTemplate Returns the template that corresponds to the given size
      * @param size the Size in Px
-     * @return
+     * @return template that corresponds to the given size
      */
     static PaperSizeTemplate GetTemplate(QSizeF size);
 
@@ -107,13 +107,13 @@ public:
     /**
      * @brief isRollTemplate Returns wether the given template is a roll or not.
      * @param tmpl
-     * @return
+     * @return true if the given template is a roll
      */
     static bool isRollTemplate(PaperSizeTemplate tmpl);
 
     /**
      * @brief GetLayout Returns the Layout of the sheet
-     * @return
+     * @return Layout of the sheet
      */
     VPLayout* GetLayout();
 

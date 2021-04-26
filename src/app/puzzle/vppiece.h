@@ -61,7 +61,7 @@ public:
 
     /**
      * @brief GetMirrorPiece returns wether the piece is mirrored or not
-     * @return  true if the piece is mirrored
+     * @return true if the piece is mirrored
      */
     bool GetPieceMirrored() const;
 

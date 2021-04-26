@@ -50,9 +50,9 @@ public:
     /**
      * @brief drawTile draws the tile of given coordinate (row, col) from the
      * current sheet of the layout with the given painter
-     * @param painter
-     * @param row
-     * @param col
+     * @param painter pointer to painter
+     * @param row current row
+     * @param col current column
      */
     void drawTile(QPainter *painter, VPMainGraphicsView *graphicsView, int row, int col);
 
@@ -63,25 +63,25 @@ public:
 
     /**
      * @brief getRowNb Returns the number of row pages
-     * @return
+     * @return number of row pages
      */
     int getRowNb();
 
     /**
      * @brief getColNb Returns the number of col pages
-     * @return
+     * @return number of col pages
      */
     int getColNb();
 
     /**
      * @brief getDrawingAreaHeight Returns the usable height of the tile in Px
-     * @return
+     * @return usable height of the tile in Px
      */
     qreal getDrawingAreaHeight();
 
     /**
      * @brief getDrawingAreaWidth Returns the usable width of the tile in Px
-     * @return
+     * @return usable width of the tile in Px
      */
     qreal getDrawingAreaWidth();
 
