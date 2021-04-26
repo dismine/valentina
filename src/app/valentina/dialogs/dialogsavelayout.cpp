@@ -555,7 +555,7 @@ void DialogSaveLayout::PathChanged(const QString &text)
 
     QDir dir(text);
     dir.setPath(text);
-    if (dir.exists(text))
+    if (not text.isEmpty() && dir.exists(text))
     {
         bOk->setEnabled(true);
         palette.setColor(ui->lineEditPath->foregroundRole(), Qt::black);
