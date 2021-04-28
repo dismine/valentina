@@ -222,7 +222,7 @@ private:
 
     /**
      * @brief generateTiledPdf Generates the tiled Pdf in the given filename
-     * @param filename output file name
+     * @param fileName output file name
      */
     void generateTiledPdf(QString fileName);
 
