@@ -222,7 +222,7 @@ private:
 
     /**
      * @brief generateTiledPdf Generates the tiled Pdf in the given filename
-     * @param filename
+     * @param filename output file name
      */
     void generateTiledPdf(QString fileName);
 
@@ -288,7 +288,7 @@ private slots:
     /**
      * @brief on_lineEditSheetName_textChanged When the name of the sheet is changed
      * in the sheet layout tab
-     * @param text
+     * @param text name of the sheet
      */
     void on_lineEditSheetName_textChanged(const QString &text);
 
@@ -329,7 +329,7 @@ private slots:
     /**
      * @brief on_checkBoxSheetShowGrid_toggled When the checkbox "show grid" is
      * clicked
-     * @param checked
+     * @param checked show grid
      */
     void on_checkBoxSheetShowGrid_toggled(bool checked);
 
@@ -393,7 +393,7 @@ private slots:
     /**
      * @brief on_checkBoxTilesShowTiles_toggled When the checkbox "show tiles" is
      * clicked
-     * @param checked
+     * @param checked show tiles
      */
     void on_checkBoxTilesShowTiles_toggled(bool checked);
 

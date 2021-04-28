@@ -101,7 +101,7 @@ private slots:
 
     /**
      * @brief on_ActivePieceListChanged Called when the active piece list is changed
-     * @param index
+     * @param index piece index
      */
     void on_ActivePieceListChanged(int index);
 };

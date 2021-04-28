@@ -78,14 +78,14 @@ public:
 
     /**
      * @brief GetTemplateSize Returns the size in Px of the given template
-     * @param tmpl
+     * @param tmpl paper size template
      * @return the size in Px
      */
     static QSizeF GetTemplateSize(PaperSizeTemplate tmpl);
 
     /**
      * @brief GetTemplateName Returns the name of the given template
-     * @param tmpl
+     * @param tmpl paper size template
      * @return name of the given template
      */
     static QString GetTemplateName(PaperSizeTemplate tmpl);
@@ -99,14 +99,14 @@ public:
 
     /**
      * @brief PopulateComboBox Populates the given combo with the given templates
-     * @param tmpls
-     * @param comboBox
+     * @param tmpls list of paper size templates
+     * @param comboBox pointer to the combobox
      */
     static void PopulateComboBox(QVector<PaperSizeTemplate> *tmpls, QComboBox* comboBox);
 
     /**
      * @brief isRollTemplate Returns wether the given template is a roll or not.
-     * @param tmpl
+     * @param tmpl paper size template
      * @return true if the given template is a roll
      */
     static bool isRollTemplate(PaperSizeTemplate tmpl);
@@ -270,7 +270,7 @@ public:
 
     /**
      * @brief GetShowGrid Returns true if the placement grid has to be shown on the current sheet
-     * @return
+     * @return true if the placement grid has to be shown on the current sheet
      */
     bool GetShowGrid();
 

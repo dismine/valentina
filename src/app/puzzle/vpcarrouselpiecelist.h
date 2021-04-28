@@ -60,7 +60,7 @@ public:
 
     /**
      * @brief SetCarrousel Sets the carrousel corresponding to the list
-     * @param carrousel
+     * @param carrousel pointer to the carrousel
      */
     void SetCarrousel(VPCarrousel *carrousel);
 

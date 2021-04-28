@@ -105,8 +105,8 @@ public:
      * @brief RotateToGrainline  rotates the piece, so that the grainline has
      * the given angle
      *
-     * @param angleOfGrainline
-     * @param add180IfAlreadyInPosition, automatically adds 180, if the piece is
+     * @param angleOfGrainline angle of grainline
+     * @param add180IfAlreadyInPosition automatically adds 180, if the piece is
      * already in the grainline position
      */
     void RotateToGrainline(qreal angleOfGrainline, bool add180IfAlreadyInPosition = false);
@@ -132,7 +132,7 @@ public:
 
     /**
      * @brief SetPieceList Sets the pieceList of the piece to the given pieceList
-     * @param pieceList
+     * @param pieceList pointer to the piece list
      */
     void SetPieceList(VPPieceList* pieceList);
 
