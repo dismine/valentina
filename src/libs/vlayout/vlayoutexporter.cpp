@@ -301,7 +301,11 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QList<Q
     {
         painter.scale(m_xScale, m_yScale);
         scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
-        painter.end();
+        if (not painter.end())
+        {
+            qCritical() << tr("Can't create an flat dxf file.")
+                        << generator.ErrorString();
+        }
     }
 
     RestoreTextAfterDXF(endStringPlaceholder, details);
@@ -319,7 +323,11 @@ void VLayoutExporter::ExportToAAMADXF(const QVector<VLayoutPiece> &details) cons
     generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
-    generator.ExportToAAMA(details);
+    if (not generator.ExportToAAMA(details))
+    {
+        qCritical() << tr("Can't create an AAMA dxf file.")
+                    << generator.ErrorString();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,7 +342,11 @@ void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) cons
     generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
-    generator.ExportToASTM(details);
+    if (not generator.ExportToASTM(details))
+    {
+        qCritical() << tr("Can't create an ASTM dxf file.")
+                    << generator.ErrorString();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -75,6 +75,8 @@ public:
     bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
     bool ExportToASTM(const QVector<VLayoutPiece> &details) const;
 
+    QString ErrorString() const;
+
 protected:
     virtual int metric(PaintDeviceMetric metric) const override;
 private:

@@ -110,6 +110,11 @@ void dx_iface::writeEntity(DRW_Entity* e){
     }
 }
 
+std::string dx_iface::ErrorString() const
+{
+    return dxfW->ErrorString();
+}
+
 void dx_iface::writeHeader(DRW_Header &data){
     //complete copy of header vars:
     data = cData.headerC;

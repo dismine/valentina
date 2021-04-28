@@ -123,55 +123,66 @@ bool dxfRW::read(DRW_Interface *interface_, bool ext){
 bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
     bool isOk = false;
     std::ofstream filestr;
+    filestr.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     version = ver;
     binFile = bin;
     iface = interface_;
-    if (binFile) {
-        filestr.open (fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
-        //write sentinel
-        filestr << "AutoCAD Binary DXF\r\n" << static_cast<char>(26) << '\0';
-        writer = new dxfWriterBinary(&filestr);
-        DRW_DBG("dxfRW::read binary file\n");
-    } else {
-        filestr.open (fileName.c_str(), std::ios_base::out | std::ios::trunc);
-        writer = new dxfWriterAscii(&filestr);
-        std::string comm = std::string("dxfrw ") + std::string(DRW_VERSION);
-        writer->writeString(999, comm);
-    }
-    DRW_Header header;
-    iface->writeHeader(header);
-    writer->writeString(0, "SECTION");
-    entCount =FIRSTHANDLE;
-    header.write(writer, version);
-    writer->writeString(0, "ENDSEC");
-    if (ver > DRW::AC1009) {
+    try
+    {
+        if (binFile) {
+            filestr.open (fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
+            //write sentinel
+            filestr << "AutoCAD Binary DXF\r\n" << static_cast<char>(26) << '\0';
+            writer = new dxfWriterBinary(&filestr);
+            DRW_DBG("dxfRW::read binary file\n");
+        } else {
+            filestr.open (fileName.c_str(), std::ios_base::out | std::ios::trunc);
+            writer = new dxfWriterAscii(&filestr);
+            std::string comm = std::string("dxfrw ") + std::string(DRW_VERSION);
+            writer->writeString(999, comm);
+        }
+        DRW_Header header;
+        iface->writeHeader(header);
         writer->writeString(0, "SECTION");
-        writer->writeString(2, "CLASSES");
+        entCount =FIRSTHANDLE;
+        header.write(writer, version);
         writer->writeString(0, "ENDSEC");
-    }
-    writer->writeString(0, "SECTION");
-    writer->writeString(2, "TABLES");
-    writeTables();
-    writer->writeString(0, "ENDSEC");
-    writer->writeString(0, "SECTION");
-    writer->writeString(2, "BLOCKS");
-    writeBlocks();
-    writer->writeString(0, "ENDSEC");
-
-    writer->writeString(0, "SECTION");
-    writer->writeString(2, "ENTITIES");
-    iface->writeEntities();
-    writer->writeString(0, "ENDSEC");
-
-    if (version > DRW::AC1009) {
+        if (ver > DRW::AC1009) {
+            writer->writeString(0, "SECTION");
+            writer->writeString(2, "CLASSES");
+            writer->writeString(0, "ENDSEC");
+        }
         writer->writeString(0, "SECTION");
-        writer->writeString(2, "OBJECTS");
-        writeObjects();
+        writer->writeString(2, "TABLES");
+        writeTables();
         writer->writeString(0, "ENDSEC");
+        writer->writeString(0, "SECTION");
+        writer->writeString(2, "BLOCKS");
+        writeBlocks();
+        writer->writeString(0, "ENDSEC");
+
+        writer->writeString(0, "SECTION");
+        writer->writeString(2, "ENTITIES");
+        iface->writeEntities();
+        writer->writeString(0, "ENDSEC");
+
+        if (version > DRW::AC1009) {
+            writer->writeString(0, "SECTION");
+            writer->writeString(2, "OBJECTS");
+            writeObjects();
+            writer->writeString(0, "ENDSEC");
+        }
+        writer->writeString(0, "EOF");
+        filestr.flush();
+        filestr.close();
     }
-    writer->writeString(0, "EOF");
-    filestr.flush();
-    filestr.close();
+    catch(std::ofstream::failure &writeErr)
+    {
+        errorString = writeErr.what();
+        delete writer;
+        writer = nullptr;
+        return isOk;
+    }
     isOk = true;
     delete writer;
     writer = nullptr;
@@ -1158,6 +1169,11 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
         //RLZ: todo not supported by acad 12 saved as unnamed block
     }
     return true;
+}
+
+std::string dxfRW::ErrorString() const
+{
+    return errorString;
 }
 
 bool dxfRW::writeInsert(DRW_Insert *ent){
