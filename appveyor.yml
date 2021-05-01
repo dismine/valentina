@@ -37,12 +37,15 @@ clone_depth: 1                       # clone entire repository history if not de
 shallow_clone: false                 # default is "false"
 
 environment:
+  ACCESS_TOKEN:
+    secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=  
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.15\mingw81_32
     QT_VERSION: Qt5.15
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
+    PYTHON: "C:\\Python38"
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -50,6 +53,7 @@ environment:
     QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
+    PYTHON: "C:\\Python38"
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -191,6 +195,8 @@ init:
   - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+  - if "%DEPLOY%" == "true" "%PYTHON%\\python -m pip install dropbox"
+  - if "%DEPLOY%" == "true" set PATH="%PYTHON%\\Scripts\\;%PATH%"
   - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
   # Path after
   - path
@@ -244,21 +250,10 @@ notifications:
 after_test:
   - if "%DEPLOY%" == "true" (mingw32-make install)
 
-artifacts:
-  - path: build/package/valentina
-    name: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
+# scripts to run before deployment
+before_deploy:
+  - if "%DEPLOY%" == "true" (%PYTHON%\\python ..\scripts\deploy.py pack ./package/valentina/ ./package/valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip)
 
-deploy:
-- provider: BinTray
-  username: dismine
-  api_key:
-    secure: dlVBgPG66AfYTbgi9EQFaK4lZeF77H6/aiuKlmCWP02/i85HLtCMnlOkyWJR5XCu
-  subject: dismine
-  repo: Valentina
-  package: valentina-win_auto-upload
-  publish: true
-  override: true
-  version: 0.7.46
-  on:
-    DEPLOY: true
-  artifact: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
+# to run your custom scripts instead of provider deployments
+deploy_script:
+  - if "%DEPLOY%" == "true" (%PYTHON%\\python ..\scripts\deploy.py upload $(ACCESS_TOKEN) ./package/valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip /0.7.x/Windows/valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip)
