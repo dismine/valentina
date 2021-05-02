@@ -45,7 +45,7 @@ environment:
     QT_VERSION: Qt5.15
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
-    PYTHON: "C:\Python38-x64"
+    PYTHON: "C:\\Python38-x64"
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -53,7 +53,7 @@ environment:
     QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
-    PYTHON: "C:\Python38-x64"
+    PYTHON: "C:\\Python38-x64"
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
