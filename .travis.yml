@@ -85,7 +85,7 @@ before_install:
     fi
     brew install python3;
     python3 --version;
-    pip install dropbox;
+    pip3 install dropbox;
   fi
 before_script:
 - |
