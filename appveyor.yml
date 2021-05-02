@@ -195,7 +195,7 @@ init:
   - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
-  - if "%DEPLOY%" == "true" "SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%"
+  - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
   # Set paths to libraries
   - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
   # Path after
