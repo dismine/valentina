@@ -83,7 +83,6 @@ before_install:
       brew link qt --force;
       chmod -R 755 /usr/local/opt/qt/*
     fi
-    brew install python3;
     python3 --version;
     pip3 install dropbox;
   fi

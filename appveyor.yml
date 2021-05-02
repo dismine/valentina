@@ -197,8 +197,8 @@ init:
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
   - if "%DEPLOY%" == "true" set PATH="%PYTHON%;%PYTHON%\\Scripts\\;%PATH%"
   # Check that we have the expected version and architecture for Python
-  - "python --version"
-  - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+  - if "%DEPLOY%" == "true" "%PYTHON%\\python.exe --version"
+  - if "%DEPLOY%" == "true" "%PYTHON%\\python.exe -c \"import struct; print(struct.calcsize('P') * 8)\""
   # Install the build dependencies of the project. 
   - if "%DEPLOY%" == "true" "%PYTHON%\\python.exe -m pip install dropbox"
   # Set paths to libraries
