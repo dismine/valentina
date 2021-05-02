@@ -79,7 +79,7 @@ before_install:
       chmod -R 755 /usr/local/opt/qt5/*
     else
       unset SSL_CERT_FILE;
-      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/7cc6650d879a5cc435edf6157b97420893718112/qt.rb;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/1218041ffba3ff4b64d109e64a9a867f8fe394c1/qt.rb;
       brew link qt --force;
       chmod -R 755 /usr/local/opt/qt/*;
       HOMEBREW_NO_AUTO_UPDATE=1 brew install python3;
