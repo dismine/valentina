@@ -79,7 +79,7 @@ before_install:
       chmod -R 755 /usr/local/opt/qt5/*
     else
       unset SSL_CERT_FILE;
-      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/f553c39bbc5f3a2b231a767924e846bdd2a56d8d/qt.rb;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/7cc6650d879a5cc435edf6157b97420893718112/qt.rb;
       brew link qt --force;
       chmod -R 755 /usr/local/opt/qt/*;
       HOMEBREW_NO_AUTO_UPDATE=1 brew install python3;
@@ -141,9 +141,9 @@ after_success:
     ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
     if [[ "$LEGACY" = false ]]; then
       tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
-      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}.tar.gz "0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}.tar.gz";
+      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}.tar.gz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}.tar.gz";
     else
       tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz Valentina.app/;
-      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz "0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz";
+      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz";
     fi
   fi
