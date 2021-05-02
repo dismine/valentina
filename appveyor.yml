@@ -201,7 +201,7 @@ init:
   # Path after
   - path
   # Check that we have the expected version and architecture for Python
-  - if "%DEPLOY%" == "true" "python --version"
+  - if "%DEPLOY%" == "true" (python --version)
   - if "%DEPLOY%" == "true" "python -c \"import struct; print(struct.calcsize('P') * 8)\""
   # Install the build dependencies of the project.
   - if "%DEPLOY%" == "true" "python -m pip install --upgrade pip" 
