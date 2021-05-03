@@ -255,12 +255,7 @@ notifications:
 after_test:
   - if "%DEPLOY%" == "true" (mingw32-make install)
 
-# scripts to run before deployment
-before_deploy:
-  - if "%DEPLOY%" == "true" (python ..\scripts\deploy.py pack .\package\valentina\ ".\package\valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip")
-
 # to run your custom scripts instead of provider deployments
 deploy_script:
-  - >-
-    if "%DEPLOY%" == "true" (python ..\scripts\deploy.py upload %ACCESS_TOKEN% .\package\valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip /0.7.x/Windows/valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip)
+  - ps: ../scripts/appveyor-deploy.ps1
 
