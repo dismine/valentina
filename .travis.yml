@@ -136,14 +136,5 @@ notifications:
     on_success: change
     on_failure: always
 after_success:
-- |
-  if [[ "$DEPLOY" == "true" ]]; then
-    ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
-    if [[ "$LEGACY" = false ]]; then
-      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
-      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}.tar.gz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}.tar.xz";
-    else
-      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz Valentina.app/;
-      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.xz";
-    fi
-  fi
+- ../scripts/travis-deploy.sh
+
