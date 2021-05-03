@@ -3,7 +3,7 @@ $env:BUILD_FOLDER = "C:\projects\valentina\build";
 
 if($env:DEPLOY -eq "true") {
     Write-Host "[CI] Starting packing." -ForegroundColor Green;
-    & $env:PYTHON\python.exe $env:ROOT_FOLDER\scripts\deploy.py pack .\package\valentina\ "$env:BUILD_FOLDER\package\valentina-win-$env:PLATFORM-$env:QT_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:APPVEYOR_REPO_COMMIT.zip";
+    & $env:PYTHON\python.exe $env:ROOT_FOLDER\scripts\deploy.py pack .\package\valentina\ "$env:BUILD_FOLDER\package\valentina-win-$env:PLATFORM-$env:QT_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:APPVEYOR_REPO_COMMIT.tar.xz";
     if ($LastExitCode -ne 0) {
         Write-Error -Message "[CI] Error creating an archive." -Category InvalidResult;
         exit 1;
