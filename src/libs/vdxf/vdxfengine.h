@@ -98,6 +98,8 @@ public:
     qreal GetYScale() const;
     void  SetYScale(const qreal &yscale);
 
+    QString ErrorString() const;
+
 private:
     Q_DISABLE_COPY(VDxfEngine)
     QSize            size;

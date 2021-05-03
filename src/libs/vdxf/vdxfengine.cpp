@@ -138,8 +138,7 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
 //---------------------------------------------------------------------------------------------------------------------
 bool VDxfEngine::end()
 {
-    const bool res = input->fileExport(m_binary);
-    return res;
+    return input->fileExport(m_binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -612,6 +611,12 @@ void VDxfEngine::SetYScale(const qreal &yscale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VDxfEngine::ErrorString() const
+{
+    return QString::fromStdString(input->ErrorString());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
@@ -668,7 +673,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
     for(auto detail : details)
     {
-        dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
+        auto *detailBlock = new dx_ifaceBlock();
 
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
@@ -691,7 +696,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
         input->AddBlock(detailBlock);
 
-        DRW_Insert *insert = new DRW_Insert();
+        auto *insert = new DRW_Insert();
         insert->name = blockName.toStdString();
         insert->layer = '1';
 
@@ -869,7 +874,7 @@ bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
 
     for(auto detail : details)
     {
-        dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
+        auto *detailBlock = new dx_ifaceBlock();
 
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
@@ -894,7 +899,7 @@ bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
 
         input->AddBlock(detailBlock);
 
-        DRW_Insert *insert = new DRW_Insert();
+        auto *insert = new DRW_Insert();
         insert->name = blockName.toStdString();
         insert->layer = '1';
 

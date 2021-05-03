@@ -37,24 +37,28 @@ clone_depth: 1                       # clone entire repository history if not de
 shallow_clone: false                 # default is "false"
 
 environment:
+  ACCESS_TOKEN:
+    secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=  
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.15\mingw81_32
-    QT_VERSION: Qt5.15
+    QT_VERSION: Qt5_15
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
+    PYTHON: "C:\\Python38-x64"
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     QT5: Qt\5.6\mingw49_32
-    QT_VERSION: Qt5.6
+    QT_VERSION: Qt5_6
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
+    PYTHON: "C:\\Python38-x64"
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.15\mingw81_64
-    QT_VERSION: Qt5.15
+    QT_VERSION: Qt5_15
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
     PLATFORM: x64
@@ -67,14 +71,14 @@ environment:
     DEPLOY: false 
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.14\mingw73_32
-    QT_VERSION: Qt5.14
+    QT_VERSION: Qt5_14
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_32\bin
     PLATFORM: x86
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.14\mingw73_64
-    QT_VERSION: Qt5.14
+    QT_VERSION: Qt5_14
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_64\bin
     PLATFORM: x64
@@ -87,7 +91,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.13\mingw73_64
-    QT_VERSION: Qt5.13
+    QT_VERSION: Qt5_13
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_64\bin
     PLATFORM: x64
@@ -100,7 +104,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.12\mingw73_64
-    QT_VERSION: Qt5.12
+    QT_VERSION: Qt5_12
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_64\bin
     PLATFORM: x64
@@ -113,7 +117,7 @@ environment:
     DEPLOY: false  
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     QT5: Qt\5.11\mingw53_32
-    QT_VERSION: Qt5.11
+    QT_VERSION: Qt5_11
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -126,7 +130,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     QT5: Qt\5.10\mingw53_32
-    QT_VERSION: Qt5.10
+    QT_VERSION: Qt5_10
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -139,7 +143,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     QT5: Qt\5.9\mingw53_32
-    QT_VERSION: Qt5.9
+    QT_VERSION: Qt5_9
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -152,7 +156,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     QT5: Qt\5.7\mingw53_32
-    QT_VERSION: Qt5.7
+    QT_VERSION: Qt5_7
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -165,7 +169,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     QT5: Qt\5.6\msvc2015_64
-    QT_VERSION: Qt5.6
+    QT_VERSION: Qt5_6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
@@ -191,9 +195,16 @@ init:
   - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+  - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  # Set paths to libraries
   - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
   # Path after
   - path
+  # Check that we have the expected version for Python
+  - if "%DEPLOY%" == "true" (python --version)
+  # Install the build dependencies of the project.
+  - if "%DEPLOY%" == "true" (python -m pip install --upgrade pip)
+  - if "%DEPLOY%" == "true" (python -m pip install dropbox)
     # Trick qmake to not work through MSYS
   - del /F "C:\Program Files\Git\usr\bin\sh.exe"
   - del /F "C:\Program Files\Git\bin\sh.exe"
@@ -244,21 +255,7 @@ notifications:
 after_test:
   - if "%DEPLOY%" == "true" (mingw32-make install)
 
-artifacts:
-  - path: build/package/valentina
-    name: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
+# to run your custom scripts instead of provider deployments
+deploy_script:
+  - ps: ../scripts/appveyor-deploy.ps1
 
-deploy:
-- provider: BinTray
-  username: dismine
-  api_key:
-    secure: dlVBgPG66AfYTbgi9EQFaK4lZeF77H6/aiuKlmCWP02/i85HLtCMnlOkyWJR5XCu
-  subject: dismine
-  repo: Valentina
-  package: valentina-win_auto-upload
-  publish: true
-  override: true
-  version: 0.7.46
-  on:
-    DEPLOY: true
-  artifact: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)

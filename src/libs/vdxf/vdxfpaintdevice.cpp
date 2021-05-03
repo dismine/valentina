@@ -215,6 +215,12 @@ bool VDxfPaintDevice::ExportToASTM(const QVector<VLayoutPiece> &details) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VDxfPaintDevice::ErrorString() const
+{
+    return engine->ErrorString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
 {
     switch (metric)

@@ -101,6 +101,8 @@ public:
     bool fileExport(bool binary);
     void writeEntity(DRW_Entity* e);
 
+    std::string ErrorString() const;
+
 //reimplement virtual DRW_Interface functions
 //writer part, send all in class dx_data to writer
     virtual void writeHeader(DRW_Header& data) override;

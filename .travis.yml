@@ -1,4 +1,7 @@
 language: cpp
+env:
+  global:
+  - secure: Zo+BbyV3sgNmKHwWvn7cCt3leXCLGbE9rSrAYoCrl22OEDZjPj7KeGzQ/59xLosE5v8PA5MV8KceH7aQB9GoIbDt6sHLw5mws13VXmy5HWtM7yhk2RpNnn1gTZIfEz33QGYuPG1geapTcZtZfaVKFU04PMkvk3f7zxA1HuS6zGRgzrNv1AmcpuOGH4LIGxbk3Z1S6xGcUMj/z9calyLlmPTOfbDLJWChU11FMVmvdTzyeDLE0oQZ5IkmsowluCfDHARfIijeRuPiuU8RzJptYEIzcWvpQ6gfDb4qDWndA9BgPDkN2aTmPL5/TA/S9zfs8BKjo07sg0TaVbTboPisyS/gGDf3SBYxlAS9B95KKdRzGGD41ZYe+cHod5tgWUt5gO/Obq2MPY/GltSwuq5KEsR+R/pKVLby/k7+R5oCO8avXJPL5HBgn46ZehEzpw0I8LFQ/ed+dLqykrxaSiA2/zHAkHSeVZptzegoCF5xeDf6T/rJFNqxr1BV3kVLPiXW90z0m63Hv2K6rz8LmBUNTQcR/mrLpkpdbQ8UQ/et30o7CE2GcJLLzUDNcjxYfA1fe66oR9L+euqyBtZc8dNuzy1iIaUOLazGWYkdlUpiYnGvWrxv6BUwzAJYpiXjWELtcTVUGMjMBpkvAmwV1FjZN45isX2iHGz5XhoVDrjbE5c=
 jobs:
   include:
   - stage: main test
@@ -9,10 +12,10 @@ jobs:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=true
-    cache: 
-     ccache: true
-     directories:
-     - "$HOME/.sonar/cache"
+    cache:
+      ccache: true
+      directories:
+      - "$HOME/.sonar/cache"
   - os: linux
     dist: bionic
     compiler: clang
@@ -21,9 +24,9 @@ jobs:
     - CCACHE_CPP2=yes
     - RUN_TESTS=true
     cache:
-     ccache: true
-     directories:
-     - "$HOME/.sonar/cache"
+      ccache: true
+      directories:
+      - "$HOME/.sonar/cache"
   - os: osx
     compiler: clang
     env:
@@ -32,8 +35,8 @@ jobs:
     osx_image: xcode11
     cache:
       directories:
-      - $HOME/Library/Caches/Homebrew
-      - /usr/local/Homebrew
+      - "$HOME/Library/Caches/Homebrew"
+      - "/usr/local/Homebrew"
   - os: osx
     compiler: clang
     env:
@@ -42,8 +45,8 @@ jobs:
     osx_image: xcode8
     cache:
       directories:
-      - $HOME/Library/Caches/Homebrew
-      - /usr/local/Homebrew
+      - "$HOME/Library/Caches/Homebrew"
+      - "/usr/local/Homebrew"
 before_cache:
   - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
 # Credit https://discourse.brew.sh/t/best-practice-for-homebrew-on-travis-brew-update-is-5min-to-build-time/5215/9
@@ -76,10 +79,13 @@ before_install:
       chmod -R 755 /usr/local/opt/qt5/*
     else
       unset SSL_CERT_FILE;
-      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/f553c39bbc5f3a2b231a767924e846bdd2a56d8d/qt.rb;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/1218041ffba3ff4b64d109e64a9a867f8fe394c1/qt.rb;
       brew link qt --force;
-      chmod -R 755 /usr/local/opt/qt/*
+      chmod -R 755 /usr/local/opt/qt/*;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install python3;
     fi
+    python3 --version;
+    pip3 install dropbox;
   fi
 before_script:
 - |
@@ -129,23 +135,15 @@ notifications:
     - dismine@gmail.com
     on_success: change
     on_failure: always
-before_deploy:
+after_success:
 - |
   if [[ "$DEPLOY" == "true" ]]; then
     ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
     if [[ "$LEGACY" = false ]]; then
       tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
+      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}.tar.gz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}.tar.xz";
     else
       tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz Valentina.app/;
+      python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}-legacy.tar.xz";
     fi
   fi
-deploy:
-  provider: bintray
-  skip_cleanup: true
-  file: "../share/bintray.json"
-  user: dismine
-  key:
-    secure: q9rcswyUyOqHAnxL0FLEQ8tdFkE21kNlv/TUpZgk0MbcsWRhBWaKJVv5kz6ABkjeLMB7c7eS7KfYRui0RFBKHI7ZnpzHBZN4f1aGd/rf9m5qaZdKFFBlpz4tXPHvXOVyXRwOReqFj7brAz6NB+oqJN8HFA4Q1y039yZOaHt28JkwYSDqS5lRvbwegYS8kaJupGZcm8NaNeB8tuXuZ/8DIQpZdVKmBUwpgpPAewCEqYP4z9DUpsmMZ5h63g7mJKm9di91cQr65eS24io6m1ZfAx8M6kTaKwyR5nz8a8bnqR48AAnbNoM8Xj1sgJqnT40DZKPCNr7KL3JSNRglKNgHVMFBOj0v9F5YxsDs8twWuqFVbywB+lNSHDyvGVgmS2+EdwKLQT0YBxYfIL1nh34ed7GffZZmBcAJGfxo8ieAMRgyylSyQIHJ0ZBl6X6DzOvLpvFlcva9yhqZfkx3P/Dgarqklnj3DdvzTDW2vxCT4yVLpMySlBXW2I3s7m8xpOjZbM7eZfMZkwjd/e8IYp8jxdQnxlzNe15mzxSXnZjLz3Rwi1qzhJZyZf4OGVxuQuR9oW+c5q55OOY5hImtZELlJyu1K0zKTd85g0D+WwKj4J30J0QWl1pxZlln59Q5cMmpyQ7sc8zN1WPoWAEyavwPrf4028TpEJqaUw/0cQGg9I4=
-  on:
-    all_branches: true
-    condition: "$DEPLOY = true"

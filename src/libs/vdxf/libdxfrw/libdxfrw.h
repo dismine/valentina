@@ -72,6 +72,8 @@ public:
     bool writeDimension(DRW_Dimension *ent);
     void setEllipseParts(int parts){elParts = parts;} /*!< set parts munber when convert ellipse to polyline */
 
+    std::string ErrorString() const;
+
 private:
     Q_DISABLE_COPY(dxfRW)
     /// used by read() to parse the content of the file
@@ -144,6 +146,7 @@ private:
 
     int currHandle;
 
+    std::string errorString{};
 };
 
 #endif // LIBDXFRW_H
