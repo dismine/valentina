@@ -42,7 +42,7 @@ environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.15\mingw81_32
-    QT_VERSION: Qt5.15
+    QT_VERSION: Qt5_15
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
     PYTHON: "C:\\Python38-x64"
@@ -50,7 +50,7 @@ environment:
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     QT5: Qt\5.6\mingw49_32
-    QT_VERSION: Qt5.6
+    QT_VERSION: Qt5_6
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PYTHON: "C:\\Python38-x64"
@@ -58,7 +58,7 @@ environment:
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.15\mingw81_64
-    QT_VERSION: Qt5.15
+    QT_VERSION: Qt5_15
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
     PLATFORM: x64
@@ -71,14 +71,14 @@ environment:
     DEPLOY: false 
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.14\mingw73_32
-    QT_VERSION: Qt5.14
+    QT_VERSION: Qt5_14
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_32\bin
     PLATFORM: x86
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.14\mingw73_64
-    QT_VERSION: Qt5.14
+    QT_VERSION: Qt5_14
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_64\bin
     PLATFORM: x64
@@ -91,7 +91,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.13\mingw73_64
-    QT_VERSION: Qt5.13
+    QT_VERSION: Qt5_13
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_64\bin
     PLATFORM: x64
@@ -104,7 +104,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.12\mingw73_64
-    QT_VERSION: Qt5.12
+    QT_VERSION: Qt5_12
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw730_64\bin
     PLATFORM: x64
@@ -117,7 +117,7 @@ environment:
     DEPLOY: false  
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     QT5: Qt\5.11\mingw53_32
-    QT_VERSION: Qt5.11
+    QT_VERSION: Qt5_11
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -130,7 +130,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     QT5: Qt\5.10\mingw53_32
-    QT_VERSION: Qt5.10
+    QT_VERSION: Qt5_10
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -143,7 +143,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     QT5: Qt\5.9\mingw53_32
-    QT_VERSION: Qt5.9
+    QT_VERSION: Qt5_9
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -156,7 +156,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     QT5: Qt\5.7\mingw53_32
-    QT_VERSION: Qt5.7
+    QT_VERSION: Qt5_7
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -169,7 +169,7 @@ environment:
     DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     QT5: Qt\5.6\msvc2015_64
-    QT_VERSION: Qt5.6
+    QT_VERSION: Qt5_6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
