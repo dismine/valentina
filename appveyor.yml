@@ -261,5 +261,6 @@ before_deploy:
 
 # to run your custom scripts instead of provider deployments
 deploy_script:
-  - if "%DEPLOY%" == "true" (python ..\scripts\deploy.py upload $(ACCESS_TOKEN) ".\package\valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip" "/0.7.x/Windows/valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip")
+  - |
+    if "%DEPLOY%" == "true" (python ..\scripts\deploy.py upload $(ACCESS_TOKEN) .\package\valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip /0.7.x/Windows/valentina-win-$(PLATFORM)-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT).zip)
 
