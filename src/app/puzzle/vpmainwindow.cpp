@@ -769,7 +769,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
 
         printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
                             QCoreApplication::applicationVersion());
-        printer->setOrientation(QPrinter::Portrait); // in the pdf file the pages should always be in portrait
+        printer->setPageOrientation(QPageLayout::Portrait); // in the pdf file the pages should always be in portrait
 
         // here we might need to so some rounding for the size.
         printer->setPageSize(QPageSize(m_layout->GetTilesSize(Unit::Mm),
