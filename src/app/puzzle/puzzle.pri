@@ -26,10 +26,11 @@ SOURCES += \
     $$PWD/xml/vplayoutfilewriter.cpp \
     $$PWD/xml/vplayoutliterals.cpp
 
-*msvc*:SOURCES +=
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/dialogs/vpdialogabout.h \
+    $$PWD/stable.h \
     $$PWD/vpapplication.h \
     $$PWD/vpcarrousel.h \
     $$PWD/vpcarrouselpiece.h \
@@ -47,7 +48,6 @@ HEADERS += \
     $$PWD/vppiecelist.h \
     $$PWD/vpsettings.h \
     $$PWD/vpsheet.h \
-    $$PWD/vpstable.h \
     $$PWD/vptilefactory.h \
     $$PWD/xml/vplayoutfilereader.h \
     $$PWD/xml/vplayoutfilewriter.h \
@@ -57,6 +57,3 @@ FORMS += \
     $$PWD/dialogs/vpdialogabout.ui \
     $$PWD/vpcarrousel.ui \
     $$PWD/vpmainwindow.ui
-
-SOURCES += \
-    $$PWD/vpstable.cpp
