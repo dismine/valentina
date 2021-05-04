@@ -765,7 +765,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
 
         // -------------  Set up the printer
-        QPrinter* printer = new QPrinter();
+        auto printer = QScopedPointer<QPrinter>(new QPrinter());
 
         printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
                             QCoreApplication::applicationVersion());
@@ -788,7 +788,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
 
         // -------------  Set up the painter
         QPainter painter;
-        if (not painter.begin(printer))
+        if (not painter.begin(printer.data()))
         { // failed to open file
             qCritical() << tr("Failed to open file, is it writable?");
             return;
