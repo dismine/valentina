@@ -765,7 +765,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
 
         // -------------  Set up the printer
-        auto printer = QScopedPointer<QPrinter>(new QPrinter());
+        QScopedPointer<QPrinter> printer(new QPrinter());
 
         printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
                             QCoreApplication::applicationVersion());
