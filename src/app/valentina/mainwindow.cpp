@@ -34,6 +34,7 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/exception/vexceptionundo.h"
+#include "../ifc/exception/vexceptioninvalidhistory.h"
 #include "version.h"
 #include "core/vapplication.h"
 #include "../vmisc/customevents.h"
@@ -4974,11 +4975,18 @@ void MainWindow::CreateActions()
             return;
         }
 
-        VPatternRecipe recipe(doc);
-        QString error;
-        if (not recipe.SaveDocument(fileName, error))
+        try
         {
-            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Could not save recipe. %1").arg(error)));
+            VPatternRecipe recipe(doc);
+            QString error;
+            if (not recipe.SaveDocument(fileName, error))
+            {
+                qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Could not save recipe. %1").arg(error)));
+            }
+        }
+        catch (const VExceptionInvalidHistory &e)
+        {
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Could not create recipe file. %1").arg(e.ErrorMessage())));
         }
     });
 

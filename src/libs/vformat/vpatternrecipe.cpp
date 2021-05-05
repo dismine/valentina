@@ -435,17 +435,26 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const 
     SetAttribute(recipeFinalMeasurement, QStringLiteral("formula"), fm.formula); // TODO: localize
 
     QScopedPointer<Calculator> cal(new Calculator());
-    const qreal result = cal->EvalFormula(data.DataVariables(), fm.formula);
-    if (qIsInf(result) || qIsNaN(result))
+    try
     {
-        const QString errorMsg = QString("%1\n\n%1").arg(tr("Reading final measurements error."),
-                                                         tr("Value for final measurtement '%1' is infinite or NaN. "
-                                                            "Please, check your calculations.").arg(fm.name));
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-    }
+        const qreal result = cal->EvalFormula(data.DataVariables(), fm.formula);
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            const QString errorMsg = QString("%1\n\n%1").arg(tr("Reading final measurements error."),
+                                                             tr("Value for final measurtement '%1' is infinite or NaN. "
+                                                                "Please, check your calculations.").arg(fm.name));
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg)
+                                                       : qWarning()
+                                                         << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
 
-    SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);
+        SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);
+    }
+    catch (const qmu::QmuParserError &e)
+    {
+        throw VExceptionInvalidHistory(tr("Unable to create record for final measurement '%1'. Error: %2")
+                                       .arg(fm.name).arg(e.GetMsg()));
+    }
 
     return recipeFinalMeasurement;
 }
