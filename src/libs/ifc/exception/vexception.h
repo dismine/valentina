@@ -64,7 +64,7 @@ protected:
     QString         error;
 
     /** @brief moreInfo more information about error */
-    QString         moreInfo;
+    QString         moreInfo {};
 
     QString         MoreInfo(const QString &detInfo) const;
 };

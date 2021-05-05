@@ -41,7 +41,7 @@
  * @param error string with error
  */
 VException::VException(const QString &error) V_NOEXCEPT_EXPR (true)
-    :QException(), error(error), moreInfo(QString())
+    : error(error)
 {
     Q_ASSERT_X(not error.isEmpty(), Q_FUNC_INFO, "Error message is empty");
 }
