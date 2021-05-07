@@ -118,8 +118,6 @@ public:
     static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
     static quint32 GetParametrId(const QDomElement& domElement);
 
-    Unit           MUnit() const;
-
     virtual void   setXMLContent(const QString &fileName);
     static QString UnitsHelpString();
 

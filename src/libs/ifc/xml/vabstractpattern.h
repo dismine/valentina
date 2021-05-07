@@ -233,6 +233,8 @@ public:
     virtual VContainer GetCompleteData() const;
     virtual VContainer GetCompletePPData(const QString &name) const;
 
+    auto Units() const -> Unit;
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
@@ -396,6 +398,14 @@ protected:
     /** @brief modified keep state of the document for cases that do not cover QUndoStack*/
     mutable bool   modified;
 
+    Unit m_units{Unit::LAST_UNIT_DO_NOT_USE};
+    QString m_patternNumber{};
+    QString m_labelDateFormat{};
+    QString m_patternName{};
+    QString m_MPath{};
+    QString m_watermarkPath{};
+    QString m_companyName{};
+
     /** @brief tools list with pointer on tools. */
     static QHash<quint32, VDataTool*> tools;
     /** @brief patternLabelLines list to speed up reading a template by many pieces. */
@@ -420,7 +430,16 @@ protected:
 
     QVector<VToolRecord> getLocalHistory(const QString &draw) const;
 
-   bool GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId);
+    bool GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId);
+
+    auto ReadUnits() const -> Unit;
+    auto ReadPatternNumber() const ->QString;
+    auto ReadLabelDateFormat() const ->QString;
+    auto ReadPatternName() const ->QString;
+    auto ReadMPath() const ->QString;
+    auto ReadWatermarkPath() const -> QString;
+    auto ReadCompanyName() const -> QString;
+
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 

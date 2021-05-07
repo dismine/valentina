@@ -232,8 +232,6 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
     }
     return false;
 }
-
-Unit mUnitCached = Unit::LAST_UNIT_DO_NOT_USE;
 }  // namespace
 
 Q_LOGGING_CATEGORY(vXML, "v.xml")
@@ -634,22 +632,6 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
         throw excep;
     }
     return id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Unit VDomDocument::MUnit() const
-{
-    if (mUnitCached == Unit::LAST_UNIT_DO_NOT_USE)
-    {
-        mUnitCached = StrToUnits(UniqueTagText(TagUnit, unitCM));
-
-        if (mUnitCached == Unit::Px)
-        {
-            mUnitCached = Unit::Cm;
-        }
-    }
-
-    return mUnitCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

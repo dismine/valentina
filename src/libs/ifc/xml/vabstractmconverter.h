@@ -43,6 +43,8 @@ public:
     explicit VAbstractMConverter(const QString &fileName);
     virtual ~VAbstractMConverter() Q_DECL_EQ_DEFAULT;
 
+    auto Units() const -> Unit;
+
 protected:
     void AddRootComment();
     static QMultiMap<QString, QString> OldNamesToNewNames_InV0_3_0();

@@ -40,6 +40,5 @@ extern const QString preferencesOtherIcon;
 extern const QString degreeSymbol;
 extern const QString trueStr;
 extern const QString falseStr;
-extern const QString unknownCharacter;
 
 #endif // LITERALS_H

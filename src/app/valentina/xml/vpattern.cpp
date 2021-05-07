@@ -141,6 +141,9 @@ void VPattern::CreateEmptyFile()
     insertBefore(createProcessingInstruction(QStringLiteral("xml"),
                                              QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
                  this->firstChild());
+
+    // Cache values
+    m_units = VAbstractValApplication::VApp()->patternUnits();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
