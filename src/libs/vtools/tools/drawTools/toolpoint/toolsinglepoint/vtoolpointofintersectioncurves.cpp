@@ -62,7 +62,9 @@ VToolPointOfIntersectionCurves::VToolPointOfIntersectionCurves(const VToolPointO
       firstCurveId(initData.firstCurveId),
       secondCurveId(initData.secondCurveId),
       vCrossPoint(initData.vCrossPoint),
-      hCrossPoint(initData.hCrossPoint)
+      hCrossPoint(initData.hCrossPoint),
+      m_curve1Segments(initData.curve1Segments),
+      m_curve2Segments(initData.curve2Segments)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -141,15 +143,19 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
     {
         initData.id = initData.data->AddGObject(p);
 
-        VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p, initData.firstCurveId, initData.data);
-        VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p, initData.secondCurveId, initData.data);
+        initData.curve1Segments = VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p,
+                                                                 initData.firstCurveId, initData.data);
+        initData.curve2Segments = VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p,
+                                                                 initData.secondCurveId, initData.data);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
-        VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p, initData.firstCurveId, initData.data);
-        VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p, initData.secondCurveId, initData.data);
+        initData.curve1Segments = VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p,
+                                                                 initData.firstCurveId, initData.data);
+        initData.curve2Segments = VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p,
+                                                                 initData.secondCurveId, initData.data);
 
         if (initData.parse != Document::FullParse)
         {
@@ -422,4 +428,25 @@ void VToolPointOfIntersectionCurves::SetVisualization()
         visual->setHCrossPoint(hCrossPoint);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersectionCurves::MakeToolTip() const -> QString
+{
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "<tr> <td><b>%3:</b> %4</td> </tr>"
+                                    "<tr> <td><b>%5:</b> %6</td> </tr>"
+                                    "<tr> <td><b>%7:</b> %8</td> </tr>"
+                                    "<tr> <td><b>%9:</b> %10</td> </tr>"
+                                    "</table>")
+            .arg(tr("Label"), p->name(), /* 1, 2 */
+                 tr("Curve 1 segment 1"), m_curve1Segments.first, /* 3, 4 */
+                 tr("Curve 1 segment 2"), m_curve1Segments.second) /* 5, 6 */
+            .arg(tr("Curve 2 segment 1"), m_curve2Segments.first, /* 7, 8 */
+                 tr("Curve 2 segment 2"), m_curve2Segments.second); /* 9, 10 */
+
+    return toolTip;
 }

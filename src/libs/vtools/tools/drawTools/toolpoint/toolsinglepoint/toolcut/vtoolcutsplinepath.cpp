@@ -388,6 +388,9 @@ QString VToolCutSplinePath::MakeToolTip() const
                 VAbstractValApplication::VApp()->toPixel(length), splPath, "X", &splPath1, &splPath2);
     delete p; // Don't need this point
 
+    splPath1->SetAliasSuffix(m_aliasSuffix1);
+    splPath2->SetAliasSuffix(m_aliasSuffix2);
+
     const QString curveStr = tr("Curve");
     const QString lengthStr = tr("length");
 

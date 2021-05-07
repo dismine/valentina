@@ -9,7 +9,8 @@
 - [smart-pattern/valentina#123] Error inside Save layout dialog.
 - Improve error handling for the dxf export.
 - Fix correct handle a final measurement formula error when exporting a pattern recipe.
-- Fix regression. Incorrect data caching. 
+- Fix regression. Incorrect data caching.
+- Improve tool tooltip. Show segment names and aliases.
 
 # Version 0.7.46 Mar 31, 2021
 - Fix incorrect calculation of value for multisize measurements in Valentina.

@@ -76,7 +76,8 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisIn
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
                     initData.basePointId, 0, initData.notes, parent),
       formulaAngle(initData.formulaAngle),
-      curveId(initData.curveId)
+      curveId(initData.curveId),
+      m_segments(initData.segments)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -160,14 +161,16 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
 
         initData.data->getNextId();
         initData.data->getNextId();
-        VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId, initData.data);
+        initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
+                                                               initData.data);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
         initData.data->AddLine(initData.basePointId, initData.id);
 
-        VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId, initData.data);
+        initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
+                                                               initData.data);
 
         if (initData.parse != Document::FullParse)
         {
@@ -307,4 +310,29 @@ void VToolCurveIntersectAxis::SetVisualization()
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCurveIntersectAxis::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
+    const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
+                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length")) // 1
+            .arg(VAbstractValApplication::VApp()->fromPixel(line.length())) // 2
+            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle")) // 3, 4
+            .arg(line.angle()) // 5
+            .arg(tr("Label"), second->name(), /* 6, 7 */
+                 tr("Segment 1"), m_segments.first, /* 8, 9 */
+                 tr("Segment 2"), m_segments.second); /* 10, 11 */
+    return toolTip;
 }

@@ -108,15 +108,17 @@ protected:
     virtual void     ChangeLabelVisibility(quint32 id, bool visible) override;
 
     template <class Item>
-    static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
-    static void InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data);
+    static QPair<QString, QString> InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
+    static QPair<QString, QString> InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
+                                                VContainer *data);
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-inline void VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId)
+inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p,
+                                      quint32 curveId) -> QPair<QString, QString>
 {
     QSharedPointer<Item> a1;
     QSharedPointer<Item> a2;
@@ -155,6 +157,8 @@ inline void VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const V
 
     data->AddArc(a1, arc1.id(), p->id());
     data->AddArc(a2, arc2.id(), p->id());
+
+    return qMakePair(arc1.ObjectName(), arc2.ObjectName());
 }
 
 #endif // VTOOLSINGLEPOINT_H

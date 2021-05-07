@@ -48,16 +48,10 @@ template <class T> class QSharedPointer;
 
 struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
 {
-    VToolCurveIntersectAxisInitData()
-        : VToolLinePointInitData(),
-          formulaAngle('0'),
-          basePointId(NULL_ID),
-          curveId(NULL_ID)
-    {}
-
-    QString formulaAngle;
-    quint32 basePointId;
-    quint32 curveId;
+    QString formulaAngle{'0'};
+    quint32 basePointId{NULL_ID};
+    quint32 curveId{NULL_ID};
+    QPair<QString, QString> segments{};
 };
 
 class VToolCurveIntersectAxis : public VToolLinePoint
@@ -92,10 +86,12 @@ protected:
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
+    virtual auto MakeToolTip() const -> QString override;
 private:
     Q_DISABLE_COPY(VToolCurveIntersectAxis)
     QString formulaAngle;
     quint32 curveId;
+    QPair<QString, QString> m_segments{};
 
     VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
 

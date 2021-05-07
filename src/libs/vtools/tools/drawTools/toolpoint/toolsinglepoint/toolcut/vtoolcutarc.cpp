@@ -298,8 +298,12 @@ QString VToolCutArc::MakeToolTip() const
     VArc ar1;
     VArc ar2;
     arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), ar1, ar2);
+
     ar1.setId(m_id + 1);
+    ar1.SetAliasSuffix(m_aliasSuffix1);
+
     ar2.setId(m_id + 2);
+    ar2.SetAliasSuffix(m_aliasSuffix2);
 
     auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr](QString toolTip, const VArc &arc,
             const QString &arcNumber)
