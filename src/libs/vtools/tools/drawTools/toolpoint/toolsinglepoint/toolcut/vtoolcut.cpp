@@ -200,6 +200,6 @@ void VToolCut::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    m_aliasSuffix1 = doc->GetParametrEmptyString(domElement, AttrAlias1);
-    m_aliasSuffix2 = doc->GetParametrEmptyString(domElement, AttrAlias2);
+    m_aliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias1);
+    m_aliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias2);
 }

@@ -77,7 +77,9 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisIn
                     initData.basePointId, 0, initData.notes, parent),
       formulaAngle(initData.formulaAngle),
       curveId(initData.curveId),
-      m_segments(initData.segments)
+      m_segments(initData.segments),
+      m_aliasSuffix1(initData.aliasSuffix1),
+      m_aliasSuffix2(initData.aliasSuffix2)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -97,6 +99,8 @@ void VToolCurveIntersectAxis::setDialog()
     dialogTool->setCurveId(curveId);
     dialogTool->SetPointName(p->name());
     dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix1(m_aliasSuffix1);
+    dialogTool->SetAliasSuffix2(m_aliasSuffix2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,6 +125,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTo
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
+    initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
 
     VToolCurveIntersectAxis *point = Create(initData);
     if (point != nullptr)
@@ -162,7 +168,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
         initData.data->getNextId();
         initData.data->getNextId();
         initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
-                                                               initData.data);
+                                                           initData.data, initData.aliasSuffix1, initData.aliasSuffix2);
     }
     else
     {
@@ -170,7 +176,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
         initData.data->AddLine(initData.basePointId, initData.id);
 
         initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
-                                                               initData.data);
+                                                           initData.data, initData.aliasSuffix1, initData.aliasSuffix2);
 
         if (initData.parse != Document::FullParse)
         {
@@ -189,6 +195,10 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
         initData.doc->IncrementReferens(curve->getIdTool());
         return point;
     }
+
+    auto *tool = qobject_cast<VToolCurveIntersectAxis *>(VAbstractPattern::getTool(initData.id));
+    tool->SetSegments(initData.segments);
+
     return nullptr;
 }
 
@@ -267,6 +277,10 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrCurve, QString().setNum(dialogTool->getCurveId()));
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
+                                dialogTool->GetAliasSuffix1().isEmpty());
+    doc->SetAttributeOrRemoveIf(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
+                                dialogTool->GetAliasSuffix2().isEmpty());
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -281,6 +295,8 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
     doc->SetAttribute(tag, AttrAngle, formulaAngle);
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrCurve, curveId);
+    doc->SetAttributeOrRemoveIf(tag, AttrAlias1, m_aliasSuffix1, m_aliasSuffix1.isEmpty());
+    doc->SetAttributeOrRemoveIf(tag, AttrAlias2, m_aliasSuffix2, m_aliasSuffix2.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -288,11 +304,13 @@ void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolLinePoint::ReadToolAttributes(domElement);
 
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    curveId = doc->GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
+    m_lineType = VAbstractPattern::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VAbstractPattern::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    curveId = VAbstractPattern::GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
+    formulaAngle = VAbstractPattern::GetParametrString(domElement, AttrAngle, QString());
+    m_aliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias1);
+    m_aliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,7 +318,7 @@ void VToolCurveIntersectAxis::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+        auto *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(curveId);
@@ -335,4 +353,10 @@ QString VToolCurveIntersectAxis::MakeToolTip() const
                  tr("Segment 1"), m_segments.first, /* 8, 9 */
                  tr("Segment 2"), m_segments.second); /* 10, 11 */
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::SetSegments(const QPair<QString, QString> &segments)
+{
+    m_segments = segments;
 }

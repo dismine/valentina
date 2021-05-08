@@ -38,7 +38,9 @@
 #include "../../visualization/path/vistoolpointofintersectioncurves.h"
 #include "../../visualization/visualization.h"
 #include "../vmisc/vabstractapplication.h"
-#include "dialogtool.h"
+#include "../qmuparser/qmudef.h"
+#include "../dialogtoolbox.h"
+#include "../vpatterndb/vcontainer.h"
 #include "ui_dialogpointofintersectioncurves.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,6 +74,10 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
             this, &DialogPointOfIntersectionCurves::CurveChanged);
     connect(ui->comboBoxCurve2, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersectionCurves::CurveChanged);
+    connect(ui->lineEditCurve1Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
+    connect(ui->lineEditCurve1Alias2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
+    connect(ui->lineEditCurve2Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
+    connect(ui->lineEditCurve2Alias2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
 
     vis = new VisToolPointOfIntersectionCurves(data);
 
@@ -253,6 +259,65 @@ void DialogPointOfIntersectionCurves::CurveChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::ValidateAlias()
+{
+    QRegularExpression rx(NameRegExp());
+
+    const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(GetFirstCurveId());
+    QPair<QString, QString> curve1Alias = SegmentAliases(curve1->getType(), GetCurve1AliasSuffix1(),
+                                                         GetCurve1AliasSuffix2());
+
+    const QSharedPointer<VAbstractCurve> curve2 = data->GeometricObject<VAbstractCurve>(GetSecondCurveId());
+    QPair<QString, QString> curve2Alias = SegmentAliases(curve2->getType(), GetCurve2AliasSuffix1(),
+                                                         GetCurve2AliasSuffix2());
+
+    QSet<QString> uniqueAliases;
+    int countAliases = 0;
+
+    auto CountUniqueAliases = [&countAliases, &uniqueAliases](const QString &alias)
+    {
+        if (not alias.isEmpty())
+        {
+            uniqueAliases.insert(alias);
+            ++countAliases;
+        }
+    };
+
+    CountUniqueAliases(curve1Alias.first);
+    CountUniqueAliases(curve1Alias.second);
+    CountUniqueAliases(curve2Alias.first);
+    CountUniqueAliases(curve2Alias.second);
+
+    auto Validate = [countAliases, uniqueAliases, rx, this](const QString &originalSuffix, const QString &suffix,
+            const QString &alias, bool &flagAlias, QLabel *label)
+    {
+        if (not suffix.isEmpty() &&
+            (not rx.match(alias).hasMatch() || (originalSuffix != suffix && not data->IsUnique(alias)) ||
+             countAliases != uniqueAliases.size()))
+        {
+            flagAlias = false;
+            ChangeColor(label, errorColor);
+        }
+        else
+        {
+            flagAlias = true;
+            ChangeColor(label, OkColor(this));
+        }
+    };
+
+    Validate(originCurve1AliasSuffix1, GetCurve1AliasSuffix1(), curve1Alias.first, flagCurve1Alias1,
+             ui->labelCurve1Alias1);
+    Validate(originCurve1AliasSuffix2, GetCurve1AliasSuffix2(), curve1Alias.second, flagCurve1Alias2,
+             ui->labelCurve1Alias2);
+    Validate(originCurve2AliasSuffix1, GetCurve2AliasSuffix1(), curve2Alias.first, flagCurve2Alias1,
+             ui->labelCurve2Alias1);
+    Validate(originCurve2AliasSuffix2, GetCurve2AliasSuffix2(), curve2Alias.second, flagCurve2Alias2,
+             ui->labelCurve2Alias2);
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::SetNotes(const QString &notes)
 {
     ui->plainTextEditToolNotes->setPlainText(notes);
@@ -262,4 +327,60 @@ void DialogPointOfIntersectionCurves::SetNotes(const QString &notes)
 QString DialogPointOfIntersectionCurves::GetNotes() const
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve1AliasSuffix1(const QString &alias)
+{
+    originCurve1AliasSuffix1 = alias;
+    ui->lineEditCurve1Alias1->setText(originCurve1AliasSuffix1);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCurves::GetCurve1AliasSuffix1() const
+{
+    return ui->lineEditCurve1Alias1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve1AliasSuffix2(const QString &alias)
+{
+    originCurve1AliasSuffix2 = alias;
+    ui->lineEditCurve1Alias2->setText(originCurve1AliasSuffix2);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCurves::GetCurve1AliasSuffix2() const
+{
+    return ui->lineEditCurve1Alias2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve2AliasSuffix1(const QString &alias)
+{
+    originCurve2AliasSuffix1 = alias;
+    ui->lineEditCurve2Alias1->setText(originCurve2AliasSuffix1);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCurves::GetCurve2AliasSuffix1() const
+{
+    return ui->lineEditCurve2Alias1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve2AliasSuffix2(const QString &alias)
+{
+    originCurve2AliasSuffix2 = alias;
+    ui->lineEditCurve2Alias2->setText(originCurve2AliasSuffix2);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCurves::GetCurve2AliasSuffix2() const
+{
+    return ui->lineEditCurve2Alias2->text();
 }

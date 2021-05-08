@@ -137,6 +137,10 @@ const QString AttrNotes       = QStringLiteral("notes");
 const QString AttrAlias       = QStringLiteral("alias");
 const QString AttrAlias1      = QStringLiteral("alias1");
 const QString AttrAlias2      = QStringLiteral("alias2");
+const QString AttrCurve1Alias1 = QStringLiteral("curve1Alias1");
+const QString AttrCurve1Alias2 = QStringLiteral("curve1Alias2");
+const QString AttrCurve2Alias1 = QStringLiteral("curve2Alias1");
+const QString AttrCurve2Alias2 = QStringLiteral("curve2Alias2");
 
 const QString TypeLineDefault        = QStringLiteral("default");
 const QString TypeLineNone           = QStringLiteral("none");

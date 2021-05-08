@@ -52,6 +52,8 @@ struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
     quint32 basePointId{NULL_ID};
     quint32 curveId{NULL_ID};
     QPair<QString, QString> segments{};
+    QString aliasSuffix1{};
+    QString aliasSuffix2{};
 };
 
 class VToolCurveIntersectAxis : public VToolLinePoint
@@ -87,13 +89,17 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
     virtual auto MakeToolTip() const -> QString override;
+
+    void SetSegments(const QPair<QString, QString> &segments);
 private:
     Q_DISABLE_COPY(VToolCurveIntersectAxis)
     QString formulaAngle;
     quint32 curveId;
     QPair<QString, QString> m_segments{};
+    QString m_aliasSuffix1{};
+    QString m_aliasSuffix2{};
 
-    VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
 
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);

@@ -53,6 +53,10 @@ struct VToolPointOfIntersectionCurvesInitData : VToolSinglePointInitData
     HCrossCurvesPoint hCrossPoint{HCrossCurvesPoint::LeftmostPoint};
     QPair<QString, QString> curve1Segments{};
     QPair<QString, QString> curve2Segments{};
+    QString curve1AliasSuffix1{};
+    QString curve1AliasSuffix2{};
+    QString curve2AliasSuffix1{};
+    QString curve2AliasSuffix2{};
 };
 
 class VToolPointOfIntersectionCurves : public VToolSinglePoint
@@ -89,6 +93,9 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
     virtual auto MakeToolTip() const -> QString override;
+
+    void SetCurve1Segments(const QPair<QString, QString> &segments);
+    void SetCurve2Segments(const QPair<QString, QString> &segments);
 private:
     Q_DISABLE_COPY(VToolPointOfIntersectionCurves)
 
@@ -100,6 +107,11 @@ private:
 
     QPair<QString, QString> m_curve1Segments{};
     QPair<QString, QString> m_curve2Segments{};
+
+    QString m_curve1AliasSuffix1{};
+    QString m_curve1AliasSuffix2{};
+    QString m_curve2AliasSuffix1{};
+    QString m_curve2AliasSuffix2{};
 
     explicit VToolPointOfIntersectionCurves(const VToolPointOfIntersectionCurvesInitData &initData,
                                             QGraphicsItem *parent = nullptr);

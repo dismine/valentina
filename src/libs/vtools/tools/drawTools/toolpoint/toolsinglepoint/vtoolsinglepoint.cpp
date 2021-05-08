@@ -396,14 +396,15 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
-                                    VContainer *data) -> QPair<QString, QString>
+                                    VContainer *data, const QString &alias1,
+                                    const QString &alias2) -> QPair<QString, QString>
 {
     switch(curveType)
     {
         case GOType::EllipticalArc:
-            return InitArc<VEllipticalArc>(data, segLength, p, curveId);
+            return InitArc<VEllipticalArc>(data, segLength, p, curveId, alias1, alias2);
         case GOType::Arc:
-            return InitArc<VArc>(data, segLength, p, curveId);
+            return InitArc<VArc>(data, segLength, p, curveId, alias1, alias2);
         case GOType::CubicBezier:
         case GOType::Spline:
         {
@@ -442,11 +443,18 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
                 delete spl2;
             }
 
+            spline1->SetAliasSuffix(alias1);
+            spline2->SetAliasSuffix(alias2);
+
             data->RegisterUniqueName(spline1);
             data->AddSpline(spline1, NULL_ID, p->id());
 
             data->RegisterUniqueName(spline2);
             data->AddSpline(spline2, NULL_ID, p->id());
+
+            // Because we don't store segments, but only data about them we must register the names manually
+            data->RegisterUniqueName(spline1);
+            data->RegisterUniqueName(spline2);
 
             return qMakePair(spline1->ObjectName(), spline2->ObjectName());
         }
@@ -491,11 +499,18 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
                 delete splPath2;
             }
 
+            splP1->SetAliasSuffix(alias1);
+            splP2->SetAliasSuffix(alias2);
+
             data->RegisterUniqueName(splP1);
             data->AddSpline(splP1, NULL_ID, p->id());
 
             data->RegisterUniqueName(splP2);
             data->AddSpline(splP2, NULL_ID, p->id());
+
+            // Because we don't store segments, but only data about them we must register the names manually
+            data->RegisterUniqueName(splP1);
+            data->RegisterUniqueName(splP2);
 
             return qMakePair(splP1->ObjectName(), splP2->ObjectName());
         }

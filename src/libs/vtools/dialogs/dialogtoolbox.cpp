@@ -36,6 +36,12 @@
 #include "../vpatterndb/variables/vcurvelength.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
 
 #include <QDialog>
 #include <QLabel>
@@ -106,7 +112,20 @@ bool DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode)
 
     return false;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString, QString>
+{
+    T curve1;
+    curve1.SetAliasSuffix(alias1);
+
+    T curve2;
+    curve2.SetAliasSuffix(alias2);
+
+    return qMakePair(curve1.GetAlias(), curve2.GetAlias());
 }
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode RowNode(QListWidget *listWidget, int i)
@@ -527,3 +546,33 @@ QIcon LineColor(int size, const QString &color)
     pix.fill(QColor(color));
     return QIcon(pix);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
+auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>
+{
+    switch(curveType)
+    {
+        case GOType::EllipticalArc:
+            return CurveAliases<VEllipticalArc>(alias1, alias2);
+        case GOType::Arc:
+            return CurveAliases<VArc>(alias1, alias2);
+        case GOType::CubicBezier:
+            return CurveAliases<VCubicBezier>(alias1, alias2);
+        case GOType::Spline:
+            return CurveAliases<VSpline>(alias1, alias2);
+        case GOType::CubicBezierPath:
+            return CurveAliases<VCubicBezierPath>(alias1, alias2);
+        case GOType::SplinePath:
+            return CurveAliases<VSplinePath>(alias1, alias2);
+        case GOType::Point:
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+            Q_UNREACHABLE();
+            break;
+    }
+
+    return {};
+}
+QT_WARNING_POP

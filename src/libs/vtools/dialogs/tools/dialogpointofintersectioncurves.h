@@ -69,6 +69,18 @@ public:
     void    SetNotes(const QString &notes);
     QString GetNotes() const;
 
+    void    SetCurve1AliasSuffix1(const QString &alias);
+    QString GetCurve1AliasSuffix1() const;
+
+    void    SetCurve1AliasSuffix2(const QString &alias);
+    QString GetCurve1AliasSuffix2() const;
+
+    void    SetCurve2AliasSuffix1(const QString &alias);
+    QString GetCurve2AliasSuffix1() const;
+
+    void    SetCurve2AliasSuffix2(const QString &alias);
+    QString GetCurve2AliasSuffix2() const;
+
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 
@@ -83,6 +95,7 @@ protected:
 
 private slots:
     void CurveChanged();
+    void ValidateAlias();
 
 private:
     Q_DISABLE_COPY(DialogPointOfIntersectionCurves)
@@ -93,12 +106,21 @@ private:
 
     bool flagName;
     bool flagError;
+    bool flagCurve1Alias1{true};
+    bool flagCurve1Alias2{true};
+    bool flagCurve2Alias1{true};
+    bool flagCurve2Alias2{true};
+
+    QString originCurve1AliasSuffix1{};
+    QString originCurve1AliasSuffix2{};
+    QString originCurve2AliasSuffix1{};
+    QString originCurve2AliasSuffix2{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogPointOfIntersectionCurves::IsValid() const
 {
-    return flagName && flagError;
+    return flagName && flagError && flagCurve1Alias1 && flagCurve1Alias2 && flagCurve2Alias1 && flagCurve2Alias2;
 }
 
 #endif // DIALOGPOINTOFINTERSECTIONCURVES_H

@@ -64,7 +64,11 @@ VToolPointOfIntersectionCurves::VToolPointOfIntersectionCurves(const VToolPointO
       vCrossPoint(initData.vCrossPoint),
       hCrossPoint(initData.hCrossPoint),
       m_curve1Segments(initData.curve1Segments),
-      m_curve2Segments(initData.curve2Segments)
+      m_curve2Segments(initData.curve2Segments),
+      m_curve1AliasSuffix1(initData.curve1AliasSuffix1),
+      m_curve1AliasSuffix2(initData.curve1AliasSuffix2),
+      m_curve2AliasSuffix1(initData.curve2AliasSuffix1),
+      m_curve2AliasSuffix2(initData.curve2AliasSuffix2)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -82,6 +86,10 @@ void VToolPointOfIntersectionCurves::setDialog()
     dialogTool->SetHCrossPoint(hCrossPoint);
     dialogTool->SetPointName(p->name());
     dialogTool->SetNotes(m_notes);
+    dialogTool->SetCurve1AliasSuffix1(m_curve1AliasSuffix1);
+    dialogTool->SetCurve1AliasSuffix2(m_curve1AliasSuffix2);
+    dialogTool->SetCurve2AliasSuffix1(m_curve2AliasSuffix1);
+    dialogTool->SetCurve2AliasSuffix2(m_curve2AliasSuffix2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,6 +114,10 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const QPo
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.curve1AliasSuffix1 = dialogTool->GetCurve1AliasSuffix1();
+    initData.curve1AliasSuffix2 = dialogTool->GetCurve1AliasSuffix2();
+    initData.curve2AliasSuffix1 = dialogTool->GetCurve2AliasSuffix1();
+    initData.curve2AliasSuffix2 = dialogTool->GetCurve2AliasSuffix2();
 
     VToolPointOfIntersectionCurves *point = Create(initData);
     if (point != nullptr)
@@ -144,22 +156,31 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
         initData.id = initData.data->AddGObject(p);
 
         initData.curve1Segments = VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p,
-                                                                 initData.firstCurveId, initData.data);
+                                                                 initData.firstCurveId, initData.data,
+                                                                 initData.curve1AliasSuffix1,
+                                                                 initData.curve1AliasSuffix2);
         initData.curve2Segments = VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p,
-                                                                 initData.secondCurveId, initData.data);
+                                                                 initData.secondCurveId, initData.data,
+                                                                 initData.curve2AliasSuffix1,
+                                                                 initData.curve2AliasSuffix2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
         initData.curve1Segments = VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p,
-                                                                 initData.firstCurveId, initData.data);
+                                                                 initData.firstCurveId, initData.data,
+                                                                 initData.curve1AliasSuffix1,
+                                                                 initData.curve1AliasSuffix2);
         initData.curve2Segments = VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p,
-                                                                 initData.secondCurveId, initData.data);
+                                                                 initData.secondCurveId, initData.data,
+                                                                 initData.curve2AliasSuffix1,
+                                                                 initData.curve2AliasSuffix2);
 
         if (initData.parse != Document::FullParse)
         {
             initData.doc->UpdateToolData(initData.id, initData.data);
+
         }
     }
 
@@ -174,6 +195,11 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
         initData.doc->IncrementReferens(curve2->getIdTool());
         return point;
     }
+
+    auto *tool = qobject_cast<VToolPointOfIntersectionCurves *>(VAbstractPattern::getTool(initData.id));
+    tool->SetCurve1Segments(initData.curve1Segments);
+    tool->SetCurve2Segments(initData.curve2Segments);
+
     return nullptr;
 }
 
@@ -373,7 +399,7 @@ void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<q
                                                 QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(m_dialog);
+    auto *dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
     AddDependence(oldDependencies, firstCurveId);
@@ -386,6 +412,14 @@ void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrCurve2, QString().setNum(dialogTool->GetSecondCurveId()));
     doc->SetAttribute(domElement, AttrVCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetVCrossPoint())));
     doc->SetAttribute(domElement, AttrHCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetHCrossPoint())));
+    doc->SetAttributeOrRemoveIf(domElement, AttrCurve1Alias1, dialogTool->GetCurve1AliasSuffix1(),
+                                dialogTool->GetCurve1AliasSuffix1().isEmpty());
+    doc->SetAttributeOrRemoveIf(domElement, AttrCurve1Alias2, dialogTool->GetCurve1AliasSuffix2(),
+                                dialogTool->GetCurve1AliasSuffix2().isEmpty());
+    doc->SetAttributeOrRemoveIf(domElement, AttrCurve2Alias1, dialogTool->GetCurve2AliasSuffix1(),
+                                dialogTool->GetCurve2AliasSuffix1().isEmpty());
+    doc->SetAttributeOrRemoveIf(domElement, AttrCurve2Alias2, dialogTool->GetCurve2AliasSuffix2(),
+                                dialogTool->GetCurve2AliasSuffix2().isEmpty());
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
@@ -401,6 +435,10 @@ void VToolPointOfIntersectionCurves::SaveOptions(QDomElement &tag, QSharedPointe
     doc->SetAttribute(tag, AttrCurve2, secondCurveId);
     doc->SetAttribute(tag, AttrVCrossPoint, static_cast<int>(vCrossPoint));
     doc->SetAttribute(tag, AttrHCrossPoint, static_cast<int>(hCrossPoint));
+    doc->SetAttributeOrRemoveIf(tag, AttrCurve1Alias1, m_curve1AliasSuffix1, m_curve1AliasSuffix1.isEmpty());
+    doc->SetAttributeOrRemoveIf(tag, AttrCurve1Alias2, m_curve1AliasSuffix2, m_curve1AliasSuffix2.isEmpty());
+    doc->SetAttributeOrRemoveIf(tag, AttrCurve2Alias1, m_curve2AliasSuffix1, m_curve2AliasSuffix1.isEmpty());
+    doc->SetAttributeOrRemoveIf(tag, AttrCurve2Alias2, m_curve2AliasSuffix2, m_curve2AliasSuffix2.isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -408,10 +446,16 @@ void VToolPointOfIntersectionCurves::ReadToolAttributes(const QDomElement &domEl
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    firstCurveId = doc->GetParametrUInt(domElement, AttrCurve1, NULL_ID_STR);
-    secondCurveId = doc->GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
-    vCrossPoint = static_cast<VCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
-    hCrossPoint = static_cast<HCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
+    firstCurveId = VAbstractPattern::GetParametrUInt(domElement, AttrCurve1, NULL_ID_STR);
+    secondCurveId = VAbstractPattern::GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
+    vCrossPoint = static_cast<VCrossCurvesPoint>(VAbstractPattern::GetParametrUInt(domElement, AttrVCrossPoint,
+                                                                                   QChar('1')));
+    hCrossPoint = static_cast<HCrossCurvesPoint>(VAbstractPattern::GetParametrUInt(domElement, AttrHCrossPoint,
+                                                                                   QChar('1')));
+    m_curve1AliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurve1Alias1);
+    m_curve1AliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurve1Alias2);
+    m_curve2AliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurve2Alias1);
+    m_curve2AliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurve2Alias2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -449,4 +493,16 @@ auto VToolPointOfIntersectionCurves::MakeToolTip() const -> QString
                  tr("Curve 2 segment 2"), m_curve2Segments.second); /* 9, 10 */
 
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCurves::SetCurve1Segments(const QPair<QString, QString> &segments)
+{
+    m_curve1Segments = segments;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCurves::SetCurve2Segments(const QPair<QString, QString> &segments)
+{
+    m_curve2Segments = segments;
 }
