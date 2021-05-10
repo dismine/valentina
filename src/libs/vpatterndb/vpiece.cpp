@@ -38,6 +38,7 @@
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vlayout/testpath.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 #include <QSharedPointer>
 #include <QDebug>
@@ -1106,6 +1107,7 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
     passmarkData.isShowSecondPassmark = path.at(passmarkIndex).IsShowSecondPassmark();
     passmarkData.passmarkIndex = passmarkIndex;
     passmarkData.id = path.at(passmarkIndex).GetId();
+    passmarkData.globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit());
 
     return VPassmark(passmarkData);
 }
@@ -1168,6 +1170,39 @@ QJsonObject VPiece::DBToJson(const VContainer *data) const
     };
 
     return dbObject;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
+{
+    qreal length = 0;
+    QString passmarkLengthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
+    if (passmarkLengthVariable.isEmpty())
+    {
+        return 0;
+    }
+
+    try
+    {
+        QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkLengthVariable);
+        length = *var->GetValue();
+
+        if (length <= accuracyPointOnLine)
+        {
+            const QString errorMsg = QObject::tr("Invalid global value for a passmark length. Piece '%1'. Length is "
+                                                 "less than minimal allowed.")
+                    .arg(GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        length = 0;
+    }
+
+    return length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1201,6 +1201,31 @@ bool VAbstractPattern::GetPatternWasChanged() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetPassmarkLengthVariable() const
+{
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return {};
+    }
+
+    return GetParametrEmptyString(pattern, AttrPassmarkLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetPassmarkLengthVariable(const QString &name)
+{
+    QDomElement pattern = documentElement();
+
+    if (not pattern.isNull())
+    {
+        SetAttribute(pattern, AttrPassmarkLength, name);
+        modified = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImage() const
 {
     return UniqueTagText(TagImage);

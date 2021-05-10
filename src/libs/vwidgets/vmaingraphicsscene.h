@@ -74,6 +74,7 @@ public slots:
     void          EnableDetailsMode(bool mode);
     void          ItemsSelection(const SelectionType &type);
     void          HighlightItem(quint32 id);
+    void          UpdatePiecePassmarks();
 
     void          ToggleLabelSelection(bool enabled);
     void          TogglePointSelection(bool enabled);
@@ -123,6 +124,7 @@ signals:
     void          CurveDetailsMode(bool mode);
     void          ItemSelection(const SelectionType &type);
     void          HighlightDetail(quint32 id);
+    void          UpdatePassmarks();
 
     void          EnableLabelItemSelection(bool enable);
     void          EnablePointItemSelection(bool enable);

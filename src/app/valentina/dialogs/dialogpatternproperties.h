@@ -38,6 +38,7 @@
 class VPattern;
 class VContainer;
 class QCheckBox;
+class QCompleter;
 
 namespace Ui
 {
@@ -50,6 +51,10 @@ class DialogPatternProperties : public QDialog
 public:
     explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() override;
+signals:
+    void UpddatePieces();
+protected:
+    virtual bool eventFilter(QObject *object, QEvent *event) override;
 private slots:
     void Apply();
     void Ok();
@@ -61,21 +66,25 @@ private:
     Ui::DialogPatternProperties *ui;
     VPattern               *doc;
     VContainer             *pattern;
-    QMap<QCheckBox *, int> data;
-    bool                   descriptionChanged;
-    bool                   gradationChanged;
-    bool                   defaultChanged;
-    bool                   securityChanged;
-    QAction                *deleteAction;
-    QAction                *changeImageAction;
-    QAction                *saveImageAction;
-    QAction                *showImageAction;
+    QMap<QCheckBox *, int> data{};
+    bool                   descriptionChanged{false};
+    bool                   defaultChanged{false};
+    bool                   securityChanged{false};
+    QAction                *deleteAction{nullptr};
+    QAction                *changeImageAction{nullptr};
+    QAction                *saveImageAction{nullptr};
+    QAction                *showImageAction{nullptr};
+    QCompleter             *m_completer{nullptr};
+    QStringList            m_variables{};
+    QString                m_oldPassmarkLength{};
 
     void         SaveDescription();
     void         SaveReadOnlyState();
 
     void         InitImage();
     QImage       GetImage();
+
+    void ValidatePassmarkLength() const;
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H

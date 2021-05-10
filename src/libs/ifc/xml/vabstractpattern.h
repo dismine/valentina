@@ -192,6 +192,9 @@ public:
     void SetPatternWasChanged(bool changed);
     bool GetPatternWasChanged() const;
 
+    QString GetPassmarkLengthVariable() const;
+    void    SetPassmarkLengthVariable(const QString &name);
+
     QString        GetImage() const;
     QString        GetImageExtension() const;
     void           SetImage(const QString &text, const QString &extension);

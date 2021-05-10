@@ -711,6 +711,13 @@ void VToolSeamAllowance::UpdatePatternInfo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::UpdatePassmarks()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    m_passmarks->setPath(detail.PassmarksPath(getData()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolDetail::UpdateGrainline updates the grain line item
  */
@@ -1293,6 +1300,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
     connect(m_sceneDetails, &VMainGraphicsScene::ItemSelection, this, &VToolSeamAllowance::ToolSelectionType);
+    connect(m_sceneDetails, &VMainGraphicsScene::UpdatePassmarks, this, &VToolSeamAllowance::UpdatePassmarks);
 
     ConnectOutsideSignals();
 }

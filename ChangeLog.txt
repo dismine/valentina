@@ -12,6 +12,7 @@
 - Fix regression. Incorrect data caching.
 - Improve tool tooltip. Show segment names and aliases.
 - Alias support for tools Point of intersection curve and axis and Point of intersection curves.
+- [smart-pattern/valentina#124] Standard passmarks length for all pieces.
 
 # Version 0.7.46 Mar 31, 2021
 - Fix incorrect calculation of value for multisize measurements in Valentina.

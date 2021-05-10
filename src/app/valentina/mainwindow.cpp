@@ -4923,6 +4923,8 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, [this]()
     {
         DialogPatternProperties proper(doc, pattern, this);
+        connect(&proper, &DialogPatternProperties::UpddatePieces, sceneDetails,
+                &VMainGraphicsScene::UpdatePiecePassmarks);
         proper.exec();
     });
 

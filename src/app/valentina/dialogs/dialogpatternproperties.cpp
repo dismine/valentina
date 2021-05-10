@@ -35,6 +35,7 @@
 #include <QDate>
 #include <QMessageBox>
 #include <QRadioButton>
+#include <QCompleter>
 
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
@@ -42,22 +43,14 @@
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 #include "dialogknownmaterials.h"
 #include "../vmisc/vsettings.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogPatternProperties),
       doc(doc),
-      pattern(pattern),
-      data(QMap<QCheckBox *, int>()),
-      descriptionChanged(false),
-      gradationChanged(false),
-      defaultChanged(false),
-      securityChanged(false),
-      deleteAction(nullptr),
-      changeImageAction(nullptr),
-      saveImageAction(nullptr),
-      showImageAction(nullptr)
+      pattern(pattern)
 {
     ui->setupUi(this);
 
@@ -137,8 +130,27 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
         ui->checkBoxPatternReadOnly->setDisabled(true);
     }
 
+    //----------------------- Passmark length
+    m_variables = pattern->DataMeasurements().keys() + pattern->DataIncrements().keys();
+    m_completer = new QCompleter(m_variables, this);
+    m_completer->setCompletionMode(QCompleter::PopupCompletion);
+    m_completer->setModelSorting(QCompleter::UnsortedModel);
+    m_completer->setFilterMode(Qt::MatchStartsWith);
+    m_completer->setCaseSensitivity(Qt::CaseSensitive);
+
+    ui->lineEditPassmarkLength->setCompleter(m_completer);
+    connect(ui->lineEditPassmarkLength, &QLineEdit::textEdited, this, [this]()
+    {
+        ValidatePassmarkLength();
+        DescEdited();
+    });
+
+    ui->lineEditPassmarkLength->installEventFilter(this);
+    m_oldPassmarkLength = doc->GetPassmarkLengthVariable();
+    ui->lineEditPassmarkLength->setText(m_oldPassmarkLength);
+    ValidatePassmarkLength();
+
     //Initialization change value. Set to default value after initialization
-    gradationChanged = false;
     defaultChanged = false;
     securityChanged = false;
 }
@@ -147,6 +159,27 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 DialogPatternProperties::~DialogPatternProperties()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> bool
+{
+    if (ui->lineEditPassmarkLength == qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            auto *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
+            {
+                m_completer->complete();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    return QDialog::eventFilter(object, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,8 +221,16 @@ void DialogPatternProperties::SaveDescription()
         doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
         doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
         doc->SetLabelPrefix(qvariant_cast<QString>(ui->comboBoxLabelLanguage->currentData()));
+        doc->SetPassmarkLengthVariable(ui->lineEditPassmarkLength->text());
+
+        if (m_oldPassmarkLength != ui->lineEditPassmarkLength->text())
+        {
+            emit UpddatePieces();
+            m_oldPassmarkLength = ui->lineEditPassmarkLength->text();
+        }
 
         descriptionChanged = false;
+        emit doc->patternChanged(false);
     }
 }
 
@@ -217,6 +258,27 @@ QImage DialogPatternProperties::GetImage()
     QString extension = doc->GetImageExtension();
     image.load(&buffer, extension.toLatin1().data()); // writes image into ba in 'extension' format
     return image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ValidatePassmarkLength() const
+{
+    const QString text = ui->lineEditPassmarkLength->text();
+    QPalette palette = ui->lineEditPassmarkLength->palette();
+    const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkLength->foregroundRole();
+
+    QRegularExpression rx(NameRegExp());
+    if (not text.isEmpty())
+    {
+        palette.setColor(foregroundRole,
+                         rx.match(text).hasMatch() && m_variables.contains(text) ? Qt::black : Qt::red);
+    }
+    else
+    {
+        palette.setColor(foregroundRole, Qt::black);
+    }
+
+    ui->lineEditPassmarkLength->setPalette(palette);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

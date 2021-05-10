@@ -3700,21 +3700,21 @@ void VPattern::RefreshPieceGeometry()
         VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
     });
 
-    if (VApplication::VApp()->IsGUIMode() && m_parsing)
+    if (VApplication::IsGUIMode() && m_parsing)
     {
         return;
     }
 
     for(auto pieceId : qAsConst(updatePieces))
     {
-        if (VApplication::VApp()->IsGUIMode() && m_parsing)
+        if (VApplication::IsGUIMode() && m_parsing)
         {
             return;
         }
 
         try
         {
-            if (VToolSeamAllowance *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+            if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
             {
                 piece->RefreshGeometry();
             }
@@ -3726,7 +3726,7 @@ void VPattern::RefreshPieceGeometry()
 
         QApplication::processEvents();
 
-        if (VApplication::VApp()->IsGUIMode() && m_parsing)
+        if (VApplication::IsGUIMode() && m_parsing)
         {
             return;
         }

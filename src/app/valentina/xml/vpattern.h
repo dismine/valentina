@@ -119,11 +119,10 @@ signals:
 public slots:
     virtual void LiteParseTree(const Document &parse) override;
 
+    void RefreshPieceGeometry();
+
 protected:
     virtual void   customEvent(QEvent * event) override;
-
-private slots:
-    void RefreshPieceGeometry();
 
 private:
     Q_DISABLE_COPY(VPattern)
