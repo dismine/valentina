@@ -1212,6 +1212,14 @@
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished">Odnośnik1:</translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished">Odnośnik2:</translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -4534,6 +4542,10 @@ Apply settings anyway?</source>
         <source>Label language:</source>
         <translation>Język etykiet:</translation>
     </message>
+    <message>
+        <source>Passmark length:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -5565,6 +5577,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished">Odnośnik1:</translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished">Odnośnik2:</translation>
+    </message>
+    <message>
+        <source>Curve 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8490,6 +8518,10 @@ Do you want to save your changes?</source>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not create recipe file. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9465,6 +9497,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12472,6 +12508,18 @@ Czy chcesz zapisać zmiany?</translation>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t create an flat dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an AAMA dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an ASTM dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
@@ -12948,6 +12996,10 @@ Czy chcesz zapisać zmiany?</translation>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPiece</name>
@@ -13168,6 +13220,26 @@ Czy chcesz zapisać zmiany?</translation>
     <name>VToolCurveIntersectAxis</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Długość</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Kąt</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Etykieta</translation>
+    </message>
+    <message>
+        <source>Segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13939,6 +14011,26 @@ Czy chcesz zapisać zmiany?</translation>
     <name>VToolPointOfIntersectionCurves</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Etykieta</translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

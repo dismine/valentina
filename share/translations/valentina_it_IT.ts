@@ -1208,6 +1208,14 @@
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -4855,6 +4863,10 @@ Applicare la configurazione comunque?</translation>
         <source>Label language:</source>
         <translation>Lingua etichetta:</translation>
     </message>
+    <message>
+        <source>Passmark length:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -6038,6 +6050,22 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9335,6 +9363,10 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not create recipe file. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -10307,7 +10339,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile ottenere risultato dalla formula &apos;%1&apos;. Errore analizzato: %2.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -10451,6 +10483,10 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12775,31 +12811,31 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
-        <translation>nero</translation>
+        <translation>Nero</translation>
     </message>
     <message>
         <source>green</source>
-        <translation>verde</translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <source>blue</source>
-        <translation>blu</translation>
+        <translation>Blu</translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation>rosso scuro</translation>
+        <translation>Rosso scuro</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation>verde scuro</translation>
+        <translation>Verde scuro</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>blu scuro</translation>
+        <translation>Blu scuro</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation>giallo</translation>
+        <translation>Giallo</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
@@ -13697,6 +13733,18 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t create an flat dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an AAMA dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an ASTM dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
@@ -14181,6 +14229,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPiece</name>
@@ -14421,6 +14473,26 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VToolCurveIntersectAxis</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lunghezza</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Etichetta</translation>
+    </message>
+    <message>
+        <source>Segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15289,6 +15361,26 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
         <translation>Errore di calcolazione del punto &apos;%1&apos;. Curve &apos;%2&apos; e &apos;%3&apos; non hanno alcun punto d&apos;intersezione</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Etichetta</translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

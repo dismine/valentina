@@ -1212,6 +1212,14 @@
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished">Alias1:</translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished">Alias2:</translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -4863,6 +4871,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Label language:</source>
         <translation>Taal label:</translation>
     </message>
+    <message>
+        <source>Passmark length:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -6047,6 +6059,22 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Notes</source>
         <translation>Notities</translation>
+    </message>
+    <message>
+        <source>Curve 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished">Alias1:</translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished">Alias2:</translation>
+    </message>
+    <message>
+        <source>Curve 2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9346,6 +9374,10 @@ Do you want to save your changes?</source>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Kan dimensie C niet instellen. Bestand was niet geopend.</translation>
     </message>
+    <message>
+        <source>Could not create recipe file. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -10462,6 +10494,10 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13783,6 +13819,18 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
         <translation>Kan bestand &apos;%1&apos; niet opslaan. Fout %2.</translation>
     </message>
+    <message>
+        <source>Can&apos;t create an flat dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an AAMA dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an ASTM dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
@@ -14267,6 +14315,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation>Waarde voor de definitieve maten &apos;%1&apos; is oneindig of NaN. Controlleer uw berekeningen.</translation>
     </message>
+    <message>
+        <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPiece</name>
@@ -14516,6 +14568,26 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
         <translation>Fout berekenen punt &apos;%1&apos;. Er is geen kruispunt met de kromme &apos;%2&apos; en de aslijn door punt &apos;%3&apos; met hoek %4°</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Label</translation>
+    </message>
+    <message>
+        <source>Segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment 2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15391,6 +15463,26 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
         <translation>Fout bij berekenen van punt &apos;%1&apos;. Krommen &apos;%2&apos; en &apos;%3&apos; hebben geen kruispunt</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Label</translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
