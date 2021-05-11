@@ -279,12 +279,6 @@ defineReplace(FindBuildRevision){
         return(\\\"unknown\\\")
     }else{
         # Release mode
-        macx{
-            GIT = /usr/local/bin/git # Can't defeat PATH variable on Mac OS.
-        }else {
-            GIT = git # All other platforms are OK.
-        }
-
         DVCS_HESH=$$system("git rev-parse --short HEAD")
         isEmpty(DVCS_HESH){
             DVCS_HESH = \\\"unknown\\\" # if we can't find build revision left unknown.
@@ -298,15 +292,9 @@ defineReplace(FindBuildRevision){
 defineReplace(FindLatestTagDistance){
     CONFIG(debug, debug|release){
         # Debug mode
-        return(0)
+        return(\\\"0\\\")
     }else{
         # Release mode
-        #get latest git tag and it's distance from HEAD
-        macx{
-            GIT = /usr/local/bin/git # Can't defeat PATH variable on Mac OS.
-        }else {
-            GIT = GIT # All other platforms all OK.
-        }
 
         # tag is formatted as TAG-N-gSHA:
         # 1. latest stable version is TAG, or vX.Y.Z
@@ -314,10 +302,10 @@ defineReplace(FindLatestTagDistance){
         # 3. latest commit is gSHA
         tag_all = $$system(git describe --tags)
         tag_split = $$split(tag_all, "-") #split at the dashes
-        GIT_DISTANCE = $$member(tag_split,1) #get 2nd element of results
+        GIT_DISTANCE = \\\"$$member(tag_split,1)\\\" #get 2nd element of results
 
         isEmpty(GIT_DISTANCE){
-            GIT_DISTANCE = 0 # if we can't find local revision left 0.
+            GIT_DISTANCE = \\\"0\\\" # if we can't find local revision left 0.
         }
 
         message("Latest tag distance:" $${GIT_DISTANCE})
