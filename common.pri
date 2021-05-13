@@ -292,7 +292,7 @@ defineReplace(FindBuildRevision){
 defineReplace(FindLatestTagDistance){
     CONFIG(debug, debug|release){
         # Debug mode
-        return(\\\"0\\\")
+        return(0)
     }else{
         # Release mode
 
@@ -302,10 +302,10 @@ defineReplace(FindLatestTagDistance){
         # 3. latest commit is gSHA
         tag_all = $$system(git describe --tags)
         tag_split = $$split(tag_all, "-") #split at the dashes
-        GIT_DISTANCE = \\\"$$member(tag_split,1)\\\" #get 2nd element of results
+        GIT_DISTANCE = $$member(tag_split,1) #get 2nd element of results
 
         isEmpty(GIT_DISTANCE){
-            GIT_DISTANCE = \\\"0\\\" # if we can't find local revision left 0.
+            GIT_DISTANCE = 0 # if we can't find local revision left 0.
         }
 
         message("Latest tag distance:" $${GIT_DISTANCE})
