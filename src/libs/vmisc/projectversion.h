@@ -49,8 +49,8 @@ extern const QString APP_VERSION_STR;
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
 
-#define VER_FILEVERSION             0,7,46
-#define VER_FILEVERSION_STR         "0.7.46\0"
+#define VER_FILEVERSION             0,7,47
+#define VER_FILEVERSION_STR         "0.7.47\0"
 
 #define V_PRERELEASE // Mark prerelease builds
 

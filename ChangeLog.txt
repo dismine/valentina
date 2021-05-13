@@ -1,4 +1,4 @@
-# Version 0.7.47 (unreleased)
+# Version 0.7.47 May 13, 2021
 - [smart-pattern/valentina#118] Incorrect seam allowance.
 - [smart-pattern/valentina#119] Improve tool Point of intersection curves.
 - [smart-pattern/valentina#120] Incorrect seam allowance.
