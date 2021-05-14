@@ -20,6 +20,6 @@ Files:
  95677e29d3a59cf5b064f7be236a4b78 24838101 valentina_0.7.47.orig.tar.gz
  2fecf324a32123b08cefc0f047bca5ee 63176 valentina_0.7.47.diff.tar.gz
 
-DEBTRANSFORM-TAR: valentina_0.7.47.orig.tar.gz
-DEBTRANSFORM-FILES-TAR: debian.tar.gz
-DEBTRANSFORM-RELEASE: 1
+Debtransform-Tar: valentina_0.7.47.orig.tar.gz
+Debtransform-Files-Tar: debian.tar.gz
+Debtransform-Release: 1
