@@ -14,6 +14,7 @@ Build-Depends: debhelper (>= 8.0.0),
                qttools5-dev-tools (>= 5.4.0), 
                libqt5xmlpatterns5-dev (>= 5.4.0),
                libqt5opengl5-dev (>= 5.4.0)
+Debtransform-Files-Tar: valentina_0.7.47.v0.7.47.tar.gz
 Package-List: 
  valentina deb graphics optional
 Checksums-Sha1: 
