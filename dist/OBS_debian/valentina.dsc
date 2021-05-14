@@ -17,8 +17,8 @@ Build-Depends: debhelper (>= 8.0.0),
 Package-List: 
  valentina deb graphics optional
 Checksums-Sha1: 
- 581eb1bf36b4ab7126b5983d809130f15396859e 24838101 valentina_0.7.47.tar
+ 581eb1bf36b4ab7126b5983d809130f15396859e 24838101 valentina_0.7.47.v0.7.47.tar
 Checksums-Sha256: 
- 9b156c7120a69b90373efb8ca9998c3e0563a60ad337210166cfd41b00b0f13c 24838101 valentina_0.7.47.tar
+ 9b156c7120a69b90373efb8ca9998c3e0563a60ad337210166cfd41b00b0f13c 24838101 valentina_0.7.47.v0.7.47.tar
 Files: 
- 95677e29d3a59cf5b064f7be236a4b78 24838101 valentina_0.7.47.tar
+ 95677e29d3a59cf5b064f7be236a4b78 24838101 valentina_0.7.47.v0.7.47.tar
