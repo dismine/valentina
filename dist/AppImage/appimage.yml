@@ -54,7 +54,7 @@ script:
 #           - $BUILD_APPDIR point to the AppDir. This directory will become the content of the AppImage
   - cd $BUILD_SOURCE_DIR
   - tar zxvf $BUILD_SOURCE_DIR/valentina-develop.tar.gz
-  - mv -v valentina-develop-* valentina
+  - mv -v valentina-develop valentina
   - cd $BUILD_SOURCE_DIR/valentina
   - qmake-qt5 PREFIX=/usr PREFIX_LIB=/usr/lib LRELEASE=lrelease-qt5 Valentina.pro -r DEFINES+=APPIMAGE "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
   - make -j$(nproc)
