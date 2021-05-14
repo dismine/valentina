@@ -10,8 +10,7 @@ Vcs-Browser: https://gitlab.com/smart-pattern/valentina
 Build-Depends: debhelper (>= 8.0.0), 
                qtbase5-dev (>= 5.4.0), 
                libqt5svg5-dev (>= 5.4.0), 
-               g++ (>= 4.8.0), 
-               qt5-default (>= 5.4.0), 
+               g++ (>= 4.8.0),
                qttools5-dev-tools (>= 5.4.0), 
                libqt5xmlpatterns5-dev (>= 5.4.0),
                libqt5opengl5-dev (>= 5.4.0)
