@@ -650,7 +650,7 @@
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>0</y>
+              <y>-153</y>
               <width>342</width>
               <height>870</height>
              </rect>
@@ -916,7 +916,11 @@
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetGridColWidth"/>
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetGridColWidth">
+                    <property name="maximum">
+                     <double>1000.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                   <item row="2" column="0">
                    <widget class="QLabel" name="labelSheetGridRowHeight">
@@ -926,7 +930,11 @@
                    </widget>
                   </item>
                   <item row="2" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetGridRowHeight"/>
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetGridRowHeight">
+                    <property name="maximum">
+                     <double>1000.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
