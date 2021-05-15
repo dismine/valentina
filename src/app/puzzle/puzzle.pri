@@ -10,6 +10,7 @@ SOURCES += \
     $$PWD/vpcarrouselpiecelist.cpp \
     $$PWD/vpcommandline.cpp \
     $$PWD/vpcommands.cpp \
+    $$PWD/vpexporter.cpp \
     $$PWD/vpgraphicspiece.cpp \
     $$PWD/vpgraphicssheet.cpp \
     $$PWD/vpgraphicstilegrid.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     $$PWD/vpcarrouselpiecelist.h \
     $$PWD/vpcommandline.h \
     $$PWD/vpcommands.h \
+    $$PWD/vpexporter.h \
     $$PWD/vpgraphicspiece.h \
     $$PWD/vpgraphicssheet.h \
     $$PWD/vpgraphicstilegrid.h \
