@@ -108,15 +108,19 @@ protected:
     virtual void     ChangeLabelVisibility(quint32 id, bool visible) override;
 
     template <class Item>
-    static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
-    static void InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data);
+    static QPair<QString, QString> InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId,
+                                           const QString &alias1, const QString &alias2);
+    static QPair<QString, QString> InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
+                                                VContainer *data, const QString &alias1, const QString &alias2);
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-inline void VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId)
+inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p,
+                                      quint32 curveId, const QString &alias1,
+                                      const QString &alias2) -> QPair<QString, QString>
 {
     QSharedPointer<Item> a1;
     QSharedPointer<Item> a2;
@@ -138,6 +142,9 @@ inline void VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const V
     arc1.setId(p->id() + 1);
     arc2.setId(p->id() + 2);
 
+    arc1.SetAliasSuffix(alias1);
+    arc2.SetAliasSuffix(alias2);
+
     if (not VFuzzyComparePossibleNulls(segLength, -1))
     {
         a1 = QSharedPointer<Item>(new Item(arc1));
@@ -155,6 +162,12 @@ inline void VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const V
 
     data->AddArc(a1, arc1.id(), p->id());
     data->AddArc(a2, arc2.id(), p->id());
+
+    // Because we don't store segments, but only data about them we must register the names manually
+    data->RegisterUniqueName(a1);
+    data->RegisterUniqueName(a2);
+
+    return qMakePair(arc1.ObjectName(), arc2.ObjectName());
 }
 
 #endif // VTOOLSINGLEPOINT_H

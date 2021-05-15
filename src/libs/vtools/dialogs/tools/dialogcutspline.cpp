@@ -227,7 +227,7 @@ void DialogCutSpline::ValidateAlias()
 
     if (not GetAliasSuffix1().isEmpty() &&
         (not rx.match(spl1.GetAlias()).hasMatch() ||
-         (originAliasSuffix2 != GetAliasSuffix1() && not data->IsUnique(spl1.GetAlias())) ||
+         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(spl1.GetAlias())) ||
          spl1.GetAlias() == spl2.GetAlias()))
     {
         flagAlias1 = false;

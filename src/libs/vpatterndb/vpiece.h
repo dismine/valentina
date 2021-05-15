@@ -158,6 +158,8 @@ private:
 
     QJsonObject MainPathToJson() const;
     QJsonObject DBToJson(const VContainer *data) const;
+
+    qreal GlobalPassmarkLength(const VContainer *data) const;
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);

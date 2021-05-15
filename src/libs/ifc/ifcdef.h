@@ -156,6 +156,10 @@ extern const QString AttrNotes;
 extern const QString AttrAlias;
 extern const QString AttrAlias1;
 extern const QString AttrAlias2;
+extern const QString AttrCurve1Alias1;
+extern const QString AttrCurve1Alias2;
+extern const QString AttrCurve2Alias1;
+extern const QString AttrCurve2Alias2;
 
 extern const QString TypeLineDefault;
 extern const QString TypeLineNone;

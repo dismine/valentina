@@ -61,6 +61,7 @@ struct VPiecePassmarkData
     bool isShowSecondPassmark{true};
     int passmarkIndex{-1};
     vidtype id{NULL_ID};
+    qreal globalPassmarkLength{0};
 
     QJsonObject toJson() const;
 };
@@ -102,7 +103,6 @@ private:
     bool m_null{true};
 
     QVector<QLineF> MakeSAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
-
 };
 
 #endif // VPASSMARK_H

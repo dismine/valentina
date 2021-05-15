@@ -17,3 +17,5 @@ do
 	basename=${file##*/} # remove the path from a path-string
 	cp -v -f $file $OBSDEBIAN/debian.${basename}	
 done
+
+cp -v -f ../dist/valentina.dsc $OBSDEBIAN/valentina.dsc

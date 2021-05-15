@@ -109,10 +109,7 @@ const QString VMeasurements::DimensionZ    = QStringLiteral("z");
 
 namespace
 {
-using VDimensions = QMap<MeasurementDimension, MeasurementDimension_p>;
-
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, (QLatin1String("1800-01-01")))
-Q_GLOBAL_STATIC(VDimensions, dimensionsCached)
 
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
@@ -124,8 +121,7 @@ QString FileComment()
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurements::VMeasurements(VContainer *data)
-    :VDomDocument(),
-      data(data),
+    : data(data),
       type(MeasurementsType::Unknown)
 {
     SCASSERT(data != nullptr)
@@ -133,8 +129,7 @@ VMeasurements::VMeasurements(VContainer *data)
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurements::VMeasurements(Unit unit, VContainer *data)
-    :VDomDocument(),
-      data(data),
+    : data(data),
       type(MeasurementsType::Individual)
 {
     SCASSERT(data != nullptr)
@@ -145,9 +140,8 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurements::VMeasurements(Unit unit, const QVector<MeasurementDimension_p > &dimensions,
                              VContainer *data)
-    :VDomDocument(),
-    data(data),
-    type(MeasurementsType::Multisize)
+    : data(data),
+      type(MeasurementsType::Multisize)
 {
     SCASSERT(data != nullptr)
 
@@ -159,6 +153,8 @@ void VMeasurements::setXMLContent(const QString &fileName)
 {
     VDomDocument::setXMLContent(fileName);
     type = ReadType();
+    m_units = ReadUnits();
+    m_dimensions = ReadDimensions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,6 +274,12 @@ void VMeasurements::MoveBottom(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VMeasurements::Units() const -> Unit
+{
+    return m_units;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::StoreNames(bool store)
 {
     m_keepNames = store;
@@ -327,25 +329,25 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 
             if (not specialUnits)
             {
-                base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
-                shiftA = UnitConvertor(shiftA, MUnit(), *data->GetPatternUnit());
-                shiftB = UnitConvertor(shiftB, MUnit(), *data->GetPatternUnit());
-                shiftC = UnitConvertor(shiftC, MUnit(), *data->GetPatternUnit());
+                base = UnitConvertor(base, Units(), *data->GetPatternUnit());
+                shiftA = UnitConvertor(shiftA, Units(), *data->GetPatternUnit());
+                shiftB = UnitConvertor(shiftB, Units(), *data->GetPatternUnit());
+                shiftC = UnitConvertor(shiftC, Units(), *data->GetPatternUnit());
 
                 QMutableMapIterator<QString, qreal> iterator(corrections);
                 while (iterator.hasNext())
                 {
                     iterator.next();
-                    iterator.setValue(UnitConvertor(iterator.value(), MUnit(), *data->GetPatternUnit()));
+                    iterator.setValue(UnitConvertor(iterator.value(), Units(), *data->GetPatternUnit()));
                 }
 
-                convertedBaseA = UnitConvertor(convertedBaseA, MUnit(), *data->GetPatternUnit());
-                convertedBaseB = UnitConvertor(convertedBaseB, MUnit(), *data->GetPatternUnit());
-                convertedBaseC = UnitConvertor(convertedBaseC, MUnit(), *data->GetPatternUnit());
+                convertedBaseA = UnitConvertor(convertedBaseA, Units(), *data->GetPatternUnit());
+                convertedBaseB = UnitConvertor(convertedBaseB, Units(), *data->GetPatternUnit());
+                convertedBaseC = UnitConvertor(convertedBaseC, Units(), *data->GetPatternUnit());
 
-                convertedStepA = UnitConvertor(convertedStepA, MUnit(), *data->GetPatternUnit());
-                convertedStepB = UnitConvertor(convertedStepB, MUnit(), *data->GetPatternUnit());
-                convertedStepC = UnitConvertor(convertedStepC, MUnit(), *data->GetPatternUnit());
+                convertedStepA = UnitConvertor(convertedStepA, Units(), *data->GetPatternUnit());
+                convertedStepB = UnitConvertor(convertedStepB, Units(), *data->GetPatternUnit());
+                convertedStepC = UnitConvertor(convertedStepC, Units(), *data->GetPatternUnit());
             }
 
             meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name,
@@ -380,7 +382,7 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 
             if (not specialUnits)
             {
-                value = UnitConvertor(value, MUnit(), *data->GetPatternUnit());
+                value = UnitConvertor(value, Units(), *data->GetPatternUnit());
             }
 
             meash = QSharedPointer<VMeasurement>::create(data, static_cast<quint32>(i), name, value, formula, ok);
@@ -846,61 +848,9 @@ QString VMeasurements::MeasurementForDimension(IMD type) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::Dimensions() const -> QMap<MeasurementDimension, MeasurementDimension_p >
+auto VMeasurements::Dimensions() const -> VDimensions
 {
-    if (type != MeasurementsType::Multisize)
-    {
-        return QMap<MeasurementDimension, MeasurementDimension_p>();
-    }
-
-    if (dimensionsCached->isEmpty())
-    {
-        const Unit units = MUnit();
-        const QDomNodeList list = elementsByTagName(TagDimension);
-        for (int i=0; i < list.size(); ++i)
-        {
-            const QDomElement dom = list.at(i).toElement();
-            const MeasurementDimension type = StrToDimensionType(GetParametrString(dom, AttrType));
-            const qreal min = GetParametrDouble(dom, AttrMin, QChar('0'));
-            const qreal max = GetParametrDouble(dom, AttrMax, QChar('0'));
-            const qreal step = GetParametrDouble(dom, AttrStep, QStringLiteral("-1"));
-            const qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
-
-            const DimesionLabels labels = ReadDimensionLabels(dom);
-
-            if (type == MeasurementDimension::X)
-            {
-                auto dimension = QSharedPointer<VXMeasurementDimension>::create(units, min, max, step);
-                dimension->SetBaseValue(base);
-                dimension->SetLabels(labels);
-                dimensionsCached->insert(type, dimension);
-            }
-            else if (type == MeasurementDimension::Y)
-            {
-                auto dimension = QSharedPointer<VYMeasurementDimension>::create(units, min, max, step);
-                dimension->SetBaseValue(base);
-                dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
-                dimension->SetLabels(labels);
-                dimensionsCached->insert(type, dimension);
-            }
-            else if (type == MeasurementDimension::W)
-            {
-                auto dimension = QSharedPointer<VWMeasurementDimension>::create(units, min, max, step);
-                dimension->SetBaseValue(base);
-                dimension->SetLabels(labels);
-                dimensionsCached->insert(type, dimension);
-            }
-            else if (type == MeasurementDimension::Z)
-            {
-                auto dimension = QSharedPointer<VZMeasurementDimension>::create(units, min, max, step);
-                dimension->SetBaseValue(base);
-                dimension->SetLabels(labels);
-                dimensionsCached->insert(type, dimension);
-            }
-        }
-    }
-
-    return *dimensionsCached;
+    return m_dimensions;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -976,7 +926,7 @@ void VMeasurements::SetDimensionLabels(const QMap<MeasurementDimension, Dimesion
         }
     }
 
-    dimensionsCached->clear(); // Invalidate cache
+    m_dimensions = ReadDimensions(); // Refresh cache
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1187,6 +1137,10 @@ void VMeasurements::CreateEmptyMultisizeFile(Unit unit,
     this->appendChild(mElement);
     insertBefore(createProcessingInstruction(QStringLiteral("xml"),
                                              QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
+
+    // Cache data
+    m_units = unit;
+    m_dimensions = ReadDimensions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1215,6 +1169,10 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     this->appendChild(mElement);
     insertBefore(createProcessingInstruction(QStringLiteral("xml"),
                                              QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
+
+    // Cache data
+    m_units = unit;
+    m_dimensions = ReadDimensions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1246,7 +1204,7 @@ QDomElement VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p
 //---------------------------------------------------------------------------------------------------------------------
 qreal VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const
 {
-    const qreal defVal = UnitConvertor(defValue, Unit::Cm, MUnit());
+    const qreal defVal = UnitConvertor(defValue, Unit::Cm, Units());
 
     const QDomNodeList nodeList = this->elementsByTagName(tag);
     if (nodeList.isEmpty())
@@ -1330,6 +1288,76 @@ MeasurementsType VMeasurements::ReadType() const
     {
         return MeasurementsType::Unknown;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurements::ReadUnits() const -> Unit
+{
+    Unit units = StrToUnits(UniqueTagText(TagUnit, unitCM));
+
+    if (units == Unit::Px)
+    {
+        units = Unit::Cm;
+    }
+
+    return units;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurements::ReadDimensions() const -> VDimensions
+{
+    if (type != MeasurementsType::Multisize)
+    {
+        return {};
+    }
+
+    VDimensions dimensions;
+
+    const Unit units = Units();
+    const QDomNodeList list = elementsByTagName(TagDimension);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+        const MeasurementDimension type = StrToDimensionType(GetParametrString(dom, AttrType));
+        const qreal min = GetParametrDouble(dom, AttrMin, QChar('0'));
+        const qreal max = GetParametrDouble(dom, AttrMax, QChar('0'));
+        const qreal step = GetParametrDouble(dom, AttrStep, QStringLiteral("-1"));
+        const qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
+
+        const DimesionLabels labels = ReadDimensionLabels(dom);
+
+        if (type == MeasurementDimension::X)
+        {
+            auto dimension = QSharedPointer<VXMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimension->SetLabels(labels);
+            dimensions.insert(type, dimension);
+        }
+        else if (type == MeasurementDimension::Y)
+        {
+            auto dimension = QSharedPointer<VYMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
+            dimension->SetLabels(labels);
+            dimensions.insert(type, dimension);
+        }
+        else if (type == MeasurementDimension::W)
+        {
+            auto dimension = QSharedPointer<VWMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimension->SetLabels(labels);
+            dimensions.insert(type, dimension);
+        }
+        else if (type == MeasurementDimension::Z)
+        {
+            auto dimension = QSharedPointer<VZMeasurementDimension>::create(units, min, max, step);
+            dimension->SetBaseValue(base);
+            dimension->SetLabels(labels);
+            dimensions.insert(type, dimension);
+        }
+    }
+
+    return dimensions;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

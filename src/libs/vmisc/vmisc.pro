@@ -90,6 +90,6 @@ CONFIG(debug, debug|release){
     } 
 }
 
-DEFINES += "LATEST_TAG_DISTANCE=$$FindLatestTagDistance()" # Make available latest tag distance number in sources.
+DEFINES += LATEST_TAG_DISTANCE=\\\"$$FindLatestTagDistance()\\\" # Make available latest tag distance number in sources.
 
 include (../libs.pri)

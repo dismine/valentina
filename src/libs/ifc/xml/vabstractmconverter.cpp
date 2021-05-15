@@ -42,6 +42,19 @@ VAbstractMConverter::VAbstractMConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractMConverter::Units() const -> Unit
+{
+    Unit units = StrToUnits(UniqueTagText(TagUnit, unitCM));
+
+    if (units == Unit::Px)
+    {
+        units = Unit::Cm;
+    }
+
+    return units;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractMConverter::AddRootComment()
 {
     const QString rootComment =

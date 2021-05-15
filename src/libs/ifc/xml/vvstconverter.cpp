@@ -345,7 +345,7 @@ void VVSTConverter::AddNewTagsForV0_5_0()
         return GetParametrInt(baseTag, QStringLiteral("base"), QChar('0'));
     };
 
-    const Unit units = MUnit();
+    const Unit units = Units();
 
     {
         const int step = static_cast<int>(UnitConvertor(6, Unit::Cm, units));

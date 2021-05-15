@@ -219,7 +219,7 @@ void DialogCutArc::ValidateAlias()
 
     if (not GetAliasSuffix1().isEmpty() &&
         (not rx.match(arc1.GetAlias()).hasMatch() ||
-         (originAliasSuffix2 != GetAliasSuffix1() && not data->IsUnique(arc1.GetAlias())) ||
+         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(arc1.GetAlias())) ||
          arc1.GetAlias() == arc2.GetAlias()))
     {
         flagAlias1 = false;

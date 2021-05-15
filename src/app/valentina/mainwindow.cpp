@@ -2065,7 +2065,7 @@ void MainWindow::CleanWaterkmarkEditors()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::StoreMultisizeMDimensions()
 {
-    VAbstractValApplication::VApp()->SetMeasurementsUnits(m->MUnit());
+    VAbstractValApplication::VApp()->SetMeasurementsUnits(m->Units());
 
     QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
@@ -2091,7 +2091,7 @@ void MainWindow::StoreMultisizeMDimensions()
                                 labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
                     const bool circumference = dimension->IsCircumference();
                     VAbstractValApplication::VApp()
-                            ->SetDimensionSizeUnits(circumference ? m->MUnit() : Unit::LAST_UNIT_DO_NOT_USE);
+                            ->SetDimensionSizeUnits(circumference ? m->Units() : Unit::LAST_UNIT_DO_NOT_USE);
                     break;
                 }
                 case MeasurementDimension::W:
@@ -5078,6 +5078,8 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, [this]()
     {
         DialogPatternProperties proper(doc, pattern, this);
+        connect(&proper, &DialogPatternProperties::UpddatePieces, sceneDetails,
+                &VMainGraphicsScene::UpdatePiecePassmarks);
         proper.exec();
     });
 
@@ -5352,7 +5354,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         {
             doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
         }
-        VAbstractValApplication::VApp()->SetPatternUnits(doc->MUnit());
+        VAbstractValApplication::VApp()->SetPatternUnits(doc->Units());
 
         QString path = AbsoluteMPath(fileName, doc->MPath());
         QString fixedMPath;
@@ -5439,7 +5441,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             {
                 doc->SetMPath(RelativeMPath(fileName, fixedMPath));
             }
-            VAbstractValApplication::VApp()->SetPatternUnits(doc->MUnit());
+            VAbstractValApplication::VApp()->SetPatternUnits(doc->Units());
         }
     }
     catch (VException &e)

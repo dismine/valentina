@@ -279,12 +279,6 @@ defineReplace(FindBuildRevision){
         return(\\\"unknown\\\")
     }else{
         # Release mode
-        macx{
-            GIT = /usr/local/bin/git # Can't defeat PATH variable on Mac OS.
-        }else {
-            GIT = git # All other platforms are OK.
-        }
-
         DVCS_HESH=$$system("git rev-parse --short HEAD")
         isEmpty(DVCS_HESH){
             DVCS_HESH = \\\"unknown\\\" # if we can't find build revision left unknown.
@@ -301,12 +295,6 @@ defineReplace(FindLatestTagDistance){
         return(0)
     }else{
         # Release mode
-        #get latest git tag and it's distance from HEAD
-        macx{
-            GIT = /usr/local/bin/git # Can't defeat PATH variable on Mac OS.
-        }else {
-            GIT = GIT # All other platforms all OK.
-        }
 
         # tag is formatted as TAG-N-gSHA:
         # 1. latest stable version is TAG, or vX.Y.Z

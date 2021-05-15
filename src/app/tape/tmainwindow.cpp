@@ -332,7 +332,7 @@ bool TMainWindow::LoadFile(const QString &path)
                 throw VException(tr("File contains invalid known measurement(s)."));
             }
 
-            mUnit = m->MUnit();
+            mUnit = m->Units();
             pUnit = mUnit;
 
             currentDimensionA = m->DimensionABase();
@@ -2672,7 +2672,7 @@ void TMainWindow::InitMenu()
 void TMainWindow::InitDimensionsBaseValue()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QString unit = UnitsToStr(m->MUnit(), true);
+    const QString unit = UnitsToStr(m->Units(), true);
     const bool fc = m->IsFullCircumference();
 
     auto DimensionsBaseValue = [this, dimensions, unit, fc](int index, QLabel *name, QLabel *base)
@@ -2726,7 +2726,7 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     SCASSERT(control != nullptr)
 
     const bool fc = m->IsFullCircumference();
-    const QString unit = UnitsToStr(m->MUnit(), true);
+    const QString unit = UnitsToStr(m->Units(), true);
 
     qreal current = -1;
     if (control->currentIndex() != -1)
@@ -2811,7 +2811,7 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
 void TMainWindow::InitDimensionControls()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
-    const QString unit = UnitsToStr(m->MUnit(), true);
+    const QString unit = UnitsToStr(m->Units(), true);
 
     auto InitControl = [this, dimensions, unit](int index, QLabel *&name, QComboBox *&control)
     {
@@ -3574,7 +3574,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
                 throw VException(tr("File contains invalid known measurement(s)."));
             }
 
-            mUnit = m->MUnit();
+            mUnit = m->Units();
             pUnit = mUnit;
 
             currentDimensionA = m->DimensionABase();
@@ -4358,7 +4358,7 @@ void TMainWindow::InitMeasurementUnits()
     }
 
     QString units;
-    switch (m->MUnit())
+    switch (m->Units())
     {
         case Unit::Mm:
             units = tr("Millimeters");

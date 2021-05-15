@@ -320,6 +320,12 @@ void VMainGraphicsScene::HighlightItem(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::UpdatePiecePassmarks()
+{
+    emit UpdatePassmarks();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::ToggleLabelSelection(bool enabled)
 {
     emit EnableLabelItemSelection(enabled);

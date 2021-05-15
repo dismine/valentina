@@ -44,6 +44,8 @@ class VContainer;
 
 enum class GenderType : qint8 { Male, Female, Unknown };
 
+using VDimensions = QMap<MeasurementDimension, MeasurementDimension_p>;
+
 class VMeasurements : public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VMeasurements)
@@ -64,6 +66,8 @@ public:
     void MoveUp(const QString &name);
     void MoveDown(const QString &name);
     void MoveBottom(const QString &name);
+
+    auto Units() const -> Unit;
 
     void StoreNames(bool store);
 
@@ -117,7 +121,7 @@ public:
 
     QString MeasurementForDimension(IMD type) const;
 
-    auto Dimensions() const -> QMap<MeasurementDimension, MeasurementDimension_p >;
+    auto Dimensions() const -> VDimensions;
 
     auto GetRestrictions() const -> QMap<QString, VDimensionRestriction >;
     void SetRestrictions(const QMap<QString, VDimensionRestriction > &restrictions);
@@ -201,6 +205,10 @@ private:
     VContainer     *data;
     MeasurementsType type;
 
+    // Cache data to quick access
+    Unit m_units{Unit::LAST_UNIT_DO_NOT_USE};
+    VDimensions m_dimensions{};
+
     /** @brief m_keepNames store names in container to check uniqueness. */
     bool m_keepNames{true};
 
@@ -214,6 +222,8 @@ private:
     QDomElement MakeEmpty(const QString &name, const QString &formula);
     QDomElement FindM(const QString &name) const;
     MeasurementsType ReadType() const;
+    auto ReadUnits() const -> Unit;
+    auto ReadDimensions() const -> VDimensions;
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 

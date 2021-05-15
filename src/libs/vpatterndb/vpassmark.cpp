@@ -538,6 +538,43 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto PassmarkLength(const VPiecePassmarkData &passmarkData, qreal width, bool &ok) -> qreal
+{
+    qreal length = 0;
+    if (not passmarkData.passmarkSAPoint.IsManualPasskmarkLength())
+    {
+        if (passmarkData.globalPassmarkLength > accuracyPointOnLine)
+        {
+            ok = true;
+            return passmarkData.globalPassmarkLength;
+        }
+
+        length = qMin(width * VSAPoint::passmarkFactor, VSAPoint::maxPassmarkLength);
+
+        if (length <= accuracyPointOnLine)
+        {
+            const QString errorMsg = QObject::tr("Found null notch for point '%1' in piece '%2'. Length is less "
+                                                 "than minimal allowed.")
+                    .arg(passmarkData.nodeName, passmarkData.pieceName);
+            VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+
+            ok = false;
+            return length;
+        }
+
+        ok = true;
+        return length;
+    }
+
+    length = passmarkData.passmarkSAPoint.GetPasskmarkLength();
+
+    ok = true;
+    return length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const VPiecePassmarkData &passmarkData,
                                          const QPointF &seamPassmarkSAPoint, const QVector<QPointF> &seamAllowance)
 {
@@ -572,14 +609,11 @@ QVector<QLineF> PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const 
         return QVector<QLineF>();
     }
 
-    const qreal length = passmarkData.passmarkSAPoint.PassmarkLength(passmarkData.saWidth);
-    if (not passmarkData.passmarkSAPoint.IsManualPasskmarkLength() && length <= accuracyPointOnLine)
+    bool ok = false;
+    const qreal length = PassmarkLength(passmarkData, passmarkData.passmarkSAPoint.MaxLocalSA(passmarkData.saWidth),
+                                        ok);
+    if (not ok)
     {
-        const QString errorMsg = QObject::tr("Found null notch for point '%1' in piece '%2'. Length is less "
-                                             "than minimal allowed.")
-                .arg(passmarkData.nodeName, passmarkData.pieceName);
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return QVector<QLineF>();
     }
 
@@ -624,6 +658,7 @@ QJsonObject VPiecePassmarkData::toJson() const
         {"isShowSecondPassmark", isShowSecondPassmark},
         {"passmarkIndex", passmarkIndex},
         {"id", static_cast<qint64>(id)},
+        {"globalPassmarkLength", static_cast<qreal>(globalPassmarkLength)},
     };
 
     return dataObject;
@@ -781,15 +816,11 @@ QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
     qreal length = 0;
     if (not piece.IsSeamAllowanceBuiltIn())
     {
-        length = m_data.passmarkSAPoint.PassmarkLength(m_data.saWidth);
-        if (not m_data.passmarkSAPoint.IsManualPasskmarkLength() && length <= accuracyPointOnLine)
+        bool ok = false;
+        length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth), ok);
+        if (not ok)
         {
-            const QString errorMsg = QObject::tr("Found null notch for point '%1' in piece '%2'. Length is less "
-                                                 "than minimal allowed.")
-                    .arg(m_data.nodeName, m_data.pieceName);
-            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-            return QVector<QLineF>();
+            return {};
         }
     }
     else
@@ -888,34 +919,23 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
             if (intersections.last() != m_data.passmarkSAPoint)
             {
                 line = QLineF(intersections.last(), m_data.passmarkSAPoint);
-                if (not m_data.passmarkSAPoint.IsManualPasskmarkLength())
+
+                bool ok = false;
+                const qreal length = PassmarkLength(m_data, width, ok);
+                if (not ok)
                 {
-                    const qreal length = qMin(width * VSAPoint::passmarkFactor, VSAPoint::maxPassmarkLength);
-                    if (length <= accuracyPointOnLine)
-                    {
-                        const QString errorMsg = QObject::tr("Found null notch for point '%1' in piece '%2'. Length is "
-                                                             "less than minimal allowed.")
-                                .arg(m_data.nodeName, m_data.pieceName);
-                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                        return QLineF();
-                    }
-                    line.setLength(length);
+                    return QLineF();
                 }
-                else
-                {
-                    line.setLength(m_data.passmarkSAPoint.GetPasskmarkLength());
-                }
+                line.setLength(length);
+
                 return line;
             }
-            else
-            {
-                const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Notch "
-                                                     "collapse.")
-                        .arg(m_data.nodeName, m_data.pieceName);
-                VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-            }
+
+            const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Notch "
+                                                 "collapse.")
+                    .arg(m_data.nodeName, m_data.pieceName);
+            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                                          qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
         else
         {
@@ -931,21 +951,17 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
 
     if (m_data.passmarkAngleType == PassmarkAngleType::Straightforward)
     {
-        const qreal length = m_data.passmarkSAPoint.PassmarkLength(m_data.saWidth);
-        if (not m_data.passmarkSAPoint.IsManualPasskmarkLength() && length <= accuracyPointOnLine)
+        bool ok = false;
+        const qreal length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth), ok);
+
+        if (not ok)
         {
-            const QString errorMsg = QObject::tr("Found null notch for point '%1' in piece '%2'. Length is less "
-                                                 "than minimal allowed.")
-                    .arg(m_data.nodeName, m_data.pieceName);
-            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            return {};
         }
-        else
-        {
-            QLineF line = QLineF(seamPassmarkSAPoint, m_data.passmarkSAPoint);
-            line.setLength(length);
-            return QVector<QLineF>({line});
-        }
+
+        QLineF line = QLineF(seamPassmarkSAPoint, m_data.passmarkSAPoint);
+        line.setLength(length);
+        return {line};
     }
     else if (m_data.passmarkAngleType == PassmarkAngleType::Bisector)
     {

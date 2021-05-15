@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += core widgets printsupport
+QT += core widgets printsupport xmlpatterns concurrent xml
 
 # Name of the library
 TARGET = vpatterndb

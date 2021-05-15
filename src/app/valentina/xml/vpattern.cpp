@@ -141,6 +141,9 @@ void VPattern::CreateEmptyFile()
     insertBefore(createProcessingInstruction(QStringLiteral("xml"),
                                              QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
                  this->firstChild());
+
+    // Cache values
+    m_units = VAbstractValApplication::VApp()->patternUnits();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2280,6 +2283,8 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
         initData.curveId = GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
         initData.formulaAngle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
         const QString angleFix = initData.formulaAngle;
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCurveIntersectAxis::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2401,6 +2406,10 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         initData.secondCurveId = GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
         initData.vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
         initData.hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
+        initData.curve1AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve1Alias1);
+        initData.curve1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
+        initData.curve2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
+        initData.curve2AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve2Alias2);
 
         VToolPointOfIntersectionCurves::Create(initData);
     }
@@ -3692,21 +3701,21 @@ void VPattern::RefreshPieceGeometry()
         VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
     });
 
-    if (VApplication::VApp()->IsGUIMode() && m_parsing)
+    if (VApplication::IsGUIMode() && m_parsing)
     {
         return;
     }
 
     for(auto pieceId : qAsConst(updatePieces))
     {
-        if (VApplication::VApp()->IsGUIMode() && m_parsing)
+        if (VApplication::IsGUIMode() && m_parsing)
         {
             return;
         }
 
         try
         {
-            if (VToolSeamAllowance *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+            if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
             {
                 piece->RefreshGeometry();
             }
@@ -3718,7 +3727,7 @@ void VPattern::RefreshPieceGeometry()
 
         QApplication::processEvents();
 
-        if (VApplication::VApp()->IsGUIMode() && m_parsing)
+        if (VApplication::IsGUIMode() && m_parsing)
         {
             return;
         }

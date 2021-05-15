@@ -133,6 +133,7 @@ public slots:
     void         Highlight(quint32 id);
     void         UpdateDetailLabel();
     void         UpdatePatternInfo();
+    void         UpdatePassmarks();
     void         ShowOptions();
     void         DeleteFromMenu();
 protected slots:

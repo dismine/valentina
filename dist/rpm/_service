@@ -1,11 +1,11 @@
 <services>
   <service name="tar_scm">
     <param name="url">git://github.com/dismine/Valentina_git.git</param>
-    <param name="versionprefix">0.7.46</param>
+    <param name="versionprefix">0.7.47</param>
     <param name="filename">valentina</param>
     <param name="scm">git</param>
     <param name="exclude">.git</param>
-    <param name="versionformat">%at</param>
+    <param name="versionformat">@PARENT_TAG@</param>
     <param name="revision">master</param>
   </service>
   <service name="extract_file">

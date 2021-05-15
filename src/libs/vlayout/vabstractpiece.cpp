@@ -1665,10 +1665,8 @@ qreal VSAPoint::PassmarkLength(qreal width) const
         passmarkLength = qMin(passmarkLength, maxPassmarkLength);
         return passmarkLength;
     }
-    else
-    {
-        return m_passmarkLength;
-    }
+
+    return m_passmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

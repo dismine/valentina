@@ -40,7 +40,7 @@ build:
 #    - ....
 #
   files:
-    - "https://gitlab.com/smart-pattern/valentina/repository/archive.tar.gz?ref=develop"
+    - "https://gitlab.com/smart-pattern/valentina/-/archive/develop/valentina-develop.tar.gz"
 
 # OPTIONAL: ingredient packages are packages which become part of the AppImage.
 #           you may want to remove parts of their content in script section.
@@ -53,9 +53,8 @@ script:
 #           - $BUILD_SOURCE_DIR point to the source directory
 #           - $BUILD_APPDIR point to the AppDir. This directory will become the content of the AppImage
   - cd $BUILD_SOURCE_DIR
-  - mv -v "archive.tar.gz?ref=develop" valentina-develop.tar.gz
   - tar zxvf $BUILD_SOURCE_DIR/valentina-develop.tar.gz
-  - mv -v valentina-develop-* valentina
+  - mv -v valentina-develop valentina
   - cd $BUILD_SOURCE_DIR/valentina
   - qmake-qt5 PREFIX=/usr PREFIX_LIB=/usr/lib LRELEASE=lrelease-qt5 Valentina.pro -r DEFINES+=APPIMAGE "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
   - make -j$(nproc)

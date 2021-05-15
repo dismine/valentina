@@ -24,9 +24,9 @@ if [[ "$DEPLOY" == "true" ]]; then
     check_failure "Unable to patch the app bundle.";
 
     if [[ "$LEGACY" = false ]]; then
-        legacy_suffix = ""    
+        legacy_suffix=""    
     else
-        legacy_suffix = "-legacy"
+        legacy_suffix="-legacy"
     fi
 
     print_info "Start compressing.";

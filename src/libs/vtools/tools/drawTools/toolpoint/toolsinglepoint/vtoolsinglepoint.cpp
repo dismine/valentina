@@ -395,17 +395,16 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 //---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
-void VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
-                                    VContainer *data)
+auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
+                                    VContainer *data, const QString &alias1,
+                                    const QString &alias2) -> QPair<QString, QString>
 {
     switch(curveType)
     {
         case GOType::EllipticalArc:
-            InitArc<VEllipticalArc>(data, segLength, p, curveId);
-            break;
+            return InitArc<VEllipticalArc>(data, segLength, p, curveId, alias1, alias2);
         case GOType::Arc:
-            InitArc<VArc>(data, segLength, p, curveId);
-            break;
+            return InitArc<VArc>(data, segLength, p, curveId, alias1, alias2);
         case GOType::CubicBezier:
         case GOType::Spline:
         {
@@ -444,12 +443,20 @@ void VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
                 delete spl2;
             }
 
+            spline1->SetAliasSuffix(alias1);
+            spline2->SetAliasSuffix(alias2);
+
             data->RegisterUniqueName(spline1);
             data->AddSpline(spline1, NULL_ID, p->id());
 
             data->RegisterUniqueName(spline2);
             data->AddSpline(spline2, NULL_ID, p->id());
-            break;
+
+            // Because we don't store segments, but only data about them we must register the names manually
+            data->RegisterUniqueName(spline1);
+            data->RegisterUniqueName(spline2);
+
+            return qMakePair(spline1->ObjectName(), spline2->ObjectName());
         }
         case GOType::CubicBezierPath:
         case GOType::SplinePath:
@@ -492,12 +499,20 @@ void VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
                 delete splPath2;
             }
 
+            splP1->SetAliasSuffix(alias1);
+            splP2->SetAliasSuffix(alias2);
+
             data->RegisterUniqueName(splP1);
             data->AddSpline(splP1, NULL_ID, p->id());
 
             data->RegisterUniqueName(splP2);
             data->AddSpline(splP2, NULL_ID, p->id());
-            break;
+
+            // Because we don't store segments, but only data about them we must register the names manually
+            data->RegisterUniqueName(splP1);
+            data->RegisterUniqueName(splP2);
+
+            return qMakePair(splP1->ObjectName(), splP2->ObjectName());
         }
         case GOType::Point:
         case GOType::PlaceLabel:
@@ -505,6 +520,8 @@ void VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
             Q_UNREACHABLE();
             break;
     }
+
+    return {};
 }
 
 QT_WARNING_POP

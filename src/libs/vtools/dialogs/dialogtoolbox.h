@@ -34,6 +34,7 @@
 
 #include "../vpatterndb/variables/vinternalvariable.h"
 #include "../vmisc/typedef.h"
+#include "../vgeometry/vgeometrydef.h"
 
 class QPlainTextEdit;
 class QPushButton;
@@ -88,5 +89,6 @@ QFont  NodeFont(QFont font, bool nodeExcluded = false);
 void   CurrentCurveLength(vidtype curveId, VContainer *data);
 void   SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar=4);
 QIcon  LineColor(int size, const QString &color);
+auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
 
 #endif // DIALOGTOOLBOX_H
