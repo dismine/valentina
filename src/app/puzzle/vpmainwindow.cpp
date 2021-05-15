@@ -1360,13 +1360,17 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
     {
         m_graphicsView->PrepareForExport();
 
-        const QSizeF s = m_layout->GetFocusedSheet()->GetSheetSize();
-        const QRectF r = QRectF(0, 0, s.width(), s.height());
+        QSizeF size = QSizeF(m_layout->GetFocusedSheet()->GetSheetSize());
+        if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
+        {
+            size.transpose();
+        }
+        const QRectF rect = QRectF(0, 0, size.width(), size.height());
 
         QSvgGenerator generator;
         generator.setFileName(fileName);
-        generator.setSize(QSize(qFloor(s.width()),qFloor(s.height())));
-        generator.setViewBox(r);
+        generator.setSize(QSize(qFloor(size.width()),qFloor(size.height())));
+        generator.setViewBox(rect);
         generator.setTitle(m_layout->GetFocusedSheet()->GetName());
         generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
         generator.setResolution(static_cast<int>(PrintDPI));
@@ -1376,12 +1380,11 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
         painter.setRenderHint(QPainter::Antialiasing, true);
         painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        m_graphicsView->GetScene()->render(&painter, r, r, Qt::IgnoreAspectRatio);
+        m_graphicsView->GetScene()->render(&painter, rect, rect, Qt::IgnoreAspectRatio);
         painter.end();
 
         m_graphicsView->CleanAfterExport();
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
