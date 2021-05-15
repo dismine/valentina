@@ -135,7 +135,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     m_completer = new QCompleter(m_variables, this);
     m_completer->setCompletionMode(QCompleter::PopupCompletion);
     m_completer->setModelSorting(QCompleter::UnsortedModel);
-    m_completer->setFilterMode(Qt::MatchStartsWith);
+    m_completer->setFilterMode(Qt::MatchContains);
     m_completer->setCaseSensitivity(Qt::CaseSensitive);
 
     ui->lineEditPassmarkLength->setCompleter(m_completer);
