@@ -53,6 +53,3 @@ unix {
 
 TEMPLATE = subdirs
 SUBDIRS = src
-
-RESOURCES += \
-    src/app/puzzle/share/resources/puzzleicon.qrc
