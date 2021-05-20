@@ -831,12 +831,20 @@ QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
         }
         else
         {
-            const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2' with built in "
-                                                 "seam allowance. User must manually provide length.")
-                    .arg(m_data.nodeName, m_data.pieceName);
-            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-            return QVector<QLineF>();
+            if (m_data.globalPassmarkLength > accuracyPointOnLine)
+            {
+                length = m_data.globalPassmarkLength;
+            }
+            else
+            {
+                const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2' with built "
+                                                     "in seam allowance. User must manually provide length.")
+                        .arg(m_data.nodeName, m_data.pieceName);
+                VAbstractApplication::VApp()->IsPedantic()
+                        ? throw VExceptionInvalidNotch(errorMsg)
+                        : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                return {};
+            }
         }
     }
 
