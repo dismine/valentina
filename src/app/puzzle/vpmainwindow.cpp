@@ -89,7 +89,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     ui->setupUi(this);
 
     // init the tile factory
-    m_tileFactory = new VPTileFactory(m_layout, qApp->Settings());
+    m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
     m_tileFactory->refreshTileInfos();
 
     InitMenuBar();
@@ -665,7 +665,7 @@ void VPMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
 void VPMainWindow::ReadSettings()
 {
     qCDebug(pWindow, "Reading settings.");
-    const VPSettings *settings = qApp->PuzzleSettings();
+    const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -691,7 +691,7 @@ void VPMainWindow::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::WriteSettings()
 {
-    VPSettings *settings = qApp->PuzzleSettings();
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));
@@ -876,7 +876,7 @@ void VPMainWindow::on_actionOpen_triggered()
     const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
 
     //Get list last open files
-    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
+    QStringList recentFiles = VPApplication::VApp()->PuzzleSettings()->GetRecentFileList();
     QString dir;
     if (recentFiles.isEmpty())
     {
@@ -914,7 +914,7 @@ void VPMainWindow::on_actionOpen_triggered()
     {
         recentFiles.removeLast();
     }
-    qApp->PuzzleSettings()->SetRecentFileList(recentFiles);
+    VPApplication::VApp()->PuzzleSettings()->SetRecentFileList(recentFiles);
 
     // updates the properties with the loaded data
     SetPropertiesData();
@@ -942,7 +942,7 @@ void VPMainWindow::on_actionSaveAs_triggered()
     // extension .vlt, check for empty file names etc.
 
     //Get list last open files
-    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
+    QStringList recentFiles = VPApplication::VApp()->PuzzleSettings()->GetRecentFileList();
     QString dir;
     if (recentFiles.isEmpty())
     {
@@ -1374,7 +1374,8 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
         QPainter painter;
         painter.begin(&generator);
         painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.setPen(QPen(Qt::black, VPApplication::VApp()->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
         m_graphicsView->GetScene()->render(&painter, r, r, Qt::IgnoreAspectRatio);
         painter.end();

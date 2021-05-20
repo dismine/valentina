@@ -61,7 +61,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // writing a multithreaded application and the error happens on
     // a non-GUI thread, you'll have to queue the message to the GUI
     QCoreApplication *instance = QCoreApplication::instance();
-    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+    const bool isGuiThread = (instance != nullptr) && (QThread::currentThread() == instance->thread());
 
     if (not isGuiThread)
     {
@@ -199,7 +199,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            if (qApp->IsAppInGUIMode())
+            if (VPApplication::VApp()->IsAppInGUIMode())
             {
                 if (topWinAllowsPop)
                 {
@@ -234,9 +234,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 //---------------------------------------------------------------------------------------------------------------------
 VPApplication::VPApplication(int &argc, char **argv)
-    :VAbstractApplication(argc, argv),
-      mainWindows(),
-      localServer(nullptr)
+    :VAbstractApplication(argc, argv)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -264,7 +262,7 @@ VPApplication::~VPApplication()
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool VPApplication::notify(QObject *receiver, QEvent *event)
+auto VPApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
     try
     {
@@ -325,13 +323,13 @@ bool VPApplication::notify(QObject *receiver, QEvent *event)
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool VPApplication::IsAppInGUIMode() const
+auto VPApplication::IsAppInGUIMode() const -> bool
 {
     return CommandLine()->IsGuiEnabled();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow *VPApplication::MainWindow()
+auto VPApplication::MainWindow()-> VPMainWindow *
 {
     Clean();
     if (mainWindows.isEmpty())
@@ -344,7 +342,7 @@ VPMainWindow *VPApplication::MainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPMainWindow *> VPApplication::MainWindows()
+auto  VPApplication::MainWindows() -> QList<VPMainWindow *>
 {
     Clean();
     QList<VPMainWindow*> list;
@@ -356,7 +354,7 @@ QList<VPMainWindow *> VPApplication::MainWindows()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow *VPApplication::NewMainWindow(const VPCommandLinePtr &cmd)
+auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 {
     VPMainWindow *puzzle = new VPMainWindow(cmd);
     mainWindows.prepend(puzzle);
@@ -399,7 +397,7 @@ void VPApplication::InitOptions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *VPApplication::TrVars()
+auto VPApplication::TrVars() -> const VTranslateVars *
 {
     return nullptr;
 }
@@ -412,7 +410,7 @@ void VPApplication::OpenSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSettings *VPApplication::PuzzleSettings()
+auto VPApplication::PuzzleSettings() -> VPSettings *
 {
     SCASSERT(settings != nullptr)
     return qobject_cast<VPSettings *>(settings);
@@ -421,7 +419,7 @@ VPSettings *VPApplication::PuzzleSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::ActivateDarkMode()
 {
-    VPSettings *settings = qApp->PuzzleSettings();
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     if (settings->GetDarkMode())
     {
          QFile f(":qdarkstyle/style.qss");
@@ -498,14 +496,14 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
-        if (args.count() > 1 && rawLayouts.size() > 0)
+        if (args.count() > 1 && not rawLayouts.isEmpty())
         {
             qCCritical(pApp, "%s\n",
-                       qPrintable(tr("Import raw layout data does not support penning several layout files.")));
+                       qPrintable(tr("Import raw layout data does not support openning several layout files.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
-        for (auto &arg : args)
+        for (const auto &arg : args)
         {
             NewMainWindow(cmd);
             if (not MainWindow()->LoadFile(arg))
@@ -518,7 +516,7 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
                 continue;
             }
 
-            if (rawLayouts.size() > 0)
+            if (not rawLayouts.isEmpty())
             {
                 MainWindow()->ImportRawLayouts(rawLayouts);
             }
@@ -533,7 +531,7 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
         }
 
         NewMainWindow(cmd);
-        if (rawLayouts.size() > 0)
+        if (not rawLayouts.isEmpty())
         {
 //            MainWindow()->New(); // prepare layout settings
             MainWindow()->ImportRawLayouts(rawLayouts);
@@ -553,7 +551,7 @@ void VPApplication::ProcessCMD()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPApplication::event(QEvent *e)
+auto VPApplication::event(QEvent *e) -> bool
 {
     switch(e->type())
     {
@@ -561,12 +559,12 @@ bool VPApplication::event(QEvent *e)
         // Mac specific).
         case QEvent::FileOpen:
         {
-            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
             const QString macFileOpen = fileOpenEvent->file();
             if(not macFileOpen.isEmpty())
             {
                 VPMainWindow *mw = MainWindow();
-                if (mw)
+                if (mw != nullptr)
                 {
                     mw->LoadFile(macFileOpen);  // open file in existing window
                 }
@@ -639,8 +637,14 @@ void VPApplication::Clean()
     }
 }
 
-//--------------------------------------------------------------------------------------------
-VPCommandLinePtr VPApplication::CommandLine() const
+//---------------------------------------------------------------------------------------------------------------------
+auto VPApplication::CommandLine() -> VPCommandLinePtr
 {
     return VPCommandLine::instance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPApplication *VPApplication::VApp()
+{
+    return qobject_cast<VPApplication*>(QCoreApplication::instance());
 }
