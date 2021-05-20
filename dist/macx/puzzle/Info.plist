@@ -9,9 +9,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.6</string>
+	<string>10.7</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2013-2020, Valentina project</string>
+	<string>© 2013-2021, Valentina project</string>
 	<key>CFBundleSignature</key>
 	<string>@TYPEINFO@</string>
 	<key>CFBundleExecutable</key>
@@ -19,11 +19,53 @@
 	<key>CFBundleIdentifier</key>
 	<string>io.bitbucket.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.7.0</string>
+	<string>0.7.47</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.0.0</string>
+	<string>0.7.47.0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+        <key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>layout.incs</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>io.bitbucket.valentinaproject.vlt</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Valentina layout</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Valentina layout</string>
+			<key>UTTypeIconFile</key>
+			<string>layout.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>io.bitbucket.valentinaproject.vlt</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>vlt</string>
+				</array>
+				<key>public.mime-type</key>
+            	                <string>text/xml</string>
+			</dict>
+		</dict>
+	</array>
 	<key>NSRequiresAquaSystemAppearance</key>
 	<true/>
 </dict>

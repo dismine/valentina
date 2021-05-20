@@ -86,6 +86,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Name: "fileassoc1"; Description: "{cm:CreateFileAssocVal}"; GroupDescription: "{cm:FileAssoc}"
 Name: "fileassoc2"; Description: "{cm:CreateFileAssocVit}"; GroupDescription: "{cm:FileAssoc}"
 Name: "fileassoc3"; Description: "{cm:CreateFileAssocVst}"; GroupDescription: "{cm:FileAssoc}"
+Name: "fileassoc4"; Description: "{cm:CreateFileAssocVlt}"; GroupDescription: "{cm:FileAssoc}"
 Name: "deletesettings"; Description: "{cm:RemoveAnyExistingSettings}"; GroupDescription: "{cm:ManageSettings}"; Flags: unchecked
 
 [Types]
@@ -161,6 +162,7 @@ Name: "lang_files\chinese"; Description: "Chinese (China)"; Types: full custom; 
 ; Signing
 Source: ".\valentina\valentina.exe"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\tape.exe"; DestDir: "{app}"; Flags: ignoreversion sign
+Source: ".\valentina\puzzle.exe"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\vpropertyexplorer.dll"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\qmuparser2.dll"; DestDir: "{app}"; Flags: ignoreversion sign
 ; Localizations
@@ -249,6 +251,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 Root: "HKCR"; Subkey: ".val"; ValueType: string; ValueName: ""; ValueData: "Valentina.Pattern"; Flags: uninsdeletevalue; Tasks: fileassoc1
 Root: "HKCR"; Subkey: ".vit"; ValueType: string; ValueName: ""; ValueData: "Valentina.IndividualMeasurements"; Flags: uninsdeletevalue; Tasks: fileassoc2
 Root: "HKCR"; Subkey: ".vst"; ValueType: string; ValueName: ""; ValueData: "Valentina.StandardMeasurements"; Flags: uninsdeletevalue; Tasks: fileassoc3
+Root: "HKCR"; Subkey: ".vlt"; ValueType: string; ValueName: ""; ValueData: "Valentina.Layout"; Flags: uninsdeletevalue; Tasks: fileassoc3
 
 Root: "HKCR"; Subkey: "Valentina.Pattern"; ValueType: string; ValueData: "Valentina pattern file"; Flags: uninsdeletekey; Tasks: fileassoc1
 Root: "HKCR"; Subkey: "Valentina.Pattern\DefaultIcon"; ValueType: string; ValueData: "{app}\pattern.ico,0"; Tasks: fileassoc1
@@ -261,6 +264,10 @@ Root: "HKCR"; Subkey: "Valentina.IndividualMeasurements\shell\open\command"; Val
 Root: "HKCR"; Subkey: "Valentina.StandardMeasurements"; ValueType: string; ValueData: "Valentina standard measurement file"; Flags: uninsdeletekey; Tasks: fileassoc3
 Root: "HKCR"; Subkey: "Valentina.StandardMeasurements\DefaultIcon"; ValueType: string; ValueData: "{app}\s-measurements.ico,0"; Tasks: fileassoc3
 Root: "HKCR"; Subkey: "Valentina.StandardMeasurements\shell\open\command"; ValueType: string; ValueData: """{app}\tape.exe"" ""%1"""; Tasks: fileassoc3
+
+Root: "HKCR"; Subkey: "Valentina.Layout"; ValueType: string; ValueData: "Valentina layout file"; Flags: uninsdeletekey; Tasks: fileassoc1
+Root: "HKCR"; Subkey: "Valentina.Layout\DefaultIcon"; ValueType: string; ValueData: "{app}\layout.ico,0"; Tasks: fileassoc1
+Root: "HKCR"; Subkey: "Valentina.Layout\shell\open\command"; ValueType: string; ValueData: """{app}\puzzle.exe"" ""%1"""; Tasks: fileassoc1
 
 [CustomMessages]
 FileAssoc = Create file associations
@@ -286,6 +293,12 @@ english.CreateFileAssocVst = *.vst (Multisize measurement file)
 russian.CreateFileAssocVst = *.vst (Мультиразмерный файл мерок)
 ukrainian.CreateFileAssocVst = *.vst (Мультирозмірний файл мірок)
 german.CreateFileAssocVst = *.vst (Multi-Size Maßdatei)
+
+CreateFileAssocVlt = *.vlt (Layout file)
+english.CreateFileAssocVlt = *.vlt (Layout file)
+russian.CreateFileAssocVlt = *.vlt (Файл раскладки)
+ukrainian.CreateFileAssocVlt = *.vlt (Файл роскладки)
+german.CreateFileAssocVlt = *.vlt (Layoutdatei)
 
 WarnRemoveOld = is installed at the moment. Remove old version?
 english.WarnRemoveOld = is installed at the moment. Remove old version?

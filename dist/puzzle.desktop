@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Puzzle
+Exec=puzzle %F
+Version=1.0
+GenericName=Valentina's layout editor
+Comment=Create and edit layouts
+Comment[uk]=Створюйте і редагуйте розкладки
+Comment[ru]=Создавайте и редактируйте раскладку
+Icon=puzzle
+Terminal=false
+MimeType=application/x-valentina-layout;
+Categories=Qt;Utility;FileTools;
+TryExec=puzzle
