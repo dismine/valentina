@@ -52,6 +52,7 @@ public:
     virtual bool IsAppInGUIMode() const override;
     VPMainWindow *MainWindow();
     QList<VPMainWindow*> MainWindows();
+    VPMainWindow *NewMainWindow();
     VPMainWindow *NewMainWindow(const VPCommandLinePtr &cmd);
 
     void InitOptions();

@@ -354,11 +354,17 @@ auto  VPApplication::MainWindows() -> QList<VPMainWindow *>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPMainWindow *VPApplication::NewMainWindow()
+{
+    return NewMainWindow(VPCommandLinePtr());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 {
     VPMainWindow *puzzle = new VPMainWindow(cmd);
     mainWindows.prepend(puzzle);
-    if (cmd->IsGuiEnabled())
+    if (not cmd->IsTestModeEnabled())
     {
         puzzle->show();
     }

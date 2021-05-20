@@ -65,9 +65,6 @@ public:
 
     bool LoadFile(const QString &path);
 
-public slots:
-    virtual void ShowToolTip(const QString &toolTip) override;
-
 protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void changeEvent(QEvent* event) override;

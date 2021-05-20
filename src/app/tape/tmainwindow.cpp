@@ -389,13 +389,6 @@ bool TMainWindow::LoadFile(const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ShowToolTip(const QString &toolTip)
-{
-    Q_UNUSED(toolTip)
-    // do nothing
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileNew()
 {
     if (m == nullptr)
@@ -597,7 +590,7 @@ void TMainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
-        VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+        WindowsLocale();
 
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
@@ -2410,7 +2403,6 @@ void TMainWindow::SetupMenu()
     m_separatorAct->setVisible(false);
     ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct );
 
-
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
     ui->actionQuit->setShortcuts(QKeySequence::Quit);
 
@@ -3653,7 +3645,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
         }
 
-        QAction *action = menu->addAction(title, this, SLOT(ShowWindow()));
+        QAction *action = menu->addAction(title, this, &TMainWindow::ShowWindow);
         action->setData(i);
         action->setCheckable(true);
         action->setMenuRole(QAction::NoRole);

@@ -57,31 +57,31 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
-    QMainWindow(parent),
+    VAbstractMainWindow(parent),
     ui(new Ui::VPMainWindow),
     m_cmd(cmd)
 {
     m_layout = new VPLayout();
 
     // create a standard sheet
-    VPSheet *sheet = new VPSheet(m_layout);
+    auto *sheet = new VPSheet(m_layout);
     sheet->SetName(QObject::tr("Sheet 1"));
     m_layout->AddSheet(sheet);
     m_layout->SetFocusedSheet();
 
-    // ----- for test purposes, to be removed------------------
-    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
-    sheet->SetSheetSizeConverted(84.1, 118.9);
-    sheet->SetPiecesGapConverted(1);
+//    // ----- for test purposes, to be removed------------------
+//    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
+//    sheet->SetSheetSizeConverted(84.1, 118.9);
+//    sheet->SetPiecesGapConverted(1);
 
-    m_layout->SetUnit(Unit::Cm);
-    m_layout->SetWarningSuperpositionOfPieces(true);
-    m_layout->SetTitle(QString("My Test Layout"));
-    m_layout->SetDescription(QString("Description of my Layout"));
+//    m_layout->SetUnit(Unit::Cm);
+//    m_layout->SetWarningSuperpositionOfPieces(true);
+//    m_layout->SetTitle(QString("My Test Layout"));
+//    m_layout->SetDescription(QString("Description of my Layout"));
 
-    m_layout->SetTilesSizeConverted(21,29.7);
-    m_layout->SetTilesOrientation(PageOrientation::Portrait);
-    m_layout->SetTilesMarginsConverted(1,1,1,1);
+//    m_layout->SetTilesSizeConverted(21,29.7);
+//    m_layout->SetTilesOrientation(PageOrientation::Portrait);
+//    m_layout->SetTilesMarginsConverted(1,1,1,1);
 //    m_layout->SetShowTiles(true);
 
     // --------------------------------------------------------
@@ -92,7 +92,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
     m_tileFactory->refreshTileInfos();
 
-    InitMenuBar();
+    SetupMenu();
     InitProperties();
     InitCarrousel();
 
@@ -102,9 +102,16 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     SetPropertiesData();
 
+    UpdateWindowTitle();
     ReadSettings();
 
-
+#if defined(Q_OS_MAC)
+    // Mac OS Dock Menu
+    QMenu *menu = new QMenu(this);
+    connect(menu, &QMenu::aboutToShow, this, &VPMainWindow::AboutToShowDockMenu);
+    AboutToShowDockMenu();
+    menu->setAsDockMenu();
+#endif //defined(Q_OS_MAC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,13 +239,17 @@ VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitMenuBar()
+void VPMainWindow::SetupMenu()
 {
     // most of the actions are connected through name convention (auto-connection)
 
-
     // -------------------- connects the actions for the file menu
+    ui->actionNew->setShortcuts(QKeySequence::New);
+    ui->actionSave->setShortcuts(QKeySequence::Save);
+    ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
+
     connect(ui->actionExit, &QAction::triggered, this, &VPMainWindow::close);
+    ui->actionExit->setShortcuts(QKeySequence::Quit);
 
     // -------------------- connects the actions for the edit menu
     // TODO : initialise the undo / redo
@@ -410,6 +421,7 @@ void VPMainWindow::InitPropertyTabLayout()
 void VPMainWindow::InitCarrousel()
 {
     m_carrousel = new VPCarrousel(m_layout, ui->dockWidgetCarrousel);
+    m_carrousel->setDisabled(true);
     ui->dockWidgetCarrousel->setWidget(m_carrousel);
 
     connect(ui->dockWidgetCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
@@ -578,6 +590,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
 void VPMainWindow::InitMainGraphics()
 {
     m_graphicsView = new VPMainGraphicsView(m_layout, m_tileFactory, this);
+    m_graphicsView->setDisabled(true);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
@@ -594,10 +607,7 @@ void VPMainWindow::InitZoomToolBar()
         delete m_doubleSpinBoxScale;
     }
 
-    if (m_mouseCoordinate != nullptr)
-    {
-        delete m_mouseCoordinate;
-    }
+    delete m_mouseCoordinate;
 
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
@@ -625,12 +635,13 @@ void VPMainWindow::InitZoomToolBar()
 
     // defined the scale
     ui->toolBarZoom->addSeparator();
-    QLabel* zoomScale = new QLabel(tr("Scale:"), this);
+    auto* zoomScale = new QLabel(tr("Scale:"), this);
     ui->toolBarZoom->addWidget(zoomScale);
 
     m_doubleSpinBoxScale = new QDoubleSpinBox(this);
     m_doubleSpinBoxScale->setDecimals(1);
     m_doubleSpinBoxScale->setSuffix("%");
+    m_doubleSpinBoxScale->setDisabled(true);
     on_ScaleChanged(m_graphicsView->transform().m11());
     connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){m_graphicsView->Zoom(d/100.0);});
@@ -662,6 +673,62 @@ void VPMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::UpdateWindowTitle()
+{
+    QString showName;
+    bool isFileWritable = true;
+    if (not curFile.isEmpty())
+    {
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+        isFileWritable = QFileInfo(curFile).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+        showName = StrippedName(curFile);
+    }
+    else
+    {
+        showName = tr("untitled %1.vlt").arg(VPApplication::VApp()->MainWindows().size()+1);
+    }
+
+    showName += QLatin1String("[*]");
+
+    if (lIsReadOnly || not isFileWritable)
+    {
+        showName += QStringLiteral(" (") + tr("read only") + QChar(')');
+    }
+
+    setWindowTitle(showName);
+    setWindowFilePath(curFile);
+
+#if defined(Q_OS_MAC)
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
+                                  QLatin1String("/../Resources/layout.icns"));
+    QIcon icon;
+    if (not curFile.isEmpty())
+    {
+        if (not isWindowModified())
+        {
+            icon = fileIcon;
+        }
+        else
+        {
+            static QIcon darkIcon;
+
+            if (darkIcon.isNull())
+            {
+                darkIcon = QIcon(darkenPixmap(fileIcon.pixmap(16, 16)));
+            }
+            icon = darkIcon;
+        }
+    }
+    setWindowIcon(icon);
+#endif //defined(Q_OS_MAC)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ReadSettings()
 {
     qCDebug(pWindow, "Reading settings.");
@@ -672,6 +739,9 @@ void VPMainWindow::ReadSettings()
         restoreGeometry(settings->GetGeometry());
         restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), APP_VERSION);
+
+        // Text under tool buton icon
+        ToolBarStyles();
 
         ui->dockWidgetProperties->setVisible(settings->IsDockWidgetPropertiesActive());
         ui->dockWidgetPropertiesContents->setVisible(settings->IsDockWidgetPropertiesContentsActive());
@@ -828,6 +898,42 @@ void VPMainWindow::generateTiledPdf(QString fileName)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CreateWindowMenu(QMenu *menu)
+{
+    SCASSERT(menu != nullptr)
+
+    QAction *action = menu->addAction(tr("&New Window"));
+    connect(action, &QAction::triggered, this, []()
+    {
+        VPApplication::VApp()->NewMainWindow()->activateWindow();
+    });
+    action->setMenuRole(QAction::NoRole);
+    menu->addSeparator();
+
+    const QList<VPMainWindow*> windows = VPApplication::VApp()->MainWindows();
+    for (int i = 0; i < windows.count(); ++i)
+    {
+        VPMainWindow *window = windows.at(i);
+
+        QString title = QStringLiteral("%1. %2").arg(i+1).arg(window->windowTitle());
+        const int index = title.lastIndexOf(QLatin1String("[*]"));
+        if (index != -1)
+        {
+            window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
+        }
+
+        QAction *action = menu->addAction(title, this, &VPMainWindow::ShowWindow);
+        action->setData(i);
+        action->setCheckable(true);
+        action->setMenuRole(QAction::NoRole);
+        if (window->isActiveWindow())
+        {
+            action->setChecked(true);
+        }
+    }
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
@@ -866,6 +972,27 @@ void VPMainWindow::closeEvent(QCloseEvent *event)
     {
         event->ignore();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        WindowsLocale();
+
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+
+    // remember to call base class implementation
+    QMainWindow::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VPMainWindow::RecentFileList() const
+{
+    return VPApplication::VApp()->PuzzleSettings()->GetRecentFileList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1538,3 +1665,64 @@ void VPMainWindow::on_MouseMoved(const QPointF &scenePos)
                                    .arg(UnitsToStr(m_layout->GetUnit(), true)));
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowWindow() const
+{
+    if (auto *action = qobject_cast<QAction*>(sender()))
+    {
+        const QVariant v = action->data();
+        if (v.canConvert<int>())
+        {
+            const int offset = qvariant_cast<int>(v);
+            const QList<VPMainWindow*> windows = VPApplication::VApp()->MainWindows();
+            windows.at(offset)->raise();
+            windows.at(offset)->activateWindow();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::Preferences()
+{
+    // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
+//    static QPointer<DialogPuzzlePreferences> guard;// Prevent any second run
+//    if (guard.isNull())
+//    {
+//        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+//        auto *preferences = new DialogPuzzlePreferences(this);
+//        // QScopedPointer needs to be sure any exception will never block guard
+//        QScopedPointer<DialogPuzzlePreferences> dlg(preferences);
+//        guard = preferences;
+//        // Must be first
+//        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
+//        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+//        QGuiApplication::restoreOverrideCursor();
+//        dlg->exec();
+    //    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ToolBarStyles()
+{
+    ToolBarStyle(ui->mainToolBar);
+    ToolBarStyle(ui->toolBarZoom);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_MAC)
+void VPMainWindow::AboutToShowDockMenu()
+{
+    if (QMenu *menu = qobject_cast<QMenu *>(sender()))
+    {
+        menu->clear();
+        CreateWindowMenu(menu);
+
+        menu->addSeparator();
+
+        QAction *actionPreferences = menu->addAction(tr("Preferences"));
+        actionPreferences->setMenuRole(QAction::NoRole);
+        connect(actionPreferences, &QAction::triggered, this, &VPMainWindow::Preferences);
+    }
+}
+#endif //defined(Q_OS_MAC)

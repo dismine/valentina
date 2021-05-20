@@ -175,6 +175,9 @@
      </property>
      <item>
       <widget class="QTabWidget" name="tabWidgetProperties">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -1561,7 +1564,8 @@
   </widget>
   <action name="actionOpen">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -1572,10 +1576,11 @@
   </action>
   <action name="actionSave">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save"/>
+    <iconset theme="document-save">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Save</string>
@@ -1586,10 +1591,11 @@
   </action>
   <action name="actionSaveAs">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save-as"/>
+    <iconset theme="document-save-as">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save &amp;As</string>
@@ -1600,7 +1606,7 @@
   </action>
   <action name="actionCloseLayout">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Close Layout</string>
@@ -1608,7 +1614,7 @@
   </action>
   <action name="actionImportRawLayout">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Import Raw Layout Data</string>
@@ -1634,7 +1640,8 @@
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset theme="document-new"/>
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>
@@ -1653,7 +1660,8 @@
   </action>
   <action name="actionAboutPuzzle">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>About &amp;Puzzle</string>
@@ -1669,6 +1677,9 @@
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Properties</string>
    </property>
@@ -1677,6 +1688,9 @@
    </property>
   </action>
   <action name="actionZoomIn">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="zoom-in">
      <normaloff>.</normaloff>.</iconset>
@@ -1686,6 +1700,9 @@
    </property>
   </action>
   <action name="actionZoomOut">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="zoom-out">
      <normaloff>.</normaloff>.</iconset>
@@ -1695,6 +1712,9 @@
    </property>
   </action>
   <action name="actionZoomOriginal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="zoom-original">
      <normaloff>.</normaloff>.</iconset>
@@ -1704,6 +1724,9 @@
    </property>
   </action>
   <action name="actionZoomFitBest">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="zoom-fit-best">
      <normaloff>.</normaloff>.</iconset>

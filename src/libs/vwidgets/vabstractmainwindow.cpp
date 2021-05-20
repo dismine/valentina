@@ -135,6 +135,13 @@ VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ShowToolTip(const QString &toolTip)
+{
+    Q_UNUSED(toolTip)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
                                                 const QString &maxFormatVersion)
 {
@@ -195,6 +202,16 @@ QString VAbstractMainWindow::CSVFilePath()
     }
 
     return fileName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
+{
+    Q_UNUSED(fileName)
+    Q_UNUSED(withHeader)
+    Q_UNUSED(mib)
+    Q_UNUSED(separator)
+    // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
