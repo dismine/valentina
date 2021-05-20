@@ -10,6 +10,7 @@ TEMPLATE = app
 DEPENDPATH +=  \
             ../../src/app/valentina \
             ../../src/app/tape \
+            ../../src/app/puzzle \    
             ../../src/libs/qmuparser \
             ../../src/libs/vpropertyexplorer \
             ../../src/libs/ifc \
@@ -25,6 +26,7 @@ DEPENDPATH +=  \
 
 include(../../src/app/valentina/valentina.pri)
 include(../../src/app/tape/tape.pri)
+include(../../src/app/tape/puzzle.pri)
 include(../../src/libs/qmuparser/qmuparser.pri)
 include(../../src/libs/vpropertyexplorer/vpropertyexplorer.pri)
 include(../../src/libs/ifc/ifc.pri)
