@@ -1077,7 +1077,6 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
     }
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
