@@ -31,6 +31,7 @@
 
 #include <QLocale>
 #include <QXmlStreamWriter>
+#include <QCoreApplication>
 
 #include "../vmisc/literals.h"
 
@@ -43,14 +44,14 @@ class QMarginsF;
 
 class VPLayoutFileWriter : public QXmlStreamWriter
 {
+    Q_DECLARE_TR_FUNCTIONS(VPLayoutFileWriter)
 public:
-    VPLayoutFileWriter();
-    ~VPLayoutFileWriter();
+    VPLayoutFileWriter()= default;
+    ~VPLayoutFileWriter()= default;
 
     void WriteFile(VPLayout *layout, QFile *file);
 
 private:
-
     void WriteLayout(VPLayout *layout);
     void WriteProperties(VPLayout *layout);
     void WriteUnplacePiecesList(VPLayout *layout);
@@ -69,7 +70,6 @@ private:
 
     template <size_t N>
     void SetAttribute(const QString &name, const char (&value)[N]);
-
 };
 
 //---------------------------------------------------------------------------------------------------------------------

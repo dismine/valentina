@@ -45,6 +45,12 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vpsheet.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
+
 #include <QLoggingCategory>
 
 QT_WARNING_PUSH
@@ -157,16 +163,50 @@ bool VPMainWindow::LoadFile(QString path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPMainWindow::SaveFile(const QString &path)
+void VPMainWindow::LayoutWasSaved(bool saved)
+{
+    setWindowModified(!saved);
+    not lIsReadOnly ? ui->actionSave->setEnabled(!saved): ui->actionSave->setEnabled(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetCurrentFile(const QString &fileName)
+{
+    curFile = fileName;
+    if (not curFile.isEmpty())
+    {
+        auto settings = VPApplication::VApp()->PuzzleSettings();
+        QStringList files = settings->GetRecentFileList();
+        files.removeAll(fileName);
+        files.prepend(fileName);
+        while (files.size() > MaxRecentFiles)
+        {
+            files.removeLast();
+        }
+        settings->SetRecentFileList(files);
+        UpdateRecentFileActions();
+    }
+
+    UpdateWindowTitle();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 {
     QFile file(path);
     file.open(QIODevice::WriteOnly);
 
-    VPLayoutFileWriter *fileWriter = new VPLayoutFileWriter();
-    fileWriter->WriteFile(m_layout, &file);
+    VPLayoutFileWriter fileWriter;
+    fileWriter.WriteFile(m_layout, &file);
 
-    // TODO / FIXME : better return value and error handling
+    if (fileWriter.hasError())
+    {
+        error = tr("Fail to create layout.");
+        return false;
+    }
 
+    SetCurrentFile(path);
+    LayoutWasSaved(true);
     return true;
 }
 
@@ -1058,47 +1098,143 @@ void VPMainWindow::on_actionOpen_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_actionSave_triggered()
+bool VPMainWindow::on_actionSave_triggered()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::Save");
-    int ret = msgBox.exec();
+    if (curFile.isEmpty() || lIsReadOnly)
+    {
+        return on_actionSaveAs_triggered();
+    }
 
-    Q_UNUSED(ret);
+    if (m_curFileFormatVersion < VLayoutConverter::LayoutMaxVer
+            && not ContinueFormatRewrite(m_curFileFormatVersionStr, VLayoutConverter::LayoutMaxVerStr))
+    {
+        return false;
+    }
 
-    // TODO
+    if (not CheckFilePermissions(curFile, this))
+    {
+        return false;
+    }
+
+    QString error;
+    if (not SaveLayout(curFile, error))
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setText(tr("Could not save the file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+        return false;
+    }
+
+    m_curFileFormatVersion = VLayoutConverter::LayoutMaxVer;
+    m_curFileFormatVersionStr = VLayoutConverter::LayoutMaxVerStr;
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_actionSaveAs_triggered()
+bool VPMainWindow::on_actionSaveAs_triggered()
 {
-    // TODO / FIXME : See valentina how the save is done over there. we need to add the
-    // extension .vlt, check for empty file names etc.
+    QString filters = tr("Layout files") + QStringLiteral(" (*.vlt)");
+    QString suffix = QStringLiteral("vlt");
+    QString fName = tr("layout") + QChar('.') + suffix;
 
-    //Get list last open files
-    QStringList recentFiles = VPApplication::VApp()->PuzzleSettings()->GetRecentFileList();
     QString dir;
-    if (recentFiles.isEmpty())
+    if (curFile.isEmpty())
     {
-        dir = QDir::homePath();
+        dir = VPApplication::VApp()->PuzzleSettings()->GetPathLayouts();
     }
     else
     {
-        //Absolute path to last open file
-        dir = QFileInfo(recentFiles.first()).absolutePath();
+        dir = QFileInfo(curFile).absolutePath();
     }
 
-    QString filters(tr("Layout files") + QLatin1String("(*.vlt)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".vlt"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
 
-    SaveFile(fileName);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir(dir).rmpath(QChar('.'));
+        }
+    });
+
+    if (fileName.isEmpty())
+    {
+        return false;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QChar('.') + suffix;
+    }
+
+    if (QFileInfo::exists(fileName) && curFile != fileName)
+    {
+        // Temporary try to lock the file before saving
+        VLockGuard<char> tmp(fileName);
+        if (not tmp.IsLocked())
+        {
+            qCCritical(pWindow, "%s",
+                       qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
+            return false;
+        }
+    }
+
+    // Need for restoring previous state in case of failure
+//    const bool readOnly = m_layout->IsReadOnly();
+
+//    m_layout->SetReadOnly(false);
+    lIsReadOnly = false;
+
+    QString error;
+    bool result = SaveLayout(fileName, error);
+    if (not result)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+
+        // Restore previous state
+//        m_layout->SetReadOnly(readOnly);
+//        lIsReadOnly = readOnly;
+        return false;
+    }
+
+    m_curFileFormatVersion = VLayoutConverter::LayoutMaxVer;
+    m_curFileFormatVersionStr = VLayoutConverter::LayoutMaxVerStr;
+
+//    UpdatePadlock(false);
+    UpdateWindowTitle();
+
+    if (curFile == fileName && not lock.isNull())
+    {
+        lock->Unlock();
+    }
+    VlpCreateLock(lock, fileName);
+    if (not lock->IsLocked())
+    {
+        qCCritical(pWindow, "%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window. "
+                                                    "Expect collissions when run 2 copies of the program.")));
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -3253,52 +3253,9 @@ bool MainWindow::on_actionSave_triggered()
             return false;
         }
 
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-        if (not isFileWritable)
+        if (not CheckFilePermissions(VAbstractValApplication::VApp()->GetPatternPath(), this))
         {
-            QMessageBox messageBox(this);
-            messageBox.setIcon(QMessageBox::Question);
-            messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText(tr("Do you want to change the premissions?"));
-            messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-            messageBox.setDefaultButton(QMessageBox::Yes);
-
-            if (messageBox.exec() == QMessageBox::Yes)
-            {
-#ifdef Q_OS_WIN32
-                qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-                bool changed =
-                        QFile::setPermissions(VAbstractValApplication::VApp()->GetPatternPath(),
-                                              QFileInfo(VAbstractValApplication::VApp()
-                                                        ->GetPatternPath()).permissions() | QFileDevice::WriteUser);
-#ifdef Q_OS_WIN32
-                qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
-                if (not changed)
-                {
-                    QMessageBox messageBox(this);
-                    messageBox.setIcon(QMessageBox::Warning);
-                    messageBox.setText(tr("Cannot set permissions for %1 to writable.")
-                                       .arg(VAbstractValApplication::VApp()->GetPatternPath()));
-                    messageBox.setInformativeText(tr("Could not save the file."));
-                    messageBox.setDefaultButton(QMessageBox::Ok);
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.exec();
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         QString error;

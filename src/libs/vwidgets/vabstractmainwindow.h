@@ -71,6 +71,8 @@ protected:
     virtual QStringList RecentFileList() const =0;
     void UpdateRecentFileActions();
 
+    static bool CheckFilePermissions(const QString &path, QWidget *messageBoxParent=nullptr) ;
+
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)
 };

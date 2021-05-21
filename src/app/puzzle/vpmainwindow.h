@@ -43,6 +43,7 @@
 #include "vpcommandline.h"
 #include "../vlayout/vlayoutdef.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "../vmisc/vlockguard.h"
 
 namespace Ui
 {
@@ -65,12 +66,15 @@ public:
      */
     bool LoadFile(QString path);
 
+    void LayoutWasSaved(bool saved);
+    void SetCurrentFile(const QString &fileName);
+
     /**
-     * @brief SaveFile Saves the current layout to the layout file of given path
+     * @brief SaveLayout Saves the current layout to the layout file of given path
      * @param path path to layout file
      * @return true if success
      */
-    bool SaveFile(const QString &path);
+    bool SaveLayout(const QString &path, QString &error);
 
     /**
      * @brief ImportRawLayouts The function imports the raw layouts of given paths
@@ -110,14 +114,14 @@ private slots:
      * triggered.
      * The slot is automatically connected through name convention.
      */
-    void on_actionSave_triggered();
+    bool on_actionSave_triggered();
 
     /**
      * @brief on_actionSaveAs_triggered When the menu action File > Save As
      * is triggered.
      * The slot is automatically connected through name convention.
      */
-    void on_actionSaveAs_triggered();
+    bool on_actionSaveAs_triggered();
 
     /**
      * @brief on_actionImportRawLayout_triggered When the menu action
@@ -423,6 +427,8 @@ private:
 
     bool isInitialized{false};
     bool lIsReadOnly{false};
+
+    QSharedPointer<VLockGuard<char>> lock{nullptr};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
