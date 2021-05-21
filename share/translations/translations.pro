@@ -26,7 +26,7 @@ DEPENDPATH +=  \
 
 include(../../src/app/valentina/valentina.pri)
 include(../../src/app/tape/tape.pri)
-include(../../src/app/tape/puzzle.pri)
+include(../../src/app/puzzle/puzzle.pri)
 include(../../src/libs/qmuparser/qmuparser.pri)
 include(../../src/libs/vpropertyexplorer/vpropertyexplorer.pri)
 include(../../src/libs/ifc/ifc.pri)
