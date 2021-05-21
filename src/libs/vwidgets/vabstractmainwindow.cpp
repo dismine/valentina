@@ -255,6 +255,7 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
+    // cppcheck-suppress unreadVariable
     const bool isFileWritable = QFileInfo(path).isWritable();
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup--; // turn it off again
