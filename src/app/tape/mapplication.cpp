@@ -854,6 +854,7 @@ TMainWindow *MApplication::NewMainWindow()
     if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
+        tape->UpdateWindowTitle();
     }
     return tape;
 }

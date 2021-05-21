@@ -89,6 +89,8 @@ public:
      */
     void InitZoom();
 
+    void UpdateWindowTitle();
+
 public slots:
     /**
      * @brief on_actionNew_triggered When the menu action File > New
@@ -391,8 +393,10 @@ private slots:
      */
     void on_MouseMoved(const QPointF &scenePos);
 
+    void on_actionPreferences_triggered();
+
     void ShowWindow() const;
-    void Preferences();
+
     void ToolBarStyles();
 
 #if defined(Q_OS_MAC)
@@ -533,8 +537,6 @@ private:
      * @param value checkbox value
      */
     void SetCheckBoxValue(QCheckBox *checkbox, bool value);
-
-    void UpdateWindowTitle();
 
     void ReadSettings();
     void WriteSettings();

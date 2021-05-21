@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tapepreferencespathpage.cpp
+ **  @file   puzzlepreferencespathpage.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   21 5, 2021
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2021 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,19 +25,14 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
-#include "tapepreferencespathpage.h"
-#include "ui_tapepreferencespathpage.h"
-#include "../../mapplication.h"
-#include "../../vtapesettings.h"
-
-#include <QDir>
-#include <QFileDialog>
+#include "puzzlepreferencespathpage.h"
+#include "ui_puzzlepreferencespathpage.h"
+#include "../../vpapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::TapePreferencesPathPage)
+PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PuzzlePreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -52,20 +47,20 @@ TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
         ui->editButton->setDefault(true);
     });
 
-    connect(ui->defaultButton, &QPushButton::clicked, this, &TapePreferencesPathPage::DefaultPath);
-    connect(ui->editButton, &QPushButton::clicked, this, &TapePreferencesPathPage::EditPath);
+    connect(ui->defaultButton, &QPushButton::clicked, this, &PuzzlePreferencesPathPage::DefaultPath);
+    connect(ui->editButton, &QPushButton::clicked, this, &PuzzlePreferencesPathPage::EditPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TapePreferencesPathPage::~TapePreferencesPathPage()
+PuzzlePreferencesPathPage::~PuzzlePreferencesPathPage()
 {
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesPathPage::Apply()
+void PuzzlePreferencesPathPage::Apply()
 {
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
@@ -74,7 +69,7 @@ void TapePreferencesPathPage::Apply()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesPathPage::changeEvent(QEvent *event)
+void PuzzlePreferencesPathPage::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
@@ -87,7 +82,7 @@ void TapePreferencesPathPage::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesPathPage::DefaultPath()
+void PuzzlePreferencesPathPage::DefaultPath()
 {
     const int row = ui->pathTable->currentRow();
     QTableWidgetItem *item = ui->pathTable->item(row, 1);
@@ -120,7 +115,7 @@ void TapePreferencesPathPage::DefaultPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesPathPage::EditPath()
+void PuzzlePreferencesPathPage::EditPath()
 {
     const int row = ui->pathTable->currentRow();
     QTableWidgetItem *item = ui->pathTable->item(row, 1);
@@ -130,20 +125,20 @@ void TapePreferencesPathPage::EditPath()
     switch (row)
     {
         case 0: // individual measurements
-            path = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathIndividualMeasurements();
             break;
         case 1: // multisize measurements
-            path = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathMultisizeMeasurements();
             path = VCommonSettings::PrepareMultisizeTables(path);
             break;
         case 2: // pattern path
-            path = MApplication::VApp()->TapeSettings()->GetPathPattern();
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathPattern();
             break;
         case 3: // templates
-            path = MApplication::VApp()->TapeSettings()->GetPathTemplate();
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathTemplate();
             break;
         case 4: // layouts
-            path = MApplication::VApp()->TapeSettings()->GetPathManualLayouts();
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
             break;
         default:
             break;
@@ -175,13 +170,13 @@ void TapePreferencesPathPage::EditPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesPathPage::InitTable()
+void PuzzlePreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
     ui->pathTable->setRowCount(5);
     ui->pathTable->setColumnCount(2);
 
-    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
     {
         ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));

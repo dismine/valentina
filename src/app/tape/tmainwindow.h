@@ -65,6 +65,8 @@ public:
 
     bool LoadFile(const QString &path);
 
+    void UpdateWindowTitle();
+
 protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void changeEvent(QEvent* event) override;
@@ -215,7 +217,6 @@ private:
     void MeasurementGUI();
     void Controls();
     void MFields(bool enabled);
-    void UpdateWindowTitle();
 
     void ReadSettings();
     void WriteSettings();

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogtapepreferences.cpp
+ **  @file   dialogpuzzlepreferences.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   21 5, 2021
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2021 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,23 +26,22 @@
  **
  *************************************************************************/
 
-#include "dialogtapepreferences.h"
-#include "ui_dialogtapepreferences.h"
-#include "../mapplication.h"
-#include "configpages/tapepreferencesconfigurationpage.h"
-#include "configpages/tapepreferencespathpage.h"
+#include "dialogpuzzlepreferences.h"
+#include "ui_dialogpuzzlepreferences.h"
+#include "../vpapplication.h"
+#include "configpages/puzzlepreferencesconfigurationpage.h"
+#include "configpages/puzzlepreferencespathpage.h"
 
 #include <QMessageBox>
 #include <QPushButton>
 #include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogTapePreferences::DialogTapePreferences(QWidget *parent)
-    :QDialog(parent),
-     ui(new Ui::DialogTapePreferences),
-     m_isInitialized(false),
-     m_configurationPage(new TapePreferencesConfigurationPage),
-     m_pathPage(new TapePreferencesPathPage)
+DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DialogPuzzlePreferences),
+    m_configurationPage(new PuzzlePreferencesConfigurationPage),
+    m_pathPage(new PuzzlePreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -54,27 +53,27 @@ DialogTapePreferences::DialogTapePreferences(QWidget *parent)
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
-    connect(bOk, &QPushButton::clicked, this, &DialogTapePreferences::Ok);
+    connect(bOk, &QPushButton::clicked, this, &DialogPuzzlePreferences::Ok);
 
     QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
     SCASSERT(bApply != nullptr)
-    connect(bApply, &QPushButton::clicked, this, &DialogTapePreferences::Apply);
+    connect(bApply, &QPushButton::clicked, this, &DialogPuzzlePreferences::Apply);
 
     ui->pagesWidget->insertWidget(0, m_configurationPage);
     ui->pagesWidget->insertWidget(1, m_pathPage);
 
-    connect(ui->contentsWidget, &QListWidget::currentItemChanged, this, &DialogTapePreferences::PageChanged);
+    connect(ui->contentsWidget, &QListWidget::currentItemChanged, this, &DialogPuzzlePreferences::PageChanged);
     ui->pagesWidget->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogTapePreferences::~DialogTapePreferences()
+DialogPuzzlePreferences::~DialogPuzzlePreferences()
 {
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTapePreferences::showEvent(QShowEvent *event)
+void DialogPuzzlePreferences::showEvent(QShowEvent *event)
 {
     QDialog::showEvent( event );
     if ( event->spontaneous() )
@@ -98,7 +97,7 @@ void DialogTapePreferences::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTapePreferences::resizeEvent(QResizeEvent *event)
+void DialogPuzzlePreferences::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
     // remember the size for the next time this dialog is opened, but only
@@ -111,7 +110,7 @@ void DialogTapePreferences::resizeEvent(QResizeEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTapePreferences::changeEvent(QEvent *event)
+void DialogPuzzlePreferences::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
@@ -123,7 +122,7 @@ void DialogTapePreferences::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTapePreferences::Apply()
+void DialogPuzzlePreferences::Apply()
 {
     QStringList preferences;
 
@@ -137,20 +136,20 @@ void DialogTapePreferences::Apply()
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
 
-    MApplication::VApp()->TapeSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VPApplication::VApp()->PuzzleSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTapePreferences::Ok()
+void DialogPuzzlePreferences::Ok()
 {
     Apply();
     done(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTapePreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void DialogPuzzlePreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if (current == nullptr)
     {

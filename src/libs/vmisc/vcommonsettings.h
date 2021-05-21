@@ -68,10 +68,6 @@ public:
     QString GetPathMultisizeMeasurements() const;
     void SetPathMultisizeMeasurements(const QString &value);
 
-    static QString GetDefPathLayouts();
-    QString GetPathLayouts() const;
-    void SetPathLayouts(const QString &value);
-
     static QString GetDefPathPattern();
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);

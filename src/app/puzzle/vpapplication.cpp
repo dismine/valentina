@@ -340,7 +340,7 @@ auto VPApplication::MainWindow()-> VPMainWindow *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto  VPApplication::MainWindows() -> QList<VPMainWindow *>
+auto VPApplication::MainWindows() -> QList<VPMainWindow *>
 {
     Clean();
     QList<VPMainWindow*> list;
@@ -367,6 +367,7 @@ auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
     if (not cmd->IsTestModeEnabled())
     {
         puzzle->show();
+        puzzle->UpdateWindowTitle();
     }
     puzzle->InitZoom();
     return puzzle;

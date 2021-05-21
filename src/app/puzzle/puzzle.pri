@@ -2,6 +2,9 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp \
+    $$PWD/dialogs/configpages/puzzlepreferencespathpage.cpp \
+    $$PWD/dialogs/dialogpuzzlepreferences.cpp \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
     $$PWD/vpapplication.cpp \
@@ -29,6 +32,9 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
+    $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.h \
+    $$PWD/dialogs/configpages/puzzlepreferencespathpage.h \
+    $$PWD/dialogs/dialogpuzzlepreferences.h \
     $$PWD/dialogs/vpdialogabout.h \
     $$PWD/stable.h \
     $$PWD/vpapplication.h \
@@ -54,6 +60,9 @@ HEADERS += \
     $$PWD/xml/vplayoutliterals.h
 
 FORMS += \
+    $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.ui \
+    $$PWD/dialogs/configpages/puzzlepreferencespathpage.ui \
+    $$PWD/dialogs/dialogpuzzlepreferences.ui \
     $$PWD/dialogs/vpdialogabout.ui \
     $$PWD/vpcarrousel.ui \
     $$PWD/vpmainwindow.ui

@@ -44,6 +44,7 @@
 #include "../ifc/exception/vexception.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vpsheet.h"
+#include "dialogs/dialogpuzzlepreferences.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -111,7 +112,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     SetPropertiesData();
 
-    UpdateWindowTitle();
     ReadSettings();
 
 #if defined(Q_OS_MAC)
@@ -825,7 +825,15 @@ void VPMainWindow::UpdateWindowTitle()
     }
     else
     {
-        showName = tr("untitled %1.vlt").arg(VPApplication::VApp()->MainWindows().size()+1);
+        int index = VPApplication::VApp()->MainWindows().indexOf(this);
+        if (index != -1)
+        {
+            showName = tr("untitled %1.vlt").arg(index+1);
+        }
+        else
+        {
+            showName = tr("untitled.vlt");
+        }
     }
 
     showName += QLatin1String("[*]");
@@ -1111,10 +1119,11 @@ void VPMainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
-        WindowsLocale();
-
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+
+        WindowsLocale();
+        UpdateWindowTitle();
     }
 
     // remember to call base class implementation
@@ -1134,7 +1143,7 @@ void VPMainWindow::on_actionOpen_triggered()
 
     const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
     //Use standard path to individual measurements
-    const QString pathTo = VPApplication::VApp()->PuzzleSettings()->GetPathLayouts();
+    const QString pathTo = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
 
     bool usedNotExistedDir = false;
     QDir directory(pathTo);
@@ -1205,7 +1214,7 @@ bool VPMainWindow::on_actionSaveAs_triggered()
     QString dir;
     if (curFile.isEmpty())
     {
-        dir = VPApplication::VApp()->PuzzleSettings()->GetPathLayouts();
+        dir = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
     }
     else
     {
@@ -1874,23 +1883,23 @@ void VPMainWindow::ShowWindow() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::Preferences()
+void VPMainWindow::on_actionPreferences_triggered()
 {
     // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
-//    static QPointer<DialogPuzzlePreferences> guard;// Prevent any second run
-//    if (guard.isNull())
-//    {
-//        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-//        auto *preferences = new DialogPuzzlePreferences(this);
-//        // QScopedPointer needs to be sure any exception will never block guard
-//        QScopedPointer<DialogPuzzlePreferences> dlg(preferences);
-//        guard = preferences;
-//        // Must be first
-//        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
-//        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
-//        QGuiApplication::restoreOverrideCursor();
-//        dlg->exec();
-    //    }
+    static QPointer<DialogPuzzlePreferences> guard;// Prevent any second run
+    if (guard.isNull())
+    {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+        auto *preferences = new DialogPuzzlePreferences(this);
+        // QScopedPointer needs to be sure any exception will never block guard
+        QScopedPointer<DialogPuzzlePreferences> dlg(preferences);
+        guard = preferences;
+        // Must be first
+        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
+        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+        QGuiApplication::restoreOverrideCursor();
+        dlg->exec();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

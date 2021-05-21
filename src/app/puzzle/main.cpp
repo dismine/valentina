@@ -53,6 +53,11 @@ int main(int argc, char *argv[])
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
     Q_INIT_RESOURCE(puzzleicon);
+    Q_INIT_RESOURCE(theme);
+    Q_INIT_RESOURCE(icon);
+    Q_INIT_RESOURCE(schema);
+    Q_INIT_RESOURCE(flags);
+    Q_INIT_RESOURCE(style);
 
     QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
 

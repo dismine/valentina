@@ -133,7 +133,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     connect(gradation, &QTimer::timeout, this, &TMainWindow::GradationChanged);
 
     SetupMenu();
-    UpdateWindowTitle();
+
     ReadSettings();
 
 #if defined(Q_OS_MAC)
@@ -593,6 +593,8 @@ void TMainWindow::changeEvent(QEvent *event)
 
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+
+        UpdateWindowTitle();
 
         InitMeasurementUnits();
 
@@ -3241,7 +3243,15 @@ void TMainWindow::UpdateWindowTitle()
     }
     else
     {
-        showName = tr("untitled %1").arg(MApplication::VApp()->MainWindows().size()+1);
+        int index = MApplication::VApp()->MainWindows().indexOf(this);
+        if (index != -1)
+        {
+            showName = tr("untitled %1").arg(index+1);
+        }
+        else
+        {
+            showName = tr("untitled");
+        }
         mType == MeasurementsType::Multisize ? showName += QLatin1String(".vst") : showName += QLatin1String(".vit");
     }
 
