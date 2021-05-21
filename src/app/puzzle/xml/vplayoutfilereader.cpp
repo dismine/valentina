@@ -34,19 +34,6 @@
 #include "../ifc/exception/vexceptionconversionerror.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayoutFileReader::VPLayoutFileReader()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPLayoutFileReader::~VPLayoutFileReader()
-{
-    // TODO
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
 bool VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file)
 {
     setDevice(file);
@@ -56,7 +43,7 @@ bool VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file)
         ReadLayout(layout);
     }
 
-    return !error();
+    return hasError();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

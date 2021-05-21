@@ -58,6 +58,8 @@ public:
     explicit VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~VPMainWindow();
 
+    QString CurrentFile() const;
+
     /**
      * @brief LoadFile Loads the layout file of given path in m_layout.
      * This function doesn't update the gui.

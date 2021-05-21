@@ -278,21 +278,20 @@ bool TMainWindow::LoadFile(const QString &path)
 
         // Check if file already opened
         const QList<TMainWindow*> list = MApplication::VApp()->MainWindows();
-        for (auto w : list)
+        auto w = std::find_if(list.begin(), list.end(),
+                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+        if (w != list.end())
         {
-            if (w->CurrentFile() == path)
-            {
-                w->activateWindow();
-                close();
-                return false;
-            }
+            (*w)->activateWindow();
+            close();
+            return false;
         }
 
         VlpCreateLock(lock, path);
 
         if (not lock->IsLocked())
         {
-            if (not IgnoreLocking(lock->GetLockError(), path))
+            if (not IgnoreLocking(lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
             {
                 return false;
             }
@@ -3478,21 +3477,20 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
         // Check if file already opened
         const QList<TMainWindow*> list = MApplication::VApp()->MainWindows();
-        for (auto w : list)
+        auto w = std::find_if(list.begin(), list.end(),
+                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+        if (w != list.end())
         {
-            if (w->CurrentFile() == path)
-            {
-                w->activateWindow();
-                close();
-                return false;
-            }
+            (*w)->activateWindow();
+            close();
+            return false;
         }
 
         VlpCreateLock(lock, path);
 
         if (not lock->IsLocked())
         {
-            if (not IgnoreLocking(lock->GetLockError(), path))
+            if (not IgnoreLocking(lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
             {
                 return false;
             }
@@ -3615,72 +3613,6 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
             action->setChecked(true);
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool TMainWindow::IgnoreLocking(int error, const QString &path)
-{
-    QMessageBox::StandardButton answer = QMessageBox::Abort;
-    if (not MApplication::VApp()->IsTestMode())
-    {
-        switch(error)
-        {
-            case QLockFile::LockFailedError:
-                answer = QMessageBox::warning(this, tr("Locking file"),
-                                              tr("This file already opened in another window. Ignore if you want "
-                                                 "to continue (not recommended, can cause a data corruption)."),
-                                              QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::PermissionError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("The lock file could not be created, for lack of permissions. "
-                                                  "Ignore if you want to continue (not recommended, can cause "
-                                                  "a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::UnknownError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("Unknown error happened, for instance a full partition "
-                                                  "prevented writing out the lock file. Ignore if you want to "
-                                                  "continue (not recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            default:
-                answer = QMessageBox::Abort;
-                break;
-        }
-    }
-
-    if (answer == QMessageBox::Abort)
-    {
-        qCDebug(tMainWindow, "Failed to lock %s", qUtf8Printable(path));
-        qCDebug(tMainWindow, "Error type: %d", error);
-        if (MApplication::VApp()->IsTestMode())
-        {
-            switch(error)
-            {
-                case QLockFile::LockFailedError:
-                    qCCritical(tMainWindow, "%s",
-                               qUtf8Printable(tr("This file already opened in another window.")));
-                    break;
-                case QLockFile::PermissionError:
-                    qCCritical(tMainWindow, "%s",
-                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
-                    break;
-                case QLockFile::UnknownError:
-                    qCCritical(tMainWindow, "%s",
-                               qUtf8Printable(tr("Unknown error happened, for instance a full partition "
-                                                 "prevented writing out the lock file.")));
-                    break;
-                default:
-                    break;
-            }
-
-            qApp->exit(V_EX_NOINPUT);
-        }
-        return false;
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

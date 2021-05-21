@@ -39,8 +39,8 @@ class VPLayoutFileReader : public QXmlStreamReader
 {
     Q_DECLARE_TR_FUNCTIONS(VPLayoutFileReader)
 public:
-    VPLayoutFileReader();
-    ~VPLayoutFileReader();
+    VPLayoutFileReader()=default;
+    ~VPLayoutFileReader()=default;
 
     bool ReadFile(VPLayout *layout, QFile *file);
 
@@ -64,7 +64,7 @@ private:
     static QString ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name);
     static bool    ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue);
     static qreal   ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
-                                     const QString &defValue);
+                                       const QString &defValue);
 };
 
 #endif // VPLAYOUTFILEREADER_H

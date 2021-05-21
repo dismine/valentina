@@ -228,8 +228,6 @@ private:
 
     void CreateWindowMenu(QMenu *menu);
 
-    bool IgnoreLocking(int error, const QString &path);
-
     template <class T>
     void HackWidget(T **widget);
     void HackDimensionBaseValue();

@@ -131,11 +131,50 @@ VPMainWindow::~VPMainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPMainWindow::LoadFile(QString path)
+auto VPMainWindow::CurrentFile() const -> QString
 {
+    return curFile;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::LoadFile(QString path) -> bool
+{
+    if (not QFileInfo::exists(path))
+    {
+        qCCritical(pWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
+        if (m_cmd->IsTestModeEnabled())
+        {
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
+    }
+
+    // Check if file already opened
+    QList<VPMainWindow*> list = VPApplication::VApp()->MainWindows();
+    auto w = std::find_if(list.begin(), list.end(),
+                          [path](VPMainWindow *window) { return window->CurrentFile() == path; });
+    if (w != list.end())
+    {
+        (*w)->activateWindow();
+        close();
+        return false;
+    }
+
+    VlpCreateLock(lock, path);
+
+    if (not lock->IsLocked())
+    {
+        if (not IgnoreLocking(lock->GetLockError(), path, m_cmd->IsGuiEnabled()))
+        {
+            return false;
+        }
+    }
+
     try
     {
         VLayoutConverter converter(path);
+        m_curFileFormatVersion = converter.GetCurrentFormatVersion();
+        m_curFileFormatVersionStr = converter.GetFormatVersionStr();
         path = converter.Convert();
     }
     catch (VException &e)
@@ -148,16 +187,32 @@ bool VPMainWindow::LoadFile(QString path)
     QFile file(path);
     file.open(QIODevice::ReadOnly);
 
-    QScopedPointer<VPLayoutFileReader> fileReader(new VPLayoutFileReader());
+    VPLayoutFileReader fileReader;
 
     if(m_layout == nullptr)
     {
         m_layout = new VPLayout();
     }
 
-    fileReader->ReadFile(m_layout, &file);
+    fileReader.ReadFile(m_layout, &file);
 
-    // TODO / FIXME : better return value and error handling
+    if (fileReader.hasError())
+    {
+        qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(tr("Unable to read a layout file")));
+        lock.reset();
+
+        if (m_cmd->IsTestModeEnabled())
+        {
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
+    }
+
+    // updates the properties with the loaded data
+    SetPropertiesData();
+
+    // TODO : update the Carrousel and the QGraphicView
 
     return true;
 }
@@ -1049,52 +1104,28 @@ void VPMainWindow::on_actionOpen_triggered()
     qCDebug(pWindow, "Openning puzzle layout file.");
 
     const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
+    //Use standard path to individual measurements
+    const QString pathTo = VPApplication::VApp()->PuzzleSettings()->GetPathLayouts();
 
-    //Get list last open files
-    QStringList recentFiles = VPApplication::VApp()->PuzzleSettings()->GetRecentFileList();
-    QString dir;
-    if (recentFiles.isEmpty())
+    bool usedNotExistedDir = false;
+    QDir directory(pathTo);
+    if (not directory.exists())
     {
-        dir = QDir::homePath();
-    }
-    else
-    {
-        //Absolute path to last open file
-        dir = QFileInfo(recentFiles.first()).absolutePath();
-    }
-    qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
-
-    if (filePath.isEmpty())
-    {
-        return;
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
+                                                       VAbstractApplication::VApp()->NativeFileDialog());
 
-    // TODO : if m_layout == nullptr, open in current window
-    // otherwise open in new window
-
-    // TODO : if layout file has a lock, warning message
-
-
-    if(!LoadFile(filePath))
+    if (not mPath.isEmpty())
     {
-        return;
+        VPApplication::VApp()->NewMainWindow()->LoadFile(mPath);
     }
 
-    // Updates the list of recent files
-    recentFiles.removeAll(filePath);
-    recentFiles.prepend(filePath);
-    while (recentFiles.size() > MaxRecentFiles)
+    if (usedNotExistedDir)
     {
-        recentFiles.removeLast();
+        QDir(pathTo).rmpath(QChar('.'));
     }
-    VPApplication::VApp()->PuzzleSettings()->SetRecentFileList(recentFiles);
-
-    // updates the properties with the loaded data
-    SetPropertiesData();
-
-    // TODO : update the Carrousel and the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------

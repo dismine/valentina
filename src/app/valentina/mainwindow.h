@@ -392,8 +392,6 @@ private:
 
     void               UpdateWindowTitle();
 
-    bool               IgnoreLocking(int error, const QString &path);
-
     void ToolSelectPoint();
     void ToolSelectPointByPress();
     void ToolSelectPointByRelease();

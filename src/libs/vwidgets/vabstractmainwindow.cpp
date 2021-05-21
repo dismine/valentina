@@ -31,17 +31,30 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vsysexits.h"
 #include "dialogs/dialogexporttocsv.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 #include <QStyle>
 #include <QToolBar>
 #include <QFileDialog>
 #include <QAction>
+#include <QLockFile>
+#include <QMessageBox>
 
 #if defined(Q_OS_MAC)
-#include "../vwidgets/vmaingraphicsview.h"
 #include <QStyleFactory>
 #endif
+
+#include <QLoggingCategory>
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(abstactMainWindow, "abs.MainWindow")
+
+QT_WARNING_POP
 
 namespace
 {
@@ -280,6 +293,72 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
         {
             return false;
         }
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool guiMode)
+{
+    QMessageBox::StandardButton answer = QMessageBox::Abort;
+    if (guiMode)
+    {
+        switch(error)
+        {
+            case QLockFile::LockFailedError:
+                answer = QMessageBox::warning(this, tr("Locking file"),
+                                              tr("This file already opened in another window. Ignore if you want "
+                                                 "to continue (not recommended, can cause a data corruption)."),
+                                              QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            case QLockFile::PermissionError:
+                answer = QMessageBox::question(this, tr("Locking file"),
+                                               tr("The lock file could not be created, for lack of permissions. "
+                                                  "Ignore if you want to continue (not recommended, can cause "
+                                                  "a data corruption)."),
+                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            case QLockFile::UnknownError:
+                answer = QMessageBox::question(this, tr("Locking file"),
+                                               tr("Unknown error happened, for instance a full partition "
+                                                  "prevented writing out the lock file. Ignore if you want to "
+                                                  "continue (not recommended, can cause a data corruption)."),
+                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            default:
+                answer = QMessageBox::Abort;
+                break;
+        }
+    }
+
+    if (answer == QMessageBox::Abort)
+    {
+        qCDebug(abstactMainWindow, "Failed to lock %s", qUtf8Printable(path));
+        qCDebug(abstactMainWindow, "Error type: %d", error);
+        if (not guiMode)
+        {
+            switch(error)
+            {
+                case QLockFile::LockFailedError:
+                    qCCritical(abstactMainWindow, "%s",
+                               qUtf8Printable(tr("This file already opened in another window.")));
+                    break;
+                case QLockFile::PermissionError:
+                    qCCritical(abstactMainWindow, "%s",
+                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
+                    break;
+                case QLockFile::UnknownError:
+                    qCCritical(abstactMainWindow, "%s",
+                               qUtf8Printable(tr("Unknown error happened, for instance a full partition "
+                                                 "prevented writing out the lock file.")));
+                    break;
+                default:
+                    break;
+            }
+
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
     }
     return true;
 }

@@ -5282,7 +5282,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     }
     else
     {
-        if (not IgnoreLocking(lock->GetLockError(), fileName))
+        if (not IgnoreLocking(lock->GetLockError(), fileName, VApplication::IsGUIMode()))
         {
             return false;
         }
@@ -6388,73 +6388,6 @@ void MainWindow::UpdateWindowTitle()
     }
     setWindowIcon(icon);
 #endif //defined(Q_OS_MAC)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::IgnoreLocking(int error, const QString &path)
-{
-    QMessageBox::StandardButton answer = QMessageBox::Abort;
-    if (VApplication::IsGUIMode())
-    {
-        switch(error)
-        {
-            case QLockFile::LockFailedError:
-                answer = QMessageBox::warning(this, tr("Locking file"),
-                                               tr("This file already opened in another window. Ignore if you want "
-                                                  "to continue (not recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::PermissionError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("The lock file could not be created, for lack of permissions. "
-                                                  "Ignore if you want to continue (not recommended, can cause "
-                                                  "a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::UnknownError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("Unknown error happened, for instance a full partition prevented "
-                                                  "writing out the lock file. Ignore if you want to continue (not "
-                                                  "recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            default:
-                answer = QMessageBox::Abort;
-                break;
-        }
-    }
-
-    if (answer == QMessageBox::Abort)
-    {
-        qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(path));
-        qCDebug(vMainWindow, "Error type: %d", error);
-        Clear();
-        if (not VApplication::IsGUIMode())
-        {
-            switch(error)
-            {
-                case QLockFile::LockFailedError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("This file already opened in another window.")));
-                    break;
-                case QLockFile::PermissionError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
-                    break;
-                case QLockFile::UnknownError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("Unknown error happened, for instance a full partition prevented "
-                                                 "writing out the lock file.")));
-                    break;
-                default:
-                    break;
-            }
-
-            qApp->exit(V_EX_NOINPUT);
-        }
-        return false;
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

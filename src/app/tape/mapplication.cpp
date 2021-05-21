@@ -374,7 +374,7 @@ bool MApplication::IsTestMode() const
  */
 bool MApplication::IsAppInGUIMode() const
 {
-    return IsTestMode();
+    return not IsTestMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
