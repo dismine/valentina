@@ -472,6 +472,11 @@ private:
     void InitZoomToolBar();
 
     /**
+     * @brief InitScaleToolBar Initialises the scale tool bar
+     */
+    void InitScaleToolBar();
+
+    /**
      * @brief SetPropertiesData Sets the values of UI elements
      * in all the property tabs to the values saved in m_layout
      */

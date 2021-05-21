@@ -97,6 +97,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     InitMainGraphics();
 
     InitZoomToolBar();
+    InitScaleToolBar();
 
     SetPropertiesData();
 
@@ -637,27 +638,29 @@ void VPMainWindow::InitZoomToolBar()
     zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
+}
 
-    // defined the scale
-    ui->toolBarZoom->addSeparator();
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitScaleToolBar()
+{
     auto* zoomScale = new QLabel(tr("Scale:"), this);
-    ui->toolBarZoom->addWidget(zoomScale);
+    ui->toolBarScale->addWidget(zoomScale);
 
     m_doubleSpinBoxScale = new QDoubleSpinBox(this);
     m_doubleSpinBoxScale->setDecimals(1);
-    m_doubleSpinBoxScale->setSuffix("%");
+    m_doubleSpinBoxScale->setSuffix(QChar('%'));
     on_ScaleChanged(m_graphicsView->transform().m11());
     connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){m_graphicsView->Zoom(d/100.0);});
-    ui->toolBarZoom->addWidget(m_doubleSpinBoxScale);
+    ui->toolBarScale->addWidget(m_doubleSpinBoxScale);
 
 
     // define the mouse position
-    ui->toolBarZoom->addSeparator();
+    ui->toolBarScale->addSeparator();
 
-    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
-    ui->toolBarZoom->addWidget(m_mouseCoordinate);
-    ui->toolBarZoom->addSeparator();
+    m_mouseCoordinate = new QLabel(QStringLiteral("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
+    ui->toolBarScale->addWidget(m_mouseCoordinate);
+    ui->toolBarScale->addSeparator();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

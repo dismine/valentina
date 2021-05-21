@@ -99,7 +99,6 @@
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidgetCarrousel">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1134,7 +1133,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>717</height>
+              <height>706</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1422,7 +1421,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>717</height>
+              <height>706</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1563,6 +1562,21 @@
    <addaction name="actionZoomOut"/>
    <addaction name="actionZoomOriginal"/>
    <addaction name="actionZoomFitBest"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBarScale">
+   <property name="windowTitle">
+    <string>Scale</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionOpen">
    <property name="icon">
