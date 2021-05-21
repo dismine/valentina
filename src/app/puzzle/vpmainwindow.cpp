@@ -61,8 +61,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     ui(new Ui::VPMainWindow),
     m_cmd(cmd)
 {
-    m_layout = new VPLayout();
-
     // create a standard sheet
     auto *sheet = new VPSheet(m_layout);
     sheet->SetName(QObject::tr("Sheet 1"));
@@ -70,19 +68,19 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->SetFocusedSheet();
 
 //    // ----- for test purposes, to be removed------------------
-//    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
-//    sheet->SetSheetSizeConverted(84.1, 118.9);
-//    sheet->SetPiecesGapConverted(1);
+    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
+    sheet->SetSheetSizeConverted(84.1, 118.9);
+    sheet->SetPiecesGapConverted(1);
 
-//    m_layout->SetUnit(Unit::Cm);
-//    m_layout->SetWarningSuperpositionOfPieces(true);
-//    m_layout->SetTitle(QString("My Test Layout"));
-//    m_layout->SetDescription(QString("Description of my Layout"));
+    m_layout->SetUnit(Unit::Cm);
+    m_layout->SetWarningSuperpositionOfPieces(true);
+    m_layout->SetTitle(QString("My Test Layout"));
+    m_layout->SetDescription(QString("Description of my Layout"));
 
-//    m_layout->SetTilesSizeConverted(21,29.7);
-//    m_layout->SetTilesOrientation(PageOrientation::Portrait);
-//    m_layout->SetTilesMarginsConverted(1,1,1,1);
-//    m_layout->SetShowTiles(true);
+    m_layout->SetTilesSizeConverted(21,29.7);
+    m_layout->SetTilesOrientation(PageOrientation::Portrait);
+    m_layout->SetTilesMarginsConverted(1,1,1,1);
+    m_layout->SetShowTiles(true);
 
     // --------------------------------------------------------
 
@@ -212,7 +210,10 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitZoom()
 {
-    m_graphicsView->ZoomFitBest();
+    if (m_graphicsView != nullptr)
+    {
+        m_graphicsView->ZoomFitBest();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -260,7 +261,6 @@ void VPMainWindow::SetupMenu()
     // Add dock properties action
     QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
     ui->menuWindows->addAction(actionDockWidgetToolOptions);
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -421,7 +421,6 @@ void VPMainWindow::InitPropertyTabLayout()
 void VPMainWindow::InitCarrousel()
 {
     m_carrousel = new VPCarrousel(m_layout, ui->dockWidgetCarrousel);
-    m_carrousel->setDisabled(true);
     ui->dockWidgetCarrousel->setWidget(m_carrousel);
 
     connect(ui->dockWidgetCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
@@ -590,7 +589,6 @@ void VPMainWindow::SetPropertyTabLayoutData()
 void VPMainWindow::InitMainGraphics()
 {
     m_graphicsView = new VPMainGraphicsView(m_layout, m_tileFactory, this);
-    m_graphicsView->setDisabled(true);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
@@ -641,7 +639,6 @@ void VPMainWindow::InitZoomToolBar()
     m_doubleSpinBoxScale = new QDoubleSpinBox(this);
     m_doubleSpinBoxScale->setDecimals(1);
     m_doubleSpinBoxScale->setSuffix("%");
-    m_doubleSpinBoxScale->setDisabled(true);
     on_ScaleChanged(m_graphicsView->transform().m11());
     connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){m_graphicsView->Zoom(d/100.0);});

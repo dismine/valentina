@@ -176,7 +176,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidgetProperties">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
@@ -231,6 +231,9 @@
          </property>
          <item>
           <widget class="QScrollArea" name="scrollAreaCurrentPiece">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="styleSheet">
             <string notr="true"/>
            </property>
@@ -1576,7 +1579,7 @@
   </action>
   <action name="actionSave">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="document-save">
@@ -1591,7 +1594,7 @@
   </action>
   <action name="actionSaveAs">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="document-save-as">
@@ -1606,7 +1609,7 @@
   </action>
   <action name="actionCloseLayout">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>&amp;Close Layout</string>
@@ -1614,7 +1617,7 @@
   </action>
   <action name="actionImportRawLayout">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>&amp;Import Raw Layout Data</string>
@@ -1678,7 +1681,7 @@
     <bool>true</bool>
    </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Properties</string>
@@ -1689,7 +1692,7 @@
   </action>
   <action name="actionZoomIn">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="zoom-in">
@@ -1701,7 +1704,7 @@
   </action>
   <action name="actionZoomOut">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="zoom-out">
@@ -1713,7 +1716,7 @@
   </action>
   <action name="actionZoomOriginal">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="zoom-original">
@@ -1725,7 +1728,7 @@
   </action>
   <action name="actionZoomFitBest">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="zoom-fit-best">
