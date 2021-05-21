@@ -230,7 +230,7 @@ void VPMainWindow::SetCurrentFile(const QString &fileName)
     curFile = fileName;
     if (not curFile.isEmpty())
     {
-        auto settings = VPApplication::VApp()->PuzzleSettings();
+        auto *settings = VPApplication::VApp()->PuzzleSettings();
         QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -361,6 +361,35 @@ void VPMainWindow::SetupMenu()
     // Add dock properties action
     QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
     ui->menuEdit->addAction(actionDockWidgetToolOptions);
+
+    // File
+    m_recentFileActs.fill(nullptr);
+    for (auto & recentFileAct : m_recentFileActs)
+    {
+        auto *action = new QAction(this);
+        recentFileAct = action;
+        connect(action, &QAction::triggered, this, [this]()
+        {
+            if (auto *senderAction = qobject_cast<QAction *>(sender()))
+            {
+                const QString filePath = senderAction->data().toString();
+                if (not filePath.isEmpty())
+                {
+                    LoadFile(filePath);
+                }
+            }
+        });
+        ui->menuFile->insertAction(ui->actionPreferences, recentFileAct);
+        recentFileAct->setVisible(false);
+    }
+
+    m_separatorAct = new QAction(this);
+    m_separatorAct->setSeparator(true);
+    m_separatorAct->setVisible(false);
+    ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct);
+
+    // Actions for recent files loaded by a puzzle window application.
+    UpdateRecentFileActions();
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, [this]()

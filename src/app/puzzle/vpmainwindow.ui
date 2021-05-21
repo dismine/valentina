@@ -14,7 +14,7 @@
    <string>Puzzle</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="share/resources/puzzleicon.qrc">
+   <iconset>
     <normaloff>:/puzzleicon/64x64/logo.png</normaloff>:/puzzleicon/64x64/logo.png</iconset>
   </property>
   <property name="layoutDirection">
@@ -52,6 +52,8 @@
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
     <addaction name="actionImportRawLayout"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -205,7 +207,7 @@
          <string notr="true"/>
         </property>
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconCurrentPiece.png</normaloff>:/puzzleicon/64x64/iconCurrentPiece.png</iconset>
         </attribute>
         <attribute name="title">
@@ -406,7 +408,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="share/resources/puzzleicon.qrc">
+                        <iconset>
                          <normaloff>:/puzzleicon/64x64/iconRotate90Clockwise.png</normaloff>:/puzzleicon/64x64/iconRotate90Clockwise.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -426,7 +428,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="share/resources/puzzleicon.qrc">
+                        <iconset>
                          <normaloff>:/puzzleicon/64x64/iconRotate90Anticlockwise.png</normaloff>:/puzzleicon/64x64/iconRotate90Anticlockwise.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -446,7 +448,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="share/resources/puzzleicon.qrc">
+                        <iconset>
                          <normaloff>:/puzzleicon/64x64/iconRotateGrainlineVertical.png</normaloff>:/puzzleicon/64x64/iconRotateGrainlineVertical.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -466,7 +468,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="share/resources/puzzleicon.qrc">
+                        <iconset>
                          <normaloff>:/puzzleicon/64x64/iconRotateGrainlineHorizontal.png</normaloff>:/puzzleicon/64x64/iconRotateGrainlineHorizontal.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -626,7 +628,7 @@
        </widget>
        <widget class="QWidget" name="tabSheetProperty">
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconLayout.png</normaloff>:/puzzleicon/64x64/iconLayout.png</iconset>
         </attribute>
         <attribute name="title">
@@ -778,7 +780,7 @@
                        <string notr="true"/>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/64x64/iconPortrait.png</normaloff>:/puzzleicon/64x64/iconPortrait.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -801,7 +803,7 @@
                        <string notr="true"/>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/64x64/iconLandscape.png</normaloff>:/puzzleicon/64x64/iconLandscape.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -985,7 +987,7 @@
                        <string notr="true"/>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/64x64/iconGrainlineVertical.png</normaloff>:/puzzleicon/64x64/iconGrainlineVertical.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -1005,7 +1007,7 @@
                        <string notr="true"/>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/64x64/iconGrainlineHorizontal.png</normaloff>:/puzzleicon/64x64/iconGrainlineHorizontal.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -1091,7 +1093,7 @@
        </widget>
        <widget class="QWidget" name="tabTilesProperty">
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconTiles.png</normaloff>:/puzzleicon/64x64/iconTiles.png</iconset>
         </attribute>
         <attribute name="title">
@@ -1133,7 +1135,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>706</height>
+              <height>700</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1201,7 +1203,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/64x64/iconPortrait.png</normaloff>:/puzzleicon/64x64/iconPortrait.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -1221,7 +1223,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/64x64/iconLandscape.png</normaloff>:/puzzleicon/64x64/iconLandscape.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -1379,7 +1381,7 @@
        </widget>
        <widget class="QWidget" name="tabLayoutProperty">
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconProperties.png</normaloff>:/puzzleicon/64x64/iconProperties.png</iconset>
         </attribute>
         <attribute name="title">
@@ -1421,7 +1423,7 @@
               <x>0</x>
               <y>0</y>
               <width>356</width>
-              <height>706</height>
+              <height>700</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1746,6 +1748,11 @@
     <string>Zoom sheet</string>
    </property>
   </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
@@ -1795,8 +1802,6 @@
   <tabstop>checkBoxLayoutWarningPiecesSuperposition</tabstop>
   <tabstop>checkBoxLayoutWarningPiecesOutOfBound</tabstop>
  </tabstops>
- <resources>
-  <include location="share/resources/puzzleicon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
