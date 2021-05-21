@@ -61,11 +61,10 @@
     </property>
     <addaction name="separator"/>
    </widget>
-   <widget class="QMenu" name="menuWindows">
+   <widget class="QMenu" name="menuWindow">
     <property name="title">
-     <string>&amp;Windows</string>
+     <string>&amp;Window</string>
     </property>
-    <addaction name="actionCloseLayout"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -77,7 +76,7 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuWindows"/>
+   <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -1605,14 +1604,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
-   </property>
-  </action>
-  <action name="actionCloseLayout">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>&amp;Close Layout</string>
    </property>
   </action>
   <action name="actionImportRawLayout">

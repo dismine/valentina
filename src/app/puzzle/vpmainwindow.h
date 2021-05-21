@@ -125,13 +125,6 @@ private slots:
     void on_actionImportRawLayout_triggered();
 
     /**
-     * @brief on_actionCloseLayout_triggered When the menu action
-     * File > Close Layout is triggered.
-     * The slot is automatically connected through name convention.
-     */
-    void on_actionCloseLayout_triggered();
-
-    /**
      * @brief on_actionAboutQt_triggered When the menu action Help > About Qt
      * is triggered.
      * The slot is automatically connected through name convention.

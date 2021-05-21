@@ -334,9 +334,7 @@ auto VPApplication::MainWindow()-> VPMainWindow *
     Clean();
     if (mainWindows.isEmpty())
     {
-        VPCommandLinePtr cmd;
-        VPCommandLine::ProcessInstance(cmd, QStringList());
-        NewMainWindow(VPCommandLinePtr());
+        NewMainWindow();
     }
     return mainWindows[0];
 }
@@ -354,15 +352,17 @@ auto  VPApplication::MainWindows() -> QList<VPMainWindow *>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow *VPApplication::NewMainWindow()
+auto VPApplication::NewMainWindow() -> VPMainWindow *
 {
-    return NewMainWindow(VPCommandLinePtr());
+    VPCommandLinePtr cmd;
+    VPCommandLine::ProcessInstance(cmd, {ConstFirst<QString>(VPApplication::arguments())});
+    return NewMainWindow(cmd);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 {
-    VPMainWindow *puzzle = new VPMainWindow(cmd);
+    auto *puzzle = new VPMainWindow(cmd);
     mainWindows.prepend(puzzle);
     if (not cmd->IsTestModeEnabled())
     {

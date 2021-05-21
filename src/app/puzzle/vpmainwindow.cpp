@@ -260,7 +260,14 @@ void VPMainWindow::SetupMenu()
 
     // Add dock properties action
     QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
-    ui->menuWindows->addAction(actionDockWidgetToolOptions);
+    ui->menuEdit->addAction(actionDockWidgetToolOptions);
+
+    // Window
+    connect(ui->menuWindow, &QMenu::aboutToShow, this, [this]()
+    {
+        ui->menuWindow->clear();
+        CreateWindowMenu(ui->menuWindow);
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -935,16 +942,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::New");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(ret);
-
-    // TODO
-
-
+    VPApplication::VApp()->NewMainWindow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1117,19 +1115,6 @@ void VPMainWindow::on_actionImportRawLayout_triggered()
 
     // TODO / FIXME : better error handling
 
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_actionCloseLayout_triggered()
-{
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::CloseLayout");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(ret);
-
-    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
