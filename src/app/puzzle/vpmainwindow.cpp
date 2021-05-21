@@ -59,7 +59,8 @@ QT_WARNING_POP
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     VAbstractMainWindow(parent),
     ui(new Ui::VPMainWindow),
-    m_cmd(cmd)
+    m_cmd(cmd),
+    m_statusLabel(new QLabel(this))
 {
     // create a standard sheet
     auto *sheet = new VPSheet(m_layout);
@@ -89,6 +90,9 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     // init the tile factory
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
     m_tileFactory->refreshTileInfos();
+
+    // init status bar
+    statusBar()->addPermanentWidget(m_statusLabel, 1);
 
     SetupMenu();
     InitProperties();
@@ -946,6 +950,12 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
 void VPMainWindow::on_actionNew_triggered()
 {
     VPApplication::VApp()->NewMainWindow();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowToolTip(const QString &toolTip)
+{
+    m_statusLabel->setText(toolTip);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

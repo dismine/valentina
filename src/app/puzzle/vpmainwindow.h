@@ -90,6 +90,8 @@ public slots:
      */
     void on_actionNew_triggered();
 
+    virtual void ShowToolTip(const QString &toolTip) override;
+
 protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void changeEvent(QEvent* event) override;
@@ -414,6 +416,8 @@ private:
      * @brief mouseCoordinate pointer to label who show mouse coordinate.
      */
     QLabel* m_mouseCoordinate{nullptr};
+
+    QLabel* m_statusLabel{nullptr};
 
     QString curFile{};
 
