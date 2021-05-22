@@ -46,6 +46,7 @@ const QString VWatermarkConverter::CurrentSchema          = QStringLiteral("://s
 VWatermarkConverter::VWatermarkConverter(const QString &fileName)
     : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
 }
 

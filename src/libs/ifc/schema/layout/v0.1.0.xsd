@@ -5,41 +5,16 @@
         <xs:element name="properties">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:string" name="unit"/>
+              <xs:element type="units" name="unit"/>
+              <xs:element type="xs:string" name="title"/>    
               <xs:element type="xs:string" name="description"/>
-              <xs:element name="size">
-                <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:float" name="width"/>
-                      <xs:attribute type="xs:short" name="length"/>
-                    </xs:extension>
-                  </xs:simpleContent>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="margin">
-                <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:float" name="top"/>
-                      <xs:attribute type="xs:float" name="right"/>
-                      <xs:attribute type="xs:float" name="bottom"/>
-                      <xs:attribute type="xs:float" name="left"/>
-                    </xs:extension>
-                  </xs:simpleContent>
-                </xs:complexType>
-              </xs:element>
               <xs:element name="control">
                 <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:string" name="followGrainLine"/>
-                      <xs:attribute type="xs:string" name="warningSuperposition"/>
-                      <xs:attribute type="xs:string" name="warningOutOfBound"/>
-                      <xs:attribute type="xs:string" name="stickyEdges"/>
-                      <xs:attribute type="xs:float" name="piecesGap"/>
-                    </xs:extension>
-                  </xs:simpleContent>
+                  <xs:attribute type="xs:boolean" name="followGrainLine"/>
+                  <xs:attribute type="xs:boolean" name="warningSuperposition"/>
+                  <xs:attribute type="xs:boolean" name="warningOutOfBound"/>
+                  <xs:attribute type="xs:boolean" name="stickyEdges"/>
+                  <xs:attribute type="xs:float" name="piecesGap"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="tiles">
@@ -47,163 +22,86 @@
                   <xs:sequence>
                     <xs:element name="size">
                       <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:float" name="width"/>
-                            <xs:attribute type="xs:float" name="length"/>
-                          </xs:extension>
-                        </xs:simpleContent>
+                        <xs:attribute type="xs:float" name="width"/>
+                        <xs:attribute type="xs:float" name="length"/>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="margin">
                       <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:float" name="top"/>
-                            <xs:attribute type="xs:float" name="right"/>
-                            <xs:attribute type="xs:float" name="bottom"/>
-                            <xs:attribute type="xs:float" name="left"/>
-                          </xs:extension>
-                        </xs:simpleContent>
+                        <xs:attribute type="xs:float" name="top"/>
+                        <xs:attribute type="xs:float" name="right"/>
+                        <xs:attribute type="xs:float" name="bottom"/>
+                        <xs:attribute type="xs:float" name="left"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute type="xs:string" name="visible"/>
+                  <xs:attribute type="xs:boolean" name="visible"/>
                   <xs:attribute type="xs:string" name="matchingMarks"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="layers">
+        <xs:element name="unplacedPieces">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="unplacedPiecesLayer">
+              <xs:element name="piece" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="uuid"/>
+                  <xs:attribute type="xs:string" name="name"/>
+                  <xs:attribute type="xs:boolean" name="mirrored"/>
+                  <xs:attribute type="xs:boolean" name="showSeamline"/>
+                  <xs:attribute type="xs:string" name="transform"/>  
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="name"/>
+            <xs:attribute type="xs:boolean" name="visible"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sheets">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sheet" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element name="size">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="width" use="required"/>
+                        <xs:attribute type="xs:float" name="length" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="margin">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="top"/>
+                        <xs:attribute type="xs:float" name="right"/>
+                        <xs:attribute type="xs:float" name="bottom"/>
+                        <xs:attribute type="xs:float" name="left"/>
+                      </xs:complexType>
+                    </xs:element>
                     <xs:element name="pieces">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="piece" maxOccurs="unbounded" minOccurs="0">
-                            <xs:complexType mixed="true">
+                          <xs:element name="piece" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
                               <xs:sequence>
-                                <xs:element name="cuttingLine" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:simpleContent>
-                                      <xs:extension base="xs:string">
-                                        <xs:attribute type="xs:string" name="style"/>
-                                        <xs:attribute type="xs:string" name="color"/>
-                                        <xs:attribute type="xs:string" name="p"/>
-                                      </xs:extension>
-                                    </xs:simpleContent>
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="seamLine" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:simpleContent>
-                                      <xs:extension base="xs:string">
-                                        <xs:attribute type="xs:string" name="style"/>
-                                        <xs:attribute type="xs:string" name="color"/>
-                                        <xs:attribute type="xs:string" name="visible"/>
-                                        <xs:attribute type="xs:string" name="p"/>
-                                      </xs:extension>
-                                    </xs:simpleContent>
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="grainline" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:simpleContent>
-                                      <xs:extension base="xs:string">
-                                        <xs:attribute type="xs:float" name="angle"/>
-                                        <xs:attribute type="xs:string" name="p"/>
-                                      </xs:extension>
-                                    </xs:simpleContent>
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="passMark" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:simpleContent>
-                                      <xs:extension base="xs:string">
-                                        <xs:attribute type="xs:string" name="p"/>
-                                      </xs:extension>
-                                    </xs:simpleContent>
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="internalPath" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:simpleContent>
-                                      <xs:extension base="xs:string">
-                                        <xs:attribute type="xs:string" name="p"/>
-                                      </xs:extension>
-                                    </xs:simpleContent>
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="placeLabel" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:simpleContent>
-                                      <xs:extension base="xs:string">
-                                        <xs:attribute type="xs:string" name="p"/>
-                                      </xs:extension>
-                                    </xs:simpleContent>
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="labels" minOccurs="0">
-                                  <xs:complexType>
-                                    <xs:sequence>
-                                      <xs:element name="label">
-                                        <xs:complexType>
-                                          <xs:choice maxOccurs="unbounded" minOccurs="0">
-                                            <xs:element name="text">
-                                              <xs:complexType>
-                                                <xs:simpleContent>
-                                                  <xs:extension base="xs:string">
-                                                    <xs:attribute type="xs:string" name="align" use="optional"/>
-                                                    <xs:attribute type="xs:string" name="decoration" use="optional"/>
-                                                    <xs:attribute type="xs:byte" name="fsize" use="optional"/>
-                                                    <xs:attribute type="xs:byte" name="size" use="optional"/>
-                                                  </xs:extension>
-                                                </xs:simpleContent>
-                                              </xs:complexType>
-                                            </xs:element>
-                                          </xs:choice>
-                                          <xs:attribute type="xs:byte" name="width"/>
-                                          <xs:attribute type="xs:byte" name="height"/>
-                                          <xs:attribute type="xs:string" name="transform"/>
-                                        </xs:complexType>
-                                      </xs:element>
-                                    </xs:sequence>
-                                  </xs:complexType>
-                                </xs:element>
                               </xs:sequence>
-                              <xs:attribute type="xs:string" name="id" use="optional"/>
-                              <xs:attribute type="xs:string" name="name" use="optional"/>
-                              <xs:attribute type="xs:string" name="mirrored" use="optional"/>
-                              <xs:attribute type="xs:string" name="transform" use="optional"/>
+                              <xs:attribute name="id" type="uuid"/>
+                              <xs:attribute type="xs:string" name="name"/>
+                              <xs:attribute type="xs:boolean" name="mirrored"/>
+                              <xs:attribute type="xs:boolean" name="showSeamline"/>
+                              <xs:attribute type="xs:string" name="transform"/>  
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
+                        <xs:attribute type="xs:string" name="name"/>
+                        <xs:attribute type="xs:boolean" name="visible"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="layer">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="piece">
-                      <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:string" name="id"/>
-                          </xs:extension>
-                        </xs:simpleContent>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                  <xs:attribute type="xs:byte" name="id"/>
-                  <xs:attribute type="xs:string" name="name"/>
-                  <xs:attribute type="xs:string" name="selected"/>
-                  <xs:attribute type="xs:string" name="visible"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -213,9 +111,22 @@
       <xs:attribute type="formatVersion" name="version"/>
     </xs:complexType>
   </xs:element>
+  <!--Types-->
   <xs:simpleType name="formatVersion">
     <xs:restriction base="xs:string">
       <xs:pattern value="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="units">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mm"/>
+      <xs:enumeration value="cm"/>
+      <xs:enumeration value="inch"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

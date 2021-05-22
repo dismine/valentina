@@ -189,10 +189,8 @@ auto VPMainWindow::LoadFile(QString path) -> bool
 
     VPLayoutFileReader fileReader;
 
-    if(m_layout == nullptr)
-    {
-        m_layout = new VPLayout();
-    }
+    delete m_layout;
+    m_layout = new VPLayout();
 
     fileReader.ReadFile(m_layout, &file);
 
@@ -208,6 +206,10 @@ auto VPMainWindow::LoadFile(QString path) -> bool
         }
         return false;
     }
+
+    SetCurrentFile(path);
+
+    m_layout->SetFocusedSheet();
 
     // updates the properties with the loaded data
     SetPropertiesData();

@@ -44,7 +44,7 @@ VPPieceList::VPPieceList(VPLayout *layout, VPSheet *sheet):
 //---------------------------------------------------------------------------------------------------------------------
 VPPieceList::~VPPieceList()
 {
-
+    qDeleteAll(m_pieces);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ QList<VPPiece *> VPPieceList::GetPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void VPPieceList::ClearSelection()
 {
-    for (auto piece: m_pieces)
+    for (auto *piece: m_pieces)
     {
         piece->SetIsSelected(false);
     }

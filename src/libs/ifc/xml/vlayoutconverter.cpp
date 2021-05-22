@@ -42,11 +42,34 @@ const QString VLayoutConverter::CurrentSchema   = QStringLiteral("://schema/layo
 //VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+namespace
+{
+// The list of all string we use for conversion
+// Better to use global variables because repeating QStringLiteral blows up code size
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVersion, (QLatin1String("version")))
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutConverter::VLayoutConverter(const QString &fileName)
     : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutConverter::GetFormatVersionStr() const -> QString
+{
+    QDomNode root = documentElement();
+    if (not root.isNull() && root.isElement())
+    {
+        const QDomElement layoutElement = root.toElement();
+        if (not layoutElement.isNull())
+        {
+            return GetParametrString(layoutElement, *strVersion, QStringLiteral("0.0.0"));
+        }
+    }
+    return QStringLiteral("0.0.0");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

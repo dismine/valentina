@@ -47,6 +47,7 @@ const QString VLabelTemplateConverter::CurrentSchema          = QStringLiteral("
 VLabelTemplateConverter::VLabelTemplateConverter(const QString &fileName)
     : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
 }
 

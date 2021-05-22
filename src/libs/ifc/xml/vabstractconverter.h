@@ -81,7 +81,7 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractConverter)
 
-    QTemporaryFile m_tmpFile;
+    QTemporaryFile m_tmpFile{};
 
     void ReserveFile() const;
 };

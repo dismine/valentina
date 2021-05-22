@@ -33,14 +33,29 @@
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(MLReader, "mlReader")
+
+QT_WARNING_POP
+
 //---------------------------------------------------------------------------------------------------------------------
-bool VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file)
+auto VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file) -> bool
 {
     setDevice(file);
 
-    if (readNextStartElement())
+    try
     {
-        ReadLayout(layout);
+        if (readNextStartElement())
+        {
+            ReadLayout(layout);
+        }
+    }
+    catch(const VException &e)
+    {
+        raiseError(e.ErrorMessage());
     }
 
     return hasError();
@@ -49,25 +64,27 @@ bool VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadLayout(VPLayout *layout)
 {
-    SCASSERT(isStartElement() && name() == ML::TagLayout);
+    AssertRootTag(ML::TagLayout);
+
+    const QStringList tags({ML::TagProperties, ML::TagUnplacedPieces, ML::TagSheets});
 
     while (readNextStartElement())
     {
-        if (name() == ML::TagProperties)
+        switch (tags.indexOf(name().toString()))
         {
-            ReadProperties(layout);
-        }
-        else if (name() == ML::TagPieceLists)
-        {
-            ReadSheets(layout);
-        }
-        else if (name() == ML::TagUnplacedPieceList)
-        {
-            ReadUnplacedPieces(layout);
-        }
-        else
-        {
-            // TODO error handling, we encountered a tag that isn't defined in the specification
+            case 0: // ML::TagProperties
+                ReadProperties(layout);
+                break;
+            case 1: // ML::TagUnplacedPieces
+                ReadUnplacedPieces(layout);
+                break;
+            case 2: // ML::TagSheets
+                ReadSheets(layout);
+                break;
+            default:
+                qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+                skipCurrentElement();
+                break;
         }
     }
 }
@@ -75,101 +92,110 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadProperties(VPLayout *layout)
 {
-    SCASSERT(isStartElement() && name() == ML::TagProperties);
+    AssertRootTag(ML::TagProperties);
+
+    const QStringList tags
+    {
+        ML::TagUnit,        // 0
+        ML::TagTitle,       // 1
+        ML::TagDescription, // 2
+        ML::TagControl,     // 3
+        ML::TagTiles        // 4
+    };
 
     while (readNextStartElement())
     {
         qDebug() << name().toString();
 
-        const QStringList tags = QStringList(
-            {
-                ML::TagUnit,
-                ML::TagDescription,
-                ML::TagControl,
-                ML::TagTiles
-            });
-
         switch (tags.indexOf(name().toString()))
         {
-        case 0:// unit
-            qDebug("read unit");
-            layout->SetUnit(StrToUnits(readElementText()));
-            break;
-        case 1:// description
-        {
-            qDebug("read description");
-            QString description = readElementText();
-            // TODO read the description info
-            break;
-        }
-        case 2:// control
-        {
-            qDebug("read control");
-            QXmlStreamAttributes attribs = attributes();
-            layout->SetWarningSuperpositionOfPieces(ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
-            layout->SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
-
-            readElementText();
-            break;
-        }
-        case 3:// tiles
-            qDebug("read tiles");
-            ReadTiles(layout);
-            readElementText();
-            break;
-        default:
-            // TODO error handling, we encountered a tag that isn't defined in the specification
-            skipCurrentElement();
-            break;
+            case 0:// unit
+                qDebug("read unit");
+                layout->SetUnit(StrToUnits(readElementText()));
+                break;
+            case 1:// title
+                qDebug("read title");
+                layout->SetTitle(readElementText());
+                break;
+            case 2:// description
+                qDebug("read description");
+                layout->SetDescription(readElementText());
+                break;
+            case 3:// control
+                qDebug("read control");
+                ReadControl(layout);
+                break;
+            case 4:// tiles
+                qDebug("read tiles");
+                ReadTiles(layout);
+                break;
+            default:
+                qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+                skipCurrentElement();
+                break;
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadControl(VPLayout *layout)
+{
+    AssertRootTag(ML::TagControl);
+
+    QXmlStreamAttributes attribs = attributes();
+    layout->SetWarningSuperpositionOfPieces(ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
+    layout->SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
+
+    readElementText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadUnplacedPieces(VPLayout *layout)
 {
+    AssertRootTag(ML::TagUnplacedPieces);
+
     ReadPieceList(layout->GetUnplacedPieceList());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadTiles(VPLayout *layout)
 {
-    Q_UNUSED(layout); // to be removed when used
+    AssertRootTag(ML::TagTiles);
 
-    SCASSERT(isStartElement() && name() == ML::TagTiles);
+    QXmlStreamAttributes attribs = attributes();
+    layout->SetShowTiles(ReadAttributeBool(attribs, ML::AttrVisible, falseStr));
+//    attribs.value(ML::AttrMatchingMarks); // TODO
 
-//    QXmlStreamAttributes attribs = attributes();
-    // attribs.value(ML::AttrVisible); // TODO
-    // attribs.value(ML::AttrMatchingMarks); // TODO
+    const QStringList tags
+    {
+        ML::TagSize,  // 0
+        ML::TagMargin // 1
+    };
 
     while (readNextStartElement())
     {
-        if (name() == ML::TagSize)
+        switch (tags.indexOf(name().toString()))
         {
-            QSizeF size = ReadSize();
-            // TODO set layout tiled size
-            Q_UNUSED(size);
-            readElementText();
-        }
-        else if (name() == ML::TagMargin)
-        {
-            QMarginsF margins = ReadMargins();
-            // TODO set layout tiled margins
-            Q_UNUSED(margins);
-            readElementText();
-        }
-        else
-        {
-            // TODO error handling, we encountered a tag that isn't defined in the specification
-            skipCurrentElement();
+            case 0: // size
+                layout->SetTilesSize(ReadSize());
+                break;
+            case 1: // margin
+                layout->SetTilesMargins(ReadMargins());
+                break;
+            default:
+                qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+                skipCurrentElement();
+                break;
         }
     }
+
+    readElementText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadSheets(VPLayout *layout)
 {
-    SCASSERT(isStartElement() && name() == ML::TagSheets);
+    AssertRootTag(ML::TagSheets);
 
     while (readNextStartElement())
     {
@@ -179,25 +205,67 @@ void VPLayoutFileReader::ReadSheets(VPLayout *layout)
         }
         else
         {
-            // TODO error handling, we encountered a tag that isn't defined in the specification
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
             skipCurrentElement();
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadSheetPieces(VPSheet *sheet)
+{
+    AssertRootTag(ML::TagPieces);
+
+    ReadPieceList(sheet->GetPieceList());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadSheet(VPLayout *layout)
 {
-    Q_UNUSED(layout);
-    // TODO
+    AssertRootTag(ML::TagSheet);
+
+    const QStringList tags
+    {
+        ML::TagName,   // 0
+        ML::TagSize,   // 1
+        ML::TagMargin, // 2
+        ML::TagPieces  // 3
+    };
+
+    QScopedPointer<VPSheet> sheet (new VPSheet(layout));
+
+    while (readNextStartElement())
+    {
+        switch (tags.indexOf(name().toString()))
+        {
+            case 0: // name
+                sheet->SetName(readElementText());
+                break;
+            case 1: // size
+                sheet->SetSheetSize(ReadSize());
+                break;
+            case 2: // margin
+                sheet->SetSheetMargins(ReadMargins());
+                break;
+            case 3: // pieces
+                ReadSheetPieces(sheet.get());
+                break;
+            default:
+                qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+                skipCurrentElement();
+                break;
+        }
+    }
+
+    readElementText();
+
+    layout->AddSheet(sheet.take());
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
 {
-    SCASSERT(isStartElement() && (name() == ML::TagPieceList || name() == ML::TagUnplacedPieceList));
-
     QXmlStreamAttributes attribs = attributes();
     pieceList->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece List")));
     pieceList->SetIsVisible(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
@@ -206,13 +274,13 @@ void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
     {
         if (name() == ML::TagPiece)
         {
-            VPPiece *piece = new VPPiece();
-            ReadPiece(piece);
-            pieceList->AddPiece(piece);
+            QScopedPointer<VPPiece>piece(new VPPiece());
+            ReadPiece(piece.data());
+            pieceList->AddPiece(piece.take());
         }
         else
         {
-            // TODO error handling, we encountered a tag that isn't defined in the specification
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
             skipCurrentElement();
         }
     }
@@ -221,13 +289,12 @@ void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadPiece(VPPiece *piece)
 {
-    Q_UNUSED(piece);
-    SCASSERT(isStartElement() && name() == ML::TagPiece);
+    AssertRootTag(ML::TagPiece);
 
     QXmlStreamAttributes attribs = attributes();
     piece->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece")));
 
-    QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid().toString());// FIXME: is that correct to have a default value here?
+    QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid::createUuid().toString());
     piece->SetUUID(QUuid(uuidStr));
 
     bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
@@ -251,7 +318,6 @@ void VPLayoutFileReader::ReadPiece(VPPiece *piece)
             skipCurrentElement();
         }
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -265,24 +331,37 @@ QMarginsF VPLayoutFileReader::ReadMargins()
     margins.setRight(ReadAttributeDouble(attribs, ML::AttrRight, QChar('0')));
     margins.setBottom(ReadAttributeDouble(attribs, ML::AttrBottom, QChar('0')));
 
+    readElementText();
+
     return margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QSizeF VPLayoutFileReader::ReadSize()
 {
-    QSizeF size = QSize();
+    QSizeF size;
 
     QXmlStreamAttributes attribs = attributes();
     size.setWidth(ReadAttributeDouble(attribs, ML::AttrWidth, QChar('0')));
     size.setHeight(ReadAttributeDouble(attribs, ML::AttrLength, QChar('0')));
 
+    readElementText();
+
     return size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::AssertRootTag(const QString &tag) const
+{
+    if (not (isStartElement() && name() == tag))
+    {
+        throw VException(tr("Unexpected tag %1 in line %2").arg(name()).arg(lineNumber()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
-                                                     const QString &defValue)
+                                                const QString &defValue)
 {
     const QString parameter = attribs.value(name).toString();
     if (parameter.isEmpty())
@@ -291,10 +370,7 @@ QString VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attr
         {
             throw VException(tr("Got empty attribute '%1'").arg(name));
         }
-        else
-        {
-            return defValue;
-        }
+        return defValue;
     }
     return parameter;
 }
@@ -344,7 +420,7 @@ bool VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, 
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
-                                                   const QString &defValue)
+                                              const QString &defValue)
 {
     bool ok = false;
     qreal param = 0;
@@ -354,7 +430,7 @@ qreal VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attrib
     {
         QString parametr = ReadAttributeString(attribs, name, defValue);
         param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
-        if (ok == false)
+        if (not ok)
         {
             throw VExceptionConversionError(message, name);
         }

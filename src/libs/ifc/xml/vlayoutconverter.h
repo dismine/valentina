@@ -40,6 +40,8 @@ public:
     explicit VLayoutConverter(const QString &fileName);
     virtual ~VLayoutConverter() Q_DECL_EQ_DEFAULT;
 
+    virtual QString GetFormatVersionStr() const override;
+
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const int LayoutMinVer = FORMAT_VERSION(0, 1, 0);

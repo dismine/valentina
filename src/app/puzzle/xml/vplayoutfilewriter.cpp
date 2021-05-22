@@ -33,6 +33,7 @@
 #include "vppiece.h"
 #include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
+#include "../vmisc/projectversion.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteFile(VPLayout *layout, QFile *file)
@@ -52,9 +53,12 @@ void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
+    writeComment(QStringLiteral("Layout created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+                 .arg(APP_VERSION_STR));
 
     WriteProperties(layout);
-    WriteUnplacePiecesList(layout);
+    WritePieceList(layout->GetUnplacedPieceList(), ML::TagUnplacedPieces);
+    WriteSheets(layout);
 
     writeEndElement(); //layout
 }
@@ -65,45 +69,46 @@ void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
     writeStartElement(ML::TagProperties);
 
     writeTextElement(ML::TagUnit, UnitsToStr(layout->GetUnit()));
-
-    writeTextElement(ML::TagDescription, QString()); // TODO : define the value in layout
+    writeTextElement(ML::TagTitle, layout->GetTitle());
+    writeTextElement(ML::TagDescription, layout->GetDescription());
 
     writeStartElement(ML::TagControl);
-
     SetAttribute(ML::AttrWarningSuperposition, layout->GetWarningSuperpositionOfPieces());
     SetAttribute(ML::AttrWarningOutOfBound, layout->GetWarningPiecesOutOfBound());
     writeEndElement(); // control
 
-    // WriteTiles(layout);  TODO: when tile functionality implemented, then uncomment this line
+    WriteTiles(layout);
 
     writeEndElement(); // properties
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteUnplacePiecesList(VPLayout *layout)
-{
-    Q_UNUSED(layout);
-    // TODO
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteSheets(VPLayout *layout)
 {
-    Q_UNUSED(layout);
-    // TODO
+    writeStartElement(ML::TagSheets);
+
+    QList<VPSheet *> sheets = layout->GetSheets();
+    for (auto *sheet : sheets)
+    {
+        WriteSheet(sheet);
+    }
+
+    writeEndElement(); // sheets
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteSheet(VPSheet* sheet)
 {
-    Q_UNUSED(sheet);
-    // TODO
+    writeStartElement(ML::TagSheet);
 
-    // WritePieceList(pieceList);
+    writeTextElement(ML::TagName, sheet->GetName());
+    WriteSize(sheet->GetSheetSize());
+    WriteMargins(sheet->GetSheetMargins());
+    WritePieceList(sheet->GetPieceList(), ML::TagPieces);
+
+    writeEndElement(); // sheet
 
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
@@ -111,23 +116,13 @@ void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
     Q_UNUSED(layout); // to be removed
 
    writeStartElement(ML::TagTiles);
-   SetAttribute(ML::AttrVisible, false); // TODO / Fixme get the right value
+   SetAttribute(ML::AttrVisible, layout->GetShowTiles());
    SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
 
-   QSizeF size = QSizeF(); // TODO get the right size
-   WriteSize(size);
-
-   QMarginsF margins = QMarginsF(); // TODO get the right margins
-   WriteMargins(margins);
+   WriteSize(layout->GetTilesSize());
+   WriteMargins(layout->GetTilesMargins());
 
    writeEndElement(); // tiles
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList)
-{
-    WritePieceList(pieceList, ML::TagPieceList);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,9 +134,8 @@ void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList, const QString &t
     //  TODO selected info. Not sure how it's saved yet
     //SetAttribute("selected", pieceList->GetIsSelected());
 
-
     QList<VPPiece*> pieces = pieceList->GetPieces();
-    for (auto piece : pieces)
+    for (auto *piece : pieces)
     {
         WritePiece(piece);
     }
@@ -152,13 +146,11 @@ void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList, const QString &t
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WritePiece(VPPiece *piece)
 {
-    Q_UNUSED(piece);
-
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
-    SetAttribute(ML::AttrMirrored, piece->GetPieceMirrored()); // TODO / Fixme get the right value
-    SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine()); // TODO / Fixme get the right value
+    SetAttribute(ML::AttrMirrored, piece->GetPieceMirrored());
+    SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine());
     SetAttribute(ML::AttrTransform, "string representation of the transformation"); // TODO / Fixme get the right value
 
     // TODO cuttingLine

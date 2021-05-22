@@ -127,7 +127,7 @@ public:
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
-    QString        GetFormatVersionStr() const;
+    virtual QString GetFormatVersionStr() const;
     static int     GetFormatVersion(const QString &version);
     static void    RemoveAllChildren(QDomElement &domElement);
 

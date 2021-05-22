@@ -27,22 +27,23 @@
  *************************************************************************/
 #include "vplayoutliterals.h"
 
-namespace ML
+namespace ML // Manual layout
 {
 const QString TagLayout              = QStringLiteral("layout");
 const QString TagProperties          = QStringLiteral("properties");
-const QString TagPieceLists              = QStringLiteral("pieceLists");
 const QString TagUnit                = QStringLiteral("unit");
+const QString TagTitle               = QStringLiteral("title");
 const QString TagDescription         = QStringLiteral("description");
 const QString TagSize                = QStringLiteral("size");
 const QString TagMargin              = QStringLiteral("margin");
 const QString TagControl             = QStringLiteral("control");
 const QString TagTiles               = QStringLiteral("tiles");
-const QString TagUnplacedPieceList   = QStringLiteral("unplacedPieceList");
-const QString TagPieceList           = QStringLiteral("pieceList");
+const QString TagUnplacedPieces      = QStringLiteral("unplacedPieces");
+const QString TagPieces              = QStringLiteral("pieces");
 const QString TagPiece               = QStringLiteral("piece");
 const QString TagSheets              = QStringLiteral("sheets");
 const QString TagSheet               = QStringLiteral("sheet");
+const QString TagName                = QStringLiteral("name");
 
 const QString AttrVersion              = QStringLiteral("version");
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");
@@ -63,4 +64,4 @@ const QString AttrID                   = QStringLiteral("id");
 const QString AttrMirrored             = QStringLiteral("mirrored");
 const QString AttrTransform            = QStringLiteral("transform");
 const QString AttrShowSeamline         = QStringLiteral("showSeamline");
-}
+}  // namespace ML

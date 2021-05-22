@@ -35,6 +35,10 @@
 #include "vppiecelist.h"
 #include "vppiece.h"
 
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(MLReader)
+
 class VPLayoutFileReader : public QXmlStreamReader
 {
     Q_DECLARE_TR_FUNCTIONS(VPLayoutFileReader)
@@ -49,15 +53,19 @@ private:
 
     void ReadLayout(VPLayout *layout);
     void ReadProperties(VPLayout *layout);
+    void ReadControl(VPLayout *layout);
     void ReadTiles(VPLayout *layout);
     void ReadUnplacedPieces(VPLayout *layout);
     void ReadSheets(VPLayout *layout);
+    void ReadSheetPieces(VPSheet *sheet);
     void ReadSheet(VPLayout *layout);
     void ReadPieceList(VPPieceList *pieceList);
     void ReadPiece(VPPiece *piece);
 
     QMarginsF ReadMargins();
     QSizeF ReadSize();
+
+    void AssertRootTag(const QString &tag) const;
 
     static QString ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
                                        const QString &defValue);

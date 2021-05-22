@@ -54,11 +54,9 @@ public:
 private:
     void WriteLayout(VPLayout *layout);
     void WriteProperties(VPLayout *layout);
-    void WriteUnplacePiecesList(VPLayout *layout);
     void WriteSheets(VPLayout *layout);
     void WriteSheet(VPSheet* sheet);
     void WriteTiles(VPLayout *layout);
-    void WritePieceList(VPPieceList *pieceList);
     void WritePieceList(VPPieceList *pieceList, const QString &tagName);
     void WritePiece(VPPiece *piece);
 
