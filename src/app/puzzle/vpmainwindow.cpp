@@ -1897,7 +1897,7 @@ void VPMainWindow::AboutToShowDockMenu()
 
         QAction *actionPreferences = menu->addAction(tr("Preferences"));
         actionPreferences->setMenuRole(QAction::NoRole);
-        connect(actionPreferences, &QAction::triggered, this, &VPMainWindow::Preferences);
+        connect(actionPreferences, &QAction::triggered, this, &VPMainWindow::on_actionPreferences_triggered);
     }
 }
 #endif //defined(Q_OS_MAC)
