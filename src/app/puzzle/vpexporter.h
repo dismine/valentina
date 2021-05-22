@@ -21,20 +21,11 @@ public:
 
     void Export(VPLayout* layout, LayoutExportFormats format, VPMainGraphicsView *mainGraphicsView);
 
-
-    // FIXME Bad copy paste from DialogSaveLayout, because I didn't know how to call this function from here
-    // to be removed as soon as I know how to call the central function from valentina
+    /**
+     * @brief InitFormats
+     * @return returns the list of formats, that we can export in puzzle
+     */
     QVector<std::pair<QString, LayoutExportFormats> > InitFormats();
-
-private:
-
-
-
-    // FIXME Bad copy paste from DialogSaveLayout, because I didn't know how to call this function from here
-    // to be removed as soon as I know how to call the central function from valentina
-    static QString ExportFormatDescription(LayoutExportFormats format);
-    static QString ExportFormatSuffix(LayoutExportFormats format);
-
 
 };
 

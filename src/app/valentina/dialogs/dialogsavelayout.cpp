@@ -350,151 +350,6 @@ Draw DialogSaveLayout::Mode() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
-{
-    const QString dxfSuffix = QStringLiteral("(*.dxf)");
-    const QString dxfFlatFilesStr = tr("(flat) files");
-    const QString filesStr = tr("files");
-
-    switch(format)
-    {
-        case LayoutExportFormats::SVG:
-            return QStringLiteral("Svg %1 (*.svg)").arg(filesStr);
-        case LayoutExportFormats::PDF:
-            return QStringLiteral("PDF %1 (*.pdf)").arg(filesStr);
-        case LayoutExportFormats::PNG:
-            return tr("Image files") + QStringLiteral(" (*.png)");
-        case LayoutExportFormats::OBJ:
-            return QStringLiteral("Wavefront OBJ (*.obj)");
-        case LayoutExportFormats::PS:
-            return QStringLiteral("PS %1 (*.ps)").arg(filesStr);
-        case LayoutExportFormats::EPS:
-            return QStringLiteral("EPS %1 (*.eps)").arg(filesStr);
-        case LayoutExportFormats::DXF_AC1006_Flat:
-            return QStringLiteral("AutoCAD DXF R10 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_Flat:
-            return QStringLiteral("AutoCAD DXF R11/12 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_Flat:
-            return QStringLiteral("AutoCAD DXF R13 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_Flat:
-            return QStringLiteral("AutoCAD DXF R14 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_Flat:
-            return QStringLiteral("AutoCAD DXF 2000 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_Flat:
-            return QStringLiteral("AutoCAD DXF 2004 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_Flat:
-            return QStringLiteral("AutoCAD DXF 2007 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_Flat:
-            return QStringLiteral("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_Flat:
-            return QStringLiteral("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-            return QStringLiteral("AutoCAD DXF R10 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-            return QStringLiteral("AutoCAD DXF R11/12 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-            return QStringLiteral("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-            return QStringLiteral("AutoCAD DXF R14 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-            return QStringLiteral("AutoCAD DXF 2000 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-            return QStringLiteral("AutoCAD DXF 2004 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-            return QStringLiteral("AutoCAD DXF 2007 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-            return QStringLiteral("AutoCAD DXF 2010 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-            return QStringLiteral("AutoCAD DXF 2013 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-            return QStringLiteral("AutoCAD DXF R10 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-            return QStringLiteral("AutoCAD DXF R11/12 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-            return QStringLiteral("AutoCAD DXF R13 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-            return QStringLiteral("AutoCAD DXF R14 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-            return QStringLiteral("AutoCAD DXF 2000 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-            return QStringLiteral("AutoCAD DXF 2004 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-            return QStringLiteral("AutoCAD DXF 2007 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-            return QStringLiteral("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            return QStringLiteral("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::PDFTiled:
-            return QStringLiteral("PDF %1 %2 (*.pdf)").arg(tr("tiled"), filesStr);
-        case LayoutExportFormats::NC:
-            return QStringLiteral("%1 %2 (*.nc)").arg(tr("Numerical control"), filesStr);
-        case LayoutExportFormats::RLD:
-            return QStringLiteral("%1 %2 (*.rld)").arg(tr("Raw Layout Data"), filesStr);
-        case LayoutExportFormats::TIF:
-            return QStringLiteral("TIFF %1 (*.tif)").arg(filesStr);
-        default:
-            return QString();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::ExportFormatSuffix(LayoutExportFormats format)
-{
-    switch(format)
-    {
-        case LayoutExportFormats::SVG:
-            return QStringLiteral(".svg");
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-            return QStringLiteral(".pdf");
-        case LayoutExportFormats::PNG:
-            return QStringLiteral(".png");
-        case LayoutExportFormats::OBJ:
-            return QStringLiteral(".obj");
-        case LayoutExportFormats::PS:
-            return QStringLiteral(".ps");
-        case LayoutExportFormats::EPS:
-            return QStringLiteral(".eps");
-        case LayoutExportFormats::DXF_AC1006_Flat:
-        case LayoutExportFormats::DXF_AC1009_Flat:
-        case LayoutExportFormats::DXF_AC1012_Flat:
-        case LayoutExportFormats::DXF_AC1014_Flat:
-        case LayoutExportFormats::DXF_AC1015_Flat:
-        case LayoutExportFormats::DXF_AC1018_Flat:
-        case LayoutExportFormats::DXF_AC1021_Flat:
-        case LayoutExportFormats::DXF_AC1024_Flat:
-        case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            return QStringLiteral(".dxf");
-        case LayoutExportFormats::NC:
-            return QStringLiteral(".nc");
-        case LayoutExportFormats::RLD:
-            return QStringLiteral(".rld");
-        case LayoutExportFormats::TIF:
-            return QStringLiteral(".tif");
-        default:
-            return QString();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::~DialogSaveLayout()
 {
     delete ui;
@@ -525,7 +380,7 @@ void DialogSaveLayout::Save()
 
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+'/'+FileName()+QString::number(i+1)+ExportFormatSuffix(Format());
+        const QString name = Path()+'/'+FileName()+QString::number(i+1)+VLayoutExporter::ExportFormatSuffix(Format());
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
@@ -573,7 +428,7 @@ void DialogSaveLayout::PathChanged(const QString &text)
 void DialogSaveLayout::ShowExample()
 {
     const LayoutExportFormats currentFormat = Format();
-    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') + ExportFormatSuffix(currentFormat));
+    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') + VLayoutExporter::ExportFormatSuffix(currentFormat));
 
     ui->checkBoxBinaryDXF->setEnabled(false);
     ui->groupBoxPaperFormat->setEnabled(false);
@@ -822,7 +677,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
 
     auto InitFormat = [&list](LayoutExportFormats format)
     {
-        list.append(std::make_pair(ExportFormatDescription(format), format));
+        list.append(std::make_pair(VLayoutExporter::ExportFormatDescription(format), format));
     };
 
     InitFormat(LayoutExportFormats::SVG);

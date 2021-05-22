@@ -34,6 +34,8 @@
 #include <QString>
 #include <QCoreApplication>
 
+#include "../vlayout/vlayoutdef.h"
+
 class QGraphicsScene;
 class QGraphicsItem;
 class VLayoutPiece;
@@ -90,6 +92,9 @@ public:
     void ExportToRLD(const QVector<VLayoutPiece> &details) const;
 
     static auto SupportPDFConversion() -> bool;
+
+    static QString ExportFormatDescription(LayoutExportFormats format);
+    static QString ExportFormatSuffix(LayoutExportFormats format);
 
 private:
     QString   m_fileName{};

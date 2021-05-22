@@ -61,9 +61,6 @@ public:
 
     Draw Mode() const;
 
-    static QString ExportFormatDescription(LayoutExportFormats format);
-    static QString ExportFormatSuffix(LayoutExportFormats format);
-
     bool IsTextAsPaths() const;
     void SetTextAsPaths(bool textAsPaths);
 
