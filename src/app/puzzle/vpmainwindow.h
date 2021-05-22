@@ -40,6 +40,7 @@
 #include "vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "vptilefactory.h"
+#include "vpexporter.h"
 #include "vpcommandline.h"
 #include "../vlayout/vlayoutdef.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -105,7 +106,7 @@ protected:
     virtual void changeEvent(QEvent* event) override;
     virtual QStringList RecentFileList() const override;
 
-private slots:
+ private slots:
     /**
      * @brief on_actionOpen_triggered When the menu action File > Open is
      * triggered.

@@ -100,7 +100,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     // init status bar
     statusBar()->addPermanentWidget(m_statusLabel, 1);
-
+    
     SetupMenu();
     InitProperties();
     InitCarrousel();
@@ -488,6 +488,14 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     ui->comboBoxSheetTemplate->blockSignals(false);
 
     ui->comboBoxSheetTemplate->setCurrentIndex(0);
+
+    // ---------------------- export format --------------------------
+
+    VPExporter exporter;
+    for (auto &v : exporter.InitFormats())
+    {
+        ui->comboBoxSheetExportFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1604,8 +1612,6 @@ void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_pushButtonTilesExport_clicked()
 {
-    // svg export to do some test for the first test
-
     QString dir = QDir::homePath();
     QString filters(tr("PDF Files") + QLatin1String("(*.pdf)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
@@ -1674,45 +1680,10 @@ void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
-    // svg export to do some test for the first test
+    LayoutExportFormats format = static_cast<LayoutExportFormats>(ui->comboBoxSheetExportFormat->currentData().toInt());
 
-    QString dir = QDir::homePath();
-    QString filters(tr("SVG Files") + QLatin1String("(*.svg)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + QLatin1String(".svg"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
-
-    if(not fileName.isEmpty())
-    {
-        m_graphicsView->PrepareForExport();
-
-        const QSizeF s = m_layout->GetFocusedSheet()->GetSheetSize();
-        const QRectF r = QRectF(0, 0, s.width(), s.height());
-
-        QSvgGenerator generator;
-        generator.setFileName(fileName);
-        generator.setSize(QSize(qFloor(s.width()),qFloor(s.height())));
-        generator.setViewBox(r);
-        generator.setTitle(m_layout->GetFocusedSheet()->GetName());
-        generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
-        generator.setResolution(static_cast<int>(PrintDPI));
-
-        QPainter painter;
-        painter.begin(&generator);
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, VPApplication::VApp()->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap,
-                            Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        m_graphicsView->GetScene()->render(&painter, r, r, Qt::IgnoreAspectRatio);
-        painter.end();
-
-        m_graphicsView->CleanAfterExport();
-    }
-
+    VPExporter exporter;
+    exporter.Export(m_layout, format, m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

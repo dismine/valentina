@@ -514,7 +514,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
                 const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                        QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                        QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
                 QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(
                             m_layoutSettings->LayoutPapers().at(i));
@@ -827,7 +827,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     }
 
     const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-            QString::number(1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
+            QString::number(1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
     ExportApparelLayout(listDetails, name, rect.size());
 }
@@ -1110,7 +1110,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
         if (paper != nullptr)
         {
             const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                    QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                    QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
             auto *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             QGraphicsScene *scene = scenes.at(i);
