@@ -3614,7 +3614,11 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
         }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+        QAction *action = menu->addAction(title, this, SLOT(ShowWindow()));
+#else
         QAction *action = menu->addAction(title, this, &TMainWindow::ShowWindow);
+#endif //QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
         action->setData(i);
         action->setCheckable(true);
         action->setMenuRole(QAction::NoRole);
