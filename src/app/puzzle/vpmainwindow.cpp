@@ -99,7 +99,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_tileFactory->refreshTileInfos();
 
     // init the export tool
-    m_exporter = new VPExporter(m_layout, qApp->Settings());
+    m_exporter = new VPExporter(m_layout, VPApplication::VApp()->Settings());
     
     // init status bar
     statusBar()->addPermanentWidget(m_statusLabel, 1);
