@@ -45,7 +45,7 @@ public:
     virtual ~VAbstractMainWindow() Q_DECL_EQ_DEFAULT;
 
 public slots:
-    virtual void ShowToolTip(const QString &toolTip)=0;
+    virtual void ShowToolTip(const QString &toolTip);
     virtual void UpdateVisibilityGroups();
     virtual void UpdateDetailsList();
     virtual void ZoomFitBestCurrent();
@@ -66,10 +66,14 @@ protected:
 
     QString CSVFilePath();
 
-    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)=0;
+    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator);
 
     virtual QStringList RecentFileList() const =0;
     void UpdateRecentFileActions();
+
+    static bool CheckFilePermissions(const QString &path, QWidget *messageBoxParent=nullptr);
+
+    bool IgnoreLocking(int error, const QString &path, bool guiMode);
 
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)

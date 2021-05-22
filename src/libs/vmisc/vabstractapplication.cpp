@@ -153,16 +153,14 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     {
         return dir.absolutePath();
     }
-    else
-    {
+
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-        /* Fix path to trasnaltions when run inside AppImage. */
-        return AppImageRoot() + PKGDATADIR + trPath;
+    /* Fix path to trasnaltions when run inside AppImage. */
+    return AppImageRoot() + PKGDATADIR + trPath;
 #else
-        return PKGDATADIR + trPath;
+    return PKGDATADIR + trPath;
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-    }
-#endif
+#endif // Unix
 }
 
 //---------------------------------------------------------------------------------------------------------------------

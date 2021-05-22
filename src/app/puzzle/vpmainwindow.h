@@ -43,19 +43,23 @@
 #include "vpexporter.h"
 #include "vpcommandline.h"
 #include "../vlayout/vlayoutdef.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vmisc/vlockguard.h"
 
 namespace Ui
 {
     class VPMainWindow;
 }
 
-class VPMainWindow : public QMainWindow
+class VPMainWindow : public VAbstractMainWindow
 {
     Q_OBJECT
 
 public:
     explicit VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent = nullptr);
     virtual ~VPMainWindow();
+
+    QString CurrentFile() const;
 
     /**
      * @brief LoadFile Loads the layout file of given path in m_layout.
@@ -65,12 +69,15 @@ public:
      */
     bool LoadFile(QString path);
 
+    void LayoutWasSaved(bool saved);
+    void SetCurrentFile(const QString &fileName);
+
     /**
-     * @brief SaveFile Saves the current layout to the layout file of given path
+     * @brief SaveLayout Saves the current layout to the layout file of given path
      * @param path path to layout file
      * @return true if success
      */
-    bool SaveFile(const QString &path);
+    bool SaveLayout(const QString &path, QString &error);
 
     /**
      * @brief ImportRawLayouts The function imports the raw layouts of given paths
@@ -83,6 +90,8 @@ public:
      */
     void InitZoom();
 
+    void UpdateWindowTitle();
+
 public slots:
     /**
      * @brief on_actionNew_triggered When the menu action File > New
@@ -90,146 +99,14 @@ public slots:
      */
     void on_actionNew_triggered();
 
+    virtual void ShowToolTip(const QString &toolTip) override;
+
 protected:
-    enum { MaxRecentFiles = 5 };
-
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual void changeEvent(QEvent* event) override;
+    virtual QStringList RecentFileList() const override;
 
-private:
-    Q_DISABLE_COPY(VPMainWindow)
-    Ui::VPMainWindow *ui;
-
-    VPCarrousel *m_carrousel{nullptr};
-    VPMainGraphicsView *m_graphicsView{nullptr};
-
-    VPCommandLinePtr m_cmd;
-
-    VPLayout *m_layout{nullptr};
-    QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
-
-    VPTileFactory *m_tileFactory{nullptr};
-    VPExporter *m_exporter{nullptr};
-
-    /**
-     * @brief spin box with the scale factor of the graphic view
-     */
-    QPointer<QDoubleSpinBox> m_doubleSpinBoxScale{nullptr};
-
-    /**
-     * @brief mouseCoordinate pointer to label who show mouse coordinate.
-     */
-    QLabel* m_mouseCoordinate{nullptr};
-
-    /**
-     * @brief CreatePiece creates a piece from the given VLayoutPiece data
-     * @param rawPiece the raw piece data
-     */
-    VPPiece* CreatePiece(const VLayoutPiece &rawPiece);
-
-    /**
-     * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
-     */
-    void InitMenuBar();
-
-    /**
-     * @brief InitProperties Init the properties
-     */
-    void InitProperties();
-
-    /**
-     * @brief InitPropertyTabCurrentPiece Inits the current piece tab in the properties
-     */
-    void InitPropertyTabCurrentPiece();
-
-    /**
-     * @brief InitPropertyTabCurrentSheet Inits the current sheet tab in the properties;
-     */
-    void InitPropertyTabCurrentSheet();
-
-    /**
-     * @brief InitPropertyTabLayout Inits the layout tab in the properties
-     */
-    void InitPropertyTabLayout();
-
-    /**
-     * @brief InitPropertyTabTiles Inits the tiles tab in the properties
-     */
-    void InitPropertyTabTiles();
-
-    /**
-     * @brief InitCarrousel Inits the carrousel
-     */
-    void InitCarrousel();
-
-    /**
-     * @brief InitMainGraphics Initialises the puzzle main graphics
-     */
-    void InitMainGraphics();
-
-    /**
-     * @brief InitToolBar Initialises the tool bar
-     */
-    void InitZoomToolBar();
-
-    /**
-     * @brief SetPropertiesData Sets the values of UI elements
-     * in all the property tabs to the values saved in m_layout
-     */
-    void SetPropertiesData();
-
-    /**
-     * @brief SetPropertyTabCurrentPieceData Sets the values of UI elements
-     * in the Current Piece Tab to the values saved in m_layout
-     */
-    void SetPropertyTabCurrentPieceData();
-
-    /**
-     * @brief SetPropertyTabSheetData Sets the values of UI elements
-     * in the Sheet Tab to the values saved in focused sheet
-     */
-    void SetPropertyTabSheetData();
-
-    /**
-     * @brief SetPropertyTabTilesData Sets the values of UI elements
-     * in the Tiles Tab to the values saved in m_layout
-     */
-    void SetPropertyTabTilesData();
-
-    /**
-    * @brief SetPropertyTabLayoutData Sets the values of UI elements
-    * in the Layout Tab to the values saved in m_layout
-    */
-    void SetPropertyTabLayoutData();
-
-    /**
-     * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.
-     * the signals are blocked before changing the value and unblocked after
-     * @param spinBox pointer to spinbox
-     * @param value spinbox value
-     */
-    void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value);
-
-    /**
-     * @brief SetCheckBoxValue sets the given checkbox to the given value.
-     * the signals are blocked before changing the value and unblocked after
-     * @param checkbox pointer to checkbox
-     * @param value checkbox value
-     */
-    void SetCheckBoxValue(QCheckBox *checkbox, bool value);
-
-    void ReadSettings();
-    void WriteSettings();
-
-    bool MaybeSave();
-
-    /**
-     * @brief generateTiledPdf Generates the tiled Pdf in the given filename
-     * @param fileName output file name
-     */
-    void generateTiledPdf(QString fileName);
-
-
-private slots:
+ private slots:
     /**
      * @brief on_actionOpen_triggered When the menu action File > Open is
      * triggered.
@@ -242,14 +119,14 @@ private slots:
      * triggered.
      * The slot is automatically connected through name convention.
      */
-    void on_actionSave_triggered();
+    bool on_actionSave_triggered();
 
     /**
      * @brief on_actionSaveAs_triggered When the menu action File > Save As
      * is triggered.
      * The slot is automatically connected through name convention.
      */
-    void on_actionSaveAs_triggered();
+    bool on_actionSaveAs_triggered();
 
     /**
      * @brief on_actionImportRawLayout_triggered When the menu action
@@ -257,13 +134,6 @@ private slots:
      * The slot is automatically connected through name convention.
      */
     void on_actionImportRawLayout_triggered();
-
-    /**
-     * @brief on_actionCloseLayout_triggered When the menu action
-     * File > Close Layout is triggered.
-     * The slot is automatically connected through name convention.
-     */
-    void on_actionCloseLayout_triggered();
 
     /**
      * @brief on_actionAboutQt_triggered When the menu action Help > About Qt
@@ -523,6 +393,165 @@ private slots:
      * @param scenePos position mouse.
      */
     void on_MouseMoved(const QPointF &scenePos);
+
+    void on_actionPreferences_triggered();
+
+    void ShowWindow() const;
+
+    void ToolBarStyles();
+
+#if defined(Q_OS_MAC)
+    void AboutToShowDockMenu();
+#endif //defined(Q_OS_MAC)
+
+private:
+    Q_DISABLE_COPY(VPMainWindow)
+    Ui::VPMainWindow *ui;
+
+    VPCarrousel *m_carrousel{nullptr};
+    VPMainGraphicsView *m_graphicsView{nullptr};
+
+    VPCommandLinePtr m_cmd;
+
+    VPLayout *m_layout{new VPLayout()};
+    QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
+
+    VPTileFactory *m_tileFactory{nullptr};
+    VPExporter *m_exporter{nullptr};
+
+    /**
+     * @brief spin box with the scale factor of the graphic view
+     */
+    QPointer<QDoubleSpinBox> m_doubleSpinBoxScale{nullptr};
+
+    /**
+     * @brief mouseCoordinate pointer to label who show mouse coordinate.
+     */
+    QLabel* m_mouseCoordinate{nullptr};
+
+    QLabel* m_statusLabel{nullptr};
+
+    QString curFile{};
+
+    bool isInitialized{false};
+    bool lIsReadOnly{false};
+
+    QSharedPointer<VLockGuard<char>> lock{nullptr};
+
+    /**
+     * @brief CreatePiece creates a piece from the given VLayoutPiece data
+     * @param rawPiece the raw piece data
+     */
+    VPPiece* CreatePiece(const VLayoutPiece &rawPiece);
+
+    /**
+     * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
+     */
+    void SetupMenu();
+
+    /**
+     * @brief InitProperties Init the properties
+     */
+    void InitProperties();
+
+    /**
+     * @brief InitPropertyTabCurrentPiece Inits the current piece tab in the properties
+     */
+    void InitPropertyTabCurrentPiece();
+
+    /**
+     * @brief InitPropertyTabCurrentSheet Inits the current sheet tab in the properties;
+     */
+    void InitPropertyTabCurrentSheet();
+
+    /**
+     * @brief InitPropertyTabLayout Inits the layout tab in the properties
+     */
+    void InitPropertyTabLayout();
+
+    /**
+     * @brief InitPropertyTabTiles Inits the tiles tab in the properties
+     */
+    void InitPropertyTabTiles();
+
+    /**
+     * @brief InitCarrousel Inits the carrousel
+     */
+    void InitCarrousel();
+
+    /**
+     * @brief InitMainGraphics Initialises the puzzle main graphics
+     */
+    void InitMainGraphics();
+
+    /**
+     * @brief InitToolBar Initialises the tool bar
+     */
+    void InitZoomToolBar();
+
+    /**
+     * @brief InitScaleToolBar Initialises the scale tool bar
+     */
+    void InitScaleToolBar();
+
+    /**
+     * @brief SetPropertiesData Sets the values of UI elements
+     * in all the property tabs to the values saved in m_layout
+     */
+    void SetPropertiesData();
+
+    /**
+     * @brief SetPropertyTabCurrentPieceData Sets the values of UI elements
+     * in the Current Piece Tab to the values saved in m_layout
+     */
+    void SetPropertyTabCurrentPieceData();
+
+    /**
+     * @brief SetPropertyTabSheetData Sets the values of UI elements
+     * in the Sheet Tab to the values saved in focused sheet
+     */
+    void SetPropertyTabSheetData();
+
+    /**
+     * @brief SetPropertyTabTilesData Sets the values of UI elements
+     * in the Tiles Tab to the values saved in m_layout
+     */
+    void SetPropertyTabTilesData();
+
+    /**
+    * @brief SetPropertyTabLayoutData Sets the values of UI elements
+    * in the Layout Tab to the values saved in m_layout
+    */
+    void SetPropertyTabLayoutData();
+
+    /**
+     * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.
+     * the signals are blocked before changing the value and unblocked after
+     * @param spinBox pointer to spinbox
+     * @param value spinbox value
+     */
+    void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value);
+
+    /**
+     * @brief SetCheckBoxValue sets the given checkbox to the given value.
+     * the signals are blocked before changing the value and unblocked after
+     * @param checkbox pointer to checkbox
+     * @param value checkbox value
+     */
+    void SetCheckBoxValue(QCheckBox *checkbox, bool value);
+
+    void ReadSettings();
+    void WriteSettings();
+
+    bool MaybeSave();
+
+    /**
+     * @brief generateTiledPdf Generates the tiled Pdf in the given filename
+     * @param fileName output file name
+     */
+    void generateTiledPdf(QString fileName);
+
+    void CreateWindowMenu(QMenu *menu);
 };
 
 #endif // VPMAINWINDOW_H

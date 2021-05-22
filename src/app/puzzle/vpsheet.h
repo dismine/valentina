@@ -70,8 +70,6 @@ class VPSheet : public QObject
 {
     Q_OBJECT
 public:
-
-
     explicit VPSheet(VPLayout* layout);
 
     ~VPSheet();

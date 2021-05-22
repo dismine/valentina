@@ -133,7 +133,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     connect(gradation, &QTimer::timeout, this, &TMainWindow::GradationChanged);
 
     SetupMenu();
-    UpdateWindowTitle();
+
     ReadSettings();
 
 #if defined(Q_OS_MAC)
@@ -278,21 +278,20 @@ bool TMainWindow::LoadFile(const QString &path)
 
         // Check if file already opened
         const QList<TMainWindow*> list = MApplication::VApp()->MainWindows();
-        for (auto w : list)
+        auto w = std::find_if(list.begin(), list.end(),
+                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+        if (w != list.end())
         {
-            if (w->CurrentFile() == path)
-            {
-                w->activateWindow();
-                close();
-                return false;
-            }
+            (*w)->activateWindow();
+            close();
+            return false;
         }
 
         VlpCreateLock(lock, path);
 
         if (not lock->IsLocked())
         {
-            if (not IgnoreLocking(lock->GetLockError(), path))
+            if (not IgnoreLocking(lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
             {
                 return false;
             }
@@ -386,13 +385,6 @@ bool TMainWindow::LoadFile(const QString &path)
     }
 
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ShowToolTip(const QString &toolTip)
-{
-    Q_UNUSED(toolTip)
-    // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -597,10 +589,12 @@ void TMainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
-        VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+        WindowsLocale();
 
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+
+        UpdateWindowTitle();
 
         InitMeasurementUnits();
 
@@ -782,48 +776,9 @@ bool TMainWindow::FileSave()
         return false;
     }
 
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-    const bool isFileWritable = QFileInfo(curFile).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-    if (not isFileWritable)
+    if (not CheckFilePermissions(curFile, this))
     {
-        QMessageBox messageBox(this);
-        messageBox.setIcon(QMessageBox::Question);
-        messageBox.setText(tr("The measurements document has no write permissions."));
-        messageBox.setInformativeText(tr("Do you want to change the premissions?"));
-        messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-        messageBox.setDefaultButton(QMessageBox::Yes);
-
-        if (messageBox.exec() == QMessageBox::Yes)
-        {
-#ifdef Q_OS_WIN32
-            qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-            bool changed = QFile::setPermissions(curFile,
-                                                 QFileInfo(curFile).permissions() | QFileDevice::WriteUser);
-#ifdef Q_OS_WIN32
-            qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
-            if (not changed)
-            {
-                messageBox.setIcon(QMessageBox::Warning);
-                messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(curFile));
-                messageBox.setInformativeText(tr("Could not save the file."));
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.setDefaultButton(QMessageBox::Ok);
-                messageBox.exec();
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     QString error;
@@ -2410,7 +2365,6 @@ void TMainWindow::SetupMenu()
     m_separatorAct->setVisible(false);
     ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct );
 
-
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
     ui->actionQuit->setShortcuts(QKeySequence::Quit);
 
@@ -3289,7 +3243,15 @@ void TMainWindow::UpdateWindowTitle()
     }
     else
     {
-        showName = tr("untitled %1").arg(MApplication::VApp()->MainWindows().size()+1);
+        int index = MApplication::VApp()->MainWindows().indexOf(this);
+        if (index != -1)
+        {
+            showName = tr("untitled %1").arg(index+1);
+        }
+        else
+        {
+            showName = tr("untitled");
+        }
         mType == MeasurementsType::Multisize ? showName += QLatin1String(".vst") : showName += QLatin1String(".vit");
     }
 
@@ -3525,21 +3487,20 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
         // Check if file already opened
         const QList<TMainWindow*> list = MApplication::VApp()->MainWindows();
-        for (auto w : list)
+        auto w = std::find_if(list.begin(), list.end(),
+                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+        if (w != list.end())
         {
-            if (w->CurrentFile() == path)
-            {
-                w->activateWindow();
-                close();
-                return false;
-            }
+            (*w)->activateWindow();
+            close();
+            return false;
         }
 
         VlpCreateLock(lock, path);
 
         if (not lock->IsLocked())
         {
-            if (not IgnoreLocking(lock->GetLockError(), path))
+            if (not IgnoreLocking(lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
             {
                 return false;
             }
@@ -3653,7 +3614,11 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
         }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
         QAction *action = menu->addAction(title, this, SLOT(ShowWindow()));
+#else
+        QAction *action = menu->addAction(title, this, &TMainWindow::ShowWindow);
+#endif //QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
         action->setData(i);
         action->setCheckable(true);
         action->setMenuRole(QAction::NoRole);
@@ -3662,72 +3627,6 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
             action->setChecked(true);
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool TMainWindow::IgnoreLocking(int error, const QString &path)
-{
-    QMessageBox::StandardButton answer = QMessageBox::Abort;
-    if (not MApplication::VApp()->IsTestMode())
-    {
-        switch(error)
-        {
-            case QLockFile::LockFailedError:
-                answer = QMessageBox::warning(this, tr("Locking file"),
-                                              tr("This file already opened in another window. Ignore if you want "
-                                                 "to continue (not recommended, can cause a data corruption)."),
-                                              QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::PermissionError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("The lock file could not be created, for lack of permissions. "
-                                                  "Ignore if you want to continue (not recommended, can cause "
-                                                  "a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::UnknownError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("Unknown error happened, for instance a full partition "
-                                                  "prevented writing out the lock file. Ignore if you want to "
-                                                  "continue (not recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            default:
-                answer = QMessageBox::Abort;
-                break;
-        }
-    }
-
-    if (answer == QMessageBox::Abort)
-    {
-        qCDebug(tMainWindow, "Failed to lock %s", qUtf8Printable(path));
-        qCDebug(tMainWindow, "Error type: %d", error);
-        if (MApplication::VApp()->IsTestMode())
-        {
-            switch(error)
-            {
-                case QLockFile::LockFailedError:
-                    qCCritical(tMainWindow, "%s",
-                               qUtf8Printable(tr("This file already opened in another window.")));
-                    break;
-                case QLockFile::PermissionError:
-                    qCCritical(tMainWindow, "%s",
-                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
-                    break;
-                case QLockFile::UnknownError:
-                    qCCritical(tMainWindow, "%s",
-                               qUtf8Printable(tr("Unknown error happened, for instance a full partition "
-                                                 "prevented writing out the lock file.")));
-                    break;
-                default:
-                    break;
-            }
-
-            qApp->exit(V_EX_NOINPUT);
-        }
-        return false;
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

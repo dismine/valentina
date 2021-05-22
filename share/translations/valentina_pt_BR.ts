@@ -1212,6 +1212,14 @@
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -4927,6 +4935,10 @@ Aplicar configurações de qualquer forma?</translation>
         <source>yyyy-MM-dd</source>
         <translation type="obsolete">yyyy-MM-dd</translation>
     </message>
+    <message>
+        <source>Passmark length:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -6112,6 +6124,22 @@ Aplicar configurações de qualquer forma?</translation>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Curve 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPreferences</name>
@@ -6130,6 +6158,28 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Paths</source>
         <translation>Caminhos</translation>
+    </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>DialogPuzzlePreferences</name>
+    <message>
+        <source>Puzzle preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Configuração</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -8344,7 +8394,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation>Este arquivo já foi aberto em outra janela.</translation>
+        <translation type="vanished">Este arquivo já foi aberto em outra janela.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
@@ -8797,27 +8847,27 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Arquivo bloqueado</translation>
+        <translation type="vanished">Arquivo bloqueado</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Este arquivo já foi aberto em outra janela. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation type="vanished">Este arquivo já foi aberto em outra janela. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation type="vanished">Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation type="vanished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>Não foi possível criar o arquivo blequado, por falta de permissões.</translation>
+        <translation type="vanished">Não foi possível criar o arquivo blequado, por falta de permissões.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado.</translation>
+        <translation type="vanished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
@@ -8977,15 +9027,15 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation>O documento não tem permissões para gravação.</translation>
+        <translation type="vanished">O documento não tem permissões para gravação.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation>Não é possível definir permissões para %1 para gravável.</translation>
+        <translation type="vanished">Não é possível definir permissões para %1 para gravável.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation>Não foi possível salvar o arquivo.</translation>
+        <translation type="vanished">Não foi possível salvar o arquivo.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -9408,10 +9458,6 @@ Você quer salvar suas mudanças?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unable to prepare raw layout data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9457,6 +9503,10 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10157,6 +10207,111 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
 </context>
 <context>
+    <name>Puzzle</name>
+    <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished">As opções de exportação podem ser usadas apenas com um único arquivo de entrada.</translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s manual layout editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The manual layout file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PuzzlePreferencesConfigurationPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Forma</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Idioma</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished">Linguagem GUI:</translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished">Barra de ferramentas</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished">A legenda aparece sob o ícone. (recomendado para iniciantes).</translation>
+    </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PuzzlePreferencesPathPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Forma</translation>
+    </message>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished">Caminhos que Valentina usa</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tipo</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Caminho</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Padrão</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Abrir Diretório</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished">Minhas Medidas Individuais</translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished">Meus Moldes</translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished">Meus modelos</translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished">Meus Layouts</translation>
+    </message>
+</context>
+<context>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
@@ -10567,6 +10722,18 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unplaced pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet 1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11162,7 +11329,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">sem título</translation>
+        <translation>sem título</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -11399,27 +11566,27 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Arquivo bloqueado</translation>
+        <translation type="vanished">Arquivo bloqueado</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Este arquivo já foi aberto em outra janela. Ignore se deseja continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation type="vanished">Este arquivo já foi aberto em outra janela. Ignore se deseja continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation type="vanished">Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation type="vanished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>Não foi possível criar o arquivo blequado, por falta de permissões.</translation>
+        <translation type="vanished">Não foi possível criar o arquivo blequado, por falta de permissões.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado.</translation>
+        <translation type="vanished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado.</translation>
     </message>
     <message>
         <source>Export to CSV</source>
@@ -11467,15 +11634,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>The measurements document has no write permissions.</source>
-        <translation>O documento de medidas não possui permissões de gravação.</translation>
+        <translation type="vanished">O documento de medidas não possui permissões de gravação.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation>Não é possível definir permissões para %1 para gravável.</translation>
+        <translation type="vanished">Não é possível definir permissões para %1 para gravável.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation>Não foi possível salvar o arquivo.</translation>
+        <translation type="vanished">Não foi possível salvar o arquivo.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -11615,10 +11782,6 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12567,6 +12730,10 @@ Deseja salvar suas mudanças?</translation>
         <source>My Patterns</source>
         <translation>Meus Moldes</translation>
     </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished">Meus Layouts</translation>
+    </message>
 </context>
 <context>
     <name>ToggleDetailInLayout</name>
@@ -12848,6 +13015,50 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Export to CSV</source>
         <translation type="unfinished">Exportar para CSV</translation>
+    </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished">O documento de medidas não possui permissões de gravação.</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished">Não é possível definir permissões para %1 para gravável.</translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished">Não foi possível salvar o arquivo.</translation>
+    </message>
+    <message>
+        <source>Locking file</source>
+        <translation type="unfinished">Arquivo bloqueado</translation>
+    </message>
+    <message>
+        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished">Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+    </message>
+    <message>
+        <source>This file already opened in another window.</source>
+        <translation type="unfinished">Este arquivo já foi aberto em outra janela.</translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions.</source>
+        <translation type="unfinished">Não foi possível criar o arquivo blequado, por falta de permissões.</translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado.</translation>
     </message>
 </context>
 <context>
@@ -13598,6 +13809,34 @@ Deseja salvar suas mudanças?</translation>
         <source>The dimension C base</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The filename of exported layout file. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The filename of layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pattern pieces form the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The raw layout data file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode): &lt;not defined&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): &lt;not defined&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -13884,6 +14123,18 @@ Deseja salvar suas mudanças?</translation>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation type="unfinished">Criação do arquivo &apos;%1&apos; falhou! %2</translation>
     </message>
+    <message>
+        <source>Can&apos;t create an flat dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an AAMA dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create an ASTM dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
@@ -14059,6 +14310,114 @@ Deseja salvar suas mudanças?</translation>
     </message>
 </context>
 <context>
+    <name>VPApplication</name>
+    <message>
+        <source>Error parsing file. Program will be terminated.</source>
+        <translation type="unfinished">Erro ao analisar o arquivo. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Error bad id. Program will be terminated.</source>
+        <translation type="unfinished">Erro de identidade incorreta. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Error can&apos;t convert value. Program will be terminated.</source>
+        <translation type="unfinished">Erro impossível converter o valor. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Error empty parameter. Program will be terminated.</source>
+        <translation type="unfinished">Erro de parâmetro vazio. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Error wrong id. Program will be terminated.</source>
+        <translation type="unfinished">Erro de identidate errada. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Something&apos;s wrong!!</source>
+        <translation type="unfinished">Algo está errado!!</translation>
+    </message>
+    <message>
+        <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished">Exceção jogada: %1. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
+        <translation type="unfinished">Não é possível começar a ouvir conexões recebidas no nome &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support openning several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support openning several layout files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide one input file.</source>
+        <translation type="unfinished">Por favor, forneça um arquivo de entrada.</translation>
+    </message>
+</context>
+<context>
+    <name>VPCarrousel</name>
+    <message>
+        <source>Pieces of </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPCarrouselPieceList</name>
+    <message>
+        <source>Move to Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Excluir</translation>
+    </message>
+    <message>
+        <source>Remove from Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPDialogAbout</name>
+    <message>
+        <source>About Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Puzzle version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation type="unfinished">Versão revista:</translation>
+    </message>
+    <message>
+        <source>This program is part of Valentina project.</source>
+        <translation type="unfinished">Este programa é parte do projero Valentina.</translation>
+    </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation type="unfinished">Checar atualizações</translation>
+    </message>
+    <message>
+        <source>Cannot open your default browser</source>
+        <translation type="unfinished">Não é possível abrir seu navegador padrão</translation>
+    </message>
+    <message>
+        <source>Build revision: %1</source>
+        <translation type="unfinished">Criar revisão: %1</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Construído de %1 a %2</translation>
+    </message>
+    <message>
+        <source>Web site : %1</source>
+        <translation type="unfinished">Web site: %1</translation>
+    </message>
+</context>
+<context>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
@@ -14078,6 +14437,573 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Open File</source>
         <translation>Abrir arquivo</translation>
+    </message>
+</context>
+<context>
+    <name>VPGraphicsPiece</name>
+    <message>
+        <source>Move to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPLayoutFileReader</name>
+    <message>
+        <source>Piece List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Got empty attribute &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPMainWindow</name>
+    <message>
+        <source>Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Arquivo</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Ajuda</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished">Menu</translation>
+    </message>
+    <message>
+        <source>Piece Carrousel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current piece properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>DummyName</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UUID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seamline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Seamline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Geometry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotação</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Ângulo:</translation>
+    </message>
+    <message>
+        <source>Rotate the piece by 90° clockwise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate the piece by 90° anti-clockwise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate the piece so that the grainline is vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate the piece so that the grainline is horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No piece selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple pieces selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Largura</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Comprimento</translation>
+    </message>
+    <message>
+        <source>Orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portrait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Margens</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Direita:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Topo:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Esquerda:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Base:</translation>
+    </message>
+    <message>
+        <source>Placement Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished">Controle</translation>
+    </message>
+    <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pieces gap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sticky edges</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished">Exportar</translation>
+    </message>
+    <message>
+        <source>Export Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiles properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled Pdf Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Tiles on sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Tiled Pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished">Layout</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nome</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descrição</translation>
+    </message>
+    <message>
+        <source>Unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning superposition of pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning pieces out of bound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation type="unfinished">&amp;Abrir</translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Salvar</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import Raw Layout Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation type="unfinished">S&amp;air</translation>
+    </message>
+    <message>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Sobre &amp;Qt</translation>
+    </message>
+    <message>
+        <source>About &amp;Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation type="unfinished">Ampliar</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation type="unfinished">Reduzir</translation>
+    </message>
+    <message>
+        <source>Zoom 1:1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom fit best</source>
+        <translation type="unfinished">Ajustar à janela</translation>
+    </message>
+    <message>
+        <source>Zoom sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Preferências</translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; doesn&apos;t exist!</source>
+        <translation type="unfinished">O arquivo &apos;%1&apos; não existe!</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Erro de arquivo.</translation>
+    </message>
+    <message>
+        <source>Unable to read a layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fail to create layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not extract data from file &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Polegadas</translation>
+    </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished">Escala:</translation>
+    </message>
+    <message>
+        <source>untitled %1.vlt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled.vlt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished">somente leitura</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Window</source>
+        <translation type="unfinished">&amp;Nova Janela</translation>
+    </message>
+    <message>
+        <source>Layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished">Abrir arquivo</translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished">Não foi possível salvar o arquivo</translation>
+    </message>
+    <message>
+        <source>layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished">Salvar como</translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window.</source>
+        <translation type="unfinished">Falha ao bloquear. Este arquivo já foi aberto em outra janela.</translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">Não foi possível salvar o arquivo</translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
+        <translation type="unfinished">Falha ao bloquear. Este arquivo já foi aberto em outra janela. Expectativa de colisão ao executar 2 cópias do programa.</translation>
+    </message>
+    <message>
+        <source>Raw Layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">Sobre Qt</translation>
+    </message>
+    <message>
+        <source>PDF Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SVG Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPSheet</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Carta</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Ofício</translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Rolo de 24&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Rolo de 30&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Rolo de 36&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Rolo de 42&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Rolo de 44&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Rolo de 44&quot; {481?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Rolo de 44&quot; {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Rolo de 44&quot; {72i?}</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personalizado</translation>
+    </message>
+</context>
+<context>
+    <name>VPTileFactory</name>
+    <message>
+        <source>Grid ( %1 , %2 )</source>
+        <translation type="unfinished">Grade ( %1, %2 )</translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation type="unfinished">Página %1 de %2</translation>
     </message>
 </context>
 <context>
@@ -14368,6 +15294,10 @@ Deseja salvar suas mudanças?</translation>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPiece</name>
@@ -14624,6 +15554,26 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolCurveIntersectAxis</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Comprimento</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Ângulo</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Rótulo</translation>
+    </message>
+    <message>
+        <source>Segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15499,6 +16449,26 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolPointOfIntersectionCurves</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished">Rótulo</translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 1 segment 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve 2 segment 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

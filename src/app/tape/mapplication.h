@@ -35,7 +35,6 @@
 #include "../vmisc/vabstractapplication.h"
 #include "dialogs/dialogmdatabase.h"
 
-class MApplication;// use in define
 class TMainWindow;
 class QLocalServer;
 

@@ -66,17 +66,9 @@ include(../translations.pri)
 
 # Set "make install" command for Unix-like systems.
 unix{
-    # Prefix for binary file.
-    isEmpty(PREFIX){
-        PREFIX = $$DEFAULT_PREFIX
-    }
-
-    unix:!macx{
-        DATADIR =$$PREFIX/share
-        DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
-
+    !macx{
         # Path to bin file after installation
-        target.path = $$PREFIX/bin
+        target.path = $$BINDIR
 
         INSTALLS += \
             target
@@ -112,8 +104,7 @@ unix{
             QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/puzzle/Info.plist
 
             format.path = $$RESOURCES_DIR/
-            format.files += $$PWD/../../../dist/macx/i-measurements.icns
-            format.files += $$PWD/../../../dist/macx/s-measurements.icns
+            format.files += $$PWD/../../../dist/macx/layout.icns
 
             QMAKE_BUNDLE_DATA += \
                 #libraries \

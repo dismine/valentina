@@ -44,6 +44,13 @@
 #include "../ifc/exception/vexception.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vpsheet.h"
+#include "dialogs/dialogpuzzlepreferences.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
 
 #include <QLoggingCategory>
 
@@ -57,19 +64,18 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
-    QMainWindow(parent),
+    VAbstractMainWindow(parent),
     ui(new Ui::VPMainWindow),
-    m_cmd(cmd)
+    m_cmd(cmd),
+    m_statusLabel(new QLabel(this))
 {
-    m_layout = new VPLayout();
-
     // create a standard sheet
-    VPSheet *sheet = new VPSheet(m_layout);
+    auto *sheet = new VPSheet(m_layout);
     sheet->SetName(QObject::tr("Sheet 1"));
     m_layout->AddSheet(sheet);
     m_layout->SetFocusedSheet();
 
-    // ----- for test purposes, to be removed------------------
+//    // ----- for test purposes, to be removed------------------
     sheet->SetSheetMarginsConverted(1, 1, 1, 1);
     sheet->SetSheetSizeConverted(84.1, 118.9);
     sheet->SetPiecesGapConverted(1);
@@ -82,31 +88,42 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->SetTilesSizeConverted(21,29.7);
     m_layout->SetTilesOrientation(PageOrientation::Portrait);
     m_layout->SetTilesMarginsConverted(1,1,1,1);
-//    m_layout->SetShowTiles(true);
+    m_layout->SetShowTiles(true);
 
     // --------------------------------------------------------
 
     ui->setupUi(this);
 
     // init the tile factory
-    m_tileFactory = new VPTileFactory(m_layout, qApp->Settings());
+    m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
     m_tileFactory->refreshTileInfos();
 
     // init the export tool
     m_exporter = new VPExporter(m_layout, qApp->Settings());
-
-    InitMenuBar();
+    
+    // init status bar
+    statusBar()->addPermanentWidget(m_statusLabel, 1);
+    
+    SetupMenu();
     InitProperties();
     InitCarrousel();
 
     InitMainGraphics();
 
     InitZoomToolBar();
+    InitScaleToolBar();
 
     SetPropertiesData();
 
     ReadSettings();
 
+#if defined(Q_OS_MAC)
+    // Mac OS Dock Menu
+    QMenu *menu = new QMenu(this);
+    connect(menu, &QMenu::aboutToShow, this, &VPMainWindow::AboutToShowDockMenu);
+    AboutToShowDockMenu();
+    menu->setAsDockMenu();
+#endif //defined(Q_OS_MAC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,11 +134,50 @@ VPMainWindow::~VPMainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPMainWindow::LoadFile(QString path)
+auto VPMainWindow::CurrentFile() const -> QString
 {
+    return curFile;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::LoadFile(QString path) -> bool
+{
+    if (not QFileInfo::exists(path))
+    {
+        qCCritical(pWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
+        if (m_cmd->IsTestModeEnabled())
+        {
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
+    }
+
+    // Check if file already opened
+    QList<VPMainWindow*> list = VPApplication::VApp()->MainWindows();
+    auto w = std::find_if(list.begin(), list.end(),
+                          [path](VPMainWindow *window) { return window->CurrentFile() == path; });
+    if (w != list.end())
+    {
+        (*w)->activateWindow();
+        close();
+        return false;
+    }
+
+    VlpCreateLock(lock, path);
+
+    if (not lock->IsLocked())
+    {
+        if (not IgnoreLocking(lock->GetLockError(), path, m_cmd->IsGuiEnabled()))
+        {
+            return false;
+        }
+    }
+
     try
     {
         VLayoutConverter converter(path);
+        m_curFileFormatVersion = converter.GetCurrentFormatVersion();
+        m_curFileFormatVersionStr = converter.GetFormatVersionStr();
         path = converter.Convert();
     }
     catch (VException &e)
@@ -134,31 +190,81 @@ bool VPMainWindow::LoadFile(QString path)
     QFile file(path);
     file.open(QIODevice::ReadOnly);
 
-    QScopedPointer<VPLayoutFileReader> fileReader(new VPLayoutFileReader());
+    VPLayoutFileReader fileReader;
 
     if(m_layout == nullptr)
     {
         m_layout = new VPLayout();
     }
 
-    fileReader->ReadFile(m_layout, &file);
+    fileReader.ReadFile(m_layout, &file);
 
-    // TODO / FIXME : better return value and error handling
+    if (fileReader.hasError())
+    {
+        qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(tr("Unable to read a layout file")));
+        lock.reset();
+
+        if (m_cmd->IsTestModeEnabled())
+        {
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
+    }
+
+    // updates the properties with the loaded data
+    SetPropertiesData();
+
+    // TODO : update the Carrousel and the QGraphicView
 
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPMainWindow::SaveFile(const QString &path)
+void VPMainWindow::LayoutWasSaved(bool saved)
+{
+    setWindowModified(!saved);
+    not lIsReadOnly ? ui->actionSave->setEnabled(!saved): ui->actionSave->setEnabled(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetCurrentFile(const QString &fileName)
+{
+    curFile = fileName;
+    if (not curFile.isEmpty())
+    {
+        auto *settings = VPApplication::VApp()->PuzzleSettings();
+        QStringList files = settings->GetRecentFileList();
+        files.removeAll(fileName);
+        files.prepend(fileName);
+        while (files.size() > MaxRecentFiles)
+        {
+            files.removeLast();
+        }
+        settings->SetRecentFileList(files);
+        UpdateRecentFileActions();
+    }
+
+    UpdateWindowTitle();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 {
     QFile file(path);
     file.open(QIODevice::WriteOnly);
 
-    VPLayoutFileWriter *fileWriter = new VPLayoutFileWriter();
-    fileWriter->WriteFile(m_layout, &file);
+    VPLayoutFileWriter fileWriter;
+    fileWriter.WriteFile(m_layout, &file);
 
-    // TODO / FIXME : better return value and error handling
+    if (fileWriter.hasError())
+    {
+        error = tr("Fail to create layout.");
+        return false;
+    }
 
+    SetCurrentFile(path);
+    LayoutWasSaved(true);
     return true;
 }
 
@@ -207,7 +313,10 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitZoom()
 {
-    m_graphicsView->ZoomFitBest();
+    if (m_graphicsView != nullptr)
+    {
+        m_graphicsView->ZoomFitBest();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -234,13 +343,17 @@ VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::InitMenuBar()
+void VPMainWindow::SetupMenu()
 {
     // most of the actions are connected through name convention (auto-connection)
 
-
     // -------------------- connects the actions for the file menu
+    ui->actionNew->setShortcuts(QKeySequence::New);
+    ui->actionSave->setShortcuts(QKeySequence::Save);
+    ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
+
     connect(ui->actionExit, &QAction::triggered, this, &VPMainWindow::close);
+    ui->actionExit->setShortcuts(QKeySequence::Quit);
 
     // -------------------- connects the actions for the edit menu
     // TODO : initialise the undo / redo
@@ -250,8 +363,43 @@ void VPMainWindow::InitMenuBar()
 
     // Add dock properties action
     QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
-    ui->menuWindows->addAction(actionDockWidgetToolOptions);
+    ui->menuEdit->addAction(actionDockWidgetToolOptions);
 
+    // File
+    m_recentFileActs.fill(nullptr);
+    for (auto & recentFileAct : m_recentFileActs)
+    {
+        auto *action = new QAction(this);
+        recentFileAct = action;
+        connect(action, &QAction::triggered, this, [this]()
+        {
+            if (auto *senderAction = qobject_cast<QAction *>(sender()))
+            {
+                const QString filePath = senderAction->data().toString();
+                if (not filePath.isEmpty())
+                {
+                    LoadFile(filePath);
+                }
+            }
+        });
+        ui->menuFile->insertAction(ui->actionPreferences, recentFileAct);
+        recentFileAct->setVisible(false);
+    }
+
+    m_separatorAct = new QAction(this);
+    m_separatorAct->setSeparator(true);
+    m_separatorAct->setVisible(false);
+    ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct);
+
+    // Actions for recent files loaded by a puzzle window application.
+    UpdateRecentFileActions();
+
+    // Window
+    connect(ui->menuWindow, &QMenu::aboutToShow, this, [this]()
+    {
+        ui->menuWindow->clear();
+        CreateWindowMenu(ui->menuWindow);
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -603,10 +751,7 @@ void VPMainWindow::InitZoomToolBar()
         delete m_doubleSpinBoxScale;
     }
 
-    if (m_mouseCoordinate != nullptr)
-    {
-        delete m_mouseCoordinate;
-    }
+    delete m_mouseCoordinate;
 
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
@@ -631,27 +776,29 @@ void VPMainWindow::InitZoomToolBar()
     zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
+}
 
-    // defined the scale
-    ui->toolBarZoom->addSeparator();
-    QLabel* zoomScale = new QLabel(tr("Scale:"), this);
-    ui->toolBarZoom->addWidget(zoomScale);
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitScaleToolBar()
+{
+    auto* zoomScale = new QLabel(tr("Scale:"), this);
+    ui->toolBarScale->addWidget(zoomScale);
 
     m_doubleSpinBoxScale = new QDoubleSpinBox(this);
     m_doubleSpinBoxScale->setDecimals(1);
-    m_doubleSpinBoxScale->setSuffix("%");
+    m_doubleSpinBoxScale->setSuffix(QChar('%'));
     on_ScaleChanged(m_graphicsView->transform().m11());
     connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){m_graphicsView->Zoom(d/100.0);});
-    ui->toolBarZoom->addWidget(m_doubleSpinBoxScale);
+    ui->toolBarScale->addWidget(m_doubleSpinBoxScale);
 
 
     // define the mouse position
-    ui->toolBarZoom->addSeparator();
+    ui->toolBarScale->addSeparator();
 
-    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
-    ui->toolBarZoom->addWidget(m_mouseCoordinate);
-    ui->toolBarZoom->addSeparator();
+    m_mouseCoordinate = new QLabel(QStringLiteral("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
+    ui->toolBarScale->addWidget(m_mouseCoordinate);
+    ui->toolBarScale->addSeparator();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -671,16 +818,83 @@ void VPMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::UpdateWindowTitle()
+{
+    QString showName;
+    bool isFileWritable = true;
+    if (not curFile.isEmpty())
+    {
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+        isFileWritable = QFileInfo(curFile).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+        showName = StrippedName(curFile);
+    }
+    else
+    {
+        int index = VPApplication::VApp()->MainWindows().indexOf(this);
+        if (index != -1)
+        {
+            showName = tr("untitled %1.vlt").arg(index+1);
+        }
+        else
+        {
+            showName = tr("untitled.vlt");
+        }
+    }
+
+    showName += QLatin1String("[*]");
+
+    if (lIsReadOnly || not isFileWritable)
+    {
+        showName += QStringLiteral(" (") + tr("read only") + QChar(')');
+    }
+
+    setWindowTitle(showName);
+    setWindowFilePath(curFile);
+
+#if defined(Q_OS_MAC)
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
+                                  QLatin1String("/../Resources/layout.icns"));
+    QIcon icon;
+    if (not curFile.isEmpty())
+    {
+        if (not isWindowModified())
+        {
+            icon = fileIcon;
+        }
+        else
+        {
+            static QIcon darkIcon;
+
+            if (darkIcon.isNull())
+            {
+                darkIcon = QIcon(darkenPixmap(fileIcon.pixmap(16, 16)));
+            }
+            icon = darkIcon;
+        }
+    }
+    setWindowIcon(icon);
+#endif //defined(Q_OS_MAC)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ReadSettings()
 {
     qCDebug(pWindow, "Reading settings.");
-    const VPSettings *settings = qApp->PuzzleSettings();
+    const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
     if (settings->status() == QSettings::NoError)
     {
         restoreGeometry(settings->GetGeometry());
         restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), APP_VERSION);
+
+        // Text under tool buton icon
+        ToolBarStyles();
 
         ui->dockWidgetProperties->setVisible(settings->IsDockWidgetPropertiesActive());
         ui->dockWidgetPropertiesContents->setVisible(settings->IsDockWidgetPropertiesContentsActive());
@@ -700,7 +914,7 @@ void VPMainWindow::ReadSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::WriteSettings()
 {
-    VPSettings *settings = qApp->PuzzleSettings();
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));
@@ -837,20 +1051,56 @@ void VPMainWindow::generateTiledPdf(QString fileName)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CreateWindowMenu(QMenu *menu)
+{
+    SCASSERT(menu != nullptr)
+
+    QAction *action = menu->addAction(tr("&New Window"));
+    connect(action, &QAction::triggered, this, []()
+    {
+        VPApplication::VApp()->NewMainWindow()->activateWindow();
+    });
+    action->setMenuRole(QAction::NoRole);
+    menu->addSeparator();
+
+    const QList<VPMainWindow*> windows = VPApplication::VApp()->MainWindows();
+    for (int i = 0; i < windows.count(); ++i)
+    {
+        VPMainWindow *window = windows.at(i);
+
+        QString title = QStringLiteral("%1. %2").arg(i+1).arg(window->windowTitle());
+        const int index = title.lastIndexOf(QLatin1String("[*]"));
+        if (index != -1)
+        {
+            window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
+        }
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+        QAction *action = menu->addAction(title, this, SLOT(ShowWindow()));
+#else
+        QAction *action = menu->addAction(title, this, &VPMainWindow::ShowWindow);
+#endif //QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+        action->setData(i);
+        action->setCheckable(true);
+        action->setMenuRole(QAction::NoRole);
+        if (window->isActiveWindow())
+        {
+            action->setChecked(true);
+        }
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::New");
-    int ret = msgBox.exec();
+    VPApplication::VApp()->NewMainWindow();
+}
 
-    Q_UNUSED(ret);
-
-    // TODO
-
-
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowToolTip(const QString &toolTip)
+{
+    m_statusLabel->setText(toolTip);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -878,101 +1128,195 @@ void VPMainWindow::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+
+        WindowsLocale();
+        UpdateWindowTitle();
+    }
+
+    // remember to call base class implementation
+    QMainWindow::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VPMainWindow::RecentFileList() const
+{
+    return VPApplication::VApp()->PuzzleSettings()->GetRecentFileList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionOpen_triggered()
 {
     qCDebug(pWindow, "Openning puzzle layout file.");
 
     const QString filter(tr("Layout files") + QLatin1String(" (*.vlt)"));
+    //Use standard path to individual measurements
+    const QString pathTo = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
 
-    //Get list last open files
-    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
-    QString dir;
-    if (recentFiles.isEmpty())
+    bool usedNotExistedDir = false;
+    QDir directory(pathTo);
+    if (not directory.exists())
     {
-        dir = QDir::homePath();
-    }
-    else
-    {
-        //Absolute path to last open file
-        dir = QFileInfo(recentFiles.first()).absolutePath();
-    }
-    qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
-
-    if (filePath.isEmpty())
-    {
-        return;
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
+                                                       VAbstractApplication::VApp()->NativeFileDialog());
 
-    // TODO : if m_layout == nullptr, open in current window
-    // otherwise open in new window
-
-    // TODO : if layout file has a lock, warning message
-
-
-    if(!LoadFile(filePath))
+    if (not mPath.isEmpty())
     {
-        return;
+        VPApplication::VApp()->NewMainWindow()->LoadFile(mPath);
     }
 
-    // Updates the list of recent files
-    recentFiles.removeAll(filePath);
-    recentFiles.prepend(filePath);
-    while (recentFiles.size() > MaxRecentFiles)
+    if (usedNotExistedDir)
     {
-        recentFiles.removeLast();
+        QDir(pathTo).rmpath(QChar('.'));
     }
-    qApp->PuzzleSettings()->SetRecentFileList(recentFiles);
-
-    // updates the properties with the loaded data
-    SetPropertiesData();
-
-    // TODO : update the Carrousel and the QGraphicView
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_actionSave_triggered()
+bool VPMainWindow::on_actionSave_triggered()
 {
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::Save");
-    int ret = msgBox.exec();
+    if (curFile.isEmpty() || lIsReadOnly)
+    {
+        return on_actionSaveAs_triggered();
+    }
 
-    Q_UNUSED(ret);
+    if (m_curFileFormatVersion < VLayoutConverter::LayoutMaxVer
+            && not ContinueFormatRewrite(m_curFileFormatVersionStr, VLayoutConverter::LayoutMaxVerStr))
+    {
+        return false;
+    }
 
-    // TODO
+    if (not CheckFilePermissions(curFile, this))
+    {
+        return false;
+    }
+
+    QString error;
+    if (not SaveLayout(curFile, error))
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setText(tr("Could not save the file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+        return false;
+    }
+
+    m_curFileFormatVersion = VLayoutConverter::LayoutMaxVer;
+    m_curFileFormatVersionStr = VLayoutConverter::LayoutMaxVerStr;
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_actionSaveAs_triggered()
+bool VPMainWindow::on_actionSaveAs_triggered()
 {
-    // TODO / FIXME : See valentina how the save is done over there. we need to add the
-    // extension .vlt, check for empty file names etc.
+    QString filters = tr("Layout files") + QStringLiteral(" (*.vlt)");
+    QString suffix = QStringLiteral("vlt");
+    QString fName = tr("layout") + QChar('.') + suffix;
 
-    //Get list last open files
-    QStringList recentFiles = qApp->PuzzleSettings()->GetRecentFileList();
     QString dir;
-    if (recentFiles.isEmpty())
+    if (curFile.isEmpty())
     {
-        dir = QDir::homePath();
+        dir = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
     }
     else
     {
-        //Absolute path to last open file
-        dir = QFileInfo(recentFiles.first()).absolutePath();
+        dir = QFileInfo(curFile).absolutePath();
     }
 
-    QString filters(tr("Layout files") + QLatin1String("(*.vlt)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("Layout") + QLatin1String(".vlt"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
 
-    SaveFile(fileName);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir(dir).rmpath(QChar('.'));
+        }
+    });
+
+    if (fileName.isEmpty())
+    {
+        return false;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QChar('.') + suffix;
+    }
+
+    if (QFileInfo::exists(fileName) && curFile != fileName)
+    {
+        // Temporary try to lock the file before saving
+        VLockGuard<char> tmp(fileName);
+        if (not tmp.IsLocked())
+        {
+            qCCritical(pWindow, "%s",
+                       qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
+            return false;
+        }
+    }
+
+    // Need for restoring previous state in case of failure
+//    const bool readOnly = m_layout->IsReadOnly();
+
+//    m_layout->SetReadOnly(false);
+    lIsReadOnly = false;
+
+    QString error;
+    bool result = SaveLayout(fileName, error);
+    if (not result)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+
+        // Restore previous state
+//        m_layout->SetReadOnly(readOnly);
+//        lIsReadOnly = readOnly;
+        return false;
+    }
+
+    m_curFileFormatVersion = VLayoutConverter::LayoutMaxVer;
+    m_curFileFormatVersionStr = VLayoutConverter::LayoutMaxVerStr;
+
+//    UpdatePadlock(false);
+    UpdateWindowTitle();
+
+    if (curFile == fileName && not lock.isNull())
+    {
+        lock->Unlock();
+    }
+    VlpCreateLock(lock, fileName);
+    if (not lock->IsLocked())
+    {
+        qCCritical(pWindow, "%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window. "
+                                                    "Expect collissions when run 2 copies of the program.")));
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1002,19 +1346,6 @@ void VPMainWindow::on_actionImportRawLayout_triggered()
 
     // TODO / FIXME : better error handling
 
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_actionCloseLayout_triggered()
-{
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::CloseLayout");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(ret);
-
-    // TODO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1509,3 +1840,64 @@ void VPMainWindow::on_MouseMoved(const QPointF &scenePos)
                                    .arg(UnitsToStr(m_layout->GetUnit(), true)));
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowWindow() const
+{
+    if (auto *action = qobject_cast<QAction*>(sender()))
+    {
+        const QVariant v = action->data();
+        if (v.canConvert<int>())
+        {
+            const int offset = qvariant_cast<int>(v);
+            const QList<VPMainWindow*> windows = VPApplication::VApp()->MainWindows();
+            windows.at(offset)->raise();
+            windows.at(offset)->activateWindow();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPreferences_triggered()
+{
+    // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
+    static QPointer<DialogPuzzlePreferences> guard;// Prevent any second run
+    if (guard.isNull())
+    {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+        auto *preferences = new DialogPuzzlePreferences(this);
+        // QScopedPointer needs to be sure any exception will never block guard
+        QScopedPointer<DialogPuzzlePreferences> dlg(preferences);
+        guard = preferences;
+        // Must be first
+        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
+        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+        QGuiApplication::restoreOverrideCursor();
+        dlg->exec();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ToolBarStyles()
+{
+    ToolBarStyle(ui->mainToolBar);
+    ToolBarStyle(ui->toolBarZoom);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_MAC)
+void VPMainWindow::AboutToShowDockMenu()
+{
+    if (QMenu *menu = qobject_cast<QMenu *>(sender()))
+    {
+        menu->clear();
+        CreateWindowMenu(menu);
+
+        menu->addSeparator();
+
+        QAction *actionPreferences = menu->addAction(tr("Preferences"));
+        actionPreferences->setMenuRole(QAction::NoRole);
+        connect(actionPreferences, &QAction::triggered, this, &VPMainWindow::Preferences);
+    }
+}
+#endif //defined(Q_OS_MAC)

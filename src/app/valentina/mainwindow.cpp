@@ -3253,52 +3253,9 @@ bool MainWindow::on_actionSave_triggered()
             return false;
         }
 
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-        if (not isFileWritable)
+        if (not CheckFilePermissions(VAbstractValApplication::VApp()->GetPatternPath(), this))
         {
-            QMessageBox messageBox(this);
-            messageBox.setIcon(QMessageBox::Question);
-            messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText(tr("Do you want to change the premissions?"));
-            messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-            messageBox.setDefaultButton(QMessageBox::Yes);
-
-            if (messageBox.exec() == QMessageBox::Yes)
-            {
-#ifdef Q_OS_WIN32
-                qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-                bool changed =
-                        QFile::setPermissions(VAbstractValApplication::VApp()->GetPatternPath(),
-                                              QFileInfo(VAbstractValApplication::VApp()
-                                                        ->GetPatternPath()).permissions() | QFileDevice::WriteUser);
-#ifdef Q_OS_WIN32
-                qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
-                if (not changed)
-                {
-                    QMessageBox messageBox(this);
-                    messageBox.setIcon(QMessageBox::Warning);
-                    messageBox.setText(tr("Cannot set permissions for %1 to writable.")
-                                       .arg(VAbstractValApplication::VApp()->GetPatternPath()));
-                    messageBox.setInformativeText(tr("Could not save the file."));
-                    messageBox.setDefaultButton(QMessageBox::Ok);
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.exec();
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         QString error;
@@ -5325,7 +5282,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     }
     else
     {
-        if (not IgnoreLocking(lock->GetLockError(), fileName))
+        if (not IgnoreLocking(lock->GetLockError(), fileName, VApplication::IsGUIMode()))
         {
             return false;
         }
@@ -6431,73 +6388,6 @@ void MainWindow::UpdateWindowTitle()
     }
     setWindowIcon(icon);
 #endif //defined(Q_OS_MAC)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::IgnoreLocking(int error, const QString &path)
-{
-    QMessageBox::StandardButton answer = QMessageBox::Abort;
-    if (VApplication::IsGUIMode())
-    {
-        switch(error)
-        {
-            case QLockFile::LockFailedError:
-                answer = QMessageBox::warning(this, tr("Locking file"),
-                                               tr("This file already opened in another window. Ignore if you want "
-                                                  "to continue (not recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::PermissionError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("The lock file could not be created, for lack of permissions. "
-                                                  "Ignore if you want to continue (not recommended, can cause "
-                                                  "a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::UnknownError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("Unknown error happened, for instance a full partition prevented "
-                                                  "writing out the lock file. Ignore if you want to continue (not "
-                                                  "recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            default:
-                answer = QMessageBox::Abort;
-                break;
-        }
-    }
-
-    if (answer == QMessageBox::Abort)
-    {
-        qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(path));
-        qCDebug(vMainWindow, "Error type: %d", error);
-        Clear();
-        if (not VApplication::IsGUIMode())
-        {
-            switch(error)
-            {
-                case QLockFile::LockFailedError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("This file already opened in another window.")));
-                    break;
-                case QLockFile::PermissionError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
-                    break;
-                case QLockFile::UnknownError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("Unknown error happened, for instance a full partition prevented "
-                                                 "writing out the lock file.")));
-                    break;
-                default:
-                    break;
-            }
-
-            qApp->exit(V_EX_NOINPUT);
-        }
-        return false;
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

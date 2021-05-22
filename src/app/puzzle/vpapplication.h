@@ -35,14 +35,8 @@
 
 #include <memory>
 
-class VPApplication;// use in define
 class VPMainWindow;
 class QLocalServer;
-
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast<VPApplication*>(VAbstractApplication::instance()))
 
 enum class SocketConnection : bool {Client = false, Server = true};
 
@@ -58,6 +52,7 @@ public:
     virtual bool IsAppInGUIMode() const override;
     VPMainWindow *MainWindow();
     QList<VPMainWindow*> MainWindows();
+    VPMainWindow *NewMainWindow();
     VPMainWindow *NewMainWindow(const VPCommandLinePtr &cmd);
 
     void InitOptions();
@@ -70,7 +65,9 @@ public:
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
     void ProcessArguments(const VPCommandLinePtr &cmd);
-    VPCommandLinePtr CommandLine() const;
+
+    static VPCommandLinePtr CommandLine();
+    static VPApplication *VApp();
 public slots:
     void ProcessCMD();
 
@@ -86,8 +83,8 @@ private slots:
 
 private:
     Q_DISABLE_COPY(VPApplication)
-    QList<QPointer<VPMainWindow> > mainWindows;
-    QLocalServer *localServer;
+    QList<QPointer<VPMainWindow> > mainWindows{};
+    QLocalServer *localServer{nullptr};
 
     void Clean();
 };

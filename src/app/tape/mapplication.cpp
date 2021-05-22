@@ -374,7 +374,7 @@ bool MApplication::IsTestMode() const
  */
 bool MApplication::IsAppInGUIMode() const
 {
-    return IsTestMode();
+    return not IsTestMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -854,6 +854,7 @@ TMainWindow *MApplication::NewMainWindow()
     if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
+        tape->UpdateWindowTitle();
     }
     return tape;
 }

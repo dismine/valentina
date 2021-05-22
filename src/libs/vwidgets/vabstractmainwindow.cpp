@@ -31,17 +31,30 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vsysexits.h"
 #include "dialogs/dialogexporttocsv.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 #include <QStyle>
 #include <QToolBar>
 #include <QFileDialog>
 #include <QAction>
+#include <QLockFile>
+#include <QMessageBox>
 
 #if defined(Q_OS_MAC)
-#include "../vwidgets/vmaingraphicsview.h"
 #include <QStyleFactory>
 #endif
+
+#include <QLoggingCategory>
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(abstactMainWindow, "abs.MainWindow")
+
+QT_WARNING_POP
 
 namespace
 {
@@ -135,6 +148,13 @@ VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ShowToolTip(const QString &toolTip)
+{
+    Q_UNUSED(toolTip)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
                                                 const QString &maxFormatVersion)
 {
@@ -198,6 +218,16 @@ QString VAbstractMainWindow::CSVFilePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
+{
+    Q_UNUSED(fileName)
+    Q_UNUSED(withHeader)
+    Q_UNUSED(mib)
+    Q_UNUSED(separator)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractMainWindow::UpdateRecentFileActions()
 {
     const QStringList files = RecentFileList();
@@ -217,6 +247,121 @@ void VAbstractMainWindow::UpdateRecentFileActions()
     }
 
     m_separatorAct->setVisible(numRecentFiles>0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *messageBoxParent) -> bool
+{
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+    // cppcheck-suppress unreadVariable
+    const bool isFileWritable = QFileInfo(path).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+    if (not isFileWritable)
+    {
+        QMessageBox messageBox(messageBoxParent);
+        messageBox.setIcon(QMessageBox::Question);
+        messageBox.setText(tr("The measurements document has no write permissions."));
+        messageBox.setInformativeText(tr("Do you want to change the premissions?"));
+        messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+        messageBox.setDefaultButton(QMessageBox::Yes);
+
+        if (messageBox.exec() == QMessageBox::Yes)
+        {
+#ifdef Q_OS_WIN32
+            qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+            bool changed = QFile::setPermissions(path, QFileInfo(path).permissions() | QFileDevice::WriteUser);
+#ifdef Q_OS_WIN32
+            qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
+            if (not changed)
+            {
+                messageBox.setIcon(QMessageBox::Warning);
+                messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(path));
+                messageBox.setInformativeText(tr("Could not save the file."));
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.setDefaultButton(QMessageBox::Ok);
+                messageBox.exec();
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool guiMode)
+{
+    QMessageBox::StandardButton answer = QMessageBox::Abort;
+    if (guiMode)
+    {
+        switch(error)
+        {
+            case QLockFile::LockFailedError:
+                answer = QMessageBox::warning(this, tr("Locking file"),
+                                              tr("This file already opened in another window. Ignore if you want "
+                                                 "to continue (not recommended, can cause a data corruption)."),
+                                              QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            case QLockFile::PermissionError:
+                answer = QMessageBox::question(this, tr("Locking file"),
+                                               tr("The lock file could not be created, for lack of permissions. "
+                                                  "Ignore if you want to continue (not recommended, can cause "
+                                                  "a data corruption)."),
+                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            case QLockFile::UnknownError:
+                answer = QMessageBox::question(this, tr("Locking file"),
+                                               tr("Unknown error happened, for instance a full partition "
+                                                  "prevented writing out the lock file. Ignore if you want to "
+                                                  "continue (not recommended, can cause a data corruption)."),
+                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            default:
+                answer = QMessageBox::Abort;
+                break;
+        }
+    }
+
+    if (answer == QMessageBox::Abort)
+    {
+        qCDebug(abstactMainWindow, "Failed to lock %s", qUtf8Printable(path));
+        qCDebug(abstactMainWindow, "Error type: %d", error);
+        if (not guiMode)
+        {
+            switch(error)
+            {
+                case QLockFile::LockFailedError:
+                    qCCritical(abstactMainWindow, "%s",
+                               qUtf8Printable(tr("This file already opened in another window.")));
+                    break;
+                case QLockFile::PermissionError:
+                    qCCritical(abstactMainWindow, "%s",
+                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
+                    break;
+                case QLockFile::UnknownError:
+                    qCCritical(abstactMainWindow, "%s",
+                               qUtf8Printable(tr("Unknown error happened, for instance a full partition "
+                                                 "prevented writing out the lock file.")));
+                    break;
+                default:
+                    break;
+            }
+
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

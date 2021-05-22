@@ -89,7 +89,7 @@ void DialogTapePreferences::showEvent(QShowEvent *event)
     // do your init stuff here
 
     QSize sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
-    if (sz.isEmpty() == false)
+    if (not sz.isEmpty())
     {
         resize(sz);
     }
