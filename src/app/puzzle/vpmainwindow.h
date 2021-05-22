@@ -417,7 +417,6 @@ private:
     QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
     VPTileFactory *m_tileFactory{nullptr};
-    VPExporter *m_exporter{nullptr};
 
     /**
      * @brief spin box with the scale factor of the graphic view

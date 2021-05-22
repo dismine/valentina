@@ -1,8 +1,6 @@
 #include "vpexporter.h"
 
-#include <QtSvg>
-#include <QImage>
-#include <QImageWriter>
+#include <QFileDialog>
 
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vpsheet.h"
@@ -10,9 +8,7 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPExporter::VPExporter(VPLayout* layout, VCommonSettings *commonSettings):
-    m_layout(layout),
-    m_commonSettings(commonSettings)
+VPExporter::VPExporter()
 {
 
 }
@@ -24,14 +20,14 @@ VPExporter::~VPExporter()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPExporter::Export(LayoutExportFormats format, VPMainGraphicsView *mainGraphicsView)
+void VPExporter::Export(VPLayout* layout, LayoutExportFormats format, VPMainGraphicsView *mainGraphicsView)
 {
     QString dir = QDir::homePath();
     QString filters(ExportFormatDescription(format));
 
     // is it ok to have a null ptr hier as a parent?
     QString fileName = QFileDialog::getSaveFileName(nullptr, tr("Save as"),
-                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + ExportFormatSuffix(format),
+                                                    dir + QLatin1String("/") + layout->GetFocusedSheet()->GetName() + ExportFormatSuffix(format),
                                                     filters, nullptr
 #ifdef Q_OS_LINUX
                                                     , QFileDialog::DontUseNativeDialog
@@ -42,159 +38,39 @@ void VPExporter::Export(LayoutExportFormats format, VPMainGraphicsView *mainGrap
     {
         mainGraphicsView->PrepareForExport();
 
+        SetFileName(fileName);
+
+        QSizeF size = QSizeF(layout->GetFocusedSheet()->GetSheetSize());
+        if(layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
+        {
+            size.transpose();
+        }
+        const QRectF rect = QRectF(0, 0, size.width(), size.height());
+
+        SetImageRect(rect);
+
         switch(format)
         {
             case LayoutExportFormats::SVG:
-                ExportToSVG(fileName, mainGraphicsView);
+                ExportToSVG(mainGraphicsView->scene());
             break;
 
             case LayoutExportFormats::PDF:
-                ExportToPDF(fileName, mainGraphicsView);
-            break;
-
-            case LayoutExportFormats::PNG:
-                ExportToPNG(fileName, mainGraphicsView);
+                ExportToPDF(mainGraphicsView->scene());
             break;
 
             case LayoutExportFormats::TIF:
-                ExportToTIF(fileName, mainGraphicsView);
+                ExportToTIF(mainGraphicsView->scene());
             break;
 
             default:
                 // do nothing
             break;
         }
+
         mainGraphicsView->CleanAfterExport();
     }
 }
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPExporter::ExportToSVG(QString fileName, VPMainGraphicsView *mainGraphicsView)
-{
-    QSizeF size = QSizeF(m_layout->GetFocusedSheet()->GetSheetSize());
-    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
-    {
-        size.transpose();
-    }
-    const QRectF rect = QRectF(0, 0, size.width(), size.height());
-
-    QSvgGenerator generator;
-    generator.setFileName(fileName);
-    generator.setResolution(static_cast<int>(PrintDPI));
-    generator.setSize(QSize(qRound(size.width()),qRound(size.height())));
-    generator.setViewBox(rect);
-    generator.setTitle(m_layout->GetFocusedSheet()->GetName());
-    generator.setDescription(m_layout->GetDescription().toHtmlEscaped());
-
-    QPainter painter;
-    painter.begin(&generator);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, m_commonSettings->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    mainGraphicsView->GetScene()->render(&painter, rect, rect, Qt::IgnoreAspectRatio);
-    painter.end();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPExporter::ExportToPDF(QString fileName, VPMainGraphicsView *mainGraphicsView)
-{
-    QSizeF size = QSizeF(m_layout->GetFocusedSheet()->GetSheetSize());
-    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
-    {
-        size.transpose();
-    }
-    const QRectF rect = QRectF(0, 0, size.width(), size.height());
-
-    QPrinter printer;
-    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
-                       QCoreApplication::applicationVersion());
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(fileName);
-    printer.setDocName(QFileInfo(fileName).fileName());
-    printer.setResolution(static_cast<int>(PrintDPI));
-    printer.setPageOrientation(QPageLayout::Portrait);
-    printer.setFullPage(true);
-
-    qreal width = FromPixel(size.width(), Unit::Mm);
-    qreal height = FromPixel(size.height(), Unit::Mm);
-
-    if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
-    {
-        qWarning() << tr("Cannot set printer page size");
-    }
-
-    QPainter painter;
-    if (not painter.begin(&printer))
-    { // failed to open file
-        qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(fileName));
-        return;
-    }
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, m_commonSettings->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    mainGraphicsView->GetScene()->render(&painter, rect, rect, Qt::IgnoreAspectRatio);
-    painter.end();
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPExporter::ExportToPNG(QString filename, VPMainGraphicsView *mainGraphicsView)
-{
-    QSizeF size = QSizeF(m_layout->GetFocusedSheet()->GetSheetSize());
-    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
-    {
-        size.transpose();
-    }
-    const QRectF rect = QRectF(0, 0, size.width(), size.height());
-
-    QImage image(QSize(qFloor(size.width()), qFloor((size.height()))), QImage::Format_ARGB32);
-    image.fill(Qt::white);
-
-    QPainter painter(&image);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, m_commonSettings->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush(QBrush(Qt::NoBrush));
-
-    mainGraphicsView->GetScene()->render(&painter, rect, rect, Qt::IgnoreAspectRatio);
-    image.save(filename);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPExporter::ExportToTIF(QString filename, VPMainGraphicsView *mainGraphicsView)
-{
-     QSizeF size = QSizeF(m_layout->GetFocusedSheet()->GetSheetSize());
-    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
-    {
-        size.transpose();
-    }
-    const QRectF rect = QRectF(0, 0, size.width(), size.height());
-
-    QImage image(QSize(qFloor(size.width()), qFloor((size.height()))), QImage::Format_ARGB32);
-    image.fill(Qt::white);
-
-    QPainter painter(&image);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, m_commonSettings->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush(QBrush(Qt::NoBrush));
-
-    mainGraphicsView->GetScene()->render(&painter, rect, rect, Qt::IgnoreAspectRatio);
-
-
-    // FIXME, not working in ubuntu 21.04 of rlt "format not supported"
-
-    QImageWriter writer;
-    writer.setFormat("tiff");
-    writer.setCompression(1); // LZW-compression
-    writer.setFileName(filename);
-
-    if (not writer.write(image))
-    { // failed to save file
-        qCritical() << qUtf8Printable(tr("Can't save file '%1'. Error: %2.").arg(filename, writer.errorString()));
-        return;
-    }
-}
-
 
 
 // FIXME Bad copy paste from DialogSaveLayout, because I didn't know how to call this function from here
@@ -361,7 +237,7 @@ QVector<std::pair<QString, LayoutExportFormats> > VPExporter::InitFormats()
 
     InitFormat(LayoutExportFormats::SVG);
     InitFormat(LayoutExportFormats::PDF);
-    InitFormat(LayoutExportFormats::PNG);
+//    InitFormat(LayoutExportFormats::PNG);
 
 //    InitFormat(LayoutExportFormats::OBJ);
 

@@ -98,9 +98,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
     m_tileFactory->refreshTileInfos();
 
-    // init the export tool
-    m_exporter = new VPExporter(m_layout, VPApplication::VApp()->Settings());
-    
     // init status bar
     statusBar()->addPermanentWidget(m_statusLabel, 1);
     
@@ -494,7 +491,8 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
 
     // ---------------------- export format --------------------------
 
-    for (auto &v : m_exporter->InitFormats())
+    VPExporter exporter;
+    for (auto &v : exporter.InitFormats())
     {
         ui->comboBoxSheetExportFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
     }
@@ -1684,7 +1682,8 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
     LayoutExportFormats format = static_cast<LayoutExportFormats>(ui->comboBoxSheetExportFormat->currentData().toInt());
 
-    m_exporter->Export(format, m_graphicsView);
+    VPExporter exporter;
+    exporter.Export(m_layout, format, m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
