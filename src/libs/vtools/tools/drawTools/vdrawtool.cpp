@@ -176,7 +176,7 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     Q_UNUSED(obj)
 
     doc->SetAttribute(tag, VDomDocument::AttrId, m_id);
-    doc->SetAttributeOrRemoveIf(tag, AttrNotes, m_notes, m_notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(tag, AttrNotes, m_notes, [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

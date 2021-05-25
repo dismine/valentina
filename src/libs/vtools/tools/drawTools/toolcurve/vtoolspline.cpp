@@ -345,8 +345,8 @@ void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 
     SetSplineAttributes(domElement, spl);
 }
@@ -655,8 +655,10 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
     doc->SetAttribute(domElement, AttrColor,   spl.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, spl.GetApproximationScale());
-    doc->SetAttributeOrRemoveIf(domElement, AttrDuplicate, spl.GetDuplicate(), spl.GetDuplicate() <= 0);
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, spl.GetAliasSuffix(), spl.GetAliasSuffix().isEmpty());
+    doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, spl.GetDuplicate(),
+                                         [](quint32 duplicate){return duplicate == 0;});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, spl.GetAliasSuffix(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
 
     if (domElement.hasAttribute(AttrKCurve))
     {

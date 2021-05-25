@@ -130,19 +130,24 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         if (not text.isNull())
         {
             SetAttribute(text, AttrShow, data.showText);
-            SetAttributeOrRemoveIf(text, AttrText, data.text, data.text.isEmpty());
-            SetAttributeOrRemoveIf(text, AttrRotation, data.textRotation, data.textRotation == 0);
-            const QString fontString = data.font.toString();
-            SetAttributeOrRemoveIf(text, AttrFont, fontString, fontString.isEmpty());
+            SetAttributeOrRemoveIf<QString>(text, AttrText, data.text,
+                                            [](const QString &text){return text.isEmpty();});
+            SetAttributeOrRemoveIf<int>(text, AttrRotation, data.textRotation,
+                                        [](int textRotation){return textRotation == 0;});
+            SetAttributeOrRemoveIf<QString>(text, AttrFont, data.font.toString(),
+                                            [](const QString &fontString){return fontString.isEmpty();});
         }
 
         QDomElement image = rootElement.firstChildElement(TagImage);
         if (not image.isNull())
         {
             SetAttribute(image, AttrShow, data.showImage);
-            SetAttributeOrRemoveIf(image, AttrPath, data.path, data.path.isEmpty());
-            SetAttributeOrRemoveIf(image, AttrRotation, data.imageRotation, data.imageRotation == 0);
-            SetAttributeOrRemoveIf(image, AttrGrayscale, data.grayscale, data.grayscale == false);
+            SetAttributeOrRemoveIf<QString>(image, AttrPath, data.path,
+                                            [](const QString &path){return path.isEmpty();});
+            SetAttributeOrRemoveIf<int>(image, AttrRotation, data.imageRotation,
+                                        [](int imageRotation){return imageRotation == 0;});
+            SetAttributeOrRemoveIf<bool>(image, AttrGrayscale, data.grayscale,
+                                         [](bool grayscale){return not grayscale;});
         }
     }
 }

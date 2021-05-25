@@ -393,9 +393,8 @@ void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
-
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

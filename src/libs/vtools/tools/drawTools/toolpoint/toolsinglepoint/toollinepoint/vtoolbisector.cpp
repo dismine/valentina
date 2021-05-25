@@ -264,9 +264,8 @@ void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
     doc->SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogTool->GetThirdPointId()));
-
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -541,9 +541,10 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         }
     }
 
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(), not node.IsExcluded());
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(),
-                                node.IsCheckUniqueness());
+    doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(),
+                                      [](bool exclude){return not exclude;});
+    doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(),
+                                      [](bool uniqueness){return uniqueness;});
 
     switch (type)
     {
@@ -600,13 +601,13 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         nod.removeAttribute(VAbstractPattern::AttrNodePassmarkAngle);
     }
 
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeShowSecondPassmark, node.IsShowSecondPassmark(),
-                                node.IsShowSecondPassmark());
+    doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeShowSecondPassmark, node.IsShowSecondPassmark(),
+                                      [](bool show){return show;});
 
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrManualPassmarkLength, node.IsManualPassmarkLength(),
-                                not node.IsManualPassmarkLength());
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrPassmarkLength, node.GetFormulaPassmarkLength(),
-                                not node.IsManualPassmarkLength());
+    doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrManualPassmarkLength, node.IsManualPassmarkLength(),
+                                      [](bool manualPassmarkLength){return not manualPassmarkLength;});
+    doc->SetAttributeOrRemoveIf<QString>(nod, VAbstractPattern::AttrPassmarkLength, node.GetFormulaPassmarkLength(),
+                                         [node](const QString &){return not node.IsManualPassmarkLength();});
 
     return nod;
 }

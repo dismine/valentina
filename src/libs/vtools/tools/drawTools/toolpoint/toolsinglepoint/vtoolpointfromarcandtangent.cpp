@@ -301,8 +301,8 @@ void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quin
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
 
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

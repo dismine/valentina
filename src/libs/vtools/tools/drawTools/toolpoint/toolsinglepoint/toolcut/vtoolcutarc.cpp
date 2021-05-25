@@ -233,13 +233,14 @@ void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                dialogTool->GetAliasSuffix1().isEmpty());
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                dialogTool->GetAliasSuffix2().isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

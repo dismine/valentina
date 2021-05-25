@@ -341,11 +341,10 @@ void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenci
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
-                                dialogTool->GetAliasSuffix().isEmpty());
-
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

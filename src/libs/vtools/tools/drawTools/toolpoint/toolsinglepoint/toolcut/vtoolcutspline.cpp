@@ -230,13 +230,12 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                dialogTool->GetAliasSuffix1().isEmpty());
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                dialogTool->GetAliasSuffix2().isEmpty());
-
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

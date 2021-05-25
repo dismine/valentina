@@ -103,7 +103,7 @@ public:
 
     template <typename T>
     void SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
-                                bool removeCondition) const;
+                                const std::function<bool(const T&)> &removeCondition) const;
 
     static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
     static int     GetParametrInt(const QDomElement& domElement, const QString &name, const QString &defValue);
@@ -218,9 +218,9 @@ inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline void VDomDocument::SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
-                                                 bool removeCondition) const
+                                                 const std::function<bool(const T&)> &removeCondition) const
 {
-    not removeCondition ? SetAttribute(domElement, name, value) : domElement.removeAttribute(name);
+    not removeCondition(value) ? SetAttribute(domElement, name, value) : domElement.removeAttribute(name);
 }
 
 QT_WARNING_POP
