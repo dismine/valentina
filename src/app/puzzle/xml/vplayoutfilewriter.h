@@ -68,6 +68,10 @@ private:
 
     template <size_t N>
     void SetAttribute(const QString &name, const char (&value)[N]);
+
+    template <typename T>
+    void SetAttributeOrRemoveIf(const QString &name, const T &value,
+                                const std::function<bool(const T&)> &removeCondition);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,6 +109,17 @@ template <size_t N>
 inline void VPLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N])
 {
     writeAttribute(name, QString(value));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void VPLayoutFileWriter::SetAttributeOrRemoveIf(const QString &name, const T &value,
+                                                       const std::function<bool(const T&)> &removeCondition)
+{
+    if (not removeCondition(value))
+    {
+        SetAttribute(name, value);
+    }
 }
 
 #endif // VPLAYOUTFILEWRITER_H
