@@ -604,6 +604,7 @@ void VAbstractPattern::Clear()
     m_watermarkPath.clear();
     m_companyName.clear();
     m_units = Unit::LAST_UNIT_DO_NOT_USE;
+    modified = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
