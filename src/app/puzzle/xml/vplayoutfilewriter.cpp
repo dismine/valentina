@@ -169,10 +169,10 @@ void VPLayoutFileWriter::WritePiece(VPPiece *piece)
 void VPLayoutFileWriter::WriteMargins(const QMarginsF &margins)
 {
     writeStartElement(ML::TagMargin);
-    SetAttribute(ML::AttrLeft, margins.left());
-    SetAttribute(ML::AttrTop, margins.top());
-    SetAttribute(ML::AttrRight, margins.right());
-    SetAttribute(ML::AttrBottom, margins.bottom());
+    SetAttributeOrRemoveIf<qreal>(ML::AttrLeft, margins.left(), [](qreal margin){return margin <= 0;});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrTop, margins.top(), [](qreal margin){return margin <= 0;});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrRight, margins.right(), [](qreal margin){return margin <= 0;});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrBottom, margins.bottom(), [](qreal margin){return margin <= 0;});
     writeEndElement(); // margin
 }
 
