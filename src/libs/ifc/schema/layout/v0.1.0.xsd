@@ -22,8 +22,8 @@
                   <xs:sequence>
                     <xs:element name="size">
                       <xs:complexType>
-                        <xs:attribute type="xs:float" name="width"/>
-                        <xs:attribute type="xs:float" name="length"/>
+                        <xs:attribute type="xs:float" name="width" use="required"/>
+                        <xs:attribute type="xs:float" name="length" use="required"/>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="margin">
@@ -108,7 +108,7 @@
           </xs:complexType>
         </xs:element>
       </xs:sequence>
-      <xs:attribute type="formatVersion" name="version"/>
+      <xs:attribute type="formatVersion" name="version" use="required"/>
     </xs:complexType>
   </xs:element>
   <!--Types-->
