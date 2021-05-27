@@ -272,17 +272,13 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 {
     VRawLayout rawLayoutReader;
 
-    for(auto &path : rawLayouts)
+    for(const auto &path : rawLayouts)
     {
         VRawLayoutData data;
         if (rawLayoutReader.ReadFile(path, data))
         {
-            for (int i = 0; i < data.pieces.size(); ++i)
+            for (const auto& rawPiece : data.pieces)
             {
-                VLayoutPiece rawPiece = data.pieces.at(i);
-
-
-
                 // TODO / FIXME: make a few tests, on the data to check for validity. If not
                 //
                 // If seam allowance enabled, but the path is empty — invalid.
@@ -321,7 +317,7 @@ void VPMainWindow::InitZoom()
 //---------------------------------------------------------------------------------------------------------------------
 VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 {
-    VPPiece *piece = new VPPiece(rawPiece);
+    auto *piece = new VPPiece(rawPiece);
 
 
     // cutting line : GetMappedSeamAllowancePoints();
@@ -735,6 +731,8 @@ void VPMainWindow::SetPropertyTabLayoutData()
 void VPMainWindow::InitMainGraphics()
 {
     m_graphicsView = new VPMainGraphicsView(m_layout, m_tileFactory, this);
+    m_graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    m_graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
 
     m_graphicsView->RefreshLayout();
@@ -1322,30 +1320,15 @@ bool VPMainWindow::on_actionSaveAs_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionImportRawLayout_triggered()
 {
-    // TODO: here the code is probably just bad, to be edited
-
-    QString dir;
-    if (true)
-    {
-        dir = QDir::homePath();
-    }
-    else
-    {
-        // TODO / FIXME get the default path for raw layouts
-    }
-
     const QString filter(tr("Raw Layout files") + QLatin1String(" (*.rld)"));
 
-    qCDebug(pWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter, nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
 
-    QStringList rawLayouts = QStringList();
-    rawLayouts.append(filePath);
-
-    ImportRawLayouts(rawLayouts);
-
-    // TODO / FIXME : better error handling
-
+    if (not filePath.isEmpty())
+    {
+        ImportRawLayouts({filePath});
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

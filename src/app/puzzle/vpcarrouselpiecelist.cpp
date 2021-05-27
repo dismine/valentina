@@ -80,10 +80,10 @@ void VPCarrouselPieceList::Refresh()
         QList<VPPiece*> pieces = m_pieceList->GetPieces();
 
         // create the corresponding carrousel pieces
-        for (auto piece : pieces)
+        for (auto *piece : pieces)
         {
             // update the label of the piece
-             VPCarrouselPiece* carrouselpiece = new VPCarrouselPiece(piece,this);
+             auto* carrouselpiece = new VPCarrouselPiece(piece, this);
              carrouselpiece->setSelected(piece->GetIsSelected());
              connect(piece, &VPPiece::SelectionChanged, this, &VPCarrouselPieceList::on_SelectionChangedExternal);
         }
@@ -120,7 +120,7 @@ void VPCarrouselPieceList::mousePressEvent(QMouseEvent *event)
     if (!(event->modifiers() & Qt::ControlModifier))
     {
         // clearSelection doesn't work properly here so we go through the elements.
-        for(auto item: selectedItems())
+        for(auto *item: selectedItems())
         {
             item->setSelected(false);
         }
@@ -157,8 +157,8 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         VPCarrouselPiece *pieceItem = static_cast<VPCarrouselPiece *> (_item);
 
         // starts the dragging
-        QDrag *drag = new QDrag(this);
-        VPMimeDataPiece *mimeData = new VPMimeDataPiece();
+        auto *drag = new QDrag(this);
+        auto *mimeData = new VPMimeDataPiece();
         VPPiece* piece = pieceItem->GetPiece();
         mimeData->SetPiecePtr(piece);
         mimeData->setObjectName("piecePointer");
@@ -179,8 +179,8 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent* e)
 {
-        qCDebug(pCarrouselPieceList, "drag move");
-        e->acceptProposedAction();
+    qCDebug(pCarrouselPieceList, "drag move");
+    e->acceptProposedAction();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -225,7 +225,6 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
         }
     }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::on_ActionPieceMovedToPieceList()

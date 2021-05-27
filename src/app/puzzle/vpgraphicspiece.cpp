@@ -284,7 +284,7 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     // change the cursor when clicking the left button
     if((event->button() == Qt::LeftButton))
     {
-        if(event->modifiers() & Qt::AltModifier)
+        if((event->modifiers() & Qt::AltModifier) != 0U)
         {
             setCursor(m_rotateCursor);
         }

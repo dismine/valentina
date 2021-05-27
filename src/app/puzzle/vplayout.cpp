@@ -38,10 +38,9 @@ Q_LOGGING_CATEGORY(pLayout, "p.layout")
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout() :
     m_unplacedPieceList(new VPPieceList(this)),
-    m_trashPieceList(new VPPieceList(this)),
-    m_sheets(QList<VPSheet*>())
+    m_trashPieceList(new VPPieceList(this))
 {
-    m_unplacedPieceList->SetName(QObject::tr("Unplaced pieces"));
+    m_unplacedPieceList->SetName(tr("Unplaced pieces"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,14 +91,14 @@ QList<VPPiece *> VPLayout::GetSelectedPieces()
 
     QList<VPPieceList *> pieceLists = QList<VPPieceList *>();
     pieceLists.append(m_unplacedPieceList);
-    for (auto sheet : m_sheets)
+    for (auto *sheet : m_sheets)
     {
         pieceLists.append(sheet->GetPieceList());
     }
 
-    for (auto pieceList : pieceLists)
+    for (auto *pieceList : pieceLists)
     {
-        for (auto piece : pieceList->GetPieces())
+        for (auto *piece : pieceList->GetPieces())
         {
             if(piece->GetIsSelected())
             {
@@ -110,7 +109,6 @@ QList<VPPiece *> VPLayout::GetSelectedPieces()
 
     return result;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::SetUnit(Unit unit)
@@ -123,7 +121,6 @@ Unit VPLayout::GetUnit() const
 {
     return m_unit;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::SetWarningSuperpositionOfPieces(bool state)
@@ -150,7 +147,7 @@ bool VPLayout::GetWarningPiecesOutOfBound() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTitle(QString title)
+void VPLayout::SetTitle(const QString &title)
 {
     m_title = title;
 }
@@ -162,7 +159,7 @@ QString VPLayout::GetTitle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetDescription(QString description)
+void VPLayout::SetDescription(const QString &description)
 {
     m_description = description;
 }
@@ -179,7 +176,7 @@ void VPLayout::ClearSelection()
 {
     m_unplacedPieceList->ClearSelection();
 
-    for (auto sheet : m_sheets)
+    for (auto *sheet : m_sheets)
     {
         sheet->ClearSelection();
     }
@@ -193,7 +190,7 @@ void VPLayout::ClearSelectionExceptForGivenPieceList(VPPieceList* pieceList)
         m_unplacedPieceList->ClearSelection();
     }
 
-    for (auto sheet : m_sheets)
+    for (auto *sheet : m_sheets)
     {
         if(sheet->GetPieceList() != pieceList)
         {
@@ -201,8 +198,6 @@ void VPLayout::ClearSelectionExceptForGivenPieceList(VPPieceList* pieceList)
         }
     }
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList)

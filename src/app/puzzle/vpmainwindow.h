@@ -441,7 +441,7 @@ private:
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
      * @param rawPiece the raw piece data
      */
-    VPPiece* CreatePiece(const VLayoutPiece &rawPiece);
+    Q_REQUIRED_RESULT VPPiece* CreatePiece(const VLayoutPiece &rawPiece);
 
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)

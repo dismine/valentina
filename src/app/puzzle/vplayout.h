@@ -88,7 +88,7 @@ public:
      * @brief SetTitle Sets the title of the layout to the given value
      * @param title the title of the layout
      */
-    void SetTitle(QString title);
+    void SetTitle(const QString &title);
 
     /**
      * @brief GetTitle Returns the title of the layout
@@ -100,7 +100,7 @@ public:
      * @brief SetDescription Sets the description of the layout to the given value
      * @param description the description of the layout
      */
-    void SetDescription(QString description);
+    void SetDescription(const QString &description);
 
     /**
      * @brief GetDescription Returns the description of the layout.
@@ -276,7 +276,7 @@ private:
      */
     VPPieceList *m_trashPieceList;
 
-    QList<VPSheet*> m_sheets;
+    QList<VPSheet*> m_sheets{};
     VPSheet *m_focusedSheet{nullptr};
 
     // format

@@ -205,7 +205,7 @@ void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *p
     Q_UNUSED(pieceListBefore)
 
     VPGraphicsPiece *_graphicsPiece = nullptr;
-    for(auto graphicPiece : m_graphicsPieces)
+    for(auto *graphicPiece : m_graphicsPieces)
     {
         if(graphicPiece->GetPiece() == piece)
         {
@@ -245,9 +245,9 @@ void VPMainGraphicsView::on_SceneSelectionChanged()
 
     // make sure, that the selected items are on top
     // FIXME: maybe there is a more proper way to do it
-    for(auto graphicPiece : m_graphicsPieces)
+    for(auto *graphicPiece : m_graphicsPieces)
     {
-        if(!graphicPiece->GetPiece()->GetIsSelected())
+        if((graphicPiece != nullptr) && not graphicPiece->GetPiece()->GetIsSelected())
         {
             if(!m_scene->selectedItems().isEmpty())
             {
