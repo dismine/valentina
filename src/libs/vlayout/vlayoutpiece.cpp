@@ -1182,7 +1182,7 @@ QPainterPath VLayoutPiece::MappedLayoutAllowancePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::DrawMiniature(QPainter &painter)
+void VLayoutPiece::DrawMiniature(QPainter &painter) const
 {
     painter.drawPath(ContourPath());
 

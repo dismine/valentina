@@ -154,7 +154,7 @@ public:
     QPainterPath ContourPath() const;
     QPainterPath MappedLayoutAllowancePath() const;
 
-    void DrawMiniature(QPainter &painter);
+    void DrawMiniature(QPainter &painter) const;
 
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
 
