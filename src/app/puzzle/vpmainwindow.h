@@ -106,7 +106,7 @@ protected:
     virtual void changeEvent(QEvent* event) override;
     virtual QStringList RecentFileList() const override;
 
- private slots:
+private slots:
     /**
      * @brief on_actionOpen_triggered When the menu action File > Open is
      * triggered.
@@ -400,6 +400,8 @@ protected:
 
     void ToolBarStyles();
 
+    void on_actionAddSheet_triggered();
+
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
 #endif //defined(Q_OS_MAC)
@@ -551,6 +553,8 @@ private:
     void generateTiledPdf(QString fileName);
 
     void CreateWindowMenu(QMenu *menu);
+
+    void AddSheet();
 };
 
 #endif // VPMAINWINDOW_H

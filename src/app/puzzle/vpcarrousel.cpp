@@ -103,7 +103,8 @@ void VPCarrousel::Refresh()
         ui->comboBoxPieceList->blockSignals(false);
     }
 
-    on_ActivePieceListChanged(index != -1 ? index: 0);
+    ui->comboBoxPieceList->setCurrentIndex(-1);
+    ui->comboBoxPieceList->setCurrentIndex(index != -1 ? index : 0);
 
     RefreshOrientation();
 }

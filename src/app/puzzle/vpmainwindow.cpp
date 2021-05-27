@@ -69,17 +69,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_cmd(cmd),
     m_statusLabel(new QLabel(this))
 {
-    // create a standard sheet
-    auto *sheet = new VPSheet(m_layout);
-    sheet->SetName(QObject::tr("Sheet 1"));
-    m_layout->AddSheet(sheet);
-    m_layout->SetFocusedSheet();
-
-//    // ----- for test purposes, to be removed------------------
-    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
-    sheet->SetSheetSizeConverted(84.1, 118.9);
-    sheet->SetPiecesGapConverted(1);
-
+    //    // ----- for test purposes, to be removed------------------
     m_layout->SetUnit(Unit::Cm);
     m_layout->SetWarningSuperpositionOfPieces(true);
     m_layout->SetTitle(QString("My Test Layout"));
@@ -93,6 +83,9 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     // --------------------------------------------------------
 
     ui->setupUi(this);
+
+    // create a standard sheet
+    AddSheet();
 
     // init the tile factory
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
@@ -1089,6 +1082,20 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::AddSheet()
+{
+    auto *sheet = new VPSheet(m_layout);
+    sheet->SetName(QObject::tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
+    m_layout->AddSheet(sheet);
+    m_layout->SetFocusedSheet();
+
+//    // ----- for test purposes, to be removed------------------
+    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
+    sheet->SetSheetSizeConverted(84.1, 118.9);
+    sheet->SetPiecesGapConverted(1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
     VPApplication::VApp()->NewMainWindow();
@@ -1865,6 +1872,13 @@ void VPMainWindow::ToolBarStyles()
 {
     ToolBarStyle(ui->mainToolBar);
     ToolBarStyle(ui->toolBarZoom);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionAddSheet_triggered()
+{
+    AddSheet();
+    m_carrousel->Refresh();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

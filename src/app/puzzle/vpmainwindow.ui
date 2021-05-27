@@ -62,6 +62,7 @@
      <string>&amp;Edit</string>
     </property>
     <addaction name="separator"/>
+    <addaction name="actionAddSheet"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -668,7 +669,7 @@
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>-170</y>
+              <y>0</y>
               <width>342</width>
               <height>870</height>
              </rect>
@@ -1759,6 +1760,11 @@
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionAddSheet">
+   <property name="text">
+    <string>Add Sheet</string>
    </property>
   </action>
  </widget>

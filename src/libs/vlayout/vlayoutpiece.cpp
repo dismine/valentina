@@ -1186,7 +1186,7 @@ void VLayoutPiece::DrawMiniature(QPainter &painter) const
 {
     painter.drawPath(ContourPath());
 
-    for (auto &path : d->m_internalPaths)
+    for (const auto &path : d->m_internalPaths)
     {
         painter.save();
 
@@ -1199,7 +1199,7 @@ void VLayoutPiece::DrawMiniature(QPainter &painter) const
         painter.restore();
     }
 
-    for (auto &label : d->m_placeLabels)
+    for (const auto &label : d->m_placeLabels)
     {
         painter.drawPath(VPlaceLabelItem::LabelShapePath(label.shape));
     }
