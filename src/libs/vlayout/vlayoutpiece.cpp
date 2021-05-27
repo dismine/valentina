@@ -530,7 +530,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     det.SetPriority(piece.GetPriority());
 
     // Very important to set main path first!
-    if (det.ContourPath().isEmpty())
+    if (det.MappedContourPath().isEmpty())
     {
         throw VException (tr("Piece %1 doesn't have shape.").arg(piece.GetName()));
     }
@@ -650,9 +650,15 @@ void VLayoutPiece::SetSeamAllowancePoints(const QVector<QPointF> &points, bool s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetLayoutAllowancePoints() const
+QVector<QPointF> VLayoutPiece::GetMappedLayoutAllowancePoints() const
 {
     return Map(d->layoutAllowance);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetLayoutAllowancePoints() const
+{
+    return d->layoutAllowance;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -791,9 +797,15 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetGrainline() const
+QVector<QPointF> VLayoutPiece::GetMappedGrainline() const
 {
     return Map(d->grainlinePoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetGrainline() const
+{
+    return d->grainlinePoints;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -956,22 +968,29 @@ int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPiece::DetailBoundingRect() const
+QRectF VLayoutPiece::MappedDetailBoundingRect() const
 {
     return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetMappedSeamAllowancePoints()) :
                                                                BoundingRect(GetMappedContourPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPiece::LayoutBoundingRect() const
+QRectF VLayoutPiece::DetailBoundingRect() const
 {
-    return BoundingRect(GetLayoutAllowancePoints());
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetSeamAllowancePoints()) :
+                                                               BoundingRect(GetContourPoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VLayoutPiece::MappedLayoutBoundingRect() const
+{
+    return BoundingRect(GetMappedLayoutAllowancePoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VLayoutPiece::Diagonal() const
 {
-    const QRectF rec = LayoutBoundingRect();
+    const QRectF rec = MappedLayoutBoundingRect();
     return qSqrt(pow(rec.height(), 2) + pow(rec.width(), 2));
 }
 
@@ -1037,9 +1056,15 @@ void VLayoutPiece::SetLayoutAllowancePoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPassmark> VLayoutPiece::GetPassmarks() const
+QVector<VLayoutPassmark> VLayoutPiece::GetMappedPassmarks() const
 {
     return Map(d->passmarks);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLayoutPassmark> VLayoutPiece::GetPassmarks() const
+{
+    return d->passmarks;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1092,6 +1117,12 @@ void VLayoutPiece::SetInternalPaths(const QVector<VLayoutPiecePath> &internalPat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutPiece::MappedContourPath() const
+{
+    return d->matrix.map(ContourPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VLayoutPiece::ContourPath() const
 {
     QPainterPath path;
@@ -1099,7 +1130,7 @@ QPainterPath VLayoutPiece::ContourPath() const
     // contour
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        path = PainterPath(GetMappedContourPoints());
+        path = PainterPath(GetContourPoints());
     }
 
     // seam allowance
@@ -1108,7 +1139,7 @@ QPainterPath VLayoutPiece::ContourPath() const
         if (not IsSeamAllowanceBuiltIn())
         {
             // Draw seam allowance
-            QVector<QPointF>points = GetMappedSeamAllowancePoints();
+            QVector<QPointF>points = GetSeamAllowancePoints();
 
             if (points.last().toPoint() != points.first().toPoint())
             {
@@ -1128,9 +1159,9 @@ QPainterPath VLayoutPiece::ContourPath() const
         // Draw passmarks
         QPainterPath passmaksPath;
         const QVector<VLayoutPassmark> passmarks = GetPassmarks();
-        for(auto &passmark : passmarks)
+        for(const auto &passmark : passmarks)
         {
-            for (auto &line : passmark.lines)
+            for (const auto &line : passmark.lines)
             {
                 passmaksPath.moveTo(line.p1());
                 passmaksPath.lineTo(line.p2());
@@ -1145,9 +1176,43 @@ QPainterPath VLayoutPiece::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::LayoutAllowancePath() const
+QPainterPath VLayoutPiece::MappedLayoutAllowancePath() const
 {
-    return PainterPath(GetLayoutAllowancePoints());
+    return PainterPath(GetMappedLayoutAllowancePoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::DrawMiniature(QPainter &painter)
+{
+    painter.drawPath(ContourPath());
+
+    for (auto &path : d->m_internalPaths)
+    {
+        painter.save();
+
+        QPen pen = painter.pen();
+        pen.setStyle(path.PenStyle());
+        painter.setPen(pen);
+
+        painter.drawPath(path.GetPainterPath());
+
+        painter.restore();
+    }
+
+    for (auto &label : d->m_placeLabels)
+    {
+        painter.drawPath(VPlaceLabelItem::LabelShapePath(label.shape));
+    }
+
+    QPainterPath path;
+
+    QVector<QPointF> gPoints = GetGrainline();
+    path.moveTo(gPoints.at(0));
+    for (auto p : qAsConst(gPoints))
+    {
+        path.lineTo(p);
+    }
+    painter.drawPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1157,7 +1222,7 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 
     for (auto &path : d->m_internalPaths)
     {
-        QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
+        auto* pathItem = new QGraphicsPathItem(item);
         pathItem->setPath(d->matrix.map(path.GetPainterPath()));
 
         QPen pen = pathItem->pen();
@@ -1166,9 +1231,9 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
         pathItem->setPen(pen);
     }
 
-    for (auto &label : d->m_placeLabels)
+    for (const auto &label : d->m_placeLabels)
     {
-        QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
+        auto* pathItem = new QGraphicsPathItem(item);
         QPen pen = pathItem->pen();
         pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
         pathItem->setPen(pen);
@@ -1341,7 +1406,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 
     QPainterPath path;
 
-    QVector<QPointF> gPoints = GetGrainline();
+    QVector<QPointF> gPoints = GetMappedGrainline();
     path.moveTo(gPoints.at(0));
     for (auto p : qAsConst(gPoints))
     {
@@ -1370,7 +1435,7 @@ QGraphicsPathItem *VLayoutPiece::GetMainItem() const
     QPen pen = item->pen();
     pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
     item->setPen(pen);
-    item->setPath(ContourPath());
+    item->setPath(MappedContourPath());
     return item;
 }
 

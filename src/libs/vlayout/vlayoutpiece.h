@@ -82,9 +82,11 @@ public:
     void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
 
+    QVector<QPointF> GetMappedLayoutAllowancePoints() const;
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();
 
+    QVector<VLayoutPassmark> GetMappedPassmarks() const;
     QVector<VLayoutPassmark> GetPassmarks() const;
     void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);
 
@@ -105,6 +107,7 @@ public:
                         const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
+    QVector<QPointF> GetMappedGrainline() const;
     QVector<QPointF> GetGrainline() const;
     bool  IsGrainlineEnabled() const;
     qreal GrainlineAngle() const;
@@ -137,8 +140,9 @@ public:
     QLineF LayoutEdge(int i) const;
     int    LayoutEdgeByPoint(const QPointF &p1) const;
 
+    QRectF MappedDetailBoundingRect() const;
     QRectF DetailBoundingRect() const;
-    QRectF LayoutBoundingRect() const;
+    QRectF MappedLayoutBoundingRect() const;
     qreal  Diagonal() const;
 
     static QRectF BoundingRect(QVector<QPointF> points);
@@ -146,8 +150,11 @@ public:
     bool isNull() const;
     qint64 Square() const;
 
+    QPainterPath MappedContourPath() const;
     QPainterPath ContourPath() const;
-    QPainterPath LayoutAllowancePath() const;
+    QPainterPath MappedLayoutAllowancePath() const;
+
+    void DrawMiniature(QPainter &painter);
 
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
 

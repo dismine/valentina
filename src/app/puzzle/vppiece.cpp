@@ -54,7 +54,7 @@ VPPiece::VPPiece(VLayoutPiece layoutPiece): VLayoutPiece(layoutPiece)
 
     // then translate the piece so that the top left corner of the bouding rect of the piece is at the position
     // (0,0) in the sheet coordinate system
-    QRectF boundingRect = DetailBoundingRect();
+    QRectF boundingRect = MappedDetailBoundingRect();
     QPointF offset = boundingRect.topLeft();
     matrix = GetMatrix();
     matrix.translate(-offset.x() ,-offset.y());

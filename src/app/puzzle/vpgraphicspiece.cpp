@@ -106,7 +106,7 @@ void VPGraphicsPiece::Init()
     // initialises the grainline
     if(m_piece->IsGrainlineEnabled())
     {
-        QVector<QPointF> grainLinepoints = m_piece->GetGrainline();
+        QVector<QPointF> grainLinepoints = m_piece->GetMappedGrainline();
         if(!grainLinepoints.isEmpty())
         {
             m_grainline.moveTo(grainLinepoints.first());
@@ -126,7 +126,7 @@ void VPGraphicsPiece::Init()
     }
 
     // initialises the passmarks
-    QVector<VLayoutPassmark> passmarks = m_piece->GetPassmarks();
+    QVector<VLayoutPassmark> passmarks = m_piece->GetMappedPassmarks();
     for(auto &passmark : passmarks)
     {
         for (auto &line : passmark.lines)

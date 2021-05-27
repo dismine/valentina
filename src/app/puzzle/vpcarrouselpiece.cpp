@@ -76,16 +76,7 @@ void VPCarrouselPiece::RefreshSelection()
 //---------------------------------------------------------------------------------------------------------------------
 QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
 {
-    QVector<QPointF> points = m_piece->GetMappedContourPoints(); // seamline
-    if(points.isEmpty())
-    {
-        points = m_piece->GetMappedSeamAllowancePoints(); // cutting line
-    }
-
-    QPolygonF shape(points);
-    shape << shape.first();
-
-    QRectF boundingRect = shape.boundingRect();
+    QRectF boundingRect = m_piece->DetailBoundingRect();
     qreal canvasSize = qMax(boundingRect.height(), boundingRect.width());
     QRectF canvas = QRectF(0, 0, canvasSize, canvasSize);
 
@@ -147,7 +138,8 @@ QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) cons
             painter.setBrush(QBrush(Qt::white));
         }
 
-        painter.drawPolygon(shape);
+        m_piece->DrawMiniature(painter);
+
         painter.end();
 
         icon.addPixmap(pixmap,iconMode);

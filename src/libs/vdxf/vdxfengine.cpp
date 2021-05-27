@@ -771,7 +771,7 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetPassmarks();
+        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
         for(auto &passmark : passmarks)
         {
             for (auto &line : passmark.lines)
@@ -788,7 +788,7 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<QPointF> grainline = detail.GetGrainline();
+    const QVector<QPointF> grainline = detail.GetMappedGrainline();
     if (grainline.count() > 1)
     {
         if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), QChar('7')))
@@ -1053,7 +1053,7 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetPassmarks();
+        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
         for(auto &passmark : passmarks)
         {
             DRW_ASTMNotch *notch = new DRW_ASTMNotch();
