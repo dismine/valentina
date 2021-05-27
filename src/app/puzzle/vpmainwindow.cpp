@@ -569,7 +569,6 @@ void VPMainWindow::InitCarrousel()
               &VPMainWindow::on_CarrouselLocationChanged);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertiesData()
 {
@@ -1376,7 +1375,7 @@ void VPMainWindow::on_lineEditSheetName_textChanged(const QString &text)
 
     if(m_carrousel != nullptr)
     {
-        m_carrousel->RefreshFocusedSheetName();
+        m_carrousel->RefreshSheetNames();
     }
 }
 

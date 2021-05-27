@@ -62,35 +62,68 @@ VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Refresh()
 {
+    const int index = ui->comboBoxPieceList->currentIndex();
+
     // --- clears the content of the carrousel
     Clear();
 
     // --- add the content saved in the layout to the carrousel.
     // Do not rely on m_layout because we do not control it.
-    m_pieceLists = QList<VPPieceList*>();
-    m_pieceLists.append(m_layout->GetUnplacedPieceList());
-    m_pieceLists.append(m_layout->GetFocusedSheet()->GetPieceList());
+    m_pieceLists = QList<VPCarrouselSheet>();
 
-    ui->comboBoxPieceList->blockSignals(true);
+    if (m_layout != nullptr)
+    {
+        {
+            VPCarrouselSheet carrouselSheet;
+            carrouselSheet.unplaced = true;
+            carrouselSheet.name = tr("Unplaced pieces");
+            carrouselSheet.pieces = m_layout->GetUnplacedPieceList();
 
-    ui->comboBoxPieceList->addItem(m_layout->GetUnplacedPieceList()->GetName());
-    ui->comboBoxPieceList->addItem(tr("Pieces of ") + m_layout->GetFocusedSheet()->GetName());
+            m_pieceLists.append(carrouselSheet);
+        }
 
-    ui->comboBoxPieceList->blockSignals(false);
+        QList<VPSheet *> sheets = m_layout->GetSheets();
+        for (auto *sheet : sheets)
+        {
+            VPCarrouselSheet carrouselSheet;
+            carrouselSheet.unplaced = false;
+            carrouselSheet.name = sheet->GetName();
+            carrouselSheet.pieces = sheet->GetPieceList();
 
-    on_ActivePieceListChanged(0);
+            m_pieceLists.append(carrouselSheet);
+        }
+
+        ui->comboBoxPieceList->blockSignals(true);
+
+        for (const auto& sheet: m_pieceLists)
+        {
+            ui->comboBoxPieceList->addItem(GetSheetName(sheet));
+        }
+
+        ui->comboBoxPieceList->blockSignals(false);
+    }
+
+    on_ActivePieceListChanged(index != -1 ? index: 0);
 
     RefreshOrientation();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrousel::RefreshFocusedSheetName()
+void VPCarrousel::RefreshSheetNames()
 {
-    // FIXME : This implementation will need a refactoring when we have multiple sheets, now it's not very nice!!
+    // Here we assume that order and number of sheets are the same in layout and here
+    QList<VPSheet *> sheets = m_layout->GetSheets();
+    if (m_pieceLists.size() != sheets.size()+1)
+    {
+        return;
+    }
 
-    ui->comboBoxPieceList->setItemText(1, tr("Pieces of ") + m_layout->GetFocusedSheet()->GetName());
+    for (int i=0; i < sheets.size(); ++i)
+    {
+        m_pieceLists[i+1].name = sheets.at(i)->GetName();
+        ui->comboBoxPieceList->setItemText(i+1, GetSheetName(m_pieceLists.at(i+1)));
+    }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Clear()
@@ -106,11 +139,13 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 {
     qCDebug(pCarrousel, "index changed %i", index);
 
-    if (index >= 0 && index < m_pieceLists.size())
+    if (not m_pieceLists.isEmpty() && index >= 0 && index < m_pieceLists.size())
     {
-        VPPieceList *pieceList = m_pieceLists.at(index);
-
-        ui->listWidget->SetCurrentPieceList(pieceList);
+        ui->listWidget->SetCurrentPieceList(m_pieceLists.at(index).pieces);
+    }
+    else
+    {
+        ui->listWidget->SetCurrentPieceList(nullptr);
     }
 }
 
@@ -150,9 +185,11 @@ void VPCarrousel::RefreshOrientation()
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::ClearSelection()
 {
-    m_layout->ClearSelection();
+    if (m_layout != nullptr)
+    {
+        m_layout->ClearSelection();
+    }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::ClearSelectionExceptForCurrentPieceList()
@@ -161,4 +198,26 @@ void VPCarrousel::ClearSelectionExceptForCurrentPieceList()
     {
         m_layout->ClearSelectionExceptForGivenPieceList(ui->listWidget->GetCurrentPieceList());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPCarrousel::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+
+        RefreshSheetNames();
+        on_ActivePieceListChanged(ui->comboBoxPieceList->currentIndex());
+    }
+
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPCarrousel::GetSheetName(const VPCarrouselSheet &sheet) -> QString
+{
+    return sheet.unplaced ? sheet.name : tr("Pieces of ") + sheet.name;
 }

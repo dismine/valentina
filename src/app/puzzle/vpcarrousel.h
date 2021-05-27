@@ -40,6 +40,13 @@ namespace Ui
 class VPCarrousel;
 }
 
+struct VPCarrouselSheet
+{
+    bool unplaced{true};
+    QString name{};
+    VPPieceList* pieces{nullptr};
+};
+
 class VPCarrousel : public QWidget
 {
     Q_OBJECT
@@ -65,10 +72,7 @@ public:
      */
     void Refresh();
 
-    /**
-     * @brief RefreshFocusedSheetName refreshes the name of the focused sheet
-     */
-    void RefreshFocusedSheetName();
+    void RefreshSheetNames();
 
     /**
      * @brief Clear Clears the carrousel (removes everything)
@@ -86,16 +90,8 @@ public:
      */
     void ClearSelectionExceptForCurrentPieceList();
 
-private:
-    Q_DISABLE_COPY(VPCarrousel)
-    Ui::VPCarrousel *ui;
-
-    VPLayout *m_layout{nullptr};
-
-    QList<VPPieceList*> m_pieceLists{};
-
-    Qt::Orientation m_orientation{Qt::Vertical};
-
+protected:
+    virtual void changeEvent(QEvent* event) override;
 
 private slots:
 
@@ -104,6 +100,18 @@ private slots:
      * @param index piece index
      */
     void on_ActivePieceListChanged(int index);
+
+private:
+    Q_DISABLE_COPY(VPCarrousel)
+    Ui::VPCarrousel *ui;
+
+    VPLayout *m_layout{nullptr};
+
+    QList<VPCarrouselSheet> m_pieceLists{};
+
+    Qt::Orientation m_orientation{Qt::Vertical};
+
+    static QString GetSheetName(const VPCarrouselSheet &sheet);
 };
 
 #endif // VPCARROUSEL_H
