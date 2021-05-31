@@ -493,12 +493,23 @@ qreal VEllipticalArc::MaxLength() const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VEllipticalArc::GetP(qreal angle) const
 {
+    if (qFuzzyIsNull(GetRadius1()) && qFuzzyIsNull(GetRadius2()))
+    {
+        return GetCenter().toQPointF();
+    }
+
     QLineF line(0, 0, 100, 0);
     line.setAngle(angle);
 
-    const qreal a = line.p2().x() / GetRadius1();
-    const qreal b = line.p2().y() / GetRadius2();
+    const qreal a = not qFuzzyIsNull(GetRadius1()) ? line.p2().x() / GetRadius1() : 0;
+    const qreal b = not qFuzzyIsNull(GetRadius2()) ? line.p2().y() / GetRadius2() : 0;
     const qreal k = qSqrt(a*a + b*b);
+
+    if (qFuzzyIsNull(k))
+    {
+        return GetCenter().toQPointF();
+    }
+
     QPointF p(line.p2().x() / k, line.p2().y() / k);
 
     QLineF line2(QPointF(), p);
@@ -566,6 +577,13 @@ void VEllipticalArc::SetFormulaRadius1(const QString &formula, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::SetRadius1(qreal value)
+{
+    d->formulaRadius1 = QString::number(value);
+    d->radius1 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::SetFormulaRadius2(const QString &formula, qreal value)
 {
     d->formulaRadius2 = formula;
@@ -573,9 +591,23 @@ void VEllipticalArc::SetFormulaRadius2(const QString &formula, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::SetRadius2(qreal value)
+{
+    d->formulaRadius2 = QString::number(value);
+    d->radius2 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::SetFormulaRotationAngle(const QString &formula, qreal value)
 {
     d->formulaRotationAngle = formula;
+    d->rotationAngle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::SetRotationAngle(qreal value)
+{
+    d->formulaRotationAngle = QString::number(value);
     d->rotationAngle = value;
 }
 

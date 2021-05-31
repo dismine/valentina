@@ -577,3 +577,29 @@ void TST_VEllipticalArc::TestFlip()
     QCOMPARE(elArc.GetRadius1(), res.GetRadius1());
     QCOMPARE(elArc.GetRadius2(), res.GetRadius2());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::EmptyArc_data()
+{
+    QTest::addColumn<qreal>("radius1");
+    QTest::addColumn<qreal>("radius2");
+    QTest::addColumn<qreal>("length");
+
+    QTest::newRow("Empty elArc") << 0. << 0. << 0.;
+    QTest::newRow("Radius1 correct") << 50. << 0. << 50.*4;
+    QTest::newRow("Radius2 correct") << 0. << 30. << 30.*4;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::EmptyArc()
+{
+    QFETCH(qreal, radius1);
+    QFETCH(qreal, radius2);
+    QFETCH(qreal, length);
+
+    VEllipticalArc empty;
+    empty.SetRadius1(radius1);
+    empty.SetRadius2(radius2);
+
+    QCOMPARE(empty.GetLength(), length);
+}

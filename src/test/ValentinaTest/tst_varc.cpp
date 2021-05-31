@@ -456,3 +456,12 @@ void TST_VArc::TestCurveIntersectAxis()
 
     Comparison(intersectionPoint, crosPoint, accuracyPointOnLine);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::EmptyArc()
+{
+    VArc empty;
+
+    Comparison(empty.GetPoints(), {QPointF()});
+    QCOMPARE(empty.GetLength(), 0);
+}

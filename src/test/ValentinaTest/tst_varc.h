@@ -50,6 +50,7 @@ private slots:
     void TestCutArc();
     void TestCurveIntersectAxis_data();
     void TestCurveIntersectAxis();
+    void EmptyArc();
 };
 
 #endif // TST_VARC_H

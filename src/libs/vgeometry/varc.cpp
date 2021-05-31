@@ -263,6 +263,11 @@ QPointF VArc::GetP2 () const
  */
 QVector<QPointF> VArc::GetPoints() const
 {
+    if (qFuzzyIsNull(GetRadius()))
+    {
+        return {GetCenter().toQPointF()};
+    }
+
     QVector<QPointF> points;
     QVector<qreal> sectionAngle;
 

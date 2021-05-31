@@ -55,6 +55,8 @@ private slots:
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+    void EmptyArc_data();
+    void EmptyArc();
 
 private:
     Q_DISABLE_COPY(TST_VEllipticalArc)
