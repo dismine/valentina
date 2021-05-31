@@ -463,5 +463,5 @@ void TST_VArc::EmptyArc()
     VArc empty;
 
     Comparison(empty.GetPoints(), {QPointF()});
-    QCOMPARE(empty.GetLength(), 0);
+    QCOMPARE(empty.GetLength(), 0.);
 }
