@@ -248,7 +248,11 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
                 sheet->SetSheetMargins(ReadMargins());
                 break;
             case 3: // pieces
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
                 ReadSheetPieces(sheet.get());
+#else
+                ReadSheetPieces(sheet.data());
+#endif
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -355,7 +359,7 @@ void VPLayoutFileReader::AssertRootTag(const QString &tag) const
 {
     if (not (isStartElement() && name() == tag))
     {
-        throw VException(tr("Unexpected tag %1 in line %2").arg(name()).arg(lineNumber()));
+        throw VException(tr("Unexpected tag %1 in line %2").arg(name().toString()).arg(lineNumber()));
     }
 }
 
