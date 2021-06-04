@@ -32,6 +32,7 @@
 #include <QLocale>
 #include <QXmlStreamWriter>
 #include <QCoreApplication>
+#include <functional>
 
 #include "../vmisc/literals.h"
 
