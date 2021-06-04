@@ -75,14 +75,17 @@ public:
 
     QString GetFormulaRotationAngle () const;
     void    SetFormulaRotationAngle (const QString &formula, qreal value);
+    void    SetRotationAngle(qreal value);
     qreal   GetRotationAngle() const;
 
     QString GetFormulaRadius1 () const;
     void    SetFormulaRadius1 (const QString &formula, qreal value);
+    void    SetRadius1 (qreal value);
     qreal   GetRadius1 () const;
 
     QString GetFormulaRadius2 () const;
     void    SetFormulaRadius2 (const QString &formula, qreal value);
+    void    SetRadius2 (qreal value);
     qreal   GetRadius2 () const;
 
     virtual qreal GetLength () const override;

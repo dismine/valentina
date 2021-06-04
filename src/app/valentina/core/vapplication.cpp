@@ -136,10 +136,18 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         }
 #   endif
 
+#   if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
     // Hide Qt bug 'Assertion when reading an icns file'
     // https://bugreports.qt.io/browse/QTBUG-45537
     // Remove after Qt fix will be released
     if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
+    {
+        type = QtDebugMsg;
+    }
+#   endif
+
+    // Hide anything that starts with QMacCGContext
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QMacCGContext::")))
     {
         type = QtDebugMsg;
     }
