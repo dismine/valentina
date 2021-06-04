@@ -42,6 +42,7 @@
 #include <QtGlobal>
 #include <QLocale>
 #include <QLoggingCategory>
+#include <functional>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
