@@ -80,17 +80,44 @@ void QmuFormulaBase::InitCharSets()
     Q_UNUSED(decimalPoint)
     Q_UNUSED(groupSeparator)
 
+    // Together with localized symbols, we always must include canonical symbols
+    auto AddNotCanonical = [](QString &chars, const QChar &c, const QChar &canonical)
+    {
+        if (c != canonical)
+        {
+            chars += c;
+        }
+    };
+
     // Defining identifier character sets
-    const QString nameChars = QString() + sign0 + sign1 + sign2 + sign3 + sign4 + sign5 + sign6 + sign7 + sign8 +
-            sign9 + QStringLiteral("\\_@#'") + symbolsStr;
+    QString nameChars = QStringLiteral("0123456789\\_@#'") + symbolsStr;
+
+    AddNotCanonical(nameChars, sign0, '0');
+    AddNotCanonical(nameChars, sign1, '1');
+    AddNotCanonical(nameChars, sign2, '2');
+    AddNotCanonical(nameChars, sign3, '3');
+    AddNotCanonical(nameChars, sign4, '4');
+    AddNotCanonical(nameChars, sign5, '5');
+    AddNotCanonical(nameChars, sign6, '6');
+    AddNotCanonical(nameChars, sign7, '7');
+    AddNotCanonical(nameChars, sign8, '8');
+    AddNotCanonical(nameChars, sign9, '9');
+
     DefineNameChars(nameChars);
 
-    const QString opChars = QStringLiteral("*^/?<>=!$%&|~'_");
+    const QString opChars = QStringLiteral("+-*^/?<>=!$%&|~'_");
 
-    const QString oprtChars = symbolsStr + positiveSign + negativeSign + opChars;
+    QString oprtChars = symbolsStr + opChars;
+    AddNotCanonical(oprtChars, positiveSign, '+');
+    AddNotCanonical(oprtChars, negativeSign, '-');
+
     DefineOprtChars(oprtChars);
 
-    const QString infixOprtChars = QString() + positiveSign + negativeSign + opChars;
+    QString infixOprtChars = opChars;
+
+    AddNotCanonical(infixOprtChars, positiveSign, '+');
+    AddNotCanonical(infixOprtChars, negativeSign, '-');
+
     DefineInfixOprtChars(infixOprtChars);
 }
 
