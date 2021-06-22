@@ -4917,6 +4917,11 @@ void MainWindow::CreateActions()
         qCDebug(vMainWindow, "Reporting bug");
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://gitlab.com/smart-pattern/valentina/issues/new")));
     });
+    connect(ui->actionShop, &QAction::triggered, this, []()
+    {
+        qCDebug(vMainWindow, "Open shop");
+        QDesktopServices::openUrl(QUrl(QStringLiteral("https://smart-pattern.com.ua/catalogue/")));
+    });
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
 

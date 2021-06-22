@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>140</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>243</height>
         </rect>
        </property>
@@ -746,7 +746,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>282</height>
         </rect>
        </property>
@@ -1037,7 +1037,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>98</width>
+         <width>140</width>
          <height>102</height>
         </rect>
        </property>
@@ -1120,7 +1120,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>192</height>
         </rect>
        </property>
@@ -1324,7 +1324,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
+         <width>126</width>
          <height>237</height>
         </rect>
        </property>
@@ -1589,8 +1589,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>104</width>
-         <height>57</height>
+         <width>140</width>
+         <height>168</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1728,6 +1728,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionReportBug"/>
+    <addaction name="actionShop"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
@@ -3024,6 +3025,11 @@
    </property>
    <property name="toolTip">
     <string>Create or edit a watermark</string>
+   </property>
+  </action>
+  <action name="actionShop">
+   <property name="text">
+    <string>Shop</string>
    </property>
   </action>
  </widget>
