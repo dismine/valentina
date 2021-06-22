@@ -1,6 +1,7 @@
 # Valentina 0.7.48 (unreleased)
 - [smart-pattern/valentina#129] Incorrect behavior of empty arc and elliptical arc.
 - Parsing formulas with not canonical math symbols.
+- [smart-pattern/valentina#133] Incorrect seam allowance.
 
 # Version 0.7.47 May 13, 2021
 - [smart-pattern/valentina#118] Incorrect seam allowance.
