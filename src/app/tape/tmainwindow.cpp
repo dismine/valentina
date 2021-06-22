@@ -897,6 +897,11 @@ bool TMainWindow::FileSaveAs()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
+    if (not curFile.isEmpty())
+    {
+        fName = StrippedName(curFile);
+    }
+
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
 

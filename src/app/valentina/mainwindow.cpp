@@ -3137,8 +3137,15 @@ bool MainWindow::on_actionSaveAs_triggered()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
+    QString newFileName = tr("pattern") + QLatin1String(".val");
+
+    if(not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
+    {
+        newFileName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
+    }
+
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
+                                                    dir + QLatin1String("/") + newFileName,
                                                     filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
