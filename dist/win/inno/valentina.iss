@@ -4,9 +4,9 @@
 #define MyAppName "Valentina"
 #define MyAppVersion GetFileVersion('valentina\valentina.exe')
 #define MyAppPublisher "Roman Telezhynskyi"
-#define MyAppURL "https://valentinaproject.bitbucket.io/"
+#define MyAppURL "https://smart-pattern.com.ua/"
 #define MyAppExeName "valentina.exe"
-#define MyAppCopyright "(C) 2013-2020 Valentina project"
+#define MyAppCopyright "(C) 2013-2021 Valentina project"
 #define MyDateTimeString GetDateTimeString('yyyymmddhhnnss', '', '');
 ; Appstatus: "" = release, "b" = beta, "a" = alpha
 ; this only modifies the resulting exe name of the installer package ;-)

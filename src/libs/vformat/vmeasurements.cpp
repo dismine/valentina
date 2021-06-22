@@ -114,7 +114,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, (QLatin1String("1800-01-0
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
 {
-    return QString("Measurements created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+    return QString("Measurements created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
 }
 }

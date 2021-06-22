@@ -7,7 +7,7 @@ EAPI=5
 inherit mercurial qmake-utils gnome2-utils fdo-mime
 
 DESCRIPTION="Cloth patternmaking software"
-HOMEPAGE="https://valentinaproject.bitbucket.io/"
+HOMEPAGE="https://smart-pattern.com.ua/"
 SRC_URI=""
 EHG_REPO_URI="https://bitbucket.org/dismine/valentina"
 EHG_REVISION="develop"

@@ -128,10 +128,10 @@ bool VObjEngine::begin(QPaintDevice *pdev)
     stream = QSharedPointer<QTextStream>(new QTextStream(outputDevice.data()));
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     *stream << "# Valentina OBJ File" <<  endl;
-    *stream << "# valentinaproject.bitbucket.io/" <<  endl;
+    *stream << "# smart-pattern.com.ua/" <<  endl;
 #else
     *stream << "# Valentina OBJ File" <<  Qt::endl;
-    *stream << "# valentinaproject.bitbucket.io/" <<  Qt::endl;
+    *stream << "# smart-pattern.com.ua/" <<  Qt::endl;
 #endif
     return true;
 }

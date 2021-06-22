@@ -66,7 +66,7 @@ extern const QString APP_VERSION_STR;
 //#define VER_ORIGINALFILENAME_STR  "valentina.exe" // Defined in program
 //#define VER_PRODUCTNAME_STR       "Valentina" // Defined in program
 
-#define VER_COMPANYDOMAIN_STR       "valentinaproject.bitbucket.io"
+#define VER_COMPANYDOMAIN_STR       "smart-pattern.com.ua"
 
 QString compilerString();
 QString buildCompatibilityString();

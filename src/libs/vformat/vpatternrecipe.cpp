@@ -61,7 +61,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 inline QString FileComment()
 {
-    return QStringLiteral("Recipe created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+    return QStringLiteral("Recipe created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
 }
 

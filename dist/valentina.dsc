@@ -4,7 +4,7 @@ Binary: valentina
 Architecture: i386 amd64
 Version: 0.7.47
 Maintainer: Roman Telezhynskyi <dismine@gmail.com>
-Homepage: https://valentinaproject.bitbucket.io
+Homepage: https://smart-pattern.com.ua
 Standards-Version: 3.9.5
 Vcs-Browser: https://gitlab.com/smart-pattern/valentina
 Build-Depends: debhelper (>= 8.0.0), 

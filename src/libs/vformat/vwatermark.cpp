@@ -45,7 +45,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
 {
-    return QString("Watermark created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+    return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
 }
 }
