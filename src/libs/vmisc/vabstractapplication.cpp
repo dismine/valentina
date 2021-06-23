@@ -198,17 +198,6 @@ void VAbstractApplication::WinAttachConsole()
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSettings hide settings constructor.
- * @return pointer to class for acssesing to settings in ini file.
- */
-VCommonSettings *VAbstractApplication::Settings()
-{
-    SCASSERT(settings != nullptr)
-    return settings;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::LoadTranslation(const QString &locale)
 {
     if (locale.isEmpty())
@@ -325,10 +314,4 @@ QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options
     }
 
     return options;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractApplication::VApp() -> VAbstractApplication *
-{
-    return qobject_cast<VAbstractApplication*>(QCoreApplication::instance());
 }
