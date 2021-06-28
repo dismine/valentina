@@ -914,7 +914,14 @@ void DialogSaveLayout::ReadSettings()
         ui->toolButtonLandscape->setChecked(true);
     }
 
-    SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    if (m_mode != Draw::Layout)
+    {
+        SelectFormat(static_cast<LayoutExportFormats>(settings->GetDetailExportFormat()));
+    }
+    else
+    {
+        SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -958,6 +965,13 @@ void DialogSaveLayout::WriteSettings() const
         settings->SetTiledPDFOrientation(PageOrientation::Landscape);
     }
 
-    settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
+    if (m_mode != Draw::Layout)
+    {
+        settings->SetDetailExportFormat(static_cast<qint8>(Format()));
+    }
+    else
+    {
+        settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
+    }
 }
 

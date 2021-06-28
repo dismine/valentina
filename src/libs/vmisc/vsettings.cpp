@@ -104,6 +104,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("lay
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDetailExportFormat, (QLatin1String("detail/exportFormat")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
@@ -781,6 +782,18 @@ auto VSettings::GetLayoutExportFormat() const -> qint8
 void VSettings::SetLayoutExportFormat(qint8 format)
 {
     setValue(*settingLayoutExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint8 VSettings::GetDetailExportFormat() const
+{
+    return qvariant_cast<qint8>(value(*settingDetailExportFormat, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetDetailExportFormat(qint8 format)
+{
+    setValue(*settingDetailExportFormat, format);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
