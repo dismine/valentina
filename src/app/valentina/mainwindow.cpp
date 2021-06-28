@@ -67,6 +67,8 @@
 #include "../vformat/vpatternrecipe.h"
 #include "watermarkwindow.h"
 #include "../vmisc/backport/qoverload.h"
+#include "../vlayout/vlayoutexporter.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -2245,6 +2247,62 @@ void MainWindow::StoreDimensions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ExportDraw(const QString &fileName)
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
+    VLayoutExporter exporter;
+
+    QT_WARNING_POP
+
+    exporter.SetFileName(fileName);
+
+    int verticalScrollBarValue = ui->view->verticalScrollBar()->value();
+    int horizontalScrollBarValue = ui->view->horizontalScrollBar()->value();
+
+    QTransform viewTransform = ui->view->transform();
+    ui->view->ZoomFitBest(); // Resize all labels
+    ui->view->repaint();
+    ui->view->ZoomOriginal(); // Set to original scale
+
+    // Enable all items on scene
+    const QList<QGraphicsItem *> qItems = sceneDraw->items();
+    for (auto *item : qItems)
+    {
+        item->setEnabled(true);
+        if (item->type() == VGraphicsSimpleTextItem::Type)
+        {
+            auto *text = dynamic_cast<VGraphicsSimpleTextItem*>(item);
+            text->setBrush(text->BaseColor()); // Regular update doesn't work on labels
+        }
+    }
+
+    ui->view->repaint();
+
+    sceneDraw->SetOriginsVisible(false);
+
+    const QRectF rect = sceneDraw->VisibleItemsBoundingRect();
+    sceneDraw->update(rect);
+    exporter.SetImageRect(rect);
+    exporter.SetOffset(rect.topLeft()); // Correct positions to fit SVG view rect
+
+    exporter.ExportToSVG(sceneDraw);
+
+    sceneDraw->SetOriginsVisible(true);
+
+    // Restore scale, scrollbars and current active pattern piece
+    ui->view->setTransform(viewTransform);
+    VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
+    emit ScaleChanged(ui->view->transform().m11());
+
+    ui->view->verticalScrollBar()->setValue(verticalScrollBarValue);
+    ui->view->horizontalScrollBar()->setValue(horizontalScrollBarValue);
+
+    doc->ChangeActivPP(doc->GetNameActivPP(), Document::FullParse);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
@@ -2517,6 +2575,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonFlippingByAxis, &QToolButton::clicked, this, &MainWindow::ToolFlippingByAxis);
     connect(ui->toolButtonMove, &QToolButton::clicked, this, &MainWindow::ToolMove);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
+    connect(ui->toolButtonExportDraw, &QToolButton::clicked, this, &MainWindow::ExportDrawAs);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
     connect(ui->toolButtonDetailExportAs, &QToolButton::clicked, this, &MainWindow::ExportDetailsAs);
     connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
@@ -4226,6 +4285,7 @@ QT_WARNING_POP
     ui->toolButtonPin->setEnabled(drawTools);
     ui->toolButtonInsertNode->setEnabled(drawTools);
     ui->toolButtonPlaceLabel->setEnabled(drawTools);
+    ui->toolButtonExportDraw->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -5479,6 +5539,30 @@ void MainWindow::CreateMeasurements()
     QProcess::startDetached(tape, arguments, workingDirectory);
 }
 #endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ExportDrawAs()
+{
+    auto Uncheck = qScopeGuard([this] {ui->toolButtonExportDraw->setChecked(false);});
+
+    QString filters(tr("Scalable Vector Graphics files") + QLatin1String("(*.svg)"));
+    QString dir = QDir::homePath() + QLatin1String("/") + FileName() + QLatin1String(".svg");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save draw"), dir, filters, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() || f.suffix() != QLatin1String("svg"))
+    {
+        fileName += QLatin1String(".svg");
+    }
+
+    ExportDraw(fileName);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()

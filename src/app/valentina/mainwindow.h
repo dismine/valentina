@@ -130,6 +130,7 @@ private slots:
 #if defined(Q_OS_MAC)
     void CreateMeasurements();
 #endif
+    void ExportDrawAs();
     void ExportLayoutAs();
     void ExportDetailsAs();
 
@@ -415,6 +416,8 @@ private:
     void SetDimensionBases();
 
     void StoreDimensions();
+
+    void ExportDraw(const QString &fileName);
 };
 
 #endif // MAINWINDOW_H

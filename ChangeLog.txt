@@ -3,6 +3,7 @@
 - Parsing formulas with not canonical math symbols.
 - [smart-pattern/valentina#133] Incorrect seam allowance.
 - Fix regression. Fix correct handle export format for exporting details in the Detail mode.
+- [smart-pattern/valentina#83] Export the Draw mode.
 
 # Version 0.7.47 May 13, 2021
 - [smart-pattern/valentina#118] Incorrect seam allowance.
