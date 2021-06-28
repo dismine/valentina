@@ -182,15 +182,13 @@ void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
 {
     if (static_cast<int>(format) < 0 || format >= LayoutExportFormats::COUNT)
     {
-        VException e(tr("Tried to use out of range format number."));
-        throw e;
+        throw VException(tr("Tried to use out of range format number."));
     }
 
     const int i = ui->comboBoxFormat->findData(static_cast<int>(format));
     if (i < 0)
     {
-        VException e(tr("Selected not present format."));
-        throw e;
+        throw VException(tr("Selected not present format."));
     }
     ui->comboBoxFormat->setCurrentIndex(i);
 }
