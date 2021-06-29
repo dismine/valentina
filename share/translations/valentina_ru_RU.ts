@@ -1214,11 +1214,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished">Псевдоним 1:</translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished">Псевдоним 2:</translation>
+        <translation>Псевдоним 2:</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1792,7 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation>Метки измерения</translation>
+        <translation>Псевдонимы измерения</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1800,7 +1800,7 @@
     </message>
     <message>
         <source>Label</source>
-        <translation>Метка</translation>
+        <translation>Псевдоним</translation>
     </message>
     <message>
         <source>Dimension:</source>
@@ -2133,22 +2133,22 @@
     <message>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним роста</translation>
     </message>
     <message>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним размера</translation>
     </message>
     <message>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним бёдер</translation>
     </message>
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним талии</translation>
     </message>
 </context>
 <context>
@@ -4873,7 +4873,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Passmark length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина надсечек:</translation>
     </message>
 </context>
 <context>
@@ -6062,19 +6062,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Curve 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 1</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished">Псевдоним 1:</translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished">Псевдоним 2:</translation>
+        <translation>Псевдоним 2:</translation>
     </message>
     <message>
         <source>Curve 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 2</translation>
     </message>
 </context>
 <context>
@@ -9378,6 +9378,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not create recipe file. %1</source>
+        <translation>Не удалось создать файл рецепта. %1</translation>
+    </message>
+    <message>
+        <source>Shop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphics files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save draw</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10500,7 +10512,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое глобальное значение длины надсечек. Деталь &quot;%1&quot;. Длина меньше минимально допустимой.</translation>
     </message>
 </context>
 <context>
@@ -10799,7 +10811,7 @@ This option will take an affect after restart.</source>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Выберите Новый для создания файла мерок.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Выберите Новый для создания файла мерок.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -11596,7 +11608,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation>Метки измерения</translation>
+        <translation>Псевдонимы измерения</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
@@ -11691,6 +11703,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Restrict first dimension</source>
         <translation>Ограничить первое измерение</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13823,15 +13839,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать плоский файл dxf.</translation>
     </message>
     <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать файл AAMA dxf.</translation>
     </message>
     <message>
         <source>Can&apos;t create an ASTM dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать файл ASTM dxf.</translation>
     </message>
 </context>
 <context>
@@ -14319,7 +14335,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать запись для финального измерения &quot;%1&apos;&quot;. Ошибка: %2</translation>
     </message>
 </context>
 <context>
@@ -14573,23 +14589,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Длина</translation>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент 1</translation>
     </message>
     <message>
         <source>Segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент 2</translation>
     </message>
 </context>
 <context>
@@ -15468,23 +15484,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Curve 1 segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 1 сегмент 1</translation>
     </message>
     <message>
         <source>Curve 1 segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 1 сегмент 2</translation>
     </message>
     <message>
         <source>Curve 2 segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 2 сегмент 1</translation>
     </message>
     <message>
         <source>Curve 2 segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 2 сегмент 2</translation>
     </message>
 </context>
 <context>

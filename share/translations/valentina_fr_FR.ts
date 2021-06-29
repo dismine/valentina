@@ -715,7 +715,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -842,7 +842,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -1044,7 +1044,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -1103,7 +1103,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -1214,11 +1214,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1 :</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2 :</translation>
     </message>
 </context>
 <context>
@@ -1305,11 +1305,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1 :</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2 :</translation>
     </message>
 </context>
 <context>
@@ -1396,11 +1396,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1 :</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2 :</translation>
     </message>
 </context>
 <context>
@@ -1487,11 +1487,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1 :</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2 :</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1792,7 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquettes de dimensions</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2103,7 +2103,7 @@
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hanche</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -2133,22 +2133,22 @@
     <message>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette de hauteur</translation>
     </message>
     <message>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette de taille</translation>
     </message>
     <message>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette de hanche</translation>
     </message>
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette de taille</translation>
     </message>
 </context>
 <context>
@@ -2287,7 +2287,7 @@
     </message>
     <message>
         <source>Lengths to control points</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur aux points de contrôle</translation>
     </message>
     <message>
         <source>Filter list by keyword</source>
@@ -2390,7 +2390,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -2604,7 +2604,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montrer le calcul complet dans une boite de dialogue &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2715,7 +2715,7 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Marqueurs:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
@@ -2735,7 +2735,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2751,7 +2751,7 @@
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffixe invalide</translation>
     </message>
     <message>
         <source>Invalid group name</source>
@@ -2759,7 +2759,7 @@
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette :</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2771,7 +2771,7 @@
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette invalide</translation>
     </message>
     <message>
         <source>Invalid alias</source>
@@ -2834,7 +2834,7 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Marqueurs:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
@@ -2854,7 +2854,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2870,7 +2870,7 @@
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffixe invalide</translation>
     </message>
     <message>
         <source>Invalid group name</source>
@@ -2878,7 +2878,7 @@
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette :</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2898,7 +2898,7 @@
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette invalide</translation>
     </message>
     <message>
         <source>Invalid alias</source>
@@ -2929,7 +2929,7 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Marqueurs:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
@@ -3203,7 +3203,7 @@
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer des objets. Suffixe &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -3366,7 +3366,7 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueurs des points de contrôle de courbes</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -3386,7 +3386,7 @@
     </message>
     <message>
         <source>Unique variable name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom unique de variable</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3425,14 +3425,14 @@
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre :</translation>
     </message>
 </context>
 <context>
     <name>DialogKnownMaterials</name>
     <message>
         <source>Known materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Matériaux connus</translation>
     </message>
     <message>
         <source>Material:</source>
@@ -3471,26 +3471,26 @@
     </message>
     <message>
         <source>Nesting. Please, wait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise en page, merci de patienter.</translation>
     </message>
     <message>
         <source>Time left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps restant :</translation>
     </message>
     <message>
         <source>Time left: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps restant : %1</translation>
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Coefficient d’efficacité: %1%</translation>
     </message>
 </context>
 <context>
     <name>DialogLayoutScale</name>
     <message>
         <source>Layout scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de sortie</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -3518,15 +3518,15 @@
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>horizontal :</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>vertical :</translation>
     </message>
 </context>
 <context>
@@ -3761,11 +3761,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Text will be converted to paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Le texte sera converti en tracés</translation>
     </message>
     <message>
         <source>Export text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter le texte en tracés</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -3773,17 +3773,19 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Ignore margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer les marges</translation>
     </message>
     <message>
         <source>Margins go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Les marges s’étendent au-delà de la zone d’impression.. 
+
+Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Follow grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Suivre le droit-fil</translation>
     </message>
     <message>
         <source>Time:</source>
@@ -3791,11 +3793,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps estimé pour que l’algorithme trouve la meilleure mise en page.</translation>
     </message>
     <message>
         <source>Efficiency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Efficacité :</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
@@ -3803,32 +3805,32 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Manual priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorité manuelle</translation>
     </message>
     <message>
         <source>Nest quantity of copies according to piece settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Regrouper le nombre de copies selon les paramètres de la pièce.</translation>
     </message>
     <message>
         <source>Nest quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantité à regrouper</translation>
     </message>
     <message>
         <source>Auto crop unused width</source>
-        <translation type="unfinished"></translation>
+        <translation>Rogner automatiquement la largeur non utilisée</translation>
     </message>
     <message>
         <source>Prefer one sheet solution</source>
-        <translation type="unfinished"></translation>
+        <translation>Préférer la solution à une feuille</translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer cette option pour obtenir des solutions à une feuille.</translation>
     </message>
 </context>
 <context>
@@ -4252,7 +4254,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Passer</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
@@ -4385,7 +4387,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Marqueurs:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
@@ -4405,7 +4407,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -4421,7 +4423,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>suffixe invalide</translation>
     </message>
     <message>
         <source>Invalid group name</source>
@@ -4429,7 +4431,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette :</translation>
     </message>
     <message>
         <source>Default</source>
@@ -4441,7 +4443,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid rotation angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule d’angle de rotation invalide</translation>
     </message>
     <message>
         <source>Invalid length formula</source>
@@ -4449,7 +4451,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette invalide</translation>
     </message>
     <message>
         <source>Invalid alias</source>
@@ -4860,7 +4862,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>For technical notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour les notes techniques</translation>
     </message>
     <message>
         <source>Label language:</source>
@@ -5178,7 +5180,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Bissectrice</translation>
     </message>
     <message>
         <source>Passmark</source>
@@ -5218,7 +5220,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cut on fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Couper le tissu</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
@@ -5262,11 +5264,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2 (gauche seulement)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2 (droite seulement)</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
@@ -5408,7 +5410,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montrer le calcul complet dans une boite de dialogue &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -5424,7 +5426,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Point :</translation>
+        <translation>Point :</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -5432,11 +5434,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Edit rectangle width</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier la largeur du rectangle</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -5452,11 +5454,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Croix</translation>
     </message>
     <message>
         <source>T-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>En forme de T</translation>
     </message>
     <message>
         <source>Doubletree</source>
@@ -5472,7 +5474,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>H-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>En forme de H</translation>
     </message>
     <message>
         <source>Button</source>
@@ -6061,11 +6063,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2 :</translation>
     </message>
     <message>
         <source>Curve 2</source>
@@ -6197,7 +6199,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Marqueurs:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
@@ -6233,7 +6235,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>suffixe invalide</translation>
     </message>
     <message>
         <source>Invalid group name</source>
@@ -6245,7 +6247,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette invalide</translation>
     </message>
     <message>
         <source>Invalid alias</source>
@@ -6257,11 +6259,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquette :</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6324,11 +6326,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Binary form</source>
-        <translation type="unfinished"></translation>
+        <translation>Forme binaire</translation>
     </message>
     <message>
         <source>Text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte en tracés</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -6344,11 +6346,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Haut:</translation>
+        <translation>Haut :</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Bas:</translation>
+        <translation>Bas :</translation>
     </message>
     <message>
         <source>Paper format</source>
@@ -6360,7 +6362,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -6368,7 +6370,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientation :</translation>
     </message>
     <message>
         <source>Options</source>
@@ -6376,15 +6378,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>horizontal :</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>vertical :</translation>
     </message>
 </context>
 <context>
@@ -6642,11 +6644,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Croix</translation>
     </message>
     <message>
         <source>T-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>En forme de T</translation>
     </message>
     <message>
         <source>Doubletree</source>
@@ -6662,7 +6664,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>H-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>En forme de H</translation>
     </message>
     <message>
         <source>Button</source>
@@ -6801,7 +6803,7 @@ Apply settings anyway?</source>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hanche</translation>
     </message>
 </context>
 <context>
@@ -7110,7 +7112,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -7269,7 +7271,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
 </context>
 <context>
@@ -9374,6 +9376,18 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Shop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphics files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save draw</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -10784,7 +10798,7 @@ This option will take an affect after restart.</source>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Sélectionnez Nouveau pour créer un fichier de mesures.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Sélectionnez Nouveau pour créer un fichier de mesures.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -11581,7 +11595,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquettes de dimensions</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
@@ -11677,6 +11691,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Restrict first dimension</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -11702,7 +11720,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montrer le calcul complet dans une boite de dialogue &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -11765,7 +11783,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montrer le calcul complet dans une boite de dialogue &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -11821,7 +11839,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientation :</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -11948,7 +11966,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Bissectrice</translation>
     </message>
     <message>
         <source>Marks</source>
@@ -11992,11 +12010,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2 (gauche seulement)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2 (droite seulement)</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -12091,7 +12109,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montrer le calcul complet dans une boite de dialogue &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -12518,7 +12536,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hanche</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
@@ -13840,7 +13858,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Hanche</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -13919,7 +13937,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Bissectrice</translation>
     </message>
     <message>
         <source>Intersection</source>
@@ -13939,11 +13957,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2 (gauche seulement)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2 (droite seulement)</translation>
     </message>
     <message>
         <source>Passmark mark</source>
@@ -14544,15 +14562,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <translation>Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Étiquette</translation>
+        <translation>Étiquette</translation>
     </message>
     <message>
         <source>Segment 1</source>
@@ -15357,15 +15375,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias2 :</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
@@ -15427,7 +15445,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Étiquette</translation>
+        <translation>Étiquette</translation>
     </message>
     <message>
         <source>Curve 1 segment 1</source>
@@ -17135,7 +17153,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Marqueurs:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>

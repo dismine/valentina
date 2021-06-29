@@ -8419,6 +8419,18 @@ Do you want to save your changes?</source>
         <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Shop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphics files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save draw</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9562,10 +9574,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>TMainWindow</name>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation type="vanished">Nume</translation>
     </message>
@@ -10305,6 +10313,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Restrict first dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12854,11 +12866,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <source>Label</source>
