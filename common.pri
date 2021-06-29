@@ -923,5 +923,7 @@ MSVC_DEBUG_CXXFLAGS += \
     -wd4774 \ # format string expected in argument 3 is not a string literal
     -wd5204 \ # class has virtual functions, but its trivial destructor is not virtual; instances of objects derived
               # from this class may not be destructed correctly
-    -wd5219   # implicit conversion from '<type>' to '<type>', possible loss of data
+    -wd5219 \ # implicit conversion from '<type>' to '<type>', possible loss of data
+    -wd5243   # 'type-name': using incomplete class 'class-name' can cause potential one definition rule violation due
+              # to ABI limitation
 }
