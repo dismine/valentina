@@ -125,14 +125,17 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
 void VGraphicsSimpleTextItem::setEnabled(bool enabled)
 {
     QGraphicsSimpleTextItem::setEnabled(enabled);
-    const QPalette palet = this->scene()->palette();
-    if (enabled)
+    if (this->scene())
     {
-        setBrush(palet.brush(QPalette::Active, QPalette::Text));
-    }
-    else
-    {
-        setBrush(palet.brush(QPalette::Disabled, QPalette::Text));
+        const QPalette palet = this->scene()->palette();
+        if (enabled)
+        {
+            setBrush(palet.brush(QPalette::Active, QPalette::Text));
+        }
+        else
+        {
+            setBrush(palet.brush(QPalette::Disabled, QPalette::Text));
+        }
     }
 }
 

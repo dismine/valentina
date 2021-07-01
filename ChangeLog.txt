@@ -1,3 +1,6 @@
+# Valentina 0.7.49 (unreleased)
+- Fix crash.
+
 # Valentina 0.7.48 June 29, 2021
 - [smart-pattern/valentina#129] Incorrect behavior of empty arc and elliptical arc.
 - Parsing formulas with not canonical math symbols.
