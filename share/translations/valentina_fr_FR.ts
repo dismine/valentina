@@ -9388,6 +9388,10 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Save draw</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Draw export</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
