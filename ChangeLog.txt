@@ -1,4 +1,4 @@
-# Valentina 0.7.49 (unreleased)
+# Valentina 0.7.49 July 1, 2021
 - Fix crash.
 - Add tooltip for Export draw feature.
 
