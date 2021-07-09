@@ -1,3 +1,6 @@
+# Valentina 0.7.50 (unreleased)
+- Fix regression. Minimal seam allowance width is less than the point accuracy values.
+
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.
 - Add tooltip for Export draw feature.

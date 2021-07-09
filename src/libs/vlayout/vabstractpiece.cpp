@@ -55,7 +55,7 @@ const qreal maxL = 3.5;
 
 const qreal VSAPoint::passmarkFactor = 0.5;
 const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
-const qreal VSAPoint::minSAWidth = ToPixel(0.015, Unit::Cm);
+const qreal VSAPoint::minSAWidth = accuracyPointOnLine + accuracyPointOnLine*0.5;
 
 namespace
 {
