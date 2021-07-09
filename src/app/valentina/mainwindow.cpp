@@ -4372,7 +4372,8 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
  */
 void MainWindow::AutoSavePattern()
 {
-    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() && isWindowModified() && isNeedAutosave)
+    if (VApplication::VApp()->IsGUIMode() && not VAbstractValApplication::VApp()->GetPatternPath().isEmpty()
+            && isWindowModified() && isNeedAutosave)
     {
         qCDebug(vMainWindow, "Autosaving pattern.");
         QString error;
