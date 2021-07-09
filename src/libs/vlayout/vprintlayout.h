@@ -138,7 +138,7 @@ private:
     bool            m_isAutoCropWidth{false};
     bool            m_isUnitePages{false};
     QString         m_layoutPrinterName{};
-    bool            m_isLayoutStale{true};
+    bool            m_isLayoutStale{false};
     QMarginsF       m_tiledMargins{};
     PageOrientation m_tiledPDFOrientation{PageOrientation::Portrait};
     QSizeF          m_tiledPDFPaperSize{};
