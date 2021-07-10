@@ -1532,8 +1532,8 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
         return false; // Not enough data
     }
 
-    DumpVector(base, QStringLiteral("base.json.XXXXXX")); // Uncomment for dumping test data
-    DumpVector(allowance, QStringLiteral("allowance.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpVector(base, QStringLiteral("base.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpVector(allowance, QStringLiteral("allowance.json.XXXXXX")); // Uncomment for dumping test data
 
     // First check direction
     const qreal baseDirection = VPiece::SumTrapezoids(base);
