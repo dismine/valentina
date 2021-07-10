@@ -61,6 +61,8 @@ private slots:
     void TestCorrectEquidistantPoints() const;
     void PossibleInfiniteClearLoops_data() const;
     void PossibleInfiniteClearLoops() const;
+    void IsAllowanceValid_data() const;
+    void IsAllowanceValid() const;
 
 private:
     QVector<VSAPoint> InputPointsCase3() const;
