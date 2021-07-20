@@ -131,9 +131,9 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       m_tabPlaceLabels(new QWidget),
       m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
       applyAllowed(false),// By default disabled
-      flagGPin(true),
-      flagDPin(true),
-      flagPPin(true),
+      flagGPin(false),
+      flagDPin(false),
+      flagPPin(false),
       flagGFormulas(true),
       flagDLAngle(true),
       flagDLFormulas(true),
@@ -169,6 +169,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       m_newPaths()
 {
     ui->setupUi(this);
+
+    m_defLabelValue = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
 
     InitOkCancelApply(ui);
     InitFancyTabBar();
@@ -2558,8 +2560,8 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
     else
     {
-        piece.GetPatternPieceData().SetLabelWidth(QString::number(1));
-        piece.GetPatternPieceData().SetLabelHeight(QString::number(1));
+        piece.GetPatternPieceData().SetLabelWidth(m_defLabelValue);
+        piece.GetPatternPieceData().SetLabelHeight(m_defLabelValue);
         piece.GetPatternPieceData().SetCenterPin(NULL_ID);
         piece.GetPatternPieceData().SetTopLeftPin(getCurrentObjectId(uiTabLabels->comboBoxDLTopLeftPin));
         piece.GetPatternPieceData().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxDLBottomRightPin));
@@ -2581,8 +2583,8 @@ VPiece DialogSeamAllowance::CreatePiece() const
         piece.GetPatternInfo().SetCenterPin(NULL_ID);
         piece.GetPatternInfo().SetTopLeftPin(getCurrentObjectId(uiTabLabels->comboBoxPLTopLeftPin));
         piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxPLBottomRightPin));
-        piece.GetPatternInfo().SetLabelWidth(QString::number(1));
-        piece.GetPatternInfo().SetLabelHeight(QString::number(1));
+        piece.GetPatternInfo().SetLabelWidth(m_defLabelValue);
+        piece.GetPatternInfo().SetLabelHeight(m_defLabelValue);
     }
 
     piece.GetGrainlineGeometry().SetVisible(uiTabGrainline->groupBoxGrainline->isChecked());
@@ -2600,7 +2602,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     else
     {
         piece.GetGrainlineGeometry().SetRotation(QString::number(90));
-        piece.GetGrainlineGeometry().SetLength(QChar('1'));
+        piece.GetGrainlineGeometry().SetLength(m_defLabelValue);
         piece.GetGrainlineGeometry().SetCenterPin(NULL_ID);
         piece.GetGrainlineGeometry().SetTopPin(getCurrentObjectId(uiTabGrainline->comboBoxGrainlineTopPin));
         piece.GetGrainlineGeometry().SetBottomPin(getCurrentObjectId(uiTabGrainline->comboBoxGrainlineBottomPin));
@@ -3142,11 +3144,10 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitLabelsTab()
 {
-    QString labelValue = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
-    uiTabLabels->lineEditDLWidthFormula->setPlainText(labelValue);
-    uiTabLabels->lineEditDLHeightFormula->setPlainText(labelValue);
-    uiTabLabels->lineEditPLWidthFormula->setPlainText(labelValue);
-    uiTabLabels->lineEditPLHeightFormula->setPlainText(labelValue);
+    uiTabLabels->lineEditDLWidthFormula->setPlainText(m_defLabelValue);
+    uiTabLabels->lineEditDLHeightFormula->setPlainText(m_defLabelValue);
+    uiTabLabels->lineEditPLWidthFormula->setPlainText(m_defLabelValue);
+    uiTabLabels->lineEditPLHeightFormula->setPlainText(m_defLabelValue);
 
     m_DLWidthBaseHeight = uiTabLabels->lineEditDLWidthFormula->height();
     m_DLHeightBaseHeight = uiTabLabels->lineEditDLHeightFormula->height();
