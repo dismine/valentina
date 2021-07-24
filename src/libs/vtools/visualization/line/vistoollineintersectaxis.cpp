@@ -99,7 +99,10 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                 QPointF p;
                 VToolLineIntersectAxis::FindPoint(axis, base_line, &p);
                 QLineF axis_line(static_cast<QPointF>(*third), p);
-                DrawLine(this, axis_line, mainColor, lineStyle);
+                if (not axis_line.isNull())
+                {
+                    DrawLine(this, axis_line, mainColor, lineStyle);
+                }
 
                 DrawPoint(point, p, mainColor);
                 ShowIntersection(axis_line, base_line);
