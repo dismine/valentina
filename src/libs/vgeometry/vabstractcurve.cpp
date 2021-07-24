@@ -464,12 +464,6 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
 {
     SCASSERT(intersectionPoint != nullptr)
 
-    if (VAbstractCurve::IsPointOnCurve(curvePoints, point))
-    {
-        *intersectionPoint = point;
-        return true;
-    }
-
     // Normalize an angle
     {
         QLineF line(QPointF(10,10), QPointF(100, 10));
@@ -487,7 +481,7 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
     axis = QLineF(point, VGObject::BuildRay(point, angle + 180, rec));
     points += VAbstractCurve::CurveIntersectLine(curvePoints, axis);
 
-    if (points.size() > 0)
+    if (not points.isEmpty())
     {
         if (points.size() == 1)
         {
@@ -522,9 +516,24 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
             *intersectionPoint = points.at(forward.first());
             return true;
         }
-        else if (not backward.isEmpty())
+
+        if (not backward.isEmpty())
         {
             *intersectionPoint = points.at(backward.first());
+            return true;
+        }
+
+        if (VAbstractCurve::IsPointOnCurve(curvePoints, point))
+        {
+            *intersectionPoint = point;
+            return true;
+        }
+    }
+    else
+    {
+        if (VAbstractCurve::IsPointOnCurve(curvePoints, point))
+        {
+            *intersectionPoint = point;
             return true;
         }
     }
