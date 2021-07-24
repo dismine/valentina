@@ -356,6 +356,13 @@ QString VToolCurveIntersectAxis::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    VToolLinePoint::hoverEnterEvent(event);
+    mainLine->SetBoldLine(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetSegments(const QPair<QString, QString> &segments)
 {
     m_segments = segments;
