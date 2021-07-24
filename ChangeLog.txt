@@ -5,6 +5,7 @@
 - Fix regression. Set default value for detail labels size and grainline length to 10 cm.
 - [smart-pattern/valentina#136] 2 decimals for entering values in multi measurements tables.
 - New warnings. Warn a user about incorrect cut curve segment length.
+- Fix finding point of intersection curve and axis. Case when the axis's point lies on the curve.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.
