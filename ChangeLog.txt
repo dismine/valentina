@@ -3,6 +3,7 @@
 - Call autosave only in GUI mode.
 - Warn about stale layout only in GUI mode.
 - Fix regression. Set default value for detail labels size and grainline length to 10 cm.
+- [smart-pattern/valentina#136] 2 decimals for entering values in multi measurements tables.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

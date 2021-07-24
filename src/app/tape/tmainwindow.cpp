@@ -4265,35 +4265,35 @@ void TMainWindow::SetDecimals()
     switch (mUnit)
     {
         case Unit::Cm:
-            ui->doubleSpinBoxBaseValue->setDecimals(1);
+            ui->doubleSpinBoxBaseValue->setDecimals(2);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
 
-            ui->doubleSpinBoxCorrection->setDecimals(1);
+            ui->doubleSpinBoxCorrection->setDecimals(2);
             ui->doubleSpinBoxCorrection->setSingleStep(0.1);
 
-            ui->doubleSpinBoxShiftA->setDecimals(1);
+            ui->doubleSpinBoxShiftA->setDecimals(2);
             ui->doubleSpinBoxShiftA->setSingleStep(0.1);
 
-            ui->doubleSpinBoxShiftB->setDecimals(1);
+            ui->doubleSpinBoxShiftB->setDecimals(2);
             ui->doubleSpinBoxShiftB->setSingleStep(0.1);
 
-            ui->doubleSpinBoxShiftC->setDecimals(1);
+            ui->doubleSpinBoxShiftC->setDecimals(2);
             ui->doubleSpinBoxShiftC->setSingleStep(0.1);
             break;
         case Unit::Mm:
-            ui->doubleSpinBoxBaseValue->setDecimals(0);
+            ui->doubleSpinBoxBaseValue->setDecimals(1);
             ui->doubleSpinBoxBaseValue->setSingleStep(1);
 
-            ui->doubleSpinBoxCorrection->setDecimals(0);
+            ui->doubleSpinBoxCorrection->setDecimals(1);
             ui->doubleSpinBoxCorrection->setSingleStep(1);
 
-            ui->doubleSpinBoxShiftA->setDecimals(0);
+            ui->doubleSpinBoxShiftA->setDecimals(1);
             ui->doubleSpinBoxShiftA->setSingleStep(1);
 
-            ui->doubleSpinBoxShiftB->setDecimals(0);
+            ui->doubleSpinBoxShiftB->setDecimals(1);
             ui->doubleSpinBoxShiftB->setSingleStep(1);
 
-            ui->doubleSpinBoxShiftC->setDecimals(0);
+            ui->doubleSpinBoxShiftC->setDecimals(1);
             ui->doubleSpinBoxShiftC->setSingleStep(1);
             break;
         case Unit::Inch:
