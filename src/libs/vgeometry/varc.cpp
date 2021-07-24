@@ -362,8 +362,6 @@ QPointF VArc::CutArc(qreal length, VArc &arc1, VArc &arc2) const
     }
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
-    const qreal minLength = ToPixel(1, Unit::Mm);
-    const qreal maxLength = fullLength - ToPixel(1, Unit::Mm);
 
     if (not IsFlipped())
     {
