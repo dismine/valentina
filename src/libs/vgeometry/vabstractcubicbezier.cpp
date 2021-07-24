@@ -39,6 +39,7 @@
 #include "../vmisc/vmath.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../ifc/exception/vexception.h"
 
 namespace
 {
@@ -420,6 +421,11 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
     if (fullLength <= minLength)
     {
         spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
+
+        const QString errorMsg = QObject::tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+
         return QPointF();
     }
 
@@ -428,10 +434,20 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
     if (length < minLength)
     {
         length = minLength;
+
+        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal "
+                                             "value.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLength)
     {
         length = maxLength;
+
+        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal "
+                                             "value.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
     const qreal parT = GetParmT(length);

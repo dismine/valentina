@@ -30,6 +30,7 @@
 
 #include <QLineF>
 #include <QPointF>
+#include <QtDebug>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -38,6 +39,7 @@
 #include "vabstractcurve.h"
 #include "varc_p.h"
 #include "vspline.h"
+#include "../ifc/exception/vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -351,10 +353,17 @@ QPointF VArc::CutArc(qreal length, VArc &arc1, VArc &arc2) const
     {
         arc1 = VArc();
         arc2 = VArc();
+
+        const QString errorMsg = QObject::tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+
         return QPointF();
     }
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
+    const qreal minLength = ToPixel(1, Unit::Mm);
+    const qreal maxLength = fullLength - ToPixel(1, Unit::Mm);
 
     if (not IsFlipped())
     {
@@ -362,7 +371,26 @@ QPointF VArc::CutArc(qreal length, VArc &arc1, VArc &arc2) const
         {
             length = fullLength + length;
         }
-        length = qBound(ToPixel(1, Unit::Mm), length, fullLength - ToPixel(1, Unit::Mm));
+
+        const qreal minLength = ToPixel(1, Unit::Mm);
+        const qreal maxLength = fullLength - ToPixel(1, Unit::Mm);
+
+        if (length < minLength)
+        {
+            const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to "
+                                                 "minimal value.").arg(name());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        }
+        else if (length > maxLength)
+        {
+            const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to "
+                                                 "maximal value.").arg(name());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        }
+
+        length = qBound(minLength, length, maxLength);
 
         line.setAngle(line.angle() + qRadiansToDegrees(length/d->radius));
     }
@@ -372,7 +400,26 @@ QPointF VArc::CutArc(qreal length, VArc &arc1, VArc &arc2) const
         {
             length = fullLength + length;
         }
-        length = qBound(fullLength + ToPixel(1, Unit::Mm), length, ToPixel(-1, Unit::Mm));
+
+        const qreal minLength = fullLength + ToPixel(1, Unit::Mm);
+        const qreal maxLength = ToPixel(-1, Unit::Mm);
+
+        if (length > minLength)
+        {
+            const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to "
+                                                 "minimal value.").arg(name());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        }
+        else if (length < maxLength)
+        {
+            const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to "
+                                                 "maximal value.").arg(name());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        }
+
+        length = qBound(minLength, length, maxLength);
 
         line.setAngle(line.angle() - qRadiansToDegrees(qAbs(length)/d->radius));
     }
