@@ -98,7 +98,7 @@ public:
     static QString ExportFormatSuffix(LayoutExportFormats format);
 
     auto offset() const -> QPointF;
-    void SetOffset(QPointF newOffset);
+    void SetOffset(const QPointF &newOffset);
 
 private:
     QString   m_fileName{};

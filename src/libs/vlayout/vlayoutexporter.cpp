@@ -404,7 +404,7 @@ QPointF VLayoutExporter::offset() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::SetOffset(QPointF newOffset)
+void VLayoutExporter::SetOffset(const QPointF &newOffset)
 {
     m_offset = newOffset;
 }
