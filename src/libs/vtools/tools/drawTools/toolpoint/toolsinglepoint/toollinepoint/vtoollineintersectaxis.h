@@ -95,6 +95,7 @@ protected:
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
+    virtual void    hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 private:
     Q_DISABLE_COPY(VToolLineIntersectAxis)
 

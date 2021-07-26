@@ -1119,9 +1119,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-53</y>
          <width>126</width>
-         <height>192</height>
+         <height>237</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1314,6 +1314,29 @@
           </property>
           <property name="checkable">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QToolButton" name="toolButtonExportDraw">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Draw export</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/export_to_picture_document.png</normaloff>:/icon/32x32/export_to_picture_document.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -1590,7 +1613,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>170</height>
+         <height>168</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1728,6 +1751,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionReportBug"/>
+    <addaction name="actionShop"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
@@ -3063,6 +3087,11 @@
    </property>
    <property name="toolTip">
     <string>Update manual layout</string>
+   </property>
+  </action>
+  <action name="actionShop">
+   <property name="text">
+    <string>Shop</string>
    </property>
   </action>
  </widget>

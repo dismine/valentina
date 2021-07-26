@@ -358,3 +358,10 @@ QString VToolLineIntersectAxis::MakeToolTip() const
             .arg(tr("Label"), current->name());
     return toolTip;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersectAxis::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    VToolLinePoint::hoverEnterEvent(event);
+    mainLine->SetBoldLine(false);
+}

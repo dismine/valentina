@@ -241,12 +241,12 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
     AbstractTest::ReadStringValue(passmarkData, QStringLiteral("pieceName"), pieceName);
     data.pieceName = pieceName;
 
-    PassmarkLineType passmarkLineType;
+    PassmarkLineType passmarkLineType = PassmarkLineType::OneLine;
     AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("passmarkLineType"), passmarkLineType,
                                   QString::number(static_cast<int>(PassmarkLineType::OneLine)));
     data.passmarkLineType = passmarkLineType;
 
-    PassmarkAngleType passmarkAngleType;
+    PassmarkAngleType passmarkAngleType = PassmarkAngleType::Straightforward;
     AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("passmarkAngleType"), passmarkAngleType,
                                   QString::number(static_cast<int>(PassmarkAngleType::Straightforward)));
     data.passmarkAngleType = passmarkAngleType;
@@ -259,11 +259,11 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
     AbstractTest::ReadBooleanValue(passmarkData, QStringLiteral("isShowSecondPassmark"), isShowSecondPassmark);
     data.isShowSecondPassmark = isShowSecondPassmark;
 
-    int passmarkIndex;
+    int passmarkIndex = -1;
     AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("passmarkIndex"), passmarkIndex, QStringLiteral("-1"));
     data.passmarkIndex = passmarkIndex;
 
-    vidtype id;
+    vidtype id = NULL_ID;
     AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("id"), id, QString::number(NULL_ID));
     data.id = id;
 
@@ -891,7 +891,7 @@ void AbstractTest::SAPointFromJson(const QJsonObject &itemObject, VSAPoint &poin
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("saAfter"), saAfter, QStringLiteral("-1"));
     point.SetSAAfter(saAfter);
 
-    PieceNodeAngle angleType;
+    PieceNodeAngle angleType = PieceNodeAngle::ByLength;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("angle"), angleType,
                                   QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
     point.SetAngleType(angleType);

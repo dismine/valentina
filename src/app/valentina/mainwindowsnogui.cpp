@@ -661,7 +661,13 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VLayoutExporter exporter;
+
+    QT_WARNING_POP
+
     exporter.SetFileName(name);
     exporter.SetImageRect(QRectF(0, 0, size.width(), size.height()));
     exporter.SetXScale(m_dialogSaveLayout->GetXScale());
@@ -1095,7 +1101,13 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                                    const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
                                    const QMarginsF &margins) const
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VLayoutExporter exporter;
+
+    QT_WARNING_POP
+
     exporter.SetMargins(margins);
     exporter.SetXScale(m_dialogSaveLayout->GetXScale());
     exporter.SetYScale(m_dialogSaveLayout->GetYScale());

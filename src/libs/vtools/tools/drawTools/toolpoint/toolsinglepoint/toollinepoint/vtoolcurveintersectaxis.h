@@ -89,6 +89,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
     virtual auto MakeToolTip() const -> QString override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 
     void SetSegments(const QPair<QString, QString> &segments);
 private:

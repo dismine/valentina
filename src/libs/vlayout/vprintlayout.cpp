@@ -744,16 +744,21 @@ auto VPrintLayout::WatermarkData() const -> VWatermarkData
 //---------------------------------------------------------------------------------------------------------------------
 auto VPrintLayout::ContinueIfLayoutStale(QWidget *parent) -> int
 {
-    QMessageBox msgBox(parent);
-    msgBox.setIcon(QMessageBox::Question);
-    msgBox.setWindowTitle(tr("The layout is stale."));
-    msgBox.setText(tr("The layout was not updated since last pattern modification. Do you want to continue?"));
-    msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
-    const int width = 500;
-    auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
-    SCASSERT(layout != nullptr)
-    layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-    return msgBox.exec();
+    if (VAbstractApplication::VApp()->IsAppInGUIMode())
+    {
+        QMessageBox msgBox(parent);
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setWindowTitle(tr("The layout is stale."));
+        msgBox.setText(tr("The layout was not updated since last pattern modification. Do you want to continue?"));
+        msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        const int width = 500;
+        auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+        SCASSERT(layout != nullptr)
+        layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+        return msgBox.exec();
+    }
+
+    return QMessageBox::Yes;
 }

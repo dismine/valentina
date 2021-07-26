@@ -31,10 +31,12 @@
 #include <QLineF>
 #include <QPoint>
 #include <QPainterPath>
+#include <QtDebug>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
@@ -356,6 +358,11 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
     {
         arc1 = VEllipticalArc();
         arc2 = VEllipticalArc();
+
+        const QString errorMsg = QObject::tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+
         return QPointF();
     }
 
@@ -364,10 +371,20 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
     if (length < minLength)
     {
         len = minLength;
+
+        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal "
+                                             "value.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLength)
     {
         len = maxLength;
+
+        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal "
+                                             "value.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else
     {

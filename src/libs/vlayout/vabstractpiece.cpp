@@ -55,7 +55,7 @@ const qreal maxL = 3.5;
 
 const qreal VSAPoint::passmarkFactor = 0.5;
 const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
-const qreal VSAPoint::minSAWidth = ToPixel(0.015, Unit::Cm);
+const qreal VSAPoint::minSAWidth = accuracyPointOnLine + accuracyPointOnLine*0.5;
 
 namespace
 {
@@ -1532,8 +1532,8 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
         return false; // Not enough data
     }
 
-//    DumpVector(base); // Uncomment for dumping test data
-//    DumpVector(allowance); // Uncomment for dumping test data
+//    DumpVector(base, QStringLiteral("base.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpVector(allowance, QStringLiteral("allowance.json.XXXXXX")); // Uncomment for dumping test data
 
     // First check direction
     const qreal baseDirection = VPiece::SumTrapezoids(base);

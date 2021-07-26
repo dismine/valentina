@@ -142,6 +142,7 @@ void VLayoutExporter::ExportToSVG(QGraphicsScene *scene) const
 
     QPainter painter;
     painter.begin(&generator);
+    painter.translate(-m_offset.x(), -m_offset.y());
     painter.translate(m_margins.left(), m_margins.top());
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(m_pen);
@@ -394,6 +395,18 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
         qDebug() << *PDFTOPS << "error" << proc.error() << proc.errorString();
     }
     return res;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VLayoutExporter::offset() const
+{
+    return m_offset;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::SetOffset(QPointF newOffset)
+{
+    m_offset = newOffset;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

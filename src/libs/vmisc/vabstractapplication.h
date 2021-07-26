@@ -120,4 +120,21 @@ inline QString VAbstractApplication::LocaleToString(const T &value)
     return loc.toString(value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VAbstractApplication::VApp() -> VAbstractApplication *
+{
+    return qobject_cast<VAbstractApplication*>(QCoreApplication::instance());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSettings hide settings constructor.
+ * @return pointer to class for acssesing to settings in ini file.
+ */
+inline VCommonSettings *VAbstractApplication::Settings()
+{
+    SCASSERT(settings != nullptr)
+    return settings;
+}
+
 #endif // VABSTRACTAPPLICATION_H

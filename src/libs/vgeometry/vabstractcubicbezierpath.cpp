@@ -30,12 +30,14 @@
 #include "vsplinepoint.h"
 
 #include <QPainterPath>
+#include <QtDebug>
 
 #include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
 #include "vpointf.h"
 #include "vspline.h"
+#include "vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject, const Draw &mode)
@@ -180,6 +182,11 @@ QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32
     {
         p1 = p2 = -1;
         spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
+
+        const QString errorMsg = QObject::tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+
         return QPointF();
     }
 
@@ -188,10 +195,20 @@ QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32
     if (length < minLength)
     {
         length = minLength;
+
+        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal "
+                                             "value.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLength)
     {
         length = maxLength;
+
+        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal "
+                                             "value.").arg(name());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
     fullLength = 0;

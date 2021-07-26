@@ -2699,11 +2699,11 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2818,11 +2818,11 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4374,11 +4374,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -6268,11 +6268,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -8943,7 +8943,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Contains all visibility groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Contiene tutti i Gruppi di Visibilità</translation>
     </message>
     <message>
         <source>Show which details will go in layout</source>
@@ -9319,7 +9319,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Groups of visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppi di Visibilità</translation>
     </message>
     <message>
         <source>Export recipe</source>
@@ -9495,6 +9495,22 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Could not create recipe file. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphics files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save draw</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw export</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11041,7 +11057,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Seleziona nuovo per la creazione di un file delle misure.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Seleziona nuovo per la creazione di un file delle misure.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -11926,6 +11942,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Restrict first dimension</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -12098,11 +12118,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzione per regolare la visibilità e posizione dell&apos;etichetta. &lt;b&gt;Non disponibile se il modello etichetta non è stato caricato&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Pattern label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Etichetta con dati del Modello</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
@@ -12162,7 +12182,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Piece label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Attiva/Disattiva Etichetta del Pezzo</translation>
     </message>
 </context>
 <context>
@@ -13079,7 +13099,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
         <source>default</source>
@@ -13991,7 +14011,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Restore label position</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina posizione dell&apos;Etichetta</translation>
     </message>
 </context>
 <context>
@@ -15523,15 +15543,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lunghezza</translation>
+        <translation>Lunghezza</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Angolo</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Etichetta</translation>
+        <translation>Etichetta</translation>
     </message>
     <message>
         <source>Segment 1</source>
@@ -16410,7 +16430,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Etichetta</translation>
+        <translation>Etichetta</translation>
     </message>
     <message>
         <source>Curve 1 segment 1</source>

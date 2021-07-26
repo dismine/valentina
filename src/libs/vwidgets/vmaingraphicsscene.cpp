@@ -221,9 +221,9 @@ void VMainGraphicsScene::InitOrigins()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
-    for (auto item : qAsConst(origins))
+    for (auto *item : qAsConst(origins))
     {
-        if (item)
+        if (item != nullptr)
         {
             item->setVisible(visible);
         }

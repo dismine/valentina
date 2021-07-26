@@ -85,7 +85,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
 {
-    return QStringLiteral("Pattern created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+    return QStringLiteral("Pattern created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
 }
 

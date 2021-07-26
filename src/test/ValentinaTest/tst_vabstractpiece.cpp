@@ -1053,6 +1053,12 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://smart_pattern_#118/input.json"),
                      QStringLiteral("://smart_pattern_#118/output.json"),
                      26.45669291338583 /*seam allowance width*/);
+
+    // See file src/app/share/collection/bugs/smart_pattern_#133.val (private collection)
+    ASSERT_TEST_CASE("Эдит 1",
+                     QStringLiteral("://smart_pattern_#133/input.json"),
+                     QStringLiteral("://smart_pattern_#133/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1258,6 +1264,42 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops() const
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
     Comparison(res, expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::IsAllowanceValid_data() const
+{
+    QTest::addColumn<QVector<QPointF>>("base");
+    QTest::addColumn<QVector<QPointF>>("allowance");
+    QTest::addColumn<bool>("valid");
+
+    auto ASSERT_TEST_CASE = [this](const char *title, const QString &base, const QString &allowance, bool valid)
+    {
+        QVector<QPointF> basePoints;
+        AbstractTest::VectorFromJson(base, basePoints);
+
+        QVector<QPointF> allowancePoints;
+        AbstractTest::VectorFromJson(allowance, allowancePoints);
+
+        QTest::newRow(title) << basePoints << allowancePoints << valid ;
+    };
+
+    // See file src/app/share/collection/valid_allowance/case3.val (private collection)
+    ASSERT_TEST_CASE("Valid seam allowance. Case 3",
+                     QStringLiteral("://valid_allowance_case3/base.json"),
+                     QStringLiteral("://valid_allowance_case3/allowance.json"),
+                     true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::IsAllowanceValid() const
+{
+    QFETCH(QVector<QPointF>, base);
+    QFETCH(QVector<QPointF>, allowance);
+    QFETCH(bool, valid);
+
+    bool result = VAbstractPiece::IsAllowanceValid(base, allowance);
+    QVERIFY(result == valid);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

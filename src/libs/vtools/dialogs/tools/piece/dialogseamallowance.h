@@ -240,6 +240,8 @@ private:
 
     VAbstractPattern *m_doc{nullptr};
 
+    QString m_defLabelValue{};
+
     VPiece CreatePiece() const;
 
     void    NewMainPathItem(const VPieceNode &node);

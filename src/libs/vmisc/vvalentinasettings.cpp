@@ -82,6 +82,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("lay
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDetailExportFormat, (QLatin1String("detail/exportFormat")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
@@ -652,4 +653,28 @@ auto VValentinaSettings::GetLayoutExportFormat() const -> qint8
 void VValentinaSettings::SetLayoutExportFormat(qint8 format)
 {
     setValue(*settingLayoutExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint8 VValentinaSettings::GetDetailExportFormat() const
+{
+    return qvariant_cast<qint8>(value(*settingDetailExportFormat, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetDetailExportFormat(qint8 format)
+{
+    setValue(*settingDetailExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+T VValentinaSettings::GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const
+{
+    if (cache < 0)
+    {
+        cache = qBound(valueMin, ValueOrDef(setting, defValue), valueMax);
+    }
+
+    return cache;
 }

@@ -170,6 +170,9 @@ public:
     auto GetLayoutExportFormat() const -> qint8;
     void SetLayoutExportFormat(qint8 format);
 
+    auto GetDetailExportFormat() const -> qint8;
+    void SetDetailExportFormat(qint8 format);
+
 private:
     Q_DISABLE_COPY(VValentinaSettings)
 

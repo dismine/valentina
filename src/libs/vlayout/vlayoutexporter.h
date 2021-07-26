@@ -93,8 +93,12 @@ public:
 
     static auto SupportPDFConversion() -> bool;
 
+
     static QString ExportFormatDescription(LayoutExportFormats format);
     static QString ExportFormatSuffix(LayoutExportFormats format);
+
+    auto offset() const -> QPointF;
+    void SetOffset(QPointF newOffset);
 
 private:
     QString   m_fileName{};
@@ -108,6 +112,7 @@ private:
     bool      m_ignorePrinterMargins{false};
     bool      m_binaryDxfFormat{false};
     int       m_dxfVersion{0};
+    QPointF   m_offset{};
 
     static void PdfToPs(const QStringList &params);
 };

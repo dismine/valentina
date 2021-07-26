@@ -1,6 +1,23 @@
-# Valentina 0.7.48 (unreleased)
+# Valentina 0.7.50 (unreleased)
+- Fix regression. Minimal seam allowance width is less than the point accuracy values.
+- Call autosave only in GUI mode.
+- Warn about stale layout only in GUI mode.
+- Fix regression. Set default value for detail labels size and grainline length to 10 cm.
+- [smart-pattern/valentina#136] 2 decimals for entering values in multi measurements tables.
+- New warnings. Warn a user about incorrect cut curve segment length.
+- Fix finding point of intersection curve and axis. Case when the axis's point lies on the curve.
+- Fix visualization for tool point of intersection line and axis. Case when the axis's point lies on the line.
+
+# Valentina 0.7.49 July 1, 2021
+- Fix crash.
+- Add tooltip for Export draw feature.
+
+# Valentina 0.7.48 June 29, 2021
 - [smart-pattern/valentina#129] Incorrect behavior of empty arc and elliptical arc.
 - Parsing formulas with not canonical math symbols.
+- [smart-pattern/valentina#133] Incorrect seam allowance.
+- Fix regression. Fix correct handle export format for exporting details in the Detail mode.
+- [smart-pattern/valentina#83] Export the Draw mode.
 
 # Version 0.7.47 May 13, 2021
 - [smart-pattern/valentina#118] Incorrect seam allowance.

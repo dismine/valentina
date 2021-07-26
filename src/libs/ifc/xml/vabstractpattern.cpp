@@ -291,7 +291,7 @@ QStringList VAbstractPattern::ListMeasurements() const
 void VAbstractPattern::ChangeActivPP(const QString &name, const Document &parse)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
-    if (CheckExistNamePP(name) && this->nameActivPP != name)
+    if (CheckExistNamePP(name))
     {
         this->nameActivPP = name;
         if (parse == Document::FullParse)

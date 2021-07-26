@@ -183,15 +183,13 @@ void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
 {
     if (static_cast<int>(format) < 0 || format >= LayoutExportFormats::COUNT)
     {
-        VException e(tr("Tried to use out of range format number."));
-        throw e;
+        throw VException(tr("Tried to use out of range format number."));
     }
 
     const int i = ui->comboBoxFormat->findData(static_cast<int>(format));
     if (i < 0)
     {
-        VException e(tr("Selected not present format."));
-        throw e;
+        throw VException(tr("Selected not present format."));
     }
     ui->comboBoxFormat->setCurrentIndex(i);
 }
@@ -783,7 +781,14 @@ void DialogSaveLayout::ReadSettings()
         ui->toolButtonLandscape->setChecked(true);
     }
 
-    SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    if (m_mode != Draw::Layout)
+    {
+        SelectFormat(static_cast<LayoutExportFormats>(settings->GetDetailExportFormat()));
+    }
+    else
+    {
+        SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -827,6 +832,13 @@ void DialogSaveLayout::WriteSettings() const
         settings->SetTiledPDFOrientation(PageOrientation::Landscape);
     }
 
-    settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
+    if (m_mode != Draw::Layout)
+    {
+        settings->SetDetailExportFormat(static_cast<qint8>(Format()));
+    }
+    else
+    {
+        settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
+    }
 }
 
