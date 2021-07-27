@@ -53,7 +53,7 @@ void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
-    writeComment(QStringLiteral("Layout created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+    writeComment(QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).")
                  .arg(APP_VERSION_STR));
 
     WriteProperties(layout);
