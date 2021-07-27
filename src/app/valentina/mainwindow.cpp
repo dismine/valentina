@@ -3948,7 +3948,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDraw->setEnabled(enable);
     ui->actionDetails->setEnabled(enable);
     ui->actionLayout->setEnabled(enable);
-    ui->actionTable->setEnabled(enable && drawStage);
+    ui->actionTable->setEnabled(enable && designStage);
     ui->actionExportIncrementsToCSV->setEnabled(enable);
     ui->actionExportFinalMeasurementsToCSV->setEnabled(enable);
     ui->actionFinalMeasurements->setEnabled(enable);
