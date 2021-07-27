@@ -1204,15 +1204,17 @@ void VLayoutPiece::DrawMiniature(QPainter &painter) const
         painter.drawPath(VPlaceLabelItem::LabelShapePath(label.shape));
     }
 
-    QPainterPath path;
-
     QVector<QPointF> gPoints = GetGrainline();
-    path.moveTo(gPoints.at(0));
-    for (auto p : qAsConst(gPoints))
+    if (not gPoints.isEmpty())
     {
-        path.lineTo(p);
+        QPainterPath path;
+        path.moveTo(gPoints.at(0));
+        for (auto p : qAsConst(gPoints))
+        {
+            path.lineTo(p);
+        }
+        painter.drawPath(path);
     }
-    painter.drawPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
