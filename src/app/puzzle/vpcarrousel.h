@@ -44,7 +44,7 @@ struct VPCarrouselSheet
 {
     bool unplaced{true};
     QString name{};
-    VPPieceList* pieces{nullptr};
+    QList<VPPiece *> pieces{};
 };
 
 class VPCarrousel : public QWidget
@@ -78,17 +78,6 @@ public:
      * @brief Clear Clears the carrousel (removes everything)
      */
     void Clear();
-
-    /**
-     * @brief ClearSelection Clears the selection of the carrousel.
-     */
-    void ClearSelection();
-
-    /**
-     * @brief ClearSelectionExceptForCurrentPieceList Clears the selection of all pieces of
-     * the layout except for the one in the current piece list
-     */
-    void ClearSelectionExceptForCurrentPieceList();
 
 protected:
     virtual void changeEvent(QEvent* event) override;

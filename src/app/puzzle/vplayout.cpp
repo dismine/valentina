@@ -25,8 +25,8 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+
 #include "vplayout.h"
-#include "vppiecelist.h"
 #include "vppiece.h"
 #include "vpsheet.h"
 
@@ -36,329 +36,114 @@
 Q_LOGGING_CATEGORY(pLayout, "p.layout")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayout::VPLayout() :
-    m_unplacedPieceList(new VPPieceList(this)),
-    m_trashPieceList(new VPPieceList(this))
-{
-    m_unplacedPieceList->SetName(tr("Unplaced pieces"));
-}
+VPLayout::VPLayout(QObject *parent) :
+    QObject(parent),
+    m_trashSheet(new VPSheet(this))
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::~VPLayout()
 {
-    qDeleteAll(m_sheets);
-    delete m_unplacedPieceList;
-    delete m_trashPieceList;
+    qDeleteAll(m_pieces);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPLayout::GetUnplacedPieceList()
+void VPLayout::AddPiece(VPPiece *piece)
 {
-    return m_unplacedPieceList;
+    if ((piece != nullptr) && not m_pieces.contains(piece))
+    {
+        piece->SetLayout(this);
+        m_pieces.append(piece);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPLayout::GetTrashPieceList()
+auto VPLayout::GetPieces() const -> QList<VPPiece *>
 {
-    return m_trashPieceList;
+    return m_pieces;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet* VPLayout::AddSheet()
+auto VPLayout::GetUnplacedPieces() const -> QList<VPPiece *>
 {
-    VPSheet *newSheet = new VPSheet(this);
+    return PiecesForSheet(nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::GetTrashedPieces() const -> QList<VPPiece *>
+{
+    return PiecesForSheet(m_trashSheet);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::AddSheet() -> VPSheet*
+{
+    auto *newSheet = new VPSheet(this);
     m_sheets.append(newSheet);
     return newSheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet* VPLayout::AddSheet(VPSheet *sheet)
+auto VPLayout::AddSheet(VPSheet *sheet) -> VPSheet*
 {
-    m_sheets.append(sheet);
+    if ((sheet != nullptr) && not m_sheets.contains(sheet))
+    {
+        sheet->setParent(this);
+        m_sheets.append(sheet);
+    }
     return sheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPSheet *> VPLayout::GetSheets()
+auto VPLayout::GetSheets() -> QList<VPSheet *>
 {
     return m_sheets;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPPiece *> VPLayout::GetSelectedPieces()
-{
-    QList<VPPiece *> result = QList<VPPiece *>();
-
-    QList<VPPieceList *> pieceLists = QList<VPPieceList *>();
-    pieceLists.append(m_unplacedPieceList);
-    for (auto *sheet : m_sheets)
-    {
-        pieceLists.append(sheet->GetPieceList());
-    }
-
-    for (auto *pieceList : pieceLists)
-    {
-        for (auto *piece : pieceList->GetPieces())
-        {
-            if(piece->GetIsSelected())
-            {
-                result.append(piece);
-            }
-        }
-    }
-
-    return result;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetUnit(Unit unit)
-{
-    m_unit = unit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Unit VPLayout::GetUnit() const
-{
-    return m_unit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetWarningSuperpositionOfPieces(bool state)
-{
-    m_warningSuperpositionOfPieces = state;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPLayout::GetWarningSuperpositionOfPieces() const
-{
-    return m_warningSuperpositionOfPieces;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetWarningPiecesOutOfBound(bool state)
-{
-    m_warningPiecesOutOfBound = state;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPLayout::GetWarningPiecesOutOfBound() const
-{
-    return m_warningPiecesOutOfBound;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTitle(const QString &title)
-{
-    m_title = title;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPLayout::GetTitle() const
-{
-    return m_title;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetDescription(const QString &description)
-{
-    m_description = description;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPLayout::GetDescription() const
-{
-    return m_description;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::ClearSelection()
-{
-    m_unplacedPieceList->ClearSelection();
-
-    for (auto *sheet : m_sheets)
-    {
-        sheet->ClearSelection();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::ClearSelectionExceptForGivenPieceList(VPPieceList* pieceList)
-{
-    if(m_unplacedPieceList != pieceList)
-    {
-        m_unplacedPieceList->ClearSelection();
-    }
-
-    for (auto *sheet : m_sheets)
-    {
-        if(sheet->GetPieceList() != pieceList)
-        {
-            sheet->ClearSelection();
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::MovePieceToPieceList(VPPiece* piece, VPPieceList* pieceList)
-{
-    VPPieceList* pieceListBefore = piece->GetPieceList();
-
-    if(pieceListBefore != nullptr)
-    {
-        piece->GetPieceList()->RemovePiece(piece);
-    }
-    pieceList->AddPiece(piece);
-
-    // signal, that a piece was moved
-    emit PieceMovedToPieceList(piece, pieceListBefore, pieceList);
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPLayout::SetFocusedSheet(VPSheet *focusedSheet)
 {
-    if(focusedSheet == nullptr)
+    if (m_sheets.isEmpty())
     {
-        m_focusedSheet = m_sheets.first();
+        m_focusedSheet = nullptr;
     }
     else
     {
-        m_focusedSheet = focusedSheet;
+        m_focusedSheet = focusedSheet == nullptr ? m_sheets.first() : focusedSheet;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet* VPLayout::GetFocusedSheet()
+auto VPLayout::GetFocusedSheet() -> VPSheet*
 {
     return m_focusedSheet;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesSize(qreal width, qreal height)
+auto VPLayout::GetTrashSheet() -> VPSheet*
 {
-    m_tilesSize.setWidth(width);
-    m_tilesSize.setHeight(height);
+    return m_trashSheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesSizeConverted(qreal width, qreal height)
+auto VPLayout::LayoutSettings() -> VPLayoutSettings &
 {
-    m_tilesSize.setWidth(UnitConvertor(width, GetUnit(), Unit::Px));
-    m_tilesSize.setHeight(UnitConvertor(height, GetUnit(), Unit::Px));
+    return m_layoutSettings;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesSize(const QSizeF &size)
+auto VPLayout::PiecesForSheet(const VPSheet *sheet) const -> QList<VPPiece *>
 {
-    m_tilesSize = size;
-}
+    QList<VPPiece *> list;
+    list.reserve(m_pieces.size());
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesSizeConverted(const QSizeF &size)
-{
-    m_tilesSize = QSizeF(
-                UnitConvertor(size.width(), GetUnit(), Unit::Px),
-                UnitConvertor(size.height(), GetUnit(), Unit::Px)
-                );
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayout::GetTilesSize() const
-{
-    return m_tilesSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayout::GetTilesSize(Unit unit) const
-{
-    QSizeF convertedSize = QSizeF(
-                UnitConvertor(m_tilesSize.width(), Unit::Px, unit),
-                UnitConvertor(m_tilesSize.height(), Unit::Px, unit)
-                );
-
-    return convertedSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayout::GetTilesSizeConverted() const
-{
-    return GetTilesSize(GetUnit());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-PageOrientation VPLayout::GetTilesOrientation()
-{
-    return m_tilesOrientation;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesOrientation(PageOrientation orientation)
-{
-    if(orientation != m_tilesOrientation)
+    for (auto *piece : m_pieces)
     {
-        m_tilesOrientation = orientation;
+        if ((piece != nullptr) && piece->Sheet() == sheet)
+        {
+            list.append(piece);
+        }
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesMargins(qreal left, qreal top, qreal right, qreal bottom)
-{
-    m_tilesMargins.setLeft(left);
-    m_tilesMargins.setTop(top);
-    m_tilesMargins.setRight(right);
-    m_tilesMargins.setBottom(bottom);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
-{
-    m_tilesMargins.setLeft(UnitConvertor(left, GetUnit(), Unit::Px));
-    m_tilesMargins.setTop(UnitConvertor(top, GetUnit(), Unit::Px));
-    m_tilesMargins.setRight(UnitConvertor(right, GetUnit(), Unit::Px));
-    m_tilesMargins.setBottom(UnitConvertor(bottom, GetUnit(), Unit::Px));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesMargins(const QMarginsF &margins)
-{
-    m_tilesMargins = margins;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTilesMarginsConverted(const QMarginsF &margins)
-{
-    m_tilesMargins = UnitConvertor(margins, GetUnit(), Unit::Px);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayout::GetTilesMargins() const
-{
-    return m_tilesMargins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayout::GetTilesMargins(Unit unit) const
-{
-    return UnitConvertor(m_tilesMargins, Unit::Px, unit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayout::GetTilesMarginsConverted() const
-{
-    return UnitConvertor(m_tilesMargins, Unit::Px, GetUnit());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPLayout::GetShowTiles()
-{
-    return m_showTiles;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetShowTiles(bool value)
-{
-    m_showTiles = value;
+    return list;
 }

@@ -84,13 +84,6 @@ protected:
 
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
-private slots:
-    /**
-     * @brief on_ActionPieceMovedToPieceList Slot called when the piece is moved via the
-     * context menu to anoter piece list
-     */
-    void on_ActionPieceMovedToPieceList();
-
 private:
     Q_DISABLE_COPY(VPGraphicsPiece)
     VPPiece *m_piece;

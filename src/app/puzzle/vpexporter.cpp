@@ -43,8 +43,8 @@ void VPExporter::Export(VPLayout* layout, LayoutExportFormats format, VPMainGrap
 
         SetFileName(fileName);
 
-        QSizeF size = QSizeF(layout->GetFocusedSheet()->GetSheetSize());
-        if(layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Landscape)
+        QSizeF size = QSizeF(layout->GetFocusedSheet()->GetLayout()->LayoutSettings().GetSheetSize());
+        if(layout->GetFocusedSheet()->GetLayout()->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
         {
             size.transpose();
         }

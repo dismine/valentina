@@ -21,7 +21,7 @@ VPGraphicsTileGrid::~VPGraphicsTileGrid()
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsTileGrid::boundingRect() const
 {
-    if(m_layout->GetShowTiles())
+    if(m_layout->LayoutSettings().GetShowTiles())
     {
         return QRectF(0,
                    0,
@@ -29,10 +29,8 @@ QRectF VPGraphicsTileGrid::boundingRect() const
                    m_tileFactory->getRowNb()* m_tileFactory->getDrawingAreaHeight()
                    );
     }
-    else
-    {
-        return QRectF(0,0,0,0);
-    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -41,7 +39,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    if(m_layout->GetShowTiles())
+    if(m_layout->LayoutSettings().GetShowTiles())
     {
         QPen pen(QColor(255,0,0,127), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         pen.setCosmetic(true);

@@ -27,9 +27,9 @@ void VPTileFactory::refreshTileInfos()
 {
     if(m_layout != nullptr)
     {
-        PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
-        QSizeF tilesSize =  m_layout->GetTilesSize();
-        QMarginsF tilesMargins = m_layout->GetTilesMargins();
+        PageOrientation tilesOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+        QSizeF tilesSize =  m_layout->LayoutSettings().GetTilesSize();
+        QMarginsF tilesMargins = m_layout->LayoutSettings().GetTilesMargins();
 
         // sets the drawing height
         m_drawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
@@ -44,11 +44,11 @@ void VPTileFactory::refreshTileInfos()
                 tilesMargins.left() + tilesMargins.right() + m_infoStripeWidth;
 
 
-        QSizeF sheetSize = m_layout->GetFocusedSheet()->GetSheetSize();
+        QSizeF sheetSize = m_layout->LayoutSettings().GetSheetSize();
         qreal totalDrawingWidth = 0;
         qreal totaldrawingHeight = 0;
 
-        if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
+        if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Portrait)
         {
              totalDrawingWidth = sheetSize.width();
              totaldrawingHeight = sheetSize.height();
@@ -68,7 +68,7 @@ void VPTileFactory::refreshTileInfos()
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView, int row, int col)
 {
-    QMarginsF tilesMargins = m_layout->GetTilesMargins();
+    QMarginsF tilesMargins = m_layout->LayoutSettings().GetTilesMargins();
     QPen penTileInfos = QPen(QColor(180,180,180), m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap, Qt::RoundJoin);
     QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 

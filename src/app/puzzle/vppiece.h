@@ -35,17 +35,17 @@
 
 #include "../vlayout/vlayoutpiece.h"
 
-class VPPieceList;
+class VPLayout;
+class VPSheet;
 
 class VPPiece : public QObject, public VLayoutPiece
 {
     Q_OBJECT
 public:
-    VPPiece();
+    VPPiece() = default;
     explicit VPPiece(VLayoutPiece layoutPiece);
 
-    ~VPPiece();
-
+    virtual ~VPPiece();
 
     /**
      * @brief GetShowSeamLine returns wether the seam line of the piece has to be shown or not
@@ -111,7 +111,6 @@ public:
      */
     void RotateToGrainline(qreal angleOfGrainline, bool add180IfAlreadyInPosition = false);
 
-
     /**
      * @brief SetIsSelected Sets wether the piece is selected
      * @param value true if the piece is selected
@@ -124,19 +123,13 @@ public:
      */
     bool GetIsSelected();
 
-    /**
-     * @brief GetPieceList Returns the piecelist in which the piece is.
-     * @return pieceList of the piece
-     */
-    VPPieceList* GetPieceList();
-
-    /**
-     * @brief SetPieceList Sets the pieceList of the piece to the given pieceList
-     * @param pieceList pointer to the piece list
-     */
-    void SetPieceList(VPPieceList* pieceList);
-
     QIcon PieceIcon(const QSize &size) const;
+
+    auto Sheet() const -> VPSheet *;
+    void SetSheet(VPSheet *newSheet);
+
+    auto Layout() const -> VPLayout *;
+    void SetLayout(VPLayout *layout);
 
 signals:
     /**
@@ -163,10 +156,12 @@ signals:
      */
     void PropertiesChanged();
 
-
-
 private:
     Q_DISABLE_COPY(VPPiece)
+
+    VPLayout *m_layout{nullptr};
+
+    VPSheet *m_sheet{nullptr};
 
     QVector<QPointF> m_grainline{};
     bool m_isGrainlineEnabled{false};
@@ -181,7 +176,6 @@ private:
     bool m_mirrorPiece{false};
 
     bool m_isSelected{false};
-    VPPieceList *m_pieceList{nullptr};
 };
 
 #endif // VPPIECE_H

@@ -68,7 +68,6 @@ public:
      */
     void CleanAfterExport();
 
-
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
@@ -78,21 +77,6 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
     void drawTilesLine();
-
-private slots:
-    /**
-     * @brief on_PieceMovedToPieceList The slot is called when the given piece was moved from the given piece list to the other
-     * given piece list
-     * @param piece the piece that was moved
-     * @param pieceListBefore the piece list before the move
-     * @param pieceListAfter the piece list after the move
-     */
-    void on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter);
-
-    /**
-     * @brief on_SceneSelectionChanged Slot is called when the scene selection has changed
-     */
-    void on_SceneSelectionChanged();
 
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)

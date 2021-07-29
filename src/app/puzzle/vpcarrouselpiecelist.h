@@ -30,7 +30,7 @@
 #define VPCARROUSELPIECELIST_H
 
 #include <QListWidget>
-#include "vppiecelist.h"
+
 #include "vpcarrousel.h"
 
 
@@ -47,16 +47,10 @@ public:
     void Refresh();
 
     /**
-     * @brief GetPieceList Returns the corresponding VPPieceList
-     * @return the VPPieceList
-     */
-    VPPieceList* GetCurrentPieceList();
-
-    /**
      * @brief SetCurrentPieceList Sets the current piece list to the given piece list and redraw
      * the carrousel.
      */
-    void SetCurrentPieceList(VPPieceList *pieceList);
+    void SetCurrentPieceList(const QList<VPPiece *> &pieceList);
 
     /**
      * @brief SetCarrousel Sets the carrousel corresponding to the list
@@ -83,31 +77,9 @@ protected:
 private:
     Q_DISABLE_COPY(VPCarrouselPieceList)
 
-    VPPieceList *m_pieceList{nullptr};
+    QList<VPPiece *> m_pieceList{};
     QPoint m_dragStart;
     VPCarrousel *m_carrousel{nullptr};
-
-private slots:
-
-    /**
-     * @brief on_PieceUpdated This slot is called when a piece was added
-     */
-    void on_PieceAdded(VPPiece* piece);
-
-    /**
-     * @brief on_PieceUpdated This slot is called when a piece was removed
-     */
-    void on_PieceRemoved(VPPiece* piece);
-
-    /**
-     * @brief on_SelectionChangedInternal when the selection was changed inside of the carrousel
-     */
-    void on_SelectionChangedInternal();
-
-    /**
-     * @brief on_ActionPieceMovedToPieceList when a piece is moved to another piece list via a context menu
-     */
-    void on_ActionPieceMovedToPieceList();
 };
 
 #endif // VPCARROUSELPIECELIST_H

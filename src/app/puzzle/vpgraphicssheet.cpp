@@ -72,12 +72,12 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         painter->drawRect(sheetRect);
     }
 
-    if(m_sheet->GetShowGrid())
+    if(m_sheet->GetLayout()->LayoutSettings().GetShowGrid())
     {
         pen.setColor(QColor(204,204,204));
         painter->setPen(pen);
 
-        qreal colWidth = m_sheet->GetGridColWidth();
+        qreal colWidth = m_sheet->GetLayout()->LayoutSettings().GetGridColWidth();
         if(colWidth > 0)
         {
             qreal colX = colWidth;
@@ -89,7 +89,7 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             }
         }
 
-        qreal rowHeight = m_sheet->GetGridRowHeight();
+        qreal rowHeight = m_sheet->GetLayout()->LayoutSettings().GetGridRowHeight();
         if(rowHeight > 0)
         {
             qreal rowY = rowHeight;
@@ -110,8 +110,8 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 QRectF VPGraphicsSheet::GetSheetRect() const
 {
     QPoint topLeft = QPoint(0,0);
-    QSizeF size = m_sheet->GetSheetSize();
-    if(m_sheet->GetOrientation() == PageOrientation::Landscape)
+    QSizeF size = m_sheet->GetLayout()->LayoutSettings().GetSheetSize();
+    if(m_sheet->GetLayout()->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
     {
         size.transpose();
     }
@@ -122,10 +122,10 @@ QRectF VPGraphicsSheet::GetSheetRect() const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsSheet::GetMarginsRect() const
 {
-    QMarginsF margins = m_sheet->GetSheetMargins();
-    QSizeF size = m_sheet->GetSheetSize();
+    QMarginsF margins = m_sheet->GetLayout()->LayoutSettings().GetSheetMargins();
+    QSizeF size = m_sheet->GetLayout()->LayoutSettings().GetSheetSize();
 
-    if(m_sheet->GetOrientation() == PageOrientation::Landscape)
+    if(m_sheet->GetLayout()->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
     {
         size.transpose();
     }

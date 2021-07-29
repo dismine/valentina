@@ -70,15 +70,15 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_statusLabel(new QLabel(this))
 {
     //    // ----- for test purposes, to be removed------------------
-    m_layout->SetUnit(Unit::Cm);
-    m_layout->SetWarningSuperpositionOfPieces(true);
-    m_layout->SetTitle(QString("My Test Layout"));
-    m_layout->SetDescription(QString("Description of my Layout"));
+    m_layout->LayoutSettings().SetUnit(Unit::Cm);
+    m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(true);
+    m_layout->LayoutSettings().SetTitle(QString("My Test Layout"));
+    m_layout->LayoutSettings().SetDescription(QString("Description of my Layout"));
 
-    m_layout->SetTilesSizeConverted(21,29.7);
-    m_layout->SetTilesOrientation(PageOrientation::Portrait);
-    m_layout->SetTilesMarginsConverted(1,1,1,1);
-    m_layout->SetShowTiles(true);
+    m_layout->LayoutSettings().SetTilesSizeConverted(21,29.7);
+    m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Portrait);
+    m_layout->LayoutSettings().SetTilesMarginsConverted(1,1,1,1);
+    m_layout->LayoutSettings().SetShowTiles(true);
 
     // --------------------------------------------------------
 
@@ -281,7 +281,8 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 
                 // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
                 VPPiece *piece = CreatePiece(rawPiece);
-                m_layout->GetUnplacedPieceList()->AddPiece(piece);
+                piece->SetSheet(nullptr); // just in case
+                m_layout->AddPiece(piece);
             }
 
             m_carrousel->Refresh();
@@ -475,7 +476,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     sheetTemplates.append(PaperSizeTemplate::Custom);
 
     ui->comboBoxSheetTemplate->blockSignals(true);
-    VPSheet::PopulateComboBox(&sheetTemplates, ui->comboBoxSheetTemplate);
+    VPLayoutSettings::PopulateComboBox(&sheetTemplates, ui->comboBoxSheetTemplate);
     ui->comboBoxSheetTemplate->blockSignals(false);
 
     ui->comboBoxSheetTemplate->setCurrentIndex(0);
@@ -514,7 +515,7 @@ void VPMainWindow::InitPropertyTabTiles()
     tilesTemplates.append(PaperSizeTemplate::Custom);
 
     ui->comboBoxTilesTemplate->blockSignals(true);
-    VPSheet::PopulateComboBox(&tilesTemplates, ui->comboBoxTilesTemplate);
+    VPLayoutSettings::PopulateComboBox(&tilesTemplates, ui->comboBoxTilesTemplate);
     ui->comboBoxTilesTemplate->blockSignals(false);
 
     ui->comboBoxTilesTemplate->setCurrentIndex(4); //A4
@@ -607,9 +608,9 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         QPointF pos = selectedPiece->GetPosition();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
-                              UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+                              UnitConvertor(pos.x(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
-                              UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+                              UnitConvertor(pos.y(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
 
         qreal angle = selectedPiece->GetRotation();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
@@ -633,12 +634,12 @@ void VPMainWindow::SetPropertyTabSheetData()
     ui->lineEditSheetName->setText(m_layout->GetFocusedSheet()->GetName());
 
     // set Width / Length
-    QSizeF size = m_layout->GetFocusedSheet()->GetSheetSizeConverted();
+    QSizeF size = m_layout->LayoutSettings().GetSheetSizeConverted();
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetWidth, size.width());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, size.height());
 
     // Set Orientation
-    if(m_layout->GetFocusedSheet()->GetOrientation() == PageOrientation::Portrait)
+    if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Portrait)
     {
         ui->radioButtonSheetPortrait->setChecked(true);
     }
@@ -648,22 +649,22 @@ void VPMainWindow::SetPropertyTabSheetData()
     }
 
     // set margins
-    QMarginsF margins = m_layout->GetFocusedSheet()->GetSheetMarginsConverted();
+    QMarginsF margins = m_layout->LayoutSettings().GetSheetMarginsConverted();
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
 
     // set placement grid
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, m_layout->GetFocusedSheet()->GetGridColWidthConverted());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, m_layout->GetFocusedSheet()->GetGridRowHeightConverted());
-    SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->GetFocusedSheet()->GetShowGrid());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, m_layout->LayoutSettings().GetGridColWidthConverted());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, m_layout->LayoutSettings().GetGridRowHeightConverted());
+    SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->LayoutSettings().GetShowGrid());
 
     // set pieces gap
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->GetFocusedSheet()->GetPiecesGapConverted());
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->LayoutSettings().GetPiecesGapConverted());
 
     // set the checkboxes
-    SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->GetFocusedSheet()->GetStickyEdges());
+    SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().GetStickyEdges());
 }
 
 
@@ -671,12 +672,12 @@ void VPMainWindow::SetPropertyTabSheetData()
 void VPMainWindow::SetPropertyTabTilesData()
 {
     // set Width / Length
-    QSizeF size = m_layout->GetTilesSizeConverted();
+    QSizeF size = m_layout->LayoutSettings().GetTilesSizeConverted();
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesWidth, size.width());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesLength, size.height());
 
     // Set Orientation
-    if(m_layout->GetTilesOrientation() == PageOrientation::Portrait)
+    if(m_layout->LayoutSettings().GetTilesOrientation() == PageOrientation::Portrait)
     {
         ui->radioButtonSheetPortrait->setChecked(true);
     }
@@ -686,25 +687,25 @@ void VPMainWindow::SetPropertyTabTilesData()
     }
 
     // set margins
-    QMarginsF margins = m_layout->GetTilesMarginsConverted();
+    QMarginsF margins = m_layout->LayoutSettings().GetTilesMarginsConverted();
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginLeft, margins.left());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginTop, margins.top());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginRight, margins.right());
     SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginBottom, margins.bottom());
 
     // set "show tiles" checkbox
-    SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->GetShowTiles());
+    SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabLayoutData()
 {
     // set the title and description
-    ui->lineEditLayoutName->setText(m_layout->GetTitle());
-    ui->plainTextEditLayoutDescription->setPlainText(m_layout->GetDescription());
+    ui->lineEditLayoutName->setText(m_layout->LayoutSettings().GetTitle());
+    ui->plainTextEditLayoutDescription->setPlainText(m_layout->LayoutSettings().GetDescription());
 
     // set Unit
-    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->GetUnit())));
+    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->LayoutSettings().GetUnit())));
     if(index != -1)
     {
         ui->comboBoxLayoutUnit->blockSignals(true); // FIXME: is there a better way to block the signals?
@@ -713,8 +714,10 @@ void VPMainWindow::SetPropertyTabLayoutData()
     }
 
     // set controls
-    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, m_layout->GetWarningPiecesOutOfBound());
-    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, m_layout->GetWarningSuperpositionOfPieces());
+    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound,
+                     m_layout->LayoutSettings().GetWarningPiecesOutOfBound());
+    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition,
+                     m_layout->LayoutSettings().GetWarningSuperpositionOfPieces());
 }
 
 
@@ -786,7 +789,8 @@ void VPMainWindow::InitScaleToolBar()
     // define the mouse position
     ui->toolBarScale->addSeparator();
 
-    m_mouseCoordinate = new QLabel(QStringLiteral("0, 0 (%1)").arg(UnitsToStr(m_layout->GetUnit(), true)));
+    m_mouseCoordinate = new QLabel(QStringLiteral("0, 0 (%1)")
+                                   .arg(UnitsToStr(m_layout->LayoutSettings().GetUnit(), true)));
     ui->toolBarScale->addWidget(m_mouseCoordinate);
     ui->toolBarScale->addSeparator();
 }
@@ -975,7 +979,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         m_graphicsView->PrepareForExport();
         m_tileFactory->refreshTileInfos();
 
-        PageOrientation tilesOrientation = m_layout->GetTilesOrientation();
+        PageOrientation tilesOrientation = m_layout->LayoutSettings().GetTilesOrientation();
 
         // -------------  Set up the printer
         QScopedPointer<QPrinter> printer(new QPrinter());
@@ -985,7 +989,7 @@ void VPMainWindow::generateTiledPdf(QString fileName)
         printer->setPageOrientation(QPageLayout::Portrait); // in the pdf file the pages should always be in portrait
 
         // here we might need to so some rounding for the size.
-        printer->setPageSize(QPageSize(m_layout->GetTilesSize(Unit::Mm),
+        printer->setPageSize(QPageSize(m_layout->LayoutSettings().GetTilesSize(Unit::Mm),
                                                            QPageSize::Millimeter));
         printer->setFullPage(true);
 
@@ -1087,12 +1091,12 @@ void VPMainWindow::AddSheet()
     auto *sheet = new VPSheet(m_layout);
     sheet->SetName(QObject::tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
     m_layout->AddSheet(sheet);
-    m_layout->SetFocusedSheet();
+    m_layout->SetFocusedSheet(sheet);
 
 //    // ----- for test purposes, to be removed------------------
-    sheet->SetSheetMarginsConverted(1, 1, 1, 1);
-    sheet->SetSheetSizeConverted(84.1, 118.9);
-    sheet->SetPiecesGapConverted(1);
+    m_layout->LayoutSettings().SetSheetMarginsConverted(1, 1, 1, 1);
+    m_layout->LayoutSettings().SetSheetSizeConverted(84.1, 118.9);
+    m_layout->LayoutSettings().SetPiecesGapConverted(1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1359,15 +1363,15 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
 
     if(comboBoxValue == QVariant(UnitsToStr(Unit::Cm)))
     {
-        m_layout->SetUnit(Unit::Cm);
+        m_layout->LayoutSettings().SetUnit(Unit::Cm);
     }
     else if(comboBoxValue == QVariant(UnitsToStr(Unit::Mm)))
     {
-        m_layout->SetUnit(Unit::Mm);
+        m_layout->LayoutSettings().SetUnit(Unit::Mm);
     }
     else if(comboBoxValue == QVariant(UnitsToStr(Unit::Inch)))
     {
-        m_layout->SetUnit(Unit::Inch);
+        m_layout->LayoutSettings().SetUnit(Unit::Inch);
     }
 
     SetPropertyTabCurrentPieceData();
@@ -1393,14 +1397,16 @@ void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
                 ui->comboBoxSheetTemplate->itemData(index).toInt()
                 );
 
-    QSizeF tmplSize = VPSheet::GetTemplateSize(tmpl);
+    QSizeF tmplSize = VPLayoutSettings::GetTemplateSize(tmpl);
     if(!tmplSize.isEmpty())
     {
         ui->doubleSpinBoxSheetWidth->blockSignals(true);
         ui->doubleSpinBoxSheetLength->blockSignals(true);
 
-        ui->doubleSpinBoxSheetWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px, m_layout->GetUnit()));
-        ui->doubleSpinBoxSheetLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px, m_layout->GetUnit()));
+        ui->doubleSpinBoxSheetWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px,
+                                                            m_layout->LayoutSettings().GetUnit()));
+        ui->doubleSpinBoxSheetLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px,
+                                                             m_layout->LayoutSettings().GetUnit()));
 
         on_SheetSizeChanged(false);
 
@@ -1412,7 +1418,7 @@ void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_SheetSizeChanged(bool changedViaSizeCombobox)
 {
-    m_layout->GetFocusedSheet()->SetSheetSizeConverted(
+    m_layout->LayoutSettings().SetSheetSizeConverted(
                 ui->doubleSpinBoxSheetWidth->value(),
                 ui->doubleSpinBoxSheetLength->value()
                 );
@@ -1442,11 +1448,11 @@ void VPMainWindow::on_SheetOrientationChanged()
     // Updates the orientation
     if(ui->radioButtonSheetPortrait->isChecked())
     {
-        m_layout->GetFocusedSheet()->SetOrientation(PageOrientation::Portrait);
+        m_layout->LayoutSettings().SetOrientation(PageOrientation::Portrait);
     }
     else
     {
-        m_layout->GetFocusedSheet()->SetOrientation(PageOrientation::Landscape);
+        m_layout->LayoutSettings().SetOrientation(PageOrientation::Landscape);
     }
     m_tileFactory->refreshTileInfos();
 
@@ -1472,7 +1478,7 @@ void VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_SheetMarginChanged()
 {
-    m_layout->GetFocusedSheet()->SetSheetMarginsConverted(
+    m_layout->LayoutSettings().SetSheetMarginsConverted(
                 ui->doubleSpinBoxSheetMarginLeft->value(),
                 ui->doubleSpinBoxSheetMarginTop->value(),
                 ui->doubleSpinBoxSheetMarginRight->value(),
@@ -1487,21 +1493,21 @@ void VPMainWindow::on_SheetMarginChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxSheetShowGrid_toggled(bool checked)
 {
-    m_layout->GetFocusedSheet()->SetShowGrid(checked);
+    m_layout->LayoutSettings().SetShowGrid(checked);
     m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_doubleSpinBoxSheetGridColWidth_valueChanged(double value)
 {
-    m_layout->GetFocusedSheet()->SetGridColWidthConverted(value);
+    m_layout->LayoutSettings().SetGridColWidthConverted(value);
     m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_doubleSpinBoxSheetGridRowHeight_valueChanged(double value)
 {
-    m_layout->GetFocusedSheet()->SetGridRowHeightConverted(value);
+    m_layout->LayoutSettings().SetGridRowHeightConverted(value);
     m_graphicsView->RefreshLayout();
 }
 
@@ -1512,14 +1518,16 @@ void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
                 ui->comboBoxTilesTemplate->itemData(index).toInt()
                 );
 
-    QSizeF tmplSize = VPSheet::GetTemplateSize(tmpl);
+    QSizeF tmplSize = VPLayoutSettings::GetTemplateSize(tmpl);
     if(!tmplSize.isEmpty())
     {
         ui->doubleSpinBoxTilesWidth->blockSignals(true);
         ui->doubleSpinBoxTilesLength->blockSignals(true);
 
-        ui->doubleSpinBoxTilesWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px, m_layout->GetUnit()));
-        ui->doubleSpinBoxTilesLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px, m_layout->GetUnit()));
+        ui->doubleSpinBoxTilesWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px,
+                                                            m_layout->LayoutSettings().GetUnit()));
+        ui->doubleSpinBoxTilesLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px,
+                                                             m_layout->LayoutSettings().GetUnit()));
 
         on_TilesSizeChanged(false);
 
@@ -1531,7 +1539,8 @@ void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_TilesSizeChanged(bool changedViaSizeCombobox)
 {
-    m_layout->SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(), ui->doubleSpinBoxTilesLength->value());
+    m_layout->LayoutSettings().SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(),
+                                                     ui->doubleSpinBoxTilesLength->value());
     m_tileFactory->refreshTileInfos();
 
     if(changedViaSizeCombobox)
@@ -1560,11 +1569,11 @@ void VPMainWindow::on_TilesOrientationChanged()
     // Updates the orientation
     if(ui->radioButtonTilesPortrait->isChecked())
     {
-        m_layout->SetTilesOrientation(PageOrientation::Portrait);
+        m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Portrait);
     }
     else
     {
-        m_layout->SetTilesOrientation(PageOrientation::Landscape);
+        m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Landscape);
     }
     m_tileFactory->refreshTileInfos();
 
@@ -1576,7 +1585,7 @@ void VPMainWindow::on_TilesOrientationChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_TilesMarginChanged()
 {
-    m_layout->SetTilesMarginsConverted(
+    m_layout->LayoutSettings().SetTilesMarginsConverted(
                 ui->doubleSpinBoxTilesMarginLeft->value(),
                 ui->doubleSpinBoxTilesMarginTop->value(),
                 ui->doubleSpinBoxTilesMarginRight->value(),
@@ -1593,7 +1602,7 @@ void VPMainWindow::on_TilesMarginChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
 {
-    m_layout->SetShowTiles(checked);
+    m_layout->LayoutSettings().SetShowTiles(checked);
 
     // TODO Undo / Redo
 
@@ -1635,7 +1644,7 @@ void VPMainWindow::on_SheetFollowGrainlineChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_doubleSpinBoxSheetPiecesGap_valueChanged(double value)
 {
-    m_layout->GetFocusedSheet()->SetPiecesGapConverted(value);
+    m_layout->LayoutSettings().SetPiecesGapConverted(value);
 
     // TODO Undo / Redo
     // TODO update the QGraphicView
@@ -1644,7 +1653,7 @@ void VPMainWindow::on_doubleSpinBoxSheetPiecesGap_valueChanged(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxLayoutWarningPiecesSuperposition_toggled(bool checked)
 {
-    m_layout->SetWarningSuperpositionOfPieces(checked);
+    m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(checked);
 
     // TODO Undo / Redo
     // TODO update the QGraphicView
@@ -1653,7 +1662,7 @@ void VPMainWindow::on_checkBoxLayoutWarningPiecesSuperposition_toggled(bool chec
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked)
 {
-    m_layout->SetWarningPiecesOutOfBound(checked);
+    m_layout->LayoutSettings().SetWarningPiecesOutOfBound(checked);
 
     // TODO Undo / Redo
     // TODO update the QGraphicView
@@ -1662,7 +1671,7 @@ void VPMainWindow::on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
 {
-    m_layout->GetFocusedSheet()->SetStickyEdges(checked);
+    m_layout->LayoutSettings().SetStickyEdges(checked);
 
     // TODO Undo / Redo
     // TODO update the QGraphicView
@@ -1748,8 +1757,10 @@ void VPMainWindow::on_CurrentPiecePositionEdited()
     if(m_selectedPieces.count() == 1)
     {
         VPPiece *piece = m_selectedPieces.first();
-        QPointF pos(UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(), m_layout->GetUnit(), Unit::Px),
-                    UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(), m_layout->GetUnit(), Unit::Px));
+        QPointF pos(UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(),
+                                  m_layout->LayoutSettings().GetUnit(), Unit::Px),
+                    UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(),
+                                  m_layout->LayoutSettings().GetUnit(), Unit::Px));
         piece->SetPosition(pos);
     }
 }
@@ -1770,7 +1781,7 @@ void VPMainWindow::on_CarrouselLocationChanged(Qt::DockWidgetArea area)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_PieceSelectionChanged()
 {
-    m_selectedPieces = m_layout->GetSelectedPieces();
+//    m_selectedPieces = m_layout->GetSelectedPieces();
 
     // update the property of the piece currently selected
     SetPropertyTabCurrentPieceData();
@@ -1786,9 +1797,9 @@ void VPMainWindow::on_PiecePositionChanged()
         QPointF pos = piece->GetPosition();
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
-                              UnitConvertor(pos.x(), Unit::Px, m_layout->GetUnit()));
+                              UnitConvertor(pos.x(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
-                              UnitConvertor(pos.y(), Unit::Px, m_layout->GetUnit()));
+                              UnitConvertor(pos.y(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
     }
 }
 
@@ -1825,9 +1836,11 @@ void VPMainWindow::on_MouseMoved(const QPointF &scenePos)
     if (m_mouseCoordinate != nullptr)
     {
         m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
-                                   .arg(static_cast<qint32>(FromPixel(scenePos.x(), m_layout->GetUnit())))
-                                   .arg(static_cast<qint32>(FromPixel(scenePos.y(), m_layout->GetUnit())))
-                                   .arg(UnitsToStr(m_layout->GetUnit(), true)));
+                                   .arg(static_cast<qint32>(FromPixel(scenePos.x(),
+                                                                      m_layout->LayoutSettings().GetUnit())))
+                                   .arg(static_cast<qint32>(FromPixel(scenePos.y(),
+                                                                      m_layout->LayoutSettings().GetUnit())))
+                                   .arg(UnitsToStr(m_layout->LayoutSettings().GetUnit(), true)));
     }
 }
 

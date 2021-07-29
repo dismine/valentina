@@ -30,6 +30,7 @@
 #include "vplayoutfilereader.h"
 #include "vplayoutfilewriter.h"
 #include "vplayoutliterals.h"
+#include "vpsheet.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 
@@ -66,7 +67,14 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
 {
     AssertRootTag(ML::TagLayout);
 
-    const QStringList tags({ML::TagProperties, ML::TagUnplacedPieces, ML::TagSheets});
+    const QStringList tags
+    {
+        ML::TagProperties,     // 0
+        ML::TagUnplacedPieces, // 1
+        ML::TagSheets,         // 2
+        ML::TagSize,           // 3
+        ML::TagMargin          // 4
+    };
 
     while (readNextStartElement())
     {
@@ -80,6 +88,12 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
                 break;
             case 2: // ML::TagSheets
                 ReadSheets(layout);
+                break;
+            case 3: // size
+                layout->LayoutSettings().SetSheetSize(ReadSize());
+                break;
+            case 4: // margin
+                layout->LayoutSettings().SetSheetMargins(ReadMargins());
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -111,15 +125,15 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
         {
             case 0:// unit
                 qDebug("read unit");
-                layout->SetUnit(StrToUnits(readElementText()));
+                layout->LayoutSettings().SetUnit(StrToUnits(readElementText()));
                 break;
             case 1:// title
                 qDebug("read title");
-                layout->SetTitle(readElementText());
+                layout->LayoutSettings().SetTitle(readElementText());
                 break;
             case 2:// description
                 qDebug("read description");
-                layout->SetDescription(readElementText());
+                layout->LayoutSettings().SetDescription(readElementText());
                 break;
             case 3:// control
                 qDebug("read control");
@@ -143,8 +157,9 @@ void VPLayoutFileReader::ReadControl(VPLayout *layout)
     AssertRootTag(ML::TagControl);
 
     QXmlStreamAttributes attribs = attributes();
-    layout->SetWarningSuperpositionOfPieces(ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
-    layout->SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
+    layout->LayoutSettings().SetWarningSuperpositionOfPieces(
+                ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
+    layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
 
     readElementText();
 }
@@ -154,7 +169,7 @@ void VPLayoutFileReader::ReadUnplacedPieces(VPLayout *layout)
 {
     AssertRootTag(ML::TagUnplacedPieces);
 
-    ReadPieceList(layout->GetUnplacedPieceList());
+    ReadPieces(layout);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +178,7 @@ void VPLayoutFileReader::ReadTiles(VPLayout *layout)
     AssertRootTag(ML::TagTiles);
 
     QXmlStreamAttributes attribs = attributes();
-    layout->SetShowTiles(ReadAttributeBool(attribs, ML::AttrVisible, falseStr));
+    layout->LayoutSettings().SetShowTiles(ReadAttributeBool(attribs, ML::AttrVisible, falseStr));
 //    attribs.value(ML::AttrMatchingMarks); // TODO
 
     const QStringList tags
@@ -177,10 +192,10 @@ void VPLayoutFileReader::ReadTiles(VPLayout *layout)
         switch (tags.indexOf(name().toString()))
         {
             case 0: // size
-                layout->SetTilesSize(ReadSize());
+                layout->LayoutSettings().SetTilesSize(ReadSize());
                 break;
             case 1: // margin
-                layout->SetTilesMargins(ReadMargins());
+                layout->LayoutSettings().SetTilesMargins(ReadMargins());
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -212,14 +227,6 @@ void VPLayoutFileReader::ReadSheets(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadSheetPieces(VPSheet *sheet)
-{
-    AssertRootTag(ML::TagPieces);
-
-    ReadPieceList(sheet->GetPieceList());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadSheet(VPLayout *layout)
 {
     AssertRootTag(ML::TagSheet);
@@ -227,9 +234,7 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
     const QStringList tags
     {
         ML::TagName,   // 0
-        ML::TagSize,   // 1
-        ML::TagMargin, // 2
-        ML::TagPieces  // 3
+        ML::TagPieces  // 1
     };
 
     QScopedPointer<VPSheet> sheet (new VPSheet(layout));
@@ -241,17 +246,11 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
             case 0: // name
                 sheet->SetName(readElementText());
                 break;
-            case 1: // size
-                sheet->SetSheetSize(ReadSize());
-                break;
-            case 2: // margin
-                sheet->SetSheetMargins(ReadMargins());
-                break;
-            case 3: // pieces
+            case 1: // pieces
 #if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-                ReadSheetPieces(sheet.get());
+                ReadPieces(layout, sheet.get());
 #else
-                ReadSheetPieces(sheet.data());
+                ReadPieces(layout, sheet.data());
 #endif
                 break;
             default:
@@ -268,19 +267,16 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadPieceList(VPPieceList *pieceList)
+void VPLayoutFileReader::ReadPieces(VPLayout *layout, VPSheet *sheet)
 {
-    QXmlStreamAttributes attribs = attributes();
-    pieceList->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece List")));
-    pieceList->SetIsVisible(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
-
     while (readNextStartElement())
     {
         if (name() == ML::TagPiece)
         {
             QScopedPointer<VPPiece>piece(new VPPiece());
             ReadPiece(piece.data());
-            pieceList->AddPiece(piece.take());
+            piece->SetSheet(sheet);
+            layout->AddPiece(piece.take());
         }
         else
         {

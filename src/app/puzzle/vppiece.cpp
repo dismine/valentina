@@ -29,7 +29,6 @@
 
 #include <QtMath>
 
-#include "vppiecelist.h"
 #include "../vmisc/def.h"
 
 #include <QIcon>
@@ -37,12 +36,6 @@
 #include <QPainter>
 
 Q_LOGGING_CATEGORY(pPiece, "p.piece")
-
-//---------------------------------------------------------------------------------------------------------------------
-VPPiece::VPPiece()
-{
-
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPPiece::VPPiece(VLayoutPiece layoutPiece): VLayoutPiece(layoutPiece)
@@ -198,16 +191,26 @@ bool VPPiece::GetIsSelected()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPieceList* VPPiece::GetPieceList()
+auto VPPiece::Sheet() const -> VPSheet *
 {
-    return m_pieceList;
+    return m_sheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetPieceList(VPPieceList* pieceList)
+void VPPiece::SetSheet(VPSheet *newSheet)
 {
-    if(pieceList != m_pieceList)
-    {
-        m_pieceList = pieceList;
-    }
+    m_sheet = newSheet;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::Layout() const -> VPLayout *
+{
+    return m_layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetLayout(VPLayout *layout)
+{
+    SCASSERT(layout != nullptr)
+    m_layout = layout;
 }

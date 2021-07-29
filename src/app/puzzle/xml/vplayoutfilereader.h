@@ -32,7 +32,6 @@
 #include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
 #include "vplayout.h"
-#include "vppiecelist.h"
 #include "vppiece.h"
 
 #include <QLoggingCategory>
@@ -57,9 +56,8 @@ private:
     void ReadTiles(VPLayout *layout);
     void ReadUnplacedPieces(VPLayout *layout);
     void ReadSheets(VPLayout *layout);
-    void ReadSheetPieces(VPSheet *sheet);
     void ReadSheet(VPLayout *layout);
-    void ReadPieceList(VPPieceList *pieceList);
+    void ReadPieces(VPLayout *layout, VPSheet *sheet=nullptr);
     void ReadPiece(VPPiece *piece);
 
     QMarginsF ReadMargins();

@@ -29,7 +29,6 @@
 #include "vplayoutfilewriter.h"
 #include "vplayout.h"
 #include "vpsheet.h"
-#include "vppiecelist.h"
 #include "vppiece.h"
 #include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -57,7 +56,7 @@ void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
                  .arg(APP_VERSION_STR));
 
     WriteProperties(layout);
-    WritePieceList(layout->GetUnplacedPieceList(), ML::TagUnplacedPieces);
+    WritePieceList(layout->GetUnplacedPieces(), ML::TagUnplacedPieces);
     WriteSheets(layout);
 
     writeEndElement(); //layout
@@ -68,13 +67,15 @@ void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
 {
     writeStartElement(ML::TagProperties);
 
-    writeTextElement(ML::TagUnit, UnitsToStr(layout->GetUnit()));
-    writeTextElement(ML::TagTitle, layout->GetTitle());
-    writeTextElement(ML::TagDescription, layout->GetDescription());
+    writeTextElement(ML::TagUnit, UnitsToStr(layout->LayoutSettings().GetUnit()));
+    writeTextElement(ML::TagTitle, layout->LayoutSettings().GetTitle());
+    writeTextElement(ML::TagDescription, layout->LayoutSettings().GetDescription());
+    WriteSize(layout->LayoutSettings().GetSheetSize());
+    WriteMargins(layout->LayoutSettings().GetSheetMargins());
 
     writeStartElement(ML::TagControl);
-    SetAttribute(ML::AttrWarningSuperposition, layout->GetWarningSuperpositionOfPieces());
-    SetAttribute(ML::AttrWarningOutOfBound, layout->GetWarningPiecesOutOfBound());
+    SetAttribute(ML::AttrWarningSuperposition, layout->LayoutSettings().GetWarningSuperpositionOfPieces());
+    SetAttribute(ML::AttrWarningOutOfBound, layout->LayoutSettings().GetWarningPiecesOutOfBound());
     writeEndElement(); // control
 
     WriteTiles(layout);
@@ -102,9 +103,7 @@ void VPLayoutFileWriter::WriteSheet(VPSheet* sheet)
     writeStartElement(ML::TagSheet);
 
     writeTextElement(ML::TagName, sheet->GetName());
-    WriteSize(sheet->GetSheetSize());
-    WriteMargins(sheet->GetSheetMargins());
-    WritePieceList(sheet->GetPieceList(), ML::TagPieces);
+    WritePieceList(sheet->GetPieces(), ML::TagPieces);
 
     writeEndElement(); // sheet
 
@@ -116,26 +115,20 @@ void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
     Q_UNUSED(layout); // to be removed
 
    writeStartElement(ML::TagTiles);
-   SetAttribute(ML::AttrVisible, layout->GetShowTiles());
+   SetAttribute(ML::AttrVisible, layout->LayoutSettings().GetShowTiles());
    SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
 
-   WriteSize(layout->GetTilesSize());
-   WriteMargins(layout->GetTilesMargins());
+   WriteSize(layout->LayoutSettings().GetTilesSize());
+   WriteMargins(layout->LayoutSettings().GetTilesMargins());
 
    writeEndElement(); // tiles
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePieceList(VPPieceList *pieceList, const QString &tagName)
+void VPLayoutFileWriter::WritePieceList(const QList<VPPiece *> &list, const QString &tagName)
 {
     writeStartElement(tagName); // piece list
-    SetAttribute(ML::AttrName, pieceList->GetName());
-    SetAttribute(ML::AttrVisible, pieceList->GetIsVisible());
-    //  TODO selected info. Not sure how it's saved yet
-    //SetAttribute("selected", pieceList->GetIsSelected());
-
-    QList<VPPiece*> pieces = pieceList->GetPieces();
-    for (auto *piece : pieces)
+    for (auto *piece : list)
     {
         WritePiece(piece);
     }

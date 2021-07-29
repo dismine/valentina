@@ -33,7 +33,6 @@
 #include <QKeyEvent>
 
 #include "vpmimedatapiece.h"
-#include "vppiecelist.h"
 #include "vplayout.h"
 #include "vpsheet.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -61,11 +60,6 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFact
 
     m_graphicsTileGrid = new VPGraphicsTileGrid(layout, tileFactory);
     m_scene->addItem(m_graphicsTileGrid);
-
-    // add the connections
-    connect(m_layout, &VPLayout::PieceMovedToPieceList, this, &VPMainGraphicsView::on_PieceMovedToPieceList);
-    connect(m_scene, &VMainGraphicsScene::selectionChanged, this,
-            &VPMainGraphicsView::on_SceneSelectionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,16 +84,14 @@ VMainGraphicsScene* VPMainGraphicsView::GetScene()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::PrepareForExport()
 {
-    m_layout->ClearSelection();
-
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
 
-    m_showGridTmp = m_layout->GetFocusedSheet()->GetShowGrid();
-    m_layout->GetFocusedSheet()->SetShowGrid(false);
+    m_showGridTmp = m_layout->GetFocusedSheet()->GetLayout()->LayoutSettings().GetShowGrid();
+    m_layout->GetFocusedSheet()->GetLayout()->LayoutSettings().SetShowGrid(false);
 
-    m_showTilesTmp = m_layout->GetShowTiles();
-    m_layout->SetShowTiles(false);
+    m_showTilesTmp = m_layout->LayoutSettings().GetShowTiles();
+    m_layout->LayoutSettings().SetShowTiles(false);
 
     RefreshLayout();
 }
@@ -110,13 +102,12 @@ void VPMainGraphicsView::CleanAfterExport()
     m_graphicsSheet->SetShowBorder(true);
     m_graphicsSheet->SetShowMargin(true);
 
-    m_layout->GetFocusedSheet()->SetShowGrid(m_showGridTmp);
+    m_layout->GetFocusedSheet()->GetLayout()->LayoutSettings().SetShowGrid(m_showGridTmp);
 
-    m_layout->SetShowTiles(m_showTilesTmp);
+    m_layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
 
     RefreshLayout();
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
@@ -147,8 +138,6 @@ void VPMainGraphicsView::dragLeaveEvent(QDragLeaveEvent *event)
     event->accept();
 }
 
-
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dropEvent(QDropEvent *event)
 {
@@ -170,11 +159,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             piece->SetPosition(mapToScene(point));
 
             // change the piecelist of the piece
-            VPPieceList *focusedPieceList = m_layout->GetFocusedSheet()->GetPieceList();
-            if(focusedPieceList != nullptr)
-            {
-                m_layout->MovePieceToPieceList(piece, focusedPieceList);
-            }
+            piece->SetSheet(m_layout->GetFocusedSheet());
         }
     }
 }
@@ -193,65 +178,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
             if(piece->GetIsSelected())
             {
                 piece->SetIsSelected(false);
-                m_layout->MovePieceToPieceList(piece, m_layout->GetUnplacedPieceList());
-            }
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::on_PieceMovedToPieceList(VPPiece *piece, VPPieceList *pieceListBefore, VPPieceList *pieceListAfter)
-{
-    Q_UNUSED(pieceListBefore)
-
-    VPGraphicsPiece *_graphicsPiece = nullptr;
-    for(auto *graphicPiece : m_graphicsPieces)
-    {
-        if(graphicPiece->GetPiece() == piece)
-        {
-            _graphicsPiece = graphicPiece;
-        }
-    }
-
-    if(pieceListAfter == m_layout->GetUnplacedPieceList() && _graphicsPiece != nullptr)
-    {
-        scene()->removeItem(_graphicsPiece);
-        m_graphicsPieces.removeAll(_graphicsPiece);
-    }
-    else if(pieceListAfter != m_layout->GetUnplacedPieceList() && pieceListAfter != m_layout->GetTrashPieceList())
-    {
-        if(_graphicsPiece == nullptr)
-        {
-            _graphicsPiece = new VPGraphicsPiece(piece);
-            m_graphicsPieces.append(_graphicsPiece);
-        }
-
-        scene()->addItem(_graphicsPiece);
-        // not very clean to directly call slots
-        _graphicsPiece->on_PieceSelectionChanged();
-        _graphicsPiece->on_PiecePositionChanged();
-        _graphicsPiece->on_PieceRotationChanged();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::on_SceneSelectionChanged()
-{
-    // most of the selection behaviour takes place automatically
-    // but we need to make sure that the unplaced pieces are unselected when the scene selection has changed
-    // because as they are not part of the scene, they are not updated
-    m_layout->GetUnplacedPieceList()->ClearSelection();
-
-
-    // make sure, that the selected items are on top
-    // FIXME: maybe there is a more proper way to do it
-    for(auto *graphicPiece : m_graphicsPieces)
-    {
-        if((graphicPiece != nullptr) && not graphicPiece->GetPiece()->GetIsSelected())
-        {
-            if(!m_scene->selectedItems().isEmpty())
-            {
-                graphicPiece->stackBefore(m_scene->selectedItems().first());
+                piece->SetSheet(nullptr);
             }
         }
     }

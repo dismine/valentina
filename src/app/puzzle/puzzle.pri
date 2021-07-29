@@ -18,11 +18,11 @@ SOURCES += \
     $$PWD/vpgraphicssheet.cpp \
     $$PWD/vpgraphicstilegrid.cpp \
     $$PWD/vplayout.cpp \
+    $$PWD/vplayoutsettings.cpp \
     $$PWD/vpmaingraphicsview.cpp \
     $$PWD/vpmainwindow.cpp \
     $$PWD/vpmimedatapiece.cpp \
     $$PWD/vppiece.cpp \
-    $$PWD/vppiecelist.cpp \
     $$PWD/vpsettings.cpp \
     $$PWD/vpsheet.cpp \
     $$PWD/vptilefactory.cpp \
@@ -49,11 +49,11 @@ HEADERS += \
     $$PWD/vpgraphicssheet.h \
     $$PWD/vpgraphicstilegrid.h \
     $$PWD/vplayout.h \
+    $$PWD/vplayoutsettings.h \
     $$PWD/vpmaingraphicsview.h \
     $$PWD/vpmainwindow.h \
     $$PWD/vpmimedatapiece.h \
     $$PWD/vppiece.h \
-    $$PWD/vppiecelist.h \
     $$PWD/vpsettings.h \
     $$PWD/vpsheet.h \
     $$PWD/vptilefactory.h \

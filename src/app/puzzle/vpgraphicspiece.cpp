@@ -40,7 +40,6 @@
 #include <QApplication>
 
 #include "vppiece.h"
-#include "vppiecelist.h"
 #include "vplayout.h"
 #include "vpsheet.h"
 
@@ -394,57 +393,43 @@ void VPGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
 
-
     // TODO/FIXME   context menu needs to be refactored
 
-    QMenu contextMenu;
+//    QMenu menu;
 
-    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
-    QList<VPPieceList*> pieceLists =  QList<VPPieceList*>();
-    for(auto sheet : m_piece->GetPieceList()->GetLayout()->GetSheets())
-    {
-        pieceLists.append(sheet->GetPieceList());
-    }
+//    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
+//    QList<VPPieceList*> pieceLists =  QList<VPPieceList*>();
+//    for(auto sheet : m_piece->GetPieceList()->GetLayout()->GetSheets())
+//    {
+//        pieceLists.append(sheet->GetPieceList());
+//    }
 
-    pieceLists.removeAll(m_piece->GetPieceList());
+//    pieceLists.removeAll(m_piece->GetPieceList());
 
-    if(pieceLists.count() > 0)
-    {
-        QMenu *moveMenu = contextMenu.addMenu(tr("Move to"));
+//    if(pieceLists.count() > 0)
+//    {
+//        QMenu *moveMenu = menu.addMenu(tr("Move to"));
 
-        // TODO order in alphabetical order
+//        // TODO order in alphabetical order
 
-        for (auto pieceList : pieceLists)
-        {
-            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
-            QVariant data = QVariant::fromValue(pieceList);
-            moveToPieceList->setData(data);
+//        for (auto pieceList : pieceLists)
+//        {
+//            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
+//            QVariant data = QVariant::fromValue(pieceList);
+//            moveToPieceList->setData(data);
 
-            connect(moveToPieceList, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
-        }
-    }
+//            connect(moveToPieceList, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
+//        }
+//    }
 
-    // remove from layout action
-    QAction *removeAction = contextMenu.addAction(tr("Remove from Sheet"));
-    QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
-    removeAction->setData(data);
-    connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
+//    // remove from layout action
+//    QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
+//    QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
+//    removeAction->setData(data);
+//    connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
 
-    contextMenu.exec(event->screenPos());
+//    menu.exec(event->screenPos());
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::on_ActionPieceMovedToPieceList()
-{
-    QAction *act = qobject_cast<QAction *>(sender());
-    QVariant v = act->data();
-    VPPieceList *pieceList = v.value<VPPieceList *>();
-    if(pieceList != nullptr)
-    {
-        pieceList->GetLayout()->MovePieceToPieceList(m_piece, pieceList);
-    }
-}
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::on_PieceSelectionChanged()

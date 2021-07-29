@@ -45,7 +45,7 @@ class VPTileFactory : QObject
 public:
     VPTileFactory(VPLayout *layout, VCommonSettings *commonSettings);
 
-    ~VPTileFactory();
+    virtual ~VPTileFactory();
 
     /**
      * @brief drawTile draws the tile of given coordinate (row, col) from the

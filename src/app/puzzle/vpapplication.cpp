@@ -446,7 +446,7 @@ void VPApplication::ActivateDarkMode()
          {
              f.open(QFile::ReadOnly | QFile::Text);
              QTextStream ts(&f);
-             qApp->setStyleSheet(ts.readAll());
+             VPApplication::VApp()->setStyleSheet(ts.readAll());
          }
     }
 }
@@ -469,7 +469,7 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
             stream << arguments.join(";;");
             stream.flush();
             socket.waitForBytesWritten();
-            qApp->exit(V_EX_OK);
+            QCoreApplication::exit(V_EX_OK);
             return;
         }
 
@@ -548,14 +548,13 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
         NewMainWindow(cmd);
         if (not rawLayouts.isEmpty())
         {
-//            MainWindow()->New(); // prepare layout settings
             MainWindow()->ImportRawLayouts(rawLayouts);
         }
     }
 
     if (not cmd->IsGuiEnabled())
     {
-        qApp->exit(V_EX_OK); // close program after processing in console mode
+        QCoreApplication::exit(V_EX_OK); // close program after processing in console mode
     }
 }
 

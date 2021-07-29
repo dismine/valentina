@@ -33,7 +33,6 @@
 #include <QFontMetrics>
 
 #include "../vmisc/backport/qoverload.h"
-#include "vppiecelist.h"
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
@@ -77,7 +76,7 @@ void VPCarrousel::Refresh()
             VPCarrouselSheet carrouselSheet;
             carrouselSheet.unplaced = true;
             carrouselSheet.name = tr("Unplaced pieces");
-            carrouselSheet.pieces = m_layout->GetUnplacedPieceList();
+            carrouselSheet.pieces = m_layout->GetUnplacedPieces();
 
             m_pieceLists.append(carrouselSheet);
         }
@@ -88,7 +87,7 @@ void VPCarrousel::Refresh()
             VPCarrouselSheet carrouselSheet;
             carrouselSheet.unplaced = false;
             carrouselSheet.name = sheet->GetName();
-            carrouselSheet.pieces = sheet->GetPieceList();
+            carrouselSheet.pieces = sheet->GetPieces();
 
             m_pieceLists.append(carrouselSheet);
         }
@@ -146,7 +145,7 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
     }
     else
     {
-        ui->listWidget->SetCurrentPieceList(nullptr);
+        ui->listWidget->SetCurrentPieceList(QList<VPPiece *>());
     }
 }
 
@@ -180,24 +179,6 @@ void VPCarrousel::RefreshOrientation()
         ui->listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
         ui->listWidget->setFlow(QListView::LeftToRight);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrousel::ClearSelection()
-{
-    if (m_layout != nullptr)
-    {
-        m_layout->ClearSelection();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPCarrousel::ClearSelectionExceptForCurrentPieceList()
-{
-    if (m_layout != nullptr)
-    {
-        m_layout->ClearSelectionExceptForGivenPieceList(ui->listWidget->GetCurrentPieceList());
     }
 }
 

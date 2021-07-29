@@ -58,7 +58,7 @@ private:
     void WriteSheets(VPLayout *layout);
     void WriteSheet(VPSheet* sheet);
     void WriteTiles(VPLayout *layout);
-    void WritePieceList(VPPieceList *pieceList, const QString &tagName);
+    void WritePieceList(const QList<VPPiece *> &list, const QString &tagName);
     void WritePiece(VPPiece *piece);
 
     void WriteMargins(const QMarginsF &margins);

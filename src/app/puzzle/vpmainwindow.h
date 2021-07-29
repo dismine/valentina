@@ -415,7 +415,7 @@ private:
 
     VPCommandLinePtr m_cmd;
 
-    VPLayout *m_layout{new VPLayout()};
+    VPLayout *m_layout{new VPLayout(this)};
     QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
     VPTileFactory *m_tileFactory{nullptr};
