@@ -45,19 +45,13 @@ Q_LOGGING_CATEGORY(pCarrouselPieceList, "p.carrouselPieceList")
 
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrouselPieceList::VPCarrouselPieceList(QWidget* parent) :
-    QListWidget(parent),
-    m_dragStart(QPoint())
+    QListWidget(parent)
 {
-    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
+    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  "
+                  "QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
     setContextMenuPolicy(Qt::DefaultContextMenu);
     setSelectionMode(QAbstractItemView::MultiSelection);
     setViewMode(QListView::IconMode);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPieceList::~VPCarrouselPieceList()
-{
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,7 +110,7 @@ void VPCarrouselPieceList::mousePressEvent(QMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::mouseMoveEvent(QMouseEvent *event)
 {
-    if ((event->buttons() & Qt::LeftButton) &&
+    if (((event->buttons() & Qt::LeftButton) != 0u) &&
         ((event->pos() - m_dragStart).manhattanLength() >= QApplication::startDragDistance()) &&
         (selectedItems().count() > 0) &&
         (not m_pieceList.isEmpty() && m_pieceList.first()->Sheet() == nullptr)) // only if it's from unplaced pieces
@@ -136,9 +130,9 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
     Q_UNUSED(supportedActions)
 
     QListWidgetItem* _item = currentItem();
-    if(_item->type() == 1001)
+    if(_item->type() == VPCarrouselPiece::Type)
     {
-        VPCarrouselPiece *pieceItem = static_cast<VPCarrouselPiece *> (_item);
+        auto *pieceItem = static_cast<VPCarrouselPiece *> (_item);
 
         // starts the dragging
         auto *drag = new QDrag(this);
@@ -171,9 +165,9 @@ void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent* e)
 void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 {
     QListWidgetItem* _item = currentItem();
-    if(_item != nullptr && _item->type() == 1001)
+    if(_item != nullptr && _item->type() == VPCarrouselPiece::Type)
     {
-        VPCarrouselPiece *pieceItem = static_cast<VPCarrouselPiece *> (_item);
+        auto *pieceItem = static_cast<VPCarrouselPiece *> (_item);
 
         QMenu menu;
 
@@ -223,9 +217,9 @@ void VPCarrouselPieceList::on_SelectionChangedExternal()
     for(int i = 0; i < count(); ++i)
     {
         QListWidgetItem* _item = item(i);
-        if(_item->type() == 1001)
+        if(_item->type() == VPCarrouselPiece::Type)
         {
-            VPCarrouselPiece *itemPiece = static_cast<VPCarrouselPiece *> (_item);
+            auto *itemPiece = static_cast<VPCarrouselPiece *> (_item);
             itemPiece->RefreshSelection();
         }
     }

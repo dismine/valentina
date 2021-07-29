@@ -100,7 +100,7 @@ private:
 
     Qt::Orientation m_orientation{Qt::Vertical};
 
-    static QString GetSheetName(const VPCarrouselSheet &sheet);
+    static auto GetSheetName(const VPCarrouselSheet &sheet) -> QString;
 };
 
 #endif // VPCARROUSEL_H

@@ -39,7 +39,7 @@ class VPCarrouselPieceList : public QListWidget
     Q_OBJECT
 public:
     explicit VPCarrouselPieceList(QWidget* parent);
-    ~VPCarrouselPieceList();
+    virtual ~VPCarrouselPieceList() = default;
 
     /**
      * @brief Refresh refreshes the items of the carrousel piece list
@@ -57,7 +57,6 @@ public:
      * @param carrousel pointer to the carrousel
      */
     void SetCarrousel(VPCarrousel *carrousel);
-
 
 public slots:
     /**
@@ -78,7 +77,7 @@ private:
     Q_DISABLE_COPY(VPCarrouselPieceList)
 
     QList<VPPiece *> m_pieceList{};
-    QPoint m_dragStart;
+    QPoint m_dragStart{};
     VPCarrousel *m_carrousel{nullptr};
 };
 

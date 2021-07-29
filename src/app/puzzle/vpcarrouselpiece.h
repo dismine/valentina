@@ -37,14 +37,16 @@
 class VPCarrouselPiece : public QListWidgetItem
 {
 public:
+    enum { Type = UserType + 1};
+
     explicit VPCarrouselPiece(VPPiece *piece, QListWidget* parent);
-    ~VPCarrouselPiece();
+    virtual ~VPCarrouselPiece() = default;
 
     /**
      * @brief GetPiece Returns the corresponding layout piece
      * @return  the corresponding layout piece
      */
-    VPPiece * GetPiece();
+    auto GetPiece() -> VPPiece *;
 
     /**
      * @brief RefreshSelection refreshes the selection of the piece according to the selection information of m_piece
@@ -56,15 +58,12 @@ public:
      * @param size of the icon
      * @return the created icon
      */
-    QIcon CreatePieceIcon(const QSize &size, bool isDragIcon = false) const;
+    auto CreatePieceIcon(const QSize &size, bool isDragIcon = false) const -> QIcon;
 
 
 private:
     Q_DISABLE_COPY(VPCarrouselPiece)
     VPPiece *m_piece;
-
-private slots:
-
 };
 
 #endif // VPCARROUSELPIECE_H

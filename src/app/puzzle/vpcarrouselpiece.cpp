@@ -44,9 +44,10 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, QListWidget* parent) :
-    QListWidgetItem(parent,1001),
+    QListWidgetItem(parent, Type),
     m_piece(piece)
 {
+    SCASSERT(m_piece != nullptr)
     int width = 120 - 8;
     QFontMetrics metrix = QFontMetrics(QFont());
     QString clippedText = metrix.elidedText(piece->GetName(), Qt::ElideRight, width);
@@ -54,15 +55,8 @@ VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, QListWidget* parent) :
     setText(clippedText);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPiece::~VPCarrouselPiece()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPPiece * VPCarrouselPiece::GetPiece()
+auto VPCarrouselPiece::GetPiece() -> VPPiece *
 {
     return m_piece;
 }
@@ -74,7 +68,7 @@ void VPCarrouselPiece::RefreshSelection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
+auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const -> QIcon
 {
     QRectF boundingRect = m_piece->DetailBoundingRect();
     qreal canvasSize = qMax(boundingRect.height(), boundingRect.width());

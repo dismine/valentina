@@ -47,6 +47,7 @@ VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
     ui(new Ui::VPCarrousel),
     m_layout(layout)
 {
+    SCASSERT(m_layout != nullptr)
     ui->setupUi(this);
     ui->listWidget->SetCarrousel(this);
 
