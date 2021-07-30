@@ -55,6 +55,8 @@ public:
      */
     void SetPiecePtr(VPPiece* piece);
 
+    static auto DragCursor(const QPixmap &piecePixmap) -> QPixmap;
+
     static const QString mineFormatPiecePtr;
 
 private:

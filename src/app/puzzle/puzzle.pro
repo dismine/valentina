@@ -60,6 +60,7 @@ UI_DIR = uic
 include(puzzle.pri)
 
 RESOURCES += \
+    share/resources/cursor.qrc \
     share/resources/puzzleicon.qrc
 
 include(../translations.pri)
