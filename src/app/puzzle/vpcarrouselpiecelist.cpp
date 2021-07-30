@@ -110,7 +110,7 @@ void VPCarrouselPieceList::mousePressEvent(QMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::mouseMoveEvent(QMouseEvent *event)
 {
-    if (((event->buttons() & Qt::LeftButton) != 0u) &&
+    if (((event->buttons() & Qt::LeftButton) != 0U) &&
         ((event->pos() - m_dragStart).manhattanLength() >= QApplication::startDragDistance()) &&
         (selectedItems().count() > 0) &&
         (not m_pieceList.isEmpty() && m_pieceList.first()->Sheet() == nullptr)) // only if it's from unplaced pieces
@@ -122,7 +122,6 @@ void VPCarrouselPieceList::mouseMoveEvent(QMouseEvent *event)
         QListWidget::mouseMoveEvent(event);
     }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
@@ -139,7 +138,6 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         auto *mimeData = new VPMimeDataPiece();
         VPPiece* piece = pieceItem->GetPiece();
         mimeData->SetPiecePtr(piece);
-        mimeData->setObjectName("piecePointer");
 
         QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120,120), true).pixmap(QSize(120,120));
 
@@ -147,8 +145,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         drag->setMimeData(mimeData);
         if(drag->exec() == Qt::MoveAction)
         {
-            delete takeItem(row(_item));
-            clearSelection();
+            m_carrousel->Refresh();
             piece->SetIsSelected(true);
         }
     }
@@ -193,19 +190,28 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
         QAction *selectedAction = menu.exec(event->globalPos());
 
+        VPPiece *piece = pieceItem->GetPiece();
+        VPLayout *layout = piece->Layout();
+
         if (selectedAction == moveAction)
         {
-            VPSheet *sheet = pieceItem->GetPiece()->Layout()->GetFocusedSheet();
-            pieceItem->GetPiece()->SetSheet(sheet);
+            VPSheet *sheet = layout->GetFocusedSheet();
+            piece->SetSheet(sheet);
+            emit layout->PieceSheetChanged(piece);
+            m_carrousel->Refresh();
         }
         else if (selectedAction == deleteAction)
         {
-            VPSheet *sheet = pieceItem->GetPiece()->Layout()->GetTrashSheet();
-            pieceItem->GetPiece()->SetSheet(sheet);
+            VPSheet *sheet = layout->GetTrashSheet();
+            piece->SetSheet(sheet);
+            emit layout->PieceSheetChanged(piece);
+            m_carrousel->Refresh();
         }
         else if (selectedAction == removeAction)
         {
-            pieceItem->GetPiece()->SetSheet(nullptr);
+            piece->SetSheet(nullptr);
+            emit layout->PieceSheetChanged(piece);
+            m_carrousel->Refresh();
         }
     }
 }

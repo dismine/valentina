@@ -38,15 +38,16 @@ class VPMimeDataPiece : public QMimeData
     Q_OBJECT
 
 public:
+    VPMimeDataPiece() = default;
+    virtual ~VPMimeDataPiece() = default;
 
-    VPMimeDataPiece();
-    ~VPMimeDataPiece();
+    virtual auto formats() const -> QStringList override;
 
     /**
      * @brief GetPiecePtr Returns the piece pointer of the mime data
      * @return  piece pointer
      */
-    VPPiece* GetPiecePtr() const;
+    auto GetPiecePtr() const -> VPPiece*;
 
     /**
      * @brief SetPiecePtr sets the piece pointer to the given value
@@ -54,11 +55,12 @@ public:
      */
     void SetPiecePtr(VPPiece* piece);
 
+    static const QString mineFormatPiecePtr;
+
 private:
     Q_DISABLE_COPY(VPMimeDataPiece)
 
     VPPiece *m_piece{nullptr};
-
 };
 
 

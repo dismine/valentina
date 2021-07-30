@@ -68,6 +68,14 @@ public:
      */
     void CleanAfterExport();
 
+public slots:
+    /**
+     * @brief on_PieceSheetChanged The slot is called when the given piece was moved from the given piece list to
+     * the other given piece list
+     * @param piece the piece that was moved
+     */
+    void on_PieceSheetChanged(VPPiece *piece);
+
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
@@ -81,13 +89,13 @@ protected:
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)
 
-    VMainGraphicsScene *m_scene{nullptr};
+    VMainGraphicsScene *m_scene;
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
 
     VPGraphicsTileGrid *m_graphicsTileGrid{nullptr};
 
-    VPLayout *m_layout{nullptr};
+    VPLayout *m_layout;
 
     QList<VPGraphicsPiece*> m_graphicsPieces{};
 

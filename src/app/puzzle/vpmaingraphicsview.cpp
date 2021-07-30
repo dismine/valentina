@@ -48,6 +48,7 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFact
     VMainGraphicsView(parent),
     m_layout(layout)
 {
+    SCASSERT(m_layout != nullptr)
     // TODO : list of scenes
     m_scene = new VMainGraphicsScene(this);
     setScene(m_scene);
@@ -60,6 +61,9 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFact
 
     m_graphicsTileGrid = new VPGraphicsTileGrid(layout, tileFactory);
     m_scene->addItem(m_graphicsTileGrid);
+
+    // add the connections
+    connect(m_layout, &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,7 +83,6 @@ VMainGraphicsScene* VPMainGraphicsView::GetScene()
 {
     return m_scene;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::PrepareForExport()
@@ -114,7 +117,7 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
-    if(mime->objectName() == "piecePointer")
+    if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         qCDebug(pMainGraphicsView(), "drag enter");
         event->acceptProposedAction();
@@ -126,7 +129,7 @@ void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
-    if(mime->objectName() == "piecePointer")
+    if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         event->acceptProposedAction();
     }
@@ -145,9 +148,9 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
     qCDebug(pMainGraphicsView(), "drop enter , %s", qUtf8Printable(mime->objectName()));
 
-    if(mime->objectName() == "piecePointer")
+    if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
-        const VPMimeDataPiece *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
 
         VPPiece *piece = mimePiece->GetPiecePtr();
         if(piece != nullptr)
@@ -157,9 +160,17 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
             QPoint point = event->pos();
             piece->SetPosition(mapToScene(point));
+            piece->SetRotation(0);
 
             // change the piecelist of the piece
             piece->SetSheet(m_layout->GetFocusedSheet());
+
+            auto *graphicsPiece = new VPGraphicsPiece(piece);
+            m_graphicsPieces.append(graphicsPiece);
+
+            scene()->addItem(graphicsPiece);
+
+            event->acceptProposedAction();
         }
     }
 }
@@ -171,7 +182,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
     {
         QList<VPGraphicsPiece*> tmpGraphicsPieces = m_graphicsPieces;
 
-        for(auto graphicsPiece : tmpGraphicsPieces)
+        for(auto *graphicsPiece : tmpGraphicsPieces)
         {
             VPPiece *piece = graphicsPiece->GetPiece();
 
@@ -181,5 +192,36 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
                 piece->SetSheet(nullptr);
             }
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::on_PieceSheetChanged(VPPiece *piece)
+{
+    VPGraphicsPiece *_graphicsPiece = nullptr;
+    for(auto *graphicPiece : m_graphicsPieces)
+    {
+        if(graphicPiece->GetPiece() == piece)
+        {
+            _graphicsPiece = graphicPiece;
+        }
+    }
+
+    if (piece->Sheet() == nullptr || piece->Sheet() == m_layout->GetTrashSheet()) // remove
+    {
+        if (_graphicsPiece != nullptr)
+        {
+            scene()->removeItem(_graphicsPiece);
+            m_graphicsPieces.removeAll(_graphicsPiece);
+        }
+    }
+    else // add
+    {
+        if(_graphicsPiece == nullptr)
+        {
+            _graphicsPiece = new VPGraphicsPiece(piece);
+            m_graphicsPieces.append(_graphicsPiece);
+        }
+        scene()->addItem(_graphicsPiece);
     }
 }

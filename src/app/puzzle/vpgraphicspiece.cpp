@@ -146,6 +146,10 @@ void VPGraphicsPiece::Init()
     // TODO : initialises the text labels
 
 
+    // Init position
+    on_PiecePositionChanged();
+    on_PieceRotationChanged();
+    on_PieceSelectionChanged();
 
     // Initialises the connectors
     connect(m_piece, &VPPiece::SelectionChanged, this, &VPGraphicsPiece::on_PieceSelectionChanged);

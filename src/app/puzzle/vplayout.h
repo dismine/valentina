@@ -72,6 +72,9 @@ public:
 
     auto PiecesForSheet(const VPSheet* sheet) const -> QList<VPPiece *>;
 
+signals:
+    void PieceSheetChanged(VPPiece *piece);
+
 private:
     Q_DISABLE_COPY(VPLayout)
 

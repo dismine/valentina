@@ -28,20 +28,16 @@
 
 #include "vpmimedatapiece.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-VPMimeDataPiece::VPMimeDataPiece()
-{
+const QString VPMimeDataPiece::mineFormatPiecePtr = QStringLiteral("application/vnd.puzzle.piece.ptr");
 
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMimeDataPiece::formats() const -> QStringList
+{
+    return {mineFormatPiecePtr};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMimeDataPiece::~VPMimeDataPiece()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPPiece* VPMimeDataPiece::GetPiecePtr() const
+auto VPMimeDataPiece::GetPiecePtr() const -> VPPiece*
 {
     return m_piece;
 }
