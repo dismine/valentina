@@ -89,7 +89,7 @@ protected:
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)
 
-    VMainGraphicsScene *m_scene;
+    VMainGraphicsScene *m_scene{nullptr};
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
 
