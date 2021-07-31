@@ -76,6 +76,7 @@ void VPCarrousel::Refresh()
         {
             VPCarrouselSheet carrouselSheet;
             carrouselSheet.unplaced = true;
+            carrouselSheet.active = false;
             carrouselSheet.name = tr("Unplaced pieces");
             carrouselSheet.pieces = m_layout->GetUnplacedPieces();
 
@@ -87,6 +88,7 @@ void VPCarrousel::Refresh()
         {
             VPCarrouselSheet carrouselSheet;
             carrouselSheet.unplaced = false;
+            carrouselSheet.active = (sheet == m_layout->GetFocusedSheet());
             carrouselSheet.name = sheet->GetName();
             carrouselSheet.pieces = sheet->GetPieces();
 
@@ -122,6 +124,7 @@ void VPCarrousel::RefreshSheetNames()
     for (int i=0; i < sheets.size(); ++i)
     {
         m_pieceLists[i+1].name = sheets.at(i)->GetName();
+        m_pieceLists[i+1].active = (sheets.at(i) == m_layout->GetFocusedSheet());
         ui->comboBoxPieceList->setItemText(i+1, GetSheetName(m_pieceLists.at(i+1)));
     }
 }
@@ -143,11 +146,24 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
     if (not m_pieceLists.isEmpty() && index >= 0 && index < m_pieceLists.size())
     {
         ui->listWidget->SetCurrentPieceList(m_pieceLists.at(index).pieces);
+
+        if (index > 0)
+        {
+            QList<VPSheet *> sheets = m_layout->GetSheets();
+
+            if (index <= sheets.size())
+            {
+                m_layout->SetFocusedSheet(sheets.at(index - 1));
+            }
+        }
     }
     else
     {
         ui->listWidget->SetCurrentPieceList(QList<VPPiece *>());
+        m_layout->SetFocusedSheet(nullptr);
     }
+
+    RefreshSheetNames();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,5 +218,15 @@ void VPCarrousel::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPCarrousel::GetSheetName(const VPCarrouselSheet &sheet) -> QString
 {
-    return sheet.unplaced ? sheet.name : tr("Pieces of ") + sheet.name;
+    if (sheet.unplaced)
+    {
+        return sheet.name;
+    }
+
+    if (sheet.active)
+    {
+        return QStringLiteral("--> %1 %2 <--").arg(tr("Pieces of"), sheet.name);
+    }
+
+    return tr("Pieces of ") + sheet.name;
 }

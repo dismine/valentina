@@ -43,6 +43,7 @@ class VPCarrousel;
 struct VPCarrouselSheet
 {
     bool unplaced{true};
+    bool active{false};
     QString name{};
     QList<VPPiece *> pieces{};
 };

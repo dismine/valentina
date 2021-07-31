@@ -51,7 +51,6 @@ public:
      */
     void RefreshLayout();
 
-
     /**
      * @brief GetScene Returns the scene of the view
      * @return scene of the view
