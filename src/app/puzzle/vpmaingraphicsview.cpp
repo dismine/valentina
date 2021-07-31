@@ -31,6 +31,7 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include <QKeyEvent>
+#include <QMenu>
 
 #include "vpmimedatapiece.h"
 #include "vplayout.h"
@@ -46,11 +47,10 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 //---------------------------------------------------------------------------------------------------------------------
 VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFactory, QWidget *parent) :
     VMainGraphicsView(parent),
+    m_scene(new VMainGraphicsScene(this)),
     m_layout(layout)
 {
     SCASSERT(m_layout != nullptr)
-    // TODO : list of scenes
-    m_scene = new VMainGraphicsScene(this);
     setScene(m_scene);
 
     m_graphicsSheet = new VPGraphicsSheet(layout->GetFocusedSheet());
@@ -76,6 +76,28 @@ void VPMainGraphicsView::RefreshLayout()
     m_graphicsTileGrid->update();
 
     m_scene->update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RefreshPieces()
+{
+    qDeleteAll(m_graphicsPieces);
+    m_graphicsPieces.clear();
+
+    VPSheet *sheet = m_layout->GetFocusedSheet();
+    if (sheet != nullptr)
+    {
+        QList<VPPiece *> pieces = sheet->GetPieces();
+        m_graphicsPieces.reserve(pieces.size());
+
+        for (auto *piece : pieces)
+        {
+            auto *graphicsPiece = new VPGraphicsPiece(piece);
+            m_graphicsPieces.append(graphicsPiece);
+
+            scene()->addItem(graphicsPiece);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -192,6 +214,35 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
                 piece->SetSheet(nullptr);
             }
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu;
+
+    VPSheet *sheet = m_layout->GetFocusedSheet();
+    QAction *removeSheetAction = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Remove sheet"));
+    removeSheetAction->setEnabled(sheet != nullptr && m_layout->GetSheets().size() > 1);
+
+    QAction *selectedAction = menu.exec(event->globalPos());
+    if (selectedAction == removeSheetAction)
+    {
+        if (sheet != nullptr)
+        {
+            sheet->SetVisible(false);
+
+            QList<VPPiece *> pieces = sheet->GetPieces();
+            for (auto *piece : pieces)
+            {
+                piece->SetSheet(nullptr);
+            }
+        }
+
+        m_layout->SetFocusedSheet(nullptr);
+        emit on_SheetRemoved();
+        RefreshPieces();
     }
 }
 

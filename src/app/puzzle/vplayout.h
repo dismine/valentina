@@ -51,6 +51,7 @@ public:
     auto AddSheet() -> VPSheet*;
     auto AddSheet(VPSheet *sheet) -> VPSheet*;
     auto GetSheets() -> QList<VPSheet *>;
+    auto GetSheet(const QUuid &uuid) -> VPSheet *;
 
     /**
      * @brief SetFocusedSheet Sets the focused sheet, to which pieces are added from the carrousel via drag

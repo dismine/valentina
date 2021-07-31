@@ -101,6 +101,20 @@ auto VPLayout::GetSheets() -> QList<VPSheet *>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::GetSheet(const QUuid &uuid) -> VPSheet *
+{
+    for (auto *sheet : m_sheets)
+    {
+        if (sheet->Uuid() == uuid)
+        {
+            return sheet;
+        }
+    }
+
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPLayout::SetFocusedSheet(VPSheet *focusedSheet)
 {
     if (m_sheets.isEmpty())

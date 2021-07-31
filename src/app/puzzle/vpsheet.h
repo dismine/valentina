@@ -33,6 +33,7 @@
 #include <QMarginsF>
 #include <QList>
 #include <QComboBox>
+#include <QUuid>
 
 #include "def.h"
 
@@ -67,12 +68,21 @@ public:
      */
     void SetName(const QString &name);
 
+    auto Uuid() const -> const QUuid &;
+
+    bool IsVisible() const;
+    void SetVisible(bool visible);
+
 private:
     Q_DISABLE_COPY(VPSheet)
 
     VPLayout *m_layout;
 
     QString m_name{};
+
+    QUuid m_uuid{QUuid::createUuid()};
+
+    bool m_visible{true};
 };
 
 #endif // VPSHEET_H

@@ -67,6 +67,9 @@ public:
      */
     void CleanAfterExport();
 
+signals:
+    void on_SheetRemoved();
+
 public slots:
     /**
      * @brief on_PieceSheetChanged The slot is called when the given piece was moved from the given piece list to
@@ -74,6 +77,8 @@ public slots:
      * @param piece the piece that was moved
      */
     void on_PieceSheetChanged(VPPiece *piece);
+
+    void RefreshPieces();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
@@ -83,12 +88,14 @@ protected:
 
     void keyPressEvent(QKeyEvent *event) override;
 
+    void contextMenuEvent(QContextMenuEvent *event) override;
+
     void drawTilesLine();
 
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)
 
-    VMainGraphicsScene *m_scene{nullptr};
+    VMainGraphicsScene *m_scene;
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
 

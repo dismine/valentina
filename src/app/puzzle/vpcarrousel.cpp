@@ -62,10 +62,12 @@ VPCarrousel::VPCarrousel(VPLayout *layout, QWidget *parent) :
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Refresh()
 {
-    const int index = ui->comboBoxPieceList->currentIndex();
+    const QUuid sheetUuid = ui->comboBoxPieceList->currentData().toUuid();
 
     // --- clears the content of the carrousel
+    ui->comboBoxPieceList->blockSignals(true);
     Clear();
+    ui->comboBoxPieceList->blockSignals(false);
 
     // --- add the content saved in the layout to the carrousel.
     // Do not rely on m_layout because we do not control it.
@@ -86,26 +88,34 @@ void VPCarrousel::Refresh()
         QList<VPSheet *> sheets = m_layout->GetSheets();
         for (auto *sheet : sheets)
         {
-            VPCarrouselSheet carrouselSheet;
-            carrouselSheet.unplaced = false;
-            carrouselSheet.active = (sheet == m_layout->GetFocusedSheet());
-            carrouselSheet.name = sheet->GetName();
-            carrouselSheet.pieces = sheet->GetPieces();
+            if (sheet->IsVisible())
+            {
+                VPCarrouselSheet carrouselSheet;
+                carrouselSheet.unplaced = false;
+                carrouselSheet.active = (sheet == m_layout->GetFocusedSheet());
+                carrouselSheet.name = sheet->GetName();
+                carrouselSheet.pieces = sheet->GetPieces();
+                carrouselSheet.sheetUuid = sheet->Uuid();
 
-            m_pieceLists.append(carrouselSheet);
+                m_pieceLists.append(carrouselSheet);
+            }
         }
 
         ui->comboBoxPieceList->blockSignals(true);
 
         for (const auto& sheet: m_pieceLists)
         {
-            ui->comboBoxPieceList->addItem(GetSheetName(sheet));
+            ui->comboBoxPieceList->addItem(GetSheetName(sheet), sheet.sheetUuid);
         }
 
         ui->comboBoxPieceList->blockSignals(false);
     }
 
+    ui->comboBoxPieceList->blockSignals(true);
     ui->comboBoxPieceList->setCurrentIndex(-1);
+    ui->comboBoxPieceList->blockSignals(false);
+
+    int index = ui->comboBoxPieceList->findData(sheetUuid);
     ui->comboBoxPieceList->setCurrentIndex(index != -1 ? index : 0);
 
     RefreshOrientation();
@@ -114,18 +124,23 @@ void VPCarrousel::Refresh()
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::RefreshSheetNames()
 {
-    // Here we assume that order and number of sheets are the same in layout and here
-    QList<VPSheet *> sheets = m_layout->GetSheets();
-    if (m_pieceLists.size() != sheets.size()+1)
+    for (int i=0; i < m_pieceLists.size(); ++i)
     {
-        return;
-    }
+        if (not m_pieceLists.at(i).unplaced)
+        {
+            VPSheet *sheet = m_layout->GetSheet(m_pieceLists.at(i).sheetUuid);
+            if (sheet != nullptr)
+            {
+                m_pieceLists[i].name = sheet->GetName();
+                m_pieceLists[i].active = (sheet == m_layout->GetFocusedSheet());
+            }
+        }
+        else
+        {
+            m_pieceLists[i].name = tr("Unplaced pieces");
+        }
 
-    for (int i=0; i < sheets.size(); ++i)
-    {
-        m_pieceLists[i+1].name = sheets.at(i)->GetName();
-        m_pieceLists[i+1].active = (sheets.at(i) == m_layout->GetFocusedSheet());
-        ui->comboBoxPieceList->setItemText(i+1, GetSheetName(m_pieceLists.at(i+1)));
+        ui->comboBoxPieceList->setItemText(i, GetSheetName(m_pieceLists.at(i)));
     }
 }
 
@@ -149,11 +164,13 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 
         if (index > 0)
         {
-            QList<VPSheet *> sheets = m_layout->GetSheets();
+            QUuid sheetUuid = ui->comboBoxPieceList->currentData().toUuid();
+            VPSheet *sheet = m_layout->GetSheet(sheetUuid);
 
-            if (index <= sheets.size())
+            if (sheet != nullptr)
             {
-                m_layout->SetFocusedSheet(sheets.at(index - 1));
+                m_layout->SetFocusedSheet(sheet);
+                emit on_ActiveSheetChanged();
             }
         }
     }
@@ -161,6 +178,7 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
     {
         ui->listWidget->SetCurrentPieceList(QList<VPPiece *>());
         m_layout->SetFocusedSheet(nullptr);
+        emit on_ActiveSheetChanged();
     }
 
     RefreshSheetNames();

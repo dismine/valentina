@@ -46,6 +46,7 @@ struct VPCarrouselSheet
     bool active{false};
     QString name{};
     QList<VPPiece *> pieces{};
+    QUuid sheetUuid{};
 };
 
 class VPCarrousel : public QWidget
@@ -68,10 +69,7 @@ public:
      */
     void RefreshOrientation();
 
-    /**
-     * @brief Refresh Refreshes the content of the carrousel
-     */
-    void Refresh();
+
 
     void RefreshSheetNames();
 
@@ -79,6 +77,15 @@ public:
      * @brief Clear Clears the carrousel (removes everything)
      */
     void Clear();
+
+signals:
+    void on_ActiveSheetChanged();
+
+public slots:
+    /**
+     * @brief Refresh Refreshes the content of the carrousel
+     */
+    void Refresh();
 
 protected:
     virtual void changeEvent(QEvent* event) override;
