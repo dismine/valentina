@@ -55,7 +55,7 @@ public:
      * @brief GetScene Returns the scene of the view
      * @return scene of the view
      */
-    VMainGraphicsScene* GetScene();
+    auto GetScene() -> VMainGraphicsScene*;
 
     /**
      * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)

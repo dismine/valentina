@@ -101,7 +101,7 @@ void VPMainGraphicsView::RefreshPieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMainGraphicsScene* VPMainGraphicsView::GetScene()
+auto VPMainGraphicsView::GetScene() -> VMainGraphicsScene*
 {
     return m_scene;
 }

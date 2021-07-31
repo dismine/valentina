@@ -38,15 +38,16 @@ class VPGraphicsPiece : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsPiece();
+    explicit VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent = nullptr);
+    ~VPGraphicsPiece() = default;
+
     void Init();
 
     /**
      * @brief GetPiece Returns the piece that corresponds to the graphics piece
      * @return the piece
      */
-    VPPiece* GetPiece();
+    auto GetPiece() -> VPPiece*;
 
 public slots:
     /**
@@ -70,8 +71,8 @@ public slots:
     void on_PiecePropertiesChanged();
 
 protected:
-    QRectF boundingRect() const override;
-    QPainterPath shape() const override;
+    auto boundingRect() const -> QRectF override;
+    auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
@@ -80,7 +81,7 @@ protected:
 
     void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
 
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
@@ -88,19 +89,19 @@ private:
     Q_DISABLE_COPY(VPGraphicsPiece)
     VPPiece *m_piece;
 
-    QPainterPath m_cuttingLine;
-    QPainterPath m_seamLine;
-    QPainterPath m_grainline;
-    QPainterPath m_passmarks;
+    QPainterPath m_cuttingLine{};
+    QPainterPath m_seamLine{};
+    QPainterPath m_grainline{};
+    QPainterPath m_passmarks{};
 
-    QVector<QPainterPath> m_internalPaths;
-    QVector<Qt::PenStyle> m_internalPathsPenStyle;
+    QVector<QPainterPath> m_internalPaths{};
+    QVector<Qt::PenStyle> m_internalPathsPenStyle{};
 
-    QVector<QPainterPath> m_placeLabels;
+    QVector<QPainterPath> m_placeLabels{};
 
-    QPointF m_rotationStartPoint;
+    QPointF m_rotationStartPoint{};
 
-    QCursor m_rotateCursor;
+    QCursor m_rotateCursor{};
 };
 
 #endif // VPGRAPHICSPIECE_H

@@ -52,28 +52,12 @@ Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
     QGraphicsObject(parent),
-    m_piece(piece),
-    m_cuttingLine(QPainterPath()),
-    m_seamLine(QPainterPath()),
-    m_grainline(QPainterPath()),
-    m_passmarks(QPainterPath()),
-    m_internalPaths(QVector<QPainterPath>()),
-    m_internalPathsPenStyle(QVector<Qt::PenStyle>()),
-    m_placeLabels(QVector<QPainterPath>()),
-    m_rotationStartPoint(QPointF()),
-    m_rotateCursor(QCursor())
+    m_piece(piece)
 {
-
     QPixmap cursor_pixmap = QIcon("://puzzleicon/svg/cursor_rotate.svg").pixmap(QSize(32,32));
     m_rotateCursor= QCursor(cursor_pixmap, 16, 16);
 
     Init();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPGraphicsPiece::~VPGraphicsPiece()
-{
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,8 +73,10 @@ void VPGraphicsPiece::Init()
     if(!seamLinePoints.isEmpty())
     {
         m_seamLine.moveTo(seamLinePoints.first());
-        for (int i = 0; i < seamLinePoints.size(); i++)
+        for (int i = 1; i < seamLinePoints.size(); i++)
+        {
             m_seamLine.lineTo(seamLinePoints.at(i));
+        }
     }
 
     // initiliases the cutting line
@@ -98,8 +84,10 @@ void VPGraphicsPiece::Init()
     if(!cuttingLinepoints.isEmpty())
     {
         m_cuttingLine.moveTo(cuttingLinepoints.first());
-        for (int i = 0; i < cuttingLinepoints.size(); i++)
+        for (int i = 1; i < cuttingLinepoints.size(); i++)
+        {
             m_cuttingLine.lineTo(cuttingLinepoints.at(i));
+        }
     }
 
     // initialises the grainline
@@ -109,16 +97,17 @@ void VPGraphicsPiece::Init()
         if(!grainLinepoints.isEmpty())
         {
             m_grainline.moveTo(grainLinepoints.first());
-            for (int i = 0; i < grainLinepoints.size(); i++)
+            for (int i = 1; i < grainLinepoints.size(); i++)
+            {
                 m_grainline.lineTo(grainLinepoints.at(i));
+            }
         }
     }
 
     // initialises the internal paths
     QVector<VLayoutPiecePath> internalPaths = m_piece->GetInternalPaths();
-    for (int i = 0; i < internalPaths.size(); i++)
+    for (const auto& piecePath : internalPaths)
     {
-        VLayoutPiecePath piecePath = internalPaths.at(i);
         QPainterPath path = m_piece->GetMatrix().map(piecePath.GetPainterPath());
         m_internalPaths.append(path);
         m_internalPathsPenStyle.append(piecePath.PenStyle());
@@ -159,13 +148,13 @@ void VPGraphicsPiece::Init()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPPiece* VPGraphicsPiece::GetPiece()
+auto VPGraphicsPiece::GetPiece() -> VPPiece*
 {
     return m_piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsPiece::boundingRect() const
+auto VPGraphicsPiece::boundingRect() const -> QRectF
 {
     if(!m_cuttingLine.isEmpty())
     {
@@ -176,7 +165,7 @@ QRectF VPGraphicsPiece::boundingRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPGraphicsPiece::shape() const
+auto VPGraphicsPiece::shape() const -> QPainterPath
 {
     if(!m_cuttingLine.isEmpty())
     {
@@ -457,16 +446,17 @@ void VPGraphicsPiece::on_PieceRotationChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::on_PiecePropertiesChanged()
 {
-    if(scene())
+    if(scene() != nullptr)
     {
         scene()->update();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVariant VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value)
+auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
 {
-    if (scene()) {
+    if (scene() != nullptr)
+    {
 
         // we do this in the mouseRelease button to avoid updated this property all the time.
 //        if(change == ItemPositionHasChanged)
