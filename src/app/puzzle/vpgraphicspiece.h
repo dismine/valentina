@@ -49,6 +49,9 @@ public:
      */
     auto GetPiece() -> VPPiece*;
 
+    virtual int        type() const override {return Type;}
+    enum { Type = UserType + 1};
+
 public slots:
     /**
      * @brief on_PieceSelectionChanged Slot called when the piece selection was changed

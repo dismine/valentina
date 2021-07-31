@@ -220,6 +220,13 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
+    QGraphicsItem *item = itemAt(event->pos());
+    if (item != nullptr && item->type() == VPGraphicsPiece::Type)
+    {
+        VMainGraphicsView::contextMenuEvent(event);
+        return;
+    }
+
     QMenu menu;
 
     VPSheet *sheet = m_layout->GetFocusedSheet();
@@ -258,12 +265,14 @@ void VPMainGraphicsView::on_PieceSheetChanged(VPPiece *piece)
         }
     }
 
-    if (piece->Sheet() == nullptr || piece->Sheet() == m_layout->GetTrashSheet()) // remove
+    if (piece->Sheet() == nullptr || piece->Sheet() == m_layout->GetTrashSheet() ||
+            piece->Sheet() != m_layout->GetFocusedSheet()) // remove
     {
         if (_graphicsPiece != nullptr)
         {
             scene()->removeItem(_graphicsPiece);
             m_graphicsPieces.removeAll(_graphicsPiece);
+            delete _graphicsPiece;
         }
     }
     else // add

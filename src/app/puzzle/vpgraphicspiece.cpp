@@ -271,7 +271,7 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     bool selectionState = isSelected();
     //perform the default behaviour
-    QGraphicsItem::mousePressEvent(event);
+    QGraphicsObject::mousePressEvent(event);
 
     // change the cursor when clicking the left button
     if((event->button() == Qt::LeftButton))
@@ -285,7 +285,6 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
             setCursor(Qt::ClosedHandCursor);
         }
     }
-
 
     // change the selected state when clicking left button
     if (event->button() == Qt::LeftButton)
@@ -385,43 +384,40 @@ void VPGraphicsPiece::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
+    QMenu menu;
 
-    // TODO/FIXME   context menu needs to be refactored
+    QList<VPSheet *> sheets = m_piece->Layout()->GetSheets();
+    sheets.removeAll(m_piece->Sheet());
 
-//    QMenu menu;
+    QVector<QAction*> moveToActions;
 
-//    // move to piece list actions  -- TODO : To be tested properly when we have several piece lists
-//    QList<VPPieceList*> pieceLists =  QList<VPPieceList*>();
-//    for(auto sheet : m_piece->GetPieceList()->GetLayout()->GetSheets())
-//    {
-//        pieceLists.append(sheet->GetPieceList());
-//    }
+    if (not sheets.isEmpty())
+    {
+        QMenu *moveMenu = menu.addMenu(tr("Move to"));
 
-//    pieceLists.removeAll(m_piece->GetPieceList());
+        for (auto *sheet : sheets)
+        {
+            QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
+            moveToSheet->setData(QVariant::fromValue(sheet));
+            moveToActions.append(moveToSheet);
+        }
+    }
 
-//    if(pieceLists.count() > 0)
-//    {
-//        QMenu *moveMenu = menu.addMenu(tr("Move to"));
+    // remove from layout action
+    QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
 
-//        // TODO order in alphabetical order
+    QAction *selectedAction = menu.exec(event->screenPos());
 
-//        for (auto pieceList : pieceLists)
-//        {
-//            QAction* moveToPieceList = moveMenu->addAction(pieceList->GetName());
-//            QVariant data = QVariant::fromValue(pieceList);
-//            moveToPieceList->setData(data);
-
-//            connect(moveToPieceList, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
-//        }
-//    }
-
-//    // remove from layout action
-//    QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
-//    QVariant data = QVariant::fromValue(m_piece->GetPieceList()->GetLayout()->GetUnplacedPieceList());
-//    removeAction->setData(data);
-//    connect(removeAction, &QAction::triggered, this, &VPGraphicsPiece::on_ActionPieceMovedToPieceList);
-
-//    menu.exec(event->screenPos());
+    if (moveToActions.contains(selectedAction))
+    {
+        m_piece->SetSheet(qvariant_cast<VPSheet *>(selectedAction->data()));
+        emit m_piece->Layout()->PieceSheetChanged(m_piece);
+    }
+    else if (selectedAction == removeAction)
+    {
+        m_piece->SetSheet(nullptr);
+        emit m_piece->Layout()->PieceSheetChanged(m_piece);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

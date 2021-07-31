@@ -198,20 +198,17 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
             VPSheet *sheet = layout->GetFocusedSheet();
             piece->SetSheet(sheet);
             emit layout->PieceSheetChanged(piece);
-            m_carrousel->Refresh();
         }
         else if (selectedAction == deleteAction)
         {
             VPSheet *sheet = layout->GetTrashSheet();
             piece->SetSheet(sheet);
             emit layout->PieceSheetChanged(piece);
-            m_carrousel->Refresh();
         }
         else if (selectedAction == removeAction)
         {
             piece->SetSheet(nullptr);
             emit layout->PieceSheetChanged(piece);
-            m_carrousel->Refresh();
         }
     }
 }
