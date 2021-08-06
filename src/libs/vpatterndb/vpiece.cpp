@@ -1187,7 +1187,7 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
         QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkLengthVariable);
         length = *var->GetValue();
 
-        if (length <= accuracyPointOnLine)
+        if (VAbstractValApplication::VApp()->toPixel(length) <= accuracyPointOnLine)
         {
             const QString errorMsg = QObject::tr("Invalid global value for a passmark length. Piece '%1'. Length is "
                                                  "less than minimal allowed.")

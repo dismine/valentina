@@ -8,6 +8,7 @@
 - Fix finding point of intersection curve and axis. Case when the axis's point lies on the curve.
 - Fix visualization for tool point of intersection line and axis. Case when the axis's point lies on the line.
 - Table of variables is available in Details mode.
+- Fix incorrect comparison of the global length of passmark to minimal allowed value.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.
