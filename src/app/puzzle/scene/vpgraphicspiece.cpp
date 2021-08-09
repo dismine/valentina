@@ -77,10 +77,17 @@ auto VPGraphicsPiece::GetPiece() -> VPPiece*
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::TranslatePiece(qreal dx, qreal dy)
+{
+    TranslatePiece(QPointF(dx, dy));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::TranslatePiece(const QPointF &p)
 {
-    m_piece->Translate(p);
     prepareGeometryChange();
+    m_piece->Translate(p);
+    PaintPiece(); // refresh shapes
 }
 
 //---------------------------------------------------------------------------------------------------------------------

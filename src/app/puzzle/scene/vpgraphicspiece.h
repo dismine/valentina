@@ -49,6 +49,7 @@ public:
      */
     auto GetPiece() -> VPPiece*;
 
+    void TranslatePiece(qreal dx, qreal dy);
     void TranslatePiece(const QPointF &p);
 
     virtual int type() const override {return Type;}

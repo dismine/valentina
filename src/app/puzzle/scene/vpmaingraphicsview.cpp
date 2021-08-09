@@ -262,9 +262,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
     {
-        QList<VPGraphicsPiece*> tmpGraphicsPieces = m_graphicsPieces;
-
-        for(auto *graphicsPiece : tmpGraphicsPieces)
+        for(auto *graphicsPiece : m_graphicsPieces)
         {
             VPPiece *piece = graphicsPiece->GetPiece();
 
@@ -272,7 +270,53 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
             {
                 piece->SetSelected(false);
                 piece->SetSheet(nullptr);
+                m_graphicsPieces.removeAll(graphicsPiece);
+                delete graphicsPiece;
             }
+        }
+    }
+    else if (event->key() == Qt::Key_Left)
+    {
+        if((event->modifiers() & Qt::ShiftModifier) != 0U)
+        {
+            TranslatePiecesOn(-10, 0);
+        }
+        else
+        {
+            TranslatePiecesOn(-1, 0);
+        }
+    }
+    else if (event->key() == Qt::Key_Right)
+    {
+        if((event->modifiers() & Qt::ShiftModifier) != 0U)
+        {
+            TranslatePiecesOn(10, 0);
+        }
+        else
+        {
+            TranslatePiecesOn(1, 0);
+        }
+    }
+    else if (event->key() == Qt::Key_Up)
+    {
+        if((event->modifiers() & Qt::ShiftModifier) != 0U)
+        {
+            TranslatePiecesOn(0, -10);
+        }
+        else
+        {
+            TranslatePiecesOn(0, 1);
+        }
+    }
+    else if (event->key() == Qt::Key_Down)
+    {
+        if((event->modifiers() & Qt::ShiftModifier) != 0U)
+        {
+            TranslatePiecesOn(0, 10);
+        }
+        else
+        {
+            TranslatePiecesOn(0, 1);
         }
     }
 }
@@ -390,12 +434,6 @@ void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RotatePiecesByAngle(qreal angle) const
 {
-    QGraphicsScene *scene = this->scene();
-    if (scene == nullptr)
-    {
-        return;
-    }
-
     VPSheet *sheet = m_layout->GetFocusedSheet();
     if (sheet == nullptr)
     {
@@ -404,13 +442,25 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle) const
 
     VPTransformationOrigon origin = sheet->TransformationOrigin();
 
-    QList<QGraphicsItem *> list = scene->selectedItems();
-    for (auto *item : list)
+    for(auto *graphicsPiece : m_graphicsPieces)
     {
-        if (item->type() == VPGraphicsPiece::Type)
+        if (graphicsPiece->isSelected())
         {
-            auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
-            pieceItem->on_Rotate(origin.origin, angle);
+            graphicsPiece->on_Rotate(origin.origin, angle);
+            m_rotationControls->on_UpdateControls();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy) const
+{
+    for(auto *graphicsPiece : m_graphicsPieces)
+    {
+        if (graphicsPiece->isSelected())
+        {
+            graphicsPiece->TranslatePiece(dx, dy);
+            m_rotationControls->on_UpdateControls();
         }
     }
 }

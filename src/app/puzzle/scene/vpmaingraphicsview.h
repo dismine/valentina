@@ -132,6 +132,7 @@ private:
     void ConnectPiece(VPGraphicsPiece *piece);
 
     void RotatePiecesByAngle(qreal angle) const;
+    void TranslatePiecesOn(qreal dx, qreal dy) const;
 
 };
 
