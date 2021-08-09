@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpmimedatapiece.h
+ **  @file   vpcarrouselpiece.h
  **  @author Ronan Le Tiec
- **  @date   4 5, 2020
+ **  @date   25 4, 2020
  **
  **  @brief
  **  @copyright
@@ -25,45 +25,44 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VPCARROUSELPIECE_H
+#define VPCARROUSELPIECE_H
 
-#ifndef VPMIMEDATAPIECE_H
-#define VPMIMEDATAPIECE_H
+#include <QMouseEvent>
+#include <QListWidgetItem>
 
-#include <QMimeData>
+class VPPiece;
 
-#include "vppiece.h"
-
-class VPMimeDataPiece : public QMimeData
+class VPCarrouselPiece : public QListWidgetItem
 {
-    Q_OBJECT
-
 public:
-    VPMimeDataPiece() = default;
-    virtual ~VPMimeDataPiece() = default;
+    enum { Type = UserType + 1};
 
-    virtual auto formats() const -> QStringList override;
-
-    /**
-     * @brief GetPiecePtr Returns the piece pointer of the mime data
-     * @return  piece pointer
-     */
-    auto GetPiecePtr() const -> VPPiece*;
+    explicit VPCarrouselPiece(VPPiece *piece, QListWidget* parent);
+    virtual ~VPCarrouselPiece() = default;
 
     /**
-     * @brief SetPiecePtr sets the piece pointer to the given value
-     * @param piece the piece pointer
+     * @brief GetPiece Returns the corresponding layout piece
+     * @return  the corresponding layout piece
      */
-    void SetPiecePtr(VPPiece* piece);
+    auto GetPiece() -> VPPiece *;
 
-    static auto DragCursor(const QPixmap &piecePixmap) -> QPixmap;
+    /**
+     * @brief RefreshSelection refreshes the selection of the piece according to the selection information of m_piece
+     */
+    void RefreshSelection();
 
-    static const QString mineFormatPiecePtr;
+    /**
+     * @brief CreatePieceIcon Creates an icon of the piece of given size
+     * @param size of the icon
+     * @return the created icon
+     */
+    auto CreatePieceIcon(const QSize &size, bool isDragIcon = false) const -> QIcon;
+
 
 private:
-    Q_DISABLE_COPY(VPMimeDataPiece)
-
-    VPPiece *m_piece{nullptr};
+    Q_DISABLE_COPY(VPCarrouselPiece)
+    VPPiece *m_piece;
 };
 
-
-#endif // VPMIMEDATAPIECE_H
+#endif // VPCARROUSELPIECE_H

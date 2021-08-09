@@ -35,7 +35,8 @@
 #include "vpmimedatapiece.h"
 #include "vpcarrouselpiecelist.h"
 #include "vpcarrousel.h"
-#include "vpsheet.h"
+#include "../layout/vpsheet.h"
+#include "../layout/vppiece.h"
 
 #include <QLoggingCategory>
 
@@ -64,7 +65,7 @@ auto VPCarrouselPiece::GetPiece() -> VPPiece *
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPiece::RefreshSelection()
 {
-    setSelected(m_piece->GetIsSelected());
+    setSelected(m_piece->IsSelected());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

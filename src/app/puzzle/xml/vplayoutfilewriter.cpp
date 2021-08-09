@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vplayoutfilewriter.h"
-#include "vplayout.h"
-#include "vpsheet.h"
-#include "vppiece.h"
+#include "../layout/vplayout.h"
+#include "../layout/vpsheet.h"
+#include "../layout/vppiece.h"
 #include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vmisc/projectversion.h"
@@ -142,8 +142,8 @@ void VPLayoutFileWriter::WritePiece(VPPiece *piece)
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
-    SetAttribute(ML::AttrMirrored, piece->GetPieceMirrored());
-    SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine());
+    SetAttribute(ML::AttrMirrored, piece->IsMirror());
+//    SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine());
     SetAttribute(ML::AttrTransform, "string representation of the transformation"); // TODO / Fixme get the right value
 
     // TODO cuttingLine

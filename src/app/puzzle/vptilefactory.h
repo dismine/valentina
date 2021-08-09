@@ -32,11 +32,10 @@
 #include <QtMath>
 #include <QObject>
 
-#include "vplayout.h"
-#include "../vmisc/def.h"
-#include "vcommonsettings.h"
-
 class VPMainGraphicsView;
+class VPLayout;
+class VCommonSettings;
+class QPainter;
 
 class VPTileFactory : QObject
 {

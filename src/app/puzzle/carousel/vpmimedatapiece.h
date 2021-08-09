@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpgraphicssheet.h
+ **  @file   vpmimedatapiece.h
  **  @author Ronan Le Tiec
- **  @date   3 5, 2020
+ **  @date   4 5, 2020
  **
  **  @brief
  **  @copyright
@@ -26,47 +26,43 @@
  **
  *************************************************************************/
 
-#ifndef VPGRAPHICSSHEET_H
-#define VPGRAPHICSSHEET_H
+#ifndef VPMIMEDATAPIECE_H
+#define VPMIMEDATAPIECE_H
 
-#include <QGraphicsItem>
-#include <QPainter>
+#include <QMimeData>
 
-#include "vpsheet.h"
+class VPPiece;
 
-class VPGraphicsSheet : public QGraphicsItem
+class VPMimeDataPiece : public QMimeData
 {
+    Q_OBJECT
+
 public:
-    explicit VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsSheet();
+    VPMimeDataPiece() = default;
+    virtual ~VPMimeDataPiece() = default;
 
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-
-
-    QRectF GetSheetRect() const;
-    QRectF GetMarginsRect() const;
+    virtual auto formats() const -> QStringList override;
 
     /**
-     * @brief SetShowMargin Sets Wether we see the margin
-     * @param value true to show the margin
+     * @brief GetPiecePtr Returns the piece pointer of the mime data
+     * @return  piece pointer
      */
-    void SetShowMargin(bool value);
+    auto GetPiecePtr() const -> VPPiece*;
 
     /**
-     * @brief SetShowBorder Sets whether we see the border of the sheet
-     * @param value true to show the border
+     * @brief SetPiecePtr sets the piece pointer to the given value
+     * @param piece the piece pointer
      */
-    void SetShowBorder(bool value);
+    void SetPiecePtr(VPPiece* piece);
+
+    static auto DragCursor(const QPixmap &piecePixmap) -> QPixmap;
+
+    static const QString mineFormatPiecePtr;
 
 private:
-    Q_DISABLE_COPY(VPGraphicsSheet)
+    Q_DISABLE_COPY(VPMimeDataPiece)
 
-    VPSheet *m_sheet{nullptr};
-    QRectF m_boundingRect;
-
-    bool m_showMargin{true};
-    bool m_showBorder{true};
+    VPPiece *m_piece{nullptr};
 };
 
-#endif // VPGRAPHICSSHEET_H
+#endif // VPMIMEDATAPIECE_H

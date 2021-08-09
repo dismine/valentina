@@ -31,8 +31,8 @@
 
 #include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
-#include "vplayout.h"
-#include "vppiece.h"
+#include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 
 #include <QLoggingCategory>
 

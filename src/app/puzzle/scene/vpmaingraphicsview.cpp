@@ -33,15 +33,26 @@
 #include <QKeyEvent>
 #include <QMenu>
 
-#include "vpmimedatapiece.h"
-#include "vplayout.h"
-#include "vpsheet.h"
+#include "../scene/vpgraphicssheet.h"
+#include "../scene/vpgraphicspiece.h"
+#include "../vptilefactory.h"
+#include "../scene/vpgraphicstilegrid.h"
+#include "../carousel/vpmimedatapiece.h"
+#include "../layout/vplayout.h"
+#include "../layout/vpsheet.h"
+#include "../layout/vppiece.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vptilefactory.h"
+#include "vpgraphicspiececontrols.h"
 
 #include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
+
+namespace
+{
+const QKeySequence restoreOriginShortcut = QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk);
+}
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -53,17 +64,65 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFact
     SCASSERT(m_layout != nullptr)
     setScene(m_scene);
 
-    m_graphicsSheet = new VPGraphicsSheet(layout->GetFocusedSheet());
+    m_graphicsSheet = new VPGraphicsSheet(m_layout->GetFocusedSheet());
     m_graphicsSheet->setPos(0, 0);
     m_scene->addItem(m_graphicsSheet);
 
     setAcceptDrops(true);
 
-    m_graphicsTileGrid = new VPGraphicsTileGrid(layout, tileFactory);
+    m_graphicsTileGrid = new VPGraphicsTileGrid(m_layout, tileFactory);
     m_scene->addItem(m_graphicsTileGrid);
+
+    m_rotationControls = new VPGraphicsPieceControls(m_layout);
+    m_rotationControls->setVisible(false);
+    m_scene->addItem(m_rotationControls);
+
+    m_rotationOrigin = new VPGraphicsTransformationOrigin(m_layout);
+    m_rotationOrigin->setVisible(false);
+    m_scene->addItem(m_rotationOrigin);
+
+    connect(m_rotationControls, &VPGraphicsPieceControls::ShowOrigin,
+            m_rotationOrigin, &VPGraphicsTransformationOrigin::on_ShowOrigin);
+    connect(m_rotationControls, &VPGraphicsPieceControls::TransformationOriginChanged,
+            m_rotationOrigin, &VPGraphicsTransformationOrigin::SetTransformationOrigin);
 
     // add the connections
     connect(m_layout, &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
+
+    auto *restoreOrigin = new QAction(this);
+    restoreOrigin->setShortcut(restoreOriginShortcut);
+    connect(restoreOrigin, &QAction::triggered, this, &VPMainGraphicsView::RestoreOrigin);
+    this->addAction(restoreOrigin);
+
+    auto *rotateByPlus15 = new QAction(this);
+    rotateByPlus15->setShortcut(QKeySequence(Qt::Key_BracketLeft));
+    connect(rotateByPlus15, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByPlus15);
+    this->addAction(rotateByPlus15);
+
+    auto *rotateByMinus15 = new QAction(this);
+    rotateByMinus15->setShortcut(QKeySequence(Qt::Key_BracketRight));
+    connect(rotateByMinus15, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByMinus15);
+    this->addAction(rotateByMinus15);
+
+    auto *rotateByPlus90 = new QAction(this);
+    rotateByPlus90->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_BracketLeft));
+    connect(rotateByPlus90, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByPlus90);
+    this->addAction(rotateByPlus90);
+
+    auto *rotateByMinus90 = new QAction(this);
+    rotateByMinus90->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_BracketRight));
+    connect(rotateByMinus90, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByMinus90);
+    this->addAction(rotateByMinus90);
+
+    auto *rotateByPlus1 = new QAction(this);
+    rotateByPlus1->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_BracketLeft));
+    connect(rotateByPlus1, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByPlus1);
+    this->addAction(rotateByPlus1);
+
+    auto *rotateByMinus1 = new QAction(this);
+    rotateByMinus1->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_BracketRight));
+    connect(rotateByMinus1, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByMinus1);
+    this->addAction(rotateByMinus1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,8 +153,8 @@ void VPMainGraphicsView::RefreshPieces()
         {
             auto *graphicsPiece = new VPGraphicsPiece(piece);
             m_graphicsPieces.append(graphicsPiece);
-
             scene()->addItem(graphicsPiece);
+            ConnectPiece(graphicsPiece);
         }
     }
 }
@@ -180,9 +239,8 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
             event->acceptProposedAction();
 
-            QPoint point = event->pos();
-            piece->SetPosition(mapToScene(point));
-            piece->SetRotation(0);
+            piece->ClearTransformations();
+            piece->SetPosition(mapToScene(event->pos()));
 
             // change the piecelist of the piece
             piece->SetSheet(m_layout->GetFocusedSheet());
@@ -191,6 +249,8 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             m_graphicsPieces.append(graphicsPiece);
 
             scene()->addItem(graphicsPiece);
+
+            ConnectPiece(graphicsPiece);
 
             event->acceptProposedAction();
         }
@@ -208,9 +268,9 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
         {
             VPPiece *piece = graphicsPiece->GetPiece();
 
-            if(piece->GetIsSelected())
+            if(piece->IsSelected())
             {
-                piece->SetIsSelected(false);
+                piece->SetSelected(false);
                 piece->SetSheet(nullptr);
             }
         }
@@ -228,10 +288,14 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     }
 
     QMenu menu;
-
     VPSheet *sheet = m_layout->GetFocusedSheet();
+
+    QAction *restoreOriginAction = menu.addAction(tr("Restore transformation origin"));
+    restoreOriginAction->setShortcut(restoreOriginShortcut);
+    restoreOriginAction->setEnabled(sheet != nullptr && sheet->TransformationOrigin().custom);
+
     QAction *removeSheetAction = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Remove sheet"));
-    removeSheetAction->setEnabled(sheet != nullptr && m_layout->GetSheets().size() > 1);
+    removeSheetAction->setEnabled(sheet != nullptr && m_layout->GetSheets().size() > 1); 
 
     QAction *selectedAction = menu.exec(event->globalPos());
     if (selectedAction == removeSheetAction)
@@ -250,6 +314,104 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
         m_layout->SetFocusedSheet(nullptr);
         emit on_SheetRemoved();
         RefreshPieces();
+    }
+    else if (selectedAction == restoreOriginAction)
+    {
+        RestoreOrigin();
+    }
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RestoreOrigin() const
+{
+    VPSheet *sheet = m_layout->GetFocusedSheet();
+    if (sheet != nullptr)
+    {
+        VPTransformationOrigon origin = sheet->TransformationOrigin();
+        origin.custom = false;
+        sheet->SetTransformationOrigin(origin);
+        m_rotationControls->on_UpdateControls();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByPlus15() const
+{
+    RotatePiecesByAngle(15);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByMinus15() const
+{
+    RotatePiecesByAngle(-15);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByPlus90() const
+{
+    RotatePiecesByAngle(90);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByMinus90() const
+{
+    RotatePiecesByAngle(-90);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByPlus1() const
+{
+    RotatePiecesByAngle(1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByMinus1() const
+{
+    RotatePiecesByAngle(-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
+{
+    SCASSERT(piece != nullptr)
+
+    connect(piece, &VPGraphicsPiece::PieceSelectionChanged,
+            m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
+    connect(piece, &VPGraphicsPiece::PiecePositionChanged,
+            m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
+    connect(m_rotationControls, &VPGraphicsPieceControls::Rotate, piece, &VPGraphicsPiece::on_Rotate);
+    connect(piece, &VPGraphicsPiece::HideTransformationHandles,
+            m_rotationControls, &VPGraphicsPieceControls::on_HideHandles);
+    connect(piece, &VPGraphicsPiece::HideTransformationHandles,
+            m_rotationOrigin, &VPGraphicsTransformationOrigin::on_HideHandles);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RotatePiecesByAngle(qreal angle) const
+{
+    QGraphicsScene *scene = this->scene();
+    if (scene == nullptr)
+    {
+        return;
+    }
+
+    VPSheet *sheet = m_layout->GetFocusedSheet();
+    if (sheet == nullptr)
+    {
+        return;
+    }
+
+    VPTransformationOrigon origin = sheet->TransformationOrigin();
+
+    QList<QGraphicsItem *> list = scene->selectedItems();
+    for (auto *item : list)
+    {
+        if (item->type() == VPGraphicsPiece::Type)
+        {
+            auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
+            pieceItem->on_Rotate(origin.origin, angle);
+        }
     }
 }
 
@@ -279,8 +441,10 @@ void VPMainGraphicsView::on_PieceSheetChanged(VPPiece *piece)
     {
         if(_graphicsPiece == nullptr)
         {
+            piece->ClearTransformations();
             _graphicsPiece = new VPGraphicsPiece(piece);
             m_graphicsPieces.append(_graphicsPiece);
+            ConnectPiece(_graphicsPiece);
         }
         scene()->addItem(_graphicsPiece);
     }

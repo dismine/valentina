@@ -29,15 +29,17 @@
 #ifndef VPMAINGRAPHICSVIEW_H
 #define VPMAINGRAPHICSVIEW_H
 
-#include "vpgraphicssheet.h"
-#include "vpgraphicspiece.h"
-#include "vptilefactory.h"
-#include "vpgraphicstilegrid.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 class VMainGraphicsScene;
-
+class VPGraphicsPieceControls;
+class VPGraphicsTransformationOrigin;
 class VPTileFactory;
+class VPGraphicsPiece;
+class VPLayout;
+class VPGraphicsTileGrid;
+class VPGraphicsSheet;
+class VPPiece;
 
 class VPMainGraphicsView : public VMainGraphicsView
 {
@@ -92,6 +94,15 @@ protected:
 
     void drawTilesLine();
 
+private slots:
+    void RestoreOrigin() const;
+    void RotatePiecesByPlus15() const;
+    void RotatePiecesByMinus15() const;
+    void RotatePiecesByPlus90() const;
+    void RotatePiecesByMinus90() const;
+    void RotatePiecesByPlus1() const;
+    void RotatePiecesByMinus1() const;
+
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)
 
@@ -100,6 +111,9 @@ private:
     VPGraphicsSheet *m_graphicsSheet{nullptr};
 
     VPGraphicsTileGrid *m_graphicsTileGrid{nullptr};
+
+    VPGraphicsPieceControls *m_rotationControls{nullptr};
+    VPGraphicsTransformationOrigin *m_rotationOrigin{nullptr};
 
     VPLayout *m_layout;
 
@@ -114,6 +128,10 @@ private:
      * variable to hold temporarly hte value of the show grid
      */
     bool m_showGridTmp{false};
+
+    void ConnectPiece(VPGraphicsPiece *piece);
+
+    void RotatePiecesByAngle(qreal angle) const;
 
 };
 

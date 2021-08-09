@@ -37,7 +37,7 @@
 #include "vpcarrouselpiece.h"
 #include "../vmisc/backport/qoverload.h"
 #include "vpmimedatapiece.h"
-#include "vpsheet.h"
+#include "../layout/vpsheet.h"
 
 #include <QLoggingCategory>
 
@@ -72,8 +72,7 @@ void VPCarrouselPieceList::Refresh()
         {
             // update the label of the piece
              auto* carrouselpiece = new VPCarrouselPiece(piece, this);
-             carrouselpiece->setSelected(piece->GetIsSelected());
-             connect(piece, &VPPiece::SelectionChanged, this, &VPCarrouselPieceList::on_SelectionChangedExternal);
+             carrouselpiece->setSelected(piece->IsSelected());
         }
         sortItems();
     }
@@ -146,7 +145,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         if(drag->exec() == Qt::MoveAction)
         {
             m_carrousel->Refresh();
-            piece->SetIsSelected(true);
+            piece->SetSelected(true);
         }
     }
 }

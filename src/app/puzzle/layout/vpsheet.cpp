@@ -85,3 +85,30 @@ void VPSheet::SetVisible(bool visible)
 {
     m_visible = visible;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GrainlineType() const -> enum GrainlineType
+{
+    if (m_layout != nullptr)
+    {
+        QSizeF size =  m_layout->LayoutSettings().GetSheetSize();
+        if (size.height() < size.width())
+        {
+            return GrainlineType::Horizontal;
+        }
+    }
+
+    return GrainlineType::Vertical;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::TransformationOrigin() const -> const VPTransformationOrigon &
+{
+    return m_transformationOrigin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetTransformationOrigin(const VPTransformationOrigon &newTransformationOrigin)
+{
+    m_transformationOrigin = newTransformationOrigin;
+}

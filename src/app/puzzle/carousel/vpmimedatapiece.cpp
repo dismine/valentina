@@ -31,6 +31,8 @@
 #include <QPainter>
 #include <QPixmap>
 
+#include "../layout/vppiece.h"
+
 const QString VPMimeDataPiece::mineFormatPiecePtr = QStringLiteral("application/vnd.puzzle.piece.ptr");
 
 //---------------------------------------------------------------------------------------------------------------------

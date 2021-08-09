@@ -4,8 +4,8 @@
 #include <QMessageBox>
 
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vpsheet.h"
-#include "vpmaingraphicsview.h"
+#include "layout/vpsheet.h"
+#include "scene/vpmaingraphicsview.h"
 #include "../vobj/vobjpaintdevice.h"
 #include "../vdxf/vdxfpaintdevice.h"
 

@@ -43,7 +43,7 @@
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../ifc/exception/vexception.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vpsheet.h"
+#include "layout/vpsheet.h"
 #include "dialogs/dialogpuzzlepreferences.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
@@ -322,11 +322,6 @@ VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
 
     // TODO : set all the information we need for the piece!
 
-    //
-    connect(piece, &VPPiece::SelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
-    connect(piece, &VPPiece::PositionChanged, this, &VPMainWindow::on_PiecePositionChanged);
-    connect(piece, &VPPiece::RotationChanged, this, &VPMainWindow::on_PieceRotationChanged);
-
 
     return piece;
 }
@@ -603,8 +598,8 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
         ui->plainTextEditCurrentPieceUUID->setPlainText(selectedPiece->GetUUID().toString());
 
-        ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
-        ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->GetPieceMirrored());
+//        ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
+        ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->IsMirror());
 
         QPointF pos = selectedPiece->GetPosition();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
@@ -612,8 +607,8 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
                               UnitConvertor(pos.y(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
 
-        qreal angle = selectedPiece->GetRotation();
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+//        qreal angle = selectedPiece->GetRotation();
+//        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
     }
     else
     {
@@ -1694,7 +1689,7 @@ void VPMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
 {
     if(m_selectedPieces.count() == 1)
     {
-        m_selectedPieces.first()->SetShowSeamLine(checked);
+//        m_selectedPieces.first()->SetShowSeamLine(checked);
     }
 }
 
@@ -1703,7 +1698,7 @@ void VPMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 {
     if(m_selectedPieces.count() == 1)
     {
-        m_selectedPieces.first()->SetPieceMirrored(checked);
+        m_selectedPieces.first()->SetMirror(checked);
     }
 }
 
@@ -1712,7 +1707,7 @@ void VPMainWindow::on_pushButtonCurrentPieceRotate90Anticlockwise_clicked()
 {
     if(m_selectedPieces.count() == 1)
     {
-         m_selectedPieces.first()->RotateBy(90);
+//         m_selectedPieces.first()->RotateBy(90);
     }
 }
 
@@ -1721,7 +1716,7 @@ void VPMainWindow::on_pushButtonCurrentPieceRotate90Clockwise_clicked()
 {
     if(m_selectedPieces.count() == 1)
     {
-         m_selectedPieces.first()->RotateBy(-90);
+//         m_selectedPieces.first()->RotateBy(-90);
     }
 }
 
@@ -1730,7 +1725,7 @@ void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineVertical_clicked()
 {
     if(m_selectedPieces.count() == 1)
     {
-         m_selectedPieces.first()->RotateToGrainline(90, true);
+//         m_selectedPieces.first()->RotateToGrainline(90, true);
     }
 }
 
@@ -1739,7 +1734,7 @@ void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked()
 {
     if(m_selectedPieces.count() == 1)
     {
-         m_selectedPieces.first()->RotateToGrainline(0, true);
+//         m_selectedPieces.first()->RotateToGrainline(0, true);
     }
 }
 
@@ -1748,8 +1743,8 @@ void VPMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
 {
     if(m_selectedPieces.count() == 1)
     {
-        VPPiece *piece = m_selectedPieces.first();
-        piece->SetRotation(value);
+//        VPPiece *piece = m_selectedPieces.first();
+//        piece->SetRotation(value);
     }
 }
 
@@ -1811,10 +1806,10 @@ void VPMainWindow::on_PieceRotationChanged()
 {
     if(m_selectedPieces.count() == 1)
     {
-        VPPiece *piece = m_selectedPieces.first();
-        qreal angle = piece->GetRotation();
+//        VPPiece *piece = m_selectedPieces.first();
+//        qreal angle = piece->GetRotation();
 
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+//        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
     }
 }
 

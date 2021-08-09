@@ -30,7 +30,7 @@
 #include "vplayoutfilereader.h"
 #include "vplayoutfilewriter.h"
 #include "vplayoutliterals.h"
-#include "vpsheet.h"
+#include "../layout/vpsheet.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 
@@ -297,11 +297,11 @@ void VPLayoutFileReader::ReadPiece(VPPiece *piece)
     QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid::createUuid().toString());
     piece->SetUUID(QUuid(uuidStr));
 
-    bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
-    piece->SetShowSeamLine(showSeamline);
+//    bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
+//    piece->SetShowSeamLine(showSeamline);
 
     bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
-    piece->SetPieceMirrored(pieceMirrored);
+    piece->SetMirror(pieceMirrored);
     // TODO read the further attributes
 
 

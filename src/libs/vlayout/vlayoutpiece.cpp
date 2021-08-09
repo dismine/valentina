@@ -877,8 +877,14 @@ void VLayoutPiece::SetId(vidtype id)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::Translate(qreal dx, qreal dy)
 {
+    Translate(QPointF(dx, dy));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::Translate(const QPointF &p)
+{
     QTransform m;
-    m.translate(dx, dy);
+    m.translate(p.x(), p.y());
     d->matrix *= m;
 }
 

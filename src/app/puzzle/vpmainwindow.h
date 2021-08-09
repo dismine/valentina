@@ -34,10 +34,10 @@
 #include <QPointer>
 
 #include "../vmisc/def.h"
-#include "vpcarrousel.h"
-#include "vpmaingraphicsview.h"
-#include "vplayout.h"
-#include "vppiece.h"
+#include "carousel/vpcarrousel.h"
+#include "scene/vpmaingraphicsview.h"
+#include "layout/vplayout.h"
+#include "layout/vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "vptilefactory.h"
 #include "vpexporter.h"

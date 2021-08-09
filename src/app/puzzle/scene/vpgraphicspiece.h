@@ -32,6 +32,8 @@
 #include <QGraphicsItem>
 #include <QCursor>
 
+#include "scenedef.h"
+
 class VPPiece;
 
 class VPGraphicsPiece : public QGraphicsObject
@@ -41,37 +43,24 @@ public:
     explicit VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent = nullptr);
     ~VPGraphicsPiece() = default;
 
-    void Init();
-
     /**
      * @brief GetPiece Returns the piece that corresponds to the graphics piece
      * @return the piece
      */
     auto GetPiece() -> VPPiece*;
 
-    virtual int        type() const override {return Type;}
-    enum { Type = UserType + 1};
+    void TranslatePiece(const QPointF &p);
+
+    virtual int type() const override {return Type;}
+    enum { Type = UserType + static_cast<int>(PGraphicsItem::Piece)};
+
+signals:
+    void PieceSelectionChanged();
+    void HideTransformationHandles(bool hide);
+    void PiecePositionChanged();
 
 public slots:
-    /**
-     * @brief on_PieceSelectionChanged Slot called when the piece selection was changed
-     */
-    void on_PieceSelectionChanged();
-
-    /**
-     * @brief on_PiecePositionChanged Slot called when the piece position was changed
-     */
-    void on_PiecePositionChanged();
-
-    /**
-     * @brief on_PieceRotationChanged Slot called when the piece rotation was changed
-     */
-    void on_PieceRotationChanged();
-
-    /**
-     * @brief on_PiecePropertiesChanged Slot called when the showSeamline / mirrored was changed
-     */
-    void on_PiecePropertiesChanged();
+    void on_Rotate(const QPointF &center, qreal angle);
 
 protected:
     auto boundingRect() const -> QRectF override;
@@ -79,10 +68,8 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-
-    void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
 
@@ -94,17 +81,15 @@ private:
 
     QPainterPath m_cuttingLine{};
     QPainterPath m_seamLine{};
-    QPainterPath m_grainline{};
-    QPainterPath m_passmarks{};
 
-    QVector<QPainterPath> m_internalPaths{};
-    QVector<Qt::PenStyle> m_internalPathsPenStyle{};
-
-    QVector<QPainterPath> m_placeLabels{};
-
+    QPointF m_moveStartPoint{};
     QPointF m_rotationStartPoint{};
 
     QCursor m_rotateCursor{};
+
+    void PaintPiece(QPainter *painter=nullptr);
+
+    void GroupMove(const QPointF &pos);
 };
 
 #endif // VPGRAPHICSPIECE_H

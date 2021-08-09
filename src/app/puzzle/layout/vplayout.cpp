@@ -30,7 +30,6 @@
 #include "vppiece.h"
 #include "vpsheet.h"
 
-
 #include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(pLayout, "p.layout")

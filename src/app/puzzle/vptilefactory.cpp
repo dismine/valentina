@@ -3,9 +3,11 @@
 #include <QtSvg>
 
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vpsheet.h"
-#include "vpmaingraphicsview.h"
-
+#include "layout/vpsheet.h"
+#include "scene/vpmaingraphicsview.h"
+#include "layout/vplayout.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vcommonsettings.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPTileFactory::VPTileFactory(VPLayout *layout, VCommonSettings *commonSettings):
@@ -20,7 +22,6 @@ VPTileFactory::~VPTileFactory()
 {
 
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::refreshTileInfos()

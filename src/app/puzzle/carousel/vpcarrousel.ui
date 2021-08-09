@@ -76,7 +76,7 @@
   <customwidget>
    <class>VPCarrouselPieceList</class>
    <extends>QListWidget</extends>
-   <header>vpcarrouselpiecelist.h</header>
+   <header>carousel/vpcarrouselpiecelist.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

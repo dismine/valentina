@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpcarrouselpiece.h
+ **  @file   vpgraphicssheet.h
  **  @author Ronan Le Tiec
- **  @date   25 4, 2020
+ **  @date   3 5, 2020
  **
  **  @brief
  **  @copyright
@@ -25,45 +25,48 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPCARROUSELPIECE_H
-#define VPCARROUSELPIECE_H
 
-#include <QMouseEvent>
-#include <QListWidgetItem>
+#ifndef VPGRAPHICSSHEET_H
+#define VPGRAPHICSSHEET_H
 
-#include "vppiece.h"
+#include <QGraphicsItem>
+#include <QPainter>
 
+class VPSheet;
 
-class VPCarrouselPiece : public QListWidgetItem
+class VPGraphicsSheet : public QGraphicsItem
 {
 public:
-    enum { Type = UserType + 1};
+    explicit VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent = nullptr);
+    ~VPGraphicsSheet();
 
-    explicit VPCarrouselPiece(VPPiece *piece, QListWidget* parent);
-    virtual ~VPCarrouselPiece() = default;
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    /**
-     * @brief GetPiece Returns the corresponding layout piece
-     * @return  the corresponding layout piece
-     */
-    auto GetPiece() -> VPPiece *;
 
-    /**
-     * @brief RefreshSelection refreshes the selection of the piece according to the selection information of m_piece
-     */
-    void RefreshSelection();
+    QRectF GetSheetRect() const;
+    QRectF GetMarginsRect() const;
 
     /**
-     * @brief CreatePieceIcon Creates an icon of the piece of given size
-     * @param size of the icon
-     * @return the created icon
+     * @brief SetShowMargin Sets Wether we see the margin
+     * @param value true to show the margin
      */
-    auto CreatePieceIcon(const QSize &size, bool isDragIcon = false) const -> QIcon;
+    void SetShowMargin(bool value);
 
+    /**
+     * @brief SetShowBorder Sets whether we see the border of the sheet
+     * @param value true to show the border
+     */
+    void SetShowBorder(bool value);
 
 private:
-    Q_DISABLE_COPY(VPCarrouselPiece)
-    VPPiece *m_piece;
+    Q_DISABLE_COPY(VPGraphicsSheet)
+
+    VPSheet *m_sheet{nullptr};
+    QRectF m_boundingRect;
+
+    bool m_showMargin{true};
+    bool m_showBorder{true};
 };
 
-#endif // VPCARROUSELPIECE_H
+#endif // VPGRAPHICSSHEET_H

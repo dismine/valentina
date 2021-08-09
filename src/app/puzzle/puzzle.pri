@@ -8,23 +8,24 @@ SOURCES += \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
     $$PWD/vpapplication.cpp \
-    $$PWD/vpcarrousel.cpp \
-    $$PWD/vpcarrouselpiece.cpp \
-    $$PWD/vpcarrouselpiecelist.cpp \
+    $$PWD/carousel/vpcarrousel.cpp \
+    $$PWD/carousel/vpcarrouselpiece.cpp \
+    $$PWD/carousel/vpcarrouselpiecelist.cpp \
     $$PWD/vpcommandline.cpp \
     $$PWD/vpcommands.cpp \
     $$PWD/vpexporter.cpp \
-    $$PWD/vpgraphicspiece.cpp \
-    $$PWD/vpgraphicssheet.cpp \
-    $$PWD/vpgraphicstilegrid.cpp \
-    $$PWD/vplayout.cpp \
-    $$PWD/vplayoutsettings.cpp \
-    $$PWD/vpmaingraphicsview.cpp \
+    $$PWD/scene/vpgraphicspiece.cpp \
+    $$PWD/scene/vpgraphicspiececontrols.cpp \
+    $$PWD/scene/vpgraphicssheet.cpp \
+    $$PWD/scene/vpgraphicstilegrid.cpp \
+    $$PWD/layout/vplayout.cpp \
+    $$PWD/layout/vplayoutsettings.cpp \
+    $$PWD/scene/vpmaingraphicsview.cpp \
     $$PWD/vpmainwindow.cpp \
-    $$PWD/vpmimedatapiece.cpp \
-    $$PWD/vppiece.cpp \
+    $$PWD/carousel/vpmimedatapiece.cpp \
+    $$PWD/layout/vppiece.cpp \
     $$PWD/vpsettings.cpp \
-    $$PWD/vpsheet.cpp \
+    $$PWD/layout/vpsheet.cpp \
     $$PWD/vptilefactory.cpp \
     $$PWD/xml/vplayoutfilereader.cpp \
     $$PWD/xml/vplayoutfilewriter.cpp \
@@ -37,25 +38,27 @@ HEADERS += \
     $$PWD/dialogs/configpages/puzzlepreferencespathpage.h \
     $$PWD/dialogs/dialogpuzzlepreferences.h \
     $$PWD/dialogs/vpdialogabout.h \
+    $$PWD/scene/scenedef.h \
     $$PWD/stable.h \
     $$PWD/vpapplication.h \
-    $$PWD/vpcarrousel.h \
-    $$PWD/vpcarrouselpiece.h \
-    $$PWD/vpcarrouselpiecelist.h \
+    $$PWD/carousel/vpcarrousel.h \
+    $$PWD/carousel/vpcarrouselpiece.h \
+    $$PWD/carousel/vpcarrouselpiecelist.h \
     $$PWD/vpcommandline.h \
     $$PWD/vpcommands.h \
     $$PWD/vpexporter.h \
-    $$PWD/vpgraphicspiece.h \
-    $$PWD/vpgraphicssheet.h \
-    $$PWD/vpgraphicstilegrid.h \
-    $$PWD/vplayout.h \
-    $$PWD/vplayoutsettings.h \
-    $$PWD/vpmaingraphicsview.h \
+    $$PWD/scene/vpgraphicspiece.h \
+    $$PWD/scene/vpgraphicspiececontrols.h \
+    $$PWD/scene/vpgraphicssheet.h \
+    $$PWD/scene/vpgraphicstilegrid.h \
+    $$PWD/layout/vplayout.h \
+    $$PWD/layout/vplayoutsettings.h \
+    $$PWD/scene/vpmaingraphicsview.h \
     $$PWD/vpmainwindow.h \
-    $$PWD/vpmimedatapiece.h \
-    $$PWD/vppiece.h \
+    $$PWD/carousel/vpmimedatapiece.h \
+    $$PWD/layout/vppiece.h \
     $$PWD/vpsettings.h \
-    $$PWD/vpsheet.h \
+    $$PWD/layout/vpsheet.h \
     $$PWD/vptilefactory.h \
     $$PWD/xml/vplayoutfilereader.h \
     $$PWD/xml/vplayoutfilewriter.h \
@@ -66,5 +69,5 @@ FORMS += \
     $$PWD/dialogs/configpages/puzzlepreferencespathpage.ui \
     $$PWD/dialogs/dialogpuzzlepreferences.ui \
     $$PWD/dialogs/vpdialogabout.ui \
-    $$PWD/vpcarrousel.ui \
+    $$PWD/carousel/vpcarrousel.ui \
     $$PWD/vpmainwindow.ui

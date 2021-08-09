@@ -32,8 +32,8 @@
 #include <QWidget>
 #include <QComboBox>
 #include <QScrollArea>
-#include "vplayout.h"
-#include "vppiece.h"
+#include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 
 namespace Ui
 {

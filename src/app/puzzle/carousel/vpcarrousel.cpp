@@ -33,7 +33,7 @@
 #include <QFontMetrics>
 
 #include "../vmisc/backport/qoverload.h"
-#include "vpsheet.h"
+#include "../layout/vpsheet.h"
 
 #include <QLoggingCategory>
 #include <QMenu>

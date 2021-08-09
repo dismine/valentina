@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "vplayout.h"
+#include "layout/vplayout.h"
 #include "../vmisc/def.h"
 #include "vcommonsettings.h"
 #include "../vlayout/vlayoutdef.h"

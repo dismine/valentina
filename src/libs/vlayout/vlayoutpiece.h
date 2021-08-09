@@ -128,6 +128,7 @@ public:
     bool IsMirror() const;
     void SetMirror(bool value);
 
+    void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);
     void Scale(qreal sx, qreal sy);
     void Rotate(const QPointF &originPoint, qreal degrees);

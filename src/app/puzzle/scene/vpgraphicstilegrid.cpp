@@ -1,7 +1,7 @@
 #include "vpgraphicstilegrid.h"
 
-#include "vptilefactory.h"
-#include "vplayout.h"
+#include "../vptilefactory.h"
+#include "../layout/vplayout.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsTileGrid::VPGraphicsTileGrid(VPLayout *layout, VPTileFactory *tileFactory,QGraphicsItem *parent):

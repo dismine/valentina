@@ -40,6 +40,18 @@
 class VPLayout;
 class VPPiece;
 
+enum class GrainlineType : qint8
+{
+    Vertical,
+    Horizontal
+};
+
+struct VPTransformationOrigon
+{
+    QPointF origin{};
+    bool    custom{false};
+};
+
 class VPSheet : public QObject
 {
     Q_OBJECT
@@ -73,6 +85,11 @@ public:
     bool IsVisible() const;
     void SetVisible(bool visible);
 
+    auto GrainlineType() const -> GrainlineType;
+
+    auto TransformationOrigin() const -> const VPTransformationOrigon &;
+    void SetTransformationOrigin(const VPTransformationOrigon &newTransformationOrigin);
+
 private:
     Q_DISABLE_COPY(VPSheet)
 
@@ -83,6 +100,8 @@ private:
     QUuid m_uuid{QUuid::createUuid()};
 
     bool m_visible{true};
+
+    VPTransformationOrigon m_transformationOrigin{};
 };
 
 #endif // VPSHEET_H
