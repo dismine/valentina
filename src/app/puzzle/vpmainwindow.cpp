@@ -149,8 +149,12 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     if (w != list.end())
     {
         (*w)->activateWindow();
-        close();
-        return false;
+        if (this != *w)
+        {
+            close();
+            return false;
+        }
+        return true;
     }
 
     VlpCreateLock(lock, path);
