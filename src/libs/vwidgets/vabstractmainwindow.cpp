@@ -264,7 +264,7 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
     {
         QMessageBox messageBox(messageBoxParent);
         messageBox.setIcon(QMessageBox::Question);
-        messageBox.setText(tr("The measurements document has no write permissions."));
+        messageBox.setText(tr("The file has no write permissions."));
         messageBox.setInformativeText(tr("Do you want to change the premissions?"));
         messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
         messageBox.setDefaultButton(QMessageBox::Yes);

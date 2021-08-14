@@ -51,6 +51,8 @@ namespace Ui
     class VPMainWindow;
 }
 
+class QFileSystemWatcher;
+
 class VPMainWindow : public VAbstractMainWindow
 {
     Q_OBJECT
@@ -435,9 +437,10 @@ private:
     QString curFile{};
 
     bool isInitialized{false};
-    bool lIsReadOnly{false};
 
     QSharedPointer<VLockGuard<char>> lock{nullptr};
+
+    QFileSystemWatcher *m_layoutWatcher;
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
@@ -555,6 +558,8 @@ private:
     void CreateWindowMenu(QMenu *menu);
 
     void AddSheet();
+
+    auto IsLayoutReadOnly() const -> bool;
 };
 
 #endif // VPMAINWINDOW_H

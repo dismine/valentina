@@ -31,6 +31,7 @@
 #include <QCloseEvent>
 #include <QtMath>
 #include <QSvgGenerator>
+#include <QFileSystemWatcher>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -67,7 +68,8 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     VAbstractMainWindow(parent),
     ui(new Ui::VPMainWindow),
     m_cmd(cmd),
-    m_statusLabel(new QLabel(this))
+    m_statusLabel(new QLabel(this)),
+    m_layoutWatcher(new QFileSystemWatcher(this))
 {
     //    // ----- for test purposes, to be removed------------------
     m_layout->LayoutSettings().SetUnit(Unit::Cm);
@@ -114,6 +116,14 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     AboutToShowDockMenu();
     menu->setAsDockMenu();
 #endif //defined(Q_OS_MAC)
+
+    connect(m_layoutWatcher, &QFileSystemWatcher::fileChanged, this, [this](const QString &path)
+    {
+        if (not curFile.isEmpty() && curFile == path)
+        {
+            UpdateWindowTitle();
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,15 +232,24 @@ auto VPMainWindow::LoadFile(QString path) -> bool
 void VPMainWindow::LayoutWasSaved(bool saved)
 {
     setWindowModified(!saved);
-    not lIsReadOnly ? ui->actionSave->setEnabled(!saved): ui->actionSave->setEnabled(false);
+    not IsLayoutReadOnly() ? ui->actionSave->setEnabled(!saved): ui->actionSave->setEnabled(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetCurrentFile(const QString &fileName)
 {
+    if (not curFile.isEmpty() && m_layoutWatcher->files().contains(curFile))
+    {
+        m_layoutWatcher->removePath(curFile);
+    }
+
     curFile = fileName;
     if (not curFile.isEmpty())
     {
+        if (not m_layoutWatcher->files().contains(curFile))
+        {
+            m_layoutWatcher->addPath(curFile);
+        }
         auto *settings = VPApplication::VApp()->PuzzleSettings();
         QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
@@ -292,6 +311,7 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             }
 
             m_carrousel->Refresh();
+            LayoutWasSaved(false);
         }
         else
         {
@@ -819,16 +839,8 @@ void VPMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
 void VPMainWindow::UpdateWindowTitle()
 {
     QString showName;
-    bool isFileWritable = true;
     if (not curFile.isEmpty())
     {
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-        isFileWritable = QFileInfo(curFile).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
         showName = StrippedName(curFile);
     }
     else
@@ -846,7 +858,7 @@ void VPMainWindow::UpdateWindowTitle()
 
     showName += QLatin1String("[*]");
 
-    if (lIsReadOnly || not isFileWritable)
+    if (IsLayoutReadOnly())
     {
         showName += QStringLiteral(" (") + tr("read only") + QChar(')');
     }
@@ -942,7 +954,7 @@ auto VPMainWindow::MaybeSave() -> bool
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
-        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || lIsReadOnly ? tr("Save…") : tr("Save"));
+        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || IsLayoutReadOnly() ? tr("Save…") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
@@ -950,18 +962,18 @@ auto VPMainWindow::MaybeSave() -> bool
 
         switch (ret)
         {
-        case QMessageBox::Yes:
-            if (lIsReadOnly)
-            {
-                return on_actionSaveAs_triggered();
-            }
-            return on_actionSave_triggered();
-        case QMessageBox::No:
-            return true;
-        case QMessageBox::Cancel:
-            return false;
-        default:
-            break;
+            case QMessageBox::Yes:
+                if (IsLayoutReadOnly())
+                {
+                    return on_actionSaveAs_triggered();
+                }
+                return on_actionSave_triggered();
+            case QMessageBox::No:
+                return true;
+            case QMessageBox::Cancel:
+                return false;
+            default:
+                break;
         }
     }
     return true;
@@ -1096,6 +1108,34 @@ void VPMainWindow::AddSheet()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::IsLayoutReadOnly() const -> bool
+{
+    if (curFile.isEmpty())
+    {
+        return false;
+    }
+
+    QFileInfo f(curFile);
+
+    if (not f.exists())
+    {
+        return false;
+    }
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+
+    bool fileWritable = f.isWritable();
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
+    return not fileWritable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
     VPApplication::VApp()->NewMainWindow();
@@ -1186,7 +1226,7 @@ void VPMainWindow::on_actionOpen_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 bool VPMainWindow::on_actionSave_triggered()
 {
-    if (curFile.isEmpty() || lIsReadOnly)
+    if (curFile.isEmpty() || IsLayoutReadOnly())
     {
         return on_actionSaveAs_triggered();
     }
@@ -1267,6 +1307,11 @@ bool VPMainWindow::on_actionSaveAs_triggered()
         fileName += QChar('.') + suffix;
     }
 
+    if (not CheckFilePermissions(fileName, this))
+    {
+        return false;
+    }
+
     if (QFileInfo::exists(fileName) && curFile != fileName)
     {
         // Temporary try to lock the file before saving
@@ -1279,12 +1324,6 @@ bool VPMainWindow::on_actionSaveAs_triggered()
         }
     }
 
-    // Need for restoring previous state in case of failure
-//    const bool readOnly = m_layout->IsReadOnly();
-
-//    m_layout->SetReadOnly(false);
-    lIsReadOnly = false;
-
     QString error;
     bool result = SaveLayout(fileName, error);
     if (not result)
@@ -1296,17 +1335,12 @@ bool VPMainWindow::on_actionSaveAs_triggered()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
-
-        // Restore previous state
-//        m_layout->SetReadOnly(readOnly);
-//        lIsReadOnly = readOnly;
         return false;
     }
 
     m_curFileFormatVersion = VLayoutConverter::LayoutMaxVer;
     m_curFileFormatVersionStr = VLayoutConverter::LayoutMaxVerStr;
 
-//    UpdatePadlock(false);
     UpdateWindowTitle();
 
     if (curFile == fileName && not lock.isNull())
