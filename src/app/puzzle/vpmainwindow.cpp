@@ -928,50 +928,42 @@ void VPMainWindow::WriteSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPMainWindow::MaybeSave()
+auto VPMainWindow::MaybeSave() -> bool
 {
     // TODO: Implement maybe save check
-//    if (this->isWindowModified())
-//    {
-//        if (curFile.isEmpty() && ui->tableWidget->rowCount() == 0)
-//        {
-//            return true;// Don't ask if file was created without modifications.
-//        }
+    if (this->isWindowModified())
+    {
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
+                                                               tr("Measurements have been modified.\n"
+                                                                  "Do you want to save your changes?"),
+                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
+                                                               QMessageBox::Cancel, this, Qt::Sheet));
 
-//        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
-//                                                               tr("Measurements have been modified.\n"
-//                                                                  "Do you want to save your changes?"),
-//                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-//                                                               QMessageBox::Cancel, this, Qt::Sheet));
+        messageBox->setDefaultButton(QMessageBox::Yes);
+        messageBox->setEscapeButton(QMessageBox::Cancel);
 
-//        messageBox->setDefaultButton(QMessageBox::Yes);
-//        messageBox->setEscapeButton(QMessageBox::Cancel);
+        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || lIsReadOnly ? tr("Save…") : tr("Save"));
+        messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
-//        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || mIsReadOnly ? tr("Save…") : tr("Save"));
-//        messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
+        messageBox->setWindowModality(Qt::ApplicationModal);
+        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
-//        messageBox->setWindowModality(Qt::ApplicationModal);
-//        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
-
-//        switch (ret)
-//        {
-//        case QMessageBox::Yes:
-//            if (mIsReadOnly)
-//            {
-//                return FileSaveAs();
-//            }
-//            else
-//            {
-//                return FileSave();
-//            }
-//        case QMessageBox::No:
-//            return true;
-//        case QMessageBox::Cancel:
-//            return false;
-//        default:
-//            break;
-//        }
-//    }
+        switch (ret)
+        {
+        case QMessageBox::Yes:
+            if (lIsReadOnly)
+            {
+                return on_actionSaveAs_triggered();
+            }
+            return on_actionSave_triggered();
+        case QMessageBox::No:
+            return true;
+        case QMessageBox::Cancel:
+            return false;
+        default:
+            break;
+        }
+    }
     return true;
 }
 

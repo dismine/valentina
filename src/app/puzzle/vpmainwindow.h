@@ -544,7 +544,7 @@ private:
     void ReadSettings();
     void WriteSettings();
 
-    bool MaybeSave();
+    auto MaybeSave() -> bool;
 
     /**
      * @brief generateTiledPdf Generates the tiled Pdf in the given filename
