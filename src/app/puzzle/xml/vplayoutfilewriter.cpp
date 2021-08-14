@@ -137,7 +137,7 @@ auto GrainlineArrowDirrectionToString(GrainlineArrowDirection type) -> QString
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteFile(VPLayout *layout, QFile *file)
+void VPLayoutFileWriter::WriteFile(VPLayout *layout, QIODevice *file)
 {
     setDevice(file);
     setAutoFormatting(true);

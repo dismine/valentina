@@ -32,6 +32,7 @@
 #include <QtMath>
 #include <QSvgGenerator>
 #include <QFileSystemWatcher>
+#include <QSaveFile>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -268,21 +269,33 @@ void VPMainWindow::SetCurrentFile(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 {
-    QFile file(path);
-    file.open(QIODevice::WriteOnly);
-
-    VPLayoutFileWriter fileWriter;
-    fileWriter.WriteFile(m_layout, &file);
-
-    if (fileWriter.hasError())
+    bool success = false;
+    QSaveFile file(path);
+    // cppcheck-suppress ConfigurationNotChecked
+    if (file.open(QIODevice::WriteOnly))
     {
-        error = tr("Fail to create layout.");
-        return false;
+        VPLayoutFileWriter fileWriter;
+        fileWriter.WriteFile(m_layout, &file);
+
+        if (fileWriter.hasError())
+        {
+            error = tr("Fail to create layout.");
+            return false;
+        }
+
+        success = file.commit();
     }
 
-    SetCurrentFile(path);
-    LayoutWasSaved(true);
-    return true;
+    if (success)
+    {
+        SetCurrentFile(path);
+        LayoutWasSaved(true);
+    }
+    else
+    {
+        error = file.errorString();
+    }
+    return success;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

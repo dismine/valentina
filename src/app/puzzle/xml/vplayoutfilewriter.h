@@ -51,7 +51,7 @@ public:
     VPLayoutFileWriter()= default;
     ~VPLayoutFileWriter()= default;
 
-    void WriteFile(VPLayout *layout, QFile *file);
+    void WriteFile(VPLayout *layout, QIODevice *file);
 
 private:
     void WriteLayout(VPLayout *layout);
