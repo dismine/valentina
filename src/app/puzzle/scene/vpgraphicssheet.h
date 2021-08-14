@@ -32,17 +32,16 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-class VPSheet;
+class VPLayout;
 
 class VPGraphicsSheet : public QGraphicsItem
 {
 public:
-    explicit VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsSheet();
+    explicit VPGraphicsSheet(VPLayout *sheet, QGraphicsItem *parent = nullptr);
+    ~VPGraphicsSheet()=default;
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-
 
     QRectF GetSheetRect() const;
     QRectF GetMarginsRect() const;
@@ -62,7 +61,7 @@ public:
 private:
     Q_DISABLE_COPY(VPGraphicsSheet)
 
-    VPSheet *m_sheet{nullptr};
+    VPLayout *m_layout{nullptr};
     QRectF m_boundingRect;
 
     bool m_showMargin{true};

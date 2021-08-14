@@ -720,6 +720,30 @@ void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& da
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetPieceLabelRect() const -> QVector<QPointF>
+{
+    return d->detailLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPieceLabelRect(const QVector<QPointF> &rect)
+{
+    d->detailLabel = rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetPieceLabelData() const -> VTextManager
+{
+    return d->m_tmDetail;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPieceLabelData(const VTextManager &data)
+{
+    d->m_tmDetail = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VLayoutPiece::GetPatternTextPosition() const
 {
     if (d->patternInfo.count() > 2)
@@ -778,6 +802,30 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetPatternLabelRect() const -> QVector<QPointF>
+{
+    return d->patternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPatternLabelRect(const QVector<QPointF> &rect)
+{
+    d->patternInfo = rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetPatternLabelData() const -> VTextManager
+{
+    return d->m_tmPattern;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPatternLabelData(const VTextManager &data)
+{
+    d->m_tmPattern = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pattern)
 {
     qreal dAng = 0;
@@ -812,6 +860,30 @@ QVector<QPointF> VLayoutPiece::GetGrainline() const
 bool VLayoutPiece::IsGrainlineEnabled() const
 {
     return d->grainlineEnabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetGrainlineEnabled(bool enabled)
+{
+    d->grainlineEnabled = enabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetGrainlineAngle(qreal angle)
+{
+    d->grainlineAngle = angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetGrainlineArrowType(GrainlineArrowDirection type)
+{
+    d->grainlineArrowType = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetGrainlinePoints(const QVector<QPointF> &points)
+{
+    d->grainlinePoints = points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1105,7 +1177,7 @@ QVector<QVector<QPointF> > VLayoutPiece::MappedInternalPathsForCut(bool cut) con
 {
     QVector<QVector<QPointF> > paths;
 
-    for (auto &path : d->m_internalPaths)
+    for (const auto &path : d->m_internalPaths)
     {
         if (path.IsCutPath() == cut)
         {

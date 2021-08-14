@@ -57,8 +57,8 @@ struct TextLine
     bool          m_italic{false};
     Qt::Alignment m_eAlign{Qt::AlignCenter};
 
-    friend QDataStream& operator<<(QDataStream& dataStream, const TextLine& data);
-    friend QDataStream& operator>>(QDataStream& dataStream, TextLine& data);
+    friend auto operator<<(QDataStream& dataStream, const TextLine& data) -> QDataStream&;
+    friend auto operator>>(QDataStream& dataStream, TextLine& data) -> QDataStream&;
 private:
     static const quint32 streamHeader;
     static const quint16 classVersion;
@@ -78,22 +78,23 @@ public:
     VTextManager(const VTextManager &text);
     VTextManager &operator=(const VTextManager &text);
 
-    virtual int GetSpacing() const;
+    virtual auto GetSpacing() const -> int;
 
-    void         SetFont(const QFont& font);
-    const QFont& GetFont() const;
-    void         SetFontSize(int iFS);
-    void         FitFontSize(qreal fW, qreal fH);
+    void SetFont(const QFont& font);
+    auto GetFont() const -> const QFont&;
+    void SetFontSize(int iFS);
+    void FitFontSize(qreal fW, qreal fH);
 
-    QVector<TextLine> GetAllSourceLines() const;
-    int               GetSourceLinesCount() const;
-    const TextLine&   GetSourceLine(int i) const;
+    auto GetAllSourceLines() const -> QVector<TextLine>;
+    void SetAllSourceLines(const QVector<TextLine> &lines);
+    auto GetSourceLinesCount() const -> int;
+    auto GetSourceLine(int i) const -> const TextLine&;
 
     void Update(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern);
     void Update(VAbstractPattern* pDoc, const VContainer *pattern);
 
-    friend QDataStream& operator<<(QDataStream& dataStream, const VTextManager& data);
-    friend QDataStream& operator>>(QDataStream& dataStream, VTextManager& data);
+    friend auto operator<<(QDataStream& dataStream, const VTextManager& data) -> QDataStream&;
+    friend auto operator>>(QDataStream& dataStream, VTextManager& data) -> QDataStream&;
 
 private:
     QFont             m_font;

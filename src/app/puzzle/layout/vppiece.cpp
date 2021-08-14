@@ -31,6 +31,7 @@
 
 #include "../vmisc/def.h"
 #include "vpsheet.h"
+#include "../vlayout/vtextmanager.h"
 
 #include <QIcon>
 #include <QLoggingCategory>
@@ -168,4 +169,76 @@ void VPPiece::SetLayout(VPLayout *layout)
 {
     SCASSERT(layout != nullptr)
     m_layout = layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetGrainlineEnabled(bool enabled)
+{
+    VLayoutPiece::SetGrainlineEnabled(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetGrainlineAngle(qreal angle)
+{
+    VLayoutPiece::SetGrainlineAngle(angle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetGrainlineArrowType(GrainlineArrowDirection type)
+{
+    VLayoutPiece::SetGrainlineArrowType(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetGrainlinePoints(const QVector<QPointF> &points)
+{
+    VLayoutPiece::SetGrainlinePoints(points);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::GetPieceLabelRect() const -> QVector<QPointF>
+{
+    return VLayoutPiece::GetPieceLabelRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetPieceLabelRect(const QVector<QPointF> &rect)
+{
+    VLayoutPiece::SetPieceLabelRect(rect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::GetPieceLabelData() const -> VTextManager
+{
+    return VLayoutPiece::GetPieceLabelData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetPieceLabelData(const VTextManager &data)
+{
+    VLayoutPiece::SetPieceLabelData(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::GetPatternLabelRect() const -> QVector<QPointF>
+{
+    return VLayoutPiece::GetPatternLabelRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetPatternLabelRect(const QVector<QPointF> &rect)
+{
+    VLayoutPiece::SetPatternLabelRect(rect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::GetPatternLabelData() const -> VTextManager
+{
+    return VLayoutPiece::GetPatternLabelData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetPatternLabelData(const VTextManager &data)
+{
+    VLayoutPiece::SetPatternLabelData(data);
 }

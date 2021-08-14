@@ -33,6 +33,108 @@
 #include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vmisc/projectversion.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vlayout/vtextmanager.h"
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+auto NumberToString(T number) -> QString
+{
+    const QLocale locale = QLocale::c();
+    return locale.toString(number, 'g', 12).remove(locale.groupSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TransformToString(const QTransform &m) -> QString
+{
+    QStringList matrix
+    {
+        NumberToString(m.m11()),
+        NumberToString(m.m12()),
+        NumberToString(m.m13()),
+        NumberToString(m.m21()),
+        NumberToString(m.m22()),
+        NumberToString(m.m23()),
+        NumberToString(m.m31()),
+        NumberToString(m.m32()),
+        NumberToString(m.m33())
+    };
+    return matrix.join(ML::groupSep);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PointToString(const QPointF &p) -> QString
+{
+    return NumberToString(p.x()) + ML::coordintatesSep + NumberToString(p.y());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PathToString(const QVector<QPointF> &pathPoints) -> QString
+{
+    QStringList path;
+
+    for (auto point : pathPoints)
+    {
+        path.append(PointToString(point));
+    }
+
+    return path.join(ML::pointsSep);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RectToString(const QRectF &r) -> QString
+{
+    return NumberToString(r.x()) + ML::groupSep +
+            NumberToString(r.y()) + ML::groupSep +
+            NumberToString(r.width()) + ML::groupSep +
+            NumberToString(r.height());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MarkerShapeToString(const PlaceLabelImg &shape) -> QString
+{
+    QStringList s;
+    for (const auto& path : shape)
+    {
+        s.append(PathToString(path));
+    }
+    return s.join(ML::itemsSep);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LineToString(const QLineF &line) -> QString
+{
+    return PointToString(line.p1()) + ML::groupSep + PointToString(line.p2());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LinesToString(const QVector<QLineF> &lines) -> QString
+{
+    QStringList l;
+    for (auto line : lines)
+    {
+        l.append(LineToString(line));
+    }
+    return l.join(ML::itemsSep);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GrainlineArrowDirrectionToString(GrainlineArrowDirection type) -> QString
+{
+    switch(type)
+    {
+        case GrainlineArrowDirection::atFront:
+            return ML::atFrontStr;
+        case GrainlineArrowDirection::atRear:
+            return ML::atRearStr;
+        case GrainlineArrowDirection::atBoth:
+        default:
+            return ML::atBothStr;
+    }
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteFile(VPLayout *layout, QFile *file)
@@ -41,6 +143,8 @@ void VPLayoutFileWriter::WriteFile(VPLayout *layout, QFile *file)
     setAutoFormatting(true);
 
     writeStartDocument();
+    writeComment(QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).")
+                 .arg(APP_VERSION_STR));
     WriteLayout(layout);
     writeEndDocument();
 
@@ -52,13 +156,9 @@ void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
-    writeComment(QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).")
-                 .arg(APP_VERSION_STR));
-
     WriteProperties(layout);
     WritePieceList(layout->GetUnplacedPieces(), ML::TagUnplacedPieces);
     WriteSheets(layout);
-
     writeEndElement(); //layout
 }
 
@@ -76,6 +176,9 @@ void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
     writeStartElement(ML::TagControl);
     SetAttribute(ML::AttrWarningSuperposition, layout->LayoutSettings().GetWarningSuperpositionOfPieces());
     SetAttribute(ML::AttrWarningOutOfBound, layout->LayoutSettings().GetWarningPiecesOutOfBound());
+    SetAttribute(ML::AttrStickyEdges, layout->LayoutSettings().GetStickyEdges());
+    SetAttribute(ML::AttrPiecesGap, layout->LayoutSettings().GetPiecesGap());
+//    SetAttribute(ML::AttrFollowGrainLine, layout->LayoutSettings().GetFollowGrainline());
     writeEndElement(); // control
 
     WriteTiles(layout);
@@ -142,19 +245,110 @@ void VPLayoutFileWriter::WritePiece(VPPiece *piece)
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
-    SetAttribute(ML::AttrMirrored, piece->IsMirror());
-//    SetAttribute(ML::AttrShowSeamline, piece->GetShowSeamLine());
-    SetAttribute(ML::AttrTransform, "string representation of the transformation"); // TODO / Fixme get the right value
+    SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(), [](bool mirrored){return not mirrored;});
+    SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
 
-    // TODO cuttingLine
-    // TODO seamLine
-    // TODO grainline
-    // TODO passmarks
-    // TODO internal paths
-    // TODO placeLabels (buttonholes etc.)
+    writeStartElement(ML::TagSeamLine);
+    writeCharacters(PathToString(piece->GetContourPoints()));
+    writeEndElement();
 
-    // TODO labels
+    writeStartElement(ML::TagSeamAllowance);
+    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsSeamAllowance(), [](bool enabled){return not enabled;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrBuiltIn, piece->IsSeamAllowanceBuiltIn(),
+                                 [](bool builtin){return not builtin;});
+    if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
+    {
+        writeCharacters(PathToString(piece->GetSeamAllowancePoints()));
+    }
+    writeEndElement();
 
+    writeStartElement(ML::TagGrainline);
+    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsGrainlineEnabled(), [](bool enabled){return not enabled;});
+    if (piece->IsGrainlineEnabled())
+    {
+        SetAttribute(ML::AttrAngle, piece->GrainlineAngle());
+        SetAttribute(ML::AttrArrowDirection, GrainlineArrowDirrectionToString(piece->GrainlineArrowType()));
+        writeCharacters(PathToString(piece->GetGrainline()));
+    }
+    writeEndElement();
+
+    writeStartElement(ML::TagNotches);
+    QVector<VLayoutPassmark> passmarks = piece->GetPassmarks();
+    for (const auto& passmark : passmarks)
+    {
+        writeStartElement(ML::TagNotch);
+        SetAttribute(ML::AttrBuiltIn, passmark.isBuiltIn);
+        SetAttribute(ML::AttrType, static_cast<int>(passmark.type));
+        SetAttribute(ML::AttrBaseLine, LineToString(passmark.baseLine));
+        SetAttribute(ML::AttrPath, LinesToString(passmark.lines));
+        writeEndElement();
+    }
+    writeEndElement();
+
+    writeStartElement(ML::TagInternalPaths);
+    QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
+    for (const auto& path : internalPaths)
+    {
+        writeStartElement(ML::TagInternalPath);
+        SetAttribute(ML::AttrCut, path.IsCutPath());
+        SetAttribute(ML::AttrPenStyle, PenStyleToLineStyle(path.PenStyle()));
+        writeCharacters(PathToString(path.Points()));
+        writeEndElement();
+    }
+    writeEndElement();
+
+    writeStartElement(ML::TagMarkers);
+    QVector<VLayoutPlaceLabel> placelabels = piece->GetPlaceLabels();
+    for (const auto& label : placelabels)
+    {
+        writeStartElement(ML::TagMarker);
+        SetAttribute(ML::AttrTransform, TransformToString(label.rotationMatrix));
+        SetAttribute(ML::AttrType, static_cast<int>(label.type));
+        SetAttribute(ML::AttrCenter, PointToString(label.center));
+        SetAttribute(ML::AttrBox, RectToString(label.box));
+        writeCharacters(MarkerShapeToString(label.shape));
+
+        writeEndElement();
+    }
+    writeEndElement();
+
+    writeStartElement(ML::TagLabels);
+    WriteLabel(piece->GetPieceLabelRect(), piece->GetPieceLabelData(), ML::TagPieceLabel);
+    WriteLabel(piece->GetPatternLabelRect(), piece->GetPatternLabelData(), ML::TagPatternLabel);
+    writeEndElement();
+
+    writeEndElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileWriter::WriteLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, const QString &tagName)
+{
+    if (labelShape.size() > 2 && tm.GetSourceLinesCount() > 0)
+    {
+        writeStartElement(tagName);
+        SetAttribute(ML::AttrShape, PathToString(labelShape));
+        WriteLabelLines(tm);
+        writeEndElement();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileWriter::WriteLabelLines(const VTextManager &tm)
+{
+    writeStartElement(ML::TagLines);
+    SetAttribute(ML::AttrFont, tm.GetFont().toString());
+
+    for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    {
+        writeStartElement(ML::TagLine);
+        const TextLine& tl = tm.GetSourceLine(i);
+        SetAttribute(ML::AttrFontSize, tl.m_iFontSize);
+        SetAttribute(ML::AttrBold, tl.m_bold);
+        SetAttribute(ML::AttrItalic, tl.m_italic);
+        SetAttribute(ML::AttrAlignment, static_cast<int>(tl.m_eAlign));
+        writeCharacters(tl.m_qsText);
+        writeEndElement();
+    }
     writeEndElement();
 }
 

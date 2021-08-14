@@ -49,6 +49,20 @@ extern const QString TagPiece;
 extern const QString TagSheets;
 extern const QString TagSheet;
 extern const QString TagName;
+extern const QString TagSeamLine;
+extern const QString TagSeamAllowance;
+extern const QString TagGrainline;
+extern const QString TagNotches;
+extern const QString TagNotch;
+extern const QString TagInternalPaths;
+extern const QString TagInternalPath;
+extern const QString TagMarkers;
+extern const QString TagMarker;
+extern const QString TagLabels;
+extern const QString TagPieceLabel;
+extern const QString TagPatternLabel;
+extern const QString TagLines;
+extern const QString TagLine;
 
 extern const QString AttrVersion;
 extern const QString AttrWarningSuperposition;
@@ -69,6 +83,32 @@ extern const QString AttrID;
 extern const QString AttrMirrored;
 extern const QString AttrTransform;
 extern const QString AttrShowSeamline;
+extern const QString AttrEnabled;
+extern const QString AttrBuiltIn;
+extern const QString AttrAngle;
+extern const QString AttrArrowDirection;
+extern const QString AttrType;
+extern const QString AttrBaseLine;
+extern const QString AttrPath;
+extern const QString AttrCut;
+extern const QString AttrPenStyle;
+extern const QString AttrCenter;
+extern const QString AttrBox;
+extern const QString AttrShape;
+extern const QString AttrFont;
+extern const QString AttrFontSize;
+extern const QString AttrBold;
+extern const QString AttrItalic;
+extern const QString AttrAlignment;
+
+extern const QString atFrontStr;
+extern const QString atRearStr;
+extern const QString atBothStr;
+
+extern const QChar groupSep;
+extern const QChar coordintatesSep;
+extern const QChar pointsSep;
+extern const QChar itemsSep;
 }
 
 

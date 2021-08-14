@@ -26,11 +26,15 @@
  **
  ** *************************************************************************/
 
+#include <Qt>
+#include <QFont>
 #include <QXmlStreamAttributes>
 #include "vplayoutfilereader.h"
 #include "vplayoutfilewriter.h"
 #include "vplayoutliterals.h"
 #include "../layout/vpsheet.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vlayout/vtextmanager.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 
@@ -41,6 +45,138 @@ QT_WARNING_DISABLE_INTEL(1418)
 Q_LOGGING_CATEGORY(MLReader, "mlReader")
 
 QT_WARNING_POP
+
+namespace
+{
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToTransfrom(const QString &matrix) -> QTransform
+{
+    QStringList elements = matrix.split(ML::groupSep);
+    if (elements.count() == 9)
+    {
+        qreal m11 = elements.at(0).toDouble();
+        qreal m12 = elements.at(1).toDouble();
+        qreal m13 = elements.at(2).toDouble();
+        qreal m21 = elements.at(3).toDouble();
+        qreal m22 = elements.at(4).toDouble();
+        qreal m23 = elements.at(5).toDouble();
+        qreal m31 = elements.at(6).toDouble();
+        qreal m32 = elements.at(7).toDouble();
+        qreal m33 = elements.at(8).toDouble();
+        return {m11, m12, m13, m21, m22, m23, m31, m32, m33};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToPoint(const QString &point) -> QPointF
+{
+    QStringList coordinates = point.split(ML::coordintatesSep);
+    if (coordinates.count() == 2)
+    {
+        return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToPath(const QString &path) -> QVector<QPointF>
+{
+    QVector<QPointF> p;
+    QStringList points = path.split(ML::pointsSep);
+    for (const auto& point : points)
+    {
+        p.append(StringToPoint(point));
+    }
+
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToGrainlineArrowDirrection(const QString &dirrection) -> GrainlineArrowDirection
+{
+    const QStringList arrows
+    {
+        ML::atFrontStr, // 0
+        ML::atRearStr,  // 1
+        ML::atBothStr   // 2
+    };
+
+    GrainlineArrowDirection arrowDirection = GrainlineArrowDirection::atBoth;
+    switch (arrows.indexOf(dirrection))
+    {
+        case 0:// at front
+            arrowDirection = GrainlineArrowDirection::atFront;
+            break;
+        case 1:// at rear
+            arrowDirection = GrainlineArrowDirection::atRear;
+            break;
+        case 2:// at both
+        default:
+            arrowDirection = GrainlineArrowDirection::atBoth;
+            break;
+    }
+    return arrowDirection;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToLine(const QString &string) -> QLineF
+{
+    QStringList points = string.split(ML::groupSep);
+    if (points.count() == 2)
+    {
+        return {StringToPoint(points.at(0)), StringToPoint(points.at(1))};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToLines(const QString &string) -> QVector<QLineF>
+{
+    QStringList lines = string.split(ML::itemsSep);
+    QVector<QLineF> path;
+
+    for (const auto& line : lines)
+    {
+        QLineF l = StringToLine(line);
+        if (not l.isNull())
+        {
+            path.append(StringToLine(line));
+        }
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToRect(const QString &string) -> QRectF
+{
+    QStringList points = string.split(ML::groupSep);
+    if (points.count() == 4)
+    {
+        return {points.at(0).toDouble(), points.at(1).toDouble(), points.at(2).toDouble(), points.at(3).toDouble()};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToMarkerShape(const QString &string) -> PlaceLabelImg
+{
+    PlaceLabelImg shape;
+    QStringList paths = string.split(ML::itemsSep);
+    for (const auto& path : paths)
+    {
+        shape.append(StringToPath(path));
+    }
+
+    return shape;
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file) -> bool
@@ -71,9 +207,7 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
     {
         ML::TagProperties,     // 0
         ML::TagUnplacedPieces, // 1
-        ML::TagSheets,         // 2
-        ML::TagSize,           // 3
-        ML::TagMargin          // 4
+        ML::TagSheets          // 2
     };
 
     while (readNextStartElement())
@@ -88,12 +222,6 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
                 break;
             case 2: // ML::TagSheets
                 ReadSheets(layout);
-                break;
-            case 3: // size
-                layout->LayoutSettings().SetSheetSize(ReadSize());
-                break;
-            case 4: // margin
-                layout->LayoutSettings().SetSheetMargins(ReadMargins());
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -113,8 +241,10 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
         ML::TagUnit,        // 0
         ML::TagTitle,       // 1
         ML::TagDescription, // 2
-        ML::TagControl,     // 3
-        ML::TagTiles        // 4
+        ML::TagSize,        // 3
+        ML::TagMargin,      // 4
+        ML::TagControl,     // 5
+        ML::TagTiles        // 6
     };
 
     while (readNextStartElement())
@@ -135,11 +265,17 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
                 qDebug("read description");
                 layout->LayoutSettings().SetDescription(readElementText());
                 break;
-            case 3:// control
+            case 3: // size
+                layout->LayoutSettings().SetSheetSize(ReadSize());
+                break;
+            case 4: // margin
+                layout->LayoutSettings().SetSheetMargins(ReadMargins());
+                break;
+            case 5: // control
                 qDebug("read control");
                 ReadControl(layout);
                 break;
-            case 4:// tiles
+            case 6: // tiles
                 qDebug("read tiles");
                 ReadTiles(layout);
                 break;
@@ -160,6 +296,9 @@ void VPLayoutFileReader::ReadControl(VPLayout *layout)
     layout->LayoutSettings().SetWarningSuperpositionOfPieces(
                 ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
     layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
+    layout->LayoutSettings().SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
+    layout->LayoutSettings().SetPiecesGap(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')));
+//    layout->LayoutSettings().SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainLine, trueStr));
 
     readElementText();
 }
@@ -302,26 +441,303 @@ void VPLayoutFileReader::ReadPiece(VPPiece *piece)
 
     bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
     piece->SetMirror(pieceMirrored);
-    // TODO read the further attributes
 
+    QString matrix = ReadAttributeEmptyString(attribs, ML::AttrTransform);
+    piece->SetMatrix(StringToTransfrom(matrix));
+
+    const QStringList tags
+    {
+        ML::TagSeamLine,      // 0
+        ML::TagSeamAllowance, // 1
+        ML::TagGrainline,     // 2
+        ML::TagNotches,       // 3
+        ML::TagInternalPaths, // 4
+        ML::TagMarkers,       // 5
+        ML::TagLabels         // 6
+    };
 
     while (readNextStartElement())
     {
-        if (name() == QString("..."))
+        switch (tags.indexOf(name().toString()))
         {
-            // TODO
-             readElementText();
+            case 0: // seam line
+                piece->SetCountourPoints(StringToPath(readElementText()));
+                break;
+            case 1: // seam allowance
+                ReadSeamAllowance(piece);
+                break;
+            case 2: // grainline
+                ReadGrainline(piece);
+                break;
+            case 3: // notches
+                ReadNotches(piece);
+                break;
+            case 4: // internal paths
+                ReadInternalPaths(piece);
+                break;
+            case 5: // markers
+                ReadMarkers(piece);
+                break;
+            case 6: // labels
+                ReadLabels(piece);
+                break;
+            default:
+                qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+                skipCurrentElement();
+                break;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadSeamAllowance(VPPiece *piece)
+{
+    AssertRootTag(ML::TagSeamAllowance);
+
+    QXmlStreamAttributes attribs = attributes();
+    bool enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
+    piece->SetSeamAllowance(enabled);
+
+    bool builtIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
+    QVector<QPointF> path = StringToPath(readElementText());
+
+    if (enabled)
+    {
+        if (not builtIn)
+        {
+            // TODO add check if not empty
+            piece->SetSeamAllowancePoints(path);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadGrainline(VPPiece *piece)
+{
+    AssertRootTag(ML::TagGrainline);
+
+    QXmlStreamAttributes attribs = attributes();
+    bool enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
+    piece->SetGrainlineEnabled(enabled);
+    QVector<QPointF> path = StringToPath(readElementText());
+
+    if (enabled)
+    {
+        piece->SetGrainlineAngle(ReadAttributeDouble(attribs, ML::AttrAngle, QChar('0')));
+        QString arrowDirection = ReadAttributeEmptyString(attribs, ML::AttrArrowDirection);
+        piece->SetGrainlineArrowType(StringToGrainlineArrowDirrection(arrowDirection));
+
+        // TODO add check if not empty
+        piece->SetGrainlinePoints(path);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadNotches(VPPiece *piece)
+{
+    AssertRootTag(ML::TagNotches);
+
+    QVector<VLayoutPassmark> passmarks;
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagNotch)
+        {
+            passmarks.append(ReadNotch());
         }
         else
         {
-            // TODO error handling, we encountered a tag that isn't defined in the specification
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+
+    piece->SetPassmarks(passmarks);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
+{
+    AssertRootTag(ML::TagNotch);
+
+    QXmlStreamAttributes attribs = attributes();
+
+    VLayoutPassmark passmark;
+    passmark.isBuiltIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
+    passmark.baseLine = StringToLine(ReadAttributeEmptyString(attribs, ML::AttrBaseLine));
+    passmark.lines = StringToLines(ReadAttributeEmptyString(attribs, ML::AttrPath));
+
+    QString defaultType = QString::number(static_cast<int>(PassmarkLineType::OneLine));
+    passmark.type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType));
+
+    readElementText();
+
+    return passmark;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadInternalPaths(VPPiece *piece)
+{
+    AssertRootTag(ML::TagInternalPaths);
+
+    QVector<VLayoutPiecePath> internalPaths;
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagInternalPath)
+        {
+            internalPaths.append(ReadInternalPath());
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+
+    piece->SetInternalPaths(internalPaths);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadInternalPath() -> VLayoutPiecePath
+{
+    AssertRootTag(ML::TagInternalPath);
+
+    VLayoutPiecePath path;
+
+    QXmlStreamAttributes attribs = attributes();
+    path.SetCutPath(ReadAttributeBool(attribs, ML::AttrCut, falseStr));
+    path.SetPenStyle(LineStyleToPenStyle(ReadAttributeString(attribs, ML::AttrPenStyle, TypeLineLine)));
+    // TODO check if not empty
+    path.SetPoints(StringToPath(readElementText()));
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadMarkers(VPPiece *piece)
+{
+    AssertRootTag(ML::TagMarkers);
+
+    QVector<VLayoutPlaceLabel> markers;
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagMarker)
+        {
+            markers.append(ReadMarker());
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+
+    piece->SetPlaceLabels(markers);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
+{
+    AssertRootTag(ML::TagMarker);
+
+    VLayoutPlaceLabel marker;
+
+    QXmlStreamAttributes attribs = attributes();
+
+    QString matrix = ReadAttributeEmptyString(attribs, ML::AttrTransform);
+    marker.rotationMatrix = StringToTransfrom(matrix);
+
+    marker.type = static_cast<PlaceLabelType>(ReadAttributeUInt(attribs, ML::AttrType, QChar('0')));
+    marker.center = StringToPoint(ReadAttributeEmptyString(attribs, ML::AttrCenter));
+    marker.box = StringToRect(ReadAttributeEmptyString(attribs, ML::AttrBox));
+    marker.shape = StringToMarkerShape(readElementText());
+
+    return marker;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadLabels(VPPiece *piece)
+{
+    AssertRootTag(ML::TagLabels);
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagPieceLabel)
+        {
+            QXmlStreamAttributes attribs = attributes();
+            piece->SetPieceLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
+
+            piece->SetPieceLabelData(ReadLabelLines());
+        }
+        else if (name() == ML::TagPatternLabel)
+        {
+            QXmlStreamAttributes attribs = attributes();
+            piece->SetPatternLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
+
+            piece->SetPatternLabelData(ReadLabelLines());
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
             skipCurrentElement();
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayoutFileReader::ReadMargins()
+auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
+{
+    AssertRootTag(ML::TagLabels);
+
+    VTextManager text;
+    QVector<TextLine> lines;
+
+    QXmlStreamAttributes attribs = attributes();
+    QFont f;
+    f.fromString(ReadAttributeEmptyString(attribs, ML::AttrFont));
+    text.SetFont(f);
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagLine)
+        {
+            lines.append(ReadLabelLine());
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+
+    text.SetAllSourceLines(lines);
+
+    return text;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadLabelLine() -> TextLine
+{
+    AssertRootTag(ML::TagLine);
+
+    TextLine line;
+
+    QXmlStreamAttributes attribs = attributes();
+
+    line.m_iFontSize = ReadAttributeInt(attribs, ML::AttrFontSize, QString::number(MIN_FONT_SIZE));
+    line.m_bold = ReadAttributeBool(attribs, ML::AttrBold, falseStr);
+    line.m_italic = ReadAttributeBool(attribs, ML::AttrItalic, falseStr);
+    int alignment = ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignCenter)));
+    line.m_eAlign = static_cast<Qt::Alignment>(alignment);
+    line.m_qsText = readElementText();
+
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadMargins() -> QMarginsF
 {
     QMarginsF margins = QMarginsF();
 
@@ -337,7 +753,7 @@ QMarginsF VPLayoutFileReader::ReadMargins()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VPLayoutFileReader::ReadSize()
+auto VPLayoutFileReader::ReadSize() -> QSizeF
 {
     QSizeF size;
 
@@ -360,8 +776,8 @@ void VPLayoutFileReader::AssertRootTag(const QString &tag) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
-                                                const QString &defValue)
+auto VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
+                                                const QString &defValue) -> QString
 {
     const QString parameter = attribs.value(name).toString();
     if (parameter.isEmpty())
@@ -376,14 +792,14 @@ QString VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPLayoutFileReader::ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name)
+auto VPLayoutFileReader::ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name) -> QString
 {
     return attribs.value(name).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name,
-                                                const QString &defValue)
+auto VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name,
+                                           const QString &defValue) -> bool
 {
     QString parametr;
     bool val = true;
@@ -419,8 +835,8 @@ bool VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
-                                              const QString &defValue)
+auto VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
+                                             const QString &defValue) -> qreal
 {
     bool ok = false;
     qreal param = 0;
@@ -430,6 +846,58 @@ qreal VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attrib
     {
         QString parametr = ReadAttributeString(attribs, name, defValue);
         param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
+        if (not ok)
+        {
+            throw VExceptionConversionError(message, name);
+        }
+    }
+    catch (const VException &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    return param;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadAttributeUInt(const QXmlStreamAttributes &attribs, const QString &name,
+                                           const QString &defValue) -> quint32
+{
+    bool ok = false;
+    quint32 param = 0;
+
+    const QString message = QObject::tr("Can't convert toUInt parameter");
+    try
+    {
+        QString parametr = ReadAttributeString(attribs, name, defValue);
+        param = parametr.replace(QChar(','), QChar('.')).toUInt(&ok);
+        if (not ok)
+        {
+            throw VExceptionConversionError(message, name);
+        }
+    }
+    catch (const VException &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    return param;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadAttributeInt(const QXmlStreamAttributes &attribs, const QString &name,
+                                          const QString &defValue) -> int
+{
+    bool ok = false;
+    int param = 0;
+
+    const QString message = QObject::tr("Can't convert toInt parameter");
+    try
+    {
+        QString parametr = ReadAttributeString(attribs, name, defValue);
+        param = parametr.replace(QChar(','), QChar('.')).toInt(&ok);
         if (not ok)
         {
             throw VExceptionConversionError(message, name);

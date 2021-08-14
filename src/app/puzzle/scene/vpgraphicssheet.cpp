@@ -33,19 +33,11 @@
 #include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsSheet::VPGraphicsSheet(VPSheet *sheet, QGraphicsItem *parent):
+VPGraphicsSheet::VPGraphicsSheet(VPLayout *layout, QGraphicsItem *parent):
     QGraphicsItem(parent),
-    m_sheet(sheet),
+    m_layout(layout),
     m_boundingRect(GetSheetRect())
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPGraphicsSheet::~VPGraphicsSheet()
-{
-
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -74,12 +66,12 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         painter->drawRect(sheetRect);
     }
 
-    if(m_sheet->GetLayout()->LayoutSettings().GetShowGrid())
+    if(m_layout->LayoutSettings().GetShowGrid())
     {
         pen.setColor(QColor(204,204,204));
         painter->setPen(pen);
 
-        qreal colWidth = m_sheet->GetLayout()->LayoutSettings().GetGridColWidth();
+        qreal colWidth = m_layout->LayoutSettings().GetGridColWidth();
         if(colWidth > 0)
         {
             qreal colX = colWidth;
@@ -91,7 +83,7 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             }
         }
 
-        qreal rowHeight = m_sheet->GetLayout()->LayoutSettings().GetGridRowHeight();
+        qreal rowHeight = m_layout->LayoutSettings().GetGridRowHeight();
         if(rowHeight > 0)
         {
             qreal rowY = rowHeight;
@@ -112,8 +104,8 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 QRectF VPGraphicsSheet::GetSheetRect() const
 {
     QPoint topLeft = QPoint(0,0);
-    QSizeF size = m_sheet->GetLayout()->LayoutSettings().GetSheetSize();
-    if(m_sheet->GetLayout()->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
+    QSizeF size = m_layout->LayoutSettings().GetSheetSize();
+    if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
     {
         size.transpose();
     }
@@ -124,10 +116,10 @@ QRectF VPGraphicsSheet::GetSheetRect() const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsSheet::GetMarginsRect() const
 {
-    QMarginsF margins = m_sheet->GetLayout()->LayoutSettings().GetSheetMargins();
-    QSizeF size = m_sheet->GetLayout()->LayoutSettings().GetSheetSize();
+    QMarginsF margins = m_layout->LayoutSettings().GetSheetMargins();
+    QSizeF size = m_layout->LayoutSettings().GetSheetSize();
 
-    if(m_sheet->GetLayout()->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
+    if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
     {
         size.transpose();
     }

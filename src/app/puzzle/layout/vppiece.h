@@ -83,6 +83,23 @@ public:
     auto Layout() const -> VPLayout *;
     void SetLayout(VPLayout *layout);
 
+    void SetGrainlineEnabled(bool enabled);
+    void SetGrainlineAngle(qreal angle);
+    void SetGrainlineArrowType(GrainlineArrowDirection type);
+    void SetGrainlinePoints(const QVector<QPointF> &points);
+
+    auto GetPieceLabelRect() const -> QVector<QPointF>;
+    void SetPieceLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPieceLabelData() const ->VTextManager;
+    void SetPieceLabelData(const VTextManager &data);
+
+    auto GetPatternLabelRect() const -> QVector<QPointF>;
+    void SetPatternLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPatternLabelData() const ->VTextManager;
+    void SetPatternLabelData(const VTextManager &data);
+
 private:
     Q_DISABLE_COPY(VPPiece)
 

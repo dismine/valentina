@@ -64,7 +64,7 @@ VPMainGraphicsView::VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFact
     SCASSERT(m_layout != nullptr)
     setScene(m_scene);
 
-    m_graphicsSheet = new VPGraphicsSheet(m_layout->GetFocusedSheet());
+    m_graphicsSheet = new VPGraphicsSheet(m_layout);
     m_graphicsSheet->setPos(0, 0);
     m_scene->addItem(m_graphicsSheet);
 

@@ -207,7 +207,9 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     // updates the properties with the loaded data
     SetPropertiesData();
 
-    // TODO : update the Carrousel and the QGraphicView
+    m_carrousel->Refresh();
+    m_graphicsView->RefreshLayout();
+    m_graphicsView->RefreshPieces();
 
     return true;
 }
