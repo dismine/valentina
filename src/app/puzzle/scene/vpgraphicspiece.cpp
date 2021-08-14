@@ -317,7 +317,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the place labels (buttons etc)
-    QVector<VLayoutPlaceLabel> placeLabels = m_piece->GetPlaceLabels();
+    QVector<VLayoutPlaceLabel> placeLabels = m_piece->GetMappedPlaceLabels();
     for(auto &placeLabel : placeLabels)
     {
         QPainterPath path = VPlaceLabelItem::LabelShapePath(placeLabel.shape);

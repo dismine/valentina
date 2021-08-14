@@ -90,10 +90,11 @@ public:
     QVector<VLayoutPassmark> GetPassmarks() const;
     void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);
 
+    QVector<VLayoutPlaceLabel> GetMappedPlaceLabels() const;
     QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    QVector<QVector<QPointF>> InternalPathsForCut(bool cut) const;
+    QVector<QVector<QPointF>> MappedInternalPathsForCut(bool cut) const;
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 

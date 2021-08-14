@@ -1083,9 +1083,15 @@ void VLayoutPiece::SetPassmarks(const QVector<VLayoutPassmark> &passmarks)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPlaceLabel> VLayoutPiece::GetPlaceLabels() const
+QVector<VLayoutPlaceLabel> VLayoutPiece::GetMappedPlaceLabels() const
 {
     return Map(d->m_placeLabels);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLayoutPlaceLabel> VLayoutPiece::GetPlaceLabels() const
+{
+    return d->m_placeLabels;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1095,7 +1101,7 @@ void VLayoutPiece::SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QVector<QPointF> > VLayoutPiece::InternalPathsForCut(bool cut) const
+QVector<QVector<QPointF> > VLayoutPiece::MappedInternalPathsForCut(bool cut) const
 {
     QVector<QVector<QPointF> > paths;
 
