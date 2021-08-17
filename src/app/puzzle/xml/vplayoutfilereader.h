@@ -47,29 +47,29 @@ public:
     VPLayoutFileReader()=default;
     ~VPLayoutFileReader()=default;
 
-    auto ReadFile(VPLayout *layout, QFile *file) -> bool;
+    auto ReadFile(const VPLayoutPtr &layout, QFile *file) -> bool;
 
 private:
     Q_DISABLE_COPY(VPLayoutFileReader)
 
-    void ReadLayout(VPLayout *layout);
-    void ReadProperties(VPLayout *layout);
-    void ReadControl(VPLayout *layout);
-    void ReadTiles(VPLayout *layout);
-    void ReadUnplacedPieces(VPLayout *layout);
-    void ReadSheets(VPLayout *layout);
-    void ReadSheet(VPLayout *layout);
-    void ReadPieces(VPLayout *layout, VPSheet *sheet=nullptr);
-    void ReadPiece(VPPiece *piece);
-    void ReadSeamAllowance(VPPiece *piece);
-    void ReadGrainline(VPPiece *piece);
-    void ReadNotches(VPPiece *piece);
+    void ReadLayout(const VPLayoutPtr &layout);
+    void ReadProperties(const VPLayoutPtr &layout);
+    void ReadControl(const VPLayoutPtr &layout);
+    void ReadTiles(const VPLayoutPtr &layout);
+    void ReadUnplacedPieces(const VPLayoutPtr &layout);
+    void ReadSheets(const VPLayoutPtr &layout);
+    void ReadSheet(const VPLayoutPtr &layout);
+    void ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr &sheet=VPSheetPtr());
+    void ReadPiece(const VPPiecePtr &piece);
+    void ReadSeamAllowance(const VPPiecePtr &piece);
+    void ReadGrainline(const VPPiecePtr &piece);
+    void ReadNotches(const VPPiecePtr &piece);
     auto ReadNotch() -> VLayoutPassmark;
-    void ReadInternalPaths(VPPiece *piece);
+    void ReadInternalPaths(const VPPiecePtr &piece);
     auto ReadInternalPath() -> VLayoutPiecePath;
-    void ReadMarkers(VPPiece *piece);
+    void ReadMarkers(const VPPiecePtr &piece);
     auto ReadMarker() -> VLayoutPlaceLabel;
-    void ReadLabels(VPPiece *piece);
+    void ReadLabels(const VPPiecePtr &piece);
     auto ReadLabelLines() -> VTextManager;
     auto ReadLabelLine() -> TextLine;
 

@@ -78,7 +78,8 @@ auto VPPiece::GetPosition() -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 void VPPiece::RotateToGrainline()
 {
-    if (not IsGrainlineEnabled() || m_sheet == nullptr)
+    VPSheetPtr sheet = Sheet();
+    if (not IsGrainlineEnabled() || sheet.isNull())
     {
         return;
     }
@@ -94,7 +95,7 @@ void VPPiece::RotateToGrainline()
     QLineF canonical(grainlinePoints.first().x(), grainlinePoints.first().y(),
                      grainlinePoints.first().x()+100, grainlinePoints.first().y());
 
-    GrainlineType grainlineType = m_sheet->GrainlineType();
+    GrainlineType grainlineType = sheet->GrainlineType();
 
     auto DegreesAtFront = [grainline, canonical, grainlineType]()
     {
@@ -147,25 +148,25 @@ auto VPPiece::IsSelected() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::Sheet() const -> VPSheet *
+auto VPPiece::Sheet() const -> VPSheetPtr
 {
     return m_sheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetSheet(VPSheet *newSheet)
+void VPPiece::SetSheet(const VPSheetPtr &newSheet)
 {
     m_sheet = newSheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::Layout() const -> VPLayout *
+auto VPPiece::Layout() const -> VPLayoutPtr
 {
     return m_layout;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetLayout(VPLayout *layout)
+void VPPiece::SetLayout(const VPLayoutPtr &layout)
 {
     SCASSERT(layout != nullptr)
     m_layout = layout;

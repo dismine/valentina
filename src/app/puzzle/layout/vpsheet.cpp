@@ -30,27 +30,27 @@
 #include "vplayout.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet::VPSheet(VPLayout* layout) :
-    QObject(layout),
+VPSheet::VPSheet(const VPLayoutPtr &layout) :
     m_layout(layout)
 {
     SCASSERT(layout != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::GetLayout() -> VPLayout*
+auto VPSheet::GetLayout() const -> VPLayoutPtr
 {
     return m_layout;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::GetPieces() const -> QList<VPPiece *>
+auto VPSheet::GetPieces() const -> QList<VPPiecePtr>
 {
-    QList<VPPiece *> list;
+    QList<VPPiecePtr> list;
 
-    if (m_layout != nullptr)
+    VPLayoutPtr layout = GetLayout();
+    if (not layout.isNull())
     {
-        return m_layout->PiecesForSheet(this);
+        return layout->PiecesForSheet(m_uuid);
     }
 
     return {};
@@ -89,9 +89,10 @@ void VPSheet::SetVisible(bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GrainlineType() const -> enum GrainlineType
 {
-    if (m_layout != nullptr)
+    VPLayoutPtr layout = GetLayout();
+    if (not layout.isNull())
     {
-        QSizeF size =  m_layout->LayoutSettings().GetSheetSize();
+        QSizeF size =  layout->LayoutSettings().GetSheetSize();
         if (size.height() < size.width())
         {
             return GrainlineType::Horizontal;
@@ -111,4 +112,12 @@ auto VPSheet::TransformationOrigin() const -> const VPTransformationOrigon &
 void VPSheet::SetTransformationOrigin(const VPTransformationOrigon &newTransformationOrigin)
 {
     m_transformationOrigin = newTransformationOrigin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::Clear()
+{
+    m_name.clear();
+    m_visible = true;
+    m_transformationOrigin = VPTransformationOrigon();
 }

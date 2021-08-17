@@ -5,12 +5,11 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "layout/vpsheet.h"
 #include "scene/vpmaingraphicsview.h"
-#include "layout/vplayout.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vcommonsettings.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPTileFactory::VPTileFactory(VPLayout *layout, VCommonSettings *commonSettings):
+VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings):
     m_layout(layout),
     m_commonSettings(commonSettings)
 {
@@ -18,19 +17,14 @@ VPTileFactory::VPTileFactory(VPLayout *layout, VCommonSettings *commonSettings):
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPTileFactory::~VPTileFactory()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::refreshTileInfos()
 {
-    if(m_layout != nullptr)
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(not layout.isNull())
     {
-        PageOrientation tilesOrientation = m_layout->LayoutSettings().GetTilesOrientation();
-        QSizeF tilesSize =  m_layout->LayoutSettings().GetTilesSize();
-        QMarginsF tilesMargins = m_layout->LayoutSettings().GetTilesMargins();
+        PageOrientation tilesOrientation = layout->LayoutSettings().GetTilesOrientation();
+        QSizeF tilesSize =  layout->LayoutSettings().GetTilesSize();
+        QMarginsF tilesMargins = layout->LayoutSettings().GetTilesMargins();
 
         // sets the drawing height
         m_drawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
@@ -45,11 +39,11 @@ void VPTileFactory::refreshTileInfos()
                 tilesMargins.left() + tilesMargins.right() + m_infoStripeWidth;
 
 
-        QSizeF sheetSize = m_layout->LayoutSettings().GetSheetSize();
+        QSizeF sheetSize = layout->LayoutSettings().GetSheetSize();
         qreal totalDrawingWidth = 0;
         qreal totaldrawingHeight = 0;
 
-        if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Portrait)
+        if(layout->LayoutSettings().GetOrientation() == PageOrientation::Portrait)
         {
              totalDrawingWidth = sheetSize.width();
              totaldrawingHeight = sheetSize.height();
@@ -69,9 +63,17 @@ void VPTileFactory::refreshTileInfos()
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView, int row, int col)
 {
-    QMarginsF tilesMargins = m_layout->LayoutSettings().GetTilesMargins();
-    QPen penTileInfos = QPen(QColor(180,180,180), m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap, Qt::RoundJoin);
-    QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(layout.isNull())
+    {
+        return
+                ;
+    }
+    QMarginsF tilesMargins = layout->LayoutSettings().GetTilesMargins();
+    QPen penTileInfos = QPen(QColor(180,180,180), m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap,
+                             Qt::RoundJoin);
+    QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                               Qt::RoundJoin);
 
     QSvgRenderer* svgRenderer = new QSvgRenderer();
 
@@ -280,7 +282,7 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
                        "<td align='center'>%1 - %2</td>"
                        "</tr>"
                        "</table>")
-               .arg(page).arg(m_layout->GetFocusedSheet()->GetName()));
+               .arg(page).arg(layout->GetFocusedSheet()->GetName()));
     painter->save();
     painter->rotate(-90);
     painter->translate(QPointF(-(m_drawingAreaHeight+tilesMargins.top()) + UnitConvertor(1, Unit::Cm, Unit::Px),

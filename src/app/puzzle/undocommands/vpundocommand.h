@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vpmimedatapiece.h
- **  @author Ronan Le Tiec
- **  @date   4 5, 2020
+ **  @file   vpundocommand.h
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   16 8, 2021
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2020 Valentina project
+ **  Copyright (C) 2021 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,44 +25,33 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VPUNDOCOMMAND_H
+#define VPUNDOCOMMAND_H
 
-#ifndef VPMIMEDATAPIECE_H
-#define VPMIMEDATAPIECE_H
+#include <QObject>
+#include <QUndoCommand>
+#include <QLoggingCategory>
 
-#include <QMimeData>
+namespace ML
+{
+enum class UndoCommand: qint8
+{
+    MovePiece = 0,
+    MovePieces = 1
+};
+}
 
-#include "../layout/layoutdef.h"
+Q_DECLARE_LOGGING_CATEGORY(vpUndo)
 
-class VPMimeDataPiece : public QMimeData
+class VPUndoCommand : public QObject, public QUndoCommand
 {
     Q_OBJECT
-
 public:
-    VPMimeDataPiece() = default;
-    virtual ~VPMimeDataPiece() = default;
-
-    virtual auto formats() const -> QStringList override;
-
-    /**
-     * @brief GetPiecePtr Returns the piece pointer of the mime data
-     * @return  piece pointer
-     */
-    auto GetPiecePtr() const -> VPPiecePtr;
-
-    /**
-     * @brief SetPiecePtr sets the piece pointer to the given value
-     * @param piece the piece pointer
-     */
-    void SetPiecePtr(const VPPiecePtr &piece);
-
-    static auto DragCursor(const QPixmap &piecePixmap) -> QPixmap;
-
-    static const QString mineFormatPiecePtr;
+    explicit VPUndoCommand(QUndoCommand *parent = nullptr);
+    virtual ~VPUndoCommand() =default;
 
 private:
-    Q_DISABLE_COPY(VPMimeDataPiece)
-
-    VPPiecePtr m_piece{};
+    Q_DISABLE_COPY(VPUndoCommand)
 };
 
-#endif // VPMIMEDATAPIECE_H
+#endif // VPUNDOCOMMAND_H

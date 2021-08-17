@@ -417,7 +417,9 @@ private:
 
     VPCommandLinePtr m_cmd;
 
-    VPLayout *m_layout{new VPLayout(this)};
+    QUndoStack *m_undoStack;
+
+    VPLayoutPtr m_layout;
     QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
     VPTileFactory *m_tileFactory{nullptr};
@@ -441,6 +443,9 @@ private:
     QSharedPointer<VLockGuard<char>> lock{nullptr};
 
     QFileSystemWatcher *m_layoutWatcher;
+
+    QAction *undoAction{nullptr};
+    QAction *redoAction{nullptr};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data

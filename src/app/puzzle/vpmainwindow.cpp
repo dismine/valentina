@@ -33,6 +33,7 @@
 #include <QSvgGenerator>
 #include <QFileSystemWatcher>
 #include <QSaveFile>
+#include <QUndoStack>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -69,10 +70,17 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     VAbstractMainWindow(parent),
     ui(new Ui::VPMainWindow),
     m_cmd(cmd),
+    m_undoStack(new QUndoStack(this)),
+    m_layout{VPLayout::CreateLayout(m_undoStack)},
     m_statusLabel(new QLabel(this)),
     m_layoutWatcher(new QFileSystemWatcher(this))
 {
-    //    // ----- for test purposes, to be removed------------------
+    ui->setupUi(this);
+
+    // create a standard sheet
+    AddSheet();
+
+    // ----- for test purposes, to be removed------------------
     m_layout->LayoutSettings().SetUnit(Unit::Cm);
     m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(true);
     m_layout->LayoutSettings().SetTitle(QString("My Test Layout"));
@@ -84,11 +92,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layout->LayoutSettings().SetShowTiles(true);
 
     // --------------------------------------------------------
-
-    ui->setupUi(this);
-
-    // create a standard sheet
-    AddSheet();
 
     // init the tile factory
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
@@ -196,9 +199,7 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     file.open(QIODevice::ReadOnly);
 
     VPLayoutFileReader fileReader;
-
-    delete m_layout;
-    m_layout = new VPLayout();
+    m_layout->Clear();
 
     fileReader.ReadFile(m_layout, &file);
 
@@ -318,9 +319,9 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 
 
                 // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
-                VPPiece *piece = CreatePiece(rawPiece);
+                VPPiecePtr piece(CreatePiece(rawPiece));
                 piece->SetSheet(nullptr); // just in case
-                m_layout->AddPiece(piece);
+                VPLayout::AddPiece(m_layout, piece);
             }
 
             m_carrousel->Refresh();
@@ -378,15 +379,29 @@ void VPMainWindow::SetupMenu()
     connect(ui->actionExit, &QAction::triggered, this, &VPMainWindow::close);
     ui->actionExit->setShortcuts(QKeySequence::Quit);
 
-    // -------------------- connects the actions for the edit menu
-    // TODO : initialise the undo / redo
-
     // -------------------- connects the actions for the windows menu
     // TODO : initialise the entries for the different windows
 
     // Add dock properties action
     QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
     ui->menuEdit->addAction(actionDockWidgetToolOptions);
+
+    auto *separatorAct = new QAction(this);
+    separatorAct->setSeparator(true);
+    ui->menuEdit->addAction(separatorAct);
+
+    // Add Undo/Redo actions.
+    undoAction = m_layout->UndoStack()->createUndoAction(this, tr("&Undo"));
+    undoAction->setShortcuts(QKeySequence::Undo);
+    undoAction->setIcon(QIcon::fromTheme("edit-undo"));
+    ui->menuEdit->addAction(undoAction);
+    ui->toolBarUndoCommands->addAction(undoAction);
+
+    redoAction = m_layout->UndoStack()->createRedoAction(this, tr("&Redo"));
+    redoAction->setShortcuts(QKeySequence::Redo);
+    redoAction->setIcon(QIcon::fromTheme("edit-redo"));
+    ui->menuEdit->addAction(redoAction);
+    ui->toolBarUndoCommands->addAction(redoAction);
 
     // File
     m_recentFileActs.fill(nullptr);
@@ -570,7 +585,6 @@ void VPMainWindow::InitPropertyTabTiles()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabLayout()
 {
-
     // FIXME ---- For MVP we hide a few things. To be displayed when functions there
     ui->groupBoxLayoutControl->hide();
 
@@ -768,9 +782,8 @@ void VPMainWindow::InitMainGraphics()
 
     connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
     connect(m_graphicsView->GetScene(), &VMainGraphicsScene::mouseMove, this, &VPMainWindow::on_MouseMoved);
-    connect(m_carrousel, &VPCarrousel::on_ActiveSheetChanged, m_graphicsView, &VPMainGraphicsView::RefreshPieces);
     connect(m_graphicsView, &VPMainGraphicsView::on_SheetRemoved, m_carrousel, &VPCarrousel::Refresh);
-    connect(m_layout, &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
+    connect(m_layout.get(), &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1109,7 +1122,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::AddSheet()
 {
-    auto *sheet = new VPSheet(m_layout);
+    VPSheetPtr sheet(new VPSheet(m_layout));
     sheet->SetName(QObject::tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
     m_layout->AddSheet(sheet);
     m_layout->SetFocusedSheet(sheet);
@@ -1191,6 +1204,8 @@ void VPMainWindow::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+        undoAction->setText(tr("&Undo"));
+        redoAction->setText(tr("&Redo"));
 
         WindowsLocale();
         UpdateWindowTitle();
@@ -1726,7 +1741,7 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
     LayoutExportFormats format = static_cast<LayoutExportFormats>(ui->comboBoxSheetExportFormat->currentData().toInt());
 
     VPExporter exporter;
-    exporter.Export(m_layout, format, m_graphicsView);
+    exporter.Export(m_layout.get(), format, m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

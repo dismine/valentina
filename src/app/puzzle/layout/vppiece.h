@@ -34,6 +34,7 @@
 #include <QTransform>
 
 #include "../vlayout/vlayoutpiece.h"
+#include "../layout/layoutdef.h"
 
 class VPLayout;
 class VPSheet;
@@ -77,11 +78,11 @@ public:
      */
     auto IsSelected() const -> bool;
 
-    auto Sheet() const -> VPSheet *;
-    void SetSheet(VPSheet *newSheet);
+    auto Sheet() const -> VPSheetPtr;
+    void SetSheet(const VPSheetPtr &newSheet);
 
-    auto Layout() const -> VPLayout *;
-    void SetLayout(VPLayout *layout);
+    auto Layout() const -> VPLayoutPtr;
+    void SetLayout(const VPLayoutPtr &layout);
 
     void SetGrainlineEnabled(bool enabled);
     void SetGrainlineAngle(qreal angle);
@@ -103,11 +104,13 @@ public:
 private:
     Q_DISABLE_COPY(VPPiece)
 
-    VPLayout *m_layout{nullptr};
+    VPLayoutWeakPtr m_layout{};
 
-    VPSheet *m_sheet{nullptr};
+    VPSheetWeakPtr m_sheet{};
 
     bool m_isSelected{false};
 };
+
+Q_DECLARE_METATYPE(VPPiecePtr)
 
 #endif // VPPIECE_H

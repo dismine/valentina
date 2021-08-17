@@ -28,7 +28,6 @@
 #ifndef VPSHEET_H
 #define VPSHEET_H
 
-#include <QObject>
 #include <QSizeF>
 #include <QMarginsF>
 #include <QList>
@@ -36,6 +35,7 @@
 #include <QUuid>
 
 #include "def.h"
+#include "layoutdef.h"
 
 class VPLayout;
 class VPPiece;
@@ -52,11 +52,10 @@ struct VPTransformationOrigon
     bool    custom{false};
 };
 
-class VPSheet : public QObject
+class VPSheet
 {
-    Q_OBJECT
 public:
-    explicit VPSheet(VPLayout* layout);
+    explicit VPSheet(const VPLayoutPtr &layout);
 
     virtual ~VPSheet() = default;
 
@@ -64,9 +63,9 @@ public:
      * @brief GetLayout Returns the Layout of the sheet
      * @return Layout of the sheet
      */
-    auto GetLayout() -> VPLayout*;
+    auto GetLayout() const -> VPLayoutPtr;
 
-    auto GetPieces() const -> QList<VPPiece *>;
+    auto GetPieces() const -> QList<VPPiecePtr>;
 
     /**
      * @brief GetName Returns the name of the sheet
@@ -90,10 +89,12 @@ public:
     auto TransformationOrigin() const -> const VPTransformationOrigon &;
     void SetTransformationOrigin(const VPTransformationOrigon &newTransformationOrigin);
 
+    void Clear();
+
 private:
     Q_DISABLE_COPY(VPSheet)
 
-    VPLayout *m_layout;
+    VPLayoutWeakPtr m_layout{};
 
     QString m_name{};
 
@@ -103,5 +104,7 @@ private:
 
     VPTransformationOrigon m_transformationOrigin{};
 };
+
+Q_DECLARE_METATYPE(VPSheetPtr)
 
 #endif // VPSHEET_H

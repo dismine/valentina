@@ -35,6 +35,7 @@
 #include <functional>
 
 #include "../vmisc/literals.h"
+#include "../layout/layoutdef.h"
 
 class VPLayout;
 class VPSheet;
@@ -51,16 +52,16 @@ public:
     VPLayoutFileWriter()= default;
     ~VPLayoutFileWriter()= default;
 
-    void WriteFile(VPLayout *layout, QIODevice *file);
+    void WriteFile(const VPLayoutPtr &layout, QIODevice *file);
 
 private:
-    void WriteLayout(VPLayout *layout);
-    void WriteProperties(VPLayout *layout);
-    void WriteSheets(VPLayout *layout);
-    void WriteSheet(VPSheet* sheet);
-    void WriteTiles(VPLayout *layout);
-    void WritePieceList(const QList<VPPiece *> &list, const QString &tagName);
-    void WritePiece(VPPiece *piece);
+    void WriteLayout(const VPLayoutPtr &layout);
+    void WriteProperties(const VPLayoutPtr &layout);
+    void WriteSheets(const VPLayoutPtr &layout);
+    void WriteSheet(const VPSheetPtr &sheet);
+    void WriteTiles(const VPLayoutPtr &layout);
+    void WritePieceList(const QList<VPPiecePtr> &list, const QString &tagName);
+    void WritePiece(const VPPiecePtr &piece);
     void WriteLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, const QString &tagName);
     void WriteLabelLines(const VTextManager &tm);
 

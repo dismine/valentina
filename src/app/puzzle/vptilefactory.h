@@ -32,8 +32,9 @@
 #include <QtMath>
 #include <QObject>
 
+#include "layout/vplayout.h"
+
 class VPMainGraphicsView;
-class VPLayout;
 class VCommonSettings;
 class QPainter;
 
@@ -42,9 +43,9 @@ class VPTileFactory : QObject
     Q_OBJECT
 
 public:
-    VPTileFactory(VPLayout *layout, VCommonSettings *commonSettings);
+    VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings);
 
-    virtual ~VPTileFactory();
+    virtual ~VPTileFactory() = default;
 
     /**
      * @brief drawTile draws the tile of given coordinate (row, col) from the
@@ -87,7 +88,7 @@ public:
 private:
     Q_DISABLE_COPY(VPTileFactory)
 
-    VPLayout *m_layout{nullptr};
+    VPLayoutWeakPtr  m_layout;
     VCommonSettings *m_commonSettings{nullptr};
 
     /**

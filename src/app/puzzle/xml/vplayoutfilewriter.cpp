@@ -137,7 +137,7 @@ auto GrainlineArrowDirrectionToString(GrainlineArrowDirection type) -> QString
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteFile(VPLayout *layout, QIODevice *file)
+void VPLayoutFileWriter::WriteFile(const VPLayoutPtr &layout, QIODevice *file)
 {
     setDevice(file);
     setAutoFormatting(true);
@@ -152,7 +152,7 @@ void VPLayoutFileWriter::WriteFile(VPLayout *layout, QIODevice *file)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
+void VPLayoutFileWriter::WriteLayout(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
@@ -163,7 +163,7 @@ void VPLayoutFileWriter::WriteLayout(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
+void VPLayoutFileWriter::WriteProperties(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagProperties);
 
@@ -187,12 +187,12 @@ void VPLayoutFileWriter::WriteProperties(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteSheets(VPLayout *layout)
+void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagSheets);
 
-    QList<VPSheet *> sheets = layout->GetSheets();
-    for (auto *sheet : sheets)
+    QList<VPSheetPtr> sheets = layout->GetSheets();
+    for (const auto &sheet : sheets)
     {
         WriteSheet(sheet);
     }
@@ -201,7 +201,7 @@ void VPLayoutFileWriter::WriteSheets(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteSheet(VPSheet* sheet)
+void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 {
     writeStartElement(ML::TagSheet);
 
@@ -213,7 +213,7 @@ void VPLayoutFileWriter::WriteSheet(VPSheet* sheet)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
+void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
 {
     Q_UNUSED(layout); // to be removed
 
@@ -228,10 +228,10 @@ void VPLayoutFileWriter::WriteTiles(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePieceList(const QList<VPPiece *> &list, const QString &tagName)
+void VPLayoutFileWriter::WritePieceList(const QList<VPPiecePtr> &list, const QString &tagName)
 {
     writeStartElement(tagName); // piece list
-    for (auto *piece : list)
+    for (const auto &piece : list)
     {
         WritePiece(piece);
     }
@@ -240,7 +240,7 @@ void VPLayoutFileWriter::WritePieceList(const QList<VPPiece *> &list, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WritePiece(VPPiece *piece)
+void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 {
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrID, piece->GetUUID().toString());

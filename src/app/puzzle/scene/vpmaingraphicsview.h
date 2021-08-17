@@ -30,6 +30,7 @@
 #define VPMAINGRAPHICSVIEW_H
 
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../layout/layoutdef.h"
 
 class VMainGraphicsScene;
 class VPGraphicsPieceControls;
@@ -45,7 +46,7 @@ class VPMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
-    VPMainGraphicsView(VPLayout *layout, VPTileFactory *tileFactory, QWidget *parent);
+    VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QWidget *parent);
     ~VPMainGraphicsView() = default;
 
     /**
@@ -78,7 +79,7 @@ public slots:
      * the other given piece list
      * @param piece the piece that was moved
      */
-    void on_PieceSheetChanged(VPPiece *piece);
+    void on_PieceSheetChanged(const VPPiecePtr &piece);
 
     void RefreshPieces();
 
@@ -89,6 +90,7 @@ protected:
     void dropEvent(QDropEvent *event) override;
 
     void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
     void contextMenuEvent(QContextMenuEvent *event) override;
 
@@ -115,7 +117,7 @@ private:
     VPGraphicsPieceControls *m_rotationControls{nullptr};
     VPGraphicsTransformationOrigin *m_rotationOrigin{nullptr};
 
-    VPLayout *m_layout;
+    VPLayoutWeakPtr m_layout;
 
     QList<VPGraphicsPiece*> m_graphicsPieces{};
 
@@ -128,11 +130,12 @@ private:
      * variable to hold temporarly hte value of the show grid
      */
     bool m_showGridTmp{false};
+    bool m_allowChangeMerge{false};
 
     void ConnectPiece(VPGraphicsPiece *piece);
 
     void RotatePiecesByAngle(qreal angle) const;
-    void TranslatePiecesOn(qreal dx, qreal dy) const;
+    void TranslatePiecesOn(qreal dx, qreal dy);
 
 };
 

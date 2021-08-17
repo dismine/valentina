@@ -42,13 +42,13 @@ auto VPMimeDataPiece::formats() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMimeDataPiece::GetPiecePtr() const -> VPPiece*
+auto VPMimeDataPiece::GetPiecePtr() const -> VPPiecePtr
 {
     return m_piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMimeDataPiece::SetPiecePtr(VPPiece* piece)
+void VPMimeDataPiece::SetPiecePtr(const VPPiecePtr &piece)
 {
     m_piece = piece;
 }
