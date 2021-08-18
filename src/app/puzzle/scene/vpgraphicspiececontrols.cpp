@@ -37,6 +37,8 @@
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/global.h"
 #include "../layout/vplayout.h"
+#include "../undocommands/vpundopiecerotate.h"
+#include "vpgraphicspiece.h"
 
 namespace
 {
@@ -67,11 +69,11 @@ enum class HandleCorner : int
     BottomLeft = 4
 };
 
-auto TransformationOrigin(VPLayout *layout, const QRectF &boundingRect) -> QPointF
+auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> QPointF
 {
     SCASSERT(layout != nullptr)
-    VPSheet *sheet = layout->GetFocusedSheet();
-    if (sheet != nullptr)
+    VPSheetPtr sheet = layout->GetFocusedSheet();
+    if (not sheet.isNull())
     {
         VPTransformationOrigon origin = sheet->TransformationOrigin();
         return origin.origin;
@@ -82,7 +84,7 @@ auto TransformationOrigin(VPLayout *layout, const QRectF &boundingRect) -> QPoin
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(VPLayout *layout, QGraphicsItem *parent)
+VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem *parent)
     : QGraphicsObject(parent),
       m_layout(layout),
       m_color(defaultColor)
@@ -113,14 +115,14 @@ void VPGraphicsTransformationOrigin::on_ShowOrigin(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsTransformationOrigin::boundingRect() const
+auto VPGraphicsTransformationOrigin::boundingRect() const -> QRectF
 {
     constexpr qreal halfPenWidth = penWidth/2.;
     return Center2().boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPGraphicsTransformationOrigin::shape() const
+auto VPGraphicsTransformationOrigin::shape() const -> QPainterPath
 {
     return Center2();
 }
@@ -170,15 +172,19 @@ void VPGraphicsTransformationOrigin::mousePressEvent(QGraphicsSceneMouseEvent *e
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    VPSheet *sheet = m_layout->GetFocusedSheet();
-    if (sheet != nullptr)
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (not layout.isNull())
     {
-        VPTransformationOrigon origin = sheet->TransformationOrigin();
-        origin.origin = event->scenePos();
-        origin.custom = true;
-        sheet->SetTransformationOrigin(origin);
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            VPTransformationOrigon origin = sheet->TransformationOrigin();
+            origin.origin = event->scenePos();
+            origin.custom = true;
+            sheet->SetTransformationOrigin(origin);
+        }
+        prepareGeometryChange();
     }
-    prepareGeometryChange();
 
     QGraphicsObject::mouseMoveEvent(event);
 }
@@ -251,7 +257,7 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPGraphicsTransformationOrigin::Center1() const
+auto VPGraphicsTransformationOrigin::Center1() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
     qreal radius = centerRadius1/scale;
@@ -265,7 +271,7 @@ QPainterPath VPGraphicsTransformationOrigin::Center1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPGraphicsTransformationOrigin::Center2() const
+auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
     qreal radius = centerRadius2/scale;
@@ -280,7 +286,7 @@ QPainterPath VPGraphicsTransformationOrigin::Center2() const
 
 // VPGraphicsPieceControls
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsPieceControls::VPGraphicsPieceControls(VPLayout *layout, QGraphicsItem *parent)
+VPGraphicsPieceControls::VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem *parent)
     : QGraphicsObject(parent),
       m_layout(layout)
 {
@@ -294,20 +300,30 @@ VPGraphicsPieceControls::VPGraphicsPieceControls(VPLayout *layout, QGraphicsItem
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPieceControls::on_UpdateControls()
 {
-    m_pieceRect = PiecesBoundingRect();
+    if (m_ignorePieceTransformation)
+    {
+        return;
+    }
+
+    m_selectedPieces = SelectedPieces();
+    m_pieceRect = PiecesBoundingRect(m_selectedPieces);
     setVisible(not m_pieceRect.isNull());
 
     if (not m_pieceRect.isNull())
     {
-        VPSheet *sheet = m_layout->GetFocusedSheet();
-        if (sheet != nullptr)
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (not layout.isNull())
         {
-            VPTransformationOrigon origin = sheet->TransformationOrigin();
-            if (not origin.custom)
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (not sheet.isNull())
             {
-                origin.origin = m_pieceRect.center();
-                sheet->SetTransformationOrigin(origin);
-                emit TransformationOriginChanged();
+                VPTransformationOrigon origin = sheet->TransformationOrigin();
+                if (not origin.custom)
+                {
+                    origin.origin = m_pieceRect.center();
+                    sheet->SetTransformationOrigin(origin);
+                    emit TransformationOriginChanged();
+                }
             }
         }
     }
@@ -320,6 +336,7 @@ void VPGraphicsPieceControls::on_UpdateControls()
 void VPGraphicsPieceControls::on_HideHandles(bool hide)
 {
     m_controlsVisible = not hide;
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -364,6 +381,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
         m_rotationStartPoint = event->scenePos();
         m_controlsVisible = false;
         m_handleCorner = HandleCorner(event->scenePos());
+        m_ignorePieceTransformation = true;
         prepareGeometryChange();
     }
     else
@@ -380,35 +398,39 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         if (not m_originSaved)
         {
-            VPSheet *sheet = m_layout->GetFocusedSheet();
-            if (sheet != nullptr)
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (not layout.isNull())
             {
-                m_savedOrigin = sheet->TransformationOrigin();
-                m_originSaved = true;
-                m_pieceRect = PiecesBoundingRect();
+                VPSheetPtr sheet = layout->GetFocusedSheet();
+                if (not sheet.isNull())
+                {
+                    m_savedOrigin = sheet->TransformationOrigin();
+                    m_originSaved = true;
+                    m_pieceRect = PiecesBoundingRect(m_selectedPieces);
 
-                VPTransformationOrigon origin;
-                origin.custom = true;
+                    VPTransformationOrigon origin;
+                    origin.custom = true;
 
-                if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::TopLeft)
-                {
-                    origin.origin = m_pieceRect.topLeft();
-                }
-                else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::TopRight)
-                {
-                    origin.origin = m_pieceRect.topRight();
-                }
-                else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::BottomRight)
-                {
-                    origin.origin = m_pieceRect.bottomRight();
-                }
-                else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::BottomLeft)
-                {
-                    origin.origin = m_pieceRect.bottomLeft();
-                }
+                    if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::TopLeft)
+                    {
+                        origin.origin = m_pieceRect.topLeft();
+                    }
+                    else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::TopRight)
+                    {
+                        origin.origin = m_pieceRect.topRight();
+                    }
+                    else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::BottomRight)
+                    {
+                        origin.origin = m_pieceRect.bottomRight();
+                    }
+                    else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::BottomLeft)
+                    {
+                        origin.origin = m_pieceRect.bottomLeft();
+                    }
 
-                sheet->SetTransformationOrigin(origin);
-                emit TransformationOriginChanged();
+                    sheet->SetTransformationOrigin(origin);
+                    emit TransformationOriginChanged();
+                }
             }
         }
     }
@@ -416,18 +438,22 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         if (m_originSaved)
         {
-            VPSheet *sheet = m_layout->GetFocusedSheet();
-            if (sheet != nullptr)
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (not layout.isNull())
             {
-                if (not m_savedOrigin.custom)
+                VPSheetPtr sheet = layout->GetFocusedSheet();
+                if (sheet != nullptr)
                 {
-                    m_pieceRect = PiecesBoundingRect();
-                    m_savedOrigin.origin = m_pieceRect.center();
+                    if (not m_savedOrigin.custom)
+                    {
+                        m_pieceRect = PiecesBoundingRect(m_selectedPieces);
+                        m_savedOrigin.origin = m_pieceRect.center();
+                    }
+                    sheet->SetTransformationOrigin(m_savedOrigin);
+                    emit TransformationOriginChanged();
                 }
-                sheet->SetTransformationOrigin(m_savedOrigin);
-                emit TransformationOriginChanged();
+                m_originSaved = false;
             }
-            m_originSaved = false;
         }
     }
 
@@ -442,7 +468,33 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if (not qFuzzyIsNull(angle))
     {
-        emit Rotate(rotationOrigin, angle);
+        auto PreparePieces = [this]()
+        {
+            QVector<VPPiecePtr> pieces;
+            for (auto *item : m_selectedPieces)
+            {
+                pieces.append(item->GetPiece());
+            }
+
+            return pieces;
+        };
+
+        QVector<VPPiecePtr> pieces = PreparePieces();
+
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (not layout.isNull())
+        {
+            if (pieces.size() == 1)
+            {
+                auto *command = new VPUndoPieceRotate(pieces.first(), rotationOrigin, angle, allowChangeMerge);
+                layout->UndoStack()->push(command);
+            }
+            else if (pieces.size() > 1)
+            {
+                auto *command = new VPUndoPiecesRotate(pieces, rotationOrigin, angle, allowChangeMerge);
+                layout->UndoStack()->push(command);
+            }
+        }
     }
 
     if (m_originSaved && m_savedOrigin.custom)
@@ -453,6 +505,7 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
 
     m_rotationStartPoint = rotationNewPoint;
+    allowChangeMerge = true;
     QGraphicsObject::mouseMoveEvent(event);
 }
 
@@ -462,26 +515,38 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         m_controlsVisible = true;
+        m_ignorePieceTransformation = false;
 
         if (m_originSaved)
         {
-            VPSheet *sheet = m_layout->GetFocusedSheet();
-            if (sheet != nullptr)
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (not layout.isNull())
             {
-                if (not m_savedOrigin.custom)
+                VPSheetPtr sheet = layout->GetFocusedSheet();
+                if (not sheet.isNull())
                 {
-                    m_pieceRect = PiecesBoundingRect();
-                    m_savedOrigin.origin = m_pieceRect.center();
+                    if (not m_savedOrigin.custom)
+                    {
+                        m_pieceRect = PiecesBoundingRect(m_selectedPieces);
+                        m_savedOrigin.origin = m_pieceRect.center();
+                    }
+                    sheet->SetTransformationOrigin(m_savedOrigin);
+                    emit TransformationOriginChanged();
                 }
-                sheet->SetTransformationOrigin(m_savedOrigin);
-                emit TransformationOriginChanged();
+                m_originSaved = false;
             }
-            m_originSaved = false;
         }
 
         on_UpdateControls();
+        allowChangeMerge = false;
     }
     QGraphicsObject::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPieceControls::SetIgnorePieceTransformation(bool newIgnorePieceTransformation)
+{
+    m_ignorePieceTransformation = newIgnorePieceTransformation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -522,7 +587,7 @@ auto VPGraphicsPieceControls::BottomRightControl(QPainter *painter) const -> QPa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPGraphicsPieceControls::Handles() const
+auto VPGraphicsPieceControls::Handles() const -> QPainterPath
 {
     QPainterPath path;
 
@@ -690,20 +755,36 @@ auto VPGraphicsPieceControls::ArrowPath() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsPieceControls::PiecesBoundingRect() const
+auto VPGraphicsPieceControls::SelectedPieces() const -> QVector<VPGraphicsPiece *>
 {
-    QRectF rect;
+    QVector<VPGraphicsPiece *> pieces;
     QGraphicsScene *scene = this->scene();
     if (scene != nullptr)
     {
         QList<QGraphicsItem *> list = scene->selectedItems();
         for (auto *item : list)
         {
-            if (item->type() == UserType + static_cast<int>(PGraphicsItem::Piece))
+            if (item->type() == VPGraphicsPiece::Type)
             {
-                rect = rect.united(item->sceneBoundingRect());
+                auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
+                if (pieceItem != nullptr)
+                {
+                    pieces.append(pieceItem);
+                }
             }
         }
+    }
+
+    return pieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPGraphicsPieceControls::PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) const -> QRectF
+{
+    QRectF rect;
+    for (auto *item : selectedPieces)
+    {
+        rect = rect.united(item->sceneBoundingRect());
     }
 
     return rect;

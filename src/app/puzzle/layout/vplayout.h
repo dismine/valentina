@@ -29,64 +29,86 @@
 #define VPLAYOUT_H
 
 #include <QList>
+#include <QMap>
 
 #include "def.h"
 #include "vplayoutsettings.h"
+#include "layoutdef.h"
 
 class VPPiece;
 class VPSheet;
+class QUndoStack;
 
 class VPLayout : public QObject
 {
     Q_OBJECT
 public:
-    explicit VPLayout(QObject *parent=nullptr);
-    virtual ~VPLayout();
+    virtual ~VPLayout() = default;
 
-    void AddPiece(VPPiece *piece);
-    auto GetPieces() const -> QList<VPPiece *>;
-    auto GetUnplacedPieces() const -> QList<VPPiece *>;
-    auto GetTrashedPieces() const -> QList<VPPiece *>;
+    static auto CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr;
+    static void AddPiece(const VPLayoutPtr &layout, const VPPiecePtr &piece);
 
-    auto AddSheet() -> VPSheet*;
-    auto AddSheet(VPSheet *sheet) -> VPSheet*;
-    auto GetSheets() -> QList<VPSheet *>;
-    auto GetSheet(const QUuid &uuid) -> VPSheet *;
+    auto GetPieces() const -> QList<VPPiecePtr>;
+    auto GetUnplacedPieces() const -> QList<VPPiecePtr>;
+    auto GetTrashedPieces() const -> QList<VPPiecePtr>;
+
+    auto AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr;
+    auto GetSheets() -> QList<VPSheetPtr>;
+    auto GetSheet(const QUuid &uuid) -> VPSheetPtr;
 
     /**
      * @brief SetFocusedSheet Sets the focused sheet, to which pieces are added from the carrousel via drag
      * and drop
      * @param focusedSheet the new active sheet. If nullptr, then it sets automaticaly the first sheet from m_sheets
      */
-    void SetFocusedSheet(VPSheet *focusedSheet = nullptr);
+    void SetFocusedSheet(const VPSheetPtr &focusedSheet = VPSheetPtr());
 
     /**
      * @brief GetFocusedSheet Returns the focused sheet, to which pieces are added from the carrousel via drag
      * and drop
      * @return the focused sheet
      */
-    auto GetFocusedSheet() -> VPSheet*;
+    auto GetFocusedSheet() -> VPSheetPtr;
 
-    auto GetTrashSheet() -> VPSheet*;
+    void AddTrashSheet(const VPSheetPtr &sheet);
+    auto GetTrashSheet() -> VPSheetPtr;
 
     auto LayoutSettings() -> VPLayoutSettings &;
 
-    auto PiecesForSheet(const VPSheet* sheet) const -> QList<VPPiece *>;
+    auto PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr>;
+    auto PiecesForSheet(const QUuid &uuid) const -> QList<VPPiecePtr>;
+
+    QUndoStack *UndoStack() const;
+
+    void SetUndoStack(QUndoStack *newUndoStack);
+
+    void Clear();
 
 signals:
-    void PieceSheetChanged(VPPiece *piece);
+    void PieceSheetChanged(const VPPiecePtr &piece);
+    void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
+    void PieceTransformationChanged(const VPPiecePtr &piece);
+
+protected:
+    explicit VPLayout(QUndoStack *undoStack);
+
+    void AddPiece(const VPPiecePtr &piece);
 
 private:
     Q_DISABLE_COPY(VPLayout)
 
-    QList<VPPiece *> m_pieces{};
+    QMap<QString, VPPiecePtr> m_pieces{};
 
-    VPSheet* m_trashSheet;
+    VPSheetPtr m_trashSheet{};
 
-    QList<VPSheet*> m_sheets{};
-    VPSheet *m_focusedSheet{nullptr};
+    QList<VPSheetPtr> m_sheets{};
+    VPSheetPtr m_focusedSheet{};
 
     VPLayoutSettings m_layoutSettings{};
+
+    QUndoStack *m_undoStack;
 };
+
+Q_DECLARE_METATYPE(VPLayoutPtr)
 
 #endif // VPLAYOUT_H

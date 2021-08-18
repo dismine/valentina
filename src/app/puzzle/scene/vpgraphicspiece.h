@@ -33,24 +33,20 @@
 #include <QCursor>
 
 #include "scenedef.h"
-
-class VPPiece;
+#include "../layout/layoutdef.h"
 
 class VPGraphicsPiece : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent = nullptr);
+    explicit VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent = nullptr);
     ~VPGraphicsPiece() = default;
 
     /**
      * @brief GetPiece Returns the piece that corresponds to the graphics piece
      * @return the piece
      */
-    auto GetPiece() -> VPPiece*;
-
-    void TranslatePiece(qreal dx, qreal dy);
-    void TranslatePiece(const QPointF &p);
+    auto GetPiece() -> VPPiecePtr;
 
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Piece)};
@@ -58,10 +54,10 @@ public:
 signals:
     void PieceSelectionChanged();
     void HideTransformationHandles(bool hide);
-    void PiecePositionChanged();
+    void PieceTransformationChanged();
 
 public slots:
-    void on_Rotate(const QPointF &center, qreal angle);
+    void on_RefreshPiece(const VPPiecePtr &piece);
 
 protected:
     auto boundingRect() const -> QRectF override;
@@ -78,7 +74,7 @@ protected:
 
 private:
     Q_DISABLE_COPY(VPGraphicsPiece)
-    VPPiece *m_piece;
+    VPPieceWeakPtr m_piece;
 
     QPainterPath m_cuttingLine{};
     QPainterPath m_seamLine{};
@@ -87,6 +83,8 @@ private:
     QPointF m_rotationStartPoint{};
 
     QCursor m_rotateCursor{};
+
+    bool allowChangeMerge{false};
 
     void PaintPiece(QPainter *painter=nullptr);
 

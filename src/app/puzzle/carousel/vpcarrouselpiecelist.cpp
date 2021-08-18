@@ -38,6 +38,7 @@
 #include "../vmisc/backport/qoverload.h"
 #include "vpmimedatapiece.h"
 #include "../layout/vpsheet.h"
+#include "../layout/vplayout.h"
 
 #include <QLoggingCategory>
 
@@ -68,18 +69,21 @@ void VPCarrouselPieceList::Refresh()
     if(not m_pieceList.isEmpty())
     {
         // create the corresponding carrousel pieces
-        for (auto *piece : m_pieceList)
+        for (auto piece : m_pieceList)
         {
-            // update the label of the piece
-             auto* carrouselpiece = new VPCarrouselPiece(piece, this);
-             carrouselpiece->setSelected(piece->IsSelected());
+            if (not piece.isNull())
+            {
+                // update the label of the piece
+                auto* carrouselpiece = new VPCarrouselPiece(piece, this);
+                carrouselpiece->setSelected(piece->IsSelected());
+            }
         }
         sortItems();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPieceList::SetCurrentPieceList(const QList<VPPiece *> &pieceList)
+void VPCarrouselPieceList::SetCurrentPieceList(const QList<VPPiecePtr> &pieceList)
 {
     m_pieceList = pieceList;
 
@@ -135,7 +139,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         // starts the dragging
         auto *drag = new QDrag(this);
         auto *mimeData = new VPMimeDataPiece();
-        VPPiece* piece = pieceItem->GetPiece();
+        VPPiecePtr piece = pieceItem->GetPiece();
         mimeData->SetPiecePtr(piece);
 
         QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120, 120), true).pixmap(QSize(120, 120));
@@ -189,18 +193,23 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
         QAction *selectedAction = menu.exec(event->globalPos());
 
-        VPPiece *piece = pieceItem->GetPiece();
-        VPLayout *layout = piece->Layout();
+        VPPiecePtr piece = pieceItem->GetPiece();
+        VPLayoutPtr layout = piece->Layout();
+
+        if (piece.isNull() || layout.isNull())
+        {
+            return;
+        }
 
         if (selectedAction == moveAction)
         {
-            VPSheet *sheet = layout->GetFocusedSheet();
+            VPSheetPtr sheet = layout->GetFocusedSheet();
             piece->SetSheet(sheet);
             emit layout->PieceSheetChanged(piece);
         }
         else if (selectedAction == deleteAction)
         {
-            VPSheet *sheet = layout->GetTrashSheet();
+            VPSheetPtr sheet = layout->GetTrashSheet();
             piece->SetSheet(sheet);
             emit layout->PieceSheetChanged(piece);
         }

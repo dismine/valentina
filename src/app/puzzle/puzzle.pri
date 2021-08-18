@@ -7,6 +7,9 @@ SOURCES += \
     $$PWD/dialogs/dialogpuzzlepreferences.cpp \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
+    $$PWD/undocommands/vpundocommand.cpp \
+    $$PWD/undocommands/vpundopiecemove.cpp \
+    $$PWD/undocommands/vpundopiecerotate.cpp \
     $$PWD/vpapplication.cpp \
     $$PWD/carousel/vpcarrousel.cpp \
     $$PWD/carousel/vpcarrouselpiece.cpp \
@@ -38,8 +41,12 @@ HEADERS += \
     $$PWD/dialogs/configpages/puzzlepreferencespathpage.h \
     $$PWD/dialogs/dialogpuzzlepreferences.h \
     $$PWD/dialogs/vpdialogabout.h \
+    $$PWD/layout/layoutdef.h \
     $$PWD/scene/scenedef.h \
     $$PWD/stable.h \
+    $$PWD/undocommands/vpundocommand.h \
+    $$PWD/undocommands/vpundopiecemove.h \
+    $$PWD/undocommands/vpundopiecerotate.h \
     $$PWD/vpapplication.h \
     $$PWD/carousel/vpcarrousel.h \
     $$PWD/carousel/vpcarrouselpiece.h \

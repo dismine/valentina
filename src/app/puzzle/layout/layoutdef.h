@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vpgraphicstilegrid.h
- **  @author Ronan Le Tiec
- **  @date   19 11, 2020
+ **  @file   layoutdef.h
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   16 8, 2021
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2020 Valentina project
+ **  Copyright (C) 2021 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,34 +25,21 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef LAYOUTDEF_H
+#define LAYOUTDEF_H
 
-#ifndef VPGRAPHICSTILEGRID_H
-#define VPGRAPHICSTILEGRID_H
+#include <QSharedPointer>
 
-#include <QGraphicsItem>
-#include <QPainter>
-
-#include "../vmisc/def.h"
-#include "../layout/layoutdef.h"
-
-class VPTileFactory;
 class VPLayout;
+using VPLayoutPtr = QSharedPointer<VPLayout>;
+using VPLayoutWeakPtr = QWeakPointer<VPLayout>;
 
-class VPGraphicsTileGrid : public QGraphicsItem
-{
-public:
-    explicit VPGraphicsTileGrid(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsTileGrid();
+class VPPiece;
+using VPPiecePtr = QSharedPointer<VPPiece>;
+using VPPieceWeakPtr = QWeakPointer<VPPiece>;
 
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+class VPSheet;
+using VPSheetPtr = QSharedPointer<VPSheet>;
+using VPSheetWeakPtr = QWeakPointer<VPSheet>;
 
-
-private:
-    Q_DISABLE_COPY(VPGraphicsTileGrid)
-
-    VPTileFactory * m_tileFactory{nullptr};
-    VPLayoutWeakPtr m_layout{};
-};
-
-#endif // VPGRAPHICSTILEGRID_H
+#endif // LAYOUTDEF_H

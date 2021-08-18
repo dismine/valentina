@@ -32,8 +32,8 @@
 #include <QWidget>
 #include <QComboBox>
 #include <QScrollArea>
-#include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
+#include "../layout/layoutdef.h"
 
 namespace Ui
 {
@@ -45,7 +45,7 @@ struct VPCarrouselSheet
     bool unplaced{true};
     bool active{false};
     QString name{};
-    QList<VPPiece *> pieces{};
+    QList<VPPiecePtr> pieces{};
     QUuid sheetUuid{};
 };
 
@@ -53,7 +53,7 @@ class VPCarrousel : public QWidget
 {
     Q_OBJECT
 public:
-    explicit VPCarrousel(VPLayout *layout, QWidget *parent = nullptr);
+    explicit VPCarrousel(const VPLayoutPtr &layout, QWidget *parent = nullptr);
     virtual ~VPCarrousel() = default;
 
     /**
@@ -69,8 +69,6 @@ public:
      */
     void RefreshOrientation();
 
-
-
     void RefreshSheetNames();
 
     /**
@@ -78,14 +76,12 @@ public:
      */
     void Clear();
 
-signals:
-    void on_ActiveSheetChanged();
-
 public slots:
     /**
      * @brief Refresh Refreshes the content of the carrousel
      */
     void Refresh();
+    void on_ActiveSheetChanged(const VPSheetPtr &sheet);
 
 protected:
     virtual void changeEvent(QEvent* event) override;
@@ -102,11 +98,13 @@ private:
     Q_DISABLE_COPY(VPCarrousel)
     Ui::VPCarrousel *ui;
 
-    VPLayout *m_layout{nullptr};
+    VPLayoutWeakPtr m_layout{};
 
     QList<VPCarrouselSheet> m_pieceLists{};
 
     Qt::Orientation m_orientation{Qt::Vertical};
+
+    bool m_ignoreActiveSheetChange{false};
 
     static auto GetSheetName(const VPCarrouselSheet &sheet) -> QString;
 };

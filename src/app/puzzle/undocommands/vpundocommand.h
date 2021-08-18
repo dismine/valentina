@@ -37,7 +37,9 @@ namespace ML
 enum class UndoCommand: qint8
 {
     MovePiece = 0,
-    MovePieces = 1
+    MovePieces = 1,
+    RotatePiece = 2,
+    RotatePieces = 3,
 };
 }
 

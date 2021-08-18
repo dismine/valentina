@@ -50,7 +50,7 @@ public:
      * @brief SetCurrentPieceList Sets the current piece list to the given piece list and redraw
      * the carrousel.
      */
-    void SetCurrentPieceList(const QList<VPPiece *> &pieceList);
+    void SetCurrentPieceList(const QList<VPPiecePtr> &pieceList);
 
     /**
      * @brief SetCarrousel Sets the carrousel corresponding to the list
@@ -76,7 +76,7 @@ protected:
 private:
     Q_DISABLE_COPY(VPCarrouselPieceList)
 
-    QList<VPPiece *> m_pieceList{};
+    QList<VPPiecePtr> m_pieceList{};
     QPoint m_dragStart{};
     VPCarrousel *m_carrousel{nullptr};
 };

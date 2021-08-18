@@ -46,6 +46,8 @@
 #include "vlayoutpiecepath.h"
 #include "vplacelabelitem.h"
 
+#include "undocommands/vpundopiecemove.h"
+
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 
@@ -55,7 +57,7 @@ constexpr qreal penWidth = 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
+VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent) :
     QGraphicsObject(parent),
     m_piece(piece)
 {
@@ -71,23 +73,9 @@ VPGraphicsPiece::VPGraphicsPiece(VPPiece *piece, QGraphicsItem *parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPiece::GetPiece() -> VPPiece*
+auto VPGraphicsPiece::GetPiece() -> VPPiecePtr
 {
     return m_piece;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::TranslatePiece(qreal dx, qreal dy)
-{
-    TranslatePiece(QPointF(dx, dy));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::TranslatePiece(const QPointF &p)
-{
-    prepareGeometryChange();
-    m_piece->Translate(p);
-    PaintPiece(); // refresh shapes
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,6 +137,7 @@ void VPGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     GroupMove(event->pos());
 
     m_moveStartPoint = event->pos();
+    allowChangeMerge = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,18 +150,29 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         setCursor(Qt::OpenHandCursor);
-        GroupMove(event->pos());
         emit HideTransformationHandles(false);
+        allowChangeMerge = false;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    QMenu menu;
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return;
+    }
 
-    QList<VPSheet *> sheets = m_piece->Layout()->GetSheets();
-    sheets.removeAll(m_piece->Sheet());
+    VPLayoutPtr layout = piece->Layout();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    QMenu menu;
+    QList<VPSheetPtr> sheets = layout->GetSheets();
+    sheets.removeAll(piece->Sheet());
 
     QVector<QAction*> moveToActions;
 
@@ -180,11 +180,14 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         QMenu *moveMenu = menu.addMenu(tr("Move to"));
 
-        for (auto *sheet : sheets)
+        for (const auto &sheet : sheets)
         {
-            QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
-            moveToSheet->setData(QVariant::fromValue(sheet));
-            moveToActions.append(moveToSheet);
+            if (not sheet.isNull())
+            {
+                QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
+                moveToSheet->setData(QVariant::fromValue(sheet));
+                moveToActions.append(moveToSheet);
+            }
         }
     }
 
@@ -195,13 +198,13 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
     if (moveToActions.contains(selectedAction))
     {
-        m_piece->SetSheet(qvariant_cast<VPSheet *>(selectedAction->data()));
-        emit m_piece->Layout()->PieceSheetChanged(m_piece);
+        piece->SetSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()));
+        emit layout->PieceSheetChanged(piece);
     }
     else if (selectedAction == removeAction)
     {
-        m_piece->SetSheet(nullptr);
-        emit m_piece->Layout()->PieceSheetChanged(m_piece);
+        piece->SetSheet(nullptr);
+        emit layout->PieceSheetChanged(piece);
     }
 }
 
@@ -211,11 +214,14 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     QBrush noBrush(Qt::NoBrush);
     QBrush selectionBrush(QColor(255,160,160,60));
 
-    QRectF rect = m_piece->MappedDetailBoundingRect();
-    QPointF p = rect.topLeft();
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return;
+    }
 
     // initialises the seam line
-    QVector<QPointF> seamLinePoints = m_piece->GetMappedContourPoints();
+    QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
     if(!seamLinePoints.isEmpty())
     {
         m_seamLine = QPainterPath();
@@ -235,7 +241,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initiliases the cutting line
-    QVector<QPointF> cuttingLinepoints = m_piece->GetMappedSeamAllowancePoints();
+    QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
     if(!cuttingLinepoints.isEmpty())
     {
         m_cuttingLine = QPainterPath();
@@ -255,9 +261,9 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the grainline
-    if(m_piece->IsGrainlineEnabled())
+    if(piece->IsGrainlineEnabled())
     {
-        QVector<QPointF> grainLinepoints = m_piece->GetMappedGrainline();
+        QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
         if(!grainLinepoints.isEmpty())
         {
             QPainterPath grainline;
@@ -282,10 +288,10 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the internal paths
-    QVector<VLayoutPiecePath> internalPaths = m_piece->GetInternalPaths();
+    QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
     for (const auto& piecePath : internalPaths)
     {
-        QPainterPath path = m_piece->GetMatrix().map(piecePath.GetPainterPath());
+        QPainterPath path = piece->GetMatrix().map(piecePath.GetPainterPath());
 
         if (painter != nullptr)
         {
@@ -297,7 +303,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the passmarks
-    QVector<VLayoutPassmark> passmarks = m_piece->GetMappedPassmarks();
+    QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
     for(auto &passmark : passmarks)
     {
         QPainterPath passmarkPath;
@@ -317,7 +323,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the place labels (buttons etc)
-    QVector<VLayoutPlaceLabel> placeLabels = m_piece->GetMappedPlaceLabels();
+    QVector<VLayoutPlaceLabel> placeLabels = piece->GetMappedPlaceLabels();
     for(auto &placeLabel : placeLabels)
     {
         QPainterPath path = VPlaceLabelItem::LabelShapePath(placeLabel.shape);
@@ -345,27 +351,63 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
     if (scene() != nullptr)
     {
         QList<QGraphicsItem *> list = scene()->selectedItems();
-        for (auto *item : list)
+
+        if (list.isEmpty())
         {
-            if (item->type() == UserType + static_cast<int>(PGraphicsItem::Piece))
-            {
-                auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
-                pieceItem->TranslatePiece(pos-m_moveStartPoint);
-            }
+            return;
         }
-        emit PiecePositionChanged();
+
+        VPPiecePtr piece = m_piece.toStrongRef();
+        if (piece.isNull())
+        {
+            return;
+        }
+
+        VPLayoutPtr layout = piece->Layout();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        auto PreparePieces = [list]()
+        {
+            QVector<VPPiecePtr> pieces;
+            for (auto *item : list)
+            {
+                if (item->type() == VPGraphicsPiece::Type)
+                {
+                    auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
+                    pieces.append(pieceItem->GetPiece());
+                }
+            }
+
+            return pieces;
+        };
+
+        QVector<VPPiecePtr> pieces = PreparePieces();
+        QPointF newPos = pos - m_moveStartPoint;
+
+        if (pieces.size() == 1)
+        {
+            auto *command = new VPUndoPieceMove(pieces.first(), newPos.x(), newPos.y(), allowChangeMerge);
+            layout->UndoStack()->push(command);
+        }
+        else if (pieces.size() > 1)
+        {
+            auto *command = new VPUndoPiecesMove(pieces, newPos.x(), newPos.y(), allowChangeMerge);
+            layout->UndoStack()->push(command);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::on_Rotate(const QPointF &center, qreal angle)
+void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
 {
-    if (isSelected())
+    if (m_piece == piece)
     {
         prepareGeometryChange();
-        m_piece->Rotate(center, angle);
-        PaintPiece(); // Update shapes
-        update();
+        PaintPiece(); // refresh shapes
+        emit PieceTransformationChanged();
     }
 }
 
@@ -376,8 +418,12 @@ auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &valu
     {
         if(change == ItemSelectedHasChanged)
         {
-            emit PieceSelectionChanged();
-            m_piece->SetSelected(value.toBool());
+            VPPiecePtr piece = m_piece.toStrongRef();
+            if (not piece.isNull())
+            {
+                emit PieceSelectionChanged();
+                piece->SetSelected(value.toBool());
+            }
         }
     }
 

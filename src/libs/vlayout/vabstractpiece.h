@@ -96,6 +96,12 @@ public:
     void  SetUUID(const QUuid &uuid);
     void  SetUUID(const QString &uuid);
 
+    /**
+     * @brief GetUniqueID returns unique piece id. Combines UUID and gradation label.
+     * @return unique piece id.
+     */
+    QString GetUniqueID() const;
+
     static QVector<QPointF> Equidistant(QVector<VSAPoint> points, qreal width, const QString &name);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);

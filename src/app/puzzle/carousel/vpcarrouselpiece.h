@@ -31,21 +31,21 @@
 #include <QMouseEvent>
 #include <QListWidgetItem>
 
-class VPPiece;
+#include "../layout/layoutdef.h"
 
 class VPCarrouselPiece : public QListWidgetItem
 {
 public:
     enum { Type = UserType + 1};
 
-    explicit VPCarrouselPiece(VPPiece *piece, QListWidget* parent);
+    explicit VPCarrouselPiece(const VPPiecePtr &piece, QListWidget* parent);
     virtual ~VPCarrouselPiece() = default;
 
     /**
      * @brief GetPiece Returns the corresponding layout piece
      * @return  the corresponding layout piece
      */
-    auto GetPiece() -> VPPiece *;
+    auto GetPiece() const -> VPPiecePtr;
 
     /**
      * @brief RefreshSelection refreshes the selection of the piece according to the selection information of m_piece
@@ -62,7 +62,7 @@ public:
 
 private:
     Q_DISABLE_COPY(VPCarrouselPiece)
-    VPPiece *m_piece;
+    VPPieceWeakPtr m_piece;
 };
 
 #endif // VPCARROUSELPIECE_H

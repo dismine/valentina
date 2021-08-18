@@ -35,12 +35,13 @@
 #include "../layout/vpsheet.h"
 
 class VPLayout;
+class VPGraphicsPiece;
 
 class VPGraphicsTransformationOrigin : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit VPGraphicsTransformationOrigin(VPLayout *layout, QGraphicsItem * parent = nullptr);
+    explicit VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
 
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::TransformationOrigin)};
@@ -65,9 +66,9 @@ protected:
 private:
     Q_DISABLE_COPY(VPGraphicsTransformationOrigin)
 
-    bool      m_originVisible{true};
-    VPLayout *m_layout;
-    QColor    m_color;
+    bool            m_originVisible{true};
+    VPLayoutWeakPtr m_layout{};
+    QColor          m_color;
 
     auto RotationCenter(QPainter *painter = nullptr) const -> QPainterPath;
     auto Center1() const -> QPainterPath;
@@ -78,13 +79,14 @@ class VPGraphicsPieceControls : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit VPGraphicsPieceControls(VPLayout *layout, QGraphicsItem * parent = nullptr);
+    explicit VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
 
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Handles)};
 
+    void SetIgnorePieceTransformation(bool newIgnorePieceTransformation);
+
 signals:
-    void Rotate(const QPointF &center, qreal angle);
     void ShowOrigin(bool show);
     void TransformationOriginChanged();
 
@@ -103,13 +105,16 @@ protected:
 
 private:
     Q_DISABLE_COPY(VPGraphicsPieceControls)
-    QRectF    m_pieceRect{};
-    QPointF   m_rotationStartPoint{};
-    bool      m_controlsVisible{true};
-    VPLayout *m_layout;
-    int       m_handleCorner{0};
+    QRectF          m_pieceRect{};
+    QPointF         m_rotationStartPoint{};
+    bool            m_controlsVisible{true};
+    VPLayoutWeakPtr m_layout{};
+    int             m_handleCorner{0};
     VPTransformationOrigon m_savedOrigin{};
-    bool      m_originSaved{false};
+    bool            m_originSaved{false};
+    bool            allowChangeMerge{false};
+    QVector<VPGraphicsPiece *> m_selectedPieces{};
+    bool            m_ignorePieceTransformation{false};
 
     auto TopLeftControl(QPainter *painter = nullptr) const -> QPainterPath;
     auto TopRightControl(QPainter *painter = nullptr) const -> QPainterPath;
@@ -122,7 +127,8 @@ private:
 
     auto ArrowPath() const -> QPainterPath;
 
-    auto PiecesBoundingRect() const -> QRectF;
+    auto SelectedPieces() const -> QVector<VPGraphicsPiece *>;
+    auto PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) const -> QRectF;
     auto HandleCorner(const QPointF &pos) const -> int;
 };
 

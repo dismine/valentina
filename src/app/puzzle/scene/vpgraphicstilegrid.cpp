@@ -4,7 +4,7 @@
 #include "../layout/vplayout.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsTileGrid::VPGraphicsTileGrid(VPLayout *layout, VPTileFactory *tileFactory,QGraphicsItem *parent):
+VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QGraphicsItem *parent):
     QGraphicsItem(parent),
     m_tileFactory(tileFactory),
     m_layout(layout)
@@ -21,7 +21,8 @@ VPGraphicsTileGrid::~VPGraphicsTileGrid()
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPGraphicsTileGrid::boundingRect() const
 {
-    if(m_layout->LayoutSettings().GetShowTiles())
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
         return QRectF(0,
                    0,
@@ -39,7 +40,8 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    if(m_layout->LayoutSettings().GetShowTiles())
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
         QPen pen(QColor(255,0,0,127), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         pen.setCosmetic(true);

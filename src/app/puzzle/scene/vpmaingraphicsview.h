@@ -98,12 +98,6 @@ protected:
 
 private slots:
     void RestoreOrigin() const;
-    void RotatePiecesByPlus15() const;
-    void RotatePiecesByMinus15() const;
-    void RotatePiecesByPlus90() const;
-    void RotatePiecesByMinus90() const;
-    void RotatePiecesByPlus1() const;
-    void RotatePiecesByMinus1() const;
 
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)
@@ -134,7 +128,7 @@ private:
 
     void ConnectPiece(VPGraphicsPiece *piece);
 
-    void RotatePiecesByAngle(qreal angle) const;
+    void RotatePiecesByAngle(qreal angle);
     void TranslatePiecesOn(qreal dx, qreal dy);
 
 };

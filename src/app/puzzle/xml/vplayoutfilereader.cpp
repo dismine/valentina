@@ -179,7 +179,7 @@ auto StringToMarkerShape(const QString &string) -> PlaceLabelImg
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file) -> bool
+auto VPLayoutFileReader::ReadFile(const VPLayoutPtr &layout, QFile *file) -> bool
 {
     setDevice(file);
 
@@ -199,7 +199,7 @@ auto VPLayoutFileReader::ReadFile(VPLayout *layout, QFile *file) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadLayout(VPLayout *layout)
+void VPLayoutFileReader::ReadLayout(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagLayout);
 
@@ -232,7 +232,7 @@ void VPLayoutFileReader::ReadLayout(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadProperties(VPLayout *layout)
+void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagProperties);
 
@@ -288,7 +288,7 @@ void VPLayoutFileReader::ReadProperties(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadControl(VPLayout *layout)
+void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagControl);
 
@@ -304,7 +304,7 @@ void VPLayoutFileReader::ReadControl(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadUnplacedPieces(VPLayout *layout)
+void VPLayoutFileReader::ReadUnplacedPieces(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagUnplacedPieces);
 
@@ -312,7 +312,7 @@ void VPLayoutFileReader::ReadUnplacedPieces(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadTiles(VPLayout *layout)
+void VPLayoutFileReader::ReadTiles(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagTiles);
 
@@ -347,7 +347,7 @@ void VPLayoutFileReader::ReadTiles(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadSheets(VPLayout *layout)
+void VPLayoutFileReader::ReadSheets(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagSheets);
 
@@ -366,7 +366,7 @@ void VPLayoutFileReader::ReadSheets(VPLayout *layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadSheet(VPLayout *layout)
+void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagSheet);
 
@@ -376,7 +376,7 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
         ML::TagPieces  // 1
     };
 
-    QScopedPointer<VPSheet> sheet (new VPSheet(layout));
+    VPSheetPtr sheet(new VPSheet(layout));
 
     while (readNextStartElement())
     {
@@ -386,11 +386,7 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
                 sheet->SetName(readElementText());
                 break;
             case 1: // pieces
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-                ReadPieces(layout, sheet.get());
-#else
-                ReadPieces(layout, sheet.data());
-#endif
+                ReadPieces(layout, sheet);
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -401,21 +397,21 @@ void VPLayoutFileReader::ReadSheet(VPLayout *layout)
 
     readElementText();
 
-    layout->AddSheet(sheet.take());
+    layout->AddSheet(sheet);
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadPieces(VPLayout *layout, VPSheet *sheet)
+void VPLayoutFileReader::ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr &sheet)
 {
     while (readNextStartElement())
     {
         if (name() == ML::TagPiece)
         {
-            QScopedPointer<VPPiece>piece(new VPPiece());
-            ReadPiece(piece.data());
+            VPPiecePtr piece(new VPPiece());
+            ReadPiece(piece);
             piece->SetSheet(sheet);
-            layout->AddPiece(piece.take());
+            VPLayout::AddPiece(layout, piece);
         }
         else
         {
@@ -426,7 +422,7 @@ void VPLayoutFileReader::ReadPieces(VPLayout *layout, VPSheet *sheet)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadPiece(VPPiece *piece)
+void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagPiece);
 
@@ -490,7 +486,7 @@ void VPLayoutFileReader::ReadPiece(VPPiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadSeamAllowance(VPPiece *piece)
+void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagSeamAllowance);
 
@@ -512,7 +508,7 @@ void VPLayoutFileReader::ReadSeamAllowance(VPPiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadGrainline(VPPiece *piece)
+void VPLayoutFileReader::ReadGrainline(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagGrainline);
 
@@ -533,7 +529,7 @@ void VPLayoutFileReader::ReadGrainline(VPPiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadNotches(VPPiece *piece)
+void VPLayoutFileReader::ReadNotches(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagNotches);
 
@@ -576,7 +572,7 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadInternalPaths(VPPiece *piece)
+void VPLayoutFileReader::ReadInternalPaths(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagInternalPaths);
 
@@ -615,7 +611,7 @@ auto VPLayoutFileReader::ReadInternalPath() -> VLayoutPiecePath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadMarkers(VPPiece *piece)
+void VPLayoutFileReader::ReadMarkers(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagMarkers);
 
@@ -658,7 +654,7 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileReader::ReadLabels(VPPiece *piece)
+void VPLayoutFileReader::ReadLabels(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagLabels);
 

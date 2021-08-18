@@ -44,7 +44,7 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, QListWidget* parent) :
+VPCarrouselPiece::VPCarrouselPiece(const VPPiecePtr &piece, QListWidget* parent) :
     QListWidgetItem(parent, Type),
     m_piece(piece)
 {
@@ -57,7 +57,7 @@ VPCarrouselPiece::VPCarrouselPiece(VPPiece *piece, QListWidget* parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPCarrouselPiece::GetPiece() -> VPPiece *
+auto VPCarrouselPiece::GetPiece() const -> VPPiecePtr
 {
     return m_piece;
 }
@@ -65,13 +65,23 @@ auto VPCarrouselPiece::GetPiece() -> VPPiece *
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPiece::RefreshSelection()
 {
-    setSelected(m_piece->IsSelected());
+    VPPiecePtr piece = GetPiece();
+    if (not piece.isNull())
+    {
+        setSelected(piece->IsSelected());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const -> QIcon
 {
-    QRectF boundingRect = m_piece->DetailBoundingRect();
+    VPPiecePtr piece = GetPiece();
+    if (piece.isNull())
+    {
+        return {};
+    }
+
+    QRectF boundingRect = piece->DetailBoundingRect();
     qreal canvasSize = qMax(boundingRect.height(), boundingRect.width());
     QRectF canvas = QRectF(0, 0, canvasSize, canvasSize);
 
@@ -133,7 +143,7 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
             painter.setBrush(QBrush(Qt::white));
         }
 
-        m_piece->DrawMiniature(painter);
+        piece->DrawMiniature(painter);
 
         painter.end();
 

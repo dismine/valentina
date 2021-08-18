@@ -1,4 +1,4 @@
-/************************************************************************
+/*******************************************************************
  **
  **  @file   vpgraphicssheet.cpp
  **  @author Ronan Le Tiec
@@ -33,7 +33,7 @@
 #include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsSheet::VPGraphicsSheet(VPLayout *layout, QGraphicsItem *parent):
+VPGraphicsSheet::VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent):
     QGraphicsItem(parent),
     m_layout(layout),
     m_boundingRect(GetSheetRect())
@@ -66,12 +66,14 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         painter->drawRect(sheetRect);
     }
 
-    if(m_layout->LayoutSettings().GetShowGrid())
+    VPLayoutPtr layout = m_layout.toStrongRef();
+
+    if(not layout.isNull() && layout->LayoutSettings().GetShowGrid())
     {
         pen.setColor(QColor(204,204,204));
         painter->setPen(pen);
 
-        qreal colWidth = m_layout->LayoutSettings().GetGridColWidth();
+        qreal colWidth = layout->LayoutSettings().GetGridColWidth();
         if(colWidth > 0)
         {
             qreal colX = colWidth;
@@ -83,7 +85,7 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             }
         }
 
-        qreal rowHeight = m_layout->LayoutSettings().GetGridRowHeight();
+        qreal rowHeight = layout->LayoutSettings().GetGridRowHeight();
         if(rowHeight > 0)
         {
             qreal rowY = rowHeight;
@@ -101,11 +103,17 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsSheet::GetSheetRect() const
+auto VPGraphicsSheet::GetSheetRect() const -> QRectF
 {
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return {};
+    }
+
     QPoint topLeft = QPoint(0,0);
-    QSizeF size = m_layout->LayoutSettings().GetSheetSize();
-    if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
+    QSizeF size = layout->LayoutSettings().GetSheetSize();
+    if(layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
     {
         size.transpose();
     }
@@ -114,20 +122,24 @@ QRectF VPGraphicsSheet::GetSheetRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsSheet::GetMarginsRect() const
+auto VPGraphicsSheet::GetMarginsRect() const -> QRectF
 {
-    QMarginsF margins = m_layout->LayoutSettings().GetSheetMargins();
-    QSizeF size = m_layout->LayoutSettings().GetSheetSize();
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return {};
+    }
 
-    if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
+    QMarginsF margins = layout->LayoutSettings().GetSheetMargins();
+    QSizeF size = layout->LayoutSettings().GetSheetSize();
+
+    if(layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
     {
         size.transpose();
     }
 
-    QRectF rect = QRectF(
-                    QPointF(margins.left(),margins.top()),
-                    QPointF(size.width()-margins.right(), size.height()-margins.bottom())
-                );
+    QRectF rect = QRectF(QPointF(margins.left(),margins.top()),
+                         QPointF(size.width()-margins.right(), size.height()-margins.bottom()));
     return rect;
 }
 
@@ -140,11 +152,11 @@ void VPGraphicsSheet::SetShowMargin(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::SetShowBorder(bool value)
 {
-   m_showBorder = value;
+    m_showBorder = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsSheet::boundingRect() const
+auto VPGraphicsSheet::boundingRect() const -> QRectF
 {
     return m_boundingRect;
 }

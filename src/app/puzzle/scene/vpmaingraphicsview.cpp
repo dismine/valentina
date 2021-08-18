@@ -46,6 +46,7 @@
 #include "vptilefactory.h"
 #include "vpgraphicspiececontrols.h"
 #include "../undocommands/vpundopiecemove.h"
+#include "../undocommands/vpundopiecerotate.h"
 
 #include <QLoggingCategory>
 
@@ -95,36 +96,6 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory 
     restoreOrigin->setShortcut(restoreOriginShortcut);
     connect(restoreOrigin, &QAction::triggered, this, &VPMainGraphicsView::RestoreOrigin);
     this->addAction(restoreOrigin);
-
-    auto *rotateByPlus15 = new QAction(this);
-    rotateByPlus15->setShortcut(QKeySequence(Qt::Key_BracketLeft));
-    connect(rotateByPlus15, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByPlus15);
-    this->addAction(rotateByPlus15);
-
-    auto *rotateByMinus15 = new QAction(this);
-    rotateByMinus15->setShortcut(QKeySequence(Qt::Key_BracketRight));
-    connect(rotateByMinus15, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByMinus15);
-    this->addAction(rotateByMinus15);
-
-    auto *rotateByPlus90 = new QAction(this);
-    rotateByPlus90->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_BracketLeft));
-    connect(rotateByPlus90, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByPlus90);
-    this->addAction(rotateByPlus90);
-
-    auto *rotateByMinus90 = new QAction(this);
-    rotateByMinus90->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_BracketRight));
-    connect(rotateByMinus90, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByMinus90);
-    this->addAction(rotateByMinus90);
-
-    auto *rotateByPlus1 = new QAction(this);
-    rotateByPlus1->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_BracketLeft));
-    connect(rotateByPlus1, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByPlus1);
-    this->addAction(rotateByPlus1);
-
-    auto *rotateByMinus1 = new QAction(this);
-    rotateByMinus1->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_BracketRight));
-    connect(rotateByMinus1, &QAction::triggered, this, &VPMainGraphicsView::RotatePiecesByMinus1);
-    this->addAction(rotateByMinus1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,17 +313,62 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
             TranslatePiecesOn(0, 1);
         }
     }
+    else if (event->key() == Qt::Key_BracketLeft)
+    {
+        if((event->modifiers() & Qt::ControlModifier) != 0U)
+        {
+            RotatePiecesByAngle(90);
+        }
+        else if((event->modifiers() & Qt::AltModifier) != 0U)
+        {
+            RotatePiecesByAngle(1);
+        }
+        else
+        {
+            RotatePiecesByAngle(15);
+        }
+    }
+    else if (event->key() == Qt::Key_BracketRight)
+    {
+        if((event->modifiers() & Qt::ControlModifier) != 0U)
+        {
+            RotatePiecesByAngle(-90);
+        }
+        else if((event->modifiers() & Qt::AltModifier) != 0U)
+        {
+            RotatePiecesByAngle(-1);
+        }
+        else
+        {
+            RotatePiecesByAngle(-15);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
-    VMainGraphicsView::keyReleaseEvent(event);
-    if (event->key() != Qt::Key_Left && event->key() != Qt::Key_Right && event->key() != Qt::Key_Up &&
-            event->key() != Qt::Key_Down)
+    if (event->key() == Qt::Key_Left ||
+            event->key() == Qt::Key_Right ||
+            event->key() == Qt::Key_Up ||
+            event->key() == Qt::Key_Down ||
+            event->key() == Qt::Key_BracketLeft ||
+            event->key() == Qt::Key_BracketRight)
     {
-        m_allowChangeMerge = false;
+        if (not event->isAutoRepeat())
+        {
+            m_allowChangeMerge = false;
+        }
     }
+
+    if (event->key() == Qt::Key_BracketLeft || event->key() == Qt::Key_BracketRight)
+    {
+        if (not event->isAutoRepeat())
+        {
+            m_rotationControls->SetIgnorePieceTransformation(false);
+        }
+    }
+    VMainGraphicsView::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -429,42 +445,6 @@ void VPMainGraphicsView::RestoreOrigin() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByPlus15() const
-{
-    RotatePiecesByAngle(15);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByMinus15() const
-{
-    RotatePiecesByAngle(-15);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByPlus90() const
-{
-    RotatePiecesByAngle(90);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByMinus90() const
-{
-    RotatePiecesByAngle(-90);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByPlus1() const
-{
-    RotatePiecesByAngle(1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByMinus1() const
-{
-    RotatePiecesByAngle(-1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
 {
     SCASSERT(piece != nullptr)
@@ -477,7 +457,6 @@ void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
             m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
     connect(piece, &VPGraphicsPiece::PieceTransformationChanged,
             m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
-    connect(m_rotationControls, &VPGraphicsPieceControls::Rotate, piece, &VPGraphicsPiece::on_Rotate);
     connect(piece, &VPGraphicsPiece::HideTransformationHandles,
             m_rotationControls, &VPGraphicsPieceControls::on_HideHandles);
     connect(piece, &VPGraphicsPiece::HideTransformationHandles,
@@ -485,8 +464,10 @@ void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RotatePiecesByAngle(qreal angle) const
+void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 {
+    m_rotationControls->SetIgnorePieceTransformation(true);
+
     VPLayoutPtr layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
@@ -501,14 +482,34 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle) const
 
     VPTransformationOrigon origin = sheet->TransformationOrigin();
 
-    for(auto *graphicsPiece : m_graphicsPieces)
+    auto PreparePieces = [this]()
     {
-        if (graphicsPiece->isSelected())
+        QVector<VPPiecePtr> pieces;
+        for (auto *item : m_graphicsPieces)
         {
-            graphicsPiece->on_Rotate(origin.origin, angle);
-            m_rotationControls->on_UpdateControls();
+            if (item->isSelected())
+            {
+                pieces.append(item->GetPiece());
+            }
         }
+
+        return pieces;
+    };
+
+    QVector<VPPiecePtr> pieces = PreparePieces();
+
+    if (pieces.size() == 1)
+    {
+        auto *command = new VPUndoPieceRotate(pieces.first(), origin.origin, angle, m_allowChangeMerge);
+        layout->UndoStack()->push(command);
     }
+    else if (pieces.size() > 1)
+    {
+        auto *command = new VPUndoPiecesRotate(pieces, origin.origin, angle, m_allowChangeMerge);
+        layout->UndoStack()->push(command);
+    }
+
+    m_allowChangeMerge = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

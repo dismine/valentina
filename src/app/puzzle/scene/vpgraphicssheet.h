@@ -32,19 +32,21 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
+#include "../layout/layoutdef.h"
+
 class VPLayout;
 
 class VPGraphicsSheet : public QGraphicsItem
 {
 public:
-    explicit VPGraphicsSheet(VPLayout *sheet, QGraphicsItem *parent = nullptr);
+    explicit VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent = nullptr);
     ~VPGraphicsSheet()=default;
 
-    QRectF boundingRect() const override;
+    auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    QRectF GetSheetRect() const;
-    QRectF GetMarginsRect() const;
+    auto GetSheetRect() const -> QRectF;
+    auto GetMarginsRect() const -> QRectF;
 
     /**
      * @brief SetShowMargin Sets Wether we see the margin
@@ -61,7 +63,7 @@ public:
 private:
     Q_DISABLE_COPY(VPGraphicsSheet)
 
-    VPLayout *m_layout{nullptr};
+    VPLayoutWeakPtr m_layout{};
     QRectF m_boundingRect;
 
     bool m_showMargin{true};

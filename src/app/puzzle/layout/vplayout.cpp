@@ -31,109 +31,118 @@
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
+#include <QUndoStack>
 
 Q_LOGGING_CATEGORY(pLayout, "p.layout")
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayout::VPLayout(QObject *parent) :
-    QObject(parent),
-    m_trashSheet(new VPSheet(this))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPLayout::~VPLayout()
+VPLayout::VPLayout(QUndoStack *undoStack) :
+    m_undoStack(undoStack)
 {
-    qDeleteAll(m_pieces);
+    SCASSERT(m_undoStack != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::AddPiece(VPPiece *piece)
+VPLayoutPtr VPLayout::CreateLayout(QUndoStack *undoStack)
 {
-    if ((piece != nullptr) && not m_pieces.contains(piece))
+    SCASSERT(undoStack != nullptr)
+    undoStack->clear();
+    VPLayoutPtr layout(new VPLayout(undoStack));
+    layout->AddTrashSheet(VPSheetPtr(new VPSheet(layout)));
+    return layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::AddPiece(const VPLayoutPtr &layout, const VPPiecePtr &piece)
+{
+    piece->SetLayout(layout);
+    layout->AddPiece(piece);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::AddPiece(const VPPiecePtr &piece)
+{
+    if ((piece != nullptr) && not m_pieces.contains(piece->GetUniqueID()))
     {
-        piece->SetLayout(this);
-        m_pieces.append(piece);
+        m_pieces.insert(piece->GetUniqueID(), piece);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetPieces() const -> QList<VPPiece *>
+auto VPLayout::GetPieces() const -> QList<VPPiecePtr>
 {
-    return m_pieces;
+    return m_pieces.values();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetUnplacedPieces() const -> QList<VPPiece *>
+auto VPLayout::GetUnplacedPieces() const -> QList<VPPiecePtr>
 {
-    return PiecesForSheet(nullptr);
+    return PiecesForSheet(VPSheetPtr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetTrashedPieces() const -> QList<VPPiece *>
+auto VPLayout::GetTrashedPieces() const -> QList<VPPiecePtr>
 {
-    return PiecesForSheet(m_trashSheet);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::AddSheet() -> VPSheet*
-{
-    auto *newSheet = new VPSheet(this);
-    m_sheets.append(newSheet);
-    return newSheet;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::AddSheet(VPSheet *sheet) -> VPSheet*
-{
-    if ((sheet != nullptr) && not m_sheets.contains(sheet))
+    if (m_trashSheet.isNull())
     {
-        sheet->setParent(this);
+        return {};
+    }
+    return PiecesForSheet(m_trashSheet->Uuid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
+{
+    if (not sheet.isNull() && GetSheet(sheet->Uuid()).isNull())
+    {
         m_sheets.append(sheet);
     }
     return sheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetSheets() -> QList<VPSheet *>
+auto VPLayout::GetSheets() -> QList<VPSheetPtr>
 {
     return m_sheets;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetSheet(const QUuid &uuid) -> VPSheet *
+auto VPLayout::GetSheet(const QUuid &uuid) -> VPSheetPtr
 {
-    for (auto *sheet : m_sheets)
+    auto sheet = std::find_if(m_sheets.begin(), m_sheets.end(),
+                              [uuid](const VPSheetPtr &sheet) { return sheet->Uuid() == uuid; });
+
+    if (sheet != m_sheets.end())
     {
-        if (sheet->Uuid() == uuid)
-        {
-            return sheet;
-        }
+        return *sheet;
     }
 
-    return nullptr;
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetFocusedSheet(VPSheet *focusedSheet)
+void VPLayout::SetFocusedSheet(const VPSheetPtr &focusedSheet)
 {
     if (m_sheets.isEmpty())
     {
-        m_focusedSheet = nullptr;
+        m_focusedSheet = {};
     }
     else
     {
-        m_focusedSheet = focusedSheet == nullptr ? m_sheets.first() : focusedSheet;
+        m_focusedSheet = focusedSheet.isNull() ? m_sheets.first() : focusedSheet;
     }
+
+    emit ActiveSheetChanged(m_focusedSheet);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetFocusedSheet() -> VPSheet*
+auto VPLayout::GetFocusedSheet() -> VPSheetPtr
 {
     return m_focusedSheet;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetTrashSheet() -> VPSheet*
+auto VPLayout::GetTrashSheet() -> VPSheetPtr
 {
     return m_trashSheet;
 }
@@ -145,18 +154,72 @@ auto VPLayout::LayoutSettings() -> VPLayoutSettings &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::PiecesForSheet(const VPSheet *sheet) const -> QList<VPPiece *>
+auto VPLayout::PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr>
 {
-    QList<VPPiece *> list;
+    QList<VPPiecePtr> list;
     list.reserve(m_pieces.size());
 
-    for (auto *piece : m_pieces)
+    for (auto piece : m_pieces)
     {
-        if ((piece != nullptr) && piece->Sheet() == sheet)
+        if (not piece.isNull() && piece->Sheet() == sheet)
         {
             list.append(piece);
         }
     }
 
     return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<VPPiecePtr> VPLayout::PiecesForSheet(const QUuid &uuid) const
+{
+    QList<VPPiecePtr> list;
+    list.reserve(m_pieces.size());
+
+    for (auto piece : m_pieces)
+    {
+        if (not piece.isNull())
+        {
+            VPSheetPtr sheet = piece->Sheet();
+            if (not sheet.isNull() && sheet->Uuid() == uuid)
+            {
+                list.append(piece);
+            }
+        }
+    }
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QUndoStack *VPLayout::UndoStack() const
+{
+    return m_undoStack;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetUndoStack(QUndoStack *newUndoStack)
+{
+    m_undoStack = newUndoStack;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::Clear()
+{
+    if (m_undoStack != nullptr)
+    {
+        m_undoStack->clear();
+    }
+
+    m_pieces.clear();
+    m_trashSheet->Clear();
+    m_sheets.clear();
+    m_focusedSheet.clear();
+    m_layoutSettings = VPLayoutSettings();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::AddTrashSheet(const VPSheetPtr &sheet)
+{
+    m_trashSheet = sheet;
 }

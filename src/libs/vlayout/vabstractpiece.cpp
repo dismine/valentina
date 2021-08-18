@@ -1631,6 +1631,12 @@ void VAbstractPiece::SetUUID(const QString &uuid)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPiece::GetUniqueID() const
+{
+    return d->m_uuid.toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSAPoint::GetSABefore(qreal width) const
 {
     if (m_before < 0)
