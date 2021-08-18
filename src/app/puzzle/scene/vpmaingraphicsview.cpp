@@ -366,6 +366,8 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
         if (not event->isAutoRepeat())
         {
             m_rotationControls->SetIgnorePieceTransformation(false);
+            m_rotationControls->on_UpdateControls();
+            m_rotationControls->on_HideHandles(false);
         }
     }
     VMainGraphicsView::keyReleaseEvent(event);
@@ -466,6 +468,7 @@ void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 {
+    m_rotationControls->on_HideHandles(true);
     m_rotationControls->SetIgnorePieceTransformation(true);
 
     VPLayoutPtr layout = m_layout.toStrongRef();
