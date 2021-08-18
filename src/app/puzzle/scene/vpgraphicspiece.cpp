@@ -81,13 +81,17 @@ auto VPGraphicsPiece::GetPiece() -> VPPiecePtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::boundingRect() const -> QRectF
 {
-    constexpr qreal halfPenWidth = penWidth/2.;
-    if(!m_cuttingLine.isEmpty())
-    {
-        return m_cuttingLine.boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
-    }
+    QPainterPath shape;
+    shape.addPath(m_seamLine);
+    shape.addPath(m_cuttingLine);
+    shape.addPath(m_grainline);
+    shape.addPath(m_internalPaths);
+    shape.addPath(m_passmarks);
+    shape.addPath(m_placeLabels);
 
-    return m_seamLine.boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
+    constexpr qreal halfPenWidth = penWidth/2.;
+
+    return shape.boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -214,6 +218,13 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     QBrush noBrush(Qt::NoBrush);
     QBrush selectionBrush(QColor(255,160,160,60));
 
+    m_seamLine = QPainterPath();
+    m_cuttingLine = QPainterPath();
+    m_grainline = QPainterPath();
+    m_internalPaths = QPainterPath();
+    m_passmarks = QPainterPath();
+    m_placeLabels = QPainterPath();
+
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
@@ -224,7 +235,6 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
     if(!seamLinePoints.isEmpty())
     {
-        m_seamLine = QPainterPath();
         m_seamLine.moveTo(seamLinePoints.first());
         for (int i = 1; i < seamLinePoints.size(); i++)
         {
@@ -244,7 +254,6 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
     if(!cuttingLinepoints.isEmpty())
     {
-        m_cuttingLine = QPainterPath();
         m_cuttingLine.moveTo(cuttingLinepoints.first());
         for (int i = 1; i < cuttingLinepoints.size(); i++)
         {
@@ -266,11 +275,10 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
         if(!grainLinepoints.isEmpty())
         {
-            QPainterPath grainline;
-            grainline.moveTo(grainLinepoints.first());
+            m_grainline.moveTo(grainLinepoints.first());
             for (int i = 1; i < grainLinepoints.size(); i++)
             {
-                grainline.lineTo(grainLinepoints.at(i));
+                m_grainline.lineTo(grainLinepoints.at(i));
             }
 
             if (painter != nullptr)
@@ -281,7 +289,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 //                painter->setBrush(blackBrush);
 
                 painter->setBrush(noBrush);
-                painter->drawPath(grainline);
+                painter->drawPath(m_grainline);
                 painter->restore();
             }
         }
@@ -300,6 +308,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
             painter->drawPath(path);
             painter->restore();
         }
+        m_internalPaths.addPath(path);
     }
 
     // initialises the passmarks
@@ -320,6 +329,8 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
             painter->drawPath(passmarkPath);
             painter->restore();
         }
+
+        m_passmarks.addPath(passmarkPath);
     }
 
     // initialises the place labels (buttons etc)
@@ -335,6 +346,8 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
             painter->drawPath(path);
             painter->restore();
         }
+
+        m_placeLabels.addPath(path);
     }
 
     // TODO : initialises the text labels

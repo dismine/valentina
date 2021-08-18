@@ -78,6 +78,10 @@ private:
 
     QPainterPath m_cuttingLine{};
     QPainterPath m_seamLine{};
+    QPainterPath m_grainline{};
+    QPainterPath m_internalPaths{};
+    QPainterPath m_passmarks{};
+    QPainterPath m_placeLabels{};
 
     QPointF m_moveStartPoint{};
     QPointF m_rotationStartPoint{};
