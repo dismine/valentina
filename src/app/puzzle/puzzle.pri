@@ -13,6 +13,7 @@ SOURCES += \
     $$PWD/undocommands/vpundooriginmove.cpp \
     $$PWD/undocommands/vpundopiecemove.cpp \
     $$PWD/undocommands/vpundopiecerotate.cpp \
+    $$PWD/undocommands/vpundoremovesheet.cpp \
     $$PWD/vpapplication.cpp \
     $$PWD/carousel/vpcarrousel.cpp \
     $$PWD/carousel/vpcarrouselpiece.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     $$PWD/undocommands/vpundooriginmove.h \
     $$PWD/undocommands/vpundopiecemove.h \
     $$PWD/undocommands/vpundopiecerotate.h \
+    $$PWD/undocommands/vpundoremovesheet.h \
     $$PWD/vpapplication.h \
     $$PWD/carousel/vpcarrousel.h \
     $$PWD/carousel/vpcarrouselpiece.h \

@@ -49,6 +49,7 @@
 #include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundooriginmove.h"
 #include "../undocommands/vpundomovepieceonsheet.h"
+#include "../undocommands/vpundoremovesheet.h"
 
 #include <QLoggingCategory>
 
@@ -401,22 +402,7 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->globalPos());
     if (selectedAction == removeSheetAction)
     {
-        if (sheet != nullptr)
-        {
-            sheet->SetVisible(false);
-
-            QList<VPPiecePtr> pieces = sheet->GetPieces();
-            for (const auto &piece : pieces)
-            {
-                if (not piece.isNull())
-                {
-                    piece->SetSheet(nullptr);
-                }
-            }
-        }
-
-        layout->SetFocusedSheet(VPSheetPtr());
-        emit on_SheetRemoved();
+        layout->UndoStack()->push(new VPUndoRemoveSheet(sheet));
     }
     else if (selectedAction == restoreOriginAction)
     {

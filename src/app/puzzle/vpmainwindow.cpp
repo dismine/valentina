@@ -784,7 +784,6 @@ void VPMainWindow::InitMainGraphics()
 
     connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
     connect(m_graphicsView->GetScene(), &VMainGraphicsScene::mouseMove, this, &VPMainWindow::on_MouseMoved);
-    connect(m_graphicsView, &VPMainGraphicsView::on_SheetRemoved, m_carrousel, &VPCarrousel::Refresh);
     connect(m_layout.get(), &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
 }
 

@@ -70,9 +70,6 @@ public:
      */
     void CleanAfterExport();
 
-signals:
-    void on_SheetRemoved();
-
 public slots:
     /**
      * @brief on_PieceSheetChanged The slot is called when the given piece was moved from the given piece list to
