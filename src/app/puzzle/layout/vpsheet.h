@@ -40,18 +40,6 @@
 class VPLayout;
 class VPPiece;
 
-enum class GrainlineType : qint8
-{
-    Vertical,
-    Horizontal
-};
-
-struct VPTransformationOrigon
-{
-    QPointF origin{};
-    bool    custom{false};
-};
-
 class VPSheet
 {
 public:

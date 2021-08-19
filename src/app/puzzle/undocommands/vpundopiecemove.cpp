@@ -32,11 +32,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPieceMove::VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bool allowMerge, QUndoCommand *parent)
-    : VPUndoCommand(parent),
+    : VPUndoCommand(allowMerge, parent),
       m_piece(piece),
       m_dx(dx),
-      m_dy(dy),
-      m_allowMerge(allowMerge)
+      m_dy(dy)
 {
     SCASSERT(not piece.isNull())
 
@@ -99,17 +98,8 @@ auto VPUndoPieceMove::mergeWith(const QUndoCommand *command) -> bool
     SCASSERT(moveCommand != nullptr)
 
     VPPiecePtr piece = Piece();
-    if (moveCommand->Piece().isNull() || piece.isNull())
-    {
-        return false;
-    }
-
-    if (moveCommand->Piece() != piece)
-    {
-        return false;
-    }
-
-    if (not moveCommand->AllowMerge())
+    if (moveCommand->Piece().isNull() || piece.isNull() || moveCommand->Piece() != piece ||
+            not moveCommand->AllowMerge())
     {
         return false;
     }
@@ -129,10 +119,9 @@ auto VPUndoPieceMove::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPiecesMove::VPUndoPiecesMove(const QVector<VPPiecePtr> &pieces, qreal dx, qreal dy, bool allowMerge,
                                    QUndoCommand *parent)
-    : VPUndoCommand(parent),
+    : VPUndoCommand(allowMerge, parent),
       m_dx(dx),
-      m_dy(dy),
-      m_allowMerge(allowMerge)
+      m_dy(dy)
 {
     setText(QObject::tr("move pieces"));
 

@@ -38,6 +38,7 @@
 #include "../vwidgets/global.h"
 #include "../layout/vplayout.h"
 #include "../undocommands/vpundopiecerotate.h"
+#include "../undocommands/vpundooriginmove.h"
 #include "vpgraphicspiece.h"
 
 namespace
@@ -93,12 +94,16 @@ VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr
     setCursor(Qt::OpenHandCursor);
     setZValue(1);
     setAcceptHoverEvents(true);
+
+    connect(layout.get(), &VPLayout::TransformationOriginChanged, this,
+            &VPGraphicsTransformationOrigin::SetTransformationOrigin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::SetTransformationOrigin()
 {
     prepareGeometryChange();
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,11 +186,14 @@ void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *ev
             VPTransformationOrigon origin = sheet->TransformationOrigin();
             origin.origin = event->scenePos();
             origin.custom = true;
-            sheet->SetTransformationOrigin(origin);
+
+            auto *command = new VPUndoOriginMove(sheet, origin, m_allowChangeMerge);
+            layout->UndoStack()->push(command);
         }
         prepareGeometryChange();
     }
 
+    m_allowChangeMerge = true;
     QGraphicsObject::mouseMoveEvent(event);
 }
 
@@ -199,6 +207,7 @@ void VPGraphicsTransformationOrigin::mouseReleaseEvent(QGraphicsSceneMouseEvent 
     if (event->button() == Qt::LeftButton)
     {
         setCursor(Qt::OpenHandCursor);
+        m_allowChangeMerge = false;
     }
 }
 
@@ -779,7 +788,7 @@ auto VPGraphicsPieceControls::SelectedPieces() const -> QVector<VPGraphicsPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPieceControls::PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) const -> QRectF
+auto VPGraphicsPieceControls::PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) -> QRectF
 {
     QRectF rect;
     for (auto *item : selectedPieces)

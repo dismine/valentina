@@ -51,7 +51,6 @@ public:
     auto Piece() const -> VPPiecePtr;
     auto Dx() const -> qreal;
     auto Dy() const -> qreal;
-    auto AllowMerge() const -> bool;
 
 private:
     Q_DISABLE_COPY(VPUndoPieceMove)
@@ -60,7 +59,6 @@ private:
     QTransform     m_oldTransform{};
     qreal          m_dx;
     qreal          m_dy;
-    bool           m_allowMerge;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,12 +79,6 @@ inline auto VPUndoPieceMove::Dy() const -> qreal
     return m_dy;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoPieceMove::AllowMerge() const -> bool
-{
-    return m_allowMerge;
-}
-
 // Move pieces
 class VPUndoPiecesMove : public VPUndoCommand
 {
@@ -105,7 +97,6 @@ public:
     auto PieceIds() const -> QSet<QString>;
     auto Dx() const -> qreal;
     auto Dy() const -> qreal;
-    auto AllowMerge() const -> bool;
 
 private:
     Q_DISABLE_COPY(VPUndoPiecesMove)
@@ -114,7 +105,6 @@ private:
     QMap<QString, QTransform> m_oldTransforms{};
     qreal                     m_dx;
     qreal                     m_dy;
-    bool                      m_allowMerge;
 
     auto Layout() const -> VPLayoutPtr;
     auto Sheet() const -> VPSheetPtr;
@@ -130,12 +120,6 @@ inline auto VPUndoPiecesMove::Dx() const -> qreal
 inline auto VPUndoPiecesMove::Dy() const -> qreal
 {
     return m_dy;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoPiecesMove::AllowMerge() const -> bool
-{
-    return m_allowMerge;
 }
 
 #endif // VPUNDOPIECEMOVE_H

@@ -47,6 +47,7 @@
 #include "vpgraphicspiececontrols.h"
 #include "../undocommands/vpundopiecemove.h"
 #include "../undocommands/vpundopiecerotate.h"
+#include "../undocommands/vpundooriginmove.h"
 
 #include <QLoggingCategory>
 
@@ -440,9 +441,23 @@ void VPMainGraphicsView::RestoreOrigin() const
     if (not sheet.isNull())
     {
         VPTransformationOrigon origin = sheet->TransformationOrigin();
-        origin.custom = false;
-        sheet->SetTransformationOrigin(origin);
-        m_rotationControls->on_UpdateControls();
+        if (origin.custom)
+        { // ignore if not custom. Prevent double call
+            origin.custom = false;
+
+            QRectF boundingRect;
+            for (auto *graphicsPiece : m_graphicsPieces)
+            {
+                if (graphicsPiece->isSelected())
+                {
+                    boundingRect = boundingRect.united(graphicsPiece->sceneBoundingRect());
+                }
+            }
+            origin.origin = boundingRect.center();
+
+            auto *command = new VPUndoOriginMove(sheet, origin);
+            layout->UndoStack()->push(command);
+        }
     }
 }
 

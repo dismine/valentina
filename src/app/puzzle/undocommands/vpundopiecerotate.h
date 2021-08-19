@@ -52,7 +52,6 @@ public:
     auto Piece() const -> VPPiecePtr;
     auto Origin() const -> QPointF;
     auto Angle() const -> qreal;
-    auto AllowMerge() const -> bool;
 
 private:
     Q_DISABLE_COPY(VPUndoPieceRotate)
@@ -61,7 +60,6 @@ private:
     QTransform     m_oldTransform{};
     QPointF        m_origin;
     qreal          m_angle;
-    bool           m_allowMerge;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,12 +80,6 @@ inline auto VPUndoPieceRotate::Angle() const -> qreal
     return m_angle;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoPieceRotate::AllowMerge() const -> bool
-{
-    return m_allowMerge;
-}
-
 // Rotate pieces
 class VPUndoPiecesRotate : public VPUndoCommand
 {
@@ -106,7 +98,6 @@ public:
     auto PieceIds() const -> QSet<QString>;
     auto Origin() const -> QPointF;
     auto Angle() const -> qreal;
-    auto AllowMerge() const -> bool;
 
 private:
     Q_DISABLE_COPY(VPUndoPiecesRotate)
@@ -115,7 +106,6 @@ private:
     QMap<QString, QTransform> m_oldTransforms{};
     QPointF                   m_origin;
     qreal                     m_angle;
-    bool                      m_allowMerge;
 
     auto Layout() const -> VPLayoutPtr;
     auto Sheet() const -> VPSheetPtr;
@@ -131,12 +121,6 @@ inline auto VPUndoPiecesRotate::Origin() const -> QPointF
 inline auto VPUndoPiecesRotate::Angle() const -> qreal
 {
     return m_angle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoPiecesRotate::AllowMerge() const -> bool
-{
-    return m_allowMerge;
 }
 
 #endif // VPUNDOPIECEROTATE_H

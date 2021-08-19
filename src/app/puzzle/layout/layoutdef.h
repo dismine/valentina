@@ -28,6 +28,7 @@
 #ifndef LAYOUTDEF_H
 #define LAYOUTDEF_H
 
+#include <QPointF>
 #include <QSharedPointer>
 
 class VPLayout;
@@ -41,5 +42,17 @@ using VPPieceWeakPtr = QWeakPointer<VPPiece>;
 class VPSheet;
 using VPSheetPtr = QSharedPointer<VPSheet>;
 using VPSheetWeakPtr = QWeakPointer<VPSheet>;
+
+enum class GrainlineType : qint8
+{
+    Vertical,
+    Horizontal
+};
+
+struct VPTransformationOrigon
+{
+    QPointF origin{};
+    bool    custom{false};
+};
 
 #endif // LAYOUTDEF_H

@@ -69,6 +69,7 @@ private:
     bool            m_originVisible{true};
     VPLayoutWeakPtr m_layout{};
     QColor          m_color;
+    bool            m_allowChangeMerge{false};
 
     auto RotationCenter(QPainter *painter = nullptr) const -> QPainterPath;
     auto Center1() const -> QPainterPath;
@@ -127,9 +128,10 @@ private:
 
     auto ArrowPath() const -> QPainterPath;
 
-    auto SelectedPieces() const -> QVector<VPGraphicsPiece *>;
-    auto PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) const -> QRectF;
     auto HandleCorner(const QPointF &pos) const -> int;
+
+    auto SelectedPieces() const -> QVector<VPGraphicsPiece *>;
+    static auto PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) -> QRectF;
 };
 
 #endif // VPGRAPHICSPIECECONTROLS_H

@@ -32,11 +32,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const QPointF &origin, qreal angle, bool allowMerge,
                                      QUndoCommand *parent)
-    : VPUndoCommand(parent),
+    : VPUndoCommand(allowMerge, parent),
       m_piece(piece),
       m_origin(origin),
-      m_angle(angle),
-      m_allowMerge(allowMerge)
+      m_angle(angle)
 {
     SCASSERT(not piece.isNull())
 
@@ -119,10 +118,9 @@ auto VPUndoPieceRotate::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPiecesRotate::VPUndoPiecesRotate(const QVector<VPPiecePtr> &pieces, const QPointF &origin, qreal angle,
                                        bool allowMerge, QUndoCommand *parent)
-    : VPUndoCommand(parent),
+    : VPUndoCommand(allowMerge, parent),
       m_origin(origin),
-      m_angle(angle),
-      m_allowMerge(allowMerge)
+      m_angle(angle)
 {
     setText(QObject::tr("rotate pieces"));
 

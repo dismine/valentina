@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpundocommand.h
+ **  @file   vpundooriginmove.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 8, 2021
+ **  @date   19 8, 2021
  **
  **  @brief
  **  @copyright
@@ -25,48 +25,49 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUNDOCOMMAND_H
-#define VPUNDOCOMMAND_H
+#ifndef VPUNDOORIGINMOVE_H
+#define VPUNDOORIGINMOVE_H
 
-#include <QObject>
-#include <QUndoCommand>
-#include <QLoggingCategory>
+#include "vpundocommand.h"
 
-namespace ML
-{
-enum class UndoCommand: qint8
-{
-    MovePiece = 0,
-    MovePieces = 1,
-    RotatePiece = 2,
-    RotatePieces = 3,
-    MoveOrigin = 4,
-};
-}
+#include "../layout/layoutdef.h"
 
-Q_DECLARE_LOGGING_CATEGORY(vpUndo)
-
-class VPUndoCommand : public QObject, public QUndoCommand
+class VPUndoOriginMove : public VPUndoCommand
 {
     Q_OBJECT
 public:
-    explicit VPUndoCommand(bool allowMerge = false, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoCommand() =default;
+    VPUndoOriginMove(const VPSheetPtr &sheet, const VPTransformationOrigon &origin, bool allowMerge = false,
+                     QUndoCommand *parent = nullptr);
+    virtual ~VPUndoOriginMove()=default;
 
-    auto AllowMerge() const -> bool;
+    virtual void undo() override;
+    virtual void redo() override;
+    // cppcheck-suppress unusedFunction
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override ;
 
-protected:
-    bool m_allowMerge;
+    auto Sheet() const -> VPSheetWeakPtr;
+    auto Origin() const -> const VPTransformationOrigon &;
 
 private:
-    Q_DISABLE_COPY(VPUndoCommand)
+    Q_DISABLE_COPY(VPUndoOriginMove)
+
+    VPSheetWeakPtr         m_sheet;
+    VPTransformationOrigon m_oldOrigin{};
+    VPTransformationOrigon m_origin{};
+
 };
 
-
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoCommand::AllowMerge() const -> bool
+inline auto VPUndoOriginMove::Sheet() const -> VPSheetWeakPtr
 {
-    return m_allowMerge;
+    return m_sheet;
 }
 
-#endif // VPUNDOCOMMAND_H
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPUndoOriginMove::Origin() const ->const VPTransformationOrigon &
+{
+    return m_origin;
+}
+
+#endif // VPUNDOORIGINMOVE_H
