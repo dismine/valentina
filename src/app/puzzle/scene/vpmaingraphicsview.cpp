@@ -48,6 +48,7 @@
 #include "../undocommands/vpundopiecemove.h"
 #include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundooriginmove.h"
+#include "../undocommands/vpundomovepieceonsheet.h"
 
 #include <QLoggingCategory>
 
@@ -237,17 +238,8 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             piece->ClearTransformations();
             piece->SetPosition(mapToScene(event->pos()));
 
-            // change the piecelist of the piece
-            piece->SetSheet(layout->GetFocusedSheet());
-
-            auto *graphicsPiece = new VPGraphicsPiece(piece);
-            m_graphicsPieces.append(graphicsPiece);
-
-            scene()->addItem(graphicsPiece);
-
-            ConnectPiece(graphicsPiece);
-
-            event->acceptProposedAction();
+            auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
+            layout->UndoStack()->push(command);
         }
     }
 }
@@ -264,9 +256,13 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
             if(not piece.isNull() && piece->IsSelected())
             {
                 piece->SetSelected(false);
-                piece->SetSheet(VPSheetPtr());
-                m_graphicsPieces.removeAll(graphicsPiece);
-                delete graphicsPiece;
+
+                VPLayoutPtr layout = m_layout.toStrongRef();
+                if (not layout.isNull())
+                {
+                    auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
+                    layout->UndoStack()->push(command);
+                }
             }
         }
     }
@@ -611,7 +607,6 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
     {
         if(_graphicsPiece == nullptr)
         {
-            piece->ClearTransformations();
             _graphicsPiece = new VPGraphicsPiece(piece);
             m_graphicsPieces.append(_graphicsPiece);
             ConnectPiece(_graphicsPiece);

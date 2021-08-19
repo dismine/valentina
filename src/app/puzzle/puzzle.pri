@@ -8,6 +8,7 @@ SOURCES += \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
     $$PWD/undocommands/vpundocommand.cpp \
+    $$PWD/undocommands/vpundomovepieceonsheet.cpp \
     $$PWD/undocommands/vpundooriginmove.cpp \
     $$PWD/undocommands/vpundopiecemove.cpp \
     $$PWD/undocommands/vpundopiecerotate.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     $$PWD/scene/scenedef.h \
     $$PWD/stable.h \
     $$PWD/undocommands/vpundocommand.h \
+    $$PWD/undocommands/vpundomovepieceonsheet.h \
     $$PWD/undocommands/vpundooriginmove.h \
     $$PWD/undocommands/vpundopiecemove.h \
     $$PWD/undocommands/vpundopiecerotate.h \

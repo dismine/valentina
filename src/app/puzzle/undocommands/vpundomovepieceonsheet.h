@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpundocommand.h
+ **  @file   vpundomovepieceonsheet.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 8, 2021
+ **  @date   19 8, 2021
  **
  **  @brief
  **  @copyright
@@ -25,49 +25,29 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUNDOCOMMAND_H
-#define VPUNDOCOMMAND_H
+#ifndef VPUNDOMOVEPIECEONSHEET_H
+#define VPUNDOMOVEPIECEONSHEET_H
 
-#include <QObject>
-#include <QUndoCommand>
-#include <QLoggingCategory>
+#include "vpundocommand.h"
 
-namespace ML
+#include "../layout/layoutdef.h"
+
+class VPUndoMovePieceOnSheet : public VPUndoCommand
 {
-enum class UndoCommand: qint8
-{
-    MovePiece = 0,
-    MovePieces = 1,
-    RotatePiece = 2,
-    RotatePieces = 3,
-    MoveOrigin = 4,
-    MoveOnSheet = 5,
-};
-}
-
-Q_DECLARE_LOGGING_CATEGORY(vpUndo)
-
-class VPUndoCommand : public QObject, public QUndoCommand
-{
-    Q_OBJECT
 public:
-    explicit VPUndoCommand(bool allowMerge = false, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoCommand() =default;
+    VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VPPiecePtr &piece, QUndoCommand *parent = nullptr);
+    virtual ~VPUndoMovePieceOnSheet()=default;
 
-    auto AllowMerge() const -> bool;
-
-protected:
-    bool m_allowMerge;
+    virtual void undo() override;
+    virtual void redo() override;
+    virtual auto id() const -> int override;
 
 private:
-    Q_DISABLE_COPY(VPUndoCommand)
+    Q_DISABLE_COPY(VPUndoMovePieceOnSheet)
+
+    VPSheetWeakPtr m_oldSheet{};
+    VPSheetWeakPtr m_sheet;
+    VPPieceWeakPtr m_piece;
 };
 
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoCommand::AllowMerge() const -> bool
-{
-    return m_allowMerge;
-}
-
-#endif // VPUNDOCOMMAND_H
+#endif // VPUNDOMOVEPIECEONSHEET_H

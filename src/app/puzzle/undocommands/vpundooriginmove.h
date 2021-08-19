@@ -44,7 +44,7 @@ public:
     virtual void redo() override;
     // cppcheck-suppress unusedFunction
     virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override ;
+    virtual auto id() const -> int override;
 
     auto Sheet() const -> VPSheetWeakPtr;
     auto Origin() const -> const VPTransformationOrigon &;

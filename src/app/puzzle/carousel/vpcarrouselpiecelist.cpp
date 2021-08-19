@@ -39,6 +39,7 @@
 #include "vpmimedatapiece.h"
 #include "../layout/vpsheet.h"
 #include "../layout/vplayout.h"
+#include "../undocommands/vpundomovepieceonsheet.h"
 
 #include <QLoggingCategory>
 
@@ -203,20 +204,19 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
         if (selectedAction == moveAction)
         {
-            VPSheetPtr sheet = layout->GetFocusedSheet();
-            piece->SetSheet(sheet);
-            emit layout->PieceSheetChanged(piece);
+            piece->ClearTransformations();
+            auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
+            layout->UndoStack()->push(command);
         }
         else if (selectedAction == deleteAction)
         {
-            VPSheetPtr sheet = layout->GetTrashSheet();
-            piece->SetSheet(sheet);
-            emit layout->PieceSheetChanged(piece);
+            auto *command = new VPUndoMovePieceOnSheet(layout->GetTrashSheet(), piece);
+            layout->UndoStack()->push(command);
         }
         else if (selectedAction == removeAction)
         {
-            piece->SetSheet(nullptr);
-            emit layout->PieceSheetChanged(piece);
+            auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
+            layout->UndoStack()->push(command);
         }
     }
 }

@@ -79,6 +79,9 @@ public:
 
     void Clear();
 
+    auto TrashSheet() const -> bool;
+    void SetTrashSheet(bool newTrashSheet);
+
 private:
     Q_DISABLE_COPY(VPSheet)
 
@@ -89,6 +92,7 @@ private:
     QUuid m_uuid{QUuid::createUuid()};
 
     bool m_visible{true};
+    bool m_trashSheet{false};
 
     VPTransformationOrigon m_transformationOrigin{};
 };

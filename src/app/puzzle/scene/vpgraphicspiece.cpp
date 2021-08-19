@@ -47,6 +47,7 @@
 #include "vplacelabelitem.h"
 
 #include "undocommands/vpundopiecemove.h"
+#include "undocommands/vpundomovepieceonsheet.h"
 
 #include <QLoggingCategory>
 Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
@@ -202,13 +203,13 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
     if (moveToActions.contains(selectedAction))
     {
-        piece->SetSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()));
-        emit layout->PieceSheetChanged(piece);
+        auto *command = new VPUndoMovePieceOnSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()), piece);
+        layout->UndoStack()->push(command);
     }
     else if (selectedAction == removeAction)
     {
-        piece->SetSheet(nullptr);
-        emit layout->PieceSheetChanged(piece);
+        auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
+        layout->UndoStack()->push(command);
     }
 }
 

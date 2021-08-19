@@ -41,7 +41,7 @@ VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const QPointF &ori
 
     m_oldTransform = piece->GetMatrix();
 
-    setText(QObject::tr("rotate piece"));
+    setText(tr("rotate piece"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

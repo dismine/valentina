@@ -41,7 +41,7 @@ VPUndoOriginMove::VPUndoOriginMove(const VPSheetPtr &sheet, const VPTransformati
 
     m_oldOrigin = sheet->TransformationOrigin();
 
-    setText(QObject::tr("move transformation origin"));
+    setText(tr("move transformation origin"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ void VPUndoOriginMove::redo()
     layout->SetFocusedSheet(sheet);
 
     sheet->SetTransformationOrigin(m_origin);
-    layout->TransformationOriginChanged();
+    emit layout->TransformationOriginChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

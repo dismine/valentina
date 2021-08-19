@@ -41,7 +41,7 @@ VPUndoPieceMove::VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bo
 
     m_oldTransform = piece->GetMatrix();
 
-    setText(QObject::tr("move piece"));
+    setText(tr("move piece"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

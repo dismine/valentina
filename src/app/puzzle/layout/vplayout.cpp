@@ -159,7 +159,7 @@ auto VPLayout::PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr
     QList<VPPiecePtr> list;
     list.reserve(m_pieces.size());
 
-    for (auto piece : m_pieces)
+    for (const auto& piece : m_pieces)
     {
         if (not piece.isNull() && piece->Sheet() == sheet)
         {
@@ -171,12 +171,12 @@ auto VPLayout::PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPPiecePtr> VPLayout::PiecesForSheet(const QUuid &uuid) const
+auto VPLayout::PiecesForSheet(const QUuid &uuid) const -> QList<VPPiecePtr>
 {
     QList<VPPiecePtr> list;
     list.reserve(m_pieces.size());
 
-    for (auto piece : m_pieces)
+    for (const auto& piece : m_pieces)
     {
         if (not piece.isNull())
         {
@@ -192,7 +192,7 @@ QList<VPPiecePtr> VPLayout::PiecesForSheet(const QUuid &uuid) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QUndoStack *VPLayout::UndoStack() const
+auto VPLayout::UndoStack() const -> QUndoStack *
 {
     return m_undoStack;
 }
@@ -222,4 +222,5 @@ void VPLayout::Clear()
 void VPLayout::AddTrashSheet(const VPSheetPtr &sheet)
 {
     m_trashSheet = sheet;
+    m_trashSheet->SetTrashSheet(true);
 }

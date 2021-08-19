@@ -120,4 +120,17 @@ void VPSheet::Clear()
     m_name.clear();
     m_visible = true;
     m_transformationOrigin = VPTransformationOrigon();
+    m_trashSheet = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::TrashSheet() const -> bool
+{
+    return m_trashSheet;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetTrashSheet(bool newTrashSheet)
+{
+    m_trashSheet = newTrashSheet;
 }
