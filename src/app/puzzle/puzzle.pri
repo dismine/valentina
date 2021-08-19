@@ -7,6 +7,7 @@ SOURCES += \
     $$PWD/dialogs/dialogpuzzlepreferences.cpp \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
+    $$PWD/undocommands/vpundoaddsheet.cpp \
     $$PWD/undocommands/vpundocommand.cpp \
     $$PWD/undocommands/vpundomovepieceonsheet.cpp \
     $$PWD/undocommands/vpundooriginmove.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     $$PWD/layout/layoutdef.h \
     $$PWD/scene/scenedef.h \
     $$PWD/stable.h \
+    $$PWD/undocommands/vpundoaddsheet.h \
     $$PWD/undocommands/vpundocommand.h \
     $$PWD/undocommands/vpundomovepieceonsheet.h \
     $$PWD/undocommands/vpundooriginmove.h \

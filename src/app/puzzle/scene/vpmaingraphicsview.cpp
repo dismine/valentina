@@ -93,6 +93,7 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory 
 
     // add the connections
     connect(layout.get(), &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
+    connect(layout.get(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::RefreshPieces);
 
     auto *restoreOrigin = new QAction(this);
     restoreOrigin->setShortcut(restoreOriginShortcut);

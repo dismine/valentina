@@ -43,12 +43,19 @@ VPLayout::VPLayout(QUndoStack *undoStack) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayoutPtr VPLayout::CreateLayout(QUndoStack *undoStack)
+auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 {
     SCASSERT(undoStack != nullptr)
     undoStack->clear();
     VPLayoutPtr layout(new VPLayout(undoStack));
     layout->AddTrashSheet(VPSheetPtr(new VPSheet(layout)));
+
+    // create a standard sheet
+    VPSheetPtr sheet(new VPSheet(layout));
+    sheet->SetName(tr("Sheet %1").arg(layout->GetSheets().size()+1));
+    layout->AddSheet(sheet);
+    layout->SetFocusedSheet(sheet);
+
     return layout;
 }
 

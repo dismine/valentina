@@ -57,6 +57,7 @@ VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent) :
             &VPCarrousel::on_ActivePieceListChanged);
 
     connect(layout.get(), &VPLayout::ActiveSheetChanged, this, &VPCarrousel::on_ActiveSheetChanged);
+    connect(layout.get(), &VPLayout::SheetListChanged, this, &VPCarrousel::Refresh);
 
     // ------ then we fill the carrousel with the layout content
     Refresh();

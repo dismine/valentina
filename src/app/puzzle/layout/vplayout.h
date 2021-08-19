@@ -89,6 +89,7 @@ signals:
     void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
     void PieceTransformationChanged(const VPPiecePtr &piece);
     void TransformationOriginChanged();
+    void SheetListChanged();
 
 protected:
     explicit VPLayout(QUndoStack *undoStack);

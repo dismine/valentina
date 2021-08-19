@@ -48,6 +48,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "layout/vpsheet.h"
 #include "dialogs/dialogpuzzlepreferences.h"
+#include "undocommands/vpundoaddsheet.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -77,19 +78,20 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // create a standard sheet
-    AddSheet();
-
     // ----- for test purposes, to be removed------------------
     m_layout->LayoutSettings().SetUnit(Unit::Cm);
     m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(true);
     m_layout->LayoutSettings().SetTitle(QString("My Test Layout"));
     m_layout->LayoutSettings().SetDescription(QString("Description of my Layout"));
 
-    m_layout->LayoutSettings().SetTilesSizeConverted(21,29.7);
+    m_layout->LayoutSettings().SetTilesSizeConverted(21, 29.7);
     m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Portrait);
-    m_layout->LayoutSettings().SetTilesMarginsConverted(1,1,1,1);
+    m_layout->LayoutSettings().SetTilesMarginsConverted(1, 1, 1, 1);
     m_layout->LayoutSettings().SetShowTiles(true);
+
+    m_layout->LayoutSettings().SetSheetMarginsConverted(1, 1, 1, 1);
+    m_layout->LayoutSettings().SetSheetSizeConverted(84.1, 118.9);
+    m_layout->LayoutSettings().SetPiecesGapConverted(1);
 
     // --------------------------------------------------------
 
@@ -1120,20 +1122,6 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::AddSheet()
-{
-    VPSheetPtr sheet(new VPSheet(m_layout));
-    sheet->SetName(QObject::tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
-    m_layout->AddSheet(sheet);
-    m_layout->SetFocusedSheet(sheet);
-
-//    // ----- for test purposes, to be removed------------------
-    m_layout->LayoutSettings().SetSheetMarginsConverted(1, 1, 1, 1);
-    m_layout->LayoutSettings().SetSheetSizeConverted(84.1, 118.9);
-    m_layout->LayoutSettings().SetPiecesGapConverted(1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::IsLayoutReadOnly() const -> bool
 {
     if (curFile.isEmpty())
@@ -1948,8 +1936,9 @@ void VPMainWindow::ToolBarStyles()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionAddSheet_triggered()
 {
-    AddSheet();
-    m_carrousel->Refresh();
+    VPSheetPtr sheet(new VPSheet(m_layout));
+    sheet->SetName(QObject::tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
+    m_layout->UndoStack()->push(new VPUndoAddSheet(sheet));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -562,8 +562,6 @@ private:
 
     void CreateWindowMenu(QMenu *menu);
 
-    void AddSheet();
-
     auto IsLayoutReadOnly() const -> bool;
 };
 

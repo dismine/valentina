@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpundocommand.h
+ **  @file   vpundoaddsheet.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 8, 2021
+ **  @date   19 8, 2021
  **
  **  @brief
  **  @copyright
@@ -25,51 +25,27 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPUNDOCOMMAND_H
-#define VPUNDOCOMMAND_H
+#ifndef VPUNDOADDSHEET_H
+#define VPUNDOADDSHEET_H
 
-#include <QObject>
-#include <QUndoCommand>
-#include <QLoggingCategory>
+#include "vpundocommand.h"
 
-namespace ML
+#include "../layout/layoutdef.h"
+
+class VPUndoAddSheet : public VPUndoCommand
 {
-enum class UndoCommand: qint8
-{
-    MovePiece = 0,
-    MovePieces = 1,
-    RotatePiece = 2,
-    RotatePieces = 3,
-    MoveOrigin = 4,
-    MoveOnSheet = 5,
-    AddSheet = 6,
-    RemoveSheet = 7,
-};
-}
-
-Q_DECLARE_LOGGING_CATEGORY(vpUndo)
-
-class VPUndoCommand : public QObject, public QUndoCommand
-{
-    Q_OBJECT
 public:
-    explicit VPUndoCommand(bool allowMerge = false, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoCommand() =default;
+    explicit VPUndoAddSheet(const VPSheetPtr &sheet, QUndoCommand *parent = nullptr);
+    virtual ~VPUndoAddSheet()=default;
 
-    auto AllowMerge() const -> bool;
-
-protected:
-    bool m_allowMerge;
+    virtual void undo() override;
+    virtual void redo() override;
+    virtual auto id() const -> int override;
 
 private:
-    Q_DISABLE_COPY(VPUndoCommand)
+    Q_DISABLE_COPY(VPUndoAddSheet)
+
+    VPSheetWeakPtr m_sheet;
 };
 
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VPUndoCommand::AllowMerge() const -> bool
-{
-    return m_allowMerge;
-}
-
-#endif // VPUNDOCOMMAND_H
+#endif // VPUNDOADDSHEET_H

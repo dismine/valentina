@@ -194,7 +194,10 @@ void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
     QList<VPSheetPtr> sheets = layout->GetSheets();
     for (const auto &sheet : sheets)
     {
-        WriteSheet(sheet);
+        if (not sheet.isNull() && sheet->IsVisible())
+        {
+            WriteSheet(sheet);
+        }
     }
 
     writeEndElement(); // sheets
