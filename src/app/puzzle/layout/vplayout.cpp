@@ -29,6 +29,7 @@
 #include "vplayout.h"
 #include "vppiece.h"
 #include "vpsheet.h"
+#include "../vpapplication.h"
 
 #include <QLoggingCategory>
 #include <QUndoStack>
@@ -55,6 +56,32 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     sheet->SetName(tr("Sheet %1").arg(layout->GetSheets().size()+1));
     layout->AddSheet(sheet);
     layout->SetFocusedSheet(sheet);
+
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+
+    layout->LayoutSettings().SetUnit(settings->LayoutUnit());
+
+    layout->LayoutSettings().SetShowTiles(settings->GetLayoutTileShowTiles());
+    layout->LayoutSettings().SetTilesSize(QSizeF(settings->GetLayoutTilePaperWidth(),
+                                                 settings->GetLayoutTilePaperHeight()));
+    layout->LayoutSettings().SetIgnoreTilesMargins(settings->GetLayoutTileIgnoreMargins());
+    layout->LayoutSettings().SetTilesMargins(settings->GetLayoutTileMargins());
+
+    layout->LayoutSettings().SetIgnoreMargins(settings->GetLayoutSheetIgnoreMargins());
+    layout->LayoutSettings().SetSheetMargins(settings->GetLayoutSheetMargins());
+    layout->LayoutSettings().SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(),
+                                                 settings->GetLayoutSheetPaperHeight()));
+
+    layout->LayoutSettings().SetWarningSuperpositionOfPieces(settings->GetLayoutWarningPiecesSuperposition());
+    layout->LayoutSettings().SetWarningPiecesOutOfBound(settings->GetLayoutWarningPiecesOutOfBound());
+    layout->LayoutSettings().SetFollowGrainline(settings->GetLayoutFollowGrainline());
+    layout->LayoutSettings().SetStickyEdges(settings->GetLayoutStickyEdges());
+    layout->LayoutSettings().SetPiecesGap(settings->GetLayoutPieceGap());
+
+    // ----- for test purposes, to be removed------------------
+    layout->LayoutSettings().SetTitle(QString("My Test Layout"));
+    layout->LayoutSettings().SetDescription(QString("Description of my Layout"));
+    // --------------------------------------------------------
 
     return layout;
 }

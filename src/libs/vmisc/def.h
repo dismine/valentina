@@ -525,7 +525,7 @@ Q_DECL_RELAXED_CONSTEXPR inline qreal UnitConvertor(qreal value, const Unit &fro
                 case Unit::Cm:
                     return value / 10.0;
                 case Unit::Inch:
-                    return value / 25.4;
+                    return value / 10.0 / 2.54;
                 case Unit::Px:
                     return (value / 25.4) * PrintDPI;
                 default:
@@ -551,7 +551,7 @@ Q_DECL_RELAXED_CONSTEXPR inline qreal UnitConvertor(qreal value, const Unit &fro
             switch (to)
             {
                 case Unit::Mm:
-                    return value * 25.4;
+                    return value * 2.54 * 10.0;
                 case Unit::Cm:
                     return value * 2.54;
                 case Unit::Inch:

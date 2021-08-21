@@ -30,6 +30,7 @@
 #define VPMIMEDATAPIECE_H
 
 #include <QMimeData>
+#include <QSharedPointer>
 
 #include "../layout/layoutdef.h"
 
@@ -62,7 +63,7 @@ public:
 private:
     Q_DISABLE_COPY(VPMimeDataPiece)
 
-    VPPiecePtr m_piece{};
+    VPPieceWeakPtr m_piece{};
 };
 
 #endif // VPMIMEDATAPIECE_H

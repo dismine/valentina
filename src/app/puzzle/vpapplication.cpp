@@ -639,6 +639,18 @@ void VPApplication::NewLocalSocketConnection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPApplication::PreferencesDialog() const -> QSharedPointer<DialogPuzzlePreferences>
+{
+    return m_preferencesDialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPApplication::SetPreferencesDialog(const QSharedPointer<DialogPuzzlePreferences> &newPreferencesDialog)
+{
+    m_preferencesDialog = newPreferencesDialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPApplication::Clean()
 {
     // cleanup any deleted main windows first

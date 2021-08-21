@@ -38,6 +38,7 @@ namespace Ui
 class PuzzlePreferencesConfigurationPage;
 class PuzzlePreferencesPathPage;
 class QListWidgetItem;
+class PuzzlePreferencesLayoutPage;
 
 class DialogPuzzlePreferences : public QDialog
 {
@@ -65,6 +66,7 @@ private:
     Ui::DialogPuzzlePreferences *ui;
     bool m_isInitialized{false};
     PuzzlePreferencesConfigurationPage *m_configurationPage;
+    PuzzlePreferencesLayoutPage        *m_layoutPage;
     PuzzlePreferencesPathPage          *m_pathPage;
 };
 

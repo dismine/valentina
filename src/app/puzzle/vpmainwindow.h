@@ -52,6 +52,8 @@ namespace Ui
 }
 
 class QFileSystemWatcher;
+template <typename T> class QSharedPointer;
+class DialogPuzzlePreferences;
 
 class VPMainWindow : public VAbstractMainWindow
 {
@@ -563,6 +565,8 @@ private:
     void CreateWindowMenu(QMenu *menu);
 
     auto IsLayoutReadOnly() const -> bool;
+
+    void ConnectToPreferences(const QSharedPointer<DialogPuzzlePreferences> &preferences);
 };
 
 #endif // VPMAINWINDOW_H

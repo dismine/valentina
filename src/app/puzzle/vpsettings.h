@@ -40,13 +40,58 @@ public:
                     QObject *parent = nullptr);
     VPSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
-    bool IsDockWidgetPropertiesActive() const;
-    static bool GetDefDockWidgetPropertiesActive();
+    auto IsDockWidgetPropertiesActive() const -> bool;
+    static auto GetDefDockWidgetPropertiesActive() -> bool;
     void SetDockWidgetPropertiesActive(bool value);
 
-    bool IsDockWidgetPropertiesContentsActive() const;
-    static bool GetDefDockWidgetPropertiesContentsActive();
+    auto IsDockWidgetPropertiesContentsActive() const -> bool;
+    static auto GetDefDockWidgetPropertiesContentsActive() -> bool;
     void SetDockWidgetPropertiesContentsActive(bool value);
+
+    void SetLayoutUnit(Unit unit);
+    auto LayoutUnit() const -> Unit;
+
+    void SetLayoutSheetPaperWidth(qreal width);
+    auto GetLayoutSheetPaperWidth() const -> qreal;
+
+    void SetLayoutSheetPaperHeight(qreal height);
+    auto GetLayoutSheetPaperHeight() const -> qreal;
+
+    void SetLayoutTilePaperWidth(qreal width);
+    auto GetLayoutTilePaperWidth() const -> qreal;
+
+    void SetLayoutTilePaperHeight(qreal height);
+    auto GetLayoutTilePaperHeight() const -> qreal;
+
+    void SetLayoutSheetMargins(const QMarginsF &margins);
+    auto GetLayoutSheetMargins() const -> QMarginsF;
+
+    void SetLayoutTileMargins(const QMarginsF &margins);
+    auto GetLayoutTileMargins() const -> QMarginsF;
+
+    void SetLayoutSheetIgnoreMargins(bool value);
+    auto GetLayoutSheetIgnoreMargins() const -> bool;
+
+    void SetLayoutTileIgnoreMargins(bool value);
+    auto GetLayoutTileIgnoreMargins() const -> bool;
+
+    void SetLayoutTileShowTiles(bool value);
+    auto GetLayoutTileShowTiles() const -> bool;
+
+    void SetLayoutWarningPiecesSuperposition(bool value);
+    auto GetLayoutWarningPiecesSuperposition() const -> bool;
+
+    void SetLayoutStickyEdges(bool value);
+    auto GetLayoutStickyEdges() const -> bool;
+
+    void SetLayoutWarningPiecesOutOfBound(bool value);
+    auto GetLayoutWarningPiecesOutOfBound() const -> bool;
+
+    void SetLayoutFollowGrainline(bool value);
+    auto GetLayoutFollowGrainline() const -> bool;
+
+    void SetLayoutPieceGap(qreal value);
+    auto GetLayoutPieceGap() const -> qreal;
 
 private:
     Q_DISABLE_COPY(VPSettings)

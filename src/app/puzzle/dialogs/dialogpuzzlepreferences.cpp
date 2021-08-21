@@ -31,6 +31,7 @@
 #include "../vpapplication.h"
 #include "configpages/puzzlepreferencesconfigurationpage.h"
 #include "configpages/puzzlepreferencespathpage.h"
+#include "configpages/puzzlepreferenceslayoutpage.h"
 
 #include <QMessageBox>
 #include <QPushButton>
@@ -41,6 +42,7 @@ DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogPuzzlePreferences),
     m_configurationPage(new PuzzlePreferencesConfigurationPage),
+    m_layoutPage(new PuzzlePreferencesLayoutPage),
     m_pathPage(new PuzzlePreferencesPathPage)
 {
     ui->setupUi(this);
@@ -60,7 +62,8 @@ DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent) :
     connect(bApply, &QPushButton::clicked, this, &DialogPuzzlePreferences::Apply);
 
     ui->pagesWidget->insertWidget(0, m_configurationPage);
-    ui->pagesWidget->insertWidget(1, m_pathPage);
+    ui->pagesWidget->insertWidget(1, m_layoutPage);
+    ui->pagesWidget->insertWidget(2, m_pathPage);
 
     connect(ui->contentsWidget, &QListWidget::currentItemChanged, this, &DialogPuzzlePreferences::PageChanged);
     ui->pagesWidget->setCurrentIndex(0);
@@ -127,6 +130,7 @@ void DialogPuzzlePreferences::Apply()
     QStringList preferences;
 
     preferences += m_configurationPage->Apply();
+    preferences += m_layoutPage->Apply();
     m_pathPage->Apply();
 
     if (not preferences.isEmpty())

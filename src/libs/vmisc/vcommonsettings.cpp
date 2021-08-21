@@ -41,6 +41,7 @@
 #include <QTextCodec>
 #include <QFont>
 #include <QGlobalStatic>
+#include <QMarginsF>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"

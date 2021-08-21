@@ -27,31 +27,56 @@
  *************************************************************************/
 #include "vpsettings.h"
 
+#include <QMarginsF>
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPropertiesActive, (QLatin1String("dockWidget/properties")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, (QLatin1String("dockWidget/contents")))
-}
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnit, (QLatin1String("layout/unit")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperWidth, (QLatin1String("layout/sheetPaperWidth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperHeight, (QLatin1String("layout/sheetPaperHeight")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperWidth, (QLatin1String("layout/tilePaperWidth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperHeight, (QLatin1String("layout/tilePaperHeight")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetMargins, (QLatin1String("layout/sheetMargins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileMargins, (QLatin1String("layout/tileMargins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetIgnoreMargins, (QLatin1String("layout/sheetIgnoreMargins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileIgnoreMargins, (QLatin1String("layout/tileIgnoreMargins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowTiles, (QLatin1String("layout/tileShowTiles")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesSuperposition,
+                          (QLatin1String("layout/warningPiecesSuperposition")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutStickyEdges, (QLatin1String("layout/stickyEdges")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound,
+                          (QLatin1String("layout/warningPiecesOutOfBound")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap")))
+}  // namespace
+
+Q_DECLARE_METATYPE(QMarginsF)
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSettings::VPSettings(Format format, Scope scope, const QString &organization, const QString &application,
                                  QObject *parent)
     : VCommonSettings(format, scope, organization, application, parent)
-{}
+{
+    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSettings::VPSettings(const QString &fileName, QSettings::Format format, QObject *parent)
     : VCommonSettings(fileName, format, parent)
-{}
+{
+    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPSettings::IsDockWidgetPropertiesActive() const
+auto VPSettings::IsDockWidgetPropertiesActive() const -> bool
 {
     return value(*settingDockWidgetPropertiesActive, GetDefDockWidgetPropertiesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPSettings::GetDefDockWidgetPropertiesActive()
+auto VPSettings::GetDefDockWidgetPropertiesActive() -> bool
 {
     return true;
 }
@@ -63,13 +88,13 @@ void VPSettings::SetDockWidgetPropertiesActive(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPSettings::IsDockWidgetPropertiesContentsActive() const
+auto VPSettings::IsDockWidgetPropertiesContentsActive() const -> bool
 {
     return value(*settingDockWidgetPropertiesActive, GetDefDockWidgetPropertiesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPSettings::GetDefDockWidgetPropertiesContentsActive()
+auto VPSettings::GetDefDockWidgetPropertiesContentsActive() -> bool
 {
     return true;
 }
@@ -78,4 +103,183 @@ bool VPSettings::GetDefDockWidgetPropertiesContentsActive()
 void VPSettings::SetDockWidgetPropertiesContentsActive(bool value)
 {
     setValue(*settingDockPropertiesContentsActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutUnit(Unit unit)
+{
+    setValue(*settingLayoutUnit, UnitsToStr(unit));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::LayoutUnit() const -> Unit
+{
+    return StrToUnits(value(*settingLayoutUnit, QString()).toString());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutSheetPaperWidth(qreal width)
+{
+    setValue(*settingLayoutSheetPaperWidth, width);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutSheetPaperWidth() const -> qreal
+{
+    return ValueOrDef<qreal>(*this, *settingLayoutSheetPaperWidth, UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutSheetPaperHeight(qreal height)
+{
+    setValue(*settingLayoutSheetPaperHeight, height);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutSheetPaperHeight() const -> qreal
+{
+    return ValueOrDef<qreal>(*this, *settingLayoutSheetPaperHeight, UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutTilePaperWidth(qreal width)
+{
+    setValue(*settingLayoutTilePaperWidth, width);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutTilePaperWidth() const -> qreal
+{
+    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperWidth, UnitConvertor(210/*A4*/, Unit::Mm, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutTilePaperHeight(qreal height)
+{
+    setValue(*settingLayoutTilePaperHeight, height);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutTilePaperHeight() const -> qreal
+{
+    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperHeight, UnitConvertor(297/*A4*/, Unit::Mm, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutSheetMargins(const QMarginsF &margins)
+{
+    setValue(*settingLayoutSheetMargins, QVariant::fromValue(margins));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutSheetMargins() const -> QMarginsF
+{
+    return ValueOrDef<QMarginsF>(*this, *settingLayoutSheetMargins, QMarginsF());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutTileMargins(const QMarginsF &margins)
+{
+    setValue(*settingLayoutTileMargins, QVariant::fromValue(margins));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutTileMargins() const -> QMarginsF
+{
+    return ValueOrDef<QMarginsF>(*this, *settingLayoutTileMargins, QMarginsF());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutSheetIgnoreMargins(bool value)
+{
+    setValue(*settingLayoutSheetIgnoreMargins, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutSheetIgnoreMargins() const -> bool
+{
+    return value(*settingLayoutSheetIgnoreMargins, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutTileIgnoreMargins(bool value)
+{
+    setValue(*settingLayoutTileIgnoreMargins, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutTileIgnoreMargins() const -> bool
+{
+    return value(*settingLayoutTileIgnoreMargins, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutTileShowTiles(bool value)
+{
+    setValue(*settingLayoutTileShowTiles, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutTileShowTiles() const -> bool
+{
+    return value(*settingLayoutTileShowTiles, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutWarningPiecesSuperposition(bool value)
+{
+    setValue(*settingLayoutWarningPiecesSuperposition, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutWarningPiecesSuperposition() const -> bool
+{
+    return value(*settingLayoutWarningPiecesSuperposition, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutStickyEdges(bool value)
+{
+    setValue(*settingLayoutStickyEdges, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutStickyEdges() const -> bool
+{
+    return value(*settingLayoutStickyEdges, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutWarningPiecesOutOfBound(bool value)
+{
+    setValue(*settingLayoutWarningPiecesOutOfBound, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutWarningPiecesOutOfBound() const -> bool
+{
+    return value(*settingLayoutWarningPiecesOutOfBound, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutFollowGrainline(bool value)
+{
+    setValue(*settingLayoutFollowGrainline, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutFollowGrainline() const -> bool
+{
+    return value(*settingLayoutFollowGrainline, false).toBool();
+}
+
+void VPSettings::SetLayoutPieceGap(qreal value)
+{
+    setValue(*settingLayoutPieceGap, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutPieceGap() const -> qreal
+{
+    return ValueOrDef<qreal>(*this, *settingLayoutPieceGap, UnitConvertor(5, Unit::Mm, Unit::Px));
 }

@@ -29,7 +29,9 @@
 #define LAYOUTDEF_H
 
 #include <QPointF>
-#include <QSharedPointer>
+
+template <typename T> class QSharedPointer;
+template <typename T> class QWeakPointer;
 
 class VPLayout;
 using VPLayoutPtr = QSharedPointer<VPLayout>;

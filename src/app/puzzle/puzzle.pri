@@ -4,6 +4,7 @@
 SOURCES += \
     $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp \
     $$PWD/dialogs/configpages/puzzlepreferencespathpage.cpp \
+    $$PWD/dialogs/configpages/puzzlepreferenceslayoutpage.cpp \
     $$PWD/dialogs/dialogpuzzlepreferences.cpp \
     $$PWD/dialogs/vpdialogabout.cpp \
     $$PWD/main.cpp \
@@ -43,6 +44,7 @@ SOURCES += \
 HEADERS += \
     $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.h \
     $$PWD/dialogs/configpages/puzzlepreferencespathpage.h \
+    $$PWD/dialogs/configpages/puzzlepreferenceslayoutpage.h \
     $$PWD/dialogs/dialogpuzzlepreferences.h \
     $$PWD/dialogs/vpdialogabout.h \
     $$PWD/layout/layoutdef.h \
@@ -82,6 +84,7 @@ HEADERS += \
 FORMS += \
     $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.ui \
     $$PWD/dialogs/configpages/puzzlepreferencespathpage.ui \
+    $$PWD/dialogs/configpages/puzzlepreferenceslayoutpage.ui \
     $$PWD/dialogs/dialogpuzzlepreferences.ui \
     $$PWD/dialogs/vpdialogabout.ui \
     $$PWD/carousel/vpcarrousel.ui \

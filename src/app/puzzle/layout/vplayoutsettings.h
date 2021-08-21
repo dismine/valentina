@@ -35,12 +35,6 @@
 
 #include "def.h"
 
-enum class FollowGrainline : qint8 {
-    No = 0,
-    Follow90 = 1,
-    Follow180 = 2
-};
-
 enum class PaperSizeTemplate : qint8 {
     A0 = 0,
     A1,
@@ -67,6 +61,8 @@ class VPLayoutSettings
 public:
     VPLayoutSettings() = default;
 
+    // Layout
+
     /**
      * @brief SetUnit Sets the unit of the layout to the given unit
      * @param unit the new unit
@@ -78,12 +74,6 @@ public:
      * @return the unit
      */
     auto GetUnit() const -> Unit;
-
-    void SetWarningSuperpositionOfPieces(bool state);
-    auto GetWarningSuperpositionOfPieces() const -> bool;
-
-    void SetWarningPiecesOutOfBound(bool state);
-    auto GetWarningPiecesOutOfBound() const -> bool;
 
     /**
      * @brief SetTitle Sets the title of the layout to the given value
@@ -108,6 +98,55 @@ public:
      * @return description of the layout
      */
     auto GetDescription() const -> QString;
+
+    void SetStickyEdges(bool state);
+    auto GetStickyEdges() const -> bool;
+
+    // Piece
+
+    void SetWarningSuperpositionOfPieces(bool state);
+    auto GetWarningSuperpositionOfPieces() const -> bool;
+
+    void SetWarningPiecesOutOfBound(bool state);
+    auto GetWarningPiecesOutOfBound() const -> bool;
+
+    /**
+     * @brief SetFollowGrainline Sets the type of grainline for the pieces to follow
+     * @param state the type of grainline
+     */
+    void SetFollowGrainline(bool state);
+
+    /**
+     * @brief GetFollowGrainline Returns if the sheet's pieces follow a grainline or not
+     * @return wether the pieces follow a grainline and if so, which grainline
+     */
+    auto GetFollowGrainline() const -> bool;
+
+    /**
+     * @brief SetPiecesGap sets the pieces gap to the given value, the unit has to be in Unit::Px
+     * @param value pieces gap
+     */
+    void SetPiecesGap(qreal value);
+
+    /**
+     * @brief SetPiecesGapConverted sets the pieces gap to the given value, the unit has to be in the layout's unit
+     * @param value pieces gap
+     */
+    void SetPiecesGapConverted(qreal value);
+
+    /**
+     * @brief GetPiecesGap returns the pieces gap in Unit::Px
+     * @return the pieces gap in Unit::Px
+     */
+    auto GetPiecesGap() const -> qreal;
+
+    /**
+     * @brief GetPiecesGapConverted returns the pieces gap in the layout's unit
+     * @return the pieces gap in the layout's unit
+     */
+    auto GetPiecesGapConverted() const -> qreal;
+
+    // Tiles
 
     /**
      * @brief SetTilesSize sets the size of the tiles, the values have to be in Unit::Px
@@ -157,12 +196,6 @@ public:
      * @return orientation of the tiles
      */
     auto GetTilesOrientation() -> PageOrientation;
-
-    /**
-     * @brief SetOrientation Sets the orientation of the tiles to the given value
-     * @param orientation the new tiles orientation
-     */
-    void SetTilesOrientation(PageOrientation orientation);
 
     /**
      * @brief SetTilesMargins, set the margins of the tiles, the values have to be in Unit::Px
@@ -260,6 +293,8 @@ public:
      */
     static auto isRollTemplate(PaperSizeTemplate tmpl) -> bool;
 
+    // Sheet
+
     /**
      * @brief SetSheetSize sets the size of the sheet, the values have to be in Unit::Px
      * @param width sheet width
@@ -352,42 +387,6 @@ public:
     auto GetSheetMarginsConverted() const -> QMarginsF;
 
     /**
-     * @brief SetFollowGrainline Sets the type of grainline for the pieces to follow
-     * @param state the type of grainline
-     */
-    void SetFollowGrainline(FollowGrainline state);
-
-    /**
-     * @brief GetFollowGrainline Returns if the sheet's pieces follow a grainline or not
-     * @return wether the pieces follow a grainline and if so, which grainline
-     */
-    auto GetFollowGrainline() const -> FollowGrainline;
-
-    /**
-     * @brief SetPiecesGap sets the pieces gap to the given value, the unit has to be in Unit::Px
-     * @param value pieces gap
-     */
-    void SetPiecesGap(qreal value);
-
-    /**
-     * @brief SetPiecesGapConverted sets the pieces gap to the given value, the unit has to be in the layout's unit
-     * @param value pieces gap
-     */
-    void SetPiecesGapConverted(qreal value);
-
-    /**
-     * @brief GetPiecesGap returns the pieces gap in Unit::Px
-     * @return the pieces gap in Unit::Px
-     */
-    auto GetPiecesGap() const -> qreal;
-
-    /**
-     * @brief GetPiecesGapConverted returns the pieces gap in the layout's unit
-     * @return the pieces gap in the layout's unit
-     */
-    auto GetPiecesGapConverted() const -> qreal;
-
-    /**
      * @brief GetShowGrid Returns true if the placement grid has to be shown on the current sheet
      * @return true if the placement grid has to be shown on the current sheet
      */
@@ -449,8 +448,11 @@ public:
      */
     void SetGridRowHeightConverted(qreal value);
 
-    void SetStickyEdges(bool state);
-    auto GetStickyEdges() const -> bool;
+    auto IgnoreTilesMargins() const -> bool;
+    void SetIgnoreTilesMargins(bool newIgnoreTilesMargins);
+
+    auto IgnoreMargins() const -> bool;
+    void SetIgnoreMargins(bool newIgnoreMargins);
 
 private:
     Unit m_unit{Unit::Cm};
@@ -477,6 +479,8 @@ private:
      */
     QMarginsF m_tilesMargins{};
 
+    bool m_ignoreTilesMargins{false};
+
     bool m_showTiles{false};
 
     /**
@@ -495,8 +499,10 @@ private:
      */
     QMarginsF m_margins{};
 
+    bool m_ignoreMargins{false};
+
     // control
-    FollowGrainline m_followGrainLine{FollowGrainline::No};
+    bool m_followGrainLine{false};
 
     /**
      * @brief m_piecesGap the pieces gap in Unit::Px

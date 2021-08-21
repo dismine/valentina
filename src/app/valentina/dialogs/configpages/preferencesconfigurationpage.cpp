@@ -136,24 +136,24 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
     // Tab Scrolling
-    ui->spinBoxDuration->setMinimum(VValentinaSettings::scrollingDurationMin);
-    ui->spinBoxDuration->setMaximum(VValentinaSettings::scrollingDurationMax);
+    ui->spinBoxDuration->setMinimum(VCommonSettings::scrollingDurationMin);
+    ui->spinBoxDuration->setMaximum(VCommonSettings::scrollingDurationMax);
     ui->spinBoxDuration->setValue(settings->GetScrollingDuration());
 
-    ui->spinBoxUpdateInterval->setMinimum(VValentinaSettings::scrollingUpdateIntervalMin);
-    ui->spinBoxUpdateInterval->setMaximum(VValentinaSettings::scrollingUpdateIntervalMax);
+    ui->spinBoxUpdateInterval->setMinimum(VCommonSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setMaximum(VCommonSettings::scrollingUpdateIntervalMax);
     ui->spinBoxUpdateInterval->setValue(settings->GetScrollingUpdateInterval());
 
-    ui->doubleSpinBoxSensor->setMinimum(VValentinaSettings::sensorMouseScaleMin);
-    ui->doubleSpinBoxSensor->setMaximum(VValentinaSettings::sensorMouseScaleMax);
+    ui->doubleSpinBoxSensor->setMinimum(VCommonSettings::sensorMouseScaleMin);
+    ui->doubleSpinBoxSensor->setMaximum(VCommonSettings::sensorMouseScaleMax);
     ui->doubleSpinBoxSensor->setValue(settings->GetSensorMouseScale());
 
-    ui->doubleSpinBoxWheel->setMinimum(VValentinaSettings::wheelMouseScaleMin);
-    ui->doubleSpinBoxWheel->setMaximum(VValentinaSettings::wheelMouseScaleMax);
+    ui->doubleSpinBoxWheel->setMinimum(VCommonSettings::wheelMouseScaleMin);
+    ui->doubleSpinBoxWheel->setMaximum(VCommonSettings::wheelMouseScaleMax);
     ui->doubleSpinBoxWheel->setValue(settings->GetWheelMouseScale());
 
-    ui->doubleSpinBoxAcceleration->setMinimum(VValentinaSettings::scrollingAccelerationMin);
-    ui->doubleSpinBoxAcceleration->setMaximum(VValentinaSettings::scrollingAccelerationMax);
+    ui->doubleSpinBoxAcceleration->setMinimum(VCommonSettings::scrollingAccelerationMin);
+    ui->doubleSpinBoxAcceleration->setMaximum(VCommonSettings::scrollingAccelerationMax);
     ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
 }
 

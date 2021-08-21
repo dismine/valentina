@@ -43,14 +43,44 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
         m_langChanged = true;
     });
 
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+
     // Theme
-    ui->darkModeCheck->setChecked(VPApplication::VApp()->PuzzleSettings()->GetDarkMode());
+    ui->darkModeCheck->setChecked(settings->GetDarkMode());
 
     // Native dialogs
-    ui->checkBoxDontUseNativeDialog->setChecked(VPApplication::VApp()->PuzzleSettings()->IsDontUseNativeDialog());
+    ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
     //----------------------- Toolbar
-    ui->toolBarStyleCheck->setChecked(VPApplication::VApp()->PuzzleSettings()->GetToolBarStyle());
+    ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
+
+    // Undo
+    ui->undoCount->setValue(settings->GetUndoCount());
+
+    //Graphical output
+    ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
+    ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
+
+    // Tab Scrolling
+    ui->spinBoxDuration->setMinimum(VCommonSettings::scrollingDurationMin);
+    ui->spinBoxDuration->setMaximum(VCommonSettings::scrollingDurationMax);
+    ui->spinBoxDuration->setValue(settings->GetScrollingDuration());
+
+    ui->spinBoxUpdateInterval->setMinimum(VCommonSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setMaximum(VCommonSettings::scrollingUpdateIntervalMax);
+    ui->spinBoxUpdateInterval->setValue(settings->GetScrollingUpdateInterval());
+
+    ui->doubleSpinBoxSensor->setMinimum(VCommonSettings::sensorMouseScaleMin);
+    ui->doubleSpinBoxSensor->setMaximum(VCommonSettings::sensorMouseScaleMax);
+    ui->doubleSpinBoxSensor->setValue(settings->GetSensorMouseScale());
+
+    ui->doubleSpinBoxWheel->setMinimum(VCommonSettings::wheelMouseScaleMin);
+    ui->doubleSpinBoxWheel->setMaximum(VCommonSettings::wheelMouseScaleMax);
+    ui->doubleSpinBoxWheel->setValue(settings->GetWheelMouseScale());
+
+    ui->doubleSpinBoxAcceleration->setMinimum(VCommonSettings::scrollingAccelerationMin);
+    ui->doubleSpinBoxAcceleration->setMaximum(VCommonSettings::scrollingAccelerationMax);
+    ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +90,7 @@ PuzzlePreferencesConfigurationPage::~PuzzlePreferencesConfigurationPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList PuzzlePreferencesConfigurationPage::Apply()
+auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
 {
     QStringList preferences;
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
@@ -87,6 +117,35 @@ QStringList PuzzlePreferencesConfigurationPage::Apply()
         VAbstractApplication::VApp()->LoadTranslation(locale);
         qApp->processEvents();// force to call changeEvent
     }
+
+    /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
+     * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
+     * prints a warning and does nothing.*/
+    if (settings->GetUndoCount() != ui->undoCount->value())
+    {
+        preferences.append(tr("undo limit"));
+        settings->SetUndoCount(ui->undoCount->value());
+    }
+
+    // Scene antialiasing
+    if (settings->GetGraphicalOutput() != ui->graphOutputCheck->isChecked())
+    {
+        preferences.append(tr("antialiasing"));
+        settings->SetGraphicalOutput(ui->graphOutputCheck->isChecked());
+    }
+
+    if (settings->IsOpenGLRender() != ui->checkBoxOpenGLRender->isChecked())
+    {
+        preferences.append(tr("scene render"));
+        settings->SetOpenGLRender(ui->checkBoxOpenGLRender->isChecked());
+    }
+
+    // Tab Scrolling
+    settings->SetScrollingDuration(ui->spinBoxDuration->value());
+    settings->SetScrollingUpdateInterval(ui->spinBoxUpdateInterval->value());
+    settings->SetSensorMouseScale(ui->doubleSpinBoxSensor->value());
+    settings->SetWheelMouseScale(ui->doubleSpinBoxWheel->value());
+    settings->SetScrollingAcceleration(ui->doubleSpinBoxAcceleration->value());
 
     return preferences;
 }

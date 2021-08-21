@@ -145,16 +145,7 @@ auto VPLayoutSettings::GetTilesSizeConverted() const -> QSizeF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutSettings::GetTilesOrientation() -> PageOrientation
 {
-    return m_tilesOrientation;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayoutSettings::SetTilesOrientation(PageOrientation orientation)
-{
-    if(orientation != m_tilesOrientation)
-    {
-        m_tilesOrientation = orientation;
-    }
+    return m_tilesSize.height() >= m_tilesSize.width() ? PageOrientation::Portrait : PageOrientation::Landscape;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -563,13 +554,13 @@ auto VPLayoutSettings::GetSheetMarginsConverted() const -> QMarginsF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutSettings::SetFollowGrainline(FollowGrainline state)
+void VPLayoutSettings::SetFollowGrainline(bool state)
 {
     m_followGrainLine = state;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutSettings::GetFollowGrainline() const -> FollowGrainline
+auto VPLayoutSettings::GetFollowGrainline() const -> bool
 {
     return m_followGrainLine;
 }
@@ -669,4 +660,28 @@ void VPLayoutSettings::SetGridRowHeight(qreal value)
 void VPLayoutSettings::SetGridRowHeightConverted(qreal value)
 {
     m_gridRowHeight = UnitConvertor(value, m_unit, Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::IgnoreTilesMargins() const -> bool
+{
+    return m_ignoreTilesMargins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetIgnoreTilesMargins(bool newIgnoreTilesMargins)
+{
+    m_ignoreTilesMargins = newIgnoreTilesMargins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::IgnoreMargins() const -> bool
+{
+    return m_ignoreMargins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetIgnoreMargins(bool newIgnoreMargins)
+{
+    m_ignoreMargins = newIgnoreMargins;
 }

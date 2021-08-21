@@ -33,10 +33,10 @@
 #include "../vmisc/vabstractapplication.h"
 #include "vpcommandline.h"
 
-#include <memory>
-
+template <typename T> class QWeakPointer;
 class VPMainWindow;
 class QLocalServer;
+class DialogPuzzlePreferences;
 
 enum class SocketConnection : bool {Client = false, Server = true};
 
@@ -68,6 +68,10 @@ public:
 
     static VPCommandLinePtr CommandLine();
     static VPApplication *VApp();
+
+    auto PreferencesDialog() const -> QSharedPointer<DialogPuzzlePreferences>;
+    void SetPreferencesDialog(const QSharedPointer<DialogPuzzlePreferences> &newPreferencesDialog);
+
 public slots:
     void ProcessCMD();
 
@@ -85,6 +89,7 @@ private:
     Q_DISABLE_COPY(VPApplication)
     QList<QPointer<VPMainWindow> > mainWindows{};
     QLocalServer *localServer{nullptr};
+    QWeakPointer<DialogPuzzlePreferences> m_preferencesDialog{};
 
     void Clean();
 };

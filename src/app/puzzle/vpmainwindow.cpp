@@ -78,23 +78,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // ----- for test purposes, to be removed------------------
-    m_layout->LayoutSettings().SetUnit(Unit::Cm);
-    m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(true);
-    m_layout->LayoutSettings().SetTitle(QString("My Test Layout"));
-    m_layout->LayoutSettings().SetDescription(QString("Description of my Layout"));
-
-    m_layout->LayoutSettings().SetTilesSizeConverted(21, 29.7);
-    m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Portrait);
-    m_layout->LayoutSettings().SetTilesMarginsConverted(1, 1, 1, 1);
-    m_layout->LayoutSettings().SetShowTiles(true);
-
-    m_layout->LayoutSettings().SetSheetMarginsConverted(1, 1, 1, 1);
-    m_layout->LayoutSettings().SetSheetSizeConverted(84.1, 118.9);
-    m_layout->LayoutSettings().SetPiecesGapConverted(1);
-
-    // --------------------------------------------------------
-
     // init the tile factory
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
     m_tileFactory->refreshTileInfos();
@@ -228,6 +211,7 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     m_carrousel->Refresh();
     m_graphicsView->RefreshLayout();
     m_graphicsView->RefreshPieces();
+    m_tileFactory->refreshTileInfos();
 
     return true;
 }
@@ -940,7 +924,7 @@ void VPMainWindow::ReadSettings()
         m_graphicsView->SetAntialiasing(settings->GetGraphicalOutput());
 
         // Stack limit
-//        qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
+        m_undoStack->setUndoLimit(settings->GetUndoCount());
     }
     else
     {
@@ -1146,6 +1130,14 @@ auto VPMainWindow::IsLayoutReadOnly() const -> bool
 #endif /*Q_OS_WIN32*/
 
     return not fileWritable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ConnectToPreferences(const QSharedPointer<DialogPuzzlePreferences> &preferences)
+{
+    // Must be first
+    connect(preferences.get(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
+    connect(preferences.get(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1612,14 +1604,6 @@ void VPMainWindow::on_TilesSizeChanged(bool changedViaSizeCombobox)
 void VPMainWindow::on_TilesOrientationChanged()
 {
     // Updates the orientation
-    if(ui->radioButtonTilesPortrait->isChecked())
-    {
-        m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Portrait);
-    }
-    else
-    {
-        m_layout->LayoutSettings().SetTilesOrientation(PageOrientation::Landscape);
-    }
     m_tileFactory->refreshTileInfos();
 
     // TODO Undo / Redo
@@ -1909,19 +1893,33 @@ void VPMainWindow::ShowWindow() const
 void VPMainWindow::on_actionPreferences_triggered()
 {
     // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
-    static QPointer<DialogPuzzlePreferences> guard;// Prevent any second run
-    if (guard.isNull())
+    QSharedPointer<DialogPuzzlePreferences> preferences = VPApplication::VApp()->PreferencesDialog();
+    if (preferences.isNull())
     {
+        auto CleanAfterDialog = qScopeGuard([&preferences]()
+        {
+            preferences.clear();
+        });
+
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-        auto *preferences = new DialogPuzzlePreferences(this);
-        // QScopedPointer needs to be sure any exception will never block guard
-        QScopedPointer<DialogPuzzlePreferences> dlg(preferences);
-        guard = preferences;
-        // Must be first
-        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
-        connect(dlg.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+
+        preferences.reset(new DialogPuzzlePreferences());
+        preferences->setWindowModality(Qt::ApplicationModal);
+        VPApplication::VApp()->SetPreferencesDialog(preferences);
+
+        const QList<VPMainWindow*> windows = VPApplication::VApp()->MainWindows();
+        for (auto *window : windows)
+        {
+            window->ConnectToPreferences(preferences);
+        }
+
         QGuiApplication::restoreOverrideCursor();
-        dlg->exec();
+
+        preferences->exec();
+    }
+    else
+    {
+        preferences->show();
     }
 }
 
