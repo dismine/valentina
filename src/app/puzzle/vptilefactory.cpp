@@ -22,43 +22,38 @@ void VPTileFactory::refreshTileInfos()
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(not layout.isNull())
     {
-        PageOrientation tilesOrientation = layout->LayoutSettings().GetTilesOrientation();
-        QSizeF tilesSize =  layout->LayoutSettings().GetTilesSize();
+        QSizeF tilesSize = layout->LayoutSettings().GetTilesSize();
         QMarginsF tilesMargins = layout->LayoutSettings().GetTilesMargins();
 
         // sets the drawing height
-        m_drawingAreaHeight = (tilesOrientation == PageOrientation::Portrait)?
-                        tilesSize.height() : tilesSize.width();
-        m_drawingAreaHeight -=
-                tilesMargins.top() + tilesMargins.bottom() + m_infoStripeWidth;
+        m_drawingAreaHeight = tilesSize.height();
 
-        // sets the drawing width
-        m_drawingAreaWidth = (tilesOrientation == PageOrientation::Portrait)?
-                    tilesSize.width() : tilesSize.height();
-        m_drawingAreaWidth -=
-                tilesMargins.left() + tilesMargins.right() + m_infoStripeWidth;
-
-
-        QSizeF sheetSize = layout->LayoutSettings().GetSheetSize();
-        qreal totalDrawingWidth = 0;
-        qreal totaldrawingHeight = 0;
-
-        if(layout->LayoutSettings().GetOrientation() == PageOrientation::Portrait)
+        if (not layout->LayoutSettings().IgnoreTilesMargins())
         {
-             totalDrawingWidth = sheetSize.width();
-             totaldrawingHeight = sheetSize.height();
+            m_drawingAreaHeight -= tilesMargins.top() + tilesMargins.bottom() + m_infoStripeWidth;
         }
         else
         {
-            totalDrawingWidth = sheetSize.height();
-            totaldrawingHeight = sheetSize.width();
+            m_drawingAreaHeight += m_infoStripeWidth;
         }
 
-        m_nbCol = qCeil(totalDrawingWidth/m_drawingAreaWidth);
-        m_nbRow = qCeil(totaldrawingHeight/m_drawingAreaHeight);
+        // sets the drawing width
+        m_drawingAreaWidth = tilesSize.width();
+
+        if (not layout->LayoutSettings().IgnoreTilesMargins())
+        {
+            m_drawingAreaWidth -= tilesMargins.left() + tilesMargins.right() + m_infoStripeWidth;
+        }
+        else
+        {
+            m_drawingAreaWidth += m_infoStripeWidth;
+        }
+
+        QSizeF sheetSize = layout->LayoutSettings().GetSheetSize();
+        m_nbCol = qCeil(sheetSize.width()/m_drawingAreaWidth);
+        m_nbRow = qCeil(sheetSize.height()/m_drawingAreaHeight);
     }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView, int row, int col)

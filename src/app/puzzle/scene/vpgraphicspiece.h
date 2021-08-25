@@ -52,7 +52,6 @@ public:
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Piece)};
 
 signals:
-    void PieceSelectionChanged();
     void HideTransformationHandles(bool hide);
     void PieceTransformationChanged();
 

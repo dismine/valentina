@@ -37,6 +37,7 @@
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/global.h"
 #include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 #include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundooriginmove.h"
 #include "vpgraphicspiece.h"
@@ -479,16 +480,21 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         auto PreparePieces = [this]()
         {
-            QVector<VPPiecePtr> pieces;
-            for (auto *item : m_selectedPieces)
+            QList<VPPiecePtr> pieces;
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (not layout.isNull())
             {
-                pieces.append(item->GetPiece());
+                VPSheetPtr sheet = layout->GetFocusedSheet();
+                if (not sheet.isNull())
+                {
+                    pieces = sheet->GetSelectedPieces();
+                }
             }
 
             return pieces;
         };
 
-        QVector<VPPiecePtr> pieces = PreparePieces();
+        QList<VPPiecePtr> pieces = PreparePieces();
 
         VPLayoutPtr layout = m_layout.toStrongRef();
         if (not layout.isNull())
@@ -662,7 +668,7 @@ auto VPGraphicsPieceControls::ControllersRect() const -> QRectF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::ArrowPath() const -> QPainterPath
 {
-    const qreal scale = SceneScale(scene());
+    const qreal scale = SceneScale(scene())/2;
     QPainterPath arrow;
 
     QRectF pieceRect = ControllersRect();
@@ -764,23 +770,17 @@ auto VPGraphicsPieceControls::ArrowPath() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPieceControls::SelectedPieces() const -> QVector<VPGraphicsPiece *>
+auto VPGraphicsPieceControls::SelectedPieces() const -> QList<VPPiecePtr>
 {
-    QVector<VPGraphicsPiece *> pieces;
-    QGraphicsScene *scene = this->scene();
-    if (scene != nullptr)
+    QList<VPPiecePtr> pieces;
+
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (not layout.isNull())
     {
-        QList<QGraphicsItem *> list = scene->selectedItems();
-        for (auto *item : list)
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (not sheet.isNull())
         {
-            if (item->type() == VPGraphicsPiece::Type)
-            {
-                auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
-                if (pieceItem != nullptr)
-                {
-                    pieces.append(pieceItem);
-                }
-            }
+            pieces = sheet->GetSelectedPieces();
         }
     }
 
@@ -788,12 +788,15 @@ auto VPGraphicsPieceControls::SelectedPieces() const -> QVector<VPGraphicsPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPieceControls::PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) -> QRectF
+auto VPGraphicsPieceControls::PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF
 {
     QRectF rect;
-    for (auto *item : selectedPieces)
+    for (const auto& item : selectedPieces)
     {
-        rect = rect.united(item->sceneBoundingRect());
+        if (not item.isNull())
+        {
+            rect = rect.united(item->MappedDetailBoundingRect());
+        }
     }
 
     return rect;

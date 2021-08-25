@@ -28,6 +28,7 @@
 #include "vpsheet.h"
 
 #include "vplayout.h"
+#include "vppiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSheet::VPSheet(const VPLayoutPtr &layout) :
@@ -45,12 +46,35 @@ auto VPSheet::GetLayout() const -> VPLayoutPtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetPieces() const -> QList<VPPiecePtr>
 {
-    QList<VPPiecePtr> list;
-
     VPLayoutPtr layout = GetLayout();
     if (not layout.isNull())
     {
         return layout->PiecesForSheet(m_uuid);
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSelectedPieces() const -> QList<VPPiecePtr>
+{
+    VPLayoutPtr layout = GetLayout();
+    if (not layout.isNull())
+    {
+        QList<VPPiecePtr> list = layout->PiecesForSheet(m_uuid);
+
+        QList<VPPiecePtr> selected;
+        selected.reserve(list.size());
+
+        for (const auto& piece : list)
+        {
+            if (not piece.isNull() && piece->IsSelected())
+            {
+                selected.append(piece);
+            }
+        }
+
+        return selected;
     }
 
     return {};

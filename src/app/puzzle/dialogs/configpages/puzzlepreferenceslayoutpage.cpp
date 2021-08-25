@@ -40,7 +40,7 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
 
     InitLayoutUnits();
     VAbstractLayoutDialog::InitTemplates(ui->comboBoxSheetTemplates);
-    VAbstractLayoutDialog::InitTemplates(ui->comboBoxTileTemplates);
+    VAbstractLayoutDialog::InitTileTemplates(ui->comboBoxTileTemplates);
     MinimumSheetPaperSize();
     MinimumTilePaperSize();
 
@@ -225,7 +225,7 @@ void PuzzlePreferencesLayoutPage::ConvertPaperSize()
     ui->doubleSpinBoxTileMarginTop->setValue(newTileTopMargin);
     ui->doubleSpinBoxTileMarginBottom->setValue(newTileBottomMargin);
 
-    ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(50, Unit::Cm, layoutUnit));
+    ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Cm, layoutUnit));
     ui->doubleSpinBoxPiecesGap->setValue(newGap);
 }
 
@@ -610,7 +610,7 @@ void PuzzlePreferencesLayoutPage::ReadSettings()
     ui->checkBoxWarningPiecesOutOfBound->setChecked(settings->GetLayoutWarningPiecesOutOfBound());
     ui->checkBoxFollowGrainline->setChecked(settings->GetLayoutFollowGrainline());
 
-    ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(50, Unit::Cm, LayoutUnit()));
+    ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Px, LayoutUnit()));
     SetPieceGap(settings->GetLayoutPieceGap());
 
     FindSheetTemplate();
@@ -637,7 +637,7 @@ void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qrea
         if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
         {
             box->blockSignals(true);
-            const int index = ui->comboBoxTileTemplates->findData(i);
+            const int index = box->findData(i);
             if (index != -1)
             {
                 box->setCurrentIndex(index);

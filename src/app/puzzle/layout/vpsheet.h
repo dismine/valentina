@@ -55,6 +55,8 @@ public:
 
     auto GetPieces() const -> QList<VPPiecePtr>;
 
+    auto GetSelectedPieces() const -> QList<VPPiecePtr>;
+
     /**
      * @brief GetName Returns the name of the sheet
      * @return the name

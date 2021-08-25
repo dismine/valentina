@@ -49,6 +49,8 @@
 #include "layout/vpsheet.h"
 #include "dialogs/dialogpuzzlepreferences.h"
 #include "undocommands/vpundoaddsheet.h"
+#include "undocommands/vpundopiecerotate.h"
+#include "undocommands/vpundopiecemove.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -66,6 +68,56 @@ Q_LOGGING_CATEGORY(pWindow, "p.window")
 
 QT_WARNING_POP
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
+{
+    spinBox->blockSignals(true);
+    spinBox->setValue(value);
+    spinBox->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetCheckBoxValue(QCheckBox *checkbox, bool value)
+{
+    checkbox->blockSignals(true);
+    checkbox->setChecked(value);
+    checkbox->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetLineEditValue(QLineEdit *lineEdit, const QString &value)
+{
+    lineEdit->blockSignals(true);
+    lineEdit->setText(value);
+    lineEdit->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetPlainTextEditValue(QPlainTextEdit *textEdit, const QString &value)
+{
+    textEdit->blockSignals(true);
+    textEdit->setPlainText(value);
+    textEdit->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF
+{
+    QRectF rect;
+    for (const auto& item : selectedPieces)
+    {
+        if (not item.isNull())
+        {
+            rect = rect.united(item->MappedDetailBoundingRect());
+        }
+    }
+
+    return rect;
+}
+}  // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     VAbstractMainWindow(parent),
@@ -77,6 +129,21 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_layoutWatcher(new QFileSystemWatcher(this))
 {
     ui->setupUi(this);
+
+    connect(m_layout.get(), &VPLayout::PieceSelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
+    connect(m_layout.get(), &VPLayout::LayoutChanged, this, [this]()
+    {
+        LayoutWasSaved(false);
+    });
+    connect(m_layout.get(), &VPLayout::PieceTransformationChanged, this, [this]()
+    {
+        SetPropertyTabCurrentPieceData();
+    });
+
+    connect(m_undoStack, &QUndoStack::cleanChanged, this, [this](bool clean)
+    {
+        LayoutWasSaved(clean);
+    });
 
     // init the tile factory
     m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
@@ -113,11 +180,14 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
             UpdateWindowTitle();
         }
     });
+
+    m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::~VPMainWindow()
 {
+    delete m_undoStack;
     delete ui;
     delete m_carrousel;
 }
@@ -205,6 +275,8 @@ auto VPMainWindow::LoadFile(QString path) -> bool
 
     m_layout->SetFocusedSheet();
 
+    m_oldLayoutUnit = m_layout->LayoutSettings().GetUnit();
+
     // updates the properties with the loaded data
     SetPropertiesData();
 
@@ -212,6 +284,7 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     m_graphicsView->RefreshLayout();
     m_graphicsView->RefreshPieces();
     m_tileFactory->refreshTileInfos();
+    VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 
     return true;
 }
@@ -429,48 +502,211 @@ void VPMainWindow::SetupMenu()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitProperties()
 {
+    ui->tabWidgetProperties->setCurrentIndex(0);
+
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    m_oldLayoutUnit = settings->LayoutUnit();
+
     InitPropertyTabCurrentPiece();
     InitPropertyTabCurrentSheet();
-    InitPropertyTabLayout();
     InitPropertyTabTiles();
+    InitPropertyTabLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentPiece()
 {
-    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-    ui->groupBoxLayoutControl->hide();
-    ui->groupBoxCurrentPieceGeometry->hide();
+    connect(ui->lineEditCurrentPieceName, &QLineEdit::textEdited, this, [this](const QString &text)
+    {
+        QList<VPPiecePtr> selectedPieces = SelectedPieces();
+        if (selectedPieces.size() == 1)
+        {
+            VPPiecePtr selectedPiece = selectedPieces.first();
+            if (not selectedPiece.isNull())
+            {
+                selectedPiece->SetName(text);
+                LayoutWasSaved(false);
+            }
+        }
+    });
 
+    connect(ui->plainTextEditCurrentPieceUUID, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        QList<VPPiecePtr> selectedPieces = SelectedPieces();
+        if (selectedPieces.size() == 1)
+        {
+            VPPiecePtr selectedPiece = selectedPieces.first();
+            if (not selectedPiece.isNull())
+            {
+                const QUuid temp = QUuid(ui->plainTextEditCurrentPieceUUID->toPlainText());
+                if (not temp.isNull())
+                {
+                    selectedPiece->SetUUID(temp);
+                }
+                LayoutWasSaved(false);
+            }
+        }
+    });
 
-    // ------------------------------ placement -----------------------------------
-    connect(ui->doubleSpinBoxCurrentPieceBoxPositionX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_CurrentPiecePositionEdited);
-    connect(ui->doubleSpinBoxCurrentPieceBoxPositionY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_CurrentPiecePositionEdited);
+    connect(ui->checkBoxCurrentPieceShowSeamline, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        QList<VPPiecePtr> selectedPieces = SelectedPieces();
+        if (selectedPieces.size() == 1)
+        {
+            VPPiecePtr selectedPiece = selectedPieces.first();
+            if (not selectedPiece.isNull())
+            {
+//                selectedPiece->SetShowSeamline(checked);
+//                LayoutWasSaved(false);
+            }
+        }
+    });
+
+    connect(ui->checkBoxCurrentPieceMirrorPiece, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        QList<VPPiecePtr> selectedPieces = SelectedPieces();
+        if (selectedPieces.size() == 1)
+        {
+            VPPiecePtr selectedPiece = selectedPieces.first();
+            if (not selectedPiece.isNull())
+            {
+                selectedPiece->SetMirror(checked);
+                LayoutWasSaved(false);
+                emit m_layout->PieceTransformationChanged(selectedPiece);
+            }
+        }
+    });
+
+    // Translate
+    ui->comboBoxTranslateUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+    ui->comboBoxTranslateUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+    ui->comboBoxTranslateUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+    ui->comboBoxTranslateUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
+
+    m_oldPieceTranslationUnit = Unit::Mm;
+    ui->comboBoxTranslateUnit->blockSignals(true);
+    ui->comboBoxTranslateUnit->setCurrentIndex(0);
+    ui->comboBoxTranslateUnit->blockSignals(false);
+
+    const int minTranslate = -1000;
+    const int maxTranslate = 1000;
+
+    ui->doubleSpinBoxCurrentPieceBoxPositionX->setMinimum(
+                UnitConvertor(minTranslate, Unit::Cm, m_oldPieceTranslationUnit));
+    ui->doubleSpinBoxCurrentPieceBoxPositionX->setMaximum(
+                UnitConvertor(maxTranslate, Unit::Cm, m_oldPieceTranslationUnit));
+    ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(0);
+
+    ui->doubleSpinBoxCurrentPieceBoxPositionY->setMinimum(
+                UnitConvertor(minTranslate, Unit::Cm, m_oldPieceTranslationUnit));
+    ui->doubleSpinBoxCurrentPieceBoxPositionY->setMaximum(
+                UnitConvertor(maxTranslate, Unit::Cm, m_oldPieceTranslationUnit));
+    ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(0);
+
+    connect(ui->comboBoxTranslateUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
+    {
+        const Unit newUnit = TranslateUnit();
+        const qreal oldTranslateX = ui->doubleSpinBoxCurrentPieceBoxPositionX->value();
+        const qreal oldTranslateY = ui->doubleSpinBoxCurrentPieceBoxPositionY->value();
+
+        ui->doubleSpinBoxCurrentPieceBoxPositionX->setMinimum(UnitConvertor(minTranslate, Unit::Cm, newUnit));
+        ui->doubleSpinBoxCurrentPieceBoxPositionX->setMaximum(UnitConvertor(maxTranslate, Unit::Cm, newUnit));
+
+        ui->doubleSpinBoxCurrentPieceBoxPositionY->setMinimum(UnitConvertor(minTranslate, Unit::Cm, newUnit));
+        ui->doubleSpinBoxCurrentPieceBoxPositionY->setMaximum(UnitConvertor(maxTranslate, Unit::Cm, newUnit));
+
+        ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
+                    UnitConvertor(oldTranslateX, m_oldPieceTranslationUnit, newUnit));
+        ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(
+                    UnitConvertor(oldTranslateY, m_oldPieceTranslationUnit, newUnit));
+
+        m_oldPieceTranslationUnit = newUnit;
+    });
+
+    SetCheckBoxValue(ui->checkBoxRelativeTranslation, true);
+    connect(ui->checkBoxRelativeTranslation, &QCheckBox::toggled, this, &VPMainWindow::on_RelativeTranslationChanged);
+
+    // Rotate
+    ui->doubleSpinBoxCurrentPieceAngle->setValue(0);
+
+    ui->toolButtonCurrentPieceRotationAnticlockwise->setChecked(true);
+    ui->checkBoxTransformSeparately->setChecked(false);
+
+    QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+    SCASSERT(bApply != nullptr)
+    connect(bApply, &QPushButton::clicked, this, &VPMainWindow::on_ApplyPieceTransformation);
+
+    QPushButton *bReset = ui->buttonBox->button(QDialogButtonBox::Reset);
+    SCASSERT(bReset != nullptr)
+    connect(bReset, &QPushButton::clicked, this, &VPMainWindow::on_ResetPieceTransformationSettings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentSheet()
 {
-    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-    ui->pushButtonSheetRemoveUnusedLength->hide();
-    ui->groupBoxSheetControl->hide();
+    connect(ui->lineEditSheetName, &QLineEdit::textEdited, this, [this](const QString &text)
+    {
+        if (not m_layout.isNull())
+        {
+            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                sheet->SetName(text);
+                LayoutWasSaved(false);
 
-    // some of the UI Elements are connected to the slots via auto-connect
-   // see https://doc.qt.io/qt-5/designer-using-a-ui-file.html#widgets-and-dialogs-with-auto-connect
+                if(m_carrousel != nullptr)
+                {
+                    m_carrousel->RefreshSheetNames();
+                }
+            }
+        }
+    });
 
-    // -------------------- layout width, length, orientation  ------------------------
-    connect(ui->doubleSpinBoxSheetWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    // -------------------- layout units ---------------------------
+    ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+    ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+    ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+    ui->comboBoxLayoutUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
+
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(settings->LayoutUnit()));
+    if (indexUnit != -1)
+    {
+        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+    }
+
+    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &VPMainWindow::on_ConvertPaperSize);
+
+    // -------------------- sheet template ---------------------------
+    VAbstractLayoutDialog::InitTemplates(ui->comboBoxSheetTemplates);
+
+    connect(ui->comboBoxSheetTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, [this]{SheetSize(SheetTemplate());});
+
+    // -------------------- paper size ---------------------------
+    MinimumSheetPaperSize();
+
+    const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
+
+    ui->doubleSpinBoxSheetPaperWidth->setSuffix(suffix);
+    ui->doubleSpinBoxSheetPaperHeight->setSuffix(suffix);
+
+    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_SheetSizeChanged);
-    connect(ui->doubleSpinBoxSheetLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_SheetSizeChanged);
-    connect(ui->radioButtonSheetPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
+    connect(ui->toolButtonSheetPortraitOritation, &QToolButton::toggled, this,
             &VPMainWindow::on_SheetOrientationChanged);
-    connect(ui->radioButtonSheetLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
+    connect(ui->toolButtonSheetLandscapeOrientation, &QToolButton::toggled, this,
             &VPMainWindow::on_SheetOrientationChanged);
 
     // -------------------- margins  ------------------------
+    ui->doubleSpinBoxSheetMarginLeft->setSuffix(suffix);
+    ui->doubleSpinBoxSheetMarginRight->setSuffix(suffix);
+    ui->doubleSpinBoxSheetMarginTop->setSuffix(suffix);
+    ui->doubleSpinBoxSheetMarginBottom->setSuffix(suffix);
+
     connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_SheetMarginChanged);
     connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
@@ -480,111 +716,176 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_SheetMarginChanged);
 
-    // ------------------- follow grainline -----------------------
-    connect(ui->radioButtonSheetFollowGrainlineNo, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_SheetFollowGrainlineChanged);
-    connect(ui->radioButtonSheetFollowGrainlineVertical, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_SheetFollowGrainlineChanged);
-    connect(ui->radioButtonSheetFollowGrainlineHorizontal, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_SheetFollowGrainlineChanged);
-
-    // -------------------- sheet template ---------------------------
-
-    // FIXME: find a nicer way to initiliase it
-    QVector<PaperSizeTemplate> sheetTemplates = QVector<PaperSizeTemplate>();
-    sheetTemplates.append(PaperSizeTemplate::A0);
-    sheetTemplates.append(PaperSizeTemplate::A1);
-    sheetTemplates.append(PaperSizeTemplate::A2);
-    sheetTemplates.append(PaperSizeTemplate::A3);
-    sheetTemplates.append(PaperSizeTemplate::A4);
-    sheetTemplates.append(PaperSizeTemplate::Letter);
-    sheetTemplates.append(PaperSizeTemplate::Legal);
-    sheetTemplates.append(PaperSizeTemplate::Tabloid);
-    sheetTemplates.append(PaperSizeTemplate::Roll24in);
-    sheetTemplates.append(PaperSizeTemplate::Roll30in);
-    sheetTemplates.append(PaperSizeTemplate::Roll36in);
-    sheetTemplates.append(PaperSizeTemplate::Roll42in);
-    sheetTemplates.append(PaperSizeTemplate::Roll44in);
-    sheetTemplates.append(PaperSizeTemplate::Roll48in);
-    sheetTemplates.append(PaperSizeTemplate::Roll62in);
-    sheetTemplates.append(PaperSizeTemplate::Roll72in);
-    sheetTemplates.append(PaperSizeTemplate::Custom);
-
-    ui->comboBoxSheetTemplate->blockSignals(true);
-    VPLayoutSettings::PopulateComboBox(&sheetTemplates, ui->comboBoxSheetTemplate);
-    ui->comboBoxSheetTemplate->blockSignals(false);
-
-    ui->comboBoxSheetTemplate->setCurrentIndex(0);
-
-    // ---------------------- export format --------------------------
-
-    VPExporter exporter;
-    for (auto &v : exporter.InitFormats())
+    connect(ui->checkBoxLayoutIgnoreFileds, &QCheckBox::stateChanged, this, [this](int state)
     {
-        ui->comboBoxSheetExportFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
-    }
+        if (not m_layout.isNull())
+        {
+            ui->doubleSpinBoxSheetMarginLeft->setDisabled(state != 0);
+            ui->doubleSpinBoxSheetMarginRight->setDisabled(state != 0);
+            ui->doubleSpinBoxSheetMarginTop->setDisabled(state != 0);
+            ui->doubleSpinBoxSheetMarginBottom->setDisabled(state != 0);
+
+            m_layout->LayoutSettings().SetIgnoreMargins(state != 0);
+            LayoutWasSaved(false);
+            m_tileFactory->refreshTileInfos();
+            m_graphicsView->RefreshLayout();
+        }
+    });
+
+    ui->groupBoxSheetGrid->setVisible(false); // temporary hide
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabTiles()
 {
-    // -------------------- layout width, length, orientation  ------------------------
-    connect(ui->doubleSpinBoxTilesWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_TilesSizeChanged);
-    connect(ui->doubleSpinBoxTilesLength, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_TilesSizeChanged);
-    connect(ui->radioButtonTilesPortrait, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_TilesOrientationChanged);
-    connect(ui->radioButtonTilesLandscape, QOverload<bool>::of(&QRadioButton::clicked), this,
-            &VPMainWindow::on_TilesOrientationChanged);
-
     // -------------------- tiles template
-    QVector<PaperSizeTemplate> tilesTemplates = QVector<PaperSizeTemplate>();
-    tilesTemplates.append(PaperSizeTemplate::A0);
-    tilesTemplates.append(PaperSizeTemplate::A1);
-    tilesTemplates.append(PaperSizeTemplate::A2);
-    tilesTemplates.append(PaperSizeTemplate::A3);
-    tilesTemplates.append(PaperSizeTemplate::A4);
-    tilesTemplates.append(PaperSizeTemplate::Letter);
-    tilesTemplates.append(PaperSizeTemplate::Legal);
-    tilesTemplates.append(PaperSizeTemplate::Custom);
+    VAbstractLayoutDialog::InitTileTemplates(ui->comboBoxTileTemplates, true);
 
-    ui->comboBoxTilesTemplate->blockSignals(true);
-    VPLayoutSettings::PopulateComboBox(&tilesTemplates, ui->comboBoxTilesTemplate);
-    ui->comboBoxTilesTemplate->blockSignals(false);
+    connect(ui->comboBoxTileTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, [this]{TileSize(TileTemplate());});
 
-    ui->comboBoxTilesTemplate->setCurrentIndex(4); //A4
+    // -------------------- paper size ---------------------------
+    MinimumTilePaperSize();
 
+    const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
+
+    ui->doubleSpinBoxTilePaperWidth->setSuffix(suffix);
+    ui->doubleSpinBoxTilePaperHeight->setSuffix(suffix);
+
+    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesSizeChanged);
+    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesSizeChanged);
+    connect(ui->toolButtonTilePortraitOrientation, &QToolButton::toggled, this,
+            &VPMainWindow::on_TilesOrientationChanged);
+    connect(ui->toolButtonTileLandscapeOrientation, &QToolButton::toggled, this,
+            &VPMainWindow::on_TilesOrientationChanged);
 
     // -------------------- margins  ------------------------
-    connect(ui->doubleSpinBoxTilesMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_TilesMarginChanged);
-    connect(ui->doubleSpinBoxTilesMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_TilesMarginChanged);
-    connect(ui->doubleSpinBoxTilesMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_TilesMarginChanged);
-    connect(ui->doubleSpinBoxTilesMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-            &VPMainWindow::on_TilesMarginChanged);
-}
+    ui->doubleSpinBoxTileMarginLeft->setSuffix(suffix);
+    ui->doubleSpinBoxTileMarginRight->setSuffix(suffix);
+    ui->doubleSpinBoxTileMarginTop->setSuffix(suffix);
+    ui->doubleSpinBoxTileMarginBottom->setSuffix(suffix);
 
+    connect(ui->doubleSpinBoxTileMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxTileMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxTileMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+    connect(ui->doubleSpinBoxTileMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &VPMainWindow::on_TilesMarginChanged);
+
+    connect(ui->checkBoxTileIgnoreFileds, &QCheckBox::stateChanged, this, [this](int state)
+    {
+        if (not m_layout.isNull())
+        {
+            ui->doubleSpinBoxTileMarginLeft->setDisabled(state != 0);
+            ui->doubleSpinBoxTileMarginRight->setDisabled(state != 0);
+            ui->doubleSpinBoxTileMarginTop->setDisabled(state != 0);
+            ui->doubleSpinBoxTileMarginBottom->setDisabled(state != 0);
+
+            m_layout->LayoutSettings().SetIgnoreTilesMargins(state != 0);
+            LayoutWasSaved(false);
+            m_tileFactory->refreshTileInfos();
+            m_graphicsView->RefreshLayout();
+        }
+    });
+
+    // -------------------- control  ------------------------
+    connect(ui->checkBoxTilesShowTiles, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetShowTiles(checked);
+            LayoutWasSaved(false);
+            m_graphicsView->RefreshLayout();
+        }
+    });
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabLayout()
 {
-    // FIXME ---- For MVP we hide a few things. To be displayed when functions there
-    ui->groupBoxLayoutControl->hide();
+    connect(ui->lineEditLayoutName, &QLineEdit::textEdited, this, [this](const QString &text)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetTitle(text);
+            LayoutWasSaved(false);
+        }
+    });
 
-    // -------------------- init the unit combobox ---------------------
-   ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
-   ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
-   ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+    connect(ui->plainTextEditLayoutDescription, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetDescription(ui->plainTextEditLayoutDescription->toPlainText());
+            LayoutWasSaved(false);
+        }
+    });
 
-   // set default unit - TODO when we have the setting for the unit
-//    const qint32 indexUnit = -1;//ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
-//    if (indexUnit != -1)
-//    {
-//        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
-//    }
+    connect(ui->checkBoxLayoutWarningPiecesSuperposition, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(checked);
+            LayoutWasSaved(false);
+            // TODO update the QGraphicView
+        }
+    });
+
+    connect(ui->checkBoxLayoutWarningPiecesOutOfBound, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetWarningPiecesOutOfBound(checked);
+            LayoutWasSaved(false);
+            // TODO update the QGraphicView
+        }
+    });
+
+    connect(ui->checkBoxSheetStickyEdges, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetStickyEdges(checked);
+            LayoutWasSaved(false);
+        }
+    });
+
+    connect(ui->checkBoxFollowGainline, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetFollowGrainline(checked);
+            LayoutWasSaved(false);
+            // TODO update the QGraphicView
+        }
+    });
+
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    ui->doubleSpinBoxSheetPiecesGap->setMaximum(
+                UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Px, settings->LayoutUnit()));
+    ui->doubleSpinBoxSheetPiecesGap->setSuffix(" " + UnitsToStr(LayoutUnit(), true));
+    connect(ui->doubleSpinBoxSheetPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](double d)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetPiecesGapConverted(d);
+            LayoutWasSaved(false);
+            // TODO update the QGraphicView
+        }
+    });
+
+    connect(ui->pushButtonLayoutExport, &QPushButton::clicked, this, [this]()
+    {
+        if (not m_layout.isNull())
+        {
+            // TODO export layout
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -600,158 +901,307 @@ void VPMainWindow::InitCarrousel()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertiesData()
 {
-    if(m_layout == nullptr)
-    {
-       // TODO : hide the tabs when there is no layout
-    }
-    else
-    {
-        SetPropertyTabCurrentPieceData();
-        SetPropertyTabSheetData();
-        SetPropertyTabTilesData();
-        SetPropertyTabLayoutData();
-    }
+    SetPropertyTabCurrentPieceData();
+    SetPropertyTabSheetData();
+    SetPropertyTabTilesData();
+    SetPropertyTabLayoutData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabCurrentPieceData()
 {
-    if(m_selectedPieces.count() == 0)
+    QList<VPPiecePtr> selectedPieces = SelectedPieces();
+
+    if(selectedPieces.isEmpty())
     {
         // show the content "no piece selected"
+        ui->labelCurrentPieceNoPieceSelected->setVisible(true);
 
-         ui->containerCurrentPieceNoData->setVisible(true);
-         ui->containerCurrentPieceData->setVisible(false);
-         ui->containerCurrentPieceMultipleData->setVisible(false);
+        ui->groupBoxCurrentPieceInfo->setVisible(false);
+        ui->groupBoxPieceTransformation->setVisible(false);
+        ui-> groupBoxCurrentPieceSeamline->setVisible(false);
+        ui->groupBoxCurrentPieceGeometry->setVisible(false);
     }
-    else if(m_selectedPieces.count() == 1)
+    else if(selectedPieces.count() == 1)
     {
-        // show the content "selected piece data"
-        ui->containerCurrentPieceNoData->setVisible(false);
-        ui->containerCurrentPieceData->setVisible(true);
-        ui->containerCurrentPieceMultipleData->setVisible(false);
+        ui->labelCurrentPieceNoPieceSelected->setVisible(false);
 
-        VPPiece *selectedPiece = m_selectedPieces.first();
+        ui->groupBoxCurrentPieceInfo->setVisible(true);
+        ui->groupBoxPieceTransformation->setVisible(true);
+        ui-> groupBoxCurrentPieceSeamline->setVisible(true);
+        ui->groupBoxCurrentPieceGeometry->setVisible(true);
+
+        VPPiecePtr selectedPiece = selectedPieces.first();
 
         // set the value to the current piece
-        ui->lineEditCurrentPieceName->setText(selectedPiece->GetName());
-        ui->plainTextEditCurrentPieceUUID->setPlainText(selectedPiece->GetUUID().toString());
+        SetLineEditValue(ui->lineEditCurrentPieceName, selectedPiece->GetName());
+        SetPlainTextEditValue(ui->plainTextEditCurrentPieceUUID, selectedPiece->GetUUID().toString());
 
-//        ui->checkBoxCurrentPieceShowSeamline->setChecked(selectedPiece->GetShowSeamLine());
-        ui->checkBoxCurrentPieceMirrorPiece->setChecked(selectedPiece->IsMirror());
+//        SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, selectedPiece->GetShowSeamLine());
+        SetCheckBoxValue(ui->checkBoxCurrentPieceMirrorPiece, selectedPiece->IsMirror());
 
-        QPointF pos = selectedPiece->GetPosition();
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
-                              UnitConvertor(pos.x(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
-                              UnitConvertor(pos.y(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
+        if (not ui->checkBoxRelativeTranslation->isChecked())
+        {
+            QRectF rect = PiecesBoundingRect(selectedPieces);
 
-//        qreal angle = selectedPiece->GetRotation();
-//        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
+            ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
+                        UnitConvertor(rect.topLeft().x(), Unit::Px, TranslateUnit()));
+            ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(
+                        UnitConvertor(rect.topLeft().y(), Unit::Px, TranslateUnit()));
+        }
     }
     else
     {
         // show the content "multiple pieces selected"
 
-        ui->containerCurrentPieceNoData->setVisible(false);
-        ui->containerCurrentPieceData->setVisible(false);
-        ui->containerCurrentPieceMultipleData->setVisible(true);
+        ui->labelCurrentPieceNoPieceSelected->setVisible(true);
 
-        // if needed in the future, we can show some properties that coul be edited for all the pieces
+        ui->groupBoxCurrentPieceInfo->setVisible(false);
+        ui->groupBoxPieceTransformation->setVisible(true);
+        ui->groupBoxCurrentPieceSeamline->setVisible(false);
+        ui->groupBoxCurrentPieceGeometry->setVisible(false);
+
+        if (not ui->checkBoxRelativeTranslation->isChecked())
+        {
+            QRectF rect = PiecesBoundingRect(selectedPieces);
+
+            ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
+                        UnitConvertor(rect.topLeft().x(), Unit::Px, TranslateUnit()));
+            ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(
+                        UnitConvertor(rect.topLeft().y(), Unit::Px, TranslateUnit()));
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabSheetData()
 {
-    // set name // TODO FIXME make it better
-    ui->lineEditSheetName->setText(m_layout->GetFocusedSheet()->GetName());
-
-    // set Width / Length
-    QSizeF size = m_layout->LayoutSettings().GetSheetSizeConverted();
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetWidth, size.width());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetLength, size.height());
-
-    // Set Orientation
-    if(m_layout->LayoutSettings().GetOrientation() == PageOrientation::Portrait)
+    if (not m_layout.isNull())
     {
-        ui->radioButtonSheetPortrait->setChecked(true);
+        ui->groupBoxSheetInfos->setDisabled(false);
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        SetLineEditValue(ui->lineEditSheetName, not sheet.isNull() ? sheet->GetName() : QString());
+
+        ui->groupBoxPaperFormat->setDisabled(false);
+        const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
+        if (indexUnit != -1)
+        {
+            ui->comboBoxLayoutUnit->blockSignals(true);
+            ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+            ui->comboBoxLayoutUnit->blockSignals(false);
+        }
+        else
+        {
+            ui->comboBoxLayoutUnit->setCurrentIndex(0);
+        }
+
+        const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
+
+        ui->doubleSpinBoxSheetPaperWidth->setSuffix(suffix);
+        ui->doubleSpinBoxSheetPaperHeight->setSuffix(suffix);
+
+        ui->doubleSpinBoxSheetMarginLeft->setSuffix(suffix);
+        ui->doubleSpinBoxSheetMarginRight->setSuffix(suffix);
+        ui->doubleSpinBoxSheetMarginTop->setSuffix(suffix);
+        ui->doubleSpinBoxSheetMarginBottom->setSuffix(suffix);
+
+        // set Width / Length
+        QSizeF size = m_layout->LayoutSettings().GetSheetSizeConverted();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, size.width());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, size.height());
+
+        SheetPaperSizeChanged();
+        FindSheetTemplate();
+
+        // set margins
+        ui->groupBoxSheetMargin->setDisabled(false);
+        QMarginsF margins = m_layout->LayoutSettings().GetSheetMarginsConverted();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
+
+        CorrectSheetMaxMargins();
+
+        const bool ignoreMargins = m_layout->LayoutSettings().IgnoreMargins();
+        SetCheckBoxValue(ui->checkBoxLayoutIgnoreFileds, ignoreMargins);
+
+        ui->doubleSpinBoxSheetMarginLeft->setDisabled(ignoreMargins);
+        ui->doubleSpinBoxSheetMarginRight->setDisabled(ignoreMargins);
+        ui->doubleSpinBoxSheetMarginTop->setDisabled(ignoreMargins);
+        ui->doubleSpinBoxSheetMarginBottom->setDisabled(ignoreMargins);
+
+        // set placement grid
+        ui->groupBoxSheetGrid->setDisabled(false);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth,
+                              m_layout->LayoutSettings().GetGridColWidthConverted());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight,
+                              m_layout->LayoutSettings().GetGridRowHeightConverted());
+
+        SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->LayoutSettings().GetShowGrid());
+
+        ui->groupBoxSheetExport->setDisabled(false);
     }
     else
     {
-        ui->radioButtonSheetLandscape->setChecked(true);
+        ui->groupBoxSheetInfos->setDisabled(true);
+        SetLineEditValue(ui->lineEditSheetName, QString());
+
+        ui->groupBoxPaperFormat->setDisabled(true);
+
+        ui->comboBoxLayoutUnit->blockSignals(true);
+        ui->comboBoxLayoutUnit->setCurrentIndex(-1);
+        ui->comboBoxLayoutUnit->blockSignals(false);
+
+        ui->comboBoxSheetTemplates->blockSignals(true);
+        ui->comboBoxSheetTemplates->setCurrentIndex(-1);
+        ui->comboBoxSheetTemplates->blockSignals(false);
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, 0);
+
+        ui->groupBoxSheetMargin->setDisabled(true);
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, 0);
+
+        SetCheckBoxValue(ui->checkBoxLayoutIgnoreFileds, false);
+
+        ui->groupBoxSheetGrid->setDisabled(true);
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, 0);
+
+        SetCheckBoxValue(ui->checkBoxSheetShowGrid, false);
+
+        ui->groupBoxSheetExport->setDisabled(true);
     }
-
-    // set margins
-    QMarginsF margins = m_layout->LayoutSettings().GetSheetMarginsConverted();
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
-
-    // set placement grid
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, m_layout->LayoutSettings().GetGridColWidthConverted());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, m_layout->LayoutSettings().GetGridRowHeightConverted());
-    SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->LayoutSettings().GetShowGrid());
-
-    // set pieces gap
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->LayoutSettings().GetPiecesGapConverted());
-
-    // set the checkboxes
-    SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().GetStickyEdges());
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabTilesData()
 {
-    // set Width / Length
-    QSizeF size = m_layout->LayoutSettings().GetTilesSizeConverted();
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesWidth, size.width());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesLength, size.height());
-
-    // Set Orientation
-    if(m_layout->LayoutSettings().GetTilesOrientation() == PageOrientation::Portrait)
+    if (not m_layout.isNull())
     {
-        ui->radioButtonSheetPortrait->setChecked(true);
+        ui->groupBoxTilePaperFormat->setDisabled(false);
+        // set Width / Length
+        QSizeF size = m_layout->LayoutSettings().GetTilesSizeConverted();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperWidth, size.width());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperHeight, size.height());
+
+        TilePaperSizeChanged();
+        FindTileTemplate();
+
+        // set margins
+        ui->groupBoxTileMargins->setDisabled(false);
+        QMarginsF margins = m_layout->LayoutSettings().GetTilesMarginsConverted();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginLeft, margins.left());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginTop, margins.top());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginRight, margins.right());
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginBottom, margins.bottom());
+
+        CorrectTileMaxMargins();
+
+        const bool ignoreMargins = m_layout->LayoutSettings().IgnoreTilesMargins();
+        SetCheckBoxValue(ui->checkBoxTileIgnoreFileds, ignoreMargins);
+
+        ui->doubleSpinBoxTileMarginLeft->setDisabled(ignoreMargins);
+        ui->doubleSpinBoxTileMarginRight->setDisabled(ignoreMargins);
+        ui->doubleSpinBoxTileMarginTop->setDisabled(ignoreMargins);
+        ui->doubleSpinBoxTileMarginBottom->setDisabled(ignoreMargins);
+
+        const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
+
+        ui->doubleSpinBoxTilePaperWidth->setSuffix(suffix);
+        ui->doubleSpinBoxTilePaperHeight->setSuffix(suffix);
+
+        ui->doubleSpinBoxTileMarginLeft->setSuffix(suffix);
+        ui->doubleSpinBoxTileMarginRight->setSuffix(suffix);
+        ui->doubleSpinBoxTileMarginTop->setSuffix(suffix);
+        ui->doubleSpinBoxTileMarginBottom->setSuffix(suffix);
+
+        ui->groupBoxTilesControl->setDisabled(false);
+
+        SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
+
+        ui->groupBoxTilesExport->setDisabled(false);
     }
     else
     {
-        ui->radioButtonSheetLandscape->setChecked(true);
+        ui->groupBoxTilePaperFormat->setDisabled(true);
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperWidth, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperHeight, 0);
+
+        ui->groupBoxTileMargins->setDisabled(true);
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginLeft, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginTop, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginRight, 0);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginBottom, 0);
+
+        SetCheckBoxValue(ui->checkBoxTileIgnoreFileds, false);
+
+        ui->groupBoxTilesControl->setDisabled(true);
+
+        SetCheckBoxValue(ui->checkBoxTilesShowTiles, false);
+
+        ui->groupBoxTilesExport->setDisabled(true);
     }
-
-    // set margins
-    QMarginsF margins = m_layout->LayoutSettings().GetTilesMarginsConverted();
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginLeft, margins.left());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginTop, margins.top());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginRight, margins.right());
-    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilesMarginBottom, margins.bottom());
-
-    // set "show tiles" checkbox
-    SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabLayoutData()
 {
-    // set the title and description
-    ui->lineEditLayoutName->setText(m_layout->LayoutSettings().GetTitle());
-    ui->plainTextEditLayoutDescription->setPlainText(m_layout->LayoutSettings().GetDescription());
-
-    // set Unit
-    int index = ui->comboBoxLayoutUnit->findData(QVariant(UnitsToStr(m_layout->LayoutSettings().GetUnit())));
-    if(index != -1)
+    if (not m_layout.isNull())
     {
-        ui->comboBoxLayoutUnit->blockSignals(true); // FIXME: is there a better way to block the signals?
-        ui->comboBoxLayoutUnit->setCurrentIndex(index);
-        ui->comboBoxLayoutUnit->blockSignals(false);
-    }
+        // set the title and description
+        ui->groupBoxLayoutInfos->setDisabled(false);
+        SetLineEditValue(ui->lineEditLayoutName, m_layout->LayoutSettings().GetTitle());
+        SetPlainTextEditValue(ui->plainTextEditLayoutDescription, m_layout->LayoutSettings().GetDescription());
 
-    // set controls
-    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound,
-                     m_layout->LayoutSettings().GetWarningPiecesOutOfBound());
-    SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition,
-                     m_layout->LayoutSettings().GetWarningSuperpositionOfPieces());
+        // set controls
+        ui->groupBoxLayoutControl->setDisabled(false);
+        SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound,
+                         m_layout->LayoutSettings().GetWarningPiecesOutOfBound());
+        SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition,
+                         m_layout->LayoutSettings().GetWarningSuperpositionOfPieces());
+        SetCheckBoxValue(ui->checkBoxSheetStickyEdges,
+                         m_layout->LayoutSettings().GetStickyEdges());
+        SetCheckBoxValue(ui->checkBoxFollowGainline,
+                         m_layout->LayoutSettings().GetFollowGrainline());
+
+        // set pieces gap
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->LayoutSettings().GetPiecesGapConverted());
+
+        ui->doubleSpinBoxSheetPiecesGap->setSuffix(" " + UnitsToStr(LayoutUnit(), true));
+
+        ui->groupBoxLayoutExport->setDisabled(false);
+    }
+    else
+    {
+        ui->groupBoxLayoutInfos->setDisabled(true);
+        SetLineEditValue(ui->lineEditLayoutName, QString());
+        SetPlainTextEditValue(ui->plainTextEditLayoutDescription, QString());
+
+        ui->groupBoxLayoutControl->setDisabled(true);
+
+        ui->comboBoxLayoutUnit->blockSignals(true);
+        ui->comboBoxLayoutUnit->setCurrentIndex(-1);
+        ui->comboBoxLayoutUnit->blockSignals(false);
+
+        // set controls
+        SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, false);
+        SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, false);
+        SetCheckBoxValue(ui->checkBoxSheetStickyEdges, false);
+        SetCheckBoxValue(ui->checkBoxFollowGainline, false);
+
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, 0);
+
+        ui->groupBoxLayoutExport->setDisabled(true);
+    }
 }
 
 
@@ -828,22 +1278,6 @@ void VPMainWindow::InitScaleToolBar()
                                    .arg(UnitsToStr(m_layout->LayoutSettings().GetUnit(), true)));
     ui->toolBarScale->addWidget(m_mouseCoordinate);
     ui->toolBarScale->addSeparator();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
-{
-    spinBox->blockSignals(true);
-    spinBox->setValue(value);
-    spinBox->blockSignals(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::SetCheckBoxValue(QCheckBox *checkbox, bool value)
-{
-    checkbox->blockSignals(true);
-    checkbox->setChecked(value);
-    checkbox->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -957,7 +1391,7 @@ auto VPMainWindow::MaybeSave() -> bool
     if (this->isWindowModified())
     {
         QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
-                                                               tr("Measurements have been modified.\n"
+                                                               tr("Layout has been modified.\n"
                                                                   "Do you want to save your changes?"),
                                                                QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
                                                                QMessageBox::Cancel, this, Qt::Sheet));
@@ -993,75 +1427,75 @@ auto VPMainWindow::MaybeSave() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::generateTiledPdf(QString fileName)
 {
-    if(not fileName.isEmpty())
-    {
-        m_graphicsView->PrepareForExport();
-        m_tileFactory->refreshTileInfos();
+//    if(not fileName.isEmpty())
+//    {
+//        m_graphicsView->PrepareForExport();
+//        m_tileFactory->refreshTileInfos();
 
-        PageOrientation tilesOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+//        PageOrientation tilesOrientation = m_layout->LayoutSettings().GetTilesOrientation();
 
-        // -------------  Set up the printer
-        QScopedPointer<QPrinter> printer(new QPrinter());
+//        // -------------  Set up the printer
+//        QScopedPointer<QPrinter> printer(new QPrinter());
 
-        printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
-                            QCoreApplication::applicationVersion());
-        printer->setPageOrientation(QPageLayout::Portrait); // in the pdf file the pages should always be in portrait
+//        printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
+//                            QCoreApplication::applicationVersion());
+//        printer->setPageOrientation(QPageLayout::Portrait); // in the pdf file the pages should always be in portrait
 
-        // here we might need to so some rounding for the size.
-        printer->setPageSize(QPageSize(m_layout->LayoutSettings().GetTilesSize(Unit::Mm),
-                                                           QPageSize::Millimeter));
-        printer->setFullPage(true);
+//        // here we might need to so some rounding for the size.
+//        printer->setPageSize(QPageSize(m_layout->LayoutSettings().GetTilesSize(Unit::Mm),
+//                                                           QPageSize::Millimeter));
+//        printer->setFullPage(true);
 
-        #ifdef Q_OS_MAC
-        printer->setOutputFormat(QPrinter::NativeFormat);
-        #else
-        printer->setOutputFormat(QPrinter::PdfFormat);
-        #endif
+//        #ifdef Q_OS_MAC
+//        printer->setOutputFormat(QPrinter::NativeFormat);
+//        #else
+//        printer->setOutputFormat(QPrinter::PdfFormat);
+//        #endif
 
-        printer->setOutputFileName(fileName);
-        printer->setResolution(static_cast<int>(PrintDPI));
-        printer->setDocName(m_layout->GetFocusedSheet()->GetName());
+//        printer->setOutputFileName(fileName);
+//        printer->setResolution(static_cast<int>(PrintDPI));
+//        printer->setDocName(m_layout->GetFocusedSheet()->GetName());
 
-        // -------------  Set up the painter
-        QPainter painter;
-        if (not painter.begin(printer.data()))
-        { // failed to open file
-            qCritical() << tr("Failed to open file, is it writable?");
-            return;
-        }
-        painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+//        // -------------  Set up the painter
+//        QPainter painter;
+//        if (not painter.begin(printer.data()))
+//        { // failed to open file
+//            qCritical() << tr("Failed to open file, is it writable?");
+//            return;
+//        }
+//        painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
+//        painter.setRenderHint(QPainter::Antialiasing, true);
+//        painter.setBrush ( QBrush ( Qt::NoBrush ) );
 
-        if(tilesOrientation == PageOrientation::Landscape)
-        {
-            // The landscape tiles have to be rotated, because the pages
-            // stay portrait in the pdf
-            painter.rotate(90);
-            painter.translate(0, -ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm));
-        }
+//        if(tilesOrientation == PageOrientation::Landscape)
+//        {
+//            // The landscape tiles have to be rotated, because the pages
+//            // stay portrait in the pdf
+//            painter.rotate(90);
+//            painter.translate(0, -ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm));
+//        }
 
-        for(int row=0;row<m_tileFactory->getRowNb();row++)  // for each row of the tiling grid
-        {
-            for(int col=0;col<m_tileFactory->getColNb();col++) // for each column of tiling grid
-            {
-                if(not (row == 0 && col == 0))
-                {
-                    if (not printer->newPage())
-                    {
-                        qWarning("failed in flushing page to disk, disk full?");
-                        return;
-                    }
-                }
+//        for(int row=0;row<m_tileFactory->getRowNb();row++)  // for each row of the tiling grid
+//        {
+//            for(int col=0;col<m_tileFactory->getColNb();col++) // for each column of tiling grid
+//            {
+//                if(not (row == 0 && col == 0))
+//                {
+//                    if (not printer->newPage())
+//                    {
+//                        qWarning("failed in flushing page to disk, disk full?");
+//                        return;
+//                    }
+//                }
 
-                m_tileFactory->drawTile(&painter, m_graphicsView, row, col);
-            }
-        }
+//                m_tileFactory->drawTile(&painter, m_graphicsView, row, col);
+//            }
+//        }
 
-        painter.end();
+//        painter.end();
 
-        m_graphicsView->CleanAfterExport();
-    }
+//        m_graphicsView->CleanAfterExport();
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1138,6 +1572,291 @@ void VPMainWindow::ConnectToPreferences(const QSharedPointer<DialogPuzzlePrefere
     // Must be first
     connect(preferences.get(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
     connect(preferences.get(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::SelectedPieces() const -> QList<VPPiecePtr>
+{
+    QList<VPPiecePtr> selectedPieces;
+    if (not m_layout.isNull())
+    {
+        VPSheetPtr activeSheet = m_layout->GetFocusedSheet();
+        if (not activeSheet.isNull())
+        {
+            selectedPieces = activeSheet->GetSelectedPieces();
+        }
+    }
+
+    return selectedPieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit VPMainWindow::TranslateUnit() const
+{
+    return StrToUnits(ui->comboBoxTranslateUnit->currentData().toString());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit VPMainWindow::LayoutUnit() const
+{
+    return StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::Template(VAbstractLayoutDialog::PaperSizeTemplate t) const -> QSizeF
+{
+    const Unit layoutUnit = LayoutUnit();
+
+    switch (t)
+    {
+        case VAbstractLayoutDialog::PaperSizeTemplate::A0:
+        case VAbstractLayoutDialog::PaperSizeTemplate::A1:
+        case VAbstractLayoutDialog::PaperSizeTemplate::A2:
+        case VAbstractLayoutDialog::PaperSizeTemplate::A3:
+        case VAbstractLayoutDialog::PaperSizeTemplate::A4:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Letter:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Legal:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Tabloid:
+            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll24in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll30in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll36in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll42in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll44in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll48in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll62in:
+        case VAbstractLayoutDialog::PaperSizeTemplate::Roll72in:
+            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
+        case VAbstractLayoutDialog::PaperSizeTemplate::Custom:
+            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
+        default:
+            break;
+    }
+    return QSizeF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::SheetTemplate() const -> QSizeF
+{
+    auto t = static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(ui->comboBoxSheetTemplates->currentData().toInt());
+    return Template(t);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::TileTemplate() const -> QSizeF
+{
+    auto t = static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(ui->comboBoxTileTemplates->currentData().toInt());
+    return Template(t);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SheetSize(const QSizeF &size)
+{
+    m_oldLayoutUnit = LayoutUnit();
+    ui->doubleSpinBoxSheetPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, m_oldLayoutUnit));
+    ui->doubleSpinBoxSheetPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, m_oldLayoutUnit));
+
+    ui->doubleSpinBoxSheetPaperWidth->setValue(size.width());
+    ui->doubleSpinBoxSheetPaperHeight->setValue(size.height());
+
+    CorrectPaperDecimals();
+    SheetPaperSizeChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::TileSize(const QSizeF &size)
+{
+    m_oldLayoutUnit = LayoutUnit();
+    ui->doubleSpinBoxTilePaperWidth->setMaximum(FromPixel(QIMAGE_MAX, m_oldLayoutUnit));
+    ui->doubleSpinBoxTilePaperHeight->setMaximum(FromPixel(QIMAGE_MAX, m_oldLayoutUnit));
+
+    ui->doubleSpinBoxTilePaperWidth->setValue(size.width());
+    ui->doubleSpinBoxTilePaperHeight->setValue(size.height());
+
+    CorrectPaperDecimals();
+    TilePaperSizeChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CorrectPaperDecimals()
+{
+    switch (m_oldLayoutUnit)
+    {
+        case Unit::Cm:
+        case Unit::Mm:
+        case Unit::Px:
+            ui->doubleSpinBoxSheetPaperWidth->setDecimals(2);
+            ui->doubleSpinBoxSheetPaperHeight->setDecimals(2);
+
+            ui->doubleSpinBoxTilePaperWidth->setDecimals(2);
+            ui->doubleSpinBoxTilePaperHeight->setDecimals(2);
+
+            ui->doubleSpinBoxSheetMarginLeft->setDecimals(4);
+            ui->doubleSpinBoxSheetMarginRight->setDecimals(4);
+            ui->doubleSpinBoxSheetMarginTop->setDecimals(4);
+            ui->doubleSpinBoxSheetMarginBottom->setDecimals(4);
+
+            ui->doubleSpinBoxTileMarginLeft->setDecimals(4);
+            ui->doubleSpinBoxTileMarginRight->setDecimals(4);
+            ui->doubleSpinBoxTileMarginTop->setDecimals(4);
+            ui->doubleSpinBoxTileMarginBottom->setDecimals(4);
+
+            ui->doubleSpinBoxSheetPiecesGap->setDecimals(2);
+            break;
+        case Unit::Inch:
+            ui->doubleSpinBoxSheetPaperWidth->setDecimals(5);
+            ui->doubleSpinBoxSheetPaperHeight->setDecimals(5);
+
+            ui->doubleSpinBoxTilePaperWidth->setDecimals(5);
+            ui->doubleSpinBoxTilePaperHeight->setDecimals(5);
+
+            ui->doubleSpinBoxSheetMarginLeft->setDecimals(5);
+            ui->doubleSpinBoxSheetMarginRight->setDecimals(5);
+            ui->doubleSpinBoxSheetMarginTop->setDecimals(5);
+            ui->doubleSpinBoxSheetMarginBottom->setDecimals(5);
+
+            ui->doubleSpinBoxTileMarginLeft->setDecimals(5);
+            ui->doubleSpinBoxTileMarginRight->setDecimals(5);
+            ui->doubleSpinBoxTileMarginTop->setDecimals(5);
+            ui->doubleSpinBoxTileMarginBottom->setDecimals(5);
+
+            ui->doubleSpinBoxSheetPiecesGap->setDecimals(5);
+            break;
+        default:
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SheetPaperSizeChanged()
+{
+    bool portrait = ui->doubleSpinBoxSheetPaperHeight->value() >= ui->doubleSpinBoxSheetPaperWidth->value();
+
+    ui->toolButtonSheetPortraitOritation->blockSignals(true);
+    ui->toolButtonSheetPortraitOritation->setChecked(portrait);
+    ui->toolButtonSheetPortraitOritation->blockSignals(false);
+
+    ui->toolButtonSheetLandscapeOrientation->blockSignals(true);
+    ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
+    ui->toolButtonSheetLandscapeOrientation->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::TilePaperSizeChanged()
+{
+    bool portrait = ui->doubleSpinBoxTilePaperHeight->value() >= ui->doubleSpinBoxTilePaperWidth->value();
+
+    ui->toolButtonTilePortraitOrientation->blockSignals(true);
+    ui->toolButtonTilePortraitOrientation->setChecked(portrait);
+    ui->toolButtonTilePortraitOrientation->blockSignals(false);
+
+    ui->toolButtonTileLandscapeOrientation->blockSignals(true);
+    ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
+    ui->toolButtonTileLandscapeOrientation->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::MinimumSheetPaperSize()
+{
+    const qreal value = UnitConvertor(1, Unit::Px, m_oldLayoutUnit);
+    ui->doubleSpinBoxSheetPaperWidth->setMinimum(value);
+    ui->doubleSpinBoxSheetPaperHeight->setMinimum(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::MinimumTilePaperSize()
+{
+    const qreal value = UnitConvertor(1, Unit::Px, m_oldLayoutUnit);
+    ui->doubleSpinBoxTilePaperWidth->setMinimum(value);
+    ui->doubleSpinBoxTilePaperHeight->setMinimum(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
+{
+    SCASSERT(box != nullptr)
+    const Unit paperUnit = LayoutUnit();
+
+    const int max = static_cast<int>(VAbstractLayoutDialog::PaperSizeTemplate::Custom);
+    for (int i=0; i < max; ++i)
+    {
+        const QSizeF tmplSize = VAbstractLayoutDialog::GetTemplateSize(
+                    static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(i), paperUnit);
+        if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
+        {
+            box->blockSignals(true);
+            const int index = box->findData(i);
+            if (index != -1)
+            {
+                box->setCurrentIndex(index);
+            }
+            box->blockSignals(false);
+            return;
+        }
+    }
+
+    box->blockSignals(true);
+    const int index = box->findData(max);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+    box->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::FindSheetTemplate()
+{
+    const qreal width = ui->doubleSpinBoxSheetPaperWidth->value();
+    const qreal height = ui->doubleSpinBoxSheetPaperHeight->value();
+    FindTemplate(ui->comboBoxSheetTemplates, width, height);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::FindTileTemplate()
+{
+    const qreal width = ui->doubleSpinBoxTilePaperWidth->value();
+    const qreal height = ui->doubleSpinBoxTilePaperHeight->value();
+    FindTemplate(ui->comboBoxTileTemplates, width, height);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CorrectTileMaxMargins()
+{
+    const qreal tileWidth = ui->doubleSpinBoxTilePaperWidth->value();
+    const qreal tileHeight = ui->doubleSpinBoxTilePaperHeight->value();
+
+    // 80%/2 of paper size for each field
+    const qreal tileWidthMargin = (tileWidth*80.0/100.0)/2.0;
+    const qreal tileHeightMargin = (tileHeight*80.0/100.0)/2.0;
+
+    ui->doubleSpinBoxTileMarginLeft->setMaximum(tileWidthMargin);
+    ui->doubleSpinBoxTileMarginRight->setMaximum(tileWidthMargin);
+    ui->doubleSpinBoxTileMarginTop->setMaximum(tileHeightMargin);
+    ui->doubleSpinBoxTileMarginBottom->setMaximum(tileHeightMargin);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CorrectSheetMaxMargins()
+{
+    const qreal sheetWidth = ui->doubleSpinBoxSheetPaperWidth->value();
+    const qreal sheetHeight = ui->doubleSpinBoxSheetPaperHeight->value();
+
+    // 80%/2 of paper size for each field
+    const qreal sheetWidthMargin = (sheetWidth*80.0/100.0)/2.0;
+    const qreal sheetHeightMargin = (sheetHeight*80.0/100.0)/2.0;
+
+    ui->doubleSpinBoxSheetMarginLeft->setMaximum(sheetWidthMargin);
+    ui->doubleSpinBoxSheetMarginRight->setMaximum(sheetWidthMargin);
+    ui->doubleSpinBoxSheetMarginTop->setMaximum(sheetHeightMargin);
+    ui->doubleSpinBoxSheetMarginBottom->setMaximum(sheetHeightMargin);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CorrectMaxMargins()
+{
+    CorrectSheetMaxMargins();
+    CorrectTileMaxMargins();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1393,23 +2112,11 @@ void VPMainWindow::on_actionAboutPuzzle_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
+void VPMainWindow::on_LayoutUnitChanged(int index)
 {
     Q_UNUSED(index);
     QVariant comboBoxValue = ui->comboBoxLayoutUnit->currentData();
-
-    if(comboBoxValue == QVariant(UnitsToStr(Unit::Cm)))
-    {
-        m_layout->LayoutSettings().SetUnit(Unit::Cm);
-    }
-    else if(comboBoxValue == QVariant(UnitsToStr(Unit::Mm)))
-    {
-        m_layout->LayoutSettings().SetUnit(Unit::Mm);
-    }
-    else if(comboBoxValue == QVariant(UnitsToStr(Unit::Inch)))
-    {
-        m_layout->LayoutSettings().SetUnit(Unit::Inch);
-    }
+    m_layout->LayoutSettings().SetUnit(StrToUnits(comboBoxValue.toString()));
 
     SetPropertyTabCurrentPieceData();
     SetPropertyTabSheetData();
@@ -1417,85 +2124,42 @@ void VPMainWindow::on_comboBoxLayoutUnit_currentIndexChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_lineEditSheetName_textChanged(const QString &text)
+void VPMainWindow::on_SheetSizeChanged()
 {
-    m_layout->GetFocusedSheet()->SetName(text);
-
-    if(m_carrousel != nullptr)
+    if (not m_layout.isNull())
     {
-        m_carrousel->RefreshSheetNames();
+        m_layout->LayoutSettings().SetSheetSizeConverted(
+                    ui->doubleSpinBoxSheetPaperWidth->value(),
+                    ui->doubleSpinBoxSheetPaperHeight->value());
+        FindSheetTemplate();
+        SheetPaperSizeChanged();
+        CorrectMaxMargins();
+        LayoutWasSaved(false);
+
+        m_tileFactory->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_comboBoxSheetTemplate_currentIndexChanged(int index)
+void VPMainWindow::on_SheetOrientationChanged(bool checked)
 {
-    PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
-                ui->comboBoxSheetTemplate->itemData(index).toInt()
-                );
-
-    QSizeF tmplSize = VPLayoutSettings::GetTemplateSize(tmpl);
-    if(!tmplSize.isEmpty())
+    if (checked && not m_layout.isNull())
     {
-        ui->doubleSpinBoxSheetWidth->blockSignals(true);
-        ui->doubleSpinBoxSheetLength->blockSignals(true);
+        const qreal width = ui->doubleSpinBoxSheetPaperWidth->value();
+        const qreal height = ui->doubleSpinBoxSheetPaperHeight->value();
 
-        ui->doubleSpinBoxSheetWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px,
-                                                            m_layout->LayoutSettings().GetUnit()));
-        ui->doubleSpinBoxSheetLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px,
-                                                             m_layout->LayoutSettings().GetUnit()));
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, height);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, width);
 
-        on_SheetSizeChanged(false);
+        m_layout->LayoutSettings().SetSheetSizeConverted(height, width);
 
-        ui->doubleSpinBoxSheetWidth->blockSignals(false);
-        ui->doubleSpinBoxSheetLength->blockSignals(false);
+        SheetPaperSizeChanged();
+        CorrectMaxMargins();
+        LayoutWasSaved(false);
+        m_tileFactory->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_SheetSizeChanged(bool changedViaSizeCombobox)
-{
-    m_layout->LayoutSettings().SetSheetSizeConverted(
-                ui->doubleSpinBoxSheetWidth->value(),
-                ui->doubleSpinBoxSheetLength->value()
-                );
-
-    if(changedViaSizeCombobox)
-    {
-        ui->comboBoxSheetTemplate->blockSignals(true);
-
-        // we don't try to get the right size, because it doesn't work well because of mm / inch conversion
-        int index = ui->comboBoxSheetTemplate->findData(
-                    QVariant(static_cast<int>(PaperSizeTemplate::Custom)));
-
-        ui->comboBoxSheetTemplate->setCurrentIndex(index);
-        ui->comboBoxSheetTemplate->blockSignals(false);
-    }
-
-    m_tileFactory->refreshTileInfos();
-
-    // TODO Undo / Redo
-
-    m_graphicsView->RefreshLayout();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_SheetOrientationChanged()
-{
-    // Updates the orientation
-    if(ui->radioButtonSheetPortrait->isChecked())
-    {
-        m_layout->LayoutSettings().SetOrientation(PageOrientation::Portrait);
-    }
-    else
-    {
-        m_layout->LayoutSettings().SetOrientation(PageOrientation::Landscape);
-    }
-    m_tileFactory->refreshTileInfos();
-
-    // TODO Undo / Redo
-
-    m_graphicsView->RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1515,16 +2179,17 @@ void VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_SheetMarginChanged()
 {
-    m_layout->LayoutSettings().SetSheetMarginsConverted(
-                ui->doubleSpinBoxSheetMarginLeft->value(),
-                ui->doubleSpinBoxSheetMarginTop->value(),
-                ui->doubleSpinBoxSheetMarginRight->value(),
-                ui->doubleSpinBoxSheetMarginBottom->value()
-            );
+    if (not m_layout.isNull())
+    {
+        m_layout->LayoutSettings().SetSheetMarginsConverted(
+                    ui->doubleSpinBoxSheetMarginLeft->value(),
+                    ui->doubleSpinBoxSheetMarginTop->value(),
+                    ui->doubleSpinBoxSheetMarginRight->value(),
+                    ui->doubleSpinBoxSheetMarginBottom->value());
 
-    // TODO Undo / Redo
-
-    m_graphicsView->RefreshLayout();
+        LayoutWasSaved(false);
+        m_graphicsView->RefreshLayout();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1549,93 +2214,58 @@ void VPMainWindow::on_doubleSpinBoxSheetGridRowHeight_valueChanged(double value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_comboBoxTilesTemplate_currentIndexChanged(int index)
+void VPMainWindow::on_TilesSizeChanged()
 {
-    PaperSizeTemplate tmpl = static_cast<PaperSizeTemplate>(
-                ui->comboBoxTilesTemplate->itemData(index).toInt()
-                );
-
-    QSizeF tmplSize = VPLayoutSettings::GetTemplateSize(tmpl);
-    if(!tmplSize.isEmpty())
+    if (not m_layout.isNull())
     {
-        ui->doubleSpinBoxTilesWidth->blockSignals(true);
-        ui->doubleSpinBoxTilesLength->blockSignals(true);
+        m_layout->LayoutSettings().SetTilesSizeConverted(
+                    ui->doubleSpinBoxTilePaperWidth->value(),
+                    ui->doubleSpinBoxTilePaperHeight->value());
+        FindTileTemplate();
+        TilePaperSizeChanged();
+        CorrectMaxMargins();
+        LayoutWasSaved(false);
 
-        ui->doubleSpinBoxTilesWidth->setValue(UnitConvertor(tmplSize.width(), Unit::Px,
-                                                            m_layout->LayoutSettings().GetUnit()));
-        ui->doubleSpinBoxTilesLength->setValue(UnitConvertor(tmplSize.height(), Unit::Px,
-                                                             m_layout->LayoutSettings().GetUnit()));
-
-        on_TilesSizeChanged(false);
-
-        ui->doubleSpinBoxTilesWidth->blockSignals(false);
-        ui->doubleSpinBoxTilesLength->blockSignals(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_TilesSizeChanged(bool changedViaSizeCombobox)
-{
-    m_layout->LayoutSettings().SetTilesSizeConverted(ui->doubleSpinBoxTilesWidth->value(),
-                                                     ui->doubleSpinBoxTilesLength->value());
-    m_tileFactory->refreshTileInfos();
-
-    if(changedViaSizeCombobox)
-    {
-        ui->comboBoxTilesTemplate->blockSignals(true);
-
-        // we don't try to get the right size, because it doesn't work well because of mm / inch conversion
-        int index = ui->comboBoxTilesTemplate->findData(
-                    QVariant(static_cast<int>(PaperSizeTemplate::Custom)));
-
-        ui->comboBoxTilesTemplate->setCurrentIndex(index);
-        ui->comboBoxTilesTemplate->blockSignals(false);
-    }
-
-    // TODO Undo / Redo
-
-    if(m_graphicsView != nullptr)
-    {
+        m_tileFactory->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_TilesOrientationChanged()
+void VPMainWindow::on_TilesOrientationChanged(bool checked)
 {
-    // Updates the orientation
-    m_tileFactory->refreshTileInfos();
+    if (checked && not m_layout.isNull())
+    {
+        const qreal width = ui->doubleSpinBoxTilePaperWidth->value();
+        const qreal height = ui->doubleSpinBoxTilePaperHeight->value();
 
-    // TODO Undo / Redo
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperWidth, height);
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperHeight, width);
 
-    m_graphicsView->RefreshLayout();
+        m_layout->LayoutSettings().SetTilesSizeConverted(height, width);
+
+        TilePaperSizeChanged();
+        CorrectMaxMargins();
+        LayoutWasSaved(false);
+        m_tileFactory->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_TilesMarginChanged()
 {
-    m_layout->LayoutSettings().SetTilesMarginsConverted(
-                ui->doubleSpinBoxTilesMarginLeft->value(),
-                ui->doubleSpinBoxTilesMarginTop->value(),
-                ui->doubleSpinBoxTilesMarginRight->value(),
-                ui->doubleSpinBoxTilesMarginBottom->value()
-            );
-    m_tileFactory->refreshTileInfos();
-
-    // TODO Undo / Redo
-
-    m_graphicsView->RefreshLayout();
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxTilesShowTiles_toggled(bool checked)
-{
-    m_layout->LayoutSettings().SetShowTiles(checked);
-
-    // TODO Undo / Redo
-
-    m_graphicsView->RefreshLayout();
+    if (not m_layout.isNull())
+    {
+        m_layout->LayoutSettings().SetTilesMarginsConverted(
+                    ui->doubleSpinBoxTileMarginLeft->value(),
+                    ui->doubleSpinBoxTileMarginTop->value(),
+                    ui->doubleSpinBoxTileMarginRight->value(),
+                    ui->doubleSpinBoxTileMarginBottom->value());
+        LayoutWasSaved(false);
+        m_tileFactory->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1654,145 +2284,43 @@ void VPMainWindow::on_pushButtonTilesExport_clicked()
     generateTiledPdf(fileName);
 }
 
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_SheetFollowGrainlineChanged()
-{
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::on_SheetFollowGrainlineChanged");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(ret);
-
-    // TODO
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_doubleSpinBoxSheetPiecesGap_valueChanged(double value)
-{
-    m_layout->LayoutSettings().SetPiecesGapConverted(value);
-
-    // TODO Undo / Redo
-    // TODO update the QGraphicView
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxLayoutWarningPiecesSuperposition_toggled(bool checked)
-{
-    m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(checked);
-
-    // TODO Undo / Redo
-    // TODO update the QGraphicView
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked)
-{
-    m_layout->LayoutSettings().SetWarningPiecesOutOfBound(checked);
-
-    // TODO Undo / Redo
-    // TODO update the QGraphicView
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxSheetStickyEdges_toggled(bool checked)
-{
-    m_layout->LayoutSettings().SetStickyEdges(checked);
-
-    // TODO Undo / Redo
-    // TODO update the QGraphicView
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_pushButtonSheetExport_clicked()
 {
-    LayoutExportFormats format = static_cast<LayoutExportFormats>(ui->comboBoxSheetExportFormat->currentData().toInt());
+//    LayoutExportFormats format = static_cast<LayoutExportFormats>(ui->comboBoxSheetExportFormat->currentData().toInt());
 
-    VPExporter exporter;
-    exporter.Export(m_layout.get(), format, m_graphicsView);
+//    VPExporter exporter;
+//    exporter.Export(m_layout.get(), format, m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
 {
-    if(m_selectedPieces.count() == 1)
-    {
+//    if(m_selectedPieces.count() == 1)
+//    {
 //        m_selectedPieces.first()->SetShowSeamLine(checked);
-    }
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
 {
-    if(m_selectedPieces.count() == 1)
-    {
-        m_selectedPieces.first()->SetMirror(checked);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonCurrentPieceRotate90Anticlockwise_clicked()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-//         m_selectedPieces.first()->RotateBy(90);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonCurrentPieceRotate90Clockwise_clicked()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-//         m_selectedPieces.first()->RotateBy(-90);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineVertical_clicked()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-//         m_selectedPieces.first()->RotateToGrainline(90, true);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-//         m_selectedPieces.first()->RotateToGrainline(0, true);
-    }
+//    if(m_selectedPieces.count() == 1)
+//    {
+//        m_selectedPieces.first()->SetMirror(checked);
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
 {
-    if(m_selectedPieces.count() == 1)
-    {
+//    if(m_selectedPieces.count() == 1)
+//    {
 //        VPPiece *piece = m_selectedPieces.first();
 //        piece->SetRotation(value);
-    }
+//    }
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_CurrentPiecePositionEdited()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-        VPPiece *piece = m_selectedPieces.first();
-        QPointF pos(UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(),
-                                  m_layout->LayoutSettings().GetUnit(), Unit::Px),
-                    UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(),
-                                  m_layout->LayoutSettings().GetUnit(), Unit::Px));
-        piece->SetPosition(pos);
-    }
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_CarrouselLocationChanged(Qt::DockWidgetArea area)
@@ -1810,40 +2338,9 @@ void VPMainWindow::on_CarrouselLocationChanged(Qt::DockWidgetArea area)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_PieceSelectionChanged()
 {
-//    m_selectedPieces = m_layout->GetSelectedPieces();
-
     // update the property of the piece currently selected
     SetPropertyTabCurrentPieceData();
 }
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_PiecePositionChanged()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-        VPPiece *piece = m_selectedPieces.first();
-        QPointF pos = piece->GetPosition();
-
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionX,
-                              UnitConvertor(pos.x(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceBoxPositionY,
-                              UnitConvertor(pos.y(), Unit::Px, m_layout->LayoutSettings().GetUnit()));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_PieceRotationChanged()
-{
-    if(m_selectedPieces.count() == 1)
-    {
-//        VPPiece *piece = m_selectedPieces.first();
-//        qreal angle = piece->GetRotation();
-
-//        SetDoubleSpinBoxValue(ui->doubleSpinBoxCurrentPieceAngle, angle);
-    }
-}
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_ScaleChanged(qreal scale)
@@ -1934,8 +2431,291 @@ void VPMainWindow::ToolBarStyles()
 void VPMainWindow::on_actionAddSheet_triggered()
 {
     VPSheetPtr sheet(new VPSheet(m_layout));
-    sheet->SetName(QObject::tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
+    sheet->SetName(tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
     m_layout->UndoStack()->push(new VPUndoAddSheet(sheet));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ApplyPieceTransformation()
+{
+    if (m_layout.isNull())
+    {
+        return;
+    }
+    const int index = ui->tabWidgetPieceTransformation->currentIndex();
+    if (ui->tabWidgetPieceTransformation->indexOf(ui->tabTranslate) == index)
+    { // translate
+        const qreal dx = UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionX->value(), TranslateUnit(), Unit::Px);
+        const qreal dy = UnitConvertor(ui->doubleSpinBoxCurrentPieceBoxPositionY->value(), TranslateUnit(), Unit::Px);
+
+        QList<VPPiecePtr> selectedPieces = SelectedPieces();
+        if (selectedPieces.isEmpty())
+        {
+            return;
+        }
+
+        if (ui->checkBoxRelativeTranslation->isChecked())
+        {
+            if (ui->checkBoxTransformSeparately->isChecked())
+            {
+                if (selectedPieces.size() > 1)
+                {
+                    m_layout->UndoStack()->beginMacro(tr("translate pieces"));
+                }
+
+                QRectF rect = PiecesBoundingRect(selectedPieces);
+                for (const auto& piece : selectedPieces)
+                {
+                    if (not piece.isNull())
+                    {
+                        const QRectF pieceRect = piece->MappedDetailBoundingRect();
+                        qreal pieceDx = dx;
+                        qreal pieceDy = dy;
+
+                        if (not qFuzzyIsNull(rect.width()))
+                        {
+                            pieceDx += dx*((pieceRect.topLeft().x()-rect.topLeft().x())/rect.width())*2.;
+                        }
+
+                        if (not qFuzzyIsNull(rect.height()))
+                        {
+                            pieceDy += dy*((pieceRect.topLeft().y()-rect.topLeft().y())/rect.height())*2.;
+                        }
+
+                        auto *command = new VPUndoPieceMove(piece, pieceDx, pieceDy);
+                        m_layout->UndoStack()->push(command);
+                    }
+                }
+
+                if (selectedPieces.size() > 1)
+                {
+                    m_layout->UndoStack()->endMacro();
+                }
+            }
+            else
+            {
+                auto *command = new VPUndoPiecesMove(selectedPieces, dx, dy);
+                m_layout->UndoStack()->push(command);
+            }
+        }
+        else
+        {
+            QRectF rect = PiecesBoundingRect(selectedPieces);
+            qreal pieceDx = dx - rect.topLeft().x();
+            qreal pieceDy = dy - rect.topLeft().y();
+
+            if (selectedPieces.size() == 1)
+            {
+                auto *command = new VPUndoPieceMove(selectedPieces.first(), pieceDx, pieceDy);
+                m_layout->UndoStack()->push(command);
+            }
+            else
+            {
+                auto *command = new VPUndoPiecesMove(selectedPieces, pieceDx, pieceDy);
+                m_layout->UndoStack()->push(command);
+            }
+        }
+    }
+    else if (ui->tabWidgetPieceTransformation->indexOf(ui->tabRotate) == index)
+    { // rotate
+        qreal angle = ui->doubleSpinBoxCurrentPieceAngle->value();
+
+        if (ui->toolButtonCurrentPieceRotationClockwise->isChecked())
+        {
+            angle *= -1;
+        }
+
+        QList<VPPiecePtr> selectedPieces = SelectedPieces();
+        if (selectedPieces.isEmpty())
+        {
+            return;
+        }
+
+        if (ui->checkBoxTransformSeparately->isChecked())
+        {
+            m_layout->UndoStack()->beginMacro(tr("rotate pieces"));
+            for (const auto& piece : selectedPieces)
+            {
+                if (not piece.isNull())
+                {
+                    const QRectF rect = piece->MappedDetailBoundingRect();
+                    auto *command = new VPUndoPieceRotate(piece, rect.center(), angle);
+                    m_layout->UndoStack()->push(command);
+                }
+            }
+            m_layout->UndoStack()->endMacro();
+        }
+        else
+        {
+            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            if (sheet.isNull())
+            {
+                return;
+            }
+
+            VPTransformationOrigon origin = sheet->TransformationOrigin();
+            auto *command = new VPUndoPiecesRotate(selectedPieces, origin.origin, angle);
+            m_layout->UndoStack()->push(command);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ResetPieceTransformationSettings()
+{
+    const int index = ui->tabWidgetPieceTransformation->currentIndex();
+    if (ui->tabWidgetPieceTransformation->indexOf(ui->tabTranslate) == index)
+    { // translate
+        if (ui->checkBoxRelativeTranslation->isChecked())
+        {
+            ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(0);
+            ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(0);
+        }
+        else
+        {
+            int unitIndex = ui->comboBoxTranslateUnit->findData(QVariant(UnitsToStr(Unit::Px)));
+            if (unitIndex != -1)
+            {
+                ui->comboBoxTranslateUnit->setCurrentIndex(unitIndex);
+            }
+        }
+    }
+    else if (ui->tabWidgetPieceTransformation->indexOf(ui->tabRotate) == index)
+    { // rotate
+        ui->doubleSpinBoxCurrentPieceAngle->setValue(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_RelativeTranslationChanged(bool checked)
+{
+    if (checked)
+    {
+        ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(0);
+        ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(0);
+    }
+    else
+    {
+        QRectF rect = PiecesBoundingRect(SelectedPieces());
+
+        ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
+                    UnitConvertor(rect.topLeft().x(), Unit::Px, TranslateUnit()));
+        ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(
+                    UnitConvertor(rect.topLeft().y(), Unit::Px, TranslateUnit()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ConvertPaperSize()
+{
+    const Unit layoutUnit = LayoutUnit();
+
+    const qreal sheetWidth = ui->doubleSpinBoxSheetPaperWidth->value();
+    const qreal sheetHeight = ui->doubleSpinBoxSheetPaperHeight->value();
+
+    const qreal sheetLeftMargin = ui->doubleSpinBoxSheetMarginLeft->value();
+    const qreal sheetRightMargin = ui->doubleSpinBoxSheetMarginRight->value();
+    const qreal sheetTopMargin = ui->doubleSpinBoxSheetMarginTop->value();
+    const qreal sheetBottomMargin = ui->doubleSpinBoxSheetMarginBottom->value();
+
+    ui->doubleSpinBoxSheetPaperWidth->blockSignals(true);
+    ui->doubleSpinBoxSheetPaperHeight->blockSignals(true);
+    ui->doubleSpinBoxSheetPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    ui->doubleSpinBoxSheetPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    ui->doubleSpinBoxSheetPaperWidth->blockSignals(false);
+    ui->doubleSpinBoxSheetPaperHeight->blockSignals(false);
+
+    const qreal newSheetWidth = UnitConvertor(sheetWidth, m_oldLayoutUnit, layoutUnit);
+    const qreal newSheetHeight = UnitConvertor(sheetHeight, m_oldLayoutUnit, layoutUnit);
+
+    const qreal newSheetLeftMargin = UnitConvertor(sheetLeftMargin, m_oldLayoutUnit, layoutUnit);
+    const qreal newSheetRightMargin = UnitConvertor(sheetRightMargin, m_oldLayoutUnit, layoutUnit);
+    const qreal newSheetTopMargin = UnitConvertor(sheetTopMargin, m_oldLayoutUnit, layoutUnit);
+    const qreal newSheetBottomMargin = UnitConvertor(sheetBottomMargin, m_oldLayoutUnit, layoutUnit);
+
+    const qreal tileWidth = ui->doubleSpinBoxTilePaperWidth->value();
+    const qreal tileHeight = ui->doubleSpinBoxTilePaperHeight->value();
+
+    const qreal tileLeftMargin = ui->doubleSpinBoxTileMarginLeft->value();
+    const qreal tileRightMargin = ui->doubleSpinBoxTileMarginRight->value();
+    const qreal tileTopMargin = ui->doubleSpinBoxTileMarginTop->value();
+    const qreal tileBottomMargin = ui->doubleSpinBoxTileMarginBottom->value();
+
+    ui->doubleSpinBoxTilePaperWidth->blockSignals(true);
+    ui->doubleSpinBoxTilePaperHeight->blockSignals(true);
+    ui->doubleSpinBoxTilePaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    ui->doubleSpinBoxTilePaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    ui->doubleSpinBoxTilePaperWidth->blockSignals(false);
+    ui->doubleSpinBoxTilePaperHeight->blockSignals(false);
+
+    const qreal newTileWidth = UnitConvertor(tileWidth, m_oldLayoutUnit, layoutUnit);
+    const qreal newTileHeight = UnitConvertor(tileHeight, m_oldLayoutUnit, layoutUnit);
+
+    const qreal newTileLeftMargin = UnitConvertor(tileLeftMargin, m_oldLayoutUnit, layoutUnit);
+    const qreal newTileRightMargin = UnitConvertor(tileRightMargin, m_oldLayoutUnit, layoutUnit);
+    const qreal newTileTopMargin = UnitConvertor(tileTopMargin, m_oldLayoutUnit, layoutUnit);
+    const qreal newTileBottomMargin = UnitConvertor(tileBottomMargin, m_oldLayoutUnit, layoutUnit);
+
+    qreal newGap = UnitConvertor(ui->doubleSpinBoxSheetPiecesGap->value(), m_oldLayoutUnit, layoutUnit);
+
+    m_oldLayoutUnit = layoutUnit;
+    m_layout->LayoutSettings().SetUnit(layoutUnit);
+    CorrectPaperDecimals();
+    MinimumSheetPaperSize();
+    MinimumTilePaperSize();
+
+    const QString suffix = " " + UnitsToStr(layoutUnit, true);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, newSheetWidth);
+    ui->doubleSpinBoxSheetPaperWidth->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, newSheetHeight);
+    ui->doubleSpinBoxSheetPaperHeight->setSuffix(suffix);
+
+    on_SheetSizeChanged();
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, newSheetLeftMargin);
+    ui->doubleSpinBoxSheetMarginLeft->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, newSheetRightMargin);
+    ui->doubleSpinBoxSheetMarginRight->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, newSheetTopMargin);
+    ui->doubleSpinBoxSheetMarginTop->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, newSheetBottomMargin);
+    ui->doubleSpinBoxSheetMarginBottom->setSuffix(suffix);
+
+    on_SheetMarginChanged();
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperWidth, newTileWidth);
+    ui->doubleSpinBoxTilePaperWidth->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperHeight, newTileHeight);
+    ui->doubleSpinBoxTilePaperHeight->setSuffix(suffix);
+
+    on_TilesSizeChanged();
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginLeft, newTileLeftMargin);
+    ui->doubleSpinBoxTileMarginLeft->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginRight, newTileRightMargin);
+    ui->doubleSpinBoxTileMarginRight->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginTop, newTileTopMargin);
+    ui->doubleSpinBoxTileMarginTop->setSuffix(suffix);
+
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginBottom, newTileBottomMargin);
+    ui->doubleSpinBoxTileMarginBottom->setSuffix(suffix);
+
+    on_TilesMarginChanged();
+
+    ui->doubleSpinBoxSheetPiecesGap->setMaximum(
+                UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Cm, layoutUnit));
+    ui->doubleSpinBoxSheetPiecesGap->setValue(newGap);
+    ui->doubleSpinBoxSheetPiecesGap->setSuffix(suffix);
+
+    CorrectMaxMargins();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

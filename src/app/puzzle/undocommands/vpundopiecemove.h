@@ -38,7 +38,7 @@ class VPUndoPieceMove : public VPUndoCommand
 {
     Q_OBJECT
 public:
-    explicit VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bool allowMerge,
+    explicit VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bool allowMerge = false,
                              QUndoCommand *parent = nullptr);
     virtual ~VPUndoPieceMove()=default;
 
@@ -84,7 +84,7 @@ class VPUndoPiecesMove : public VPUndoCommand
 {
     Q_OBJECT
 public:
-    explicit VPUndoPiecesMove(const QVector<VPPiecePtr> &pieces, qreal dx, qreal dy, bool allowMerge,
+    explicit VPUndoPiecesMove(const QList<VPPiecePtr> &pieces, qreal dx, qreal dy, bool allowMerge = false,
                               QUndoCommand *parent = nullptr);
     virtual ~VPUndoPiecesMove()=default;
 

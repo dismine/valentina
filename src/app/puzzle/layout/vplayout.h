@@ -90,6 +90,8 @@ signals:
     void PieceTransformationChanged(const VPPiecePtr &piece);
     void TransformationOriginChanged();
     void SheetListChanged();
+    void PieceSelectionChanged(const VPPiecePtr &piece);
+    void LayoutChanged();
 
 protected:
     explicit VPLayout(QUndoStack *undoStack);

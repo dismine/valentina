@@ -192,12 +192,6 @@ public:
     auto GetTilesSizeConverted() const -> QSizeF;
 
     /**
-     * @brief GetOrientation Returns the orientation of the tiles
-     * @return orientation of the tiles
-     */
-    auto GetTilesOrientation() -> PageOrientation;
-
-    /**
      * @brief SetTilesMargins, set the margins of the tiles, the values have to be in Unit::Px
      * @param left in Unit::Px
      * @param top in Unit::Px
@@ -331,18 +325,6 @@ public:
      * @return the size in the layout's unit
      */
     auto GetSheetSizeConverted() const -> QSizeF;
-
-    /**
-     * @brief GetOrientation Returns the orientation of the sheet
-     * @return orientation of the sheet
-     */
-    auto GetOrientation() -> PageOrientation;
-
-    /**
-     * @brief SetOrientation Sets the orientation of the sheet to the given value
-     * @param orientation the new page orientation
-     */
-    void SetOrientation(PageOrientation orientation);
 
     /**
      * @brief SetSheetMargins, set the margins of the sheet, the values have to be in Unit::Px
@@ -487,11 +469,6 @@ private:
      * @brief m_size the Size in Unit::Px
      */
     QSizeF m_size{};
-
-    /**
-     * @brief holds the orientation of the sheet
-     */
-    PageOrientation m_orientation {PageOrientation::Portrait};
 
     // margins
     /**

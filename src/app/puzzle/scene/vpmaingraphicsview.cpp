@@ -70,6 +70,8 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory 
     SCASSERT(not m_layout.isNull())
     setScene(m_scene);
 
+    connect(m_scene, &VMainGraphicsScene::ItemClicked, this, &VPMainGraphicsView::on_ItemClicked);
+
     m_graphicsSheet = new VPGraphicsSheet(m_layout);
     m_graphicsSheet->setPos(0, 0);
     m_scene->addItem(m_graphicsSheet);
@@ -262,6 +264,8 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
                 VPLayoutPtr layout = m_layout.toStrongRef();
                 if (not layout.isNull())
                 {
+                    emit layout->PieceSelectionChanged(piece);
+
                     auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
                     layout->UndoStack()->push(command);
                 }
@@ -429,17 +433,72 @@ void VPMainGraphicsView::RestoreOrigin() const
             origin.custom = false;
 
             QRectF boundingRect;
-            for (auto *graphicsPiece : m_graphicsPieces)
+            QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+            for (const auto& piece : selectedPieces)
             {
-                if (graphicsPiece->isSelected())
+                if (piece->IsSelected())
                 {
-                    boundingRect = boundingRect.united(graphicsPiece->sceneBoundingRect());
+                    boundingRect = boundingRect.united(piece->MappedDetailBoundingRect());
                 }
             }
             origin.origin = boundingRect.center();
 
             auto *command = new VPUndoOriginMove(sheet, origin);
             layout->UndoStack()->push(command);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::on_ItemClicked(QGraphicsItem *item)
+{
+    if (item == nullptr || (item->type() != VPGraphicsPiece::Type &&
+                            item->type() != VPGraphicsPieceControls::Type &&
+                            item->type() != VPGraphicsTransformationOrigin::Type))
+    {
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (not layout.isNull())
+        {
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+                for (const auto& piece : selectedPieces)
+                {
+                    if (piece->IsSelected())
+                    {
+                        piece->SetSelected(false);
+                    }
+                }
+
+                if (not selectedPieces.isEmpty())
+                {
+                    emit layout->PieceSelectionChanged(VPPiecePtr());
+                }
+            }
+        }
+    }
+    else
+    {
+        if (item->type() == VPGraphicsPiece::Type)
+        {
+            auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
+            if (pieceItem != nullptr)
+            {
+                VPPiecePtr piece = pieceItem->GetPiece();
+                if (not piece.isNull())
+                {
+                    if (not piece->IsSelected())
+                    {
+                        piece->SetSelected(true);
+                        VPLayoutPtr layout = m_layout.toStrongRef();
+                        if (not layout.isNull())
+                        {
+                            emit layout->PieceSelectionChanged(piece);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -453,7 +512,7 @@ void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
 
     connect(layout.get(), &VPLayout::PieceTransformationChanged, piece,
             &VPGraphicsPiece::on_RefreshPiece);
-    connect(piece, &VPGraphicsPiece::PieceSelectionChanged,
+    connect(layout.get(), &VPLayout::PieceSelectionChanged,
             m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
     connect(piece, &VPGraphicsPiece::PieceTransformationChanged,
             m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
@@ -485,19 +544,21 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 
     auto PreparePieces = [this]()
     {
-        QVector<VPPiecePtr> pieces;
-        for (auto *item : m_graphicsPieces)
+        QList<VPPiecePtr> pieces;
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (not layout.isNull())
         {
-            if (item->isSelected())
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (not sheet.isNull())
             {
-                pieces.append(item->GetPiece());
+                pieces = sheet->GetSelectedPieces();
             }
         }
 
         return pieces;
     };
 
-    QVector<VPPiecePtr> pieces = PreparePieces();
+    QList<VPPiecePtr> pieces = PreparePieces();
 
     if (pieces.size() == 1)
     {
@@ -535,19 +596,21 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
 
     auto PreparePieces = [this]()
     {
-        QVector<VPPiecePtr> pieces;
-        for (auto *graphicsPiece : m_graphicsPieces)
+        QList<VPPiecePtr> pieces;
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (not layout.isNull())
         {
-            if (graphicsPiece->isSelected())
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (not sheet.isNull())
             {
-                pieces.append(graphicsPiece->GetPiece());
+                pieces = sheet->GetSelectedPieces();
             }
         }
 
         return pieces;
     };
 
-    QVector<VPPiecePtr> pieces = PreparePieces();
+    QList<VPPiecePtr> pieces = PreparePieces();
     if (pieces.size() == 1)
     {
         auto *command = new VPUndoPieceMove(pieces.first(), dx, dy, m_allowChangeMerge);

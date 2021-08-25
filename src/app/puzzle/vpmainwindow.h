@@ -45,6 +45,7 @@
 #include "../vlayout/vlayoutdef.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vmisc/vlockguard.h"
+#include "../vlayout/dialogs/vabstractlayoutdialog.h"
 
 namespace Ui
 {
@@ -154,40 +155,24 @@ private slots:
     void on_actionAboutPuzzle_triggered();
 
     /**
-     * @brief on_comboBoxLayoutUnit_currentIndexChanged When the unit is changed in
+     * @brief on_LayoutUnitChanged When the unit is changed in
      * the layout property tab.
      * The slot is automatically connected through name convention.
      * @param index the index of the selected unit
      */
-    void on_comboBoxLayoutUnit_currentIndexChanged(int index);
-
-    /**
-     * @brief on_lineEditSheetName_textChanged When the name of the sheet is changed
-     * in the sheet layout tab
-     * @param text name of the sheet
-     */
-    void on_lineEditSheetName_textChanged(const QString &text);
-
-    /**
-     * @brief on_comboBoxLayoutTemplate_currentIndexChanged When the template is
-     * changed in the sheet property tab.
-     * The slot is automatically connected through name convention.
-     * @param index the index of the selected templated
-     */
-    void on_comboBoxSheetTemplate_currentIndexChanged(int index);
+    void on_LayoutUnitChanged(int index);
 
     /**
      * @brief on_SheetSizeChanged When the width or the length has been changed in
      * the sheet property tab
-     * @param changedViaSizeCombobox true if the change happened through the combobox
      */
-    void on_SheetSizeChanged(bool changedViaSizeCombobox = true);
+    void on_SheetSizeChanged();
 
     /**
      * @brief on_SheetOrientationChanged When one of the radio boxes for the sheet
      * orientation has been clicked
      */
-    void on_SheetOrientationChanged();
+    void on_SheetOrientationChanged(bool checked);
 
     /**
      * @brief on_pushButtonLayoutRemoveUnusedLength_clicked When the button
@@ -226,39 +211,16 @@ private slots:
     void on_doubleSpinBoxSheetGridRowHeight_valueChanged(double value);
 
     /**
-     * @brief LayoutFollowGrainlineChanged When one of the radio boxes for the
-     * "Follow grainline" has been clicked in the sheet property tab.
-     */
-    void on_SheetFollowGrainlineChanged();
-
-    /**
-     * @brief on_doubleSpinBoxLayoutPiecesGap_valueChanged When the "pieces gap"
-     * value is changed in the layout property tab.
-     * The slot is automatically connected through name convention.
-     * @param value the new value of the pieces gap
-     */
-    void on_doubleSpinBoxSheetPiecesGap_valueChanged(double value);
-
-    /**
-     * @brief on_comboBoxTilesTemplate_currentIndexChanged When the template is
-     * changed in the tiles property tab.
-     * The slot is automatically connected through name convention.
-     * @param index the index of the selected templated
-     */
-    void on_comboBoxTilesTemplate_currentIndexChanged(int index);
-
-    /**
      * @brief on_TilesSizeChanged When the width or the length has been changed in
      * the tiles property tab
-     * @param changedViaSizeCombobox true if the change happened through the combobox
      */
-    void on_TilesSizeChanged(bool changedViaSizeCombobox = true);
+    void on_TilesSizeChanged();
 
     /**
      * @brief on_TilesOrientationChanged When one of the radio boxes for the tiles
      * orientation has been clicked
      */
-    void on_TilesOrientationChanged();
+    void on_TilesOrientationChanged(bool checked);
 
     /**
      * @brief on_TilesMarginChanged When one of the margin values has been changed
@@ -267,42 +229,9 @@ private slots:
     void on_TilesMarginChanged();
 
     /**
-     * @brief on_checkBoxTilesShowTiles_toggled When the checkbox "show tiles" is
-     * clicked
-     * @param checked show tiles
-     */
-    void on_checkBoxTilesShowTiles_toggled(bool checked);
-
-    /**
      * @brief on_pushButtonTilesExport_clicked When the export tiles button is clicked
      */
     void on_pushButtonTilesExport_clicked();
-
-    /**
-     * @brief on_checkBoxLayoutWarningPiecesSuperposition_toggled When the
-     * "Warning when pieces superposition" checkbox value in the layout
-     * property tab is toggled.
-     * The slot is automatically connected through name convention.
-     * @param checked the new checked value
-     */
-    void on_checkBoxLayoutWarningPiecesSuperposition_toggled(bool checked);
-
-    /**
-     * @brief on_checkBoxLayoutWarningPiecesOutOfBound_toggled When the
-     * "Warning when pieces out of bound" checkbox value in the layout property
-     * tab is toggled.
-     * The slot is automatically connected through name convention.
-     * @param checked the new checked value
-     */
-    void on_checkBoxLayoutWarningPiecesOutOfBound_toggled(bool checked);
-
-    /**
-     * @brief on_checkBoxLayoutStickyEdges_toggled When the "Sticky edges"
-     * checkbox value in the layout property tab is toggled.
-     * The slot is automatically connected through name convention.
-     * @param checked the new checked value
-     */
-    void on_checkBoxSheetStickyEdges_toggled(bool checked);
 
     /**
      * @brief on_pushButtonLayoutExport_clicked When the button
@@ -328,42 +257,12 @@ private slots:
     void on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked);
 
     /**
-     * @brief on_pushButtonCurrentPieceRotate90Antilockwise_clicked When the 90
-     * anticlockwise angle button is clicked
-     */
-    void on_pushButtonCurrentPieceRotate90Anticlockwise_clicked();
-
-    /**
-     * @brief on_pushButtonCurrentPieceRotate90Clockwise_clicked When the 90
-     * clockwise angle button is clicked
-     */
-    void on_pushButtonCurrentPieceRotate90Clockwise_clicked();
-
-    /**
-     * @brief on_pushButtonCurrentPieceRotateGrainlineVertical_clicked
-     * When the grainline vertical angle button is clicked
-     */
-    void on_pushButtonCurrentPieceRotateGrainlineVertical_clicked();
-
-    /**
-     * @brief on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked
-     * When the grainline horizontal angle button is clicked
-     */
-    void on_pushButtonCurrentPieceRotateGrainlineHorizontal_clicked();
-
-    /**
      * @brief on_doubleSpinBoxCurrentPieceAngle_valueChanged When the
      * "Current Piece Angle" value in the current piece property is changed
      * The slot is automatically connected through name convention.
      * @param value the new angle value
      */
     void on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value);
-
-    /**
-     * @brief on_CurrentPiecePositionChanged When the positionX or the positionY
-     * is changed in the current piece tab
-     */
-    void on_CurrentPiecePositionEdited();
 
     /**
      * @brief CarrouselLocationChanged When the piece carrousel's location
@@ -376,16 +275,6 @@ private slots:
      * @brief on_PieceSelectionChanged When the piece selection has changed
      */
     void on_PieceSelectionChanged();
-
-    /**
-     * @brief on_PiecePositionChanged When the current piece position has changed
-     */
-    void on_PiecePositionChanged();
-
-    /**
-     * @brief on_PieceRotationChanged When the current piece rotation has changed
-     */
-    void on_PieceRotationChanged();
 
     /**
      * @brief on_ScaleChanged When the scale of the graphic view is changed
@@ -406,6 +295,14 @@ private slots:
 
     void on_actionAddSheet_triggered();
 
+    void on_ApplyPieceTransformation();
+
+    void on_ResetPieceTransformationSettings();
+
+    void on_RelativeTranslationChanged(bool checked);
+
+    void on_ConvertPaperSize();
+
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
 #endif //defined(Q_OS_MAC)
@@ -422,7 +319,6 @@ private:
     QUndoStack *m_undoStack;
 
     VPLayoutPtr m_layout;
-    QList<VPPiece *>m_selectedPieces{QList<VPPiece *>()};
 
     VPTileFactory *m_tileFactory{nullptr};
 
@@ -448,6 +344,9 @@ private:
 
     QAction *undoAction{nullptr};
     QAction *redoAction{nullptr};
+
+    Unit m_oldPieceTranslationUnit{Unit::Mm};
+    Unit m_oldLayoutUnit{Unit::Mm};
 
     /**
      * @brief CreatePiece creates a piece from the given VLayoutPiece data
@@ -535,22 +434,6 @@ private:
     */
     void SetPropertyTabLayoutData();
 
-    /**
-     * @brief SetDoubleSpinBoxValue sets the given spinbox to the given value.
-     * the signals are blocked before changing the value and unblocked after
-     * @param spinBox pointer to spinbox
-     * @param value spinbox value
-     */
-    void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value);
-
-    /**
-     * @brief SetCheckBoxValue sets the given checkbox to the given value.
-     * the signals are blocked before changing the value and unblocked after
-     * @param checkbox pointer to checkbox
-     * @param value checkbox value
-     */
-    void SetCheckBoxValue(QCheckBox *checkbox, bool value);
-
     void ReadSettings();
     void WriteSettings();
 
@@ -567,6 +450,34 @@ private:
     auto IsLayoutReadOnly() const -> bool;
 
     void ConnectToPreferences(const QSharedPointer<DialogPuzzlePreferences> &preferences);
+
+    auto SelectedPieces() const -> QList<VPPiecePtr>;
+
+    auto TranslateUnit() const -> Unit;
+    auto LayoutUnit() const -> Unit;
+
+    QSizeF Template(VAbstractLayoutDialog::PaperSizeTemplate t) const;
+    QSizeF SheetTemplate() const;
+    QSizeF TileTemplate() const;
+
+    void SheetSize(const QSizeF &size);
+    void TileSize(const QSizeF &size);
+
+    void CorrectPaperDecimals();
+
+    void SheetPaperSizeChanged();
+    void TilePaperSizeChanged();
+
+    void MinimumSheetPaperSize();
+    void MinimumTilePaperSize();
+
+    void FindTemplate(QComboBox *box, qreal width, qreal height);
+    void FindSheetTemplate();
+    void FindTileTemplate();
+
+    void CorrectTileMaxMargins();
+    void CorrectSheetMaxMargins();
+    void CorrectMaxMargins();
 };
 
 #endif // VPMAINWINDOW_H

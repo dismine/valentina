@@ -100,8 +100,8 @@ void VPLayoutSettings::SetTilesSize(qreal width, qreal height)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutSettings::SetTilesSizeConverted(qreal width, qreal height)
 {
-    m_tilesSize.setWidth(UnitConvertor(width, GetUnit(), Unit::Px));
-    m_tilesSize.setHeight(UnitConvertor(height, GetUnit(), Unit::Px));
+    m_tilesSize.setWidth(UnitConvertor(width, m_unit, Unit::Px));
+    m_tilesSize.setHeight(UnitConvertor(height, m_unit, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,12 +140,6 @@ auto VPLayoutSettings::GetTilesSize(Unit unit) const -> QSizeF
 auto VPLayoutSettings::GetTilesSizeConverted() const -> QSizeF
 {
     return GetTilesSize(GetUnit());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutSettings::GetTilesOrientation() -> PageOrientation
-{
-    return m_tilesSize.height() >= m_tilesSize.width() ? PageOrientation::Portrait : PageOrientation::Landscape;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -495,21 +489,6 @@ auto VPLayoutSettings::GetSheetSizeConverted() const -> QSizeF
                 );
 
     return convertedSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutSettings::GetOrientation() -> PageOrientation
-{
-    return m_orientation;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayoutSettings::SetOrientation(PageOrientation orientation)
-{
-    if(orientation != m_orientation)
-    {
-        m_orientation = orientation;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

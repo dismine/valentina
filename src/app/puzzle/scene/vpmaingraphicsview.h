@@ -95,6 +95,7 @@ protected:
 
 private slots:
     void RestoreOrigin() const;
+    void on_ItemClicked(QGraphicsItem* item);
 
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)

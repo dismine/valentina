@@ -149,7 +149,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     ui->lineEditPath->setText(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout());
 
-    InitTemplates(ui->comboBoxTemplates);
+    InitTileTemplates(ui->comboBoxTemplates);
 
     connect(ui->toolButtonScaleConnected, &QToolButton::clicked, this, &DialogSaveLayout::ToggleScaleConnection);
 
@@ -162,20 +162,6 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     ShowExample();//Show example for current format.
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::InitTemplates(QComboBox *comboBoxTemplates)
-{
-    SCASSERT(comboBoxTemplates != nullptr)
-    VAbstractLayoutDialog::InitTemplates(comboBoxTemplates);
-
-    // remove unused formats
-    for (int i = static_cast<int>(PaperSizeTemplate::Roll24in); i <= static_cast<int>(PaperSizeTemplate::Custom); ++i)
-    {
-       comboBoxTemplates->removeItem(comboBoxTemplates->findData(i));
-    }
-}
-
 
 //---------------------------------------------------------------------------------------------------------------------
 

@@ -85,6 +85,23 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractLayoutDialog::InitTileTemplates(QComboBox *comboBoxTemplates, bool keepCustom)
+{
+    SCASSERT(comboBoxTemplates != nullptr)
+    InitTemplates(comboBoxTemplates);
+
+    // remove unused formats
+    for (int i = static_cast<int>(PaperSizeTemplate::Roll24in); i <= static_cast<int>(PaperSizeTemplate::Custom); ++i)
+    {
+        if (keepCustom && i == static_cast<int>(PaperSizeTemplate::Custom))
+        {
+            continue;
+        }
+        comboBoxTemplates->removeItem(comboBoxTemplates->findData(i));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractLayoutDialog::GetTemplateSize(PaperSizeTemplate tmpl, Unit unit) -> QSizeF
 {
     qreal width = 0;

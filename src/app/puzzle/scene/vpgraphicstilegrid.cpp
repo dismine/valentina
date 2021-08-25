@@ -13,13 +13,7 @@ VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, VPTileFactory 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsTileGrid::~VPGraphicsTileGrid()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VPGraphicsTileGrid::boundingRect() const
+auto VPGraphicsTileGrid::boundingRect() const -> QRectF
 {
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(not layout.isNull() && layout->LayoutSettings().GetShowTiles())

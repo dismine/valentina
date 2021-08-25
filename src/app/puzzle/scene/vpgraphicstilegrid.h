@@ -42,7 +42,7 @@ class VPGraphicsTileGrid : public QGraphicsItem
 {
 public:
     explicit VPGraphicsTileGrid(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsTileGrid();
+    ~VPGraphicsTileGrid()=default;
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

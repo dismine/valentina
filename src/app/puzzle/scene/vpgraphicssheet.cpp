@@ -113,10 +113,6 @@ auto VPGraphicsSheet::GetSheetRect() const -> QRectF
 
     QPoint topLeft = QPoint(0,0);
     QSizeF size = layout->LayoutSettings().GetSheetSize();
-    if(layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
-    {
-        size.transpose();
-    }
     QRectF rect = QRectF(topLeft, size);
     return rect;
 }
@@ -130,17 +126,17 @@ auto VPGraphicsSheet::GetMarginsRect() const -> QRectF
         return {};
     }
 
-    QMarginsF margins = layout->LayoutSettings().GetSheetMargins();
     QSizeF size = layout->LayoutSettings().GetSheetSize();
 
-    if(layout->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
+    if (not layout->LayoutSettings().IgnoreMargins())
     {
-        size.transpose();
+        QMarginsF margins = layout->LayoutSettings().GetSheetMargins();
+        QRectF rect = QRectF(QPointF(margins.left(), margins.top()),
+                             QPointF(size.width()-margins.right(), size.height()-margins.bottom()));
+        return rect;
     }
 
-    QRectF rect = QRectF(QPointF(margins.left(),margins.top()),
-                         QPointF(size.width()-margins.right(), size.height()-margins.bottom()));
-    return rect;
+    return QRectF(0, 0, size.width(), size.height());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

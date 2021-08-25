@@ -5,10 +5,6 @@
         <file>puzzleicon/64x64/iconCurrentPiece.png</file>
         <file>puzzleicon/64x64/iconLayers.png</file>
         <file>puzzleicon/64x64/iconTiles.png</file>
-        <file>puzzleicon/64x64/iconLandscape.png</file>
-        <file>puzzleicon/64x64/iconPortrait.png</file>
-        <file>puzzleicon/64x64/iconGrainlineVertical.png</file>
-        <file>puzzleicon/64x64/iconGrainlineHorizontal.png</file>
         <file>puzzleicon/64x64/iconProperties.png</file>
         <file>puzzleicon/svg/icon_scissors.svg</file>
         <file>puzzleicon/svg/icon_scissors_vertical.svg</file>
@@ -18,10 +14,6 @@
         <file>puzzleicon/svg/cursor_rotate.svg</file>
         <file>puzzleicon/svg/icon_rotate_90_anticlockwise.svg</file>
         <file>puzzleicon/svg/icon_rotate_90_clockwise.svg</file>
-        <file>puzzleicon/64x64/iconRotate90Anticlockwise.png</file>
-        <file>puzzleicon/64x64/iconRotate90Clockwise.png</file>
-        <file>puzzleicon/64x64/iconRotateGrainlineHorizontal.png</file>
-        <file>puzzleicon/64x64/iconRotateGrainlineVertical.png</file>
         <file>puzzleicon/svg/icon_rotate_grainline_horizontal.svg</file>
         <file>puzzleicon/svg/icon_rotate_grainline_vertical.svg</file>
     </qresource>

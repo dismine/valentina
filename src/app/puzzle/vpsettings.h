@@ -90,6 +90,7 @@ public:
     void SetLayoutFollowGrainline(bool value);
     auto GetLayoutFollowGrainline() const -> bool;
 
+    static auto GetMaxLayoutPieceGap() -> qreal;
     void SetLayoutPieceGap(qreal value);
     auto GetLayoutPieceGap() const -> qreal;
 

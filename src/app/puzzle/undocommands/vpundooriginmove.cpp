@@ -59,7 +59,10 @@ void VPUndoOriginMove::undo()
         return;
     }
 
-    layout->SetFocusedSheet(sheet);
+    if (layout->GetFocusedSheet() != sheet)
+    {
+        layout->SetFocusedSheet(sheet);
+    }
 
     sheet->SetTransformationOrigin(m_oldOrigin);
     layout->TransformationOriginChanged();
@@ -80,7 +83,10 @@ void VPUndoOriginMove::redo()
         return;
     }
 
-    layout->SetFocusedSheet(sheet);
+    if (layout->GetFocusedSheet() != sheet)
+    {
+        layout->SetFocusedSheet(sheet);
+    }
 
     sheet->SetTransformationOrigin(m_origin);
     emit layout->TransformationOriginChanged();

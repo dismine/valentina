@@ -147,8 +147,6 @@ void VPLayoutFileWriter::WriteFile(const VPLayoutPtr &layout, QIODevice *file)
                  .arg(APP_VERSION_STR));
     WriteLayout(layout);
     writeEndDocument();
-
-    file->close();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

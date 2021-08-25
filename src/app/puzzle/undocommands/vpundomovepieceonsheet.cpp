@@ -59,7 +59,7 @@ void VPUndoMovePieceOnSheet::undo()
     if (not activateSheet.isNull())
     {
         layout = activateSheet->GetLayout();
-        if (not layout.isNull() && not activateSheet->TrashSheet())
+        if (not layout.isNull() && not activateSheet->TrashSheet() && layout->GetFocusedSheet() != activateSheet)
         {
             layout->SetFocusedSheet(activateSheet);
         }
@@ -69,10 +69,12 @@ void VPUndoMovePieceOnSheet::undo()
     if (not piece.isNull())
     {
         piece->SetSheet(sourceSheet);
+        piece->SetSelected(false);
 
         if (not layout.isNull())
         {
             emit layout->PieceSheetChanged(piece);
+            emit layout->PieceSelectionChanged(piece);
         }
     }
 }
@@ -92,7 +94,7 @@ void VPUndoMovePieceOnSheet::redo()
     if (not activateSheet.isNull())
     {
         layout = activateSheet->GetLayout();
-        if (not layout.isNull() && not activateSheet->TrashSheet())
+        if (not layout.isNull() && not activateSheet->TrashSheet() && layout->GetFocusedSheet() != activateSheet)
         {
             layout->SetFocusedSheet(activateSheet);
         }

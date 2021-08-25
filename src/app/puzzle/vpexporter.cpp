@@ -44,10 +44,6 @@ void VPExporter::Export(VPLayout* layout, LayoutExportFormats format, VPMainGrap
         SetFileName(fileName);
 
         QSizeF size = QSizeF(layout->GetFocusedSheet()->GetLayout()->LayoutSettings().GetSheetSize());
-        if(layout->GetFocusedSheet()->GetLayout()->LayoutSettings().GetOrientation() == PageOrientation::Landscape)
-        {
-            size.transpose();
-        }
         const QRectF rect = QRectF(0, 0, size.width(), size.height());
 
         SetImageRect(rect);

@@ -76,7 +76,7 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::GetPiece() -> VPPiecePtr
 {
-    return m_piece;
+    return m_piece.toStrongRef();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,7 +245,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         if (painter != nullptr)
         {
             painter->save();
-            painter->setBrush(isSelected() ? selectionBrush : noBrush);
+            painter->setBrush(piece->IsSelected() ? selectionBrush : noBrush);
             painter->drawPath(m_seamLine);
             painter->restore();
         }
@@ -362,55 +362,48 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::GroupMove(const QPointF &pos)
 {
-    if (scene() != nullptr)
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
     {
-        QList<QGraphicsItem *> list = scene()->selectedItems();
+        return;
+    }
 
-        if (list.isEmpty())
+    VPLayoutPtr layout = piece->Layout();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    auto PreparePieces = [layout]()
+    {
+        QList<VPPiecePtr> pieces;
+
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (not sheet.isNull())
         {
-            return;
+            return sheet->GetSelectedPieces();
         }
 
-        VPPiecePtr piece = m_piece.toStrongRef();
-        if (piece.isNull())
-        {
-            return;
-        }
+        return pieces;
+    };
 
-        VPLayoutPtr layout = piece->Layout();
-        if (layout.isNull())
-        {
-            return;
-        }
+    QList<VPPiecePtr> pieces = PreparePieces();
+    QPointF newPos = pos - m_moveStartPoint;
 
-        auto PreparePieces = [list]()
-        {
-            QVector<VPPiecePtr> pieces;
-            for (auto *item : list)
-            {
-                if (item->type() == VPGraphicsPiece::Type)
-                {
-                    auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
-                    pieces.append(pieceItem->GetPiece());
-                }
-            }
+    if (qFuzzyIsNull(newPos.x()) && qFuzzyIsNull(newPos.y()))
+    {
+        return;
+    }
 
-            return pieces;
-        };
-
-        QVector<VPPiecePtr> pieces = PreparePieces();
-        QPointF newPos = pos - m_moveStartPoint;
-
-        if (pieces.size() == 1)
-        {
-            auto *command = new VPUndoPieceMove(pieces.first(), newPos.x(), newPos.y(), allowChangeMerge);
-            layout->UndoStack()->push(command);
-        }
-        else if (pieces.size() > 1)
-        {
-            auto *command = new VPUndoPiecesMove(pieces, newPos.x(), newPos.y(), allowChangeMerge);
-            layout->UndoStack()->push(command);
-        }
+    if (pieces.size() == 1)
+    {
+        auto *command = new VPUndoPieceMove(pieces.first(), newPos.x(), newPos.y(), allowChangeMerge);
+        layout->UndoStack()->push(command);
+    }
+    else if (pieces.size() > 1)
+    {
+        auto *command = new VPUndoPiecesMove(pieces, newPos.x(), newPos.y(), allowChangeMerge);
+        layout->UndoStack()->push(command);
     }
 }
 
@@ -435,8 +428,13 @@ auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &valu
             VPPiecePtr piece = m_piece.toStrongRef();
             if (not piece.isNull())
             {
-                emit PieceSelectionChanged();
                 piece->SetSelected(value.toBool());
+
+                VPLayoutPtr layout = piece->Layout();
+                if (not layout.isNull())
+                {
+                    emit layout->PieceSelectionChanged(piece);
+                }
             }
         }
     }

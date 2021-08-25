@@ -38,7 +38,7 @@ class VPUndoPieceRotate : public VPUndoCommand
 {
     Q_OBJECT
 public:
-    VPUndoPieceRotate(const VPPiecePtr &piece, const QPointF &origin, qreal angle, bool allowMerge,
+    VPUndoPieceRotate(const VPPiecePtr &piece, const QPointF &origin, qreal angle, bool allowMerge = false,
                       QUndoCommand *parent = nullptr);
 
     virtual ~VPUndoPieceRotate()=default;
@@ -85,8 +85,8 @@ class VPUndoPiecesRotate : public VPUndoCommand
 {
     Q_OBJECT
 public:
-    explicit VPUndoPiecesRotate(const QVector<VPPiecePtr> &pieces, const QPointF &origin, qreal angle, bool allowMerge,
-                                QUndoCommand *parent = nullptr);
+    explicit VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const QPointF &origin, qreal angle,
+                                bool allowMerge = false, QUndoCommand *parent = nullptr);
     virtual ~VPUndoPiecesRotate()=default;
 
     virtual void undo() override;

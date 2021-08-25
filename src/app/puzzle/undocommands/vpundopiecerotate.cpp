@@ -59,7 +59,10 @@ void VPUndoPieceRotate::undo()
         return;
     }
 
-    layout->SetFocusedSheet(piece->Sheet());
+    if (layout->GetFocusedSheet() != piece->Sheet())
+    {
+        layout->SetFocusedSheet(piece->Sheet());
+    }
 
     piece->SetMatrix(m_oldTransform);
     emit layout->PieceTransformationChanged(piece);
@@ -80,7 +83,10 @@ void VPUndoPieceRotate::redo()
         return;
     }
 
-    layout->SetFocusedSheet(piece->Sheet());
+    if (layout->GetFocusedSheet() != piece->Sheet())
+    {
+        layout->SetFocusedSheet(piece->Sheet());
+    }
 
     piece->Rotate(m_origin, m_angle);
     emit layout->PieceTransformationChanged(piece);
@@ -116,7 +122,7 @@ auto VPUndoPieceRotate::id() const -> int
 
 // rotate pieces
 //---------------------------------------------------------------------------------------------------------------------
-VPUndoPiecesRotate::VPUndoPiecesRotate(const QVector<VPPiecePtr> &pieces, const QPointF &origin, qreal angle,
+VPUndoPiecesRotate::VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const QPointF &origin, qreal angle,
                                        bool allowMerge, QUndoCommand *parent)
     : VPUndoCommand(allowMerge, parent),
       m_origin(origin),
@@ -148,7 +154,11 @@ void VPUndoPiecesRotate::undo()
         return;
     }
 
-    layout->SetFocusedSheet(Sheet());
+    VPSheetPtr sheet = Sheet();
+    if (layout->GetFocusedSheet() != sheet)
+    {
+        layout->SetFocusedSheet(sheet);
+    }
 
     for (const auto& piece : m_pieces)
     {
@@ -178,7 +188,11 @@ void VPUndoPiecesRotate::redo()
         return;
     }
 
-    layout->SetFocusedSheet(Sheet());
+    VPSheetPtr sheet = Sheet();
+    if (layout->GetFocusedSheet() != sheet)
+    {
+        layout->SetFocusedSheet(sheet);
+    }
 
     for (const auto& piece : m_pieces)
     {

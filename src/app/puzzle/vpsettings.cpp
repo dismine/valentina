@@ -273,6 +273,13 @@ auto VPSettings::GetLayoutFollowGrainline() const -> bool
     return value(*settingLayoutFollowGrainline, false).toBool();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPSettings::GetMaxLayoutPieceGap()
+{
+    return UnitConvertor(50, Unit::Cm, Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPSettings::SetLayoutPieceGap(qreal value)
 {
     setValue(*settingLayoutPieceGap, value);

@@ -114,7 +114,7 @@ private:
     VPTransformationOrigon m_savedOrigin{};
     bool            m_originSaved{false};
     bool            allowChangeMerge{false};
-    QVector<VPGraphicsPiece *> m_selectedPieces{};
+    QList<VPPiecePtr> m_selectedPieces{};
     bool            m_ignorePieceTransformation{false};
 
     auto TopLeftControl(QPainter *painter = nullptr) const -> QPainterPath;
@@ -130,8 +130,8 @@ private:
 
     auto HandleCorner(const QPointF &pos) const -> int;
 
-    auto SelectedPieces() const -> QVector<VPGraphicsPiece *>;
-    static auto PiecesBoundingRect(const QVector<VPGraphicsPiece *> &selectedPieces) -> QRectF;
+    auto SelectedPieces() const -> QList<VPPiecePtr>;
+    static auto PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF;
 };
 
 #endif // VPGRAPHICSPIECECONTROLS_H
