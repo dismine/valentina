@@ -2297,35 +2297,6 @@ void VPMainWindow::on_pushButtonSheetExport_clicked()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxCurrentPieceShowSeamline_toggled(bool checked)
-{
-//    if(m_selectedPieces.count() == 1)
-//    {
-//        m_selectedPieces.first()->SetShowSeamLine(checked);
-//    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked)
-{
-//    if(m_selectedPieces.count() == 1)
-//    {
-//        m_selectedPieces.first()->SetMirror(checked);
-//    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value)
-{
-//    if(m_selectedPieces.count() == 1)
-//    {
-//        VPPiece *piece = m_selectedPieces.first();
-//        piece->SetRotation(value);
-//    }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_CarrouselLocationChanged(Qt::DockWidgetArea area)
 {
     if(area == Qt::BottomDockWidgetArea || area == Qt::TopDockWidgetArea)

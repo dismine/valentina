@@ -241,30 +241,6 @@ private slots:
     void on_pushButtonSheetExport_clicked();
 
     /**
-     * @brief on_checkBoxCurrentPieceShowSeamline_toggled When the
-     * "Show seamline" checkbox value in the current piece tab is toggled.
-     * The slot is automatically connected through name convention.
-     * @param checked the new checked value
-     */
-    void on_checkBoxCurrentPieceShowSeamline_toggled(bool checked);
-
-    /**
-     * @brief on_checkBoxCurrentPieceMirrorPiece_toggled When the
-     * "Mirror piece" checkbox in the current piece tab is toggled.
-     * The slot is automatically connected through name convention.
-     * @param checked the new checked value
-     */
-    void on_checkBoxCurrentPieceMirrorPiece_toggled(bool checked);
-
-    /**
-     * @brief on_doubleSpinBoxCurrentPieceAngle_valueChanged When the
-     * "Current Piece Angle" value in the current piece property is changed
-     * The slot is automatically connected through name convention.
-     * @param value the new angle value
-     */
-    void on_doubleSpinBoxCurrentPieceAngle_valueChanged(double value);
-
-    /**
      * @brief CarrouselLocationChanged When the piece carrousel's location
      * has been changed
      * @param area The new area where the piece carrousel has been placed
