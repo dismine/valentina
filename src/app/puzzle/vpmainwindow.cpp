@@ -570,9 +570,12 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
             VPPiecePtr selectedPiece = selectedPieces.first();
             if (not selectedPiece.isNull())
             {
-                selectedPiece->SetMirror(checked);
-                LayoutWasSaved(false);
-                emit m_layout->PieceTransformationChanged(selectedPiece);
+                if (selectedPiece->IsMirror() != checked)
+                {
+                    selectedPiece->Flip();
+                    LayoutWasSaved(false);
+                    emit m_layout->PieceTransformationChanged(selectedPiece);
+                }
             }
         }
     });

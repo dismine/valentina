@@ -101,6 +101,11 @@ public:
     auto GetPatternLabelData() const ->VTextManager;
     void SetPatternLabelData(const VTextManager &data);
 
+    /**
+     * @brief Flip horizontally mirror around center of bounding rect
+     */
+    void Flip();
+
 private:
     Q_DISABLE_COPY(VPPiece)
 

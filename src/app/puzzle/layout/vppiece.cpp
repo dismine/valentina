@@ -243,3 +243,19 @@ void VPPiece::SetPatternLabelData(const VTextManager &data)
 {
     VLayoutPiece::SetPatternLabelData(data);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::Flip()
+{
+    QTransform pieceMatrix = GetMatrix();
+    QPointF center = pieceMatrix.map(DetailBoundingRect().center());
+
+    QTransform m;
+    m.translate(center.x(), 0);
+    m.scale(-1, 1);
+    m.translate(-center.x(), 0);
+
+    pieceMatrix *= m;
+    SetMatrix(pieceMatrix);
+    SetMirror(!IsMirror());
+}
