@@ -550,7 +550,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     }
 
     const VGrainlineData& grainlineGeom = piece.GetGrainlineGeometry();
-    if (grainlineGeom.IsVisible() == true)
+    if (grainlineGeom.IsVisible())
     {
         det.SetGrainline(grainlineGeom, pattern);
     }
@@ -560,7 +560,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-QVector<T> VLayoutPiece::Map(QVector<T> points) const
+auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
 {
     std::transform(points.begin(), points.end(), points.begin(),
                    [this](const T &point) { return d->matrix.map(point); });
