@@ -109,6 +109,23 @@ auto VPLayout::GetPieces() const -> QList<VPPiecePtr>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::GetPlacedPieces() const -> QList<VPPiecePtr>
+{
+    QList<VPPiecePtr> pieces;
+    pieces.reserve(m_pieces.size());
+
+    for (const auto& piece : m_pieces)
+    {
+        if (not piece->isNull() && piece->Sheet() != VPSheetPtr() && piece->Sheet() != m_trashSheet)
+        {
+            pieces.append(piece);
+        }
+    }
+
+    return pieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPLayout::GetUnplacedPieces() const -> QList<VPPiecePtr>
 {
     return PiecesForSheet(VPSheetPtr());

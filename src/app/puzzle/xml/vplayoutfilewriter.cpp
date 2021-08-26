@@ -176,7 +176,7 @@ void VPLayoutFileWriter::WriteProperties(const VPLayoutPtr &layout)
     SetAttribute(ML::AttrWarningOutOfBound, layout->LayoutSettings().GetWarningPiecesOutOfBound());
     SetAttribute(ML::AttrStickyEdges, layout->LayoutSettings().GetStickyEdges());
     SetAttribute(ML::AttrPiecesGap, layout->LayoutSettings().GetPiecesGap());
-//    SetAttribute(ML::AttrFollowGrainLine, layout->LayoutSettings().GetFollowGrainline());
+    SetAttribute(ML::AttrFollowGrainline, layout->LayoutSettings().GetFollowGrainline());
     writeEndElement(); // control
 
     WriteTiles(layout);

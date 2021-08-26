@@ -117,7 +117,7 @@ public:
     /** @brief grainlineInfo line */
     QVector<QPointF>          grainlinePoints{};
 
-    GrainlineArrowDirection                 grainlineArrowType{GrainlineArrowDirection::atFront};
+    GrainlineArrowDirection   grainlineArrowType{GrainlineArrowDirection::atFront};
     qreal                     grainlineAngle{0};
     bool                      grainlineEnabled{false};
 

@@ -76,7 +76,7 @@ auto VPPiece::GetPosition() -> QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::RotateToGrainline()
+void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
 {
     VPSheetPtr sheet = Sheet();
     if (not IsGrainlineEnabled() || sheet.isNull())
@@ -105,7 +105,8 @@ void VPPiece::RotateToGrainline()
             atFront.setAngle(90);
         }
 
-        return grainline.angleTo(atFront);
+        qreal angleTo = grainline.angleTo(atFront);
+        return angleTo;
     };
 
     auto DegreesAtRear = [grainline, canonical, grainlineType]()
@@ -113,7 +114,8 @@ void VPPiece::RotateToGrainline()
         QLineF atRear = canonical;
         atRear.setAngle(grainlineType == GrainlineType::Vertical ? 270 : 180);
 
-        return grainline.angleTo(atRear);
+        qreal angleTo = grainline.angleTo(atRear);
+        return angleTo;
     };
 
     GrainlineArrowDirection type = GrainlineArrowType();
@@ -129,10 +131,25 @@ void VPPiece::RotateToGrainline()
     }
     else
     {
-        degrees = qMin(DegreesAtFront(), DegreesAtRear());
+        const qreal atFront = DegreesAtFront();
+        if (atFront <= 90 || atFront >= 270)
+        {
+            degrees = atFront;
+        }
+        else
+        {
+            degrees = DegreesAtRear();
+        }
     }
 
-    Rotate(MappedDetailBoundingRect().center(), degrees);
+    if (origin.custom)
+    {
+        Rotate(MappedDetailBoundingRect().center(), degrees);
+    }
+    else
+    {
+        Rotate(origin.origin, degrees);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

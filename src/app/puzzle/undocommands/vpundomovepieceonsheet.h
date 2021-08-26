@@ -48,6 +48,7 @@ private:
     VPSheetWeakPtr m_oldSheet{};
     VPSheetWeakPtr m_sheet;
     VPPieceWeakPtr m_piece;
+    bool           m_followGrainline{false};
 };
 
 #endif // VPUNDOMOVEPIECEONSHEET_H

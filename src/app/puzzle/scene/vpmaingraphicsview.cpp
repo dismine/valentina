@@ -371,6 +371,7 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
             m_rotationControls->SetIgnorePieceTransformation(false);
             m_rotationControls->on_UpdateControls();
             m_rotationControls->on_HideHandles(false);
+            m_rotationSum = 0;
         }
     }
     VMainGraphicsView::keyReleaseEvent(event);
@@ -558,16 +559,32 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
         return pieces;
     };
 
+    if (layout->LayoutSettings().GetFollowGrainline() && not origin.custom)
+    {
+        if (m_rotationSum > 90 || m_rotationSum < -90)
+        {
+            m_rotationSum = angle;
+        }
+        else
+        {
+            m_rotationSum += angle;
+        }
+    }
+    else
+    {
+        m_rotationSum = angle;
+    }
+
     QList<VPPiecePtr> pieces = PreparePieces();
 
     if (pieces.size() == 1)
     {
-        auto *command = new VPUndoPieceRotate(pieces.first(), origin.origin, angle, m_allowChangeMerge);
+        auto *command = new VPUndoPieceRotate(pieces.first(), origin, angle, m_rotationSum, m_allowChangeMerge);
         layout->UndoStack()->push(command);
     }
     else if (pieces.size() > 1)
     {
-        auto *command = new VPUndoPiecesRotate(pieces, origin.origin, angle, m_allowChangeMerge);
+        auto *command = new VPUndoPiecesRotate(pieces, origin, angle, m_rotationSum, m_allowChangeMerge);
         layout->UndoStack()->push(command);
     }
 

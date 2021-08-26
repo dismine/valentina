@@ -41,6 +41,12 @@ VPUndoMovePieceOnSheet::VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VP
 
     m_oldSheet = piece->Sheet();
 
+    VPLayoutPtr layout = piece->Layout();
+    if (not layout.isNull())
+    {
+        m_followGrainline = layout->LayoutSettings().GetFollowGrainline();
+    }
+
     setText(tr("move piece on sheet"));
 }
 
@@ -104,6 +110,14 @@ void VPUndoMovePieceOnSheet::redo()
     if (not piece.isNull())
     {
         piece->SetSheet(sourceSheet);
+
+        if (m_followGrainline)
+        {
+            VPTransformationOrigon origin;
+            origin.custom = true;
+
+            piece->RotateToGrainline(origin);
+        }
 
         if (not layout.isNull())
         {

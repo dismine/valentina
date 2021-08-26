@@ -454,6 +454,8 @@ private:
     void CorrectTileMaxMargins();
     void CorrectSheetMaxMargins();
     void CorrectMaxMargins();
+
+    void RotatePiecesToGrainline();
 };
 
 #endif // VPMAINWINDOW_H

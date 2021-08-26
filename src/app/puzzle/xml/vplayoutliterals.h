@@ -78,7 +78,7 @@ extern const QString AttrRight;
 extern const QString AttrBottom;
 extern const QString AttrWidth;
 extern const QString AttrLength;
-extern const QString AttrFollowGrainLine;
+extern const QString AttrFollowGrainline;
 extern const QString AttrID;
 extern const QString AttrMirrored;
 extern const QString AttrTransform;

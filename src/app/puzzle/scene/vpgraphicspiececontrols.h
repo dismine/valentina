@@ -108,6 +108,7 @@ private:
     Q_DISABLE_COPY(VPGraphicsPieceControls)
     QRectF          m_pieceRect{};
     QPointF         m_rotationStartPoint{};
+    qreal           m_rotationSum{0};
     bool            m_controlsVisible{true};
     VPLayoutWeakPtr m_layout{};
     int             m_handleCorner{0};

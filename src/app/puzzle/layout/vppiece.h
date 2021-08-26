@@ -64,7 +64,7 @@ public:
     /**
      * @brief RotateToGrainline  rotates the piece to follow the grainline
      */
-    void RotateToGrainline();
+    void RotateToGrainline(const VPTransformationOrigon &origin);
 
     /**
      * @brief SetSelected Sets wether the piece is selected

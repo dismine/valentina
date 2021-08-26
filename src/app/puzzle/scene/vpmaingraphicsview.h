@@ -124,6 +124,8 @@ private:
     bool m_showGridTmp{false};
     bool m_allowChangeMerge{false};
 
+    qreal m_rotationSum{0};
+
     void ConnectPiece(VPGraphicsPiece *piece);
 
     void RotatePiecesByAngle(qreal angle);

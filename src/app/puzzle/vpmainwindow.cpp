@@ -862,8 +862,13 @@ void VPMainWindow::InitPropertyTabLayout()
         if (not m_layout.isNull())
         {
             m_layout->LayoutSettings().SetFollowGrainline(checked);
+
+            if (checked)
+            {
+                RotatePiecesToGrainline();
+            }
+
             LayoutWasSaved(false);
-            // TODO update the QGraphicView
         }
     });
 
@@ -1742,6 +1747,11 @@ void VPMainWindow::SheetPaperSizeChanged()
     ui->toolButtonSheetLandscapeOrientation->blockSignals(true);
     ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
     ui->toolButtonSheetLandscapeOrientation->blockSignals(false);
+
+    if (not m_layout.isNull() && m_layout->LayoutSettings().GetFollowGrainline())
+    {
+        RotatePiecesToGrainline();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1860,6 +1870,29 @@ void VPMainWindow::CorrectMaxMargins()
 {
     CorrectSheetMaxMargins();
     CorrectTileMaxMargins();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::RotatePiecesToGrainline()
+{
+    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    for(const auto& sheet : sheets)
+    {
+        if (not sheet.isNull())
+        {
+            QList<VPPiecePtr> pieces = sheet->GetPieces();
+            for(const auto& piece : pieces)
+            {
+                if (not piece.isNull() && piece->IsGrainlineEnabled())
+                {
+                    VPTransformationOrigon origin;
+                    origin.custom = true;
+                    piece->RotateToGrainline(origin);
+                    emit m_layout->PieceTransformationChanged(piece);
+                }
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2513,7 +2546,12 @@ void VPMainWindow::on_ApplyPieceTransformation()
                 if (not piece.isNull())
                 {
                     const QRectF rect = piece->MappedDetailBoundingRect();
-                    auto *command = new VPUndoPieceRotate(piece, rect.center(), angle);
+
+                    VPTransformationOrigon origin;
+                    origin.origin = rect.center();
+                    origin.custom = true;
+
+                    auto *command = new VPUndoPieceRotate(piece, origin, angle, angle);
                     m_layout->UndoStack()->push(command);
                 }
             }
@@ -2528,7 +2566,7 @@ void VPMainWindow::on_ApplyPieceTransformation()
             }
 
             VPTransformationOrigon origin = sheet->TransformationOrigin();
-            auto *command = new VPUndoPiecesRotate(selectedPieces, origin.origin, angle);
+            auto *command = new VPUndoPiecesRotate(selectedPieces, origin, angle, angle);
             m_layout->UndoStack()->push(command);
         }
     }

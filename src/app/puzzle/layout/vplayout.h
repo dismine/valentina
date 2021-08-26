@@ -49,6 +49,7 @@ public:
     static void AddPiece(const VPLayoutPtr &layout, const VPPiecePtr &piece);
 
     auto GetPieces() const -> QList<VPPiecePtr>;
+    auto GetPlacedPieces() const -> QList<VPPiecePtr>;
     auto GetUnplacedPieces() const -> QList<VPPiecePtr>;
     auto GetTrashedPieces() const -> QList<VPPiecePtr>;
 

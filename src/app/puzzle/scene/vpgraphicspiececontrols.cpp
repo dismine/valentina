@@ -71,17 +71,20 @@ enum class HandleCorner : int
     BottomLeft = 4
 };
 
-auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> QPointF
+auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
 {
     SCASSERT(layout != nullptr)
     VPSheetPtr sheet = layout->GetFocusedSheet();
     if (not sheet.isNull())
     {
-        VPTransformationOrigon origin = sheet->TransformationOrigin();
-        return origin.origin;
+        return sheet->TransformationOrigin();
     }
 
-    return boundingRect.center();
+    VPTransformationOrigon origin;
+    origin.origin = boundingRect.center();
+    origin.custom = false;
+
+    return origin;
 }
 }  // namespace
 
@@ -233,8 +236,8 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 
     const qreal scale = SceneScale(scene());
     qreal radius = centerRadius1/scale;
-    QPointF transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect(transformationOrigin.x()-radius, transformationOrigin.y()-radius, radius*2., radius*2.);
+    VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
+    QRectF rect(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2., radius*2.);
 
     QPainterPath center1;
     center1.addEllipse(rect);
@@ -249,7 +252,7 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
     path.addPath(center1);
 
     radius = centerRadius2/scale;
-    rect = QRectF(transformationOrigin.x()-radius, transformationOrigin.y()-radius, radius*2., radius*2.);
+    rect = QRectF(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2., radius*2.);
 
     QPainterPath center2;
     center2.addEllipse(rect);
@@ -271,8 +274,8 @@ auto VPGraphicsTransformationOrigin::Center1() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
     qreal radius = centerRadius1/scale;
-    QPointF transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect(transformationOrigin.x()-radius, transformationOrigin.y()-radius, radius*2., radius*2.);
+    VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
+    QRectF rect(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2., radius*2.);
 
     QPainterPath center1;
     center1.addEllipse(rect);
@@ -285,8 +288,9 @@ auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
     qreal radius = centerRadius2/scale;
-    QPointF transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect = QRectF(transformationOrigin.x()-radius, transformationOrigin.y()-radius, radius*2., radius*2.);
+    VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
+    QRectF rect = QRectF(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2.,
+                         radius*2.);
 
     QPainterPath center2;
     center2.addEllipse(rect);
@@ -389,6 +393,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         m_rotationStartPoint = event->scenePos();
+        m_rotationSum = 0;
         m_controlsVisible = false;
         m_handleCorner = HandleCorner(event->scenePos());
         m_ignorePieceTransformation = true;
@@ -470,13 +475,18 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     QPointF rotationNewPoint = event->scenePos();
 
     // get the angle from the center to the initial click point
-    QPointF rotationOrigin = TransformationOrigin(m_layout, m_pieceRect);
-    QLineF initPosition(rotationOrigin, m_rotationStartPoint);
-    QLineF initRotationPosition(rotationOrigin, rotationNewPoint);
+    VPTransformationOrigon rotationOrigin = TransformationOrigin(m_layout, m_pieceRect);
+    QLineF initPosition(rotationOrigin.origin, m_rotationStartPoint);
+    QLineF initRotationPosition(rotationOrigin.origin, rotationNewPoint);
 
-    qreal angle = initPosition.angleTo(initRotationPosition);
+    qreal rotateOn = initPosition.angleTo(initRotationPosition);
 
-    if (not qFuzzyIsNull(angle))
+    if (rotateOn > 180)
+    {
+        rotateOn = rotateOn - 360.;
+    }
+
+    if (not qFuzzyIsNull(rotateOn))
     {
         auto PreparePieces = [this]()
         {
@@ -499,14 +509,32 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         VPLayoutPtr layout = m_layout.toStrongRef();
         if (not layout.isNull())
         {
+            if (layout->LayoutSettings().GetFollowGrainline() && not rotationOrigin.custom)
+            {
+                if (m_rotationSum > 90 || m_rotationSum < -90)
+                {
+                    m_rotationSum = rotateOn;
+                }
+                else
+                {
+                    m_rotationSum += rotateOn;
+                }
+            }
+            else
+            {
+                m_rotationSum = rotateOn;
+            }
+
             if (pieces.size() == 1)
             {
-                auto *command = new VPUndoPieceRotate(pieces.first(), rotationOrigin, angle, allowChangeMerge);
+                auto *command = new VPUndoPieceRotate(pieces.first(), rotationOrigin, rotateOn, m_rotationSum,
+                                                      allowChangeMerge);
                 layout->UndoStack()->push(command);
             }
             else if (pieces.size() > 1)
             {
-                auto *command = new VPUndoPiecesRotate(pieces, rotationOrigin, angle, allowChangeMerge);
+                auto *command = new VPUndoPiecesRotate(pieces, rotationOrigin, rotateOn, m_rotationSum,
+                                                       allowChangeMerge);
                 layout->UndoStack()->push(command);
             }
         }
@@ -514,8 +542,8 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if (m_originSaved && m_savedOrigin.custom)
     {
-        QLineF line(rotationOrigin, m_savedOrigin.origin);
-        line.setAngle(line.angle()+angle);
+        QLineF line(rotationOrigin.origin, m_savedOrigin.origin);
+        line.setAngle(line.angle()+rotateOn);
         m_savedOrigin.origin = line.p2();
     }
 
