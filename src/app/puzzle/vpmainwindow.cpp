@@ -799,6 +799,7 @@ void VPMainWindow::InitPropertyTabTiles()
             LayoutWasSaved(false);
             m_tileFactory->refreshTileInfos();
             m_graphicsView->RefreshLayout();
+            VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
         }
     });
 
@@ -810,6 +811,7 @@ void VPMainWindow::InitPropertyTabTiles()
             m_layout->LayoutSettings().SetShowTiles(checked);
             LayoutWasSaved(false);
             m_graphicsView->RefreshLayout();
+            VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
         }
     });
 }
@@ -1785,6 +1787,8 @@ void VPMainWindow::SheetPaperSizeChanged()
             sheet->ValidatePiecesOutOfBound();
         }
     }
+
+    VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1799,6 +1803,8 @@ void VPMainWindow::TilePaperSizeChanged()
     ui->toolButtonTileLandscapeOrientation->blockSignals(true);
     ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
     ui->toolButtonTileLandscapeOrientation->blockSignals(false);
+
+    VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2342,6 +2348,8 @@ void VPMainWindow::on_TilesMarginChanged()
         m_tileFactory->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
+
+    VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -682,4 +682,6 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
         }
         scene()->addItem(_graphicsPiece);
     }
+
+    VMainGraphicsView::NewSceneRect(scene(), this);
 }
