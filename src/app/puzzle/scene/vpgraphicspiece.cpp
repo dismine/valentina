@@ -43,6 +43,8 @@
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 
+#include "../vlayout/vtextmanager.h"
+
 #include "vlayoutpiecepath.h"
 #include "vplacelabelitem.h"
 
@@ -217,6 +219,105 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, QPainter *painter)
+{
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return;
+    }
+
+    if (labelShape.count() > 2)
+    {
+        const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+        const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+        const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
+        qreal dY = 0;
+        QColor color = PieceColor();
+
+        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+        {
+            const TextLine& tl = tm.GetSourceLine(i);
+            QFont fnt = tm.GetFont();
+            fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
+            fnt.setBold(tl.m_bold);
+            fnt.setItalic(tl.m_italic);
+
+            QFontMetrics fm(fnt);
+
+            if (dY > dH)
+            {
+                break;
+            }
+
+            QString qsText = tl.m_qsText;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+            if (fm.horizontalAdvance(qsText) > dW)
+#else
+            if (fm.width(qsText) > dW)
+#endif
+            {
+                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
+            }
+
+            qreal dX = 0;
+            if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+                dX = (dW - fm.horizontalAdvance(qsText))/2;
+#else
+                dX = (dW - fm.width(qsText))/2;
+#endif
+            }
+            else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+            {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+                dX = dW - fm.horizontalAdvance(qsText);
+#else
+                dX = dW - fm.width(qsText);
+#endif
+            }
+
+            // set up the rotation around top-left corner matrix
+            QTransform labelMatrix;
+            labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
+            if (piece->IsMirror())
+            {
+                labelMatrix.scale(-1, 1);
+                labelMatrix.rotate(-angle);
+                labelMatrix.translate(-dW, 0);
+                labelMatrix.translate(dX, dY); // Each string has own position
+            }
+            else
+            {
+                labelMatrix.rotate(angle);
+                labelMatrix.translate(dX, dY); // Each string has own position
+            }
+
+            labelMatrix *= piece->GetMatrix();
+
+            QPainterPath string;
+            string.addText(QPointF(), fnt, qsText);
+            string = labelMatrix.map(string);
+
+            if (painter != nullptr)
+            {
+                painter->save();
+                painter->setBrush(QBrush(color));
+                painter->drawPath(string);
+                painter->restore();
+            }
+
+            dY += (fm.height() + tm.GetSpacing());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPiece(QPainter *painter)
 {
     QBrush noBrush(Qt::NoBrush);
@@ -354,12 +455,8 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         m_placeLabels.addPath(path);
     }
 
-    // TODO : initialises the text labels
-
-//    QPointF position = m_piece->GetPatternTextPosition();
-//    QStringList texts = m_piece->GetPatternText();
-
-    //    painter->drawText();
+    PaintPieceLabel(piece->GetPieceLabelRect(), piece->GetPieceLabelData(), painter);
+    PaintPieceLabel(piece->GetPatternLabelRect(), piece->GetPatternLabelData(), painter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -35,6 +35,8 @@
 #include "scenedef.h"
 #include "../layout/layoutdef.h"
 
+class VTextManager;
+
 class VPGraphicsPiece : public QGraphicsObject
 {
     Q_OBJECT
@@ -89,6 +91,7 @@ private:
 
     bool allowChangeMerge{false};
 
+    void PaintPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, QPainter *painter=nullptr);
     void PaintPiece(QPainter *painter=nullptr);
 
     void GroupMove(const QPointF &pos);

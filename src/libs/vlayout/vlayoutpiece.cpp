@@ -63,7 +63,7 @@
 #include "vgraphicsfillitem.h"
 
 const quint32 VLayoutPieceData::streamHeader = 0x80D7D009; // CRC-32Q string "VLayoutPieceData"
-const quint16 VLayoutPieceData::classVersion = 2;
+const quint16 VLayoutPieceData::classVersion = 3;
 
 namespace
 {

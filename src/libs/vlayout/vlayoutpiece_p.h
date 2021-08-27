@@ -172,6 +172,10 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &
     dataStream << piece.m_quantity;
     dataStream << piece.m_id;
 
+    // Added in classVersion = 3
+    dataStream << piece.m_tmDetail;
+    dataStream << piece.m_tmPattern;
+
     return dataStream;
 }
 
@@ -222,6 +226,12 @@ inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
     {
         dataStream >> piece.m_quantity;
         dataStream >> piece.m_id;
+    }
+
+    if (actualClassVersion >= 3)
+    {
+        dataStream >> piece.m_tmDetail;
+        dataStream >> piece.m_tmPattern;
     }
 
     return dataStream;
