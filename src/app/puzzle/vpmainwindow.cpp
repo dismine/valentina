@@ -284,6 +284,7 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     m_graphicsView->RefreshLayout();
     m_graphicsView->RefreshPieces();
     m_tileFactory->refreshTileInfos();
+    m_layout->CheckPiecesPositionValidity();
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 
     return true;
@@ -732,6 +733,12 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             LayoutWasSaved(false);
             m_tileFactory->refreshTileInfos();
             m_graphicsView->RefreshLayout();
+
+            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                sheet->ValidatePiecesOutOfBound();
+            }
         }
     });
 
@@ -834,7 +841,15 @@ void VPMainWindow::InitPropertyTabLayout()
         {
             m_layout->LayoutSettings().SetWarningSuperpositionOfPieces(checked);
             LayoutWasSaved(false);
-            // TODO update the QGraphicView
+            if (checked)
+            {
+                VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                if (not sheet.isNull())
+                {
+                    sheet->ValidateSuperpositionOfPieces();
+                }
+            }
+            m_graphicsView->RefreshPieces();
         }
     });
 
@@ -844,7 +859,16 @@ void VPMainWindow::InitPropertyTabLayout()
         {
             m_layout->LayoutSettings().SetWarningPiecesOutOfBound(checked);
             LayoutWasSaved(false);
-            // TODO update the QGraphicView
+
+            if (checked)
+            {
+                VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                if (not sheet.isNull())
+                {
+                    sheet->ValidatePiecesOutOfBound();
+                }
+            }
+            m_graphicsView->RefreshPieces();
         }
     });
 
@@ -1748,9 +1772,18 @@ void VPMainWindow::SheetPaperSizeChanged()
     ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
     ui->toolButtonSheetLandscapeOrientation->blockSignals(false);
 
-    if (not m_layout.isNull() && m_layout->LayoutSettings().GetFollowGrainline())
+    if (not m_layout.isNull())
     {
-        RotatePiecesToGrainline();
+        if (m_layout->LayoutSettings().GetFollowGrainline())
+        {
+            RotatePiecesToGrainline();
+        }
+
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            sheet->ValidatePiecesOutOfBound();
+        }
     }
 }
 
@@ -2224,6 +2257,13 @@ void VPMainWindow::on_SheetMarginChanged()
                     ui->doubleSpinBoxSheetMarginBottom->value());
 
         LayoutWasSaved(false);
+
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            sheet->ValidatePiecesOutOfBound();
+        }
+
         m_graphicsView->RefreshLayout();
     }
 }

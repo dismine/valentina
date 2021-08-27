@@ -122,6 +122,7 @@ void VPUndoMovePieceOnSheet::redo()
         if (not layout.isNull())
         {
             emit layout->PieceSheetChanged(piece);
+            emit layout->PieceTransformationChanged(piece);
         }
     }
 }

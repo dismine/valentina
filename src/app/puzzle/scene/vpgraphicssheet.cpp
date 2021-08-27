@@ -105,38 +105,13 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsSheet::GetSheetRect() const -> QRectF
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
-    if (layout.isNull())
-    {
-        return {};
-    }
-
-    QPoint topLeft = QPoint(0,0);
-    QSizeF size = layout->LayoutSettings().GetSheetSize();
-    QRectF rect = QRectF(topLeft, size);
-    return rect;
+    return VPSheet::GetSheetRect(m_layout.toStrongRef());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsSheet::GetMarginsRect() const -> QRectF
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
-    if (layout.isNull())
-    {
-        return {};
-    }
-
-    QSizeF size = layout->LayoutSettings().GetSheetSize();
-
-    if (not layout->LayoutSettings().IgnoreMargins())
-    {
-        QMarginsF margins = layout->LayoutSettings().GetSheetMargins();
-        QRectF rect = QRectF(QPointF(margins.left(), margins.top()),
-                             QPointF(size.width()-margins.right(), size.height()-margins.bottom()));
-        return rect;
-    }
-
-    return QRectF(0, 0, size.width(), size.height());
+    return VPSheet::GetMarginsRect(m_layout.toStrongRef());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

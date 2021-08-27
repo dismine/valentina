@@ -40,8 +40,9 @@
 class VPLayout;
 class VPPiece;
 
-class VPSheet
+class VPSheet : public QObject
 {
+    Q_OBJECT
 public:
     explicit VPSheet(const VPLayoutPtr &layout);
 
@@ -84,6 +85,19 @@ public:
     auto TrashSheet() const -> bool;
     void SetTrashSheet(bool newTrashSheet);
 
+    void ValidateSuperpositionOfPieces() const;
+    void ValidatePieceOutOfBound(const VPPiecePtr &piece) const;
+    void ValidatePiecesOutOfBound() const;
+
+    auto GetSheetRect() const -> QRectF;
+    auto GetMarginsRect() const -> QRectF;
+
+    static auto GetSheetRect(const VPLayoutPtr &layout) -> QRectF;
+    static auto GetMarginsRect(const VPLayoutPtr &layout) -> QRectF;
+
+public slots:
+    void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
+
 private:
     Q_DISABLE_COPY(VPSheet)
 
@@ -97,6 +111,8 @@ private:
     bool m_trashSheet{false};
 
     VPTransformationOrigon m_transformationOrigin{};
+
+    auto PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) const -> bool;
 };
 
 Q_DECLARE_METATYPE(VPSheetPtr)

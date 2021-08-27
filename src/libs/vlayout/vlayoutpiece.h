@@ -86,6 +86,9 @@ public:
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();
 
+    QVector<QPointF> GetMappedExternalContourPoints() const;
+    QVector<QPointF> GetExternalContourPoints() const;
+
     QVector<VLayoutPassmark> GetMappedPassmarks() const;
     QVector<VLayoutPassmark> GetPassmarks() const;
     void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);

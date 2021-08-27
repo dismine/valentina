@@ -515,6 +515,8 @@ void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
             &VPGraphicsPiece::on_RefreshPiece);
     connect(layout.get(), &VPLayout::PieceSelectionChanged,
             m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
+    connect(layout.get(), &VPLayout::PiecePositionValidityChanged,
+            piece, &VPGraphicsPiece::on_RefreshPiece);
     connect(piece, &VPGraphicsPiece::PieceTransformationChanged,
             m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
     connect(piece, &VPGraphicsPiece::HideTransformationHandles,

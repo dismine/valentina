@@ -92,6 +92,8 @@ private:
     void PaintPiece(QPainter *painter=nullptr);
 
     void GroupMove(const QPointF &pos);
+
+    QColor PieceColor() const;
 };
 
 #endif // VPGRAPHICSPIECE_H

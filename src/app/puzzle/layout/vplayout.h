@@ -85,6 +85,8 @@ public:
 
     void Clear();
 
+    void CheckPiecesPositionValidity() const;
+
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);
     void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
@@ -92,6 +94,7 @@ signals:
     void TransformationOriginChanged();
     void SheetListChanged();
     void PieceSelectionChanged(const VPPiecePtr &piece);
+    void PiecePositionValidityChanged(const VPPiecePtr &piece);
     void LayoutChanged();
 
 protected:

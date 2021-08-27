@@ -153,43 +153,6 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetSelected(bool value)
-{
-    m_isSelected = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::IsSelected() const -> bool
-{
-    return m_isSelected;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::Sheet() const -> VPSheetPtr
-{
-    return m_sheet;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetSheet(const VPSheetPtr &newSheet)
-{
-    m_sheet = newSheet;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::Layout() const -> VPLayoutPtr
-{
-    return m_layout;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetLayout(const VPLayoutPtr &layout)
-{
-    SCASSERT(layout != nullptr)
-    m_layout = layout;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPPiece::SetGrainlineEnabled(bool enabled)
 {
     VLayoutPiece::SetGrainlineEnabled(enabled);

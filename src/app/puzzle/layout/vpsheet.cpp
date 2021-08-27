@@ -158,3 +158,178 @@ void VPSheet::SetTrashSheet(bool newTrashSheet)
 {
     m_trashSheet = newTrashSheet;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::ValidateSuperpositionOfPieces() const
+{
+    QList<VPPiecePtr> pieces = GetPieces();
+
+    for (const auto &piece : pieces)
+    {
+        if (piece.isNull())
+        {
+            continue;
+        }
+
+        const bool oldSuperpositionOfPieces = piece->HasSuperpositionWithPieces();
+        QVector<QPointF> path1 = piece->GetMappedExternalContourPoints();
+        bool hasSuperposition = false;
+
+        for (const auto &p : pieces)
+        {
+            if (p.isNull() || piece == p)
+            {
+                continue;
+            }
+
+            QVector<QPointF> path2 = p->GetMappedExternalContourPoints();
+
+            bool superposition = PathsSuperposition(path1, path2);
+            if (superposition)
+            {
+                hasSuperposition = superposition;
+                break;
+            }
+        }
+
+        piece->SetHasSuperpositionWithPieces(hasSuperposition);
+
+        if (oldSuperpositionOfPieces != piece->HasSuperpositionWithPieces())
+        {
+            VPLayoutPtr layout = GetLayout();
+            if (not layout.isNull())
+            {
+                emit layout->PiecePositionValidityChanged(piece);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::ValidatePieceOutOfBound(const VPPiecePtr &piece) const
+{
+    if (piece.isNull())
+    {
+        return;
+    }
+
+    const bool oldOutOfBound = piece->OutOfBound();
+
+    QRectF pieceRect = piece->MappedDetailBoundingRect();
+    QRectF sheetRect = GetMarginsRect();
+
+    piece->SetOutOfBound(not sheetRect.contains(pieceRect));
+
+    if (oldOutOfBound != piece->OutOfBound())
+    {
+        VPLayoutPtr layout = GetLayout();
+        if (not layout.isNull())
+        {
+            emit layout->PiecePositionValidityChanged(piece);
+        }
+    }
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::ValidatePiecesOutOfBound() const
+{
+    QList<VPPiecePtr> pieces = GetPieces();
+    for (const auto &piece : pieces)
+    {
+        ValidatePieceOutOfBound(piece);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSheetRect() const -> QRectF
+{
+    return GetSheetRect(GetLayout());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetMarginsRect() const -> QRectF
+{
+    return GetMarginsRect(GetLayout());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSheetRect(const VPLayoutPtr &layout) -> QRectF
+{
+    if (layout.isNull())
+    {
+        return {};
+    }
+
+    QPoint topLeft = QPoint(0,0);
+    QSizeF size = layout->LayoutSettings().GetSheetSize();
+    QRectF rect = QRectF(topLeft, size);
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetMarginsRect(const VPLayoutPtr &layout) -> QRectF
+{
+    if (layout.isNull())
+    {
+        return {};
+    }
+
+    QSizeF size = layout->LayoutSettings().GetSheetSize();
+
+    if (not layout->LayoutSettings().IgnoreMargins())
+    {
+        QMarginsF margins = layout->LayoutSettings().GetSheetMargins();
+        QRectF rect = QRectF(QPointF(margins.left(), margins.top()),
+                             QPointF(size.width()-margins.right(), size.height()-margins.bottom()));
+        return rect;
+    }
+
+    return QRectF(0, 0, size.width(), size.height());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
+{
+    VPLayoutPtr layout = GetLayout();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> pieces = GetPieces();
+    if (piece.isNull() || not pieces.contains(piece))
+    {
+        return;
+    }
+
+    if (layout->LayoutSettings().GetWarningPiecesOutOfBound())
+    {
+        ValidatePieceOutOfBound(piece);
+    }
+
+    if (layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    {
+        ValidateSuperpositionOfPieces();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) const -> bool
+{
+    const QRectF path1Rect = VLayoutPiece::BoundingRect(path1);
+    const QPainterPath path1Path = VAbstractPiece::PainterPath(path1);
+
+    const QRectF path2Rect = VLayoutPiece::BoundingRect(path2);
+    const QPainterPath path2Path = VAbstractPiece::PainterPath(path2);
+
+    if (path1Rect.intersects(path2Rect) || path2Rect.contains(path1Rect) || path1Rect.contains(path2Rect))
+    {
+        if (path1Path.contains(path2Path) || path2Path.contains(path1Path) || path1Path.intersects(path2Path))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

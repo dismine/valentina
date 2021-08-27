@@ -147,6 +147,7 @@ auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
     if (not sheet.isNull() && GetSheet(sheet->Uuid()).isNull())
     {
         m_sheets.append(sheet);
+        connect(this, &VPLayout::PieceTransformationChanged, sheet.get(), &VPSheet::CheckPiecePositionValidity);
     }
     return sheet;
 }
@@ -267,6 +268,19 @@ void VPLayout::Clear()
     m_sheets.clear();
     m_focusedSheet.clear();
     m_layoutSettings = VPLayoutSettings();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::CheckPiecesPositionValidity() const
+{
+    for (const auto &sheet : m_sheets)
+    {
+        if (not sheet.isNull())
+        {
+            sheet->ValidateSuperpositionOfPieces();
+            sheet->ValidatePiecesOutOfBound();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

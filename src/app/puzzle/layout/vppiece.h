@@ -106,6 +106,12 @@ public:
      */
     void Flip();
 
+    auto OutOfBound() const -> bool;
+    void SetOutOfBound(bool newOutOfBound);
+
+    auto HasSuperpositionWithPieces() const -> bool;
+    void SetHasSuperpositionWithPieces(bool newHasSuperpositionWithPieces);
+
 private:
     Q_DISABLE_COPY(VPPiece)
 
@@ -114,7 +120,70 @@ private:
     VPSheetWeakPtr m_sheet{};
 
     bool m_isSelected{false};
+    bool m_outOfBound{false};
+    bool m_hasSuperpositionWithPieces{false};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPPiece::SetSelected(bool value)
+{
+    m_isSelected = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPPiece::IsSelected() const -> bool
+{
+    return m_isSelected;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPPiece::Sheet() const -> VPSheetPtr
+{
+    return m_sheet;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPPiece::SetSheet(const VPSheetPtr &newSheet)
+{
+    m_sheet = newSheet;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPPiece::Layout() const -> VPLayoutPtr
+{
+    return m_layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPPiece::SetLayout(const VPLayoutPtr &layout)
+{
+    SCASSERT(layout != nullptr)
+    m_layout = layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPPiece::OutOfBound() const -> bool
+{
+    return m_outOfBound;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPPiece::SetOutOfBound(bool newOutOfBound)
+{
+    m_outOfBound = newOutOfBound;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPPiece::HasSuperpositionWithPieces() const -> bool
+{
+    return m_hasSuperpositionWithPieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPPiece::SetHasSuperpositionWithPieces(bool newHasSuperpositionWithPieces)
+{
+    m_hasSuperpositionWithPieces = newHasSuperpositionWithPieces;
+}
 
 Q_DECLARE_METATYPE(VPPiecePtr)
 

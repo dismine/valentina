@@ -55,6 +55,9 @@ Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 namespace
 {
 constexpr qreal penWidth = 1;
+
+QColor mainColor = Qt::black;
+QColor errorColor = Qt::red;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,7 +115,7 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    QPen pen(Qt::black, penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(PieceColor(), penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter->setPen(pen);
 
     PaintPiece(painter);
@@ -405,6 +408,41 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
         auto *command = new VPUndoPiecesMove(pieces, newPos.x(), newPos.y(), allowChangeMerge);
         layout->UndoStack()->push(command);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QColor VPGraphicsPiece::PieceColor() const
+{
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return mainColor;
+    }
+
+    VPLayoutPtr layout = piece->Layout();
+    if (layout.isNull())
+    {
+        return mainColor;
+    }
+
+    bool outOfBound = false;
+    if (layout->LayoutSettings().GetWarningPiecesOutOfBound())
+    {
+        outOfBound = piece->OutOfBound();
+    }
+
+    bool superposition = false;
+    if (layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    {
+        superposition = piece->HasSuperpositionWithPieces();
+    }
+
+    if (outOfBound || superposition)
+    {
+        return errorColor;
+    }
+
+    return mainColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

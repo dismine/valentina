@@ -1048,15 +1048,13 @@ int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::MappedDetailBoundingRect() const
 {
-    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetMappedSeamAllowancePoints()) :
-                                                               BoundingRect(GetMappedContourPoints());
+    return BoundingRect(GetMappedExternalContourPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::DetailBoundingRect() const
 {
-    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetSeamAllowancePoints()) :
-                                                               BoundingRect(GetContourPoints());
+    return BoundingRect(GetExternalContourPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1131,6 +1129,20 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         d->layoutAllowance.clear();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetMappedExternalContourPoints() const
+{
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetMappedSeamAllowancePoints() :
+                                                               GetMappedContourPoints();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetExternalContourPoints() const
+{
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetSeamAllowancePoints() :
+                                                               GetContourPoints();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
