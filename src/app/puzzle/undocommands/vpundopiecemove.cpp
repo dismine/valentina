@@ -90,6 +90,7 @@ void VPUndoPieceMove::redo()
 
     piece->Translate(m_dx, m_dy);
     emit layout->PieceTransformationChanged(piece);
+    emit layout->LayoutChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,6 +205,8 @@ void VPUndoPiecesMove::redo()
             emit layout->PieceTransformationChanged(p);
         }
     }
+
+    emit layout->LayoutChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

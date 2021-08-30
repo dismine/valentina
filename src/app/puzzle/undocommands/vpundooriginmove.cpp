@@ -90,6 +90,7 @@ void VPUndoOriginMove::redo()
 
     sheet->SetTransformationOrigin(m_origin);
     emit layout->TransformationOriginChanged();
+    emit layout->LayoutChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

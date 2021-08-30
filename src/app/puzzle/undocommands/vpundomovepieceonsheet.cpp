@@ -123,6 +123,7 @@ void VPUndoMovePieceOnSheet::redo()
         {
             emit layout->PieceSheetChanged(piece);
             emit layout->PieceTransformationChanged(piece);
+            emit layout->LayoutChanged();
         }
     }
 }

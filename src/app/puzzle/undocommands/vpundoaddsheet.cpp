@@ -80,6 +80,7 @@ void VPUndoAddSheet::redo()
     layout->AddSheet(sheet);
     emit layout->SheetListChanged();
     layout->SetFocusedSheet(sheet);
+    emit layout->LayoutChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

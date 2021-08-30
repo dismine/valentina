@@ -111,10 +111,11 @@ void VPUndoRemoveSheet::redo()
 
     emit layout->SheetListChanged();
     layout->SetFocusedSheet(VPSheetPtr());
+    emit layout->LayoutChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPUndoRemoveSheet::id() const
+auto VPUndoRemoveSheet::id() const -> int
 {
     return static_cast<int>(ML::UndoCommand::RemoveSheet);
 }
