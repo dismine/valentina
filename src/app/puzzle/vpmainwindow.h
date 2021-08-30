@@ -325,12 +325,6 @@ private:
     Unit m_oldLayoutUnit{Unit::Mm};
 
     /**
-     * @brief CreatePiece creates a piece from the given VLayoutPiece data
-     * @param rawPiece the raw piece data
-     */
-    Q_REQUIRED_RESULT VPPiece* CreatePiece(const VLayoutPiece &rawPiece);
-
-    /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
      */
     void SetupMenu();

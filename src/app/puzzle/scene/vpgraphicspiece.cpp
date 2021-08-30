@@ -582,7 +582,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor VPGraphicsPiece::PieceColor() const
+auto VPGraphicsPiece::PieceColor() const -> QColor
 {
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())

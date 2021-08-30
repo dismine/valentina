@@ -410,6 +410,12 @@ void VPLayoutFileReader::ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr 
         {
             VPPiecePtr piece(new VPPiece());
             ReadPiece(piece);
+
+            if (not piece->IsValid())
+            {
+                throw VException(tr("Piece %1 invalid.").arg(piece->GetName()));
+            }
+
             piece->SetSheet(sheet);
             VPLayout::AddPiece(layout, piece);
         }

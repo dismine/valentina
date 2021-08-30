@@ -116,6 +116,8 @@ public:
 
     static auto PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> bool;
 
+    auto IsValid() const -> bool;
+
 private:
     Q_DISABLE_COPY(VPPiece)
 

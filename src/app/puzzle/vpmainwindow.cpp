@@ -371,15 +371,20 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
         {
             for (const auto& rawPiece : data.pieces)
             {
-                // TODO / FIXME: make a few tests, on the data to check for validity. If not
-                //
-                // If seam allowance enabled, but the path is empty — invalid.
-                // If seam line path not hidden, but the path is empty — invalid.
-                // If seam allowance is built-in, but the seam line path is empty — invalid.
-
-
                 // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
-                VPPiecePtr piece(CreatePiece(rawPiece));
+                VPPiecePtr piece(new VPPiece(rawPiece));
+
+                if (not piece->IsValid())
+                {
+                    qCCritical(pWindow) << qPrintable(tr("Piece %1 invalid.").arg(piece->GetName()));
+
+                    if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
+                    {
+                        QGuiApplication::exit(V_EX_DATAERR);
+                        return;
+                    }
+                }
+
                 piece->SetSheet(nullptr); // just in case
                 VPLayout::AddPiece(m_layout, piece);
             }
@@ -406,24 +411,6 @@ void VPMainWindow::InitZoom()
     {
         m_graphicsView->ZoomFitBest();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPPiece* VPMainWindow::CreatePiece(const VLayoutPiece &rawPiece)
-{
-    auto *piece = new VPPiece(rawPiece);
-
-
-    // cutting line : GetMappedSeamAllowancePoints();
-    // seamline : GetMappedContourPoints();
-
-    // rawPiece.IsGrainlineEnabled() , GrainlineAngle , GetGrainline
-
-
-    // TODO : set all the information we need for the piece!
-
-
-    return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
