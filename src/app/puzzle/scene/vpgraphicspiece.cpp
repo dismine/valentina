@@ -94,6 +94,7 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     shape.addPath(m_internalPaths);
     shape.addPath(m_passmarks);
     shape.addPath(m_placeLabels);
+    shape.addPath(m_stickyPath);
 
     constexpr qreal halfPenWidth = penWidth/2.;
 
@@ -136,6 +137,7 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
         m_moveStartPoint = event->pos();
         emit HideTransformationHandles(true);
+        m_hasStickyPosition = false;
     }
 }
 
@@ -161,7 +163,26 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         setCursor(Qt::OpenHandCursor);
         emit HideTransformationHandles(false);
+
+        VPPiecePtr piece = m_piece.toStrongRef();
+        if (not piece.isNull())
+        {
+            VPLayoutPtr layout = piece->Layout();
+            if (not layout.isNull())
+            {
+                if (layout->LayoutSettings().GetStickyEdges() && m_hasStickyPosition)
+                {
+                    auto *command = new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY,
+                                                        allowChangeMerge);
+                    layout->UndoStack()->push(command);
+
+                    SetStickyPoints(QVector<QPointF>());
+                }
+            }
+        }
+
         allowChangeMerge = false;
+        m_hasStickyPosition = false;
     }
 }
 
@@ -216,6 +237,15 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
         layout->UndoStack()->push(command);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::SetStickyPoints(const QVector<QPointF> &newStickyPoint)
+{
+    m_stickyPoints = newStickyPoint;
+
+    prepareGeometryChange();
+    PaintPiece(); // refresh shapes
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,6 +359,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     m_internalPaths = QPainterPath();
     m_passmarks = QPainterPath();
     m_placeLabels = QPainterPath();
+    m_stickyPath = QPainterPath();
 
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())
@@ -457,6 +488,29 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 
     PaintPieceLabel(piece->GetPieceLabelRect(), piece->GetPieceLabelData(), painter);
     PaintPieceLabel(piece->GetPatternLabelRect(), piece->GetPatternLabelData(), painter);
+
+    if (not m_stickyPoints.isEmpty())
+    {
+        m_stickyPath.moveTo(m_stickyPoints.first());
+        for (int i = 1; i < m_stickyPoints.size(); i++)
+        {
+            m_stickyPath.lineTo(m_stickyPoints.at(i));
+        }
+
+        if (painter != nullptr)
+        {
+            painter->save();
+            painter->setBrush(QBrush(Qt::BDiagPattern));
+
+            QPen pen = painter->pen();
+            pen.setStyle(Qt::DashLine);
+            pen.setColor(mainColor);
+            painter->setPen(pen);
+
+            painter->drawPath(m_stickyPath);
+            painter->restore();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -497,8 +551,28 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
 
     if (pieces.size() == 1)
     {
-        auto *command = new VPUndoPieceMove(pieces.first(), newPos.x(), newPos.y(), allowChangeMerge);
+        VPPiecePtr p = pieces.first();
+        auto *command = new VPUndoPieceMove(piece, newPos.x(), newPos.y(), allowChangeMerge);
         layout->UndoStack()->push(command);
+
+        if (layout->LayoutSettings().GetStickyEdges())
+        {
+            QVector<QPointF> path;
+            if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))
+            {
+                path = p->GetMappedExternalContourPoints();
+                QTransform m;
+                m.translate(m_stickyTranslateX, m_stickyTranslateY);
+                path = m.map(path);
+                m_hasStickyPosition = true;
+            }
+            else
+            {
+                m_hasStickyPosition = false;
+            }
+
+            SetStickyPoints(path);
+        }
     }
     else if (pieces.size() > 1)
     {

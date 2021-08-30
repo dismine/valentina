@@ -297,7 +297,7 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
                 ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
     layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
     layout->LayoutSettings().SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
-    layout->LayoutSettings().SetPiecesGap(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')));
+    layout->LayoutSettings().SetPiecesGap(qMax(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')), 0.0));
     layout->LayoutSettings().SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));
 
     readElementText();

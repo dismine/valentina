@@ -184,7 +184,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
 
             QVector<QPointF> path2 = p->GetMappedExternalContourPoints();
 
-            bool superposition = PathsSuperposition(path1, path2);
+            bool superposition = VPPiece::PathsSuperposition(path1, path2);
             if (superposition)
             {
                 hasSuperposition = superposition;
@@ -312,24 +312,4 @@ void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
     {
         ValidateSuperpositionOfPieces();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) const -> bool
-{
-    const QRectF path1Rect = VLayoutPiece::BoundingRect(path1);
-    const QPainterPath path1Path = VAbstractPiece::PainterPath(path1);
-
-    const QRectF path2Rect = VLayoutPiece::BoundingRect(path2);
-    const QPainterPath path2Path = VAbstractPiece::PainterPath(path2);
-
-    if (path1Rect.intersects(path2Rect) || path2Rect.contains(path1Rect) || path1Rect.contains(path2Rect))
-    {
-        if (path1Path.contains(path2Path) || path2Path.contains(path1Path) || path1Path.intersects(path2Path))
-        {
-            return true;
-        }
-    }
-
-    return false;
 }

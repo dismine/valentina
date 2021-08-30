@@ -31,6 +31,7 @@
 
 #include "../vmisc/def.h"
 #include "vpsheet.h"
+#include "vplayout.h"
 #include "../vlayout/vtextmanager.h"
 
 #include <QIcon>
@@ -38,6 +39,86 @@
 #include <QPainter>
 
 Q_LOGGING_CATEGORY(pPiece, "p.piece")
+
+namespace
+{
+constexpr qreal minStickyDistance = ToPixel(3, Unit::Mm);
+constexpr qreal maxStickyDistance = ToPixel(10, Unit::Mm);
+constexpr qreal stickyShift = ToPixel(1, Unit::Mm);
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CutEdge(const QLineF &edge) -> QVector<QPointF>
+{
+    QVector<QPointF> points;
+    if (qFuzzyIsNull(stickyShift))
+    {
+        points.append(edge.p1());
+        points.append(edge.p2());
+    }
+    else
+    {
+        const int n = qFloor(edge.length()/stickyShift);
+
+        if (n <= 0)
+        {
+            points.append(edge.p1());
+            points.append(edge.p2());
+        }
+        else
+        {
+            points.reserve(n);
+            const qreal nShift = edge.length()/n;
+            for (int i = 1; i <= n+1; ++i)
+            {
+                QLineF l1 = edge;
+                l1.setLength(nShift*(i-1));
+                points.append(l1.p2());
+            }
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF>
+{
+    if (path.size() < 2)
+    {
+        return path;
+    }
+
+    QVector<QPointF> stickyPath;
+
+    for (int i=0; i<path.size(); ++i)
+    {
+        stickyPath += CutEdge(QLineF(path.at(i), path.at(i < path.size()-1 ? i+1 : 0)));
+    }
+
+    return stickyPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
+{
+    qreal distance = INT_MAX;
+    QLineF closestDistance;
+
+    for (auto p1 : path1)
+    {
+        for (auto p2 : path2)
+        {
+            QLineF d(p1, p2);
+            if (d.length() <= distance)
+            {
+                distance = d.length();
+                closestDistance = d;
+            }
+        }
+    }
+
+    return closestDistance;
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPPiece::VPPiece(const VLayoutPiece &layoutPiece)
@@ -238,4 +319,112 @@ void VPPiece::Flip()
     pieceMatrix *= m;
     SetMatrix(pieceMatrix);
     SetMirror(!IsMirror());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
+{
+    VPLayoutPtr layout = Layout();
+    if (layout.isNull() || not layout->LayoutSettings().GetStickyEdges())
+    {
+        return false;
+    }
+
+    const qreal pieceGap = layout->LayoutSettings().GetPiecesGap();
+    if (pieceGap <= 0)
+    {
+        return false;
+    }
+
+    VPSheetPtr sheet = Sheet();
+    if (sheet.isNull())
+    {
+        return false;
+    }
+
+    QList<VPPiecePtr> allPieces = sheet->GetPieces();
+
+    if (allPieces.count() < 2)
+    {
+        return false;
+    }
+
+    QVector<QPointF> path = GetMappedExternalContourPoints();
+    QRectF boundingRect = VLayoutPiece::BoundingRect(path);
+    const qreal stickyDistance = pieceGap+minStickyDistance;
+    QRectF stickyZone = QRectF(boundingRect.topLeft().x()-stickyDistance, boundingRect.topLeft().y()-stickyDistance,
+                               boundingRect.width()+stickyDistance*2, boundingRect.height()+stickyDistance*2);
+
+    QVector<QPointF> stickyPath = PrepareStickyPath(path);
+    QLineF closestDistance;
+
+    for (const auto& piece : allPieces)
+    {
+        if (piece.isNull() || piece->GetUniqueID() == GetUniqueID())
+        {
+            continue;
+        }
+
+        QVector<QPointF> piecePath = piece->GetMappedExternalContourPoints();
+        QRectF pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
+
+        if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||
+                stickyZone.contains(pieceBoundingRect))
+        {
+            if (not VPPiece::PathsSuperposition(path, piecePath))
+            {
+                QVector<QPointF> pieceStickyPath = PrepareStickyPath(piecePath);
+                closestDistance = ClosestDistance(stickyPath, pieceStickyPath);
+            }
+        }
+    }
+
+    if (closestDistance.isNull())
+    {
+        return false;
+    }
+
+    const qreal extraZone = qBound(minStickyDistance, pieceGap * 50 / 100, maxStickyDistance);
+    const qreal length = closestDistance.length();
+
+    if (length > pieceGap && length <= pieceGap + extraZone)
+    {
+        closestDistance.setLength(length - pieceGap);
+        QPointF diff = closestDistance.p2() - closestDistance.p1();
+        dx = diff.x();
+        dy = diff.y();
+        return true;
+    }
+
+    if (length < pieceGap && length >= pieceGap - extraZone)
+    {
+        closestDistance.setAngle(closestDistance.angle() + 180);
+        closestDistance.setLength(pieceGap - length);
+        QPointF diff = closestDistance.p2() - closestDistance.p1();
+        dx = diff.x();
+        dy = diff.y();
+        return true;
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> bool
+{
+    const QRectF path1Rect = VLayoutPiece::BoundingRect(path1);
+    const QPainterPath path1Path = VAbstractPiece::PainterPath(path1);
+
+    const QRectF path2Rect = VLayoutPiece::BoundingRect(path2);
+    const QPainterPath path2Path = VAbstractPiece::PainterPath(path2);
+
+    if (path1Rect.intersects(path2Rect) || path2Rect.contains(path1Rect) || path1Rect.contains(path2Rect))
+    {
+        if (path1Path.contains(path2Path) || path2Path.contains(path1Path) || path1Path.intersects(path2Path))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

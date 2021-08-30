@@ -126,11 +126,16 @@ private:
 
     qreal m_rotationSum{0};
 
+    bool m_hasStickyPosition{false};
+    qreal m_stickyTranslateX{0};
+    qreal m_stickyTranslateY{0};
+
     void ConnectPiece(VPGraphicsPiece *piece);
 
     void RotatePiecesByAngle(qreal angle);
     void TranslatePiecesOn(qreal dx, qreal dy);
 
+    auto ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *;
 };
 
 #endif // VPMAINGRAPHICSVIEW_H

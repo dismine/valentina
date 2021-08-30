@@ -53,6 +53,8 @@ public:
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Piece)};
 
+    void SetStickyPoints(const QVector<QPointF> &newStickyPoint);
+
 signals:
     void HideTransformationHandles(bool hide);
     void PieceTransformationChanged();
@@ -90,6 +92,13 @@ private:
     QCursor m_rotateCursor{};
 
     bool allowChangeMerge{false};
+
+    QVector<QPointF> m_stickyPoints{};
+    QPainterPath m_stickyPath{};
+
+    bool m_hasStickyPosition{false};
+    qreal m_stickyTranslateX{0};
+    qreal m_stickyTranslateY{0};
 
     void PaintPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, QPainter *painter=nullptr);
     void PaintPiece(QPainter *painter=nullptr);

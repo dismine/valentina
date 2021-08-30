@@ -112,7 +112,7 @@ private:
 
     VPTransformationOrigon m_transformationOrigin{};
 
-    auto PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) const -> bool;
+
 };
 
 Q_DECLARE_METATYPE(VPSheetPtr)

@@ -909,7 +909,6 @@ void VPMainWindow::InitPropertyTabLayout()
         {
             m_layout->LayoutSettings().SetPiecesGapConverted(d);
             LayoutWasSaved(false);
-            // TODO update the QGraphicView
         }
     });
 
@@ -2539,6 +2538,19 @@ void VPMainWindow::on_ApplyPieceTransformation()
 
                         auto *command = new VPUndoPieceMove(piece, pieceDx, pieceDy);
                         m_layout->UndoStack()->push(command);
+
+                        if (m_layout->LayoutSettings().GetStickyEdges())
+                        {
+                            qreal stickyTranslateX = 0;
+                            qreal stickyTranslateY = 0;
+                            if (piece->StickyPosition(stickyTranslateX, stickyTranslateY))
+                            {
+                                bool allowMerge = selectedPieces.size() == 1;
+                                auto *stickyCommand = new VPUndoPieceMove(piece, stickyTranslateX, stickyTranslateY,
+                                                                          allowMerge);
+                                m_layout->UndoStack()->push(stickyCommand);
+                            }
+                        }
                     }
                 }
 

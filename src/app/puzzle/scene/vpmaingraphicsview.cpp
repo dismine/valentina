@@ -302,7 +302,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
         }
         else
         {
-            TranslatePiecesOn(0, 1);
+            TranslatePiecesOn(0, -1);
         }
     }
     else if (event->key() == Qt::Key_Down)
@@ -360,7 +360,48 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
     {
         if (not event->isAutoRepeat())
         {
+            if (m_hasStickyPosition && not m_graphicsPieces.isEmpty())
+            {
+                VPPiecePtr piece = m_graphicsPieces.first()->GetPiece();
+                if (not piece.isNull())
+                {
+                    VPLayoutPtr layout = piece->Layout();
+                    if (not layout.isNull() && layout->LayoutSettings().GetStickyEdges())
+                    {
+                        auto PreparePieces = [layout]()
+                        {
+                            QList<VPPiecePtr> pieces;
+                            VPSheetPtr sheet = layout->GetFocusedSheet();
+                            if (not sheet.isNull())
+                            {
+                                pieces = sheet->GetSelectedPieces();
+                            }
+
+                            return pieces;
+                        };
+
+                        QList<VPPiecePtr> pieces = PreparePieces();
+                        if (pieces.size() == 1)
+                        {
+                            VPPiecePtr p = pieces.first();
+
+                            auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
+                                                                m_allowChangeMerge);
+                            layout->UndoStack()->push(command);
+
+                            VPGraphicsPiece * gPiece = ScenePiece(p);
+                            if (gPiece != nullptr)
+                            {
+                                gPiece->SetStickyPoints(QVector<QPointF>());
+                            }
+                        }
+                    }
+
+                }
+            }
+
             m_allowChangeMerge = false;
+            m_hasStickyPosition = false;
         }
     }
 
@@ -632,8 +673,32 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
     QList<VPPiecePtr> pieces = PreparePieces();
     if (pieces.size() == 1)
     {
-        auto *command = new VPUndoPieceMove(pieces.first(), dx, dy, m_allowChangeMerge);
+        VPPiecePtr p = pieces.first();
+        auto *command = new VPUndoPieceMove(p, dx, dy, m_allowChangeMerge);
         layout->UndoStack()->push(command);
+
+        if (layout->LayoutSettings().GetStickyEdges())
+        {
+            QVector<QPointF> path;
+            if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))
+            {
+                path = p->GetMappedExternalContourPoints();
+                QTransform m;
+                m.translate(m_stickyTranslateX, m_stickyTranslateY);
+                path = m.map(path);
+                m_hasStickyPosition = true;
+            }
+            else
+            {
+                m_hasStickyPosition = false;
+            }
+
+            VPGraphicsPiece *gPiece = ScenePiece(p);
+            if (gPiece != nullptr)
+            {
+                gPiece->SetStickyPoints(path);
+            }
+        }
     }
     else if (pieces.size() > 1)
     {
@@ -645,7 +710,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
+auto VPMainGraphicsView::ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *
 {
     VPGraphicsPiece *_graphicsPiece = nullptr;
     for(auto *graphicPiece : m_graphicsPieces)
@@ -656,6 +721,14 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
         }
     }
 
+    return _graphicsPiece;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
+{
+    VPGraphicsPiece *graphicsPiece = ScenePiece(piece);
+
     VPLayoutPtr layout = piece->Layout();
     if (layout.isNull())
     {
@@ -665,22 +738,22 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
     if (piece->Sheet().isNull() || piece->Sheet() == layout->GetTrashSheet() ||
             piece->Sheet() != layout->GetFocusedSheet()) // remove
     {
-        if (_graphicsPiece != nullptr)
+        if (graphicsPiece != nullptr)
         {
-            scene()->removeItem(_graphicsPiece);
-            m_graphicsPieces.removeAll(_graphicsPiece);
-            delete _graphicsPiece;
+            scene()->removeItem(graphicsPiece);
+            m_graphicsPieces.removeAll(graphicsPiece);
+            delete graphicsPiece;
         }
     }
     else // add
     {
-        if(_graphicsPiece == nullptr)
+        if(graphicsPiece == nullptr)
         {
-            _graphicsPiece = new VPGraphicsPiece(piece);
-            m_graphicsPieces.append(_graphicsPiece);
-            ConnectPiece(_graphicsPiece);
+            graphicsPiece = new VPGraphicsPiece(piece);
+            m_graphicsPieces.append(graphicsPiece);
+            ConnectPiece(graphicsPiece);
         }
-        scene()->addItem(_graphicsPiece);
+        scene()->addItem(graphicsPiece);
     }
 
     VMainGraphicsView::NewSceneRect(scene(), this);
