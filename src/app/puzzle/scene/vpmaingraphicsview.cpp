@@ -756,5 +756,7 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
         scene()->addItem(graphicsPiece);
     }
 
+    m_rotationControls->on_UpdateControls();
+
     VMainGraphicsView::NewSceneRect(scene(), this);
 }

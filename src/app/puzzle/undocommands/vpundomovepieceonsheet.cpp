@@ -111,6 +111,11 @@ void VPUndoMovePieceOnSheet::redo()
     {
         piece->SetSheet(sourceSheet);
 
+        if (sourceSheet.isNull())
+        {
+            piece->SetSelected(false);
+        }
+
         if (m_followGrainline)
         {
             VPTransformationOrigon origin;

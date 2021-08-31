@@ -368,40 +368,46 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the seam line
-    QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
-    if(!seamLinePoints.isEmpty())
+    if (not piece->IsHideMainPath() || not piece->IsSeamAllowance())
     {
-        m_seamLine.moveTo(seamLinePoints.first());
-        for (int i = 1; i < seamLinePoints.size(); i++)
+        QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
+        if(!seamLinePoints.isEmpty())
         {
-            m_seamLine.lineTo(seamLinePoints.at(i));
-        }
+            m_seamLine.moveTo(seamLinePoints.first());
+            for (int i = 1; i < seamLinePoints.size(); i++)
+            {
+                m_seamLine.lineTo(seamLinePoints.at(i));
+            }
 
-        if (painter != nullptr)
-        {
-            painter->save();
-            painter->setBrush(piece->IsSelected() ? selectionBrush : noBrush);
-            painter->drawPath(m_seamLine);
-            painter->restore();
+            if (painter != nullptr)
+            {
+                painter->save();
+                painter->setBrush(piece->IsSelected() ? selectionBrush : noBrush);
+                painter->drawPath(m_seamLine);
+                painter->restore();
+            }
         }
     }
 
     // initiliases the cutting line
-    QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
-    if(!cuttingLinepoints.isEmpty())
+    if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        m_cuttingLine.moveTo(cuttingLinepoints.first());
-        for (int i = 1; i < cuttingLinepoints.size(); i++)
+        QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
+        if(!cuttingLinepoints.isEmpty())
         {
-            m_cuttingLine.lineTo(cuttingLinepoints.at(i));
-        }
+            m_cuttingLine.moveTo(cuttingLinepoints.first());
+            for (int i = 1; i < cuttingLinepoints.size(); i++)
+            {
+                m_cuttingLine.lineTo(cuttingLinepoints.at(i));
+            }
 
-        if (painter != nullptr)
-        {
-            painter->save();
-            painter->setBrush(isSelected() ? selectionBrush : noBrush);
-            painter->drawPath(m_cuttingLine);
-            painter->restore();
+            if (painter != nullptr)
+            {
+                painter->save();
+                painter->setBrush(isSelected() ? selectionBrush : noBrush);
+                painter->drawPath(m_cuttingLine);
+                painter->restore();
+            }
         }
     }
 

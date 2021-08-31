@@ -251,6 +251,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
                                     [](const QString &label){return label.isEmpty();});
     SetAttribute(ML::AttrCopyNumber, piece->CopyNumber());
+    SetAttributeOrRemoveIf<bool>(ML::AttrShowSeamline, not piece->IsHideMainPath(), [](bool show){return show;});
 
     writeStartElement(ML::TagSeamLine);
     writeCharacters(PathToString(piece->GetContourPoints()));

@@ -440,9 +440,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
 
     piece->SetName(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
     piece->SetCopyNumber(static_cast<quint16>(ReadAttributeUInt(attribs, ML::AttrCopyNumber, QChar('1'))));
-
-//    bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
-//    piece->SetShowSeamLine(showSeamline);
+    piece->SetHideMainPath(not ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr));
 
     bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
     piece->SetMirror(pieceMirrored);

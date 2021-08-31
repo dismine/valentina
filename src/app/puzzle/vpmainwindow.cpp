@@ -515,8 +515,10 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
             VPPiecePtr selectedPiece = selectedPieces.first();
             if (not selectedPiece.isNull())
             {
-//                selectedPiece->SetShowSeamline(checked);
-//                LayoutWasSaved(false);
+                selectedPiece->SetHideMainPath(not checked);
+                LayoutWasSaved(false);
+                // nothing changed, but will force redraw
+                emit m_layout->PieceTransformationChanged(selectedPiece);
             }
         }
     });
@@ -929,7 +931,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetPlainTextEditValue(ui->plainTextEditCurrentPieceUUID, selectedPiece->GetUUID().toString());
         SetLineEditValue(ui->lineEditCurrentPieceGradationId, selectedPiece->GetGradationId());
 
-//        SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, selectedPiece->GetShowSeamLine());
+        SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, not selectedPiece->IsHideMainPath());
         SetCheckBoxValue(ui->checkBoxCurrentPieceMirrorPiece, selectedPiece->IsMirror());
 
         if (not ui->checkBoxRelativeTranslation->isChecked())

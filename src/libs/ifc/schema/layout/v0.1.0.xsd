@@ -185,7 +185,8 @@
                   <xs:attribute type="xs:boolean" name="mirrored"/>
                   <xs:attribute type="Transformation" name="transform"/>
                   <xs:attribute type="xs:string" name="gradationLabel"/>
-                  <xs:attribute type="xs:unsignedInt" name="copyNumber"/>  
+                  <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
+                  <xs:attribute type="xs:boolean" name="showSeamline"/>  
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -325,7 +326,10 @@
                               <xs:attribute name="id" type="uuid" use="required"/>
                               <xs:attribute type="xs:string" name="name"/>
                               <xs:attribute type="xs:boolean" name="mirrored"/>
-                              <xs:attribute type="Transformation" name="transform"/>  
+                              <xs:attribute type="Transformation" name="transform"/>
+                              <xs:attribute type="xs:string" name="gradationLabel"/>
+                              <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
+                              <xs:attribute type="xs:boolean" name="showSeamline"/>   
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
