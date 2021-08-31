@@ -100,6 +100,8 @@ extern const QString AttrFontSize;
 extern const QString AttrBold;
 extern const QString AttrItalic;
 extern const QString AttrAlignment;
+extern const QString AttrGradationLabel;
+extern const QString AttrCopyNumber;
 
 extern const QString atFrontStr;
 extern const QString atRearStr;

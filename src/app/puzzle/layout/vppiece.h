@@ -44,8 +44,12 @@ class VPPiece : public VLayoutPiece
 public:
     VPPiece() = default;
     explicit VPPiece(const VLayoutPiece &layoutPiece);
-
     virtual ~VPPiece() = default;
+
+    void Update(const VPPiecePtr &piece);
+
+    virtual auto GetUniqueID() const -> QString override;
+
 
     void ClearTransformations();
 
@@ -118,6 +122,9 @@ public:
 
     auto IsValid() const -> bool;
 
+    auto CopyNumber() const -> quint16;
+    void SetCopyNumber(quint16 newCopyNumber);
+
 private:
     Q_DISABLE_COPY(VPPiece)
 
@@ -128,6 +135,8 @@ private:
     bool m_isSelected{false};
     bool m_outOfBound{false};
     bool m_hasSuperpositionWithPieces{false};
+
+    quint16 m_copyNumber{1};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

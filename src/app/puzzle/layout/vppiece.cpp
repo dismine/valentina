@@ -33,6 +33,7 @@
 #include "vpsheet.h"
 #include "vplayout.h"
 #include "../vlayout/vtextmanager.h"
+#include "../vlayout/vlayoutpiecepath.h"
 
 #include <QIcon>
 #include <QLoggingCategory>
@@ -125,6 +126,45 @@ VPPiece::VPPiece(const VLayoutPiece &layoutPiece)
     : VLayoutPiece(layoutPiece)
 {
     ClearTransformations();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::Update(const VPPiecePtr &piece)
+{
+    if (piece.isNull())
+    {
+        return;
+    }
+
+    SetName(piece->GetName());
+    SetCountourPoints(piece->GetContourPoints(), IsHideMainPath());
+    SetSeamAllowancePoints(GetSeamAllowancePoints(), piece->IsSeamAllowance(), piece->IsSeamAllowanceBuiltIn());
+    SetInternalPaths(GetInternalPaths());
+    SetPassmarks(GetPassmarks());
+    SetPlaceLabels(GetPlaceLabels());
+
+    SetGrainlineEnabled(piece->IsGrainlineEnabled());
+    SetGrainlineAngle(piece->GrainlineAngle());
+    SetGrainlineArrowType(piece->GrainlineArrowType());
+    SetGrainlinePoints(piece->GetGrainline());
+
+    SetPieceLabelRect(piece->GetPieceLabelRect());
+    SetPieceLabelData(piece->GetPieceLabelData());
+    SetPatternLabelRect(piece->GetPatternLabelRect());
+    SetPatternLabelData(piece->GetPatternLabelData());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPPiece::GetUniqueID() const
+{
+    QString id = VLayoutPiece::GetUniqueID();
+
+    if (m_copyNumber > 1)
+    {
+        id = id + '_' + QString::number(m_copyNumber);
+    }
+
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -453,4 +493,16 @@ auto VPPiece::IsValid() const -> bool
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint16 VPPiece::CopyNumber() const
+{
+    return m_copyNumber;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetCopyNumber(quint16 newCopyNumber)
+{
+    m_copyNumber = qMax(static_cast<quint16>(1), newCopyNumber);
 }

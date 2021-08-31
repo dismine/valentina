@@ -438,6 +438,9 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid::createUuid().toString());
     piece->SetUUID(QUuid(uuidStr));
 
+    piece->SetName(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
+    piece->SetCopyNumber(static_cast<quint16>(ReadAttributeUInt(attribs, ML::AttrCopyNumber, QChar('1'))));
+
 //    bool showSeamline = ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr);
 //    piece->SetShowSeamLine(showSeamline);
 

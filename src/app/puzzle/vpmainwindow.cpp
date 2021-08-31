@@ -371,22 +371,25 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
         {
             for (const auto& rawPiece : data.pieces)
             {
-                // TODO for feature "Update piece" : CreateOrUpdate() function indstead of CreatePiece()
-                VPPiecePtr piece(new VPPiece(rawPiece));
-
-                if (not piece->IsValid())
+                for (quint16 i = 1; i <= rawPiece.GetQuantity(); ++i)
                 {
-                    qCCritical(pWindow) << qPrintable(tr("Piece %1 invalid.").arg(piece->GetName()));
+                    VPPiecePtr piece(new VPPiece(rawPiece));
+                    piece->SetCopyNumber(i);
 
-                    if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
+                    if (not piece->IsValid())
                     {
-                        QGuiApplication::exit(V_EX_DATAERR);
-                        return;
-                    }
-                }
+                        qCCritical(pWindow) << qPrintable(tr("Piece %1 invalid.").arg(piece->GetName()));
 
-                piece->SetSheet(nullptr); // just in case
-                VPLayout::AddPiece(m_layout, piece);
+                        if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
+                        {
+                            QGuiApplication::exit(V_EX_DATAERR);
+                            return;
+                        }
+                    }
+
+                    piece->SetSheet(nullptr); // just in case
+                    VPLayout::AddPiece(m_layout, piece);
+                }
             }
 
             m_carrousel->Refresh();

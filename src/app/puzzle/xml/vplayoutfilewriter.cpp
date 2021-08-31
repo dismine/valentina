@@ -248,6 +248,9 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     SetAttribute(ML::AttrName, piece->GetName());
     SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(), [](bool mirrored){return not mirrored;});
     SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
+    SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
+                                    [](const QString &label){return label.isEmpty();});
+    SetAttribute(ML::AttrCopyNumber, piece->CopyNumber());
 
     writeStartElement(ML::TagSeamLine);
     writeCharacters(PathToString(piece->GetContourPoints()));
