@@ -168,7 +168,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       m_templateLines(),
       m_undoStack(),
       m_newPlaceLabels(),
-      m_newPaths()
+      m_newPaths(),
+      m_placeholdersMenu(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -350,6 +351,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabPaths->lineEditName->setText(piece.GetName());
     uiTabPaths->lineEditUUID->setText(piece.GetUUID().toString());
+    uiTabPaths->lineEditGradationLabel->setText(piece.GetGradationLabel());
     uiTabPaths->spinBoxPriority->setValue(static_cast<int>(piece.GetPriority()));
 
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(
@@ -2581,6 +2583,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
     piece.SetName(uiTabPaths->lineEditName->text());
     piece.SetUUID(uiTabPaths->lineEditUUID->text());
+    piece.SetGradationLabel(uiTabPaths->lineEditGradationLabel->text());
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
@@ -3025,6 +3028,12 @@ void DialogSeamAllowance::InitPieceTab()
             [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
 
     connect(uiTabPaths->lineEditUUID, &QLineEdit::textChanged, this, &DialogSeamAllowance::DetailUUIDChanged);
+
+    InitGradationPlaceholders();
+    InitGradationPlaceholdersMenu();
+
+    m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    uiTabPaths->pushButtonGradationPlaceholder->setMenu(m_placeholdersMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3864,6 +3873,71 @@ void DialogSeamAllowance::SavePatternMaterialData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitGradationPlaceholdersMenu()
+{
+    QChar per('%');
+    auto i = m_gradationPlaceholders.constBegin();
+    while (i != m_gradationPlaceholders.constEnd())
+    {
+        auto value = i.value();
+        QAction *action = m_placeholdersMenu->addAction(value.first);
+        action->setData(per + i.key() + per);
+        connect(action, &QAction::triggered, this, &DialogSeamAllowance::InsertGradationPlaceholder);
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitGradationPlaceholders()
+{
+    // Pattern tags
+    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
+
+    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    m_gradationPlaceholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
+
+    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    m_gradationPlaceholders.insert(pl_size, qMakePair(tr("Size", "dimension"), sizeValue));
+
+    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    m_gradationPlaceholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), hipValue));
+
+    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    m_gradationPlaceholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), waistValue));
+
+    {
+        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+        m_gradationPlaceholders.insert(pl_heightLabel, qMakePair(tr("Height label", "dimension"),
+                                                                 not label.isEmpty() ? label : heightValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+        m_gradationPlaceholders.insert(pl_sizeLabel, qMakePair(tr("Size label", "dimension"),
+                                                               not label.isEmpty() ? label : sizeValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+        m_gradationPlaceholders.insert(pl_hipLabel, qMakePair(tr("Hip label", "dimension"),
+                                                              not label.isEmpty() ? label : hipValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+        m_gradationPlaceholders.insert(pl_waistLabel, qMakePair(tr("Waist label", "dimension"),
+                                                                not label.isEmpty() ? label : waistValue));
+    }
+
+    {
+        const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
+        auto i = measurements.constBegin();
+        while (i != measurements.constEnd())
+        {
+            QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+            m_gradationPlaceholders.insert(pl_measurement + i.key(),
+                                           qMakePair(tr("Measurement: %1").arg(description),
+                                                     QString::number(*i.value()->GetValue())));
+            ++i;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetMoveControls()
 {
     uiTabPaths->toolButtonTop->setEnabled(false);
@@ -3953,5 +4027,16 @@ void DialogSeamAllowance::ManagePatternMaterials()
         {
             settings->SetKnownMaterials(editor.GetKnownMaterials());
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InsertGradationPlaceholder()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action)
+    {
+        uiTabPaths->lineEditGradationLabel->insert(action->data().toString());
+        uiTabPaths->lineEditGradationLabel->setFocus();
     }
 }

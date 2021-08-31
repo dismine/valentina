@@ -189,7 +189,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -328,6 +328,20 @@
                      </property>
                      <property name="plainText">
                       <string>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="label_4">
+                     <property name="text">
+                      <string>Gradation id:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QLineEdit" name="lineEditCurrentPieceGradationId">
+                     <property name="readOnly">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
@@ -1874,8 +1888,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupTileOrientation"/>
+  <buttongroup name="buttonGroupSheetOrientation"/>
  </buttongroups>
 </ui>

@@ -134,6 +134,9 @@ public:
 
     QVector<QPointF> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
 
+    void SetGradationLabel(const QString &label);
+    auto GetGradationLabel() const -> QString;
+
     static void DumpPiece(const VPiece &piece, const VContainer *data);
 private:
     QSharedDataPointer<VPieceData> d;

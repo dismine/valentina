@@ -749,6 +749,18 @@ QVector<QPointF> VPiece::SeamAllowancePointsWithRotation(const VContainer *data,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetGradationLabel(const QString &label)
+{
+    d->m_gradationLabel = label;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPiece::GetGradationLabel() const
+{
+    return d->m_gradationLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
 {
     SCASSERT(data != nullptr)

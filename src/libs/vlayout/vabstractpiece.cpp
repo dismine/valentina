@@ -1631,7 +1631,7 @@ void VAbstractPiece::SetUUID(const QString &uuid)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPiece::GetUniqueID() const
+auto VAbstractPiece::GetUniqueID() const -> QString
 {
     return d->m_uuid.toString();
 }

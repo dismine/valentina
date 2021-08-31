@@ -429,6 +429,87 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
     return layoutPassmarks;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PrepareGradationPlaceholders(const VContainer *data) -> QMap<QString, QString>
+{
+    SCASSERT(data != nullptr)
+
+    QMap<QString, QString> placeholders;
+
+    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    placeholders.insert(pl_height, heightValue);
+
+    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    placeholders.insert(pl_size, sizeValue);
+
+    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    placeholders.insert(pl_hip, hipValue);
+
+    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    placeholders.insert(pl_waist, waistValue);
+
+    {
+        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+        placeholders.insert(pl_heightLabel, not label.isEmpty() ? label : heightValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+        placeholders.insert(pl_sizeLabel, not label.isEmpty() ? label : sizeValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+        placeholders.insert(pl_hipLabel, not label.isEmpty() ? label : hipValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+        placeholders.insert(pl_waistLabel, not label.isEmpty() ? label : waistValue);
+    }
+
+    {
+        const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
+        auto i = measurements.constBegin();
+        while (i != measurements.constEnd())
+        {
+            placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+            ++i;
+        }
+    }
+
+    return placeholders;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line) -> QString
+{
+    QChar per('%');
+
+    auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
+    {
+        if (line.contains(per+placeholder+per) && placeholders.value(placeholder) == QChar('0'))
+        {
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    };
+
+    TestDimension(pl_height, QObject::tr("No data for the height dimension."));
+    TestDimension(pl_size, QObject::tr("No data for the size dimension."));
+    TestDimension(pl_hip, QObject::tr("No data for the hip dimension."));
+    TestDimension(pl_waist, QObject::tr("No data for the waist dimension."));
+
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        line.replace(per+i.key()+per, i.value());
+        ++i;
+    }
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PrepareGradationId(const QString &label, const VContainer *pattern) -> QString
+{
+    const QMap<QString, QString> placeholders = PrepareGradationPlaceholders(pattern);
+    return ReplacePlaceholders(placeholders, label);
+}
 }
 
 // Friend functions
@@ -506,6 +587,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
 
     det.SetName(piece.GetName());
     det.SetUUID(piece.GetUUID());
+    det.SetGradationId(PrepareGradationId(piece.GetGradationLabel(), pattern));
 
     det.SetSAWidth(VAbstractValApplication::VApp()->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
@@ -556,6 +638,19 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
     }
 
     return det;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetUniqueID() const -> QString
+{
+    QString id = VAbstractPiece::GetUniqueID();
+
+    if (not d->m_gradationId.isEmpty())
+    {
+        id = id + '_' + d->m_gradationId;
+    }
+
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1571,6 +1666,18 @@ bool VLayoutPiece::IsMirror() const
 void VLayoutPiece::SetMirror(bool value)
 {
     d->mirror = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetGradationId(const QString &id)
+{
+    d->m_gradationId = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetGradationId() const -> QString
+{
+    return d->m_gradationId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

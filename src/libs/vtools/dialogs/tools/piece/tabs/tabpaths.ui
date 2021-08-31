@@ -28,15 +28,15 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>402</width>
-        <height>604</height>
+        <width>394</width>
+        <height>612</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tabMainPath">
           <attribute name="title">
@@ -197,10 +197,13 @@
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="2" column="0">
-              <widget class="QLabel" name="labelEditUUID">
+             <item row="0" column="1">
+              <widget class="VLineEdit" name="lineEditName">
                <property name="text">
-                <string notr="true">UUID:</string>
+                <string>Detail</string>
+               </property>
+               <property name="placeholderText">
+                <string>Name can't be empty</string>
                </property>
               </widget>
              </item>
@@ -225,16 +228,6 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="VLineEdit" name="lineEditName">
-               <property name="text">
-                <string>Detail</string>
-               </property>
-               <property name="placeholderText">
-                <string>Name can't be empty</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="lineEditUUID">
                <property name="toolTip">
@@ -247,6 +240,41 @@
                 <bool>true</bool>
                </property>
               </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelEditUUID">
+               <property name="text">
+                <string notr="true">UUID:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Gradation label:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEditGradationLabel">
+                 <property name="placeholderText">
+                  <string>%size%_%height%</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonGradationPlaceholder">
+                 <property name="text">
+                  <string>Insert…</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>

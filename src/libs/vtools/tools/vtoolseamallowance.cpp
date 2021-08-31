@@ -332,6 +332,8 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, piece.GetName());
     doc->SetAttribute(domElement, AttrUUID, piece.GetUUID().toString());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrGradationLabel, piece.GetGradationLabel(),
+                                         [](const QString &label){return label.isEmpty();});
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
     doc->SetAttribute(domElement, AttrMx, VAbstractValApplication::VApp()->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, VAbstractValApplication::VApp()->fromPixel(piece.GetMy()));

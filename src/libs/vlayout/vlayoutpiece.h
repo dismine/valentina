@@ -73,6 +73,8 @@ public:
 
     static VLayoutPiece Create(const VPiece &piece, vidtype id, const VContainer *pattern);
 
+    virtual auto GetUniqueID() const -> QString override;
+
     QVector<QPointF> GetMappedContourPoints() const;
     QVector<QPointF> GetContourPoints() const;
     void SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath = false);
@@ -131,6 +133,9 @@ public:
 
     bool IsMirror() const;
     void SetMirror(bool value);
+
+    void SetGradationId(const QString &id);
+    auto GetGradationId() const -> QString;
 
     void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);

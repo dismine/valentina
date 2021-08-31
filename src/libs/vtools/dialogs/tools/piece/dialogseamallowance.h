@@ -164,6 +164,8 @@ private slots:
     void EditPatternLabel();
     void ManagePatternMaterials();
 
+    void InsertGradationPlaceholder();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
@@ -242,6 +244,10 @@ private:
 
     QString m_defLabelValue{};
 
+    QMenu *m_placeholdersMenu;
+
+    QMap<QString, QPair<QString, QString>> m_gradationPlaceholders{};
+
     VPiece CreatePiece() const;
 
     void    NewMainPathItem(const VPieceNode &node);
@@ -311,6 +317,9 @@ private:
     void SavePatternLabelData();
     void SavePatternTemplateData();
     void SavePatternMaterialData();
+
+    void InitGradationPlaceholdersMenu();
+    void InitGradationPlaceholders();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -876,6 +876,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.id = GetParametrId(domElement);
         initData.detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
         initData.detail.SetUUID(GetParametrEmptyString(domElement, AttrUUID));
+        initData.detail.SetGradationLabel(GetParametrEmptyString(domElement, AttrGradationLabel));
         initData.detail.SetMx(VAbstractValApplication::VApp()
                               ->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
         initData.detail.SetMy(VAbstractValApplication::VApp()

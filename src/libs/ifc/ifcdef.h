@@ -66,6 +66,7 @@ extern const QString AttrMx;
 extern const QString AttrMy;
 extern const QString AttrName;
 extern const QString AttrUUID;
+extern const QString AttrGradationLabel;
 extern const QString AttrMx1;
 extern const QString AttrMy1;
 extern const QString AttrName1;

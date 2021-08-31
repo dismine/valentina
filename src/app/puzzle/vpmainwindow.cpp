@@ -504,38 +504,6 @@ void VPMainWindow::InitProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentPiece()
 {
-    connect(ui->lineEditCurrentPieceName, &QLineEdit::textEdited, this, [this](const QString &text)
-    {
-        QList<VPPiecePtr> selectedPieces = SelectedPieces();
-        if (selectedPieces.size() == 1)
-        {
-            VPPiecePtr selectedPiece = selectedPieces.first();
-            if (not selectedPiece.isNull())
-            {
-                selectedPiece->SetName(text);
-                LayoutWasSaved(false);
-            }
-        }
-    });
-
-    connect(ui->plainTextEditCurrentPieceUUID, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        QList<VPPiecePtr> selectedPieces = SelectedPieces();
-        if (selectedPieces.size() == 1)
-        {
-            VPPiecePtr selectedPiece = selectedPieces.first();
-            if (not selectedPiece.isNull())
-            {
-                const QUuid temp = QUuid(ui->plainTextEditCurrentPieceUUID->toPlainText());
-                if (not temp.isNull())
-                {
-                    selectedPiece->SetUUID(temp);
-                }
-                LayoutWasSaved(false);
-            }
-        }
-    });
-
     connect(ui->checkBoxCurrentPieceShowSeamline, &QCheckBox::toggled, this, [this](bool checked)
     {
         QList<VPPiecePtr> selectedPieces = SelectedPieces();
@@ -956,6 +924,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         // set the value to the current piece
         SetLineEditValue(ui->lineEditCurrentPieceName, selectedPiece->GetName());
         SetPlainTextEditValue(ui->plainTextEditCurrentPieceUUID, selectedPiece->GetUUID().toString());
+        SetLineEditValue(ui->lineEditCurrentPieceGradationId, selectedPiece->GetGradationId());
 
 //        SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, selectedPiece->GetShowSeamLine());
         SetCheckBoxValue(ui->checkBoxCurrentPieceMirrorPiece, selectedPiece->IsMirror());
