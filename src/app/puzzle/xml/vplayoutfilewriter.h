@@ -56,7 +56,7 @@ public:
 
 private:
     void WriteLayout(const VPLayoutPtr &layout);
-    void WriteProperties(const VPLayoutPtr &layout);
+    void WriteLayoutProperties(const VPLayoutPtr &layout);
     void WriteSheets(const VPLayoutPtr &layout);
     void WriteSheet(const VPSheetPtr &sheet);
     void WriteTiles(const VPLayoutPtr &layout);

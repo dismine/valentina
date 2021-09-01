@@ -48,8 +48,12 @@ using VPSheetWeakPtr = QWeakPointer<VPSheet>;
 enum class GrainlineType : qint8
 {
     Vertical,
-    Horizontal
+    Horizontal,
+    NotFixed
 };
+
+auto GrainlineTypeToStr(GrainlineType type) -> QString;
+auto StrToGrainlineType(const QString &string) -> GrainlineType;
 
 struct VPTransformationOrigon
 {
@@ -59,17 +63,5 @@ struct VPTransformationOrigon
     bool operator==(const VPTransformationOrigon &origin) const;
     bool operator!=(const VPTransformationOrigon &origin) const;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VPTransformationOrigon::operator==(const VPTransformationOrigon &origin) const
-{
-    return this->origin == origin.origin && custom == origin.custom;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VPTransformationOrigon::operator!=(const VPTransformationOrigon &origin) const
-{
-    return !VPTransformationOrigon::operator==(origin);
-}
 
 #endif // LAYOUTDEF_H

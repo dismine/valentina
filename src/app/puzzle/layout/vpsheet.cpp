@@ -29,12 +29,18 @@
 
 #include "vplayout.h"
 #include "vppiece.h"
+#include "../vpapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSheet::VPSheet(const VPLayoutPtr &layout) :
     m_layout(layout)
 {
     SCASSERT(layout != nullptr)
+
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    SetIgnoreMargins(settings->GetLayoutSheetIgnoreMargins());
+    SetSheetMargins(settings->GetLayoutSheetMargins());
+    SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(), settings->GetLayoutSheetPaperHeight()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,19 +117,31 @@ void VPSheet::SetVisible(bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::GrainlineType() const -> enum GrainlineType
+GrainlineType VPSheet::GrainlineOrientation() const
 {
-    VPLayoutPtr layout = GetLayout();
-    if (not layout.isNull())
+    if (m_grainlineType == GrainlineType::NotFixed)
     {
-        QSizeF size =  layout->LayoutSettings().GetSheetSize();
-        if (size.height() < size.width())
+        if (m_size.height() < m_size.width())
         {
             return GrainlineType::Horizontal;
         }
+
+        return GrainlineType::Vertical;
     }
 
-    return GrainlineType::Vertical;
+    return m_grainlineType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetGrainlineType() const -> GrainlineType
+{
+    return m_grainlineType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetGrainlineType(GrainlineType type)
+{
+    m_grainlineType = type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,48 +262,77 @@ void VPSheet::ValidatePiecesOutOfBound() const
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetRect() const -> QRectF
 {
-    return GetSheetRect(GetLayout());
+    return QRectF(QPoint(0, 0), m_size);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetMarginsRect() const -> QRectF
 {
-    return GetMarginsRect(GetLayout());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::GetSheetRect(const VPLayoutPtr &layout) -> QRectF
-{
-    if (layout.isNull())
+    if (not m_ignoreMargins)
     {
-        return {};
-    }
-
-    QPoint topLeft = QPoint(0,0);
-    QSizeF size = layout->LayoutSettings().GetSheetSize();
-    QRectF rect = QRectF(topLeft, size);
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::GetMarginsRect(const VPLayoutPtr &layout) -> QRectF
-{
-    if (layout.isNull())
-    {
-        return {};
-    }
-
-    QSizeF size = layout->LayoutSettings().GetSheetSize();
-
-    if (not layout->LayoutSettings().IgnoreMargins())
-    {
-        QMarginsF margins = layout->LayoutSettings().GetSheetMargins();
-        QRectF rect = QRectF(QPointF(margins.left(), margins.top()),
-                             QPointF(size.width()-margins.right(), size.height()-margins.bottom()));
+        QRectF rect = QRectF(QPointF(m_margins.left(), m_margins.top()),
+                             QPointF(m_size.width() - m_margins.right(), m_size.height() - m_margins.bottom()));
         return rect;
     }
 
-    return QRectF(0, 0, size.width(), size.height());
+    return QRectF(0, 0, m_size.width(), m_size.height());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::RemoveUnusedLength()
+{
+    VPLayoutPtr layout = GetLayout();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> pieces = GetPieces();
+    if (pieces.isEmpty())
+    {
+        return;
+    }
+
+    QRectF piecesBoundingRect;
+
+    for (const auto& piece : pieces)
+    {
+        if (not piece.isNull())
+        {
+            piecesBoundingRect = piecesBoundingRect.united(piece->MappedDetailBoundingRect());
+        }
+    }
+
+    const qreal extra = 2;
+    QRectF sheetRect = GetSheetRect();
+    GrainlineType type = GrainlineOrientation();
+
+    if (type == GrainlineType::Vertical)
+    {
+        qreal margin = 0;
+        if (not m_ignoreMargins)
+        {
+            margin = m_margins.bottom();
+        }
+
+        if (sheetRect.bottomRight().y() - margin > piecesBoundingRect.bottomRight().y())
+        {
+            m_size = QSizeF(m_size.width(), piecesBoundingRect.bottomRight().y() + margin + extra);
+        }
+    }
+    else if (type == GrainlineType::Horizontal)
+    {
+        qreal margin = 0;
+        if (not m_ignoreMargins)
+        {
+            margin = m_margins.right();
+        }
+
+        if (sheetRect.topRight().x() - margin > piecesBoundingRect.topRight().x())
+        {
+            m_size = QSizeF(piecesBoundingRect.topRight().x() + margin + extra, m_size.height());
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -312,4 +359,119 @@ void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
     {
         ValidateSuperpositionOfPieces();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit VPSheet::SheetUnits() const
+{
+    VPLayoutPtr layout = GetLayout();
+    if (not layout.isNull())
+    {
+        return layout->LayoutSettings().GetUnit();
+    }
+
+    return Unit::Cm;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetSize(qreal width, qreal height)
+{
+    m_size.setWidth(width);
+    m_size.setHeight(height);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetSizeConverted(qreal width, qreal height)
+{
+    Unit unit = SheetUnits();
+    m_size.setWidth(UnitConvertor(width, unit, Unit::Px));
+    m_size.setHeight(UnitConvertor(height, unit, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetSize(const QSizeF &size)
+{
+    m_size = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetSizeConverted(const QSizeF &size)
+{
+    Unit unit = SheetUnits();
+    m_size = QSizeF(UnitConvertor(size.width(), unit, Unit::Px),
+                    UnitConvertor(size.height(), unit, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSheetSize() const -> QSizeF
+{
+    return m_size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSheetSizeConverted() const -> QSizeF
+{
+    Unit unit = SheetUnits();
+    QSizeF convertedSize = QSizeF(
+                UnitConvertor(m_size.width(), Unit::Px, unit),
+                UnitConvertor(m_size.height(), Unit::Px, unit)
+                );
+
+    return convertedSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetMargins(qreal left, qreal top, qreal right, qreal bottom)
+{
+    m_margins.setLeft(left);
+    m_margins.setTop(top);
+    m_margins.setRight(right);
+    m_margins.setBottom(bottom);
+}
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
+{
+    Unit unit = SheetUnits();
+    m_margins.setLeft(UnitConvertor(left, unit, Unit::Px));
+    m_margins.setTop(UnitConvertor(top, unit, Unit::Px));
+    m_margins.setRight(UnitConvertor(right, unit, Unit::Px));
+    m_margins.setBottom(UnitConvertor(bottom, unit, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetMargins(const QMarginsF &margins)
+{
+    m_margins = margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetMarginsConverted(const QMarginsF &margins)
+{
+    Unit unit = SheetUnits();
+    m_margins = UnitConvertor(margins, unit, Unit::Px);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSheetMargins() const -> QMarginsF
+{
+    return m_margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::GetSheetMarginsConverted() const -> QMarginsF
+{
+    Unit unit = SheetUnits();
+    return UnitConvertor(m_margins, Unit::Px, unit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSheet::IgnoreMargins() const -> bool
+{
+    return m_ignoreMargins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetIgnoreMargins(bool newIgnoreMargins)
+{
+    m_ignoreMargins = newIgnoreMargins;
 }

@@ -16,5 +16,9 @@
         <file>puzzleicon/svg/icon_rotate_90_clockwise.svg</file>
         <file>puzzleicon/svg/icon_rotate_grainline_horizontal.svg</file>
         <file>puzzleicon/svg/icon_rotate_grainline_vertical.svg</file>
+        <file>puzzleicon/32X32/horizontal_grainline.png</file>
+        <file>puzzleicon/32X32/horizontal_grainline@2x.png</file>
+        <file>puzzleicon/32X32/vertical_grainline.png</file>
+        <file>puzzleicon/32X32/vertical_grainline@2x.png</file>
     </qresource>
 </RCC>

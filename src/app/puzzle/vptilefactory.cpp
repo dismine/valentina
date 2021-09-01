@@ -49,7 +49,12 @@ void VPTileFactory::refreshTileInfos()
             m_drawingAreaWidth += m_infoStripeWidth;
         }
 
-        QSizeF sheetSize = layout->LayoutSettings().GetSheetSize();
+        QSizeF sheetSize;
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            sheetSize = sheet->GetSheetSize();
+        }
         m_nbCol = qCeil(sheetSize.width()/m_drawingAreaWidth);
         m_nbRow = qCeil(sheetSize.height()/m_drawingAreaHeight);
     }

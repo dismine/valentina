@@ -154,22 +154,20 @@ void VPLayoutFileWriter::WriteLayout(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagLayout);
     SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
-    WriteProperties(layout);
+    WriteLayoutProperties(layout);
     WritePieceList(layout->GetUnplacedPieces(), ML::TagUnplacedPieces);
     WriteSheets(layout);
     writeEndElement(); //layout
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteProperties(const VPLayoutPtr &layout)
+void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagProperties);
 
     writeTextElement(ML::TagUnit, UnitsToStr(layout->LayoutSettings().GetUnit()));
     writeTextElement(ML::TagTitle, layout->LayoutSettings().GetTitle());
     writeTextElement(ML::TagDescription, layout->LayoutSettings().GetDescription());
-    WriteSize(layout->LayoutSettings().GetSheetSize());
-    WriteMargins(layout->LayoutSettings().GetSheetMargins());
 
     writeStartElement(ML::TagControl);
     SetAttribute(ML::AttrWarningSuperposition, layout->LayoutSettings().GetWarningSuperpositionOfPieces());
@@ -205,8 +203,13 @@ void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
 void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 {
     writeStartElement(ML::TagSheet);
+    SetAttributeOrRemoveIf<QString>(ML::AttrGrainlineType, GrainlineTypeToStr(sheet->GetGrainlineType()),
+                                    [](const QString &type)
+    {return type == GrainlineTypeToStr(GrainlineType::NotFixed);});
 
     writeTextElement(ML::TagName, sheet->GetName());
+    WriteSize(sheet->GetSheetSize());
+    WriteMargins(sheet->GetSheetMargins());
     WritePieceList(sheet->GetPieces(), ML::TagPieces);
 
     writeEndElement(); // sheet

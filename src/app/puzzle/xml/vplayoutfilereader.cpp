@@ -241,10 +241,8 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
         ML::TagUnit,        // 0
         ML::TagTitle,       // 1
         ML::TagDescription, // 2
-        ML::TagSize,        // 3
-        ML::TagMargin,      // 4
-        ML::TagControl,     // 5
-        ML::TagTiles        // 6
+        ML::TagControl,     // 3
+        ML::TagTiles        // 4
     };
 
     while (readNextStartElement())
@@ -265,17 +263,11 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
                 qDebug("read description");
                 layout->LayoutSettings().SetDescription(readElementText());
                 break;
-            case 3: // size
-                layout->LayoutSettings().SetSheetSize(ReadSize());
-                break;
-            case 4: // margin
-                layout->LayoutSettings().SetSheetMargins(ReadMargins());
-                break;
-            case 5: // control
+            case 3: // control
                 qDebug("read control");
                 ReadControl(layout);
                 break;
-            case 6: // tiles
+            case 4: // tiles
                 qDebug("read tiles");
                 ReadTiles(layout);
                 break;
@@ -370,13 +362,18 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagSheet);
 
+    VPSheetPtr sheet(new VPSheet(layout));
+
+    QXmlStreamAttributes attribs = attributes();
+    sheet->SetGrainlineType(StrToGrainlineType(ReadAttributeEmptyString(attribs, ML::AttrGrainlineType)));
+
     const QStringList tags
     {
         ML::TagName,   // 0
-        ML::TagPieces  // 1
+        ML::TagSize,   // 1
+        ML::TagMargin, // 2
+        ML::TagPieces  // 3
     };
-
-    VPSheetPtr sheet(new VPSheet(layout));
 
     while (readNextStartElement())
     {
@@ -385,7 +382,13 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
             case 0: // name
                 sheet->SetName(readElementText());
                 break;
-            case 1: // pieces
+            case 1: // size
+                sheet->SetSheetSize(ReadSize());
+                break;
+            case 2: // margin
+                sheet->SetSheetMargins(ReadMargins());
+                break;
+            case 3: // pieces
                 ReadPieces(layout, sheet);
                 break;
             default:

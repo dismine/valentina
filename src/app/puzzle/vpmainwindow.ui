@@ -189,7 +189,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>
@@ -249,7 +249,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>358</width>
+              <width>392</width>
               <height>700</height>
              </rect>
             </property>
@@ -686,8 +686,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>344</width>
-              <height>748</height>
+              <width>378</width>
+              <height>829</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -787,6 +787,51 @@
                 </item>
                 <item>
                  <layout class="QGridLayout" name="gridLayout_3">
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetPaperHeight">
+                    <property name="minimumSize">
+                     <size>
+                      <width>94</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
+                    <property name="maximum">
+                     <double>99999.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetPaperWidth">
+                    <property name="minimumSize">
+                     <size>
+                      <width>94</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
+                    <property name="maximum">
+                     <double>99999.990000000005239</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelLength">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Length:</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="2" column="0">
                    <layout class="QHBoxLayout" name="horizontalLayout_3">
                     <item>
@@ -850,50 +895,82 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="labelLength">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_5">
+                  <item>
+                   <widget class="QLabel" name="label_5">
                     <property name="text">
-                     <string>Length:</string>
+                     <string>Grainline orientation:</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetPaperHeight">
-                    <property name="minimumSize">
-                     <size>
-                      <width>94</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="decimals">
-                     <number>2</number>
-                    </property>
-                    <property name="maximum">
-                     <double>99999.000000000000000</double>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QDoubleSpinBox" name="doubleSpinBoxSheetPaperWidth">
-                    <property name="minimumSize">
-                     <size>
-                      <width>94</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="decimals">
-                     <number>2</number>
-                    </property>
-                    <property name="maximum">
-                     <double>99999.990000000005239</double>
-                    </property>
-                   </widget>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout">
+                    <item>
+                     <widget class="QToolButton" name="toolButtonGrainlineHorizontalOrientation">
+                      <property name="toolTip">
+                       <string>Force the grainline orientation to always be horizontal</string>
+                      </property>
+                      <property name="text">
+                       <string notr="true">...</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="share/resources/puzzleicon.qrc">
+                        <normaloff>:/puzzleicon/32X32/horizontal_grainline.png</normaloff>:/puzzleicon/32X32/horizontal_grainline.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>24</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                      <property name="checkable">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="toolButtonGrainlineVerticalOrientation">
+                      <property name="toolTip">
+                       <string>Force the grainline orientation to always be vertical</string>
+                      </property>
+                      <property name="text">
+                       <string notr="true">...</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="share/resources/puzzleicon.qrc">
+                        <normaloff>:/puzzleicon/32X32/vertical_grainline.png</normaloff>:/puzzleicon/32X32/vertical_grainline.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>24</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                      <property name="checkable">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_2">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
                 </item>
@@ -1133,7 +1210,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>358</width>
+              <width>392</width>
               <height>700</height>
              </rect>
             </property>
@@ -1505,7 +1582,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>358</width>
+              <width>392</width>
               <height>700</height>
              </rect>
             </property>

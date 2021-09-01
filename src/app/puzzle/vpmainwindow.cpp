@@ -139,6 +139,12 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     {
         SetPropertyTabCurrentPieceData();
     });
+    connect(m_layout.get(), &VPLayout::ActiveSheetChanged, this, [this]()
+    {
+        m_tileFactory->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
+        SetPropertyTabSheetData();
+    });
 
     connect(m_undoStack, &QUndoStack::cleanChanged, this, [this](bool clean)
     {
@@ -393,6 +399,7 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
             }
 
             m_carrousel->Refresh();
+            m_layout->CheckPiecesPositionValidity();
             LayoutWasSaved(false);
         }
         else
@@ -665,6 +672,67 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     connect(ui->toolButtonSheetLandscapeOrientation, &QToolButton::toggled, this,
             &VPMainWindow::on_SheetOrientationChanged);
 
+    connect(ui->toolButtonGrainlineHorizontalOrientation, &QToolButton::clicked, this, [this](bool checked)
+    {
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        if (sheet.isNull())
+        {
+            return;
+        }
+
+        if (checked)
+        {
+            sheet->SetGrainlineType(GrainlineType::Horizontal);
+            ui->toolButtonGrainlineVerticalOrientation->setChecked(false);
+        }
+        else
+        {
+            sheet->SetGrainlineType(GrainlineType::NotFixed);
+        }
+
+        RotatePiecesToGrainline();
+        LayoutWasSaved(false);
+    });
+
+    connect(ui->toolButtonGrainlineVerticalOrientation, &QToolButton::clicked, this, [this](bool checked)
+    {
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        if (sheet.isNull())
+        {
+            return;
+        }
+
+        if (checked)
+        {
+            sheet->SetGrainlineType(GrainlineType::Vertical);
+            ui->toolButtonGrainlineHorizontalOrientation->setChecked(false);
+        }
+        else
+        {
+            sheet->SetGrainlineType(GrainlineType::NotFixed);
+        }
+
+        RotatePiecesToGrainline();
+        LayoutWasSaved(false);
+    });
+
+    connect(ui->pushButtonSheetRemoveUnusedLength, &QPushButton::clicked, this, [this]()
+    {
+        if (not m_layout.isNull())
+        {
+            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                sheet->RemoveUnusedLength();
+                LayoutWasSaved(false);
+                m_tileFactory->refreshTileInfos();
+                m_graphicsView->RefreshLayout();
+                m_graphicsView->RefreshPieces();
+                SetPropertyTabSheetData();
+            }
+        }
+    });
+
     // -------------------- margins  ------------------------
     ui->doubleSpinBoxSheetMarginLeft->setSuffix(suffix);
     ui->doubleSpinBoxSheetMarginRight->setSuffix(suffix);
@@ -689,14 +757,14 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             ui->doubleSpinBoxSheetMarginTop->setDisabled(state != 0);
             ui->doubleSpinBoxSheetMarginBottom->setDisabled(state != 0);
 
-            m_layout->LayoutSettings().SetIgnoreMargins(state != 0);
-            LayoutWasSaved(false);
-            m_tileFactory->refreshTileInfos();
-            m_graphicsView->RefreshLayout();
-
             VPSheetPtr sheet = m_layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
+                sheet->SetIgnoreMargins(state != 0);
+                LayoutWasSaved(false);
+                m_tileFactory->refreshTileInfos();
+                m_graphicsView->RefreshLayout();
+
                 sheet->ValidatePiecesOutOfBound();
             }
         }
@@ -972,106 +1040,114 @@ void VPMainWindow::SetPropertyTabSheetData()
 {
     if (not m_layout.isNull())
     {
-        ui->groupBoxSheetInfos->setDisabled(false);
         VPSheetPtr sheet = m_layout->GetFocusedSheet();
-        SetLineEditValue(ui->lineEditSheetName, not sheet.isNull() ? sheet->GetName() : QString());
-
-        ui->groupBoxPaperFormat->setDisabled(false);
-        const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
-        if (indexUnit != -1)
+        if (not sheet.isNull())
         {
-            ui->comboBoxLayoutUnit->blockSignals(true);
-            ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
-            ui->comboBoxLayoutUnit->blockSignals(false);
+            ui->groupBoxSheetInfos->setDisabled(false);
+            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            SetLineEditValue(ui->lineEditSheetName, not sheet.isNull() ? sheet->GetName() : QString());
+
+            ui->groupBoxPaperFormat->setDisabled(false);
+            const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
+            if (indexUnit != -1)
+            {
+                ui->comboBoxLayoutUnit->blockSignals(true);
+                ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+                ui->comboBoxLayoutUnit->blockSignals(false);
+            }
+            else
+            {
+                ui->comboBoxLayoutUnit->setCurrentIndex(0);
+            }
+
+            const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
+
+            ui->doubleSpinBoxSheetPaperWidth->setSuffix(suffix);
+            ui->doubleSpinBoxSheetPaperHeight->setSuffix(suffix);
+
+            ui->doubleSpinBoxSheetMarginLeft->setSuffix(suffix);
+            ui->doubleSpinBoxSheetMarginRight->setSuffix(suffix);
+            ui->doubleSpinBoxSheetMarginTop->setSuffix(suffix);
+            ui->doubleSpinBoxSheetMarginBottom->setSuffix(suffix);
+
+            // set Width / Length
+            QSizeF size = sheet->GetSheetSizeConverted();
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, size.width());
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, size.height());
+
+            SheetPaperSizeChanged();
+            FindSheetTemplate();
+
+            // set margins
+            ui->groupBoxSheetMargin->setDisabled(false);
+            QMarginsF margins = sheet->GetSheetMarginsConverted();
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
+
+            CorrectSheetMaxMargins();
+
+            const bool ignoreMargins = sheet->IgnoreMargins();
+            SetCheckBoxValue(ui->checkBoxLayoutIgnoreFileds, ignoreMargins);
+
+            ui->doubleSpinBoxSheetMarginLeft->setDisabled(ignoreMargins);
+            ui->doubleSpinBoxSheetMarginRight->setDisabled(ignoreMargins);
+            ui->doubleSpinBoxSheetMarginTop->setDisabled(ignoreMargins);
+            ui->doubleSpinBoxSheetMarginBottom->setDisabled(ignoreMargins);
+
+            GrainlineType type = sheet->GetGrainlineType();
+            ui->toolButtonGrainlineHorizontalOrientation->setChecked(type == GrainlineType::Horizontal);
+            ui->toolButtonGrainlineVerticalOrientation->setChecked(type == GrainlineType::Vertical);
+
+            // set placement grid
+            ui->groupBoxSheetGrid->setDisabled(false);
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth,
+                                  m_layout->LayoutSettings().GetGridColWidthConverted());
+            SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight,
+                                  m_layout->LayoutSettings().GetGridRowHeightConverted());
+
+            SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->LayoutSettings().GetShowGrid());
+
+            ui->groupBoxSheetExport->setDisabled(false);
+
+            return;
         }
-        else
-        {
-            ui->comboBoxLayoutUnit->setCurrentIndex(0);
-        }
-
-        const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
-
-        ui->doubleSpinBoxSheetPaperWidth->setSuffix(suffix);
-        ui->doubleSpinBoxSheetPaperHeight->setSuffix(suffix);
-
-        ui->doubleSpinBoxSheetMarginLeft->setSuffix(suffix);
-        ui->doubleSpinBoxSheetMarginRight->setSuffix(suffix);
-        ui->doubleSpinBoxSheetMarginTop->setSuffix(suffix);
-        ui->doubleSpinBoxSheetMarginBottom->setSuffix(suffix);
-
-        // set Width / Length
-        QSizeF size = m_layout->LayoutSettings().GetSheetSizeConverted();
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, size.width());
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, size.height());
-
-        SheetPaperSizeChanged();
-        FindSheetTemplate();
-
-        // set margins
-        ui->groupBoxSheetMargin->setDisabled(false);
-        QMarginsF margins = m_layout->LayoutSettings().GetSheetMarginsConverted();
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, margins.bottom());
-
-        CorrectSheetMaxMargins();
-
-        const bool ignoreMargins = m_layout->LayoutSettings().IgnoreMargins();
-        SetCheckBoxValue(ui->checkBoxLayoutIgnoreFileds, ignoreMargins);
-
-        ui->doubleSpinBoxSheetMarginLeft->setDisabled(ignoreMargins);
-        ui->doubleSpinBoxSheetMarginRight->setDisabled(ignoreMargins);
-        ui->doubleSpinBoxSheetMarginTop->setDisabled(ignoreMargins);
-        ui->doubleSpinBoxSheetMarginBottom->setDisabled(ignoreMargins);
-
-        // set placement grid
-        ui->groupBoxSheetGrid->setDisabled(false);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth,
-                              m_layout->LayoutSettings().GetGridColWidthConverted());
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight,
-                              m_layout->LayoutSettings().GetGridRowHeightConverted());
-
-        SetCheckBoxValue(ui->checkBoxSheetShowGrid, m_layout->LayoutSettings().GetShowGrid());
-
-        ui->groupBoxSheetExport->setDisabled(false);
     }
-    else
-    {
-        ui->groupBoxSheetInfos->setDisabled(true);
-        SetLineEditValue(ui->lineEditSheetName, QString());
 
-        ui->groupBoxPaperFormat->setDisabled(true);
+    ui->groupBoxSheetInfos->setDisabled(true);
+    SetLineEditValue(ui->lineEditSheetName, QString());
 
-        ui->comboBoxLayoutUnit->blockSignals(true);
-        ui->comboBoxLayoutUnit->setCurrentIndex(-1);
-        ui->comboBoxLayoutUnit->blockSignals(false);
+    ui->groupBoxPaperFormat->setDisabled(true);
 
-        ui->comboBoxSheetTemplates->blockSignals(true);
-        ui->comboBoxSheetTemplates->setCurrentIndex(-1);
-        ui->comboBoxSheetTemplates->blockSignals(false);
+    ui->comboBoxLayoutUnit->blockSignals(true);
+    ui->comboBoxLayoutUnit->setCurrentIndex(-1);
+    ui->comboBoxLayoutUnit->blockSignals(false);
 
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, 0);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, 0);
+    ui->comboBoxSheetTemplates->blockSignals(true);
+    ui->comboBoxSheetTemplates->setCurrentIndex(-1);
+    ui->comboBoxSheetTemplates->blockSignals(false);
 
-        ui->groupBoxSheetMargin->setDisabled(true);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, 0);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, 0);
 
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, 0);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, 0);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, 0);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, 0);
+    ui->groupBoxSheetMargin->setDisabled(true);
 
-        SetCheckBoxValue(ui->checkBoxLayoutIgnoreFileds, false);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, 0);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, 0);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, 0);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginBottom, 0);
 
-        ui->groupBoxSheetGrid->setDisabled(true);
+    SetCheckBoxValue(ui->checkBoxLayoutIgnoreFileds, false);
 
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, 0);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, 0);
+    ui->groupBoxSheetGrid->setDisabled(true);
 
-        SetCheckBoxValue(ui->checkBoxSheetShowGrid, false);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridColWidth, 0);
+    SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetGridRowHeight, 0);
 
-        ui->groupBoxSheetExport->setDisabled(true);
-    }
+    SetCheckBoxValue(ui->checkBoxSheetShowGrid, false);
+
+    ui->groupBoxSheetExport->setDisabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1874,6 +1950,11 @@ void VPMainWindow::CorrectMaxMargins()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::RotatePiecesToGrainline()
 {
+    if (not m_layout->LayoutSettings().GetFollowGrainline())
+    {
+        return;
+    }
+
     QList<VPSheetPtr> sheets = m_layout->GetSheets();
     for(const auto& sheet : sheets)
     {
@@ -2163,9 +2244,13 @@ void VPMainWindow::on_SheetSizeChanged()
 {
     if (not m_layout.isNull())
     {
-        m_layout->LayoutSettings().SetSheetSizeConverted(
-                    ui->doubleSpinBoxSheetPaperWidth->value(),
-                    ui->doubleSpinBoxSheetPaperHeight->value());
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            sheet->SetSheetSizeConverted(ui->doubleSpinBoxSheetPaperWidth->value(),
+                                         ui->doubleSpinBoxSheetPaperHeight->value());
+        }
+
         FindSheetTemplate();
         SheetPaperSizeChanged();
         CorrectMaxMargins();
@@ -2187,7 +2272,11 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, height);
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, width);
 
-        m_layout->LayoutSettings().SetSheetSizeConverted(height, width);
+        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            sheet->SetSheetSizeConverted(height, width);
+        }
 
         SheetPaperSizeChanged();
         CorrectMaxMargins();
@@ -2198,35 +2287,20 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked()
-{
-    // just for test purpuses, to be removed:
-    QMessageBox msgBox;
-    msgBox.setText("TODO VPMainWindow::on_pushButtonSheetRemoveUnusedLength_clicked");
-    int ret = msgBox.exec();
-
-    Q_UNUSED(ret);
-
-    // TODO
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_SheetMarginChanged()
 {
     if (not m_layout.isNull())
     {
-        m_layout->LayoutSettings().SetSheetMarginsConverted(
-                    ui->doubleSpinBoxSheetMarginLeft->value(),
-                    ui->doubleSpinBoxSheetMarginTop->value(),
-                    ui->doubleSpinBoxSheetMarginRight->value(),
-                    ui->doubleSpinBoxSheetMarginBottom->value());
-
-        LayoutWasSaved(false);
-
         VPSheetPtr sheet = m_layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
+            sheet->SetSheetMarginsConverted(ui->doubleSpinBoxSheetMarginLeft->value(),
+                                            ui->doubleSpinBoxSheetMarginTop->value(),
+                                            ui->doubleSpinBoxSheetMarginRight->value(),
+                                            ui->doubleSpinBoxSheetMarginBottom->value());
+
+            LayoutWasSaved(false);
+
             sheet->ValidatePiecesOutOfBound();
         }
 

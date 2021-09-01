@@ -97,6 +97,7 @@ const QString AttrItalic               = QStringLiteral("italic");
 const QString AttrAlignment            = QStringLiteral("alignment");
 const QString AttrGradationLabel       = QStringLiteral("gradationLabel");
 const QString AttrCopyNumber           = QStringLiteral("copyNumber");
+const QString AttrGrainlineType        = QStringLiteral("grainlineType");
 
 const QString atFrontStr               = QStringLiteral("atFront");
 const QString atRearStr                = QStringLiteral("atRear");

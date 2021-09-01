@@ -8,20 +8,6 @@
               <xs:element type="units" name="unit"/>
               <xs:element type="xs:string" name="title"/>    
               <xs:element type="xs:string" name="description"/>
-              <xs:element name="size">
-                <xs:complexType>
-                  <xs:attribute type="xs:float" name="width" use="required"/>
-                  <xs:attribute type="xs:float" name="length" use="required"/>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="margin">
-                <xs:complexType>
-                  <xs:attribute type="xs:float" name="top"/>
-                  <xs:attribute type="xs:float" name="right"/>
-                  <xs:attribute type="xs:float" name="bottom"/>
-                  <xs:attribute type="xs:float" name="left"/>
-                </xs:complexType>
-              </xs:element>
               <xs:element name="control">
                 <xs:complexType>
                   <xs:attribute type="xs:boolean" name="warningSuperposition"/>
@@ -199,6 +185,20 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element type="xs:string" name="name"/>
+                    <xs:element name="size">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="width" use="required"/>
+                        <xs:attribute type="xs:float" name="length" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="margin">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="top"/>
+                        <xs:attribute type="xs:float" name="right"/>
+                        <xs:attribute type="xs:float" name="bottom"/>
+                        <xs:attribute type="xs:float" name="left"/>
+                      </xs:complexType>
+                    </xs:element>
                     <xs:element name="pieces">
                       <xs:complexType>
                         <xs:sequence>
@@ -336,6 +336,7 @@
                       </xs:complexType>
                     </xs:element>  
                   </xs:sequence>
+                  <xs:attribute type="GrainlineType" name="grainlineType"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -459,6 +460,13 @@
   <xs:simpleType name="MarkerShapePath">
     <xs:restriction base="xs:string">
       <xs:pattern value="(([-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?\s){0,}[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?\*){0,}([-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?\s){0,}[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="GrainlineType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="horizontal"/>
+      <xs:enumeration value="vertical"/>
+      <xs:enumeration value="notFixed"/>
     </xs:restriction>
   </xs:simpleType>  
 </xs:schema>

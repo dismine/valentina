@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   vpsheet.h
  **  @author Ronan Le Tiec
@@ -75,7 +75,9 @@ public:
     bool IsVisible() const;
     void SetVisible(bool visible);
 
-    auto GrainlineType() const -> GrainlineType;
+    auto GrainlineOrientation() const -> GrainlineType;
+    auto GetGrainlineType() const -> GrainlineType;
+    void SetGrainlineType(GrainlineType type);
 
     auto TransformationOrigin() const -> const VPTransformationOrigon &;
     void SetTransformationOrigin(const VPTransformationOrigon &newTransformationOrigin);
@@ -92,8 +94,89 @@ public:
     auto GetSheetRect() const -> QRectF;
     auto GetMarginsRect() const -> QRectF;
 
-    static auto GetSheetRect(const VPLayoutPtr &layout) -> QRectF;
-    static auto GetMarginsRect(const VPLayoutPtr &layout) -> QRectF;
+    void RemoveUnusedLength();
+
+    /**
+     * @brief SetSheetSize sets the size of the sheet, the values have to be in Unit::Px
+     * @param width sheet width
+     * @param height sheet height
+     */
+    void SetSheetSize(qreal width, qreal height);
+
+    /**
+     * @brief SetSheetSize sets the size of the sheet, the values have to be in the layout's unit
+     * @param width sheet width
+     * @param height sheet height
+     */
+    void SetSheetSizeConverted(qreal width, qreal height);
+
+    /**
+     * @brief SetSheetSize sets the size of the sheet, the values have to be in Unit::Px
+     * @param size sheet size
+     */
+    void SetSheetSize(const QSizeF &size);
+    /**
+     * @brief SetSheetSizeConverted sets the size of the sheet, the values have to be in the layout's unit
+     * @param size sheet size
+     */
+    void SetSheetSizeConverted(const QSizeF &size);
+
+    /**
+     * @brief GetSheetSize Returns the size in Unit::Px
+     * @return sheet size in Unit::Px
+     */
+    auto GetSheetSize() const -> QSizeF;
+
+    /**
+     * @brief GetSheetSizeConverted Returns the size in the layout's unit
+     * @return the size in the layout's unit
+     */
+    auto GetSheetSizeConverted() const -> QSizeF;
+
+    /**
+     * @brief SetSheetMargins, set the margins of the sheet, the values have to be in Unit::Px
+     * @param left in Unit::Px
+     * @param top in Unit::Px
+     * @param right in Unit::Px
+     * @param bottom in Unit::Px
+     */
+    void SetSheetMargins(qreal left, qreal top, qreal right, qreal bottom);
+
+    /**
+     * @brief SetSheetMargins, set the margins of the sheet, the values have to be in the unit of the layout
+     * @param left in Unit::Px
+     * @param top in Unit::Px
+     * @param right in Unit::Px
+     * @param bottom in Unit::Px
+     */
+    void SetSheetMarginsConverted(qreal left, qreal top, qreal right, qreal bottom);
+
+    /**
+     * @brief SetSheetMargins set the margins of the sheet, the values have to be in Unit::Px
+     * @param margins sheet margins
+     */
+    void SetSheetMargins(const QMarginsF &margins);
+
+    /**
+     * @brief SetSheetMargins set the margins of the sheet, the values have to be in the unit of the layout
+     * @param margins sheet margins
+     */
+    void SetSheetMarginsConverted(const QMarginsF &margins);
+
+    /**
+     * @brief GetSheetMargins Returns the size in Unit::Px
+     * @return the size in Unit::Px
+     */
+    auto GetSheetMargins() const -> QMarginsF;
+
+    /**
+     * @brief GetSheetMarginsConverted Returns the margins in the layout's unit
+     * @return the margins in the sheet's unit
+     */
+    auto GetSheetMarginsConverted() const -> QMarginsF;
+
+    auto IgnoreMargins() const -> bool;
+    void SetIgnoreMargins(bool newIgnoreMargins);
 
 public slots:
     void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
@@ -112,6 +195,22 @@ private:
 
     VPTransformationOrigon m_transformationOrigin{};
 
+    /**
+     * @brief m_size the Size in Unit::Px
+     */
+    QSizeF m_size{};
+
+    // margins
+    /**
+     * @brief m_margins the margins in Unit::Px
+     */
+    QMarginsF m_margins{};
+
+    bool m_ignoreMargins{false};
+
+    GrainlineType m_grainlineType{GrainlineType::NotFixed};
+
+    auto SheetUnits() const -> Unit;
 
 };
 

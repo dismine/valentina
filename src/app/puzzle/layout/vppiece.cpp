@@ -216,7 +216,7 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
     QLineF canonical(grainlinePoints.first().x(), grainlinePoints.first().y(),
                      grainlinePoints.first().x()+100, grainlinePoints.first().y());
 
-    GrainlineType grainlineType = sheet->GrainlineType();
+    GrainlineType grainlineType = sheet->GrainlineOrientation();
 
     auto DegreesAtFront = [grainline, canonical, grainlineType]()
     {

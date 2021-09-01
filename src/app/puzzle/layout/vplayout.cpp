@@ -67,11 +67,6 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     layout->LayoutSettings().SetIgnoreTilesMargins(settings->GetLayoutTileIgnoreMargins());
     layout->LayoutSettings().SetTilesMargins(settings->GetLayoutTileMargins());
 
-    layout->LayoutSettings().SetIgnoreMargins(settings->GetLayoutSheetIgnoreMargins());
-    layout->LayoutSettings().SetSheetMargins(settings->GetLayoutSheetMargins());
-    layout->LayoutSettings().SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(),
-                                                 settings->GetLayoutSheetPaperHeight()));
-
     layout->LayoutSettings().SetWarningSuperpositionOfPieces(settings->GetLayoutWarningPiecesSuperposition());
     layout->LayoutSettings().SetWarningPiecesOutOfBound(settings->GetLayoutWarningPiecesOutOfBound());
     layout->LayoutSettings().SetFollowGrainline(settings->GetLayoutFollowGrainline());

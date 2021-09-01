@@ -35,26 +35,6 @@
 
 #include "def.h"
 
-enum class PaperSizeTemplate : qint8 {
-    A0 = 0,
-    A1,
-    A2,
-    A3,
-    A4,
-    Letter,
-    Legal,
-    Tabloid,
-    Roll24in,
-    Roll30in,
-    Roll36in,
-    Roll42in,
-    Roll44in,
-    Roll48in,
-    Roll62in,
-    Roll72in,
-    Custom
-};
-
 class VPLayoutSettings
 {
     Q_DECLARE_TR_FUNCTIONS(VPLayoutSettings)
@@ -252,122 +232,7 @@ public:
      */
     void SetShowTiles(bool value);
 
-    /**
-     * @brief GetTemplateSize Returns the size in Px of the given template
-     * @param tmpl paper size template
-     * @return the size in Px
-     */
-    static auto GetTemplateSize(PaperSizeTemplate tmpl) -> QSizeF;
-
-    /**
-     * @brief GetTemplateName Returns the name of the given template
-     * @param tmpl paper size template
-     * @return name of the given template
-     */
-    static auto GetTemplateName(PaperSizeTemplate tmpl) -> QString;
-
-    /**
-     * @brief GetTemplate GetTemplate Returns the template that corresponds to the given size
-     * @param size the Size in Px
-     * @return template that corresponds to the given size
-     */
-    static auto GetTemplate(QSizeF size) -> PaperSizeTemplate;
-
-    /**
-     * @brief PopulateComboBox Populates the given combo with the given templates
-     * @param tmpls list of paper size templates
-     * @param comboBox pointer to the combobox
-     */
-    static void PopulateComboBox(QVector<PaperSizeTemplate> *tmpls, QComboBox* comboBox);
-
-    /**
-     * @brief isRollTemplate Returns wether the given template is a roll or not.
-     * @param tmpl paper size template
-     * @return true if the given template is a roll
-     */
-    static auto isRollTemplate(PaperSizeTemplate tmpl) -> bool;
-
     // Sheet
-
-    /**
-     * @brief SetSheetSize sets the size of the sheet, the values have to be in Unit::Px
-     * @param width sheet width
-     * @param height sheet height
-     */
-    void SetSheetSize(qreal width, qreal height);
-
-    /**
-     * @brief SetSheetSize sets the size of the sheet, the values have to be in the layout's unit
-     * @param width sheet width
-     * @param height sheet height
-     */
-    void SetSheetSizeConverted(qreal width, qreal height);
-
-    /**
-     * @brief SetSheetSize sets the size of the sheet, the values have to be in Unit::Px
-     * @param size sheet size
-     */
-    void SetSheetSize(const QSizeF &size);
-    /**
-     * @brief SetSheetSizeConverted sets the size of the sheet, the values have to be in the layout's unit
-     * @param size sheet size
-     */
-    void SetSheetSizeConverted(const QSizeF &size);
-
-    /**
-     * @brief GetSheetSize Returns the size in Unit::Px
-     * @return sheet size in Unit::Px
-     */
-    auto GetSheetSize() const -> QSizeF;
-
-    /**
-     * @brief GetSheetSizeConverted Returns the size in the layout's unit
-     * @return the size in the layout's unit
-     */
-    auto GetSheetSizeConverted() const -> QSizeF;
-
-    /**
-     * @brief SetSheetMargins, set the margins of the sheet, the values have to be in Unit::Px
-     * @param left in Unit::Px
-     * @param top in Unit::Px
-     * @param right in Unit::Px
-     * @param bottom in Unit::Px
-     */
-    void SetSheetMargins(qreal left, qreal top, qreal right, qreal bottom);
-
-    /**
-     * @brief SetSheetMargins, set the margins of the sheet, the values have to be in the unit of the layout
-     * @param left in Unit::Px
-     * @param top in Unit::Px
-     * @param right in Unit::Px
-     * @param bottom in Unit::Px
-     */
-    void SetSheetMarginsConverted(qreal left, qreal top, qreal right, qreal bottom);
-
-    /**
-     * @brief SetSheetMargins set the margins of the sheet, the values have to be in Unit::Px
-     * @param margins sheet margins
-     */
-    void SetSheetMargins(const QMarginsF &margins);
-
-    /**
-     * @brief SetSheetMargins set the margins of the sheet, the values have to be in the unit of the layout
-     * @param margins sheet margins
-     */
-    void SetSheetMarginsConverted(const QMarginsF &margins);
-
-    /**
-     * @brief GetSheetMargins Returns the size in Unit::Px
-     * @return the size in Unit::Px
-     */
-    auto GetSheetMargins() const -> QMarginsF;
-
-    /**
-     * @brief GetSheetMarginsConverted Returns the margins in the layout's unit
-     * @return the margins in the sheet's unit
-     */
-    auto GetSheetMarginsConverted() const -> QMarginsF;
-
     /**
      * @brief GetShowGrid Returns true if the placement grid has to be shown on the current sheet
      * @return true if the placement grid has to be shown on the current sheet
@@ -433,9 +298,6 @@ public:
     auto IgnoreTilesMargins() const -> bool;
     void SetIgnoreTilesMargins(bool newIgnoreTilesMargins);
 
-    auto IgnoreMargins() const -> bool;
-    void SetIgnoreMargins(bool newIgnoreMargins);
-
 private:
     Unit m_unit{Unit::Cm};
 
@@ -450,11 +312,6 @@ private:
      */
     QSizeF m_tilesSize{};
 
-    /**
-     * @brief holds the orientation of the tiles
-     */
-    PageOrientation m_tilesOrientation {PageOrientation::Portrait};
-
     // margins
     /**
      * @brief m_margins the margins of the tiles in Unit::Px
@@ -464,19 +321,6 @@ private:
     bool m_ignoreTilesMargins{false};
 
     bool m_showTiles{false};
-
-    /**
-     * @brief m_size the Size in Unit::Px
-     */
-    QSizeF m_size{};
-
-    // margins
-    /**
-     * @brief m_margins the margins in Unit::Px
-     */
-    QMarginsF m_margins{};
-
-    bool m_ignoreMargins{false};
 
     // control
     bool m_followGrainLine{false};

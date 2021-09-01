@@ -7,6 +7,7 @@ SOURCES += \
     $$PWD/dialogs/configpages/puzzlepreferenceslayoutpage.cpp \
     $$PWD/dialogs/dialogpuzzlepreferences.cpp \
     $$PWD/dialogs/vpdialogabout.cpp \
+    $$PWD/layout/layoutdef.cpp \
     $$PWD/main.cpp \
     $$PWD/undocommands/vpundoaddsheet.cpp \
     $$PWD/undocommands/vpundocommand.cpp \

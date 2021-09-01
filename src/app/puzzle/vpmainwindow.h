@@ -175,13 +175,6 @@ private slots:
     void on_SheetOrientationChanged(bool checked);
 
     /**
-     * @brief on_pushButtonLayoutRemoveUnusedLength_clicked When the button
-     * "Remove unused length" in the sheet property tab is clicked.
-     * The slot is automatically connected through name convention.
-     */
-    void on_pushButtonSheetRemoveUnusedLength_clicked();
-
-    /**
      * @brief on_SheetMarginChanged When one of the margin values has been changed
      * in the sheet property tab.
      */
