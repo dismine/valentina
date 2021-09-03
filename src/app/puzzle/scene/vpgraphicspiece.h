@@ -55,6 +55,8 @@ public:
 
     void SetStickyPoints(const QVector<QPointF> &newStickyPoint);
 
+    void SetTextAsPaths(bool newTextAsPaths);
+
 signals:
     void HideTransformationHandles(bool hide);
     void PieceTransformationChanged();
@@ -100,7 +102,13 @@ private:
     qreal m_stickyTranslateX{0};
     qreal m_stickyTranslateY{0};
 
-    void PaintPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, QPainter *painter=nullptr);
+    bool m_textAsPaths{false};
+
+    QVector<QGraphicsPathItem *> m_labelPathItems{};
+    QVector<QGraphicsSimpleTextItem *> m_labelTextItems{};
+
+    void InitLabels();
+    void InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm);
     void PaintPiece(QPainter *painter=nullptr);
 
     void GroupMove(const QPointF &pos);

@@ -76,6 +76,7 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
     setCursor(Qt::OpenHandCursor);
 
     PaintPiece();
+    InitLabels();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,6 +241,32 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::SetTextAsPaths(bool newTextAsPaths)
+{
+    m_textAsPaths = newTextAsPaths;
+    InitLabels();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::InitLabels()
+{
+    qDeleteAll(m_labelPathItems);
+    qDeleteAll(m_labelTextItems);
+
+    m_labelPathItems.clear();
+    m_labelTextItems.clear();
+
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return;
+    }
+
+    InitPieceLabel(piece->GetPieceLabelRect(), piece->GetPieceLabelData());
+    InitPieceLabel(piece->GetPatternLabelRect(), piece->GetPatternLabelData());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::SetStickyPoints(const QVector<QPointF> &newStickyPoint)
 {
     m_stickyPoints = newStickyPoint;
@@ -249,7 +276,7 @@ void VPGraphicsPiece::SetStickyPoints(const QVector<QPointF> &newStickyPoint)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PaintPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, QPainter *painter)
+void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm)
 {
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())
@@ -274,6 +301,11 @@ void VPGraphicsPiece::PaintPieceLabel(const QVector<QPointF> &labelShape, const 
             fnt.setItalic(tl.m_italic);
 
             QFontMetrics fm(fnt);
+
+            if (m_textAsPaths)
+            {
+                dY += fm.height();
+            }
 
             if (dY > dH)
             {
@@ -330,19 +362,29 @@ void VPGraphicsPiece::PaintPieceLabel(const QVector<QPointF> &labelShape, const 
 
             labelMatrix *= piece->GetMatrix();
 
-            QPainterPath string;
-            string.addText(QPointF(), fnt, qsText);
-            string = labelMatrix.map(string);
-
-            if (painter != nullptr)
+            if (m_textAsPaths)
             {
-                painter->save();
-                painter->setBrush(QBrush(color));
-                painter->drawPath(string);
-                painter->restore();
-            }
+                QPainterPath path;
+                path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
 
-            dY += (fm.height() + tm.GetSpacing());
+                auto* item = new QGraphicsPathItem(this);
+                item->setPath(path);
+                item->setBrush(QBrush(color));
+                item->setTransform(labelMatrix);
+                m_labelPathItems.append(item);
+
+                dY += tm.GetSpacing();
+            }
+            else
+            {
+                auto* item = new QGraphicsSimpleTextItem(this);
+                item->setFont(fnt);
+                item->setText(qsText);
+                item->setTransform(labelMatrix);
+                m_labelTextItems.append(item);
+
+                dY += (fm.height() + tm.GetSpacing());
+            }
         }
     }
 }
@@ -492,9 +534,6 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         m_placeLabels.addPath(path);
     }
 
-    PaintPieceLabel(piece->GetPieceLabelRect(), piece->GetPieceLabelData(), painter);
-    PaintPieceLabel(piece->GetPatternLabelRect(), piece->GetPatternLabelData(), painter);
-
     if (not m_stickyPoints.isEmpty())
     {
         m_stickyPath.moveTo(m_stickyPoints.first());
@@ -629,6 +668,7 @@ void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
     {
         prepareGeometryChange();
         PaintPiece(); // refresh shapes
+        InitLabels();
         emit PieceTransformationChanged();
     }
 }

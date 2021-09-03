@@ -1565,7 +1565,7 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
                 QPainterPath path;
                 path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
 
-                QGraphicsPathItem* item = new QGraphicsPathItem(parent);
+                auto* item = new QGraphicsPathItem(parent);
                 item->setPath(path);
                 item->setBrush(QBrush(Qt::black));
                 item->setTransform(labelMatrix);
@@ -1574,7 +1574,7 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             }
             else
             {
-                QGraphicsSimpleTextItem* item = new QGraphicsSimpleTextItem(parent);
+                auto* item = new QGraphicsSimpleTextItem(parent);
                 item->setFont(fnt);
                 item->setText(qsText);
                 item->setTransform(labelMatrix);
