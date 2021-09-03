@@ -779,6 +779,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         {
             const qreal x = item->boundingRect().x();
             piece.Mirror();
+            delete item;
             item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
             diff = item->boundingRect().x() - x;
         }
