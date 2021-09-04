@@ -268,7 +268,7 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     if (fileReader.hasError())
     {
         qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(tr("Unable to read a layout file")));
+                   qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
         lock.reset();
 
         if (m_cmd->IsTestModeEnabled())
