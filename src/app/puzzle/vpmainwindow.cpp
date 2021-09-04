@@ -253,6 +253,7 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     {
         qCCritical(pWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        lock.reset();
         return false;
     }
 
