@@ -70,6 +70,8 @@ private:
     void ReadMarkers(const VPPiecePtr &piece);
     auto ReadMarker() -> VLayoutPlaceLabel;
     void ReadLabels(const VPPiecePtr &piece);
+    void ReadPieceLabel(const VPPiecePtr &piece);
+    void ReadPatternLabel(const VPPiecePtr &piece);
     auto ReadLabelLines() -> VTextManager;
     auto ReadLabelLine() -> TextLine;
 

@@ -672,16 +672,54 @@ void VPLayoutFileReader::ReadLabels(const VPPiecePtr &piece)
     {
         if (name() == ML::TagPieceLabel)
         {
-            QXmlStreamAttributes attribs = attributes();
-            piece->SetPieceLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
-
-            piece->SetPieceLabelData(ReadLabelLines());
+            ReadPieceLabel(piece);
         }
         else if (name() == ML::TagPatternLabel)
         {
-            QXmlStreamAttributes attribs = attributes();
-            piece->SetPatternLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
+            ReadPatternLabel(piece);
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadPieceLabel(const VPPiecePtr &piece)
+{
+    AssertRootTag(ML::TagPieceLabel);
+
+    QXmlStreamAttributes attribs = attributes();
+    piece->SetPieceLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagLines)
+        {
+            piece->SetPieceLabelData(ReadLabelLines());
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadPatternLabel(const VPPiecePtr &piece)
+{
+    AssertRootTag(ML::TagPatternLabel);
+
+    QXmlStreamAttributes attribs = attributes();
+    piece->SetPatternLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagLines)
+        {
             piece->SetPatternLabelData(ReadLabelLines());
         }
         else
@@ -695,7 +733,7 @@ void VPLayoutFileReader::ReadLabels(const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
 {
-    AssertRootTag(ML::TagLabels);
+    AssertRootTag(ML::TagLines);
 
     VTextManager text;
     QVector<TextLine> lines;

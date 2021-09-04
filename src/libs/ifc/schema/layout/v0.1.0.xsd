@@ -127,14 +127,19 @@
                                   <xs:complexType>
                                     <xs:sequence>
                                       <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
-                                        <xs:complexType>      
-                                          <xs:attribute type="xs:string" name="font" use="required"/>
-                                          <xs:attribute type="xs:boolean" name="bold" use="optional"/>
-                                          <xs:attribute type="xs:boolean" name="italic" use="optional"/>
-                                          <xs:attribute type="xs:unsignedInt" name="alignment" use="optional"/>
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                              <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="alignment" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
                                         </xs:complexType>
                                       </xs:element>
                                     </xs:sequence>
+                                    <xs:attribute type="xs:string" name="font"/>
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
@@ -148,14 +153,19 @@
                                   <xs:complexType>
                                     <xs:sequence>
                                       <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
-                                        <xs:complexType>      
-                                          <xs:attribute type="xs:string" name="font" use="required"/>
-                                          <xs:attribute type="xs:boolean" name="bold" use="optional"/>
-                                          <xs:attribute type="xs:boolean" name="italic" use="optional"/>
-                                          <xs:attribute type="xs:unsignedInt" name="alignment" use="optional"/>
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                              <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="alignment" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
                                         </xs:complexType>
                                       </xs:element>
                                     </xs:sequence>
+                                    <xs:attribute type="xs:string" name="font"/>
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
@@ -284,14 +294,19 @@
                                               <xs:complexType>
                                                 <xs:sequence>
                                                   <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
-                                                    <xs:complexType>      
-                                                      <xs:attribute type="xs:string" name="font" use="required"/>
-                                                      <xs:attribute type="xs:boolean" name="bold" use="optional"/>
-                                                      <xs:attribute type="xs:boolean" name="italic" use="optional"/>
-                                                      <xs:attribute type="AlignmentType" name="alignment" use="optional"/>
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                                          <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                                          <xs:attribute type="AlignmentType" name="alignment" use="optional"/>
+                                                          <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
                                                     </xs:complexType>
                                                   </xs:element>
                                                 </xs:sequence>
+                                                <xs:attribute type="xs:string" name="font"/>
                                               </xs:complexType>
                                             </xs:element>
                                           </xs:sequence>
@@ -305,14 +320,19 @@
                                               <xs:complexType>
                                                 <xs:sequence>
                                                   <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
-                                                    <xs:complexType>      
-                                                      <xs:attribute type="xs:string" name="font" use="required"/>
-                                                      <xs:attribute type="xs:boolean" name="bold" use="optional"/>
-                                                      <xs:attribute type="xs:boolean" name="italic" use="optional"/>
-                                                      <xs:attribute type="AlignmentType" name="alignment" use="optional"/>
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                                          <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                                          <xs:attribute type="AlignmentType" name="alignment" use="optional"/>
+                                                          <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
                                                     </xs:complexType>
                                                   </xs:element>
                                                 </xs:sequence>
+                                                <xs:attribute type="xs:string" name="font"/>
                                               </xs:complexType>
                                             </xs:element>
                                           </xs:sequence>
