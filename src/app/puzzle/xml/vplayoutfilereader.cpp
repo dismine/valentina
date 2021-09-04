@@ -511,7 +511,10 @@ void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
     {
         if (not builtIn)
         {
-            // TODO add check if not empty
+            if (path.isEmpty())
+            {
+                throw VException(tr("Error in line %1. Seam allowance is empty.").arg(lineNumber()));
+            }
             piece->SetSeamAllowancePoints(path);
         }
     }
@@ -533,7 +536,10 @@ void VPLayoutFileReader::ReadGrainline(const VPPiecePtr &piece)
         QString arrowDirection = ReadAttributeEmptyString(attribs, ML::AttrArrowDirection);
         piece->SetGrainlineArrowType(StringToGrainlineArrowDirrection(arrowDirection));
 
-        // TODO add check if not empty
+        if (path.isEmpty())
+        {
+            throw VException(tr("Error in line %1. Grainline is empty.").arg(lineNumber()));
+        }
         piece->SetGrainlinePoints(path);
     }
 }
@@ -614,8 +620,14 @@ auto VPLayoutFileReader::ReadInternalPath() -> VLayoutPiecePath
     QXmlStreamAttributes attribs = attributes();
     path.SetCutPath(ReadAttributeBool(attribs, ML::AttrCut, falseStr));
     path.SetPenStyle(LineStyleToPenStyle(ReadAttributeString(attribs, ML::AttrPenStyle, TypeLineLine)));
-    // TODO check if not empty
-    path.SetPoints(StringToPath(readElementText()));
+
+    QVector<QPointF> shape = StringToPath(readElementText());
+    if (shape.isEmpty())
+    {
+        throw VException(tr("Error in line %1. Internal path shape is empty.").arg(lineNumber()));
+    }
+
+    path.SetPoints(shape);
 
     return path;
 }
@@ -658,7 +670,14 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
     marker.type = static_cast<PlaceLabelType>(ReadAttributeUInt(attribs, ML::AttrType, QChar('0')));
     marker.center = StringToPoint(ReadAttributeEmptyString(attribs, ML::AttrCenter));
     marker.box = StringToRect(ReadAttributeEmptyString(attribs, ML::AttrBox));
-    marker.shape = StringToMarkerShape(readElementText());
+
+    PlaceLabelImg shape = StringToMarkerShape(readElementText());
+    if (shape.isEmpty())
+    {
+        throw VException(tr("Error in line %1. Marker shape is empty.").arg(lineNumber()));
+    }
+
+    marker.shape = shape;
 
     return marker;
 }
