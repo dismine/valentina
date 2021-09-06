@@ -60,7 +60,7 @@ public:
      */
     void RefreshLayout();
 
-    void RefreshPieces(const VPSheetPtr &sheet);
+    void RefreshPieces();
 
     /**
      * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
@@ -109,6 +109,10 @@ private:
      * variable to hold temporarly hte value of the show grid
      */
     bool m_showGridTmp{false};
+
+    QUuid m_sheetUuid;
+
+    QList<VPPiecePtr> m_slectedPiecesTmp{};
 
     void ConnectPiece(VPGraphicsPiece *piece);
 };

@@ -104,7 +104,7 @@ void VPMainGraphicsView::RefreshPieces()
         VPSheetPtr sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
-            sheet->SceneData()->RefreshPieces(sheet);
+            sheet->SceneData()->RefreshPieces();
         }
     }
 }

@@ -41,7 +41,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid)
     : m_layout(layout),
-      m_scene(new VMainGraphicsScene())
+      m_scene(new VMainGraphicsScene()),
+      m_sheetUuid(sheetUuid)
 {
     SCASSERT(not layout.isNull())
 
@@ -49,7 +50,7 @@ VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheet
     m_graphicsSheet->setPos(0, 0);
     m_scene->addItem(m_graphicsSheet);
 
-    m_graphicsTileGrid = new VPGraphicsTileGrid(layout, sheetUuid);
+    m_graphicsTileGrid = new VPGraphicsTileGrid(layout, m_sheetUuid);
     m_scene->addItem(m_graphicsTileGrid);
 
     m_rotationControls = new VPGraphicsPieceControls(layout);
@@ -89,11 +90,18 @@ void VPSheetSceneData::RefreshLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheetSceneData::RefreshPieces(const VPSheetPtr &sheet)
+void VPSheetSceneData::RefreshPieces()
 {
     qDeleteAll(m_graphicsPieces);
     m_graphicsPieces.clear();
 
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(layout.isNull())
+    {
+        return;
+    }
+
+    VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
     if (not sheet.isNull())
     {
         QList<VPPiecePtr> pieces = sheet->GetPieces();
@@ -118,6 +126,9 @@ void VPSheetSceneData::PrepareForExport()
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
 
+    m_rotationControls->setVisible(false);
+    m_rotationOrigin->setVisible(false);
+
     VPLayoutPtr layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
@@ -126,9 +137,21 @@ void VPSheetSceneData::PrepareForExport()
 
         m_showTilesTmp = layout->LayoutSettings().GetShowTiles();
         layout->LayoutSettings().SetShowTiles(false);
+
+        VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+        m_slectedPiecesTmp = sheet->GetSelectedPieces();
+
+        for (const auto& piece : m_slectedPiecesTmp)
+        {
+            if (not piece.isNull())
+            {
+                piece->SetSelected(false);
+            }
+        }
     }
 
     RefreshLayout();
+    RefreshPieces();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -142,9 +165,19 @@ void VPSheetSceneData::CleanAfterExport()
     {
         layout->LayoutSettings().SetShowGrid(m_showGridTmp);
         layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
+
+        for (const auto& piece : m_slectedPiecesTmp)
+        {
+            if (not piece.isNull())
+            {
+                piece->SetSelected(true);
+                emit layout->PieceSelectionChanged(piece);
+            }
+        }
     }
 
     RefreshLayout();
+    RefreshPieces();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -612,7 +645,7 @@ void VPSheet::ClearSelection() const
         VPLayoutPtr layout = GetLayout();
         if (not layout.isNull())
         {
-            emit GetLayout()->PieceSelectionChanged(VPPiecePtr());
+            emit layout->PieceSelectionChanged(VPPiecePtr());
         }
     }
 }

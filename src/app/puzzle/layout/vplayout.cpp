@@ -133,7 +133,7 @@ void VPLayout::RefreshScenePieces() const
     {
         if (not sheet.isNull())
         {
-            sheet->SceneData()->RefreshPieces(sheet);
+            sheet->SceneData()->RefreshPieces();
         }
     }
 }
