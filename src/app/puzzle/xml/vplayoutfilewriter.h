@@ -65,7 +65,7 @@ private:
     void WriteLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, const QString &tagName);
     void WriteLabelLines(const VTextManager &tm);
 
-    void WriteMargins(const QMarginsF &margins);
+    void WriteMargins(const QMarginsF &margins, bool ignore);
     void WriteSize(QSizeF size);
 
     template <typename T>

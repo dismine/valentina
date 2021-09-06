@@ -32,6 +32,7 @@
                         <xs:attribute type="xs:float" name="right"/>
                         <xs:attribute type="xs:float" name="bottom"/>
                         <xs:attribute type="xs:float" name="left"/>
+                        <xs:attribute type="xs:boolean" name="ignoreMargins"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
@@ -213,6 +214,7 @@
                         <xs:attribute type="xs:float" name="right"/>
                         <xs:attribute type="xs:float" name="bottom"/>
                         <xs:attribute type="xs:float" name="left"/>
+                        <xs:attribute type="xs:boolean" name="ignoreMargins"/>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="pieces">

@@ -101,6 +101,7 @@ const QString AttrCopyNumber           = QStringLiteral("copyNumber");
 const QString AttrGrainlineType        = QStringLiteral("grainlineType");
 const QString AttrXScale               = QStringLiteral("xScale");
 const QString AttrYScale               = QStringLiteral("yScale");
+const QString AttrIgnoreMargins        = QStringLiteral("ignoreMargins");
 
 const QString atFrontStr               = QStringLiteral("atFront");
 const QString atRearStr                = QStringLiteral("atRear");

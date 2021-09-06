@@ -331,7 +331,7 @@ void VPLayoutFileReader::ReadTiles(const VPLayoutPtr &layout)
                 layout->LayoutSettings().SetTilesSize(ReadSize());
                 break;
             case 1: // margin
-                layout->LayoutSettings().SetTilesMargins(ReadMargins());
+                ReadLayoutMargins(layout);
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -403,7 +403,7 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
                 sheet->SetSheetSize(ReadSize());
                 break;
             case 2: // margin
-                sheet->SetSheetMargins(ReadMargins());
+                ReadSheetMargins(sheet);
                 break;
             case 3: // pieces
                 ReadPieces(layout, sheet);
@@ -817,19 +817,37 @@ auto VPLayoutFileReader::ReadLabelLine() -> TextLine
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutFileReader::ReadMargins() -> QMarginsF
+QMarginsF VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
 {
-    QMarginsF margins = QMarginsF();
-
     QXmlStreamAttributes attribs = attributes();
+
+    QMarginsF margins = QMarginsF();
     margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
     margins.setTop(ReadAttributeDouble(attribs, ML::AttrTop, QChar('0')));
     margins.setRight(ReadAttributeDouble(attribs, ML::AttrRight, QChar('0')));
     margins.setBottom(ReadAttributeDouble(attribs, ML::AttrBottom, QChar('0')));
+    layout->LayoutSettings().SetTilesMargins(margins);
+
+    layout->LayoutSettings().SetIgnoreTilesMargins(ReadAttributeBool(attribs, ML::AttrIgnoreMargins, falseStr));
 
     readElementText();
+}
 
-    return margins;
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadSheetMargins(const VPSheetPtr &sheet) -> QMarginsF
+{
+    QXmlStreamAttributes attribs = attributes();
+
+    QMarginsF margins = QMarginsF();
+    margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
+    margins.setTop(ReadAttributeDouble(attribs, ML::AttrTop, QChar('0')));
+    margins.setRight(ReadAttributeDouble(attribs, ML::AttrRight, QChar('0')));
+    margins.setBottom(ReadAttributeDouble(attribs, ML::AttrBottom, QChar('0')));
+    sheet->SetSheetMargins(margins);
+
+    sheet->SetIgnoreMargins(ReadAttributeBool(attribs, ML::AttrIgnoreMargins, falseStr));
+
+    readElementText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

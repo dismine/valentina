@@ -106,6 +106,7 @@ extern const QString AttrCopyNumber;
 extern const QString AttrGrainlineType;
 extern const QString AttrXScale;
 extern const QString AttrYScale;
+extern const QString AttrIgnoreMargins;
 
 extern const QString atFrontStr;
 extern const QString atRearStr;

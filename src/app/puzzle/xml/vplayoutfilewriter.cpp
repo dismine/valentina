@@ -214,7 +214,7 @@ void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 
     writeTextElement(ML::TagName, sheet->GetName());
     WriteSize(sheet->GetSheetSize());
-    WriteMargins(sheet->GetSheetMargins());
+    WriteMargins(sheet->GetSheetMargins(), sheet->IgnoreMargins());
     WritePieceList(sheet->GetPieces(), ML::TagPieces);
 
     writeEndElement(); // sheet
@@ -231,7 +231,7 @@ void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
    SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
 
    WriteSize(layout->LayoutSettings().GetTilesSize());
-   WriteMargins(layout->LayoutSettings().GetTilesMargins());
+   WriteMargins(layout->LayoutSettings().GetTilesMargins(), layout->LayoutSettings().IgnoreTilesMargins());
 
    writeEndElement(); // tiles
 }
@@ -366,13 +366,17 @@ void VPLayoutFileWriter::WriteLabelLines(const VTextManager &tm)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayoutFileWriter::WriteMargins(const QMarginsF &margins)
+void VPLayoutFileWriter::WriteMargins(const QMarginsF &margins, bool ignore)
 {
     writeStartElement(ML::TagMargin);
+
     SetAttributeOrRemoveIf<qreal>(ML::AttrLeft, margins.left(), [](qreal margin){return margin <= 0;});
     SetAttributeOrRemoveIf<qreal>(ML::AttrTop, margins.top(), [](qreal margin){return margin <= 0;});
     SetAttributeOrRemoveIf<qreal>(ML::AttrRight, margins.right(), [](qreal margin){return margin <= 0;});
     SetAttributeOrRemoveIf<qreal>(ML::AttrBottom, margins.bottom(), [](qreal margin){return margin <= 0;});
+
+    SetAttributeOrRemoveIf<bool>(ML::AttrIgnoreMargins, ignore, [](bool ignore){return not ignore;});
+
     writeEndElement(); // margin
 }
 
