@@ -48,6 +48,7 @@
 #include "vrawlayout.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexception.h"
+#include "vprintlayout.h"
 
 namespace
 {
@@ -66,21 +67,18 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops")))
  *
  * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
  */
-void PrepareTextForDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details)
+void PrepareTextForDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
 {
-    for (const auto &paperItems : details)
+    for (auto *item : paperItems)
     {
-        for (auto *item : paperItems)
+        QList<QGraphicsItem *> pieceChildren = item->childItems();
+        for (auto *child : qAsConst(pieceChildren))
         {
-            QList<QGraphicsItem *> pieceChildren = item->childItems();
-            for (auto *child : qAsConst(pieceChildren))
+            if (child->type() == QGraphicsSimpleTextItem::Type)
             {
-                if (child->type() == QGraphicsSimpleTextItem::Type)
+                if(auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
                 {
-                    if(auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
-                    {
-                        textItem->setText(textItem->text() + placeholder);
-                    }
+                    textItem->setText(textItem->text() + placeholder);
                 }
             }
         }
@@ -96,23 +94,20 @@ void PrepareTextForDXF(const QString &placeholder, const QList<QList<QGraphicsIt
  *
  * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
  */
-void RestoreTextAfterDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details)
+void RestoreTextAfterDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
 {
-    for (const auto &paperItems : details)
+    for (auto *item : paperItems)
     {
-        for (auto *item : paperItems)
+        QList<QGraphicsItem *> pieceChildren = item->childItems();
+        for (auto *child : qAsConst(pieceChildren))
         {
-            QList<QGraphicsItem *> pieceChildren = item->childItems();
-            for (auto *child : qAsConst(pieceChildren))
+            if (child->type() == QGraphicsSimpleTextItem::Type)
             {
-                if (child->type() == QGraphicsSimpleTextItem::Type)
+                if(auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
                 {
-                    if(auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
-                    {
-                        QString text = textItem->text();
-                        text.replace(placeholder, QString());
-                        textItem->setText(text);
-                    }
+                    QString text = textItem->text();
+                    text.replace(placeholder, QString());
+                    textItem->setText(text);
                 }
             }
         }
@@ -209,46 +204,7 @@ void VLayoutExporter::ExportToTIF(QGraphicsScene *scene) const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutExporter::ExportToPDF(QGraphicsScene *scene) const
 {
-    QPrinter printer;
-    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
-                       QCoreApplication::applicationVersion());
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(m_fileName);
-    printer.setDocName(QFileInfo(m_fileName).fileName());
-    printer.setResolution(static_cast<int>(PrintDPI));
-    printer.setPageOrientation(QPageLayout::Portrait);
-    printer.setFullPage(m_ignorePrinterMargins);
-
-    qreal width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
-    qreal height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
-
-    if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
-    {
-        qWarning() << tr("Cannot set printer page size");
-    }
-
-    const qreal left = FromPixel(m_margins.left(), Unit::Mm);
-    const qreal top = FromPixel(m_margins.top(), Unit::Mm);
-    const qreal right = FromPixel(m_margins.right(), Unit::Mm);
-    const qreal bottom = FromPixel(m_margins.bottom(), Unit::Mm);
-
-    if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
-    {
-        qWarning() << tr("Cannot set printer margins");
-    }
-
-    QPainter painter;
-    if (not painter.begin(&printer))
-    { // failed to open file
-        qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(m_fileName));
-        return;
-    }
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(m_pen);
-    painter.setBrush(QBrush(Qt::NoBrush));
-    painter.scale(m_xScale, m_yScale);
-    scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
-    painter.end();
+    ExportToPDF(scene, m_fileName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -271,8 +227,9 @@ void VLayoutExporter::ExportToPS(QGraphicsScene *scene) const
     QTemporaryFile tmp;
     if (tmp.open())
     {
-        ExportToPDF(scene);
-        PdfToPs(QStringList{tmp.fileName(), m_fileName});
+        const QString fileName = m_fileName;
+        ExportToPDF(scene, tmp.fileName());
+        PdfToPs(QStringList{tmp.fileName(), fileName});
     }
 }
 
@@ -282,13 +239,14 @@ void VLayoutExporter::ExportToEPS(QGraphicsScene *scene) const
     QTemporaryFile tmp;
     if (tmp.open())
     {
-        ExportToPDF(scene);
-        PdfToPs(QStringList{QStringLiteral("-eps"), tmp.fileName(), m_fileName});
+        const QString fileName = m_fileName;
+        ExportToPDF(scene, tmp.fileName());
+        PdfToPs(QStringList{QStringLiteral("-eps"), tmp.fileName(), fileName});
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QList<QGraphicsItem *> > &details) const
+void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
     PrepareTextForDXF(endStringPlaceholder, details);
 
@@ -447,6 +405,53 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QString &filename) const
+{
+    QPrinter printer;
+    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                       QCoreApplication::applicationVersion());
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(filename);
+    printer.setDocName(QFileInfo(filename).fileName());
+    printer.setResolution(static_cast<int>(PrintDPI));
+    printer.setPageOrientation(QPageLayout::Portrait);
+    printer.setFullPage(m_ignorePrinterMargins);
+
+    qreal width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
+    qreal height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
+
+    if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
+    {
+        qWarning() << tr("Cannot set printer page size");
+    }
+
+    if (not m_ignorePrinterMargins)
+    {
+        const qreal left = FromPixel(m_margins.left(), Unit::Mm);
+        const qreal top = FromPixel(m_margins.top(), Unit::Mm);
+        const qreal right = FromPixel(m_margins.right(), Unit::Mm);
+        const qreal bottom = FromPixel(m_margins.bottom(), Unit::Mm);
+
+        if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
+        {
+            qWarning() << tr("Cannot set printer margins");
+        }
+    }
+
+    QPainter painter;
+    if (not painter.begin(&printer))
+    { // failed to open file
+        qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(m_fileName));
+        return;
+    }
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(m_pen);
+    painter.setBrush(QBrush(Qt::NoBrush));
+    painter.scale(m_xScale, m_yScale);
+    scene->render(&painter, VPrintLayout::SceneTargetRect(&printer, m_imageRect), m_imageRect, Qt::IgnoreAspectRatio);
+    painter.end();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VLayoutExporter::ExportFormatDescription(LayoutExportFormats format)

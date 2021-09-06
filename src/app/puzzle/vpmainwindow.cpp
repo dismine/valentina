@@ -41,6 +41,8 @@
 #include "xml/vplayoutfilereader.h"
 #include "vpapplication.h"
 #include "../vlayout/vrawlayout.h"
+#include "../vlayout/vlayoutexporter.h"
+#include "../vlayout/vprintlayout.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/projectversion.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -51,6 +53,8 @@
 #include "undocommands/vpundoaddsheet.h"
 #include "undocommands/vpundopiecerotate.h"
 #include "undocommands/vpundopiecemove.h"
+#include "dialogs/dialogsavemanuallayout.h"
+#include "../vdxf/libdxfrw/drw_base.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -70,6 +74,29 @@ QT_WARNING_POP
 
 namespace
 {
+//---------------------------------------------------------------------------------------------------------------------
+auto CreateLayoutPath(const QString &path) -> bool
+{
+    bool usedNotExistedDir = true;
+    QDir dir(path);
+    dir.setPath(path);
+    if (not dir.exists(path))
+    {
+        usedNotExistedDir = dir.mkpath(QChar('.'));
+    }
+    return usedNotExistedDir;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
+{
+    if (usedNotExistedDir)
+    {
+        QDir dir(path);
+        dir.rmpath(QChar('.'));
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
 {
@@ -118,6 +145,19 @@ auto PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF
 }
 }  // namespace
 
+struct VPExportData
+{
+    LayoutExportFormats format{LayoutExportFormats::SVG};
+    QList<VPSheetPtr> sheets{};
+    QString path{};
+    QString fileName{};
+    qreal xScale{1.};
+    qreal yScale{1.};
+    bool isBinaryDXF{false};
+    bool textAsPaths{false};
+    bool exportUnified{true};
+};
+
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     VAbstractMainWindow(parent),
@@ -141,7 +181,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     });
     connect(m_layout.get(), &VPLayout::ActiveSheetChanged, this, [this]()
     {
-        m_tileFactory->refreshTileInfos();
+        m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
         SetPropertyTabSheetData();
     });
@@ -150,10 +190,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     {
         LayoutWasSaved(clean);
     });
-
-    // init the tile factory
-    m_tileFactory = new VPTileFactory(m_layout, VPApplication::VApp()->Settings());
-    m_tileFactory->refreshTileInfos();
 
     // init status bar
     statusBar()->addPermanentWidget(m_statusLabel, 1);
@@ -288,10 +324,10 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     SetPropertiesData();
 
     m_carrousel->Refresh();
-    m_graphicsView->RefreshLayout();
-    m_graphicsView->RefreshPieces();
-    m_tileFactory->refreshTileInfos();
+    m_graphicsView->on_ActiveSheetChanged(m_layout->GetFocusedSheet());
+    m_layout->TileFactory()->refreshTileInfos();
     m_layout->CheckPiecesPositionValidity();
+
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 
     return true;
@@ -428,40 +464,12 @@ void VPMainWindow::InitZoom()
 void VPMainWindow::SetupMenu()
 {
     // most of the actions are connected through name convention (auto-connection)
-
+    // File
     // -------------------- connects the actions for the file menu
     ui->actionNew->setShortcuts(QKeySequence::New);
     ui->actionSave->setShortcuts(QKeySequence::Save);
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
-    connect(ui->actionExit, &QAction::triggered, this, &VPMainWindow::close);
-    ui->actionExit->setShortcuts(QKeySequence::Quit);
-
-    // -------------------- connects the actions for the windows menu
-    // TODO : initialise the entries for the different windows
-
-    // Add dock properties action
-    QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
-    ui->menuEdit->addAction(actionDockWidgetToolOptions);
-
-    auto *separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    ui->menuEdit->addAction(separatorAct);
-
-    // Add Undo/Redo actions.
-    undoAction = m_layout->UndoStack()->createUndoAction(this, tr("&Undo"));
-    undoAction->setShortcuts(QKeySequence::Undo);
-    undoAction->setIcon(QIcon::fromTheme("edit-undo"));
-    ui->menuEdit->addAction(undoAction);
-    ui->toolBarUndoCommands->addAction(undoAction);
-
-    redoAction = m_layout->UndoStack()->createRedoAction(this, tr("&Redo"));
-    redoAction->setShortcuts(QKeySequence::Redo);
-    redoAction->setIcon(QIcon::fromTheme("edit-redo"));
-    ui->menuEdit->addAction(redoAction);
-    ui->toolBarUndoCommands->addAction(redoAction);
-
-    // File
     m_recentFileActs.fill(nullptr);
     for (auto & recentFileAct : m_recentFileActs)
     {
@@ -489,6 +497,34 @@ void VPMainWindow::SetupMenu()
 
     // Actions for recent files loaded by a puzzle window application.
     UpdateRecentFileActions();
+
+    connect(ui->actionExit, &QAction::triggered, this, &VPMainWindow::close);
+    ui->actionExit->setShortcuts(QKeySequence::Quit);
+
+    // Layout
+    connect(ui->actionExportLayout, &QAction::triggered, this, &VPMainWindow::on_ExportLayout);
+
+    // Sheet
+    connect(ui->actionExportSheet, &QAction::triggered, this, &VPMainWindow::on_ExportSheet);
+
+    // Add dock properties action
+    ui->menuSheet->addSeparator();
+    QAction* actionDockWidgetToolOptions = ui->dockWidgetProperties->toggleViewAction();
+    ui->menuSheet->addAction(actionDockWidgetToolOptions);
+    ui->menuSheet->addSeparator();
+
+    // Add Undo/Redo actions.
+    undoAction = m_layout->UndoStack()->createUndoAction(this, tr("&Undo"));
+    undoAction->setShortcuts(QKeySequence::Undo);
+    undoAction->setIcon(QIcon::fromTheme("edit-undo"));
+    ui->menuSheet->addAction(undoAction);
+    ui->toolBarUndoCommands->addAction(undoAction);
+
+    redoAction = m_layout->UndoStack()->createRedoAction(this, tr("&Redo"));
+    redoAction->setShortcuts(QKeySequence::Redo);
+    redoAction->setIcon(QIcon::fromTheme("edit-redo"));
+    ui->menuSheet->addAction(redoAction);
+    ui->toolBarUndoCommands->addAction(redoAction);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, [this]()
@@ -726,7 +762,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             {
                 sheet->RemoveUnusedLength();
                 LayoutWasSaved(false);
-                m_tileFactory->refreshTileInfos();
+                m_layout->TileFactory()->refreshTileInfos();
                 m_graphicsView->RefreshLayout();
                 m_graphicsView->RefreshPieces();
                 SetPropertyTabSheetData();
@@ -763,7 +799,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             {
                 sheet->SetIgnoreMargins(state != 0);
                 LayoutWasSaved(false);
-                m_tileFactory->refreshTileInfos();
+                m_layout->TileFactory()->refreshTileInfos();
                 m_graphicsView->RefreshLayout();
 
                 sheet->ValidatePiecesOutOfBound();
@@ -772,6 +808,8 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     });
 
     ui->groupBoxSheetGrid->setVisible(false); // temporary hide
+
+    connect(ui->pushButtonSheetExport, &QPushButton::clicked, this, &VPMainWindow::on_ExportSheet);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -826,7 +864,7 @@ void VPMainWindow::InitPropertyTabTiles()
 
             m_layout->LayoutSettings().SetIgnoreTilesMargins(state != 0);
             LayoutWasSaved(false);
-            m_tileFactory->refreshTileInfos();
+            m_layout->TileFactory()->refreshTileInfos();
             m_graphicsView->RefreshLayout();
             VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
         }
@@ -941,13 +979,7 @@ void VPMainWindow::InitPropertyTabLayout()
         }
     });
 
-    connect(ui->pushButtonLayoutExport, &QPushButton::clicked, this, [this]()
-    {
-        if (not m_layout.isNull())
-        {
-            // TODO export layout
-        }
-    });
+    connect(ui->pushButtonLayoutExport, &QPushButton::clicked, this, &VPMainWindow::on_ExportLayout);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1045,8 +1077,7 @@ void VPMainWindow::SetPropertyTabSheetData()
         if (not sheet.isNull())
         {
             ui->groupBoxSheetInfos->setDisabled(false);
-            VPSheetPtr sheet = m_layout->GetFocusedSheet();
-            SetLineEditValue(ui->lineEditSheetName, not sheet.isNull() ? sheet->GetName() : QString());
+            SetLineEditValue(ui->lineEditSheetName, sheet->GetName());
 
             ui->groupBoxPaperFormat->setDisabled(false);
             const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
@@ -1196,8 +1227,6 @@ void VPMainWindow::SetPropertyTabTilesData()
         ui->groupBoxTilesControl->setDisabled(false);
 
         SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
-
-        ui->groupBoxTilesExport->setDisabled(false);
     }
     else
     {
@@ -1218,8 +1247,6 @@ void VPMainWindow::SetPropertyTabTilesData()
         ui->groupBoxTilesControl->setDisabled(true);
 
         SetCheckBoxValue(ui->checkBoxTilesShowTiles, false);
-
-        ui->groupBoxTilesExport->setDisabled(true);
     }
 }
 
@@ -1280,7 +1307,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitMainGraphics()
 {
-    m_graphicsView = new VPMainGraphicsView(m_layout, m_tileFactory, this);
+    m_graphicsView = new VPMainGraphicsView(m_layout, this);
     m_graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     m_graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     ui->centralWidget->layout()->addWidget(m_graphicsView);
@@ -1288,7 +1315,7 @@ void VPMainWindow::InitMainGraphics()
     m_graphicsView->RefreshLayout();
 
     connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
-    connect(m_graphicsView->GetScene(), &VMainGraphicsScene::mouseMove, this, &VPMainWindow::on_MouseMoved);
+    connect(m_graphicsView, &VPMainGraphicsView::mouseMove, this, &VPMainWindow::on_MouseMoved);
     connect(m_layout.get(), &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
 }
 
@@ -1493,80 +1520,6 @@ auto VPMainWindow::MaybeSave() -> bool
         }
     }
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::generateTiledPdf(QString fileName)
-{
-//    if(not fileName.isEmpty())
-//    {
-//        m_graphicsView->PrepareForExport();
-//        m_tileFactory->refreshTileInfos();
-
-//        PageOrientation tilesOrientation = m_layout->LayoutSettings().GetTilesOrientation();
-
-//        // -------------  Set up the printer
-//        QScopedPointer<QPrinter> printer(new QPrinter());
-
-//        printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
-//                            QCoreApplication::applicationVersion());
-//        printer->setPageOrientation(QPageLayout::Portrait); // in the pdf file the pages should always be in portrait
-
-//        // here we might need to so some rounding for the size.
-//        printer->setPageSize(QPageSize(m_layout->LayoutSettings().GetTilesSize(Unit::Mm),
-//                                                           QPageSize::Millimeter));
-//        printer->setFullPage(true);
-
-//        #ifdef Q_OS_MAC
-//        printer->setOutputFormat(QPrinter::NativeFormat);
-//        #else
-//        printer->setOutputFormat(QPrinter::PdfFormat);
-//        #endif
-
-//        printer->setOutputFileName(fileName);
-//        printer->setResolution(static_cast<int>(PrintDPI));
-//        printer->setDocName(m_layout->GetFocusedSheet()->GetName());
-
-//        // -------------  Set up the painter
-//        QPainter painter;
-//        if (not painter.begin(printer.data()))
-//        { // failed to open file
-//            qCritical() << tr("Failed to open file, is it writable?");
-//            return;
-//        }
-//        painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
-//        painter.setRenderHint(QPainter::Antialiasing, true);
-//        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-
-//        if(tilesOrientation == PageOrientation::Landscape)
-//        {
-//            // The landscape tiles have to be rotated, because the pages
-//            // stay portrait in the pdf
-//            painter.rotate(90);
-//            painter.translate(0, -ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm));
-//        }
-
-//        for(int row=0;row<m_tileFactory->getRowNb();row++)  // for each row of the tiling grid
-//        {
-//            for(int col=0;col<m_tileFactory->getColNb();col++) // for each column of tiling grid
-//            {
-//                if(not (row == 0 && col == 0))
-//                {
-//                    if (not printer->newPage())
-//                    {
-//                        qWarning("failed in flushing page to disk, disk full?");
-//                        return;
-//                    }
-//                }
-
-//                m_tileFactory->drawTile(&painter, m_graphicsView, row, col);
-//            }
-//        }
-
-//        painter.end();
-
-//        m_graphicsView->CleanAfterExport();
-//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1977,6 +1930,587 @@ void VPMainWindow::RotatePiecesToGrainline()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ExportData(const VPExportData &data)
+{
+    if (data.format == LayoutExportFormats::DXF_AC1006_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1009_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1012_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1014_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1015_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1018_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1021_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1024_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1027_AAMA ||
+        data.format == LayoutExportFormats::DXF_AC1006_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1009_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1012_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1014_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1015_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1018_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1021_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1024_ASTM ||
+        data.format == LayoutExportFormats::DXF_AC1027_ASTM ||
+        data.format == LayoutExportFormats::RLD)
+    {
+        for (int i = 0; i < data.sheets.size(); ++i)
+        {
+            QString name;
+
+            if (data.sheets.size() > 1)
+            {
+                name = data.path + '/' + data.fileName +
+                        QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(data.format);
+            }
+            else
+            {
+                name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
+            }
+
+            VPSheetPtr sheet = data.sheets.at(i);
+            ExportApparelLayout(data, sheet->GetAsLayoutPieces(), name, sheet->GetSheetSize().toSize());
+        }
+    }
+    else
+    {
+        ExportFlatLayout(data);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<VLayoutPiece> &details,
+                                       const QString &name, const QSize &size) const
+{
+    const QString path = data.path;
+    bool usedNotExistedDir = CreateLayoutPath(path);
+    if (not usedNotExistedDir)
+    {
+        qCritical() << tr("Can't create a path");
+        return;
+    }
+
+    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(path);
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
+    VLayoutExporter exporter;
+
+    QT_WARNING_POP
+
+    exporter.SetFileName(name);
+    exporter.SetImageRect(QRectF(0, 0, size.width(), size.height()));
+    exporter.SetXScale(data.xScale);
+    exporter.SetYScale(data.yScale);
+    exporter.SetBinaryDxfFormat(data.isBinaryDXF);
+
+    switch (data.format)
+    {
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+            exporter.SetDxfVersion(DRW::AC1006);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+            exporter.SetDxfVersion(DRW::AC1009);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+            exporter.SetDxfVersion(DRW::AC1012);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+            exporter.SetDxfVersion(DRW::AC1014);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+            exporter.SetDxfVersion(DRW::AC1015);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+            exporter.SetDxfVersion(DRW::AC1018);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+            exporter.SetDxfVersion(DRW::AC1021);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+            exporter.SetDxfVersion(DRW::AC1024);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            exporter.SetDxfVersion(DRW::AC1027);
+            exporter.ExportToASTMDXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+            exporter.SetDxfVersion(DRW::AC1006);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+            exporter.SetDxfVersion(DRW::AC1009);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+            exporter.SetDxfVersion(DRW::AC1012);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+            exporter.SetDxfVersion(DRW::AC1014);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+            exporter.SetDxfVersion(DRW::AC1015);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+            exporter.SetDxfVersion(DRW::AC1018);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+            exporter.SetDxfVersion(DRW::AC1021);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+            exporter.SetDxfVersion(DRW::AC1024);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+            exporter.SetDxfVersion(DRW::AC1027);
+            exporter.ExportToAAMADXF(details);
+            break;
+        case LayoutExportFormats::RLD:
+            exporter.ExportToRLD(details);
+            break;
+        default:
+            qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
+            break;
+    }
+
+    RemoveLayoutPath(path, usedNotExistedDir);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ExportFlatLayout(const VPExportData &data)
+{
+    const QString path = data.path;
+    bool usedNotExistedDir = CreateLayoutPath(path);
+    if (not usedNotExistedDir)
+    {
+        qCritical() << tr("Can't create a path");
+        return;
+    }
+
+    m_layout->RefreshScenePieces();
+
+    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(path);
+
+    if (data.format == LayoutExportFormats::PDFTiled)
+    {
+        ExportPdfTiledFile(data);
+    }
+    else if ((data.format == LayoutExportFormats::PDF || data.format == LayoutExportFormats::PS ||
+             data.format == LayoutExportFormats::EPS) && data.exportUnified)
+    {
+        ExportUnifiedPdfFile(data);
+    }
+    else
+    {
+        ExportScene(data);
+    }
+
+    RemoveLayoutPath(path, usedNotExistedDir);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ExportScene(const VPExportData &data)
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
+    VLayoutExporter exporter;
+
+    QT_WARNING_POP
+
+    exporter.SetXScale(data.xScale);
+    exporter.SetYScale(data.yScale);
+    exporter.SetDescription(m_layout->LayoutSettings().GetDescription());
+    exporter.SetBinaryDxfFormat(data.isBinaryDXF);
+
+    QList<VPSheetPtr> sheets = data.sheets;
+
+    for (int i=0; i < sheets.size(); ++i)
+    {
+        VPSheetPtr sheet = sheets.at(i);
+        if (sheet.isNull())
+        {
+            continue;
+        }
+
+        sheet->SceneData()->PrepareForExport();
+        sheet->SceneData()->SetTextAsPaths(data.textAsPaths);
+
+        exporter.SetMargins(sheet->GetSheetMargins());
+        exporter.SetTitle(sheet->GetName());
+        exporter.SetIgnorePrinterMargins(sheet->IgnoreMargins());
+
+        QString name;
+        if (sheets.size() > 1)
+        {
+            name = data.path + '/' + data.fileName + QString::number(i+1) +
+                    VLayoutExporter::ExportFormatSuffix(data.format);
+        }
+        else
+        {
+            name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
+        }
+
+        exporter.SetFileName(name);
+        exporter.SetImageRect(sheet->GetMarginsRect());
+
+        switch (data.format)
+        {
+            case LayoutExportFormats::SVG:
+                exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                     Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                exporter.ExportToSVG(sheet->SceneData()->Scene());
+                break;
+            case LayoutExportFormats::PDF:
+                exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                     Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                exporter.ExportToPDF(sheet->SceneData()->Scene());
+                break;
+            case LayoutExportFormats::PNG:
+                exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                     Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                exporter.ExportToPNG(sheet->SceneData()->Scene());
+                break;
+            case LayoutExportFormats::OBJ:
+                exporter.ExportToOBJ(sheet->SceneData()->Scene());
+                break;
+            case LayoutExportFormats::PS:
+                exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                     Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                exporter.ExportToPS(sheet->SceneData()->Scene());
+                break;
+            case LayoutExportFormats::EPS:
+                exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                     Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                exporter.ExportToEPS(sheet->SceneData()->Scene());
+                break;
+            case LayoutExportFormats::DXF_AC1006_Flat:
+                exporter.SetDxfVersion(DRW::AC1006);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1009_Flat:
+                exporter.SetDxfVersion(DRW::AC1009);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1012_Flat:
+                exporter.SetDxfVersion(DRW::AC1012);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1014_Flat:
+                exporter.SetDxfVersion(DRW::AC1014);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1015_Flat:
+                exporter.SetDxfVersion(DRW::AC1015);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1018_Flat:
+                exporter.SetDxfVersion(DRW::AC1018);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1021_Flat:
+                exporter.SetDxfVersion(DRW::AC1021);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1024_Flat:
+                exporter.SetDxfVersion(DRW::AC1024);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::DXF_AC1027_Flat:
+                exporter.SetDxfVersion(DRW::AC1027);
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                break;
+            case LayoutExportFormats::TIF:
+                exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                     Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                exporter.ExportToTIF(sheet->SceneData()->Scene());
+                break;
+            default:
+                qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
+                break;
+        }
+
+        sheet->SceneData()->CleanAfterExport();
+        sheet->SceneData()->SetTextAsPaths(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ExportUnifiedPdfFile(const VPExportData &data)
+{
+    const QString name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
+
+    if (data.format == LayoutExportFormats::PDF)
+    {
+        GenerateUnifiedPdfFile(data, name);
+    }
+    else if (data.format == LayoutExportFormats::PS)
+    {
+        QTemporaryFile tmp;
+        if (tmp.open())
+        {
+            GenerateUnifiedPdfFile(data, tmp.fileName());
+            VLayoutExporter::PdfToPs(QStringList{tmp.fileName(), name});
+        }
+    }
+    else if (data.format == LayoutExportFormats::EPS)
+    {
+        QTemporaryFile tmp;
+        if (tmp.open())
+        {
+            GenerateUnifiedPdfFile(data, tmp.fileName());
+            VLayoutExporter::PdfToPs(QStringList{QStringLiteral("-eps"), tmp.fileName(), name});
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QString &name)
+{
+    QPrinter printer;
+    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                       QCoreApplication::applicationVersion());
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(name);
+    printer.setDocName(QFileInfo(name).fileName());
+    printer.setResolution(static_cast<int>(PrintDPI));
+    printer.setPageOrientation(QPageLayout::Portrait);
+
+    QPainter painter;
+
+    bool firstPage = true;
+
+    for (const auto& sheet : data.sheets)
+    {
+        QMarginsF margins;
+        if (not sheet->IgnoreMargins())
+        {
+            margins = sheet->GetSheetMargins();
+        }
+
+        QRectF imageRect = sheet->GetMarginsRect();
+        qreal width = FromPixel(imageRect.width() * data.xScale + margins.left() + margins.right(), Unit::Mm);
+        qreal height = FromPixel(imageRect.height() * data.yScale + margins.top() + margins.bottom(), Unit::Mm);
+
+        if (firstPage)
+        {
+            if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
+            {
+                qWarning() << tr("Cannot set printer page size");
+            }
+
+            if (not painter.begin(&printer))
+            { // failed to open file
+                qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(name));
+                return;
+            }
+
+            painter.setRenderHint(QPainter::Antialiasing, true);
+            painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter.setBrush(QBrush(Qt::NoBrush));
+            painter.scale(data.xScale, data.yScale);
+        }
+        else
+        {
+            if (not printer.newPage())
+            {
+                qCritical() << tr("Failed in flushing page to disk, disk full?");
+                return;
+            }
+
+            if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
+            {
+                qWarning() << tr("Cannot set printer page size");
+            }
+        }
+
+        if (not sheet->IgnoreMargins())
+        {
+            const qreal left = FromPixel(margins.left(), Unit::Mm);
+            const qreal top = FromPixel(margins.top(), Unit::Mm);
+            const qreal right = FromPixel(margins.right(), Unit::Mm);
+            const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+
+            if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
+            {
+                qWarning() << tr("Cannot set printer margins");
+            }
+        }
+        else
+        {
+            printer.setFullPage(sheet->IgnoreMargins());
+        }
+
+        sheet->SceneData()->PrepareForExport();
+        sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(&printer, imageRect), imageRect,
+                                            Qt::IgnoreAspectRatio);
+        sheet->SceneData()->CleanAfterExport();
+
+        firstPage = false;
+    }
+
+    painter.end();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
+{
+    QPrinter printer;
+#ifdef Q_OS_MAC
+    printer.setOutputFormat(QPrinter::NativeFormat);
+#else
+    printer.setOutputFormat(QPrinter::PdfFormat);
+#endif
+    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    QPageLayout::Orientation tiledPDFOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+
+    printer.setPageOrientation(tiledPDFOrientation);
+
+    if (not printer.setPageSize(QPageSize(m_layout->LayoutSettings().GetTilesSize(Unit::Mm), QPageSize::Millimeter)))
+    {
+        qWarning() << tr("Cannot set printer page size");
+    }
+
+    printer.setFullPage(m_layout->LayoutSettings().IgnoreTilesMargins());
+
+    if (not m_layout->LayoutSettings().IgnoreTilesMargins())
+    {
+        QMarginsF tiledMargins = m_layout->LayoutSettings().GetTilesMargins();
+        QMarginsF printerMargins;
+        if(tiledPDFOrientation == QPageLayout::Landscape)
+        {
+            // because when painting we have a -90rotation in landscape mode,
+            // see function PrintPages.
+            printerMargins = QMarginsF(tiledMargins.bottom(), tiledMargins.left(), tiledMargins.top(),
+                                       tiledMargins.right());
+        }
+        else
+        {
+            printerMargins = tiledMargins;
+        }
+
+        if (not printer.setPageMargins(UnitConvertor(printerMargins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
+        {
+            qWarning() << tr("Cannot set printer margins");
+        }
+    }
+
+    printer.setResolution(static_cast<int>(PrintDPI));
+
+    QPainter painter;
+
+    // when tiled, the landscape tiles have to be rotated, because the pages
+    // stay portrait in the pdf
+    if(tiledPDFOrientation == QPageLayout::Landscape)
+    {
+        const int angle = -90;
+        painter.rotate(angle);
+        painter.translate(-ToPixel(printer.pageRect(QPrinter::Millimeter).height(), Unit::Mm), 0);
+    }
+
+    if (data.exportUnified)
+    {
+        const QString name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
+
+        printer.setOutputFileName(name);
+        printer.setDocName(QFileInfo(name).baseName());
+
+        if (not painter.begin(&printer))
+        { // failed to open file
+            qCritical() << tr("Failed to open file, is it writable?");
+            return;
+        }
+
+        painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
+                            Qt::RoundCap, Qt::RoundJoin));
+        painter.setBrush(QBrush(Qt::NoBrush));
+        painter.setRenderHint(QPainter::Antialiasing, true);
+
+        bool firstSheet = true;
+        for (const auto& sheet : data.sheets)
+        {
+            GeneratePdfTiledFile(sheet, &painter, &printer, firstSheet);
+            firstSheet = false;
+        }
+
+        painter.end();
+    }
+    else
+    {
+        for (int i = 0; i < data.sheets.size(); ++i)
+        {
+            const QString name = data.path + '/' + data.fileName + QString::number(i+1) +
+                                 VLayoutExporter::ExportFormatSuffix(data.format);
+
+            printer.setOutputFileName(name);
+            printer.setDocName(QFileInfo(name).baseName());
+
+            if (not painter.begin(&printer))
+            { // failed to open file
+                qCritical() << tr("Failed to open file, is it writable?");
+                return;
+            }
+
+            painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
+                                Qt::RoundCap, Qt::RoundJoin));
+            painter.setBrush(QBrush(Qt::NoBrush));
+            painter.setRenderHint(QPainter::Antialiasing, true);
+
+            bool firstSheet = true;
+            GeneratePdfTiledFile(data.sheets.at(i), &painter, &printer, firstSheet);
+
+            painter.end();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *painter, QPrinter *printer, bool firstSheet)
+{
+    SCASSERT(not sheet.isNull())
+    SCASSERT(painter != nullptr)
+    SCASSERT(printer != nullptr)
+
+    sheet->SceneData()->PrepareForExport();
+    m_layout->TileFactory()->refreshTileInfos();
+    sheet->SceneData()->SetTextAsPaths(false);
+
+    for(int row=0; row < m_layout->TileFactory()->RowNb(sheet); row++)  // for each row of the tiling grid
+    {
+        for(int col=0; col < m_layout->TileFactory()->ColNb(sheet); col++) // for each column of tiling grid
+        {
+            if(not (row == 0 && col == 0) || not firstSheet)
+            {
+                if (not printer->newPage())
+                {
+                    qWarning("failed in flushing page to disk, disk full?");
+                    return;
+                }
+            }
+
+            m_layout->TileFactory()->drawTile(painter, printer, sheet, row, col);
+        }
+    }
+
+    sheet->SceneData()->CleanAfterExport();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
     VPApplication::VApp()->NewMainWindow();
@@ -2257,7 +2791,7 @@ void VPMainWindow::on_SheetSizeChanged()
         CorrectMaxMargins();
         LayoutWasSaved(false);
 
-        m_tileFactory->refreshTileInfos();
+        m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -2282,7 +2816,7 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
         SheetPaperSizeChanged();
         CorrectMaxMargins();
         LayoutWasSaved(false);
-        m_tileFactory->refreshTileInfos();
+        m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -2343,7 +2877,7 @@ void VPMainWindow::on_TilesSizeChanged()
         CorrectMaxMargins();
         LayoutWasSaved(false);
 
-        m_tileFactory->refreshTileInfos();
+        m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -2364,7 +2898,7 @@ void VPMainWindow::on_TilesOrientationChanged(bool checked)
         TilePaperSizeChanged();
         CorrectMaxMargins();
         LayoutWasSaved(false);
-        m_tileFactory->refreshTileInfos();
+        m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -2380,36 +2914,11 @@ void VPMainWindow::on_TilesMarginChanged()
                     ui->doubleSpinBoxTileMarginRight->value(),
                     ui->doubleSpinBoxTileMarginBottom->value());
         LayoutWasSaved(false);
-        m_tileFactory->refreshTileInfos();
+        m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonTilesExport_clicked()
-{
-    QString dir = QDir::homePath();
-    QString filters(tr("PDF Files") + QLatin1String("(*.pdf)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + m_layout->GetFocusedSheet()->GetName() + QLatin1String(".pdf"),
-                                                    filters, nullptr
-#ifdef Q_OS_LINUX
-                                                    , QFileDialog::DontUseNativeDialog
-#endif
-                                                    );
-
-    generateTiledPdf(fileName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::on_pushButtonSheetExport_clicked()
-{
-//    LayoutExportFormats format = static_cast<LayoutExportFormats>(ui->comboBoxSheetExportFormat->currentData().toInt());
-
-//    VPExporter exporter;
-//    exporter.Export(m_layout.get(), format, m_graphicsView);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2824,6 +3333,128 @@ void VPMainWindow::on_ConvertPaperSize()
     ui->doubleSpinBoxSheetPiecesGap->setSuffix(suffix);
 
     CorrectMaxMargins();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ExportLayout()
+{
+    if (m_layout.isNull())
+    {
+        return;
+    }
+
+    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    if (sheets.isEmpty())
+    {
+        return;
+    }
+
+    DialogSaveManualLayout dialog(sheets.size(), false, m_layout->LayoutSettings().GetTitle(), this);
+
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    // TODO add checks for out of bound and pieces superpositions
+
+    VPExportData data;
+    data.format = dialog.Format();
+    data.path = dialog.Path();
+    data.fileName = dialog.FileName();
+    data.sheets = sheets;
+    data.xScale = dialog.GetXScale();
+    data.yScale = dialog.GetYScale();
+    data.isBinaryDXF = dialog.IsBinaryDXFFormat();
+    data.textAsPaths = dialog.IsTextAsPaths();
+    data.exportUnified = dialog.IsExportUnified();
+
+    ExportData(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_ExportSheet()
+{
+    if (m_layout.isNull())
+    {
+        return;
+    }
+
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    DialogSaveManualLayout dialog(1, false, sheet->GetName(), this);
+
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    // TODO add checks for out of bound and pieces superpositions
+
+    VPExportData data;
+    data.format = dialog.Format();
+    data.path = dialog.Path();
+    data.fileName = dialog.FileName();
+    data.sheets = QList<VPSheetPtr>{sheet};
+    data.xScale = dialog.GetXScale();
+    data.yScale = dialog.GetYScale();
+    data.isBinaryDXF = dialog.IsBinaryDXFFormat();
+    data.textAsPaths = dialog.IsTextAsPaths();
+    data.exportUnified = dialog.IsExportUnified();
+
+    ExportData(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintLayout_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintPreviewLayout_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintTiledLayout_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintSheet_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintPreviewSheet_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintTiledSheet_triggered()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionPrintPreviewTiledSheet_triggered()
+{
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,6 +50,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound,
                           (QLatin1String("layout/warningPiecesOutOfBound")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))
 }  // namespace
 
 Q_DECLARE_METATYPE(QMarginsF)
@@ -289,4 +290,16 @@ void VPSettings::SetLayoutPieceGap(qreal value)
 auto VPSettings::GetLayoutPieceGap() const -> qreal
 {
     return ValueOrDef<qreal>(*this, *settingLayoutPieceGap, UnitConvertor(5, Unit::Mm, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint8 VPSettings::GetLayoutExportFormat() const
+{
+    return qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutExportFormat(qint8 format)
+{
+    setValue(*settingLayoutExportFormat, format);
 }

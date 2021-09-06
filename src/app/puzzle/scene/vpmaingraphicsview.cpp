@@ -34,17 +34,16 @@
 #include <QMenu>
 #include <QUndoStack>
 
-#include "../scene/vpgraphicssheet.h"
-#include "../scene/vpgraphicspiece.h"
 #include "../vptilefactory.h"
-#include "../scene/vpgraphicstilegrid.h"
 #include "../carousel/vpmimedatapiece.h"
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 #include "../layout/vppiece.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vptilefactory.h"
+#include "vpgraphicspiece.h"
 #include "vpgraphicspiececontrols.h"
+
 #include "../undocommands/vpundopiecemove.h"
 #include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundooriginmove.h"
@@ -62,41 +61,19 @@ const QKeySequence restoreOriginShortcut = QKeySequence(Qt::ControlModifier + Qt
 
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QWidget *parent) :
+VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent) :
     VMainGraphicsView(parent),
-    m_scene(new VMainGraphicsScene(this)),
     m_layout(layout)
 {
-    SCASSERT(not m_layout.isNull())
-    setScene(m_scene);
+    SCASSERT(not layout.isNull())
 
-    connect(m_scene, &VMainGraphicsScene::ItemClicked, this, &VPMainGraphicsView::on_ItemClicked);
-
-    m_graphicsSheet = new VPGraphicsSheet(m_layout);
-    m_graphicsSheet->setPos(0, 0);
-    m_scene->addItem(m_graphicsSheet);
+    SwitchScene(layout->GetFocusedSheet());
 
     setAcceptDrops(true);
 
-    m_graphicsTileGrid = new VPGraphicsTileGrid(m_layout, tileFactory);
-    m_scene->addItem(m_graphicsTileGrid);
-
-    m_rotationControls = new VPGraphicsPieceControls(m_layout);
-    m_rotationControls->setVisible(false);
-    m_scene->addItem(m_rotationControls);
-
-    m_rotationOrigin = new VPGraphicsTransformationOrigin(m_layout);
-    m_rotationOrigin->setVisible(false);
-    m_scene->addItem(m_rotationOrigin);
-
-    connect(m_rotationControls, &VPGraphicsPieceControls::ShowOrigin,
-            m_rotationOrigin, &VPGraphicsTransformationOrigin::on_ShowOrigin);
-    connect(m_rotationControls, &VPGraphicsPieceControls::TransformationOriginChanged,
-            m_rotationOrigin, &VPGraphicsTransformationOrigin::SetTransformationOrigin);
-
     // add the connections
     connect(layout.get(), &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
-    connect(layout.get(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::RefreshPieces);
+    connect(layout.get(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::on_ActiveSheetChanged);
 
     auto *restoreOrigin = new QAction(this);
     restoreOrigin->setShortcut(restoreOriginShortcut);
@@ -107,84 +84,29 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RefreshLayout()
 {
-    // FIXME: Is that the way to go?
-
-    m_graphicsSheet->update();
-
-    m_graphicsTileGrid->update();
-
-    m_scene->update();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RefreshPieces()
-{
-    qDeleteAll(m_graphicsPieces);
-    m_graphicsPieces.clear();
-
     VPLayoutPtr layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         VPSheetPtr sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
-            QList<VPPiecePtr> pieces = sheet->GetPieces();
-            m_graphicsPieces.reserve(pieces.size());
-
-            for (const auto &piece : pieces)
-            {
-                if (not piece.isNull())
-                {
-                    auto *graphicsPiece = new VPGraphicsPiece(piece);
-                    m_graphicsPieces.append(graphicsPiece);
-                    scene()->addItem(graphicsPiece);
-                    ConnectPiece(graphicsPiece);
-                }
-            }
+            sheet->SceneData()->RefreshLayout();
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainGraphicsView::GetScene() -> VMainGraphicsScene*
+void VPMainGraphicsView::RefreshPieces()
 {
-    return m_scene;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::PrepareForExport()
-{
-    m_graphicsSheet->SetShowBorder(false);
-    m_graphicsSheet->SetShowMargin(false);
-
     VPLayoutPtr layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
-        m_showGridTmp = layout->GetFocusedSheet()->GetLayout()->LayoutSettings().GetShowGrid();
-        layout->GetFocusedSheet()->GetLayout()->LayoutSettings().SetShowGrid(false);
-
-        m_showTilesTmp = layout->LayoutSettings().GetShowTiles();
-        layout->LayoutSettings().SetShowTiles(false);
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (not sheet.isNull())
+        {
+            sheet->SceneData()->RefreshPieces(sheet);
+        }
     }
-
-    RefreshLayout();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::CleanAfterExport()
-{
-    m_graphicsSheet->SetShowBorder(true);
-    m_graphicsSheet->SetShowMargin(true);
-
-    VPLayoutPtr layout = m_layout.toStrongRef();
-    if (not layout.isNull())
-    {
-        layout->GetFocusedSheet()->GetLayout()->LayoutSettings().SetShowGrid(m_showGridTmp);
-
-        layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
-    }
-
-    RefreshLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,7 +175,20 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
     {
-        for(auto *graphicsPiece : m_graphicsPieces)
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (sheet.isNull())
+        {
+            return ;
+        }
+
+        const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
+        for(auto *graphicsPiece : graphicsPieces)
         {
             VPPiecePtr piece = graphicsPiece->GetPiece();
 
@@ -360,43 +295,50 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
     {
         if (not event->isAutoRepeat())
         {
-            if (m_hasStickyPosition && not m_graphicsPieces.isEmpty())
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (layout.isNull())
             {
-                VPPiecePtr piece = m_graphicsPieces.first()->GetPiece();
-                if (not piece.isNull())
+                return;
+            }
+
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (sheet.isNull())
+            {
+                return;
+            }
+
+            const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
+            if (m_hasStickyPosition && not graphicsPieces.isEmpty())
+            {
+                if (layout->LayoutSettings().GetStickyEdges())
                 {
-                    VPLayoutPtr layout = piece->Layout();
-                    if (not layout.isNull() && layout->LayoutSettings().GetStickyEdges())
+                    auto PreparePieces = [layout]()
                     {
-                        auto PreparePieces = [layout]()
+                        QList<VPPiecePtr> pieces;
+                        VPSheetPtr sheet = layout->GetFocusedSheet();
+                        if (not sheet.isNull())
                         {
-                            QList<VPPiecePtr> pieces;
-                            VPSheetPtr sheet = layout->GetFocusedSheet();
-                            if (not sheet.isNull())
-                            {
-                                pieces = sheet->GetSelectedPieces();
-                            }
+                            pieces = sheet->GetSelectedPieces();
+                        }
 
-                            return pieces;
-                        };
+                        return pieces;
+                    };
 
-                        QList<VPPiecePtr> pieces = PreparePieces();
-                        if (pieces.size() == 1)
+                    QList<VPPiecePtr> pieces = PreparePieces();
+                    if (pieces.size() == 1)
+                    {
+                        VPPiecePtr p = pieces.first();
+
+                        auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
+                                                            m_allowChangeMerge);
+                        layout->UndoStack()->push(command);
+
+                        VPGraphicsPiece * gPiece = sheet->SceneData()->ScenePiece(p);
+                        if (gPiece != nullptr)
                         {
-                            VPPiecePtr p = pieces.first();
-
-                            auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
-                                                                m_allowChangeMerge);
-                            layout->UndoStack()->push(command);
-
-                            VPGraphicsPiece * gPiece = ScenePiece(p);
-                            if (gPiece != nullptr)
-                            {
-                                gPiece->SetStickyPoints(QVector<QPointF>());
-                            }
+                            gPiece->SetStickyPoints(QVector<QPointF>());
                         }
                     }
-
                 }
             }
 
@@ -409,9 +351,20 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
     {
         if (not event->isAutoRepeat())
         {
-            m_rotationControls->SetIgnorePieceTransformation(false);
-            m_rotationControls->on_UpdateControls();
-            m_rotationControls->on_HideHandles(false);
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (layout.isNull())
+            {
+                return;
+            }
+
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (sheet.isNull())
+            {
+                sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(false);
+                sheet->SceneData()->RotationControls()->on_UpdateControls();
+                sheet->SceneData()->RotationControls()->on_HideHandles(false);
+            }
+
             m_rotationSum = 0;
         }
     }
@@ -546,32 +499,14 @@ void VPMainGraphicsView::on_ItemClicked(QGraphicsItem *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::ConnectPiece(VPGraphicsPiece *piece)
+void VPMainGraphicsView::on_SceneMouseMove(const QPointF &scenePos)
 {
-    SCASSERT(piece != nullptr)
-
-    VPLayoutPtr layout = m_layout.toStrongRef();
-
-    connect(layout.get(), &VPLayout::PieceTransformationChanged, piece,
-            &VPGraphicsPiece::on_RefreshPiece);
-    connect(layout.get(), &VPLayout::PieceSelectionChanged,
-            m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
-    connect(layout.get(), &VPLayout::PiecePositionValidityChanged,
-            piece, &VPGraphicsPiece::on_RefreshPiece);
-    connect(piece, &VPGraphicsPiece::PieceTransformationChanged,
-            m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
-    connect(piece, &VPGraphicsPiece::HideTransformationHandles,
-            m_rotationControls, &VPGraphicsPieceControls::on_HideHandles);
-    connect(piece, &VPGraphicsPiece::HideTransformationHandles,
-            m_rotationOrigin, &VPGraphicsTransformationOrigin::on_HideHandles);
+    emit mouseMove(scenePos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 {
-    m_rotationControls->on_HideHandles(true);
-    m_rotationControls->SetIgnorePieceTransformation(true);
-
     VPLayoutPtr layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
@@ -583,6 +518,9 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
     {
         return;
     }
+
+    sheet->SceneData()->RotationControls()->on_HideHandles(true);
+    sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(true);
 
     VPTransformationOrigon origin = sheet->TransformationOrigin();
 
@@ -637,19 +575,27 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
 {
-    if (m_graphicsPieces.isEmpty())
-    {
-        return;
-    }
-
-    VPPiecePtr piece = m_graphicsPieces.first()->GetPiece();
-    if (piece.isNull())
-    {
-        return;
-    }
-
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr layout = m_layout.toStrongRef();
     if (layout.isNull())
+    {
+        return;
+    }
+
+    VPSheetPtr sheet = layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
+
+    if (graphicsPieces.isEmpty())
+    {
+        return;
+    }
+
+    VPPiecePtr piece = graphicsPieces.first()->GetPiece();
+    if (piece.isNull())
     {
         return;
     }
@@ -693,7 +639,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
                 m_hasStickyPosition = false;
             }
 
-            VPGraphicsPiece *gPiece = ScenePiece(p);
+            VPGraphicsPiece *gPiece = sheet->SceneData()->ScenePiece(p);
             if (gPiece != nullptr)
             {
                 gPiece->SetStickyPoints(path);
@@ -710,38 +656,66 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainGraphicsView::ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *
+void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
 {
-    VPGraphicsPiece *_graphicsPiece = nullptr;
-    for(auto *graphicPiece : m_graphicsPieces)
+    if (not sheet.isNull())
     {
-        if(graphicPiece->GetPiece() == piece)
-        {
-            _graphicsPiece = graphicPiece;
-        }
+       VMainGraphicsScene *scene = sheet->SceneData()->Scene();
+       setScene(scene);
+       connect(scene, &VMainGraphicsScene::ItemClicked, this, &VPMainGraphicsView::on_ItemClicked,
+               Qt::UniqueConnection);
+       connect(scene, &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
+               Qt::UniqueConnection);
     }
-
-    return _graphicsPiece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
+void VPMainGraphicsView::ClearSelection()
 {
-    VPGraphicsPiece *graphicsPiece = ScenePiece(piece);
-
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    if (piece->Sheet().isNull() || piece->Sheet() == layout->GetTrashSheet() ||
-            piece->Sheet() != layout->GetFocusedSheet()) // remove
+    VPSheetPtr sheet = layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> pieces = sheet->GetSelectedPieces();
+    for (const auto& piece : pieces)
+    {
+        piece->SetSelected(false);
+        emit layout->PieceSelectionChanged(piece);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    VPSheetPtr sheet = layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    VPGraphicsPiece *graphicsPiece = sheet->SceneData()->ScenePiece(piece);
+
+    if (piece != nullptr && (piece->Sheet().isNull() || piece->Sheet() == layout->GetTrashSheet() ||
+            piece->Sheet() != layout->GetFocusedSheet())) // remove
     {
         if (graphicsPiece != nullptr)
         {
-            scene()->removeItem(graphicsPiece);
-            m_graphicsPieces.removeAll(graphicsPiece);
+            sheet->SceneData()->Scene()->removeItem(graphicsPiece);
+            sheet->SceneData()->RemovePiece(graphicsPiece);
             delete graphicsPiece;
         }
     }
@@ -750,13 +724,24 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
         if(graphicsPiece == nullptr)
         {
             graphicsPiece = new VPGraphicsPiece(piece);
-            m_graphicsPieces.append(graphicsPiece);
-            ConnectPiece(graphicsPiece);
+            sheet->SceneData()->AddPiece(graphicsPiece);
         }
-        scene()->addItem(graphicsPiece);
+        sheet->SceneData()->Scene()->addItem(graphicsPiece);
     }
 
-    m_rotationControls->on_UpdateControls();
+    sheet->SceneData()->RotationControls()->on_UpdateControls();
 
     VMainGraphicsView::NewSceneRect(scene(), this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::on_ActiveSheetChanged(const VPSheetPtr &focusedSheet)
+{
+    if (not focusedSheet.isNull())
+    {
+        ClearSelection();
+        SwitchScene(focusedSheet);
+        RefreshLayout();
+        RefreshPieces();
+    }
 }

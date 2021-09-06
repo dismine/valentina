@@ -153,6 +153,8 @@ public:
      */
     void SetTilesSizeConverted(const QSizeF &size);
 
+    auto GetTilesOrientation() const -> QPageLayout::Orientation;
+
     /**
      * @brief GetTilesSize Returns the size of the tiles in Unit::Px
      * @return tiles size in Unit::Px

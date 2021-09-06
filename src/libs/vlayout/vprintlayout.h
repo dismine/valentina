@@ -121,6 +121,7 @@ public:
     void CleanLayout();
 
     static auto ContinueIfLayoutStale(QWidget *parent) -> int;
+    static auto SceneTargetRect(QPrinter *printer, const QRectF &source) -> QRectF;
 
 private slots:
     void PrintPages (QPrinter *printer);

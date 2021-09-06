@@ -120,6 +120,12 @@ void VPLayoutSettings::SetTilesSizeConverted(const QSizeF &size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::GetTilesOrientation() const -> QPageLayout::Orientation
+{
+    return m_tilesSize.height() >= m_tilesSize.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutSettings::GetTilesSize() const -> QSizeF
 {
     return m_tilesSize;

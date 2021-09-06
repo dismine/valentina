@@ -94,6 +94,9 @@ public:
     void SetLayoutPieceGap(qreal value);
     auto GetLayoutPieceGap() const -> qreal;
 
+    auto GetLayoutExportFormat() const -> qint8;
+    void SetLayoutExportFormat(qint8 format);
+
 private:
     Q_DISABLE_COPY(VPSettings)
 };

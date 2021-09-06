@@ -46,29 +46,13 @@ class VPMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT
 public:
-    VPMainGraphicsView(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QWidget *parent);
+    VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent);
     ~VPMainGraphicsView() = default;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
      */
     void RefreshLayout();
-
-    /**
-     * @brief GetScene Returns the scene of the view
-     * @return scene of the view
-     */
-    auto GetScene() -> VMainGraphicsScene*;
-
-    /**
-     * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
-     */
-    void PrepareForExport();
-
-    /**
-     * @brief CleanAfterExport cleans the graphic for an export (i.e show margin etc)
-     */
-    void CleanAfterExport();
 
 public slots:
     /**
@@ -78,7 +62,16 @@ public slots:
      */
     void on_PieceSheetChanged(const VPPiecePtr &piece);
 
+    void on_ActiveSheetChanged(const VPSheetPtr &focusedSheet);
+
     void RefreshPieces();
+
+signals:
+    /**
+     * @brief mouseMove send new mouse position.
+     * @param scenePos new mouse position.
+     */
+    void mouseMove(const QPointF &scenePos);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
@@ -96,32 +89,13 @@ protected:
 private slots:
     void RestoreOrigin() const;
     void on_ItemClicked(QGraphicsItem* item);
+    void on_SceneMouseMove(const QPointF &scenePos);
 
 private:
     Q_DISABLE_COPY(VPMainGraphicsView)
 
-    VMainGraphicsScene *m_scene;
-
-    VPGraphicsSheet *m_graphicsSheet{nullptr};
-
-    VPGraphicsTileGrid *m_graphicsTileGrid{nullptr};
-
-    VPGraphicsPieceControls *m_rotationControls{nullptr};
-    VPGraphicsTransformationOrigin *m_rotationOrigin{nullptr};
-
     VPLayoutWeakPtr m_layout;
 
-    QList<VPGraphicsPiece*> m_graphicsPieces{};
-
-    /**
-     * variable to hold temporarly hte value of the show tiles
-     */
-    bool m_showTilesTmp{false};
-
-    /**
-     * variable to hold temporarly hte value of the show grid
-     */
-    bool m_showGridTmp{false};
     bool m_allowChangeMerge{false};
 
     qreal m_rotationSum{0};
@@ -130,12 +104,11 @@ private:
     qreal m_stickyTranslateX{0};
     qreal m_stickyTranslateY{0};
 
-    void ConnectPiece(VPGraphicsPiece *piece);
-
     void RotatePiecesByAngle(qreal angle);
     void TranslatePiecesOn(qreal dx, qreal dy);
 
-    auto ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *;
+    void SwitchScene(const VPSheetPtr &sheet);
+    void ClearSelection();
 };
 
 #endif // VPMAINGRAPHICSVIEW_H

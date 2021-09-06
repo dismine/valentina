@@ -30,6 +30,7 @@
 #include "vppiece.h"
 #include "vpsheet.h"
 #include "../vpapplication.h"
+#include "../vptilefactory.h"
 
 #include <QLoggingCategory>
 #include <QUndoStack>
@@ -78,6 +79,11 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     layout->LayoutSettings().SetDescription(QString("Description of my Layout"));
     // --------------------------------------------------------
 
+    // init the tile factory
+    auto *tileFactory = new VPTileFactory(layout, settings);
+    tileFactory->refreshTileInfos();
+    layout->SetTileFactory(tileFactory);
+
     return layout;
 }
 
@@ -104,6 +110,30 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
             {
                 oldPiece->Update(piece);
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPTileFactory *VPLayout::TileFactory() const
+{
+    return m_tileFactory;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::SetTileFactory(VPTileFactory *newTileFactory)
+{
+    m_tileFactory = newTileFactory;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::RefreshScenePieces() const
+{
+    for (const auto& sheet : GetSheets())
+    {
+        if (not sheet.isNull())
+        {
+            sheet->SceneData()->RefreshPieces(sheet);
         }
     }
 }
@@ -159,7 +189,7 @@ auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetSheets() -> QList<VPSheetPtr>
+auto VPLayout::GetSheets() const -> QList<VPSheetPtr>
 {
     return m_sheets;
 }

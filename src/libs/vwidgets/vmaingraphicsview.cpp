@@ -793,7 +793,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QG
     {
         QRectF rect = item->sceneBoundingRect();
         const QList<QGraphicsItem *> children = item->childItems();
-        for (auto child : children)
+        for (auto *child : children)
         {
             if(child->isVisible())
             {

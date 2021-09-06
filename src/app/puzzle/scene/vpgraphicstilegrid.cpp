@@ -3,13 +3,17 @@
 #include "../vptilefactory.h"
 #include "../layout/vplayout.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QGraphicsItem *parent):
-    QGraphicsItem(parent),
-    m_tileFactory(tileFactory),
-    m_layout(layout)
+namespace
 {
+constexpr qreal penWidth = 1;
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &sheetUuid, QGraphicsItem *parent):
+    QGraphicsItem(parent),
+    m_layout(layout),
+    m_sheetUuid(sheetUuid)
+{
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -18,11 +22,15 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
-        return QRectF(0,
-                   0,
-                   m_tileFactory->getColNb()* m_tileFactory->getDrawingAreaWidth(),
-                   m_tileFactory->getRowNb()* m_tileFactory->getDrawingAreaHeight()
-                   );
+        VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+
+        QRectF rect(0, 0,
+                    layout->TileFactory()->ColNb(sheet) * layout->TileFactory()->DrawingAreaWidth(),
+                    layout->TileFactory()->RowNb(sheet) * layout->TileFactory()->DrawingAreaHeight() );
+
+        constexpr qreal halfPenWidth = penWidth/2.;
+
+        return rect.adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
     }
 
     return {};
@@ -37,34 +45,36 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
-        QPen pen(QColor(255,0,0,127), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+        VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+
+        QPen pen(QColor(255,0,0,127), penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         pen.setCosmetic(true);
         pen.setStyle(Qt::DashLine);
         QBrush noBrush(Qt::NoBrush);
         painter->setPen(pen);
         painter->setBrush(noBrush);
 
-        for(int i=0;i<=m_tileFactory->getColNb();i++)
+        for(int i=0;i<=layout->TileFactory()->ColNb(sheet);i++)
         {
            painter->drawLine(QPointF(
-                                 i*m_tileFactory->getDrawingAreaWidth(),
+                                 i*layout->TileFactory()->DrawingAreaWidth(),
                                  0),
                              QPointF(
-                                 i*m_tileFactory->getDrawingAreaWidth(),
-                                 m_tileFactory->getRowNb()*m_tileFactory->getDrawingAreaHeight()
+                                 i*layout->TileFactory()->DrawingAreaWidth(),
+                                 layout->TileFactory()->RowNb(sheet)*layout->TileFactory()->DrawingAreaHeight()
                                  )
                              );
         }
 
-        for(int j=0;j<=m_tileFactory->getRowNb();j++)
+        for(int j=0;j<=layout->TileFactory()->RowNb(sheet);j++)
         {
             painter->drawLine(QPointF(
                                   0,
-                                  j*m_tileFactory->getDrawingAreaHeight()
+                                  j*layout->TileFactory()->DrawingAreaHeight()
                                   ),
                               QPointF(
-                                  m_tileFactory->getColNb()*m_tileFactory->getDrawingAreaWidth(),
-                                  j*m_tileFactory->getDrawingAreaHeight()
+                                  layout->TileFactory()->ColNb(sheet)*layout->TileFactory()->DrawingAreaWidth(),
+                                  j*layout->TileFactory()->DrawingAreaHeight()
                                   )
                               );
         }

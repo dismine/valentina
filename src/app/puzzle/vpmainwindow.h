@@ -40,7 +40,6 @@
 #include "layout/vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "vptilefactory.h"
-#include "vpexporter.h"
 #include "vpcommandline.h"
 #include "../vlayout/vlayoutdef.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -55,6 +54,7 @@ namespace Ui
 class QFileSystemWatcher;
 template <typename T> class QSharedPointer;
 class DialogPuzzlePreferences;
+struct VPExportData;
 
 class VPMainWindow : public VAbstractMainWindow
 {
@@ -222,18 +222,6 @@ private slots:
     void on_TilesMarginChanged();
 
     /**
-     * @brief on_pushButtonTilesExport_clicked When the export tiles button is clicked
-     */
-    void on_pushButtonTilesExport_clicked();
-
-    /**
-     * @brief on_pushButtonLayoutExport_clicked When the button
-     * "Export layout" in the layout property is clicked.
-     * The slot is automatically connected through name convention.
-     */
-    void on_pushButtonSheetExport_clicked();
-
-    /**
      * @brief CarrouselLocationChanged When the piece carrousel's location
      * has been changed
      * @param area The new area where the piece carrousel has been placed
@@ -272,6 +260,19 @@ private slots:
 
     void on_ConvertPaperSize();
 
+    void on_ExportLayout();
+    void on_ExportSheet();
+
+    void on_actionPrintLayout_triggered();
+    void on_actionPrintPreviewLayout_triggered();
+    void on_actionPrintTiledLayout_triggered();
+    void on_actionPrintPreviewTiledLayout_triggered();
+
+    void on_actionPrintSheet_triggered();
+    void on_actionPrintPreviewSheet_triggered();
+    void on_actionPrintTiledSheet_triggered();
+    void on_actionPrintPreviewTiledSheet_triggered();
+
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
 #endif //defined(Q_OS_MAC)
@@ -288,8 +289,6 @@ private:
     QUndoStack *m_undoStack;
 
     VPLayoutPtr m_layout;
-
-    VPTileFactory *m_tileFactory{nullptr};
 
     /**
      * @brief spin box with the scale factor of the graphic view
@@ -402,12 +401,6 @@ private:
 
     auto MaybeSave() -> bool;
 
-    /**
-     * @brief generateTiledPdf Generates the tiled Pdf in the given filename
-     * @param fileName output file name
-     */
-    void generateTiledPdf(QString fileName);
-
     void CreateWindowMenu(QMenu *menu);
 
     auto IsLayoutReadOnly() const -> bool;
@@ -443,6 +436,16 @@ private:
     void CorrectMaxMargins();
 
     void RotatePiecesToGrainline();
+
+    void ExportData(const VPExportData &data);
+    void ExportApparelLayout(const VPExportData &data, const QVector<VLayoutPiece> &details, const QString &name,
+                             const QSize &size) const;
+    void ExportFlatLayout(const VPExportData &data);
+    void ExportScene(const VPExportData &data);
+    void ExportUnifiedPdfFile(const VPExportData &data);
+    void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
+    void ExportPdfTiledFile(const VPExportData &data);
+    void GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *painter, QPrinter *printer, bool firstSheet);
 };
 
 #endif // VPMAINWINDOW_H

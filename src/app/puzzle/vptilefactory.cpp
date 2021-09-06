@@ -7,13 +7,14 @@
 #include "scene/vpmaingraphicsview.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vlayout/vprintlayout.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings):
     m_layout(layout),
-    m_commonSettings(commonSettings)
+    m_commonSettings(commonSettings),
+    m_infoStripeWidth(UnitConvertor(1, Unit::Cm, Unit::Px))
 {
-    m_infoStripeWidth = UnitConvertor(1, Unit::Cm, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,34 +49,53 @@ void VPTileFactory::refreshTileInfos()
         {
             m_drawingAreaWidth += m_infoStripeWidth;
         }
-
-        QSizeF sheetSize;
-        VPSheetPtr sheet = layout->GetFocusedSheet();
-        if (not sheet.isNull())
-        {
-            sheetSize = sheet->GetSheetSize();
-        }
-        m_nbCol = qCeil(sheetSize.width()/m_drawingAreaWidth);
-        m_nbRow = qCeil(sheetSize.height()/m_drawingAreaHeight);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView, int row, int col)
+void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheetPtr &sheet, int row, int col)
 {
+    SCASSERT(painter != nullptr)
+    SCASSERT(printer != nullptr)
+
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(layout.isNull())
     {
-        return
-                ;
+        return;
     }
+
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    const int nbCol = ColNb(sheet);
+    const int nbRow = RowNb(sheet);
+
+    if (row < 0 || row > nbRow || col < 0 || col > nbCol)
+    {
+        return;
+    }
+
     QMarginsF tilesMargins = layout->LayoutSettings().GetTilesMargins();
     QPen penTileInfos = QPen(QColor(180,180,180), m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap,
                              Qt::RoundJoin);
     QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
                                Qt::RoundJoin);
 
-    QSvgRenderer* svgRenderer = new QSvgRenderer();
+    // paint the content of the page
+    QRectF source = QRectF(col*m_drawingAreaWidth,
+                           row*m_drawingAreaHeight,
+                           m_drawingAreaWidth + m_infoStripeWidth,
+                           m_drawingAreaHeight + m_infoStripeWidth
+                           );
+
+    painter->setPen(penTileDrawing);
+
+    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, source), source,
+                                        Qt::IgnoreAspectRatio);
+
+    QScopedPointer<QSvgRenderer> svgRenderer(new QSvgRenderer());
 
     // ------------- prepare triangles for position marks
     QRectF rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px),
@@ -90,7 +110,6 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
     triangleBasic.lineTo(rectBasic.topLeft());
 
     QBrush triangleBush = QBrush(QColor(200,200,200));
-
 
     // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
     painter->setPen(penTileInfos);
@@ -107,19 +126,17 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
         //  scissors along the top line
         svgRenderer->load(QStringLiteral("://puzzleicon/svg/icon_scissors_horizontal.svg"));
         svgRenderer->render(painter, QRectF(tilesMargins.left() + m_drawingAreaWidth,
-                                             tilesMargins.top(),
-                                             UnitConvertor(1, Unit::Cm, Unit::Px),
-                                             UnitConvertor(0.56, Unit::Cm, Unit::Px)
-                                             ));
+                                            tilesMargins.top(),
+                                            UnitConvertor(1, Unit::Cm, Unit::Px),
+                                            UnitConvertor(0.56, Unit::Cm, Unit::Px)));
 
         // dashed top line (for cutting)
         penTileInfos.setStyle(Qt::DashLine);
         painter->setPen(penTileInfos);
         painter->drawLine(QPointF(tilesMargins.left(),
-                                 tilesMargins.top()),
-                        QPointF(tilesMargins.left() + m_drawingAreaWidth + m_infoStripeWidth,
-                                tilesMargins.top())
-                         );
+                                  tilesMargins.top()),
+                          QPointF(tilesMargins.left() + m_drawingAreaWidth + m_infoStripeWidth,
+                                  tilesMargins.top()));
     }
     else
     {
@@ -127,10 +144,9 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
         penTileInfos.setStyle(Qt::SolidLine);
         painter->setPen(penTileInfos);
         painter->drawLine(QPointF(tilesMargins.left(),
-                                 tilesMargins.top()),
-                        QPointF(tilesMargins.left() + m_drawingAreaWidth + ((col < m_nbCol-1)? m_infoStripeWidth : 0),
-                                tilesMargins.top())
-                         );
+                                  tilesMargins.top()),
+                          QPointF(tilesMargins.left() + m_drawingAreaWidth + ((col < nbCol-1)? m_infoStripeWidth : 0),
+                                  tilesMargins.top()));
     }
 
     if(col > 0)
@@ -168,11 +184,11 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
         painter->drawLine(QPointF(tilesMargins.left(),
                                  tilesMargins.top()),
                         QPointF(tilesMargins.left(),
-                                tilesMargins.top() + m_drawingAreaHeight + ((row < m_nbRow-1)? m_infoStripeWidth : 0))
+                                tilesMargins.top() + m_drawingAreaHeight + ((row < nbRow-1)? m_infoStripeWidth : 0))
                          );
     }
 
-    if(row < m_nbRow-1)
+    if(row < nbRow-1)
     {
         // add bottom triangle
         QPainterPath triangleBottom =
@@ -191,19 +207,20 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
                         QPointF(tilesMargins.left() + m_drawingAreaWidth + m_infoStripeWidth,
                                 tilesMargins.top() + m_drawingAreaHeight)
                          );
-    } else
+    }
+    else
     {
         // solid bottom line at the edge
         penTileInfos.setStyle(Qt::SolidLine);
         painter->setPen(penTileInfos);
         painter->drawLine(QPointF(tilesMargins.left(),
                                  tilesMargins.top() + m_drawingAreaHeight),
-                        QPointF(tilesMargins.left() + m_drawingAreaWidth + ((col < m_nbCol-1)? m_infoStripeWidth : 0),
+                        QPointF(tilesMargins.left() + m_drawingAreaWidth + ((col < nbCol-1)? m_infoStripeWidth : 0),
                                 tilesMargins.top() + m_drawingAreaHeight)
                          );
     }
 
-    if(col < m_nbCol-1)
+    if(col < nbCol-1)
     {
         // add right triangle
         QPainterPath triangleRight =
@@ -230,24 +247,9 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
         painter->drawLine(QPointF(tilesMargins.left() + m_drawingAreaWidth,
                                  tilesMargins.top()),
                         QPointF(tilesMargins.left() + m_drawingAreaWidth,
-                                tilesMargins.top()+ m_drawingAreaHeight + ((row < m_nbRow-1) ? m_infoStripeWidth : 0))
+                                tilesMargins.top()+ m_drawingAreaHeight + ((row < nbRow-1) ? m_infoStripeWidth : 0))
                          );
     }
-
-    // paint the content of the page
-    QRectF source = QRectF(col*m_drawingAreaWidth,
-                           row*m_drawingAreaHeight,
-                           m_drawingAreaWidth + m_infoStripeWidth,
-                           m_drawingAreaHeight + m_infoStripeWidth
-                           );
-    QRectF target = QRectF(tilesMargins.left(),
-                           tilesMargins.top(),
-                           source.width(),
-                           source.height()
-                           );
-
-    painter->setPen(penTileDrawing);
-    graphicsView->GetScene()->render(painter, target, source, Qt::IgnoreAspectRatio);
 
     // prepare the painting for the text information
     QTextDocument td;
@@ -274,15 +276,20 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
     painter->restore();
 
     // paint the page information
-    const QString page = tr("Page %1 of %2").arg(row*m_nbCol+col+1).arg(m_nbCol*m_nbRow);
+    const QString page = tr("Page %1 of %2").arg(row*nbCol+col+1).arg(nbCol*nbRow);
 
     td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
+
+    QFontMetrics metrix = QFontMetrics(td.defaultFont());
+    QString clippedSheetName = metrix.elidedText(sheet->GetName(), Qt::ElideMiddle,
+                                                 metrix.width(QString().fill('z', 50)));
+
     td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
                        "<tr>"
                        "<td align='center'>%1 - %2</td>"
                        "</tr>"
                        "</table>")
-               .arg(page).arg(layout->GetFocusedSheet()->GetName()));
+               .arg(page).arg(clippedSheetName));
     painter->save();
     painter->rotate(-90);
     painter->translate(QPointF(-(m_drawingAreaHeight+tilesMargins.top()) + UnitConvertor(1, Unit::Cm, Unit::Px),
@@ -290,29 +297,38 @@ void VPTileFactory::drawTile(QPainter *painter, VPMainGraphicsView *graphicsView
                              ));
     td.drawContents(painter);
     painter->restore();
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPTileFactory::getRowNb()
+auto VPTileFactory::RowNb(const VPSheetPtr &sheet) const -> int
 {
-    return m_nbRow;
+    if (sheet.isNull())
+    {
+        return 0;
+    }
+    QSizeF sheetSize = sheet->GetSheetSize();
+    return qCeil(sheetSize.height() / m_drawingAreaHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPTileFactory::getColNb()
+auto VPTileFactory::ColNb(const VPSheetPtr &sheet) const -> int
 {
-    return m_nbCol;
+    if (sheet.isNull())
+    {
+        return 0;
+    }
+    QSizeF sheetSize = sheet->GetSheetSize();
+    return qCeil(sheetSize.width() / m_drawingAreaWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPTileFactory::getDrawingAreaHeight()
+auto VPTileFactory::DrawingAreaHeight() const -> qreal
 {
     return m_drawingAreaHeight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPTileFactory::getDrawingAreaWidth()
+auto VPTileFactory::DrawingAreaWidth() const -> qreal
 {
     return m_drawingAreaWidth;
 }

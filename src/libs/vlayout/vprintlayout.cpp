@@ -386,14 +386,6 @@ void VPrintLayout::PrintPages(QPrinter *printer)
 
     VWatermarkData data = WatermarkData();
 
-    // Here we try understand difference between printer's dpi and our.
-    // Get printer rect acording to our dpi.
-    const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
-                                 ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
-    const QRect pageRect = printer->pageLayout().paintRectPixels(printer->resolution());
-    const double xscale = pageRect.width() / printerPageRect.width();
-    const double yscale = pageRect.height() / printerPageRect.height();
-
     for (int i = 0; i < copyCount; ++i)
     {
         for (int j = 0; j < numPages; ++j)
@@ -437,24 +429,8 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                 QRectF source;
                 m_isTiled ? source = poster->at(index).rect : source = paper->rect();
 
-                qreal x;
-                qreal y;
-                if(printer->fullPage())
-                {
-                    QPageLayout layout = printer->pageLayout();
-                    layout.setUnits(QPageLayout::Millimeter);
-                    QMarginsF printerMargins = layout.margins();
-                    x = qFloor(ToPixel(printerMargins.left(), Unit::Mm));
-                    y = qFloor(ToPixel(printerMargins.top(), Unit::Mm));
-                }
-                else
-                {
-                    x = 0; y = 0;
-                }
-
-                QRectF target(x * xscale, y * yscale, source.width() * xscale, source.height() * yscale);
-
-                m_layoutScenes.at(paperIndex)->render(&painter, target, source, Qt::IgnoreAspectRatio);
+                m_layoutScenes.at(paperIndex)->render(&painter, VPrintLayout::SceneTargetRect(printer, source), source,
+                                                      Qt::IgnoreAspectRatio);
 
                 if (m_isTiled)
                 {
@@ -761,4 +737,35 @@ auto VPrintLayout::ContinueIfLayoutStale(QWidget *parent) -> int
     }
 
     return QMessageBox::Yes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source)
+{
+    SCASSERT(printer != nullptr)
+
+    qreal x;
+    qreal y;
+    if(printer->fullPage())
+    {
+        QPageLayout layout = printer->pageLayout();
+        layout.setUnits(QPageLayout::Millimeter);
+        QMarginsF printerMargins = layout.margins();
+        x = qFloor(ToPixel(printerMargins.left(), Unit::Mm));
+        y = qFloor(ToPixel(printerMargins.top(), Unit::Mm));
+    }
+    else
+    {
+        x = 0; y = 0;
+    }
+
+    // Here we try understand difference between printer's dpi and our.
+    // Get printer rect acording to our dpi.
+    const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
+                                 ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
+    const QRect pageRect = printer->pageLayout().paintRectPixels(printer->resolution());
+    const double xscale = pageRect.width() / printerPageRect.width();
+    const double yscale = pageRect.height() / printerPageRect.height();
+
+    return QRectF(x * xscale, y * yscale, source.width() * xscale, source.height() * yscale);
 }

@@ -38,6 +38,7 @@
 class VPPiece;
 class VPSheet;
 class QUndoStack;
+class VPTileFactory;
 
 class VPLayout : public QObject
 {
@@ -54,7 +55,7 @@ public:
     auto GetTrashedPieces() const -> QList<VPPiecePtr>;
 
     auto AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr;
-    auto GetSheets() -> QList<VPSheetPtr>;
+    auto GetSheets() const -> QList<VPSheetPtr>;
     auto GetSheet(const QUuid &uuid) -> VPSheetPtr;
 
     /**
@@ -87,6 +88,11 @@ public:
 
     void CheckPiecesPositionValidity() const;
 
+    auto TileFactory() const -> VPTileFactory *;
+    void SetTileFactory(VPTileFactory *newTileFactory);
+
+    void RefreshScenePieces() const;
+
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);
     void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
@@ -115,6 +121,8 @@ private:
     VPLayoutSettings m_layoutSettings{};
 
     QUndoStack *m_undoStack;
+
+    VPTileFactory *m_tileFactory{nullptr};
 };
 
 Q_DECLARE_METATYPE(VPLayoutPtr)

@@ -31,6 +31,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QUuid>
 
 #include "../vmisc/def.h"
 #include "../layout/layoutdef.h"
@@ -41,18 +42,17 @@ class VPLayout;
 class VPGraphicsTileGrid : public QGraphicsItem
 {
 public:
-    explicit VPGraphicsTileGrid(const VPLayoutPtr &layout, VPTileFactory *tileFactory, QGraphicsItem *parent = nullptr);
+    explicit VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &sheetUuid, QGraphicsItem *parent = nullptr);
     ~VPGraphicsTileGrid()=default;
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-
 private:
     Q_DISABLE_COPY(VPGraphicsTileGrid)
 
-    VPTileFactory * m_tileFactory{nullptr};
-    VPLayoutWeakPtr m_layout{};
+    VPLayoutWeakPtr m_layout;
+    QUuid m_sheetUuid;
 };
 
 #endif // VPGRAPHICSTILEGRID_H

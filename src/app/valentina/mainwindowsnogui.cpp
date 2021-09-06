@@ -1172,55 +1172,55 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                 case LayoutExportFormats::DXF_AC1006_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1006);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1009_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1009);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1012_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1012);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1014_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1014);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1015_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1015);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1018_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1018);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1021_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1021);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1024_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1024);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1027_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1027);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::TIF:

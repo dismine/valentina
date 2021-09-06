@@ -39,6 +39,79 @@
 
 class VPLayout;
 class VPPiece;
+class VMainGraphicsScene;
+class VPGraphicsPieceControls;
+class VPGraphicsTransformationOrigin;
+class VPGraphicsPiece;
+class VPGraphicsTileGrid;
+class VPGraphicsSheet;
+class VLayoutPiece;
+
+class VPSheetSceneData
+{
+public:
+    explicit VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid);
+    ~VPSheetSceneData();
+
+    VMainGraphicsScene *Scene() const;
+
+    /**
+     * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
+     */
+    void RefreshLayout();
+
+    void RefreshPieces(const VPSheetPtr &sheet);
+
+    /**
+     * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
+     */
+    void PrepareForExport();
+
+    /**
+     * @brief CleanAfterExport cleans the graphic for an export (i.e show margin etc)
+     */
+    void CleanAfterExport();
+
+    auto GraphicsPieces() const -> const QList<VPGraphicsPiece *> &;
+    auto GraphicsPiecesAsItems() const -> QList<QGraphicsItem *>;
+
+    auto RotationControls() const -> VPGraphicsPieceControls *;
+
+    auto ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *;
+
+    void RemovePiece(VPGraphicsPiece *piece);
+    void AddPiece(VPGraphicsPiece *piece);
+
+    void SetTextAsPaths(bool textAsPaths) const;
+
+private:
+    Q_DISABLE_COPY(VPSheetSceneData)
+
+    VPLayoutWeakPtr m_layout{};
+
+    VMainGraphicsScene *m_scene;
+
+    VPGraphicsSheet *m_graphicsSheet{nullptr};
+
+    VPGraphicsTileGrid *m_graphicsTileGrid{nullptr};
+
+    VPGraphicsPieceControls *m_rotationControls{nullptr};
+    VPGraphicsTransformationOrigin *m_rotationOrigin{nullptr};
+
+    QList<VPGraphicsPiece*> m_graphicsPieces{};
+
+    /**
+     * variable to hold temporarly hte value of the show tiles
+     */
+    bool m_showTilesTmp{false};
+
+    /**
+     * variable to hold temporarly hte value of the show grid
+     */
+    bool m_showGridTmp{false};
+
+    void ConnectPiece(VPGraphicsPiece *piece);
+};
 
 class VPSheet : public QObject
 {
@@ -57,6 +130,8 @@ public:
     auto GetPieces() const -> QList<VPPiecePtr>;
 
     auto GetSelectedPieces() const -> QList<VPPiecePtr>;
+
+    auto GetAsLayoutPieces() const -> QVector<VLayoutPiece>;
 
     /**
      * @brief GetName Returns the name of the sheet
@@ -178,6 +253,8 @@ public:
     auto IgnoreMargins() const -> bool;
     void SetIgnoreMargins(bool newIgnoreMargins);
 
+    VPSheetSceneData *SceneData() const;
+
 public slots:
     void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
 
@@ -209,6 +286,8 @@ private:
     bool m_ignoreMargins{false};
 
     GrainlineType m_grainlineType{GrainlineType::NotFixed};
+
+    VPSheetSceneData *m_sceneData{nullptr};
 
     auto SheetUnits() const -> Unit;
 

@@ -34,7 +34,7 @@
 
 #include "layout/vplayout.h"
 
-class VPMainGraphicsView;
+class QGraphicsScene;
 class VCommonSettings;
 class QPainter;
 
@@ -54,52 +54,42 @@ public:
      * @param row current row
      * @param col current column
      */
-    void drawTile(QPainter *painter, VPMainGraphicsView *graphicsView, int row, int col);
+    void drawTile(QPainter *painter, QPrinter *printer, const VPSheetPtr &sheet, int row, int col);
 
     /**
-     * @brief refreshTileInfos Resfreshes the tile infos (m_nbCol, m_nbRow, m_drawingAreaHeight, m_drawingAreaWidth)
+     * @brief refreshTileInfos Resfreshes the tile infos (m_drawingAreaHeight, m_drawingAreaWidth)
      */
     void refreshTileInfos();
 
     /**
-     * @brief getRowNb Returns the number of row pages
+     * @brief RowNb Returns the number of row pages
      * @return number of row pages
      */
-    int getRowNb();
+    auto RowNb(const VPSheetPtr &sheet) const -> int;
 
     /**
-     * @brief getColNb Returns the number of col pages
+     * @brief ColNb Returns the number of col pages
      * @return number of col pages
      */
-    int getColNb();
+    auto ColNb(const VPSheetPtr &sheet) const -> int;
 
     /**
-     * @brief getDrawingAreaHeight Returns the usable height of the tile in Px
+     * @brief DrawingAreaHeight Returns the usable height of the tile in Px
      * @return usable height of the tile in Px
      */
-    qreal getDrawingAreaHeight();
+    auto DrawingAreaHeight() const -> qreal;
 
     /**
-     * @brief getDrawingAreaWidth Returns the usable width of the tile in Px
+     * @brief DrawingAreaWidth Returns the usable width of the tile in Px
      * @return usable width of the tile in Px
      */
-    qreal getDrawingAreaWidth();
+    auto DrawingAreaWidth() const -> qreal;
 
 private:
     Q_DISABLE_COPY(VPTileFactory)
 
     VPLayoutWeakPtr  m_layout;
     VCommonSettings *m_commonSettings{nullptr};
-
-    /**
-     * @brief m_nbCol the number of column-pages for the current sheet of the layout
-     */
-    int m_nbCol{0};
-
-    /**
-     * @brief m_nbRow the number of row-pages for  the current sheet of the layout
-     */
-    int m_nbRow{0};
 
     /**
      * @brief m_drawingAreaHeight the height of the drawing area
@@ -114,7 +104,7 @@ private:
     /**
      * @brief m_infoStripeWidth the width of the info / glueing stripe in Px
      */
-    qreal m_infoStripeWidth{0};
+    qreal m_infoStripeWidth;
 
 };
 

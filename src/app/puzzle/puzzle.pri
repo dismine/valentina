@@ -22,7 +22,6 @@ SOURCES += \
     $$PWD/carousel/vpcarrouselpiecelist.cpp \
     $$PWD/vpcommandline.cpp \
     $$PWD/vpcommands.cpp \
-    $$PWD/vpexporter.cpp \
     $$PWD/scene/vpgraphicspiece.cpp \
     $$PWD/scene/vpgraphicspiececontrols.cpp \
     $$PWD/scene/vpgraphicssheet.cpp \
@@ -38,7 +37,8 @@ SOURCES += \
     $$PWD/vptilefactory.cpp \
     $$PWD/xml/vplayoutfilereader.cpp \
     $$PWD/xml/vplayoutfilewriter.cpp \
-    $$PWD/xml/vplayoutliterals.cpp
+    $$PWD/xml/vplayoutliterals.cpp \
+    $$PWD/dialogs/dialogsavemanuallayout.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -64,7 +64,6 @@ HEADERS += \
     $$PWD/carousel/vpcarrouselpiecelist.h \
     $$PWD/vpcommandline.h \
     $$PWD/vpcommands.h \
-    $$PWD/vpexporter.h \
     $$PWD/scene/vpgraphicspiece.h \
     $$PWD/scene/vpgraphicspiececontrols.h \
     $$PWD/scene/vpgraphicssheet.h \
@@ -80,7 +79,8 @@ HEADERS += \
     $$PWD/vptilefactory.h \
     $$PWD/xml/vplayoutfilereader.h \
     $$PWD/xml/vplayoutfilewriter.h \
-    $$PWD/xml/vplayoutliterals.h
+    $$PWD/xml/vplayoutliterals.h \
+    $$PWD/dialogs/dialogsavemanuallayout.h
 
 FORMS += \
     $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.ui \
@@ -89,4 +89,5 @@ FORMS += \
     $$PWD/dialogs/dialogpuzzlepreferences.ui \
     $$PWD/dialogs/vpdialogabout.ui \
     $$PWD/carousel/vpcarrousel.ui \
-    $$PWD/vpmainwindow.ui
+    $$PWD/vpmainwindow.ui \
+    $$PWD/dialogs/dialogsavemanuallayout.ui

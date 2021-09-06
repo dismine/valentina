@@ -57,12 +57,19 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuEdit">
+   <widget class="QMenu" name="menuSheet">
     <property name="title">
-     <string>&amp;Edit</string>
+     <string>&amp;Sheet</string>
     </property>
     <addaction name="separator"/>
     <addaction name="actionAddSheet"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrintSheet"/>
+    <addaction name="actionPrintPreviewSheet"/>
+    <addaction name="actionPrintTiledSheet"/>
+    <addaction name="actionPrintPreviewTiledSheet"/>
+    <addaction name="separator"/>
+    <addaction name="actionExportSheet"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -77,8 +84,20 @@
     <addaction name="actionAboutQt"/>
     <addaction name="actionAboutPuzzle"/>
    </widget>
+   <widget class="QMenu" name="menuLayout">
+    <property name="title">
+     <string>&amp;Layout</string>
+    </property>
+    <addaction name="actionPrintLayout"/>
+    <addaction name="actionPrintPreviewLayout"/>
+    <addaction name="actionPrintTiledLayout"/>
+    <addaction name="actionPrintPreviewTiledLayout"/>
+    <addaction name="separator"/>
+    <addaction name="actionExportLayout"/>
+   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
+   <addaction name="menuLayout"/>
+   <addaction name="menuSheet"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -1505,22 +1524,6 @@
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="groupBoxTilesExport">
-               <property name="title">
-                <string>Export</string>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_20">
-                <item>
-                 <widget class="QPushButton" name="pushButtonTilesExport">
-                  <property name="text">
-                   <string>Export Tiled Pdf</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
               <spacer name="verticalSpacerTiles">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -1770,6 +1773,9 @@
    <property name="shortcut">
     <string>Ctrl+O</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
   </action>
   <action name="actionSave">
    <property name="enabled">
@@ -1785,6 +1791,9 @@
    <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
   </action>
   <action name="actionSaveAs">
    <property name="enabled">
@@ -1799,6 +1808,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
    </property>
   </action>
   <action name="actionImportRawLayout">
@@ -1837,6 +1849,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
    </property>
   </action>
   <action name="actionAboutQt">
@@ -1931,10 +1946,128 @@
    <property name="text">
     <string>Preferences</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="actionAddSheet">
    <property name="text">
     <string>Add Sheet</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintLayout">
+   <property name="icon">
+    <iconset theme="document-print">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintPreviewLayout">
+   <property name="icon">
+    <iconset theme="document-print-preview">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print preview</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintTiledLayout">
+   <property name="icon">
+    <iconset theme="document-print">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print tiled</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintPreviewTiledLayout">
+   <property name="icon">
+    <iconset theme="document-print-preview">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print preview tiled</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionExportLayout">
+   <property name="text">
+    <string>Export</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintSheet">
+   <property name="icon">
+    <iconset theme="document-print">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintPreviewSheet">
+   <property name="icon">
+    <iconset theme="document-print-preview">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print preview</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintTiledSheet">
+   <property name="icon">
+    <iconset theme="document-print">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print tiled</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionPrintPreviewTiledSheet">
+   <property name="icon">
+    <iconset theme="document-print-preview">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Print preview tiled</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionExportSheet">
+   <property name="text">
+    <string>Export</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
    </property>
   </action>
  </widget>
@@ -1953,7 +2086,6 @@
   <tabstop>lineEditSheetName</tabstop>
   <tabstop>pushButtonSheetExport</tabstop>
   <tabstop>checkBoxTilesShowTiles</tabstop>
-  <tabstop>pushButtonTilesExport</tabstop>
   <tabstop>lineEditLayoutName</tabstop>
   <tabstop>plainTextEditLayoutDescription</tabstop>
   <tabstop>checkBoxLayoutWarningPiecesSuperposition</tabstop>
