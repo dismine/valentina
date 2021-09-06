@@ -210,9 +210,15 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
         if (selectedAction == moveAction)
         {
-            piece->ClearTransformations();
-            auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
-            layout->UndoStack()->push(command);
+            VPSheetPtr sheet = layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                piece->ClearTransformations();
+                QRectF rect = sheet->GetMarginsRect();
+                piece->SetPosition(QPointF(rect.topLeft().x() + 1, rect.topLeft().y() + 1));
+                auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
+                layout->UndoStack()->push(command);
+            }
         }
         else if (selectedAction == deleteAction)
         {
