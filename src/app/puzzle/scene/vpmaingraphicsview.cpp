@@ -457,19 +457,7 @@ void VPMainGraphicsView::on_ItemClicked(QGraphicsItem *item)
             VPSheetPtr sheet = layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
-                QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
-                for (const auto& piece : selectedPieces)
-                {
-                    if (piece->IsSelected())
-                    {
-                        piece->SetSelected(false);
-                    }
-                }
-
-                if (not selectedPieces.isEmpty())
-                {
-                    emit layout->PieceSelectionChanged(VPPiecePtr());
-                }
+                sheet->ClearSelection();
             }
         }
     }

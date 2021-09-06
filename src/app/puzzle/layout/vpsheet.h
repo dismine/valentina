@@ -255,6 +255,8 @@ public:
 
     VPSheetSceneData *SceneData() const;
 
+    void ClearSelection() const;
+
 public slots:
     void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
 

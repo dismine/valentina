@@ -596,6 +596,28 @@ auto VPSheet::SceneData() const -> VPSheetSceneData *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPSheet::ClearSelection() const
+{
+    QList<VPPiecePtr> selectedPieces = GetSelectedPieces();
+    for (const auto& piece : selectedPieces)
+    {
+        if (piece->IsSelected())
+        {
+            piece->SetSelected(false);
+        }
+    }
+
+    if (not selectedPieces.isEmpty())
+    {
+        VPLayoutPtr layout = GetLayout();
+        if (not layout.isNull())
+        {
+            emit GetLayout()->PieceSelectionChanged(VPPiecePtr());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::SheetUnits() const -> Unit
 {
     VPLayoutPtr layout = GetLayout();

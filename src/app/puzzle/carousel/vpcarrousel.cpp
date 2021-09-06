@@ -203,6 +203,12 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 
             if (not sheet.isNull())
             {
+                VPSheetPtr activeSheet = layout->GetFocusedSheet();
+                if (not activeSheet.isNull())
+                {
+                    activeSheet->ClearSelection();
+                }
+
                 m_ignoreActiveSheetChange = true;
                 layout->SetFocusedSheet(sheet);
                 m_ignoreActiveSheetChange = false;
