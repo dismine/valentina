@@ -242,7 +242,8 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
         ML::TagTitle,       // 1
         ML::TagDescription, // 2
         ML::TagControl,     // 3
-        ML::TagTiles        // 4
+        ML::TagTiles,       // 4
+        ML::TagScale        // 5
     };
 
     while (readNextStartElement())
@@ -270,6 +271,10 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
             case 4: // tiles
                 qDebug("read tiles");
                 ReadTiles(layout);
+                break;
+            case 5: // scale
+                qDebug("read scale");
+                ReadScale(layout);
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -334,6 +339,18 @@ void VPLayoutFileReader::ReadTiles(const VPLayoutPtr &layout)
                 break;
         }
     }
+
+    readElementText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadScale(const VPLayoutPtr &layout)
+{
+    AssertRootTag(ML::TagScale);
+
+    QXmlStreamAttributes attribs = attributes();
+    layout->LayoutSettings().SetHorizontalScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
+    layout->LayoutSettings().SetVerticalScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
 
     readElementText();
 }

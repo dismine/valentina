@@ -24,9 +24,12 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
     {
         VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
 
+        qreal xScale = layout->LayoutSettings().HorizontalScale();
+        qreal yScale = layout->LayoutSettings().VerticalScale();
+
         QRectF rect(0, 0,
-                    layout->TileFactory()->ColNb(sheet) * layout->TileFactory()->DrawingAreaWidth(),
-                    layout->TileFactory()->RowNb(sheet) * layout->TileFactory()->DrawingAreaHeight() );
+                    layout->TileFactory()->ColNb(sheet) * (layout->TileFactory()->DrawingAreaWidth() / xScale),
+                    layout->TileFactory()->RowNb(sheet) * (layout->TileFactory()->DrawingAreaHeight() / yScale));
 
         constexpr qreal halfPenWidth = penWidth/2.;
 
@@ -54,29 +57,22 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         painter->setPen(pen);
         painter->setBrush(noBrush);
 
+        qreal xScale = layout->LayoutSettings().HorizontalScale();
+        qreal yScale = layout->LayoutSettings().VerticalScale();
+
+        const qreal drawingAreaWidth = layout->TileFactory()->DrawingAreaWidth() / xScale;
+        const qreal drawingAreaHeight = layout->TileFactory()->DrawingAreaHeight() / yScale;
+
         for(int i=0;i<=layout->TileFactory()->ColNb(sheet);i++)
         {
-           painter->drawLine(QPointF(
-                                 i*layout->TileFactory()->DrawingAreaWidth(),
-                                 0),
-                             QPointF(
-                                 i*layout->TileFactory()->DrawingAreaWidth(),
-                                 layout->TileFactory()->RowNb(sheet)*layout->TileFactory()->DrawingAreaHeight()
-                                 )
-                             );
+           painter->drawLine(QPointF(i*drawingAreaWidth, 0),
+                             QPointF(i*drawingAreaWidth, layout->TileFactory()->RowNb(sheet)*drawingAreaHeight));
         }
 
         for(int j=0;j<=layout->TileFactory()->RowNb(sheet);j++)
         {
-            painter->drawLine(QPointF(
-                                  0,
-                                  j*layout->TileFactory()->DrawingAreaHeight()
-                                  ),
-                              QPointF(
-                                  layout->TileFactory()->ColNb(sheet)*layout->TileFactory()->DrawingAreaWidth(),
-                                  j*layout->TileFactory()->DrawingAreaHeight()
-                                  )
-                              );
+            painter->drawLine(QPointF(0, j*drawingAreaHeight),
+                              QPointF(layout->TileFactory()->ColNb(sheet)*drawingAreaWidth, j*drawingAreaHeight));
         }
     }
 }

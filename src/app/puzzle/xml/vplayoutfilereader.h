@@ -56,6 +56,7 @@ private:
     void ReadProperties(const VPLayoutPtr &layout);
     void ReadControl(const VPLayoutPtr &layout);
     void ReadTiles(const VPLayoutPtr &layout);
+    void ReadScale(const VPLayoutPtr &layout);
     void ReadUnplacedPieces(const VPLayoutPtr &layout);
     void ReadSheets(const VPLayoutPtr &layout);
     void ReadSheet(const VPLayoutPtr &layout);

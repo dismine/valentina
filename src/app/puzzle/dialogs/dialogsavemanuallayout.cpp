@@ -126,13 +126,6 @@ DialogSaveManualLayout::DialogSaveManualLayout(int count, bool consoleExport, co
 
     ui->lineEditPath->setText(VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts());
 
-    connect(ui->toolButtonScaleConnected, &QToolButton::clicked, this, &DialogSaveManualLayout::ToggleScaleConnection);
-
-    connect(ui->doubleSpinBoxHorizontalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveManualLayout::HorizontalScaleChanged);
-    connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveManualLayout::VerticalScaleChanged);
-
     ReadSettings();
 
     ShowExample();//Show example for current format.
@@ -145,19 +138,19 @@ DialogSaveManualLayout::~DialogSaveManualLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveManualLayout::Path() const
+auto DialogSaveManualLayout::Path() const -> QString
 {
     return ui->lineEditPath->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveManualLayout::FileName() const
+auto DialogSaveManualLayout::FileName() const -> QString
 {
     return ui->lineEditFileName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-LayoutExportFormats DialogSaveManualLayout::Format() const
+auto DialogSaveManualLayout::Format() const -> LayoutExportFormats
 {
     return static_cast<LayoutExportFormats>(ui->comboBoxFormat->currentData().toInt());
 }
@@ -229,7 +222,7 @@ void DialogSaveManualLayout::SetBinaryDXFFormat(bool binary)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveManualLayout::IsBinaryDXFFormat() const
+auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
 {
     switch(Format())
     {
@@ -303,7 +296,7 @@ void DialogSaveManualLayout::SetDestinationPath(const QString &cmdDestinationPat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveManualLayout::IsTextAsPaths() const
+auto DialogSaveManualLayout::IsTextAsPaths() const -> bool
 {
     return ui->checkBoxTextAsPaths->isChecked();
 }
@@ -312,30 +305,6 @@ bool DialogSaveManualLayout::IsTextAsPaths() const
 void DialogSaveManualLayout::SetTextAsPaths(bool textAsPaths)
 {
     ui->checkBoxTextAsPaths->setChecked(textAsPaths);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveManualLayout::SetXScale(qreal scale)
-{
-    ui->doubleSpinBoxHorizontalScale->setValue(scale * 100.);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal DialogSaveManualLayout::GetXScale() const
-{
-    return ui->doubleSpinBoxHorizontalScale->value() / 100.;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveManualLayout::SetYScale(qreal scale)
-{
-    ui->doubleSpinBoxVerticalScale->setValue(scale * 100.);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal DialogSaveManualLayout::GetYScale() const
-{
-    return ui->doubleSpinBoxVerticalScale->value() / 100.;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -390,7 +359,7 @@ void DialogSaveManualLayout::SetExportUnified(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveManualLayout::IsExportUnified() const
+auto DialogSaveManualLayout::IsExportUnified() const -> bool
 {
     switch(Format())
     {
@@ -586,40 +555,7 @@ void DialogSaveManualLayout::ShowExample()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSaveManualLayout::ToggleScaleConnection()
-{
-    m_scaleConnected = not m_scaleConnected;
-
-    QIcon icon;
-    icon.addFile(m_scaleConnected ? QStringLiteral(":/icon/32x32/link.png")
-                                  : QStringLiteral(":/icon/32x32/broken_link.png"));
-    ui->toolButtonScaleConnected->setIcon(icon);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveManualLayout::HorizontalScaleChanged(double d)
-{
-    if (m_scaleConnected)
-    {
-        ui->doubleSpinBoxVerticalScale->blockSignals(true);
-        ui->doubleSpinBoxVerticalScale->setValue(d);
-        ui->doubleSpinBoxVerticalScale->blockSignals(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveManualLayout::VerticalScaleChanged(double d)
-{
-    if (m_scaleConnected)
-    {
-        ui->doubleSpinBoxHorizontalScale->blockSignals(true);
-        ui->doubleSpinBoxHorizontalScale->setValue(d);
-        ui->doubleSpinBoxHorizontalScale->blockSignals(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveManualLayout::SupportPSTest()
+auto DialogSaveManualLayout::SupportPSTest() -> bool
 {
     if (!tested)
     {
@@ -630,7 +566,7 @@ bool DialogSaveManualLayout::SupportPSTest()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<std::pair<QString, LayoutExportFormats> > DialogSaveManualLayout::InitFormats()
+auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >
 {
     QVector<std::pair<QString, LayoutExportFormats>> list;
 

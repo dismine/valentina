@@ -58,6 +58,7 @@ const QString TagPieceLabel          = QStringLiteral("pieceLabel");
 const QString TagPatternLabel        = QStringLiteral("patternLabel");
 const QString TagLines               = QStringLiteral("lines");
 const QString TagLine                = QStringLiteral("line");
+const QString TagScale               = QStringLiteral("scale");
 
 const QString AttrVersion              = QStringLiteral("version");
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");
@@ -98,6 +99,8 @@ const QString AttrAlignment            = QStringLiteral("alignment");
 const QString AttrGradationLabel       = QStringLiteral("gradationLabel");
 const QString AttrCopyNumber           = QStringLiteral("copyNumber");
 const QString AttrGrainlineType        = QStringLiteral("grainlineType");
+const QString AttrXScale               = QStringLiteral("xScale");
+const QString AttrYScale               = QStringLiteral("yScale");
 
 const QString atFrontStr               = QStringLiteral("atFront");
 const QString atRearStr                = QStringLiteral("atRear");

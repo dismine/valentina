@@ -52,21 +52,15 @@ public:
     void SelectFormat(LayoutExportFormats format);
 
     void SetBinaryDXFFormat(bool binary);
-    bool IsBinaryDXFFormat() const;
+    auto IsBinaryDXFFormat() const -> bool;
 
     void SetDestinationPath(const QString& cmdDestinationPath);
 
-    bool IsTextAsPaths() const;
+    auto IsTextAsPaths() const -> bool;
     void SetTextAsPaths(bool textAsPaths);
 
-    void  SetXScale(qreal scale);
-    qreal GetXScale() const;
-
-    void  SetYScale(qreal scale);
-    qreal GetYScale() const;
-
     void SetExportUnified(bool value);
-    bool IsExportUnified() const;
+    auto IsExportUnified() const -> bool;
 
 protected:
     virtual void showEvent(QShowEvent *event) override;
@@ -75,9 +69,6 @@ private slots:
     void Save();
     void PathChanged(const QString &text);
     void ShowExample();
-    void ToggleScaleConnection();
-    void HorizontalScaleChanged(double d);
-    void VerticalScaleChanged(double d);
 
 private:
     Q_DISABLE_COPY(DialogSaveManualLayout)

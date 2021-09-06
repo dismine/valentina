@@ -83,16 +83,23 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
                                Qt::RoundJoin);
 
+    painter->setPen(penTileDrawing);
+
     // paint the content of the page
-    QRectF source = QRectF(col*m_drawingAreaWidth,
+    qreal xScale = layout->LayoutSettings().HorizontalScale();
+    qreal yScale = layout->LayoutSettings().VerticalScale();
+    QRectF source = QRectF(col*m_drawingAreaWidth / xScale,
+                           row*m_drawingAreaHeight / yScale,
+                           m_drawingAreaWidth / xScale + m_infoStripeWidth,
+                           m_drawingAreaHeight / yScale + m_infoStripeWidth
+                           );
+
+    QRectF target = QRectF(col*m_drawingAreaWidth,
                            row*m_drawingAreaHeight,
                            m_drawingAreaWidth + m_infoStripeWidth,
                            m_drawingAreaHeight + m_infoStripeWidth
                            );
-
-    painter->setPen(penTileDrawing);
-
-    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, source), source,
+    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
                                         Qt::IgnoreAspectRatio);
 
     QScopedPointer<QSvgRenderer> svgRenderer(new QSvgRenderer());
@@ -306,8 +313,16 @@ auto VPTileFactory::RowNb(const VPSheetPtr &sheet) const -> int
     {
         return 0;
     }
+
+    qreal yScale = 1;
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(not layout.isNull())
+    {
+        yScale = layout->LayoutSettings().VerticalScale();
+    }
+
     QSizeF sheetSize = sheet->GetSheetSize();
-    return qCeil(sheetSize.height() / m_drawingAreaHeight);
+    return qCeil(sheetSize.height() * yScale / m_drawingAreaHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -317,8 +332,16 @@ auto VPTileFactory::ColNb(const VPSheetPtr &sheet) const -> int
     {
         return 0;
     }
+
+    qreal xScale = 1;
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(not layout.isNull())
+    {
+        xScale = layout->LayoutSettings().HorizontalScale();
+    }
+
     QSizeF sheetSize = sheet->GetSheetSize();
-    return qCeil(sheetSize.width() / m_drawingAreaWidth);
+    return qCeil(sheetSize.width() * xScale / m_drawingAreaWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

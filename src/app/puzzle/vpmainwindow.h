@@ -316,6 +316,8 @@ private:
     Unit m_oldPieceTranslationUnit{Unit::Mm};
     Unit m_oldLayoutUnit{Unit::Mm};
 
+    bool m_scaleConnected{true};
+
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
      */
@@ -446,6 +448,8 @@ private:
     void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
     void ExportPdfTiledFile(const VPExportData &data);
     void GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *painter, QPrinter *printer, bool firstSheet);
+
+    void UpdateScaleConnection() const;
 };
 
 #endif // VPMAINWINDOW_H

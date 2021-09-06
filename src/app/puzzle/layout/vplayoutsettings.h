@@ -300,6 +300,12 @@ public:
     auto IgnoreTilesMargins() const -> bool;
     void SetIgnoreTilesMargins(bool newIgnoreTilesMargins);
 
+    auto HorizontalScale() const -> qreal;
+    void SetHorizontalScale(qreal newHorizontalScale);
+
+    auto VerticalScale() const -> qreal;
+    void SetVerticalScale(qreal newVerticalScale);
+
 private:
     Unit m_unit{Unit::Cm};
 
@@ -348,6 +354,9 @@ private:
     qreal m_gridRowHeight{0};
 
     bool m_stickyEdges{false};
+
+    qreal m_horizontalScale{1.0};
+    qreal m_verticalScale{1.0};
 };
 
 #endif // VPLAYOUTSETTINGS_H

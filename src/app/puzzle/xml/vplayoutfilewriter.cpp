@@ -179,6 +179,11 @@ void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
 
     WriteTiles(layout);
 
+    writeStartElement(ML::TagScale);
+    SetAttribute(ML::AttrXScale, layout->LayoutSettings().HorizontalScale());
+    SetAttribute(ML::AttrYScale, layout->LayoutSettings().VerticalScale());
+    writeEndElement(); // scale
+
     writeEndElement(); // properties
 }
 

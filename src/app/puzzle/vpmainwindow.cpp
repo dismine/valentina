@@ -979,6 +979,65 @@ void VPMainWindow::InitPropertyTabLayout()
         }
     });
 
+    connect(ui->toolButtonScaleConnected, &QToolButton::clicked, this, [this]()
+    {
+        m_scaleConnected = not m_scaleConnected;
+
+        UpdateScaleConnection();
+    });
+
+    connect(ui->doubleSpinBoxHorizontalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](double d)
+    {
+        if (m_layout.isNull())
+        {
+            return;
+        }
+
+        m_layout->LayoutSettings().SetHorizontalScale(d / 100.);
+
+        if (m_scaleConnected)
+        {
+            ui->doubleSpinBoxVerticalScale->blockSignals(true);
+            ui->doubleSpinBoxVerticalScale->setValue(d);
+            ui->doubleSpinBoxVerticalScale->blockSignals(false);
+
+            m_layout->LayoutSettings().SetVerticalScale(d / 100.);
+        }
+
+        LayoutWasSaved(false);
+        m_layout->TileFactory()->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
+
+        VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+    });
+
+    connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            [this](double d)
+    {
+        if (m_layout.isNull())
+        {
+            return;
+        }
+
+        m_layout->LayoutSettings().SetVerticalScale(d / 100.);
+
+        if (m_scaleConnected)
+        {
+            ui->doubleSpinBoxHorizontalScale->blockSignals(true);
+            ui->doubleSpinBoxHorizontalScale->setValue(d);
+            ui->doubleSpinBoxHorizontalScale->blockSignals(false);
+
+            m_layout->LayoutSettings().SetHorizontalScale(d / 100.);
+        }
+
+        LayoutWasSaved(false);
+        m_layout->TileFactory()->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
+
+        VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+    });
+
     connect(ui->pushButtonLayoutExport, &QPushButton::clicked, this, &VPMainWindow::on_ExportLayout);
 }
 
@@ -1276,6 +1335,17 @@ void VPMainWindow::SetPropertyTabLayoutData()
 
         ui->doubleSpinBoxSheetPiecesGap->setSuffix(" " + UnitsToStr(LayoutUnit(), true));
 
+        ui->groupBoxLayoutScale->setDisabled(false);
+
+        const qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxHorizontalScale, xScale * 100.);
+
+        const qreal yScale = m_layout->LayoutSettings().VerticalScale();
+        SetDoubleSpinBoxValue(ui->doubleSpinBoxVerticalScale, yScale * 100.);
+
+        m_scaleConnected = qFuzzyCompare(xScale, yScale);
+        UpdateScaleConnection();
+
         ui->groupBoxLayoutExport->setDisabled(false);
     }
     else
@@ -1297,6 +1367,8 @@ void VPMainWindow::SetPropertyTabLayoutData()
         SetCheckBoxValue(ui->checkBoxFollowGainline, false);
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, 0);
+
+        ui->groupBoxLayoutScale->setDisabled(true);
 
         ui->groupBoxLayoutExport->setDisabled(true);
     }
@@ -2139,7 +2211,7 @@ void VPMainWindow::ExportScene(const VPExportData &data)
 
     for (int i=0; i < sheets.size(); ++i)
     {
-        VPSheetPtr sheet = sheets.at(i);
+        const VPSheetPtr& sheet = sheets.at(i);
         if (sheet.isNull())
         {
             continue;
@@ -2390,8 +2462,9 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 
     if (not m_layout->LayoutSettings().IgnoreTilesMargins())
     {
-        QMarginsF tiledMargins = m_layout->LayoutSettings().GetTilesMargins();
+
         QMarginsF printerMargins;
+        QMarginsF tiledMargins = m_layout->LayoutSettings().GetTilesMargins();
         if(tiledPDFOrientation == QPageLayout::Landscape)
         {
             // because when painting we have a -90rotation in landscape mode,
@@ -2508,6 +2581,15 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *paint
     }
 
     sheet->SceneData()->CleanAfterExport();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::UpdateScaleConnection() const
+{
+    QIcon icon;
+    icon.addFile(m_scaleConnected ? QStringLiteral(":/icon/32x32/link.png")
+                                  : QStringLiteral(":/icon/32x32/broken_link.png"));
+    ui->toolButtonScaleConnected->setIcon(icon);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3363,8 +3445,8 @@ void VPMainWindow::on_ExportLayout()
     data.path = dialog.Path();
     data.fileName = dialog.FileName();
     data.sheets = sheets;
-    data.xScale = dialog.GetXScale();
-    data.yScale = dialog.GetYScale();
+    data.xScale = m_layout->LayoutSettings().HorizontalScale();
+    data.yScale = m_layout->LayoutSettings().VerticalScale();
     data.isBinaryDXF = dialog.IsBinaryDXFFormat();
     data.textAsPaths = dialog.IsTextAsPaths();
     data.exportUnified = dialog.IsExportUnified();
@@ -3400,8 +3482,8 @@ void VPMainWindow::on_ExportSheet()
     data.path = dialog.Path();
     data.fileName = dialog.FileName();
     data.sheets = QList<VPSheetPtr>{sheet};
-    data.xScale = dialog.GetXScale();
-    data.yScale = dialog.GetYScale();
+    data.xScale = m_layout->LayoutSettings().HorizontalScale();
+    data.yScale = m_layout->LayoutSettings().VerticalScale();
     data.isBinaryDXF = dialog.IsBinaryDXFFormat();
     data.textAsPaths = dialog.IsTextAsPaths();
     data.exportUnified = dialog.IsExportUnified();

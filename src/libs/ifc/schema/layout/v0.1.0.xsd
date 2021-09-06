@@ -39,6 +39,12 @@
                   <xs:attribute type="xs:string" name="matchingMarks"/>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="scale">
+                <xs:complexType>
+                  <xs:attribute type="LayoutScale" name="xScale"/>
+                  <xs:attribute type="LayoutScale" name="yScale"/>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -489,4 +495,10 @@
       <xs:enumeration value="notFixed"/>
     </xs:restriction>
   </xs:simpleType>  
+  <xs:simpleType name="LayoutScale">
+    <xs:restriction base="xs:float">
+      <xs:minInclusive value="0.01"/>
+      <xs:maxInclusive value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

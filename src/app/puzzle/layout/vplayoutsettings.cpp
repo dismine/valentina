@@ -328,3 +328,27 @@ void VPLayoutSettings::SetIgnoreTilesMargins(bool newIgnoreTilesMargins)
 {
     m_ignoreTilesMargins = newIgnoreTilesMargins;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPLayoutSettings::HorizontalScale() const
+{
+    return m_horizontalScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetHorizontalScale(qreal newHorizontalScale)
+{
+    m_horizontalScale = newHorizontalScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPLayoutSettings::VerticalScale() const
+{
+    return m_verticalScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetVerticalScale(qreal newVerticalScale)
+{
+    m_verticalScale = newVerticalScale;
+}
