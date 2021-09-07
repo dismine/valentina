@@ -2,6 +2,7 @@
 
 #include "../vptilefactory.h"
 #include "../layout/vplayout.h"
+#include "../layout/vpsheet.h"
 
 namespace
 {
@@ -24,12 +25,21 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
     {
         VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
 
+        QMarginsF sheetMargins;
+        if (not sheet.isNull() && not sheet->IgnoreMargins())
+        {
+            sheetMargins = sheet->GetSheetMargins();
+        }
+
         qreal xScale = layout->LayoutSettings().HorizontalScale();
         qreal yScale = layout->LayoutSettings().VerticalScale();
 
-        QRectF rect(0, 0,
-                    layout->TileFactory()->ColNb(sheet) * (layout->TileFactory()->DrawingAreaWidth() / xScale),
-                    layout->TileFactory()->RowNb(sheet) * (layout->TileFactory()->DrawingAreaHeight() / yScale));
+        qreal width = layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth;
+        qreal height = layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth;
+
+        QRectF rect(sheetMargins.left(), sheetMargins.top(),
+                    layout->TileFactory()->ColNb(sheet) * (width / xScale),
+                    layout->TileFactory()->RowNb(sheet) * (height / yScale));
 
         constexpr qreal halfPenWidth = penWidth/2.;
 
@@ -50,6 +60,12 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     {
         VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
 
+        QMarginsF sheetMargins;
+        if (not sheet.isNull() && not sheet->IgnoreMargins())
+        {
+            sheetMargins = sheet->GetSheetMargins();
+        }
+
         QPen pen(QColor(255,0,0,127), penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         pen.setCosmetic(true);
         pen.setStyle(Qt::DashLine);
@@ -60,19 +76,24 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         qreal xScale = layout->LayoutSettings().HorizontalScale();
         qreal yScale = layout->LayoutSettings().VerticalScale();
 
-        const qreal drawingAreaWidth = layout->TileFactory()->DrawingAreaWidth() / xScale;
-        const qreal drawingAreaHeight = layout->TileFactory()->DrawingAreaHeight() / yScale;
+        const qreal width = (layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth) / xScale;
+        const qreal height = (layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth) / yScale;
 
-        for(int i=0;i<=layout->TileFactory()->ColNb(sheet);i++)
+        const int nbCol = layout->TileFactory()->ColNb(sheet);
+        const int nbRow = layout->TileFactory()->RowNb(sheet);
+
+        for(int i=0;i<=nbCol;++i)
         {
-           painter->drawLine(QPointF(i*drawingAreaWidth, 0),
-                             QPointF(i*drawingAreaWidth, layout->TileFactory()->RowNb(sheet)*drawingAreaHeight));
+            // vertical lines
+            painter->drawLine(QPointF(sheetMargins.left()+i*width, sheetMargins.top()),
+                              QPointF(sheetMargins.left()+i*width, sheetMargins.top() + nbRow*height));
         }
 
-        for(int j=0;j<=layout->TileFactory()->RowNb(sheet);j++)
+        for(int j=0;j<=nbRow;++j)
         {
-            painter->drawLine(QPointF(0, j*drawingAreaHeight),
-                              QPointF(layout->TileFactory()->ColNb(sheet)*drawingAreaWidth, j*drawingAreaHeight));
+            // horizontal lines
+            painter->drawLine(QPointF(sheetMargins.left(), sheetMargins.top()+j*height),
+                              QPointF(sheetMargins.left()+nbCol*width, sheetMargins.top()+j*height));
         }
     }
 }

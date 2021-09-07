@@ -85,6 +85,11 @@ public:
      */
     auto DrawingAreaWidth() const -> qreal;
 
+    /**
+     * @brief tileStripeWidth the width of the info / glueing stripe in Px
+     */
+    static constexpr qreal tileStripeWidth = UnitConvertor(1, Unit::Cm, Unit::Px);
+
 private:
     Q_DISABLE_COPY(VPTileFactory)
 
@@ -100,11 +105,6 @@ private:
      * @brief m_drawingAreaWidth the width of the drawing area
      */
     qreal m_drawingAreaWidth{0};
-
-    /**
-     * @brief m_infoStripeWidth the width of the info / glueing stripe in Px
-     */
-    qreal m_infoStripeWidth;
 
 };
 
