@@ -2358,7 +2358,6 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
     printer.setOutputFileName(name);
     printer.setDocName(QFileInfo(name).fileName());
     printer.setResolution(static_cast<int>(PrintDPI));
-    printer.setPageOrientation(QPageLayout::Portrait);
 
     QPainter painter;
 
@@ -2372,17 +2371,31 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
             margins = sheet->GetSheetMargins();
         }
 
+        QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+
         QRectF imageRect = sheet->GetMarginsRect();
         qreal width = FromPixel(imageRect.width() * data.xScale + margins.left() + margins.right(), Unit::Mm);
         qreal height = FromPixel(imageRect.height() * data.yScale + margins.top() + margins.bottom(), Unit::Mm);
 
+        QSizeF pageSize = sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
+        if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+        {
+            qWarning() << tr("Cannot set printer page size");
+        }
+
+        printer.setPageOrientation(sheetOrientation);
+        printer.setFullPage(sheet->IgnoreMargins());
+
+        if (not sheet->IgnoreMargins())
+        {
+            if (not printer.setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
+            {
+                qWarning() << tr("Cannot set printer margins");
+            }
+        }
+
         if (firstPage)
         {
-            if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
-            {
-                qWarning() << tr("Cannot set printer page size");
-            }
-
             if (not painter.begin(&printer))
             { // failed to open file
                 qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(name));
@@ -2402,28 +2415,6 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
                 qCritical() << tr("Failed in flushing page to disk, disk full?");
                 return;
             }
-
-            if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
-            {
-                qWarning() << tr("Cannot set printer page size");
-            }
-        }
-
-        if (not sheet->IgnoreMargins())
-        {
-            const qreal left = FromPixel(margins.left(), Unit::Mm);
-            const qreal top = FromPixel(margins.top(), Unit::Mm);
-            const qreal right = FromPixel(margins.right(), Unit::Mm);
-            const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
-
-            if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
-            {
-                qWarning() << tr("Cannot set printer margins");
-            }
-        }
-        else
-        {
-            printer.setFullPage(sheet->IgnoreMargins());
         }
 
         sheet->SceneData()->PrepareForExport();
@@ -2451,50 +2442,26 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 
     QPageLayout::Orientation tiledPDFOrientation = m_layout->LayoutSettings().GetTilesOrientation();
 
-    printer.setPageOrientation(tiledPDFOrientation);
-
-    if (not printer.setPageSize(QPageSize(m_layout->LayoutSettings().GetTilesSize(Unit::Mm), QPageSize::Millimeter)))
+    QSizeF tileSize = m_layout->LayoutSettings().GetTilesSize(Unit::Mm);
+    QSizeF pageSize = tiledPDFOrientation == QPageLayout::Portrait ? tileSize
+                                                                   : QSizeF(tileSize.height(), tileSize.width());
+    if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << tr("Cannot set printer page size");
     }
 
+    printer.setPageOrientation(tiledPDFOrientation);
     printer.setFullPage(m_layout->LayoutSettings().IgnoreTilesMargins());
 
     if (not m_layout->LayoutSettings().IgnoreTilesMargins())
     {
-
-        QMarginsF printerMargins;
-        QMarginsF tiledMargins = m_layout->LayoutSettings().GetTilesMargins();
-        if(tiledPDFOrientation == QPageLayout::Landscape)
-        {
-            // because when painting we have a -90rotation in landscape mode,
-            // see function PrintPages.
-            printerMargins = QMarginsF(tiledMargins.bottom(), tiledMargins.left(), tiledMargins.top(),
-                                       tiledMargins.right());
-        }
-        else
-        {
-            printerMargins = tiledMargins;
-        }
-
-        if (not printer.setPageMargins(UnitConvertor(printerMargins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
+        if (not printer.setPageMargins(m_layout->LayoutSettings().GetTilesMargins(Unit::Mm), QPageLayout::Millimeter))
         {
             qWarning() << tr("Cannot set printer margins");
         }
     }
 
     printer.setResolution(static_cast<int>(PrintDPI));
-
-    QPainter painter;
-
-    // when tiled, the landscape tiles have to be rotated, because the pages
-    // stay portrait in the pdf
-    if(tiledPDFOrientation == QPageLayout::Landscape)
-    {
-        const int angle = -90;
-        painter.rotate(angle);
-        painter.translate(-ToPixel(printer.pageRect(QPrinter::Millimeter).height(), Unit::Mm), 0);
-    }
 
     if (data.exportUnified)
     {
@@ -2503,6 +2470,7 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
         printer.setOutputFileName(name);
         printer.setDocName(QFileInfo(name).baseName());
 
+        QPainter painter;
         if (not painter.begin(&printer))
         { // failed to open file
             qCritical() << tr("Failed to open file, is it writable?");
@@ -2533,6 +2501,7 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
             printer.setOutputFileName(name);
             printer.setDocName(QFileInfo(name).baseName());
 
+            QPainter painter;
             if (not painter.begin(&printer))
             { // failed to open file
                 qCritical() << tr("Failed to open file, is it writable?");

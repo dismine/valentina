@@ -261,6 +261,8 @@ public:
 
     void ClearSelection() const;
 
+    auto GetSheetOrientation() const -> QPageLayout::Orientation;
+
 public slots:
     void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
 

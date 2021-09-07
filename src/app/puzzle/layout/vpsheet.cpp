@@ -651,6 +651,12 @@ void VPSheet::ClearSelection() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPageLayout::Orientation VPSheet::GetSheetOrientation() const
+{
+    return m_size.height() >= m_size.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::SheetUnits() const -> Unit
 {
     VPLayoutPtr layout = GetLayout();

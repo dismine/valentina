@@ -415,16 +415,21 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QString &filename
     printer.setOutputFileName(filename);
     printer.setDocName(QFileInfo(filename).fileName());
     printer.setResolution(static_cast<int>(PrintDPI));
-    printer.setPageOrientation(QPageLayout::Portrait);
     printer.setFullPage(m_ignorePrinterMargins);
+
+    QPageLayout::Orientation imageOrientation = m_imageRect.height() >= m_imageRect.width() ? QPageLayout::Portrait
+                                                                                            : QPageLayout::Landscape;
 
     qreal width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
     qreal height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
 
-    if (not printer.setPageSize(QPageSize(QSizeF(width, height), QPageSize::Millimeter)))
+    QSizeF pageSize = imageOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
+    if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << tr("Cannot set printer page size");
     }
+
+    printer.setPageOrientation(imageOrientation);
 
     if (not m_ignorePrinterMargins)
     {
