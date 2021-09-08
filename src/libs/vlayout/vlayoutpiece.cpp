@@ -1058,6 +1058,9 @@ void VLayoutPiece::Translate(const QPointF &p)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::Scale(qreal sx, qreal sy)
 {
+    d->m_xScale *= sx;
+    d->m_yScale *= sy;
+
     QTransform m;
     m.scale(sx, sy);
     d->matrix *= m;
@@ -1678,6 +1681,30 @@ void VLayoutPiece::SetGradationId(const QString &id)
 auto VLayoutPiece::GetGradationId() const -> QString
 {
     return d->m_gradationId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetXScale() const -> qreal
+{
+    return d->m_xScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetXScale(qreal xs)
+{
+    d->m_xScale = xs;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetYScale() const -> qreal
+{
+    return d->m_yScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetYScale(qreal ys)
+{
+    d->m_yScale = ys;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

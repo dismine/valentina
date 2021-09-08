@@ -137,6 +137,12 @@ public:
     void SetGradationId(const QString &id);
     auto GetGradationId() const -> QString;
 
+    auto GetXScale() const -> qreal;
+    void SetXScale(qreal xs);
+
+    auto GetYScale() const -> qreal;
+    void SetYScale(qreal ys);
+
     void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);
     void Scale(qreal sx, qreal sy);

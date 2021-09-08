@@ -461,6 +461,8 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetName(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
     piece->SetCopyNumber(static_cast<quint16>(ReadAttributeUInt(attribs, ML::AttrCopyNumber, QChar('1'))));
     piece->SetHideMainPath(not ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr));
+    piece->SetXScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
+    piece->SetYScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
 
     bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
     piece->SetMirror(pieceMirrored);
@@ -817,7 +819,7 @@ auto VPLayoutFileReader::ReadLabelLine() -> TextLine
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
+void VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
 {
     QXmlStreamAttributes attribs = attributes();
 
@@ -834,7 +836,7 @@ QMarginsF VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutFileReader::ReadSheetMargins(const VPSheetPtr &sheet) -> QMarginsF
+void VPLayoutFileReader::ReadSheetMargins(const VPSheetPtr &sheet)
 {
     QXmlStreamAttributes attribs = attributes();
 

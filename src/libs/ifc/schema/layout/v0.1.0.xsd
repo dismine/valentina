@@ -189,7 +189,9 @@
                   <xs:attribute type="Transformation" name="transform"/>
                   <xs:attribute type="xs:string" name="gradationLabel"/>
                   <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
-                  <xs:attribute type="xs:boolean" name="showSeamline"/>  
+                  <xs:attribute type="xs:boolean" name="showSeamline"/>
+                  <xs:attribute type="xs:float" name="xScale"/>  
+                  <xs:attribute type="xs:float" name="yScale"/> 
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -357,7 +359,9 @@
                               <xs:attribute type="Transformation" name="transform"/>
                               <xs:attribute type="xs:string" name="gradationLabel"/>
                               <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
-                              <xs:attribute type="xs:boolean" name="showSeamline"/>   
+                              <xs:attribute type="xs:boolean" name="showSeamline"/>
+                              <xs:attribute type="xs:float" name="xScale"/>  
+                              <xs:attribute type="xs:float" name="yScale"/>    
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>

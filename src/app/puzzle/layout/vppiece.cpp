@@ -171,13 +171,19 @@ QString VPPiece::GetUniqueID() const
 void VPPiece::ClearTransformations()
 {
     // Reset the piece position to the default state
-    QTransform matrix;
+    SetMatrix(QTransform());
+
+    // restore original size
+    QTransform m;
+    m.scale(GetXScale(), GetYScale());
+    QTransform matrix = GetMatrix();
+    matrix *= m;
     SetMatrix(matrix);
+
     // translate the piece so that the top left corner of the bouding rect of the piece is at the position
     // (0,0) in the sheet coordinate system
     const QPointF offset = MappedDetailBoundingRect().topLeft();
-    matrix.translate(-offset.x() ,-offset.y());
-    SetMatrix(matrix);
+    Translate(-offset.x(), -offset.y());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

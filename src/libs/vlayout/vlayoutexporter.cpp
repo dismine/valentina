@@ -314,13 +314,17 @@ void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) cons
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutExporter::ExportToRLD(const QVector<VLayoutPiece> &details) const
 {
+    QVector<VLayoutPiece> scaledPieces;
+    scaledPieces.reserve(details.size());
+
     for(auto detail : details)
     {
         detail.Scale(m_xScale, m_yScale);
+        scaledPieces.append(detail);
     }
 
     VRawLayoutData layoutData;
-    layoutData.pieces = details;
+    layoutData.pieces = scaledPieces;
 
     VRawLayout generator;
     if (not generator.WriteFile(m_fileName, layoutData))

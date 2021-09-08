@@ -76,8 +76,8 @@ private:
     auto ReadLabelLines() -> VTextManager;
     auto ReadLabelLine() -> TextLine;
 
-    auto ReadLayoutMargins(const VPLayoutPtr &layout) -> QMarginsF;
-    auto ReadSheetMargins(const VPSheetPtr &sheet) -> QMarginsF;
+    void ReadLayoutMargins(const VPLayoutPtr &layout);
+    void ReadSheetMargins(const VPSheetPtr &sheet);
     auto ReadSize() -> QSizeF;
 
     void AssertRootTag(const QString &tag) const;

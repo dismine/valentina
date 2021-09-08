@@ -78,7 +78,9 @@ public:
           m_square(detail.m_square),
           m_quantity(detail.m_quantity),
           m_id(detail.m_id),
-          m_gradationId(detail.m_gradationId)
+          m_gradationId(detail.m_gradationId),
+          m_xScale(detail.m_xScale),
+          m_yScale(detail.m_yScale)
     {}
 
     ~VLayoutPieceData() Q_DECL_EQ_DEFAULT;
@@ -140,6 +142,9 @@ public:
 
     QString m_gradationId{};
 
+    qreal m_xScale{1.0};
+    qreal m_yScale{1.0};
+
 private:
     Q_DISABLE_ASSIGN(VLayoutPieceData)
 
@@ -179,6 +184,8 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &
     dataStream << piece.m_tmDetail;
     dataStream << piece.m_tmPattern;
     dataStream << piece.m_gradationId;
+    dataStream << piece.m_xScale;
+    dataStream << piece.m_yScale;
 
     return dataStream;
 }
@@ -237,6 +244,8 @@ inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
         dataStream >> piece.m_tmDetail;
         dataStream >> piece.m_tmPattern;
         dataStream >> piece.m_gradationId;
+        dataStream >> piece.m_xScale;
+        dataStream >> piece.m_yScale;
     }
 
     return dataStream;

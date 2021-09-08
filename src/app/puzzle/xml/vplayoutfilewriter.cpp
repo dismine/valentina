@@ -260,6 +260,10 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                     [](const QString &label){return label.isEmpty();});
     SetAttribute(ML::AttrCopyNumber, piece->CopyNumber());
     SetAttributeOrRemoveIf<bool>(ML::AttrShowSeamline, not piece->IsHideMainPath(), [](bool show){return show;});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrXScale, piece->GetXScale(),
+                                  [](qreal xs){return VFuzzyComparePossibleNulls(xs, 1.0);});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrYScale, piece->GetYScale(),
+                                  [](qreal ys){return VFuzzyComparePossibleNulls(ys, 1.0);});
 
     writeStartElement(ML::TagSeamLine);
     writeCharacters(PathToString(piece->GetContourPoints()));
