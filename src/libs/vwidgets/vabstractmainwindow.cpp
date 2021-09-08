@@ -252,14 +252,24 @@ void VAbstractMainWindow::UpdateRecentFileActions()
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *messageBoxParent) -> bool
 {
+    QFileInfo info(path);
+
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
+
+    if (not info.exists())
+    {
+        return true;
+    }
+
     // cppcheck-suppress unreadVariable
-    const bool isFileWritable = QFileInfo(path).isWritable();
+    const bool isFileWritable = info.isWritable();
+
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
+
     if (not isFileWritable)
     {
         QMessageBox messageBox(messageBoxParent);
