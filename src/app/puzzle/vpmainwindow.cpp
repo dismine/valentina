@@ -3400,14 +3400,75 @@ void VPMainWindow::on_ExportLayout()
         return;
     }
 
+    if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound() ||
+            m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    {
+        for (const auto &sheet : sheets)
+        {
+            bool outOfBoundChecked = false;
+            bool pieceSuperpositionChecked = false;
+
+            QList<VPPiecePtr> pieces = sheet->GetPieces();
+            for (const auto& piece :pieces)
+            {
+               if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound())
+               {
+                   if (not outOfBoundChecked && not piece.isNull() && piece->OutOfBound())
+                   {
+                       QMessageBox msgBox(this);
+                       msgBox.setIcon(QMessageBox::Question);
+                       msgBox.setWindowTitle(tr("The layout is invalid."));
+                       msgBox.setText(tr("The layout is invalid. Piece out of bound. Do you want to continue export?"));
+                       msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+                       msgBox.setDefaultButton(QMessageBox::No);
+                       const int width = 500;
+                       auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                       auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+                       SCASSERT(layout != nullptr)
+                       layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+                       if (msgBox.exec() == QMessageBox::No)
+                       {
+                           return;
+                       }
+
+                       outOfBoundChecked = true; // no need to ask more
+                   }
+               }
+
+               if (m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+               {
+                   if (not pieceSuperpositionChecked && not piece.isNull() && piece->HasSuperpositionWithPieces())
+                   {
+                       QMessageBox msgBox(this);
+                       msgBox.setIcon(QMessageBox::Question);
+                       msgBox.setWindowTitle(tr("The layout is invalid."));
+                       msgBox.setText(tr("The layout is invalid. Pieces superposition. Do you want to continue "
+                                         "export?"));
+                       msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+                       msgBox.setDefaultButton(QMessageBox::No);
+                       const int width = 500;
+                       auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                       auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+                       SCASSERT(layout != nullptr)
+                       layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+                       if (msgBox.exec() == QMessageBox::No)
+                       {
+                           return;
+                       }
+
+                       pieceSuperpositionChecked = true; // no need to ask more
+                   }
+               }
+            }
+        }
+    }
+
     DialogSaveManualLayout dialog(sheets.size(), false, m_layout->LayoutSettings().GetTitle(), this);
 
     if (dialog.exec() == QDialog::Rejected)
     {
         return;
     }
-
-    // TODO add checks for out of bound and pieces superpositions
 
     VPExportData data;
     data.format = dialog.Format();
@@ -3437,14 +3498,71 @@ void VPMainWindow::on_ExportSheet()
         return;
     }
 
+    if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound() ||
+            m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    {
+        bool outOfBoundChecked = false;
+        bool pieceSuperpositionChecked = false;
+
+        QList<VPPiecePtr> pieces = sheet->GetPieces();
+        for (const auto& piece :pieces)
+        {
+           if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound())
+           {
+               if (not outOfBoundChecked && not piece.isNull() && piece->OutOfBound())
+               {
+                   QMessageBox msgBox(this);
+                   msgBox.setIcon(QMessageBox::Question);
+                   msgBox.setWindowTitle(tr("The layout is invalid."));
+                   msgBox.setText(tr("The layout is invalid. Piece out of bound. Do you want to continue export?"));
+                   msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+                   msgBox.setDefaultButton(QMessageBox::No);
+                   const int width = 500;
+                   auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                   auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+                   SCASSERT(layout != nullptr)
+                   layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+                   if (msgBox.exec() == QMessageBox::No)
+                   {
+                       return;
+                   }
+
+                   outOfBoundChecked = true; // no need to ask more
+               }
+           }
+
+           if (m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+           {
+               if (not pieceSuperpositionChecked && not piece.isNull() && piece->HasSuperpositionWithPieces())
+               {
+                   QMessageBox msgBox(this);
+                   msgBox.setIcon(QMessageBox::Question);
+                   msgBox.setWindowTitle(tr("The layout is invalid."));
+                   msgBox.setText(tr("The layout is invalid. Pieces superposition. Do you want to continue export?"));
+                   msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+                   msgBox.setDefaultButton(QMessageBox::No);
+                   const int width = 500;
+                   auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                   auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+                   SCASSERT(layout != nullptr)
+                   layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+                   if (msgBox.exec() == QMessageBox::No)
+                   {
+                       return;
+                   }
+
+                   pieceSuperpositionChecked = true; // no need to ask more
+               }
+           }
+        }
+    }
+
     DialogSaveManualLayout dialog(1, false, sheet->GetName(), this);
 
     if (dialog.exec() == QDialog::Rejected)
     {
         return;
     }
-
-    // TODO add checks for out of bound and pieces superpositions
 
     VPExportData data;
     data.format = dialog.Format();
