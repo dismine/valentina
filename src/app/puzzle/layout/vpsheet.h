@@ -114,6 +114,9 @@ private:
 
     QList<VPPiecePtr> m_slectedPiecesTmp{};
 
+    bool m_outOfBoundTmp{false};
+    bool m_pieceSuperpositionTmp{false};
+
     void ConnectPiece(VPGraphicsPiece *piece);
 };
 

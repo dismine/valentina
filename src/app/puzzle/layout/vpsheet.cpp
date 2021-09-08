@@ -148,6 +148,12 @@ void VPSheetSceneData::PrepareForExport()
                 piece->SetSelected(false);
             }
         }
+
+        m_outOfBoundTmp = layout->LayoutSettings().GetWarningPiecesOutOfBound();
+        layout->LayoutSettings().SetWarningPiecesOutOfBound(false);
+
+        m_pieceSuperpositionTmp = layout->LayoutSettings().GetWarningSuperpositionOfPieces();
+        layout->LayoutSettings().SetWarningSuperpositionOfPieces(false);
     }
 
     RefreshLayout();
@@ -174,6 +180,9 @@ void VPSheetSceneData::CleanAfterExport()
                 emit layout->PieceSelectionChanged(piece);
             }
         }
+
+        layout->LayoutSettings().SetWarningPiecesOutOfBound(m_outOfBoundTmp);
+        layout->LayoutSettings().SetWarningSuperpositionOfPieces(m_pieceSuperpositionTmp);
     }
 
     RefreshLayout();
