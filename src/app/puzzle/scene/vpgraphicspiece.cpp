@@ -380,6 +380,7 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
                 auto* item = new QGraphicsSimpleTextItem(this);
                 item->setFont(fnt);
                 item->setText(qsText);
+                item->setBrush(QBrush(color));
                 item->setTransform(labelMatrix);
                 m_labelTextItems.append(item);
 
@@ -488,7 +489,9 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         if (painter != nullptr)
         {
             painter->save();
-            painter->setPen(piecePath.PenStyle());
+            QPen pen = painter->pen();
+            pen.setStyle(piecePath.PenStyle());
+            painter->setPen(pen);
             painter->drawPath(path);
             painter->restore();
         }
