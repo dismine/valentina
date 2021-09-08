@@ -9,6 +9,11 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../vlayout/vprintlayout.h"
 
+namespace
+{
+const QColor tileColor(180, 180, 180);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings):
     m_layout(layout),
@@ -74,8 +79,7 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         return;
     }
 
-    QMarginsF tilesMargins = layout->LayoutSettings().GetTilesMargins();
-    QPen penTileInfos = QPen(QColor(180,180,180), m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap,
+    QPen penTileInfos = QPen(tileColor, m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap,
                              Qt::RoundJoin);
     QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
                                Qt::RoundJoin);
@@ -224,6 +228,8 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         }
     }
 
+    DrawRuler(painter);
+
     if(col < nbCol-1)
     {
         // add right triangle
@@ -264,16 +270,17 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
 
     // paint the grid information
     const QString grid = tr("Grid ( %1 , %2 )").arg(row+1).arg(col+1);
+    const QString tileColorStr = QString("%1,%2,%3").arg(tileColor.red()).arg(tileColor.green()).arg(tileColor.blue());
 
-    td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
+    td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
                        "<tr>"
-                       "<td align='center'>%1</td>"
+                       "<td align='center'>%2</td>"
                        "</tr>"
                        "</table>")
-               .arg(grid));
+               .arg(tileColorStr, grid));
     painter->setPen(penTileInfos);
     painter->save();
-    painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth));
+    painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth/1.3));
     td.drawContents(painter);
     painter->restore();
 
@@ -286,12 +293,12 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     QString clippedSheetName = metrix.elidedText(sheet->GetName(), Qt::ElideMiddle,
                                                  metrix.width(QString().fill('z', 50)));
 
-    td.setHtml(QString("<table width='100%' style='color:rgb(180,180,180);'>"
+    td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
                        "<tr>"
-                       "<td align='center'>%1 - %2</td>"
+                       "<td align='center'>%2 - %3</td>"
                        "</tr>"
                        "</table>")
-               .arg(page).arg(clippedSheetName));
+               .arg(tileColorStr).arg(page).arg(clippedSheetName));
     painter->save();
     painter->rotate(-90);
     painter->translate(QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px),
@@ -348,4 +355,58 @@ auto VPTileFactory::DrawingAreaHeight() const -> qreal
 auto VPTileFactory::DrawingAreaWidth() const -> qreal
 {
     return m_drawingAreaWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawRuler(QPainter *painter)
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(layout.isNull())
+    {
+        return;
+    }
+
+    QPen rulePen(tileColor, 1, Qt::SolidLine);
+
+    painter->save();
+    painter->setPen(rulePen);
+
+    const qreal notchHeight = UnitConvertor(3, Unit::Mm, Unit::Px);
+    const qreal shortNotchHeight = UnitConvertor(1.1, Unit::Mm, Unit::Px);
+    Unit layoutUnits = layout->LayoutSettings().GetUnit();
+    const qreal step = UnitConvertor(1, layoutUnits, Unit::Px);
+    double marksCount = (m_drawingAreaWidth-tileStripeWidth) / step;
+    int i = 0;
+    while (i < marksCount)
+    {
+        if (i != 0)
+        { // don't need 0 notch
+            // middle ruler line
+            painter->drawLine(QPointF(step * i - step / 2., m_drawingAreaHeight-tileStripeWidth),
+                              QPointF(step * i - step / 2., m_drawingAreaHeight - tileStripeWidth + shortNotchHeight));
+
+            // ruler line
+            painter->drawLine(QPointF(step * i, m_drawingAreaHeight-tileStripeWidth),
+                              QPointF(step * i, m_drawingAreaHeight - tileStripeWidth + notchHeight));
+        }
+        else
+        {
+            QString units = layoutUnits == Unit::Cm || layoutUnits == Unit::Mm ? tr("cm", "unit") : tr("in", "unit");
+            QFont fnt = painter->font();
+            fnt.setPointSize(10);
+
+            qreal unitsWidth = 0;
+            QFontMetrics fm(fnt);
+        #if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+            unitsWidth = fm.horizontalAdvance(units);
+        #else
+            unitsWidth = fm.width(units);
+        #endif
+            painter->drawText(QPointF(step*0.5-unitsWidth*0.6,
+                                      m_drawingAreaHeight - tileStripeWidth + notchHeight+shortNotchHeight), units);
+        }
+        ++i;
+    }
+
+    painter->restore();
 }

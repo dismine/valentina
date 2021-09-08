@@ -106,6 +106,8 @@ private:
      */
     qreal m_drawingAreaWidth{0};
 
+    void DrawRuler(QPainter *painter);
+
 };
 
 #endif // VPTILEFACTORY_H
