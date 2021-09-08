@@ -62,6 +62,9 @@ public:
     void SetExportUnified(bool value);
     auto IsExportUnified() const -> bool;
 
+    void SetTilesScheme(bool value);
+    auto IsTilesScheme() const -> bool;
+
 protected:
     virtual void showEvent(QShowEvent *event) override;
 

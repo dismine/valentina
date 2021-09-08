@@ -84,6 +84,9 @@ public:
 
     void SetTextAsPaths(bool textAsPaths) const;
 
+    void PrepareTilesScheme();
+    void ClearTilesScheme();
+
 private:
     Q_DISABLE_COPY(VPSheetSceneData)
 
@@ -104,6 +107,8 @@ private:
      * variable to hold temporarly hte value of the show tiles
      */
     bool m_showTilesTmp{false};
+
+    bool m_showTilesSchemeTmp{false};
 
     /**
      * variable to hold temporarly hte value of the show grid

@@ -205,16 +205,6 @@ void DialogSaveManualLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::DXF_AC1027_ASTM:
             ui->checkBoxBinaryDXF->setChecked(binary);
             break;
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::TIF:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -254,16 +244,6 @@ auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
         case LayoutExportFormats::DXF_AC1024_ASTM:
         case LayoutExportFormats::DXF_AC1027_ASTM:
             return ui->checkBoxBinaryDXF->isChecked();
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::TIF:
         default:
             return false;
     }
@@ -318,44 +298,10 @@ void DialogSaveManualLayout::SetExportUnified(bool value)
         case LayoutExportFormats::EPS:
             ui->checkBoxExportUnified->setChecked(value);
             break;
-        case LayoutExportFormats::DXF_AC1006_Flat:
-        case LayoutExportFormats::DXF_AC1009_Flat:
-        case LayoutExportFormats::DXF_AC1012_Flat:
-        case LayoutExportFormats::DXF_AC1014_Flat:
-        case LayoutExportFormats::DXF_AC1015_Flat:
-        case LayoutExportFormats::DXF_AC1018_Flat:
-        case LayoutExportFormats::DXF_AC1021_Flat:
-        case LayoutExportFormats::DXF_AC1024_Flat:
-        case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::TIF:
         default:
             ui->checkBoxExportUnified->setChecked(false);
             break;
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -368,39 +314,32 @@ auto DialogSaveManualLayout::IsExportUnified() const -> bool
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
             return ui->checkBoxExportUnified->isChecked();
-        case LayoutExportFormats::DXF_AC1006_Flat:
-        case LayoutExportFormats::DXF_AC1009_Flat:
-        case LayoutExportFormats::DXF_AC1012_Flat:
-        case LayoutExportFormats::DXF_AC1014_Flat:
-        case LayoutExportFormats::DXF_AC1015_Flat:
-        case LayoutExportFormats::DXF_AC1018_Flat:
-        case LayoutExportFormats::DXF_AC1021_Flat:
-        case LayoutExportFormats::DXF_AC1024_Flat:
-        case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::TIF:
+        default:
+            return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveManualLayout::SetTilesScheme(bool value)
+{
+    switch(Format())
+    {
+        case LayoutExportFormats::PDFTiled:
+            ui->checkBoxTilesScheme->setChecked(value);
+            break;
+        default:
+            ui->checkBoxTilesScheme->setChecked(false);
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogSaveManualLayout::IsTilesScheme() const
+{
+    switch(Format())
+    {
+        case LayoutExportFormats::PDFTiled:
+            return ui->checkBoxTilesScheme->isChecked();
         default:
             return false;
     }
@@ -503,6 +442,7 @@ void DialogSaveManualLayout::ShowExample()
     ui->checkBoxBinaryDXF->setEnabled(false);
     ui->checkBoxTextAsPaths->setEnabled(true);
     ui->checkBoxExportUnified->setEnabled(false);
+    ui->checkBoxTilesScheme->setEnabled(false);
 
     switch(currentFormat)
     {
@@ -539,6 +479,9 @@ void DialogSaveManualLayout::ShowExample()
             ui->checkBoxTextAsPaths->setEnabled(false);
             break;
         case LayoutExportFormats::PDFTiled:
+            ui->checkBoxTilesScheme->setEnabled(true);
+            ui->checkBoxExportUnified->setEnabled(true);
+            break;
         case LayoutExportFormats::PDF:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:

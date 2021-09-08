@@ -156,6 +156,7 @@ struct VPExportData
     bool isBinaryDXF{false};
     bool textAsPaths{false};
     bool exportUnified{true};
+    bool showTilesScheme{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2440,27 +2441,6 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
     printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    QPageLayout::Orientation tiledPDFOrientation = m_layout->LayoutSettings().GetTilesOrientation();
-
-    QSizeF tileSize = m_layout->LayoutSettings().GetTilesSize(Unit::Mm);
-    QSizeF pageSize = tiledPDFOrientation == QPageLayout::Portrait ? tileSize
-                                                                   : QSizeF(tileSize.height(), tileSize.width());
-    if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
-    {
-        qWarning() << tr("Cannot set printer page size");
-    }
-
-    printer.setPageOrientation(tiledPDFOrientation);
-    printer.setFullPage(m_layout->LayoutSettings().IgnoreTilesMargins());
-
-    if (not m_layout->LayoutSettings().IgnoreTilesMargins())
-    {
-        if (not printer.setPageMargins(m_layout->LayoutSettings().GetTilesMargins(Unit::Mm), QPageLayout::Millimeter))
-        {
-            qWarning() << tr("Cannot set printer margins");
-        }
-    }
-
     printer.setResolution(static_cast<int>(PrintDPI));
 
     if (data.exportUnified)
@@ -2471,25 +2451,11 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
         printer.setDocName(QFileInfo(name).baseName());
 
         QPainter painter;
-        if (not painter.begin(&printer))
-        { // failed to open file
-            qCritical() << tr("Failed to open file, is it writable?");
-            return;
-        }
-
-        painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
-                            Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush(QBrush(Qt::NoBrush));
-        painter.setRenderHint(QPainter::Antialiasing, true);
-
-        bool firstSheet = true;
+        bool firstPage = true;
         for (const auto& sheet : data.sheets)
         {
-            GeneratePdfTiledFile(sheet, &painter, &printer, firstSheet);
-            firstSheet = false;
+            GeneratePdfTiledFile(sheet, data.showTilesScheme, &painter, &printer, firstPage);
         }
-
-        painter.end();
     }
     else
     {
@@ -2502,27 +2468,15 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
             printer.setDocName(QFileInfo(name).baseName());
 
             QPainter painter;
-            if (not painter.begin(&printer))
-            { // failed to open file
-                qCritical() << tr("Failed to open file, is it writable?");
-                return;
-            }
-
-            painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
-                                Qt::RoundCap, Qt::RoundJoin));
-            painter.setBrush(QBrush(Qt::NoBrush));
-            painter.setRenderHint(QPainter::Antialiasing, true);
-
-            bool firstSheet = true;
-            GeneratePdfTiledFile(data.sheets.at(i), &painter, &printer, firstSheet);
-
-            painter.end();
+            bool firstPage = true;
+            GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, &painter, &printer, firstPage);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *painter, QPrinter *printer, bool firstSheet)
+void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
+                                        QPrinter *printer, bool &firstPage)
 {
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
@@ -2532,12 +2486,143 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *paint
     m_layout->TileFactory()->refreshTileInfos();
     sheet->SceneData()->SetTextAsPaths(false);
 
+    auto SetPageSettings = [this, &printer, sheet](QPageLayout::Orientation orientation, bool forSheet)
+    {
+        QSizeF tileSize = m_layout->LayoutSettings().GetTilesSize(Unit::Mm);
+        QSizeF pageSize;
+
+        if (not forSheet)
+        {
+            pageSize = orientation == QPageLayout::Portrait ? tileSize : tileSize.transposed();
+        }
+        else
+        {
+            QPageLayout::Orientation tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+            QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+
+            if (tileOrientation != sheetOrientation)
+            {
+                pageSize = orientation == QPageLayout::Portrait ? tileSize.transposed() : tileSize;
+            }
+            else
+            {
+                pageSize = orientation == QPageLayout::Portrait ? tileSize : tileSize.transposed();
+            }
+        }
+
+        if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+        {
+            qWarning() << tr("Cannot set printer page size");
+        }
+
+        printer->setPageOrientation(orientation);
+        printer->setFullPage(m_layout->LayoutSettings().IgnoreTilesMargins());
+
+        if (not m_layout->LayoutSettings().IgnoreTilesMargins())
+        {
+            if (not printer->setPageMargins(m_layout->LayoutSettings().GetTilesMargins(Unit::Mm),
+                                            QPageLayout::Millimeter))
+            {
+                qWarning() << tr("Cannot set printer margins");
+            }
+        }
+    };
+
+    if (showTilesScheme)
+    {
+        SetPageSettings(sheet->GetSheetOrientation(), true);
+    }
+    else
+    {
+        SetPageSettings(m_layout->LayoutSettings().GetTilesOrientation(), false);
+    }
+
+    if (firstPage)
+    {
+        if (not painter->begin(printer))
+        { // failed to open file
+            qCritical() << tr("Failed to open file, is it writable?");
+            return;
+        }
+
+        painter->setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
+                            Qt::RoundCap, Qt::RoundJoin));
+        painter->setBrush(QBrush(Qt::NoBrush));
+        painter->setRenderHint(QPainter::Antialiasing, true);
+    }
+
+    if (showTilesScheme)
+    {
+        VPLayoutPtr layout = sheet->GetLayout();
+        if(layout.isNull())
+        {
+            return;
+        }
+
+        if(not firstPage)
+        {
+            SetPageSettings(sheet->GetSheetOrientation(), true);
+
+            if (not printer->newPage())
+            {
+                qWarning("failed in flushing page to disk, disk full?");
+                return;
+            }
+        }
+
+        sheet->SceneData()->PrepareTilesScheme();
+
+        qreal xScale = layout->LayoutSettings().HorizontalScale();
+        qreal yScale = layout->LayoutSettings().VerticalScale();
+
+        qreal width = m_layout->TileFactory()->DrawingAreaWidth();
+        qreal height = m_layout->TileFactory()->DrawingAreaHeight();
+
+        QPageLayout::Orientation tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+        QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+
+        QRectF sheetRect = sheet->GetMarginsRect();
+
+        const int nbCol = m_layout->TileFactory()->ColNb(sheet);
+        const int nbRow = m_layout->TileFactory()->RowNb(sheet);
+
+        QRectF source = QRectF(sheetRect.topLeft(), QSizeF(nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale),
+                                                           nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale)));
+        QRectF target;
+
+        if (tileOrientation != sheetOrientation)
+        {
+            QMarginsF margins;
+            if (not m_layout->LayoutSettings().IgnoreTilesMargins())
+            {
+                margins = m_layout->LayoutSettings().GetTilesMargins();
+            }
+
+            QSizeF tilesSize = layout->LayoutSettings().GetTilesSize();
+            target = QRectF(0, 0,
+                            tilesSize.height() - margins.left() - margins.right(),
+                            tilesSize.width() - margins.top() - margins.bottom());
+        }
+        else
+        {
+            target = QRectF(0, 0, width, height);
+        }
+        sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
+                                            Qt::KeepAspectRatio);
+
+        sheet->SceneData()->ClearTilesScheme();
+
+        firstPage = false;
+    }
+
     for(int row=0; row < m_layout->TileFactory()->RowNb(sheet); row++)  // for each row of the tiling grid
     {
         for(int col=0; col < m_layout->TileFactory()->ColNb(sheet); col++) // for each column of tiling grid
         {
-            if(not (row == 0 && col == 0) || not firstSheet)
+            if(not firstPage)
             {
+                SetPageSettings(m_layout->LayoutSettings().GetTilesOrientation(), false);
+
                 if (not printer->newPage())
                 {
                     qWarning("failed in flushing page to disk, disk full?");
@@ -2546,6 +2631,8 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *paint
             }
 
             m_layout->TileFactory()->drawTile(painter, printer, sheet, row, col);
+
+            firstPage = false;
         }
     }
 
@@ -3480,6 +3567,7 @@ void VPMainWindow::on_ExportLayout()
     data.isBinaryDXF = dialog.IsBinaryDXFFormat();
     data.textAsPaths = dialog.IsTextAsPaths();
     data.exportUnified = dialog.IsExportUnified();
+    data.showTilesScheme = dialog.IsTilesScheme();
 
     ExportData(data);
 }
@@ -3574,6 +3662,7 @@ void VPMainWindow::on_ExportSheet()
     data.isBinaryDXF = dialog.IsBinaryDXFFormat();
     data.textAsPaths = dialog.IsTextAsPaths();
     data.exportUnified = dialog.IsExportUnified();
+    data.showTilesScheme = dialog.IsTilesScheme();
 
     ExportData(data);
 }

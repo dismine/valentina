@@ -256,6 +256,31 @@ void VPSheetSceneData::SetTextAsPaths(bool textAsPaths) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPSheetSceneData::PrepareTilesScheme()
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (not layout.isNull())
+    {
+        m_showTilesSchemeTmp = layout->LayoutSettings().GetShowTiles();
+        layout->LayoutSettings().SetShowTiles(true);
+    }
+
+    RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheetSceneData::ClearTilesScheme()
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (not layout.isNull())
+    {
+        layout->LayoutSettings().SetShowTiles(m_showTilesSchemeTmp);
+    }
+
+    RefreshLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
 {
     SCASSERT(piece != nullptr)

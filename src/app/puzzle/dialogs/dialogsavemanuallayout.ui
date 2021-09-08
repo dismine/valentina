@@ -141,6 +141,16 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxTilesScheme">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Tiles scheme</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>

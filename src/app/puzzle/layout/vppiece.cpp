@@ -155,7 +155,7 @@ void VPPiece::Update(const VPPiecePtr &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPPiece::GetUniqueID() const
+auto VPPiece::GetUniqueID() const -> QString
 {
     QString id = VLayoutPiece::GetUniqueID();
 

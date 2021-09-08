@@ -322,7 +322,7 @@ auto VPTileFactory::RowNb(const VPSheetPtr &sheet) const -> int
         yScale = layout->LayoutSettings().VerticalScale();
     }
 
-    QSizeF sheetSize = sheet->GetSheetSize();
+    QRectF sheetSize = sheet->GetMarginsRect();
     return qCeil(sheetSize.height() * yScale / (m_drawingAreaHeight - tileStripeWidth));
 }
 
@@ -341,7 +341,7 @@ auto VPTileFactory::ColNb(const VPSheetPtr &sheet) const -> int
         xScale = layout->LayoutSettings().HorizontalScale();
     }
 
-    QSizeF sheetSize = sheet->GetSheetSize();
+    QRectF sheetSize = sheet->GetMarginsRect();
     return qCeil(sheetSize.width() * xScale / (m_drawingAreaWidth - tileStripeWidth));
 }
 

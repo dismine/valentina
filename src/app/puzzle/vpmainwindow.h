@@ -447,7 +447,8 @@ private:
     void ExportUnifiedPdfFile(const VPExportData &data);
     void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
     void ExportPdfTiledFile(const VPExportData &data);
-    void GeneratePdfTiledFile(const VPSheetPtr &sheet, QPainter *painter, QPrinter *printer, bool firstSheet);
+    void GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter, QPrinter *printer,
+                              bool &firstPage);
 
     void UpdateScaleConnection() const;
 };
