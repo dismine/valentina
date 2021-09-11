@@ -184,6 +184,12 @@ void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
     SetAttribute(ML::AttrYScale, layout->LayoutSettings().VerticalScale());
     writeEndElement(); // scale
 
+    writeStartElement(ML::TagWatermark);
+    SetAttributeOrRemoveIf<bool>(ML::AttrShowPreview, layout->LayoutSettings().GetShowWatermark(),
+                                 [](bool show){return not show;});
+    writeCharacters(layout->LayoutSettings().WatermarkPath());
+    writeEndElement(); // watermark
+
     writeEndElement(); // properties
 }
 

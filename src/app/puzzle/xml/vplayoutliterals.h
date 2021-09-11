@@ -64,6 +64,7 @@ extern const QString TagPatternLabel;
 extern const QString TagLines;
 extern const QString TagLine;
 extern const QString TagScale;
+extern const QString TagWatermark;
 
 extern const QString AttrVersion;
 extern const QString AttrWarningSuperposition;
@@ -107,6 +108,7 @@ extern const QString AttrGrainlineType;
 extern const QString AttrXScale;
 extern const QString AttrYScale;
 extern const QString AttrIgnoreMargins;
+extern const QString AttrShowPreview;
 
 extern const QString atFrontStr;
 extern const QString atRearStr;

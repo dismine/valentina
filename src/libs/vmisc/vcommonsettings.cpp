@@ -42,6 +42,7 @@
 #include <QFont>
 #include <QGlobalStatic>
 #include <QMarginsF>
+#include <QColor>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -140,6 +141,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1S
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1String("watermarkEditorSize")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkCustomColors, (QLatin1String("watermarkCustomColors")))
 
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
@@ -1430,4 +1434,64 @@ auto VCommonSettings::GetTiledPDFOrientation() const -> PageOrientation
 void VCommonSettings::SetTiledPDFOrientation(PageOrientation value)
 {
     setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetWatermarkEditorSize() const
+{
+    return value(*settingWatermarkEditorSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetWatermarkEditorSize(const QSize &sz)
+{
+    setValue(*settingWatermarkEditorSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QColor> VCommonSettings::GetWatermarkCustomColors() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    QStringList colors = settings.value(*settingPatternGraphicalOutput, 1).toStringList();
+
+    QVector<QColor> customColors;
+    customColors.reserve(colors.size());
+
+    for (auto color : colors)
+    {
+        QColor c(color);
+        if (c.isValid())
+        {
+            customColors.append(c);
+        }
+    }
+
+    if (customColors.count() > 7)
+    {
+        customColors.remove(0, customColors.count() - 7);
+    }
+
+    return customColors;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetWatermarkCustomColors(QVector<QColor> colors)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+
+    if (colors.count() > 7)
+    {
+        colors.remove(0, colors.count() - 7);
+    }
+
+    QStringList customColors;
+    customColors.reserve(colors.size());
+
+    for (auto color : colors)
+    {
+        customColors.append(color.name());
+    }
+
+    settings.setValue(*settingWatermarkCustomColors, customColors);
+    settings.sync();
 }

@@ -43,6 +43,7 @@
 #include "../vlayout/vrawlayout.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vlayout/vprintlayout.h"
+#include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/projectversion.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -63,6 +64,8 @@
 #endif
 
 #include <QLoggingCategory>
+#include <chrono>
+#include <thread>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -167,7 +170,8 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     m_undoStack(new QUndoStack(this)),
     m_layout{VPLayout::CreateLayout(m_undoStack)},
     m_statusLabel(new QLabel(this)),
-    m_layoutWatcher(new QFileSystemWatcher(this))
+    m_layoutWatcher(new QFileSystemWatcher(this)),
+    m_watermarkWatcher(new QFileSystemWatcher(this))
 {
     ui->setupUi(this);
 
@@ -220,7 +224,49 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     {
         if (not curFile.isEmpty() && curFile == path)
         {
+            QFileInfo checkFile(path);
+            if (not checkFile.exists())
+            {
+                for(int i=0; i<=1000; i=i+10)
+                {
+                    if (checkFile.exists())
+                    {
+                        break;
+                    }
+
+                    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                }
+            }
             UpdateWindowTitle();
+
+            if (checkFile.exists())
+            {
+                m_layoutWatcher->addPath(path);
+            }
+        }
+    });
+
+    connect(m_layoutWatcher, &QFileSystemWatcher::fileChanged, this, [this](const QString &path)
+    {
+        QFileInfo checkFile(path);
+        if (not checkFile.exists())
+        {
+            for(int i=0; i<=1000; i=i+10)
+            {
+                if (checkFile.exists())
+                {
+                    break;
+                }
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+        }
+        m_layout->TileFactory()->refreshTileInfos();
+        m_graphicsView->RefreshLayout();
+
+        if (checkFile.exists())
+        {
+            m_layoutWatcher->addPath(path);
         }
     });
 
@@ -330,6 +376,14 @@ auto VPMainWindow::LoadFile(QString path) -> bool
     m_layout->CheckPiecesPositionValidity();
 
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+
+    ui->actionRemoveWatermark->setEnabled(not m_layout->LayoutSettings().WatermarkPath().isEmpty());
+    ui->actionEditCurrentWatermark->setEnabled(not m_layout->LayoutSettings().WatermarkPath().isEmpty());
+
+    if (not m_layout->LayoutSettings().WatermarkPath().isEmpty())
+    {
+        m_layoutWatcher->addPath(m_layout->LayoutSettings().WatermarkPath());
+    }
 
     return true;
 }
@@ -526,6 +580,12 @@ void VPMainWindow::SetupMenu()
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
     ui->menuSheet->addAction(redoAction);
     ui->toolBarUndoCommands->addAction(redoAction);
+
+    // Watermark
+    connect(ui->actionWatermarkEditor, &QAction::triggered, this, &VPMainWindow::CreateWatermark);
+    connect(ui->actionEditCurrentWatermark, &QAction::triggered, this, &VPMainWindow::EditCurrentWatermark);
+    connect(ui->actionLoadWatermark, &QAction::triggered, this, &VPMainWindow::LoadWatermark);
+    connect(ui->actionRemoveWatermark, &QAction::triggered, this, &VPMainWindow::RemoveWatermark);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, [this]()
@@ -877,6 +937,17 @@ void VPMainWindow::InitPropertyTabTiles()
         if (not m_layout.isNull())
         {
             m_layout->LayoutSettings().SetShowTiles(checked);
+            LayoutWasSaved(false);
+            m_graphicsView->RefreshLayout();
+            VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+        }
+    });
+
+    connect(ui->checkBoxTilesShowWatermark, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetShowWatermark(checked);
             LayoutWasSaved(false);
             m_graphicsView->RefreshLayout();
             VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
@@ -1287,6 +1358,7 @@ void VPMainWindow::SetPropertyTabTilesData()
         ui->groupBoxTilesControl->setDisabled(false);
 
         SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
+        SetCheckBoxValue(ui->checkBoxTilesShowWatermark, m_layout->LayoutSettings().GetShowWatermark());
     }
     else
     {
@@ -2586,8 +2658,9 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
         const int nbCol = m_layout->TileFactory()->ColNb(sheet);
         const int nbRow = m_layout->TileFactory()->RowNb(sheet);
 
-        QRectF source = QRectF(sheetRect.topLeft(), QSizeF(nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale),
-                                                           nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale)));
+        QRectF source = QRectF(sheetRect.topLeft(),
+                               QSizeF(nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale),
+                                      nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale)));
         QRectF target;
 
         if (tileOrientation != sheetOrientation)
@@ -2609,6 +2682,25 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
         }
         sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
                                             Qt::KeepAspectRatio);
+
+        VWatermarkData watermarkData = m_layout->TileFactory()->WatermarkData();
+        if (watermarkData.opacity > 0)
+        {
+            if (watermarkData.showImage && not watermarkData.path.isEmpty())
+            {
+                VPTileFactory::PaintWatermarkImage(painter, target, watermarkData,
+                                                   layout->LayoutSettings().WatermarkPath(),
+                                                   layout->LayoutSettings().HorizontalScale(),
+                                                   layout->LayoutSettings().VerticalScale());
+            }
+
+            if (watermarkData.showText && not watermarkData.text.isEmpty())
+            {
+                VPTileFactory::PaintWatermarkText(painter, target, watermarkData,
+                                                  layout->LayoutSettings().HorizontalScale(),
+                                                  layout->LayoutSettings().VerticalScale());
+            }
+        }
 
         sheet->SceneData()->ClearTilesScheme();
 
@@ -2646,6 +2738,42 @@ void VPMainWindow::UpdateScaleConnection() const
     icon.addFile(m_scaleConnected ? QStringLiteral(":/icon/32x32/link.png")
                                   : QStringLiteral(":/icon/32x32/broken_link.png"));
     ui->toolButtonScaleConnected->setIcon(icon);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::OpenWatermark(const QString &path)
+{
+    QList<QPointer<WatermarkWindow>>::const_iterator i;
+    for (i = m_watermarkEditors.begin(); i != m_watermarkEditors.end(); ++i)
+    {
+        if (not (*i).isNull() && not (*i)->CurrentFile().isEmpty()
+                && (*i)->CurrentFile() == AbsoluteMPath(curFile, path))
+        {
+            (*i)->show();
+            return;
+        }
+    }
+
+    auto *watermark = new WatermarkWindow(curFile, this);
+    connect(watermark, &WatermarkWindow::New, this, [this](){OpenWatermark();});
+    connect(watermark, &WatermarkWindow::OpenAnother, this, [this](const QString &path){OpenWatermark(path);});
+    m_watermarkEditors.append(watermark);
+    watermark->show();
+    watermark->Open(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CleanWaterkmarkEditors()
+{
+    QMutableListIterator<QPointer<WatermarkWindow>> i(m_watermarkEditors);
+    while (i.hasNext())
+    {
+        QPointer<WatermarkWindow> watermarkEditor = i.next();
+        if (watermarkEditor.isNull())
+        {
+            i.remove();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3713,6 +3841,67 @@ void VPMainWindow::on_actionPrintTiledSheet_triggered()
 void VPMainWindow::on_actionPrintPreviewTiledSheet_triggered()
 {
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CreateWatermark()
+{
+    CleanWaterkmarkEditors();
+    OpenWatermark();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::EditCurrentWatermark()
+{
+    CleanWaterkmarkEditors();
+
+    QString watermarkFile = m_layout->LayoutSettings().WatermarkPath();
+    if (not watermarkFile.isEmpty())
+    {
+        OpenWatermark(watermarkFile);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::LoadWatermark()
+{
+    const QString filter(tr("Watermark files") + QLatin1String(" (*.vwm)"));
+    QString dir = QDir::homePath();
+    qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    m_layout->LayoutSettings().SetWatermarkPath(filePath);
+    LayoutWasSaved(false);
+    m_layout->TileFactory()->refreshTileInfos();
+    m_graphicsView->RefreshLayout();
+    ui->actionRemoveWatermark->setEnabled(true);
+    ui->actionEditCurrentWatermark->setEnabled(true);
+
+    if (not m_layout->LayoutSettings().WatermarkPath().isEmpty())
+    {
+        m_layoutWatcher->addPath(m_layout->LayoutSettings().WatermarkPath());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::RemoveWatermark()
+{
+    m_layout->LayoutSettings().SetWatermarkPath(QString());
+    LayoutWasSaved(false);
+    m_layout->TileFactory()->refreshTileInfos();
+    m_graphicsView->RefreshLayout();
+    ui->actionRemoveWatermark->setEnabled(false);
+    ui->actionEditCurrentWatermark->setEnabled(false);
+
+    if (not m_layout->LayoutSettings().WatermarkPath().isEmpty())
+    {
+        m_layoutWatcher->removePath(m_layout->LayoutSettings().WatermarkPath());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -20,5 +20,6 @@
         <file>puzzleicon/32X32/horizontal_grainline@2x.png</file>
         <file>puzzleicon/32X32/vertical_grainline.png</file>
         <file>puzzleicon/32X32/vertical_grainline@2x.png</file>
+        <file>puzzleicon/svg/no_watermark_image.svg</file>
     </qresource>
 </RCC>

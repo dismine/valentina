@@ -55,6 +55,7 @@ class QFileSystemWatcher;
 template <typename T> class QSharedPointer;
 class DialogPuzzlePreferences;
 struct VPExportData;
+class WatermarkWindow;
 
 class VPMainWindow : public VAbstractMainWindow
 {
@@ -273,6 +274,11 @@ private slots:
     void on_actionPrintTiledSheet_triggered();
     void on_actionPrintPreviewTiledSheet_triggered();
 
+    void CreateWatermark();
+    void EditCurrentWatermark();
+    void LoadWatermark();
+    void RemoveWatermark();
+
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
 #endif //defined(Q_OS_MAC)
@@ -317,6 +323,10 @@ private:
     Unit m_oldLayoutUnit{Unit::Mm};
 
     bool m_scaleConnected{true};
+
+    QList<QPointer<WatermarkWindow>> m_watermarkEditors{};
+
+    QFileSystemWatcher *m_watermarkWatcher{nullptr};
 
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
@@ -451,6 +461,9 @@ private:
                               bool &firstPage);
 
     void UpdateScaleConnection() const;
+
+    void OpenWatermark(const QString &path = QString());
+    void CleanWaterkmarkEditors();
 };
 
 #endif // VPMAINWINDOW_H

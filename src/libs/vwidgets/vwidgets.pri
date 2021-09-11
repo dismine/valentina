@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/qtcolorpicker.cpp \
     $$PWD/vcomboboxdelegate.cpp \
     $$PWD/vdecorationaligningdelegate.cpp \
     $$PWD/velidedlabel.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
+    $$PWD/qtcolorpicker.h \
     $$PWD/stable.h \
     $$PWD/vcomboboxdelegate.h \
     $$PWD/vdecorationaligningdelegate.h \

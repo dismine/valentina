@@ -33,6 +33,7 @@
 #include <QObject>
 
 #include "layout/vplayout.h"
+#include "../ifc/ifcdef.h"
 
 class QGraphicsScene;
 class VCommonSettings;
@@ -90,6 +91,13 @@ public:
      */
     static constexpr qreal tileStripeWidth = UnitConvertor(1, Unit::Cm, Unit::Px);
 
+    auto WatermarkData() const -> const VWatermarkData &;
+
+    static void PaintWatermarkText(QPainter *painter, const QRectF &img, const VWatermarkData &watermarkData,
+                                   qreal xScale = 1.0, qreal yScale = 1.0);
+    static void PaintWatermarkImage(QPainter *painter, const QRectF &img, const VWatermarkData &watermarkData,
+                                    const QString &watermarkPath, qreal xScale = 1.0, qreal yScale = 1.0);
+
 private:
     Q_DISABLE_COPY(VPTileFactory)
 
@@ -106,8 +114,10 @@ private:
      */
     qreal m_drawingAreaWidth{0};
 
-    void DrawRuler(QPainter *painter);
+    VWatermarkData m_watermarkData{};
 
+    void DrawRuler(QPainter *painter);
+    void DrawWatermark(QPainter *painter);
 };
 
 #endif // VPTILEFACTORY_H

@@ -38,6 +38,7 @@
 
 class VPTileFactory;
 class VPLayout;
+struct VWatermarkData;
 
 class VPGraphicsTileGrid : public QGraphicsItem
 {

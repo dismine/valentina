@@ -39,6 +39,7 @@ class VPPiece;
 class VPSheet;
 class QUndoStack;
 class VPTileFactory;
+struct VWatermarkData;
 
 class VPLayout : public QObject
 {
@@ -92,6 +93,8 @@ public:
     void SetTileFactory(VPTileFactory *newTileFactory);
 
     void RefreshScenePieces() const;
+
+    auto WatermarkData() const -> VWatermarkData;
 
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);

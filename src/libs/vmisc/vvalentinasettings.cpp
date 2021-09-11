@@ -93,8 +93,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
                           (QLatin1String("dockWidget/patternMessagesActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
-
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1String("watermarkEditorSize")))
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -617,18 +615,6 @@ bool VValentinaSettings::GetAutoRefreshPatternMessage() const
 void VValentinaSettings::SetAutoRefreshPatternMessage(bool value)
 {
     setValue(*settingAutoRefreshPatternMessage, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSize VValentinaSettings::GetWatermarkEditorSize() const
-{
-    return value(*settingWatermarkEditorSize, QSize(0, 0)).toSize();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VValentinaSettings::SetWatermarkEditorSize(const QSize &sz)
-{
-    setValue(*settingWatermarkEditorSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

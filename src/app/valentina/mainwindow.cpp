@@ -65,7 +65,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 #include "../vformat/vpatternrecipe.h"
-#include "watermarkwindow.h"
+#include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vmisc/backport/qoverload.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"

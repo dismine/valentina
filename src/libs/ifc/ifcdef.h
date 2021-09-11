@@ -35,6 +35,7 @@
 #  include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
+#include <QColor>
 #include <QFont>
 #include <QString>
 #include <QStringList>
@@ -262,6 +263,8 @@ struct VWatermarkData
     QString path{};
     int     imageRotation{0};
     bool    grayscale{false};
+    bool    invalidFile{false};
+    QColor  textColor{Qt::black};
 };
 
 QT_WARNING_POP

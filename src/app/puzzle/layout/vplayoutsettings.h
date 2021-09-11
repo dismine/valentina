@@ -306,6 +306,12 @@ public:
     auto VerticalScale() const -> qreal;
     void SetVerticalScale(qreal newVerticalScale);
 
+    auto WatermarkPath() const -> const QString &;
+    void SetWatermarkPath(const QString &newWatermarkPath);
+
+    auto GetShowWatermark() const -> bool;
+    void SetShowWatermark(bool newShowWatermark);
+
 private:
     Unit m_unit{Unit::Cm};
 
@@ -329,6 +335,7 @@ private:
     bool m_ignoreTilesMargins{false};
 
     bool m_showTiles{false};
+    bool m_showWatermark{false};
 
     // control
     bool m_followGrainLine{false};
@@ -357,6 +364,8 @@ private:
 
     qreal m_horizontalScale{1.0};
     qreal m_verticalScale{1.0};
+
+    QString m_watermarkPath{};
 };
 
 #endif // VPLAYOUTSETTINGS_H

@@ -111,6 +111,7 @@ private:
     bool m_showTilesTmp{false};
 
     bool m_showTilesSchemeTmp{false};
+    bool m_showTilesWatermarkSchemeTmp{false};
 
     /**
      * variable to hold temporarly hte value of the show grid

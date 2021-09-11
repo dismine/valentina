@@ -263,6 +263,9 @@ void VPSheetSceneData::PrepareTilesScheme()
     {
         m_showTilesSchemeTmp = layout->LayoutSettings().GetShowTiles();
         layout->LayoutSettings().SetShowTiles(true);
+
+        m_showTilesWatermarkSchemeTmp = layout->LayoutSettings().GetShowWatermark();
+        layout->LayoutSettings().SetShowWatermark(false);
     }
 
     RefreshLayout();
@@ -275,6 +278,7 @@ void VPSheetSceneData::ClearTilesScheme()
     if (not layout.isNull())
     {
         layout->LayoutSettings().SetShowTiles(m_showTilesSchemeTmp);
+        layout->LayoutSettings().SetShowWatermark(m_showTilesWatermarkSchemeTmp);
     }
 
     RefreshLayout();
@@ -379,7 +383,7 @@ auto VPSheet::GetAsLayoutPieces() const -> QVector<VLayoutPiece>
     QVector<VLayoutPiece> details;
     details.reserve(pieces.size());
 
-    for (auto piece : pieces)
+    for (const auto& piece : pieces)
     {
         if (not piece.isNull())
         {
@@ -421,7 +425,7 @@ void VPSheet::SetVisible(bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-GrainlineType VPSheet::GrainlineOrientation() const
+auto VPSheet::GrainlineOrientation() const -> GrainlineType
 {
     if (m_grainlineType == GrainlineType::NotFixed)
     {
@@ -694,7 +698,7 @@ void VPSheet::ClearSelection() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPageLayout::Orientation VPSheet::GetSheetOrientation() const
+auto VPSheet::GetSheetOrientation() const -> QPageLayout::Orientation
 {
     return m_size.height() >= m_size.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
 }

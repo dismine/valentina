@@ -46,6 +46,15 @@
                   <xs:attribute type="LayoutScale" name="yScale"/>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="watermark">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:boolean" name="showPreview" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

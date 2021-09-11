@@ -243,7 +243,8 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
         ML::TagDescription, // 2
         ML::TagControl,     // 3
         ML::TagTiles,       // 4
-        ML::TagScale        // 5
+        ML::TagScale,       // 5
+        ML::TagWatermark    // 6
     };
 
     while (readNextStartElement())
@@ -275,6 +276,10 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
             case 5: // scale
                 qDebug("read scale");
                 ReadScale(layout);
+                break;
+            case 6: // watermark
+                qDebug("read watermark");
+                ReadWatermark(layout);
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -816,6 +821,16 @@ auto VPLayoutFileReader::ReadLabelLine() -> TextLine
     line.m_qsText = readElementText();
 
     return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadWatermark(const VPLayoutPtr &layout)
+{
+    AssertRootTag(ML::TagWatermark);
+
+    QXmlStreamAttributes attribs = attributes();
+    layout->LayoutSettings().SetShowWatermark(ReadAttributeBool(attribs, ML::AttrShowPreview, falseStr));
+    layout->LayoutSettings().SetWatermarkPath(readElementText());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

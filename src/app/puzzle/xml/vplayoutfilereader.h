@@ -75,6 +75,7 @@ private:
     void ReadPatternLabel(const VPPiecePtr &piece);
     auto ReadLabelLines() -> VTextManager;
     auto ReadLabelLine() -> TextLine;
+    void ReadWatermark(const VPLayoutPtr &layout);
 
     void ReadLayoutMargins(const VPLayoutPtr &layout);
     void ReadSheetMargins(const VPSheetPtr &sheet);

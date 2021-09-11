@@ -78,6 +78,9 @@ public:
     void SetLayoutTileShowTiles(bool value);
     auto GetLayoutTileShowTiles() const -> bool;
 
+    void SetLayoutTileShowWatermark(bool value);
+    auto GetLayoutTileShowWatermark() const -> bool;
+
     void SetLayoutWarningPiecesSuperposition(bool value);
     auto GetLayoutWarningPiecesSuperposition() const -> bool;
 

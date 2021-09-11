@@ -95,7 +95,6 @@ QPixmap WatermarkImageFromCache(const VWatermarkData &watermarkData, const QStri
         if (watermarkData.grayscale)
         {
             watermark = Grayscale(watermark);
-            watermark.save("/home/dismine/grayscale.png", "PNG");
         }
 
         // Workaround for QGraphicsPixmapItem opacity problem.
@@ -272,6 +271,11 @@ QVector<QGraphicsItem *> VPoster::TextWatermark(QGraphicsItem *parent, const Pos
 
     QGraphicsSimpleTextItem *text = new QGraphicsSimpleTextItem(watermarkData.text, parent);
     text->setFont(watermarkData.font);
+
+    QPen pen = text->pen();
+    pen.setColor(watermarkData.textColor);
+    text->setPen(pen);
+
     text->setOpacity(watermarkData.opacity/100.);
     text->setTransformOriginPoint(text->boundingRect().center());
     text->setRotation(-watermarkData.textRotation);

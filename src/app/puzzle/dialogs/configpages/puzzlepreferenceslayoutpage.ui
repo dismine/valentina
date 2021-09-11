@@ -375,6 +375,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkBoxTileShowWatermark">
+        <property name="toolTip">
+         <string>Show watermark preview</string>
+        </property>
+        <property name="text">
+         <string>Show watermark</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QGroupBox" name="groupBoxPaperFormat_2">
         <property name="autoFillBackground">
          <bool>false</bool>

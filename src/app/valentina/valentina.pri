@@ -10,8 +10,7 @@ include(core/core.pri)
 SOURCES += \
         $$PWD/main.cpp \
         $$PWD/mainwindow.cpp \
-        $$PWD/mainwindowsnogui.cpp \
-        $$PWD/watermarkwindow.cpp
+        $$PWD/mainwindowsnogui.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -20,10 +19,8 @@ HEADERS  += \
         $$PWD/mainwindow.h \
         $$PWD/stable.h \
         $$PWD/version.h \
-        $$PWD/mainwindowsnogui.h \
-        $$PWD/watermarkwindow.h
+        $$PWD/mainwindowsnogui.h
 
 # Main forms
 FORMS    += \
-        $$PWD/mainwindow.ui \
-        $$PWD/watermarkwindow.ui
+        $$PWD/mainwindow.ui

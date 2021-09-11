@@ -119,6 +119,7 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
     settings->SetLayoutSheetMargins(GetSheetMargins());
 
     settings->SetLayoutTileShowTiles(ui->checkBoxTileShowTiles->isChecked());
+    settings->SetLayoutTileShowWatermark(ui->checkBoxTileShowWatermark->isChecked());
 
     settings->SetLayoutTilePaperHeight(
                 UnitConvertor(ui->doubleSpinBoxTilePaperHeight->value(), m_oldLayoutUnit, Unit::Px));
@@ -602,6 +603,7 @@ void PuzzlePreferencesLayoutPage::ReadSettings()
     TileSize(QSizeF(tileWidth, tileHeight));
 
     ui->checkBoxTileShowTiles->setChecked(settings->GetLayoutTileShowTiles());
+    ui->checkBoxTileShowWatermark->setChecked(settings->GetLayoutTileShowWatermark());
     ui->checkBoxTileIgnoreFileds->setChecked(settings->GetLayoutTileIgnoreMargins());
     SetTileMargins(settings->GetLayoutSheetMargins());
 

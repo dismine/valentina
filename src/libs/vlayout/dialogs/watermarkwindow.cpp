@@ -34,10 +34,11 @@
 #include <QFontDialog>
 #include <QFuture>
 #include <QMessageBox>
+#include <QStyle>
 #include <QtConcurrent>
 
 #include "../vmisc/def.h"
-#include "core/vapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
@@ -109,6 +110,31 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
 
     connect(ui->groupBoxWatermarkText, &QGroupBox::toggled, this, [this](){WatermarkChangesWereSaved(false);});
     connect(ui->groupBoxWatermarkImage, &QGroupBox::toggled, this, [this](){WatermarkChangesWereSaved(false);});
+
+    ui->pushButtonColorPicker->insertColor(Qt::black, tr("Black", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::red, tr("Red", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkRed, tr("Dark red", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::green, tr("Green", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkGreen, tr("Dark green", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::blue, tr("Blue", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkBlue, tr("Dark blue", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::cyan, tr("Cyan", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkCyan, tr("Dark cyan", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::magenta, tr("Magenta", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkMagenta, tr("Dark magenta", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::yellow, tr("Yellow", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkYellow, tr("Dark yellow", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::gray, tr("Gray", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::darkGray, tr("Dark gray", "color"));
+    ui->pushButtonColorPicker->insertColor(Qt::lightGray, tr("Light gray", "color"));
+
+    QVector<QColor> colors = VAbstractApplication::VApp()->Settings()->GetWatermarkCustomColors();
+    for (const auto& color : colors)
+    {
+        ui->pushButtonColorPicker->insertColor(color);
+    }
+
+    connect(ui->pushButtonColorPicker, &QtColorPicker::colorChanged, this, [this](){WatermarkChangesWereSaved(false);});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,7 +268,7 @@ void WatermarkWindow::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize sz = VAbstractValApplication::VApp()->ValentinaSettings()->GetWatermarkEditorSize();
+    QSize sz = VAbstractApplication::VApp()->Settings()->GetWatermarkEditorSize();
     if (sz.isEmpty() == false)
     {
         resize(sz);
@@ -259,7 +285,7 @@ void WatermarkWindow::resizeEvent(QResizeEvent *event)
     // window creating, which would
     if (m_isInitialized)
     {
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetWatermarkEditorSize(size());
+        VAbstractApplication::VApp()->Settings()->SetWatermarkEditorSize(size());
     }
     QMainWindow::resizeEvent(event);
 }
@@ -584,7 +610,7 @@ bool WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::SaveWatermark(const QString &fileName, QString &error)
+auto WatermarkWindow::SaveWatermark(const QString &fileName, QString &error) -> bool
 {
     m_data.opacity = ui->spinBoxOpacity->value();
     m_data.showText = ui->groupBoxWatermarkText->isChecked();
@@ -594,6 +620,7 @@ bool WatermarkWindow::SaveWatermark(const QString &fileName, QString &error)
     m_data.path = RelativeMPath(fileName, ui->lineEditPath->text());
     m_data.imageRotation = ui->spinBoxImageRotation->value();
     m_data.grayscale = ui->checkBoxGrayColor->isChecked();
+    m_data.textColor = ui->pushButtonColorPicker->currentColor();
 
     VWatermark doc;
     doc.CreateEmptyWatermark();
@@ -605,6 +632,8 @@ bool WatermarkWindow::SaveWatermark(const QString &fileName, QString &error)
         SetCurrentFile(fileName);
         statusBar()->showMessage(tr("File saved"), 5000);
         WatermarkChangesWereSaved(result);
+
+        VAbstractApplication::VApp()->Settings()->SetWatermarkCustomColors(ui->pushButtonColorPicker->CustomColors());
     }
     return result;
 }
@@ -717,6 +746,10 @@ void WatermarkWindow::ShowWatermark()
     ui->checkBoxGrayColor->blockSignals(true);
     ui->checkBoxGrayColor->setChecked(m_data.grayscale);
     ui->checkBoxGrayColor->blockSignals(false);
+
+    ui->pushButtonColorPicker->blockSignals(true);
+    ui->pushButtonColorPicker->setCurrentColor(m_data.textColor);
+    ui->pushButtonColorPicker->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

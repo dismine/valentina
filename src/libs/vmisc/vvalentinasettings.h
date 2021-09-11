@@ -161,9 +161,6 @@ public:
     bool GetAutoRefreshPatternMessage() const;
     void SetAutoRefreshPatternMessage(bool value);
 
-    QSize GetWatermarkEditorSize() const;
-    void SetWatermarkEditorSize(const QSize& sz);
-
     bool GetToolPanelScaling() const;
     void SetToolPanelScaling(const bool &value);
 

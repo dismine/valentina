@@ -330,7 +330,7 @@ void VPLayoutSettings::SetIgnoreTilesMargins(bool newIgnoreTilesMargins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPLayoutSettings::HorizontalScale() const
+auto VPLayoutSettings::HorizontalScale() const -> qreal
 {
     return m_horizontalScale;
 }
@@ -342,7 +342,7 @@ void VPLayoutSettings::SetHorizontalScale(qreal newHorizontalScale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPLayoutSettings::VerticalScale() const
+auto VPLayoutSettings::VerticalScale() const -> qreal
 {
     return m_verticalScale;
 }
@@ -351,4 +351,28 @@ qreal VPLayoutSettings::VerticalScale() const
 void VPLayoutSettings::SetVerticalScale(qreal newVerticalScale)
 {
     m_verticalScale = newVerticalScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::WatermarkPath() const -> const QString &
+{
+    return m_watermarkPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetWatermarkPath(const QString &newWatermarkPath)
+{
+    m_watermarkPath = newWatermarkPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::GetShowWatermark() const -> bool
+{
+    return m_showWatermark;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetShowWatermark(bool newShowWatermark)
+{
+    m_showWatermark = newShowWatermark;
 }

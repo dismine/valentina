@@ -4,10 +4,15 @@
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 
+#include <QFileInfo>
+#include <QImageReader>
+#include <QPixmapCache>
+#include <QSvgRenderer>
+
 namespace
 {
 constexpr qreal penWidth = 1;
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &sheetUuid, QGraphicsItem *parent):
@@ -82,18 +87,44 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         const int nbCol = layout->TileFactory()->ColNb(sheet);
         const int nbRow = layout->TileFactory()->RowNb(sheet);
 
-        for(int i=0;i<=nbCol;++i)
-        {
-            // vertical lines
-            painter->drawLine(QPointF(sheetMargins.left()+i*width, sheetMargins.top()),
-                              QPointF(sheetMargins.left()+i*width, sheetMargins.top() + nbRow*height));
-        }
+        VWatermarkData watermarkData = layout->TileFactory()->WatermarkData();
 
         for(int j=0;j<=nbRow;++j)
         {
             // horizontal lines
             painter->drawLine(QPointF(sheetMargins.left(), sheetMargins.top()+j*height),
                               QPointF(sheetMargins.left()+nbCol*width, sheetMargins.top()+j*height));
+
+            for(int i=0;i<=nbCol;++i)
+            {
+                // vertical lines
+                painter->drawLine(QPointF(sheetMargins.left()+i*width, sheetMargins.top()),
+                                  QPointF(sheetMargins.left()+i*width, sheetMargins.top() + nbRow*height));
+
+                if (j < nbRow && i < nbCol)
+                {
+                    QRectF img(sheetMargins.left()+i*width, sheetMargins.top()+j*height,
+                               width, height);
+
+                    if (not layout->LayoutSettings().WatermarkPath().isEmpty() &&
+                            layout->LayoutSettings().GetShowWatermark())
+                    {
+                        if (watermarkData.opacity > 0)
+                        {
+                            if (watermarkData.showImage && not watermarkData.path.isEmpty())
+                            {
+                                VPTileFactory::PaintWatermarkImage(painter, img, watermarkData,
+                                                                   layout->LayoutSettings().WatermarkPath());
+                            }
+
+                            if (watermarkData.showText && not watermarkData.text.isEmpty())
+                            {
+                                VPTileFactory::PaintWatermarkText(painter, img, watermarkData);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

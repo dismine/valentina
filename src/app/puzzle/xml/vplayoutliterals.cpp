@@ -59,6 +59,7 @@ const QString TagPatternLabel        = QStringLiteral("patternLabel");
 const QString TagLines               = QStringLiteral("lines");
 const QString TagLine                = QStringLiteral("line");
 const QString TagScale               = QStringLiteral("scale");
+const QString TagWatermark           = QStringLiteral("watermark");
 
 const QString AttrVersion              = QStringLiteral("version");
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");
@@ -102,6 +103,7 @@ const QString AttrGrainlineType        = QStringLiteral("grainlineType");
 const QString AttrXScale               = QStringLiteral("xScale");
 const QString AttrYScale               = QStringLiteral("yScale");
 const QString AttrIgnoreMargins        = QStringLiteral("ignoreMargins");
+const QString AttrShowPreview          = QStringLiteral("showPreview");
 
 const QString atFrontStr               = QStringLiteral("atFront");
 const QString atRearStr                = QStringLiteral("atRear");

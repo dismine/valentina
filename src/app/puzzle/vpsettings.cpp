@@ -43,6 +43,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileMargins, (QLatin1Strin
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetIgnoreMargins, (QLatin1String("layout/sheetIgnoreMargins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileIgnoreMargins, (QLatin1String("layout/tileIgnoreMargins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowTiles, (QLatin1String("layout/tileShowTiles")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowWatermark, (QLatin1String("layout/tileShowWatermark")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesSuperposition,
                           (QLatin1String("layout/warningPiecesSuperposition")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutStickyEdges, (QLatin1String("layout/stickyEdges")))
@@ -224,6 +225,18 @@ void VPSettings::SetLayoutTileShowTiles(bool value)
 auto VPSettings::GetLayoutTileShowTiles() const -> bool
 {
     return value(*settingLayoutTileShowTiles, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutTileShowWatermark(bool value)
+{
+    setValue(*settingLayoutTileShowWatermark, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutTileShowWatermark() const -> bool
+{
+    return value(*settingLayoutTileShowWatermark, false).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

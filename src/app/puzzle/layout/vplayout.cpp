@@ -31,9 +31,13 @@
 #include "vpsheet.h"
 #include "../vpapplication.h"
 #include "../vptilefactory.h"
+#include "../ifc/xml/vwatermarkconverter.h"
+#include "../vformat/vwatermark.h"
+#include "../ifc/exception/vexception.h"
 
 #include <QLoggingCategory>
 #include <QUndoStack>
+#include <QPixmapCache>
 
 Q_LOGGING_CATEGORY(pLayout, "p.layout")
 
@@ -63,6 +67,7 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     layout->LayoutSettings().SetUnit(settings->LayoutUnit());
 
     layout->LayoutSettings().SetShowTiles(settings->GetLayoutTileShowTiles());
+    layout->LayoutSettings().SetShowWatermark(settings->GetLayoutTileShowWatermark());
     layout->LayoutSettings().SetTilesSize(QSizeF(settings->GetLayoutTilePaperWidth(),
                                                  settings->GetLayoutTilePaperHeight()));
     layout->LayoutSettings().SetIgnoreTilesMargins(settings->GetLayoutTileIgnoreMargins());
@@ -136,6 +141,33 @@ void VPLayout::RefreshScenePieces() const
             sheet->SceneData()->RefreshPieces();
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::WatermarkData() const -> VWatermarkData
+{
+    VWatermarkData data;
+    if (not m_layoutSettings.WatermarkPath().isEmpty())
+    {
+        try
+        {
+            VWatermarkConverter converter(m_layoutSettings.WatermarkPath());
+            VWatermark watermark;
+            watermark.setXMLContent(converter.Convert());
+            data = watermark.GetWatermark();
+        }
+        catch (VException &e)
+        {
+            data.invalidFile = true;
+            data.opacity = 20;
+            data.showImage = true;
+            data.path = "fake.png";
+            data.showText = false;
+            return data;
+        }
+    }
+
+    return data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

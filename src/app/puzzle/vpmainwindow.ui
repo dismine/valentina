@@ -95,9 +95,20 @@
     <addaction name="separator"/>
     <addaction name="actionExportLayout"/>
    </widget>
+   <widget class="QMenu" name="menuWatermark">
+    <property name="title">
+     <string>Watermark</string>
+    </property>
+    <addaction name="actionWatermarkEditor"/>
+    <addaction name="actionEditCurrentWatermark"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadWatermark"/>
+    <addaction name="actionRemoveWatermark"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLayout"/>
    <addaction name="menuSheet"/>
+   <addaction name="menuWatermark"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -208,7 +219,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <property name="iconSize">
         <size>
@@ -1520,6 +1531,16 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBoxTilesShowWatermark">
+                  <property name="toolTip">
+                   <string>Show watermark preview</string>
+                  </property>
+                  <property name="text">
+                   <string>Show watermark</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
@@ -2243,6 +2264,59 @@
     <enum>QAction::ApplicationSpecificRole</enum>
    </property>
   </action>
+  <action name="actionWatermarkEditor">
+   <property name="icon">
+    <iconset theme="document-new"/>
+   </property>
+   <property name="text">
+    <string>Editor</string>
+   </property>
+   <property name="toolTip">
+    <string>Create or edit a watermark</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionEditCurrentWatermark">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Edit current</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionLoadWatermark">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
+   <property name="text">
+    <string>Load</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionRemoveWatermark">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="edit-delete"/>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
@@ -2270,8 +2344,8 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupTileOrientation"/>
-  <buttongroup name="buttonGroupSheetOrientation"/>
  </buttongroups>
 </ui>

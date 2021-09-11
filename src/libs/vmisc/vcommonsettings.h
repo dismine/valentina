@@ -277,6 +277,12 @@ public:
     bool GetGraphicalOutput() const;
     void SetGraphicalOutput(const bool &value);
 
+    auto GetWatermarkEditorSize() const -> QSize;
+    void SetWatermarkEditorSize(const QSize& sz);
+
+    auto GetWatermarkCustomColors() const -> QVector<QColor>;
+    void SetWatermarkCustomColors(QVector<QColor> colors);
+
 protected:
 
     template <typename T>
