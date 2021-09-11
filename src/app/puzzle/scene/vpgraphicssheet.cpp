@@ -35,8 +35,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsSheet::VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent):
     QGraphicsItem(parent),
-    m_layout(layout),
-    m_boundingRect(GetSheetRect())
+    m_layout(layout)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,8 +97,6 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             }
         }
     }
-
-    m_boundingRect = sheetRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,7 +146,13 @@ void VPGraphicsSheet::SetShowBorder(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsSheet::RefreshBoundingRect()
+{
+    prepareGeometryChange();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsSheet::boundingRect() const -> QRectF
 {
-    return m_boundingRect;
+    return GetSheetRect();
 }

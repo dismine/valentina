@@ -87,6 +87,8 @@ public:
     void PrepareTilesScheme();
     void ClearTilesScheme();
 
+    void RefreshSheetSize();
+
 private:
     Q_DISABLE_COPY(VPSheetSceneData)
 

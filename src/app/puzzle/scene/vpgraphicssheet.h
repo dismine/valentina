@@ -60,11 +60,12 @@ public:
      */
     void SetShowBorder(bool value);
 
+    void RefreshBoundingRect();
+
 private:
     Q_DISABLE_COPY(VPGraphicsSheet)
 
     VPLayoutWeakPtr m_layout{};
-    QRectF m_boundingRect;
 
     bool m_showMargin{true};
     bool m_showBorder{true};

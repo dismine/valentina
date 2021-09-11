@@ -281,6 +281,15 @@ void VPSheetSceneData::ClearTilesScheme()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPSheetSceneData::RefreshSheetSize()
+{
+    if (m_graphicsSheet != nullptr)
+    {
+        m_graphicsSheet->RefreshBoundingRect();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
 {
     SCASSERT(piece != nullptr)
@@ -707,6 +716,11 @@ void VPSheet::SetSheetSize(qreal width, qreal height)
 {
     m_size.setWidth(width);
     m_size.setHeight(height);
+
+    if (m_sceneData != nullptr)
+    {
+        m_sceneData->RefreshSheetSize();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -715,12 +729,22 @@ void VPSheet::SetSheetSizeConverted(qreal width, qreal height)
     Unit unit = SheetUnits();
     m_size.setWidth(UnitConvertor(width, unit, Unit::Px));
     m_size.setHeight(UnitConvertor(height, unit, Unit::Px));
+
+    if (m_sceneData != nullptr)
+    {
+        m_sceneData->RefreshSheetSize();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::SetSheetSize(const QSizeF &size)
 {
     m_size = size;
+
+    if (m_sceneData != nullptr)
+    {
+        m_sceneData->RefreshSheetSize();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -729,6 +753,11 @@ void VPSheet::SetSheetSizeConverted(const QSizeF &size)
     Unit unit = SheetUnits();
     m_size = QSizeF(UnitConvertor(size.width(), unit, Unit::Px),
                     UnitConvertor(size.height(), unit, Unit::Px));
+
+    if (m_sceneData != nullptr)
+    {
+        m_sceneData->RefreshSheetSize();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
