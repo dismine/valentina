@@ -52,8 +52,8 @@ public:
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int PatternMinVer = FORMAT_VERSION(0, 1, 4);
-    static Q_DECL_CONSTEXPR const int PatternMaxVer = FORMAT_VERSION(0, 8, 12);
+    static Q_DECL_CONSTEXPR const int PatternMinVer = FormatVersion(0, 1, 4);
+    static Q_DECL_CONSTEXPR const int PatternMaxVer = FormatVersion(0, 8, 12);
 
 protected:
     virtual int     MinVer() const override;

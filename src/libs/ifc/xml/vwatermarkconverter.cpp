@@ -37,7 +37,7 @@
 
 const QString VWatermarkConverter::WatermarkMinVerStr = QStringLiteral("1.0.0");
 const QString VWatermarkConverter::WatermarkMaxVerStr = QStringLiteral("1.0.0");
-const QString VWatermarkConverter::CurrentSchema          = QStringLiteral("://schema/watermark/v1.0.0.xsd");
+const QString VWatermarkConverter::CurrentSchema      = QStringLiteral("://schema/watermark/v1.0.0.xsd");
 
 //VWatermarkConverter::WatermarkMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VWatermarkConverter::WatermarkMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!

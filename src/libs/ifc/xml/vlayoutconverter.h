@@ -44,8 +44,8 @@ public:
 
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int LayoutMinVer = FORMAT_VERSION(0, 1, 0);
-    static Q_DECL_CONSTEXPR const int LayoutMaxVer = FORMAT_VERSION(0, 1, 0);
+    static Q_DECL_CONSTEXPR const int LayoutMinVer = FormatVersion(0, 1, 0);
+    static Q_DECL_CONSTEXPR const int LayoutMaxVer = FormatVersion(0, 1, 0);
 
 protected:
     virtual int     MinVer() const override;

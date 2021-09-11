@@ -37,7 +37,10 @@
 
 #include "vdomdocument.h"
 
-#define FORMAT_VERSION(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+constexpr inline auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
+{
+    return ((major<<16u)|(minor<<8u)|patch);
+}
 
 class VAbstractConverter :public VDomDocument
 {

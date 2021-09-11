@@ -77,7 +77,7 @@ QString VLayoutConverter::XSDSchema(int ver) const
 {
     QHash <int, QString> schemas =
     {
-        std::make_pair(FORMAT_VERSION(0, 1, 0), CurrentSchema)
+        std::make_pair(FormatVersion(0, 1, 0), CurrentSchema)
     };
 
     if (schemas.contains(ver))
@@ -93,7 +93,7 @@ void VLayoutConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FORMAT_VERSION(0, 1, 0)):
+        case (FormatVersion(0, 1, 0)):
             break;
         default:
             InvalidVersion(m_ver);

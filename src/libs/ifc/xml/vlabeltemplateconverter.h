@@ -39,8 +39,8 @@ public:
 
     static const QString LabelTemplateMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int LabelTemplateMinVer = FORMAT_VERSION(1, 0, 0);
-    static Q_DECL_CONSTEXPR const int LabelTemplateMaxVer = FORMAT_VERSION(1, 0, 0);
+    static Q_DECL_CONSTEXPR const int LabelTemplateMinVer = FormatVersion(1, 0, 0);
+    static Q_DECL_CONSTEXPR const int LabelTemplateMaxVer = FormatVersion(1, 0, 0);
 
 protected:
     virtual int     MinVer() const override;
