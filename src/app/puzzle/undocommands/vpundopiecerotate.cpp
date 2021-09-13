@@ -341,7 +341,7 @@ auto VPUndoPiecesRotate::Layout() const -> VPLayoutPtr
         }
     }
 
-    return nullptr;
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,5 +356,5 @@ auto VPUndoPiecesRotate::Sheet() const -> VPSheetPtr
         }
     }
 
-    return nullptr;
+    return {};
 }
