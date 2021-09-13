@@ -72,6 +72,13 @@
     </message>
 </context>
 <context>
+    <name>ColorPickerPopup</name>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personalizzato</translation>
+    </message>
+</context>
+<context>
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
@@ -6180,6 +6187,10 @@ Applicare la configurazione comunque?</translation>
             <numerusform></numerusform>
         </translation>
     </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished">Layout</translation>
+    </message>
 </context>
 <context>
     <name>DialogRestrictDimension</name>
@@ -6538,27 +6549,102 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>files</source>
-        <translation>files</translation>
-    </message>
-    <message>
-        <source>(flat) files</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">files</translation>
     </message>
     <message>
         <source>Image files</source>
-        <translation>File immagini</translation>
+        <translation type="vanished">File immagini</translation>
     </message>
+</context>
+<context>
+    <name>DialogSaveManualLayout</name>
     <message>
-        <source>tiled</source>
+        <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Numerical control</source>
+        <source>Path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Raw Layout Data</source>
+        <source>Destination folder</source>
+        <translation type="unfinished">La cartella di destinazione</translation>
+    </message>
+    <message>
+        <source>Path to destination folder</source>
+        <translation type="unfinished">Percorso per la cartella di destinazione</translation>
+    </message>
+    <message>
+        <source>Select path to destination folder</source>
+        <translation type="unfinished">Seleziona il percorso alla cartella di destinazione</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation type="unfinished">Cerca…</translation>
+    </message>
+    <message>
+        <source>File format:</source>
+        <translation type="unfinished">Formato file:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Opzioni</translation>
+    </message>
+    <message>
+        <source>Binary form</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text as paths</source>
+        <translation type="unfinished">Testi come percorsi</translation>
+    </message>
+    <message>
+        <source>Export unified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiles scheme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File name:</source>
+        <translation type="unfinished">Nome file:</translation>
+    </message>
+    <message>
+        <source>File base name</source>
+        <translation type="unfinished">Nome del file di base</translation>
+    </message>
+    <message>
+        <source>The base filename does not match a regular expression.</source>
+        <translation type="unfinished">Il nome del file di base non ha corrispondenza con espressioni regolari.</translation>
+    </message>
+    <message>
+        <source>Select folder</source>
+        <translation type="unfinished">Seleziona cartella</translation>
+    </message>
+    <message>
+        <source>Tried to use out of range format number.</source>
+        <translation type="unfinished">Si è cercato di utilizzare un formato di numero fuori gamma.</translation>
+    </message>
+    <message>
+        <source>Selected not present format.</source>
+        <translation type="unfinished">Selezionato formato non presente.</translation>
+    </message>
+    <message>
+        <source>The destination directory doesn&apos;t exists or is not readable.</source>
+        <translation type="unfinished">La directory di destinazione non esiste o non è leggibile.</translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <translation type="unfinished">Conflitto di nome</translation>
+    </message>
+    <message>
+        <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
+        <translation type="unfinished">La cartella già contiene file con nome %1. Riscrivere tutti i nomi conflittuali?</translation>
+    </message>
+    <message>
+        <source>Example:</source>
+        <translation type="unfinished">Esempio:</translation>
     </message>
 </context>
 <context>
@@ -6806,6 +6892,50 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation type="unfinished">I dati dell&apos;etichetta sono stati modificati. Vuoi salvarli prima di modificare il formato dell&apos;etichetta?</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Altezza</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Taglia</translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10283,6 +10413,218 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <source>dark mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished">Generale</translation>
+    </message>
+    <message>
+        <source>Graphical output</source>
+        <translation type="unfinished">Risultato grafico</translation>
+    </message>
+    <message>
+        <source>Use antialiasing</source>
+        <translation type="unfinished">utilizza antialiasing</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished">Usa OpenGL per renderizzare una scena.
+Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished">Usa il render OpenGL</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Annullare</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
+        <translation type="unfinished">Conto passi (0-infinito):</translation>
+    </message>
+    <message>
+        <source>Scrolling</source>
+        <translation type="unfinished">Scorrere</translation>
+    </message>
+    <message>
+        <source>Animation</source>
+        <translation type="unfinished">Animazione</translation>
+    </message>
+    <message>
+        <source>Duration:</source>
+        <translation type="unfinished">Durata:</translation>
+    </message>
+    <message>
+        <source>Scrolling animation duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <comment>milliseconds</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update interval:</source>
+        <translation type="unfinished">Intervallo d&apos;aggiornamento:</translation>
+    </message>
+    <message>
+        <source>Time in milliseconds between each animation update</source>
+        <translation type="unfinished">Tempo in millisecondi tra ogni aggiornamento d&apos;animazione</translation>
+    </message>
+    <message>
+        <source>Mouse scale</source>
+        <translation type="unfinished">Scala mouse</translation>
+    </message>
+    <message>
+        <source>Sensor:</source>
+        <comment>sensor mouse</comment>
+        <translation type="unfinished">Sensore:</translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with sensor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wheel:</source>
+        <comment>mouse wheel</comment>
+        <translation type="unfinished">Rotella:</translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with wheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceleration:</source>
+        <translation type="unfinished">Accelerazione:</translation>
+    </message>
+    <message>
+        <source>undo limit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished">Antialising</translation>
+    </message>
+    <message>
+        <source>scene render</source>
+        <translation type="unfinished">Render di scena</translation>
+    </message>
+</context>
+<context>
+    <name>PuzzlePreferencesLayoutPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Unità:</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation type="unfinished">Modelli:</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Larghezza:</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Altezza:</translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Margini</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Destra:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Top:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Sinistra:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Fondo:</translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
+        <translation type="unfinished">Ignora margini</translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning superposition of pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning pieces out of bound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sticky edges</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished">Rispetta drittofilo</translation>
+    </message>
+    <message>
+        <source>Pieces gap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Tiles on sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show watermark preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default layout settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimetri</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimetri</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Pollici</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished">Pixel</translation>
+    </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
@@ -10753,11 +11095,31 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unplaced pieces</source>
+        <source>move pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sheet 1</source>
+        <source>rotate pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished">Margini di stampa impossibili da impostare</translation>
+    </message>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10970,6 +11332,81 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
         <translation>Due punti fuori posto alla posizione $POS$</translation>
+    </message>
+</context>
+<context>
+    <name>QtColorPicker</name>
+    <message>
+        <source>Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personalizzato</translation>
     </message>
 </context>
 <context>
@@ -12492,6 +12929,18 @@ Vuoi salvare le tue modifiche?</translation>
         <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Gradation label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%size%_%height%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert…</source>
+        <translation type="unfinished">Inserisci…</translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -13029,7 +13478,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The measurements document has no write permissions.</source>
-        <translation type="unfinished">Il file di misure è in sola lettura.</translation>
+        <translation type="obsolete">Il file di misure è in sola lettura.</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -13070,6 +13519,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation type="unfinished">Si è verificato un errore sconosciuto, come ad esempio il fallimento di una partizione completa durante la trascrizione di un file bloccato.</translation>
+    </message>
+    <message>
+        <source>The file has no write permissions.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14124,6 +14577,30 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Can&apos;t create an ASTM dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>(flat) files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>files</source>
+        <translation type="unfinished">files</translation>
+    </message>
+    <message>
+        <source>Image files</source>
+        <translation type="unfinished">File immagini</translation>
+    </message>
+    <message>
+        <source>tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Numerical control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw Layout Data</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
@@ -14351,6 +14828,14 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Pieces of </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unplaced pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pieces of</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPCarrouselPieceList</name>
@@ -14440,17 +14925,55 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
-    <name>VPLayoutFileReader</name>
+    <name>VPLayout</name>
     <message>
-        <source>Piece List</source>
+        <source>Sheet %1</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>VPLayoutFileReader</name>
     <message>
         <source>Piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Got empty attribute &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in line %1. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in line %1. Grainline is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in line %1. Internal path shape is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in line %1. Marker shape is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected tag %1 in line %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPMainGraphicsView</name>
+    <message>
+        <source>Restore transformation origin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove sheet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14463,10 +14986,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;File</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -14541,39 +15060,11 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">Angolo:</translation>
     </message>
     <message>
-        <source>Rotate the piece by 90° clockwise</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate the piece by 90° anti-clockwise</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate the piece so that the grainline is vertical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate the piece so that the grainline is horizontal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Placement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>X:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No piece selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multiple pieces selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14593,28 +15084,12 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Width</source>
-        <translation type="unfinished">Larghezza</translation>
+        <translation type="obsolete">Larghezza</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lunghezza</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Portrait</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Lunghezza</translation>
     </message>
     <message>
         <source>Remove unused length</source>
@@ -14665,22 +15140,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">Rispetta drittofilo</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Horizontal grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pieces gap</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sticky edges</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14705,10 +15164,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export Tiled Pdf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Layout properties</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14717,16 +15172,8 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">Layout</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation type="unfinished">Descrizione</translation>
-    </message>
-    <message>
-        <source>Unit</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
@@ -14829,10 +15276,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to read a layout file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fail to create layout.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14925,11 +15368,245 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">About Qt</translation>
     </message>
     <message>
-        <source>PDF Files</source>
+        <source>&amp;Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SVG Files</source>
+        <source>&amp;Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gradation id:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <comment>Translate piece</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relative translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply to each piece separately</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Unità:</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation type="unfinished">Modelli:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Lunghezza:</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Larghezza:</translation>
+    </message>
+    <message>
+        <source>Grainline orientation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force the grainline orientation to always be horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force the grainline orientation to always be vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
+        <translation type="unfinished">Ignora margini</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Altezza:</translation>
+    </message>
+    <message>
+        <source>Show watermark preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print tiles scheme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pieces gap:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished">Stampa</translation>
+    </message>
+    <message>
+        <source>Print preview</source>
+        <translation type="unfinished">Anteprima di stampa</translation>
+    </message>
+    <message>
+        <source>Print tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create or edit a watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Rimuovi</translation>
+    </message>
+    <message>
+        <source>Unable to read a layout file. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation type="unfinished">&amp;Undo</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation type="unfinished">&amp;Redo</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished">Pixel</translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished">Modifiche non salvate</translation>
+    </message>
+    <message>
+        <source>Layout has been modified.
+Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished">Salva…</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Salva</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished">Non salvare</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
+        <translation type="unfinished">Impossibile creare tracciato</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed in flushing page to disk, disk full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>translate pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished">Per stampare documenti con pagine multiple tutti i fogli devono avere la stessa dimensione.</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Errore di stampa</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Impossibile procedere perché non ci sono stampanti disponibili nel sistema.</translation>
+    </message>
+    <message>
+        <source>Unable to sheet page settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14937,51 +15614,47 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VPSheet</name>
     <message>
         <source>Letter</source>
-        <translation type="unfinished">Lettera</translation>
+        <translation type="obsolete">Lettera</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation type="unfinished">Legale</translation>
-    </message>
-    <message>
-        <source>Tabloid</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Legale</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="unfinished">Rotolo 24pollici</translation>
+        <translation type="obsolete">Rotolo 24pollici</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="unfinished">Rotolo 30pollici</translation>
+        <translation type="obsolete">Rotolo 30pollici</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="unfinished">Rotolo 36pollici</translation>
+        <translation type="obsolete">Rotolo 36pollici</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="unfinished">Rotolo 42pollici</translation>
+        <translation type="obsolete">Rotolo 42pollici</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="unfinished">Rotolo 44pollici</translation>
+        <translation type="obsolete">Rotolo 44pollici</translation>
     </message>
     <message>
         <source>Roll 48in</source>
-        <translation type="unfinished">Rotolo 44pollici {48i?}</translation>
+        <translation type="obsolete">Rotolo 44pollici {48i?}</translation>
     </message>
     <message>
         <source>Roll 62in</source>
-        <translation type="unfinished">Rotolo 44pollici {62i?}</translation>
+        <translation type="obsolete">Rotolo 44pollici {62i?}</translation>
     </message>
     <message>
         <source>Roll 72in</source>
-        <translation type="unfinished">Rotolo 44pollici {72i?}</translation>
+        <translation type="obsolete">Rotolo 44pollici {72i?}</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Personalizzato</translation>
+        <translation type="obsolete">Personalizzato</translation>
     </message>
 </context>
 <context>
@@ -14993,6 +15666,58 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Page %1 of %2</source>
         <translation type="unfinished">Pagina %1 of %2</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <comment>unit</comment>
+        <translation type="unfinished">cm</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <comment>unit</comment>
+        <translation type="unfinished">in</translation>
+    </message>
+</context>
+<context>
+    <name>VPUndoAddSheet</name>
+    <message>
+        <source>add sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPUndoMovePieceOnSheet</name>
+    <message>
+        <source>move piece on sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPUndoOriginMove</name>
+    <message>
+        <source>move transformation origin</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPUndoPieceMove</name>
+    <message>
+        <source>move piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPUndoPieceRotate</name>
+    <message>
+        <source>rotate piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPUndoRemoveSheet</name>
+    <message>
+        <source>add sheet</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18410,6 +19135,94 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Colore</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Colore:</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark red</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark green</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark blue</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cyan</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark cyan</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Magenta</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark magenta</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark yellow</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark gray</source>
+        <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light gray</source>
+        <comment>color</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
