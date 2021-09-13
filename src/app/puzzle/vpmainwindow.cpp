@@ -287,16 +287,16 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(m_layout.get(), &VPLayout::PieceSelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
-    connect(m_layout.get(), &VPLayout::LayoutChanged, this, [this]()
+    connect(m_layout.data(), &VPLayout::PieceSelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
+    connect(m_layout.data(), &VPLayout::LayoutChanged, this, [this]()
     {
         LayoutWasSaved(false);
     });
-    connect(m_layout.get(), &VPLayout::PieceTransformationChanged, this, [this]()
+    connect(m_layout.data(), &VPLayout::PieceTransformationChanged, this, [this]()
     {
         SetPropertyTabCurrentPieceData();
     });
-    connect(m_layout.get(), &VPLayout::ActiveSheetChanged, this, [this]()
+    connect(m_layout.data(), &VPLayout::ActiveSheetChanged, this, [this]()
     {
         m_layout->TileFactory()->refreshTileInfos();
         m_graphicsView->RefreshLayout();
@@ -1582,7 +1582,7 @@ void VPMainWindow::InitMainGraphics()
 
     connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
     connect(m_graphicsView, &VPMainGraphicsView::mouseMove, this, &VPMainWindow::on_MouseMoved);
-    connect(m_layout.get(), &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
+    connect(m_layout.data(), &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1860,8 +1860,8 @@ auto VPMainWindow::IsLayoutReadOnly() const -> bool
 void VPMainWindow::ConnectToPreferences(const QSharedPointer<DialogPuzzlePreferences> &preferences)
 {
     // Must be first
-    connect(preferences.get(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
-    connect(preferences.get(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+    connect(preferences.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
+    connect(preferences.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

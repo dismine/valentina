@@ -304,11 +304,11 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
         return;
     }
 
-    QObject::connect(layout.get(), &VPLayout::PieceTransformationChanged, piece,
+    QObject::connect(layout.data(), &VPLayout::PieceTransformationChanged, piece,
                      &VPGraphicsPiece::on_RefreshPiece);
-    QObject::connect(layout.get(), &VPLayout::PieceSelectionChanged,
+    QObject::connect(layout.data(), &VPLayout::PieceSelectionChanged,
                      m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
-    QObject::connect(layout.get(), &VPLayout::PiecePositionValidityChanged,
+    QObject::connect(layout.data(), &VPLayout::PiecePositionValidityChanged,
                      piece, &VPGraphicsPiece::on_RefreshPiece);
     QObject::connect(piece, &VPGraphicsPiece::PieceTransformationChanged,
                      m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);

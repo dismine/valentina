@@ -99,7 +99,7 @@ VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr
     setZValue(1);
     setAcceptHoverEvents(true);
 
-    connect(layout.get(), &VPLayout::TransformationOriginChanged, this,
+    connect(layout.data(), &VPLayout::TransformationOriginChanged, this,
             &VPGraphicsTransformationOrigin::SetTransformationOrigin);
 }
 

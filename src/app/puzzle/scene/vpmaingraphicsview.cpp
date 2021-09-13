@@ -72,8 +72,8 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *paren
     setAcceptDrops(true);
 
     // add the connections
-    connect(layout.get(), &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
-    connect(layout.get(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::on_ActiveSheetChanged);
+    connect(layout.data(), &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
+    connect(layout.data(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::on_ActiveSheetChanged);
 
     auto *restoreOrigin = new QAction(this);
     restoreOrigin->setShortcut(restoreOriginShortcut);

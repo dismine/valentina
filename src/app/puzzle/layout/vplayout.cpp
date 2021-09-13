@@ -243,7 +243,7 @@ auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
     if (not sheet.isNull() && GetSheet(sheet->Uuid()).isNull())
     {
         m_sheets.append(sheet);
-        connect(this, &VPLayout::PieceTransformationChanged, sheet.get(), &VPSheet::CheckPiecePositionValidity);
+        connect(this, &VPLayout::PieceTransformationChanged, sheet.data(), &VPSheet::CheckPiecePositionValidity);
     }
     return sheet;
 }
