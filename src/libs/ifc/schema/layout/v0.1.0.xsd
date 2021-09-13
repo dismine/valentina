@@ -38,6 +38,7 @@
                   </xs:sequence>
                   <xs:attribute type="xs:boolean" name="visible"/>
                   <xs:attribute type="xs:string" name="matchingMarks"/>
+                  <xs:attribute type="xs:boolean" name="printScheme"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="scale">

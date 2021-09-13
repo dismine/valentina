@@ -34,6 +34,9 @@
 #include <QFileSystemWatcher>
 #include <QSaveFile>
 #include <QUndoStack>
+#include <QPrinterInfo>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -145,6 +148,115 @@ auto PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF
     }
 
     return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_REQUIRED_RESULT auto PreparePrinter(
+        const QPrinterInfo &info, QPrinter::PrinterMode mode = QPrinter::ScreenResolution) -> QSharedPointer<QPrinter>;
+auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode) -> QSharedPointer<QPrinter>
+{
+    QPrinterInfo tmpInfo = info;
+    if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
+    {
+        const QStringList list = QPrinterInfo::availablePrinterNames();
+        if(list.isEmpty())
+        {
+            return QSharedPointer<QPrinter>();
+        }
+
+        tmpInfo = QPrinterInfo::printerInfo(list.first());
+    }
+
+    auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
+    printer->setResolution(static_cast<int>(PrintDPI));
+    return printer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetPrinterSheetPageSettings(const QSharedPointer<QPrinter> &printer, const VPSheetPtr &sheet, qreal xScale,
+                                 qreal yScale)
+{
+    SCASSERT(not printer.isNull())
+
+    QMarginsF margins;
+    if (not sheet->IgnoreMargins())
+    {
+        margins = sheet->GetSheetMargins();
+    }
+
+    QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+
+    QRectF imageRect = sheet->GetMarginsRect();
+    qreal width = FromPixel(imageRect.width() * xScale + margins.left() + margins.right(), Unit::Mm);
+    qreal height = FromPixel(imageRect.height() * yScale + margins.top() + margins.bottom(), Unit::Mm);
+
+    QSizeF pageSize = sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
+    if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+    {
+        qWarning() << QObject::tr("Cannot set printer page size");
+    }
+
+    printer->setPageOrientation(sheetOrientation);
+    printer->setFullPage(sheet->IgnoreMargins());
+
+    if (not sheet->IgnoreMargins())
+    {
+        if (not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
+        {
+            qWarning() << QObject::tr("Cannot set printer margins");
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const VPLayoutPtr &layout,
+                                 const VPSheetPtr &sheet, QPageLayout::Orientation orientation, bool forSheet)
+{
+    SCASSERT(not printer.isNull())
+
+    if (layout.isNull() || sheet.isNull())
+    {
+        return;
+    }
+
+    QSizeF tileSize = layout->LayoutSettings().GetTilesSize(Unit::Mm);
+    QSizeF pageSize;
+
+    if (not forSheet)
+    {
+        pageSize = orientation == QPageLayout::Portrait ? tileSize : tileSize.transposed();
+    }
+    else
+    {
+        QPageLayout::Orientation tileOrientation = layout->LayoutSettings().GetTilesOrientation();
+        QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+
+        if (tileOrientation != sheetOrientation)
+        {
+            pageSize = orientation == QPageLayout::Portrait ? tileSize.transposed() : tileSize;
+        }
+        else
+        {
+            pageSize = orientation == QPageLayout::Portrait ? tileSize : tileSize.transposed();
+        }
+    }
+
+    if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+    {
+        qWarning() << QObject::tr("Cannot set printer page size");
+    }
+
+    printer->setPageOrientation(orientation);
+    printer->setFullPage(layout->LayoutSettings().IgnoreTilesMargins());
+
+    if (not layout->LayoutSettings().IgnoreTilesMargins())
+    {
+        if (not printer->setPageMargins(layout->LayoutSettings().GetTilesMargins(Unit::Mm),
+                                        QPageLayout::Millimeter))
+        {
+            qWarning() << QObject::tr("Cannot set printer margins");
+        }
+    }
 }
 }  // namespace
 
@@ -953,6 +1065,15 @@ void VPMainWindow::InitPropertyTabTiles()
             VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
         }
     });
+
+    connect(ui->checkBoxPrintTilesScheme, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetPrintTilesScheme(checked);
+            LayoutWasSaved(false);
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1359,6 +1480,7 @@ void VPMainWindow::SetPropertyTabTilesData()
 
         SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
         SetCheckBoxValue(ui->checkBoxTilesShowWatermark, m_layout->LayoutSettings().GetShowWatermark());
+        SetCheckBoxValue(ui->checkBoxPrintTilesScheme, m_layout->LayoutSettings().GetPrintTilesScheme());
     }
     else
     {
@@ -2054,7 +2176,7 @@ void VPMainWindow::RotatePiecesToGrainline()
         return;
     }
 
-    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    QList<VPSheetPtr> sheets = m_layout->GetAllSheets();
     for(const auto& sheet : sheets)
     {
         if (not sheet.isNull())
@@ -2424,13 +2546,13 @@ void VPMainWindow::ExportUnifiedPdfFile(const VPExportData &data)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QString &name)
 {
-    QPrinter printer;
-    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
-                       QCoreApplication::applicationVersion());
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(name);
-    printer.setDocName(QFileInfo(name).fileName());
-    printer.setResolution(static_cast<int>(PrintDPI));
+    QSharedPointer<QPrinter> printer(new QPrinter());
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+    printer->setOutputFormat(QPrinter::PdfFormat);
+    printer->setOutputFileName(name);
+    printer->setDocName(QFileInfo(name).fileName());
+    printer->setResolution(static_cast<int>(PrintDPI));
 
     QPainter painter;
 
@@ -2438,38 +2560,16 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
 
     for (const auto& sheet : data.sheets)
     {
-        QMarginsF margins;
-        if (not sheet->IgnoreMargins())
+        if (sheet.isNull())
         {
-            margins = sheet->GetSheetMargins();
+            continue;
         }
 
-        QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
-
-        QRectF imageRect = sheet->GetMarginsRect();
-        qreal width = FromPixel(imageRect.width() * data.xScale + margins.left() + margins.right(), Unit::Mm);
-        qreal height = FromPixel(imageRect.height() * data.yScale + margins.top() + margins.bottom(), Unit::Mm);
-
-        QSizeF pageSize = sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
-        if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
-        {
-            qWarning() << tr("Cannot set printer page size");
-        }
-
-        printer.setPageOrientation(sheetOrientation);
-        printer.setFullPage(sheet->IgnoreMargins());
-
-        if (not sheet->IgnoreMargins())
-        {
-            if (not printer.setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
-            {
-                qWarning() << tr("Cannot set printer margins");
-            }
-        }
+        SetPrinterSheetPageSettings(printer, sheet, data.xScale, data.yScale);
 
         if (firstPage)
         {
-            if (not painter.begin(&printer))
+            if (not painter.begin(printer.data()))
             { // failed to open file
                 qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(name));
                 return;
@@ -2483,7 +2583,7 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
         }
         else
         {
-            if (not printer.newPage())
+            if (not printer->newPage())
             {
                 qCritical() << tr("Failed in flushing page to disk, disk full?");
                 return;
@@ -2491,8 +2591,9 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
         }
 
         sheet->SceneData()->PrepareForExport();
-        sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(&printer, imageRect), imageRect,
-                                            Qt::IgnoreAspectRatio);
+        QRectF imageRect = sheet->GetMarginsRect();
+        sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer.data(), imageRect),
+                                            imageRect, Qt::IgnoreAspectRatio);
         sheet->SceneData()->CleanAfterExport();
 
         firstPage = false;
@@ -2504,29 +2605,29 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 {
-    QPrinter printer;
+    QSharedPointer<QPrinter> printer(new QPrinter());
 #ifdef Q_OS_MAC
-    printer.setOutputFormat(QPrinter::NativeFormat);
+    printer->setOutputFormat(QPrinter::NativeFormat);
 #else
-    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer->setOutputFormat(QPrinter::PdfFormat);
 #endif
-    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    printer.setResolution(static_cast<int>(PrintDPI));
+    printer->setResolution(static_cast<int>(PrintDPI));
 
     if (data.exportUnified)
     {
         const QString name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
 
-        printer.setOutputFileName(name);
-        printer.setDocName(QFileInfo(name).baseName());
+        printer->setOutputFileName(name);
+        printer->setDocName(QFileInfo(name).baseName());
 
         QPainter painter;
         bool firstPage = true;
         for (const auto& sheet : data.sheets)
         {
-            GeneratePdfTiledFile(sheet, data.showTilesScheme, &painter, &printer, firstPage);
+            GeneratePdfTiledFile(sheet, data.showTilesScheme, &painter, printer, firstPage);
         }
     }
     else
@@ -2536,82 +2637,40 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
             const QString name = data.path + '/' + data.fileName + QString::number(i+1) +
                                  VLayoutExporter::ExportFormatSuffix(data.format);
 
-            printer.setOutputFileName(name);
-            printer.setDocName(QFileInfo(name).baseName());
+            printer->setOutputFileName(name);
+            printer->setDocName(QFileInfo(name).baseName());
 
             QPainter painter;
             bool firstPage = true;
-            GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, &painter, &printer, firstPage);
+            GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, &painter, printer, firstPage);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
-                                        QPrinter *printer, bool &firstPage)
+                                        const QSharedPointer<QPrinter> &printer, bool &firstPage)
 {
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
-    SCASSERT(printer != nullptr)
+    SCASSERT(not printer.isNull())
 
     sheet->SceneData()->PrepareForExport();
     m_layout->TileFactory()->refreshTileInfos();
     sheet->SceneData()->SetTextAsPaths(false);
 
-    auto SetPageSettings = [this, &printer, sheet](QPageLayout::Orientation orientation, bool forSheet)
-    {
-        QSizeF tileSize = m_layout->LayoutSettings().GetTilesSize(Unit::Mm);
-        QSizeF pageSize;
-
-        if (not forSheet)
-        {
-            pageSize = orientation == QPageLayout::Portrait ? tileSize : tileSize.transposed();
-        }
-        else
-        {
-            QPageLayout::Orientation tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
-            QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
-
-            if (tileOrientation != sheetOrientation)
-            {
-                pageSize = orientation == QPageLayout::Portrait ? tileSize.transposed() : tileSize;
-            }
-            else
-            {
-                pageSize = orientation == QPageLayout::Portrait ? tileSize : tileSize.transposed();
-            }
-        }
-
-        if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
-        {
-            qWarning() << tr("Cannot set printer page size");
-        }
-
-        printer->setPageOrientation(orientation);
-        printer->setFullPage(m_layout->LayoutSettings().IgnoreTilesMargins());
-
-        if (not m_layout->LayoutSettings().IgnoreTilesMargins())
-        {
-            if (not printer->setPageMargins(m_layout->LayoutSettings().GetTilesMargins(Unit::Mm),
-                                            QPageLayout::Millimeter))
-            {
-                qWarning() << tr("Cannot set printer margins");
-            }
-        }
-    };
-
     if (showTilesScheme)
     {
-        SetPageSettings(sheet->GetSheetOrientation(), true);
+        SetPrinterTiledPageSettings(printer, m_layout, sheet, sheet->GetSheetOrientation(), true);
     }
     else
     {
-        SetPageSettings(m_layout->LayoutSettings().GetTilesOrientation(), false);
+        SetPrinterTiledPageSettings(printer, m_layout, sheet, m_layout->LayoutSettings().GetTilesOrientation(), false);
     }
 
     if (firstPage)
     {
-        if (not painter->begin(printer))
+        if (not painter->begin(printer.data()))
         { // failed to open file
             qCritical() << tr("Failed to open file, is it writable?");
             return;
@@ -2625,86 +2684,7 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
 
     if (showTilesScheme)
     {
-        VPLayoutPtr layout = sheet->GetLayout();
-        if(layout.isNull())
-        {
-            return;
-        }
-
-        if(not firstPage)
-        {
-            SetPageSettings(sheet->GetSheetOrientation(), true);
-
-            if (not printer->newPage())
-            {
-                qWarning("failed in flushing page to disk, disk full?");
-                return;
-            }
-        }
-
-        sheet->SceneData()->PrepareTilesScheme();
-
-        qreal xScale = layout->LayoutSettings().HorizontalScale();
-        qreal yScale = layout->LayoutSettings().VerticalScale();
-
-        qreal width = m_layout->TileFactory()->DrawingAreaWidth();
-        qreal height = m_layout->TileFactory()->DrawingAreaHeight();
-
-        QPageLayout::Orientation tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
-        QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
-
-        QRectF sheetRect = sheet->GetMarginsRect();
-
-        const int nbCol = m_layout->TileFactory()->ColNb(sheet);
-        const int nbRow = m_layout->TileFactory()->RowNb(sheet);
-
-        QRectF source = QRectF(sheetRect.topLeft(),
-                               QSizeF(nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale),
-                                      nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale)));
-        QRectF target;
-
-        if (tileOrientation != sheetOrientation)
-        {
-            QMarginsF margins;
-            if (not m_layout->LayoutSettings().IgnoreTilesMargins())
-            {
-                margins = m_layout->LayoutSettings().GetTilesMargins();
-            }
-
-            QSizeF tilesSize = layout->LayoutSettings().GetTilesSize();
-            target = QRectF(0, 0,
-                            tilesSize.height() - margins.left() - margins.right(),
-                            tilesSize.width() - margins.top() - margins.bottom());
-        }
-        else
-        {
-            target = QRectF(0, 0, width, height);
-        }
-        sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
-                                            Qt::KeepAspectRatio);
-
-        VWatermarkData watermarkData = m_layout->TileFactory()->WatermarkData();
-        if (watermarkData.opacity > 0)
-        {
-            if (watermarkData.showImage && not watermarkData.path.isEmpty())
-            {
-                VPTileFactory::PaintWatermarkImage(painter, target, watermarkData,
-                                                   layout->LayoutSettings().WatermarkPath(),
-                                                   layout->LayoutSettings().HorizontalScale(),
-                                                   layout->LayoutSettings().VerticalScale());
-            }
-
-            if (watermarkData.showText && not watermarkData.text.isEmpty())
-            {
-                VPTileFactory::PaintWatermarkText(painter, target, watermarkData,
-                                                  layout->LayoutSettings().HorizontalScale(),
-                                                  layout->LayoutSettings().VerticalScale());
-            }
-        }
-
-        sheet->SceneData()->ClearTilesScheme();
-
-        firstPage = false;
+        DrawTilesScheme(printer.data(), painter, sheet, firstPage);
     }
 
     for(int row=0; row < m_layout->TileFactory()->RowNb(sheet); row++)  // for each row of the tiling grid
@@ -2713,7 +2693,8 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
         {
             if(not firstPage)
             {
-                SetPageSettings(m_layout->LayoutSettings().GetTilesOrientation(), false);
+                SetPrinterTiledPageSettings(printer, m_layout, sheet,
+                                            m_layout->LayoutSettings().GetTilesOrientation(), false);
 
                 if (not printer->newPage())
                 {
@@ -2722,7 +2703,7 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
                 }
             }
 
-            m_layout->TileFactory()->drawTile(painter, printer, sheet, row, col);
+            m_layout->TileFactory()->drawTile(painter, printer.data(), sheet, row, col);
 
             firstPage = false;
         }
@@ -2772,6 +2753,386 @@ void VPMainWindow::CleanWaterkmarkEditors()
         if (watermarkEditor.isNull())
         {
             i.remove();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const VPSheetPtr &sheet, bool &firstPage)
+{
+    SCASSERT(printer != nullptr)
+    SCASSERT(painter != nullptr)
+
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    if(not firstPage)
+    {
+        printer->setPageOrientation(sheet->GetSheetOrientation());
+
+        if (not printer->newPage())
+        {
+            qWarning("failed in flushing page to disk, disk full?");
+            return;
+        }
+    }
+
+    sheet->SceneData()->PrepareTilesScheme();
+
+    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+
+    qreal width = m_layout->TileFactory()->DrawingAreaWidth();
+    qreal height = m_layout->TileFactory()->DrawingAreaHeight();
+
+    QPageLayout::Orientation tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+    QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+
+    QRectF sheetRect = sheet->GetMarginsRect();
+
+    const int nbCol = m_layout->TileFactory()->ColNb(sheet);
+    const int nbRow = m_layout->TileFactory()->RowNb(sheet);
+
+    QRectF source = QRectF(sheetRect.topLeft(),
+                           QSizeF(nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale),
+                                  nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale)));
+    QRectF target;
+
+    if (tileOrientation != sheetOrientation)
+    {
+        QMarginsF margins;
+        if (not m_layout->LayoutSettings().IgnoreTilesMargins())
+        {
+            margins = m_layout->LayoutSettings().GetTilesMargins();
+        }
+
+        QSizeF tilesSize = m_layout->LayoutSettings().GetTilesSize();
+        target = QRectF(0, 0,
+                        tilesSize.height() - margins.left() - margins.right(),
+                        tilesSize.width() - margins.top() - margins.bottom());
+    }
+    else
+    {
+        target = QRectF(0, 0, width, height);
+    }
+
+    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
+                                        Qt::KeepAspectRatio);
+
+    VWatermarkData watermarkData = m_layout->TileFactory()->WatermarkData();
+    if (watermarkData.opacity > 0)
+    {
+        if (watermarkData.showImage && not watermarkData.path.isEmpty())
+        {
+            VPTileFactory::PaintWatermarkImage(painter, target, watermarkData,
+                                               m_layout->LayoutSettings().WatermarkPath(),
+                                               m_layout->LayoutSettings().HorizontalScale(),
+                                               m_layout->LayoutSettings().VerticalScale());
+        }
+
+        if (watermarkData.showText && not watermarkData.text.isEmpty())
+        {
+            VPTileFactory::PaintWatermarkText(painter, target, watermarkData,
+                                              m_layout->LayoutSettings().HorizontalScale(),
+                                              m_layout->LayoutSettings().VerticalScale());
+        }
+    }
+
+    sheet->SceneData()->ClearTilesScheme();
+
+    firstPage = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool
+{
+    if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound() ||
+            m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    {
+        for (const auto &sheet : sheets)
+        {
+            bool outOfBoundChecked = false;
+            bool pieceSuperpositionChecked = false;
+
+            QList<VPPiecePtr> pieces = sheet->GetPieces();
+            for (const auto& piece :pieces)
+            {
+               if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound())
+               {
+                   if (not outOfBoundChecked && not piece.isNull() && piece->OutOfBound())
+                   {
+                       QMessageBox msgBox(this);
+                       msgBox.setIcon(QMessageBox::Question);
+                       msgBox.setWindowTitle(tr("The layout is invalid."));
+                       msgBox.setText(tr("The layout is invalid. Piece out of bound. Do you want to continue export?"));
+                       msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+                       msgBox.setDefaultButton(QMessageBox::No);
+                       const int width = 500;
+                       auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                       auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+                       SCASSERT(layout != nullptr)
+                       layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+                       if (msgBox.exec() == QMessageBox::No)
+                       {
+                           return false;
+                       }
+
+                       outOfBoundChecked = true; // no need to ask more
+                   }
+               }
+
+               if (m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+               {
+                   if (not pieceSuperpositionChecked && not piece.isNull() && piece->HasSuperpositionWithPieces())
+                   {
+                       QMessageBox msgBox(this);
+                       msgBox.setIcon(QMessageBox::Question);
+                       msgBox.setWindowTitle(tr("The layout is invalid."));
+                       msgBox.setText(tr("The layout is invalid. Pieces superposition. Do you want to continue "
+                                         "export?"));
+                       msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+                       msgBox.setDefaultButton(QMessageBox::No);
+                       const int width = 500;
+                       auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                       auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
+                       SCASSERT(layout != nullptr)
+                       layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+                       if (msgBox.exec() == QMessageBox::No)
+                       {
+                           return false;
+                       }
+
+                       pieceSuperpositionChecked = true; // no need to ask more
+                   }
+               }
+            }
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets)
+{
+    SCASSERT(printer != nullptr)
+
+    // Handle the fromPage(), toPage(), supportsMultipleCopies(), and numCopies() values from QPrinter.
+    int firstPageNumber = printer->fromPage() - 1;
+    if (firstPageNumber >= sheets.count())
+    {
+        return;
+    }
+    if (firstPageNumber == -1)
+    {
+        firstPageNumber = 0;
+    }
+
+    int lastPageNumber = printer->toPage() - 1;
+    if (lastPageNumber == -1 || lastPageNumber >= sheets.count())
+    {
+        lastPageNumber = sheets.count() - 1;
+    }
+
+    const int numPages = lastPageNumber - firstPageNumber + 1;
+    int copyCount = 1;
+    if (not printer->supportsMultipleCopies())
+    {
+        copyCount = printer->copyCount();
+    }
+
+    QPainter painter;
+    bool firstPage = true;
+    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+
+    for (int i = 0; i < copyCount; ++i)
+    {
+        for (int j = 0; j < numPages; ++j)
+        {
+            int index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
+
+            const VPSheetPtr& sheet = sheets.at(index);
+            if (sheet.isNull())
+            {
+                continue;
+            }
+
+            if (firstPage)
+            {
+                if (not painter.begin(printer))
+                { // failed to open file
+                    qCritical() << tr("Failed to open file, is it writable?");
+                    return;
+                }
+
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
+                                    Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                painter.setBrush(QBrush(Qt::NoBrush));
+                painter.scale(xScale, yScale);
+            }
+            else
+            {
+                printer->setPageOrientation(sheet->GetSheetOrientation());
+                printer->setFullPage(sheet->IgnoreMargins());
+
+                if (not sheet->IgnoreMargins())
+                {
+                    QMarginsF margins = sheet->GetSheetMargins();
+                    if (not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm),
+                                                    QPageLayout::Millimeter))
+                    {
+                        qWarning() << QObject::tr("Cannot set printer margins");
+                    }
+                }
+
+                if (not printer->newPage())
+                {
+                    qCritical() << tr("Failed in flushing page to disk, disk full?");
+                    return;
+                }
+            }
+
+            sheet->SceneData()->PrepareForExport();
+            QRectF imageRect = sheet->GetMarginsRect();
+            sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer, imageRect),
+                                                imageRect, Qt::IgnoreAspectRatio);
+            sheet->SceneData()->CleanAfterExport();
+
+            firstPage = false;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets)
+{
+    SCASSERT(printer != nullptr)
+
+    struct VPLayoutPrinterPage
+    {
+        VPSheetPtr sheet{};
+        bool       tilesScheme{false};
+        int        tileRow{-1};
+        int        tileCol{-1};
+    };
+
+    QVector<VPLayoutPrinterPage> pages;
+
+    for (const auto& sheet : sheets)
+    {
+        if (m_layout->LayoutSettings().GetPrintTilesScheme())
+        {
+            VPLayoutPrinterPage page;
+            page.sheet = sheet;
+            page.tilesScheme  = true;
+
+            pages.append(page);
+        }
+
+        for(int row=0; row < m_layout->TileFactory()->RowNb(sheet); row++)  // for each row of the tiling grid
+        {
+            for(int col=0; col < m_layout->TileFactory()->ColNb(sheet); col++) // for each column of tiling grid
+            {
+                VPLayoutPrinterPage page;
+                page.sheet = sheet;
+                page.tilesScheme = false;
+                page.tileRow = row;
+                page.tileCol = col;
+
+                pages.append(page);
+            }
+        }
+    }
+
+    // Handle the fromPage(), toPage(), supportsMultipleCopies(), and numCopies() values from QPrinter.
+    int firstPageNumber = printer->fromPage() - 1;
+    if (firstPageNumber >= pages.count())
+    {
+        return;
+    }
+    if (firstPageNumber == -1)
+    {
+        firstPageNumber = 0;
+    }
+
+    int lastPageNumber = printer->toPage() - 1;
+    if (lastPageNumber == -1 || lastPageNumber >= pages.count())
+    {
+        lastPageNumber = pages.count() - 1;
+    }
+
+    const int numPages = lastPageNumber - firstPageNumber + 1;
+    int copyCount = 1;
+    if (not printer->supportsMultipleCopies())
+    {
+        copyCount = printer->copyCount();
+    }
+
+    QPainter painter;
+    bool firstPage = true;
+
+    m_layout->TileFactory()->refreshTileInfos();
+
+    for (int i = 0; i < copyCount; ++i)
+    {
+        for (int j = 0; j < numPages; ++j)
+        {
+            int index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
+            const VPLayoutPrinterPage &page = pages.at(index);
+
+            page.sheet->SceneData()->PrepareForExport();
+            page.sheet->SceneData()->SetTextAsPaths(false);
+
+            if (firstPage)
+            {
+                if (page.tilesScheme)
+                {
+                    printer->setPageOrientation(page.sheet->GetSheetOrientation());
+                }
+                else
+                {
+                    printer->setPageOrientation(m_layout->LayoutSettings().GetTilesOrientation());
+                }
+
+                if (not painter.begin(printer))
+                { // failed to open file
+                    qCritical() << tr("Failed to open file, is it writable?");
+                    return;
+                }
+
+                painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
+                                    Qt::RoundCap, Qt::RoundJoin));
+                painter.setBrush(QBrush(Qt::NoBrush));
+                painter.setRenderHint(QPainter::Antialiasing, true);
+            }
+
+            if (page.tilesScheme)
+            {
+                DrawTilesScheme(printer, &painter, page.sheet, firstPage);
+            }
+            else
+            {
+                if(not firstPage)
+                {
+                    printer->setPageOrientation(m_layout->LayoutSettings().GetTilesOrientation());
+
+                    if (not printer->newPage())
+                    {
+                        qWarning("failed in flushing page to disk, disk full?");
+                        return;
+                    }
+                }
+
+                m_layout->TileFactory()->drawTile(&painter, printer, page.sheet, page.tileRow, page.tileCol);
+
+                firstPage = false;
+            }
+
+            page.sheet->SceneData()->CleanAfterExport();
         }
     }
 }
@@ -3296,7 +3657,7 @@ void VPMainWindow::ToolBarStyles()
 void VPMainWindow::on_actionAddSheet_triggered()
 {
     VPSheetPtr sheet(new VPSheet(m_layout));
-    sheet->SetName(tr("Sheet %1").arg(m_layout->GetSheets().size()+1));
+    sheet->SetName(tr("Sheet %1").arg(m_layout->GetAllSheets().size()+1));
     m_layout->UndoStack()->push(new VPUndoAddSheet(sheet));
 }
 
@@ -3615,67 +3976,9 @@ void VPMainWindow::on_ExportLayout()
         return;
     }
 
-    if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound() ||
-            m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    if (not AskLayoutIsInvalid(sheets))
     {
-        for (const auto &sheet : sheets)
-        {
-            bool outOfBoundChecked = false;
-            bool pieceSuperpositionChecked = false;
-
-            QList<VPPiecePtr> pieces = sheet->GetPieces();
-            for (const auto& piece :pieces)
-            {
-               if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound())
-               {
-                   if (not outOfBoundChecked && not piece.isNull() && piece->OutOfBound())
-                   {
-                       QMessageBox msgBox(this);
-                       msgBox.setIcon(QMessageBox::Question);
-                       msgBox.setWindowTitle(tr("The layout is invalid."));
-                       msgBox.setText(tr("The layout is invalid. Piece out of bound. Do you want to continue export?"));
-                       msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-                       msgBox.setDefaultButton(QMessageBox::No);
-                       const int width = 500;
-                       auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-                       auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
-                       SCASSERT(layout != nullptr)
-                       layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-                       if (msgBox.exec() == QMessageBox::No)
-                       {
-                           return;
-                       }
-
-                       outOfBoundChecked = true; // no need to ask more
-                   }
-               }
-
-               if (m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
-               {
-                   if (not pieceSuperpositionChecked && not piece.isNull() && piece->HasSuperpositionWithPieces())
-                   {
-                       QMessageBox msgBox(this);
-                       msgBox.setIcon(QMessageBox::Question);
-                       msgBox.setWindowTitle(tr("The layout is invalid."));
-                       msgBox.setText(tr("The layout is invalid. Pieces superposition. Do you want to continue "
-                                         "export?"));
-                       msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-                       msgBox.setDefaultButton(QMessageBox::No);
-                       const int width = 500;
-                       auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-                       auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
-                       SCASSERT(layout != nullptr)
-                       layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-                       if (msgBox.exec() == QMessageBox::No)
-                       {
-                           return;
-                       }
-
-                       pieceSuperpositionChecked = true; // no need to ask more
-                   }
-               }
-            }
-        }
+        return;
     }
 
     DialogSaveManualLayout dialog(sheets.size(), false, m_layout->LayoutSettings().GetTitle(), this);
@@ -3710,6 +4013,11 @@ void VPMainWindow::on_ExportSheet()
 
     VPSheetPtr sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
+    {
+        return;
+    }
+
+    if (not AskLayoutIsInvalid(QList<VPSheetPtr>{sheet}))
     {
         return;
     }
@@ -3798,49 +4106,353 @@ void VPMainWindow::on_ExportSheet()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintLayout_triggered()
 {
+    if (not m_layout->IsSheetsUniform())
+    {
+        qCritical()<<tr("For printing multipages document all sheet should have the same size.");
+        return;
+    }
 
+    if (not AskLayoutIsInvalid(m_layout->GetSheets()))
+    {
+        return;
+    }
+
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    VPSheetPtr firstSheet = sheets.first();
+    if (firstSheet.isNull())
+    {
+        qCritical() << tr("Unable to sheet page settings");
+    }
+
+    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+
+    SetPrinterSheetPageSettings(printer, firstSheet, xScale, yScale);
+    printer->setDocName(m_layout->LayoutSettings().GetTitle());
+    printer->setOutputFileName(QString());//Disable printing to file if was enabled.
+    printer->setOutputFormat(QPrinter::NativeFormat);
+
+    QPrintDialog dialog(printer.data(), this);
+    // If only user couldn't change page margins we could use method setMinMax();
+    dialog.setOption(QPrintDialog::PrintCurrentPage, false);
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        printer->setResolution(static_cast<int>(PrintDPI));
+        on_printLayoutSheets(printer.data());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewLayout_triggered()
 {
+    if (not m_layout->IsSheetsUniform())
+    {
+        qCritical()<<tr("For printing multipages document all sheet should have the same size.");
+        return;
+    }
 
+    if (not AskLayoutIsInvalid(m_layout->GetSheets()))
+    {
+        return;
+    }
+
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter());
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    VPSheetPtr firstSheet = sheets.first();
+    if (firstSheet.isNull())
+    {
+        qCritical() << tr("Unable to sheet page settings");
+        return;
+    }
+
+    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+
+    SetPrinterSheetPageSettings(printer, firstSheet, xScale, yScale);
+    printer->setDocName(m_layout->LayoutSettings().GetTitle());
+    printer->setResolution(static_cast<int>(PrintDPI));
+
+    // display print preview dialog
+    QPrintPreviewDialog preview(printer.data());
+    connect(&preview, &QPrintPreviewDialog::paintRequested, this, &VPMainWindow::on_printLayoutSheets);
+    preview.exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintTiledLayout_triggered()
 {
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
 
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    VPSheetPtr firstSheet = sheets.first();
+    if (firstSheet.isNull())
+    {
+        qCritical() << tr("Unable to sheet page settings");
+        return;
+    }
+
+    SetPrinterTiledPageSettings(printer, m_layout, firstSheet, m_layout->LayoutSettings().GetTilesOrientation(), false);
+    printer->setDocName(m_layout->LayoutSettings().GetTitle());
+    printer->setOutputFileName(QString());//Disable printing to file if was enabled.
+    printer->setOutputFormat(QPrinter::NativeFormat);
+
+    QPrintDialog dialog(printer.data(), this);
+    // If only user couldn't change page margins we could use method setMinMax();
+    dialog.setOption(QPrintDialog::PrintCurrentPage, false);
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        printer->setResolution(static_cast<int>(PrintDPI));
+        on_printLayoutTiledPages(printer.data());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
 {
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
 
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+
+    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    VPSheetPtr firstSheet = sheets.first();
+    if (firstSheet.isNull())
+    {
+        qCritical() << tr("Unable to sheet page settings");
+        return;
+    }
+
+    SetPrinterTiledPageSettings(printer, m_layout, firstSheet, m_layout->LayoutSettings().GetTilesOrientation(), false);
+    printer->setDocName(m_layout->LayoutSettings().GetTitle());
+    printer->setResolution(static_cast<int>(PrintDPI));
+
+    // display print preview dialog
+    QPrintPreviewDialog preview(printer.data());
+    connect(&preview, &QPrintPreviewDialog::paintRequested, this, &VPMainWindow::on_printLayoutTiledPages);
+    preview.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_printLayoutSheets(QPrinter *printer)
+{
+    PrintLayoutSheets(printer, m_layout->GetSheets());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_printLayoutTiledPages(QPrinter *printer)
+{
+    PrintLayoutTiledSheets(printer, m_layout->GetSheets());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintSheet_triggered()
 {
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
 
+    if (not AskLayoutIsInvalid(QList<VPSheetPtr>{sheet}))
+    {
+        return;
+    }
+
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+
+    SetPrinterSheetPageSettings(printer, sheet, xScale, yScale);
+    printer->setDocName(sheet->GetName());
+    printer->setOutputFileName(QString());//Disable printing to file if was enabled.
+    printer->setOutputFormat(QPrinter::NativeFormat);
+
+    QPrintDialog dialog(printer.data(), this);
+    // If only user couldn't change page margins we could use method setMinMax();
+    dialog.setOption(QPrintDialog::PrintCurrentPage, false);
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        printer->setResolution(static_cast<int>(PrintDPI));
+        on_printLayoutSheet(printer.data());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewSheet_triggered()
 {
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
 
+    if (not AskLayoutIsInvalid(QList<VPSheetPtr>{sheet}))
+    {
+        return;
+    }
+
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter());
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+
+    SetPrinterSheetPageSettings(printer, sheet, xScale, yScale);
+    printer->setDocName(sheet->GetName());
+    printer->setResolution(static_cast<int>(PrintDPI));
+
+    // display print preview dialog
+    QPrintPreviewDialog preview(printer.data());
+    connect(&preview, &QPrintPreviewDialog::paintRequested, this, &VPMainWindow::on_printLayoutSheet);
+    preview.exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintTiledSheet_triggered()
 {
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
 
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    SetPrinterTiledPageSettings(printer, m_layout, sheet, m_layout->LayoutSettings().GetTilesOrientation(), false);
+    printer->setDocName(sheet->GetName());
+    printer->setOutputFileName(QString());//Disable printing to file if was enabled.
+    printer->setOutputFormat(QPrinter::NativeFormat);
+
+    QPrintDialog dialog(printer.data(), this);
+    // If only user couldn't change page margins we could use method setMinMax();
+    dialog.setOption(QPrintDialog::PrintCurrentPage, false);
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        printer->setResolution(static_cast<int>(PrintDPI));
+        on_printLayoutSheetTiledPages(printer.data());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewTiledSheet_triggered()
 {
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
 
+    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
+                        QCoreApplication::applicationVersion());
+
+    SetPrinterTiledPageSettings(printer, m_layout, sheet, m_layout->LayoutSettings().GetTilesOrientation(), false);
+    printer->setDocName(sheet->GetName());
+    printer->setResolution(static_cast<int>(PrintDPI));
+
+    // display print preview dialog
+    QPrintPreviewDialog preview(printer.data());
+    connect(&preview, &QPrintPreviewDialog::paintRequested, this, &VPMainWindow::on_printLayoutSheetTiledPages);
+    preview.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_printLayoutSheet(QPrinter *printer)
+{
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    PrintLayoutSheets(printer, QList<VPSheetPtr>{sheet});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_printLayoutSheetTiledPages(QPrinter *printer)
+{
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    PrintLayoutTiledSheets(printer, QList<VPSheetPtr>{sheet});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

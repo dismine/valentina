@@ -58,7 +58,7 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 
     // create a standard sheet
     VPSheetPtr sheet(new VPSheet(layout));
-    sheet->SetName(tr("Sheet %1").arg(layout->GetSheets().size()+1));
+    sheet->SetName(tr("Sheet %1").arg(layout->GetAllSheets().size()+1));
     layout->AddSheet(sheet);
     layout->SetFocusedSheet(sheet);
 
@@ -156,7 +156,7 @@ auto VPLayout::WatermarkData() const -> VWatermarkData
             watermark.setXMLContent(converter.Convert());
             data = watermark.GetWatermark();
         }
-        catch (VException &e)
+        catch (VException &)
         {
             data.invalidFile = true;
             data.opacity = 20;
@@ -168,6 +168,34 @@ auto VPLayout::WatermarkData() const -> VWatermarkData
     }
 
     return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::IsSheetsUniform() const -> bool
+{
+    QList<VPSheetPtr> sheets = GetSheets();
+    if (sheets.size() < 2)
+    {
+        return true;
+    }
+
+    VPSheetPtr sheet = sheets.first();
+    if (sheet.isNull())
+    {
+        return false;
+    }
+
+    QSizeF sheetSize = sheet->GetSheetSize().toSize();
+
+    return std::all_of(sheets.begin(), sheets.end(), [sheetSize](const VPSheetPtr &sheet)
+    {
+        if (sheet.isNull())
+        {
+            return false;
+        }
+        QSize size = sheet->GetSheetSize().toSize();
+        return size == sheetSize || size.transposed() == sheetSize;
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,9 +249,25 @@ auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::GetSheets() const -> QList<VPSheetPtr>
+QList<VPSheetPtr> VPLayout::GetAllSheets() const
 {
     return m_sheets;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::GetSheets() const -> QList<VPSheetPtr>
+{
+    QList<VPSheetPtr> sheets;
+    sheets.reserve(m_sheets.size());
+
+    for (const auto &sheet : m_sheets)
+    {
+        if (not sheet.isNull() && sheet->IsVisible())
+        {
+            sheets.append(sheet);
+        }
+    }
+    return sheets;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

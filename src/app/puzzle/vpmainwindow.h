@@ -269,10 +269,16 @@ private slots:
     void on_actionPrintTiledLayout_triggered();
     void on_actionPrintPreviewTiledLayout_triggered();
 
+    void on_printLayoutSheets(QPrinter *printer);
+    void on_printLayoutTiledPages(QPrinter *printer);
+
     void on_actionPrintSheet_triggered();
     void on_actionPrintPreviewSheet_triggered();
     void on_actionPrintTiledSheet_triggered();
     void on_actionPrintPreviewTiledSheet_triggered();
+
+    void on_printLayoutSheet(QPrinter *printer);
+    void on_printLayoutSheetTiledPages(QPrinter *printer);
 
     void CreateWatermark();
     void EditCurrentWatermark();
@@ -457,13 +463,20 @@ private:
     void ExportUnifiedPdfFile(const VPExportData &data);
     void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
     void ExportPdfTiledFile(const VPExportData &data);
-    void GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter, QPrinter *printer,
-                              bool &firstPage);
+    void GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
+                              const QSharedPointer<QPrinter> &printer, bool &firstPage);
 
     void UpdateScaleConnection() const;
 
     void OpenWatermark(const QString &path = QString());
     void CleanWaterkmarkEditors();
+
+    void DrawTilesScheme(QPrinter *printer, QPainter *painter, const VPSheetPtr &sheet, bool &firstPage);
+
+    auto AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool;
+
+    void PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
+    void PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
 };
 
 #endif // VPMAINWINDOW_H

@@ -312,6 +312,9 @@ public:
     auto GetShowWatermark() const -> bool;
     void SetShowWatermark(bool newShowWatermark);
 
+    bool GetPrintTilesScheme() const;
+    void SetPrintTilesScheme(bool newPrintTilesScheme);
+
 private:
     Unit m_unit{Unit::Cm};
 
@@ -366,6 +369,8 @@ private:
     qreal m_verticalScale{1.0};
 
     QString m_watermarkPath{};
+
+    bool m_printTilesScheme{false};
 };
 
 #endif // VPLAYOUTSETTINGS_H

@@ -109,6 +109,7 @@ extern const QString AttrXScale;
 extern const QString AttrYScale;
 extern const QString AttrIgnoreMargins;
 extern const QString AttrShowPreview;
+extern const QString AttrPrintScheme;
 
 extern const QString atFrontStr;
 extern const QString atRearStr;

@@ -201,7 +201,7 @@ void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
     QList<VPSheetPtr> sheets = layout->GetSheets();
     for (const auto &sheet : sheets)
     {
-        if (not sheet.isNull() && sheet->IsVisible())
+        if (not sheet.isNull())
         {
             WriteSheet(sheet);
         }
@@ -224,7 +224,6 @@ void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
     WritePieceList(sheet->GetPieces(), ML::TagPieces);
 
     writeEndElement(); // sheet
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -235,6 +234,8 @@ void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
    writeStartElement(ML::TagTiles);
    SetAttribute(ML::AttrVisible, layout->LayoutSettings().GetShowTiles());
    SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
+   SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme, layout->LayoutSettings().GetPrintTilesScheme(),
+                                [](bool print){return not print;});
 
    WriteSize(layout->LayoutSettings().GetTilesSize());
    WriteMargins(layout->LayoutSettings().GetTilesMargins(), layout->LayoutSettings().IgnoreTilesMargins());

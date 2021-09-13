@@ -376,3 +376,15 @@ void VPLayoutSettings::SetShowWatermark(bool newShowWatermark)
 {
     m_showWatermark = newShowWatermark;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPLayoutSettings::GetPrintTilesScheme() const
+{
+    return m_printTilesScheme;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetPrintTilesScheme(bool newPrintTilesScheme)
+{
+    m_printTilesScheme = newPrintTilesScheme;
+}

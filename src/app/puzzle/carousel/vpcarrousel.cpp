@@ -93,7 +93,7 @@ void VPCarrousel::Refresh()
         QList<VPSheetPtr> sheets = layout->GetSheets();
         for (const auto &sheet : sheets)
         {
-            if (not sheet.isNull() && sheet->IsVisible())
+            if (not sheet.isNull())
             {
                 VPCarrouselSheet carrouselSheet;
                 carrouselSheet.unplaced = false;

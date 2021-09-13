@@ -56,6 +56,7 @@ public:
     auto GetTrashedPieces() const -> QList<VPPiecePtr>;
 
     auto AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr;
+    auto GetAllSheets() const -> QList<VPSheetPtr>;
     auto GetSheets() const -> QList<VPSheetPtr>;
     auto GetSheet(const QUuid &uuid) -> VPSheetPtr;
 
@@ -95,6 +96,8 @@ public:
     void RefreshScenePieces() const;
 
     auto WatermarkData() const -> VWatermarkData;
+
+    auto IsSheetsUniform() const -> bool;
 
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);

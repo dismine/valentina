@@ -1541,6 +1541,13 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBoxPrintTilesScheme">
+                  <property name="text">
+                   <string>Print tiles scheme</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
@@ -2266,7 +2273,8 @@
   </action>
   <action name="actionWatermarkEditor">
    <property name="icon">
-    <iconset theme="document-new"/>
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Editor</string>
@@ -2294,7 +2302,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Load</string>
@@ -2308,7 +2317,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="edit-delete"/>
+    <iconset theme="edit-delete">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Remove</string>
