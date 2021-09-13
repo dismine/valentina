@@ -61,6 +61,9 @@ public:
 
     static auto GetTemplateSize(PaperSizeTemplate tmpl, Unit unit) -> QSizeF;
 
+    static void InitTemplates(QComboBox *comboBoxTemplates);
+    static void InitTileTemplates(QComboBox *comboBoxTemplates, bool keepCustom = false);
+
 protected:
     typedef QStringList FormatsVector;
     const static FormatsVector pageFormatNames;
@@ -68,7 +71,7 @@ protected:
 
     static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;
 
-    static void InitTemplates(QComboBox *comboBoxTemplates);
+
 private:
     Q_DISABLE_COPY(VAbstractLayoutDialog)
 };

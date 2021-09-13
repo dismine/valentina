@@ -412,17 +412,16 @@ void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrCurve2, QString().setNum(dialogTool->GetSecondCurveId()));
     doc->SetAttribute(domElement, AttrVCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetVCrossPoint())));
     doc->SetAttribute(domElement, AttrHCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetHCrossPoint())));
-    doc->SetAttributeOrRemoveIf(domElement, AttrCurve1Alias1, dialogTool->GetCurve1AliasSuffix1(),
-                                dialogTool->GetCurve1AliasSuffix1().isEmpty());
-    doc->SetAttributeOrRemoveIf(domElement, AttrCurve1Alias2, dialogTool->GetCurve1AliasSuffix2(),
-                                dialogTool->GetCurve1AliasSuffix2().isEmpty());
-    doc->SetAttributeOrRemoveIf(domElement, AttrCurve2Alias1, dialogTool->GetCurve2AliasSuffix1(),
-                                dialogTool->GetCurve2AliasSuffix1().isEmpty());
-    doc->SetAttributeOrRemoveIf(domElement, AttrCurve2Alias2, dialogTool->GetCurve2AliasSuffix2(),
-                                dialogTool->GetCurve2AliasSuffix2().isEmpty());
-
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve1Alias1, dialogTool->GetCurve1AliasSuffix1(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve1Alias2, dialogTool->GetCurve1AliasSuffix2(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve2Alias1, dialogTool->GetCurve2AliasSuffix1(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve2Alias2, dialogTool->GetCurve2AliasSuffix2(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -435,10 +434,14 @@ void VToolPointOfIntersectionCurves::SaveOptions(QDomElement &tag, QSharedPointe
     doc->SetAttribute(tag, AttrCurve2, secondCurveId);
     doc->SetAttribute(tag, AttrVCrossPoint, static_cast<int>(vCrossPoint));
     doc->SetAttribute(tag, AttrHCrossPoint, static_cast<int>(hCrossPoint));
-    doc->SetAttributeOrRemoveIf(tag, AttrCurve1Alias1, m_curve1AliasSuffix1, m_curve1AliasSuffix1.isEmpty());
-    doc->SetAttributeOrRemoveIf(tag, AttrCurve1Alias2, m_curve1AliasSuffix2, m_curve1AliasSuffix2.isEmpty());
-    doc->SetAttributeOrRemoveIf(tag, AttrCurve2Alias1, m_curve2AliasSuffix1, m_curve2AliasSuffix1.isEmpty());
-    doc->SetAttributeOrRemoveIf(tag, AttrCurve2Alias2, m_curve2AliasSuffix2, m_curve2AliasSuffix2.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve1Alias1, m_curve1AliasSuffix1,
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve1Alias2, m_curve1AliasSuffix2,
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve2Alias1, m_curve2AliasSuffix1,
+                                         [](const QString &suffix){return suffix.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve2Alias2, m_curve2AliasSuffix2,
+                                         [](const QString &suffix){return suffix.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

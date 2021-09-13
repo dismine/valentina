@@ -32,7 +32,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vcomboboxdelegate.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 namespace
 {

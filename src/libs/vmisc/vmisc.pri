@@ -4,11 +4,10 @@
 SOURCES += \
     $$PWD/def.cpp \
     $$PWD/vabstractvalapplication.cpp \
-    $$PWD/vsettings.cpp \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
     $$PWD/vcommonsettings.cpp \
-    $$PWD/vtapesettings.cpp \
+    $$PWD/vvalentinasettings.cpp \
     $$PWD/commandoptions.cpp \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
@@ -30,11 +29,10 @@ HEADERS += \
     $$PWD/def.h \
     $$PWD/vabstractvalapplication.h \
     $$PWD/vmath.h \
-    $$PWD/vsettings.h \
     $$PWD/vabstractapplication.h \
     $$PWD/projectversion.h \
     $$PWD/vcommonsettings.h \
-    $$PWD/vtapesettings.h \
+    $$PWD/vvalentinasettings.h \
     $$PWD/debugbreak.h \
     $$PWD/vlockguard.h \
     $$PWD/vsysexits.h \

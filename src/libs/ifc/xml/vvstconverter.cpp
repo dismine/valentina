@@ -77,14 +77,14 @@ QString VVSTConverter::XSDSchema(int ver) const
 {
     QHash <int, QString> schemas =
     {
-        std::make_pair(FORMAT_VERSION(0, 3, 0), QStringLiteral("://schema/multisize_measurements/v0.3.0.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 0), QStringLiteral("://schema/multisize_measurements/v0.4.0.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 1), QStringLiteral("://schema/multisize_measurements/v0.4.1.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 2), QStringLiteral("://schema/multisize_measurements/v0.4.2.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 3), QStringLiteral("://schema/multisize_measurements/v0.4.3.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 4, 4), QStringLiteral("://schema/multisize_measurements/v0.4.4.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 5, 0), QStringLiteral("://schema/multisize_measurements/v0.5.0.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 5, 1), CurrentSchema),
+        std::make_pair(FormatVersion(0, 3, 0), QStringLiteral("://schema/multisize_measurements/v0.3.0.xsd")),
+        std::make_pair(FormatVersion(0, 4, 0), QStringLiteral("://schema/multisize_measurements/v0.4.0.xsd")),
+        std::make_pair(FormatVersion(0, 4, 1), QStringLiteral("://schema/multisize_measurements/v0.4.1.xsd")),
+        std::make_pair(FormatVersion(0, 4, 2), QStringLiteral("://schema/multisize_measurements/v0.4.2.xsd")),
+        std::make_pair(FormatVersion(0, 4, 3), QStringLiteral("://schema/multisize_measurements/v0.4.3.xsd")),
+        std::make_pair(FormatVersion(0, 4, 4), QStringLiteral("://schema/multisize_measurements/v0.4.4.xsd")),
+        std::make_pair(FormatVersion(0, 5, 0), QStringLiteral("://schema/multisize_measurements/v0.5.0.xsd")),
+        std::make_pair(FormatVersion(0, 5, 1), CurrentSchema),
     };
 
     if (schemas.contains(ver))
@@ -102,35 +102,35 @@ void VVSTConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FORMAT_VERSION(0, 3, 0)):
+        case (FormatVersion(0, 3, 0)):
             ToV0_4_0();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 0)));
+            ValidateXML(XSDSchema(FormatVersion(0, 4, 0)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 4, 0)):
+        case (FormatVersion(0, 4, 0)):
             ToV0_4_1();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 1)));
+            ValidateXML(XSDSchema(FormatVersion(0, 4, 1)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 4, 1)):
+        case (FormatVersion(0, 4, 1)):
             ToV0_4_2();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 2)));
+            ValidateXML(XSDSchema(FormatVersion(0, 4, 2)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 4, 2)):
+        case (FormatVersion(0, 4, 2)):
             ToV0_4_3();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 3)));
+            ValidateXML(XSDSchema(FormatVersion(0, 4, 3)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 4, 3)):
+        case (FormatVersion(0, 4, 3)):
             ToV0_4_4();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 4)));
+            ValidateXML(XSDSchema(FormatVersion(0, 4, 4)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 4, 4)):
+        case (FormatVersion(0, 4, 4)):
             ToV0_5_0();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 0)));
+            ValidateXML(XSDSchema(FormatVersion(0, 5, 0)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 5, 0)):
+        case (FormatVersion(0, 5, 0)):
             ToV0_5_1();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 1)));
+            ValidateXML(XSDSchema(FormatVersion(0, 5, 1)));
             Q_FALLTHROUGH();
-        case (FORMAT_VERSION(0, 5, 1)):
+        case (FormatVersion(0, 5, 1)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -149,7 +149,7 @@ void VVSTConverter::DowngradeToCurrentMaxVersion()
 bool VVSTConverter::IsReadOnly() const
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FORMAT_VERSION(0, 5, 1),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 5, 1),
                       "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
@@ -163,7 +163,7 @@ bool VVSTConverter::IsReadOnly() const
 void VVSTConverter::AddNewTagsForV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0),
                       "Time to refactor the code.");
 
     QDomElement rootElement = this->documentElement();
@@ -179,7 +179,7 @@ void VVSTConverter::AddNewTagsForV0_4_0()
 void VVSTConverter::RemoveTagsForV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0),
                       "Time to refactor the code.");
 
     QDomElement rootElement = this->documentElement();
@@ -205,7 +205,7 @@ void VVSTConverter::RemoveTagsForV0_4_0()
 void VVSTConverter::ConvertMeasurementsToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0),
                       "Time to refactor the code.");
 
     const QString tagBM = QStringLiteral("body-measurements");
@@ -255,7 +255,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
 QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease)
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0),
                       "Time to refactor the code.");
 
     QDomElement element = createElement(QStringLiteral("m"));
@@ -274,7 +274,7 @@ QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal si
 void VVSTConverter::PM_SystemV0_4_1()
 {
     // TODO. Delete if minimal supported version is 0.4.1
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 1),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 1),
                       "Time to refactor the code.");
 
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("size"));
@@ -288,7 +288,7 @@ void VVSTConverter::PM_SystemV0_4_1()
 void VVSTConverter::ConvertMeasurementsToV0_4_2()
 {
     // TODO. Delete if minimal supported version is 0.4.2
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 2),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 2),
                       "Time to refactor the code.");
 
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_3_3();
@@ -321,7 +321,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_2()
 void VVSTConverter::AddNewTagsForV0_5_0()
 {
     // TODO. Delete if minimal supported version is 0.5.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 0),
                       "Time to refactor the code.");
 
     QDomElement root = documentElement();
@@ -385,7 +385,7 @@ void VVSTConverter::AddNewTagsForV0_5_0()
 void VVSTConverter::RemoveTagsForV0_5_0()
 {
     // TODO. Delete if minimal supported version is 0.5.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 0),
                       "Time to refactor the code.");
 
     QDomElement root = documentElement();
@@ -407,7 +407,7 @@ void VVSTConverter::RemoveTagsForV0_5_0()
 void VVSTConverter::ConvertMeasurementsToV0_5_0()
 {
     // TODO. Delete if minimal supported version is 0.5.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 0),
                       "Time to refactor the code.");
 
     const QDomNodeList measurements = elementsByTagName(QStringLiteral("m"));
@@ -427,7 +427,7 @@ void VVSTConverter::ConvertMeasurementsToV0_5_0()
 void VVSTConverter::ToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0),
                       "Time to refactor the code.");
 
     AddRootComment();
@@ -442,7 +442,7 @@ void VVSTConverter::ToV0_4_0()
 void VVSTConverter::ToV0_4_1()
 {
     // TODO. Delete if minimal supported version is 0.4.1
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 1),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 1),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.1"));
@@ -454,7 +454,7 @@ void VVSTConverter::ToV0_4_1()
 void VVSTConverter::ToV0_4_2()
 {
     // TODO. Delete if minimal supported version is 0.4.2
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 2),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 2),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.2"));
@@ -466,7 +466,7 @@ void VVSTConverter::ToV0_4_2()
 void VVSTConverter::ToV0_4_3()
 {
     // TODO. Delete if minimal supported version is 0.4.3
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 3),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 3),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.3"));
@@ -477,7 +477,7 @@ void VVSTConverter::ToV0_4_3()
 void VVSTConverter::ToV0_4_4()
 {
     // TODO. Delete if minimal supported version is 0.4.4
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 4),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 4),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.4"));
@@ -488,7 +488,7 @@ void VVSTConverter::ToV0_4_4()
 void VVSTConverter::ToV0_5_0()
 {
     // TODO. Delete if minimal supported version is 0.5.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 0),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 0),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.5.0"));
@@ -502,7 +502,7 @@ void VVSTConverter::ToV0_5_0()
 void VVSTConverter::ToV0_5_1()
 {
     // TODO. Delete if minimal supported version is 0.5.1
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 5, 1),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 1),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.5.1"));

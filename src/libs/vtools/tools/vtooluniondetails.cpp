@@ -1339,7 +1339,7 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
     {
         // This check need for backward compatibility
         // Remove check and "else" part if min version is 0.3.2
-        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 2),
+        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 3, 2),
                           "Time to refactor the code.");
         if (children.size() == countNodeD1 + countNodeD2-1)
         {
@@ -1396,7 +1396,7 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
 QVector<quint32> FixChildren(QVector<quint32> records, QVector<quint32> children, VContainer *data)
 {
     // TODO. Delete if minimal supported version is 0.7.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 7, 0),
                       "Time to refactor the code.");
     SCASSERT(data != nullptr)
 
@@ -1434,7 +1434,7 @@ void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx
     if (initData.version == 1)
     {
         // TODO. Delete if minimal supported version is 0.7.0
-        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 0),
+        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 7, 0),
                           "Time to refactor the code.");
         // Fixing bug in first version of the tool. Mostly for backward compatibility.
         children = FixChildren(records, children, initData.data);
@@ -1447,7 +1447,7 @@ void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx
         if (initData.version == 1)
         {
             // TODO. Delete if minimal supported version is 0.7.0
-            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 0),
+            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 7, 0),
                               "Time to refactor the code.");
             const quint32 updatedId = TakeNextId(children);
 

@@ -152,7 +152,7 @@ void VGraphicsSimpleTextItem::SetShowParentTooltip(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGraphicsSimpleTextItem::SetRealPos(QPointF pos)
+void VGraphicsSimpleTextItem::SetRealPos(const QPointF &pos)
 {
     m_realPos = pos;
 

@@ -40,7 +40,7 @@
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/customevents.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/compatibility.h"
@@ -875,6 +875,8 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         VToolSeamAllowanceInitData initData;
         initData.id = GetParametrId(domElement);
         initData.detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
+        initData.detail.SetUUID(GetParametrEmptyString(domElement, AttrUUID));
+        initData.detail.SetGradationLabel(GetParametrEmptyString(domElement, AttrGradationLabel));
         initData.detail.SetMx(VAbstractValApplication::VApp()
                               ->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
         initData.detail.SetMy(VAbstractValApplication::VApp()
@@ -964,7 +966,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     if (version == 1)
                     {
                         // TODO. Delete if minimal supported version is 0.4.0
-                        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
+                        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0),
                                           "Time to refactor the code.");
                         const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
                         const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
@@ -4311,7 +4313,7 @@ void VPattern::SetReadOnly(bool rOnly)
 
     if (not pattern.isNull())
     {
-        SetAttributeOrRemoveIf(pattern, AttrReadOnly, rOnly, not rOnly);
+        SetAttributeOrRemoveIf<bool>(pattern, AttrReadOnly, rOnly, [](bool rOnly){return not rOnly;});
         modified = true;
     }
 }

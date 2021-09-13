@@ -47,6 +47,7 @@ const QString VLabelTemplateConverter::CurrentSchema          = QStringLiteral("
 VLabelTemplateConverter::VLabelTemplateConverter(const QString &fileName)
     : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
 }
 
@@ -79,7 +80,7 @@ QString VLabelTemplateConverter::XSDSchema(int ver) const
 {
     switch (ver)
     {
-        case (0x010000):
+        case (FormatVersion(1, 0, 0)):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -93,7 +94,7 @@ void VLabelTemplateConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (0x010000):
+        case (FormatVersion(1, 0, 0)):
             break;
         default:
             InvalidVersion(m_ver);

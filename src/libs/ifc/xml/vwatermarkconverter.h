@@ -38,8 +38,8 @@ public:
 
     static const QString WatermarkMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int WatermarkMinVer = FORMAT_VERSION(1, 0, 0);
-    static Q_DECL_CONSTEXPR const int WatermarkMaxVer = FORMAT_VERSION(1, 0, 0);
+    static Q_DECL_CONSTEXPR const int WatermarkMinVer = FormatVersion(1, 0, 0);
+    static Q_DECL_CONSTEXPR const int WatermarkMaxVer = FormatVersion(1, 1, 0);
 
 protected:
     virtual int     MinVer() const override;
@@ -57,6 +57,8 @@ protected:
 private:
     Q_DISABLE_COPY(VWatermarkConverter)
     static const QString WatermarkMinVerStr;
+
+    void ToV1_1_0();
 };
 
 #endif // VWATERMARKCONVERTER_H

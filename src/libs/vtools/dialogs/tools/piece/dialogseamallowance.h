@@ -86,6 +86,7 @@ protected:
 
 private slots:
     void NameDetailChanged();
+    void DetailUUIDChanged();
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
@@ -163,6 +164,8 @@ private slots:
     void EditPatternLabel();
     void ManagePatternMaterials();
 
+    void InsertGradationPlaceholder();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
@@ -197,6 +200,7 @@ private:
     bool   flagFormulaPassmarkLength{true};
     bool   flagMainPathIsValid;
     bool   flagName;
+    bool   flagUUID;
     bool   flagFormula;
     bool   m_bAddMode;
     bool   m_patternLabelDataChanged{false};
@@ -240,6 +244,10 @@ private:
 
     QString m_defLabelValue{};
 
+    QMenu *m_placeholdersMenu;
+
+    QMap<QString, QPair<QString, QString>> m_gradationPlaceholders{};
+
     VPiece CreatePiece() const;
 
     void    NewMainPathItem(const VPieceNode &node);
@@ -264,6 +272,7 @@ private:
 
     void InitFancyTabBar();
     void InitMainPathTab();
+    void InitPieceTab();
     void InitSeamAllowanceTab();
     void InitNodesList();
     void InitPassmarksList();
@@ -308,12 +317,15 @@ private:
     void SavePatternLabelData();
     void SavePatternTemplateData();
     void SavePatternMaterialData();
+
+    void InitGradationPlaceholdersMenu();
+    void InitGradationPlaceholders();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline bool DialogSeamAllowance::IsValid() const
 {
-    return flagName && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
+    return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
             && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
             && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength;
 }

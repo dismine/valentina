@@ -50,11 +50,11 @@ public:
     static const QString CurrentSchema;
 // GCC 4.6 doesn't allow constexpr and const together
 #if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
-    static Q_DECL_CONSTEXPR int MeasurementMinVer = FORMAT_VERSION(0, 3, 0);
-    static Q_DECL_CONSTEXPR int MeasurementMaxVer = FORMAT_VERSION(0, 5, 1);
+    static Q_DECL_CONSTEXPR int MeasurementMinVer = FormatVersion(0, 3, 0);
+    static Q_DECL_CONSTEXPR int MeasurementMaxVer = FormatVersion(0, 5, 1);
 #else
-    static Q_DECL_CONSTEXPR const int MeasurementMinVer = FORMAT_VERSION(0, 3, 0);
-    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = FORMAT_VERSION(0, 5, 1);
+    static Q_DECL_CONSTEXPR const int MeasurementMinVer = FormatVersion(0, 3, 0);
+    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = FormatVersion(0, 5, 1);
 #endif
 
 protected:

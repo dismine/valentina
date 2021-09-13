@@ -59,6 +59,7 @@ src_install() {
 
 	doman dist/debian/${PN}.1
 	doman dist/debian/tape.1
+    doman dist/debian/puzzle.1
 
 	cp dist/debian/valentina.sharedmimeinfo dist/debian/${PN}.xml || die
 	insinto /usr/share/mime/packages

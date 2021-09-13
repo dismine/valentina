@@ -1119,7 +1119,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-53</y>
+         <y>0</y>
          <width>126</width>
          <height>237</height>
         </rect>
@@ -1828,12 +1828,21 @@
     <addaction name="actionLoadWatermark"/>
     <addaction name="actionRemoveWatermark"/>
    </widget>
+   <widget class="QMenu" name="menuManual_Layout">
+    <property name="title">
+     <string>Manual Layout</string>
+    </property>
+    <addaction name="actionOpenPuzzle"/>
+    <addaction name="actionCreateManualLayout"/>
+    <addaction name="actionUpdateManualLayout"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPatternPiece"/>
    <addaction name="menuMode"/>
    <addaction name="menuMeasurements"/>
    <addaction name="menuHistory"/>
    <addaction name="menuWatermark"/>
+   <addaction name="menuManual_Layout"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -3008,7 +3017,7 @@
   </action>
   <action name="actionLoadWatermark">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="document-open">
@@ -3048,6 +3057,36 @@
    </property>
    <property name="toolTip">
     <string>Create or edit a watermark</string>
+   </property>
+  </action>
+  <action name="actionOpenPuzzle">
+   <property name="text">
+    <string>Open Puzzle</string>
+   </property>
+   <property name="toolTip">
+    <string>Open the Puzzle app</string>
+   </property>
+  </action>
+  <action name="actionCreateManualLayout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create</string>
+   </property>
+   <property name="toolTip">
+    <string>Create manual layout</string>
+   </property>
+  </action>
+  <action name="actionUpdateManualLayout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Update</string>
+   </property>
+   <property name="toolTip">
+    <string>Update manual layout</string>
    </property>
   </action>
   <action name="actionShop">

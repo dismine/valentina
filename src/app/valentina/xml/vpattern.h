@@ -214,7 +214,7 @@ private:
     void ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7),
                       "Time to refactor the code.");
     void ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
@@ -222,7 +222,7 @@ private:
     void ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7),
                       "Time to refactor the code.");
     void ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 

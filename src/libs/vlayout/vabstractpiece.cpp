@@ -49,7 +49,7 @@
 #include <QJsonDocument>
 
 const quint32 VAbstractPieceData::streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-const quint16 VAbstractPieceData::classVersion = 2;
+const quint16 VAbstractPieceData::classVersion = 3;
 
 const qreal maxL = 3.5;
 
@@ -1609,6 +1609,31 @@ uint VAbstractPiece::GetPriority() const
 void VAbstractPiece::SetPriority(uint value)
 {
     d->m_priority = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QUuid VAbstractPiece::GetUUID() const
+{
+    return d->m_uuid;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetUUID(const QUuid &uuid)
+{
+    d->m_uuid = uuid;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetUUID(const QString &uuid)
+{
+    const QUuid temp = QUuid(uuid);
+    d->m_uuid = temp.isNull() ? QUuid::createUuid() : temp;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::GetUniqueID() const -> QString
+{
+    return d->m_uuid.toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

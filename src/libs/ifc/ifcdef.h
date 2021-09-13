@@ -35,6 +35,7 @@
 #  include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
+#include <QColor>
 #include <QFont>
 #include <QString>
 #include <QStringList>
@@ -65,6 +66,8 @@ extern const QString AttrType;
 extern const QString AttrMx;
 extern const QString AttrMy;
 extern const QString AttrName;
+extern const QString AttrUUID;
+extern const QString AttrGradationLabel;
 extern const QString AttrMx1;
 extern const QString AttrMy1;
 extern const QString AttrName1;
@@ -260,6 +263,8 @@ struct VWatermarkData
     QString path{};
     int     imageRotation{0};
     bool    grayscale{false};
+    bool    invalidFile{false};
+    QColor  textColor{Qt::black};
 };
 
 QT_WARNING_POP

@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>408</width>
-    <height>461</height>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Rotation</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -183,7 +183,7 @@
             <string notr="true">...</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../../../vmisc/share/resources/icon.qrc">
              <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
@@ -200,7 +200,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -426,7 +426,9 @@
    <header>vlineedit.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../vmisc/share/resources/icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -29,7 +29,7 @@
 #include "tapepreferencesconfigurationpage.h"
 #include "ui_tapepreferencesconfigurationpage.h"
 #include "../../mapplication.h"
-#include "../vmisc/vtapesettings.h"
+#include "../../vtapesettings.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/pmsystems.h"
 

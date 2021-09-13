@@ -38,7 +38,7 @@
 #include "version.h"
 #include "core/vapplication.h"
 #include "../vmisc/customevents.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/def.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vmodifierkey.h"
@@ -65,10 +65,11 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 #include "../vformat/vpatternrecipe.h"
-#include "watermarkwindow.h"
+#include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vmisc/backport/qoverload.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vlayout/dialogs/dialoglayoutscale.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -331,7 +332,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonMessagesZoomInFont, &QToolButton::clicked, this, [this]()
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         QFont f = ui->plainTextEditPatternMessages->font();
         if (f.pointSize() < settings->GetDefMaxPatternMessageFontSize())
         {
@@ -343,7 +344,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonMessagesZoomOutFont, &QToolButton::clicked, this, [this]()
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         QFont f = ui->plainTextEditPatternMessages->font();
         if (f.pointSize() > settings->GetDefMinPatternMessageFontSize())
         {
@@ -2452,7 +2453,7 @@ void MainWindow::ToolBarTools()
     ui->actionIncreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetLabelFontSize() + 1);
         if (sceneDraw)
         {
@@ -2468,7 +2469,7 @@ void MainWindow::ToolBarTools()
     ui->actionDecreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetLabelFontSize() - 1);
         if (sceneDraw)
         {
@@ -2484,7 +2485,7 @@ void MainWindow::ToolBarTools()
     ui->actionOriginalLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_0));
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         settings->SetLabelFontSize(settings->GetDefLabelFontSize());
         if (sceneDraw)
         {
@@ -3318,52 +3319,9 @@ bool MainWindow::on_actionSave_triggered()
             return false;
         }
 
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-        if (not isFileWritable)
+        if (not CheckFilePermissions(VAbstractValApplication::VApp()->GetPatternPath(), this))
         {
-            QMessageBox messageBox(this);
-            messageBox.setIcon(QMessageBox::Question);
-            messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText(tr("Do you want to change the premissions?"));
-            messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-            messageBox.setDefaultButton(QMessageBox::Yes);
-
-            if (messageBox.exec() == QMessageBox::Yes)
-            {
-#ifdef Q_OS_WIN32
-                qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-                bool changed =
-                        QFile::setPermissions(VAbstractValApplication::VApp()->GetPatternPath(),
-                                              QFileInfo(VAbstractValApplication::VApp()
-                                                        ->GetPatternPath()).permissions() | QFileDevice::WriteUser);
-#ifdef Q_OS_WIN32
-                qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
-                if (not changed)
-                {
-                    QMessageBox messageBox(this);
-                    messageBox.setIcon(QMessageBox::Warning);
-                    messageBox.setText(tr("Cannot set permissions for %1 to writable.")
-                                       .arg(VAbstractValApplication::VApp()->GetPatternPath()));
-                    messageBox.setInformativeText(tr("Could not save the file."));
-                    messageBox.setDefaultButton(QMessageBox::Ok);
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.exec();
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         QString error;
@@ -3416,6 +3374,166 @@ void MainWindow::on_actionOpen_triggered()
         return;
     }
     LoadPattern(filePath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionOpenPuzzle_triggered()
+{
+    const QString puzzle = VApplication::VApp()->PuzzleFilePath();
+    const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+
+    QStringList arguments;
+    if (isNoScaling)
+    {
+        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+    }
+
+    QProcess::startDetached(puzzle, arguments, workingDirectory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionCreateManualLayout_triggered()
+{
+    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    if (rldFile.open())
+    {
+        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+
+        if (detailsInLayout.count() == 0)
+        {
+            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                                 "include at least one detail in layout."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        QVector<VLayoutPiece> listDetails;
+        try
+        {
+            listDetails = PrepareDetailsForLayout(detailsInLayout);
+        }
+        catch (VException &e)
+        {
+            QMessageBox::warning(this, tr("Export details"),
+                                 tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        DialogLayoutScale layoutScale(false, this);
+        layoutScale.SetXScale(1);
+        layoutScale.SetYScale(1);
+        layoutScale.exec();
+
+        VLayoutExporter exporter;
+        exporter.SetFileName(rldFile.fileName());
+        exporter.SetXScale(layoutScale.GetXScale());
+        exporter.SetYScale(layoutScale.GetYScale());
+        exporter.ExportToRLD(listDetails);
+
+        QStringList arguments {"-r", rldFile.fileName()};
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        rldFile.setAutoRemove(false);
+
+        const QString puzzle = VApplication::VApp()->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+    }
+    else
+    {
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Unable to prepare raw layout data.")));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::on_actionUpdateManualLayout_triggered()
+{
+    const QString filter(tr("Manual layout files") + QLatin1String(" (*.vlt)"));
+
+    //Use standard path to manual layouts
+    const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathManualLayouts();
+
+    bool usedNotExistedDir = false;
+    QDir directory(path);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
+
+    auto RemoveUnsuded = qScopeGuard([usedNotExistedDir, path]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir directory(path);
+            directory.rmpath(QChar('.'));
+        }
+    });
+
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Select manual layout"), path, filter, nullptr);
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    rldFile.setAutoRemove(false);
+    if (rldFile.open())
+    {
+        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+
+        if (detailsInLayout.count() == 0)
+        {
+            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                                 "include at least one detail in layout."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        QVector<VLayoutPiece> listDetails;
+        try
+        {
+            listDetails = PrepareDetailsForLayout(detailsInLayout);
+        }
+        catch (VException &e)
+        {
+            QMessageBox::warning(this, tr("Export details"),
+                                 tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            return;
+        }
+
+        DialogLayoutScale layoutScale(false, this);
+        layoutScale.SetXScale(1);
+        layoutScale.SetYScale(1);
+        layoutScale.exec();
+
+        VLayoutExporter exporter;
+        exporter.SetFileName(rldFile.fileName());
+        exporter.SetXScale(layoutScale.GetXScale());
+        exporter.SetYScale(layoutScale.GetYScale());
+        exporter.ExportToRLD(listDetails);
+
+        QStringList arguments {filePath, "-r", rldFile.fileName()};
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        rldFile.setAutoRemove(false);
+
+        const QString puzzle = VApplication::VApp()->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+    }
+    else
+    {
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Unable to prepare raw layout data.")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3823,7 +3941,9 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     const bool drawStage = (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation);
     const bool detailsStage = (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling);
+    const bool layoutStage = (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Layout);
     const bool designStage = (drawStage || detailsStage);
+    const bool piecesStage = (detailsStage || layoutStage);
 
     comboBoxDraws->setEnabled(enable && drawStage);
     ui->actionOptionDraw->setEnabled(enable && drawStage);
@@ -3857,6 +3977,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);
     ui->actionHideLabels->setEnabled(enable);
+    ui->actionCreateManualLayout->setEnabled(enable && piecesStage);
+    ui->actionUpdateManualLayout->setEnabled(enable && piecesStage);
 
     ui->actionLoadWatermark->setEnabled(enable);
     ui->actionRemoveWatermark->setEnabled(enable && not doc->GetWatermarkPath().isEmpty());
@@ -4401,7 +4523,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() && VApplication::IsGUIMode())
     {
         qCDebug(vMainWindow, "Updating recent file list.");
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -4430,7 +4552,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
-    const VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -4475,7 +4597,7 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));
@@ -5243,7 +5365,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     }
     else
     {
-        if (not IgnoreLocking(lock->GetLockError(), fileName))
+        if (not IgnoreLocking(lock->GetLockError(), fileName, VApplication::IsGUIMode()))
         {
             return false;
         }
@@ -6373,73 +6495,6 @@ void MainWindow::UpdateWindowTitle()
     }
     setWindowIcon(icon);
 #endif //defined(Q_OS_MAC)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::IgnoreLocking(int error, const QString &path)
-{
-    QMessageBox::StandardButton answer = QMessageBox::Abort;
-    if (VApplication::IsGUIMode())
-    {
-        switch(error)
-        {
-            case QLockFile::LockFailedError:
-                answer = QMessageBox::warning(this, tr("Locking file"),
-                                               tr("This file already opened in another window. Ignore if you want "
-                                                  "to continue (not recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::PermissionError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("The lock file could not be created, for lack of permissions. "
-                                                  "Ignore if you want to continue (not recommended, can cause "
-                                                  "a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            case QLockFile::UnknownError:
-                answer = QMessageBox::question(this, tr("Locking file"),
-                                               tr("Unknown error happened, for instance a full partition prevented "
-                                                  "writing out the lock file. Ignore if you want to continue (not "
-                                                  "recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
-                break;
-            default:
-                answer = QMessageBox::Abort;
-                break;
-        }
-    }
-
-    if (answer == QMessageBox::Abort)
-    {
-        qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(path));
-        qCDebug(vMainWindow, "Error type: %d", error);
-        Clear();
-        if (not VApplication::IsGUIMode())
-        {
-            switch(error)
-            {
-                case QLockFile::LockFailedError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("This file already opened in another window.")));
-                    break;
-                case QLockFile::PermissionError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
-                    break;
-                case QLockFile::UnknownError:
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("Unknown error happened, for instance a full partition prevented "
-                                                 "writing out the lock file.")));
-                    break;
-                default:
-                    break;
-            }
-
-            qApp->exit(V_EX_NOINPUT);
-        }
-        return false;
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

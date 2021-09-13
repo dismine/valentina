@@ -151,6 +151,9 @@ gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 gzip -9c dist/debian/tape.1 > dist/debian/tape.1.gz &&
 %{__install} -Dm 644 dist/debian/tape.1.gz %{buildroot}%{_mandir}/man1/tape.1.gz
 
+gzip -9c dist/debian/puzzle.1 > dist/debian/puzzle.1.gz &&
+%{__install} -Dm 644 dist/debian/puzzle.1.gz %{buildroot}%{_mandir}/man1/puzzle.1.gz
+
 cp dist/debian/valentina.sharedmimeinfo dist/debian/%{name}.xml &&
 %{__install} -Dm 644 dist/debian/%{name}.xml %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
@@ -160,6 +163,7 @@ cp dist/debian/valentina.mime dist/debian/%{name} &&
 %if 0%{?suse_version} > 0
 %suse_update_desktop_file -r %{name} Graphics VectorGraphics 2DGraphics
 %suse_update_desktop_file -r tape Utility Applet
+%suse_update_desktop_file -r puzzle Utility Applet
 %endif
 
 %post 
@@ -194,8 +198,10 @@ fi
 %license LICENSE_GPL.txt 
 %doc %{_mandir}/man1/%{name}.1*
 %doc %{_mandir}/man1/tape.1*
+%doc %{_mandir}/man1/puzzle.1*
 %{_bindir}/valentina
 %{_bindir}/tape
+%{_bindir}/puzzle
 %{_libdir}/libvpropertyexplorer.so
 %{_libdir}/libvpropertyexplorer.so.*
 %{_libdir}/libqmuparser.so
@@ -208,6 +214,7 @@ fi
 %{_datadir}/mime/packages/%{name}.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/tape.desktop
+%{_datadir}/applications/puzzle.desktop
 
 %dir %{_datadir}/icons/
 %dir %{_datadir}/icons/hicolor/
@@ -242,7 +249,7 @@ fi
 %{_datadir}/%{name}/labels/*.xml
 
 %clean
-rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dist/debian/%{name}
+rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/puzzle.1.gz dist/debian/%{name}.xml dist/debian/%{name}
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 
 

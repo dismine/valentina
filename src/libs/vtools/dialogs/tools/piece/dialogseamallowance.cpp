@@ -52,11 +52,12 @@
 #include "../vmisc/vmodifierkey.h"
 #include "dialogpatternmaterials.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QMenu>
 #include <QMessageBox>
 #include <QTimer>
+#include <QUuid>
 #include <QtNumeric>
 
 enum TabOrder {Paths=0, Pins=1, Labels=2, Grainline=3,  Passmarks=4, PlaceLabels=5, Count=6};
@@ -143,6 +144,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       flagFormulaAfter(true),
       flagMainPathIsValid(true),
       flagName(true), //We have default name of piece.
+      flagUUID(true),
       flagFormula(true),
       m_bAddMode(true),
       m_dialog(),
@@ -166,7 +168,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       m_templateLines(),
       m_undoStack(),
       m_newPlaceLabels(),
-      m_newPaths()
+      m_newPaths(),
+      m_placeholdersMenu(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -177,6 +180,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
     EnableApply(applyAllowed);
 
     InitMainPathTab();
+    InitPieceTab();
     InitSeamAllowanceTab();
     InitInternalPathsTab();
     InitPatternPieceDataTab();
@@ -346,6 +350,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabPaths->lineEditName->setText(piece.GetName());
+    uiTabPaths->lineEditUUID->setText(piece.GetUUID().toString());
+    uiTabPaths->lineEditGradationLabel->setText(piece.GetGradationLabel());
     uiTabPaths->spinBoxPriority->setValue(static_cast<int>(piece.GetPriority()));
 
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(
@@ -532,7 +538,7 @@ void DialogSeamAllowance::CheckState()
 
     if (flagFormula && flagFormulaBefore && flagFormulaAfter)
     {
-        if (flagMainPathIsValid && flagName)
+        if (flagMainPathIsValid && flagName && flagUUID)
         {
             m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
         }
@@ -547,9 +553,9 @@ void DialogSeamAllowance::CheckState()
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
     }
 
-    if (flagMainPathIsValid && flagName)
+    if (flagMainPathIsValid)
     {
-        if (flagFormula && flagFormulaBefore && flagFormulaAfter)
+        if (flagFormula && flagFormulaBefore && flagFormulaAfter && flagName && flagUUID)
         {
             m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
         }
@@ -569,6 +575,22 @@ void DialogSeamAllowance::CheckState()
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), icon);
+    }
+
+    if (flagName && flagUUID)
+    {
+        if (flagFormula && flagFormulaBefore && flagFormulaAfter && flagMainPathIsValid)
+        {
+            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
+        }
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), QIcon());
+    }
+    else
+    {
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), icon);
     }
 
     uiTabPaths->comboBoxNodes->setEnabled(flagFormulaBefore && flagFormulaAfter);
@@ -623,7 +645,7 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
         uiTabLabels->lineEditPatternNumber->setText(m_doc->GetPatternNumber());
         uiTabLabels->lineEditCompanyName->setText(m_doc->GetCompanyName());
 
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
         m_patternMaterials = m_doc->GetPatternMaterials();
 
         InitComboBoxFormats(uiTabLabels->comboBoxDateFormat,
@@ -678,6 +700,30 @@ void DialogSeamAllowance::NameDetailChanged()
         {
             flagName = true;
             ChangeColor(uiTabPaths->labelEditName, OkColor(this));
+        }
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DetailUUIDChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        QRegularExpression re("^$|^{[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-"
+                              "[0-9a-fA-F]{12}}$");
+        QRegularExpressionMatch match = re.match(edit->text());
+
+        if (match.hasMatch())
+        {
+            flagUUID = true;
+            ChangeColor(uiTabPaths->labelEditUUID, OkColor(this));
+        }
+        else
+        {
+            flagUUID = false;
+            ChangeColor(uiTabPaths->labelEditUUID, errorColor);
         }
     }
     CheckState();
@@ -2536,6 +2582,8 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
     piece.SetName(uiTabPaths->lineEditName->text());
+    piece.SetUUID(uiTabPaths->lineEditUUID->text());
+    piece.SetGradationLabel(uiTabPaths->lineEditGradationLabel->text());
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
@@ -2914,6 +2962,29 @@ void DialogSeamAllowance::InitFancyTabBar()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitMainPathTab()
 {
+    uiTabPaths->checkBoxHideMainPath->setChecked(VAbstractApplication::VApp()->Settings()->IsHideMainPath());
+
+    uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(uiTabPaths->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowMainPathContextMenu);
+    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
+            &DialogSeamAllowance::ListChanged);
+    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
+            &DialogSeamAllowance::SetMoveControls);
+
+    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
+            [this](){MoveListRowTop(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
+            [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
+            [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
+            [this](){MoveListRowBottom(uiTabPaths->listWidgetMainPath);});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPieceTab()
+{
     connect(uiTabPaths->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
@@ -2955,8 +3026,14 @@ void DialogSeamAllowance::InitMainPathTab()
             [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
     connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
             [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
-            [this](){MoveListRowBottom(uiTabPaths->listWidgetMainPath);});
+
+    connect(uiTabPaths->lineEditUUID, &QLineEdit::textChanged, this, &DialogSeamAllowance::DetailUUIDChanged);
+
+    InitGradationPlaceholders();
+    InitGradationPlaceholdersMenu();
+
+    m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    uiTabPaths->pushButtonGradationPlaceholder->setMenu(m_placeholdersMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3796,6 +3873,71 @@ void DialogSeamAllowance::SavePatternMaterialData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitGradationPlaceholdersMenu()
+{
+    QChar per('%');
+    auto i = m_gradationPlaceholders.constBegin();
+    while (i != m_gradationPlaceholders.constEnd())
+    {
+        auto value = i.value();
+        QAction *action = m_placeholdersMenu->addAction(value.first);
+        action->setData(per + i.key() + per);
+        connect(action, &QAction::triggered, this, &DialogSeamAllowance::InsertGradationPlaceholder);
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitGradationPlaceholders()
+{
+    // Pattern tags
+    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
+
+    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    m_gradationPlaceholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
+
+    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    m_gradationPlaceholders.insert(pl_size, qMakePair(tr("Size", "dimension"), sizeValue));
+
+    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    m_gradationPlaceholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), hipValue));
+
+    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    m_gradationPlaceholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), waistValue));
+
+    {
+        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+        m_gradationPlaceholders.insert(pl_heightLabel, qMakePair(tr("Height label", "dimension"),
+                                                                 not label.isEmpty() ? label : heightValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+        m_gradationPlaceholders.insert(pl_sizeLabel, qMakePair(tr("Size label", "dimension"),
+                                                               not label.isEmpty() ? label : sizeValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+        m_gradationPlaceholders.insert(pl_hipLabel, qMakePair(tr("Hip label", "dimension"),
+                                                              not label.isEmpty() ? label : hipValue));
+
+        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+        m_gradationPlaceholders.insert(pl_waistLabel, qMakePair(tr("Waist label", "dimension"),
+                                                                not label.isEmpty() ? label : waistValue));
+    }
+
+    {
+        const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
+        auto i = measurements.constBegin();
+        while (i != measurements.constEnd())
+        {
+            QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+            m_gradationPlaceholders.insert(pl_measurement + i.key(),
+                                           qMakePair(tr("Measurement: %1").arg(description),
+                                                     QString::number(*i.value()->GetValue())));
+            ++i;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetMoveControls()
 {
     uiTabPaths->toolButtonTop->setEnabled(false);
@@ -3872,7 +4014,7 @@ void DialogSeamAllowance::EditPatternLabel()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ManagePatternMaterials()
 {
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     DialogPatternMaterials editor(m_patternMaterials, settings->IsRememberPatternMaterials());
 
@@ -3885,5 +4027,16 @@ void DialogSeamAllowance::ManagePatternMaterials()
         {
             settings->SetKnownMaterials(editor.GetKnownMaterials());
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InsertGradationPlaceholder()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action)
+    {
+        uiTabPaths->lineEditGradationLabel->insert(action->data().toString());
+        uiTabPaths->lineEditGradationLabel->setFocus();
     }
 }

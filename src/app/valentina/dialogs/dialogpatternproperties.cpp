@@ -42,7 +42,7 @@
 #include "../core/vapplication.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 #include "dialogknownmaterials.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     SCASSERT(doc != nullptr)
 
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     if (VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
@@ -137,6 +137,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     m_completer->setModelSorting(QCompleter::UnsortedModel);
     m_completer->setFilterMode(Qt::MatchContains);
     m_completer->setCaseSensitivity(Qt::CaseSensitive);
+    connect(m_completer, QOverload<const QString &>::of(&QCompleter::activated), this, [this]()
+    {
+        ValidatePassmarkLength();
+        DescEdited();
+    });
 
     ui->lineEditPassmarkLength->setCompleter(m_completer);
     connect(ui->lineEditPassmarkLength, &QLineEdit::textEdited, this, [this]()

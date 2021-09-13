@@ -692,6 +692,7 @@
                         <xs:attribute name="mx" type="xs:double"/>
                         <xs:attribute name="my" type="xs:double"/>
                         <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="uuid" type="uuid"/>
                         <xs:attribute name="bufferName" type="xs:string"/>
                         <xs:attribute name="inLayout" type="xs:boolean"/>
                         <xs:attribute name="bufferInLayout" type="xs:boolean"/>
@@ -761,6 +762,11 @@
   <xs:simpleType name="shortName">
     <xs:restriction base="xs:string">
       <xs:pattern value="([^\p{Nd}\p{Zs}*/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\&quot;]){1,1}([^\p{Zs}*/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\&quot;]){0,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="units">

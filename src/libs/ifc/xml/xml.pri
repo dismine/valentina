@@ -4,6 +4,7 @@
 HEADERS += \
     $$PWD/vabstractconverter.h \
     $$PWD/vdomdocument.h \
+    $$PWD/vlayoutconverter.h \
     $$PWD/vpatternconverter.h \
     $$PWD/vtoolrecord.h \
     $$PWD/vabstractpattern.h \
@@ -16,6 +17,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/vabstractconverter.cpp \
     $$PWD/vdomdocument.cpp \
+    $$PWD/vlayoutconverter.cpp \
     $$PWD/vpatternconverter.cpp \
     $$PWD/vtoolrecord.cpp \
     $$PWD/vabstractpattern.cpp \

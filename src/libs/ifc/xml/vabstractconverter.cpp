@@ -112,14 +112,11 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
-    : VDomDocument(),
-      m_ver(0x0),
+    : m_ver(0x0),
       m_originalFileName(fileName),
-      m_convertedFileName(fileName),
-      m_tmpFile()
+      m_convertedFileName(fileName)
 {
     setXMLContent(m_convertedFileName);// Throw an exception on error
-    m_ver = GetFormatVersion(GetFormatVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

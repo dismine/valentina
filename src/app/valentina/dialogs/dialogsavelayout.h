@@ -61,9 +61,6 @@ public:
 
     Draw Mode() const;
 
-    static QString ExportFormatDescription(LayoutExportFormats format);
-    static QString ExportFormatSuffix(LayoutExportFormats format);
-
     bool IsTextAsPaths() const;
     void SetTextAsPaths(bool textAsPaths);
 
@@ -86,7 +83,6 @@ public:
 
 protected:
     virtual void showEvent(QShowEvent *event) override;
-    void InitTemplates(QComboBox *comboBoxTemplates);
 
 private slots:
     void Save();

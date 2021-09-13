@@ -65,8 +65,7 @@ public:
 
     bool LoadFile(const QString &path);
 
-public slots:
-    virtual void ShowToolTip(const QString &toolTip) override;
+    void UpdateWindowTitle();
 
 protected:
     virtual void closeEvent(QCloseEvent *event) override;
@@ -218,7 +217,6 @@ private:
     void MeasurementGUI();
     void Controls();
     void MFields(bool enabled);
-    void UpdateWindowTitle();
 
     void ReadSettings();
     void WriteSettings();
@@ -230,8 +228,6 @@ private:
     bool LoadFromExistingFile(const QString &path);
 
     void CreateWindowMenu(QMenu *menu);
-
-    bool IgnoreLocking(int error, const QString &path);
 
     template <class T>
     void HackWidget(T **widget);

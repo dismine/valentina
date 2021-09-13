@@ -27,7 +27,7 @@
  *************************************************************************/
 #include "vabstractvalapplication.h"
 #include "customevents.h"
-#include "vsettings.h"
+#include "vvalentinasettings.h"
 
 #include <QWidget>
 
@@ -63,15 +63,15 @@ void VAbstractValApplication::PostWarningMessage(const QString &message, QtMsgTy
  */
 void VAbstractValApplication::OpenSettings()
 {
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                             QCoreApplication::applicationName(), this);
+    settings = new VValentinaSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                      QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSettings *VAbstractValApplication::ValentinaSettings()
+VValentinaSettings *VAbstractValApplication::ValentinaSettings()
 {
     SCASSERT(settings != nullptr)
-            return qobject_cast<VSettings *>(settings);
+            return qobject_cast<VValentinaSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

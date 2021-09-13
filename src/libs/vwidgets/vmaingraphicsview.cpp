@@ -56,7 +56,7 @@
 #include "vsimplecurve.h"
 #include "vcontrolpointspline.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vcommonsettings.h"
 #include "vabstractmainwindow.h"
 #include "global.h"
 
@@ -71,7 +71,7 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
     qreal numSteps = 0;
-    VSettings *settings = qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings());
+    VCommonSettings *settings = qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings());
 
     if (not numPixels.isNull())
     {
@@ -107,7 +107,7 @@ qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
     }
 
     scheduledScrollings *=
-            qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings())->GetScrollingAcceleration();
+            qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings())->GetScrollingAcceleration();
 
     return scheduledScrollings;
 }
@@ -199,7 +199,7 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::InitScrollingAnimation()
 {
-    VSettings *settings = qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings());
+    VCommonSettings *settings = qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings());
 
     if (not verticalScrollAnim.isNull())
     {
@@ -430,7 +430,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
       m_oldCursor(),
       m_currentCursor(Qt::ArrowCursor)
 {
-    VSettings *settings = qobject_cast<VSettings *>(VAbstractApplication::VApp()->Settings());
+    VCommonSettings *settings = qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings());
     if (settings && settings->IsOpenGLRender())
     {
         QOpenGLWidget *viewport = new QOpenGLWidget();
@@ -793,7 +793,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QG
     {
         QRectF rect = item->sceneBoundingRect();
         const QList<QGraphicsItem *> children = item->childItems();
-        for (auto child : children)
+        for (auto *child : children)
         {
             if(child->isVisible())
             {

@@ -1951,7 +1951,8 @@ void VAbstractPattern::SetFMeasurements(QDomElement &element, const QVector<VFin
 
             SetAttribute(tagFMeasurement, AttrName, m.name);
             SetAttribute(tagFMeasurement, AttrFormula, m.formula);
-            SetAttributeOrRemoveIf(tagFMeasurement, AttrDescription, m.description, m.description.isEmpty());
+            SetAttributeOrRemoveIf<QString>(tagFMeasurement, AttrDescription, m.description,
+                                            [](const QString &description){return description.isEmpty();});
 
             element.appendChild(tagFMeasurement);
         }
@@ -2028,8 +2029,9 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
     SetAttribute(group, AttrId, id);
     SetAttribute(group, AttrName, name);
     SetAttribute(group, AttrVisible, true);
-    SetAttributeOrRemoveIf(group, AttrTool, tool, tool == null_id);
-    SetAttributeOrRemoveIf(group, AttrTags, preparedTags, preparedTags.isEmpty());
+    SetAttributeOrRemoveIf<vidtype>(group, AttrTool, tool, [](vidtype tool){ return tool == null_id;});
+    SetAttributeOrRemoveIf<QString>(group, AttrTags, preparedTags,
+                                    [](const QString &preparedTags){return preparedTags.isEmpty();});
 
     auto i = groupData.constBegin();
     while (i != groupData.constEnd())
@@ -2109,8 +2111,8 @@ void VAbstractPattern::SetGroupTags(quint32 id, const QStringList &tags)
     QDomElement group = elementById(id, TagGroup);
     if (group.isElement())
     {
-        const QString rawTags = tags.join(',');
-        SetAttributeOrRemoveIf(group, AttrTags, rawTags, rawTags.isEmpty());
+        SetAttributeOrRemoveIf<QString>(group, AttrTags, tags.join(','),
+                                        [](const QString &rawTags){return rawTags.isEmpty();});
         modified = true;
         emit patternChanged(false);
     }

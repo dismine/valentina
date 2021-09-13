@@ -63,7 +63,7 @@ public:
 
     void SetShowParentTooltip(bool show);
 
-    void SetRealPos(QPointF pos);
+    void SetRealPos(const QPointF &pos);
 
     QColor BaseColor() const;
     void   SetBaseColor(const QColor &baseColor);

@@ -34,26 +34,22 @@
 
 // (de)serialize enums into QDataStream
 
+// It is very important to use exactly the same way across all Qt versions we need to support. Otherwise, it will break
+// interchange between Valentina versions built on different Qt versions.
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-//a function that can serialize any enum into QDataStream
-//it stores the enum in a qint64
-template<typename Enum,
-         typename = typename std::enable_if<std::is_enum<Enum>::value>::type>
-inline QDataStream& operator<<(QDataStream& stream, const Enum& e)
+template <typename T>
+typename std::enable_if<std::is_enum<T>::value, QDataStream &>::type&
+operator<<(QDataStream &s, const T &t)
 {
-    return stream << static_cast<qint64>(e);
+    return s << static_cast<typename std::underlying_type<T>::type>(t);
 }
 
-//a function that can deserialize any enum from QDataStream
-//it reads the enum as if it was stored in qint64
-template<typename Enum,
-         typename = typename std::enable_if<std::is_enum<Enum>::value>::type>
-inline QDataStream& operator>>(QDataStream& stream, Enum& e)
+template <typename T>
+typename std::enable_if<std::is_enum<T>::value, QDataStream &>::type&
+operator>>(QDataStream &s, T &t)
 {
-    qint64 v;
-    stream >> v;
-    e = static_cast<Enum>(v);
-    return stream;
+    return s >> reinterpret_cast<typename std::underlying_type<T>::type &>(t);
 }
 #endif
 

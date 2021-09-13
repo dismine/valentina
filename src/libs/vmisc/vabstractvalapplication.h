@@ -36,7 +36,7 @@ class VAbstractValApplication;// use in define
 class VAbstractPattern;
 class VMainGraphicsView;
 class QGraphicsScene;
-class VSettings;
+class VValentinaSettings;
 
 class VAbstractValApplication : public VAbstractApplication
 {
@@ -121,7 +121,7 @@ public:
     void    SetDimensionWaistLabel(const QString &label);
 
     virtual void OpenSettings() override;
-    VSettings *ValentinaSettings();
+    VValentinaSettings *ValentinaSettings();
 
     static VAbstractValApplication *VApp();
 

@@ -322,7 +322,8 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
     doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
     doc->SetAttribute(tag, AttrAScale, curve->GetApproximationScale());
-    doc->SetAttributeOrRemoveIf(tag, AttrAlias, curve->GetAliasSuffix(), curve->GetAliasSuffix().isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias, curve->GetAliasSuffix(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

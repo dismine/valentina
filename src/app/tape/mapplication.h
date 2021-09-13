@@ -31,11 +31,10 @@
 
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vtapesettings.h"
+#include "vtapesettings.h"
 #include "../vmisc/vabstractapplication.h"
 #include "dialogs/dialogmdatabase.h"
 
-class MApplication;// use in define
 class TMainWindow;
 class QLocalServer;
 
@@ -63,7 +62,7 @@ public:
 
     virtual void  OpenSettings() override;
     VTapeSettings *TapeSettings();
-    void               ActivateDarkMode();
+    void ActivateDarkMode();
 
     QString diagramsPath() const;
 
@@ -98,8 +97,8 @@ private:
 
     void Clean();
 };
-//---------------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------------------------------------------------
 inline const VTranslateVars *MApplication::TrVars()
 {
     return trVars;

@@ -32,7 +32,7 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
-#include "../vmisc/vsettings.h"
+#include "vvalentinasettings.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
@@ -834,7 +834,7 @@ QStringList VCommandLine::OptionValues(const QString &option) const
 //---------------------------------------------------------------------------------------------------------------------
 int VCommandLine::OptNestingTime() const
 {
-    int time = VSettings::GetDefNestingTime();
+    int time = VValentinaSettings::GetDefNestingTime();
     if (IsOptionSet(LONG_OPTION_NESTING_TIME))
     {
         bool ok = false;
@@ -854,7 +854,7 @@ int VCommandLine::OptNestingTime() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCommandLine::OptEfficiencyCoefficient() const
 {
-    qreal coefficient = VSettings::GetDefEfficiencyCoefficient();
+    qreal coefficient = VValentinaSettings::GetDefEfficiencyCoefficient();
     if (IsOptionSet(LONG_OPTION_EFFICIENCY_COEFFICIENT))
     {
         bool ok = false;

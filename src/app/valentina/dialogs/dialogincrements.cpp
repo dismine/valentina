@@ -29,7 +29,7 @@
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
 #include "../vwidgets/vwidgetpopup.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vpatterndb/vtranslatevars.h"

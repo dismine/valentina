@@ -32,7 +32,7 @@
 #include "configpages/preferencesconfigurationpage.h"
 #include "configpages/preferencespatternpage.h"
 #include "configpages/preferencespathpage.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QMessageBox>
 #include <QPushButton>

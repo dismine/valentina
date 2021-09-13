@@ -27,6 +27,8 @@
  *************************************************************************/
 #include "vwatermarkconverter.h"
 
+#include <QtGlobal>
+
 /*
  * Version rules:
  * 1. Version have three parts "major.minor.patch";
@@ -36,8 +38,8 @@
  */
 
 const QString VWatermarkConverter::WatermarkMinVerStr = QStringLiteral("1.0.0");
-const QString VWatermarkConverter::WatermarkMaxVerStr = QStringLiteral("1.0.0");
-const QString VWatermarkConverter::CurrentSchema          = QStringLiteral("://schema/watermark/v1.0.0.xsd");
+const QString VWatermarkConverter::WatermarkMaxVerStr = QStringLiteral("1.1.0");
+const QString VWatermarkConverter::CurrentSchema      = QStringLiteral("://schema/watermark/v1.1.0.xsd");
 
 //VWatermarkConverter::WatermarkMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VWatermarkConverter::WatermarkMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -46,6 +48,7 @@ const QString VWatermarkConverter::CurrentSchema          = QStringLiteral("://s
 VWatermarkConverter::VWatermarkConverter(const QString &fileName)
     : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
 }
 
@@ -76,15 +79,18 @@ QString VWatermarkConverter::MaxVerStr() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VWatermarkConverter::XSDSchema(int ver) const
 {
-    switch (ver)
+    QHash <int, QString> schemas =
     {
-        case (0x010000):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
-            break;
+        std::make_pair(FormatVersion(1, 0, 0), QStringLiteral("://schema/watermark/v1.0.0.xsd")),
+        std::make_pair(FormatVersion(1, 1, 0), CurrentSchema)
+    };
+
+    if (schemas.contains(ver))
+    {
+        return schemas.value(ver);
     }
-    return QString();//unreachable code
+
+    InvalidVersion(ver);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,11 +98,14 @@ void VWatermarkConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (0x010000):
+        case (FormatVersion(1, 0, 0)):
+            ToV1_1_0();
+            ValidateXML(XSDSchema(FormatVersion(1, 1, 0)));
+            Q_FALLTHROUGH();
+        case (FormatVersion(1, 1, 0)):
             break;
         default:
             InvalidVersion(m_ver);
-            break;
     }
 }
 
@@ -104,5 +113,16 @@ void VWatermarkConverter::ApplyPatches()
 void VWatermarkConverter::DowngradeToCurrentMaxVersion()
 {
     SetVersion(WatermarkMaxVerStr);
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWatermarkConverter::ToV1_1_0()
+{
+    // TODO. Delete if minimal supported version is 1.1.0
+    Q_STATIC_ASSERT_X(VWatermarkConverter::WatermarkMinVer < FormatVersion(1, 1, 0),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("1.1.0"));
     Save();
 }

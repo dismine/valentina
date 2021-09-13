@@ -34,6 +34,8 @@
 #include <QString>
 #include <QCoreApplication>
 
+#include "../vlayout/vlayoutdef.h"
+
 class QGraphicsScene;
 class QGraphicsItem;
 class VLayoutPiece;
@@ -84,14 +86,20 @@ public:
     void ExportToOBJ(QGraphicsScene *scene) const;
     void ExportToPS(QGraphicsScene *scene) const;
     void ExportToEPS(QGraphicsScene *scene) const;
-    void ExportToFlatDXF(QGraphicsScene *scene, const QList<QList<QGraphicsItem *> > &details) const;
+    void ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToAAMADXF(const QVector<VLayoutPiece> &details) const;
     void ExportToASTMDXF(const QVector<VLayoutPiece> &details) const;
+    void ExportToRLD(const QVector<VLayoutPiece> &details) const;
 
     static auto SupportPDFConversion() -> bool;
 
+
+    static QString ExportFormatDescription(LayoutExportFormats format);
+    static QString ExportFormatSuffix(LayoutExportFormats format);
+    static void PdfToPs(const QStringList &params);
+
     auto offset() const -> QPointF;
-    void SetOffset(QPointF newOffset);
+    void SetOffset(const QPointF &newOffset);
 
 private:
     QString   m_fileName{};
@@ -107,7 +115,7 @@ private:
     int       m_dxfVersion{0};
     QPointF   m_offset{};
 
-    static void PdfToPs(const QStringList &params);
+    void ExportToPDF(QGraphicsScene *scene, const QString &filename) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

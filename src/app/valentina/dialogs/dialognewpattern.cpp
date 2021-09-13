@@ -29,7 +29,7 @@
 #include "dialognewpattern.h"
 #include "ui_dialognewpattern.h"
 #include "../core/vapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 
 #include <QFileDialog>

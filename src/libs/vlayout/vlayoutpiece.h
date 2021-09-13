@@ -73,6 +73,8 @@ public:
 
     static VLayoutPiece Create(const VPiece &piece, vidtype id, const VContainer *pattern);
 
+    virtual auto GetUniqueID() const -> QString override;
+
     QVector<QPointF> GetMappedContourPoints() const;
     QVector<QPointF> GetContourPoints() const;
     void SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath = false);
@@ -82,16 +84,22 @@ public:
     void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
 
+    QVector<QPointF> GetMappedLayoutAllowancePoints() const;
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();
 
+    QVector<QPointF> GetMappedExternalContourPoints() const;
+    QVector<QPointF> GetExternalContourPoints() const;
+
+    QVector<VLayoutPassmark> GetMappedPassmarks() const;
     QVector<VLayoutPassmark> GetPassmarks() const;
     void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);
 
+    QVector<VLayoutPlaceLabel> GetMappedPlaceLabels() const;
     QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    QVector<QVector<QPointF>> InternalPathsForCut(bool cut) const;
+    QVector<QVector<QPointF>> MappedInternalPathsForCut(bool cut) const;
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
@@ -105,6 +113,7 @@ public:
                         const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
+    QVector<QPointF> GetMappedGrainline() const;
     QVector<QPointF> GetGrainline() const;
     bool  IsGrainlineEnabled() const;
     qreal GrainlineAngle() const;
@@ -125,6 +134,16 @@ public:
     bool IsMirror() const;
     void SetMirror(bool value);
 
+    void SetGradationId(const QString &id);
+    auto GetGradationId() const -> QString;
+
+    auto GetXScale() const -> qreal;
+    void SetXScale(qreal xs);
+
+    auto GetYScale() const -> qreal;
+    void SetYScale(qreal ys);
+
+    void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);
     void Scale(qreal sx, qreal sy);
     void Rotate(const QPointF &originPoint, qreal degrees);
@@ -137,8 +156,9 @@ public:
     QLineF LayoutEdge(int i) const;
     int    LayoutEdgeByPoint(const QPointF &p1) const;
 
+    QRectF MappedDetailBoundingRect() const;
     QRectF DetailBoundingRect() const;
-    QRectF LayoutBoundingRect() const;
+    QRectF MappedLayoutBoundingRect() const;
     qreal  Diagonal() const;
 
     static QRectF BoundingRect(QVector<QPointF> points);
@@ -146,8 +166,11 @@ public:
     bool isNull() const;
     qint64 Square() const;
 
+    QPainterPath MappedContourPath() const;
     QPainterPath ContourPath() const;
-    QPainterPath LayoutAllowancePath() const;
+    QPainterPath MappedLayoutAllowancePath() const;
+
+    void DrawMiniature(QPainter &painter) const;
 
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
 
@@ -157,6 +180,24 @@ public:
 
     friend QDataStream& operator<< (QDataStream& dataStream, const VLayoutPiece& piece);
     friend QDataStream& operator>> (QDataStream& dataStream, VLayoutPiece& piece);
+
+protected:
+    void SetGrainlineEnabled(bool enabled);
+    void SetGrainlineAngle(qreal angle);
+    void SetGrainlineArrowType(GrainlineArrowDirection type);
+    void SetGrainlinePoints(const QVector<QPointF> &points);
+
+    auto GetPieceLabelRect() const -> QVector<QPointF>;
+    void SetPieceLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPieceLabelData() const ->VTextManager;
+    void SetPieceLabelData(const VTextManager &data);
+
+    auto GetPatternLabelRect() const -> QVector<QPointF>;
+    void SetPatternLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPatternLabelData() const ->VTextManager;
+    void SetPatternLabelData(const VTextManager &data);
 
 private:
     QSharedDataPointer<VLayoutPieceData> d;

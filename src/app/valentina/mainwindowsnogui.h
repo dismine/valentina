@@ -141,6 +141,7 @@ protected:
     QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
 
     void CheckRequiredMeasurements(const VMeasurements *m) const;
+
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 

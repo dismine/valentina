@@ -42,6 +42,7 @@
 #include <QtGlobal>
 #include <QLocale>
 #include <QLoggingCategory>
+#include <functional>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
@@ -103,7 +104,7 @@ public:
 
     template <typename T>
     void SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
-                                bool removeCondition) const;
+                                const std::function<bool(const T&)> &removeCondition) const;
 
     static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
     static int     GetParametrInt(const QDomElement& domElement, const QString &name, const QString &defValue);
@@ -127,7 +128,7 @@ public:
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
-    QString        GetFormatVersionStr() const;
+    virtual QString GetFormatVersionStr() const;
     static int     GetFormatVersion(const QString &version);
     static void    RemoveAllChildren(QDomElement &domElement);
 
@@ -218,9 +219,9 @@ inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline void VDomDocument::SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
-                                                 bool removeCondition) const
+                                                 const std::function<bool(const T&)> &removeCondition) const
 {
-    not removeCondition ? SetAttribute(domElement, name, value) : domElement.removeAttribute(name);
+    not removeCondition(value) ? SetAttribute(domElement, name, value) : domElement.removeAttribute(name);
 }
 
 QT_WARNING_POP

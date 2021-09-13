@@ -28,6 +28,7 @@
 #include "vwatermark.h"
 
 #include "../vmisc/projectversion.h"
+#include "../ifc/xml/vwatermarkconverter.h"
 
 const QString VWatermark::TagWatermark = QStringLiteral("watermark");
 const QString VWatermark::TagText      = QStringLiteral("text");
@@ -61,7 +62,7 @@ void VWatermark::CreateEmptyWatermark()
     QDomElement wElement = this->createElement(TagWatermark);
 
     wElement.appendChild(createComment(FileComment()));
-    wElement.appendChild(CreateElementWithText(TagVersion, "1.0.0" /*VWatermarkConverter::WatermarkMaxVerStr*/));
+    wElement.appendChild(CreateElementWithText(TagVersion, VWatermarkConverter::WatermarkMaxVerStr));
     wElement.appendChild(createElement(TagText));
     wElement.appendChild(createElement(TagImage));
 
@@ -102,6 +103,12 @@ VWatermarkData VWatermark::GetWatermark() const
             data.text = GetParametrEmptyString(text, AttrText);
             data.textRotation = GetParametrInt(text, AttrRotation, QChar('0'));
             data.font.fromString(GetParametrEmptyString(text, AttrFont));
+            QColor color(GetParametrString(text, AttrColor, QColor(Qt::black).name()));
+            if (not color.isValid())
+            {
+                color = Qt::black;
+            }
+            data.textColor = color;
         }
 
         QDomElement image = rootElement.firstChildElement(TagImage);
@@ -130,19 +137,25 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         if (not text.isNull())
         {
             SetAttribute(text, AttrShow, data.showText);
-            SetAttributeOrRemoveIf(text, AttrText, data.text, data.text.isEmpty());
-            SetAttributeOrRemoveIf(text, AttrRotation, data.textRotation, data.textRotation == 0);
-            const QString fontString = data.font.toString();
-            SetAttributeOrRemoveIf(text, AttrFont, fontString, fontString.isEmpty());
+            SetAttributeOrRemoveIf<QString>(text, AttrText, data.text,
+                                            [](const QString &text){return text.isEmpty();});
+            SetAttributeOrRemoveIf<int>(text, AttrRotation, data.textRotation,
+                                        [](int textRotation){return textRotation == 0;});
+            SetAttributeOrRemoveIf<QString>(text, AttrFont, data.font.toString(),
+                                            [](const QString &fontString){return fontString.isEmpty();});
+            SetAttribute(text, AttrColor, data.textColor.name());
         }
 
         QDomElement image = rootElement.firstChildElement(TagImage);
         if (not image.isNull())
         {
             SetAttribute(image, AttrShow, data.showImage);
-            SetAttributeOrRemoveIf(image, AttrPath, data.path, data.path.isEmpty());
-            SetAttributeOrRemoveIf(image, AttrRotation, data.imageRotation, data.imageRotation == 0);
-            SetAttributeOrRemoveIf(image, AttrGrayscale, data.grayscale, data.grayscale == false);
+            SetAttributeOrRemoveIf<QString>(image, AttrPath, data.path,
+                                            [](const QString &path){return path.isEmpty();});
+            SetAttributeOrRemoveIf<int>(image, AttrRotation, data.imageRotation,
+                                        [](int imageRotation){return imageRotation == 0;});
+            SetAttributeOrRemoveIf<bool>(image, AttrGrayscale, data.grayscale,
+                                         [](bool grayscale){return not grayscale;});
         }
     }
 }

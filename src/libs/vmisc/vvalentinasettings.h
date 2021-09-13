@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vsettings.h
+ **  @file   vvalentinasettings.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   22 11, 2014
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VSETTINGS_H
-#define VSETTINGS_H
+#ifndef VVALENTINASETTINGS_H
+#define VVALENTINASETTINGS_H
 
 #include <QMetaObject>
 #include <QObject>
@@ -39,13 +39,13 @@
 #include "vcommonsettings.h"
 #include "../vlayout/vbank.h"
 
-class VSettings : public VCommonSettings
+class VValentinaSettings : public VCommonSettings
 {
     Q_OBJECT
 public:
-    VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+    VValentinaSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = nullptr);
-    VSettings(const QString &fileName, Format format, QObject *parent = nullptr);
+    VValentinaSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
@@ -53,12 +53,6 @@ public:
     static QString GetDefPathLayout();
     QString GetPathLayout() const;
     void SetPathLayout(const QString &value);
-
-    bool GetGraphicalOutput() const;
-    void SetGraphicalOutput(const bool &value);
-
-    bool IsOpenGLRender() const;
-    void SetOpenGLRender(bool value);
 
     // Layout settings
     qreal GetLayoutPaperHeight() const;
@@ -147,36 +141,6 @@ public:
     qreal GetTiledPDFPaperWidth(const Unit &unit) const;
     void  SetTiledPDFPaperWidth(qreal value, const Unit &unit);
 
-    static const int defaultScrollingDuration;
-    static const int scrollingDurationMin;
-    static const int scrollingDurationMax;
-    int GetScrollingDuration() const;
-    void SetScrollingDuration(int duration);
-
-    static const int defaultScrollingUpdateInterval;
-    static const int scrollingUpdateIntervalMin;
-    static const int scrollingUpdateIntervalMax;
-    int GetScrollingUpdateInterval() const;
-    void SetScrollingUpdateInterval(int updateInterval);
-
-    static const qreal defaultSensorMouseScale;
-    static const qreal sensorMouseScaleMin;
-    static const qreal sensorMouseScaleMax;
-    qreal GetSensorMouseScale() const;
-    void SetSensorMouseScale(qreal scale);
-
-    static const qreal defaultWheelMouseScale;
-    static const qreal wheelMouseScaleMin;
-    static const qreal wheelMouseScaleMax;
-    qreal GetWheelMouseScale() const;
-    void SetWheelMouseScale(qreal scale);
-
-    static const qreal defaultScrollingAcceleration;
-    static const qreal scrollingAccelerationMin;
-    static const qreal scrollingAccelerationMax;
-    qreal GetScrollingAcceleration() const;
-    void SetScrollingAcceleration(qreal acceleration);
-
     bool IsDockWidgetGroupsActive() const;
     static bool GetDefDockWidgetGroupsActive();
     void SetDockWidgetGroupsActive(bool value);
@@ -197,9 +161,6 @@ public:
     bool GetAutoRefreshPatternMessage() const;
     void SetAutoRefreshPatternMessage(bool value);
 
-    QSize GetWatermarkEditorSize() const;
-    void SetWatermarkEditorSize(const QSize& sz);
-
     bool GetToolPanelScaling() const;
     void SetToolPanelScaling(const bool &value);
 
@@ -210,10 +171,10 @@ public:
     void SetDetailExportFormat(qint8 format);
 
 private:
-    Q_DISABLE_COPY(VSettings)
+    Q_DISABLE_COPY(VValentinaSettings)
 
     template <typename T>
     T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;  
 };
 
-#endif // VSETTINGS_H
+#endif // VVALENTINASETTINGS_H

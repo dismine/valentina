@@ -63,6 +63,7 @@
         <file>schema/pattern/v0.8.9.xsd</file>
         <file>schema/pattern/v0.8.10.xsd</file>
         <file>schema/pattern/v0.8.11.xsd</file>
+        <file>schema/pattern/v0.8.12.xsd</file>
         <file>schema/multisize_measurements/v0.3.0.xsd</file>
         <file>schema/multisize_measurements/v0.4.0.xsd</file>
         <file>schema/multisize_measurements/v0.4.1.xsd</file>
@@ -81,5 +82,7 @@
         <file>schema/individual_measurements/v0.5.1.xsd</file>
         <file>schema/label_template/v1.0.0.xsd</file>
         <file>schema/watermark/v1.0.0.xsd</file>
+        <file>schema/watermark/v1.1.0.xsd</file>
+        <file>schema/layout/v0.1.0.xsd</file>
     </qresource>
 </RCC>

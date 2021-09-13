@@ -39,7 +39,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
-#include "../vmisc/vsettings.h"
+#include "vvalentinasettings.h"
 
 #include <QtDebug>
 #include <QDir>
@@ -63,6 +63,28 @@ Q_LOGGING_CATEGORY(vApp, "v.application")
 QT_WARNING_POP
 
 Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
+
+namespace
+{
+QString AppFilePath(const QString &appName)
+{
+    QString appNameExe = appName;
+#ifdef Q_OS_WIN
+    appNameExe += ".exe";
+#endif
+    QFileInfo canonicalFile(QString("%1/%2").arg(QCoreApplication::applicationDirPath(), appNameExe));
+    if (canonicalFile.exists())
+    {
+        return canonicalFile.absoluteFilePath();
+    }
+    else
+    {
+        QFileInfo debugFile(QString("%1/../../%2/bin/%3")
+                                .arg(QCoreApplication::applicationDirPath(), appName, appNameExe));
+        return debugFile.exists() ? debugFile.absoluteFilePath() : appNameExe;
+    }
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -442,9 +464,10 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VApplication::ActivateDarkMode()
 {
-     VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
      if (settings->GetDarkMode())
      {
          QFile f(QStringLiteral(":qdarkstyle/style.qss"));
@@ -462,58 +485,16 @@ void VApplication::ActivateDarkMode()
      }
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::TapeFilePath() const
 {
-    const QString tape = QStringLiteral("tape");
-#ifdef Q_OS_WIN
-    QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape + ".exe");
-    if (tapeFile.exists())
-    {
-        return tapeFile.absoluteFilePath();
-    }
-    else
-    {
-        return QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape + ".exe";
-    }
-#elif defined(Q_OS_MAC)
-    QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape);
-    if (tapeFile.exists())
-    {
-        return tapeFile.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo file(QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape);
-        if (file.exists())
-        {
-            return file.absoluteFilePath();
-        }
-        else
-        {
-            return tape;
-        }
-    }
-#else // Unix
-    QFileInfo file(QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape);
-    if (file.exists())
-    {
-        return file.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape);
-        if (tapeFile.exists())
-        {
-            return tapeFile.absoluteFilePath();
-        }
-        else
-        {
-            return tape;
-        }
-    }
-#endif
+    return AppFilePath(QStringLiteral("tape"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::PuzzleFilePath() const
+{
+    return AppFilePath(QStringLiteral("puzzle"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

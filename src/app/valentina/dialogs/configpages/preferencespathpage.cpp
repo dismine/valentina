@@ -28,7 +28,7 @@
 
 #include "preferencespathpage.h"
 #include "ui_preferencespathpage.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../../core/vapplication.h"
 
 #include <QDir>
@@ -65,13 +65,14 @@ PreferencesPathPage::~PreferencesPathPage()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList PreferencesPathPage::Apply()
 {
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
     settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
     settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
+    settings->SetPathManualLayouts(ui->pathTable->item(6, 1)->text());
 
     return QStringList(); // No changes those require restart.
 }
@@ -104,19 +105,22 @@ void PreferencesPathPage::DefaultPath()
             path = VCommonSettings::GetDefPathMultisizeMeasurements();
             break;
         case 2: // pattern path
-            path = VSettings::GetDefPathPattern();
+            path = VValentinaSettings::GetDefPathPattern();
             break;
         case 0: // individual measurements
             path = VCommonSettings::GetDefPathIndividualMeasurements();
             break;
         case 3: // layout path
-            path = VSettings::GetDefPathLayout();
+            path = VValentinaSettings::GetDefPathLayout();
             break;
         case 4: // templates
             path = VCommonSettings::GetDefPathTemplate();
             break;
         case 5: // label templates
             path = VCommonSettings::GetDefPathLabelTemplate();
+            break;
+        case 6: // manual layouts
+            path = VCommonSettings::GetDefPathManualLayouts();
             break;
         default:
             break;
@@ -155,6 +159,9 @@ void PreferencesPathPage::EditPath()
         case 5: // label templates
             path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate();
             break;
+        case 6: // manual layouts
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathManualLayouts();
+            break;
         default:
             break;
     }
@@ -192,10 +199,10 @@ void PreferencesPathPage::EditPath()
 void PreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(6);
+    ui->pathTable->setRowCount(7);
     ui->pathTable->setColumnCount(2);
 
-    const VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     {
         ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));
@@ -237,6 +244,13 @@ void PreferencesPathPage::InitTable()
         QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathLabelTemplate());
         item->setToolTip(settings->GetPathLabelTemplate());
         ui->pathTable->setItem(5, 1, item);
+    }
+
+    {
+        ui->pathTable->setItem(6, 0, new QTableWidgetItem(tr("My manual layouts")));
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathManualLayouts());
+        item->setToolTip(settings->GetPathManualLayouts());
+        ui->pathTable->setItem(6, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

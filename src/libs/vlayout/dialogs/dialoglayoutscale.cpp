@@ -29,7 +29,7 @@
 #include "dialoglayoutscale.h"
 #include "ui_dialoglayoutscale.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vcommonsettings.h"
 
 #include <QPushButton>
 #include <QShowEvent>

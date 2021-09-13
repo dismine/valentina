@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>424</width>
-    <height>436</height>
+    <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Flipping by line</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -255,7 +255,9 @@
    <header>vlineedit.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../vmisc/share/resources/icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

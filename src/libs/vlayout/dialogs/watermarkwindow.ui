@@ -14,7 +14,7 @@
    <string>Watermark</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+   <iconset resource="../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="toolButtonStyle">
@@ -32,8 +32,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>512</width>
-         <height>344</height>
+         <width>498</width>
+         <height>367</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -132,6 +132,9 @@
              <property name="suffix">
               <string notr="true">°</string>
              </property>
+             <property name="minimum">
+              <number>-360</number>
+             </property>
              <property name="maximum">
               <number>360</number>
              </property>
@@ -171,7 +174,7 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+                <iconset resource="../../vmisc/share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/font_preferences.png</normaloff>:/icon/24x24/font_preferences.png</iconset>
                </property>
                <property name="iconSize">
@@ -183,6 +186,20 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="3" column="1">
+            <widget class="QtColorPicker" name="pushButtonColorPicker">
+             <property name="text">
+              <string>Color</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Color:</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -245,8 +262,11 @@
              <property name="suffix">
               <string notr="true">°</string>
              </property>
+             <property name="minimum">
+              <number>-360</number>
+             </property>
              <property name="maximum">
-              <number>100</number>
+              <number>360</number>
              </property>
             </widget>
            </item>
@@ -365,8 +385,15 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>qtcolorpicker.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

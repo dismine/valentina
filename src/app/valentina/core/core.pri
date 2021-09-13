@@ -6,7 +6,7 @@ HEADERS += \
     $$PWD/vformulaproperty.h \
     $$PWD/vformulapropertyeditor.h \
     $$PWD/vtooloptionspropertybrowser.h \
-    $$PWD/vcmdexport.h
+    $$PWD/vcmdexport.h 
 
 SOURCES += \
     $$PWD/vapplication.cpp \

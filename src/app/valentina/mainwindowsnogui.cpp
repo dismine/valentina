@@ -54,7 +54,8 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vwatermarkconverter.h"
-#include "../vmisc/vsettings.h"
+#include "../vlayout/vrawlayout.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -505,14 +506,15 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         format == LayoutExportFormats::DXF_AC1018_ASTM ||
         format == LayoutExportFormats::DXF_AC1021_ASTM ||
         format == LayoutExportFormats::DXF_AC1024_ASTM ||
-        format == LayoutExportFormats::DXF_AC1027_ASTM)
+        format == LayoutExportFormats::DXF_AC1027_ASTM ||
+        format == LayoutExportFormats::RLD)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
                 const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                        QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                        QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
                 QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(
                             m_layoutSettings->LayoutPapers().at(i));
@@ -746,6 +748,9 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
             exporter.SetDxfVersion(DRW::AC1027);
             exporter.ExportToAAMADXF(details);
             break;
+        case LayoutExportFormats::RLD:
+            exporter.ExportToRLD(details);
+            break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
             break;
@@ -774,6 +779,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         {
             const qreal x = item->boundingRect().x();
             piece.Mirror();
+            delete item;
             item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
             diff = item->boundingRect().x() - x;
         }
@@ -828,7 +834,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     }
 
     const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-            QString::number(1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
+            QString::number(1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
     ExportApparelLayout(listDetails, name, rect.size());
 }
@@ -855,7 +861,7 @@ void MainWindowsNoGUI::PrintPreviewTiled()
     }
     else
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
@@ -889,7 +895,7 @@ void MainWindowsNoGUI::PrintTiled()
     }
     else
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
@@ -1076,7 +1082,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     }
     else
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
@@ -1117,7 +1123,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
         if (paper != nullptr)
         {
             const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                    QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                    QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
             auto *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             QGraphicsScene *scene = scenes.at(i);
@@ -1166,55 +1172,55 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                 case LayoutExportFormats::DXF_AC1006_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1006);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1009_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1009);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1012_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1012);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1014_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1014);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1015_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1015);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1018_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1018);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1021_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1021);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1024_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1024);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1027_Flat:
                     paper->setVisible(false);
                     exporter.SetDxfVersion(DRW::AC1027);
-                    exporter.ExportToFlatDXF(scene, details);
+                    exporter.ExportToFlatDXF(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::TIF:

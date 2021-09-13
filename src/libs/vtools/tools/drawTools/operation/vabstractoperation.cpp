@@ -748,9 +748,12 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, sItem.id);
-        doc->SetAttributeOrRemoveIf(item, AttrAlias, sItem.alias, sItem.alias.isEmpty());
-        doc->SetAttributeOrRemoveIf(item, AttrPenStyle, sItem.penStyle, sItem.penStyle == TypeLineDefault);
-        doc->SetAttributeOrRemoveIf(item, AttrColor, sItem.color, sItem.color == ColorDefault);
+        doc->SetAttributeOrRemoveIf<QString>(item, AttrAlias, sItem.alias,
+                                             [](const QString &alias){return alias.isEmpty();});
+        doc->SetAttributeOrRemoveIf<QString>(item, AttrPenStyle, sItem.penStyle,
+                                             [](const QString &penStyle){return penStyle == TypeLineDefault;});
+        doc->SetAttributeOrRemoveIf<QString>(item, AttrColor, sItem.color,
+                                             [](const QString &color){return color == ColorDefault;});
         tagObjects.appendChild(item);
     }
     tag.appendChild(tagObjects);
@@ -763,11 +766,11 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
 
         VAbstractSimple *obj = operatedObjects.value(dItem.id, nullptr);
 
-        doc->SetAttributeOrRemoveIf(item, AttrMx, VAbstractValApplication::VApp()->fromPixel(dItem.mx),
-                                    obj && obj->GetType() != GOType::Point);
-        doc->SetAttributeOrRemoveIf(item, AttrMy, VAbstractValApplication::VApp()->fromPixel(dItem.my),
-                                    obj && obj->GetType() != GOType::Point);
-        doc->SetAttributeOrRemoveIf<bool>(item, AttrShowLabel, dItem.showLabel, dItem.showLabel);
+        doc->SetAttributeOrRemoveIf<double>(item, AttrMx, VAbstractValApplication::VApp()->fromPixel(dItem.mx),
+                                            [obj](double){return obj && obj->GetType() != GOType::Point;});
+        doc->SetAttributeOrRemoveIf<double>(item, AttrMy, VAbstractValApplication::VApp()->fromPixel(dItem.my),
+                                            [obj](double){return obj && obj->GetType() != GOType::Point;});
+        doc->SetAttributeOrRemoveIf<bool>(item, AttrShowLabel, dItem.showLabel, [](bool showLabel){return showLabel;});
 
         tagObjects.appendChild(item);
     }

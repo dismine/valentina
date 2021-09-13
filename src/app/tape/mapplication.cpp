@@ -382,7 +382,7 @@ bool MApplication::IsTestMode() const
  */
 bool MApplication::IsAppInGUIMode() const
 {
-    return IsTestMode();
+    return not IsTestMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,8 +436,9 @@ void MApplication::InitOptions()
     ActivateDarkMode();
     QResource::registerResource(diagramsPath());
 }
-// Dark mode
 
+//---------------------------------------------------------------------------------------------------------------------
+// Dark mode
 void MApplication::ActivateDarkMode()
 {
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
@@ -861,6 +862,7 @@ TMainWindow *MApplication::NewMainWindow()
     if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
+        tape->UpdateWindowTitle();
     }
     return tape;
 }

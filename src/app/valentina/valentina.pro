@@ -149,66 +149,80 @@ unix{
         tape.path = $$BINDIR
         tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
 
+        puzzle.path = $$BINDIR
+        puzzle.files += $${OUT_PWD}/../puzzle/$${DESTDIR}/puzzle
+
         # .desktop file
         desktop.path = $$DATADIR/applications/
         desktop.files += ../../../dist/$${TARGET}.desktop \
-        desktop.files += ../../../dist/tape.desktop
+        desktop.files += ../../../dist/tape.desktop \
+        desktop.files += ../../../dist/puzzle.desktop
 
         # logo
         hicolor_48_apps.path = $$DATADIR/icons/hicolor/48x48/apps/
         hicolor_48_apps.files += \
             ../../../share/icons/48x48/apps/$${TARGET}.png \
-            ../../../share/icons/48x48/apps/tape.png
+            ../../../share/icons/48x48/apps/tape.png \
+            ../../../share/icons/48x48/apps/puzzle.png
 
         hicolor_48_mimetypes.path = $$DATADIR/icons/hicolor/48x48/mimetypes/
         hicolor_48_mimetypes.files += \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-i-measurements.png \
-            ../../../share/icons/48x48/mimetypes/application-x-valentina-s-measurements.png
+            ../../../share/icons/48x48/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/48x48/mimetypes/application-x-valentina-layout.png
 
         hicolor_64_apps.path = $$DATADIR/icons/hicolor/64x64/apps/
         hicolor_64_apps.files += \
             ../../../share/icons/64x64/apps/$${TARGET}.png \
-            ../../../share/icons/64x64/apps/tape.png
+            ../../../share/icons/64x64/apps/tape.png \
+            ../../../share/icons/64x64/apps/puzzle.png
 
         hicolor_64_mimetypes.path = $$DATADIR/icons/hicolor/64x64/mimetypes/
         hicolor_64_mimetypes.files += \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-i-measurements.png \
-            ../../../share/icons/64x64/mimetypes/application-x-valentina-s-measurements.png
+            ../../../share/icons/64x64/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/64x64/mimetypes/application-x-valentina-layout.png
 
         hicolor_128_apps.path = $$DATADIR/icons/hicolor/128x128/apps/
         hicolor_128_apps.files += \
             ../../../share/icons/128x128/apps/$${TARGET}.png \
-            ../../../share/icons/128x128/apps/tape.png
+            ../../../share/icons/128x128/apps/tape.png \
+            ../../../share/icons/128x128/apps/puzzle.png
 
         hicolor_128_mimetypes.path = $$DATADIR/icons/hicolor/128x128/mimetypes/
         hicolor_128_mimetypes.files += \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-i-measurements.png \
-            ../../../share/icons/128x128/mimetypes/application-x-valentina-s-measurements.png
+            ../../../share/icons/128x128/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/128x128/mimetypes/application-x-valentina-layout.png
 
         hicolor_256_apps.path = $$DATADIR/icons/hicolor/256x256/apps/
         hicolor_256_apps.files += \
             ../../../share/icons/256x256/apps/$${TARGET}.png \
-            ../../../share/icons/256x256/apps/tape.png
+            ../../../share/icons/256x256/apps/tape.png \
+            ../../../share/icons/256x256/apps/puzzle.png
 
         hicolor_256_mimetypes.path = $$DATADIR/icons/hicolor/256x256/mimetypes/
         hicolor_256_mimetypes.files += \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-i-measurements.png \
-            ../../../share/icons/256x256/mimetypes/application-x-valentina-s-measurements.png
+            ../../../share/icons/256x256/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/256x256/mimetypes/application-x-valentina-layout.png
 
         hicolor_512_apps.path = $$DATADIR/icons/hicolor/512x512/apps/
         hicolor_512_apps.files += \
             ../../../share/icons/512x512/apps/$${TARGET}.png \
-            ../../../share/icons/512x512/apps/tape.png
+            ../../../share/icons/512x512/apps/tape.png \
+            ../../../share/icons/512x512/apps/puzzle.png
 
         hicolor_512_mimetypes.path = $$DATADIR/icons/hicolor/512x512/mimetypes/
         hicolor_512_mimetypes.files += \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-i-measurements.png \
-            ../../../share/icons/512x512/mimetypes/application-x-valentina-s-measurements.png
+            ../../../share/icons/512x512/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/512x512/mimetypes/application-x-valentina-layout.png
 
         # Path to translation files after installation
         translations.path = $$PKGDATADIR/translations/
@@ -229,6 +243,7 @@ unix{
         INSTALLS += \
             target \
             tape \
+            puzzle \
             desktop \
             hicolor_48_apps \
             hicolor_48_mimetypes \
@@ -273,6 +288,9 @@ unix{
             tape.path = $$MACOS_DIR
             tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$MACOS_DIR/tape
 
+            puzzle.path = $$MACOS_DIR
+            puzzle.files += $${OUT_PWD}/../puzzle/$${DESTDIR}/puzzle.app/$$MACOS_DIR/puzzle
+
             # Utility pdftops need for saving a layout image to PS and EPS formates.
             xpdf.path = $$MACOS_DIR
             xpdf.files += $${PWD}/../../../dist/macx/bin64/pdftops
@@ -298,6 +316,7 @@ unix{
             icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
             icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
             icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
+            icns_resources.files += $$PWD/../../../dist/macx/layout.icns
 
             # Copy to bundle multisize measurements files
             # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
@@ -309,6 +328,7 @@ unix{
                 label \
                 libraries \
                 tape \
+                puzzle \
                 xpdf \
                 icns_resources
         }
@@ -322,11 +342,13 @@ win32:*g++* {
     package.files += \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
+        $${OUT_PWD}/../puzzle/$${DESTDIR}/puzzle.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
         $$PWD/../../../dist/win/i-measurements.ico \
         $$PWD/../../../dist/win/s-measurements.ico \
         $$PWD/../../../dist/win/pattern.ico \
+        $$PWD/../../../dist/win/layout.ico \
         $$PWD/../../../dist/win/pdftops.exe \
         $$PWD/../../../dist/win/EUDC.TTE \
         $$PWD/../../../AUTHORS.txt \
@@ -566,6 +588,15 @@ DEPENDPATH += $$PWD/../../libs/vtools
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
 
+# VLayout static library  (depend on IFC, VGeometry)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
+
+INCLUDEPATH += $$PWD/../../libs/vlayout
+DEPENDPATH += $$PWD/../../libs/vlayout
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+
 #VWidgets static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
 
@@ -584,7 +615,7 @@ DEPENDPATH += $$PWD/../../libs/vformat
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
 
-#VPatternDB static library (depend on vgeometry, vmisc, VLayout)
+#VPatternDB static library (depend on vgeometry, vmisc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
 
 INCLUDEPATH += $$PWD/../../libs/vpatterndb
@@ -592,15 +623,6 @@ DEPENDPATH += $$PWD/../../libs/vpatterndb
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
-
-# VLayout static library  (depend on IFC, VGeometry)
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
-
-INCLUDEPATH += $$PWD/../../libs/vlayout
-DEPENDPATH += $$PWD/../../libs/vlayout
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
 
 # VGeometry static library (depend on ifc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/ -lvgeometry

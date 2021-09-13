@@ -77,7 +77,10 @@ public:
           m_placeLabels(detail.m_placeLabels),
           m_square(detail.m_square),
           m_quantity(detail.m_quantity),
-          m_id(detail.m_id)
+          m_id(detail.m_id),
+          m_gradationId(detail.m_gradationId),
+          m_xScale(detail.m_xScale),
+          m_yScale(detail.m_yScale)
     {}
 
     ~VLayoutPieceData() Q_DECL_EQ_DEFAULT;
@@ -117,7 +120,7 @@ public:
     /** @brief grainlineInfo line */
     QVector<QPointF>          grainlinePoints{};
 
-    GrainlineArrowDirection                 grainlineArrowType{GrainlineArrowDirection::atFront};
+    GrainlineArrowDirection   grainlineArrowType{GrainlineArrowDirection::atFront};
     qreal                     grainlineAngle{0};
     bool                      grainlineEnabled{false};
 
@@ -136,6 +139,11 @@ public:
 
     /** @brief m_id keep id of original piece. */
     vidtype                   m_id;
+
+    QString m_gradationId{};
+
+    qreal m_xScale{1.0};
+    qreal m_yScale{1.0};
 
 private:
     Q_DISABLE_ASSIGN(VLayoutPieceData)
@@ -171,6 +179,13 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &
     // Added in classVersion = 2
     dataStream << piece.m_quantity;
     dataStream << piece.m_id;
+
+    // Added in classVersion = 3
+    dataStream << piece.m_tmDetail;
+    dataStream << piece.m_tmPattern;
+    dataStream << piece.m_gradationId;
+    dataStream << piece.m_xScale;
+    dataStream << piece.m_yScale;
 
     return dataStream;
 }
@@ -222,6 +237,15 @@ inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
     {
         dataStream >> piece.m_quantity;
         dataStream >> piece.m_id;
+    }
+
+    if (actualClassVersion >= 3)
+    {
+        dataStream >> piece.m_tmDetail;
+        dataStream >> piece.m_tmPattern;
+        dataStream >> piece.m_gradationId;
+        dataStream >> piece.m_xScale;
+        dataStream >> piece.m_yScale;
     }
 
     return dataStream;

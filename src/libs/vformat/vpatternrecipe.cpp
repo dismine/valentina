@@ -1117,7 +1117,8 @@ void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
     SetAttribute(step, AttrPenStyle, tool->GetPenStyle());
     SetAttribute(step, AttrAScale, tool->GetApproximationScale());
     SetAttribute(step, AttrDuplicate, tool->GetDuplicate());
-    SetAttributeOrRemoveIf(step, AttrAlias, tool->GetAliasSuffix(), tool->GetAliasSuffix().isEmpty());
+    SetAttributeOrRemoveIf<QString>(step, AttrAlias, tool->GetAliasSuffix(),
+                                    [](const QString &suffix){return suffix.isEmpty();});
 }
 
 
@@ -1125,8 +1126,10 @@ void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
 template<typename T>
 void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
 {
-    SetAttributeOrRemoveIf(step, AttrAlias1, tool->GetAliasSuffix1(), tool->GetAliasSuffix1().isEmpty());
-    SetAttributeOrRemoveIf(step, AttrAlias2, tool->GetAliasSuffix2(), tool->GetAliasSuffix2().isEmpty());
+    SetAttributeOrRemoveIf<QString>(step, AttrAlias1, tool->GetAliasSuffix1(),
+                                    [](const QString &suffix){return suffix.isEmpty();});
+    SetAttributeOrRemoveIf<QString>(step, AttrAlias2, tool->GetAliasSuffix2(),
+                                    [](const QString &suffix){return suffix.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1168,7 +1171,7 @@ QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint
         }
 
         SetAttribute(node, AttrItem, obj->ObjectName());
-        SetAttributeOrRemoveIf(node, AttrAlias, item.alias, item.alias.isEmpty());
+        SetAttributeOrRemoveIf<QString>(node, AttrAlias, item.alias, [](const QString &alias){return alias.isEmpty();});
 
         if (obj->getType() != GOType::Point)
         {

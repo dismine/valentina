@@ -299,7 +299,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     QVector<QPointF> newGContour = m_data.gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();
-    const QRectF boundingRect = detail.DetailBoundingRect();
+    const QRectF boundingRect = detail.MappedDetailBoundingRect();
     const qreal depthPosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.y() : boundingRect.x();
     const qreal sidePosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.x() : boundingRect.y();
 
@@ -332,7 +332,7 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (not detail.IsForceFlipping() && SheetContains(detail.DetailBoundingRect()))
+    if (not detail.IsForceFlipping() && SheetContains(detail.MappedDetailBoundingRect()))
     {
         if (not m_data.gContour.GetContour().isEmpty())
         {
@@ -375,7 +375,7 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
         }
 
         CrossingType type = CrossingType::Intersection;
-        if (SheetContains(detail.DetailBoundingRect()))
+        if (SheetContains(detail.MappedDetailBoundingRect()))
         {
             type = Crossing(detail);
         }
@@ -417,7 +417,7 @@ bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.DetailBoundingRect()))
+    if (SheetContains(detail.MappedDetailBoundingRect()))
     {
         type = Crossing(detail);
     }
@@ -469,7 +469,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
         return CrossingType::NoIntersection;
     }
 
-    const QVector<QPointF> layoutPoints = detail.GetLayoutAllowancePoints();
+    const QVector<QPointF> layoutPoints = detail.GetMappedLayoutAllowancePoints();
     const QRectF layoutBoundingRect = VLayoutPiece::BoundingRect(layoutPoints);
     const QPainterPath layoutAllowancePath = VAbstractPiece::PainterPath(layoutPoints);
 

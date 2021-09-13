@@ -41,11 +41,33 @@
 #include <QTextCodec>
 #include <QFont>
 #include <QGlobalStatic>
+#include <QMarginsF>
+#include <QColor>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/pmsystems.h"
+
+const int VCommonSettings::defaultScrollingDuration = 300;
+const int VCommonSettings::scrollingDurationMin = 100;
+const int VCommonSettings::scrollingDurationMax = 1000;
+
+const int VCommonSettings::defaultScrollingUpdateInterval = 30;
+const int VCommonSettings::scrollingUpdateIntervalMin = 10;
+const int VCommonSettings::scrollingUpdateIntervalMax = 100;
+
+const qreal VCommonSettings::defaultSensorMouseScale = 2.0;
+const qreal VCommonSettings::sensorMouseScaleMin = 1.0;
+const qreal VCommonSettings::sensorMouseScaleMax = 10.0;
+
+const qreal VCommonSettings::defaultWheelMouseScale = 45.0;
+const qreal VCommonSettings::wheelMouseScaleMin = 1.0;
+const qreal VCommonSettings::wheelMouseScaleMax = 100.0;
+
+const qreal VCommonSettings::defaultScrollingAcceleration = 1.3;
+const qreal VCommonSettings::scrollingAccelerationMin = 1.0;
+const qreal VCommonSettings::scrollingAccelerationMax = 10.0;
 
 Q_DECLARE_METATYPE(QMarginsF)
 
@@ -56,6 +78,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsMultisizeMeasurements, (QLa
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsManualLayouts, (QLatin1String("paths/manualLayouts")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationOsSeparator, (QLatin1String("configuration/osSeparator")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveState, (QLatin1String("configuration/autosave/state")))
@@ -83,6 +106,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, (QLatin
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath, (QLatin1String("pattern/pieceShowMainPath")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, (QLatin1String("pattern/labelFontSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, (QLatin1String("pattern/hideLabels")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, (QLatin1String("recentFileList")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1String("restoreFileList")))
@@ -107,8 +132,18 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserDateFormats, (QLatin1St
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelTimeFormat, (QLatin1String("label/timeFormat")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserTimeFormats, (QLatin1String("label/userTimeFormats")))
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale,
+                          (QLatin1String("scrolling/sensorMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1String("watermarkEditorSize")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkCustomColors, (QLatin1String("watermarkCustomColors")))
 
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
@@ -116,6 +151,11 @@ Q_GLOBAL_STATIC(QString, localeCached)
 qreal lineWidthCached = 0;
 int labelFontSizeCached = 0;
 int pieceShowMainPath = -1;
+int scrollingDurationCached = -1;
+int scrollingUpdateIntervalCached = -1;
+qreal scrollingSensorMouseScaleCached = -1;
+qreal scrollingWheelMouseScaleCached = -1;
+qreal scrollingAccelerationCached = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
@@ -429,6 +469,24 @@ QString VCommonSettings::GetPathLabelTemplate() const
 void VCommonSettings::SetPathLabelTemplate(const QString &value)
 {
     setValue(*settingPathsLabelTemplate, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathManualLayouts()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("manual layouts");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathManualLayouts() const
+{
+    return value(*settingPathsManualLayouts, GetDefPathManualLayouts()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathManualLayouts(const QString &value)
+{
+    setValue(*settingPathsManualLayouts, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1223,6 +1281,121 @@ qreal VCommonSettings::WidthHairLine() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetScrollingDuration() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingDurationCached, *settingScrollingDuration, defaultScrollingDuration,
+                          scrollingDurationMin, scrollingDurationMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetScrollingDuration(int duration)
+{
+    scrollingDurationCached = qBound(scrollingDurationMin, duration, scrollingDurationMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingDuration, scrollingDurationCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetScrollingUpdateInterval() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingUpdateIntervalCached, *settingScrollingUpdateInterval,
+                          defaultScrollingUpdateInterval, scrollingUpdateIntervalMin, scrollingUpdateIntervalMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetScrollingUpdateInterval(int updateInterval)
+{
+    scrollingUpdateIntervalCached = qBound(scrollingUpdateIntervalMin, updateInterval, scrollingUpdateIntervalMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingUpdateInterval, scrollingUpdateIntervalCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetSensorMouseScale() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingSensorMouseScaleCached, *settingScrollingSensorMouseScale,
+                          defaultSensorMouseScale, sensorMouseScaleMin, sensorMouseScaleMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetSensorMouseScale(qreal scale)
+{
+    scrollingSensorMouseScaleCached = qBound(sensorMouseScaleMin, scale, sensorMouseScaleMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingSensorMouseScale, scrollingSensorMouseScaleCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetWheelMouseScale() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingWheelMouseScaleCached, *settingScrollingWheelMouseScale,
+                          defaultWheelMouseScale, wheelMouseScaleMin, wheelMouseScaleMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetWheelMouseScale(qreal scale)
+{
+    scrollingWheelMouseScaleCached = qBound(wheelMouseScaleMin, scale, wheelMouseScaleMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingWheelMouseScale, scrollingWheelMouseScaleCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetScrollingAcceleration() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return GetCachedValue(settings, scrollingAccelerationCached, *settingScrollingAcceleration,
+                          defaultScrollingAcceleration, scrollingAccelerationMin, scrollingAccelerationMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetScrollingAcceleration(qreal acceleration)
+{
+    scrollingAccelerationCached = qBound(scrollingAccelerationMin, acceleration, scrollingAccelerationMax);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingScrollingAcceleration, scrollingAccelerationCached);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsOpenGLRender() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPatternUseOpenGLRender, 0).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetOpenGLRender(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPatternUseOpenGLRender, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetGraphicalOutput() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPatternGraphicalOutput, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetGraphicalOutput(const bool &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPatternGraphicalOutput, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetTiledPDFMargins returns the tiled pdf margins in the given unit. When the setting is
  * called for the first time, the 4 default margins are 10mm.
@@ -1233,7 +1406,8 @@ qreal VCommonSettings::WidthHairLine() const
 auto VCommonSettings::GetTiledPDFMargins(const Unit &unit) const -> QMarginsF
 {
     // default value is 10mm. We save the margins in mm in the setting.
-    return UnitConvertor(ValueOrDef<QMarginsF>(*settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm, unit);
+    return UnitConvertor(
+                ValueOrDef<QMarginsF>(*this, *settingTiledPDFMargins, QMarginsF(10, 10, 10, 10)), Unit::Mm, unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1260,4 +1434,64 @@ auto VCommonSettings::GetTiledPDFOrientation() const -> PageOrientation
 void VCommonSettings::SetTiledPDFOrientation(PageOrientation value)
 {
     setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetWatermarkEditorSize() const
+{
+    return value(*settingWatermarkEditorSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetWatermarkEditorSize(const QSize &sz)
+{
+    setValue(*settingWatermarkEditorSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QColor> VCommonSettings::GetWatermarkCustomColors() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    QStringList colors = settings.value(*settingPatternGraphicalOutput, 1).toStringList();
+
+    QVector<QColor> customColors;
+    customColors.reserve(colors.size());
+
+    for (auto color : colors)
+    {
+        QColor c(color);
+        if (c.isValid())
+        {
+            customColors.append(c);
+        }
+    }
+
+    if (customColors.count() > 7)
+    {
+        customColors.remove(0, customColors.count() - 7);
+    }
+
+    return customColors;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetWatermarkCustomColors(QVector<QColor> colors)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+
+    if (colors.count() > 7)
+    {
+        colors.remove(0, colors.count() - 7);
+    }
+
+    QStringList customColors;
+    customColors.reserve(colors.size());
+
+    for (auto color : colors)
+    {
+        customColors.append(color.name());
+    }
+
+    settings.setValue(*settingWatermarkCustomColors, customColors);
+    settings.sync();
 }

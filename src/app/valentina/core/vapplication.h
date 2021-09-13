@@ -53,6 +53,7 @@ public:
     void               InitOptions();
 
     QString            TapeFilePath() const;
+    QString            PuzzleFilePath() const;
 
     QTimer             *getAutoSaveTimer() const;
     void               setAutoSaveTimer(QTimer *value);

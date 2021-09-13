@@ -32,7 +32,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QMessageBox>
 #include <QDate>
@@ -64,7 +64,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->setupUi(this);
     RetranslateUi();
 
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
@@ -126,7 +126,7 @@ QStringList PreferencesPatternPage::Apply()
 {
     QStringList preferences;
 
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     // Scene antialiasing
     if (settings->GetGraphicalOutput() != ui->graphOutputCheck->isChecked())
@@ -202,7 +202,7 @@ void PreferencesPatternPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::EditDateTimeFormats()
 {
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     if (button == ui->pushButtonEditDateFormats)
@@ -232,7 +232,7 @@ void PreferencesPatternPage::ManageKnownMaterials()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitLabelDateTimeFormats()
 {
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     InitComboBoxFormats(ui->comboBoxDateFormats,
                         VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),

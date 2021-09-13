@@ -727,7 +727,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
         }
     }
 
-    const QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
+    const QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(false);
     for(auto &intCut : drawIntCut)
     {
         if (DRW_Entity *e = AAMAPolygon(intCut, QChar('8'), false))
@@ -736,7 +736,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
         }
     }
 
-    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
     for(auto &label : labels)
     {
         if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
@@ -756,7 +756,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(true);
+    QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(true);
     for(auto &intCut : drawIntCut)
     {
         if (DRW_Entity *e = AAMAPolygon(intCut, "11", false))
@@ -771,7 +771,7 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetPassmarks();
+        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
         for(auto &passmark : passmarks)
         {
             for (auto &line : passmark.lines)
@@ -788,7 +788,7 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<QPointF> grainline = detail.GetGrainline();
+    const QVector<QPointF> grainline = detail.GetMappedGrainline();
     if (grainline.count() > 1)
     {
         if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), QChar('7')))
@@ -833,7 +833,7 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
 
     for(auto &label : labels)
     {
@@ -953,7 +953,7 @@ void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiec
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
+    const QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(false);
     for(auto &intCut : drawIntCut)
     {
         // Internal line
@@ -969,7 +969,7 @@ void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayou
         }
     }
 
-    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
     for(auto &label : labels)
     {
         if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
@@ -996,7 +996,7 @@ void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayou
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(true);
+    QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(true);
     for(auto &intCut : drawIntCut)
     {
         // Internal cutout
@@ -1026,7 +1026,7 @@ void VDxfEngine::ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLay
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
 
     for(auto &label : labels)
     {
@@ -1053,7 +1053,7 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetPassmarks();
+        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
         for(auto &passmark : passmarks)
         {
             DRW_ASTMNotch *notch = new DRW_ASTMNotch();

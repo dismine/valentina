@@ -51,7 +51,7 @@ const quint16 TextLine::classVersion = 1;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator<<(QDataStream &dataStream, const TextLine &data)
+auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream&
 {
     dataStream << TextLine::streamHeader << TextLine::classVersion;
 
@@ -68,7 +68,7 @@ QDataStream& operator<<(QDataStream &dataStream, const TextLine &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator>>(QDataStream &dataStream, TextLine &data)
+auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream&
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -113,7 +113,7 @@ const quint16 VTextManager::classVersion = 1;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator<<(QDataStream &dataStream, const VTextManager &data)
+auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStream&
 {
     dataStream << VTextManager::streamHeader << VTextManager::classVersion;
 
@@ -127,7 +127,7 @@ QDataStream& operator<<(QDataStream &dataStream, const VTextManager &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator>>(QDataStream &dataStream, VTextManager &data)
+auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream&
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -167,7 +167,7 @@ namespace
 {
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data)
+auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) -> QMap<QString, QString>
 {
     SCASSERT(doc != nullptr)
     SCASSERT(data != nullptr)
@@ -331,7 +331,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line)
+auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line) -> QString
 {
     QChar per('%');
 
@@ -359,7 +359,7 @@ QString ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
+auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 {
     QVector<TextLine> textLines;
 
@@ -412,7 +412,7 @@ VTextManager &VTextManager::operator=(const VTextManager &text)
  * @brief GetSpacing returns the vertical spacing between the lines
  * @return spacing
  */
-int VTextManager::GetSpacing() const
+auto VTextManager::GetSpacing() const -> int
 {
     return 0;
 }
@@ -432,7 +432,7 @@ void VTextManager::SetFont(const QFont& font)
  * @brief GetFont returns the text base font
  * @return text base font
  */
-const QFont& VTextManager::GetFont() const
+auto VTextManager::GetFont() const -> const QFont&
 {
     return m_font;
 }
@@ -448,9 +448,15 @@ void VTextManager::SetFontSize(int iFS)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<TextLine> VTextManager::GetAllSourceLines() const
+auto VTextManager::GetAllSourceLines() const -> QVector<TextLine>
 {
     return m_liLines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextManager::SetAllSourceLines(const QVector<TextLine> &lines)
+{
+    m_liLines = lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -458,7 +464,7 @@ QVector<TextLine> VTextManager::GetAllSourceLines() const
  * @brief VTextManager::GetSourceLinesCount returns the number of input text lines
  * @return number of text lines that were added to the list by calling AddLine
  */
-int VTextManager::GetSourceLinesCount() const
+auto VTextManager::GetSourceLinesCount() const -> int
 {
     return m_liLines.count();
 }
@@ -469,7 +475,7 @@ int VTextManager::GetSourceLinesCount() const
  * @param i index of the requested line
  * @return reference to the requested TextLine object
  */
-const TextLine& VTextManager::GetSourceLine(int i) const
+auto VTextManager::GetSourceLine(int i) const -> const TextLine&
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < m_liLines.count());

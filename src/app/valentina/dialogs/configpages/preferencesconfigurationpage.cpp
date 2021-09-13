@@ -30,7 +30,7 @@
 #include "ui_preferencesconfigurationpage.h"
 #include "../../core/vapplication.h"
 #include "../vpatterndb/pmsystems.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QDir>
 #include <QDirIterator>
@@ -112,13 +112,13 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     //----------------------------- Pattern Editing
     connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
-        VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
         settings->SetConfirmItemDelete(true);
         settings->SetConfirmFormatRewriting(true);
     });
 
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
     ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
@@ -136,24 +136,24 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
     // Tab Scrolling
-    ui->spinBoxDuration->setMinimum(VSettings::scrollingDurationMin);
-    ui->spinBoxDuration->setMaximum(VSettings::scrollingDurationMax);
+    ui->spinBoxDuration->setMinimum(VCommonSettings::scrollingDurationMin);
+    ui->spinBoxDuration->setMaximum(VCommonSettings::scrollingDurationMax);
     ui->spinBoxDuration->setValue(settings->GetScrollingDuration());
 
-    ui->spinBoxUpdateInterval->setMinimum(VSettings::scrollingUpdateIntervalMin);
-    ui->spinBoxUpdateInterval->setMaximum(VSettings::scrollingUpdateIntervalMax);
+    ui->spinBoxUpdateInterval->setMinimum(VCommonSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setMaximum(VCommonSettings::scrollingUpdateIntervalMax);
     ui->spinBoxUpdateInterval->setValue(settings->GetScrollingUpdateInterval());
 
-    ui->doubleSpinBoxSensor->setMinimum(VSettings::sensorMouseScaleMin);
-    ui->doubleSpinBoxSensor->setMaximum(VSettings::sensorMouseScaleMax);
+    ui->doubleSpinBoxSensor->setMinimum(VCommonSettings::sensorMouseScaleMin);
+    ui->doubleSpinBoxSensor->setMaximum(VCommonSettings::sensorMouseScaleMax);
     ui->doubleSpinBoxSensor->setValue(settings->GetSensorMouseScale());
 
-    ui->doubleSpinBoxWheel->setMinimum(VSettings::wheelMouseScaleMin);
-    ui->doubleSpinBoxWheel->setMaximum(VSettings::wheelMouseScaleMax);
+    ui->doubleSpinBoxWheel->setMinimum(VCommonSettings::wheelMouseScaleMin);
+    ui->doubleSpinBoxWheel->setMaximum(VCommonSettings::wheelMouseScaleMax);
     ui->doubleSpinBoxWheel->setValue(settings->GetWheelMouseScale());
 
-    ui->doubleSpinBoxAcceleration->setMinimum(VSettings::scrollingAccelerationMin);
-    ui->doubleSpinBoxAcceleration->setMaximum(VSettings::scrollingAccelerationMax);
+    ui->doubleSpinBoxAcceleration->setMinimum(VCommonSettings::scrollingAccelerationMin);
+    ui->doubleSpinBoxAcceleration->setMaximum(VCommonSettings::scrollingAccelerationMax);
     ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
 }
 
@@ -168,7 +168,7 @@ QStringList PreferencesConfigurationPage::Apply()
 {
     // Tab General
     QStringList preferences;
-    VSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetAutosaveState(ui->autoSaveCheck->isChecked());
     settings->SetAutosaveTime(ui->autoTime->value());
 

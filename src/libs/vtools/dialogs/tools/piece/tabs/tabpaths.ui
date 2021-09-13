@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>426</width>
-    <height>637</height>
+    <width>422</width>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,8 +28,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>406</width>
-        <height>617</height>
+        <width>394</width>
+        <height>612</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -72,64 +72,6 @@
               </widget>
              </item>
             </layout>
-           </item>
-           <item>
-            <layout class="QFormLayout" name="formLayout">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::ExpandingFieldsGrow</enum>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="labelEditName">
-               <property name="text">
-                <string>Name of detail:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="VLineEdit" name="lineEditName">
-               <property name="text">
-                <string>Detail</string>
-               </property>
-               <property name="placeholderText">
-                <string>Name can't be empty</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>Priority:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSpinBox" name="spinBoxPriority">
-               <property name="toolTip">
-                <string>Controls priority in layout. 0 - no priority.</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxForbidFlipping">
-             <property name="toolTip">
-              <string>Forbid piece be mirrored in a layout.</string>
-             </property>
-             <property name="text">
-              <string>Forbid flipping</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxForceFlipping">
-             <property name="toolTip">
-              <string>Force piece to be always flipped in a layout.</string>
-             </property>
-             <property name="text">
-              <string>Force flipping</string>
-             </property>
-            </widget>
            </item>
            <item>
             <widget class="QCheckBox" name="checkBoxHideMainPath">
@@ -245,6 +187,129 @@
               <bool>false</bool>
              </property>
             </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabPiece">
+          <attribute name="title">
+           <string>Piece</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="1">
+              <widget class="VLineEdit" name="lineEditName">
+               <property name="text">
+                <string>Detail</string>
+               </property>
+               <property name="placeholderText">
+                <string>Name can't be empty</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Priority:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelEditName">
+               <property name="text">
+                <string>Name of detail:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spinBoxPriority">
+               <property name="toolTip">
+                <string>Controls priority in layout. 0 - no priority.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEditUUID">
+               <property name="toolTip">
+                <string>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</string>
+               </property>
+               <property name="placeholderText">
+                <string>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelEditUUID">
+               <property name="text">
+                <string notr="true">UUID:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Gradation label:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEditGradationLabel">
+                 <property name="placeholderText">
+                  <string>%size%_%height%</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonGradationPlaceholder">
+                 <property name="text">
+                  <string>Insert…</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxForbidFlipping">
+             <property name="toolTip">
+              <string>Forbid piece be mirrored in a layout.</string>
+             </property>
+             <property name="text">
+              <string>Forbid flipping</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxForceFlipping">
+             <property name="toolTip">
+              <string>Force piece to be always flipped in a layout.</string>
+             </property>
+             <property name="text">
+              <string>Force flipping</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -1063,14 +1128,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPlainTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
    <header>vlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

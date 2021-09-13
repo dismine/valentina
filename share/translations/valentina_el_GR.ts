@@ -564,7 +564,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -695,14 +695,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -822,14 +822,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -953,7 +953,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1020,14 +1020,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1075,14 +1075,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1186,7 +1186,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1277,11 +1277,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1289,6 +1285,10 @@
     </message>
     <message>
         <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1368,11 +1368,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1380,6 +1376,10 @@
     </message>
     <message>
         <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1459,11 +1459,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1471,6 +1467,10 @@
     </message>
     <message>
         <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1751,15 +1751,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value</source>
-        <translation>Τιμή</translation>
-    </message>
-    <message>
-        <source>Label</source>
+        <source>Dimension:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dimension:</source>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1915,6 +1915,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Size</source>
+        <translation type="obsolete">Μέγεθος</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="obsolete">Ύψος</translation>
+    </message>
+    <message>
         <source>Measurments extension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2043,18 +2051,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Ύψος</translation>
+        <translation type="unfinished">Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Μέγεθος</translation>
+        <translation type="unfinished">Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2067,23 +2071,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Final measurement: %1</source>
+        <source>Measurement: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2104,6 +2092,26 @@
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Final measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the height dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the size dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the hip dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2338,14 +2346,14 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2453,7 +2461,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2683,11 +2691,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2703,6 +2707,10 @@
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2802,11 +2810,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2822,6 +2826,10 @@
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2976,7 +2984,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3811,7 +3819,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3878,7 +3886,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4005,7 +4013,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4160,11 +4168,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation>Πλήρες όνομα:</translation>
+        <translation type="unfinished">Πλήρες όνομα:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation>Περιγραφή:</translation>
+        <translation type="unfinished">Περιγραφή:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4172,18 +4180,48 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Όνομα</translation>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Όνομα</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Τιμή</translation>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Πλήρες όνομα</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Περιγραφή</translation>
     </message>
     <message>
         <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Όνομα</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Base value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4204,36 +4242,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <comment>measurement column</comment>
-        <translation>Όνομα</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <comment>measurement column</comment>
-        <translation>Τιμή</translation>
-    </message>
-    <message>
-        <source>Full name</source>
-        <comment>measurement column</comment>
-        <translation>Πλήρες όνομα</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <comment>measurement column</comment>
-        <translation>Περιγραφή</translation>
-    </message>
-    <message>
-        <source>Base value</source>
-        <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift (%1):</source>
-        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4329,11 +4337,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -4349,6 +4353,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4590,7 +4598,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4793,6 +4801,10 @@ Apply settings anyway?</source>
     <message>
         <source>Label language:</source>
         <translation>Γλώσσα ετικέτας:</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="obsolete">χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Passmark length:</source>
@@ -5487,7 +5499,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5586,7 +5598,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5681,7 +5693,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5740,7 +5752,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5807,7 +5819,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5922,7 +5934,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5969,7 +5981,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6009,6 +6021,28 @@ Apply settings anyway?</source>
     <message>
         <source>Paths</source>
         <translation>Μονοπάτια</translation>
+    </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>DialogPuzzlePreferences</name>
+    <message>
+        <source>Puzzle preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -6129,11 +6163,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -6149,6 +6179,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6387,6 +6421,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Numerical control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw Layout Data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6648,6 +6686,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Ύψος</translation>
+    </message>
+    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6680,7 +6723,22 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished">Μέγεθος</translation>
+    </message>
+    <message>
         <source>Circumference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waist</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hip</source>
+        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6697,26 +6755,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation>Ύψος</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation>Μέγεθος</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6828,7 +6866,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6871,7 +6909,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7018,14 +7056,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7177,14 +7215,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7365,7 +7403,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7476,7 +7514,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation>Εργαλείο</translation>
+        <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -8191,7 +8229,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation>Αυτό το αρχείο είναι ήδη ανοιχτό σε ένα άλλο παράθυρο.</translation>
+        <translation type="vanished">Αυτό το αρχείο είναι ήδη ανοιχτό σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
@@ -8628,27 +8666,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Κλείδωμα αρχείου</translation>
+        <translation type="vanished">Κλείδωμα αρχείου</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
+        <translation type="vanished">Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
@@ -8791,16 +8817,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The document has no write permissions.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not save the file.</source>
-        <translation>Could not save the file.</translation>
+        <translation type="vanished">Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -9187,7 +9205,43 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to change the premissions?</source>
+        <source>Manual Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the Puzzle app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create manual layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished">Ενημέρωση</translation>
+    </message>
+    <message>
+        <source>Update manual layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to prepare raw layout data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select manual layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9360,6 +9414,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
         <translation>Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation type="vanished">Λανθασμένες μονάδες.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -9749,6 +9807,10 @@ Do you want to save your changes?</source>
         <source>My label templates</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>My manual layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPatternPage</name>
@@ -9888,6 +9950,111 @@ This option will take an affect after restart.</source>
     <message>
         <source>scene render</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Puzzle</name>
+    <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished">Οι επιλογές εξαγωγής μπορούν να χρησιμοποιηθούν μόνο με ένα αρχείο εισαγωγής.</translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s manual layout editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The manual layout file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PuzzlePreferencesConfigurationPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Γλώσσα</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PuzzlePreferencesPathPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished">Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Τύπος</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Προεπιλογή</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Επεξεργασία</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Άνοιγμα φακέλου</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished">Πατρόν μου</translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished">Πρότυπά μου</translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished">Διατάξεις μου</translation>
     </message>
 </context>
 <context>
@@ -10213,6 +10380,10 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Piece name &apos;%1&apos; is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Could not find the segment start.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10226,6 +10397,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10245,15 +10420,11 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10277,11 +10448,15 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
+        <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
+        <source>Unplaced pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet 1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10847,7 +11022,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">ανώνυμο</translation>
+        <translation>ανώνυμο</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -11064,27 +11239,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Κλείδωμα αρχείου</translation>
+        <translation type="vanished">Κλείδωμα αρχείου</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
+        <translation type="vanished">Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
     </message>
     <message>
         <source>Export to CSV</source>
@@ -11131,16 +11294,8 @@ Do you want to save your changes?</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
-        <source>The measurements document has no write permissions.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not save the file.</source>
-        <translation>Could not save the file.</translation>
+        <translation type="vanished">Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -11271,16 +11426,42 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Όνομα</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Πλήρες όνομα</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Υπολογισμένη τιμή</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Φόρμουλα</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Units:</source>
-        <translation>Μονάδες μέτρησης:</translation>
+        <translation type="unfinished">Μονάδες μέτρησης:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -11380,44 +11561,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Ίντσες</translation>
+        <translation type="unfinished">Ίντσες</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Εκατοστά</translation>
+        <translation type="unfinished">Εκατοστά</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <comment>measurement column</comment>
-        <translation>Όνομα</translation>
-    </message>
-    <message>
-        <source>Full name</source>
-        <comment>measurement column</comment>
-        <translation>Πλήρες όνομα</translation>
-    </message>
-    <message>
-        <source>Calculated value</source>
-        <comment>measurement column</comment>
-        <translation>Υπολογισμένη τιμή</translation>
-    </message>
-    <message>
-        <source>Formula</source>
-        <comment>measurement column</comment>
-        <translation>Φόρμουλα</translation>
-    </message>
-    <message>
-        <source>Base value</source>
-        <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Correction</source>
-        <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11497,6 +11648,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Labels</source>
         <translation>Ετικέτες</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="obsolete">Εμφάνιση ετικέτας λεπτομέρειας</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -11608,19 +11763,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation>Όνομα πατρόν:</translation>
+        <translation type="unfinished">Όνομα πατρόν:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation>Αριθμός πατρόν:</translation>
+        <translation type="unfinished">Αριθμός πατρόν:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation>Όνομα Επιχείρησης/Σχεδιαστή:</translation>
+        <translation type="unfinished">Όνομα Επιχείρησης/Σχεδιαστή:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation>Όνομα πελάτη:</translation>
+        <translation type="unfinished">Όνομα πελάτη:</translation>
     </message>
     <message>
         <source>Date format:</source>
@@ -11636,7 +11791,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>χχχχ-ΜΜ-ηη</translation>
+        <translation type="unfinished">χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -11958,6 +12113,18 @@ Do you want to save your changes?</source>
         <comment>seam allowance</comment>
         <translation>Προσαρμογή</translation>
     </message>
+    <message>
+        <source>Piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -12130,6 +12297,14 @@ Do you want to save your changes?</source>
         <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
+        <source>Default height and size</source>
+        <translation type="obsolete">Προεπιλεγμένο ύψος και μέγεθος</translation>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="obsolete">Εξ&apos;ορισμού μέγεθος:</translation>
+    </message>
+    <message>
         <source>With OS options</source>
         <translation>Με επιλογές του λειτουργικού συστήματος</translation>
     </message>
@@ -12192,6 +12367,10 @@ Do you want to save your changes?</source>
         <source>My Patterns</source>
         <translation>Πατρόν μου</translation>
     </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished">Διατάξεις μου</translation>
+    </message>
 </context>
 <context>
     <name>TogglePieceForceForbidFlipping</name>
@@ -12237,18 +12416,14 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation>Μέγεθος</translation>
-    </message>
-    <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Ύψος</translation>
+        <translation type="unfinished">Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Μέγεθος</translation>
+        <translation type="unfinished">Μέγεθος</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -12269,6 +12444,10 @@ Do you want to save your changes?</source>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Μέγεθος</translation>
     </message>
     <message>
         <source>Chest circumference</source>
@@ -12447,7 +12626,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation>Τιμές χωρισμένες με κόμμα</translation>
+        <translation type="unfinished">Τιμές χωρισμένες με κόμμα</translation>
     </message>
     <message>
         <source>values</source>
@@ -12455,7 +12634,51 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation>Εξαγωγή σε CSV</translation>
+        <translation type="unfinished">Εξαγωγή σε CSV</translation>
+    </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locking file</source>
+        <translation type="unfinished">Κλείδωμα αρχείου</translation>
+    </message>
+    <message>
+        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished">Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file already opened in another window.</source>
+        <translation type="unfinished">Αυτό το αρχείο είναι ήδη ανοιχτό σε ένα άλλο παράθυρο.</translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished">Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
     </message>
 </context>
 <context>
@@ -13110,6 +13333,34 @@ Do you want to save your changes?</source>
         <source>The dimension C base</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The filename of exported layout file. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The filename of layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pattern pieces form the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The raw layout data file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode): &lt;not defined&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): &lt;not defined&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -13135,6 +13386,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>manual layouts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13342,6 +13597,10 @@ Do you want to save your changes?</source>
 <context>
     <name>VLayoutExporter</name>
     <message>
+        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot set printer page size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13354,12 +13613,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
+        <source>Export raw layout data failed. %1.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
-        <translation type="unfinished"></translation>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
     </message>
     <message>
         <source>Can&apos;t create an flat dxf file.</source>
@@ -13393,15 +13652,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation type="unfinished">Κανένα</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Ύψος</translation>
+        <translation type="unfinished">Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Μέγεθος</translation>
+        <translation type="unfinished">Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13548,6 +13807,114 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPApplication</name>
+    <message>
+        <source>Error parsing file. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error bad id. Program will be terminated.</source>
+        <translation type="unfinished">Σφάλμα κακής ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
+    </message>
+    <message>
+        <source>Error can&apos;t convert value. Program will be terminated.</source>
+        <translation type="unfinished">Σφάλμα λόγω αδυναμίας μετατροπής της τιμής. Το πρόγραμμα θα τερματιστεί.</translation>
+    </message>
+    <message>
+        <source>Error empty parameter. Program will be terminated.</source>
+        <translation type="unfinished">Σφάλμα λόγω κενής παραμέτρου. Το πρόγραμμα θα τερματιστεί.</translation>
+    </message>
+    <message>
+        <source>Error wrong id. Program will be terminated.</source>
+        <translation type="unfinished">Σφάλμα λόγω λάθους ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
+    </message>
+    <message>
+        <source>Something&apos;s wrong!!</source>
+        <translation type="unfinished">Υπάρχει σφάλμα!!</translation>
+    </message>
+    <message>
+        <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
+        <translation type="unfinished">Δεν μπορεί να αρχίσει να ακούει τις εισερχόμενες συνδέσεις στο όνομα &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support openning several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support openning several layout files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide one input file.</source>
+        <translation type="unfinished">Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
+    </message>
+</context>
+<context>
+    <name>VPCarrousel</name>
+    <message>
+        <source>Pieces of </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPCarrouselPieceList</name>
+    <message>
+        <source>Move to Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
+    </message>
+    <message>
+        <source>Remove from Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPDialogAbout</name>
+    <message>
+        <source>About Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Puzzle version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation type="unfinished">Αναθεώρηση έκδοσης:</translation>
+    </message>
+    <message>
+        <source>This program is part of Valentina project.</source>
+        <translation type="unfinished">Αυτό το πρόγραμμα είναι μέρος του Valentina project.</translation>
+    </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation type="unfinished">Έλεγχος για ενημερώσεις</translation>
+    </message>
+    <message>
+        <source>Cannot open your default browser</source>
+        <translation type="unfinished">Δεν είναι δυνατό το άνοιγμα του προεπιλεγμένου περιηγητή</translation>
+    </message>
+    <message>
+        <source>Build revision: %1</source>
+        <translation type="unfinished">Αναθεώρηση έκδοσης: %1</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Web site : %1</source>
+        <translation type="unfinished">Ιστοσελίδα : %1</translation>
+    </message>
+</context>
+<context>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
@@ -13567,6 +13934,573 @@ Do you want to save your changes?</source>
     <message>
         <source>Open File</source>
         <translation>Άνοιγμα αρχείου</translation>
+    </message>
+</context>
+<context>
+    <name>VPGraphicsPiece</name>
+    <message>
+        <source>Move to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPLayoutFileReader</name>
+    <message>
+        <source>Piece List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Got empty attribute &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPMainWindow</name>
+    <message>
+        <source>Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Αρχείο</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Βοήθεια</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished">Μενού</translation>
+    </message>
+    <message>
+        <source>Piece Carrousel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current piece properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Όνομα:</translation>
+    </message>
+    <message>
+        <source>DummyName</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UUID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seamline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Seamline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Geometry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Περιστροφή</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>Rotate the piece by 90° clockwise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate the piece by 90° anti-clockwise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate the piece so that the grainline is vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate the piece so that the grainline is horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No piece selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple pieces selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Φάρδος</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portrait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Περιθώρια</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Δεξιά:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Επάνω:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Αριστερά:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Κάτω:</translation>
+    </message>
+    <message>
+        <source>Placement Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pieces gap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sticky edges</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished">Εξαγωγή</translation>
+    </message>
+    <message>
+        <source>Export Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiles properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled Pdf Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Tiles on sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Tiled Pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished">Τοποθέτηση</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Όνομα</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Περιγραφή</translation>
+    </message>
+    <message>
+        <source>Unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning superposition of pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning pieces out of bound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation type="unfinished">&amp;Άνοιγμα</translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Αποθήκευση</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import Raw Layout Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation type="unfinished">Έ&amp;ξοδος</translation>
+    </message>
+    <message>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Νέο</translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Σχετικά &amp;Qt</translation>
+    </message>
+    <message>
+        <source>About &amp;Puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation type="unfinished">Μεγέθυνση</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation type="unfinished">Σμίκρυνση</translation>
+    </message>
+    <message>
+        <source>Zoom 1:1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom fit best</source>
+        <translation type="unfinished">Προσαρμογή zoom</translation>
+    </message>
+    <message>
+        <source>Zoom sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Προτιμήσεις</translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; doesn&apos;t exist!</source>
+        <translation type="unfinished">Το αρχείο &apos;%1&apos; δεν υπάρχει!</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Σφάλμα στο αρχείο.</translation>
+    </message>
+    <message>
+        <source>Unable to read a layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fail to create layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not extract data from file &apos;%1&apos;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Εκατοστά</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Χιλιοστά</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Ίντσες</translation>
+    </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled %1.vlt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled.vlt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished">μόνο για ανάγνωση</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Window</source>
+        <translation type="unfinished">&amp;Νέο παράθυρο</translation>
+    </message>
+    <message>
+        <source>Layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished">Άνοιγμα αρχείου</translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished">Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
+    </message>
+    <message>
+        <source>layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished">Αποθήκευση ως</translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window.</source>
+        <translation type="unfinished">Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
+        <translation type="unfinished">Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
+    </message>
+    <message>
+        <source>Raw Layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">Σχετικά με το Qt</translation>
+    </message>
+    <message>
+        <source>PDF Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SVG Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPSheet</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Letter</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Ρολό 24 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Ρολό 30 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Ρολό 36 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Ρολό 42 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {72i?}</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Προσαρμογή</translation>
+    </message>
+</context>
+<context>
+    <name>VPTileFactory</name>
+    <message>
+        <source>Grid ( %1 , %2 )</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13926,11 +14860,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Σφάλμα εκτύπωσης</translation>
+        <translation type="unfinished">Σφάλμα εκτύπωσης</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
+        <translation type="unfinished">Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -13974,13 +14908,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
+        <translation type="unfinished">Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
     </message>
 </context>
 <context>
-    <name>VSettings</name>
+    <name>VRawLayout</name>
     <message>
-        <source>layouts</source>
+        <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VRawLayout::ReadFile() failed.
+Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14910,7 +15849,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Σημειώσεις:</translation>
+        <translation type="unfinished">Σημειώσεις:</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -16533,6 +17472,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="vanished">Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VValentinaSettings</name>
+    <message>
+        <source>layouts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

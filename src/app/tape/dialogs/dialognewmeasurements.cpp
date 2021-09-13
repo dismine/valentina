@@ -30,7 +30,7 @@
 #include "ui_dialognewmeasurements.h"
 
 #include "../vpatterndb/variables/vmeasurement.h"
-#include "../vmisc/vtapesettings.h"
+#include "../vtapesettings.h"
 #include "../mapplication.h"
 
 #include <QShowEvent>

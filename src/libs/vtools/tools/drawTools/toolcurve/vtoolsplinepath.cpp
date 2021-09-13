@@ -397,7 +397,8 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
 void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path)
 {
     doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttributeOrRemoveIf(domElement, AttrDuplicate, path.GetDuplicate(), path.GetDuplicate() <= 0);
+    doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, path.GetDuplicate(),
+                                         [](quint32 duplicate){return duplicate == 0;});
 
     if (domElement.hasAttribute(AttrKCurve))
     {
@@ -407,7 +408,8 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
     doc->SetAttribute(domElement, AttrColor, path.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());
-    doc->SetAttributeOrRemoveIf(domElement, AttrAlias, path.GetAliasSuffix(), path.GetAliasSuffix().isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, path.GetAliasSuffix(),
+                                         [](const QString &suffix){return suffix.isEmpty();});
 
     UpdatePathPoints(doc, domElement, path);
 }
@@ -544,8 +546,8 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDep
         controlPoints[j-1]->blockSignals(false);
     }
 
-    const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf(domElement, AttrNotes, notes, notes.isEmpty());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes){return notes.isEmpty();});
 
     SetSplinePathAttributes(domElement, splPath);
 }

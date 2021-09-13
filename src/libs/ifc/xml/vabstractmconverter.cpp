@@ -39,6 +39,7 @@
 VAbstractMConverter::VAbstractMConverter(const QString &fileName)
     :VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

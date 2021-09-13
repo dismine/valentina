@@ -93,5 +93,6 @@
         <file>icon/24x24/star@2x.png</file>
         <file>icon/24x24/close.png</file>
         <file>icon/24x24/close@2x.png</file>
+        <file>icon/layout.png</file>
     </qresource>
 </RCC>

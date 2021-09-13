@@ -73,7 +73,8 @@ public:
           m_ppData(detail.m_ppData),
           m_piPatternInfo(detail.m_piPatternInfo),
           m_glGrainline(detail.m_glGrainline),
-          m_formulaWidth(detail.m_formulaWidth)
+          m_formulaWidth(detail.m_formulaWidth),
+          m_gradationLabel(detail.m_gradationLabel)
     {}
 
     ~VPieceData();
@@ -99,6 +100,8 @@ public:
     VGrainlineData m_glGrainline;
 
     QString m_formulaWidth;
+
+    QString m_gradationLabel{};
 
 private:
     Q_DISABLE_ASSIGN(VPieceData)

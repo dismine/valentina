@@ -35,7 +35,7 @@
 #include <QtDebug>
 #include "../core/vapplication.h"
 #include "../fervor/fvupdater.h"
-#include "../vmisc/vsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :

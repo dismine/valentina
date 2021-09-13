@@ -64,6 +64,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QTimer>
+#include <QUuid>
 
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
@@ -253,6 +254,7 @@ auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToo
                                                           replacements));
     dupDetail.SetInternalPaths(DuplicateInternalPaths(initData.detail.GetInternalPaths(), initData));
     dupDetail.SetPlaceLabels(DuplicatePlaceLabels(initData.detail.GetPlaceLabels(), initData));
+    dupDetail.SetUUID(QUuid::createUuid());
 
     const QMap<quint32, quint32> mappedPins = DuplicatePins(initData.detail.GetPins(), initData);
     dupDetail.SetPins(mappedPins.values().toVector());
@@ -329,20 +331,25 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, piece.GetName());
+    doc->SetAttribute(domElement, AttrUUID, piece.GetUUID().toString());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrGradationLabel, piece.GetGradationLabel(),
+                                         [](const QString &label){return label.isEmpty();});
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
     doc->SetAttribute(domElement, AttrMx, VAbstractValApplication::VApp()->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, VAbstractValApplication::VApp()->fromPixel(piece.GetMy()));
-    doc->SetAttributeOrRemoveIf(domElement, AttrInLayout, piece.IsInLayout(), piece.IsInLayout());
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrInLayout, piece.IsInLayout(),
+                                      [](bool inLayout){return inLayout;});
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
-    doc->SetAttributeOrRemoveIf(domElement, AttrSeamAllowance, piece.IsSeamAllowance(),
-                                not piece.IsSeamAllowance());
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowance, piece.IsSeamAllowance(),
+                                      [](bool seamAllowance){return not seamAllowance;});
     doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
-    doc->SetAttributeOrRemoveIf(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(),
-                                not piece.IsSeamAllowanceBuiltIn());
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(),
+                                      [](bool builtin){return not builtin;});
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
-    doc->SetAttributeOrRemoveIf(domElement, AttrUnited, piece.IsUnited(), not piece.IsUnited());
-    doc->SetAttributeOrRemoveIf(domElement, AttrPiecePriority, piece.GetPriority(), piece.GetPriority() == 0);
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrUnited, piece.IsUnited(), [](bool united){return not united;});
+    doc->SetAttributeOrRemoveIf<uint>(domElement, AttrPiecePriority, piece.GetPriority(),
+                                      [](uint priority){return priority == 0;});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -423,9 +430,12 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
-    doc->SetAttributeOrRemoveIf(domData, AttrCenterPin, data.CenterPin(), data.CenterPin() <= NULL_ID);
-    doc->SetAttributeOrRemoveIf(domData, AttrTopLeftPin, data.TopLeftPin(), data.TopLeftPin() <= NULL_ID);
-    doc->SetAttributeOrRemoveIf(domData, AttrBottomRightPin, data.BottomRightPin(), data.BottomRightPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, data.CenterPin(),
+                                         [](quint32 pin){return pin == NULL_ID;});
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopLeftPin, data.TopLeftPin(),
+                                         [](quint32 leftPin){return leftPin == NULL_ID;});
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomRightPin, data.BottomRightPin(),
+                                         [](quint32 rightPin){return rightPin == NULL_ID;});
     doc->SetLabelTemplate(domData, data.GetLabelTemplate());
 
     domElement.appendChild(domData);
@@ -443,9 +453,12 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
-    doc->SetAttributeOrRemoveIf(domData, AttrCenterPin, geom.CenterPin(), geom.CenterPin() <= NULL_ID);
-    doc->SetAttributeOrRemoveIf(domData, AttrTopLeftPin, geom.TopLeftPin(), geom.TopLeftPin() <= NULL_ID);
-    doc->SetAttributeOrRemoveIf(domData, AttrBottomRightPin, geom.BottomRightPin(), geom.BottomRightPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, geom.CenterPin(),
+                                         [](quint32 pin){return pin <= NULL_ID;});
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopLeftPin, geom.TopLeftPin(),
+                                         [](quint32 pin){return pin <= NULL_ID;});
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomRightPin, geom.BottomRightPin(),
+                                         [](quint32 pin){return pin <= NULL_ID;});
 
     domElement.appendChild(domData);
 }
@@ -462,9 +475,12 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
-    doc->SetAttributeOrRemoveIf(domData, AttrCenterPin, glGeom.CenterPin(), glGeom.CenterPin() <= NULL_ID);
-    doc->SetAttributeOrRemoveIf(domData, AttrTopPin, glGeom.TopPin(), glGeom.TopPin() <= NULL_ID);
-    doc->SetAttributeOrRemoveIf(domData, AttrBottomPin, glGeom.BottomPin(), glGeom.BottomPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, glGeom.CenterPin(),
+                                         [](quint32 pin){return pin <= NULL_ID;});
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopPin, glGeom.TopPin(),
+                                         [](quint32 pin){return pin <= NULL_ID;});
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomPin, glGeom.BottomPin(),
+                                         [](quint32 pin){return pin <= NULL_ID;});
 
     domElement.appendChild(domData);
 }
@@ -1005,7 +1021,7 @@ void VToolSeamAllowance::RefreshDataInFile()
         // Refresh only parts that we possibly need to update
         {
             // TODO. Delete if minimal supported version is 0.4.0
-            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
+            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0),
                               "Time to refactor the code.");
 
             const uint version = doc->GetParametrUInt(domElement, AttrVersion, QChar('1'));
