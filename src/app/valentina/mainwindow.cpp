@@ -69,6 +69,7 @@
 #include "../vmisc/backport/qoverload.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vlayout/dialogs/dialoglayoutscale.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -3419,10 +3420,15 @@ void MainWindow::on_actionCreateManualLayout_triggered()
             return;
         }
 
+        DialogLayoutScale layoutScale(false, this);
+        layoutScale.SetXScale(1);
+        layoutScale.SetYScale(1);
+        layoutScale.exec();
+
         VLayoutExporter exporter;
         exporter.SetFileName(rldFile.fileName());
-//        exporter.SetXScale(m_dialogSaveLayout->GetXScale());
-//        exporter.SetYScale(m_dialogSaveLayout->GetYScale());
+        exporter.SetXScale(layoutScale.GetXScale());
+        exporter.SetYScale(layoutScale.GetYScale());
         exporter.ExportToRLD(listDetails);
 
         QStringList arguments {"-r", rldFile.fileName()};
@@ -3501,10 +3507,15 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
             return;
         }
 
+        DialogLayoutScale layoutScale(false, this);
+        layoutScale.SetXScale(1);
+        layoutScale.SetYScale(1);
+        layoutScale.exec();
+
         VLayoutExporter exporter;
         exporter.SetFileName(rldFile.fileName());
-//        exporter.SetXScale(m_dialogSaveLayout->GetXScale());
-//        exporter.SetYScale(m_dialogSaveLayout->GetYScale());
+        exporter.SetXScale(layoutScale.GetXScale());
+        exporter.SetYScale(layoutScale.GetYScale());
         exporter.ExportToRLD(listDetails);
 
         QStringList arguments {filePath, "-r", rldFile.fileName()};
