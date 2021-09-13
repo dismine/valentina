@@ -267,9 +267,9 @@ private:
 
     \sa QFrame
 */
-QtColorPicker::QtColorPicker(QWidget *parent,
-			     int cols, bool enableColorDialog)
-    : QPushButton(parent), popup(0), withColorDialog(enableColorDialog)
+QtColorPicker::QtColorPicker(QWidget *parent, int columns, bool enableColorDialog)
+    : QPushButton(parent),
+      withColorDialog(enableColorDialog)
 {
     setFocusPolicy(Qt::StrongFocus);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
@@ -286,7 +286,7 @@ QtColorPicker::QtColorPicker(QWidget *parent,
     dirty = true;
 
     // Create color grid popup and connect to it.
-    popup = new ColorPickerPopup(cols, withColorDialog, this);
+    popup = new ColorPickerPopup(columns, withColorDialog, this);
     connect(popup, SIGNAL(selected(const QColor &)),
 	    SLOT(setCurrentColor(const QColor &)));
     connect(popup, SIGNAL(hid()), SLOT(popupClosed()));

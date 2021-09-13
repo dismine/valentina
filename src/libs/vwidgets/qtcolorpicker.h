@@ -83,10 +83,10 @@ public:
 
     auto CustomColors() const -> QVector<QColor>;
 
-    static QColor getColor(const QPoint &pos, bool allowCustomColors = true);
+    static QColor getColor(const QPoint &point, bool allowCustomColors = true);
 
 public Q_SLOTS:
-    void setCurrentColor(const QColor &col);
+    void setCurrentColor(const QColor &color);
 
 Q_SIGNALS:
     void colorChanged(const QColor &);

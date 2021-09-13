@@ -542,7 +542,6 @@ auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 {
     bool success = false;
     QSaveFile file(path);
-    // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::WriteOnly))
     {
         VPLayoutFileWriter fileWriter;
