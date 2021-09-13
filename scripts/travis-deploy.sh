@@ -30,11 +30,11 @@ if [[ "$DEPLOY" == "true" ]]; then
     fi
 
     print_info "Start compressing.";
-    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvJf valentina-osx-${TRAVIS_COMMIT}${legacy_suffix}.tar.xz Valentina.app/;
+    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvJf valentina-osx-${XCODE}-${TRAVIS_COMMIT}${legacy_suffix}.tar.xz Valentina.app/;
     check_failure "Unable to create an archive.";
 
     print_info "Start uploading.";
-    python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${TRAVIS_COMMIT}${legacy_suffix}.tar.xz "/0.7.x/Mac OS X/valentina-osx-${TRAVIS_COMMIT}${legacy_suffix}.tar.xz";
+    python3 $TRAVIS_BUILD_DIR/scripts/deploy.py upload $ACCESS_TOKEN $TRAVIS_BUILD_DIR/build/valentina-osx-${XCODE}-${TRAVIS_COMMIT}${legacy_suffix}.tar.xz "/0.7.x/Mac OS X/valentina-osx-${XCODE}-${TRAVIS_COMMIT}${legacy_suffix}.tar.xz";
     check_failure "Unable to upload.";
 
     print_info "Successfully uploaded.";
