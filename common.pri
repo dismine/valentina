@@ -811,6 +811,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wzero-length-array \
     -Qunused-arguments \
     -fcolor-diagnostics \
+    -Wno-gnu-zero-variadic-macro-arguments \
     -fms-extensions # Need for pragma message
 
 CONFIG(release, debug|release){
@@ -862,6 +863,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wall \
     -Wextra \
     -pedantic \
+    -Wno-gnu-zero-variadic-macro-arguments \
     -fno-omit-frame-pointer \ # Need for exchndl.dll
     -fms-extensions # Need for pragma message
 
