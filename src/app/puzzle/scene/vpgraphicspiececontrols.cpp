@@ -395,7 +395,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
         m_rotationStartPoint = event->scenePos();
         m_rotationSum = 0;
         m_controlsVisible = false;
-        m_handleCorner = HandleCorner(event->scenePos());
+        m_handleCorner = SelectedHandleCorner(event->scenePos());
         m_ignorePieceTransformation = true;
         prepareGeometryChange();
     }
@@ -409,7 +409,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if((event->modifiers() & Qt::ShiftModifier) != 0U
-            && static_cast<enum HandleCorner>(m_handleCorner) != HandleCorner::Invalid)
+            && static_cast<HandleCorner>(m_handleCorner) != HandleCorner::Invalid)
     {
         if (not m_originSaved)
         {
@@ -426,19 +426,19 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                     VPTransformationOrigon origin;
                     origin.custom = true;
 
-                    if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::TopLeft)
+                    if (static_cast<HandleCorner>(m_handleCorner) == HandleCorner::TopLeft)
                     {
                         origin.origin = m_pieceRect.topLeft();
                     }
-                    else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::TopRight)
+                    else if (static_cast<HandleCorner>(m_handleCorner) == HandleCorner::TopRight)
                     {
                         origin.origin = m_pieceRect.topRight();
                     }
-                    else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::BottomRight)
+                    else if (static_cast<HandleCorner>(m_handleCorner) == HandleCorner::BottomRight)
                     {
                         origin.origin = m_pieceRect.bottomRight();
                     }
-                    else if (static_cast<enum HandleCorner>(m_handleCorner) == HandleCorner::BottomLeft)
+                    else if (static_cast<HandleCorner>(m_handleCorner) == HandleCorner::BottomLeft)
                     {
                         origin.origin = m_pieceRect.bottomLeft();
                     }
@@ -831,7 +831,7 @@ auto VPGraphicsPieceControls::PiecesBoundingRect(const QList<VPPiecePtr> &select
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPieceControls::HandleCorner(const QPointF &pos) const -> int
+auto VPGraphicsPieceControls::SelectedHandleCorner(const QPointF &pos) const -> int
 {
     if (TopLeftControl().boundingRect().contains(pos))
     {

@@ -129,7 +129,7 @@ private:
 
     auto ArrowPath() const -> QPainterPath;
 
-    auto HandleCorner(const QPointF &pos) const -> int;
+    auto SelectedHandleCorner(const QPointF &pos) const -> int;
 
     auto SelectedPieces() const -> QList<VPPiecePtr>;
     static auto PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF;
