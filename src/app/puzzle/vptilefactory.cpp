@@ -363,8 +363,12 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
 
     QFontMetrics metrix = QFontMetrics(td.defaultFont());
-    QString clippedSheetName = metrix.elidedText(sheet->GetName(), Qt::ElideMiddle,
-                                                 metrix.width(QString().fill('z', 50)));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+    int maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
+#else
+    int maxWidth = metrix.width(QString().fill('z', 50));
+#endif
+    QString clippedSheetName = metrix.elidedText(sheet->GetName(), Qt::ElideMiddle, maxWidth);
 
     td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
                        "<tr>"
