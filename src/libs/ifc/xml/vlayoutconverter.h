@@ -44,17 +44,17 @@ public:
 
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int LayoutMinVer = FormatVersion(0, 1, 0);
-    static Q_DECL_CONSTEXPR const int LayoutMaxVer = FormatVersion(0, 1, 0);
+    static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
+    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 0);
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    virtual unsigned MinVer() const override;
+    virtual unsigned MaxVer() const override;
 
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const override;
+    virtual QString XSDSchema(unsigned ver) const override;
     virtual void    ApplyPatches() override;
     virtual void    DowngradeToCurrentMaxVersion() override;
 
@@ -66,13 +66,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VLayoutConverter::MinVer() const
+inline unsigned VLayoutConverter::MinVer() const
 {
     return LayoutMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VLayoutConverter::MaxVer() const
+inline unsigned VLayoutConverter::MaxVer() const
 {
     return LayoutMaxVer;
 }

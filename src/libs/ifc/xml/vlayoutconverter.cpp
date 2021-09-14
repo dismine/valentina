@@ -73,11 +73,11 @@ auto VLayoutConverter::GetFormatVersionStr() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLayoutConverter::XSDSchema(int ver) const
+auto VLayoutConverter::XSDSchema(unsigned ver) const -> QString
 {
-    QHash <int, QString> schemas =
+    QHash <unsigned, QString> schemas =
     {
-        std::make_pair(FormatVersion(0, 1, 0), CurrentSchema)
+        std::make_pair(FormatVersion(0, 1, 0), CurrentSchema),
     };
 
     if (schemas.contains(ver))

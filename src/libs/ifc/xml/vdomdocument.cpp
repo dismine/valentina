@@ -860,7 +860,7 @@ QString VDomDocument::GetFormatVersionStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VDomDocument::GetFormatVersion(const QString &version)
+unsigned VDomDocument::GetFormatVersion(const QString &version)
 {
     ValidateVersion(version);
 
@@ -887,7 +887,7 @@ int VDomDocument::GetFormatVersion(const QString &version)
         return 0x0;
     }
 
-    return (major<<16)|(minor<<8)|(patch);
+    return (major<<16u)|(minor<<8u)|(patch);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

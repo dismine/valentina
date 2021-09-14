@@ -48,17 +48,17 @@ public:
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int MeasurementMinVer = FormatVersion(0, 2, 0);
-    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = FormatVersion(0, 5, 1);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 2, 0);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 1);
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    virtual unsigned MinVer() const override;
+    virtual unsigned MaxVer() const override;
 
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const override;
+    virtual QString XSDSchema(unsigned ver) const override;
     virtual void    ApplyPatches() override;
     virtual void    DowngradeToCurrentMaxVersion() override;
     virtual bool    IsReadOnly() const override;
@@ -86,13 +86,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VVITConverter::MinVer() const
+inline unsigned VVITConverter::MinVer() const
 {
     return MeasurementMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VVITConverter::MaxVer() const
+inline unsigned VVITConverter::MaxVer() const
 {
     return MeasurementMaxVer;
 }

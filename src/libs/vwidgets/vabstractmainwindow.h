@@ -55,7 +55,7 @@ protected slots:
     void ExportDataToCSV();
 
 protected:
-    int     m_curFileFormatVersion;
+    unsigned m_curFileFormatVersion;
     QString m_curFileFormatVersionStr;
     enum { MaxRecentFiles = 5 };
     QVector<QAction *> m_recentFileActs{QVector<QAction *>(MaxRecentFiles)};

@@ -54,22 +54,22 @@ public:
     int GetCurrentFormatVersion() const;
 
 protected:
-    int     m_ver;
+    unsigned m_ver;
     QString m_originalFileName;
     QString m_convertedFileName;
 
     void ValidateInputFile(const QString &currentSchema) const;
-    Q_NORETURN void InvalidVersion(int ver) const;
+    Q_NORETURN void InvalidVersion(unsigned ver) const;
     void Save();
     void SetVersion(const QString &version);
 
-    virtual int     MinVer() const =0;
-    virtual int     MaxVer() const =0;
+    virtual unsigned MinVer() const =0;
+    virtual unsigned MaxVer() const =0;
 
     virtual QString MinVerStr() const =0;
     virtual QString MaxVerStr() const =0;
 
-    virtual QString XSDSchema(int ver) const =0;
+    virtual QString XSDSchema(unsigned ver) const =0;
     virtual void    ApplyPatches() =0;
     virtual void    DowngradeToCurrentMaxVersion() =0;
 

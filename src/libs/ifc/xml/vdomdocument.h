@@ -129,7 +129,7 @@ public:
     QString        Minor() const;
     QString        Patch() const;
     virtual QString GetFormatVersionStr() const;
-    static int     GetFormatVersion(const QString &version);
+    static unsigned GetFormatVersion(const QString &version);
     static void    RemoveAllChildren(QDomElement &domElement);
 
     QDomNode       ParentNodeById(const quint32 &nodeId);

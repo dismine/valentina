@@ -281,7 +281,7 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
+Q_NORETURN void VAbstractConverter::InvalidVersion(unsigned ver) const
 {
     if (ver < MinVer())
     {

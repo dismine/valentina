@@ -38,17 +38,17 @@ public:
 
     static const QString WatermarkMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int WatermarkMinVer = FormatVersion(1, 0, 0);
-    static Q_DECL_CONSTEXPR const int WatermarkMaxVer = FormatVersion(1, 1, 0);
+    static Q_DECL_CONSTEXPR const unsigned WatermarkMinVer = FormatVersion(1, 0, 0);
+    static Q_DECL_CONSTEXPR const unsigned WatermarkMaxVer = FormatVersion(1, 1, 0);
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    virtual unsigned MinVer() const override;
+    virtual unsigned MaxVer() const override;
 
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const override;
+    virtual QString XSDSchema(unsigned ver) const override;
     virtual void    ApplyPatches() override;
     virtual void    DowngradeToCurrentMaxVersion() override;
 

@@ -79,9 +79,9 @@ VVITConverter::VVITConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVITConverter::XSDSchema(int ver) const
+QString VVITConverter::XSDSchema(unsigned ver) const
 {
-    QHash <int, QString> schemas =
+    QHash <unsigned, QString> schemas =
     {
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/individual_measurements/v0.2.0.xsd")),
         std::make_pair(FormatVersion(0, 3, 0), QStringLiteral("://schema/individual_measurements/v0.3.0.xsd")),

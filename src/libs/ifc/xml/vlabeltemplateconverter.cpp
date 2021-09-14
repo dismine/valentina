@@ -52,13 +52,13 @@ VLabelTemplateConverter::VLabelTemplateConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLabelTemplateConverter::MinVer() const
+unsigned VLabelTemplateConverter::MinVer() const
 {
     return LabelTemplateMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLabelTemplateConverter::MaxVer() const
+unsigned VLabelTemplateConverter::MaxVer() const
 {
     return LabelTemplateMaxVer;
 }
@@ -76,7 +76,7 @@ QString VLabelTemplateConverter::MaxVerStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::XSDSchema(int ver) const
+QString VLabelTemplateConverter::XSDSchema(unsigned ver) const
 {
     switch (ver)
     {

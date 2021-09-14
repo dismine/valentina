@@ -73,9 +73,9 @@ VVSTConverter::VVSTConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVSTConverter::XSDSchema(int ver) const
+QString VVSTConverter::XSDSchema(unsigned ver) const
 {
-    QHash <int, QString> schemas =
+    QHash <unsigned, QString> schemas =
     {
         std::make_pair(FormatVersion(0, 3, 0), QStringLiteral("://schema/multisize_measurements/v0.3.0.xsd")),
         std::make_pair(FormatVersion(0, 4, 0), QStringLiteral("://schema/multisize_measurements/v0.4.0.xsd")),

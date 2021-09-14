@@ -178,9 +178,9 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::XSDSchema(int ver) const
+auto VPatternConverter::XSDSchema(unsigned ver) const -> QString
 {
-    QHash <int, QString> schemas =
+    QHash <unsigned, QString> schemas =
     {
         std::make_pair(FormatVersion(0, 1, 4), QStringLiteral("://schema/pattern/v0.1.4.xsd")),
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/pattern/v0.2.0.xsd")),

@@ -48,23 +48,17 @@ public:
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
-// GCC 4.6 doesn't allow constexpr and const together
-#if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
-    static Q_DECL_CONSTEXPR int MeasurementMinVer = FormatVersion(0, 3, 0);
-    static Q_DECL_CONSTEXPR int MeasurementMaxVer = FormatVersion(0, 5, 1);
-#else
-    static Q_DECL_CONSTEXPR const int MeasurementMinVer = FormatVersion(0, 3, 0);
-    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = FormatVersion(0, 5, 1);
-#endif
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 1);
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    virtual unsigned MinVer() const override;
+    virtual unsigned MaxVer() const override;
 
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const override;
+    virtual QString XSDSchema(unsigned ver) const override;
     virtual void    ApplyPatches() override;
     virtual void    DowngradeToCurrentMaxVersion() override;
     virtual bool    IsReadOnly() const override;
@@ -94,13 +88,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VVSTConverter::MinVer() const
+inline unsigned VVSTConverter::MinVer() const
 {
     return MeasurementMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VVSTConverter::MaxVer() const
+inline unsigned VVSTConverter::MaxVer() const
 {
     return MeasurementMaxVer;
 }

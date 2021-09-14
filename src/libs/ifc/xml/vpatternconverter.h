@@ -52,17 +52,17 @@ public:
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int PatternMinVer = FormatVersion(0, 1, 4);
-    static Q_DECL_CONSTEXPR const int PatternMaxVer = FormatVersion(0, 8, 12);
+    static Q_DECL_CONSTEXPR const unsigned PatternMinVer = FormatVersion(0, 1, 4);
+    static Q_DECL_CONSTEXPR const unsigned PatternMaxVer = FormatVersion(0, 8, 12);
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    virtual unsigned MinVer() const override;
+    virtual unsigned MaxVer() const override;
 
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const override;
+    virtual QString XSDSchema(unsigned ver) const override;
     virtual void    ApplyPatches() override;
     virtual void    DowngradeToCurrentMaxVersion() override;
 
@@ -193,13 +193,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VPatternConverter::MinVer() const
+inline unsigned VPatternConverter::MinVer() const
 {
     return PatternMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VPatternConverter::MaxVer() const
+inline unsigned VPatternConverter::MaxVer() const
 {
     return PatternMaxVer;
 }

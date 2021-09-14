@@ -79,7 +79,7 @@ private:
     QColor m_okPathColor;
     bool m_isInitialized{false};
 
-    int     m_curFileFormatVersion{0x0};
+    unsigned m_curFileFormatVersion{0x0};
     QString m_curFileFormatVersionStr{QLatin1String("0.0.0")};
 
     QSharedPointer<VLockGuard<char>> lock{};
