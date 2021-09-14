@@ -42,6 +42,10 @@
 #include <QLockFile>
 #include <QMessageBox>
 
+#ifdef Q_OS_WIN
+extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+#endif /*Q_OS_WIN*/
+
 #if defined(Q_OS_MAC)
 #include <QStyleFactory>
 #endif
