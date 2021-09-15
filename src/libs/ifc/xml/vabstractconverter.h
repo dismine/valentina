@@ -51,7 +51,7 @@ public:
 
     QString Convert();
 
-    int GetCurrentFormatVersion() const;
+    unsigned GetCurrentFormatVersion() const;
 
 protected:
     unsigned m_ver;
