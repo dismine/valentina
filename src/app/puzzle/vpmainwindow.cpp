@@ -596,7 +596,7 @@ void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
                         }
                     }
 
-                    piece->SetSheet(nullptr); // just in case
+                    piece->SetSheet(VPSheetPtr()); // just in case
                     VPLayout::AddPiece(m_layout, piece);
                 }
             }
