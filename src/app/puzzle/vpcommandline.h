@@ -31,6 +31,7 @@
 #include <memory>
 #include <QCoreApplication>
 #include <QCommandLineParser>
+#include <ciso646>
 
 class VPCommandLine;
 using VPCommandLinePtr = std::shared_ptr<VPCommandLine>;

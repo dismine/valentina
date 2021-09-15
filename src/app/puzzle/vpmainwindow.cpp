@@ -768,8 +768,8 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     ui->comboBoxTranslateUnit->setCurrentIndex(0);
     ui->comboBoxTranslateUnit->blockSignals(false);
 
-    const int minTranslate = -1000;
-    const int maxTranslate = 1000;
+    int minTranslate = -1000;
+    int maxTranslate = 1000;
 
     ui->doubleSpinBoxCurrentPieceBoxPositionX->setMinimum(
                 UnitConvertor(minTranslate, Unit::Cm, m_oldPieceTranslationUnit));
@@ -783,7 +783,8 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                 UnitConvertor(maxTranslate, Unit::Cm, m_oldPieceTranslationUnit));
     ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(0);
 
-    connect(ui->comboBoxTranslateUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->comboBoxTranslateUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this, minTranslate, maxTranslate]()
     {
         const Unit newUnit = TranslateUnit();
         const qreal oldTranslateX = ui->doubleSpinBoxCurrentPieceBoxPositionX->value();
