@@ -43,9 +43,9 @@ Q_LOGGING_CATEGORY(pPiece, "p.piece")
 
 namespace
 {
-constexpr qreal minStickyDistance = ToPixel(3, Unit::Mm);
-constexpr qreal maxStickyDistance = ToPixel(10, Unit::Mm);
-constexpr qreal stickyShift = ToPixel(1, Unit::Mm);
+constexpr qreal minStickyDistance = 3 / 25.4 * PrintDPI; // 3 mm
+constexpr qreal maxStickyDistance = 10 / 25.4 * PrintDPI; // 10 mm
+constexpr qreal stickyShift = 1 / 25.4 * PrintDPI; // 1 mm
 
 //---------------------------------------------------------------------------------------------------------------------
 auto CutEdge(const QLineF &edge) -> QVector<QPointF>
