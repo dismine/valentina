@@ -33,6 +33,7 @@
 #include <QXmlStreamWriter>
 #include <QCoreApplication>
 #include <functional>
+#include <ciso646>
 
 #include "../vmisc/literals.h"
 #include "../layout/layoutdef.h"

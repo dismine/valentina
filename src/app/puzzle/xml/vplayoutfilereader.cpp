@@ -29,6 +29,7 @@
 #include <Qt>
 #include <QFont>
 #include <QXmlStreamAttributes>
+#include <ciso646>
 #include "vplayoutfilereader.h"
 #include "vplayoutfilewriter.h"
 #include "vplayoutliterals.h"
