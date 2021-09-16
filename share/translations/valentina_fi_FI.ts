@@ -13412,18 +13412,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Nmi:</translation>
     </message>
     <message>
-        <source>DummyName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UUID:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Seamline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13994,11 +13982,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to sheet page settings</source>
+        <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Watermark files</source>
+        <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -219,7 +219,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -331,7 +331,10 @@
                    <item row="1" column="1">
                     <widget class="QLineEdit" name="lineEditCurrentPieceName">
                      <property name="text">
-                      <string>DummyName</string>
+                      <string/>
+                     </property>
+                     <property name="frame">
+                      <bool>false</bool>
                      </property>
                      <property name="readOnly">
                       <bool>true</bool>
@@ -341,7 +344,7 @@
                    <item row="2" column="0">
                     <widget class="QLabel" name="labelCurrentPieceUUID">
                      <property name="text">
-                      <string>UUID:</string>
+                      <string notr="true">UUID:</string>
                      </property>
                     </widget>
                    </item>
@@ -357,7 +360,7 @@
                       <bool>true</bool>
                      </property>
                      <property name="plainText">
-                      <string>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</string>
+                      <string/>
                      </property>
                     </widget>
                    </item>

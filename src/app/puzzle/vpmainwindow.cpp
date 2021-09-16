@@ -4132,7 +4132,7 @@ void VPMainWindow::on_actionPrintLayout_triggered()
     VPSheetPtr firstSheet = sheets.first();
     if (firstSheet.isNull())
     {
-        qCritical() << tr("Unable to sheet page settings");
+        qCritical() << tr("Unable to get sheet page settings");
     }
 
     qreal xScale = m_layout->LayoutSettings().HorizontalScale();
@@ -4183,7 +4183,7 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
     VPSheetPtr firstSheet = sheets.first();
     if (firstSheet.isNull())
     {
-        qCritical() << tr("Unable to sheet page settings");
+        qCritical() << tr("Unable to get sheet page settings");
         return;
     }
 
@@ -4218,7 +4218,7 @@ void VPMainWindow::on_actionPrintTiledLayout_triggered()
     VPSheetPtr firstSheet = sheets.first();
     if (firstSheet.isNull())
     {
-        qCritical() << tr("Unable to sheet page settings");
+        qCritical() << tr("Unable to get sheet page settings");
         return;
     }
 
@@ -4257,7 +4257,7 @@ void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
     VPSheetPtr firstSheet = sheets.first();
     if (firstSheet.isNull())
     {
-        qCritical() << tr("Unable to sheet page settings");
+        qCritical() << tr("Unable to get sheet page settings");
         return;
     }
 

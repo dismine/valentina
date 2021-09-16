@@ -15190,18 +15190,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Name:</translation>
     </message>
     <message>
-        <source>DummyName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UUID:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Seamline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15768,12 +15756,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Prozess kann nicht fortgesetzt werden, da keine verfügbaren Drucker in Ihrem System vorhanden sind.</translation>
     </message>
     <message>
-        <source>Unable to sheet page settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Watermark files</source>
         <translation type="unfinished">Wasserzeichen Dateien</translation>
+    </message>
+    <message>
+        <source>Unable to get sheet page settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

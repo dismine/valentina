@@ -15217,18 +15217,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished">Naam:</translation>
     </message>
     <message>
-        <source>DummyName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UUID:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>{7b2ce4ae-96f5-4905-bb34-405cb40ca208}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Seamline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15799,12 +15787,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
-        <source>Unable to sheet page settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Watermark files</source>
         <translation type="unfinished">Watermerk bestanden</translation>
+    </message>
+    <message>
+        <source>Unable to get sheet page settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
