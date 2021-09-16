@@ -397,7 +397,7 @@ void VPApplication::InitOptions()
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 
-    VPCommandLine::Instance(*this);
+    VPCommandLine::Instance();
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)

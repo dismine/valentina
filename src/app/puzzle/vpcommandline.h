@@ -68,7 +68,7 @@ protected:
     VPCommandLine();
 
     /** @brief create the single instance of the class inside vpapplication */
-    static VPCommandLinePtr Instance(const QCoreApplication &app);
+    static VPCommandLinePtr Instance();
     static void ProcessInstance(VPCommandLinePtr &instance, const QStringList &arguments);
 private:
     Q_DISABLE_COPY(VPCommandLine)

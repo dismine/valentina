@@ -116,9 +116,9 @@ VPCommandLine::VPCommandLine():
 }
 
 //-------------------------------------------------------------------------------------------
-VPCommandLinePtr VPCommandLine::Instance(const QCoreApplication &app)
+VPCommandLinePtr VPCommandLine::Instance()
 {
-    VPCommandLine::ProcessInstance(instance, app.arguments());
+    VPCommandLine::ProcessInstance(instance, QCoreApplication::arguments());
     return instance;
 }
 
