@@ -1,0 +1,95 @@
+### Global defaults
+
+env:  
+  PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
+  CCACHE_SIZE: "200M"
+  CCACHE_DIR: "/tmp/ccache_dir"
+  CCACHE_NOHASHDIR: "1"  # Debug info might contain a stale path if the build dir changes, but this is fine
+
+### Task templates
+
+# https://cirrus-ci.org/guide/tips-and-tricks/#sharing-configuration-between-tasks
+filter_template: &FILTER_TEMPLATE
+  only_if: $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH == 'develop'
+  skip: "!changesInclude('.cirrus.yml', '**.{h,cpp,c,pro,pri,ts,ui,png}')"
+
+linux_task_template: &LINUX_TASK_TEMPLATE
+  << : *FILTER_TEMPLATE
+  ccache_cache:
+    folder: "/tmp/ccache_dir"
+  install_task:
+    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf xvfb ccache"
+  build_task:
+    - uname -a
+    - which qmake
+    - mkdir build
+    - cd build
+    - pwd
+    - qmake --version
+    - qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings
+    - "$CXX --version"
+    - make -j$(nproc)
+    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$CIRRUS_WORKING_DIR/build/src/libs/vpropertyexplorer/bin:$CIRRUS_WORKING_DIR/build/src/libs/qmuparser/bin"
+    - xvfb-run -a make --silent check TESTARGS="-silent"
+
+macos_task_template: &MACOS_TASK_TEMPLATE
+  << : *FILTER_TEMPLATE
+  env:
+    ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
+  global_homebrew_cache:
+    folder: "/usr/local/Homebrew"
+  local_homebrew_cache:
+    folder: "$HOME/Library/Caches/Homebrew"
+  install_task:
+    - brew cleanup
+    # Credit https://discourse.brew.sh/t/best-practice-for-homebrew-on-travis-brew-update-is-5min-to-build-time/5215/9
+    # Cache only .git files under "/usr/local/Homebrew" so "brew update" does not take 5min every build
+    - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
+    - brew update > /dev/null;
+    - brew install qt5;
+    - chmod -R 755 /usr/local/opt/qt5/*
+    - python3 --version
+    - pip3 install dropbox
+  build_task:
+    - QTDIR="/usr/local/opt/qt5"
+    - PATH="$QTDIR/bin:$PATH"
+    - LDFLAGS=-L$QTDIR/lib
+    - CPPFLAGS=-I$QTDIR/include
+    - PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig
+    - mkdir build
+    - cd build
+    - pwd
+    - qmake --version
+    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests
+    - "$CXX --version"
+    - make -j$(nproc)
+  deploy_task:
+    - ../scripts/cirrus-deploy.sh
+
+task:
+  name: 'macOS Catalina 10.15 [no tests]'
+  container:
+    image: catalina-xcode-11.3.1
+  << : *MACOS_TASK_TEMPLATE
+  env:
+    PLATFORM: "macOS 10.14+"
+
+task:
+  name: 'macOS Big Sur 11 [no tests]'
+  container:
+    image: big-sur-xcode-12.4
+  << : *MACOS_TASK_TEMPLATE
+  env:
+    PLATFORM: "macOS 10.15+"
+
+task:
+  name: 'latest GCC'
+  container:
+    image: gcc:latest
+  << : *LINUX_TASK_TEMPLATE
+
+task:
+  name: 'latest Clang'
+  container:
+    image: silkeh/clang:latest
+  << : *LINUX_TASK_TEMPLATE
