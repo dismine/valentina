@@ -36,6 +36,7 @@ linux_task_template: &LINUX_TASK_TEMPLATE
 
 macos_task_template: &MACOS_TASK_TEMPLATE
   << : *FILTER_TEMPLATE
+  timeout_in: 120m
   env:
     ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
     PATH: ${HOME}/.local/bin:${PATH}
