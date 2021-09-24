@@ -4558,7 +4558,7 @@ void MainWindow::ReadSettings()
     {
         restoreGeometry(settings->GetGeometry());
         restoreState(settings->GetWindowState());
-        restoreState(settings->GetToolbarsState(), APP_VERSION);
+        restoreState(settings->GetToolbarsState(), AppVersion());
 
         ui->dockWidgetGroups->setVisible(settings->IsDockWidgetGroupsActive());
         ui->dockWidgetToolOptions->setVisible(settings->IsDockWidgetToolOptionsActive());
@@ -4600,7 +4600,7 @@ void MainWindow::WriteSettings()
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
-    settings->SetToolbarsState(saveState(APP_VERSION));
+    settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->SetDockWidgetGroupsActive(ui->dockWidgetGroups->isEnabled());
     settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isEnabled());

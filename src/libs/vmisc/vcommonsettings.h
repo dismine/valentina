@@ -153,8 +153,8 @@ public:
     QSize GetFinalMeasurementsDialogSize() const;
     void  SetFinalMeasurementsDialogSize(const QSize& sz);
 
-    int  GetLatestSkippedVersion() const;
-    void SetLatestSkippedVersion(int value);
+    unsigned GetLatestSkippedVersion() const;
+    void SetLatestSkippedVersion(unsigned value);
 
     QDate GetDateOfLastRemind() const;
     void  SetDateOfLastRemind(const QDate &date);

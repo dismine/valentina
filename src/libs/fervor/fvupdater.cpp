@@ -532,7 +532,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
     //	3) A newer version (don't ignore)
     // 'version' is not likely to contain an older version in any case.
 
-    int decVersion = 0x0;
+    unsigned decVersion = 0x0;
     try
     {
         decVersion = VAbstractConverter::GetFormatVersion(version);
@@ -543,12 +543,12 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         return true; // Ignore invalid version
     }
 
-    if (decVersion == APP_VERSION)
+    if (decVersion == AppVersion())
     {
         return true;
     }
 
-    const int lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
+    const unsigned lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
     if (lastSkippedVersion != 0x0)
     {
         if (decVersion == lastSkippedVersion)
@@ -558,7 +558,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         }
     }
 
-    if (decVersion > APP_VERSION)
+    if (decVersion > AppVersion())
     {
         // Newer version - do not skip
         return false;
@@ -571,7 +571,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::IgnoreVersion(const QString &version)
 {
-    int decVersion = 0x0;
+    unsigned decVersion = 0x0;
     try
     {
         decVersion = VAbstractConverter::GetFormatVersion(version);
@@ -582,7 +582,7 @@ void FvUpdater::IgnoreVersion(const QString &version)
         return ; // Ignore invalid version
     }
 
-    if (decVersion == APP_VERSION)
+    if (decVersion == AppVersion())
     {
         // Don't ignore the current version
         return;

@@ -31,20 +31,21 @@
 
 class QString;
 
-extern const int MAJOR_VERSION;
-extern const int MINOR_VERSION;
-extern const int DEBUG_VERSION;
+constexpr unsigned MAJOR_VERSION = 0;
+constexpr unsigned MINOR_VERSION = 7;
+constexpr unsigned DEBUG_VERSION = 49;
 
 extern const QString APP_VERSION_STR;
 
-/*
-   APP_VERSION is (major << 16) + (minor << 8) + patch.
-*/
-#define APP_VERSION V_VERSION_CHECK(MAJOR_VERSION, MINOR_VERSION, DEBUG_VERSION)
-/*
-   can be used like #if (APP_VERSION >= V_VERSION_CHECK(0, 7, 0))
-*/
-#define V_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+constexpr inline auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
+{
+    return ((major<<16u)|(minor<<8u)|patch);
+}
+
+constexpr inline auto AppVersion() -> unsigned
+{
+    return FormatVersion(MAJOR_VERSION, MINOR_VERSION, DEBUG_VERSION);
+}
 
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi

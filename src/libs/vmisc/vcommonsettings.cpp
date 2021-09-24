@@ -800,14 +800,14 @@ void VCommonSettings::SetFinalMeasurementsDialogSize(const QSize &sz)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommonSettings::GetLatestSkippedVersion() const
+unsigned VCommonSettings::GetLatestSkippedVersion() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingLatestSkippedVersion, 0x0).toInt();
+    return settings.value(*settingLatestSkippedVersion, 0x0).toUInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetLatestSkippedVersion(int value)
+void VCommonSettings::SetLatestSkippedVersion(unsigned value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingLatestSkippedVersion, value);

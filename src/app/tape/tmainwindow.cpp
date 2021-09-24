@@ -3423,7 +3423,7 @@ void TMainWindow::ReadSettings()
     {
         restoreGeometry(settings->GetGeometry());
         restoreState(settings->GetWindowState());
-        restoreState(settings->GetToolbarsState(), APP_VERSION);
+        restoreState(settings->GetToolbarsState(), AppVersion());
 
         // Text under tool buton icon
         ToolBarStyles();
@@ -3443,7 +3443,7 @@ void TMainWindow::WriteSettings()
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
-    settings->SetToolbarsState(saveState(APP_VERSION));
+    settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)

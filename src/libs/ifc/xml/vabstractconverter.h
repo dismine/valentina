@@ -36,11 +36,7 @@
 #include <QtGlobal>
 
 #include "vdomdocument.h"
-
-constexpr inline auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
-{
-    return ((major<<16u)|(minor<<8u)|patch);
-}
+#include "../vmisc/projectversion.h"
 
 class VAbstractConverter :public VDomDocument
 {

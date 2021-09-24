@@ -43,8 +43,13 @@ enum CustomEventType {
 };
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
 // Define undo event identifier
 const QEvent::Type UNDO_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::UndoEventType);
+
+QT_WARNING_POP
 
 class UndoEvent : public QEvent
 {
@@ -57,7 +62,12 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
 const QEvent::Type LITE_PARSE_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::LiteParseEventType);
+
+QT_WARNING_POP
 
 class LiteParseEvent : public QEvent
 {
@@ -70,8 +80,13 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
 const QEvent::Type FIT_BEST_CURRENT_EVENT = static_cast<QEvent::Type>(QEvent::User +
                                                                       CustomEventType::FitBestCurrentEventType);
+
+QT_WARNING_POP
 
 class FitBestCurrentEvent : public QEvent
 {
@@ -84,8 +99,13 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
 const QEvent::Type WARNING_MESSAGE_EVENT = static_cast<QEvent::Type>(QEvent::User +
                                                                       CustomEventType::WarningMessageEventType);
+
+QT_WARNING_POP
 
 class WarningMessageEvent : public QEvent
 {

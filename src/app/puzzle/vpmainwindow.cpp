@@ -1711,7 +1711,7 @@ void VPMainWindow::ReadSettings()
     {
         restoreGeometry(settings->GetGeometry());
         restoreState(settings->GetWindowState());
-        restoreState(settings->GetToolbarsState(), APP_VERSION);
+        restoreState(settings->GetToolbarsState(), AppVersion());
 
         // Text under tool buton icon
         ToolBarStyles();
@@ -1737,7 +1737,7 @@ void VPMainWindow::WriteSettings()
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
-    settings->SetToolbarsState(saveState(APP_VERSION));
+    settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->SetDockWidgetPropertiesActive(ui->dockWidgetProperties->isEnabled());
     settings->SetDockWidgetPropertiesContentsActive(ui->dockWidgetPropertiesContents->isEnabled());
