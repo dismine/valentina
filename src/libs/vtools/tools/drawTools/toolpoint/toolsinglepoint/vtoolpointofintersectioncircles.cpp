@@ -334,7 +334,7 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes){return notes.isEmpty();});
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

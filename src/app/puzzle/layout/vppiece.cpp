@@ -38,6 +38,7 @@
 #include <QIcon>
 #include <QLoggingCategory>
 #include <QPainter>
+#include <QPainterPath>
 
 Q_LOGGING_CATEGORY(pPiece, "p.piece")
 

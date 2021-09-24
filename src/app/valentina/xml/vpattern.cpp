@@ -4313,7 +4313,7 @@ void VPattern::SetReadOnly(bool rOnly)
 
     if (not pattern.isNull())
     {
-        SetAttributeOrRemoveIf<bool>(pattern, AttrReadOnly, rOnly, [](bool rOnly){return not rOnly;});
+        SetAttributeOrRemoveIf<bool>(pattern, AttrReadOnly, rOnly, [](bool rOnly) noexcept {return not rOnly;});
         modified = true;
     }
 }

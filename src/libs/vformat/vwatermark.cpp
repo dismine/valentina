@@ -138,11 +138,11 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         {
             SetAttribute(text, AttrShow, data.showText);
             SetAttributeOrRemoveIf<QString>(text, AttrText, data.text,
-                                            [](const QString &text){return text.isEmpty();});
+                                            [](const QString &text) noexcept {return text.isEmpty();});
             SetAttributeOrRemoveIf<int>(text, AttrRotation, data.textRotation,
-                                        [](int textRotation){return textRotation == 0;});
+                                        [](int textRotation) noexcept {return textRotation == 0;});
             SetAttributeOrRemoveIf<QString>(text, AttrFont, data.font.toString(),
-                                            [](const QString &fontString){return fontString.isEmpty();});
+                                            [](const QString &fontString) noexcept {return fontString.isEmpty();});
             SetAttribute(text, AttrColor, data.textColor.name());
         }
 
@@ -151,11 +151,11 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         {
             SetAttribute(image, AttrShow, data.showImage);
             SetAttributeOrRemoveIf<QString>(image, AttrPath, data.path,
-                                            [](const QString &path){return path.isEmpty();});
+                                            [](const QString &path) noexcept {return path.isEmpty();});
             SetAttributeOrRemoveIf<int>(image, AttrRotation, data.imageRotation,
-                                        [](int imageRotation){return imageRotation == 0;});
+                                        [](int imageRotation) noexcept {return imageRotation == 0;});
             SetAttributeOrRemoveIf<bool>(image, AttrGrayscale, data.grayscale,
-                                         [](bool grayscale){return not grayscale;});
+                                         [](bool grayscale) noexcept {return not grayscale;});
         }
     }
 }

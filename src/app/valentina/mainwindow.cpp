@@ -2419,6 +2419,9 @@ void MainWindow::ToolBarTools()
     QKeySequence::ZoomOut). For examle "+" is Qt::Key_Plus + Qt::KeypadModifier for keypad.
     Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
     zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
@@ -2512,6 +2515,8 @@ void MainWindow::ToolBarTools()
             sceneDetails->update();
         }
     });
+
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

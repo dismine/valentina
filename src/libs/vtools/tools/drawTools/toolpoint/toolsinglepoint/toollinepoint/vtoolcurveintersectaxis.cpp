@@ -278,11 +278,11 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrCurve, QString().setNum(dialogTool->getCurveId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes){return notes.isEmpty();});
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,9 +295,9 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrCurve, curveId);
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias1, m_aliasSuffix1,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias2, m_aliasSuffix2,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

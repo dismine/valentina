@@ -542,9 +542,9 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
     }
 
     doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(),
-                                      [](bool exclude){return not exclude;});
+                                      [](bool exclude) noexcept {return not exclude;});
     doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(),
-                                      [](bool uniqueness){return uniqueness;});
+                                      [](bool uniqueness) noexcept {return uniqueness;});
 
     switch (type)
     {
@@ -602,12 +602,12 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
     }
 
     doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeShowSecondPassmark, node.IsShowSecondPassmark(),
-                                      [](bool show){return show;});
+                                      [](bool show) noexcept {return show;});
 
     doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrManualPassmarkLength, node.IsManualPassmarkLength(),
-                                      [](bool manualPassmarkLength){return not manualPassmarkLength;});
+                                      [](bool manualPassmarkLength) noexcept {return not manualPassmarkLength;});
     doc->SetAttributeOrRemoveIf<QString>(nod, VAbstractPattern::AttrPassmarkLength, node.GetFormulaPassmarkLength(),
-                                         [node](const QString &){return not node.IsManualPassmarkLength();});
+                                         [node](const QString &) noexcept {return not node.IsManualPassmarkLength();});
 
     return nod;
 }

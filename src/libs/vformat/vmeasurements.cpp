@@ -649,7 +649,7 @@ void VMeasurements::SetFullCircumference(bool fc)
     QDomElement dimenstionsTag = documentElement().firstChildElement(TagDimensions);
     if (not dimenstionsTag.isNull())
     {
-        SetAttributeOrRemoveIf<bool>(dimenstionsTag, AttrFullCircumference, fc, [](bool fc){return not fc;});
+        SetAttributeOrRemoveIf<bool>(dimenstionsTag, AttrFullCircumference, fc, [](bool fc) noexcept {return not fc;});
     }
     else
     {
@@ -747,7 +747,7 @@ void VMeasurements::SetMSpecialUnits(const QString &name, bool special)
     QDomElement node = FindM(name);
     if (not node.isNull())
     {
-        SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special, [](bool special){return not special;});
+        SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special, [](bool special) noexcept {return not special;});
     }
     else
     {
@@ -820,7 +820,8 @@ void VMeasurements::SetMDimension(const QString &name, IMD type)
     if (not node.isNull())
     {
         SetAttributeOrRemoveIf<QString>(node, AttrDimension, VMeasurements::IMDToStr(type),
-                                        [](const QString &type){return type == VMeasurements::IMDToStr(IMD::N);});
+                                        [](const QString &type) noexcept
+        {return type == VMeasurements::IMDToStr(IMD::N);});
     }
     else
     {
@@ -895,11 +896,11 @@ void VMeasurements::SetRestrictions(const QMap<QString, VDimensionRestriction> &
 
         SetAttribute(restrictionTag, AttrCoordinates, i.key());
         SetAttributeOrRemoveIf<qreal>(restrictionTag, AttrMin, i.value().GetMin(),
-                                      [](qreal min){return qFuzzyIsNull(min);});
+                                      [](qreal min) noexcept {return qFuzzyIsNull(min);});
         SetAttributeOrRemoveIf<qreal>(restrictionTag, AttrMax, i.value().GetMax(),
-                                      [](qreal max){return qFuzzyIsNull(max);});
+                                      [](qreal max) noexcept {return qFuzzyIsNull(max);});
         SetAttributeOrRemoveIf<QString>(restrictionTag, AttrExclude, i.value().GetExcludeString(),
-                                        [](const QString &exlcuded){return exlcuded.isEmpty();});
+                                        [](const QString &exlcuded) noexcept {return exlcuded.isEmpty();});
 
         restrictionsTag.appendChild(restrictionTag);
         ++i;

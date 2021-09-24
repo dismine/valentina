@@ -398,7 +398,7 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
 {
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, path.GetDuplicate(),
-                                         [](quint32 duplicate){return duplicate == 0;});
+                                         [](quint32 duplicate) noexcept {return duplicate == 0;});
 
     if (domElement.hasAttribute(AttrKCurve))
     {
@@ -409,7 +409,7 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, path.GetAliasSuffix(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
 
     UpdatePathPoints(doc, domElement, path);
 }
@@ -547,7 +547,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDep
     }
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes){return notes.isEmpty();});
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 
     SetSplinePathAttributes(domElement, splPath);
 }

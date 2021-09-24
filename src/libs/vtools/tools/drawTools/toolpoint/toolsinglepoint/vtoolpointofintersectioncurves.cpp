@@ -413,15 +413,15 @@ void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrVCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetVCrossPoint())));
     doc->SetAttribute(domElement, AttrHCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetHCrossPoint())));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve1Alias1, dialogTool->GetCurve1AliasSuffix1(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve1Alias2, dialogTool->GetCurve1AliasSuffix2(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve2Alias1, dialogTool->GetCurve2AliasSuffix1(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrCurve2Alias2, dialogTool->GetCurve2AliasSuffix2(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes){return notes.isEmpty();});
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -435,13 +435,13 @@ void VToolPointOfIntersectionCurves::SaveOptions(QDomElement &tag, QSharedPointe
     doc->SetAttribute(tag, AttrVCrossPoint, static_cast<int>(vCrossPoint));
     doc->SetAttribute(tag, AttrHCrossPoint, static_cast<int>(hCrossPoint));
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve1Alias1, m_curve1AliasSuffix1,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve1Alias2, m_curve1AliasSuffix2,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve2Alias1, m_curve2AliasSuffix1,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrCurve2Alias2, m_curve2AliasSuffix2,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

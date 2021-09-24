@@ -56,7 +56,12 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
 
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
 const QKeySequence restoreOriginShortcut = QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk);
+
+QT_WARNING_POP
 }
 
 

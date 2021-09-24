@@ -220,7 +220,7 @@ void VToolCubicBezierPath::SaveDialog(QDomElement &domElement, QList<quint32> &o
     }
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes){return notes.isEmpty();});
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 
     SetSplinePathAttributes(domElement, splPath);
 }
@@ -275,7 +275,7 @@ void VToolCubicBezierPath::SetSplinePathAttributes(QDomElement &domElement, cons
 {
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, path.GetDuplicate(),
-                                         [](quint32 duplicate){return duplicate <= 0;});
+                                         [](quint32 duplicate) noexcept {return duplicate <= 0;});
     doc->SetAttribute(domElement, AttrColor, path.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());

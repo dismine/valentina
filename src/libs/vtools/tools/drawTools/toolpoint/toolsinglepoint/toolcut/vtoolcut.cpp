@@ -192,9 +192,9 @@ void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias1, m_aliasSuffix1,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias2, m_aliasSuffix2,
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

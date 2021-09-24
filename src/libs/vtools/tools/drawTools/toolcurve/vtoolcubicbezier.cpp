@@ -233,7 +233,7 @@ void VToolCubicBezier::SaveDialog(QDomElement &domElement, QList<quint32> &oldDe
     AddDependence(newDependencies, spl.GetP3().id());
     AddDependence(newDependencies, spl.GetP4().id());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes){return notes.isEmpty();});
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 
     SetSplineAttributes(domElement, spl);
 }
@@ -291,7 +291,7 @@ void VToolCubicBezier::SetSplineAttributes(QDomElement &domElement, const VCubic
     doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale,   spl.GetApproximationScale());
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, spl.GetDuplicate(),
-                                         [](quint32 duplicate){return duplicate == 0;});
+                                         [](quint32 duplicate) noexcept {return duplicate == 0;});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, spl.GetAliasSuffix(),
-                                         [](const QString &suffix){return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
 }

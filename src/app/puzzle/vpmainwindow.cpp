@@ -1596,6 +1596,9 @@ void VPMainWindow::InitZoomToolBar()
 
     delete m_mouseCoordinate;
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
@@ -1619,6 +1622,8 @@ void VPMainWindow::InitZoomToolBar()
     zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
+
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

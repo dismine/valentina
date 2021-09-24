@@ -333,23 +333,24 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrName, piece.GetName());
     doc->SetAttribute(domElement, AttrUUID, piece.GetUUID().toString());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrGradationLabel, piece.GetGradationLabel(),
-                                         [](const QString &label){return label.isEmpty();});
+                                         [](const QString &label) noexcept {return label.isEmpty();});
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
     doc->SetAttribute(domElement, AttrMx, VAbstractValApplication::VApp()->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, VAbstractValApplication::VApp()->fromPixel(piece.GetMy()));
     doc->SetAttributeOrRemoveIf<bool>(domElement, AttrInLayout, piece.IsInLayout(),
-                                      [](bool inLayout){return inLayout;});
+                                      [](bool inLayout) noexcept {return inLayout;});
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
     doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowance, piece.IsSeamAllowance(),
-                                      [](bool seamAllowance){return not seamAllowance;});
+                                      [](bool seamAllowance) noexcept {return not seamAllowance;});
     doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
     doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(),
-                                      [](bool builtin){return not builtin;});
+                                      [](bool builtin) noexcept {return not builtin;});
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
-    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrUnited, piece.IsUnited(), [](bool united){return not united;});
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrUnited, piece.IsUnited(),
+                                      [](bool united) noexcept {return not united;});
     doc->SetAttributeOrRemoveIf<uint>(domElement, AttrPiecePriority, piece.GetPriority(),
-                                      [](uint priority){return priority == 0;});
+                                      [](uint priority) noexcept {return priority == 0;});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -431,11 +432,11 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, data.CenterPin(),
-                                         [](quint32 pin){return pin == NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin == NULL_ID;});
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopLeftPin, data.TopLeftPin(),
-                                         [](quint32 leftPin){return leftPin == NULL_ID;});
+                                         [](quint32 leftPin) noexcept {return leftPin == NULL_ID;});
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomRightPin, data.BottomRightPin(),
-                                         [](quint32 rightPin){return rightPin == NULL_ID;});
+                                         [](quint32 rightPin) noexcept {return rightPin == NULL_ID;});
     doc->SetLabelTemplate(domData, data.GetLabelTemplate());
 
     domElement.appendChild(domData);
@@ -454,11 +455,11 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, geom.CenterPin(),
-                                         [](quint32 pin){return pin <= NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin <= NULL_ID;});
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopLeftPin, geom.TopLeftPin(),
-                                         [](quint32 pin){return pin <= NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin <= NULL_ID;});
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomRightPin, geom.BottomRightPin(),
-                                         [](quint32 pin){return pin <= NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin <= NULL_ID;});
 
     domElement.appendChild(domData);
 }
@@ -476,11 +477,11 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, glGeom.CenterPin(),
-                                         [](quint32 pin){return pin <= NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin <= NULL_ID;});
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopPin, glGeom.TopPin(),
-                                         [](quint32 pin){return pin <= NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin <= NULL_ID;});
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomPin, glGeom.BottomPin(),
-                                         [](quint32 pin){return pin <= NULL_ID;});
+                                         [](quint32 pin) noexcept {return pin <= NULL_ID;});
 
     domElement.appendChild(domData);
 }
