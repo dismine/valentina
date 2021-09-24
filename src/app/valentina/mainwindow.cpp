@@ -5385,7 +5385,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     {
         // Quick reading measurements
         doc->setXMLContent(fileName);
-        const int currentFormatVersion = doc->GetFormatVersion(doc->GetFormatVersionStr());
+        const unsigned currentFormatVersion = doc->GetFormatVersion(doc->GetFormatVersionStr());
         if (currentFormatVersion != VPatternConverter::PatternMaxVer)
         { // Because we rely on the fact that we know where is path to measurements optimization available only for
           // the latest format version
