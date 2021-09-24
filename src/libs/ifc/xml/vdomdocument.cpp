@@ -860,28 +860,28 @@ QString VDomDocument::GetFormatVersionStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned VDomDocument::GetFormatVersion(const QString &version)
+auto VDomDocument::GetFormatVersion(const QString &version) -> unsigned
 {
     ValidateVersion(version);
 
     const QStringList ver = version.split(QChar('.'));
 
     bool ok = false;
-    const int major = ver.at(0).toInt(&ok);
+    const unsigned major = ver.at(0).toUInt(&ok);
     if (not ok)
     {
         return 0x0;
     }
 
     ok = false;
-    const int minor = ver.at(1).toInt(&ok);
+    const unsigned minor = ver.at(1).toUInt(&ok);
     if (not ok)
     {
         return 0x0;
     }
 
     ok = false;
-    const int patch = ver.at(2).toInt(&ok);
+    const unsigned patch = ver.at(2).toUInt(&ok);
     if (not ok)
     {
         return 0x0;
