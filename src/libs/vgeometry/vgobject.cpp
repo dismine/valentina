@@ -558,29 +558,62 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IsPointOnLineSegment Check if the point is on the line segment.
- *
- * Original idea http://www.sunshine2k.de/coding/java/PointOnLine/PointOnLine.html
  */
-bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy)
+auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
 {
-    auto InsideRange = [accuracy](qreal p1, qreal p2, qreal t)
-    {        
-        return not ( not ((p1 <= t && t <= p2) || (p2 <= t && t <= p1))
-                     && not (qAbs(p1 - t) <= accuracy) && not (qAbs(p2 - t) <= accuracy));
-    };
+    // Because of accuracy issues, this operation is slightly different from ordinary checking point on segment.
+    // Here we deal with more like cigar shape.
 
-    if (not InsideRange(p1.x(), p2.x(), t.x()))
+    // Front and rear easy to check
+    if (VFuzzyComparePoints(p1, t) || VFuzzyComparePoints(p2, t))
     {
-        return false; // test point not in x-range
+        return true;
     }
 
-    if (not InsideRange(p1.y(), p2.y(), t.y()))
+    // Check if we have a segment. On previous step we already confirmed that we don't have intersection
+    if (VFuzzyComparePoints(p1, p2))
     {
-        return false; // test point not in y-range
+        return false;
     }
 
-    // Test via the perp dot product (PDP)
-    return IsPointOnLineviaPDP(t, p1, p2, accuracy);
+    // Calculate the main rectangle shape. QLineF is not 100% accurate in calculating positions for points, but this
+    // should be good enough for us.
+    const qreal degrees = 90;
+    QLineF edge(p1, p2);
+    edge.setAngle(edge.angle()+degrees);
+    edge.setLength(accuracy);
+    QPointF sP1 = edge.p2();
+
+    edge = QLineF(p2, p1);
+    edge.setAngle(edge.angle()-degrees);
+    edge.setLength(accuracy);
+    QPointF sP2 = edge.p2();
+
+    edge = QLineF(p2, p1);
+    edge.setAngle(edge.angle()+degrees);
+    edge.setLength(accuracy);
+    QPointF sP3 = edge.p2();
+
+    edge = QLineF(p1, p2);
+    edge.setAngle(edge.angle()-degrees);
+    edge.setLength(accuracy);
+    QPointF sP4 = edge.p2();
+
+    QVector<QPointF> shape{sP1, sP2, sP3, sP4, sP1};
+
+    for (int i=0; i < shape.size()-1; ++i)
+    {
+        const QPointF &sp1 = shape.at(i);
+        const QPointF &sp2 = shape.at(i+1);
+        // This formula helps to determine on which side of a vector lies a point.
+        qreal position = (sp2.x()-sp1.x())*(t.y()-sp1.y())-(sp2.y()-sp1.y())*(t.x()-sp1.x());
+        if (position < 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -237,7 +237,28 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
 template <class T>
 QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast)
 {
-    QVector<T> p = points;
+    if (points.size() < 4)
+    {
+        return points;
+    }
+
+    QVector<T> p;
+    p.reserve(points.size());
+
+    p.append(points.first());
+
+    for (int i = 0; i < points.size(); ++i)
+    {
+        for (int j = i+1; j < points.size(); ++j)
+        {
+            if (not VFuzzyComparePoints(points.at(i), points.at(j)))
+            {
+                p.append(points.at(j));
+                i = j-1;
+                break;
+            }
+        }
+    }
 
     if (removeFirstAndLast)
     {
@@ -249,22 +270,6 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
             {
                 p.removeLast();
             }
-        }
-    }
-
-    for (int i = 0; i < p.size()-1; ++i)
-    {
-        if (VFuzzyComparePoints(p.at(i), p.at(i+1)))
-        {
-            if (not removeFirstAndLast && (i == p.size()-2))
-            {
-                p.erase(p.begin() + i);
-            }
-            else
-            {
-                p.erase(p.begin() + i + 1);
-            }
-            --i;
         }
     }
 

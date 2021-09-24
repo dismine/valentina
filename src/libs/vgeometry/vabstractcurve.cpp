@@ -170,7 +170,7 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
         bool theBegin = false;
         for (qint32 i = 0; i < points.count()-1; ++i)
         {
-            if (theBegin == false)
+            if (not theBegin)
             {
                 if (IsPointOnLineSegment(begin, points.at(i), points.at(i+1)))
                 {

@@ -37,7 +37,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
-#include "../vlayout/testpath.h"
+#include "../vmisc/testpath.h"
 #include "../ifc/xml/vabstractpattern.h"
 
 #include <QSharedPointer>
@@ -173,7 +173,7 @@ void VPiece::SetPath(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 {
-//    DumpPiece(*this, data);  // Uncomment for dumping test data
+//    DumpPiece(*this, data, QStringLiteral("input.json.XXXXXX"));  // Uncomment for dumping test data
 
     VPiecePath mainPath = GetPath();
     mainPath.SetName(tr("Main path of piece %1").arg(GetName()));
@@ -181,7 +181,7 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
     QVector<QPointF> points = mainPath.PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
 
-//    DumpVector(points); // Uncomment for dumping test data
+//    DumpVector(points, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return points;
 }
 
@@ -223,6 +223,7 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
 {
     QVector<VPassmark> passmarks = Passmarks(data);
     QVector<QLineF> lines;
+    return lines;
     for(auto &passmark : passmarks)
     {
         if (not passmark.IsNull())
@@ -385,6 +386,7 @@ QPainterPath VPiece::PlaceLabelPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VPiece::IsSeamAllowanceValid(const VContainer *data) const
 {
+    return true;
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
         return VAbstractPiece::IsAllowanceValid(UniteMainPathPoints(data), SeamAllowancePoints(data));
@@ -1218,11 +1220,17 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::DumpPiece(const VPiece &piece, const VContainer *data)
+void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName)
 {
     SCASSERT(data != nullptr)
     QTemporaryFile temp; // Go to tmp folder to find dump
     temp.setAutoRemove(false); // Remove dump manually
+
+    if (not templateName.isEmpty())
+    {
+        temp.setFileTemplate(QDir::tempPath() + QDir::separator() + templateName);
+    }
+
     if (temp.open())
     {
 #if defined(Q_OS_LINUX)

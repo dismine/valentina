@@ -54,7 +54,7 @@ void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
         radius += UnitConvertor(5, Unit::Cm, Unit::Px);
     }
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VArc::TST_VArc(QObject *parent)

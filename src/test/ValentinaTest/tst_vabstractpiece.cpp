@@ -943,6 +943,12 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://doll/input.json"),
                      QStringLiteral("://doll/output.json"),
                      26.45669291338583 /*seam allowance width 0.7 cm*/);
+
+    // See the file "collection/bugs/smart_pattern_#145.val"
+    ASSERT_TEST_CASE("Issue #145",
+                     QStringLiteral("://smart_pattern_#145/input.json"),
+                     QStringLiteral("://smart_pattern_#145/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

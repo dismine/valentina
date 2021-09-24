@@ -10,6 +10,7 @@
 - Table of variables is available in Details mode.
 - Fix incorrect comparison of the global length of passmark to minimal allowed value.
 - Make an increment name valid after user selected it from a completion list.
+- [smart-pattern/valentina#150] Fix Seam allowance not correct at intersection curve and axis.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

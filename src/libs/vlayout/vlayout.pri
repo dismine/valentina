@@ -6,7 +6,6 @@ include(dialogs/dialogs.pri)
 
 HEADERS += \
     $$PWD/stable.h \
-    $$PWD/testpath.h \
     $$PWD/vlayoutexporter.h \
     $$PWD/vlayoutgenerator.h \
     $$PWD/vlayoutdef.h \
@@ -33,7 +32,6 @@ HEADERS += \
     $$PWD/vrawsapoint.h
 
 SOURCES += \
-    $$PWD/testpath.cpp \
     $$PWD/vlayoutexporter.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutpaper.cpp \

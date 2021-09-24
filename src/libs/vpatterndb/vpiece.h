@@ -137,7 +137,7 @@ public:
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
 
-    static void DumpPiece(const VPiece &piece, const VContainer *data);
+    static void DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName=QString());
 private:
     QSharedDataPointer<VPieceData> d;
 
