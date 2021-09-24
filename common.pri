@@ -434,7 +434,8 @@ g++7:GCC_DEBUG_CXXFLAGS += \
     -Wduplicated-branches \
     -Wrestrict \
     -Walloc-zero \
-    -Wnonnull
+    -Wnonnull \
+    -Wno-stringop-overflow # cannot suppress warning in Qt headers
 
 # Since GCC 8
 g++8:GCC_DEBUG_CXXFLAGS += \

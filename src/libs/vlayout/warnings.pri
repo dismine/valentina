@@ -38,9 +38,6 @@ unix {
                 QMAKE_LFLAGS += -fsanitize=undefined
             }
         }
-
-        QMAKE_CXXFLAGS += \
-            -Wno-stringop-overflow
     }
 
     *clang*{

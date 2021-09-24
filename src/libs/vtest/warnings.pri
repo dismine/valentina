@@ -37,9 +37,6 @@ unix {
         # want them in global list. Compromise decision delete them from local list.
         QMAKE_CXXFLAGS -= \
             -Wswitch-default
-
-        QMAKE_CXXFLAGS += \
-            -Wno-stringop-overflow
     }
 
     *clang*{
