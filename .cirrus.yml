@@ -17,7 +17,7 @@ linux_task_template: &LINUX_TASK_TEMPLATE
   ccache_cache:
     folder: "/tmp/ccache_dir"
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf xvfb ccache"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf xvfb ccache"
   build_script:
     - uname -a
     - which qmake
@@ -59,7 +59,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - cd build
     - pwd
     - qmake --version
-    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests
+    - QT_SELECT=qt5 qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests
     - "$CXX --version"
     - make -j$(nproc)
   deploy_script:
