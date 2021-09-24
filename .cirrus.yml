@@ -38,16 +38,21 @@ macos_task_template: &MACOS_TASK_TEMPLATE
   << : *FILTER_TEMPLATE
   env:
     ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
+    PATH: ${HOME}/.local/bin:${PATH}
+    # ^  add user paths
+    PIP_CACHE_DIR: ${HOME}/.cache/pip
   global_homebrew_cache:
     folder: "/usr/local/Homebrew"
   local_homebrew_cache:
     folder: "$HOME/Library/Caches/Homebrew"
+  pip_cache:
+    folder: ${PIP_CACHE_DIR}
   install_script:
     - brew update > /dev/null
     - brew install qt5
     - chmod -R 755 /usr/local/opt/qt5/*
     - python3 --version
-    - pip3 install dropbox
+    - pip3 install --user --upgrade pip dropbox
   build_script:
     - QTDIR="/usr/local/opt/qt5"
     - PATH="$QTDIR/bin:$PATH"
