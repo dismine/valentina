@@ -223,7 +223,6 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
 {
     QVector<VPassmark> passmarks = Passmarks(data);
     QVector<QLineF> lines;
-    return lines;
     for(auto &passmark : passmarks)
     {
         if (not passmark.IsNull())
@@ -386,7 +385,6 @@ QPainterPath VPiece::PlaceLabelPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VPiece::IsSeamAllowanceValid(const VContainer *data) const
 {
-    return true;
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
         return VAbstractPiece::IsAllowanceValid(UniteMainPathPoints(data), SeamAllowancePoints(data));
