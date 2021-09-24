@@ -16,6 +16,9 @@ linux_task_template: &LINUX_TASK_TEMPLATE
   << : *FILTER_TEMPLATE
   ccache_cache:
     folder: "/tmp/ccache_dir"
+  container:
+    cpu: 4
+    memory: 8G
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf xvfb ccache"
   build_script:
@@ -25,7 +28,8 @@ linux_task_template: &LINUX_TASK_TEMPLATE
     - cd build
     - pwd
     - qmake --version
-    - qmake ../Valentina.pro -r -spec ${COMPILER} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
+    - qmake ../Valentina.pro -r -spec linux-${COMPILER} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
+    - ${COMPILER} --version
     - make -j$(nproc)
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$CIRRUS_WORKING_DIR/build/src/libs/vpropertyexplorer/bin:$CIRRUS_WORKING_DIR/build/src/libs/qmuparser/bin"
     - xvfb-run -a make --silent check TESTARGS="-silent"
@@ -43,8 +47,8 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # Credit https://discourse.brew.sh/t/best-practice-for-homebrew-on-travis-brew-update-is-5min-to-build-time/5215/9
     # Cache only .git files under "/usr/local/Homebrew" so "brew update" does not take 5min every build
     - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
-    - brew update > /dev/null;
-    - brew install qt5;
+    - brew update > /dev/null
+    - brew install qt5
     - chmod -R 755 /usr/local/opt/qt5/*
     - python3 --version
     - pip3 install dropbox
@@ -59,9 +63,12 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - pwd
     - qmake --version
     - QT_SELECT=qt5 qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests
+    - ${COMPILER} --version
     - make -j$(nproc)
   deploy_script:
     - ../scripts/cirrus-deploy.sh
+  env:
+    COMPILER: clang
 
 task:
   name: 'macOS Catalina 10.15 [no tests]'
@@ -85,7 +92,7 @@ task:
     image: gcc:latest
   << : *LINUX_TASK_TEMPLATE
   env:
-    COMPILER: linux-g++
+    COMPILER: g++
 
 task:
   name: 'latest Clang'
@@ -93,4 +100,4 @@ task:
     image: silkeh/clang:latest
   << : *LINUX_TASK_TEMPLATE
   env:
-    COMPILER: linux-clang
+    COMPILER: clang
