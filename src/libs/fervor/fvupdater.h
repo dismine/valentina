@@ -35,7 +35,7 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-class FvUpdater : public QObject
+class FvUpdater final : public QObject
 {
     Q_OBJECT
 

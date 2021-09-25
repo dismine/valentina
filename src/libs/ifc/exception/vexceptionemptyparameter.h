@@ -41,7 +41,7 @@ class QDomElement;
 /**
  * @brief The VExceptionEmptyParameter class for exception empty parameter
  */
-class VExceptionEmptyParameter : public VException
+class VExceptionEmptyParameter final : public VException
 {
 public:
     VExceptionEmptyParameter(const QString &what, const QString &name,

@@ -50,6 +50,8 @@ private:
     QmuTokenParser();
 };
 
+QMU_MARK_NONFINAL_CLASS(QmuTokenParser)
+
 } // namespace qmu
 
 #endif // QMUTOKENPARSER_H

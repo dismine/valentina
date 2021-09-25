@@ -103,6 +103,8 @@ private:
     Q_DISABLE_COPY(VPropertyFormView)
 };
 
+VPE_MARK_NONFINAL_CLASS(VPropertyFormView)
+
 }   // Namespace VPE
 
 #endif // VPROPERTYFORMVIEW_H

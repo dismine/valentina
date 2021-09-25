@@ -43,7 +43,7 @@
 
 class QDomElement;
 
-class VPatternConverter : public VAbstractConverter
+class VPatternConverter final : public VAbstractConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VPatternConverter)
 public:

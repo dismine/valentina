@@ -40,7 +40,7 @@
 class VAbstractCurve;
 class VSpline;
 
-class VCurveLength : public VCurveVariable
+class VCurveLength final : public VCurveVariable
 {
 public:
     VCurveLength();

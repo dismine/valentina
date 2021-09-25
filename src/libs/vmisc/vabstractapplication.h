@@ -49,6 +49,9 @@ class QUndoStack;
 class VAbstractApplication;// use in define
 class VCommonSettings;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VAbstractApplication : public QApplication
 {
     Q_OBJECT
@@ -110,6 +113,8 @@ private:
 
     void ClearTranslation();
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>

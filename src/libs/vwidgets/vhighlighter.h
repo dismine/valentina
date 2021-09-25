@@ -40,7 +40,7 @@ struct ParenthesisInfo
     int position;
 };
 
-class VTextBlockData : public QTextBlockUserData
+class VTextBlockData final : public QTextBlockUserData
 {
 public:
     VTextBlockData();

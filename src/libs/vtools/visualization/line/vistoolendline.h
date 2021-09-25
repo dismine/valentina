@@ -39,7 +39,7 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class VisToolEndLine : public VisLine
+class VisToolEndLine final : public VisLine
 {
     Q_OBJECT
 public:

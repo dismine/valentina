@@ -93,7 +93,7 @@ private:
 
 };
 
-class dx_iface : public DRW_Interface
+class dx_iface final : public DRW_Interface
 {
 public:
     dx_iface(const std::string& file, DRW::Version v, VarMeasurement varMeasurement, VarInsunits varInsunits);

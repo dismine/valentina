@@ -50,7 +50,7 @@
 
 class QxtCsvModelPrivate;
 
-class QxtCsvModel : public QAbstractTableModel
+class QxtCsvModel final : public QAbstractTableModel
 {
     Q_OBJECT
 public:

@@ -93,7 +93,7 @@ public:
     virtual bool readBool() override;
 };
 
-class dxfReaderAscii : public dxfReader {
+class dxfReaderAscii final : public dxfReader {
 public:
     explicit dxfReaderAscii(std::istream *stream)
         : dxfReader(stream)

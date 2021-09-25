@@ -38,7 +38,7 @@
 /**
  * @brief The VExceptionConversionError class for exception of conversion error
  */
-class VExceptionConversionError : public VException
+class VExceptionConversionError final : public VException
 {
 public:
     VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR (true);

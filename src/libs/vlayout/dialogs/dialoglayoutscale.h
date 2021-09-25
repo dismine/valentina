@@ -35,7 +35,7 @@ namespace Ui
     class DialogLayoutScale;
 }
 
-class DialogLayoutScale : public QDialog
+class DialogLayoutScale final : public QDialog
 {
     Q_OBJECT
 

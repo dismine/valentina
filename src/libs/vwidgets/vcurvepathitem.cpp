@@ -39,7 +39,9 @@ VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
       m_directionArrows(),
       m_points(),
       m_defaultWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine())
-{}
+{
+    SCASSERT(parent != nullptr);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VCurvePathItem::shape() const

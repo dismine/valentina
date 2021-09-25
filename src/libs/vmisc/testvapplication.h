@@ -45,7 +45,7 @@ public:
     }
 };
 
-class TestVApplication : public VAbstractValApplication
+class TestVApplication final : public VAbstractValApplication
 {
     Q_OBJECT
 public:

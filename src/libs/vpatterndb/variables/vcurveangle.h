@@ -52,7 +52,7 @@ protected:
     VCurveAngle(const quint32 &id, const quint32 &parentId);
 };
 
-class VEllipticalArcRotation : public VCurveAngle
+class VEllipticalArcRotation final : public VCurveAngle
 {
 public:
     VEllipticalArcRotation();

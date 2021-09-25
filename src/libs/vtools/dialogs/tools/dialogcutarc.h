@@ -46,7 +46,7 @@ namespace Ui
 /**
  * @brief The DialogCutArc class dialog for ToolCutArc.
  */
-class DialogCutArc : public DialogTool
+class DialogCutArc final : public DialogTool
 {
     Q_OBJECT
 public:

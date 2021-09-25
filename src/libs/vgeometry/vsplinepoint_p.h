@@ -41,7 +41,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VFSplinePointData : public QSharedData
+class VFSplinePointData final : public QSharedData
 {
 public:
 
@@ -101,7 +101,7 @@ VFSplinePointData::~VFSplinePointData()
 
 //--------------------------------------VSplinePointData---------------------------------------------------------------
 
-class VSplinePointData : public QSharedData
+class VSplinePointData final : public QSharedData
 {
 public:
     VSplinePointData()

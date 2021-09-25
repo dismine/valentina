@@ -46,7 +46,7 @@ namespace Ui
 /**
  * @brief The DialogBisector class dialog for ToolBisector. Help create point and edit option.
  */
-class DialogBisector : public DialogTool
+class DialogBisector final : public DialogTool
 {
     Q_OBJECT
 public:

@@ -39,7 +39,7 @@
 
 class QDomElement;
 
-class VVITConverter : public VAbstractMConverter
+class VVITConverter final : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVITConverter)
 public:

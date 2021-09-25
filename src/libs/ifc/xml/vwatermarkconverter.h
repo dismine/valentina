@@ -30,7 +30,7 @@
 
 #include "vabstractconverter.h"
 
-class VWatermarkConverter : public VAbstractConverter
+class VWatermarkConverter final : public VAbstractConverter
 {
 public:
     explicit VWatermarkConverter(const QString &fileName);

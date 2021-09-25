@@ -40,7 +40,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VSplineData : public QSharedData
+class VSplineData final : public QSharedData
 {
 public:
     VSplineData();

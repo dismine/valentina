@@ -226,6 +226,8 @@ private:
     Q_DISABLE_COPY(VProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VProperty)
+
 }
 
 #endif // VPROPERTY_H

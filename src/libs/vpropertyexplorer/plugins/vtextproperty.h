@@ -86,6 +86,8 @@ private:
     Q_DISABLE_COPY(VTextProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VTextProperty)
+
 }
 
 #endif // VTEXTPROPERTY_H

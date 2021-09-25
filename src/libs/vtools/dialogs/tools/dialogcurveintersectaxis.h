@@ -43,7 +43,7 @@ namespace Ui
     class DialogCurveIntersectAxis;
 }
 
-class DialogCurveIntersectAxis : public DialogTool
+class DialogCurveIntersectAxis final : public DialogTool
 {
     Q_OBJECT
 

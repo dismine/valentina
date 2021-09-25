@@ -138,6 +138,8 @@ private:
     Q_DISABLE_COPY(VPropertySet)
 };
 
+VPE_MARK_NONFINAL_CLASS(VPropertySet)
+
 }
 
 #endif // VPROPERTYMODEL_H

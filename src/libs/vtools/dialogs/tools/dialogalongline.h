@@ -46,7 +46,7 @@ namespace Ui
 /**
  * @brief The DialogAlongLine class dialog for ToolAlongLine. Help create point and edit option.
  */
-class DialogAlongLine : public DialogTool
+class DialogAlongLine final : public DialogTool
 {
     Q_OBJECT
 public:

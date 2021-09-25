@@ -55,7 +55,7 @@ class DialogEditWrongFormula;
  *
  * Don't implemant button "Apply" for this dialog!!
  */
-class DialogEditWrongFormula : public QDialog
+class DialogEditWrongFormula final : public QDialog
 {
     Q_OBJECT
 public:

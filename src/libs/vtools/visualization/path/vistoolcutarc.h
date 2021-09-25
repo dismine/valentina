@@ -39,7 +39,7 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VisToolCutArc : public VisPath
+class VisToolCutArc final : public VisPath
 {
     Q_OBJECT
 public:

@@ -44,7 +44,7 @@
 
 class VEllipticalArcData;
 
-class VEllipticalArc : public VAbstractArc
+class VEllipticalArc final : public VAbstractArc
 {
     Q_DECLARE_TR_FUNCTIONS(VEllipticalArc)
 public:

@@ -40,7 +40,7 @@ namespace VPE
 
 //! This property holds a QWidget and displays it, if the view supports that. If not, it will behave like an empty
 //! property
-class VPROPERTYEXPLORERSHARED_EXPORT VWidgetProperty : public VEmptyProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VWidgetProperty: public VEmptyProperty
 {
 public:
     //! Constructor
@@ -66,6 +66,8 @@ public:
     Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
                                                VProperty* container = nullptr) const override;
 };
+
+VPE_MARK_NONFINAL_CLASS(VWidgetProperty)
 
 }
 

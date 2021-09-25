@@ -33,7 +33,7 @@
 #include <QIcon>
 #include <QPropertyAnimation>
 
-class FancyTab : public QObject
+class FancyTab final : public QObject
 {
     friend class FancyTabBar;
     Q_OBJECT

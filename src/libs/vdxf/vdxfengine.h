@@ -50,7 +50,7 @@ class VLayoutPiece;
 class DRW_Entity;
 class dx_ifaceBlock;
 
-class VDxfEngine : public QPaintEngine
+class VDxfEngine final : public QPaintEngine
 {
     friend class VDxfPaintDevice;
 public:

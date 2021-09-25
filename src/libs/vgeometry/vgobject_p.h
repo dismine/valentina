@@ -38,7 +38,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VGObjectData : public QSharedData
+class VGObjectData final : public QSharedData
 {
 public:
     VGObjectData()

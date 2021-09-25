@@ -761,7 +761,7 @@ private:
 *  Class to handle vertex  for polyline entity
 *  @author Rallaz
 */
-class DRW_Vertex : public DRW_Point {
+class DRW_Vertex final : public DRW_Point {
     SETENTFRIENDS
 public:
     DRW_Vertex()

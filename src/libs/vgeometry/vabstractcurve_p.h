@@ -38,7 +38,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VAbstractCurveData : public QSharedData
+class VAbstractCurveData final : public QSharedData
 {
 public:
 

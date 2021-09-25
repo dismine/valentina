@@ -44,7 +44,7 @@ class QTextStream;
 
 #define MAX_POINTS      512
 
-class VObjEngine : public QPaintEngine
+class VObjEngine final : public QPaintEngine
 {
 public:
     VObjEngine();

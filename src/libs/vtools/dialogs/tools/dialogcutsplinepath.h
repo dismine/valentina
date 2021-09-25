@@ -46,7 +46,7 @@ namespace Ui
 /**
  * @brief The DialogCutSplinePath class dialog for ToolCutSplinePath.
  */
-class DialogCutSplinePath : public DialogTool
+class DialogCutSplinePath final : public DialogTool
 {
     Q_OBJECT
 public:

@@ -37,7 +37,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 namespace qmu
 {
 
-class QmuParserCallbackData : public QSharedData
+class QmuParserCallbackData final : public QSharedData
 {
 public:
     QmuParserCallbackData();

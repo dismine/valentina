@@ -39,7 +39,7 @@
 /**
  * @brief The VExceptionBadId class for exception bad id
  */
-class VExceptionBadId : public VException
+class VExceptionBadId final : public VException
 {
 public:
     VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR (true);

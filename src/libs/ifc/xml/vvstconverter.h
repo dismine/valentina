@@ -39,7 +39,7 @@
 
 class QDomElement;
 
-class VVSTConverter : public VAbstractMConverter
+class VVSTConverter final : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVSTConverter)
 public:

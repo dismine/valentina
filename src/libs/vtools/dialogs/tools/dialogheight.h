@@ -46,7 +46,7 @@ namespace Ui
 /**
  * @brief The DialogHeight class dialog for ToolHeight. Help create point and edit option.
  */
-class DialogHeight : public DialogTool
+class DialogHeight final : public DialogTool
 {
     Q_OBJECT
 public:

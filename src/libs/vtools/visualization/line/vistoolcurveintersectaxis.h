@@ -39,7 +39,7 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class VisToolCurveIntersectAxis : public VisLine
+class VisToolCurveIntersectAxis final : public VisLine
 {
     Q_OBJECT
 public:

@@ -48,7 +48,7 @@
  * which can be dragged around, resized and rotated within the parent item. The text font
  * size will be automatically updated, so that the entire text will fit into the item.
  */
-class VTextGraphicsItem : public VPieceItem
+class VTextGraphicsItem final : public VPieceItem
 {
     Q_OBJECT
 public:

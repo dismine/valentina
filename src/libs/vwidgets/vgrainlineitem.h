@@ -33,7 +33,7 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vmisc/def.h"
 
-class VGrainlineItem : public VPieceItem
+class VGrainlineItem final : public VPieceItem
 {
     Q_OBJECT
 public:

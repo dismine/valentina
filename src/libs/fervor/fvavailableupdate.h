@@ -28,7 +28,7 @@
 #include <QUrl>
 #include <QtGlobal>
 
-class FvAvailableUpdate : public QObject
+class FvAvailableUpdate final : public QObject
 {
     Q_OBJECT
 public:

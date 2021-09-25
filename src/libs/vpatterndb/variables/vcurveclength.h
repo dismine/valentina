@@ -40,7 +40,7 @@ enum class CurveCLength : qint8 { C1, C2 };
 class VAbstractBezier;
 class VSpline;
 
-class VCurveCLength : public VCurveVariable
+class VCurveCLength final : public VCurveVariable
 {
 public:
     VCurveCLength();

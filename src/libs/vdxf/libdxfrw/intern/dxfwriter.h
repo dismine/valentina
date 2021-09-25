@@ -56,7 +56,7 @@ public:
     virtual bool writeBool(int code, bool data) override;
 };
 
-class dxfWriterAscii : public dxfWriter {
+class dxfWriterAscii final : public dxfWriter {
 public:
     explicit dxfWriterAscii(std::ofstream *stream);
     virtual ~dxfWriterAscii() = default;

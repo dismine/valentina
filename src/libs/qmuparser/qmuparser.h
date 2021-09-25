@@ -99,6 +99,8 @@ namespace qmu
         static qreal Max(const qreal*, int);  // maximum
     };
 
+    QMU_MARK_NONFINAL_CLASS(QmuParser)
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Callback for the unary minus operator.

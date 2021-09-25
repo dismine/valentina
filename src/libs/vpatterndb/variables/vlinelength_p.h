@@ -40,7 +40,7 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 // cppcheck-suppress copyCtorAndEqOperator
-class VLengthLineData : public QSharedData
+class VLengthLineData final : public QSharedData
 {
 public:
 

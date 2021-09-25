@@ -113,6 +113,56 @@ QMUPARSERSHARED_EXPORT QString NameRegExp();
 
 QT_WARNING_POP
 
+#ifndef QMU_ATTRIBUTE_UNUSED
+# if defined(Q_CC_GNU) || defined(Q_CC_CLANG)
+#  define QMU_ATTRIBUTE_UNUSED [[gnu::unused]]
+#elif defined(Q_CC_MSVC)
+#  define QMU_ATTRIBUTE_UNUSED __declspec(unused)
+# else
+#  define QMU_ATTRIBUTE_UNUSED
+# endif
+#endif
+
+// Example of use
+//class Base
+//{
+//    virtual ~Base()
+//    {
+//    }
+
+//    virtual int a(float f)
+//    {
+//    }
+//    virtual void b(double)
+//    {
+//    }
+//};
+
+//QMU_MARK_NONFINAL_CLASS(Base)
+//QMU_ATTRIBUTE_UNUSED(Base, int, a(float))
+//QMU_ATTRIBUTE_UNUSED(Base, void, b(double)
+
+#ifndef QMU_MARK_NONFINAL_CLASS
+#define QMU_MARK_NONFINAL_CLASS(base)                        \
+    namespace qmu_void_namespace_for_class_##base            \
+    {                                                        \
+        struct QMU_ATTRIBUTE_UNUSED temp_marker final : base \
+        {                                                    \
+        };                                                   \
+    }
+#endif
+
+#ifndef QMU_MARK_NONFINAL_METHOD
+#define QMU_MARK_NONFINAL_METHOD(base, return_type, method)            \
+    namespace qmu_void_namespace_for_class_##base##_methos_##method    \
+    {                                                                  \
+        struct QMU_ATTRIBUTE_UNUSED temp_marker final : base           \
+        {                                                              \
+            inline return_type QMU_ATTRIBUTE_UNUSED method override {} \
+        };                                                             \
+    }
+#endif
+
 Q_REQUIRED_RESULT static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2);
 static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
 {
