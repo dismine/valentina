@@ -120,6 +120,12 @@ private:
     void SetDefaultColumns();
 
     void CheckStatus();
+
+    template <class T>
+    auto ColumnValid(T column) const -> bool;
+
+    template <class T>
+    void SaveColum(QComboBox *control, T column);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

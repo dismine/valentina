@@ -156,67 +156,48 @@ void DialogMeasurementsCSVColumns::ColumnChanged()
 {
     auto *control = qobject_cast<QComboBox*>(sender());
 
-    auto SaveColum = [this, control](int column)
-    {
-        m_columnsMap[column] = control->currentData().toInt();
-        ShowImportPreview();
-        CheckStatus();
-    };
-
     if (control == ui->comboBoxName)
     {
-        if (m_type == MeasurementsType::Individual)
-        {
-            SaveColum(static_cast<int>(IndividualMeasurementsColumns::Name));
-        }
-        else
-        {
-            SaveColum(static_cast<int>(MultisizeMeasurementsColumns::Name));
-        }
+        m_type == MeasurementsType::Individual ? SaveColum(control, IndividualMeasurementsColumns::Name)
+                                               : SaveColum(control, MultisizeMeasurementsColumns::Name);
     }
     else if (control == ui->comboBoxValue)
     {
-        if (m_type == MeasurementsType::Individual)
-        {
-            SaveColum(static_cast<int>(IndividualMeasurementsColumns::Value));
-        }
-        else
-        {
-            SaveColum(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
-        }
+        m_type == MeasurementsType::Individual ? SaveColum(control, IndividualMeasurementsColumns::Value)
+                                               : SaveColum(control, MultisizeMeasurementsColumns::BaseValue);
     }
     else if (control == ui->comboBoxShiftA)
     {
-        SaveColum(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
+        SaveColum(control, MultisizeMeasurementsColumns::ShiftA);
     }
     else if (control == ui->comboBoxShiftB)
     {
-        SaveColum(static_cast<int>(MultisizeMeasurementsColumns::ShiftB));
+        SaveColum(control, MultisizeMeasurementsColumns::ShiftB);
     }
     else if (control == ui->comboBoxShiftC)
     {
-        SaveColum(static_cast<int>(MultisizeMeasurementsColumns::ShiftC));
+        SaveColum(control, MultisizeMeasurementsColumns::ShiftC);
     }
     else if (control == ui->comboBoxFullName)
     {
         if (m_type == MeasurementsType::Individual)
         {
-            SaveColum(static_cast<int>(IndividualMeasurementsColumns::FullName));
+            SaveColum(control, IndividualMeasurementsColumns::FullName);
         }
         else
         {
-            SaveColum(static_cast<int>(MultisizeMeasurementsColumns::FullName));
+            SaveColum(control, MultisizeMeasurementsColumns::FullName);
         }
     }
     else if (control == ui->comboBoxDescription)
     {
         if (m_type == MeasurementsType::Individual)
         {
-            SaveColum(static_cast<int>(IndividualMeasurementsColumns::Description));
+            SaveColum(control, IndividualMeasurementsColumns::Description);
         }
         else
         {
-            SaveColum(static_cast<int>(MultisizeMeasurementsColumns::Description));
+            SaveColum(control, MultisizeMeasurementsColumns::Description);
         }
     }
 }
@@ -347,13 +328,13 @@ int DialogMeasurementsCSVColumns::MinimumColumns() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogMeasurementsCSVColumns::ColumnsValid()
+auto DialogMeasurementsCSVColumns::ColumnsValid() -> bool
 {
     ChangeColor(ui->labelName, OkColor(this));
     ChangeColor(ui->labelValue, OkColor(this));
     if (m_type == MeasurementsType::Multisize)
     {
-        if (m_dimensions.size() > 0)
+        if (not m_dimensions.empty())
         {
             ChangeColor(ui->labelShiftA, OkColor(this));
         }
@@ -371,31 +352,6 @@ bool DialogMeasurementsCSVColumns::ColumnsValid()
     ChangeColor(ui->labelFullName, OkColor(this));
     ChangeColor(ui->labelDescription, OkColor(this));
 
-    auto ColumnValid = [this](int column)
-    {
-        int value = m_columnsMap.at(column);
-
-        if (value == -1 && not ColumnMandatory(column))
-        {
-            return true;
-        }
-
-        for (int c=0; c < m_columnsMap.size(); ++c)
-        {
-            if (c == column)
-            {
-                continue;
-            }
-
-            if (value == m_columnsMap.at(c))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    };
-
     bool columnNameFlag = true;
     bool columnValueFlag = true;
     bool columnShiftAFlag = true;
@@ -406,46 +362,26 @@ bool DialogMeasurementsCSVColumns::ColumnsValid()
 
     const QColor errorColor = Qt::red;
 
-
-    if (m_type == MeasurementsType::Multisize)
+    if (m_type == MeasurementsType::Multisize ? not ColumnValid(MultisizeMeasurementsColumns::Name)
+                                              : not ColumnValid(IndividualMeasurementsColumns::Name))
     {
-        if (not ColumnValid(static_cast<int>(MultisizeMeasurementsColumns::Name)))
-        {
-            ChangeColor(ui->labelName, errorColor);
-            columnNameFlag = false;
-        }
-    }
-    else
-    {
-        if (not ColumnValid(static_cast<int>(IndividualMeasurementsColumns::Name)))
-        {
-            ChangeColor(ui->labelName, errorColor);
-            columnNameFlag = false;
-        }
+        ChangeColor(ui->labelName, errorColor);
+        columnNameFlag = false;
     }
 
-    if (m_type == MeasurementsType::Multisize)
+
+    if (m_type == MeasurementsType::Multisize ? not ColumnValid(MultisizeMeasurementsColumns::BaseValue)
+                                              : not ColumnValid(IndividualMeasurementsColumns::Value))
     {
-        if (not ColumnValid(static_cast<int>(MultisizeMeasurementsColumns::BaseValue)))
-        {
-            ChangeColor(ui->labelValue, errorColor);
-            columnValueFlag = false;
-        }
-    }
-    else
-    {
-        if (not ColumnValid(static_cast<int>(IndividualMeasurementsColumns::Value)))
-        {
-            ChangeColor(ui->labelValue, errorColor);
-            columnValueFlag = false;
-        }
+        ChangeColor(ui->labelValue, errorColor);
+        columnValueFlag = false;
     }
 
     if (m_type == MeasurementsType::Multisize)
     {
-        if (m_dimensions.size() > 0)
+        if (not m_dimensions.empty())
         {
-            if (not ColumnValid(static_cast<int>(MultisizeMeasurementsColumns::ShiftA)))
+            if (not ColumnValid(MultisizeMeasurementsColumns::ShiftA))
             {
                 ChangeColor(ui->labelShiftA, errorColor);
                 columnShiftAFlag = false;
@@ -454,7 +390,7 @@ bool DialogMeasurementsCSVColumns::ColumnsValid()
 
         if (m_dimensions.size() > 1)
         {
-            if (not ColumnValid(static_cast<int>(MultisizeMeasurementsColumns::ShiftB)))
+            if (not ColumnValid(MultisizeMeasurementsColumns::ShiftB))
             {
                 ChangeColor(ui->labelShiftB, errorColor);
                 columnShiftBFlag = false;
@@ -463,7 +399,7 @@ bool DialogMeasurementsCSVColumns::ColumnsValid()
 
         if (m_dimensions.size() > 2)
         {
-            if (not ColumnValid(static_cast<int>(MultisizeMeasurementsColumns::ShiftC)))
+            if (not ColumnValid(MultisizeMeasurementsColumns::ShiftC))
             {
                 ChangeColor(ui->labelShiftC, errorColor);
                 columnShiftCFlag = false;
@@ -471,17 +407,15 @@ bool DialogMeasurementsCSVColumns::ColumnsValid()
         }
     }
 
-    if (not ColumnValid(m_type == MeasurementsType::Multisize
-                            ? static_cast<int>(MultisizeMeasurementsColumns::FullName)
-                            : static_cast<int>(IndividualMeasurementsColumns::FullName)))
+    if (m_type == MeasurementsType::Multisize ? not ColumnValid(MultisizeMeasurementsColumns::FullName)
+                                              : not ColumnValid(IndividualMeasurementsColumns::FullName))
     {
         ChangeColor(ui->labelFullName, errorColor);
         columnFullNameFlag = false;
     }
 
-    if (not ColumnValid(m_type == MeasurementsType::Multisize
-                            ? static_cast<int>(MultisizeMeasurementsColumns::Description)
-                            : static_cast<int>(IndividualMeasurementsColumns::Description)))
+    if (m_type == MeasurementsType::Multisize ? not ColumnValid(MultisizeMeasurementsColumns::Description)
+                                              : not ColumnValid(IndividualMeasurementsColumns::Description))
     {
         ChangeColor(ui->labelDescription, errorColor);
         columnDescriptionFlag = false;
@@ -926,4 +860,44 @@ void DialogMeasurementsCSVColumns::HackWidget(T **widget)
     delete *widget;
     *widget = new T();
     m_hackedWidgets.append(*widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
+{
+    const int columnNumber = static_cast<int>(column);
+    int value = m_columnsMap.at(columnNumber);
+
+    if (value == -1 && not ColumnMandatory(columnNumber))
+    {
+        return true;
+    }
+
+    for (int c=0; c < m_columnsMap.size(); ++c)
+    {
+        if (c == columnNumber)
+        {
+            continue;
+        }
+
+        if (value == m_columnsMap.at(c))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+void DialogMeasurementsCSVColumns::SaveColum(QComboBox *control, T column)
+{
+    SCASSERT(control != nullptr)
+
+    const int columnNumber = static_cast<int>(column);
+    m_columnsMap[columnNumber] = control->currentData().toInt();
+    ShowImportPreview();
+    CheckStatus();
 }
