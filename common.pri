@@ -412,7 +412,6 @@ g++6:GCC_DEBUG_CXXFLAGS += \
     -Wshift-overflow \
     -Wshift-overflow=2 \
     -Wtautological-compare \
-    -Wnull-dereference \
     -Wduplicated-cond \
     -Wmisleading-indentation
 
@@ -433,7 +432,8 @@ g++8:GCC_DEBUG_CXXFLAGS += \
      -Wmultistatement-macros \
      -Warray-bounds \
      -Wsuggest-final-types \
-     -Wsuggest-final-methods
+     -Wsuggest-final-methods \
+     -Wnull-dereference
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
