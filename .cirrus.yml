@@ -5,6 +5,7 @@ env:
   CCACHE_DIR: "/tmp/ccache_dir"
   CCACHE_NOHASHDIR: "1"  # Debug info might contain a stale path if the build dir changes, but this is fine
   CCACHE_CPP2: "yes"
+  QT_SELECT: "qt5"
 
 ### Task templates
 
@@ -48,6 +49,11 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # ^  add user paths
     PIP_CACHE_DIR: ${HOME}/.cache/pip
     DEPLOY: "true"
+    QTDIR: "/usr/local/opt/qt5"
+    PATH: "$QTDIR/bin:$PATH"
+    LDFLAGS: "-L$QTDIR/lib"
+    CPPFLAGS: "-I$QTDIR/include"
+    PKG_CONFIG_PATH: "/usr/local/opt/qt5/lib/pkgconfig"
   global_homebrew_cache:
     folder: "/usr/local/Homebrew"
   local_homebrew_cache:
@@ -61,16 +67,11 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
   build_script:
-    - QTDIR="/usr/local/opt/qt5"
-    - PATH="$QTDIR/bin:$PATH"
-    - LDFLAGS=-L$QTDIR/lib
-    - CPPFLAGS=-I$QTDIR/include
-    - PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig
     - mkdir build
     - cd build
     - pwd
     - qmake --version
-    - QT_SELECT=qt5 qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests
+    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests
     - ${COMPILER} --version
     - make -j$(nproc)
   deploy_script:
