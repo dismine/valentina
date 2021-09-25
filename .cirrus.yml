@@ -47,6 +47,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     PATH: ${HOME}/.local/bin:${PATH}
     # ^  add user paths
     PIP_CACHE_DIR: ${HOME}/.cache/pip
+    DEPLOY: "true"
   global_homebrew_cache:
     folder: "/usr/local/Homebrew"
   local_homebrew_cache:
