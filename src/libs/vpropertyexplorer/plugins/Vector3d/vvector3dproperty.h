@@ -70,6 +70,9 @@ Q_DECLARE_METATYPE(QPE::Vector3D)   // todo
 
 */
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 {
     Q_OBJECT
@@ -113,7 +116,7 @@ private:
     Q_DISABLE_COPY(QVector3DProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(QVector3DProperty)
+QT_WARNING_POP
 
 }
 

@@ -37,6 +37,9 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VPROPERTYEXPLORERSHARED_EXPORT VColorProperty : public VProperty
 {
     Q_OBJECT
@@ -74,7 +77,7 @@ private:
     Q_DISABLE_COPY(VColorProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VColorProperty)
+QT_WARNING_POP
 
 }
 

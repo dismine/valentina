@@ -38,6 +38,9 @@ namespace VPE
 // todo: this way, this class doesn't really make sense. What we have to do is pass a widget factory instead of the
 // actual widget!
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 //! This property holds a QWidget and displays it, if the view supports that. If not, it will behave like an empty
 //! property
 class VPROPERTYEXPLORERSHARED_EXPORT VWidgetProperty: public VEmptyProperty
@@ -67,7 +70,7 @@ public:
                                                VProperty* container = nullptr) const override;
 };
 
-VPE_MARK_NONFINAL_CLASS(VWidgetProperty)
+QT_WARNING_POP
 
 }
 

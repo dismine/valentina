@@ -37,6 +37,10 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
 {
     Q_OBJECT
@@ -104,7 +108,7 @@ private:
     Q_DISABLE_COPY(VEnumProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VEnumProperty)
+QT_WARNING_POP
 
 }
 

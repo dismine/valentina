@@ -39,7 +39,7 @@
 class VLineAngleData;
 class VPointF;
 
-class VLineAngle :public VInternalVariable
+class VLineAngle final :public VInternalVariable
 {
 public:
     VLineAngle();

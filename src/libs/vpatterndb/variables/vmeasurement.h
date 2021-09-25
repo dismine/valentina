@@ -47,7 +47,7 @@ class VMeasurementData;
 /**
  * @brief The VMeasurement class keep data row of multisize table
  */
-class VMeasurement :public VVariable
+class VMeasurement final :public VVariable
 {
 public:
     VMeasurement(quint32 index, const QString &name, qreal baseA, qreal baseB, qreal baseC, qreal base);

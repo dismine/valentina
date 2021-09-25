@@ -36,6 +36,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VCurvePathItem : public QGraphicsPathItem
 {

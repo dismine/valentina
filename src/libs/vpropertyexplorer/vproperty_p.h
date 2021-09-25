@@ -30,6 +30,10 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VPropertyPrivate
 {
 public:
@@ -85,6 +89,8 @@ public:
 private:
     Q_DISABLE_COPY(VPropertyPrivate)
 };
+
+QT_WARNING_POP
 
 }
 

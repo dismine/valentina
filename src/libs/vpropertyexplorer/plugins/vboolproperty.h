@@ -36,6 +36,9 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 //! The VBoolProperty can take two states: True or False.
 class VPROPERTYEXPLORERSHARED_EXPORT VBoolProperty : public VProperty
 {
@@ -80,7 +83,7 @@ private:
     Q_DISABLE_COPY(VBoolProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VBoolProperty)
+QT_WARNING_POP
 
 }
 

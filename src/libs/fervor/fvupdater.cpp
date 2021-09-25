@@ -130,13 +130,16 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
     // Create a new window
     m_updaterWindow = new FvUpdateWindow(VAbstractValApplication::VApp()->getMainWindow());
     m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
-    m_updaterWindow->exec();
+    if (m_updaterWindow != nullptr)
+    {
+        m_updaterWindow->exec();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::hideUpdaterWindow()
 {
-    if (m_updaterWindow)
+    if (m_updaterWindow != nullptr)
     {
         m_updaterWindow->close();
     }
@@ -352,7 +355,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::cancelDownloadFeed()
 {
-    if (m_reply)
+    if (m_reply != nullptr)
     {
         m_httpRequestAborted = true;
         m_reply->abort();

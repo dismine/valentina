@@ -354,56 +354,6 @@ if (!(cond))                                            \
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
-#ifndef V_ATTRIBUTE_UNUSED
-# if defined(Q_CC_GNU) || defined(Q_CC_CLANG)
-#  define V_ATTRIBUTE_UNUSED [[gnu::unused]]
-#elif defined(Q_CC_MSVC)
-#  define V_ATTRIBUTE_UNUSED __declspec(unused)
-# else
-#  define V_ATTRIBUTE_UNUSED
-# endif
-#endif
-
-// Example of use
-//class Base
-//{
-//    virtual ~Base()
-//    {
-//    }
-
-//    virtual int a(float f)
-//    {
-//    }
-//    virtual void b(double)
-//    {
-//    }
-//};
-
-//V_MARK_NONFINAL_CLASS(Base)
-//V_ATTRIBUTE_UNUSED(Base, int, a(float))
-//V_ATTRIBUTE_UNUSED(Base, void, b(double)
-
-#ifndef V_MARK_NONFINAL_CLASS
-#define V_MARK_NONFINAL_CLASS(base)                        \
-    namespace v_void_namespace_for_class_##base            \
-    {                                                      \
-        struct V_ATTRIBUTE_UNUSED temp_marker final : base \
-        {                                                  \
-        };                                                 \
-    }
-#endif
-
-#ifndef V_MARK_NONFINAL_METHOD
-#define V_MARK_NONFINAL_METHOD(base, return_type, method)            \
-    namespace v_void_namespace_for_class_##base##_methos_##method    \
-    {                                                                \
-        struct V_ATTRIBUTE_UNUSED temp_marker final : base           \
-        {                                                            \
-            inline return_type V_ATTRIBUTE_UNUSED method override {} \
-        };                                                           \
-    }
-#endif
-
 bool IsOptionSet(int argc, char *argv[], const char *option);
 void InitHighDpiScaling(int argc, char *argv[]);
 
@@ -726,6 +676,10 @@ Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
 #define QXT_D(PUB) PUB##Private& d = qxt_d()
 #define QXT_P(PUB) PUB& p = qxt_p()
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 template <typename PUB>
 class QxtPrivate
 {
@@ -761,6 +715,8 @@ private:
     Q_DISABLE_COPY(QxtPrivate)
     PUB* qxt_p_ptr;
 };
+
+QT_WARNING_POP
 
 template <typename PUB, typename PVT>
 class QxtPrivateInterface

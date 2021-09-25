@@ -58,6 +58,10 @@ public:
 
 class VPropertyPrivate;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VPROPERTYEXPLORERSHARED_EXPORT VProperty : public QObject
 {
     Q_OBJECT
@@ -226,7 +230,7 @@ private:
     Q_DISABLE_COPY(VProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VProperty)
+QT_WARNING_POP
 
 }
 

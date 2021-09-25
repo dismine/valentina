@@ -72,9 +72,9 @@ public:
     VPosition(const VPosition&) = default;
     VPosition& operator=(const VPosition&) = default;
     VPosition& operator=(VPosition&&) = default;
-    virtual ~VPosition()= default;
+    ~VPosition()= default;
 
-    virtual void run();
+    void run();
 
     VBestSquare getBestResult() const;
 

@@ -214,7 +214,10 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
-                vis->VisualMode(id);
+                if (vis != nullptr)
+                {
+                    vis->VisualMode(id);
+                }
                 VAbstractMainWindow *window =
                         qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                 SCASSERT(window != nullptr)

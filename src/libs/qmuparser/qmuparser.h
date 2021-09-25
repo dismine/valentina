@@ -37,6 +37,9 @@
 
 namespace qmu
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
     /** @brief Mathematical expressions parser.
     *
     * Standard implementation of the mathematical expressions parser.
@@ -99,7 +102,7 @@ namespace qmu
         static qreal Max(const qreal*, int);  // maximum
     };
 
-    QMU_MARK_NONFINAL_CLASS(QmuParser)
+    QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

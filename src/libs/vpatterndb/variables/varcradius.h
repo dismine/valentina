@@ -39,7 +39,7 @@
 class VArc;
 class VEllipticalArc;
 
-class VArcRadius :public VCurveVariable
+class VArcRadius final :public VCurveVariable
 {
 public:
     VArcRadius();

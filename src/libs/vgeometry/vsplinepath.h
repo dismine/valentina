@@ -50,7 +50,7 @@ class VSplinePathData;
 /**
  * @brief The VSplinePath class keep information about splinePath.
  */
-class VSplinePath :public VAbstractCubicBezierPath
+class VSplinePath final :public VAbstractCubicBezierPath
 {
     Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:

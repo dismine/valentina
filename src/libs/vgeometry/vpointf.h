@@ -44,6 +44,7 @@ class VPointFData;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_INTEL(2304)
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 /**
  * @brief The VPointF class keep data of point.
@@ -97,7 +98,6 @@ private:
 
 Q_DECLARE_METATYPE(VPointF)
 Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
-V_MARK_NONFINAL_CLASS(VPointF)
 
 QT_WARNING_POP
 

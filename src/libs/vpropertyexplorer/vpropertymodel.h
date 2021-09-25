@@ -41,6 +41,10 @@ namespace VPE
 class VPropertyModelPrivate;
 class VPropertySet;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 //! \brief  This is the base model for managing all the properties
 //!         and passing them to the view.
 //!
@@ -169,7 +173,7 @@ private:
     Q_DISABLE_COPY(VPropertyModel)
 };
 
-VPE_MARK_NONFINAL_CLASS(VPropertyModel)
+QT_WARNING_POP
 
 }
 

@@ -57,7 +57,7 @@ class VInternalVariable;
  *     result = cal->EvalFormula(data->PlainVariables(), formula);
  * }
  */
-class Calculator:public qmu::QmuFormulaBase
+class Calculator final : public qmu::QmuFormulaBase
 {
 public:
     Calculator();

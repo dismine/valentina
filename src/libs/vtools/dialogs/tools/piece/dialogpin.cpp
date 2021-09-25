@@ -131,7 +131,10 @@ void DialogPin::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxPoint, QString()))
             {
-                vis->VisualMode(id);
+                if (vis != nullptr)
+                {
+                    vis->VisualMode(id);
+                }
                 CheckPoint();
                 prepare = true;
                 this->setModal(true);

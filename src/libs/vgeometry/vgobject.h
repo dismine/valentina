@@ -45,6 +45,10 @@ class QRectF;
 class VGObjectData;
 class QTransform;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 /**
  * @brief The VGObject class keep information graphical objects.
  */
@@ -119,6 +123,8 @@ private:
 
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };
+
+QT_WARNING_POP
 
 Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE);
 

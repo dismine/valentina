@@ -38,6 +38,10 @@ namespace VPE
 // Forward declaration
 class VPropertySetPrivate;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 // todo: better description
 //! \brief  VPropertySet is a simple class for managing a set of properties.
 //!         If you don't need all the Model-functionality, chose this class
@@ -138,7 +142,7 @@ private:
     Q_DISABLE_COPY(VPropertySet)
 };
 
-VPE_MARK_NONFINAL_CLASS(VPropertySet)
+QT_WARNING_POP
 
 }
 

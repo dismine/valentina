@@ -310,13 +310,16 @@ void DialogArc::SetRadius(const QString &value)
  */
 void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (not prepare)// After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
             if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
-                vis->VisualMode(id);
+                if (vis != nullptr)
+                {
+                    vis->VisualMode(id);
+                }
                 prepare = true;
                 this->setModal(true);
                 this->show();

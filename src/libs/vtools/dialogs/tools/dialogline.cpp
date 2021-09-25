@@ -189,7 +189,10 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
                     if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
                     {
                         number++;
-                        vis->VisualMode(id);
+                        if (vis != nullptr)
+                        {
+                            vis->VisualMode(id);
+                        }
                     }
                     break;
                 case 1:

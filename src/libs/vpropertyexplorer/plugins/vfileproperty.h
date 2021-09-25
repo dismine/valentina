@@ -38,6 +38,10 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VPROPERTYEXPLORERSHARED_EXPORT VFileProperty : public VProperty
 {
     Q_OBJECT
@@ -108,7 +112,7 @@ private:
     Q_DISABLE_COPY(VFileProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VFileProperty)
+QT_WARNING_POP
 
 }
 

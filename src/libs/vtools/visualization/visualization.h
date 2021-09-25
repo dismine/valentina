@@ -51,6 +51,10 @@ class VInternalVariable;
 
 enum class Mode : qint8 {Creation, Show};
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class Visualization : public QObject
 {
     Q_OBJECT
@@ -119,6 +123,8 @@ protected:
 private:
     Q_DISABLE_COPY(Visualization)
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Item>

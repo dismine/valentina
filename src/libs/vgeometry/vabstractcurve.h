@@ -47,6 +47,10 @@ typedef QPair<QLineF, QLineF> DirectionArrow;
 class QPainterPath;
 class VAbstractCurveData;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VAbstractCurve :public VGObject
 {
 public:
@@ -116,6 +120,8 @@ private:
     static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr);
     static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr);
 };
+
+QT_WARNING_POP
 
 Q_DECLARE_TYPEINFO(VAbstractCurve, Q_MOVABLE_TYPE);
 

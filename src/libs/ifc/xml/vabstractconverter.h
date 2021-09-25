@@ -38,6 +38,10 @@
 #include "vdomdocument.h"
 #include "../vmisc/projectversion.h"
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VAbstractConverter :public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractConverter)
@@ -84,5 +88,7 @@ private:
 
     void ReserveFile() const;
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTCONVERTER_H

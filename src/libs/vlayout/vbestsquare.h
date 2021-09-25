@@ -39,13 +39,13 @@
 
 class VBestSquareData;
 
-class VBestSquare
+class VBestSquare final
 {
 public:
     VBestSquare();
     VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait);
     VBestSquare(const VBestSquare &res);
-    virtual ~VBestSquare();
+    ~VBestSquare();
 
     VBestSquare &operator=(const VBestSquare &res);
 #ifdef Q_COMPILER_RVALUE_REFS

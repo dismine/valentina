@@ -91,14 +91,17 @@ bool VCurveVariable::Filter(quint32 id)
         return false;
     }
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnull-dereference")
+
     if (d->parentId != NULL_ID)//Do not check if value zero
     {// Not all curves have parents. Only those who was created after cutting the parent curve.
         return d->id == id || d->parentId == id;
     }
-    else
-    {
-        return d->id == id;
-    }
+
+    return d->id == id;
+
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

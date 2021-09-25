@@ -48,7 +48,7 @@ class VSplineData;
 /**
  * @brief VSpline class that implements the spline.
  */
-class VSpline :public VAbstractCubicBezier
+class VSpline final :public VAbstractCubicBezier
 {
 public:
     VSpline();

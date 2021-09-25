@@ -36,6 +36,9 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 //! This property can be used to handle key shortcuts
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutProperty : public VProperty
 {
@@ -81,7 +84,7 @@ private:
     Q_DISABLE_COPY(VShortcutProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VShortcutProperty)
+QT_WARNING_POP
 
 }
 

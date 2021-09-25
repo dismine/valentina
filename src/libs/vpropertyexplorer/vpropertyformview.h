@@ -36,6 +36,10 @@ namespace VPE
 
 class VPropertyModel;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 //! This class populates a form layout with the properties in a model
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormView : public VPropertyFormWidget
 {
@@ -103,7 +107,7 @@ private:
     Q_DISABLE_COPY(VPropertyFormView)
 };
 
-VPE_MARK_NONFINAL_CLASS(VPropertyFormView)
+QT_WARNING_POP
 
 }   // Namespace VPE
 

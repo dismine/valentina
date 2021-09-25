@@ -41,7 +41,7 @@
 class VLengthLineData;
 class VPointF;
 
-class VLengthLine :public VInternalVariable
+class VLengthLine final :public VInternalVariable
 {
 public:
     VLengthLine();

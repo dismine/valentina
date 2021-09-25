@@ -56,6 +56,10 @@ class VPieceLabelData;
 class VAbstractPattern;
 class VPatternLabelData;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VLayoutPiece :public VAbstractPiece
 {
     Q_DECLARE_TR_FUNCTIONS(VLayoutPiece)
@@ -217,6 +221,8 @@ private:
     QLineF Edge(const QVector<QPointF> &path, int i) const;
     int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;
 };
+
+QT_WARNING_POP
 
 Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE);
 

@@ -38,6 +38,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception

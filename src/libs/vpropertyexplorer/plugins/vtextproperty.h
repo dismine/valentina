@@ -36,6 +36,9 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 //! Class for holding a text property
 class VPROPERTYEXPLORERSHARED_EXPORT VTextProperty : public VProperty
 {
@@ -86,7 +89,7 @@ private:
     Q_DISABLE_COPY(VTextProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VTextProperty)
+QT_WARNING_POP
 
 }
 

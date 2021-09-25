@@ -94,7 +94,10 @@ void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
             }
 
             emit ToolTip(tr("Click to place duplicate"));
-            vis->VisualMode(id);
+            if (vis != nullptr)
+            {
+                vis->VisualMode(id);
+            }
             prepare = true;
         }
     }

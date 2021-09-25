@@ -52,6 +52,10 @@ namespace qmu
  * @brief This file contains the class definition of the qmuparser engine.
  */
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 /**
  * @brief Mathematical expressions parser (base parser engine).
  * @author (C) 2013 Ingo Berg
@@ -278,6 +282,8 @@ private:
                                  const QString &a_szCharSet) const;
     void               StackDump(const QStack<token_type > &a_stVal, const QStack<token_type > &a_stOprt) const;
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

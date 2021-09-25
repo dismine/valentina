@@ -38,6 +38,8 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 //! Class for holding an integer property
 class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public VProperty
@@ -146,7 +148,7 @@ private:
     Q_DISABLE_COPY(VDoubleProperty)
 };
 
-VPE_MARK_NONFINAL_CLASS(VDoubleProperty)
+QT_WARNING_POP
 
 }
 

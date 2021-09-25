@@ -37,6 +37,8 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VFileEditWidget : public QWidget
 {
@@ -113,7 +115,7 @@ private:
     Q_DISABLE_COPY(VFileEditWidget)
 };
 
-VPE_MARK_NONFINAL_CLASS(VFileEditWidget)
+QT_WARNING_POP
 
 }
 

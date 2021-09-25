@@ -19,6 +19,10 @@
 #include "drw_objects.h"
 #include "drw_header.h"
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 /**
  * Abstract class (interface) for comunicate dxfReader with the application.
  * Inherit your class which takes care of the entities in the
@@ -186,5 +190,7 @@ public:
     virtual void writeDimstyles() { }
     virtual void writeAppId() { }
 };
+
+QT_WARNING_POP
 
 #endif

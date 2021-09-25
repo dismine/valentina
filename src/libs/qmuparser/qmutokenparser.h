@@ -33,6 +33,9 @@
 namespace qmu
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class QMUPARSERSHARED_EXPORT QmuTokenParser : public QmuFormulaBase
 {
 public:
@@ -50,7 +53,7 @@ private:
     QmuTokenParser();
 };
 
-QMU_MARK_NONFINAL_CLASS(QmuTokenParser)
+QT_WARNING_POP
 
 } // namespace qmu
 

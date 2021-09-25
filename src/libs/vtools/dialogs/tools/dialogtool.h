@@ -70,6 +70,10 @@ class VAbstractTool;
 
 enum class FillComboBox : qint8 { Whole, NoChildren};
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 /**
  * @brief The DialogTool class parent for all dialog of tools.
  */
@@ -232,9 +236,9 @@ private:
     template <typename GObject>
     void FillCombo(QComboBox *box, GOType gType, FillComboBox rule = FillComboBox::Whole,
                    const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
-
-
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
