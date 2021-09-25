@@ -814,7 +814,7 @@ macx{
         -Wno-sign-conversion \
         -Wno-duplicate-enum \
         -Wno-shorten-64-to-32 \
-        -Wno-Wdeprecated
+        -Wno-deprecated
 }
 
 CONFIG(release, debug|release){
