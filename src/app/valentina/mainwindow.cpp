@@ -102,6 +102,7 @@
 #include <QGlobalStatic>
 #include <QFuture>
 #include <QtConcurrent>
+#include <QStyleFactory>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
