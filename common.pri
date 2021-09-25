@@ -808,6 +808,13 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wno-gnu-zero-variadic-macro-arguments \
     -fms-extensions # Need for pragma message
 
+macx{
+    # Cannot suppress warnings from Qt headers
+    CLANG_DEBUG_CXXFLAGS += \
+        -Wno-sign-conversion \
+        -Wno-duplicate-enum
+}
+
 CONFIG(release, debug|release){
     CLANG_DEBUG_CXXFLAGS += -Wno-unknown-warning-option
 }
