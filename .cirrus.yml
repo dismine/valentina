@@ -1,10 +1,10 @@
 ### Global defaults
 
 env:  
-  PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   CCACHE_SIZE: "200M"
   CCACHE_DIR: "/tmp/ccache_dir"
   CCACHE_NOHASHDIR: "1"  # Debug info might contain a stale path if the build dir changes, but this is fine
+  CCACHE_CPP2: "yes"
 
 ### Task templates
 
@@ -12,10 +12,15 @@ env:
 filter_template: &FILTER_TEMPLATE
   skip: "!changesInclude('.cirrus.yml', '**.{h,cpp,c,pro,pri,ts,ui,png}')"
 
-linux_task_template: &LINUX_TASK_TEMPLATE
+regular_task_template: &REGULER_TASK_TEMPLATE
   << : *FILTER_TEMPLATE
   ccache_cache:
     folder: "/tmp/ccache_dir"
+
+linux_task_template: &LINUX_TASK_TEMPLATE
+  << : *REGULER_TASK_TEMPLATE
+  env:
+    PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   container:
     cpu: 4
     memory: 8G
@@ -35,7 +40,7 @@ linux_task_template: &LINUX_TASK_TEMPLATE
     - xvfb-run -a make --silent check TESTARGS="-silent"
 
 macos_task_template: &MACOS_TASK_TEMPLATE
-  << : *FILTER_TEMPLATE
+  << : *REGULER_TASK_TEMPLATE
   timeout_in: 120m
   env:
     ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
@@ -50,7 +55,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     folder: ${PIP_CACHE_DIR}
   install_script:
     - brew update > /dev/null
-    - brew install qt5 coreutils
+    - brew install qt5 coreutils ccache
     - chmod -R 755 /usr/local/opt/qt5/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
@@ -64,7 +69,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - cd build
     - pwd
     - qmake --version
-    - QT_SELECT=qt5 qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests
+    - QT_SELECT=qt5 qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests
     - ${COMPILER} --version
     - make -j$(nproc)
   deploy_script:

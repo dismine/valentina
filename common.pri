@@ -147,11 +147,6 @@ win32 {
 
 DEFINES += QT_NO_FOREACH
 
-macx{
-    # QTBUG-31034 qmake doesn't allow override QMAKE_CXX
-    CONFIG+=no_ccache
-}
-
 CONFIG(release, debug|release){
     !noDebugSymbols:win32:!*msvc*{
         unset(QMAKE_STRIP)
