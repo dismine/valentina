@@ -108,6 +108,8 @@ private:
     Q_DISABLE_COPY(VFileProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VFileProperty)
+
 }
 
 #endif // VFILEPROPERTY_H

@@ -113,6 +113,8 @@ private:
     Q_DISABLE_COPY(VFileEditWidget)
 };
 
+VPE_MARK_NONFINAL_CLASS(VFileEditWidget)
+
 }
 
 #endif // VFILEPROPERTYEDITOR_H

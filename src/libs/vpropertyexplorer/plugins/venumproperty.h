@@ -104,6 +104,8 @@ private:
     Q_DISABLE_COPY(VEnumProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VEnumProperty)
+
 }
 
 #endif // VENUMPROPERTY_H

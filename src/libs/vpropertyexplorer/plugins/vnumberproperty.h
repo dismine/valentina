@@ -146,6 +146,7 @@ private:
     Q_DISABLE_COPY(VDoubleProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VDoubleProperty)
 
 }
 

@@ -41,6 +41,9 @@
 
 class VPointF;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VAbstractCubicBezier : public VAbstractBezier
 {
 public:
@@ -73,5 +76,7 @@ protected:
     virtual QPointF GetControlPoint1() const =0;
     virtual QPointF GetControlPoint2() const =0;
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTCUBICBEZIER_H

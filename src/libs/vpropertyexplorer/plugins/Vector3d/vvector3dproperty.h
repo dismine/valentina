@@ -113,6 +113,8 @@ private:
     Q_DISABLE_COPY(QVector3DProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(QVector3DProperty)
+
 }
 
 #endif // VVECTOR3DPROPERTY_H
