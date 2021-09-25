@@ -309,16 +309,14 @@ enum class IMD: qint8 // Individual measurement dimension
  */
 #ifndef V_NO_ASSERT
 
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qCritical("ASSERT: %s in %s (%s:%u)",               \
-                  #cond, Q_FUNC_INFO , __FILE__, __LINE__); \
-        debug_break();                                      \
-        abort();                                            \
-    }                                                       \
-}                                                           \
+#define SCASSERT(cond)                                  \
+if (!(cond))                                            \
+{                                                       \
+    qCritical("ASSERT: %s in %s (%s:%u)",               \
+              #cond, Q_FUNC_INFO , __FILE__, __LINE__); \
+    debug_break();                                      \
+    abort();                                            \
+}
 
 #else // define but disable this function if debugging is not set
 #define SCASSERT(cond) qt_noop();
