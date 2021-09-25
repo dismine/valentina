@@ -3,6 +3,7 @@ unix {
     *g++*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
             $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
@@ -43,6 +44,7 @@ unix {
     *clang*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS \# See common.pri for more details.
@@ -61,6 +63,7 @@ unix {
 
     *-icc-*{
         QMAKE_CXXFLAGS += \
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
             $$ICC_DEBUG_CXXFLAGS
