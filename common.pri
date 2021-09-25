@@ -424,7 +424,7 @@ g++7:GCC_DEBUG_CXXFLAGS += \
     -Wrestrict \
     -Walloc-zero \
     -Wnonnull \
-    -Wno-stringop-overflow # cannot suppress warning in Qt headers
+    -Wstringop-overflow=0 # cannot suppress warning in Qt headers
 
 # Since GCC 8
 g++8:GCC_DEBUG_CXXFLAGS += \
