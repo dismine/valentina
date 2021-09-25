@@ -261,7 +261,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
-    SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(), [](bool mirrored){return not mirrored;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(),
+                                 [](bool mirrored) noexcept {return not mirrored;});
     SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
                                     [](const QString &label) noexcept {return label.isEmpty();});
@@ -278,7 +279,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     writeStartElement(ML::TagSeamAllowance);
-    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsSeamAllowance(), [](bool enabled){return not enabled;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsSeamAllowance(),
+                                 [](bool enabled) noexcept {return not enabled;});
     SetAttributeOrRemoveIf<bool>(ML::AttrBuiltIn, piece->IsSeamAllowanceBuiltIn(),
                                  [](bool builtin) noexcept {return not builtin;});
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
