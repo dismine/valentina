@@ -363,7 +363,7 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
             }
 
             VPSheetPtr sheet = layout->GetFocusedSheet();
-            if (sheet.isNull())
+            if (not sheet.isNull())
             {
                 sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(false);
                 sheet->SceneData()->RotationControls()->on_UpdateControls();
