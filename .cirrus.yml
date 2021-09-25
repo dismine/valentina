@@ -24,7 +24,6 @@ linux_task_template: &LINUX_TASK_TEMPLATE
     PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   container:
     cpu: 4
-    memory: 8G
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf xvfb ccache"
   build_script:
@@ -102,6 +101,7 @@ task:
   name: 'latest GCC'
   container:
     image: gcc:latest
+    memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
   << : *LINUX_TASK_TEMPLATE
   env:
     COMPILER: g++
@@ -111,6 +111,7 @@ task:
   name: 'latest Clang'
   container:
     image: silkeh/clang:latest
+    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
   << : *LINUX_TASK_TEMPLATE
   env:
     COMPILER: clang
