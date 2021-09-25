@@ -14,6 +14,19 @@ win32{
 }
 
 unix{
+    *g++* {
+        GCC_VERSION = $$system("g++ -dumpfullversion -dumpversion")
+        message("g++ version $$GCC_VERSION found")
+        COMPILER_MAJOR_VERSION = $$str_member($${GCC_VERSION})
+
+        greaterThan(COMPILER_MAJOR_VERSION, 3):CONFIG += g++4
+        greaterThan(COMPILER_MAJOR_VERSION, 4):CONFIG += g++5
+        greaterThan(COMPILER_MAJOR_VERSION, 5):CONFIG += g++6
+        greaterThan(COMPILER_MAJOR_VERSION, 6):CONFIG += g++7
+        greaterThan(COMPILER_MAJOR_VERSION, 7):CONFIG += g++8
+        greaterThan(COMPILER_MAJOR_VERSION, 8):CONFIG += g++9
+    }
+
     macx{
         VCOPY = $$QMAKE_COPY
     } else {
@@ -402,12 +415,6 @@ g++5:GCC_DEBUG_CXXFLAGS += \
 
 # Since GCC 6
 g++6:GCC_DEBUG_CXXFLAGS += \
-    -Wswitch-bool \
-    -Wlogical-not-parentheses \
-    -Wsizeof-array-argument \
-    -Wbool-compare \
-    -Wsuggest-final-types \
-    -Wsuggest-final-methods \
     -Wshift-negative-value \
     -Wshift-overflow \
     -Wshift-overflow=2 \
@@ -418,19 +425,6 @@ g++6:GCC_DEBUG_CXXFLAGS += \
 
 # Since GCC 7
 g++7:GCC_DEBUG_CXXFLAGS += \
-    -Wswitch-bool \
-    -Wlogical-not-parentheses \
-    -Wsizeof-array-argument \
-    -Wbool-compare \
-    -Wsuggest-final-types \
-    -Wsuggest-final-methods \
-    -Wshift-negative-value \
-    -Wshift-overflow \
-    -Wshift-overflow=2 \
-    -Wtautological-compare \
-    -Wnull-dereference \
-    -Wduplicated-cond \
-    -Wmisleading-indentation \
     -Wduplicated-branches \
     -Wrestrict \
     -Walloc-zero \
@@ -439,8 +433,8 @@ g++7:GCC_DEBUG_CXXFLAGS += \
 
 # Since GCC 8
 g++8:GCC_DEBUG_CXXFLAGS += \
-    -Wmultistatement-macros \
-    -Warray-bounds
+     -Wmultistatement-macros \
+     -Warray-bounds
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
