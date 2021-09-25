@@ -425,7 +425,7 @@ g++7{
         -Wnonnull \
         -Wno-stringop-overflow # cannot suppress warning in Qt headers
 
-    QMAKE_LFLAGS += -Wno-stringop-overflow # cannot suppress warning in Qt headers
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-stringop-overflow # cannot suppress warning in Qt headers
 }
 
 # Since GCC 8
