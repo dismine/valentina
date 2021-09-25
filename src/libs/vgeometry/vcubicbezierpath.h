@@ -44,7 +44,7 @@
 
 class VCubicBezierPathData;
 
-class VCubicBezierPath : public VAbstractCubicBezierPath
+class VCubicBezierPath final : public VAbstractCubicBezierPath
 {
     Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath)
 public:

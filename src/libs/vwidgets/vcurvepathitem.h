@@ -34,6 +34,9 @@
 
 #include "../vmisc/def.h"
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VCurvePathItem : public QGraphicsPathItem
 {
 public:
@@ -60,5 +63,7 @@ private:
     QVector<QPointF> m_points;
     qreal m_defaultWidth;
 };
+
+QT_WARNING_POP
 
 #endif // VCURVEPATHITEM_H

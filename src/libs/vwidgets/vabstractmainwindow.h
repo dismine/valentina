@@ -37,6 +37,9 @@
 
 struct VFinalMeasurement;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VAbstractMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -78,5 +81,7 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTMAINWINDOW_H

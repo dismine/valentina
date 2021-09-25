@@ -39,6 +39,7 @@ unix {
     *clang*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 

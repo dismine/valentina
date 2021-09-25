@@ -43,6 +43,9 @@ class VPointF;
 class VSpline;
 class VSplinePoint;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VAbstractCubicBezierPath : public VAbstractBezier
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath)
@@ -79,5 +82,7 @@ protected:
     virtual VPointF FirstPoint() const =0;
     virtual VPointF LastPoint() const =0;
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTCUBICBEZIERPATH_H

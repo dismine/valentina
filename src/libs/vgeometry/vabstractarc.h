@@ -41,6 +41,9 @@
 class VAbstractArcData;
 class VPointF;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VAbstractArc : public VAbstractCurve
 {
 public:
@@ -88,5 +91,7 @@ protected:
 private:
     QSharedDataPointer<VAbstractArcData> d;
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTARC_H

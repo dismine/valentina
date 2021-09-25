@@ -302,7 +302,7 @@ public:
 *  @author Rallaz
 */
 /*TODO: handle complex lineType*/
-class DRW_LType : public DRW_TableEntry {
+class DRW_LType final : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_LType()

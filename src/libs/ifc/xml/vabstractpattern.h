@@ -87,6 +87,9 @@ struct VGroupData
 
 QT_WARNING_POP
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 class VAbstractPattern : public VDomDocument
 {
     Q_OBJECT
@@ -470,6 +473,8 @@ private:
     QVector<VFinalMeasurement> GetFMeasurements(const QDomElement &element) const;
     void                       SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

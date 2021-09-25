@@ -37,7 +37,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VPlaceLabelItemData : public QSharedData
+class VPlaceLabelItemData final : public QSharedData
 {
 public:
     VPlaceLabelItemData()

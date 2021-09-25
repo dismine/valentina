@@ -36,6 +36,9 @@
 
 #include "../ifcdef.h"
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception
  */
@@ -68,6 +71,8 @@ protected:
 
     QString         MoreInfo(const QString &detInfo) const;
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
