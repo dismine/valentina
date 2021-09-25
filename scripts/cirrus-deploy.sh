@@ -20,7 +20,7 @@ check_failure() {
 }
 
 if [[ "$DEPLOY" == "true" ]]; then
-    ../scripts/macfixqtdylibrpath.py $CIRRUS_WORKING_DIR/build/src/app/valentina/bin/Valentina.app;
+    $CIRRUS_WORKING_DIR/scripts/macfixqtdylibrpath.py $CIRRUS_WORKING_DIR/build/src/app/valentina/bin/Valentina.app;
     check_failure "Unable to patch the app bundle.";
 
     print_info "Start compressing.";

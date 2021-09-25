@@ -68,7 +68,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - ${COMPILER} --version
     - make -j$(nproc)
   deploy_script:
-    - ../scripts/cirrus-deploy.sh
+    - $CIRRUS_WORKING_DIR/scripts/cirrus-deploy.sh
   env:
     COMPILER: clang
 
