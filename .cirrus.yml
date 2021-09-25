@@ -91,7 +91,7 @@ task:
     image: catalina-xcode-11.3.1
   << : *MACOS_TASK_TEMPLATE
   env:
-    PLATFORM: "macOS 10.14+"
+    PLATFORM: "macOS_10.14+"
 
 task:
   name: 'macOS Big Sur 11 [no tests]'
@@ -99,7 +99,7 @@ task:
     image: big-sur-xcode-12.4
   << : *MACOS_TASK_TEMPLATE
   env:
-    PLATFORM: "macOS 10.15+"
+    PLATFORM: "macOS_10.15+"
 
 task:
   name: 'latest GCC'
