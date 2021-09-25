@@ -404,9 +404,7 @@ g++5:GCC_DEBUG_CXXFLAGS += \
     -Wswitch-bool \
     -Wlogical-not-parentheses \
     -Wsizeof-array-argument \
-    -Wbool-compare \
-    -Wsuggest-final-types \
-    -Wsuggest-final-methods
+    -Wbool-compare
 
 # Since GCC 6
 g++6:GCC_DEBUG_CXXFLAGS += \
@@ -433,7 +431,9 @@ g++7{
 # Since GCC 8
 g++8:GCC_DEBUG_CXXFLAGS += \
      -Wmultistatement-macros \
-     -Warray-bounds
+     -Warray-bounds \
+     -Wsuggest-final-types \
+     -Wsuggest-final-methods
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
