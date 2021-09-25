@@ -75,6 +75,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - ${COMPILER} --version
     - make -j$(nproc)
   deploy_script:
+    - pwd
     - $CIRRUS_WORKING_DIR/scripts/cirrus-deploy.sh
   before_cache_script:
     - brew cleanup
