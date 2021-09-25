@@ -812,7 +812,9 @@ macx{
     # Cannot suppress warnings from Qt headers
     CLANG_DEBUG_CXXFLAGS += \
         -Wno-sign-conversion \
-        -Wno-duplicate-enum
+        -Wno-duplicate-enum \
+        -Wno-shorten-64-to-32 \
+        -Wno-Wdeprecated
 }
 
 CONFIG(release, debug|release){
