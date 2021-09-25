@@ -99,9 +99,9 @@ bool VCurveVariable::Filter(quint32 id)
         return d->id == id || d->parentId == id;
     }
 
-    return d->id == id;
-
     QT_WARNING_POP
+
+    return d->id == id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
