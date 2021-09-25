@@ -80,6 +80,8 @@ private:
     Q_DISABLE_COPY(VBoolProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VBoolProperty)
+
 }
 
 #endif // VBOOLPROPERTY_H

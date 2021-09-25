@@ -87,6 +87,8 @@ private:
     Q_DISABLE_COPY(VEmptyProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VEmptyProperty)
+
 }
 
 #endif // VEMPTYPROPERTY_H

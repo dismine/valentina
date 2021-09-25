@@ -115,7 +115,7 @@ private:
 *  Class to handle dim style symbol table entries
 *  @author Rallaz
 */
-class DRW_Dimstyle : public DRW_TableEntry {
+class DRW_Dimstyle final : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_Dimstyle()
@@ -343,7 +343,7 @@ private:
 *  Class to handle layer symbol table entries
 *  @author Rallaz
 */
-class DRW_Layer : public DRW_TableEntry {
+class DRW_Layer final : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_Layer()
@@ -410,7 +410,7 @@ public:
 *  Class to handle text style symbol table entries
 *  @author Rallaz
 */
-class DRW_Textstyle : public DRW_TableEntry {
+class DRW_Textstyle final : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_Textstyle()
@@ -453,7 +453,7 @@ public:
 *  Class to handle vport symbol table entries
 *  @author Rallaz
 */
-class DRW_Vport : public DRW_TableEntry {
+class DRW_Vport final : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_Vport()
@@ -545,7 +545,7 @@ public:
 *  Class to handle image definitions object entries
 *  @author Rallaz
 */
-class DRW_ImageDef : public DRW_TableEntry {//
+class DRW_ImageDef final : public DRW_TableEntry {//
     SETOBJFRIENDS
 public:
     DRW_ImageDef()
@@ -590,7 +590,7 @@ public:
 *  Class to handle AppId symbol table entries
 *  @author Rallaz
 */
-class DRW_AppId : public DRW_TableEntry {
+class DRW_AppId final : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_AppId() { reset();}

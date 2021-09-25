@@ -46,7 +46,7 @@ namespace Ui
 /**
  * @brief The DialogArc class dialog for ToolArc. Help create arc and edit option.
  */
-class DialogArc : public DialogTool
+class DialogArc final : public DialogTool
 {
     Q_OBJECT
 public:

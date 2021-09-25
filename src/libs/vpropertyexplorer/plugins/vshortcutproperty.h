@@ -81,6 +81,8 @@ private:
     Q_DISABLE_COPY(VShortcutProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VShortcutProperty)
+
 }
 
 #endif // VFILEPROPERTY_H

@@ -47,7 +47,7 @@ class VArcData;
 /**
  * @brief VArc class for anticlockwise arc.
  */
-class VArc: public VAbstractArc
+class VArc final : public VAbstractArc
 {
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:

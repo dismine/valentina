@@ -43,7 +43,7 @@ namespace Ui
     class DialogArcWithLength;
 }
 
-class DialogArcWithLength : public DialogTool
+class DialogArcWithLength final : public DialogTool
 {
     Q_OBJECT
 

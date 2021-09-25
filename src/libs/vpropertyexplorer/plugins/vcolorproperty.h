@@ -74,6 +74,8 @@ private:
     Q_DISABLE_COPY(VColorProperty)
 };
 
+VPE_MARK_NONFINAL_CLASS(VColorProperty)
+
 }
 
 #endif // VCOLORPROPERTY_H

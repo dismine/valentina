@@ -43,7 +43,7 @@
 
 class VCubicBezierData;
 
-class VCubicBezier : public VAbstractCubicBezier
+class VCubicBezier final : public VAbstractCubicBezier
 {
 public:
     VCubicBezier();

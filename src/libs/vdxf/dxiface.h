@@ -35,7 +35,7 @@ public:
 };
 
 //container class to store entites.
-class dx_ifaceBlock : public DRW_Block {
+class dx_ifaceBlock final : public DRW_Block {
 public:
     dx_ifaceBlock()
         : ent()

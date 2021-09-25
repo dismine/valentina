@@ -31,6 +31,7 @@ QT_WARNING_DISABLE_GCC("-Wold-style-cast")
 QT_WARNING_DISABLE_CLANG("-Wold-style-cast")
 QT_WARNING_DISABLE_GCC("-Wcast-qual")
 QT_WARNING_DISABLE_CLANG("-Wcast-qual")
+QT_WARNING_DISABLE_GCC("-Walloc-zero")
 
 #if PREDICATE == EXACT_PREDICATE
 extern void exactinit();
