@@ -419,12 +419,16 @@ g++6:GCC_DEBUG_CXXFLAGS += \
     -Wmisleading-indentation
 
 # Since GCC 7
-g++7:GCC_DEBUG_CXXFLAGS += \
-    -Wduplicated-branches \
-    -Wrestrict \
-    -Walloc-zero \
-    -Wnonnull \
-    -Wno-stringop-overflow # cannot suppress warning in Qt headers
+g++7{
+    GCC_DEBUG_CXXFLAGS += \
+        -Wduplicated-branches \
+        -Wrestrict \
+        -Walloc-zero \
+        -Wnonnull \
+        -Wno-stringop-overflow # cannot suppress warning in Qt headers
+
+    QMAKE_LFLAGS += -Wno-stringop-overflow # cannot suppress warning in Qt headers
+}
 
 # Since GCC 8
 g++8:GCC_DEBUG_CXXFLAGS += \
