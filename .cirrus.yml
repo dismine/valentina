@@ -21,13 +21,14 @@ regular_task_template: &REGULER_TASK_TEMPLATE
 linux_task_template: &LINUX_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
   env:
-    PACKAGE_MANAGER_INSTALL: "DEBIAN_FRONTEND=noninteractive apt-get -qq update && apt-get install -y --no-install-recommends"
+    PACKAGE_MANAGER_INSTALL: "DEBIAN_FRONTEND=noninteractive apt-get -qq update && apt-get install -y"
   container:
     cpu: 4
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL locales locales-all qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
     - uname -a
+    - echo $PATH
     - which qmake
     - mkdir build
     - cd build
@@ -44,12 +45,11 @@ macos_task_template: &MACOS_TASK_TEMPLATE
   timeout_in: 120m
   env:
     ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
-    PATH: ${HOME}/.local/bin:${PATH}
+    QTDIR: "/usr/local/opt/qt5"
+    PATH: ${HOME}/.local/bin:$QTDIR/bin:${PATH}
     # ^  add user paths
     PIP_CACHE_DIR: ${HOME}/.cache/pip
     DEPLOY: "true"
-    QTDIR: "/usr/local/opt/qt5"
-    PATH: "$QTDIR/bin:$PATH"
     LDFLAGS: "-L$QTDIR/lib"
     CPPFLAGS: "-I$QTDIR/include"
     PKG_CONFIG_PATH: "/usr/local/opt/qt5/lib/pkgconfig"
