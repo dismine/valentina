@@ -21,7 +21,8 @@ regular_task_template: &REGULER_TASK_TEMPLATE
 linux_task_template: &LINUX_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
   env:
-    PACKAGE_MANAGER_INSTALL: "DEBIAN_FRONTEND=noninteractive apt-get -qq update && apt-get install -y"
+    DEBIAN_FRONTEND: "noninteractive"
+    PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   container:
     cpu: 4
   install_script:
