@@ -25,7 +25,7 @@ linux_task_template: &LINUX_TASK_TEMPLATE
   container:
     cpu: 4
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL locales locales-all qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
+    - bash -c "$PACKAGE_MANAGER_INSTALL dialog apt-utils locales locales-all qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
     - uname -a
     - echo $PATH
