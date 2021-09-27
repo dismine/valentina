@@ -118,8 +118,13 @@ void VPUndoMovePieceOnSheet::redo()
 
         if (m_followGrainline)
         {
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
             VPTransformationOrigon origin;
             origin.custom = true;
+
+            QT_WARNING_POP
 
             piece->RotateToGrainline(origin);
         }

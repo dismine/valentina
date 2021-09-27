@@ -80,9 +80,14 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
         return sheet->TransformationOrigin();
     }
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VPTransformationOrigon origin;
     origin.origin = boundingRect.center();
     origin.custom = false;
+
+    QT_WARNING_POP
 
     return origin;
 }

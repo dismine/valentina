@@ -467,10 +467,15 @@ void VPSheet::SetTransformationOrigin(const VPTransformationOrigon &newTransform
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::Clear()
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     m_name.clear();
     m_visible = true;
     m_transformationOrigin = VPTransformationOrigon();
     m_trashSheet = false;
+
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

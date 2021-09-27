@@ -2191,8 +2191,14 @@ void VPMainWindow::RotatePiecesToGrainline()
             {
                 if (not piece.isNull() && piece->IsGrainlineEnabled())
                 {
+                    QT_WARNING_PUSH
+                    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
                     VPTransformationOrigon origin;
                     origin.custom = true;
+
+                    QT_WARNING_POP
+
                     piece->RotateToGrainline(origin);
                     emit m_layout->PieceTransformationChanged(piece);
                 }

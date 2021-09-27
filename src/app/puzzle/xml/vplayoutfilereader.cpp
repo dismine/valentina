@@ -600,6 +600,9 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
 
     QXmlStreamAttributes attribs = attributes();
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VLayoutPassmark passmark;
     passmark.isBuiltIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
     passmark.baseLine = StringToLine(ReadAttributeEmptyString(attribs, ML::AttrBaseLine));
@@ -607,6 +610,8 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
 
     QString defaultType = QString::number(static_cast<int>(PassmarkLineType::OneLine));
     passmark.type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType));
+
+    QT_WARNING_POP
 
     readElementText();
 
@@ -686,6 +691,9 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
 {
     AssertRootTag(ML::TagMarker);
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VLayoutPlaceLabel marker;
 
     QXmlStreamAttributes attribs = attributes();
@@ -704,6 +712,8 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
     }
 
     marker.shape = shape;
+
+    QT_WARNING_POP
 
     return marker;
 }
