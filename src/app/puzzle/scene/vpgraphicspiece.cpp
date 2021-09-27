@@ -447,7 +447,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
             if (painter != nullptr)
             {
                 painter->save();
-                painter->setBrush(isSelected() ? selectionBrush : noBrush);
+                painter->setBrush(piece->IsSelected() ? selectionBrush : noBrush);
                 painter->drawPath(m_cuttingLine);
                 painter->restore();
             }
