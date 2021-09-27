@@ -1973,51 +1973,43 @@ void VPMainWindow::TileSize(const QSizeF &size)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::CorrectPaperDecimals()
 {
+    int decimals = 0;
+
     switch (m_oldLayoutUnit)
     {
         case Unit::Cm:
+            decimals = 2;
+            break;
         case Unit::Mm:
+            decimals = 1;
+            break;
         case Unit::Px:
-            ui->doubleSpinBoxSheetPaperWidth->setDecimals(2);
-            ui->doubleSpinBoxSheetPaperHeight->setDecimals(2);
-
-            ui->doubleSpinBoxTilePaperWidth->setDecimals(2);
-            ui->doubleSpinBoxTilePaperHeight->setDecimals(2);
-
-            ui->doubleSpinBoxSheetMarginLeft->setDecimals(4);
-            ui->doubleSpinBoxSheetMarginRight->setDecimals(4);
-            ui->doubleSpinBoxSheetMarginTop->setDecimals(4);
-            ui->doubleSpinBoxSheetMarginBottom->setDecimals(4);
-
-            ui->doubleSpinBoxTileMarginLeft->setDecimals(4);
-            ui->doubleSpinBoxTileMarginRight->setDecimals(4);
-            ui->doubleSpinBoxTileMarginTop->setDecimals(4);
-            ui->doubleSpinBoxTileMarginBottom->setDecimals(4);
-
-            ui->doubleSpinBoxSheetPiecesGap->setDecimals(2);
+            decimals = 4;
             break;
         case Unit::Inch:
-            ui->doubleSpinBoxSheetPaperWidth->setDecimals(5);
-            ui->doubleSpinBoxSheetPaperHeight->setDecimals(5);
-
-            ui->doubleSpinBoxTilePaperWidth->setDecimals(5);
-            ui->doubleSpinBoxTilePaperHeight->setDecimals(5);
-
-            ui->doubleSpinBoxSheetMarginLeft->setDecimals(5);
-            ui->doubleSpinBoxSheetMarginRight->setDecimals(5);
-            ui->doubleSpinBoxSheetMarginTop->setDecimals(5);
-            ui->doubleSpinBoxSheetMarginBottom->setDecimals(5);
-
-            ui->doubleSpinBoxTileMarginLeft->setDecimals(5);
-            ui->doubleSpinBoxTileMarginRight->setDecimals(5);
-            ui->doubleSpinBoxTileMarginTop->setDecimals(5);
-            ui->doubleSpinBoxTileMarginBottom->setDecimals(5);
-
-            ui->doubleSpinBoxSheetPiecesGap->setDecimals(5);
+            decimals = 5;
             break;
         default:
             break;
     }
+
+    ui->doubleSpinBoxSheetPaperWidth->setDecimals(decimals);
+    ui->doubleSpinBoxSheetPaperHeight->setDecimals(decimals);
+
+    ui->doubleSpinBoxTilePaperWidth->setDecimals(decimals);
+    ui->doubleSpinBoxTilePaperHeight->setDecimals(decimals);
+
+    ui->doubleSpinBoxSheetMarginLeft->setDecimals(decimals);
+    ui->doubleSpinBoxSheetMarginRight->setDecimals(decimals);
+    ui->doubleSpinBoxSheetMarginTop->setDecimals(decimals);
+    ui->doubleSpinBoxSheetMarginBottom->setDecimals(decimals);
+
+    ui->doubleSpinBoxTileMarginLeft->setDecimals(decimals);
+    ui->doubleSpinBoxTileMarginRight->setDecimals(decimals);
+    ui->doubleSpinBoxTileMarginTop->setDecimals(decimals);
+    ui->doubleSpinBoxTileMarginBottom->setDecimals(decimals);
+
+    ui->doubleSpinBoxSheetPiecesGap->setDecimals(decimals);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
