@@ -1258,6 +1258,8 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 {
     QList<VPPiecePtr> selectedPieces = SelectedPieces();
 
+    ui->labelCurrentPieceNoPieceSelected->setVisible(false);
+
     if(selectedPieces.isEmpty())
     {
         // show the content "no piece selected"
@@ -1270,8 +1272,6 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
     }
     else if(selectedPieces.count() == 1)
     {
-        ui->labelCurrentPieceNoPieceSelected->setVisible(false);
-
         ui->groupBoxCurrentPieceInfo->setVisible(true);
         ui->groupBoxPieceTransformation->setVisible(true);
         ui-> groupBoxCurrentPieceSeamline->setVisible(true);
@@ -1300,9 +1300,6 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
     else
     {
         // show the content "multiple pieces selected"
-
-        ui->labelCurrentPieceNoPieceSelected->setVisible(true);
-
         ui->groupBoxCurrentPieceInfo->setVisible(false);
         ui->groupBoxPieceTransformation->setVisible(true);
         ui->groupBoxCurrentPieceSeamline->setVisible(false);
