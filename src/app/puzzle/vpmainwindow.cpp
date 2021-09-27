@@ -3656,6 +3656,7 @@ void VPMainWindow::ToolBarStyles()
 {
     ToolBarStyle(ui->mainToolBar);
     ToolBarStyle(ui->toolBarZoom);
+    ToolBarStyle(ui->toolBarUndoCommands);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
