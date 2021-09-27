@@ -132,7 +132,7 @@ void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsObject::mousePressEvent(event);
 
     // change the cursor when clicking the left button
-    if((event->button() == Qt::LeftButton))
+    if(event->button() == Qt::LeftButton)
     {
         setCursor(Qt::ClosedHandCursor);
 

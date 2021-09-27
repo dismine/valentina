@@ -466,29 +466,6 @@ void VPMainGraphicsView::on_ItemClicked(QGraphicsItem *item)
             }
         }
     }
-    else
-    {
-        if (item->type() == VPGraphicsPiece::Type)
-        {
-            auto *pieceItem = dynamic_cast<VPGraphicsPiece*>(item);
-            if (pieceItem != nullptr)
-            {
-                VPPiecePtr piece = pieceItem->GetPiece();
-                if (not piece.isNull())
-                {
-                    if (not piece->IsSelected())
-                    {
-                        piece->SetSelected(true);
-                        VPLayoutPtr layout = m_layout.toStrongRef();
-                        if (not layout.isNull())
-                        {
-                            emit layout->PieceSelectionChanged(piece);
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
