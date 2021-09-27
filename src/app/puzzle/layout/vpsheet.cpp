@@ -612,6 +612,8 @@ void VPSheet::RemoveUnusedLength()
     {
         if (not piece.isNull())
         {
+            piece->SetSelected(false);
+            emit layout->PieceSelectionChanged(piece);
             piecesBoundingRect = piecesBoundingRect.united(piece->MappedDetailBoundingRect());
         }
     }
