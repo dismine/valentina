@@ -176,7 +176,38 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
     {
         auto *pieceItem = static_cast<VPCarrouselPiece *> (_item);
 
+        VPPiecePtr piece = pieceItem->GetPiece();
+        VPLayoutPtr layout = piece->Layout();
+
+        if (piece.isNull() || layout.isNull())
+        {
+            return;
+        }
+
         QMenu menu;
+
+        QVector<QAction*> moveToActions;
+
+        if (not piece->Sheet().isNull())
+        {
+            QList<VPSheetPtr> sheets = layout->GetSheets();
+            sheets.removeAll(piece->Sheet());
+
+            if (not sheets.isEmpty())
+            {
+                QMenu *moveMenu = menu.addMenu(tr("Move to"));
+
+                for (const auto &sheet : sheets)
+                {
+                    if (not sheet.isNull())
+                    {
+                        QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
+                        moveToSheet->setData(QVariant::fromValue(sheet));
+                        moveToActions.append(moveToSheet);
+                    }
+                }
+            }
+        }
 
         QAction *moveAction = menu.addAction(tr("Move to Sheet"));
         moveAction->setVisible(false);
@@ -200,14 +231,6 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
         QAction *selectedAction = menu.exec(event->globalPos());
 
-        VPPiecePtr piece = pieceItem->GetPiece();
-        VPLayoutPtr layout = piece->Layout();
-
-        if (piece.isNull() || layout.isNull())
-        {
-            return;
-        }
-
         if (selectedAction == moveAction)
         {
             VPSheetPtr sheet = layout->GetFocusedSheet();
@@ -228,6 +251,11 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
         else if (selectedAction == removeAction)
         {
             auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
+            layout->UndoStack()->push(command);
+        }
+        else if (moveToActions.contains(selectedAction))
+        {
+            auto *command = new VPUndoMovePieceOnSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()), piece);
             layout->UndoStack()->push(command);
         }
     }
