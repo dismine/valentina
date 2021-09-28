@@ -40,7 +40,7 @@ class VPMimeDataPiece : public QMimeData
     Q_OBJECT
 
 public:
-    VPMimeDataPiece(const QUuid &layoutUuid);
+    explicit VPMimeDataPiece(const QUuid &layoutUuid);
     virtual ~VPMimeDataPiece() = default;
 
     virtual auto formats() const -> QStringList override;
