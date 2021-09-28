@@ -53,6 +53,7 @@ QT_WARNING_POP
 #include <QLocalSocket>
 #include <QLocalServer>
 #include <QFileOpenEvent>
+#include <QPixmapCache>
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -394,6 +395,8 @@ void VPApplication::InitOptions()
     qCDebug(pApp, "Built on %s at %s", __DATE__, __TIME__);
     qCDebug(pApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
     qCDebug(pApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
+
+    QPixmapCache::setCacheLimit(50 * 1024 /* 50 MB */);
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 

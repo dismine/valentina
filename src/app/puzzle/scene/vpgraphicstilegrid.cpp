@@ -114,7 +114,8 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
                             if (watermarkData.showImage && not watermarkData.path.isEmpty())
                             {
                                 VPTileFactory::PaintWatermarkImage(painter, img, watermarkData,
-                                                                   layout->LayoutSettings().WatermarkPath());
+                                                                   layout->LayoutSettings().WatermarkPath(),
+                                                                   xScale, yScale);
                             }
 
                             if (watermarkData.showText && not watermarkData.text.isEmpty())

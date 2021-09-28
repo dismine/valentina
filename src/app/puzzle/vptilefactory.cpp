@@ -35,11 +35,10 @@ auto Grayscale(QImage image) -> QImage
 auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString &watermarkPath, qreal xScale,
                              qreal yScale, QString &error) -> QPixmap
 {
-    const qreal opacity = watermarkData.opacity/100.;
     QPixmap pixmap;
     QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
-    QString imageCacheKey = QString("puzzle=path%1+opacity%2+rotation%3+grayscale%4+xscale%5+yxcale%6")
-            .arg(imagePath, QString::number(opacity), QString::number(watermarkData.imageRotation),
+    QString imageCacheKey = QString("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
+            .arg(imagePath, QString::number(watermarkData.imageRotation),
                  watermarkData.grayscale ? trueStr : falseStr ).arg(xScale).arg(yScale);
 
     if (not QPixmapCache::find(imageCacheKey, &pixmap))
@@ -57,26 +56,17 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
             watermark = Grayscale(watermark);
         }
 
-        // Workaround for QGraphicsPixmapItem opacity problem.
-        // Opacity applied only if use a cached pixmap and only after first draw. First image always has opacity 1.
-        // Preparing an image manually allows to avoid the problem.
-        QSize scaledSize(qRound(watermark.width() * xScale), qRound(watermark.height() * yScale));
-        QImage tmp(scaledSize, watermark.format());
-        tmp = tmp.convertToFormat(QImage::Format_ARGB32);
-        tmp.fill(Qt::transparent);
-
-        QPainter p(&tmp);
-        p.setOpacity(opacity);
-
         QTransform t;
-        t.translate(tmp.width()/2., tmp.height()/2.);
+        t.scale(1 / xScale, 1 / yScale);
+        watermark = watermark.transformed(t);
+
+        t = QTransform();
+        t.translate(watermark.width()/2., watermark.height()/2.);
         t.rotate(-watermarkData.imageRotation);
-        t.translate(-tmp.width()/2., -tmp.height()/2.);
-        p.setTransform(t);
+        t.translate(-watermark.width()/2., -watermark.height()/2.);
+        watermark = watermark.transformed(t);
 
-        p.drawImage(QRectF(QPointF(), scaledSize), watermark);
-
-        pixmap = QPixmap::fromImage(tmp);
+        pixmap = QPixmap::fromImage(watermark);
 
         QPixmapCache::insert(imageCacheKey, pixmap);
     }
@@ -514,16 +504,12 @@ void VPTileFactory::DrawWatermark(QPainter *painter)
         if (m_watermarkData.showImage && not m_watermarkData.path.isEmpty())
         {
             PaintWatermarkImage(painter, img, m_watermarkData,
-                                layout->LayoutSettings().WatermarkPath(),
-                                layout->LayoutSettings().HorizontalScale(),
-                                layout->LayoutSettings().VerticalScale());
+                                layout->LayoutSettings().WatermarkPath());
         }
 
         if (m_watermarkData.showText && not m_watermarkData.text.isEmpty())
         {
-            PaintWatermarkText(painter, img, m_watermarkData,
-                               layout->LayoutSettings().HorizontalScale(),
-                               layout->LayoutSettings().VerticalScale());
+            PaintWatermarkText(painter, img, m_watermarkData);
         }
     }
 }
@@ -575,9 +561,9 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
 {
     SCASSERT(painter != nullptr)
 
-    auto BrokenImage = [img, watermarkData, watermarkPath]()
+    const qreal opacity = watermarkData.opacity/100.;
+    auto BrokenImage = [img, watermarkData, watermarkPath, opacity]()
     {
-        const qreal opacity = watermarkData.opacity/100.;
         QPixmap watermark;
         QString imagePath = QString("puzzle=path%1+opacity%2_broken")
                 .arg(AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
@@ -604,8 +590,57 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         return watermark;
     };
 
+    QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
+    QFileInfo f(imagePath);
+
+    QImageReader imageReader(imagePath);
+    QImage watermarkImage = imageReader.read();
+
+    if (watermarkImage.isNull())
+    {
+        QPixmap watermarkPixmap = BrokenImage();
+
+        if (watermarkPixmap.width() < img.width() && watermarkPixmap.height() < img.height())
+        {
+            QRect imagePosition(0, 0, watermarkPixmap.width(), watermarkPixmap.height());
+            imagePosition.translate(img.center().toPoint() - imagePosition.center());
+
+            painter->drawPixmap(imagePosition, watermarkPixmap);
+        }
+        else
+        {
+            painter->drawPixmap(img.toRect(), watermarkPixmap);
+        }
+        return;
+    }
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+    qint64 fileSize = watermarkImage.byteCount();
+#else
+    qint64 fileSize = watermarkImage.sizeInBytes();
+#endif
+    qint64 pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
+    QSize scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
+    qint64 scaledImageSize = pixelSize*scaledSize.width()*scaledSize.height() / 1024;
+    int limit = QPixmapCache::cacheLimit();
+
+    if (scaledImageSize > limit && (xScale < 1 || yScale < 1))
+    {
+        QScopedPointer<QSvgRenderer> svgRenderer(new QSvgRenderer());
+
+        painter->save();
+        painter->setOpacity(opacity);
+        painter->restore();
+
+        QString grayscale = watermarkData.grayscale ? QStringLiteral("_grayscale") : QString();
+        svgRenderer->load(QStringLiteral("://puzzleicon/svg/watermark_placeholder%1.svg").arg(grayscale));
+        QRect imageRect(0, 0, qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
+        imageRect.translate(img.center().toPoint() - imageRect.center());
+        svgRenderer->render(painter, imageRect);
+        return;
+    }
+
     QPixmap watermark;
-    QFileInfo f(watermarkData.path);
     if (f.suffix() == "png" || f.suffix() == "jpg" || f.suffix() == "jpeg" || f.suffix() == "bmp")
     {
         QString error;
@@ -621,6 +656,9 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         watermark = BrokenImage();
     }
 
+    painter->save();
+    painter->setOpacity(watermarkData.opacity/100.);
+
     if (watermark.width() < img.width() && watermark.height() < img.height())
     {
         QRect imagePosition(0, 0, watermark.width(), watermark.height());
@@ -632,4 +670,6 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     {
         painter->drawPixmap(img.toRect(), watermark);
     }
+
+    painter->restore();
 }

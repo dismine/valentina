@@ -2827,16 +2827,12 @@ void VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
         if (watermarkData.showImage && not watermarkData.path.isEmpty())
         {
             VPTileFactory::PaintWatermarkImage(painter, target, watermarkData,
-                                               m_layout->LayoutSettings().WatermarkPath(),
-                                               m_layout->LayoutSettings().HorizontalScale(),
-                                               m_layout->LayoutSettings().VerticalScale());
+                                               m_layout->LayoutSettings().WatermarkPath());
         }
 
         if (watermarkData.showText && not watermarkData.text.isEmpty())
         {
-            VPTileFactory::PaintWatermarkText(painter, target, watermarkData,
-                                              m_layout->LayoutSettings().HorizontalScale(),
-                                              m_layout->LayoutSettings().VerticalScale());
+            VPTileFactory::PaintWatermarkText(painter, target, watermarkData);
         }
     }
 

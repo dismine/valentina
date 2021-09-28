@@ -21,5 +21,7 @@
         <file>puzzleicon/32X32/vertical_grainline.png</file>
         <file>puzzleicon/32X32/vertical_grainline@2x.png</file>
         <file>puzzleicon/svg/no_watermark_image.svg</file>
+        <file>puzzleicon/svg/watermark_placeholder.svg</file>
+        <file>puzzleicon/svg/watermark_placeholder_grayscale.svg</file>
     </qresource>
 </RCC>
