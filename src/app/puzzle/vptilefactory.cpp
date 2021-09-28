@@ -659,16 +659,19 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     painter->save();
     painter->setOpacity(watermarkData.opacity/100.);
 
+    QRect imagePosition(0, 0, watermark.width(), watermark.height());
+    imagePosition.translate(img.center().toPoint() - imagePosition.center());
+
     if (watermark.width() < img.width() && watermark.height() < img.height())
     {
-        QRect imagePosition(0, 0, watermark.width(), watermark.height());
-        imagePosition.translate(img.center().toPoint() - imagePosition.center());
-
         painter->drawPixmap(imagePosition, watermark);
     }
     else
     {
-        painter->drawPixmap(img.toRect(), watermark);
+        QRect croppedRect = imagePosition.intersected(img.toRect());
+        QPixmap cropped = watermark.copy(croppedRect.translated(-imagePosition.x(), -imagePosition.y()));
+
+        painter->drawPixmap(croppedRect, cropped);
     }
 
     painter->restore();
