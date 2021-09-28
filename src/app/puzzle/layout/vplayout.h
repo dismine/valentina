@@ -30,6 +30,7 @@
 
 #include <QList>
 #include <QMap>
+#include <QUuid>
 
 #include "def.h"
 #include "vplayoutsettings.h"
@@ -99,6 +100,8 @@ public:
 
     auto IsSheetsUniform() const -> bool;
 
+    const QUuid &Uuid() const;
+
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);
     void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
@@ -129,6 +132,8 @@ private:
     QUndoStack *m_undoStack;
 
     VPTileFactory *m_tileFactory{nullptr};
+
+    QUuid m_uuid{QUuid::createUuid()};
 };
 
 Q_DECLARE_METATYPE(VPLayoutPtr)

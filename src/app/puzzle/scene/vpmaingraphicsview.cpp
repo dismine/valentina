@@ -121,8 +121,18 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 
     if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
-        qCDebug(pMainGraphicsView(), "drag enter");
-        event->acceptProposedAction();
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+        if (mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
+        {
+            qCDebug(pMainGraphicsView(), "drag enter");
+            event->acceptProposedAction();
+        }
     }
 }
 
@@ -133,7 +143,17 @@ void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 
     if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
-        event->acceptProposedAction();
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+        if (mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
+        {
+            event->acceptProposedAction();
+        }
     }
 }
 
@@ -152,17 +172,22 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
     if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
         const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+
+        if (mimePiece == nullptr || mimePiece->LayoutUuid() != layout->Uuid())
+        {
+            return;
+        }
 
         VPPiecePtr piece = mimePiece->GetPiecePtr();
         if(not piece.isNull())
         {
-            VPLayoutPtr layout = m_layout.toStrongRef();
-            if (layout.isNull())
-            {
-                return;
-            }
-
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
             event->acceptProposedAction();
 

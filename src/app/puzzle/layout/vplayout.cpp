@@ -120,6 +120,12 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+const QUuid &VPLayout::Uuid() const
+{
+    return m_uuid;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPTileFactory *VPLayout::TileFactory() const
 {
     return m_tileFactory;

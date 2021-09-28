@@ -227,6 +227,12 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPLayoutWeakPtr VPCarrousel::Layout() const
+{
+    return m_layout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::SetOrientation(Qt::Orientation orientation)
 {
     m_orientation = orientation;

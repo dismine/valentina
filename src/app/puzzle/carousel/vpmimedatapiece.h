@@ -31,6 +31,7 @@
 
 #include <QMimeData>
 #include <QSharedPointer>
+#include <QUuid>
 
 #include "../layout/layoutdef.h"
 
@@ -39,7 +40,7 @@ class VPMimeDataPiece : public QMimeData
     Q_OBJECT
 
 public:
-    VPMimeDataPiece() = default;
+    VPMimeDataPiece(const QUuid &layoutUuid);
     virtual ~VPMimeDataPiece() = default;
 
     virtual auto formats() const -> QStringList override;
@@ -60,10 +61,14 @@ public:
 
     static const QString mineFormatPiecePtr;
 
+    const QUuid &LayoutUuid() const;
+
 private:
     Q_DISABLE_COPY(VPMimeDataPiece)
 
     VPPieceWeakPtr m_piece{};
+
+    QUuid m_layoutUuid;
 };
 
 #endif // VPMIMEDATAPIECE_H

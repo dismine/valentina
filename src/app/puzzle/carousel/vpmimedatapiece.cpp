@@ -36,6 +36,11 @@
 const QString VPMimeDataPiece::mineFormatPiecePtr = QStringLiteral("application/vnd.puzzle.piece.ptr");
 
 //---------------------------------------------------------------------------------------------------------------------
+VPMimeDataPiece::VPMimeDataPiece(const QUuid &layoutUuid)
+    :m_layoutUuid(layoutUuid)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPMimeDataPiece::formats() const -> QStringList
 {
     return {mineFormatPiecePtr};
@@ -64,4 +69,10 @@ auto VPMimeDataPiece::DragCursor(const QPixmap &piecePixmap) -> QPixmap
     painter.drawPixmap(dragCursor.width()/2 - cursor.width()/2, dragCursor.height()/2 - cursor.height()/2, cursor);
     painter.end();
     return dragCursor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QUuid &VPMimeDataPiece::LayoutUuid() const
+{
+    return m_layoutUuid;
 }

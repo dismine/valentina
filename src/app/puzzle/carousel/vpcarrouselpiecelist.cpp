@@ -137,9 +137,20 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
     {
         auto *pieceItem = static_cast<VPCarrouselPiece *> (_item);
 
+        if (m_carrousel == nullptr)
+        {
+            return;
+        }
+
+        VPLayoutPtr layout = m_carrousel->Layout().toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
         // starts the dragging
         auto *drag = new QDrag(this);
-        auto *mimeData = new VPMimeDataPiece();
+        auto *mimeData = new VPMimeDataPiece(layout->Uuid());
         VPPiecePtr piece = pieceItem->GetPiece();
         mimeData->SetPiecePtr(piece);
 

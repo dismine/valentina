@@ -76,6 +76,8 @@ public:
      */
     void Clear();
 
+    VPLayoutWeakPtr Layout() const;
+
 public slots:
     /**
      * @brief Refresh Refreshes the content of the carrousel
