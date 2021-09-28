@@ -446,8 +446,11 @@ void VPTileFactory::DrawRuler(QPainter *painter)
 
     const qreal notchHeight = UnitConvertor(3, Unit::Mm, Unit::Px);
     const qreal shortNotchHeight = UnitConvertor(1.1, Unit::Mm, Unit::Px);
+
     Unit layoutUnits = layout->LayoutSettings().GetUnit();
-    const qreal step = UnitConvertor(1, layoutUnits, Unit::Px);
+    Unit rulerUnits = layoutUnits == Unit::Inch ? layoutUnits : Unit::Cm;
+
+    const qreal step = UnitConvertor(1, rulerUnits, Unit::Px);
     double marksCount = (m_drawingAreaWidth-tileStripeWidth) / step;
     int i = 0;
     while (i < marksCount)
@@ -464,7 +467,7 @@ void VPTileFactory::DrawRuler(QPainter *painter)
         }
         else
         {
-            QString units = layoutUnits == Unit::Cm || layoutUnits == Unit::Mm ? tr("cm", "unit") : tr("in", "unit");
+            QString units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
             QFont fnt = painter->font();
             fnt.setPointSize(10);
 
