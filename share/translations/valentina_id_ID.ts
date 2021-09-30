@@ -12327,6 +12327,10 @@ Do you want to save your changes?</source>
         <source>Remove from Sheet</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Move to</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPDialogAbout</name>

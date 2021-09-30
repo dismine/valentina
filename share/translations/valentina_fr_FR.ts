@@ -14821,6 +14821,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Remove from Sheet</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Move to</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPDialogAbout</name>
