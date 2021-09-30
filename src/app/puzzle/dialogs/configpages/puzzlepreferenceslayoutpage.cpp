@@ -50,9 +50,16 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
             this, &PuzzlePreferencesLayoutPage::ConvertPaperSize);
 
     connect(ui->comboBoxSheetTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this]{SheetSize(SheetTemplate());});
+            this, [this]
+    {
+        SheetSize(SheetTemplate()); m_settingsChanged = true;
+    });
     connect(ui->comboBoxTileTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this]{TileSize(TileTemplate());});
+            this, [this]
+    {
+        TileSize(TileTemplate());
+        m_settingsChanged = true;
+    });
 
     connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &PuzzlePreferencesLayoutPage::SheetPaperSizeChanged);
@@ -94,6 +101,27 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
             &PuzzlePreferencesLayoutPage::SwapTileOrientation);
     connect(ui->toolButtonTileLandscapeOrientation, &QToolButton::toggled, this,
             &PuzzlePreferencesLayoutPage::SwapTileOrientation);
+
+    connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](){m_settingsChanged=true;});
+    connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](){m_settingsChanged=true;});
+    connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](){m_settingsChanged=true;});
+    connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](){m_settingsChanged=true;});
+
+    connect(ui->checkBoxTileShowTiles, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+
+    connect(ui->doubleSpinBoxPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, [this](){m_settingsChanged=true;});
+
+    connect(ui->checkBoxWarningPiecesSuperposition, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxStickyEdges, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxWarningPiecesOutOfBound, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxFollowGrainline, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,7 +164,11 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
     settings->SetLayoutWarningPiecesOutOfBound(ui->checkBoxWarningPiecesOutOfBound->isChecked());
     settings->SetLayoutFollowGrainline(ui->checkBoxFollowGrainline->isChecked());
 
-    preferences.append(tr("default layout settings"));
+    if (m_settingsChanged)
+    {
+        preferences.append(tr("default layout settings"));
+        m_settingsChanged = false;
+    }
     return preferences;
 }
 
@@ -228,6 +260,8 @@ void PuzzlePreferencesLayoutPage::ConvertPaperSize()
 
     ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Cm, layoutUnit));
     ui->doubleSpinBoxPiecesGap->setValue(newGap);
+
+    m_settingsChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,6 +271,8 @@ void PuzzlePreferencesLayoutPage::LayoutSheetIgnoreMargins(int state)
     ui->doubleSpinBoxSheetMarginRight->setDisabled(state != 0);
     ui->doubleSpinBoxSheetMarginTop->setDisabled(state != 0);
     ui->doubleSpinBoxSheetMarginBottom->setDisabled(state != 0);
+
+    m_settingsChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,6 +282,8 @@ void PuzzlePreferencesLayoutPage::LayoutTileIgnoreMargins(int state)
     ui->doubleSpinBoxTileMarginRight->setDisabled(state != 0);
     ui->doubleSpinBoxTileMarginTop->setDisabled(state != 0);
     ui->doubleSpinBoxTileMarginBottom->setDisabled(state != 0);
+
+    m_settingsChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -309,6 +347,8 @@ void PuzzlePreferencesLayoutPage::SwapSheetOrientation(bool checked)
         ui->doubleSpinBoxSheetPaperHeight->blockSignals(false);
 
         SheetPaperSizeChanged();
+
+        m_settingsChanged = true;
     }
 }
 
@@ -329,6 +369,8 @@ void PuzzlePreferencesLayoutPage::SwapTileOrientation(bool checked)
         ui->doubleSpinBoxTilePaperHeight->blockSignals(false);
 
         TilePaperSizeChanged();
+
+        m_settingsChanged = true;
     }
 }
 
@@ -519,6 +561,8 @@ void PuzzlePreferencesLayoutPage::SheetPaperSizeChanged()
     ui->toolButtonSheetLandscapeOrientation->blockSignals(true);
     ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
     ui->toolButtonSheetLandscapeOrientation->blockSignals(false);
+
+    m_settingsChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -533,6 +577,8 @@ void PuzzlePreferencesLayoutPage::TilePaperSizeChanged()
     ui->toolButtonTileLandscapeOrientation->blockSignals(true);
     ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
     ui->toolButtonTileLandscapeOrientation->blockSignals(false);
+
+    m_settingsChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -623,6 +669,8 @@ void PuzzlePreferencesLayoutPage::ReadSettings()
 
     LayoutSheetIgnoreMargins(static_cast<int>(ui->checkBoxLayoutIgnoreFileds->isChecked()));
     LayoutTileIgnoreMargins(static_cast<int>(ui->checkBoxTileIgnoreFileds->isChecked()));
+
+    m_settingsChanged = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

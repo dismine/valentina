@@ -65,6 +65,7 @@ private:
     Q_DISABLE_COPY(PuzzlePreferencesLayoutPage)
     Ui::PuzzlePreferencesLayoutPage *ui;
     Unit m_oldLayoutUnit{Unit::Mm};
+    bool m_settingsChanged{false};
 
     void InitLayoutUnits();
 
