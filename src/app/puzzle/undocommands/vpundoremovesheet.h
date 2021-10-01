@@ -34,6 +34,7 @@
 
 class VPUndoRemoveSheet : public VPUndoCommand
 {
+    Q_OBJECT
 public:
     explicit VPUndoRemoveSheet(const VPSheetPtr &sheet, QUndoCommand *parent = nullptr);
     virtual ~VPUndoRemoveSheet()=default;

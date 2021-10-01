@@ -234,7 +234,7 @@
                 <string>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</string>
                </property>
                <property name="placeholderText">
-                <string>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</string>
+                <string notr="true">{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</string>
                </property>
                <property name="clearButtonEnabled">
                 <bool>true</bool>
@@ -260,7 +260,7 @@
                <item>
                 <widget class="QLineEdit" name="lineEditGradationLabel">
                  <property name="placeholderText">
-                  <string>%size%_%height%</string>
+                  <string notr="true">%size%_%height%</string>
                  </property>
                  <property name="clearButtonEnabled">
                   <bool>true</bool>

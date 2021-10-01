@@ -34,6 +34,7 @@
 
 class VPUndoMovePieceOnSheet : public VPUndoCommand
 {
+    Q_OBJECT
 public:
     VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VPPiecePtr &piece, QUndoCommand *parent = nullptr);
     virtual ~VPUndoMovePieceOnSheet()=default;

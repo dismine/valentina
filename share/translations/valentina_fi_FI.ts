@@ -459,7 +459,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -586,7 +586,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -709,7 +709,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -840,7 +840,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -907,7 +907,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -962,7 +962,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1073,7 +1073,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1160,7 +1160,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1247,7 +1247,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1334,7 +1334,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1443,7 +1443,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Label</source>
@@ -1602,14 +1602,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="obsolete">Koko</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="obsolete">Pituus</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1740,12 +1732,12 @@
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2021,7 +2013,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2136,7 +2128,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2354,7 +2346,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2469,7 +2461,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2639,7 +2631,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3398,7 +3390,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3465,7 +3457,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3592,7 +3584,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3760,12 +3752,12 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3775,12 +3767,12 @@ Apply settings anyway?</source>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Alkuarvo</translation>
+        <translation>Alkuarvo</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -3793,15 +3785,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Alkuarvo</translation>
+        <translation>Alkuarvo</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
@@ -3912,7 +3904,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -4161,7 +4153,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4978,7 +4970,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5065,7 +5057,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5160,7 +5152,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5219,7 +5211,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5270,7 +5262,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5361,7 +5353,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5408,7 +5400,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5465,11 +5457,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Polut</translation>
+        <translation>Polut</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -5480,7 +5472,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Sommittelu</translation>
+        <translation>Sommittelu</translation>
     </message>
 </context>
 <context>
@@ -5586,7 +5578,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -5806,12 +5798,8 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Path:</source>
-        <translation type="unfinished">Polku:</translation>
+        <translation>Polku:</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -5835,7 +5823,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Binary form</source>
@@ -5883,7 +5871,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished">Nimikonflikti</translation>
+        <translation>Nimikonflikti</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
@@ -5891,6 +5879,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save manual layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6143,12 +6135,12 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -6198,7 +6190,7 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6235,7 +6227,7 @@ Apply settings anyway?</source>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -6376,7 +6368,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6419,7 +6411,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6546,7 +6538,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -6685,7 +6677,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -6873,7 +6865,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6956,7 +6948,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Työkalu</translation>
+        <translation>Työkalu</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -8038,10 +8030,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation type="obsolete">Korkeus:</translation>
-    </message>
-    <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8633,10 +8621,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Väärät yksiköt.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Tiedostovirhe.</translation>
     </message>
@@ -9183,12 +9167,8 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Language</source>
-        <translation type="unfinished">Kieli</translation>
+        <translation>Kieli</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -9224,11 +9204,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished">Graafinen tulos</translation>
+        <translation>Graafinen tulos</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished">Käytä pehmennystä</translation>
+        <translation>Käytä pehmennystä</translation>
     </message>
     <message>
         <source>Use OpenGL to render a scene.
@@ -9241,7 +9221,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Peru</translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
@@ -9318,10 +9298,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9335,15 +9311,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Mallit:</translation>
+        <translation>Mallit:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -9415,50 +9391,46 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimetriä</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pikseliä</translation>
+        <translation>Pikseliä</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paths that Valentina uses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Tyyppi</translation>
+        <translation>Tyyppi</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Polku</translation>
+        <translation>Polku</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Oletus</translation>
+        <translation>Oletus</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Muokkaa</translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Avaa kansio</translation>
+        <translation>Avaa kansio</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -10768,7 +10740,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -10783,12 +10755,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Matemaattinen kaava</translation>
+        <translation>Matemaattinen kaava</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Alkuarvo</translation>
+        <translation>Alkuarvo</translation>
     </message>
     <message>
         <source>Correction</source>
@@ -10797,7 +10769,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Mittayksiköt:</translation>
+        <translation>Mittayksiköt:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -10897,11 +10869,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -11454,15 +11426,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gradation label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%size%_%height%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11718,12 +11682,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -11747,7 +11711,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Chest circumference</source>
@@ -11972,7 +11936,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished">Tämä tiedosto on jo avattu toiseen ikkunaan.</translation>
+        <translation>Tämä tiedosto on jo avattu toiseen ikkunaan.</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -12951,7 +12915,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Tiedoston &apos;%1&apos; luonti epäonnistui! %2</translation>
+        <translation>Tiedoston &apos;%1&apos; luonti epäonnistui! %2</translation>
     </message>
     <message>
         <source>Can&apos;t create an flat dxf file.</source>
@@ -13013,11 +12977,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13167,27 +13131,27 @@ Do you want to save your changes?</source>
     <name>VPApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation type="unfinished">Jäsentämis virhe tiedostossa. Ohjelma lopetetaan.</translation>
+        <translation>Jäsentämis virhe tiedostossa. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished">Väärä id. Ohjelma lopetetaan.</translation>
+        <translation>Väärä id. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation type="unfinished">Arvoa ei voi muuttaa. Ohjelma lopetetaan.</translation>
+        <translation>Arvoa ei voi muuttaa. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation type="unfinished">Tyhjä parametri. Ohjelma lopetetaan.</translation>
+        <translation>Tyhjä parametri. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished">Väärä id. Ohjelma lopetetaan.</translation>
+        <translation>Väärä id. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation type="unfinished">Joku on vialla!!</translation>
+        <translation>Joku on vialla!!</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
@@ -13213,10 +13177,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VPCarrousel</name>
     <message>
-        <source>Pieces of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unplaced pieces</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13233,7 +13193,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
@@ -13256,7 +13216,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished">Käännös versio:</translation>
+        <translation>Käännös versio:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -13268,7 +13228,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished">Oletus selaimen aukaiseminen epäonnistui</translation>
+        <translation>Oletus selaimen aukaiseminen epäonnistui</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
@@ -13280,7 +13240,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation type="unfinished">Kotisivu: %1</translation>
+        <translation>Kotisivu: %1</translation>
     </message>
 </context>
 <context>
@@ -13377,7 +13337,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Tiedosto</translation>
+        <translation>&amp;Tiedosto</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -13385,7 +13345,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Apua</translation>
+        <translation>&amp;Apua</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -13413,7 +13373,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Seamline</source>
@@ -13456,20 +13416,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Leveys</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Pituus</translation>
     </message>
     <message>
         <source>Remove unused length</source>
@@ -13549,15 +13497,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Sommittelu</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nimi</translation>
+        <translation>Sommittelu</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
@@ -13577,19 +13521,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Avaa</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Avaa</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Tallenna</translation>
+        <translation>&amp;Tallenna</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+S</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
@@ -13597,7 +13537,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -13605,23 +13545,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">L&amp;opeta</translation>
+        <translation>L&amp;opeta</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Q</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Uusi</translation>
+        <translation>&amp;Uusi</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">Tietoja &amp;Qt</translation>
+        <translation>Tietoja &amp;Qt</translation>
     </message>
     <message>
         <source>About &amp;Puzzle</source>
@@ -13629,11 +13569,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished">Tarkenna</translation>
+        <translation>Tarkenna</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished">Loitonna</translation>
+        <translation>Loitonna</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
@@ -13641,7 +13581,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished">Tarkenna sopivasti</translation>
+        <translation>Tarkenna sopivasti</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
@@ -13649,7 +13589,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -13657,7 +13597,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Tiedostovirhe.</translation>
+        <translation>Tiedostovirhe.</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
@@ -13669,15 +13609,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -13717,7 +13657,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Avaa tiedosto</translation>
+        <translation>Avaa tiedosto</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -13729,7 +13669,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Talenna nimellä</translation>
+        <translation>Talenna nimellä</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -13737,7 +13677,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Tiedostoa ei voitu tallentaa</translation>
+        <translation>Tiedostoa ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
@@ -13749,7 +13689,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Tietoja Qt:stä</translation>
+        <translation>Tietoja Qt:stä</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
@@ -13802,7 +13742,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Mallit:</translation>
+        <translation>Mallit:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -13810,7 +13750,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
@@ -13830,7 +13770,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
@@ -13906,15 +13846,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Peru</translation>
+        <translation>&amp;Peru</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Tee uudelleen</translation>
+        <translation>&amp;Tee uudelleen</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pikseliä</translation>
+        <translation>Pikseliä</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -13931,7 +13871,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Talenna</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -14007,12 +13947,12 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">tuuma</translation>
+        <translation>tuuma</translation>
     </message>
 </context>
 <context>
@@ -17337,7 +17277,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Väri</translation>
+        <translation>Väri</translation>
     </message>
     <message>
         <source>Color:</source>

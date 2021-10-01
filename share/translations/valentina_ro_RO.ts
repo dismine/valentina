@@ -556,7 +556,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -687,7 +687,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -814,7 +814,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -945,7 +945,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1012,7 +1012,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1067,7 +1067,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1178,7 +1178,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1269,7 +1269,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1360,7 +1360,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1451,7 +1451,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1608,7 +1608,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Label</source>
@@ -1767,14 +1767,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="obsolete">Dimensiune</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="obsolete">Înălțime</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1905,12 +1897,12 @@
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2190,7 +2182,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2305,7 +2297,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2523,7 +2515,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2638,7 +2630,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2808,7 +2800,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3571,7 +3563,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3638,7 +3630,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3765,7 +3757,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3933,12 +3925,12 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3948,12 +3940,12 @@ Apply settings anyway?</source>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Descriere</translation>
+        <translation>Descriere</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valoarea de bază</translation>
+        <translation>Valoarea de bază</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -3966,15 +3958,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Valoarea de bază</translation>
+        <translation>Valoarea de bază</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
@@ -4085,7 +4077,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -4334,7 +4326,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5067,7 +5059,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5154,7 +5146,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5237,7 +5229,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5288,7 +5280,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5343,7 +5335,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5438,7 +5430,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5485,7 +5477,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5543,11 +5535,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Configurație</translation>
+        <translation>Configurație</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Căi</translation>
+        <translation>Căi</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -5665,7 +5657,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -5862,11 +5854,11 @@ Apply settings anyway?</source>
     <name>DialogSaveManualLayout</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Rută:</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -5890,7 +5882,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opțiuni</translation>
+        <translation>Opțiuni</translation>
     </message>
     <message>
         <source>Binary form</source>
@@ -5946,6 +5938,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save manual layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6198,12 +6194,12 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -6253,7 +6249,7 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6290,7 +6286,7 @@ Apply settings anyway?</source>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -6431,7 +6427,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6474,7 +6470,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6601,7 +6597,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -6740,7 +6736,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -6929,7 +6925,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7012,7 +7008,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Instrument</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -8069,10 +8065,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation type="obsolete">Înălțime:</translation>
-    </message>
-    <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8656,10 +8648,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Unități de măsură greșite.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Eroare de fișier.</translation>
     </message>
@@ -9143,20 +9131,16 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Language</source>
-        <translation type="unfinished">Limba</translation>
+        <translation>Limba</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Limbaj GUI:</translation>
+        <translation>Limbaj GUI:</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Bară de instrumente</translation>
+        <translation>Bară de instrumente</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
@@ -9278,10 +9262,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9295,15 +9275,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Șabloane:</translation>
+        <translation>Șabloane:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Înălțime:</translation>
+        <translation>Înălțime:</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -9375,27 +9355,23 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetrii</translation>
+        <translation>Milimetrii</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetrii</translation>
+        <translation>Centimetrii</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixeli</translation>
+        <translation>Pixeli</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paths that Valentina uses</source>
         <translation type="unfinished"></translation>
@@ -10390,6 +10366,10 @@ This option will take an affect after restart.</source>
         <translation>Măsuri individuale</translation>
     </message>
     <message>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10720,7 +10700,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -10735,12 +10715,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Valoarea de bază</translation>
+        <translation>Valoarea de bază</translation>
     </message>
     <message>
         <source>Correction</source>
@@ -10749,7 +10729,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Unități:</translation>
+        <translation>Unități:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -10849,11 +10829,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetrii</translation>
+        <translation>Centimetrii</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -10861,10 +10841,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Restrict first dimension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11410,15 +11386,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gradation label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%size%_%height%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11670,12 +11638,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -11699,7 +11667,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Chest circumference</source>
@@ -12888,11 +12856,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Înălțime</translation>
+        <translation>Înălțime</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Dimensiune</translation>
+        <translation>Dimensiune</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -13088,10 +13056,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VPCarrousel</name>
     <message>
-        <source>Pieces of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unplaced pieces</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13108,7 +13072,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
@@ -13131,11 +13095,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished">Revizie Versiune:</translation>
+        <translation>Revizie Versiune:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation type="unfinished">Acest program face parte din proiectul Valentina.</translation>
+        <translation>Acest program face parte din proiectul Valentina.</translation>
     </message>
     <message>
         <source>Check For Updates</source>
@@ -13143,19 +13107,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished">Nu pot deschide browser-ul implicit</translation>
+        <translation>Nu pot deschide browser-ul implicit</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
-        <translation type="unfinished">Revizie Versiune: %1</translation>
+        <translation>Revizie Versiune: %1</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Construit pe %1 la %2</translation>
+        <translation>Construit pe %1 la %2</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation type="unfinished">Site Web: %1</translation>
+        <translation>Site Web: %1</translation>
     </message>
 </context>
 <context>
@@ -13252,7 +13216,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp; Fișier</translation>
+        <translation>&amp; Fișier</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -13260,7 +13224,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp; Ajutor</translation>
+        <translation>&amp; Ajutor</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -13312,7 +13276,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <source>Placement</source>
@@ -13331,20 +13295,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Lățime</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Lungime</translation>
     </message>
     <message>
         <source>Remove unused length</source>
@@ -13427,12 +13379,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation type="obsolete">Nume</translation>
-    </message>
-    <message>
         <source>Description</source>
-        <translation type="unfinished">Descriere</translation>
+        <translation>Descriere</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
@@ -13452,19 +13400,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Deschide</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Deschide</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Salvează</translation>
+        <translation>&amp;Salvează</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+S</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
@@ -13472,7 +13416,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -13480,23 +13424,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">E&amp;xit</translation>
+        <translation>E&amp;xit</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Q</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp; Nou</translation>
+        <translation>&amp; Nou</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">Despre&amp;Qt</translation>
+        <translation>Despre&amp;Qt</translation>
     </message>
     <message>
         <source>About &amp;Puzzle</source>
@@ -13504,11 +13448,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished">Mărește</translation>
+        <translation>Mărește</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished">Micșorează</translation>
+        <translation>Micșorează</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
@@ -13516,7 +13460,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished">Zoom se potrivesc cel mai bine</translation>
+        <translation>Zoom se potrivește cel mai bine</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
@@ -13524,7 +13468,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Preferințe</translation>
+        <translation>Preferințe</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -13532,7 +13476,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Eroare de fișier.</translation>
+        <translation>Eroare de fișier.</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
@@ -13544,15 +13488,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetrii</translation>
+        <translation>Centimetrii</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetrii</translation>
+        <translation>Milimetrii</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -13592,7 +13536,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Deschide fișier</translation>
+        <translation>Deschide fișier</translation>
     </message>
     <message>
         <source>Could not save the file</source>
@@ -13604,7 +13548,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Salvează ca și</translation>
+        <translation>Salvează ca și</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -13612,7 +13556,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Fișierul nu a putut fii salvat</translation>
+        <translation>Fișierul nu a putut fii salvat</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
@@ -13624,7 +13568,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Despre Qt</translation>
+        <translation>Despre Qt</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
@@ -13677,15 +13621,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Șabloane:</translation>
+        <translation>Șabloane:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Lungime:</translation>
+        <translation>Lungime:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
@@ -13705,7 +13649,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Înălțime:</translation>
+        <translation>Înălțime:</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
@@ -13781,7 +13725,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Anulare</translation>
+        <translation>&amp;Anulare</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
@@ -13789,7 +13733,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixeli</translation>
+        <translation>Pixeli</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -13806,7 +13750,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Salvează</translation>
+        <translation>Salvează</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -13882,7 +13826,7 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
@@ -17100,11 +17044,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Culoare</translation>
+        <translation>Culoare</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Culoare:</translation>
+        <translation>Culoare:</translation>
     </message>
     <message>
         <source>Black</source>

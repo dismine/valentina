@@ -75,7 +75,7 @@
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательский</translation>
     </message>
 </context>
 <context>
@@ -268,7 +268,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше об &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам исправить ошибки. Мы не собираем персональную информацию пользователей. Узнать больше об &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -436,7 +436,7 @@
     </message>
     <message>
         <source>Tape version</source>
-        <translation>Версия  Tape</translation>
+        <translation>Версия Tape</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -583,7 +583,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -972,7 +972,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1213,7 +1213,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1221,11 +1221,11 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished">Псевдоним 1:</translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished">Псевдоним 2:</translation>
+        <translation>Псевдоним 2:</translation>
     </message>
 </context>
 <context>
@@ -1544,7 +1544,7 @@
     </message>
     <message>
         <source>Name of detail</source>
-        <translation type="vanished">Имя детали</translation>
+        <translation type="vanished">Название детали</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -1620,7 +1620,7 @@
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="vanished">Имя детали:</translation>
+        <translation type="vanished">Название детали:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -1799,19 +1799,19 @@
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдонимы измерения</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение:</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Псевдоним</translation>
     </message>
 </context>
 <context>
@@ -1966,14 +1966,6 @@
         <translation>Имя файла мерок</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="vanished">Размер</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Высота</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation>Расширение файла мерок</translation>
     </message>
@@ -2083,87 +2075,87 @@
     </message>
     <message>
         <source>Measurements units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения мерок</translation>
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения выкройки</translation>
     </message>
     <message>
         <source>Size units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения размера</translation>
     </message>
     <message>
         <source>Customer birth date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата рождения клиента</translation>
     </message>
     <message>
         <source>Customer email</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронная почта клиента</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерка: %1</translation>
     </message>
     <message>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка роста</translation>
     </message>
     <message>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка размера</translation>
     </message>
     <message>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка бёдер</translation>
     </message>
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка талии</translation>
     </message>
     <message>
         <source>Final measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Финальное измерение: %1</translation>
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения рост.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения размер.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения бёдра.</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения талия.</translation>
     </message>
 </context>
 <context>
@@ -2512,7 +2504,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2671,7 +2663,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск финальных измерений по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска финальных измерений по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -2905,11 +2897,11 @@
     </message>
     <message>
         <source>Invalid first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная первая точка линии</translation>
     </message>
     <message>
         <source>Invalid second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная вторая точка линии</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -3035,7 +3027,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3405,11 +3397,11 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск прибавок по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска прибавок по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск предварительных расчетов по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска предварительных расчетов по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Increment</source>
@@ -3440,7 +3432,7 @@
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество:</translation>
     </message>
 </context>
 <context>
@@ -3632,7 +3624,7 @@
     </message>
     <message>
         <source>Save length of the sheet</source>
-        <translation>Сохранить размер листа</translation>
+        <translation>Сохранить длину листа</translation>
     </message>
     <message>
         <source>Letter</source>
@@ -3844,11 +3836,11 @@ Apply settings anyway?</source>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"></translation>
+        <translation>мин</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включите эту опцию, чтобы предпочесть получать решения на одном листе.</translation>
     </message>
 </context>
 <context>
@@ -3899,7 +3891,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3966,7 +3958,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4041,7 +4033,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -4093,7 +4085,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4228,101 +4220,101 @@ Apply settings anyway?</source>
     <name>DialogMeasurementsCSVColumns</name>
     <message>
         <source>Setup columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки колонок</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Предварительный просмотр</translation>
+        <translation>Предварительный просмотр</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Входные данные</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные, необходимые для импорта</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Колонки</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Полное имя:</translation>
+        <translation>Полное имя:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Описание:</translation>
+        <translation>Описание:</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Готово</translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полное имя</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базовое значение</translation>
+        <translation>Базовое значение</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропустить</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Базовое значение</translation>
+        <translation>Базовое значение</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (%1)*:</translation>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к файлу пуст</translation>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно колонок</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно данных для импорта</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, выберите уникальный номер для каждой колонки</translation>
     </message>
 </context>
 <context>
@@ -4678,7 +4670,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4875,10 +4867,6 @@ Apply settings anyway?</source>
         <translation type="vanished">Показать файл мерок</translation>
     </message>
     <message>
-        <source>From multisize measurements</source>
-        <translation type="vanished">Для мультиразмерных мерок</translation>
-    </message>
-    <message>
         <source>Pattern</source>
         <translation>Выкройка</translation>
     </message>
@@ -4887,68 +4875,12 @@ Apply settings anyway?</source>
         <translation>Для технических заметок</translation>
     </message>
     <message>
-        <source>Label data</source>
-        <translation type="vanished">Данные метки</translation>
-    </message>
-    <message>
-        <source>Label template:</source>
-        <translation type="vanished">Шаблон метки:</translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Редактировать метку выкройки</translation>
-    </message>
-    <message>
-        <source>Edit template</source>
-        <translation type="vanished">Редактировать шаблон</translation>
-    </message>
-    <message>
-        <source>Date format:</source>
-        <translation type="vanished">Формат даты:</translation>
-    </message>
-    <message>
-        <source>Time format:</source>
-        <translation type="vanished">Формат времени:</translation>
-    </message>
-    <message>
-        <source>Save label data.</source>
-        <translation type="vanished">Сохранить данные метки.</translation>
-    </message>
-    <message>
-        <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="vanished">Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
-    </message>
-    <message>
-        <source>Materials</source>
-        <translation type="vanished">Материалы</translation>
-    </message>
-    <message>
-        <source>Pattern materials:</source>
-        <translation type="vanished">Материалы выкройки:</translation>
-    </message>
-    <message>
-        <source>Manage list of pattern materials</source>
-        <translation type="vanished">Управлять списком материалов выкройки</translation>
-    </message>
-    <message>
-        <source>Manage</source>
-        <translation type="vanished">Управление</translation>
-    </message>
-    <message>
-        <source>The customer name from individual measurements</source>
-        <translation type="vanished">Имя клиента из индивидуальных мерок</translation>
-    </message>
-    <message>
         <source>Label language:</source>
         <translation>Язык метки точки:</translation>
     </message>
     <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="obsolete">гггг-мм-дд</translation>
-    </message>
-    <message>
         <source>Passmark length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина надсечки:</translation>
     </message>
 </context>
 <context>
@@ -5410,11 +5342,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит внутрь детали</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит наружу детали</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -5647,7 +5579,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5746,7 +5678,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5841,7 +5773,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5876,7 +5808,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
-        <translation>Выберите точку по горозинтали</translation>
+        <translation>Выберите точку по горизонтали</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -5900,7 +5832,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5967,7 +5899,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6082,7 +6014,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6129,7 +6061,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6137,19 +6069,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Curve 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 1</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished">Псевдоним 1:</translation>
+        <translation>Псевдоним 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished">Псевдоним 2:</translation>
+        <translation>Псевдоним 2:</translation>
     </message>
     <message>
         <source>Curve 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 2</translation>
     </message>
 </context>
 <context>
@@ -6183,58 +6115,58 @@ Apply settings anyway?</source>
     <name>DialogPuzzlePreferences</name>
     <message>
         <source>Puzzle preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки Puzzle</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Настройки</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Пути</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform>Следующий %n параметр требует перезапуск, чтобы вступить в силу: %1.</numerusform>
-            <numerusform>Следующие %n параметры требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
-            <numerusform>Следующие %n параметров требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
+        <translation>
+            <numerusform>Для вступления в силу %n параметра требуется перезапуск: %1.</numerusform>
+            <numerusform>Для вступления в силу %n параметров требуется перезапуск: %1.</numerusform>
+            <numerusform>Для вступления в силу %n параметров требуется перезапуск: %1.</numerusform>
         </translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Раскладка</translation>
+        <translation>Раскладка</translation>
     </message>
 </context>
 <context>
     <name>DialogRestrictDimension</name>
     <message>
         <source>Restrict dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить измерение</translation>
     </message>
     <message>
         <source>Dimension A:</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение A:</translation>
     </message>
     <message>
         <source>Restriction</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение</translation>
     </message>
     <message>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Мин:</translation>
     </message>
     <message>
         <source>Max:</source>
-        <translation type="unfinished"></translation>
+        <translation>Макс:</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished">Исключить</translation>
+        <translation>Исключить</translation>
     </message>
     <message>
         <source>Include</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить</translation>
     </message>
 </context>
 <context>
@@ -6561,112 +6493,100 @@ Apply settings anyway?</source>
         <source>The base filename does not match a regular expression.</source>
         <translation>Базовое имя файла не соответствует регулярному выражению.</translation>
     </message>
-    <message>
-        <source>files</source>
-        <translation type="vanished">файлы</translation>
-    </message>
-    <message>
-        <source>(flat) files</source>
-        <translation type="vanished">(плоские) файлы</translation>
-    </message>
-    <message>
-        <source>Image files</source>
-        <translation type="vanished">Файлы изображений</translation>
-    </message>
-    <message>
-        <source>tiled</source>
-        <translation type="vanished">плитка</translation>
-    </message>
 </context>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Путь:</translation>
+        <translation>Путь:</translation>
     </message>
     <message>
         <source>Destination folder</source>
-        <translation type="unfinished">Каталог назначения</translation>
+        <translation>Каталог назначения</translation>
     </message>
     <message>
         <source>Path to destination folder</source>
-        <translation type="unfinished">Путь к папке назначения</translation>
+        <translation>Путь к папке назначения</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
-        <translation type="unfinished">Выберите путь к каталогу назначения</translation>
+        <translation>Выберите путь к каталогу назначения</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished">Обзор…</translation>
+        <translation>Обзор…</translation>
     </message>
     <message>
         <source>File format:</source>
-        <translation type="unfinished">Формат файла:</translation>
+        <translation>Формат файла:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Binary form</source>
-        <translation type="unfinished">Бинарная форма</translation>
+        <translation>Бинарная форма</translation>
     </message>
     <message>
         <source>Text as paths</source>
-        <translation type="unfinished">Текст как контуры</translation>
+        <translation>Текст как контуры</translation>
     </message>
     <message>
         <source>Export unified</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать как один файл</translation>
     </message>
     <message>
         <source>Tiles scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема плитки</translation>
     </message>
     <message>
         <source>File name:</source>
-        <translation type="unfinished">Имя файла:</translation>
+        <translation>Имя файла:</translation>
     </message>
     <message>
         <source>File base name</source>
-        <translation type="unfinished">Базовое имя файла</translation>
+        <translation>Базовое имя файла</translation>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
-        <translation type="unfinished">Базовое имя файла не соответствует регулярному выражению.</translation>
+        <translation>Базовое имя файла не соответствует регулярному выражению.</translation>
     </message>
     <message>
         <source>Select folder</source>
-        <translation type="unfinished">Выберите каталог</translation>
+        <translation>Выберите каталог</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
-        <translation type="unfinished">Попытка использования номера формата вне диапазона.</translation>
+        <translation>Попытка использования номера формата вне диапазона.</translation>
     </message>
     <message>
         <source>Selected not present format.</source>
-        <translation type="unfinished">Выбран несуществующий формат.</translation>
+        <translation>Выбран несуществующий формат.</translation>
     </message>
     <message>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
-        <translation type="unfinished">Каталог назначения не существует или не может быть прочитан.</translation>
+        <translation>Каталог назначения не существует или не может быть прочитан.</translation>
     </message>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished">Конфликт имени</translation>
+        <translation>Конфликт имени</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation type="unfinished">Каталог уже содержит файл с именем «%1». Перезаписать все файлы с конфликтующими именами?</translation>
+        <translation>Каталог уже содержит файл с именем «%1». Перезаписать все файлы с конфликтующими именами?</translation>
     </message>
     <message>
         <source>Example:</source>
-        <translation type="unfinished">Пример:</translation>
+        <translation>Пример:</translation>
+    </message>
+    <message>
+        <source>Save manual layout</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6897,150 +6817,150 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation type="unfinished">Имя клиента из индивидуальных мерок</translation>
+        <translation>Имя клиента из индивидуальных мерок</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронная почта клиента с индивидуальными мерками</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата рождения клиента с индивидуальными мерками</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished">Сохранить данные метки.</translation>
+        <translation>Сохранить данные метки.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished">Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
+        <translation>Данные метки были изменены. Вы хотите сохранить их перед редактированием шаблона метки?</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка роста</translation>
     </message>
     <message>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка размера</translation>
     </message>
     <message>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка бёдер</translation>
     </message>
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Метка талии</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерка: %1</translation>
     </message>
 </context>
 <context>
     <name>DialogSetupMultisize</name>
     <message>
         <source>Setup multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка мультиразмерных мерок</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать полный обхват</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Min value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальное значение:</translation>
     </message>
     <message>
         <source>Minimal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальное значение, указанное в колонке</translation>
     </message>
     <message>
         <source>Max value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное значение:</translation>
     </message>
     <message>
         <source>Maximal value described in the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное значение, указанное в колонке</translation>
     </message>
     <message>
         <source>Step:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг:</translation>
     </message>
     <message>
         <source>Single-step between the column values</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг между значениями в колонке</translation>
     </message>
     <message>
         <source>Base:</source>
-        <translation type="unfinished"></translation>
+        <translation>База:</translation>
     </message>
     <message>
         <source>The base value for the column</source>
-        <translation type="unfinished"></translation>
+        <translation>Базовое значение колонки</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Обхват</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, укажите правильные данные для измерений</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, выберите хотя бы одно измерение</translation>
     </message>
     <message>
         <source>No more than 3 dimensions allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Допускается не более 3 измерений</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Готово</translation>
+        <translation>Готово</translation>
     </message>
 </context>
 <context>
@@ -7151,7 +7071,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7194,7 +7114,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7527,9 +7447,9 @@ Apply settings anyway?</source>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Следующий %n параметр требует перезапуск, чтобы вступить в силу: %1.</numerusform>
-            <numerusform>Следующие %n параметры требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
+            <numerusform>Следующие %n параметра требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
             <numerusform>Следующие %n параметров требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
         </translation>
     </message>
@@ -7693,7 +7613,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7804,7 +7724,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Инструмент</translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7878,7 +7798,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Retain original pieces</source>
-        <translation>Сохранить оригинальную выкройку</translation>
+        <translation>Сохранить оригинальные детали</translation>
     </message>
 </context>
 <context>
@@ -7913,7 +7833,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New %1 test version is now available. Would you like to download it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая тестовая версия %1 доступна для скачивания. Хотите скачать ее сейчас?</translation>
     </message>
 </context>
 <context>
@@ -8058,51 +7978,51 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set base for dimension A in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения A в единицах измерения таблицы.</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение А - база</translation>
     </message>
     <message>
         <source>Set base for dimension B in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения B в единицах измерения таблицы.</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение B - база</translation>
     </message>
     <message>
         <source>Set base for dimension C in the table units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения C в единицах измерения таблицы.</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение C - база</translation>
     </message>
     <message>
         <source>Set pattern file units: cm, mm, inch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите единицу измерения файла выкройки: см, мм, дюйм.</translation>
     </message>
     <message>
         <source>The pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения выкройки</translation>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение измерения A.</translation>
     </message>
     <message>
         <source>Invalid dimension B base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение измерения В.</translation>
     </message>
     <message>
         <source>Invalid dimension C base value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение измерения С.</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение в формуле: %1. Программа будет завершена.</translation>
     </message>
 </context>
 <context>
@@ -8265,7 +8185,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
-        <translation>Сохранить еще не сохраненную выкройку</translation>
+        <translation>Сохранить еще несохраненную выкройку</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -8562,7 +8482,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation>Валентина не была закрыта корректно. Вы хотите восстановить файлы (%1) которые былы открыты раньше?</translation>
+        <translation>Valentina не была закрыта корректно. Вы хотите восстановить файлы (%1) которые были открыты раньше?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
@@ -8798,7 +8718,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show ...</source>
-        <translation type="vanished">Показать...</translation>
+        <translation type="vanished">Показать ...</translation>
     </message>
     <message>
         <source>Show measurements</source>
@@ -8847,7 +8767,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено 2 окна программы.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
@@ -9174,18 +9094,6 @@ Do you want to save your changes?</source>
         <translation>Выберите объекты основного контура по часовой стрелке.</translation>
     </message>
     <message>
-        <source>The document has no write permissions.</source>
-        <translation type="vanished">Документ не имеет прав на запись.</translation>
-    </message>
-    <message>
-        <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="vanished">Невозможно установить разрешения для %1 для записи.</translation>
-    </message>
-    <message>
-        <source>Could not save the file.</source>
-        <translation type="vanished">Не удалось сохранить файл.</translation>
-    </message>
-    <message>
         <source>Could not save the file</source>
         <translation>Не удалось сохранить файл</translation>
     </message>
@@ -9330,14 +9238,6 @@ Do you want to save your changes?</source>
         <translation>Невозможно экспортировать детали.</translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="vanished">Невозможно установить размер. Нужен файл мультиразмерных мерок.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="vanished">Невозможно установить рост. Необходим файл мультиразмерных мерок.</translation>
-    </message>
-    <message>
         <source>Label template editor</source>
         <translation>Редактор шаблона метки</translation>
     </message>
@@ -9443,7 +9343,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -9499,7 +9399,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструмент сложная кривая, которая использует точки чертежа как контрольные точки</translation>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
@@ -9511,7 +9411,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Globally show pieces main path</source>
-        <translation type="unfinished"></translation>
+        <translation>На глобальном уровне показать основной контур деталей</translation>
     </message>
     <message>
         <source>Pattern messages</source>
@@ -9579,103 +9479,99 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Manual Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Ручная раскладка</translation>
     </message>
     <message>
         <source>Open Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть Puzzle</translation>
     </message>
     <message>
         <source>Open the Puzzle app</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть приложение Puzzle</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать</translation>
     </message>
     <message>
         <source>Create manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать ручную раскладку</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Обновление</translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <source>Update manual layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="obsolete">Вы хотите изменить настройки?</translation>
+        <translation>Обновить ручную раскладку</translation>
     </message>
     <message>
         <source>Unable to prepare raw layout data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно подготовить сырые данные раскладки.</translation>
     </message>
     <message>
         <source>Manual layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы ручной раскладки</translation>
     </message>
     <message>
         <source>Select manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать ручную раскладку</translation>
     </message>
     <message>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемое значение измерения А &quot;%1&quot; для данного файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение A. Нужен файл с мультиразмерными мерками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение A. Файл не открыт.</translation>
     </message>
     <message>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемое значение измерения B &quot;%1&quot; для данного файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение B. Нужен файл с мультиразмерными мерками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение B. Файл не открыт.</translation>
     </message>
     <message>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживаемое значение измерения C &quot;%1&quot; для данного файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение C. Нужен файл с мультиразмерными мерками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить измерение C. Файл не открыт.</translation>
     </message>
     <message>
         <source>Could not create recipe file. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Draw export</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать файл рецепта. %1</translation>
     </message>
     <message>
         <source>Shop</source>
-        <translation type="unfinished"></translation>
+        <translation>Магазин</translation>
     </message>
     <message>
         <source>Scalable Vector Graphics files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы масштабируемой векторной графики</translation>
     </message>
     <message>
         <source>Save draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить чертёж</translation>
+    </message>
+    <message>
+        <source>Draw export</source>
+        <translation>Экспорт чертежа</translation>
     </message>
 </context>
 <context>
@@ -9817,14 +9713,6 @@ Do you want to save your changes?</source>
         <translation>Файл мерок содержит неправильные мерки.</translation>
     </message>
     <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Неправильные единицы измерения.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Приложение не поддерживает мультиразмерную таблицу в дюймах.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
@@ -9845,28 +9733,8 @@ Do you want to save your changes?</source>
         <translation>Закончилось время.</translation>
     </message>
     <message>
-        <source>Cannot set printer page size</source>
-        <translation type="vanished">Невозможно установить размер страницы принтера</translation>
-    </message>
-    <message>
-        <source>Cannot set custom printer page size</source>
-        <translation type="vanished">Невозможно установить пользовательский размер страницы принтера</translation>
-    </message>
-    <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Процесс был остановлен из-за исключения.</translation>
-    </message>
-    <message>
-        <source>File error.
-
-%1
-
-%2</source>
-        <translation type="vanished">Ошибка файла.
-
-%1
-
-%2</translation>
     </message>
 </context>
 <context>
@@ -9930,7 +9798,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="vanished">Путь, что использует Валентина</translation>
+        <translation type="vanished">Путь, что использует Valentina</translation>
     </message>
     <message>
         <source>Default</source>
@@ -10207,15 +10075,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Измените положение панели инструментов, чтобы оптимизировать место для больших разрешений экрана. По умолчанию панель инструментов займет все доступное пространство.</translation>
     </message>
     <message>
         <source>Tool panel scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабирование панели инструментов</translation>
     </message>
     <message>
         <source>Don&apos;t use the native file dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Не использовать родной диалог файлов</translation>
     </message>
 </context>
 <context>
@@ -10270,7 +10138,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My manual layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Мои ручные раскладки</translation>
     </message>
 </context>
 <context>
@@ -10418,317 +10286,317 @@ This option will take an affect after restart.</source>
     <name>Puzzle</name>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="unfinished">Параметры экспорта могут использоваться только с одним входным файлом.</translation>
+        <translation>Параметры экспорта могут использоваться только с одним входным файлом.</translation>
     </message>
     <message>
         <source>Valentina&apos;s manual layout editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор ручной раскладки Валентины.</translation>
     </message>
     <message>
         <source>The manual layout file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл ручной раскладки.</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Язык</translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Язык интерфейса:</translation>
+        <translation>Язык интерфейса:</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Панель инструментов</translation>
+        <translation>Панель инструментов</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Текст отображается под иконками (рекомендуется для начинающих).</translation>
+        <translation>Текст отображается под иконками (рекомендуется для начинающих).</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished">Пользовательский интерфейс</translation>
+        <translation>Пользовательский интерфейс</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished">Активировать тёмный режим</translation>
+        <translation>Активировать тёмный режим</translation>
     </message>
     <message>
         <source>Don&apos;t use the native file dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Не использовать родной диалог файлов</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished">тёмный режим</translation>
+        <translation>тёмный режим</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Главная</translation>
+        <translation>Общие</translation>
     </message>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished">Графический вывод</translation>
+        <translation>Графический вывод</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished">Использовать сглаживание</translation>
+        <translation>Использовать сглаживание</translation>
     </message>
     <message>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
-        <translation type="unfinished">Использовать OpenGL для рендеринга сцены.
+        <translation>Использовать OpenGL для рендеринга сцены.
 Этот параметр будет действовать после перезапуска.</translation>
     </message>
     <message>
         <source>Use OpenGL render</source>
-        <translation type="unfinished">Использовать OpenGL рендер</translation>
+        <translation>Использовать OpenGL рендер</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation type="unfinished">Количество шагов (0 - без ограничений):</translation>
+        <translation>Количество шагов (0 - без ограничений):</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished">Прокрутка</translation>
+        <translation>Прокрутка</translation>
     </message>
     <message>
         <source>Animation</source>
-        <translation type="unfinished">Анимация</translation>
+        <translation>Анимация</translation>
     </message>
     <message>
         <source>Duration:</source>
-        <translation type="unfinished">Продолжительность:</translation>
+        <translation>Продолжительность:</translation>
     </message>
     <message>
         <source>Scrolling animation duration</source>
-        <translation type="unfinished">Продолжительность анимации прокрутки</translation>
+        <translation>Продолжительность анимации прокрутки</translation>
     </message>
     <message>
         <source>ms</source>
         <comment>milliseconds</comment>
-        <translation type="unfinished">мс</translation>
+        <translation>мс</translation>
     </message>
     <message>
         <source>Update interval:</source>
-        <translation type="unfinished">Интервал обновления:</translation>
+        <translation>Интервал обновления:</translation>
     </message>
     <message>
         <source>Time in milliseconds between each animation update</source>
-        <translation type="unfinished">Время в миллисекундах между каждым обновлением анимации</translation>
+        <translation>Время в миллисекундах между каждым обновлением анимации</translation>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished">Масштаб мыши</translation>
+        <translation>Масштаб мыши</translation>
     </message>
     <message>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
-        <translation type="unfinished">Сенсорная:</translation>
+        <translation>Сенсорная:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation type="unfinished">Чувствительность прокрутки для мыши с датчиком</translation>
+        <translation>Чувствительность прокрутки для мыши с датчиком</translation>
     </message>
     <message>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
-        <translation type="unfinished">С колесом:</translation>
+        <translation>С колесом:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation type="unfinished">Чувствительность прокрутки для мыши с колесом</translation>
+        <translation>Чувствительность прокрутки для мыши с колесом</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished">Ускорение:</translation>
+        <translation>Ускорение:</translation>
     </message>
     <message>
         <source>undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>отменить ограничение</translation>
     </message>
     <message>
         <source>antialiasing</source>
-        <translation type="unfinished">сглаживание</translation>
+        <translation>сглаживание</translation>
     </message>
     <message>
         <source>scene render</source>
-        <translation type="unfinished">рендер сцены</translation>
+        <translation>рендер сцены</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Лист</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Единицы:</translation>
+        <translation>Единицы:</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Шаблоны:</translation>
+        <translation>Шаблоны:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота:</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Поля</translation>
+        <translation>Поля</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Правое:</translation>
+        <translation>Правое:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнее:</translation>
+        <translation>Верхнее:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Левое:</translation>
+        <translation>Левое:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнее:</translation>
+        <translation>Нижнее:</translation>
     </message>
     <message>
         <source>Ignore margins</source>
-        <translation type="unfinished">Игнорировать поля</translation>
+        <translation>Игнорировать поля</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished">Контроль</translation>
+        <translation>Контроль</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: наложение деталей</translation>
     </message>
     <message>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: детали за пределами поля</translation>
     </message>
     <message>
         <source>Sticky edges</source>
-        <translation type="unfinished"></translation>
+        <translation>Липкие края</translation>
     </message>
     <message>
         <source>Follow grainline</source>
-        <translation type="unfinished">Раскладка по долевой</translation>
+        <translation>Раскладка по долевой</translation>
     </message>
     <message>
         <source>Pieces gap</source>
-        <translation type="unfinished"></translation>
+        <translation>Зазор между деталями</translation>
     </message>
     <message>
         <source>Tiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Плитки</translation>
     </message>
     <message>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать плитки на листе</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать предварительный просмотр водяного знака</translation>
     </message>
     <message>
         <source>Show watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать водяной знак</translation>
     </message>
     <message>
         <source>default layout settings</source>
-        <translation type="unfinished"></translation>
+        <translation>настройки раскладки по умолчанию</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Миллиметры</translation>
+        <translation>Миллиметры</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметры</translation>
+        <translation>Сантиметры</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюймы</translation>
+        <translation>Дюймы</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Пиксели</translation>
+        <translation>Пиксели</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished">Пути, что использует Валентина</translation>
+        <translation>Пути, что использует Валентина</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">По умолчанию</translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть каталог</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
-        <translation type="unfinished">Мои индивидуальные мерки</translation>
+        <translation>Мои индивидуальные мерки</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished">Мои мультиразмерные мерки</translation>
+        <translation>Мои мультиразмерные мерки</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Мои выкройки</translation>
+        <translation>Мои выкройки</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished">Мои шаблоны</translation>
+        <translation>Мои шаблоны</translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Мои раскладки</translation>
+        <translation>Мои раскладки</translation>
     </message>
 </context>
 <context>
@@ -10793,75 +10661,75 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VLayoutPassmark: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPassmark compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VLayoutPassmark: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VLayoutPlaceLabel: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VLayoutPlaceLabel: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VAbstractPieceData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VAbstractPieceData: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VRawLayoutData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VRawLayoutData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VRawLayoutData: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VLayoutPiecePathData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VLayoutPiecePathData: actualClassVersion = %1, а classVersion = %2</translation>
     </message>
     <message>
         <source>TextLine prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса TextLine: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>TextLine compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости TextLine: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VTextManager: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VTextManager compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VTextManager: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несоответствия префикса CustomSARecord: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости CustomSARecord: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
     <message>
         <source>VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несовпадения префикса VPieceNodeData: actualStreamHeader = 0x%1 и streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VPieceNodeData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка совместимости VPieceNodeData: actualClassVersion = %1 и classVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -10990,15 +10858,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать надсечку для точки &quot;%1&quot; в детали &quot;%2&quot;. Тип ошибки - коллапс надсечки.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать надсечку для точки &quot;%1&quot; в части &quot;%2&quot;. Нет пересечения.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу получить токены из формулы &quot;%1&quot;. Ошибка парсера: %2.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -11026,7 +10894,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos; имеет недействительный припуск на раскладку. Пожалуйста, проверьте припуск на шов, чтобы проверить, как ведет себя припуск на шов.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
@@ -11062,11 +10930,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot cast tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно преобразовать инструмент с id &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Empty list of nodes for tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустой список узлов для инструмента с id &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
@@ -11074,107 +10942,107 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Не может преобразовать параметр toInt</translation>
     </message>
     <message>
         <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished">Имя детали &quot;%1&quot; не уникальное.</translation>
+        <translation>Имя детали &quot;%1&quot; не уникальное.</translation>
     </message>
     <message>
         <source>Could not find the segment start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось найти начало сегмента.</translation>
     </message>
     <message>
         <source>Could not find the segment end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось найти конец сегмента.</translation>
     </message>
     <message>
         <source>Segment is too short.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент слишком короткий.</translation>
     </message>
     <message>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка расчёта сегмента для кривой &apos;%1&apos;. %2</translation>
     </message>
     <message>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в кривой &quot;%1&quot;. Не удалось вычислить сегмент для кривой &apos;%2&apos;. %3</translation>
     </message>
     <message>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно подготовить встроенную надсечку &apos;%1&apos; для детали &apos;%2&apos;. Надсечка пуста.</translation>
     </message>
     <message>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно приготовить встроенную надсечку &apos;%1&apos; для детали &apos;%2&apos;. Базовая линия надсечки пуста.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно приготовить надсечку &apos;%1&apos; для детали &apos;%2&apos;. Базовая линия надсечки пуста.</translation>
     </message>
     <message>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно приготовить надсечку &apos;%1&apos; для детали &apos;%2&apos;. Надсечка пустая.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу получить токены из формулы &quot;%1&quot;. Ошибка формулы: %2.</translation>
     </message>
     <message>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось подготовить заполнитель для финального измерения. Ошибка синтаксического анализатора в строке %1: %2.</translation>
     </message>
     <message>
         <source>No data for the height dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения рост.</translation>
     </message>
     <message>
         <source>No data for the size dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения размер.</translation>
     </message>
     <message>
         <source>No data for the hip dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения бёдра.</translation>
     </message>
     <message>
         <source>No data for the waist dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения Талия.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &quot;%1&quot;. Долевая линия неправильная.</translation>
     </message>
     <message>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое глобальное значение длины надсечек. Деталь &quot;%1&quot;. Длина меньше минимально допустимой.</translation>
     </message>
     <message>
         <source>move pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить детали</translation>
     </message>
     <message>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>вращать детали</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+        <translation>Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Невозможно установить поля принтера</translation>
+        <translation>Невозможно установить поля принтера</translation>
     </message>
     <message>
         <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно разрезать кривую &quot;%1&quot;. Кривая слишком короткая.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &quot;%1&quot;. Длина вырезанного сегмента слишком мала. Оптимизируйте её до минимального значения.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &quot;%1&quot;. Длина вырезанного сегмента слишком велика. Оптимизируйте её до максимального значения.</translation>
     </message>
 </context>
 <context>
@@ -11392,75 +11260,75 @@ This option will take an affect after restart.</source>
     <name>QtColorPicker</name>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Чёрный</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Белый</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Красный</translation>
     </message>
     <message>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-красный</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Зелёный</translation>
     </message>
     <message>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-зелёный</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Синий</translation>
     </message>
     <message>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-синий</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Голубой</translation>
     </message>
     <message>
         <source>Dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-голубой</translation>
     </message>
     <message>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Фиолетовый</translation>
     </message>
     <message>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-фиолетовый</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Жёлтый</translation>
     </message>
     <message>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-жёлтый</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Серый</translation>
     </message>
     <message>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-серый</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Светло-серый</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательский</translation>
     </message>
 </context>
 <context>
@@ -11752,7 +11620,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation type="vanished">Открыть стандартные...</translation>
+        <translation type="vanished">Открыть стандартные ...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -11922,7 +11790,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено 2 окна программы.</translation>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
@@ -11962,7 +11830,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The full name of known measurement forbidden to change.</source>
-        <translation>Нельзя изменить полное название известной мерки.</translation>
+        <translation>Нельзя изменить полное имя известной мерки.</translation>
     </message>
     <message>
         <source>Name in formula</source>
@@ -12148,18 +12016,6 @@ Do you want to save your changes?</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <source>The measurements document has no write permissions.</source>
-        <translation type="vanished">Документ мерок не имеет прав на запись.</translation>
-    </message>
-    <message>
-        <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="vanished">Невозможно установить разрешения для %1 для записи.</translation>
-    </message>
-    <message>
-        <source>Could not save the file.</source>
-        <translation type="vanished">Не удалось сохранить файл.</translation>
-    </message>
-    <message>
         <source>Could not save the file</source>
         <translation>Не удалось сохранить файл</translation>
     </message>
@@ -12232,18 +12088,6 @@ Do you want to save your changes?</source>
         <translation>Мультиразмерные мерки требуют как минимум 4 колонки.</translation>
     </message>
     <message>
-        <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="vanished">Невозможно конвертировать значение базового размера для дублирования в колонку 2.</translation>
-    </message>
-    <message>
-        <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="vanished">Невозможно конвертировать значение увеличения роста для дублирования в колонку 3.</translation>
-    </message>
-    <message>
-        <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="vanished">Невозможно конвертировать значение увеличения размера для дублирования в колонку 4.</translation>
-    </message>
-    <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Импортируемый файл не должен содержать то же самое имя дважды.</translation>
     </message>
@@ -12297,173 +12141,161 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Вы хотите изменить настройки?</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск мерок по ключевым параметрам. &lt;/p&gt;&lt;p&gt; Прибавьте &amp;quot;/r/&amp;quot; к передней части строки поиска для поиска мерок по регулярному выражению. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height (%1):</source>
-        <translation type="vanished">Рост (%1):</translation>
-    </message>
-    <message>
-        <source>Size (%1):</source>
-        <translation type="vanished">Размер (%1):</translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полное имя</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Рассчитанное значение</translation>
+        <translation>Рассчитанное значение</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Формула</translation>
+        <translation>Формула</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базовое значение</translation>
+        <translation>Базовое значение</translation>
     </message>
     <message>
         <source>Correction</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Коррекция</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Единицы измерения:</translation>
+        <translation>Единицы измерения:</translation>
     </message>
     <message>
         <source>Shift B</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение B</translation>
     </message>
     <message>
         <source>Shift C</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение C</translation>
     </message>
     <message>
         <source>Correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коррекция:</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите одно из измерений, чтобы в дальнейшем использовать значение мерки в метке детали</translation>
     </message>
     <message>
         <source>Base Values:</source>
-        <translation type="unfinished"></translation>
+        <translation>Базовые значения:</translation>
     </message>
     <message>
         <source>Export to individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт в индивидуальные</translation>
     </message>
     <message>
         <source>Export to individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт в индивидуальные мерки</translation>
     </message>
     <message>
         <source>Use full circumference</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать полный обхват</translation>
     </message>
     <message>
         <source>Restrict second dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить второе измерение</translation>
     </message>
     <message>
         <source>Restrict third dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить третье измерение</translation>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдонимы измерения</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>В таблице не указаны измерения</translation>
     </message>
     <message>
         <source>Invalid base value for dimension A</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение для измерения A</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension B</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица не поддерживает измерение B</translation>
     </message>
     <message>
         <source>Invalid base value for dimension B</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение для измерения B</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица не поддерживает измерение C</translation>
     </message>
     <message>
         <source>Invalid base value for dimension C</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое базовое значение для измерения C</translation>
     </message>
     <message>
         <source>measurements.vit</source>
-        <translation type="unfinished"></translation>
+        <translation>мерки.vit</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (%1):</translation>
     </message>
     <message>
         <source>%1 shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение. %1</translation>
     </message>
     <message>
         <source>Cannot convert base value to double in column 2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно преобразовать базовое значение в дробное число во втором столбце 2.</translation>
     </message>
     <message>
         <source>Cannot convert shift value to double in column %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно преобразовать значение сдвига в дробное число в столбце %1.</translation>
     </message>
     <message>
         <source>Millimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюймы</translation>
+        <translation>Дюймы</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметры</translation>
+        <translation>Сантиметры</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Градусы</translation>
     </message>
     <message>
         <source>Restrict first dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить первое измерение</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Выберите &quot;Новый&quot; для создания файла с мерками.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -12534,10 +12366,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Labels</source>
         <translation>Метки</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Видимость метки детали</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -12641,67 +12469,67 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные метки выкройки</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished">Редактировать метку выкройки</translation>
+        <translation>Редактировать метку выкройки</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Название модели:</translation>
+        <translation>Название модели:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Номер модели:</translation>
+        <translation>Номер модели:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Название компании / имя разработчика:</translation>
+        <translation>Название компании / имя разработчика:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Имя клиента:</translation>
+        <translation>Имя клиента:</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished">Формат даты:</translation>
+        <translation>Формат даты:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished">Формат времени:</translation>
+        <translation>Формат времени:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата рождения клиента:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">гггг-мм-дд</translation>
+        <translation>гггг-мм-дд</translation>
     </message>
     <message>
         <source>Customer email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронная почта клиента:</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished">Материалы</translation>
+        <translation>Материалы</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished">Материалы выкройки:</translation>
+        <translation>Материалы выкройки:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished">Управлять списком материалов выкройки</translation>
+        <translation>Управлять списком материалов выкройки</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished">Управление</translation>
+        <translation>Управление</translation>
     </message>
     <message>
         <source>Piece label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Видимость метки детали</translation>
     </message>
 </context>
 <context>
@@ -12792,7 +12620,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит наружу детали</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -12836,7 +12664,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Острый угол, который смотрит внутрь детали</translation>
     </message>
 </context>
 <context>
@@ -13001,27 +12829,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь</translation>
     </message>
     <message>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Универсальный уникальный идентификатор детали. Используется для обозначения детали при обновлении ручной раскладки. Оставьте пустым, чтобы сгенерировать новое значение.</translation>
     </message>
     <message>
         <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</translation>
     </message>
     <message>
         <source>Gradation label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка градации:</translation>
     </message>
     <message>
         <source>%size%_%height%</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">%размер%_%рост%</translation>
     </message>
     <message>
         <source>Insert…</source>
-        <translation type="unfinished">Вставить…</translation>
+        <translation>Вставить…</translation>
     </message>
 </context>
 <context>
@@ -13029,13 +12857,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Dialog</source>
         <translation>Диалог</translation>
-    </message>
-</context>
-<context>
-    <name>Tape</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Эта тестовая сборка старше %1 дня. Чтобы предоставить вам более качественный сервис, мы ограничиваем срок службы тестовой сборки. Чтобы продолжить использовать Tape, пожалуйста, обновитесь до новой тестовой сборки. Приложение будет закрыто.</translation>
     </message>
 </context>
 <context>
@@ -13206,18 +13027,6 @@ Do you want to save your changes?</source>
         <translation>Текст отображается под иконками (рекомендуется для начинающих).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Рост и размер по умолчанию</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Рост по умолчанию:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Размер по умолчанию:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>С опций ОС</translation>
     </message>
@@ -13235,7 +13044,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t use the native file dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Не использовать родной диалог файлов</translation>
     </message>
 </context>
 <context>
@@ -13282,7 +13091,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Мои раскладки</translation>
+        <translation>Мои раскладки</translation>
     </message>
 </context>
 <context>
@@ -13318,81 +13127,81 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation>Не по&amp;казывать снова</translation>
+        <translation>Не &amp;показывать снова</translation>
     </message>
 </context>
 <context>
     <name>VAbstartMeasurementDimension</name>
     <message>
         <source>Invalid min/max range</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимый мин/макс диапазон</translation>
     </message>
     <message>
         <source>Invalid step</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный шаг</translation>
     </message>
     <message>
         <source>Base value invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильное базовое значение</translation>
     </message>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полный обхват груди</translation>
     </message>
     <message>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полуобхват груди</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Chest circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Обхват груди</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полный обхват талии</translation>
     </message>
     <message>
         <source>Waist half circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полуобхват талии</translation>
     </message>
     <message>
         <source>Hip full circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полный обхват бёдер</translation>
     </message>
     <message>
         <source>Hip half circumference</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Полуобхват бёдер</translation>
     </message>
 </context>
 <context>
@@ -13500,7 +13309,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Tabloid</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>Таблоид</translation>
     </message>
     <message>
         <source>Roll 24in</source>
@@ -13552,71 +13361,67 @@ Do you want to save your changes?</source>
     <name>VAbstractMainWindow</name>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished">Подтвердите изменение формата</translation>
+        <translation>Подтвердите изменение формата</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished">Этот файл использует предыдущую версию формата v%1. Текущая версия -  v%2. При сохранении файла с этой версией приложения будет обновлена ​​версия формата для этого файла. Это может помешать вам открыть файл со старыми версиями приложения. Вы действительно хотите продолжить?</translation>
+        <translation>Этот файл использует предыдущую версию формата v%1. Текущая версия -  v%2. При сохранении файла с этой версией приложения будет обновлена ​​версия формата для этого файла. Это может помешать вам открыть файл со старыми версиями приложения. Вы действительно хотите продолжить?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Значения, разделенные запятыми</translation>
+        <translation>Значения, разделенные запятыми</translation>
     </message>
     <message>
         <source>values</source>
-        <translation type="unfinished"></translation>
+        <translation>значения</translation>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Экспорт в CSV</translation>
-    </message>
-    <message>
-        <source>The measurements document has no write permissions.</source>
-        <translation type="obsolete">Документ мерок не имеет прав на запись.</translation>
+        <translation>Экспорт в CSV</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Вы хотите изменить настройки?</translation>
+        <translation>Вы хотите изменить права?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Невозможно установить разрешения для %1 для записи.</translation>
+        <translation>Невозможно установить разрешения для %1 для записи.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Не удалось сохранить файл.</translation>
+        <translation>Не удалось сохранить файл.</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл блокировки</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Этот файл уже открыт в другом окне. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Этот файл уже открыт в другом окне. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Файл блокировки не может быть создан из-за отсутствия разрешений. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Файл блокировки не может быть создан из-за отсутствия разрешений. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished">Этот файл уже открыт в другом окне.</translation>
+        <translation>Этот файл уже открыт в другом окне.</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished">Файл блокировки не может быть создан, не хватает прав доступа.</translation>
+        <translation>Файл блокировки не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки.</translation>
     </message>
     <message>
         <source>The file has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>У файла нет прав на запись.</translation>
     </message>
 </context>
 <context>
@@ -13824,18 +13629,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение в формуле: %1. Программа будет завершена.</translation>
     </message>
 </context>
 <context>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка подготовки данных к раскладке: Деталь &apos;%1&apos; площадь &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка подготовки данных к раскладке: лист раскладки бумаги &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
@@ -13846,7 +13651,7 @@ Do you want to save your changes?</source>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать материал</translation>
     </message>
 </context>
 <context>
@@ -13901,7 +13706,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
-        <translation type="vanished">Сохранить размер листа (режим экспорта).</translation>
+        <translation type="vanished">Сохранить длину листа (режим экспорта).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
@@ -14276,14 +14081,6 @@ Do you want to save your changes?</source>
         <translation>Единицы измерения страницы (режим экспорта). Допустимые значения: %1.</translation>
     </message>
     <message>
-        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Задайте значение размера для файла шаблона, которое было открыто с помощью мультиразмерных мерок (export mode). Допустимые значения: %1 см.</translation>
-    </message>
-    <message>
-        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Устанавливает значение роста для файла выкройки, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
-    </message>
-    <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Используйте этот параметр для переопределения пользовательского материала, заданного в выкройке. Значение должно быть в форме &lt;number&gt;@&lt;user matrial name&gt;. Число должно быть в диапазоне от 1 до %1. Например, 1@Fabric2. Ключ может использоваться несколько раз. Не действует в графическом режиме.</translation>
     </message>
@@ -14333,7 +14130,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Follow manual priority over priority by square (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Следовать ручному приоритету над приоритетом по площади (режим экспорта).</translation>
     </message>
     <message>
         <source>Nest quantity copies of each piece (export mode).</source>
@@ -14353,7 +14150,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите горизонтальный масштабный коэффициент от 0,01 до 3,0 (по умолчанию = 1,0, режим экспорта).</translation>
     </message>
     <message>
         <source>Horizontal scale</source>
@@ -14361,7 +14158,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите вертикальный масштабный коэффициент от 0,01 до 3,0 (по умолчанию = 1,0, режим экспорта).</translation>
     </message>
     <message>
         <source>Vertical scale</source>
@@ -14373,67 +14170,67 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid dimension A value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое значение измерения A.</translation>
     </message>
     <message>
         <source>Invalid dimension B value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое значение измерения B.</translation>
     </message>
     <message>
         <source>Invalid dimension C value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимое значение измерения C.</translation>
     </message>
     <message>
         <source>Set base for dimension A in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения A в единицах измерения мультиразмерных мерок (режим экспорта).</translation>
     </message>
     <message>
         <source>The dimension A base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение А - база</translation>
     </message>
     <message>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения B в единицах измерения мультиразмерных мерок (режим экспорта).</translation>
     </message>
     <message>
         <source>The dimension B base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение B - база</translation>
     </message>
     <message>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите базу для измерения C в единицах измерения мультиразмерных мерок (режим экспорта).</translation>
     </message>
     <message>
         <source>The dimension C base</source>
-        <translation type="unfinished"></translation>
+        <translation>Измерение C - база</translation>
     </message>
     <message>
         <source>The filename of exported layout file. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя файла экспортированного файла раскладки. Используйте его, чтобы включить режим экспорта консоли.</translation>
     </message>
     <message>
         <source>The filename of layout file</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя файла из файла раскладки</translation>
     </message>
     <message>
         <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузите детали выкройки из файла сырых данных раскладки.</translation>
     </message>
     <message>
         <source>The raw layout data file</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл сырых данных раскладки</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): &lt;not defined&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Число, соответствующее формату вывода (по умолчанию = 0, режим экспорта):&lt;not defined&gt;</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): &lt;not defined&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер, соответствующий шаблону страницы pdf-плитка (по умолчанию = 0, режим экспорта с  форматом pdf-плитка): &lt;not defined&gt;</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить программу в тестовом режиме. Программа в этом режиме загружает один файл раскладки и тихо завершает работу, не показывая главное окно. Ключ имеет приоритет перед ключом &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -14464,7 +14261,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>manual layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>ручные раскладки</translation>
     </message>
 </context>
 <context>
@@ -14557,7 +14354,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="vanished">Этот id не уникальный.</translation>
+        <translation type="vanished">Этот id неуникальный.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -14658,7 +14455,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Math parser error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка математического анализатора: %1</translation>
     </message>
     <message>
         <source>Result is infinite</source>
@@ -14666,7 +14463,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Result is NaN</source>
-        <translation type="unfinished"></translation>
+        <translation>Результат - NaN</translation>
     </message>
     <message>
         <source>Result is zero</source>
@@ -14682,14 +14479,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вычислено</translation>
     </message>
 </context>
 <context>
     <name>VFormulaData</name>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вычислено</translation>
     </message>
     <message>
         <source>Error</source>
@@ -14715,63 +14512,63 @@ Do you want to save your changes?</source>
     <name>VLayoutExporter</name>
     <message>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается сохранить файл &apos;%1&apos;. Ошибка: %2.</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+        <translation>Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Невозможно установить поля принтера</translation>
+        <translation>Невозможно установить поля принтера</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удаётся открыть файл &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Export raw layout data failed. %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать необработанные данные раскладки. %1.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Ошибка при создании файла «%1»! %2</translation>
+        <translation>Ошибка при создании файла «%1»! %2</translation>
     </message>
     <message>
         <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать плоский файл dxf.</translation>
     </message>
     <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать файл AAMA dxf.</translation>
     </message>
     <message>
         <source>Can&apos;t create an ASTM dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать файл ASTM dxf.</translation>
     </message>
     <message>
         <source>(flat) files</source>
-        <translation type="unfinished">(плоские) файлы</translation>
+        <translation>(плоские) файлы</translation>
     </message>
     <message>
         <source>files</source>
-        <translation type="unfinished">файлы</translation>
+        <translation>файлы</translation>
     </message>
     <message>
         <source>Image files</source>
-        <translation type="unfinished">Файлы изображений</translation>
+        <translation>Файлы изображений</translation>
     </message>
     <message>
         <source>tiled</source>
-        <translation type="unfinished">плитка</translation>
+        <translation>плитка</translation>
     </message>
     <message>
         <source>Numerical control</source>
-        <translation type="unfinished"></translation>
+        <translation>Числовое управление</translation>
     </message>
     <message>
         <source>Raw Layout Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Сырые данные раскладки</translation>
     </message>
 </context>
 <context>
@@ -14793,23 +14590,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Произвольное</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Бёдра</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Талия</translation>
     </message>
 </context>
 <context>
@@ -14951,120 +14748,120 @@ Do you want to save your changes?</source>
     <name>VPApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка парсинга файла. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка, невозможно преобразовать значение. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка, пустой параметр. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Что-то не так!!!</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation type="unfinished">Программное исключение: %1. Работа программы будет завершена.</translation>
+        <translation>Программное исключение: %1. Работа программы будет завершена.</translation>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation type="unfinished">Невозможно начать слушать входящие соединения с именем &apos;%1&apos;</translation>
+        <translation>Невозможно начать слушать входящие соединения с именем &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим экспорта не поддерживает открытие нескольких файлов.</translation>
     </message>
     <message>
         <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт необработанных данных раскладки не поддерживает открытие нескольких файлов раскладки.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо указать один входной файл.</translation>
     </message>
 </context>
 <context>
     <name>VPCarrousel</name>
     <message>
         <source>Pieces of </source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Детали листа </translation>
     </message>
     <message>
         <source>Unplaced pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Неразмещённые детали</translation>
     </message>
     <message>
         <source>Pieces of</source>
-        <translation type="unfinished"></translation>
+        <translation>Детали листа</translation>
     </message>
 </context>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
         <source>Move to Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на лист</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить с листа</translation>
     </message>
     <message>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на</translation>
     </message>
 </context>
 <context>
     <name>VPDialogAbout</name>
     <message>
         <source>About Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>О Puzzle</translation>
     </message>
     <message>
         <source>Puzzle version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия Puzzle</translation>
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished">Ревизия:</translation>
+        <translation>Ревизия:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation type="unfinished">Эта программа является частью проекта Valentina.</translation>
+        <translation>Эта программа является частью проекта Valentina.</translation>
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished">Проверить наличие обновлений</translation>
+        <translation>Проверить наличие обновлений</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished">Невозможно открыть браузер по умолчанию</translation>
+        <translation>Невозможно открыть браузер по умолчанию</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
-        <translation type="unfinished">Ревизия: %1</translation>
+        <translation>Ревизия: %1</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Собрано %1 в %2</translation>
+        <translation>Собрано %1 в %2</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Веб сайт : %1</translation>
     </message>
 </context>
 <context>
@@ -15093,794 +14890,748 @@ Do you want to save your changes?</source>
     <name>VPGraphicsPiece</name>
     <message>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить с листа</translation>
     </message>
 </context>
 <context>
     <name>VPLayout</name>
     <message>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Лист %1</translation>
     </message>
 </context>
 <context>
     <name>VPLayoutFileReader</name>
     <message>
         <source>Piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь</translation>
     </message>
     <message>
         <source>Got empty attribute &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Получен пустой атрибут &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь %1 неправильная.</translation>
     </message>
     <message>
         <source>Error in line %1. Seam allowance is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в строке %1. Припуск на шов пустой.</translation>
     </message>
     <message>
         <source>Error in line %1. Grainline is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в строке %1. Контур долевой нити пустой.</translation>
     </message>
     <message>
         <source>Error in line %1. Internal path shape is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в строке %1. Форма внутреннего контура пуста.</translation>
     </message>
     <message>
         <source>Error in line %1. Marker shape is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в строке %1. Форма маркера пуста.</translation>
     </message>
     <message>
         <source>Unexpected tag %1 in line %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Неожиданный тег %1 в строке %2</translation>
     </message>
 </context>
 <context>
     <name>VPMainGraphicsView</name>
     <message>
         <source>Restore transformation origin</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановление центра трансформации</translation>
     </message>
     <message>
         <source>Remove sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить лист</translation>
     </message>
 </context>
 <context>
     <name>VPMainWindow</name>
     <message>
         <source>Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished">&amp;Окно</translation>
+        <translation>&amp;Окно</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Помощь</translation>
+        <translation>&amp;Помощь</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished">Меню</translation>
+        <translation>Меню</translation>
     </message>
     <message>
         <source>Piece Carrousel</source>
-        <translation type="unfinished"></translation>
+        <translation>Карусель деталей</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <source>Current piece properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущие свойства детали</translation>
     </message>
     <message>
         <source>Current piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущая деталь</translation>
     </message>
     <message>
         <source>Infos</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Seamline</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия шва</translation>
     </message>
     <message>
         <source>Show Seamline</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать линию шва</translation>
     </message>
     <message>
         <source>Geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Геометрия</translation>
     </message>
     <message>
         <source>Mirror piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Отзеркалить деталь</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Угол:</translation>
+        <translation>Угол:</translation>
     </message>
     <message>
         <source>Placement</source>
-        <translation type="unfinished"></translation>
+        <translation>Размещение</translation>
     </message>
     <message>
         <source>No piece selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь не выбрана</translation>
     </message>
     <message>
         <source>Sheet properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства листа</translation>
     </message>
     <message>
         <source>Current sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущий лист</translation>
     </message>
     <message>
         <source>Name </source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Имя</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Ширина</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Длина</translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <source>Remove unused length</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить неиспользованную длину</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Поля</translation>
+        <translation>Поля</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Правое:</translation>
+        <translation>Правое:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнее:</translation>
+        <translation>Верхнее:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Левое:</translation>
+        <translation>Левое:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнее:</translation>
+        <translation>Нижнее:</translation>
     </message>
     <message>
         <source>Placement Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Сетка размещения</translation>
     </message>
     <message>
         <source>Show Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать сетку</translation>
     </message>
     <message>
         <source>Column width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина колонки</translation>
     </message>
     <message>
         <source>Row height</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота ряда</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished">Контроль</translation>
+        <translation>Контроль</translation>
     </message>
     <message>
         <source>Follow grainline</source>
-        <translation type="unfinished">Раскладка по долевой</translation>
+        <translation>Раскладка по долевой</translation>
     </message>
     <message>
         <source>Sticky edges</source>
-        <translation type="unfinished"></translation>
+        <translation>Липкие края</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">Экспорт</translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
         <source>Export Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт листа</translation>
     </message>
     <message>
         <source>Tiles properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства плитки</translation>
     </message>
     <message>
         <source>Tiled Pdf Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт PDF-плиткой</translation>
     </message>
     <message>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать плитки на листе</translation>
     </message>
     <message>
         <source>Layout properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства раскладки</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Раскладка</translation>
+        <translation>Раскладка</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: наложение деталей</translation>
     </message>
     <message>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: детали за пределами поля</translation>
     </message>
     <message>
         <source>zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>масштаб</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished">Масштаб</translation>
+        <translation>Масштаб</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Открыть</translation>
+        <translation>&amp;Открыть</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished">Ctrl+O</translation>
+        <translation type="vanished">Ctrl+O</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сохранить</translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+S</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить как</translation>
     </message>
     <message>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать необработанные данные раскладки</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Выход</translation>
+        <translation>&amp;Выход</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Q</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Новый</translation>
+        <translation>&amp;Новый</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Про &amp;Qt</translation>
     </message>
     <message>
         <source>About &amp;Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>О Puzzle</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished">Увеличить</translation>
+        <translation>Увеличить</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished">Уменьшить</translation>
+        <translation>Уменьшить</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб 1:1</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished">Уместить</translation>
+        <translation>Уместить</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб листа</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
-        <translation type="unfinished">Файл «%1» не существует!</translation>
+        <translation>Файл «%1» не существует!</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Ошибка файла.</translation>
+        <translation>Ошибка файла.</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать раскладку.</translation>
     </message>
     <message>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось извлечь данные из файла &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметры</translation>
+        <translation>Сантиметры</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Миллиметры</translation>
+        <translation>Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюймы</translation>
+        <translation>Дюймы</translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished">Масштаб:</translation>
+        <translation>Масштаб:</translation>
     </message>
     <message>
         <source>untitled %1.vlt</source>
-        <translation type="unfinished"></translation>
+        <translation>без названия %1.vlt</translation>
     </message>
     <message>
         <source>untitled.vlt</source>
-        <translation type="unfinished"></translation>
+        <translation>без названия.vlt</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">только для чтения</translation>
+        <translation>только для чтения</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать настройки из некорректного .INI файла.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished">Невозможно сохранить настройки. Доступ запрещен.</translation>
+        <translation>Невозможно сохранить настройки. Доступ запрещен.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть файл, доступен ли он для записи?</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
-        <translation type="unfinished">&amp;Новое окно</translation>
+        <translation>&amp;Новое окно</translation>
     </message>
     <message>
         <source>Layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы раскладки</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Открыть файл</translation>
+        <translation>Открыть файл</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Не удалось сохранить файл</translation>
+        <translation>Не удалось сохранить файл</translation>
     </message>
     <message>
         <source>layout</source>
-        <translation type="unfinished"></translation>
+        <translation>раскладка</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Сохранить как</translation>
+        <translation>Сохранить как</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Невозможно заблокировать. Этот файл уже открыт в другом окне.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно сохранить файл</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено 2 окна программы.</translation>
     </message>
     <message>
         <source>Raw Layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы сырой раскладки</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Про Qt</translation>
+        <translation>Про Qt</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Лист</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладка</translation>
     </message>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished">Водяной знак</translation>
+        <translation>Водяной знак</translation>
     </message>
     <message>
         <source>Gradation id:</source>
-        <translation type="unfinished"></translation>
+        <translation>Идентификатор градации:</translation>
     </message>
     <message>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Трансформация</translation>
     </message>
     <message>
         <source>Translate</source>
         <comment>Translate piece</comment>
-        <translation type="unfinished"></translation>
+        <translation>Переместить</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished">По горизонтали:</translation>
+        <translation>По горизонтали:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished">По вертикали:</translation>
+        <translation>По вертикали:</translation>
     </message>
     <message>
         <source>Relative translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Относительное перемещение</translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Повернуть</translation>
     </message>
     <message>
         <source>Apply to each piece separately</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить к каждой детали отдельно</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Единицы:</translation>
+        <translation>Единицы:</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Шаблоны:</translation>
+        <translation>Шаблоны:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Длина:</translation>
+        <translation>Длина:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ориентация долевой нити:</translation>
     </message>
     <message>
         <source>Force the grainline orientation to always be horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительная ориентация долевой нити - всегда горизонтальная</translation>
     </message>
     <message>
         <source>Force the grainline orientation to always be vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительная ориентация долевой нити - всегда вертикальная</translation>
     </message>
     <message>
         <source>Ignore margins</source>
-        <translation type="unfinished">Игнорировать поля</translation>
+        <translation>Игнорировать поля</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота:</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать предварительный просмотр водяного знака</translation>
     </message>
     <message>
         <source>Show watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать водяной знак</translation>
     </message>
     <message>
         <source>Print tiles scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема печати плитки</translation>
     </message>
     <message>
         <source>Pieces gap:</source>
-        <translation type="unfinished"></translation>
+        <translation>Зазор между деталями:</translation>
     </message>
     <message>
         <source>Export Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт раскладки</translation>
     </message>
     <message>
         <source>Undo commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Команды отмены</translation>
     </message>
     <message>
         <source>Add Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить лист</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished">Печать</translation>
+        <translation>Печать</translation>
     </message>
     <message>
         <source>Print preview</source>
-        <translation type="unfinished">Предварительный просмотр</translation>
+        <translation>Предварительный просмотр</translation>
     </message>
     <message>
         <source>Print tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Печать плиткой</translation>
     </message>
     <message>
         <source>Print preview tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Предварительный просмотр плиткой</translation>
     </message>
     <message>
         <source>Editor</source>
-        <translation type="unfinished">Редактор</translation>
+        <translation>Редактор</translation>
     </message>
     <message>
         <source>Create or edit a watermark</source>
-        <translation type="unfinished">Создать или редактировать водяной знак</translation>
+        <translation>Создать или редактировать водяной знак</translation>
     </message>
     <message>
         <source>Edit current</source>
-        <translation type="unfinished">Редактировать текущий</translation>
+        <translation>Редактировать текущий</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished">Загрузка</translation>
+        <translation>Загрузить</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Unable to read a layout file. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно прочитать файл раскладки. %1</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь %1 неправильная.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Отменить</translation>
+        <translation>&amp;Отменить</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Повторить</translation>
+        <translation>&amp;Повторить</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Пиксели</translation>
+        <translation>Пиксели</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Несохранённые изменения</translation>
     </message>
     <message>
         <source>Layout has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладка была изменена.
+Вы хотите сохранить изменения?</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation type="unfinished">Сохранить…</translation>
+        <translation>Сохранить…</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Не сохранять</translation>
+        <translation>Не сохранять</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
-        <translation type="unfinished">Невозможно создать контур</translation>
+        <translation>Невозможно создать путь</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удаётся открыть файл &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось записать страницу на диск, диск заполнен?</translation>
     </message>
     <message>
         <source>The layout is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладка неправильная.</translation>
     </message>
     <message>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладка неправильная. Деталь за пределами поля. Хотите продолжить экспорт?</translation>
     </message>
     <message>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладка неправильная. Наложение деталей. Хотите продолжить экспорт?</translation>
     </message>
     <message>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Лист %1</translation>
     </message>
     <message>
         <source>translate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить детали</translation>
     </message>
     <message>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>вращать детали</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">При печати многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Ошибка печати</translation>
+        <translation>Ошибка печати</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Невозможно продолжить, в системе нет доступных принтеров.</translation>
+        <translation>Невозможно продолжить, в системе нет доступных принтеров.</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished">Файлы водяных знаков</translation>
+        <translation>Файлы водяных знаков</translation>
     </message>
     <message>
         <source>Unable to get sheet page settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VPSheet</name>
-    <message>
-        <source>Legal</source>
-        <translation type="obsolete">Legal</translation>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="obsolete">Рулон 24 дюйма</translation>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="obsolete">Рулон 30 дюймов</translation>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="obsolete">Рулон 36 дюймов</translation>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="obsolete">Рулон 42 дюйма</translation>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="obsolete">Рулон 44 дюйма</translation>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="obsolete">Рулон 44 дюйма {не 48 ли?}</translation>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="obsolete">Рулон 44 дюйма {не 62 ли?}</translation>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="obsolete">Рулон 44 дюйма {не 72 ли?}</translation>
+        <translation>Невозможно получить настройки страницы листа</translation>
     </message>
 </context>
 <context>
     <name>VPTileFactory</name>
     <message>
         <source>Grid ( %1 , %2 )</source>
-        <translation type="unfinished">Сетка ( %1 , %2 )</translation>
+        <translation>Сетка ( %1 , %2 )</translation>
     </message>
     <message>
         <source>Page %1 of %2</source>
-        <translation type="unfinished">Страница %1 из %2</translation>
+        <translation>Страница %1 из %2</translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">см</translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">дюйм</translation>
+        <translation>дюйм</translation>
     </message>
 </context>
 <context>
     <name>VPUndoAddSheet</name>
     <message>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>добавить лист</translation>
     </message>
 </context>
 <context>
     <name>VPUndoMovePieceOnSheet</name>
     <message>
         <source>move piece on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить деталь на лист</translation>
     </message>
 </context>
 <context>
     <name>VPUndoOriginMove</name>
     <message>
         <source>move transformation origin</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить начало трансформации</translation>
     </message>
 </context>
 <context>
     <name>VPUndoPieceMove</name>
     <message>
         <source>move piece</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить деталь</translation>
     </message>
 </context>
 <context>
     <name>VPUndoPieceRotate</name>
     <message>
         <source>rotate piece</source>
-        <translation type="unfinished"></translation>
+        <translation>вращать деталь</translation>
     </message>
 </context>
 <context>
     <name>VPUndoRemoveSheet</name>
     <message>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>добавить лист</translation>
     </message>
 </context>
 <context>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка, не уникальный id.</translation>
+        <translation type="vanished">Ошибка, неуникальный id.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -16128,7 +15879,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Контур детали не содержит узлов</translation>
     </message>
 </context>
 <context>
@@ -16162,11 +15913,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение для финальной мерки &quot;%1&quot; бесконечно или NaN. Пожалуйста, проверьте свои расчеты.</translation>
     </message>
     <message>
         <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать запись для финального измерения &quot;%1&apos;&quot;. Ошибка: %2</translation>
     </message>
 </context>
 <context>
@@ -16177,7 +15928,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Надсечка для точки &quot;%1&quot; в детали &quot;%2&quot; будет отключена. Ручная длина меньше допустимого значения.</translation>
     </message>
     <message>
         <source>Main path of piece %1</source>
@@ -16221,51 +15972,51 @@ Do you want to save your changes?</source>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">При печати многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation>При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
+        <translation>Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Ошибка печати</translation>
+        <translation>Ошибка печати</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Невозможно продолжить, в системе нет доступных принтеров.</translation>
+        <translation>Невозможно продолжить, в системе нет доступных принтеров.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть файл, доступен ли он для записи?</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось записать страницу на диск, диск заполнен?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Невозможно установить поля принтера</translation>
+        <translation>Невозможно установить поля принтера</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished">Невозможно установить пользовательский размер страницы принтера</translation>
+        <translation>Невозможно установить пользовательский размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished">Невозможно установить размер страницы принтера</translation>
+        <translation>Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set printer tiled page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно установить размер страницы плитки для принтера</translation>
     </message>
     <message>
         <source>unamed</source>
-        <translation type="unfinished"></translation>
+        <translation>неназванный</translation>
     </message>
     <message>
         <source>File error.
@@ -16273,7 +16024,7 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation type="unfinished">Ошибка файла.
+        <translation>Ошибка файла.
 
 %1
 
@@ -16281,37 +16032,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Раскладка устарела.</translation>
+        <translation>Раскладка устарела.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
+        <translation>Раскладка не была обновлена после последнего изменения выкройки. Хотите продолжить?</translation>
     </message>
 </context>
 <context>
     <name>VRawLayout</name>
     <message>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
-        <translation type="unfinished"></translation>
+        <translation>VRawLayout::ReadFile() failed. Ошибка несоответствия префикса формата сырой раскладки.</translation>
     </message>
     <message>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VSettings</name>
-    <message>
-        <source>layouts</source>
-        <translation type="vanished">раскладки</translation>
+        <translation>VRawLayout::ReadFile() failed.
+Ошибка совместимости формата сырой раскладки: actualFileVersion = %1 и fileVersion = %2</translation>
     </message>
 </context>
 <context>
     <name>VSimpleCurve</name>
     <message>
         <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation type="unfinished"></translation>
+        <translation>VSimpleCurve::RefreshGeometry: указатель на кривую нуль.</translation>
     </message>
 </context>
 <context>
@@ -16432,23 +16177,23 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Длина</translation>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент 1</translation>
     </message>
     <message>
         <source>Segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент 2</translation>
     </message>
 </context>
 <context>
@@ -16616,7 +16361,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>отразить объект по линии</translation>
     </message>
 </context>
 <context>
@@ -16714,7 +16459,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>переместить</translation>
     </message>
 </context>
 <context>
@@ -17253,7 +16998,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Заметки:</translation>
+        <translation>Заметки:</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -17327,23 +17072,23 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Curve 1 segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 1 сегмент 1</translation>
     </message>
     <message>
         <source>Curve 1 segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 1 сегмент 2</translation>
     </message>
     <message>
         <source>Curve 2 segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 2 сегмент 1</translation>
     </message>
     <message>
         <source>Curve 2 segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая 2 сегмент 2</translation>
     </message>
 </context>
 <context>
@@ -18720,131 +18465,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Угол2ЭлДуга_</translation>
     </message>
     <message>
-        <source>date</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дата</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">время</translation>
-    </message>
-    <message>
-        <source>patternName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">названиеМодели</translation>
-    </message>
-    <message>
-        <source>patternNumber</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">номерМодели</translation>
-    </message>
-    <message>
-        <source>author</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">автор</translation>
-    </message>
-    <message>
-        <source>customer</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">клиент</translation>
-    </message>
-    <message>
-        <source>pExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">чРазширение</translation>
-    </message>
-    <message>
-        <source>pFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">чИмяФайла</translation>
-    </message>
-    <message>
-        <source>mFileName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мИмяФайла</translation>
-    </message>
-    <message>
-        <source>mExt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мРазширение</translation>
-    </message>
-    <message>
-        <source>pLetter</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дБуква</translation>
-    </message>
-    <message>
-        <source>pAnnotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дАннотация</translation>
-    </message>
-    <message>
-        <source>pOrientation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дОриентация</translation>
-    </message>
-    <message>
-        <source>pRotation</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дВращение</translation>
-    </message>
-    <message>
-        <source>pTilt</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дНаклон</translation>
-    </message>
-    <message>
-        <source>pFoldPosition</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дРасположениеСгиба</translation>
-    </message>
-    <message>
-        <source>pName</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дИмя</translation>
-    </message>
-    <message>
-        <source>pQuantity</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">дКоличество</translation>
-    </message>
-    <message>
-        <source>mFabric</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мТкань</translation>
-    </message>
-    <message>
-        <source>mLining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мПодклад</translation>
-    </message>
-    <message>
-        <source>mInterfacing</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мКлееваяПодкладка</translation>
-    </message>
-    <message>
-        <source>mInterlining</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">мМежподкладка</translation>
-    </message>
-    <message>
-        <source>wCut</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">сВырезать</translation>
-    </message>
-    <message>
-        <source>wOnFold</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">сНаСгиб</translation>
-    </message>
-    <message>
-        <source>userMaterial</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">полМатериал</translation>
-    </message>
-    <message>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
         <translation>r2cm</translation>
@@ -18907,32 +18527,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>hyperbolic sine function</source>
         <comment>function sinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция синуса</translation>
     </message>
     <message>
         <source>hyperbolic cosine</source>
         <comment>function cosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболический косинус</translation>
     </message>
     <message>
         <source>hyperbolic tangens function</source>
         <comment>function tanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция тангенса</translation>
     </message>
     <message>
         <source>hyperbolic arcus sine function</source>
         <comment>function asinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция арксинуса</translation>
     </message>
     <message>
         <source>hyperbolic arcus cosine function</source>
         <comment>function acosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция арккосинуса</translation>
     </message>
     <message>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>гиперболическая функция арктангенса</translation>
     </message>
     <message>
         <source>sine function working with degrees</source>
@@ -18967,27 +18587,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>logarithm to the base 2</source>
         <comment>function log2</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию 2</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log10</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию 10</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию 10</translation>
     </message>
     <message>
         <source>logarithm to base e (2.71828...)</source>
         <comment>function ln</comment>
-        <translation type="unfinished"></translation>
+        <translation>логарифм к основанию е (2.71828...)</translation>
     </message>
     <message>
         <source>e raised to the power of x</source>
         <comment>function exp</comment>
-        <translation type="unfinished"></translation>
+        <translation>е возведённый в степень х</translation>
     </message>
     <message>
         <source>square root of a value</source>
@@ -18997,7 +18617,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
         <comment>function sign</comment>
-        <translation type="unfinished"></translation>
+        <translation>функция знака -1 если x&lt;0; 1 если x&gt;0</translation>
     </message>
     <message>
         <source>round to nearest integer</source>
@@ -19047,7 +18667,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает остаток с плавающей точкой от числа/делитель (округленного до нуля)</translation>
     </message>
     <message>
         <source>warning</source>
@@ -19086,7 +18706,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VValentinaSettings</name>
     <message>
         <source>layouts</source>
-        <translation type="unfinished">раскладки</translation>
+        <translation>раскладки</translation>
     </message>
 </context>
 <context>
@@ -19137,7 +18757,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Cannot find piece by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается найти деталь с идентификатором &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -19192,13 +18812,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
-    <name>Valentina</name>
-    <message>
-        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
-        <translation type="vanished">Эта тестовая сборка старше %1 дня. Чтобы предоставить вам более качественный сервис, мы ограничиваем срок службы тестовой сборки. Для продолжения работы с Валентиной, пожалуйста, обновите тестовую сборку. Приложение будет закрыто.</translation>
-    </message>
-</context>
-<context>
     <name>VisToolCubicBezierPath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
@@ -19241,7 +18854,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Точка на расстоянии и под углом&lt;/b&gt;: угол = %1°, длина = %2%3; &lt;b&gt;%4&lt;/b&gt; - фиксация угла, &lt;b&gt;%5&lt;/b&gt; - окончание создания</translation>
     </message>
 </context>
 <context>
@@ -19263,11 +18876,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина = %1%2, угол = %3°, &lt;b&gt;%4&lt;/b&gt; - фиксация угла, &lt;b&gt;клик мыши&lt;/b&gt; - завершение выбора позиции</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина = %1%2, угол = %3°, угол вращения = %4°, &lt;b&gt;%5&lt;/b&gt; - фиксация угла, &lt;b&gt;%6&lt;/b&gt; - изменение начальной точки вращения, &lt;b&gt;клик мыши&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
@@ -19278,7 +18891,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол поворота = %1°, &lt;b&gt;%2&lt;/b&gt; - фиксация угла, &lt;b&gt;клик мыши&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
@@ -19289,7 +18902,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте &lt;b&gt;%1&lt;/b&gt; для фиксации угла!</translation>
     </message>
 </context>
 <context>
@@ -19312,7 +18925,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте &lt;b&gt;%1&lt;/b&gt; для фиксации угла!</translation>
     </message>
 </context>
 <context>
@@ -19510,95 +19123,95 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished">Вы хотите изменить настройки?</translation>
+        <translation>Вы хотите изменить права?</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Цвет</translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Цвет:</translation>
+        <translation>Цвет:</translation>
     </message>
     <message>
         <source>Black</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Чёрный</translation>
     </message>
     <message>
         <source>Red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Красный</translation>
     </message>
     <message>
         <source>Dark red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Темно-красный</translation>
     </message>
     <message>
         <source>Green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Зелёный</translation>
     </message>
     <message>
         <source>Dark green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Темно-зелёный</translation>
     </message>
     <message>
         <source>Blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Синий</translation>
     </message>
     <message>
         <source>Dark blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-синий</translation>
     </message>
     <message>
         <source>Cyan</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Голубой</translation>
     </message>
     <message>
         <source>Dark cyan</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-голубой</translation>
     </message>
     <message>
         <source>Magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Фиолетовый</translation>
     </message>
     <message>
         <source>Dark magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-фиолетовый</translation>
     </message>
     <message>
         <source>Yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Жёлтый</translation>
     </message>
     <message>
         <source>Dark yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-жёлтый</translation>
     </message>
     <message>
         <source>Gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Серый</translation>
     </message>
     <message>
         <source>Dark gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Тёмно-серый</translation>
     </message>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Светло-серый</translation>
     </message>
 </context>
 <context>

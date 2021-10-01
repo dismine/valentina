@@ -75,7 +75,7 @@
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Користувацька</translation>
     </message>
 </context>
 <context>
@@ -583,7 +583,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -714,7 +714,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -841,7 +841,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -972,7 +972,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1043,7 +1043,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1102,7 +1102,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1213,7 +1213,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1304,7 +1304,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1395,7 +1395,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1486,7 +1486,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1807,7 +1807,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <source>Label</source>
@@ -1966,14 +1966,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="obsolete">Розмір</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="obsolete">Зріст</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2104,12 +2096,12 @@
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2397,7 +2389,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2512,7 +2504,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2742,7 +2734,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2861,7 +2853,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -3035,7 +3027,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3897,7 +3889,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3964,7 +3956,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4091,7 +4083,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4246,11 +4238,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Повне ім&apos;я:</translation>
+        <translation>Повне ім&apos;я:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Опис:</translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4259,27 +4251,27 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Повне ім&apos;я</translation>
+        <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Опис</translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базове значення</translation>
+        <translation>Базове значення</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
@@ -4292,15 +4284,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Базове значення</translation>
+        <translation>Базове значення</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
@@ -4415,7 +4407,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -4676,7 +4668,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4883,10 +4875,6 @@ Apply settings anyway?</source>
     <message>
         <source>Label language:</source>
         <translation>Мова назви точки:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="obsolete">yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Passmark length:</source>
@@ -5589,7 +5577,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5688,7 +5676,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5783,7 +5771,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5842,7 +5830,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5909,7 +5897,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6024,7 +6012,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6071,7 +6059,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6129,11 +6117,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Налаштування</translation>
+        <translation>Налаштування</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Шляхи</translation>
+        <translation>Шляхи</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -6145,7 +6133,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Розкладка</translation>
+        <translation>Розкладка</translation>
     </message>
 </context>
 <context>
@@ -6259,7 +6247,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -6503,32 +6491,28 @@ Apply settings anyway?</source>
         <source>The base filename does not match a regular expression.</source>
         <translation>Базове імя файлу не відповідає регулярному виразу.</translation>
     </message>
-    <message>
-        <source>files</source>
-        <translation type="vanished">файли</translation>
-    </message>
 </context>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Діалог</translation>
+        <translation type="vanished">Діалог</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Шлях:</translation>
+        <translation>Шлях:</translation>
     </message>
     <message>
         <source>Destination folder</source>
-        <translation type="unfinished">Папка призначення</translation>
+        <translation>Папка призначення</translation>
     </message>
     <message>
         <source>Path to destination folder</source>
-        <translation type="unfinished">Шлях до теки призначення</translation>
+        <translation>Шлях до теки призначення</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
-        <translation type="unfinished">Вибрати шлях до папки призначення</translation>
+        <translation>Вибрати шлях до папки призначення</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -6536,11 +6520,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File format:</source>
-        <translation type="unfinished">Формат файлу:</translation>
+        <translation>Формат файлу:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Параметри</translation>
+        <translation>Параметри</translation>
     </message>
     <message>
         <source>Binary form</source>
@@ -6560,43 +6544,47 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File name:</source>
-        <translation type="unfinished">Назва файлу:</translation>
+        <translation>Назва файлу:</translation>
     </message>
     <message>
         <source>File base name</source>
-        <translation type="unfinished">Базова назва файлу</translation>
+        <translation>Базова назва файлу</translation>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
-        <translation type="unfinished">Базове імя файлу не відповідає регулярному виразу.</translation>
+        <translation>Базове імя файлу не відповідає регулярному виразу.</translation>
     </message>
     <message>
         <source>Select folder</source>
-        <translation type="unfinished">Вибрати папку</translation>
+        <translation>Вибрати папку</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
-        <translation type="unfinished">Спроба використати значення формату, що виходить за межі діапазону.</translation>
+        <translation>Спроба використати значення формату, що виходить за межі діапазону.</translation>
     </message>
     <message>
         <source>Selected not present format.</source>
-        <translation type="unfinished">Вибрано не існуючий формат.</translation>
+        <translation>Вибрано не існуючий формат.</translation>
     </message>
     <message>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
-        <translation type="unfinished">Каталог призначення не існує або не читається.</translation>
+        <translation>Каталог призначення не існує або не читається.</translation>
     </message>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished">Конфлікт імені</translation>
+        <translation>Конфлікт імені</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation type="unfinished">У папці вже є файл з ім&apos;ям %1. Бажаєте його перезаписати?</translation>
+        <translation>У папці вже є файл з ім&apos;ям %1. Бажаєте його перезаписати?</translation>
     </message>
     <message>
         <source>Example:</source>
-        <translation type="unfinished">Приклад:</translation>
+        <translation>Приклад:</translation>
+    </message>
+    <message>
+        <source>Save manual layout</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6848,12 +6836,12 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -6903,7 +6891,7 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6940,7 +6928,7 @@ Apply settings anyway?</source>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7081,7 +7069,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7124,7 +7112,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7271,7 +7259,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -7430,7 +7418,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -7623,7 +7611,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7734,7 +7722,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Інструмент</translation>
+        <translation>Інструмент</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -9104,18 +9092,6 @@ Do you want to save your changes?</source>
         <translation>Виберіть основний контур за годиниковою стрілкою.</translation>
     </message>
     <message>
-        <source>The document has no write permissions.</source>
-        <translation type="vanished">Документ не має прав на запис.</translation>
-    </message>
-    <message>
-        <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="vanished">Не вдалося встановити права для %1 на запис.</translation>
-    </message>
-    <message>
-        <source>Could not save the file.</source>
-        <translation type="vanished">Не вдалося зберегти файл.</translation>
-    </message>
-    <message>
         <source>Could not save the file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
@@ -9521,7 +9497,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Оновити</translation>
+        <translation>Оновити</translation>
     </message>
     <message>
         <source>Update manual layout</source>
@@ -9733,10 +9709,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
         <translation>Файл мірок містить недійсні відомі мірки.</translation>
-    </message>
-    <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Неправильні одиниці виміру.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -10311,7 +10283,7 @@ This option will take an affect after restart.</source>
     <name>Puzzle</name>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="unfinished">Параметри експорту можуть використовуватися тільки з одним вхідним файлом.</translation>
+        <translation>Параметри експорту можуть використовуватися тільки з одним вхідним файлом.</translation>
     </message>
     <message>
         <source>Valentina&apos;s manual layout editor.</source>
@@ -10326,23 +10298,23 @@ This option will take an affect after restart.</source>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Мова</translation>
+        <translation>Мова</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Мова інтерфейсу:</translation>
+        <translation>Мова інтерфейсу:</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Панель інструментів</translation>
+        <translation>Панель інструментів</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Текст відображається під іконкою (рекомендується для новачків).</translation>
+        <translation>Текст відображається під іконкою (рекомендується для новачків).</translation>
     </message>
     <message>
         <source>User Interface</source>
@@ -10362,15 +10334,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Загальні</translation>
+        <translation>Загальні</translation>
     </message>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished">Графічний вивід</translation>
+        <translation>Графічний вивід</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished">Використовувати згладжування</translation>
+        <translation>Використовувати згладжування</translation>
     </message>
     <message>
         <source>Use OpenGL to render a scene.
@@ -10383,11 +10355,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Відмінити</translation>
+        <translation>Відмінити</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation type="unfinished">Кількість кроків (0 - без обмежень):</translation>
+        <translation>Кількість кроків (0 - без обмежень):</translation>
     </message>
     <message>
         <source>Scrolling</source>
@@ -10461,7 +10433,7 @@ This option will take an affect after restart.</source>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Sheet</source>
@@ -10473,19 +10445,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Одинця виміру:</translation>
+        <translation>Одинця виміру:</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Шаблони:</translation>
+        <translation>Шаблони:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Висота:</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -10493,19 +10465,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Праве:</translation>
+        <translation>Праве:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнє:</translation>
+        <translation>Верхнє:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Ліве:</translation>
+        <translation>Ліве:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнє:</translation>
+        <translation>Нижнє:</translation>
     </message>
     <message>
         <source>Ignore margins</source>
@@ -10557,70 +10529,70 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Міліметри</translation>
+        <translation>Міліметри</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметри</translation>
+        <translation>Сантиметри</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюйми</translation>
+        <translation>Дюйми</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Пікселі</translation>
+        <translation>Пікселі</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished">Шляхи, що використовує Валентина</translation>
+        <translation>Шляхи, що використовує Валентина</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Контур</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">По замовчуванню</translation>
+        <translation>По замовчуванню</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Редагувати</translation>
+        <translation>Редагувати</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Відкрити директорію</translation>
+        <translation>Відкрити директорію</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
-        <translation type="unfinished">Мої індивідуальні мірки</translation>
+        <translation>Мої індивідуальні мірки</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished">Мої стандартні мірки</translation>
+        <translation>Мої стандартні мірки</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Мої лекала</translation>
+        <translation>Мої лекала</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished">Мої шаблони</translation>
+        <translation>Мої шаблони</translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Мої розкладки</translation>
+        <translation>Мої розкладки</translation>
     </message>
 </context>
 <context>
@@ -11054,7 +11026,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Не вдалося встановити поля принтеру</translation>
+        <translation>Не вдалося встановити поля принтеру</translation>
     </message>
     <message>
         <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
@@ -11352,7 +11324,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Користувацька</translation>
     </message>
 </context>
 <context>
@@ -12040,18 +12012,6 @@ Do you want to save your changes?</source>
         <translation>Всі файли</translation>
     </message>
     <message>
-        <source>The measurements document has no write permissions.</source>
-        <translation type="vanished">Документ мірок не має прав на запис.</translation>
-    </message>
-    <message>
-        <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="vanished">Не вдалося встановити права для %1 на запис.</translation>
-    </message>
-    <message>
-        <source>Could not save the file.</source>
-        <translation type="vanished">Не вдалося зберегти файл.</translation>
-    </message>
-    <message>
         <source>Could not save the file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
@@ -12186,27 +12146,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Повне ім&apos;я</translation>
+        <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Розраховане значення</translation>
+        <translation>Розраховане значення</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Формула</translation>
+        <translation>Формула</translation>
     </message>
     <message>
         <source>Base value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Базове значення</translation>
+        <translation>Базове значення</translation>
     </message>
     <message>
         <source>Correction</source>
@@ -12215,7 +12175,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Одинці виміру:</translation>
+        <translation>Одинці виміру:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -12315,11 +12275,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюйми</translation>
+        <translation>Дюйми</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметри</translation>
+        <translation>Сантиметри</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -12402,10 +12362,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Labels</source>
         <translation>Мітки</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Мітка деталі видима</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -12517,19 +12473,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Ім&apos;я лекала:</translation>
+        <translation>Ім&apos;я лекала:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Номер лекала:</translation>
+        <translation>Номер лекала:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Компанія/дезайнер:</translation>
+        <translation>Компанія/дезайнер:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Ім&apos;я клієнта:</translation>
+        <translation>Ім&apos;я клієнта:</translation>
     </message>
     <message>
         <source>Date format:</source>
@@ -12545,7 +12501,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy-MM-dd</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -12876,15 +12832,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gradation label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%size%_%height%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13067,18 +13015,6 @@ Do you want to save your changes?</source>
         <translation>Текст відображається під іконкою (рекомендується для новачків).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Стандартний зріст і розмір</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Стандартний зріст:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Стандартний розмір:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>З параметрами ОС</translation>
     </message>
@@ -13143,7 +13079,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Мої розкладки</translation>
+        <translation>Мої розкладки</translation>
     </message>
 </context>
 <context>
@@ -13199,12 +13135,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -13228,7 +13164,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Chest circumference</source>
@@ -13420,7 +13356,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Comma-Separated Values</translation>
+        <translation>Comma-Separated Values</translation>
     </message>
     <message>
         <source>values</source>
@@ -13428,11 +13364,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Експортувати до CSV</translation>
-    </message>
-    <message>
-        <source>The measurements document has no write permissions.</source>
-        <translation type="obsolete">Документ мірок не має прав на запис.</translation>
+        <translation>Експортувати до CSV</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -13440,39 +13372,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Не вдалося встановити права для %1 на запис.</translation>
+        <translation>Не вдалося встановити права для %1 на запис.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Не вдалося зберегти файл.</translation>
+        <translation>Не вдалося зберегти файл.</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокування файлу</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей файл вже відкритий в іншому вікні. Ігноруйте якщо ви хочете продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося створити lock файл через відсутність дозволів. Ігноруйте якщо хочете продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу. Ігноруйте якщо бажаєте продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished">Цей файл вже відкрито в іншому вікні.</translation>
+        <translation>Цей файл вже відкрито в іншому вікні.</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося створити lock файл через відсутність дозволів.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу.</translation>
     </message>
     <message>
         <source>The file has no write permissions.</source>
@@ -14574,7 +14506,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Не вдалося встановити поля принтеру</translation>
+        <translation>Не вдалося встановити поля принтеру</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -14586,7 +14518,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Створення файлу &apos;%1&apos; не вдалося! %2</translation>
+        <translation>Створення файлу &apos;%1&apos; не вдалося! %2</translation>
     </message>
     <message>
         <source>Can&apos;t create an flat dxf file.</source>
@@ -14606,7 +14538,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>files</source>
-        <translation type="unfinished">файли</translation>
+        <translation>файли</translation>
     </message>
     <message>
         <source>Image files</source>
@@ -14644,15 +14576,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Жодного</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Зріст</translation>
+        <translation>Зріст</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Розмір</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -14802,35 +14734,35 @@ Do you want to save your changes?</source>
     <name>VPApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation type="unfinished">Помилка парсінгу файла. Програма буде закрита.</translation>
+        <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished">Помилка неправильний id. Програма буде закрита.</translation>
+        <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation type="unfinished">Помилка конвертації значення. Програма буде закрита.</translation>
+        <translation>Помилка конвертації значення. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation type="unfinished">Помилка пустий параметр. Програма буде закрита.</translation>
+        <translation>Помилка пустий параметр. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished">Помилка неправильний id. Програма буде закрита.</translation>
+        <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation type="unfinished">Щось не так!!</translation>
+        <translation>Щось не так!!</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програмне виключення: %1. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation type="unfinished">Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
+        <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Export mode doesn&apos;t support openning several files.</source>
@@ -14842,15 +14774,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished">Будь ласка, надайте один вхідний файл.</translation>
+        <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
 </context>
 <context>
     <name>VPCarrousel</name>
-    <message>
-        <source>Pieces of </source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Unplaced pieces</source>
         <translation type="unfinished"></translation>
@@ -14868,7 +14796,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
@@ -14891,31 +14819,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished">Ревізія:</translation>
+        <translation>Ревізія:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation type="unfinished">Ця програма є частиною проекту Valentina.</translation>
+        <translation>Ця програма є частиною проекту Valentina.</translation>
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished">Перевірити наявність оновлень</translation>
+        <translation>Перевірити наявність оновлень</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished">Не можу відкрити браузер по замовчуванню</translation>
+        <translation>Не можу відкрити браузер по замовчуванню</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
-        <translation type="unfinished">Ревізія: %1</translation>
+        <translation>Ревізія: %1</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Зібрано %1 в %2</translation>
+        <translation>Зібрано %1 в %2</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation type="unfinished">Веб сайт : %1</translation>
+        <translation>Веб сайт : %1</translation>
     </message>
 </context>
 <context>
@@ -15012,7 +14940,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -15020,11 +14948,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Допомога</translation>
+        <translation>&amp;Допомога</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished">Меню</translation>
+        <translation>Меню</translation>
     </message>
     <message>
         <source>Piece Carrousel</source>
@@ -15048,7 +14976,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Імя:</translation>
+        <translation>Імя:</translation>
     </message>
     <message>
         <source>Seamline</source>
@@ -15068,11 +14996,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Кут:</translation>
+        <translation>Кут:</translation>
     </message>
     <message>
         <source>Placement</source>
@@ -15091,20 +15019,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Ширина</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Довжина</translation>
     </message>
     <message>
         <source>Remove unused length</source>
@@ -15116,19 +15032,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Праве:</translation>
+        <translation>Праве:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнє:</translation>
+        <translation>Верхнє:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Ліве:</translation>
+        <translation>Ліве:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнє:</translation>
+        <translation>Нижнє:</translation>
     </message>
     <message>
         <source>Placement Grid</source>
@@ -15160,7 +15076,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">Експорт</translation>
+        <translation>Експорт</translation>
     </message>
     <message>
         <source>Export Sheet</source>
@@ -15184,11 +15100,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Розкладка</translation>
+        <translation>Розкладка</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Опис</translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
@@ -15208,19 +15124,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Відкрити</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Відкрити</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Зберегти</translation>
+        <translation>&amp;Зберегти</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+S</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
@@ -15228,7 +15140,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -15236,23 +15148,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Вихід</translation>
+        <translation>&amp;Вихід</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+Q</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Новий</translation>
+        <translation>&amp;Новий</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">Про &amp;Qt</translation>
+        <translation>Про &amp;Qt</translation>
     </message>
     <message>
         <source>About &amp;Puzzle</source>
@@ -15260,11 +15172,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished">Збільшити</translation>
+        <translation>Збільшити</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished">Зменшити</translation>
+        <translation>Зменшити</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
@@ -15272,7 +15184,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished">Помістити все</translation>
+        <translation>Помістити все</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
@@ -15280,15 +15192,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Властивості</translation>
+        <translation>Властивості</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
-        <translation type="unfinished">Файл &apos;%1&apos; не існує!</translation>
+        <translation>Файл &apos;%1&apos; не існує!</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Помилка файла.</translation>
+        <translation>Помилка файла.</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
@@ -15300,15 +15212,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметри</translation>
+        <translation>Сантиметри</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Міліметри</translation>
+        <translation>Міліметри</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюйми</translation>
+        <translation>Дюйми</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -15324,7 +15236,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">тільки читання</translation>
+        <translation>тільки читання</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -15340,7 +15252,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New Window</source>
-        <translation type="unfinished">&amp;Нове вікно</translation>
+        <translation>&amp;Нове вікно</translation>
     </message>
     <message>
         <source>Layout files</source>
@@ -15348,11 +15260,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Відкрити файл</translation>
+        <translation>Відкрити файл</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Не вдалося зберегти файл</translation>
+        <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
         <source>layout</source>
@@ -15360,19 +15272,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Зберегти як</translation>
+        <translation>Зберегти як</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Не вдалося зберегти файл</translation>
+        <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено кілька екземплярів програми.</translation>
     </message>
     <message>
         <source>Raw Layout files</source>
@@ -15380,7 +15292,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Про Qt</translation>
+        <translation>Про Qt</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
@@ -15429,19 +15341,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Одинця виміру:</translation>
+        <translation>Одинця виміру:</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Шаблони:</translation>
+        <translation>Шаблони:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Довжина:</translation>
+        <translation>Довжина:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
@@ -15461,7 +15373,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Висота:</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
@@ -15493,19 +15405,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished">Друк</translation>
+        <translation>Друк</translation>
     </message>
     <message>
         <source>Print preview</source>
-        <translation type="unfinished">Попередній перегляд</translation>
+        <translation>Попередній перегляд</translation>
     </message>
     <message>
         <source>Print tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Друк плиткою</translation>
     </message>
     <message>
         <source>Print preview tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередній перегляд плитки</translation>
     </message>
     <message>
         <source>Editor</source>
@@ -15525,7 +15437,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
     <message>
         <source>Unable to read a layout file. %1</source>
@@ -15537,19 +15449,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Відмінити</translation>
+        <translation>&amp;Відмінити</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Повторити</translation>
+        <translation>&amp;Повторити</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Пікселі</translation>
+        <translation>Пікселі</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Не збереженні змінення</translation>
     </message>
     <message>
         <source>Layout has been modified.
@@ -15562,11 +15474,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Зберегти</translation>
+        <translation>Зберегти</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Не зберігати</translation>
+        <translation>Не зберігати</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
@@ -15606,15 +15518,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
+        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Помилка друку</translation>
+        <translation>Помилка друку</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+        <translation>Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15626,67 +15538,24 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VPSheet</name>
-    <message>
-        <source>Letter</source>
-        <translation type="obsolete">Лист</translation>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="obsolete">Legal</translation>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="obsolete">Рулон 24 дюйми</translation>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="obsolete">Рулон 30 дюймів</translation>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="obsolete">Рулон 36 дюймів</translation>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="obsolete">Рулон 42 дюйми</translation>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="obsolete">Рулон 44 дюйми</translation>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="obsolete">Рулон 44 дюйми {48i?}</translation>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="obsolete">Рулон 44 дюйми {62i?}</translation>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="obsolete">Рулон 44 дюйми {72i?}</translation>
-    </message>
-</context>
-<context>
     <name>VPTileFactory</name>
     <message>
         <source>Grid ( %1 , %2 )</source>
-        <translation type="unfinished">Сітка ( %1 , %2 )</translation>
+        <translation>Сітка ( %1 , %2 )</translation>
     </message>
     <message>
         <source>Page %1 of %2</source>
-        <translation type="unfinished">Сторінка %1 з %2</translation>
+        <translation>Сторінка %1 з %2</translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">см</translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">дюйм</translation>
+        <translation>дюйм</translation>
     </message>
 </context>
 <context>
@@ -16076,23 +15945,23 @@ Do you want to save your changes?</source>
     <name>VPrintLayout</name>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished">Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
+        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished">Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
+        <translation>Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished">Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
+        <translation>Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Помилка друку</translation>
+        <translation>Помилка друку</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+        <translation>Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -16104,7 +15973,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished">Не вдалося встановити поля принтеру</translation>
+        <translation>Не вдалося встановити поля принтеру</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
@@ -16132,11 +16001,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is stale.</source>
-        <translation type="unfinished">Розкладка застаріла.</translation>
+        <translation>Розкладка застаріла.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
+        <translation>Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
     </message>
 </context>
 <context>
@@ -16149,13 +16018,6 @@ Do you want to save your changes?</source>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VSettings</name>
-    <message>
-        <source>layouts</source>
-        <translation type="vanished">розкладки</translation>
     </message>
 </context>
 <context>
@@ -17104,7 +16966,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Примітки:</translation>
+        <translation>Примітки:</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -18807,7 +18669,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VValentinaSettings</name>
     <message>
         <source>layouts</source>
-        <translation type="unfinished">розкладки</translation>
+        <translation>розкладки</translation>
     </message>
 </context>
 <context>
@@ -19226,11 +19088,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Колір</translation>
+        <translation>Колір</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Колір:</translation>
+        <translation>Колір:</translation>
     </message>
     <message>
         <source>Black</source>

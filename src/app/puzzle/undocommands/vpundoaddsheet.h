@@ -34,6 +34,7 @@
 
 class VPUndoAddSheet : public VPUndoCommand
 {
+    Q_OBJECT
 public:
     explicit VPUndoAddSheet(const VPSheetPtr &sheet, QUndoCommand *parent = nullptr);
     virtual ~VPUndoAddSheet()=default;

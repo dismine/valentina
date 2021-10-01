@@ -14,7 +14,7 @@
    <string>Puzzle</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="share/resources/puzzleicon.qrc">
+   <iconset>
     <normaloff>:/puzzleicon/64x64/logo.png</normaloff>:/puzzleicon/64x64/logo.png</iconset>
   </property>
   <property name="layoutDirection">
@@ -232,7 +232,7 @@
          <string notr="true"/>
         </property>
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconCurrentPiece.png</normaloff>:/puzzleicon/64x64/iconCurrentPiece.png</iconset>
         </attribute>
         <attribute name="title">
@@ -678,7 +678,7 @@
        </widget>
        <widget class="QWidget" name="tabSheetProperty">
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconLayout.png</normaloff>:/puzzleicon/64x64/iconLayout.png</iconset>
         </attribute>
         <attribute name="title">
@@ -748,7 +748,7 @@
                   <item row="0" column="0">
                    <widget class="QLabel" name="labelSheetName">
                     <property name="text">
-                     <string>Name </string>
+                     <string>Name:</string>
                     </property>
                    </widget>
                   </item>
@@ -953,7 +953,7 @@
                        <string notr="true">...</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/32X32/horizontal_grainline.png</normaloff>:/puzzleicon/32X32/horizontal_grainline.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -976,7 +976,7 @@
                        <string notr="true">...</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
+                       <iconset>
                         <normaloff>:/puzzleicon/32X32/vertical_grainline.png</normaloff>:/puzzleicon/32X32/vertical_grainline.png</iconset>
                       </property>
                       <property name="iconSize">
@@ -1202,7 +1202,7 @@
        </widget>
        <widget class="QWidget" name="tabTilesProperty">
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconTiles.png</normaloff>:/puzzleicon/64x64/iconTiles.png</iconset>
         </attribute>
         <attribute name="title">
@@ -1575,7 +1575,7 @@
        </widget>
        <widget class="QWidget" name="tabLayoutProperty">
         <attribute name="icon">
-         <iconset resource="share/resources/puzzleicon.qrc">
+         <iconset>
           <normaloff>:/puzzleicon/64x64/iconProperties.png</normaloff>:/puzzleicon/64x64/iconProperties.png</iconset>
         </attribute>
         <attribute name="title">
@@ -1975,7 +1975,7 @@
     <string>&amp;Open</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string notr="true">Ctrl+O</string>
    </property>
    <property name="menuRole">
     <enum>QAction::ApplicationSpecificRole</enum>
@@ -1993,7 +1993,7 @@
     <string>&amp;Save</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string notr="true">Ctrl+S</string>
    </property>
    <property name="menuRole">
     <enum>QAction::ApplicationSpecificRole</enum>
@@ -2011,7 +2011,7 @@
     <string>Save &amp;As</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string notr="true">Ctrl+Shift+S</string>
    </property>
    <property name="menuRole">
     <enum>QAction::ApplicationSpecificRole</enum>
@@ -2037,7 +2037,7 @@
     <string>E&amp;xit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -2052,7 +2052,7 @@
     <string>&amp;New</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+N</string>
+    <string notr="true">Ctrl+N</string>
    </property>
    <property name="menuRole">
     <enum>QAction::ApplicationSpecificRole</enum>
@@ -2352,13 +2352,12 @@
   <tabstop>checkBoxLayoutWarningPiecesOutOfBound</tabstop>
  </tabstops>
  <resources>
-  <include location="share/resources/puzzleicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
-  <buttongroup name="buttonGroupTileOrientation"/>
  </buttongroups>
 </ui>

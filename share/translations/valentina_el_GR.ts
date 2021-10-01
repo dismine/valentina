@@ -75,7 +75,7 @@
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Προσαρμογή</translation>
+        <translation>Προσαρμογή</translation>
     </message>
 </context>
 <context>
@@ -571,7 +571,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -702,7 +702,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -829,7 +829,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -960,7 +960,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1027,7 +1027,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1082,7 +1082,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1193,7 +1193,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1284,7 +1284,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1375,7 +1375,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1466,7 +1466,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1763,7 +1763,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Label</source>
@@ -1922,14 +1922,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="obsolete">Μέγεθος</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="obsolete">Ύψος</translation>
-    </message>
-    <message>
         <source>Measurments extension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2060,12 +2052,12 @@
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -2353,7 +2345,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2468,7 +2460,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -2698,7 +2690,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2817,7 +2809,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2991,7 +2983,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3826,7 +3818,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -3893,7 +3885,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4020,7 +4012,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4175,11 +4167,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished">Πλήρες όνομα:</translation>
+        <translation>Πλήρες όνομα:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Περιγραφή:</translation>
+        <translation>Περιγραφή:</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -4188,22 +4180,22 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Πλήρες όνομα</translation>
+        <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Περιγραφή</translation>
+        <translation>Περιγραφή</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -4221,11 +4213,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -4344,7 +4336,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -4605,7 +4597,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4808,10 +4800,6 @@ Apply settings anyway?</source>
     <message>
         <source>Label language:</source>
         <translation>Γλώσσα ετικέτας:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="obsolete">χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Passmark length:</source>
@@ -5506,7 +5494,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5605,7 +5593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5700,7 +5688,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5759,7 +5747,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5826,7 +5814,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5941,7 +5929,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -5988,7 +5976,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -6045,11 +6033,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρυθμίσεις</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Μονοπάτια</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
@@ -6060,7 +6048,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Τοποθέτηση</translation>
+        <translation>Τοποθέτηση</translation>
     </message>
 </context>
 <context>
@@ -6174,7 +6162,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -6414,40 +6402,28 @@ Apply settings anyway?</source>
         <source>The base filename does not match a regular expression.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>files</source>
-        <translation type="vanished">αρχεία</translation>
-    </message>
-    <message>
-        <source>(flat) files</source>
-        <translation type="vanished">(επίπεδα) αρχεία</translation>
-    </message>
-    <message>
-        <source>Image files</source>
-        <translation type="vanished">Αρχεία εικόνων</translation>
-    </message>
 </context>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Διάλογος</translation>
+        <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Διαδρομή:</translation>
+        <translation>Διαδρομή:</translation>
     </message>
     <message>
         <source>Destination folder</source>
-        <translation type="unfinished">Φάκελος προορισμού</translation>
+        <translation>Φάκελος προορισμού</translation>
     </message>
     <message>
         <source>Path to destination folder</source>
-        <translation type="unfinished">Διαδρομή για φάκελο προορισμού</translation>
+        <translation>Διαδρομή για φάκελο προορισμού</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
-        <translation type="unfinished">Επιλογή διαδρομής για φάκελο προορισμού</translation>
+        <translation>Επιλογή διαδρομής για φάκελο προορισμού</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -6455,11 +6431,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File format:</source>
-        <translation type="unfinished">Τύπος αρχείου:</translation>
+        <translation>Τύπος αρχείου:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Επιλογές</translation>
+        <translation>Επιλογές</translation>
     </message>
     <message>
         <source>Binary form</source>
@@ -6467,7 +6443,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Text as paths</source>
-        <translation type="unfinished">Κείμενο ως μονοπάτια</translation>
+        <translation>Κείμενο ως μονοπάτια</translation>
     </message>
     <message>
         <source>Export unified</source>
@@ -6479,11 +6455,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File name:</source>
-        <translation type="unfinished">Όνομα αρχείου:</translation>
+        <translation>Όνομα αρχείου:</translation>
     </message>
     <message>
         <source>File base name</source>
-        <translation type="unfinished">Όνομα αρχείου βάσης</translation>
+        <translation>Όνομα αρχείου βάσης</translation>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
@@ -6491,7 +6467,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select folder</source>
-        <translation type="unfinished">Επιλογή φακέλου</translation>
+        <translation>Επιλογή φακέλου</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
@@ -6515,7 +6491,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Example:</source>
-        <translation type="unfinished">Παράδειγμα:</translation>
+        <translation>Παράδειγμα:</translation>
+    </message>
+    <message>
+        <source>Save manual layout</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6767,12 +6747,12 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -6822,7 +6802,7 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -6859,7 +6839,7 @@ Apply settings anyway?</source>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7000,7 +6980,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7043,7 +7023,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7190,7 +7170,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -7349,7 +7329,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -7537,7 +7517,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -7648,7 +7628,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">Εργαλείο</translation>
+        <translation>Εργαλείο</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -8951,10 +8931,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not save the file.</source>
-        <translation type="vanished">Could not save the file.</translation>
-    </message>
-    <message>
         <source>Could not save the file</source>
         <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
@@ -9360,7 +9336,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Ενημέρωση</translation>
+        <translation>Ενημέρωση</translation>
     </message>
     <message>
         <source>Update manual layout</source>
@@ -9548,10 +9524,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
         <translation>Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
-    </message>
-    <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Λανθασμένες μονάδες.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -10090,7 +10062,7 @@ This option will take an affect after restart.</source>
     <name>Puzzle</name>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="unfinished">Οι επιλογές εξαγωγής μπορούν να χρησιμοποιηθούν μόνο με ένα αρχείο εισαγωγής.</translation>
+        <translation>Οι επιλογές εξαγωγής μπορούν να χρησιμοποιηθούν μόνο με ένα αρχείο εισαγωγής.</translation>
     </message>
     <message>
         <source>Valentina&apos;s manual layout editor.</source>
@@ -10104,24 +10076,20 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Language</source>
-        <translation type="unfinished">Γλώσσα</translation>
+        <translation>Γλώσσα</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Γλώσσα  γραφικού περιβάλλοντος χρήστη:</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή εργαλείων</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished"></translation>
+        <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
         <source>User Interface</source>
@@ -10141,7 +10109,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Γενικά</translation>
+        <translation>Γενικά</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -10162,7 +10130,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Αναίρεση</translation>
+        <translation>Αναίρεση</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
@@ -10239,10 +10207,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10252,43 +10216,43 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Μονάδες μέτρησης:</translation>
+        <translation>Μονάδες μέτρησης:</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Πρότυπα:</translation>
+        <translation>Πρότυπα:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Φάρδος:</translation>
+        <translation>Φάρδος:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Ύψος:</translation>
+        <translation>Ύψος:</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Περιθώρια</translation>
+        <translation>Περιθώρια</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Δεξιά:</translation>
+        <translation>Δεξιά:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Επάνω:</translation>
+        <translation>Επάνω:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Αριστερά:</translation>
+        <translation>Αριστερά:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Κάτω:</translation>
+        <translation>Κάτω:</translation>
     </message>
     <message>
         <source>Ignore margins</source>
-        <translation type="unfinished">Αγνόηση περιθωρίων</translation>
+        <translation>Αγνόηση περιθωρίων</translation>
     </message>
     <message>
         <source>Control</source>
@@ -10336,50 +10300,46 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Χιλιοστά</translation>
+        <translation>Χιλιοστά</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Εκατοστά</translation>
+        <translation>Εκατοστά</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Ίντσες</translation>
+        <translation>Ίντσες</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixels</translation>
+        <translation>Pixels</translation>
     </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished">Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
+        <translation>Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Τύπος</translation>
+        <translation>Τύπος</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Μονοπάτι</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Επεξεργασία</translation>
+        <translation>Επεξεργασία</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Άνοιγμα φακέλου</translation>
+        <translation>Άνοιγμα φακέλου</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -10391,15 +10351,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Πατρόν μου</translation>
+        <translation>Πατρόν μου</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished">Πρότυπά μου</translation>
+        <translation>Πρότυπά μου</translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Διατάξεις μου</translation>
+        <translation>Διατάξεις μου</translation>
     </message>
 </context>
 <context>
@@ -11093,7 +11053,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Προσαρμογή</translation>
+        <translation>Προσαρμογή</translation>
     </message>
 </context>
 <context>
@@ -11734,10 +11694,6 @@ Do you want to save your changes?</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
-        <source>Could not save the file.</source>
-        <translation type="vanished">Could not save the file.</translation>
-    </message>
-    <message>
         <source>Could not save the file</source>
         <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
@@ -11872,22 +11828,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Full name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Πλήρες όνομα</translation>
+        <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <source>Calculated value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Υπολογισμένη τιμή</translation>
+        <translation>Υπολογισμένη τιμή</translation>
     </message>
     <message>
         <source>Formula</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Φόρμουλα</translation>
+        <translation>Φόρμουλα</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -11901,7 +11857,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Μονάδες μέτρησης:</translation>
+        <translation>Μονάδες μέτρησης:</translation>
     </message>
     <message>
         <source>Shift B</source>
@@ -12001,11 +11957,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Ίντσες</translation>
+        <translation>Ίντσες</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Εκατοστά</translation>
+        <translation>Εκατοστά</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -12088,10 +12044,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Labels</source>
         <translation>Ετικέτες</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="obsolete">Εμφάνιση ετικέτας λεπτομέρειας</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -12203,19 +12155,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished">Όνομα πατρόν:</translation>
+        <translation>Όνομα πατρόν:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished">Αριθμός πατρόν:</translation>
+        <translation>Αριθμός πατρόν:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished">Όνομα Επιχείρησης/Σχεδιαστή:</translation>
+        <translation>Όνομα Επιχείρησης/Σχεδιαστή:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished">Όνομα πελάτη:</translation>
+        <translation>Όνομα πελάτη:</translation>
     </message>
     <message>
         <source>Date format:</source>
@@ -12231,7 +12183,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">χχχχ-ΜΜ-ηη</translation>
+        <translation>χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Customer email:</source>
@@ -12562,15 +12514,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gradation label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%size%_%height%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12749,14 +12693,6 @@ Do you want to save your changes?</source>
         <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
-        <source>Default height and size</source>
-        <translation type="obsolete">Προεπιλεγμένο ύψος και μέγεθος</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="obsolete">Εξ&apos;ορισμού μέγεθος:</translation>
-    </message>
-    <message>
         <source>With OS options</source>
         <translation>Με επιλογές του λειτουργικού συστήματος</translation>
     </message>
@@ -12821,7 +12757,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Διατάξεις μου</translation>
+        <translation>Διατάξεις μου</translation>
     </message>
 </context>
 <context>
@@ -12870,12 +12806,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Waist</source>
@@ -12899,7 +12835,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Chest circumference</source>
@@ -13078,7 +13014,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Τιμές χωρισμένες με κόμμα</translation>
+        <translation>Τιμές χωρισμένες με κόμμα</translation>
     </message>
     <message>
         <source>values</source>
@@ -13086,7 +13022,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished">Εξαγωγή σε CSV</translation>
+        <translation>Εξαγωγή σε CSV</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -13098,15 +13034,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου.</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished">Κλείδωμα αρχείου</translation>
+        <translation>Κλείδωμα αρχείου</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
+        <translation>Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -13118,7 +13054,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished">Αυτό το αρχείο είναι ήδη ανοιχτό σε ένα άλλο παράθυρο.</translation>
+        <translation>Αυτό το αρχείο είναι ήδη ανοιχτό σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -13126,7 +13062,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished">Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
+        <translation>Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
     </message>
     <message>
         <source>The file has no write permissions.</source>
@@ -14070,7 +14006,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
+        <translation>Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
     </message>
     <message>
         <source>Can&apos;t create an flat dxf file.</source>
@@ -14086,15 +14022,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>(flat) files</source>
-        <translation type="unfinished">(επίπεδα) αρχεία</translation>
+        <translation>(επίπεδα) αρχεία</translation>
     </message>
     <message>
         <source>files</source>
-        <translation type="unfinished">αρχεία</translation>
+        <translation>αρχεία</translation>
     </message>
     <message>
         <source>Image files</source>
-        <translation type="unfinished">Αρχεία εικόνων</translation>
+        <translation>Αρχεία εικόνων</translation>
     </message>
     <message>
         <source>tiled</source>
@@ -14128,15 +14064,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Κανένα</translation>
+        <translation>Κανένα</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Ύψος</translation>
+        <translation>Ύψος</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Μέγεθος</translation>
+        <translation>Μέγεθος</translation>
     </message>
     <message>
         <source>Hip</source>
@@ -14290,23 +14226,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished">Σφάλμα κακής ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
+        <translation>Σφάλμα κακής ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation type="unfinished">Σφάλμα λόγω αδυναμίας μετατροπής της τιμής. Το πρόγραμμα θα τερματιστεί.</translation>
+        <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation type="unfinished">Σφάλμα λόγω κενής παραμέτρου. Το πρόγραμμα θα τερματιστεί.</translation>
+        <translation>Σφάλμα λόγω κενής παραμέτρου. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished">Σφάλμα λόγω λάθους ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
+        <translation>Σφάλμα λόγω λάθους ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation type="unfinished">Υπάρχει σφάλμα!!</translation>
+        <translation>Υπάρχει σφάλμα!!</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
@@ -14314,7 +14250,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation type="unfinished">Δεν μπορεί να αρχίσει να ακούει τις εισερχόμενες συνδέσεις στο όνομα &apos;%1&apos;</translation>
+        <translation>Δεν μπορεί να αρχίσει να ακούει τις εισερχόμενες συνδέσεις στο όνομα &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Export mode doesn&apos;t support openning several files.</source>
@@ -14326,15 +14262,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished">Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
+        <translation>Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
     </message>
 </context>
 <context>
     <name>VPCarrousel</name>
-    <message>
-        <source>Pieces of </source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Unplaced pieces</source>
         <translation type="unfinished"></translation>
@@ -14352,7 +14284,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Διαγραφή</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
@@ -14375,23 +14307,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished">Αναθεώρηση έκδοσης:</translation>
+        <translation>Αναθεώρηση έκδοσης:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation type="unfinished">Αυτό το πρόγραμμα είναι μέρος του Valentina project.</translation>
+        <translation>Αυτό το πρόγραμμα είναι μέρος του Valentina project.</translation>
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished">Έλεγχος για ενημερώσεις</translation>
+        <translation>Έλεγχος για ενημερώσεις</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished">Δεν είναι δυνατό το άνοιγμα του προεπιλεγμένου περιηγητή</translation>
+        <translation>Δεν είναι δυνατό το άνοιγμα του προεπιλεγμένου περιηγητή</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
-        <translation type="unfinished">Αναθεώρηση έκδοσης: %1</translation>
+        <translation>Αναθεώρηση έκδοσης: %1</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -14399,7 +14331,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation type="unfinished">Ιστοσελίδα : %1</translation>
+        <translation>Ιστοσελίδα : %1</translation>
     </message>
 </context>
 <context>
@@ -14496,7 +14428,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Αρχείο</translation>
+        <translation>&amp;Αρχείο</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -14504,11 +14436,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Βοήθεια</translation>
+        <translation>&amp;Βοήθεια</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished">Μενού</translation>
+        <translation>Μενού</translation>
     </message>
     <message>
         <source>Piece Carrousel</source>
@@ -14532,7 +14464,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Όνομα:</translation>
+        <translation>Όνομα:</translation>
     </message>
     <message>
         <source>Seamline</source>
@@ -14552,11 +14484,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Περιστροφή</translation>
+        <translation>Περιστροφή</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Γωνία:</translation>
+        <translation>Γωνία:</translation>
     </message>
     <message>
         <source>Placement</source>
@@ -14575,20 +14507,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Φάρδος</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Μήκος</translation>
     </message>
     <message>
         <source>Remove unused length</source>
@@ -14596,23 +14516,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Περιθώρια</translation>
+        <translation>Περιθώρια</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Δεξιά:</translation>
+        <translation>Δεξιά:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Επάνω:</translation>
+        <translation>Επάνω:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Αριστερά:</translation>
+        <translation>Αριστερά:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Κάτω:</translation>
+        <translation>Κάτω:</translation>
     </message>
     <message>
         <source>Placement Grid</source>
@@ -14644,7 +14564,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">Εξαγωγή</translation>
+        <translation>Εξαγωγή</translation>
     </message>
     <message>
         <source>Export Sheet</source>
@@ -14668,15 +14588,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Τοποθέτηση</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Όνομα</translation>
+        <translation>Τοποθέτηση</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Περιγραφή</translation>
+        <translation>Περιγραφή</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
@@ -14696,26 +14612,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Άνοιγμα</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Άνοιγμα</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Αποθήκευση</translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Αποθήκευση</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14724,23 +14628,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">Έ&amp;ξοδος</translation>
-    </message>
-    <message>
-        <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Έ&amp;ξοδος</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Νέο</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Νέο</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">Σχετικά &amp;Qt</translation>
+        <translation>Σχετικά &amp;Qt</translation>
     </message>
     <message>
         <source>About &amp;Puzzle</source>
@@ -14748,11 +14644,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished">Μεγέθυνση</translation>
+        <translation>Μεγέθυνση</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished">Σμίκρυνση</translation>
+        <translation>Σμίκρυνση</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
@@ -14760,7 +14656,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished">Προσαρμογή zoom</translation>
+        <translation>Προσαρμογή zoom</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
@@ -14768,15 +14664,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Προτιμήσεις</translation>
+        <translation>Προτιμήσεις</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
-        <translation type="unfinished">Το αρχείο &apos;%1&apos; δεν υπάρχει!</translation>
+        <translation>Το αρχείο &apos;%1&apos; δεν υπάρχει!</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Σφάλμα στο αρχείο.</translation>
+        <translation>Σφάλμα στο αρχείο.</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
@@ -14788,15 +14684,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Εκατοστά</translation>
+        <translation>Εκατοστά</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Χιλιοστά</translation>
+        <translation>Χιλιοστά</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Ίντσες</translation>
+        <translation>Ίντσες</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -14812,7 +14708,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">μόνο για ανάγνωση</translation>
+        <translation>μόνο για ανάγνωση</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -14828,7 +14724,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New Window</source>
-        <translation type="unfinished">&amp;Νέο παράθυρο</translation>
+        <translation>&amp;Νέο παράθυρο</translation>
     </message>
     <message>
         <source>Layout files</source>
@@ -14836,11 +14732,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Άνοιγμα αρχείου</translation>
+        <translation>Άνοιγμα αρχείου</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <source>layout</source>
@@ -14848,19 +14744,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Αποθήκευση ως</translation>
+        <translation>Αποθήκευση ως</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
+        <translation>Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
+        <translation>Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
+        <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
     <message>
         <source>Raw Layout files</source>
@@ -14868,7 +14764,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Σχετικά με το Qt</translation>
+        <translation>Σχετικά με το Qt</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
@@ -14917,19 +14813,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Μονάδες μέτρησης:</translation>
+        <translation>Μονάδες μέτρησης:</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Πρότυπα:</translation>
+        <translation>Πρότυπα:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Μήκος:</translation>
+        <translation>Μήκος:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Φάρδος:</translation>
+        <translation>Φάρδος:</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
@@ -14945,11 +14841,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ignore margins</source>
-        <translation type="unfinished">Αγνόηση περιθωρίων</translation>
+        <translation>Αγνόηση περιθωρίων</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Ύψος:</translation>
+        <translation>Ύψος:</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
@@ -14981,15 +14877,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished">Εκτύπωση</translation>
+        <translation>Εκτύπωση</translation>
     </message>
     <message>
         <source>Print preview</source>
-        <translation type="unfinished">Προεπισκόπιση εκτύπωσης</translation>
+        <translation>Προεπισκόπιση εκτύπωσης</translation>
     </message>
     <message>
         <source>Print tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκτύπωση σε κομμάτια</translation>
     </message>
     <message>
         <source>Print preview tiled</source>
@@ -15013,7 +14909,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Αφαίρεση</translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <source>Unable to read a layout file. %1</source>
@@ -15025,19 +14921,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Αναίρεση</translation>
+        <translation>&amp;Αναίρεση</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Ακύρωση αναίρεσης</translation>
+        <translation>&amp;Ακύρωση αναίρεσης</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixels</translation>
+        <translation>Pixels</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Αλλαγές χωρίς αποθήκευση</translation>
+        <translation>Αλλαγές χωρίς αποθήκευση</translation>
     </message>
     <message>
         <source>Layout has been modified.
@@ -15050,15 +14946,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Αποθήκευση</translation>
+        <translation>Αποθήκευση</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Χωρίς αποθήκευση</translation>
+        <translation>Χωρίς αποθήκευση</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
-        <translation type="unfinished">Δεν είναι δυνατή η δημιουργία μονοπατιού</translation>
+        <translation>Δεν είναι δυνατή η δημιουργία μονοπατιού</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
@@ -15098,11 +14994,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Σφάλμα εκτύπωσης</translation>
+        <translation>Σφάλμα εκτύπωσης</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
+        <translation>Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15111,53 +15007,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VPSheet</name>
-    <message>
-        <source>Letter</source>
-        <translation type="obsolete">Letter</translation>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="obsolete">Legal</translation>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="obsolete">Ρολό 24 ιντσών</translation>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="obsolete">Ρολό 30 ιντσών</translation>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="obsolete">Ρολό 36 ιντσών</translation>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="obsolete">Ρολό 42 ιντσών</translation>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="obsolete">Ρολό 44 ιντσών</translation>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="obsolete">Ρολό 44 ιντσών {48i?}</translation>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="obsolete">Ρολό 44 ιντσών {62i?}</translation>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="obsolete">Ρολό 44 ιντσών {72i?}</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="obsolete">Προσαρμογή</translation>
     </message>
 </context>
 <context>
@@ -15173,12 +15022,12 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">εκ</translation>
+        <translation>εκ</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">ίντσες</translation>
+        <translation>ίντσες</translation>
     </message>
 </context>
 <context>
@@ -15580,11 +15429,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished">Σφάλμα εκτύπωσης</translation>
+        <translation>Σφάλμα εκτύπωσης</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished">Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
+        <translation>Η συνέχεια είναι αδύνατη διότι δεν υπάρχουν διαθέσιμοι εκτυπωτές στ σύστημα.</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
@@ -15628,7 +15477,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished">Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
+        <translation>Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
     </message>
 </context>
 <context>
@@ -16569,7 +16418,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Σημειώσεις:</translation>
+        <translation>Σημειώσεις:</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -18613,11 +18462,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Χρώμα</translation>
+        <translation>Χρώμα</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Χρώμα:</translation>
+        <translation>Χρώμα:</translation>
     </message>
     <message>
         <source>Black</source>

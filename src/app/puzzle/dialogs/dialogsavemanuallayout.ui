@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>413</width>
-    <height>290</height>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Save manual layout</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../share/resources/puzzleicon.qrc">
+    <normaloff>:/puzzleicon/64x64/logo.png</normaloff>:/puzzleicon/64x64/logo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_9">
    <item>
@@ -242,7 +246,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../share/resources/puzzleicon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -294,5 +294,5 @@ auto VPCarrousel::GetSheetName(const VPCarrouselSheet &sheet) -> QString
         return QStringLiteral("--> %1 %2 <--").arg(tr("Pieces of"), sheet.name);
     }
 
-    return tr("Pieces of ") + sheet.name;
+    return tr("Pieces of") + ' ' + sheet.name;
 }
