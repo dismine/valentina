@@ -453,7 +453,7 @@ QRectF VLayoutPaper::DetailsBoundingRect() const
     QRectF rec;
     for (auto &detail : d->details)
     {
-        rec = rec.united(detail.DetailBoundingRect());
+        rec = rec.united(detail.MappedDetailBoundingRect());
     }
 
     return rec;
