@@ -571,19 +571,25 @@ void DialogEditLabel::InitPlaceholders()
                                    VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
                                     ? QStringLiteral("vst") : QStringLiteral("vit")));
 
-    const QString materialDescription = tr("User material");
+    const QString userMaterialStr = tr("User material");
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {
         const QString number = QString::number(i+1);
+        QString materialDescription;
 
         QString value;
         if (materials.contains(i + 1))
         {
             value = materials.value(i + 1);
+            materialDescription = QStringLiteral("%1 %2 <%3>").arg(userMaterialStr, number, value);
+        }
+        else
+        {
+            materialDescription = QStringLiteral("%1 %2").arg(userMaterialStr, number);
         }
 
-        m_placeholders.insert(pl_userMaterial + number, qMakePair(materialDescription + number, value));
+        m_placeholders.insert(pl_userMaterial + number, qMakePair(materialDescription, value));
     }
 
     {
