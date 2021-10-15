@@ -46,15 +46,15 @@ VCommandLinePtr VCommandLine::instance = nullptr;
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-qreal Lo2Px(const QString &src, const DialogLayoutSettings &converter)
+qreal Lo2Px(const QString &src, const DialogLayoutSettings &converter, bool *ok)
 {
-    return converter.LayoutToPixels(src.toDouble());
+    return converter.LayoutToPixels(src.toDouble(ok));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter)
+qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter, bool *ok)
 {
-    return converter.PageToPixels(src.toDouble());
+    return converter.PageToPixels(src.toDouble(ok));
 }
 } // anonymous namespace
 
@@ -175,8 +175,23 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
-        diag.SetPaperHeight (Pg2Px(OptionValue(LONG_OPTION_PAGEH), diag));
-        diag.SetPaperWidth  (Pg2Px(OptionValue(LONG_OPTION_PAGEW), diag));
+        bool ok = false;
+        qreal height = Pg2Px(OptionValue(LONG_OPTION_PAGEH), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid page height value.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        diag.SetPaperHeight(height);
+
+        ok = false;
+        qreal width = Pg2Px(OptionValue(LONG_OPTION_PAGEW), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid page width value.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        diag.SetPaperWidth(width);
     }
     else
     { // Not explicit page size
@@ -197,7 +212,14 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     if (IsOptionSet(LONG_OPTION_GAPWIDTH))
     {
-        diag.SetLayoutWidth(Lo2Px(OptionValue(LONG_OPTION_GAPWIDTH), diag));
+        bool ok = false;
+        qreal width = Lo2Px(OptionValue(LONG_OPTION_GAPWIDTH), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid gap width.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        diag.SetLayoutWidth(width);
     }
 
     diag.SetAutoCropLength(IsOptionSet(LONG_OPTION_CROP_LENGTH));
@@ -216,22 +238,50 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
     {
-        margins.setLeft(Pg2Px(OptionValue(LONG_OPTION_LEFT_MARGIN), diag));
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_LEFT_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page left margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setLeft(margin);
     }
 
     if (IsOptionSet(LONG_OPTION_RIGHT_MARGIN))
     {
-        margins.setRight(Pg2Px(OptionValue(LONG_OPTION_RIGHT_MARGIN), diag));
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_RIGHT_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page right margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setRight(margin);
     }
 
     if (IsOptionSet(LONG_OPTION_TOP_MARGIN))
     {
-        margins.setTop(Pg2Px(OptionValue(LONG_OPTION_TOP_MARGIN), diag));
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_TOP_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page top margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setTop(margin);
     }
 
     if (IsOptionSet(LONG_OPTION_BOTTOM_MARGIN))
     {
-        margins.setBottom(Pg2Px(OptionValue(LONG_OPTION_BOTTOM_MARGIN), diag));
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_BOTTOM_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page bottom margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setBottom(margin);
     }
 
     diag.SetFields(margins);
@@ -592,22 +642,50 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
 
     if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
     {
-        margins.setLeft(UnitConvertor(OptionValue(LONG_OPTION_LEFT_MARGIN).toDouble(), unit, Unit::Mm));
+        bool ok = false;
+        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_LEFT_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid tiled page left margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setLeft(margin);
     }
 
     if (IsOptionSet(LONG_OPTION_RIGHT_MARGIN))
     {
-        margins.setRight(UnitConvertor(OptionValue(LONG_OPTION_RIGHT_MARGIN).toDouble(), unit, Unit::Mm));
+        bool ok = false;
+        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_RIGHT_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid tiled page right margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setLeft(margin);
     }
 
     if (IsOptionSet(LONG_OPTION_TOP_MARGIN))
     {
-        margins.setTop(UnitConvertor(OptionValue(LONG_OPTION_TOP_MARGIN).toDouble(), unit, Unit::Mm));
+        bool ok = false;
+        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_TOP_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid tiled page top margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setLeft(margin);
     }
 
     if (IsOptionSet(LONG_OPTION_BOTTOM_MARGIN))
     {
-        margins.setBottom(UnitConvertor(OptionValue(LONG_OPTION_BOTTOM_MARGIN).toDouble(), unit, Unit::Mm));
+        bool ok = false;
+        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_BOTTOM_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid tiled page bottom margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setLeft(margin);
     }
 
     return margins;
