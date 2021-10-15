@@ -572,23 +572,23 @@ int VCommandLine::OptDimensionC() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VCommandLine::TiledPageMargins() const
+auto VCommandLine::TiledPageMargins() const -> QMarginsF
 {
     QMarginsF margins(10, 10, 10, 10); // mm
 
-    if (not IsOptionSet(LONG_OPTION_LEFT_MARGIN))
-    {
-        return margins;
-    }
+    Unit unit = Unit::Cm;
 
-    const QString value = OptionValue(LONG_OPTION_LEFT_MARGIN);
-    const QStringList supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
-    if (not supportedUnits.contains(value))
+    if (IsOptionSet(LONG_OPTION_SHIFTUNITS))
     {
-        qCritical() << translate("VCommandLine", "Unsupported paper units.") << "\n";
-        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        const QString value = OptionValue(LONG_OPTION_SHIFTUNITS);
+        const QStringList supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
+        if (not supportedUnits.contains(value))
+        {
+            qCritical() << translate("VCommandLine", "Unsupported paper units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        unit = StrToUnits(value);
     }
-    const Unit unit = StrToUnits(value);
 
     if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
     {
@@ -747,7 +747,7 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Save length of the sheet if set (export mode). The option tells the program to use "
          "as much as possible width of sheet. Quality of a layout can be worse when this option was used.")},
         {{SINGLE_OPTION_SHIFTUNITS, LONG_OPTION_SHIFTUNITS},
-         translate("VCommandLine", "Layout units (as paper's one except px, export mode)."),
+         translate("VCommandLine", "Layout units (as paper's one except px, export mode). Default units cm."),
          translate("VCommandLine", "The unit")},
         {{SINGLE_OPTION_GAPWIDTH, LONG_OPTION_GAPWIDTH},
          translate("VCommandLine", "The layout gap width x2, measured in layout units (export mode). Set distance "
