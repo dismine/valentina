@@ -5327,39 +5327,60 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         return false;
     }
 
-    try
+    if (fileName.endsWith(".vit") || fileName.endsWith(".vst"))
     {
-        // Here comes undocumented Valentina's feature.
-        // Because app bundle in Mac OS X doesn't allow setup assosiation for Tape we must do this through Valentina
-        VMeasurements m(pattern);
-        m.setXMLContent(fileName);
-
-        if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
+        try
         {
-            const QString tape = VApplication::VApp()->TapeFilePath();
-            const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
+            // Here comes undocumented Valentina's feature.
+            // Because app bundle in Mac OS X doesn't allow setup assosiation for Tape we must do this through Valentina
+            VMeasurements m(pattern);
+            m.setXMLContent(fileName);
 
-            QStringList arguments = QStringList() << fileName;
-            if (isNoScaling)
+            if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
             {
-                arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
-            }
+                const QString tape = VApplication::VApp()->TapeFilePath();
+                const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
 
-            QProcess::startDetached(tape, arguments, workingDirectory);
-            qApp->exit(V_EX_OK);
-            return false; // stop continue processing
+                QStringList arguments = QStringList() << fileName;
+                if (isNoScaling)
+                {
+                    arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+                }
+
+                QProcess::startDetached(tape, arguments, workingDirectory);
+                qApp->exit(V_EX_OK);
+                return false; // stop continue processing
+            }
+        }
+        catch (VException &e)
+        {
+            qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+            Clear();
+            if (not VApplication::IsGUIMode())
+            {
+                qApp->exit(V_EX_NOINPUT);
+            }
+            return false;
         }
     }
-    catch (VException &e)
+
+    if (fileName.endsWith(".vlt"))
     {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        Clear();
-        if (not VApplication::IsGUIMode())
+        // Here comes undocumented Valentina's feature.
+        // Because app bundle in Mac OS X doesn't allow setup assosiation for Puzzle we must do this through Valentina
+        const QString puzzle = VApplication::VApp()->PuzzleFilePath();
+        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
+
+        QStringList arguments = QStringList() << fileName;
+        if (isNoScaling)
         {
-            qApp->exit(V_EX_NOINPUT);
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
         }
-        return false;
+
+        QProcess::startDetached(puzzle, arguments, workingDirectory);
+        qApp->exit(V_EX_OK);
+        return false; // stop continue processing
     }
 
     qCDebug(vMainWindow, "Loking file");

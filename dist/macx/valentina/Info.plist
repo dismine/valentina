@@ -134,7 +134,29 @@
 					<string>vst</string>
 				</array>
 				<key>public.mime-type</key>
-            	<string>text/xml</string>
+        <string>text/xml</string>
+			</dict>
+		</dict>
+    <dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Valentina layout</string>
+			<key>UTTypeIconFile</key>
+			<string>layout.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>io.bitbucket.valentinaproject.vlt</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>vlt</string>
+				</array>
+				<key>public.mime-type</key>
+        <string>text/xml</string>
 			</dict>
 		</dict>
 	</array>
