@@ -6492,10 +6492,6 @@ Appliquer quand même les réglages ?</translation>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialogue</translation>
-    </message>
-    <message>
         <source>Path:</source>
         <translation>Chemin:</translation>
     </message>
@@ -10286,10 +10282,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Formulaire</translation>
-    </message>
-    <message>
         <source>Language</source>
         <translation>Langue</translation>
     </message>
@@ -10421,10 +10413,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Formulaire</translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10535,10 +10523,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Formulaire</translation>
-    </message>
     <message>
         <source>Paths that Valentina uses</source>
         <translation type="unfinished"></translation>
@@ -13678,7 +13662,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Dimensions du plan de coupe (equivalent à celles du papier hors px, mode export).</translation>
+        <translation type="vanished">Dimensions du plan de coupe (equivalent à celles du papier hors px, mode export).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -14198,6 +14182,54 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page height value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page width value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gap width.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15112,16 +15144,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>&amp;Sauver</translation>
     </message>
     <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Ctrl+S</translation>
-    </message>
-    <message>
         <source>Save &amp;As</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+S</source>
-        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -15132,16 +15156,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Ctrl+Q</translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>

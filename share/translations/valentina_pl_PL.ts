@@ -5972,10 +5972,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Wartość pierwszego kąta</translation>
-    </message>
-    <message>
         <source>Path:</source>
         <translation>Ścieżka:</translation>
     </message>
@@ -12498,10 +12494,6 @@ Czy chcesz zapisać zmiany?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The unit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12903,6 +12895,54 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page height value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page width value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gap width.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -6495,10 +6495,6 @@ Toch de instellingen aanpassen?</translation>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialoog</translation>
-    </message>
-    <message>
         <source>Path:</source>
         <translation>Pad:</translation>
     </message>
@@ -10297,10 +10293,6 @@ Deze optie wordt actief na een herstart..</translation>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Vorm</translation>
-    </message>
-    <message>
         <source>Language</source>
         <translation>Taal</translation>
     </message>
@@ -10433,10 +10425,6 @@ Deze optie wordt actief na een herstart..</translation>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Vorm</translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10547,10 +10535,6 @@ Deze optie wordt actief na een herstart..</translation>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Vorm</translation>
-    </message>
     <message>
         <source>Paths that Valentina uses</source>
         <translation>Pad welke Valentina gebruikt</translation>
@@ -13699,7 +13683,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Opmaak eenheden (als van een papier behalve px, export modus).</translation>
+        <translation type="vanished">Opmaak eenheden (als van een papier behalve px, export modus).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -14219,6 +14203,54 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page height value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page width value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gap width.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15130,24 +15162,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>&amp;Open</translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
-        <translation type="vanished">Ctrl+O</translation>
-    </message>
-    <message>
         <source>&amp;Save</source>
         <translation>&amp;Opslaan</translation>
     </message>
     <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Ctrl+S</translation>
-    </message>
-    <message>
         <source>Save &amp;As</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+S</source>
-        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -15158,16 +15178,8 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>E&amp;xit</translation>
     </message>
     <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Ctrl+Q</translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation>&amp;Nieuw</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>

@@ -6497,10 +6497,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
         <source>Path:</source>
         <translation>Путь:</translation>
     </message>
@@ -6586,7 +6582,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить ручную раскладку</translation>
     </message>
 </context>
 <context>
@@ -10300,10 +10296,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
@@ -10436,10 +10428,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation>Лист</translation>
     </message>
@@ -10550,10 +10538,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
     <message>
         <source>Paths that Valentina uses</source>
         <translation>Пути, что использует Валентина</translation>
@@ -12836,16 +12820,8 @@ Do you want to save your changes?</source>
         <translation>Универсальный уникальный идентификатор детали. Используется для обозначения детали при обновлении ручной раскладки. Оставьте пустым, чтобы сгенерировать новое значение.</translation>
     </message>
     <message>
-        <source>{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</source>
-        <translation type="vanished">{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</translation>
-    </message>
-    <message>
         <source>Gradation label:</source>
         <translation>Метка градации:</translation>
-    </message>
-    <message>
-        <source>%size%_%height%</source>
-        <translation type="vanished">%размер%_%рост%</translation>
     </message>
     <message>
         <source>Insert…</source>
@@ -13710,7 +13686,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Единицы измерения раскладки (как для бумаги, кроме пикселей, режим экспорта).</translation>
+        <translation type="vanished">Единицы измерения раскладки (как для бумаги, кроме пикселей, режим экспорта).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -14231,6 +14207,54 @@ Do you want to save your changes?</source>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Запустить программу в тестовом режиме. Программа в этом режиме загружает один файл раскладки и тихо завершает работу, не показывая главное окно. Ключ имеет приоритет перед ключом &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid page height value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page width value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gap width.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14794,10 +14818,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VPCarrousel</name>
     <message>
-        <source>Pieces of </source>
-        <translation type="vanished">Детали листа </translation>
-    </message>
-    <message>
         <source>Unplaced pieces</source>
         <translation>Неразмещённые детали</translation>
     </message>
@@ -15037,10 +15057,6 @@ Do you want to save your changes?</source>
         <translation>Текущий лист</translation>
     </message>
     <message>
-        <source>Name </source>
-        <translation type="vanished">Имя</translation>
-    </message>
-    <message>
         <source>Format</source>
         <translation>Формат</translation>
     </message>
@@ -15149,24 +15165,12 @@ Do you want to save your changes?</source>
         <translation>&amp;Открыть</translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
-        <translation type="vanished">Ctrl+O</translation>
-    </message>
-    <message>
         <source>&amp;Save</source>
         <translation>&amp;Сохранить</translation>
     </message>
     <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Ctrl+S</translation>
-    </message>
-    <message>
         <source>Save &amp;As</source>
         <translation>Сохранить как</translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+S</source>
-        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -15177,16 +15181,8 @@ Do you want to save your changes?</source>
         <translation>&amp;Выход</translation>
     </message>
     <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Ctrl+Q</translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation>&amp;Новый</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>

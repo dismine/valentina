@@ -6494,10 +6494,6 @@ Einstellungen trotzdem anwenden?</translation>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
-    </message>
-    <message>
         <source>Path:</source>
         <translation>Verzeichnis:</translation>
     </message>
@@ -10297,10 +10293,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
-    <message>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
@@ -10433,10 +10425,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
-    <message>
         <source>Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10547,10 +10535,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
     <message>
         <source>Paths that Valentina uses</source>
         <translation>Pfade die Valentina benutzt</translation>
@@ -13697,7 +13681,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Layout -Einheiten (eines Papiers mit Ausnahme von px, Export-Modus).</translation>
+        <translation type="vanished">Layout -Einheiten (eines Papiers mit Ausnahme von px, Export-Modus).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -14217,6 +14201,54 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page height value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid page width value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gap width.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid layout page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page left margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page right margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page top margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid tiled page bottom margin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15127,24 +15159,12 @@ Do you want to save your changes?</source>
         <translation>&amp;Öffnen</translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
-        <translation type="vanished">Strg+O</translation>
-    </message>
-    <message>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Strg+S</translation>
-    </message>
-    <message>
         <source>Save &amp;As</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+S</source>
-        <translation type="vanished">Strg+Umschalt+S</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -15155,16 +15175,8 @@ Do you want to save your changes?</source>
         <translation>Valentina &amp;beenden</translation>
     </message>
     <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Strg+Q</translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation>&amp;Neu</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="vanished">Strg+N</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
