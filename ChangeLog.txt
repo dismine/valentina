@@ -1,4 +1,4 @@
-# Valentina 0.7.50 (unreleased)
+# Valentina 0.7.50 October 16, 2021
 - Fix regression. Minimal seam allowance width is less than the point accuracy values.
 - Call autosave only in GUI mode.
 - Warn about stale layout only in GUI mode.
