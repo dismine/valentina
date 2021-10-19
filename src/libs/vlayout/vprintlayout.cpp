@@ -50,6 +50,7 @@
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vmath.h"
+#include "../vpropertyexplorer/checkablemessagebox.h"
 
 namespace
 {
@@ -722,21 +723,29 @@ auto VPrintLayout::ContinueIfLayoutStale(QWidget *parent) -> int
 {
     if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
-        QMessageBox msgBox(parent);
-        msgBox.setIcon(QMessageBox::Question);
+        if (not VAbstractApplication::VApp()->Settings()->GetAskContinueIfLayoutStale())
+        {
+            return QMessageBox::Yes;
+        }
+
+        Utils::CheckableMessageBox msgBox(parent);
+        msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
         msgBox.setWindowTitle(tr("The layout is stale."));
         msgBox.setText(tr("The layout was not updated since last pattern modification. Do you want to continue?"));
-        msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::No);
-        const int width = 500;
-        auto* horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-        auto* layout = qobject_cast<QGridLayout*>(msgBox.layout());
-        SCASSERT(layout != nullptr)
-        layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-        return msgBox.exec();
+        msgBox.setStandardButtons(QDialogButtonBox::Yes|QDialogButtonBox::No);
+        msgBox.setDefaultButton(QDialogButtonBox::No);
+
+        int dialogResult = msgBox.exec();
+
+        if (msgBox.isChecked())
+        {
+            VAbstractApplication::VApp()->Settings()->SetAskContinueIfLayoutStale(false);
+        }
+
+        return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
     }
 
-    return QMessageBox::Yes;
+    return QDialogButtonBox::Yes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

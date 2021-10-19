@@ -14,6 +14,7 @@
 - Show tooltip about defined user material in the label placeholder list.
 - Fix reading tiled page margins in console mode.
 - Fix handling numeric values passed in console mode.
+- Add Don't ask again for Stale layout question dialog.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

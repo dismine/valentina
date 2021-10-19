@@ -108,6 +108,9 @@ public:
     bool GetConfirmFormatRewriting() const;
     void SetConfirmFormatRewriting(const bool &value);
 
+    bool GetAskContinueIfLayoutStale() const;
+    void SetAskContinueIfLayoutStale(const bool &value);
+
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 

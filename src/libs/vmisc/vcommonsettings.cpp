@@ -88,6 +88,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPMSystemCode, (QLatin1String("co
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationUnit, (QLatin1String("configuration/unit")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmItemDeletion, (QLatin1String("configuration/confirm_item_deletion")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmFormatRewriting, (QLatin1String("configuration/confirm_format_rewriting")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAskContinueIfLayoutStale, (QLatin1String("configuration/askContinueIfLayoutStale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle, (QLatin1String("configuration/tool_bar_style")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode, (QLatin1String("configuration/freeCurveMode")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDoubleClickZoomFitBestCurrentPP, (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP")))
@@ -597,6 +598,18 @@ bool VCommonSettings::GetConfirmFormatRewriting() const
 void VCommonSettings::SetConfirmFormatRewriting(const bool &value)
 {
     setValue(*settingConfigurationConfirmFormatRewriting, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetAskContinueIfLayoutStale() const
+{
+    return value(*settingConfigurationAskContinueIfLayoutStale, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAskContinueIfLayoutStale(const bool &value)
+{
+    setValue(*settingConfigurationAskContinueIfLayoutStale, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

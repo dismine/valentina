@@ -116,6 +116,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
         settings->SetConfirmItemDelete(true);
         settings->SetConfirmFormatRewriting(true);
+        settings->SetAskContinueIfLayoutStale(true);
     });
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
