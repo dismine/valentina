@@ -6871,6 +6871,21 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
 </context>
 <context>
+    <name>DialogSelectLanguage</name>
+    <message>
+        <source>Select language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select user interface language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSetupMultisize</name>
     <message>
         <source>Setup multisize measurements</source>
