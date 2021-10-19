@@ -786,7 +786,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             }
         }
 
-        for (auto &arg : args)
+        for (const auto &arg : args)
         {
             NewMainWindow();
             if (not MainWindow()->LoadFile(arg))

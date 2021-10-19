@@ -202,11 +202,11 @@ QStringList PreferencesConfigurationPage::Apply()
 
     if (m_langChanged || m_systemChanged)
     {
-        const QString locale = qvariant_cast<QString>(ui->langCombo->currentData());
+        const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
         m_langChanged = false;
 
-        const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
         settings->SetPMSystemCode(code);
         m_systemChanged = false;
 
@@ -214,14 +214,14 @@ QStringList PreferencesConfigurationPage::Apply()
     }
     if (m_unitChanged)
     {
-        const QString unit = qvariant_cast<QString>(ui->unitCombo->currentData());
+        const auto unit = qvariant_cast<QString>(ui->unitCombo->currentData());
         settings->SetUnit(unit);
         m_unitChanged = false;
         preferences.append(tr("default unit"));
     }
     if (m_labelLangChanged)
     {
-        const QString locale = qvariant_cast<QString>(ui->labelCombo->currentData());
+        const auto locale = qvariant_cast<QString>(ui->labelCombo->currentData());
         settings->SetLabelLanguage(locale);
         m_labelLangChanged = false;
     }
