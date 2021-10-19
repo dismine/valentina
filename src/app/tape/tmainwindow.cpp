@@ -52,6 +52,7 @@
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "version.h"
+#include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "mapplication.h" // Should be last because of definning qApp
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
@@ -148,6 +149,11 @@ TMainWindow::TMainWindow(QWidget *parent)
     AboutToShowDockMenu();
     menu->setAsDockMenu();
 #endif //defined(Q_OS_MAC)
+
+    if (MApplication::VApp()->IsAppInGUIMode())
+    {
+        QTimer::singleShot(1000, this, &TMainWindow::SetDefaultGUILanguage);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2305,6 +2311,28 @@ void TMainWindow::EditDimensionLabels()
 
     InitDimensionsBaseValue();
     InitDimensionControls();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetDefaultGUILanguage()
+{
+    if (MApplication::VApp()->IsAppInGUIMode())
+    {
+        VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+        if (not settings->IsLocaleSelected())
+        {
+            QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+            DialogSelectLanguage dialog(this);
+            QGuiApplication::restoreOverrideCursor();
+            dialog.setWindowModality(Qt::WindowModal);
+            if (dialog.exec() == QDialog::Accepted)
+            {
+                QString locale = dialog.Locale();
+                settings->SetLocale(locale);
+                VAbstractApplication::VApp()->LoadTranslation(locale);
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

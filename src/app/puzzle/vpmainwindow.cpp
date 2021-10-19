@@ -37,6 +37,7 @@
 #include <QPrinterInfo>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
+#include <QTimer>
 
 #include "ui_vpmainwindow.h"
 #include "dialogs/vpdialogabout.h"
@@ -59,6 +60,7 @@
 #include "undocommands/vpundopiecemove.h"
 #include "dialogs/dialogsavemanuallayout.h"
 #include "../vdxf/libdxfrw/drw_base.h"
+#include "../vmisc/dialogs/dialogselectlanguage.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -383,6 +385,11 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     });
 
     m_graphicsView->RefreshLayout();
+
+    if (m_cmd->IsGuiEnabled())
+    {
+        QTimer::singleShot(1000, this, &VPMainWindow::SetDefaultGUILanguage);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4510,6 +4517,28 @@ void VPMainWindow::RemoveWatermark()
     if (not m_layout->LayoutSettings().WatermarkPath().isEmpty())
     {
         m_layoutWatcher->removePath(m_layout->LayoutSettings().WatermarkPath());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetDefaultGUILanguage()
+{
+    if (m_cmd->IsGuiEnabled())
+    {
+        auto *settings = VPApplication::VApp()->PuzzleSettings();
+        if (not settings->IsLocaleSelected())
+        {
+            QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+            DialogSelectLanguage dialog(this);
+            QGuiApplication::restoreOverrideCursor();
+            dialog.setWindowModality(Qt::WindowModal);
+            if (dialog.exec() == QDialog::Accepted)
+            {
+                QString locale = dialog.Locale();
+                settings->SetLocale(locale);
+                VAbstractApplication::VApp()->LoadTranslation(locale);
+            }
+        }
     }
 }
 

@@ -224,6 +224,8 @@ private slots:
     void ShowProgress();
     void ClearPatternMessages();
 
+    void SetDefaultGUILanguage();
+
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */

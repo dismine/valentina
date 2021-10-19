@@ -145,6 +145,8 @@ private slots:
 
     void EditDimensionLabels();
 
+    void SetDefaultGUILanguage();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

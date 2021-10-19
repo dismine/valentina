@@ -535,6 +535,15 @@ void VCommonSettings::SetAutosaveTime(const int &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsLocaleSelected() const -> bool
+{
+    const QString fakeLocale = QStringLiteral("Fake");
+    QString locale = value(*settingConfigurationLocale, fakeLocale).toString();
+
+    return locale != fakeLocale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetLocale() const
 {
     if (localeCached->isEmpty())

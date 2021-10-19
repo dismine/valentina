@@ -289,6 +289,8 @@ private slots:
     void AboutToShowDockMenu();
 #endif //defined(Q_OS_MAC)
 
+    void SetDefaultGUILanguage();
+
 private:
     Q_DISABLE_COPY(VPMainWindow)
     Ui::VPMainWindow *ui;

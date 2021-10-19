@@ -70,6 +70,7 @@
 #include "../vlayout/vlayoutexporter.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vlayout/dialogs/dialoglayoutscale.h"
+#include "../vmisc/dialogs/dialogselectlanguage.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -376,6 +377,11 @@ MainWindow::MainWindow(QWidget *parent)
             ClearPatternMessages();
         }
     });
+
+    if (VApplication::VApp()->IsGUIMode())
+    {
+        QTimer::singleShot(1000, this, &MainWindow::SetDefaultGUILanguage);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4159,6 +4165,27 @@ void MainWindow::ClearPatternMessages()
     if (not m_unreadPatternMessage.isNull())
     {
         m_unreadPatternMessage->setText(QString());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetDefaultGUILanguage()
+{
+    if (VApplication::VApp()->IsGUIMode())
+    {
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        if (not settings->IsLocaleSelected())
+        {
+            QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+            DialogSelectLanguage dialog(this);
+            QGuiApplication::restoreOverrideCursor();
+            if (dialog.exec() == QDialog::Accepted)
+            {
+                QString locale = dialog.Locale();
+                settings->SetLocale(locale);
+                VAbstractApplication::VApp()->LoadTranslation(locale);
+            }
+        }
     }
 }
 

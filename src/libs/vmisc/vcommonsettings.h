@@ -93,6 +93,7 @@ public:
     int  GetAutosaveTime() const;
     void SetAutosaveTime(const int &value);
 
+    bool IsLocaleSelected() const;
     QString GetLocale() const;
     void SetLocale(const QString &value);
 

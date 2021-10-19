@@ -14,7 +14,8 @@ SOURCES += \
     $$PWD/vtablesearch.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
     $$PWD/literals.cpp \
-    $$PWD/vmodifierkey.cpp
+    $$PWD/vmodifierkey.cpp \
+    $$PWD/dialogs/dialogselectlanguage.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -52,7 +53,8 @@ HEADERS += \
     $$PWD/vdatastreamenum.h \
     $$PWD/vmodifierkey.h \
     $$PWD/typedef.h \
-    $$PWD/backport/qscopeguard.h
+    $$PWD/backport/qscopeguard.h \
+    $$PWD/dialogs/dialogselectlanguage.h
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \
@@ -72,4 +74,5 @@ contains(QT_VERSION, ^5\\.[0-2]\\.[0-2]$) { # Since Qt 5.3.0
 }
 
 FORMS    += \
-    $$PWD/dialogs/dialogexporttocsv.ui
+    $$PWD/dialogs/dialogexporttocsv.ui \
+    $$PWD/dialogs/dialogselectlanguage.ui
