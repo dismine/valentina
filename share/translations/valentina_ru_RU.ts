@@ -6880,15 +6880,15 @@ Apply settings anyway?</source>
     <name>DialogSelectLanguage</name>
     <message>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите язык</translation>
     </message>
     <message>
         <source>Select user interface language</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите язык пользовательского интерфейса</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык:</translation>
     </message>
 </context>
 <context>
@@ -14225,51 +14225,51 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid page height value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное значение высоты страницы.</translation>
     </message>
     <message>
         <source>Invalid page width value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное значение ширины страницы.</translation>
     </message>
     <message>
         <source>Invalid gap width.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная ширина зазора.</translation>
     </message>
     <message>
         <source>Invalid layout page left margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное левое поле страницы раскладки.</translation>
     </message>
     <message>
         <source>Invalid layout page right margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное правое поле страницы раскладки.</translation>
     </message>
     <message>
         <source>Invalid layout page top margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное верхнее поле страницы раскладки.</translation>
     </message>
     <message>
         <source>Invalid layout page bottom margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное нижнее поле страницы раскладки.</translation>
     </message>
     <message>
         <source>Invalid tiled page left margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное левое поле плиточной страницы.</translation>
     </message>
     <message>
         <source>Invalid tiled page right margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильное правое поле черепичной страницы.</translation>
     </message>
     <message>
         <source>Invalid tiled page top margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное верхнее поле черепичной страницы.</translation>
     </message>
     <message>
         <source>Invalid tiled page bottom margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильное нижнее поле черепичной страницы.</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы раскладки (как у бумаги, кроме px, режим экспорта). Единицы по умолчанию - см.</translation>
     </message>
 </context>
 <context>
