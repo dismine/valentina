@@ -90,7 +90,7 @@ QString VPieceLabelData::GetLetter() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceLabelData::SetLetter(const QString &qsLetter)
 {
-    d->m_qsLetter = qsLetter.left(3);
+    d->m_qsLetter = qsLetter.left(5);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
