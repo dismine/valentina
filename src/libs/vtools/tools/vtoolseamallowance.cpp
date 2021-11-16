@@ -2050,14 +2050,29 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
 auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
 {
     QLineF grainLine = m_grainLine->Grainline();
-    QPainterPath grainLinePath = VAbstractPiece::PainterPath(QVector<QPointF>{grainLine.p1(), grainLine.p2()});
-
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
                 detail.SeamAllowancePoints(getData()) : detail.MainPathPoints(getData());
-    const QPainterPath contourPath = VAbstractPiece::PainterPath(contourPoints);
 
-    return contourPath.contains(grainLinePath);
+    QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, grainLine);
+    if (not points.isEmpty())
+    {
+        for (auto &point : points)
+        {
+            if (not VFuzzyComparePoints(grainLine.p1(), point) && not VFuzzyComparePoints(grainLine.p2(), point))
+            {
+                return false;
+            }
+        }
+    }
+    else
+    {
+        QPainterPath grainLinePath = VAbstractPiece::PainterPath(QVector<QPointF>{grainLine.p1(), grainLine.p2()});
+        const QPainterPath contourPath = VAbstractPiece::PainterPath(contourPoints);
+        return contourPath.contains(grainLinePath);
+    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

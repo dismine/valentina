@@ -16,6 +16,7 @@
 - Fix handling numeric values passed in console mode.
 - Add Don't ask again for Stale layout question dialog.
 - Help user to select default GUI language.
+- Improve validation grainline position.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.
