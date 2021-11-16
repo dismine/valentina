@@ -17,6 +17,7 @@
 - Add Don't ask again for Stale layout question dialog.
 - Help user to select default GUI language.
 - Improve validation grainline position.
+- Increased the limit for the Letter field.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.
