@@ -18,6 +18,7 @@
 - Help user to select default GUI language.
 - Improve validation grainline position.
 - Increased the limit for the Letter field.
+- Fix double call of a main path context menu.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

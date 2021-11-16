@@ -3010,22 +3010,6 @@ void DialogSeamAllowance::InitPieceTab()
                 VAbstractApplication::VApp()->Settings()->GetForbidWorkpieceFlipping());
     uiTabPaths->checkBoxForceFlipping->setChecked(
                 VAbstractApplication::VApp()->Settings()->GetForceWorkpieceFlipping());
-    uiTabPaths->checkBoxHideMainPath->setChecked(VAbstractApplication::VApp()->Settings()->IsHideMainPath());
-
-    uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
-            &DialogSeamAllowance::ShowMainPathContextMenu);
-    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
-            &DialogSeamAllowance::ListChanged);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
-            &DialogSeamAllowance::SetMoveControls);
-
-    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
-            [this](){MoveListRowTop(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
-            [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
-            [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
 
     connect(uiTabPaths->lineEditUUID, &QLineEdit::textChanged, this, &DialogSeamAllowance::DetailUUIDChanged);
 
