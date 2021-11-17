@@ -749,14 +749,14 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
  */
 void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
-    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails << TagGroups;
+    QStringList tags{TagCalculation, TagModeling, TagDetails, TagGroups};
     QDomNode domNode = node.firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
         if (domNode.isElement())
         {
             const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (not domElement.isNull())
             {
                 switch (tags.indexOf(domElement.tagName()))
                 {
@@ -778,8 +778,7 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
                         ParseGroups(domElement);
                         break;
                     default:
-                        VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
-                        throw e;
+                        throw VException(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
                 }
             }
         }
