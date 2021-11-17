@@ -64,6 +64,7 @@
         <file>schema/pattern/v0.8.10.xsd</file>
         <file>schema/pattern/v0.8.11.xsd</file>
         <file>schema/pattern/v0.8.12.xsd</file>
+        <file>schema/pattern/v0.8.13.xsd</file>
         <file>schema/multisize_measurements/v0.3.0.xsd</file>
         <file>schema/multisize_measurements/v0.4.0.xsd</file>
         <file>schema/multisize_measurements/v0.4.1.xsd</file>

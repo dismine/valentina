@@ -19,6 +19,7 @@
 - Improve validation grainline position.
 - Increased the limit for the Letter field.
 - Fix double call of a main path context menu.
+- Improve storing visibility group items. Don't store duplicate information.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

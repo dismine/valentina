@@ -1847,8 +1847,9 @@ QPair<bool, QMap<quint32, quint32> > VAbstractPattern::ParseItemElement(const QD
             const QDomElement element = nodeList.at(i).toElement();
             if (not element.isNull() && element.tagName() == TagGroupItem)
             {
-                const quint32 object = GetParametrUInt(element, AttrObject, NULL_ID_STR);
                 const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
+                const quint32 object = GetParametrUInt(element, AttrObject, QString::number(tool));
+
                 items.insert(object, tool);
             }
         }
@@ -2037,8 +2038,9 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
     while (i != groupData.constEnd())
     {
         QDomElement item = createElement(TagGroupItem);
-        item.setAttribute(AttrObject, i.key());
         item.setAttribute(AttrTool, i.value());
+        SetAttributeOrRemoveIf<vidtype>(item, AttrObject, i.key(), [i](vidtype object) noexcept
+        {return object == i.value();});
         group.appendChild(item);
         ++i;
     }
@@ -2256,7 +2258,7 @@ bool VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 
             if (item.isNull() == false)
             {
                 quint32 toolIdIterate= GetParametrUInt(item, AttrTool, QChar('0'));
-                quint32 objectIdIterate= GetParametrUInt(item, AttrObject, QChar('0'));
+                quint32 objectIdIterate= GetParametrUInt(item, AttrObject, QString::number(toolIdIterate));
 
                 if(toolIdIterate == toolId && objectIdIterate == objectId)
                 {
@@ -2358,7 +2360,8 @@ QDomElement VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, q
 
         QDomElement item = createElement(TagGroupItem);
         item.setAttribute(AttrTool, toolId);
-        item.setAttribute(AttrObject, objectId);
+        SetAttributeOrRemoveIf<vidtype>(item, AttrObject, objectId, [toolId](vidtype object) noexcept
+        {return object == toolId;});
         group.appendChild(item);
 
         // to signalised that the pattern was changed and need to be saved
@@ -2413,7 +2416,7 @@ QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 object
                 if (item.isNull() == false)
                 {
                     quint32 toolIdIterate= GetParametrUInt(item, AttrTool, QChar('0'));
-                    quint32 objectIdIterate= GetParametrUInt(item, AttrObject, QChar('0'));
+                    quint32 objectIdIterate= GetParametrUInt(item, AttrObject, QString::number(toolIdIterate));
 
                     if(toolIdIterate == toolId && objectIdIterate == objectId)
                     {
