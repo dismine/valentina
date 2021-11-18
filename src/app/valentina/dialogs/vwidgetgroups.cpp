@@ -349,7 +349,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
             item->setToolTip(tr("Categories: %1.").arg(data.tags.join(", ")));
         }
 
-        if(doc->GroupIsEmpty(i.key()))
+        if(data.items.isEmpty())
         {
             QFont font = item->font();
             font.setStrikeOut(true);

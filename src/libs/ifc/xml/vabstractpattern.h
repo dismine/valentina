@@ -83,6 +83,8 @@ struct VGroupData
     QString name{};
     bool visible{true};
     QStringList tags{};
+    vidtype tool{NULL_ID};
+    QVector<QPair<vidtype, vidtype>> items{};
 };
 
 QT_WARNING_POP
@@ -212,7 +214,7 @@ public:
     QDomElement    GetDraw(const QString &name) const;
 
     void           ParseGroups(const QDomElement &domElement);
-    QDomElement    CreateGroups();
+    QDomElement    CreateGroups(const QString &patternPieceName = QString());
     QDomElement    CreateGroup(quint32 id, const QString &name, const QStringList &tags,
                                const QMap<quint32, quint32> &groupData, vidtype tool=null_id);
     vidtype        GroupLinkedToTool(vidtype toolId) const;
@@ -225,11 +227,10 @@ public:
 
     QStringList GetGroupCategories() const;
 
-    QMap<quint32, VGroupData> GetGroups();
+    QMap<quint32, VGroupData> GetGroups(const QString &patternPieceName = QString());
     QMap<quint32, QString> GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem);
     QDomElement           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
     QDomElement           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
-    bool           GroupIsEmpty(quint32 id);
     bool           GetGroupVisibility(quint32 id);
 
     static QStringList FilterGroupTags(const QString &tags);

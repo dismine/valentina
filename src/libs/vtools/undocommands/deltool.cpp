@@ -35,9 +35,25 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "vundocommand.h"
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto FixGroups(QMap<quint32, VGroupData> groups, const QMap<quint32, VGroupData> &fix) -> QMap<quint32, VGroupData>
+{
+    auto i = fix.constBegin();
+    while (i != fix.constEnd())
+    {
+        groups.insert(i.key(), i.value());
+        ++i;
+    }
+
+    return groups;
+}
+}  // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID),
+    : VUndoCommand(QDomElement(), doc, parent),
       nameActivDraw(doc->GetNameActivPP())
 {
     setText(tr("delete tool"));
@@ -45,11 +61,35 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     siblingId = doc->SiblingNodeId(nodeId);
     parentNode = doc->ParentNodeById(nodeId);
     xml = doc->CloneNodeById(nodeId);
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-DelTool::~DelTool()
-{}
+    QMap<quint32, VGroupData> groups = doc->GetGroups(nameActivDraw);
+    auto i = groups.constBegin();
+    while (i != groups.constEnd())
+    {
+        VGroupData groupData = i.value();
+        auto *itemRecord = std::find_if(groupData.items.begin(), groupData.items.end(),
+                                  [id](const QPair<vidtype, vidtype> &item) { return item.second == id; });
+
+        if (itemRecord != groupData.items.end())
+        {
+            m_groupsBefore.insert(i.key(), groupData);
+
+            QVector<QPair<vidtype, vidtype>> cleanItems;
+            for (auto item : groupData.items)
+            {
+                if (item.second != id)
+                {
+                    cleanItems.append(item);
+                }
+            }
+
+            VGroupData cleanGroupData = groupData;
+            cleanGroupData.items = cleanItems;
+            m_groupsAfter.insert(i.key(), cleanGroupData);
+        }
+        ++i;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::undo()
@@ -57,6 +97,12 @@ void DelTool::undo()
     qCDebug(vUndo, "Undo.");
 
     UndoDeleteAfterSibling(parentNode, siblingId);
+
+    if (not m_groupsBefore.isEmpty())
+    {
+        UpdateGroups(FixGroups(doc->GetGroups(nameActivDraw), m_groupsBefore));
+    }
+
     emit NeedFullParsing();
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
@@ -76,5 +122,37 @@ void DelTool::redo()
     }
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);
+
+    if (not m_groupsAfter.isEmpty())
+    {
+        UpdateGroups(FixGroups(doc->GetGroups(nameActivDraw), m_groupsAfter));
+    }
+
     emit NeedFullParsing();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
+{
+    QDomElement groupsTag = doc->CreateGroups(nameActivDraw);
+    if (not groupsTag.isNull())
+    {
+        VDomDocument::RemoveAllChildren(groupsTag);
+
+        auto i = groups.constBegin();
+        while (i != groups.constEnd())
+        {
+            QMap<vidtype, vidtype> groupMap;
+            for (auto record : i.value().items)
+            {
+                groupMap.insert(record.first, record.second);
+            }
+
+            QDomElement group = doc->CreateGroup(i.key(), i.value().name, i.value().tags, groupMap, i.value().tool);
+            doc->SetAttribute(group, VAbstractPattern::AttrVisible, i.value().visible);
+            groupsTag.appendChild(group);
+
+            ++i;
+        }
+    }
 }

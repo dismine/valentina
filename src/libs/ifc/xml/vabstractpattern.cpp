@@ -1997,29 +1997,42 @@ QDomElement VAbstractPattern::GetDraw(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VAbstractPattern::CreateGroups()
+auto VAbstractPattern::CreateGroups(const QString &patternPieceName) -> QDomElement
 {
     QDomElement draw;
-    if (GetActivDrawElement(draw))
+
+    if (patternPieceName.isEmpty())
     {
-        QDomElement groups = draw.firstChildElement(TagGroups);
-
-        if (groups.isNull())
+        if (not GetActivDrawElement(draw))
         {
-            groups = createElement(TagGroups);
-            draw.appendChild(groups);
+            return QDomElement();
         }
-
-        return groups;
     }
-    return QDomElement();
+    else
+    {
+        draw = GetPPElement(patternPieceName);
+        if (not draw.isElement())
+        {
+            return QDomElement();
+        }
+    }
+
+    QDomElement groups = draw.firstChildElement(TagGroups);
+
+    if (groups.isNull())
+    {
+        groups = createElement(TagGroups);
+        draw.appendChild(groups);
+    }
+
+    return groups;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const QStringList &tags,
-                                          const QMap<quint32, quint32> &groupData, vidtype tool)
+auto VAbstractPattern::CreateGroup(quint32 id, const QString &name, const QStringList &tags,
+                                   const QMap<quint32, quint32> &groupData, vidtype tool) -> QDomElement
 {
-    if (id == NULL_ID || groupData.isEmpty())
+    if (id == NULL_ID)
     {
         return QDomElement();
     }
@@ -2140,22 +2153,22 @@ QStringList VAbstractPattern::GetGroupCategories() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<quint32, VGroupData> VAbstractPattern::GetGroups()
+auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint32, VGroupData>
 {
     QMap<quint32, VGroupData> data;
 
     try
     {
-        QDomElement groups = CreateGroups();
+        QDomElement groups = CreateGroups(patternPieceName);
         if (not groups.isNull())
         {
             QDomNode domNode = groups.firstChild();
-            while (domNode.isNull() == false)
+            while (not domNode.isNull())
             {
                 if (domNode.isElement())
                 {
                     const QDomElement group = domNode.toElement();
-                    if (group.isNull() == false)
+                    if (not group.isNull())
                     {
                         if (group.tagName() == TagGroup)
                         {
@@ -2164,6 +2177,25 @@ QMap<quint32, VGroupData> VAbstractPattern::GetGroups()
                             groupData.visible = GetParametrBool(group, AttrVisible, trueStr);
                             groupData.name = GetParametrString(group, AttrName, tr("New group"));
                             groupData.tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
+                            groupData.tool = GetParametrUInt(group, AttrTool, NULL_ID_STR);
+
+                            QVector<QPair<quint32, quint32>> items;
+
+                            const QDomNodeList nodeList = group.childNodes();
+                            const qint32 num = nodeList.size();
+                            for (qint32 i = 0; i < num; ++i)
+                            {
+                                const QDomElement element = nodeList.at(i).toElement();
+                                if (not element.isNull() && element.tagName() == TagGroupItem)
+                                {
+                                    const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
+                                    const quint32 object = GetParametrUInt(element, AttrObject, QString::number(tool));
+
+                                    items.append(QPair<quint32, quint32>(object, tool));
+                                }
+                            }
+
+                            groupData.items = items;
 
                             data.insert(id, groupData);
                         }
@@ -2446,27 +2478,6 @@ QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 object
     }
 
     return QDomElement();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Returns true if the given group is empty
- * @param id group id
- * @return true if the given group is empty
- */
-bool VAbstractPattern::GroupIsEmpty(quint32 id)
-{
-    QDomElement group = elementById(id, TagGroup);
-
-    if (group.isNull() == false)
-    {
-        return not group.hasChildNodes();
-    }
-    else
-    {
-        qDebug() << "The group of id " << id << " doesn't exist";
-        return true;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

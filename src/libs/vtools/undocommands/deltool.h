@@ -43,14 +43,18 @@ class DelTool : public VUndoCommand
     Q_OBJECT
 public:
     DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~DelTool() override;
+    virtual ~DelTool() override =default;
     virtual void undo() override;
     virtual void redo() override;
 private:
     Q_DISABLE_COPY(DelTool)
-    QDomNode      parentNode;
-    quint32       siblingId;
+    QDomNode      parentNode{};
+    quint32       siblingId{NULL_ID};
     const QString nameActivDraw;
+    QMap<quint32, VGroupData> m_groupsBefore{};
+    QMap<quint32, VGroupData> m_groupsAfter{};
+
+    void UpdateGroups(const QMap<quint32, VGroupData> &groups) const;
 };
 
 #endif // DELTOOL_H
