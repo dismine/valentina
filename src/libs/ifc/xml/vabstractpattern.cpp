@@ -474,19 +474,20 @@ int VAbstractPattern::CountPP() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VAbstractPattern::GetPPElement(const QString &name)
 {
-    if (name.isEmpty() == false)
+    if (not name.isEmpty())
     {
         const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
         if (elements.size() == 0)
         {
             return QDomElement();
         }
+
         for ( qint32 i = 0; i < elements.count(); i++ )
         {
-            QDomElement element = elements.at( i ).toElement();
-            if (element.isNull() == false)
+            QDomElement element = elements.at(i).toElement();
+            if (not element.isNull())
             {
-                if ( element.attribute( AttrName ) == name )
+                if (element.attribute(AttrName) == name)
                 {
                     return element;
                 }

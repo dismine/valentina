@@ -328,7 +328,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
         ++currentRow;
         const VGroupData data = i.value();
 
-        QTableWidgetItem *item = new QTableWidgetItem();
+        auto *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
         (data.visible) ? item->setIcon(QIcon("://icon/16x16/open_eye.png"))
                        : item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
