@@ -121,6 +121,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolSeamAllowanceDialogSize, (QL
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIncrementsDialogSize, (QLatin1String("toolIncrementsDialogSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFormulaWizardDialogSize, (QLatin1String("formulaWizardDialogSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFinalMeasurementsDialogSize, (QLatin1String("finalMeasurementsDialogSize")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutomaticallyCheckUpdates, (QLatin1String("automaticallyCheckUpdates")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLatestSkippedVersion, (QLatin1String("lastestSkippedVersion")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDateOfLastRemind, (QLatin1String("dateOfLastRemind")))
 
@@ -819,6 +820,21 @@ QSize VCommonSettings::GetFinalMeasurementsDialogSize() const
 void VCommonSettings::SetFinalMeasurementsDialogSize(const QSize &sz)
 {
     setValue(*settingFinalMeasurementsDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsAutomaticallyCheckUpdates() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingAutomaticallyCheckUpdates, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAutomaticallyCheckUpdates(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingAutomaticallyCheckUpdates, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

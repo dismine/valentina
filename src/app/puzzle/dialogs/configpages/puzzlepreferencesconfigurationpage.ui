@@ -156,6 +156,28 @@ This option will take an affect after restart.</string>
             </widget>
            </item>
            <item>
+            <widget class="QGroupBox" name="groupBox_9">
+             <property name="title">
+              <string>Update</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <widget class="QCheckBox" name="checkBoxAutomaticallyCheckUpdates">
+                <property name="toolTip">
+                 <string>Automatically check for updates each time the application starts</string>
+                </property>
+                <property name="text">
+                 <string>Automatically check for updates</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>

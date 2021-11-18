@@ -284,7 +284,7 @@ bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CheckForUpdatesSilent()
+auto FvUpdater::CheckForUpdatesSilent() -> bool
 {
     if (VAbstractApplication::VApp()->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
     {
@@ -295,18 +295,16 @@ bool FvUpdater::CheckForUpdatesSilent()
         }
         return success;
     }
-    else
+
+    if (m_dropOnFinnish)
     {
-        if (m_dropOnFinnish)
-        {
-            drop();
-        }
-        return true;
+        drop();
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CheckForUpdatesNotSilent()
+auto FvUpdater::CheckForUpdatesNotSilent() -> bool
 {
     const bool success = CheckForUpdates(false);
     if (m_dropOnFinnish && not success)

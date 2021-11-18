@@ -61,6 +61,9 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
 
+    //----------------------- Update
+    ui->checkBoxAutomaticallyCheckUpdates->setChecked(settings->IsAutomaticallyCheckUpdates());
+
     // Tab Scrolling
     ui->spinBoxDuration->setMinimum(VCommonSettings::scrollingDurationMin);
     ui->spinBoxDuration->setMaximum(VCommonSettings::scrollingDurationMax);
@@ -138,6 +141,11 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
     {
         preferences.append(tr("scene render"));
         settings->SetOpenGLRender(ui->checkBoxOpenGLRender->isChecked());
+    }
+
+    if (settings->IsAutomaticallyCheckUpdates() != ui->checkBoxAutomaticallyCheckUpdates->isChecked())
+    {
+        settings->SetAutomaticallyCheckUpdates(ui->checkBoxAutomaticallyCheckUpdates->isChecked());
     }
 
     // Tab Scrolling

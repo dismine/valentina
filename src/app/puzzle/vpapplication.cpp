@@ -37,6 +37,7 @@
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../fervor/fvupdater.h"
 
 #include <QMessageBox>
 #include <QLoggingCategory>
@@ -565,6 +566,15 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 void VPApplication::ProcessCMD()
 {
     ParseCommandLine(SocketConnection::Client, arguments());
+
+    if (IsAppInGUIMode() && Settings()->IsAutomaticallyCheckUpdates())
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+
+        // Check for updates automatically
+        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,6 +39,7 @@
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../fervor/fvupdater.h"
 
 #include <QDir>
 #include <QFileOpenEvent>
@@ -871,6 +872,15 @@ TMainWindow *MApplication::NewMainWindow()
 void MApplication::ProcessCMD()
 {
     ParseCommandLine(SocketConnection::Client, arguments());
+
+    if (IsAppInGUIMode() && Settings()->IsAutomaticallyCheckUpdates())
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+
+        // Check for updates automatically
+        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

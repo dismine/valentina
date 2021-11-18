@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>680</width>
-    <height>624</height>
+    <height>872</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,9 +33,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
+            <y>-27</y>
             <width>624</width>
-            <height>765</height>
+            <height>838</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -287,6 +287,28 @@
                <widget class="QCheckBox" name="checkBoxDontUseNativeDialog">
                 <property name="text">
                  <string>Don't use the native file dialog</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_9">
+             <property name="title">
+              <string>Update</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <widget class="QCheckBox" name="checkBoxAutomaticallyCheckUpdates">
+                <property name="toolTip">
+                 <string>Automatically check for updates each time the application starts</string>
+                </property>
+                <property name="text">
+                 <string>Automatically check for updates</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>

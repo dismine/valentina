@@ -87,6 +87,10 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(MApplication::VApp()->TapeSettings()->GetToolBarStyle());
+
+    //----------------------- Update
+    ui->checkBoxAutomaticallyCheckUpdates->setChecked(
+                MApplication::VApp()->TapeSettings()->IsAutomaticallyCheckUpdates());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,6 +135,11 @@ QStringList TapePreferencesConfigurationPage::Apply()
         // Part about measurments will not be updated automatically
         MApplication::VApp()->RetranslateTables();
         MApplication::VApp()->RetranslateGroups();
+    }
+
+    if (settings->IsAutomaticallyCheckUpdates() != ui->checkBoxAutomaticallyCheckUpdates->isChecked())
+    {
+        settings->SetAutomaticallyCheckUpdates(ui->checkBoxAutomaticallyCheckUpdates->isChecked());
     }
 
     return preferences;

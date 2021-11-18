@@ -136,6 +136,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     // Native dialogs
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
+    //----------------------- Update
+    ui->checkBoxAutomaticallyCheckUpdates->setChecked(settings->IsAutomaticallyCheckUpdates());
+
     // Tab Scrolling
     ui->spinBoxDuration->setMinimum(VCommonSettings::scrollingDurationMin);
     ui->spinBoxDuration->setMaximum(VCommonSettings::scrollingDurationMax);
@@ -212,6 +215,7 @@ QStringList PreferencesConfigurationPage::Apply()
 
         VAbstractApplication::VApp()->LoadTranslation(locale);
     }
+
     if (m_unitChanged)
     {
         const auto unit = qvariant_cast<QString>(ui->unitCombo->currentData());
@@ -219,11 +223,17 @@ QStringList PreferencesConfigurationPage::Apply()
         m_unitChanged = false;
         preferences.append(tr("default unit"));
     }
+
     if (m_labelLangChanged)
     {
         const auto locale = qvariant_cast<QString>(ui->labelCombo->currentData());
         settings->SetLabelLanguage(locale);
         m_labelLangChanged = false;
+    }
+
+    if (settings->IsAutomaticallyCheckUpdates() != ui->checkBoxAutomaticallyCheckUpdates->isChecked())
+    {
+        settings->SetAutomaticallyCheckUpdates(ui->checkBoxAutomaticallyCheckUpdates->isChecked());
     }
 
     // Tab Scrolling

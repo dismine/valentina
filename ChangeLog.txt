@@ -21,6 +21,7 @@
 - Fix double call of a main path context menu.
 - Improve storing visibility group items. Don't store duplicate information.
 - Remove tool from all visibility groups it in.
+- Option to disable the automatic search for updates.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

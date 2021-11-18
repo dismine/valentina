@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     VApplication app(argc, argv);
     app.InitOptions();
 
-    if (VApplication::IsGUIMode())
+    if (VApplication::IsGUIMode() && VAbstractApplication::VApp()->Settings()->IsAutomaticallyCheckUpdates())
     {
         // Set feed URL before doing anything else
         FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
 #if !defined(Q_OS_MAC)
-    app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
+    VApplication::setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
 #endif // !defined(Q_OS_MAC)
     app.setMainWindow(&w);
 

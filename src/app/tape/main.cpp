@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 #endif //Q_OS_MAC
 
     MApplication app(argc, argv);
-    app.InitOptions();
+    app.InitOptions(); 
 
     QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
 
