@@ -34,6 +34,7 @@
 #include <QDomElement>
 
 class VPattern;
+class VTableSearch;
 
 struct HistoryRecord
 {
@@ -90,6 +91,7 @@ private:
 
     /** @brief cursorToolRecordRow save number of row selected record */
     qint32            cursorToolRecordRow;
+    QSharedPointer<VTableSearch> m_search{};
 
     void              FillTable();
     HistoryRecord     Record(const VToolRecord &tool) const;

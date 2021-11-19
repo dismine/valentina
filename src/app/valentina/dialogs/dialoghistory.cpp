@@ -40,6 +40,7 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../xml/vpattern.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vtablesearch.h"
 
 #include <QDebug>
 #include <QtConcurrent>
@@ -72,6 +73,22 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
     ShowPoint();
+
+    m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
+
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){m_search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this](){m_search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this](){m_search->FindNext();});
+
+    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+    });
+
+    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
+    {
+        ui->toolButtonFindNext->setEnabled(state);
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,6 +175,8 @@ void DialogHistory::UpdateHistory()
 {
     FillTable();
     InitialTable();
+
+    m_search->RefreshList(ui->lineEditFind->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
