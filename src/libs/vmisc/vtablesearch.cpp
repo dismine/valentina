@@ -98,7 +98,7 @@ QList<QTableWidgetItem *> VTableSearch::FindTableItems(const QString& term)
 {
     if (term.isEmpty())
     {
-        return QList<QTableWidgetItem *>();
+        return {};
     }
 
     if (term.startsWith(QChar('/')))
@@ -122,7 +122,7 @@ QList<QTableWidgetItem *> VTableSearch::FindTableItems(const QString& term)
 #endif
         }
 
-        return QList<QTableWidgetItem *>();
+        return {};
     }
 
     return table->findItems(term, Qt::MatchContains);
@@ -139,7 +139,7 @@ void VTableSearch::Find(const QString &term)
 
     if (not searchList.isEmpty())
     {
-        for (auto item : qAsConst(searchList))
+        for (auto *item : qAsConst(searchList))
         {
             item->setBackground(Qt::yellow);
         }

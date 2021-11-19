@@ -75,9 +75,9 @@ private:
     VPattern                    *m_doc;
     VContainer                   m_data;
     QVector<VFinalMeasurement>   m_measurements;
-    QSharedPointer<VTableSearch> m_search;
-    int                          formulaBaseHeight;
-    bool                         m_isInitialized;
+    QSharedPointer<VTableSearch> m_search{};
+    int                          formulaBaseHeight{0};
+    bool                         m_isInitialized{false};
 
     void FillFinalMeasurements(bool freshCall = false);
 

@@ -46,10 +46,7 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
       ui(new Ui::DialogFinalMeasurements),
       m_doc(doc),
       m_data(doc->GetCompleteData()),
-      m_measurements(doc->GetFinalMeasurements()),
-      m_search(),
-      formulaBaseHeight(0),
-      m_isInitialized(false)
+      m_measurements(doc->GetFinalMeasurements())
 {
     ui->setupUi(this);
 
