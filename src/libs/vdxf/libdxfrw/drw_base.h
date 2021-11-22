@@ -216,11 +216,7 @@ static inline bool DRW_FuzzyComparePossibleNulls(double p1, double p2)
 */
 class DRW_Coord {
 public:
-    DRW_Coord()
-        : x(0),
-          y(0),
-          z(0)
-    {}
+    DRW_Coord() = default;
     DRW_Coord(double ix, double iy, double iz)
         : x(ix),
           y(iy),
@@ -257,9 +253,9 @@ public:
     }
 
 public:
-    double x;
-    double y;
-    double z;
+    double x {0};
+    double y {0};
+    double z {0};
 };
 
 
