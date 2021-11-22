@@ -769,7 +769,7 @@ QRectF VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source)
     }
 
     // Here we try understand difference between printer's dpi and our.
-    // Get printer rect acording to our dpi.
+    // Get printer rect according to our dpi.
     const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
                                  ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
     const QRect pageRect = printer->pageLayout().paintRectPixels(printer->resolution());

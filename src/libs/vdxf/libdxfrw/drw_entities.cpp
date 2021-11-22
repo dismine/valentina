@@ -17,9 +17,9 @@
 #include "../vmisc/diagnostic.h"
 
 
-//! Calculate arbitary axis
+//! Calculate arbitrary axis
 /*!
-*   Calculate arbitary axis for apply extrusions
+*   Calculate arbitrary axis for apply extrusions
 *  @author Rallaz
 */
 void DRW_Entity::calculateAxis(DRW_Coord extPoint){
@@ -50,9 +50,9 @@ void DRW_Entity::calculateAxis(DRW_Coord extPoint){
     extAxisY.unitize();
 }
 
-//! Extrude a point using arbitary axis
+//! Extrude a point using arbitrary axis
 /*!
-*   apply extrusion in a point using arbitary axis (previous calculated)
+*   apply extrusion in a point using arbitrary axis (previous calculated)
 *  @author Rallaz
 */
 void DRW_Entity::extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const{
