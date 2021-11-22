@@ -45,22 +45,20 @@ QMap<QString, QStringList> QtCodecs()
 }
 
 DRW_TextCodec::DRW_TextCodec()
-    : version(DRW::AC1021),
-      cp(),
-      conv(nullptr)
+    : version(DRW::AC1021)
 {}
 
 void DRW_TextCodec::setVersion(int v, bool dxfFormat){
     if (v == DRW::AC1009 || v == DRW::AC1006) {
         version = DRW::AC1009;
         cp = "ANSI_1252";
-        setCodePage(&cp, dxfFormat);
+        setCodePage(cp, dxfFormat);
     } else if (v == DRW::AC1012 || v == DRW::AC1014
              || v == DRW::AC1015 || v == DRW::AC1018) {
         version = DRW::AC1015;
 //        if (cp.empty()) { //codepage not set, initialize
             cp = "ANSI_1252";
-            setCodePage(&cp, dxfFormat);
+            setCodePage(cp, dxfFormat);
 //        }
     } else {
         version = DRW::AC1021;
@@ -68,12 +66,11 @@ void DRW_TextCodec::setVersion(int v, bool dxfFormat){
             cp = "UTF-8";//RLZ: can be UCS2 or UTF-16 16bits per char
         else
             cp = "UTF-16";//RLZ: can be UCS2 or UTF-16 16bits per char
-        setCodePage(&cp, dxfFormat);
+        setCodePage(cp, dxfFormat);
     }
 }
 
-void DRW_TextCodec::setVersion(std::string *v, bool dxfFormat){
-    std::string versionStr = *v;
+void DRW_TextCodec::setVersion(const std::string &versionStr, bool dxfFormat){
     if (versionStr == "AC1009" || versionStr == "AC1006") {
         setVersion(DRW::AC1009, dxfFormat);
     } else if (versionStr == "AC1012" || versionStr == "AC1014"
@@ -86,8 +83,8 @@ void DRW_TextCodec::setVersion(std::string *v, bool dxfFormat){
     }
 }
 
-void DRW_TextCodec::setCodePage(const std::string *c, bool dxfFormat){
-    cp = correctCodePage(*c);
+void DRW_TextCodec::setCodePage(const std::string &c, bool dxfFormat){
+    cp = correctCodePage(c);
     if (version < DRW::AC1021)
     {
         if (cp == "UTF-8")

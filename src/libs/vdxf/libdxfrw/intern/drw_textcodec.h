@@ -15,10 +15,9 @@ public:
     std::string fromUtf8(const std::string &s);
     std::string toUtf8(const std::string &s);
     int getVersion() const {return version;}
-    void setVersion(std::string *v, bool dxfFormat);
+    void setVersion(const std::string &versionStr, bool dxfFormat);
     void setVersion(int v, bool dxfFormat);
-    void setCodePage(const std::string *c, bool dxfFormat);
-    void setCodePage(const std::string &c, bool dxfFormat){setCodePage(&c, dxfFormat);}
+    void setCodePage(const std::string &c, bool dxfFormat);
     std::string getCodePage() const {return cp;}
 
     static QMap<QString, QStringList> DXFCodePageMap();
@@ -30,8 +29,8 @@ private:
 private:
     Q_DISABLE_COPY(DRW_TextCodec)
     int version;
-    std::string cp;
-    QTextCodec *conv;
+    std::string cp{};
+    QTextCodec *conv{nullptr};
 };
 
 #endif // DRW_TEXTCODEC_H

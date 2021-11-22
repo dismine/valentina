@@ -16,6 +16,7 @@
 #include <string>
 #include <iostream>
 #include <QtGlobal>
+#include <memory>
 //#include <iomanip>
 
 #define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
@@ -55,9 +56,9 @@ private:
     DRW_dbg();
     ~DRW_dbg();
     static DRW_dbg *instance;
-    LEVEL level;
-    std::ios_base::fmtflags flags;
-    print_none* prClass;
+    LEVEL level{NONE};
+    std::ios_base::fmtflags flags{std::cerr.flags()};
+    std::unique_ptr<print_none> prClass;
 };
 
 

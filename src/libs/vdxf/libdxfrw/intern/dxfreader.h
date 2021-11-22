@@ -50,8 +50,8 @@ public:
     unsigned long long int getInt64() const {return int64;}
     bool getBool() const { return (intData==0) ? false : true;}
     int getVersion() const {return decoder.getVersion();}
-    void setVersion(std::string *v, bool dxfFormat){decoder.setVersion(v, dxfFormat);}
-    void setCodePage(std::string *c){decoder.setCodePage(c, true);}
+    void setVersion(const std::string &v, bool dxfFormat){decoder.setVersion(v, dxfFormat);}
+    void setCodePage(const std::string &c){decoder.setCodePage(c, true);}
     std::string getCodePage() const { return decoder.getCodePage();}
 
 protected:
