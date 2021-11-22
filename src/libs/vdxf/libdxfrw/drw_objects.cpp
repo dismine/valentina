@@ -48,26 +48,46 @@ void DRW_TableEntry::parseCode(int code, dxfReader *reader){
     case 1011:
     case 1012:
     case 1013:
-        curr = new DRW_Variant();
-        curr->addCoord();
-        curr->setCoordX(reader->getDouble());
-        curr->code = code;
-        extData.push_back(curr);
+        // don't trust in X, Y, Z order!
+        if (curr != nullptr)
+        {
+            curr->setCoordX(reader->getDouble());
+        }
+        else
+        {
+            curr = new DRW_Variant( code, DRW_Coord( reader->getDouble(), 0.0, 0.0));
+            extData.push_back(curr);
+        }
         break;
     case 1020:
     case 1021:
     case 1022:
     case 1023:
-        if (curr)
+        // don't trust in X, Y, Z order!
+        if (curr != nullptr)
+        {
             curr->setCoordY(reader->getDouble());
+        }
+        else
+        {
+            curr = new DRW_Variant(code, DRW_Coord( 0.0, reader->getDouble(), 0.0));
+                                   extData.push_back(curr);
+        }
         break;
     case 1030:
     case 1031:
     case 1032:
     case 1033:
-        if (curr)
+        // don't trust in X, Y, Z order!
+        if (curr != nullptr)
+        {
             curr->setCoordZ(reader->getDouble());
-        curr=nullptr;
+        }
+        else
+        {
+            curr = new DRW_Variant(code, DRW_Coord(0.0, 0.0, reader->getDouble()));
+            extData.push_back(curr);
+        }
         break;
     case 1040:
     case 1041:

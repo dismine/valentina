@@ -54,20 +54,15 @@ namespace DRW {
 */
 class DRW_TableEntry {
 public:
-    //initializes default values
     DRW_TableEntry()
-        : tType(DRW::UNKNOWNT),
-          handle(),
-          parentHandle(0),
-          name(),
-          flags(0),
-          extData(),
-          curr(nullptr)
     {}
 
-    virtual~DRW_TableEntry() {
-        for (std::vector<DRW_Variant*>::iterator it=extData.begin(); it!=extData.end(); ++it)
+    virtual~DRW_TableEntry()
+    {
+        for (std::vector<DRW_Variant*>::iterator it = extData.begin(); it != extData.end(); ++it)
+        {
             delete *it;
+        }
 
         extData.clear();
     }
@@ -79,34 +74,45 @@ public:
           name(e.name),
           flags(e.flags),
           extData(),
-          curr(e.curr)
+          curr(nullptr)
     {
-        for (std::vector<DRW_Variant*>::const_iterator it=e.extData.begin(); it!=e.extData.end(); ++it){
-            extData.push_back(new DRW_Variant(*(*it)));
+        for (std::vector<DRW_Variant*>::const_iterator it = e.extData.begin(); it != e.extData.end(); ++it)
+        {
+            DRW_Variant *src = *it;
+            DRW_Variant *dst = new DRW_Variant(*src);
+            extData.push_back(dst);
+            if (src == e.curr)
+            {
+                curr = dst;
+            }
         }
     }
 
 protected:
     void parseCode(int code, dxfReader *reader);
-    void reset(){
+    void reset()
+    {
         flags = 0;
-        for (std::vector<DRW_Variant*>::iterator it=extData.begin(); it!=extData.end(); ++it)
+        for (std::vector<DRW_Variant*>::iterator it = extData.begin(); it != extData.end(); ++it)
+        {
             delete *it;
+        }
         extData.clear();
+        curr = nullptr;
     }
 
 public:
-    enum DRW::TTYPE tType;     /*!< enum: entity type, code 0 */
-    duint32 handle;            /*!< entity identifier, code 5 */
-    int parentHandle;          /*!< Soft-pointer ID/handle to owner object, code 330 */
-    UTF8STRING name;           /*!< entry name, code 2 */
-    int flags;                 /*!< Flags relevant to entry, code 70 */
-    std::vector<DRW_Variant*> extData; /*!< FIFO list of extended data, codes 1000 to 1071*/
+    enum DRW::TTYPE tType {DRW::UNKNOWNT};  /*!< enum: entity type, code 0 */
+    duint32 handle {0};                     /*!< entity identifier, code 5 */
+    int parentHandle {0};                   /*!< Soft-pointer ID/handle to owner object, code 330 */
+    UTF8STRING name{};                      /*!< entry name, code 2 */
+    int flags {0};                          /*!< Flags relevant to entry, code 70 */
+    std::vector<DRW_Variant*> extData{};    /*!< FIFO list of extended data, codes 1000 to 1071*/
 
 private:
     DRW_TableEntry &operator=(const DRW_TableEntry &) Q_DECL_EQ_DELETE;
     // cppcheck-suppress unsafeClassCanLeak
-    DRW_Variant* curr;
+    DRW_Variant* curr{nullptr};
 };
 
 
