@@ -165,7 +165,7 @@ private:
     QComboBox       *comboBoxUnits{nullptr};
     int              formulaBaseHeight;
     QSharedPointer<VLockGuard<char>> lock{nullptr};
-    QSharedPointer<VTableSearch> search{};
+    QSharedPointer<VTableSearch> m_search{};
     QLabel *labelGradationDimensionA{nullptr};
     QLabel *labelGradationDimensionB{nullptr};
     QLabel *labelGradationDimensionC{nullptr};
@@ -173,6 +173,7 @@ private:
     bool isInitialized{false};
     bool mIsReadOnly{false};
     QTimer *gradation;
+    QMenu *m_searchHistory;
 
     QVector<QObject *> hackedWidgets{};
 
@@ -190,6 +191,11 @@ private:
     void InitMeasurementUnits();
     void InitGender(QComboBox *gender);
     void InitMeasurementDimension();
+    void InitSearch();
+
+    void InitSearchHistory();
+    void SaveSearchRequest();
+    void UpdateSearchControlsTooltips();
 
     void RetranslateTableHeaders();
 

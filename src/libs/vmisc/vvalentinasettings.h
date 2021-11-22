@@ -170,6 +170,66 @@ public:
     auto GetDetailExportFormat() const -> qint8;
     void SetDetailExportFormat(qint8 format);
 
+    auto GetHistorySearchHistory() const -> QStringList;
+    void SetHistorySearchHistory(const QStringList &history);
+
+    auto GetIncrementsSearchHistory() const -> QStringList;
+    void SetIncrementsSearchHistory(const QStringList &history);
+
+    auto GetPreviewCalculationsSearchHistory() const -> QStringList;
+    void SetPreviewCalculationsSearchHistory(const QStringList &history);
+
+    auto GetFinalMeasurementsSearchHistory() const -> QStringList;
+    void SetFinalMeasurementsSearchHistory(const QStringList &history);
+
+    auto GetHistorySearchOptionUseUnicodeProperties() const -> bool;
+    void SetHistorySearchOptionUseUnicodeProperties(bool value);
+
+    auto GetHistorySearchOptionWholeWord() const -> bool;
+    void SetHistorySearchOptionWholeWord(bool value);
+
+    auto GetHistorySearchOptionRegexp() const -> bool;
+    void SetHistorySearchOptionRegexp(bool value);
+
+    auto GetHistorySearchOptionMatchCase() const ->bool;
+    void SetHistorySearchOptionMatchCase(bool value);
+
+    auto GetIncrementsSearchOptionUseUnicodeProperties() const -> bool;
+    void SetIncrementsSearchOptionUseUnicodeProperties(bool value);
+
+    auto GetIncrementsSearchOptionWholeWord() const -> bool;
+    void SetIncrementsSearchOptionWholeWord(bool value);
+
+    auto GetIncrementsSearchOptionRegexp() const -> bool;
+    void SetIncrementsSearchOptionRegexp(bool value);
+
+    auto GetIncrementsSearchOptionMatchCase() const ->bool;
+    void SetIncrementsSearchOptionMatchCase(bool value);
+
+    auto GetPreviewCalculationsSearchOptionUseUnicodeProperties() const -> bool;
+    void SetPreviewCalculationsSearchOptionUseUnicodeProperties(bool value);
+
+    auto GetPreviewCalculationsSearchOptionWholeWord() const -> bool;
+    void SetPreviewCalculationsSearchOptionWholeWord(bool value);
+
+    auto GetPreviewCalculationsSearchOptionRegexp() const -> bool;
+    void SetPreviewCalculationsSearchOptionRegexp(bool value);
+
+    auto GetPreviewCalculationsSearchOptionMatchCase() const ->bool;
+    void SetPreviewCalculationsSearchOptionMatchCase(bool value);
+
+    auto GetFinalMeasurementsSearchOptionUseUnicodeProperties() const -> bool;
+    void SetFinalMeasurementsSearchOptionUseUnicodeProperties(bool value);
+
+    auto GetFinalMeasurementsSearchOptionWholeWord() const -> bool;
+    void SetFinalMeasurementsSearchOptionWholeWord(bool value);
+
+    auto GetFinalMeasurementsSearchOptionRegexp() const -> bool;
+    void SetFinalMeasurementsSearchOptionRegexp(bool value);
+
+    auto GetFinalMeasurementsSearchOptionMatchCase() const ->bool;
+    void SetFinalMeasurementsSearchOptionMatchCase(bool value);
+
 private:
     Q_DISABLE_COPY(VValentinaSettings)
 

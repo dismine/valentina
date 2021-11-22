@@ -23,6 +23,7 @@
 - Remove tool from all visibility groups it in.
 - Option to disable the automatic search for updates.
 - [smart-pattern/valentina#153] To add text search bar in History window.
+- Improve for a search bar.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

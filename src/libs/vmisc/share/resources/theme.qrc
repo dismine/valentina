@@ -105,5 +105,8 @@
         <file alias="16x16/actions/object-rotate-right.png">icons/win.icon.theme/16x16/actions/object-rotate-right.png</file>
         <file alias="24x24/actions/object-rotate-right.png">icons/win.icon.theme/24x24/actions/object-rotate-right.png</file>
         <file alias="32x32/actions/object-rotate-right.png">icons/win.icon.theme/32x32/actions/object-rotate-right.png</file>
+        <file alias="16x16/actions/system-search.png">icons/win.icon.theme/16x16/actions/system-search.png</file>
+        <file alias="24x24/actions/system-search.png">icons/win.icon.theme/24x24/actions/system-search.png</file>
+        <file alias="32x32/actions/system-search.png">icons/win.icon.theme/32x32/actions/system-search.png</file>
     </qresource>
 </RCC>

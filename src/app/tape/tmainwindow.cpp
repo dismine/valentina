@@ -108,13 +108,13 @@ TMainWindow::TMainWindow(QWidget *parent)
     : VAbstractMainWindow(parent),
       ui(new Ui::TMainWindow),
       formulaBaseHeight(0),
-      gradation(new QTimer(this))
+      gradation(new QTimer(this)),
+      m_searchHistory(new QMenu(this))
 {
     ui->setupUi(this);
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditFullName->setClearButtonEnabled(true);
     ui->lineEditCustomerName->setClearButtonEnabled(true);
@@ -123,7 +123,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->lineEditFind->installEventFilter(this);
     ui->plainTextEditFormula->installEventFilter(this);
 
-    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
+    m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
 
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -159,6 +159,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::~TMainWindow()
 {
+    ui->lineEditFind->blockSignals(true); // prevents crash
     delete data;
     delete m;
     qDeleteAll(hackedWidgets);
@@ -179,7 +180,7 @@ void TMainWindow::RetranslateTable()
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
         ui->tableWidget->selectRow(row);
-        search->RefreshList(ui->lineEditFind->text());
+        m_search->RefreshList(ui->lineEditFind->text());
     }
 }
 
@@ -599,6 +600,9 @@ void TMainWindow::changeEvent(QEvent *event)
 
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+        UpdateSearchControlsTooltips();
 
         UpdateWindowTitle();
 
@@ -1158,9 +1162,9 @@ void TMainWindow::Remove()
 
     MeasurementsWereSaved(false);
 
-    search->RemoveRow(row);
+    m_search->RemoveRow(row);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     if (ui->tableWidget->rowCount() > 0)
     {
@@ -1240,7 +1244,7 @@ void TMainWindow::MoveTop()
     m->MoveTop(nameField->data(Qt::UserRole).toString());
     MeasurementsWereSaved(false);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(0);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
@@ -1259,7 +1263,7 @@ void TMainWindow::MoveUp()
     m->MoveUp(nameField->data(Qt::UserRole).toString());
     MeasurementsWereSaved(false);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row-1);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
@@ -1278,7 +1282,7 @@ void TMainWindow::MoveDown()
     m->MoveDown(nameField->data(Qt::UserRole).toString());
     MeasurementsWereSaved(false);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row+1);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
@@ -1297,7 +1301,7 @@ void TMainWindow::MoveBottom()
     m->MoveBottom(nameField->data(Qt::UserRole).toString());
     MeasurementsWereSaved(false);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(ui->tableWidget->rowCount()-1);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
@@ -1348,7 +1352,7 @@ void TMainWindow::Fx()
 
         RefreshData();
 
-        search->RefreshList(ui->lineEditFind->text());
+        m_search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->selectRow(row);
     }
@@ -1373,9 +1377,9 @@ void TMainWindow::AddCustom()
         m->AddEmptyAfter(nameField->data(Qt::UserRole).toString(), name);
     }
 
-    search->AddRow(currentRow);
+    m_search->AddRow(currentRow);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(currentRow);
 
@@ -1408,7 +1412,7 @@ void TMainWindow::AddKnown()
                     m->AddEmpty(name);
                 }
 
-                search->AddRow(currentRow);
+                m_search->AddRow(currentRow);
             }
         }
         else
@@ -1426,13 +1430,13 @@ void TMainWindow::AddKnown()
                 {
                     m->AddEmptyAfter(after, name);
                 }
-                search->AddRow(currentRow);
+                m_search->AddRow(currentRow);
                 after = name;
             }
         }
 
         RefreshData();
-        search->RefreshList(ui->lineEditFind->text());
+        m_search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->selectRow(currentRow);
 
@@ -1510,7 +1514,7 @@ void TMainWindow::ImportFromPattern()
 
     RefreshData();
 
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(currentRow);
 
@@ -1567,7 +1571,7 @@ void TMainWindow::GradationChanged()
     gradation->stop();
     const int row = ui->tableWidget->currentRow();
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
 }
 
@@ -1810,7 +1814,7 @@ void TMainWindow::SaveMName(const QString &text)
         m->SetMName(nameField->text(), newName);
         MeasurementsWereSaved(false);
         RefreshData();
-        search->RefreshList(ui->lineEditFind->text());
+        m_search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->blockSignals(true);
         ui->tableWidget->selectRow(row);
@@ -1888,7 +1892,7 @@ void TMainWindow::SaveMValue()
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1913,7 +1917,7 @@ void TMainWindow::SaveMBaseValue(double value)
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1938,7 +1942,7 @@ void TMainWindow::SaveMShiftA(double value)
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1963,7 +1967,7 @@ void TMainWindow::SaveMShiftB(double value)
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1988,7 +1992,7 @@ void TMainWindow::SaveMShiftC(double value)
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -2014,7 +2018,7 @@ void TMainWindow::SaveMCorrectionValue(double value)
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -2112,7 +2116,7 @@ void TMainWindow::SaveMUnits()
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -2138,7 +2142,7 @@ void TMainWindow::SaveMDimension()
     MeasurementsWereSaved(false);
 
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -2553,18 +2557,7 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textChanged, this, [this] (const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this] (){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this] (){search->FindNext();});
-
-    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPrevious->setEnabled(state);
-    });
-    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindNext->setEnabled(state);
-    });
+    InitSearch();
 
     ui->plainTextEditNotes->setPlainText(m->Notes());
     connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
@@ -3473,6 +3466,11 @@ void TMainWindow::WriteSettings()
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(AppVersion()));
 
+    settings->SetTapeSearchOptionMatchCase(m_search->IsMatchCase());
+    settings->SetTapeSearchOptionWholeWord(m_search->IsMatchWord());
+    settings->SetTapeSearchOptionRegexp(m_search->IsMatchRegexp());
+    settings->SetTapeSearchOptionUseUnicodeProperties(m_search->IsUseUnicodePreperties());
+
     settings->sync();
     if (settings->status() == QSettings::AccessError)
     {
@@ -3498,7 +3496,7 @@ void TMainWindow::UpdatePatternUnit()
 
     RefreshTable();
 
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(row);
 }
@@ -3763,9 +3761,9 @@ void TMainWindow::ShowError(const QString &text)
 void TMainWindow::RefreshDataAfterImport()
 {
     const int currentRow = ui->tableWidget->currentRow();
-    search->AddRow(currentRow);
+    m_search->AddRow(currentRow);
     RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    m_search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(currentRow);
     ui->actionExportToCSV->setEnabled(true);
@@ -4354,6 +4352,182 @@ void TMainWindow::InitMeasurementDimension()
     }
 
     ui->comboBoxDimension->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitSearch()
+{
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    m_search->SetUseUnicodePreperties(settings->GetTapeSearchOptionUseUnicodeProperties());
+    m_search->SetMatchWord(settings->GetTapeSearchOptionWholeWord());
+    m_search->SetMatchRegexp(settings->GetTapeSearchOptionRegexp());
+    m_search->SetMatchCase(settings->GetTapeSearchOptionMatchCase());
+
+    ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+
+    UpdateSearchControlsTooltips();
+
+    connect(ui->lineEditFind, &QLineEdit::textChanged, this, [this] (const QString &term){m_search->Find(term);});
+    connect(ui->lineEditFind, &QLineEdit::editingFinished, this, [this]()
+    {
+        SaveSearchRequest();
+        InitSearchHistory();
+        m_search->Find(ui->lineEditFind->text());
+    });
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this]()
+    {
+        SaveSearchRequest();
+        InitSearchHistory();
+        m_search->FindPrevious();
+        ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+    });
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this]()
+    {
+        SaveSearchRequest();
+        InitSearchHistory();
+        m_search->FindNext();
+        ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+    });
+
+    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+        ui->toolButtonFindNext->setEnabled(state);
+
+        if (state)
+        {
+            ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+        }
+        else
+        {
+            ui->labelResults->setText(tr("0 results"));
+        }
+
+        QPalette palette;
+
+        if (not state && not ui->lineEditFind->text().isEmpty())
+        {
+            palette.setColor(QPalette::Text, Qt::red);
+            ui->lineEditFind->setPalette(palette);
+
+            palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
+            palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
+            ui->labelResults->setPalette(palette);
+        }
+        else
+        {
+            ui->lineEditFind->setPalette(palette);
+            ui->labelResults->setPalette(palette);
+        }
+    });
+
+    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetMatchCase(checked);
+        m_search->Find(ui->lineEditFind->text());
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetMatchWord(checked);
+        m_search->Find(ui->lineEditFind->text());
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonRegexp, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetMatchRegexp(checked);
+
+        if (checked)
+        {
+            ui->toolButtonWholeWord->blockSignals(true);
+            ui->toolButtonWholeWord->setChecked(false);
+            ui->toolButtonWholeWord->blockSignals(false);
+            ui->toolButtonWholeWord->setEnabled(false);
+
+            ui->toolButtonUseUnicodeProperties->setEnabled(true);
+        }
+        else
+        {
+            ui->toolButtonWholeWord->setEnabled(true);
+            ui->toolButtonUseUnicodeProperties->blockSignals(true);
+            ui->toolButtonUseUnicodeProperties->setChecked(false);
+            ui->toolButtonUseUnicodeProperties->blockSignals(false);
+            ui->toolButtonUseUnicodeProperties->setEnabled(false);
+        }
+        m_search->Find(ui->lineEditFind->text());
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetUseUnicodePreperties(checked);
+        m_search->Find(ui->lineEditFind->text());
+    });
+
+    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    InitSearchHistory();
+    ui->pushButtonSearch->setMenu(m_searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitSearchHistory()
+{
+    QStringList searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
+    m_searchHistory->clear();
+    for (const auto& term : searchHistory)
+    {
+        QAction *action = m_searchHistory->addAction(term);
+        action->setData(term);
+        connect(action, &QAction::triggered, this, [this]()
+        {
+            auto *action = qobject_cast<QAction *>(sender());
+            if (action != nullptr)
+            {
+                QString term = action->data().toString();
+                ui->lineEditFind->setText(term);
+                m_search->Find(term);
+                ui->lineEditFind->setFocus();
+            }
+        });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveSearchRequest()
+{
+    QStringList searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
+    QString term = ui->lineEditFind->text();
+    if (term.isEmpty())
+    {
+        return;
+    }
+
+    searchHistory.removeAll(term);
+    searchHistory.prepend(term);
+    while (searchHistory.size() > VTableSearch::MaxHistoryRecords)
+    {
+        searchHistory.removeLast();
+    }
+    MApplication::VApp()->TapeSettings()->SetTapeSearchHistory(searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::UpdateSearchControlsTooltips()
+{
+    auto UpdateToolTip = [](QAbstractButton *button)
+    {
+        button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+    };
+
+    UpdateToolTip(ui->toolButtonCaseSensitive);
+    UpdateToolTip(ui->toolButtonWholeWord);
+    UpdateToolTip(ui->toolButtonRegexp);
+    UpdateToolTip(ui->toolButtonUseUnicodeProperties);
+    UpdateToolTip(ui->pushButtonSearch);
+    UpdateToolTip(ui->toolButtonFindPrevious);
+    UpdateToolTip(ui->toolButtonFindNext);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

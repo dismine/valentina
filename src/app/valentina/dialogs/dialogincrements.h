@@ -96,15 +96,18 @@ private:
     /** @brief m_completeData need to show all internal variables */
     VContainer           m_completeData;
 
-    int                  formulaBaseHeight;
-    int                  formulaBaseHeightPC;
+    int                  formulaBaseHeight{0};
+    int                  formulaBaseHeightPC{0};
 
-    QSharedPointer<VTableSearch> search;
-    QSharedPointer<VTableSearch> searchPC;
+    QSharedPointer<VTableSearch> m_search{};
+    QSharedPointer<VTableSearch> m_searchPC{};
 
-    bool hasChanges;
+    bool hasChanges{false};
 
-    QVector<QPair<QString, QString>> renameList;
+    QVector<QPair<QString, QString>> renameList{};
+
+    QMenu *m_searchHistory;
+    QMenu *m_searchHistoryPC;
 
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
@@ -148,6 +151,13 @@ private:
     QMenu *InitVarTypeMenu(QMenu *menu, bool incrementTab);
 
     void AddNewIncrement(IncrementType type);
+
+    void InitSearch();
+    void InitIncrementsSearchHistory();
+    void InitPreviewCalculationsSearchHistory();
+    void SaveIncrementsSearchRequest();
+    void SavePreviewCalculationsSearchRequest();
+    void UpdateSearchControlsTooltips();
 };
 
 #endif // DIALOGINCREMENTS_H

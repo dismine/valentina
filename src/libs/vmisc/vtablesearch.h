@@ -48,6 +48,25 @@ public:
     void AddRow(int row);
     void RefreshList(const QString &term);
 
+    void SetMatchCase(bool value);
+    auto IsMatchCase() const -> bool;
+
+    void SetMatchWord(bool value);
+    auto IsMatchWord() const -> bool;
+
+    void SetMatchRegexp(bool value);
+    auto IsMatchRegexp() const -> bool;
+
+    void SetUseUnicodePreperties(bool value);
+    auto IsUseUnicodePreperties() const -> bool;
+
+    auto MatchIndex() const -> int;
+    auto MatchCount() const -> int;
+
+    auto SearchPlaceholder() const -> QString;
+
+    static const int MaxHistoryRecords;
+
 signals:
     void HasResult(bool state);
 
@@ -55,12 +74,18 @@ private:
     Q_DISABLE_COPY(VTableSearch)
 
     QTableWidget *table;
-    int           searchIndex;
-    QList<QTableWidgetItem *> searchList;
+    int           searchIndex{-1};
+    QList<QTableWidgetItem *> searchList{};
+
+    bool m_matchCase{false};
+    bool m_matchWord{false};
+    bool m_matchRegexp{false};
+    bool m_useUnicodePreperties{false};
 
     void Clear();
     void ShowNext(int newIndex);
-    QList<QTableWidgetItem *> FindTableItems(const QString& term);
+    auto FindTableItems(QString term) -> QList<QTableWidgetItem *>;
+    auto FindCurrentMatchIndex() const -> int;
 };
 
 #endif // VTABLESEARCH_H

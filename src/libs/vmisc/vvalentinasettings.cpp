@@ -93,7 +93,50 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
                           (QLatin1String("dockWidget/patternMessagesActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
-}
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryHistory, (QLatin1String("searchHistory/history")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryIncrements, (QLatin1String("searchHistory/increments")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryPreviewCalculations,
+                          (QLatin1String("searchHistory/previewCalculations")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryFinalMeasurements,
+                          (QLatin1String("searchHistory/finalMeasurements")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryUseUnicodeProperties,
+                          (QLatin1String("searchOptions/historyUseUnicodeProperties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryWholeWord,
+                          (QLatin1String("searchOptions/historyWholeWord")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryRegexp,
+                          (QLatin1String("searchOptions/historyRegexp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryMatchCase,
+                          (QLatin1String("searchOptions/historyMatchCase")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsUseUnicodeProperties,
+                          (QLatin1String("searchOptions/incrementsUseUnicodeProperties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsWholeWord,
+                          (QLatin1String("searchOptions/incrementsWholeWord")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsRegexp,
+                          (QLatin1String("searchOptions/incrementsRegexp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsMatchCase,
+                          (QLatin1String("searchOptions/incrementsMatchCase")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsUseUnicodeProperties,
+                          (QLatin1String("searchOptions/previewCalculationsUseUnicodeProperties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsWholeWord,
+                          (QLatin1String("searchOptions/previewCalculationsWholeWord")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsRegexp,
+                          (QLatin1String("searchOptions/previewCalculationsRegexp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsMatchCase,
+                          (QLatin1String("searchOptions/previewCalculationsMatchCase")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsUseUnicodeProperties,
+                          (QLatin1String("searchOptions/finalMeasurementsUseUnicodeProperties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsWholeWord,
+                          (QLatin1String("searchOptions/finalMeasurementsWholeWord")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsRegexp,
+                          (QLatin1String("searchOptions/finalMeasurementsRegexp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsMatchCase,
+                          (QLatin1String("searchOptions/finalMeasurementsMatchCase")))
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VValentinaSettings::VValentinaSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -651,6 +694,246 @@ qint8 VValentinaSettings::GetDetailExportFormat() const
 void VValentinaSettings::SetDetailExportFormat(qint8 format)
 {
     setValue(*settingDetailExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetHistorySearchHistory() const -> QStringList
+{
+    return value(*settingSearchHistoryHistory).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetHistorySearchHistory(const QStringList &history)
+{
+    setValue(*settingSearchHistoryHistory, history);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VValentinaSettings::GetIncrementsSearchHistory() const
+{
+    return value(*settingSearchHistoryIncrements).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetIncrementsSearchHistory(const QStringList &history)
+{
+    setValue(*settingSearchHistoryIncrements, history);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VValentinaSettings::GetPreviewCalculationsSearchHistory() const
+{
+    return value(*settingSearchHistoryPreviewCalculations).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPreviewCalculationsSearchHistory(const QStringList &history)
+{
+    setValue(*settingSearchHistoryPreviewCalculations, history);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VValentinaSettings::GetFinalMeasurementsSearchHistory() const
+{
+    return value(*settingSearchHistoryFinalMeasurements).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetFinalMeasurementsSearchHistory(const QStringList &history)
+{
+    setValue(*settingSearchHistoryFinalMeasurements, history);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetHistorySearchOptionUseUnicodeProperties() const -> bool
+{
+    return value(*settingSearchOptionsHistoryUseUnicodeProperties, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetHistorySearchOptionUseUnicodeProperties(bool value)
+{
+    setValue(*settingSearchOptionsHistoryUseUnicodeProperties, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetHistorySearchOptionWholeWord() const -> bool
+{
+    return value(*settingSearchOptionsHistoryWholeWord, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetHistorySearchOptionWholeWord(bool value)
+{
+    setValue(*settingSearchOptionsHistoryWholeWord, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetHistorySearchOptionRegexp() const -> bool
+{
+    return value(*settingSearchOptionsHistoryRegexp, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetHistorySearchOptionRegexp(bool value)
+{
+    setValue(*settingSearchOptionsHistoryRegexp, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetHistorySearchOptionMatchCase() const -> bool
+{
+    return value(*settingSearchOptionsHistoryMatchCase, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetHistorySearchOptionMatchCase(bool value)
+{
+    setValue(*settingSearchOptionsHistoryMatchCase, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetIncrementsSearchOptionUseUnicodeProperties() const -> bool
+{
+    return value(*settingSearchOptionsIncrementsUseUnicodeProperties, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetIncrementsSearchOptionUseUnicodeProperties(bool value)
+{
+    setValue(*settingSearchOptionsIncrementsUseUnicodeProperties, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetIncrementsSearchOptionWholeWord() const -> bool
+{
+    return value(*settingSearchOptionsIncrementsWholeWord, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetIncrementsSearchOptionWholeWord(bool value)
+{
+    setValue(*settingSearchOptionsIncrementsWholeWord, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetIncrementsSearchOptionRegexp() const -> bool
+{
+    return value(*settingSearchOptionsIncrementsRegexp, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetIncrementsSearchOptionRegexp(bool value)
+{
+    setValue(*settingSearchOptionsIncrementsRegexp, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetIncrementsSearchOptionMatchCase() const -> bool
+{
+    return value(*settingSearchOptionsIncrementsMatchCase, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetIncrementsSearchOptionMatchCase(bool value)
+{
+    setValue(*settingSearchOptionsIncrementsMatchCase, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetPreviewCalculationsSearchOptionUseUnicodeProperties() const -> bool
+{
+    return value(*settingSearchOptionsPreviewCalculationsUseUnicodeProperties, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPreviewCalculationsSearchOptionUseUnicodeProperties(bool value)
+{
+    setValue(*settingSearchOptionsPreviewCalculationsUseUnicodeProperties, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetPreviewCalculationsSearchOptionWholeWord() const -> bool
+{
+    return value(*settingSearchOptionsPreviewCalculationsWholeWord, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPreviewCalculationsSearchOptionWholeWord(bool value)
+{
+    setValue(*settingSearchOptionsPreviewCalculationsWholeWord, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetPreviewCalculationsSearchOptionRegexp() const -> bool
+{
+    return value(*settingSearchOptionsPreviewCalculationsRegexp, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPreviewCalculationsSearchOptionRegexp(bool value)
+{
+    setValue(*settingSearchOptionsPreviewCalculationsRegexp, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetPreviewCalculationsSearchOptionMatchCase() const -> bool
+{
+    return value(*settingSearchOptionsPreviewCalculationsMatchCase, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPreviewCalculationsSearchOptionMatchCase(bool value)
+{
+    setValue(*settingSearchOptionsPreviewCalculationsMatchCase, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetFinalMeasurementsSearchOptionUseUnicodeProperties() const -> bool
+{
+    return value(*settingSearchOptionsFinalMeasurementsUseUnicodeProperties, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetFinalMeasurementsSearchOptionUseUnicodeProperties(bool value)
+{
+    setValue(*settingSearchOptionsFinalMeasurementsUseUnicodeProperties, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetFinalMeasurementsSearchOptionWholeWord() const -> bool
+{
+    return value(*settingSearchOptionsFinalMeasurementsWholeWord, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetFinalMeasurementsSearchOptionWholeWord(bool value)
+{
+    setValue(*settingSearchOptionsFinalMeasurementsWholeWord, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetFinalMeasurementsSearchOptionRegexp() const -> bool
+{
+    return value(*settingSearchOptionsFinalMeasurementsRegexp, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetFinalMeasurementsSearchOptionRegexp(bool value)
+{
+    setValue(*settingSearchOptionsFinalMeasurementsRegexp, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetFinalMeasurementsSearchOptionMatchCase() const -> bool
+{
+    return value(*settingSearchOptionsFinalMeasurementsMatchCase, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetFinalMeasurementsSearchOptionMatchCase(bool value)
+{
+    setValue(*settingSearchOptionsFinalMeasurementsMatchCase, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

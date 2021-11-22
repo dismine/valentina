@@ -49,6 +49,21 @@ public:
     QByteArray GetDataBaseGeometry() const;
     void SetDataBaseGeometry(const QByteArray &value);
 
+    auto GetTapeSearchHistory() const -> QStringList;
+    void SetTapeSearchHistory(const QStringList &history);
+
+    auto GetTapeSearchOptionUseUnicodeProperties() const -> bool;
+    void SetTapeSearchOptionUseUnicodeProperties(bool value);
+
+    auto GetTapeSearchOptionWholeWord() const -> bool;
+    void SetTapeSearchOptionWholeWord(bool value);
+
+    auto GetTapeSearchOptionRegexp() const -> bool;
+    void SetTapeSearchOptionRegexp(bool value);
+
+    auto GetTapeSearchOptionMatchCase() const ->bool;
+    void SetTapeSearchOptionMatchCase(bool value);
+
 private:
     Q_DISABLE_COPY(VTapeSettings)
 };

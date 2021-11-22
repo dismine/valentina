@@ -79,6 +79,8 @@ private:
     int                          formulaBaseHeight{0};
     bool                         m_isInitialized{false};
 
+    QMenu *m_searchHistory;
+
     void FillFinalMeasurements(bool freshCall = false);
 
     void ShowUnits();
@@ -91,6 +93,11 @@ private:
     void UpdateTree();
 
     qreal EvalFormula(const QString &formula, bool &ok);
+
+    void InitSearch();
+    void InitSearchHistory();
+    void SaveSearchRequest();
+    void UpdateSearchControlsTooltips();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

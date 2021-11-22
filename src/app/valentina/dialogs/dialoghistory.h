@@ -87,11 +87,13 @@ private:
     VPattern          *doc;
 
     /** @brief cursorRow save number of row where is cursor */
-    qint32            cursorRow;
+    qint32            cursorRow{0};
 
     /** @brief cursorToolRecordRow save number of row selected record */
-    qint32            cursorToolRecordRow;
+    qint32            cursorToolRecordRow{0};
     QSharedPointer<VTableSearch> m_search{};
+
+    QMenu *m_searchHistory;
 
     void              FillTable();
     HistoryRecord     Record(const VToolRecord &tool) const;
@@ -101,6 +103,11 @@ private:
     quint32           AttrUInt(const QDomElement &domElement, const QString &name) const;
     void              RetranslateUi();
     int               CursorRow() const;
+
+    void InitSearch();
+    void InitSearchHistory();
+    void SaveSearchRequest();
+    void UpdateSearchControlsTooltips();
 };
 
 #endif // DIALOGHISTORY_H

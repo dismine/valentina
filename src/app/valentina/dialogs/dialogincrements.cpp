@@ -61,12 +61,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       data(data),
       doc(doc),
       m_completeData(doc->GetCompleteData()),
-      formulaBaseHeight(0),
-      formulaBaseHeightPC(0),
-      search(),
-      searchPC(),
-      hasChanges(false),
-      renameList()
+      m_searchHistory(new QMenu(this)),
+      m_searchHistoryPC(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -75,15 +71,13 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 #endif
 
     ui->lineEditName->setClearButtonEnabled(true);
-    ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditNamePC->setClearButtonEnabled(true);
-    ui->lineEditFindPC->setClearButtonEnabled(true);
 
     ui->lineEditFind->installEventFilter(this);
     ui->lineEditFindPC->installEventFilter(this);
 
-    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
-    searchPC = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetPC));
+    m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
+    m_searchPC = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetPC));
 
     formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
@@ -137,34 +131,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->plainTextEditDescriptionPC, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
     connect(ui->plainTextEditFormulaPC, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){search->Find(term);});
-    connect(ui->lineEditFindPC, &QLineEdit::textEdited, this, [this](const QString &term){searchPC->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this](){search->FindPrevious();});
-    connect(ui->toolButtonFindPreviousPC, &QToolButton::clicked, this, [this](){searchPC->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this](){search->FindNext();});
-    connect(ui->toolButtonFindNextPC, &QToolButton::clicked, this, [this](){searchPC->FindNext();});
     connect(ui->pushButtonRefresh, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
     connect(ui->pushButtonRefreshPC, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
 
-    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPrevious->setEnabled(state);
-    });
-
-    connect(searchPC.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPreviousPC->setEnabled(state);
-    });
-
-    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindNext->setEnabled(state);
-    });
-
-    connect(searchPC.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindNextPC->setEnabled(state);
-    });
+    InitSearch();
 
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
@@ -627,8 +597,8 @@ void DialogIncrements::LocalUpdateTree()
     ui->tableWidgetPC->selectRow(row);
     ui->tableWidgetPC->blockSignals(false);
 
-    search->RefreshList(ui->lineEditFind->text());
-    searchPC->RefreshList(ui->lineEditFindPC->text());
+    m_search->RefreshList(ui->lineEditFind->text());
+    m_searchPC->RefreshList(ui->lineEditFindPC->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -814,6 +784,344 @@ void DialogIncrements::AddNewIncrement(IncrementType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitSearch()
+{
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
+    m_search->SetUseUnicodePreperties(settings->GetIncrementsSearchOptionUseUnicodeProperties());
+    m_search->SetMatchWord(settings->GetIncrementsSearchOptionWholeWord());
+    m_search->SetMatchRegexp(settings->GetIncrementsSearchOptionRegexp());
+    m_search->SetMatchCase(settings->GetIncrementsSearchOptionMatchCase());
+
+    m_searchPC->SetUseUnicodePreperties(settings->GetPreviewCalculationsSearchOptionUseUnicodeProperties());
+    m_searchPC->SetMatchWord(settings->GetPreviewCalculationsSearchOptionWholeWord());
+    m_searchPC->SetMatchRegexp(settings->GetPreviewCalculationsSearchOptionRegexp());
+    m_searchPC->SetMatchCase(settings->GetPreviewCalculationsSearchOptionMatchCase());
+
+    ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+
+    UpdateSearchControlsTooltips();
+
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){m_search->Find(term);});
+    connect(ui->lineEditFind, &QLineEdit::editingFinished, this, [this]()
+    {
+        SaveIncrementsSearchRequest();
+        InitIncrementsSearchHistory();
+        m_search->Find(ui->lineEditFind->text());
+    });
+    connect(ui->lineEditFindPC, &QLineEdit::textEdited, this, [this](const QString &term){m_searchPC->Find(term);});
+    connect(ui->lineEditFindPC, &QLineEdit::editingFinished, this, [this]()
+    {
+        SavePreviewCalculationsSearchRequest();
+        InitPreviewCalculationsSearchHistory();
+        m_searchPC->Find(ui->lineEditFindPC->text());
+    });
+
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this]()
+    {
+        SaveIncrementsSearchRequest();
+        InitPreviewCalculationsSearchHistory();
+        m_search->FindPrevious();
+        ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+    });
+    connect(ui->toolButtonFindPreviousPC, &QToolButton::clicked, this, [this]()
+    {
+        SavePreviewCalculationsSearchRequest();
+        InitPreviewCalculationsSearchHistory();
+        m_searchPC->FindPrevious();
+        ui->labelResultsPC->setText(QString("%1/%2").arg(m_searchPC->MatchIndex()+1).arg(m_searchPC->MatchCount()));
+    });
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this]()
+    {
+        SaveIncrementsSearchRequest();
+        InitIncrementsSearchHistory();
+        m_search->FindNext();
+        ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+    });
+    connect(ui->toolButtonFindNextPC, &QToolButton::clicked, this, [this]()
+    {
+        SavePreviewCalculationsSearchRequest();
+        InitPreviewCalculationsSearchHistory();
+        m_searchPC->FindNext();
+        ui->labelResultsPC->setText(QString("%1/%2").arg(m_searchPC->MatchIndex()+1).arg(m_searchPC->MatchCount()));
+    });
+
+    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+        ui->toolButtonFindNext->setEnabled(state);
+
+        if (state)
+        {
+            ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+        }
+        else
+        {
+            ui->labelResults->setText(tr("0 results"));
+        }
+
+        QPalette palette;
+
+        if (not state && not ui->lineEditFind->text().isEmpty())
+        {
+            palette.setColor(QPalette::Text, Qt::red);
+            ui->lineEditFind->setPalette(palette);
+
+            palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
+            palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
+            ui->labelResults->setPalette(palette);
+        }
+        else
+        {
+            ui->lineEditFind->setPalette(palette);
+            ui->labelResults->setPalette(palette);
+        }
+    });
+
+    connect(m_searchPC.data(), &VTableSearch::HasResult, this, [this] (bool state)
+    {
+        ui->toolButtonFindPreviousPC->setEnabled(state);
+        ui->toolButtonFindNextPC->setEnabled(state);
+
+        if (state)
+        {
+            ui->labelResultsPC->setText(QString("%1/%2").arg(m_searchPC->MatchIndex()+1).arg(m_searchPC->MatchCount()));
+        }
+        else
+        {
+            ui->labelResultsPC->setText(tr("0 results"));
+        }
+
+        QPalette palette;
+
+        if (not state && not ui->lineEditFindPC->text().isEmpty())
+        {
+            palette.setColor(QPalette::Text, Qt::red);
+            ui->lineEditFindPC->setPalette(palette);
+
+            palette.setColor(QPalette::Active, ui->labelResultsPC->foregroundRole(), Qt::red);
+            palette.setColor(QPalette::Inactive, ui->labelResultsPC->foregroundRole(), Qt::red);
+            ui->labelResultsPC->setPalette(palette);
+        }
+        else
+        {
+            ui->lineEditFindPC->setPalette(palette);
+            ui->labelResultsPC->setPalette(palette);
+        }
+    });
+
+    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetMatchCase(checked);
+        m_search->Find(ui->lineEditFind->text());
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonCaseSensitivePC, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_searchPC->SetMatchCase(checked);
+        m_searchPC->Find(ui->lineEditFindPC->text());
+        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetMatchWord(checked);
+        m_search->Find(ui->lineEditFind->text());
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonWholeWordPC, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_searchPC->SetMatchWord(checked);
+        m_searchPC->Find(ui->lineEditFindPC->text());
+        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonRegexp, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetMatchRegexp(checked);
+
+        if (checked)
+        {
+            ui->toolButtonWholeWord->blockSignals(true);
+            ui->toolButtonWholeWord->setChecked(false);
+            ui->toolButtonWholeWord->blockSignals(false);
+            ui->toolButtonWholeWord->setEnabled(false);
+
+            ui->toolButtonUseUnicodeProperties->setEnabled(true);
+        }
+        else
+        {
+            ui->toolButtonWholeWord->setEnabled(true);
+            ui->toolButtonUseUnicodeProperties->blockSignals(true);
+            ui->toolButtonUseUnicodeProperties->setChecked(false);
+            ui->toolButtonUseUnicodeProperties->blockSignals(false);
+            ui->toolButtonUseUnicodeProperties->setEnabled(false);
+        }
+        m_search->Find(ui->lineEditFind->text());
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonRegexpPC, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_searchPC->SetMatchRegexp(checked);
+
+        if (checked)
+        {
+            ui->toolButtonWholeWordPC->blockSignals(true);
+            ui->toolButtonWholeWordPC->setChecked(false);
+            ui->toolButtonWholeWordPC->blockSignals(false);
+            ui->toolButtonWholeWordPC->setEnabled(false);
+
+            ui->toolButtonUseUnicodePropertiesPC->setEnabled(true);
+        }
+        else
+        {
+            ui->toolButtonWholeWordPC->setEnabled(true);
+            ui->toolButtonUseUnicodePropertiesPC->blockSignals(true);
+            ui->toolButtonUseUnicodePropertiesPC->setChecked(false);
+            ui->toolButtonUseUnicodePropertiesPC->blockSignals(false);
+            ui->toolButtonUseUnicodePropertiesPC->setEnabled(false);
+        }
+        m_searchPC->Find(ui->lineEditFindPC->text());
+        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+    });
+
+    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_search->SetUseUnicodePreperties(checked);
+        m_search->Find(ui->lineEditFind->text());
+    });
+
+    connect(ui->toolButtonUseUnicodePropertiesPC, &QToolButton::toggled, this, [this](bool checked)
+    {
+        m_searchPC->SetUseUnicodePreperties(checked);
+        m_searchPC->Find(ui->lineEditFindPC->text());
+    });
+
+    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    m_searchHistoryPC->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+
+    InitIncrementsSearchHistory();
+    InitPreviewCalculationsSearchHistory();
+
+    ui->pushButtonSearch->setMenu(m_searchHistory);
+    ui->pushButtonSearchPC->setMenu(m_searchHistoryPC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIncrementsSearchHistory()
+{
+    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
+    m_searchHistory->clear();
+    for (const auto& term : searchHistory)
+    {
+        QAction *action = m_searchHistory->addAction(term);
+        action->setData(term);
+        connect(action, &QAction::triggered, this, [this]()
+        {
+            auto *action = qobject_cast<QAction *>(sender());
+            if (action != nullptr)
+            {
+                QString term = action->data().toString();
+                ui->lineEditFind->setText(term);
+                m_search->Find(term);
+                ui->lineEditFind->setFocus();
+            }
+        });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitPreviewCalculationsSearchHistory()
+{
+    QStringList searchHistory =
+            VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
+    m_searchHistoryPC->clear();
+    for (const auto& term : searchHistory)
+    {
+        QAction *action = m_searchHistoryPC->addAction(term);
+        action->setData(term);
+        connect(action, &QAction::triggered, this, [this]()
+        {
+            auto *action = qobject_cast<QAction *>(sender());
+            if (action != nullptr)
+            {
+                QString term = action->data().toString();
+                ui->lineEditFindPC->setText(term);
+                m_searchPC->Find(term);
+                ui->lineEditFindPC->setFocus();
+            }
+        });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SaveIncrementsSearchRequest()
+{
+    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
+    QString term = ui->lineEditFind->text();
+    if (term.isEmpty())
+    {
+        return;
+    }
+
+    searchHistory.removeAll(term);
+    searchHistory.prepend(term);
+    while (searchHistory.size() > VTableSearch::MaxHistoryRecords)
+    {
+        searchHistory.removeLast();
+    }
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetIncrementsSearchHistory(searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SavePreviewCalculationsSearchRequest()
+{
+    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
+    QString term = ui->lineEditFindPC->text();
+    if (term.isEmpty())
+    {
+        return;
+    }
+
+    searchHistory.removeAll(term);
+    searchHistory.prepend(term);
+    while (searchHistory.size() > VTableSearch::MaxHistoryRecords)
+    {
+        searchHistory.removeLast();
+    }
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetPreviewCalculationsSearchHistory(searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::UpdateSearchControlsTooltips()
+{
+    auto UpdateToolTip = [](QAbstractButton *button)
+    {
+        button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+    };
+
+    UpdateToolTip(ui->toolButtonCaseSensitive);
+    UpdateToolTip(ui->toolButtonWholeWord);
+    UpdateToolTip(ui->toolButtonRegexp);
+    UpdateToolTip(ui->toolButtonUseUnicodeProperties);
+    UpdateToolTip(ui->pushButtonSearch);
+    UpdateToolTip(ui->toolButtonFindPrevious);
+    UpdateToolTip(ui->toolButtonFindNext);
+
+    UpdateToolTip(ui->toolButtonCaseSensitivePC);
+    UpdateToolTip(ui->toolButtonWholeWordPC);
+    UpdateToolTip(ui->toolButtonRegexpPC);
+    UpdateToolTip(ui->toolButtonUseUnicodePropertiesPC);
+    UpdateToolTip(ui->pushButtonSearchPC);
+    UpdateToolTip(ui->toolButtonFindPreviousPC);
+    UpdateToolTip(ui->toolButtonFindNextPC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
@@ -841,8 +1149,8 @@ void DialogIncrements::FullUpdateFromFile()
     FillRadiusesArcs();
     FillAnglesCurves();
 
-    search->RefreshList(ui->lineEditFind->text());
-    searchPC->RefreshList(ui->lineEditFindPC->text());
+    m_search->RefreshList(ui->lineEditFind->text());
+    m_searchPC->RefreshList(ui->lineEditFindPC->text());
 
     ui->tableWidgetIncrement->selectRow(incrementRow);
     ui->tableWidgetPC->selectRow(pcRow);
@@ -1412,6 +1720,18 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
 
     disconnect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
+    settings->SetIncrementsSearchOptionMatchCase(m_search->IsMatchCase());
+    settings->SetIncrementsSearchOptionWholeWord(m_search->IsMatchWord());
+    settings->SetIncrementsSearchOptionRegexp(m_search->IsMatchRegexp());
+    settings->SetIncrementsSearchOptionUseUnicodeProperties(m_search->IsUseUnicodePreperties());
+
+    settings->SetPreviewCalculationsSearchOptionMatchCase(m_searchPC->IsMatchCase());
+    settings->SetPreviewCalculationsSearchOptionWholeWord(m_searchPC->IsMatchWord());
+    settings->SetPreviewCalculationsSearchOptionRegexp(m_searchPC->IsMatchRegexp());
+    settings->SetPreviewCalculationsSearchOptionUseUnicodeProperties(m_searchPC->IsUseUnicodePreperties());
+
     emit UpdateProperties();
     emit DialogClosed(QDialog::Accepted);
     event->accept();
@@ -1427,6 +1747,10 @@ void DialogIncrements::changeEvent(QEvent *event)
 
         ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
         ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
+
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+        UpdateSearchControlsTooltips();
 
         FullUpdateFromFile();
     }
@@ -1508,6 +1832,8 @@ void DialogIncrements::ShowIncrementDetails()
 //---------------------------------------------------------------------------------------------------------------------
 DialogIncrements::~DialogIncrements()
 {
+    ui->lineEditFind->blockSignals(true); // prevents crash
+    ui->lineEditFindPC->blockSignals(true); // prevents crash
     delete ui;
 }
 

@@ -37,7 +37,16 @@
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))
-}
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, (QLatin1String("searchHistory/tape")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties,
+                          (QLatin1String("searchOptions/tapeUseUnicodeProperties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord,
+                          (QLatin1String("searchOptions/tapeWholeWord")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, (QLatin1String("searchOptions/tapeRegexp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase,
+                          (QLatin1String("searchOptions/tapeMatchCase")))
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -56,4 +65,64 @@ QByteArray VTapeSettings::GetDataBaseGeometry() const
 void VTapeSettings::SetDataBaseGeometry(const QByteArray &value)
 {
     setValue(*settingDataBaseGeometry, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetTapeSearchHistory() const -> QStringList
+{
+    return value(*settingSearchHistoryTape).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetTapeSearchHistory(const QStringList &history)
+{
+    setValue(*settingSearchHistoryTape, history);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetTapeSearchOptionUseUnicodeProperties() const -> bool
+{
+    return value(*settingSearchOptionsTapeUseUnicodeProperties, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetTapeSearchOptionUseUnicodeProperties(bool value)
+{
+    setValue(*settingSearchOptionsTapeUseUnicodeProperties, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetTapeSearchOptionWholeWord() const -> bool
+{
+    return value(*settingSearchOptionsTapeWholeWord, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetTapeSearchOptionWholeWord(bool value)
+{
+    setValue(*settingSearchOptionsTapeWholeWord, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetTapeSearchOptionRegexp() const -> bool
+{
+    return value(*settingSearchOptionsTapeRegexp, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetTapeSearchOptionRegexp(bool value)
+{
+    setValue(*settingSearchOptionsTapeRegexp, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetTapeSearchOptionMatchCase() const -> bool
+{
+    return value(*settingSearchOptionsTapeMatchCase, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetTapeSearchOptionMatchCase(bool value)
+{
+    setValue(*settingSearchOptionsTapeMatchCase, value);
 }

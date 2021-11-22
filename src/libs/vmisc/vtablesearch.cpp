@@ -36,12 +36,12 @@
 
 #include "../vmisc/def.h"
 
+const int VTableSearch::MaxHistoryRecords = 10;
+
 //---------------------------------------------------------------------------------------------------------------------
 VTableSearch::VTableSearch(QTableWidget *table, QObject *parent)
     : QObject(parent),
-      table(table),
-      searchIndex(-1),
-      searchList()
+      table(table)
 {
 }
 
@@ -94,44 +94,94 @@ void VTableSearch::ShowNext(int newIndex)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QTableWidgetItem *> VTableSearch::FindTableItems(const QString& term)
+auto VTableSearch::FindTableItems(QString term) -> QList<QTableWidgetItem *>
 {
     if (term.isEmpty())
     {
         return {};
     }
 
-    if (term.startsWith(QChar('/')))
+    QRegularExpression::PatternOptions options = QRegularExpression::NoPatternOption;
+
+    if (not m_matchCase)
     {
-        QRegularExpression qre(QStringLiteral("^/(?<searchType>[^/]+)/(?<searchString>.+)$"));
-        QScopedPointer<QRegularExpressionMatch> match(new QRegularExpressionMatch());
-        if (!term.contains(qre, match.data()))
-        {
-            return QList<QTableWidgetItem *>();
-        }
+        options |= QRegularExpression::CaseInsensitiveOption;
+    }
 
-        auto searchType = match->capturedRef(QStringLiteral("searchType"));
-        auto searchString = match->capturedRef(QStringLiteral("searchString"));
-        if (searchType == QChar('r'))
-        {
-            QString reSearchString = ".*" % searchString % ".*";
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            return table->findItems(reSearchString, Qt::MatchRegExp);
-#else
-            return table->findItems(reSearchString, Qt::MatchRegularExpression);
-#endif
-        }
+    if (m_matchWord)
+    {
+        options |= QRegularExpression::UseUnicodePropertiesOption;
+        term = "\\b" % term % "\\b";
+    }
 
+    if (m_matchRegexp && m_useUnicodePreperties)
+    {
+        options |= QRegularExpression::UseUnicodePropertiesOption;
+    }
+
+    QRegularExpression re(term, options);
+
+    if(not re.isValid())
+    {
         return {};
     }
 
-    return table->findItems(term, Qt::MatchContains);
+    QList<QTableWidgetItem *> list;
+
+    for (int r=0; r<table->rowCount(); ++r)
+    {
+        for (int c=0; c<table->columnCount(); ++c)
+        {
+            QTableWidgetItem *cell = table->item(r, c);
+            if (cell != nullptr)
+            {
+                QString text = cell->text();
+                QRegularExpressionMatch match = re.match(text);
+                if (match.hasMatch())
+                {
+                    list.append(cell);
+                }
+            }
+        }
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::FindCurrentMatchIndex() const -> int
+{
+    if (searchList.isEmpty())
+    {
+        return 0;
+    }
+
+    QList<QTableWidgetItem*> selectedItems = table->selectedItems();
+    if (selectedItems.isEmpty())
+    {
+        return 0;
+    }
+
+    QTableWidgetItem* selectedItem = selectedItems.first();
+
+    for (int i=0; i<searchList.size(); ++i)
+    {
+        QTableWidgetItem* item = searchList.at(i);
+        if (item->row()>= selectedItem->row() && item->column()>= selectedItem->column())
+        {
+            return i;
+        }
+    }
+
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::Find(const QString &term)
 {
-    SCASSERT(table != nullptr)
+    if(table == nullptr)
+    {
+        return;
+    }
 
     Clear();
 
@@ -144,13 +194,16 @@ void VTableSearch::Find(const QString &term)
             item->setBackground(Qt::yellow);
         }
 
-        searchIndex = 0;
+        searchIndex = FindCurrentMatchIndex();
         QTableWidgetItem *item = searchList.at(searchIndex);
         item->setBackground(Qt::red);
         table->scrollToItem(item);
 
         emit HasResult(true);
+        return;
     }
+
+    emit HasResult(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -191,7 +244,7 @@ void VTableSearch::RemoveRow(int row)
 
     if (row <= indexRow)
     {
-        for (auto item : qAsConst(searchList))
+        for (auto *item : qAsConst(searchList))
         {
             if (item->row() == row)
             {
@@ -213,7 +266,7 @@ void VTableSearch::AddRow(int row)
 
     if (row <= indexRow)
     {
-        for (auto item : qAsConst(searchList))
+        for (auto *item : qAsConst(searchList))
         {
             if (item->row() == row)
             {
@@ -232,7 +285,7 @@ void VTableSearch::RefreshList(const QString &term)
 
     if (not searchList.isEmpty())
     {
-        for (auto item : qAsConst(searchList))
+        for (auto *item : qAsConst(searchList))
         {
             item->setBackground(Qt::yellow);
         }
@@ -256,4 +309,101 @@ void VTableSearch::RefreshList(const QString &term)
     {
         emit HasResult(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTableSearch::SetMatchCase(bool value)
+{
+    m_matchCase = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::IsMatchCase() const -> bool
+{
+    return m_matchCase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTableSearch::SetMatchWord(bool value)
+{
+    m_matchWord = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::IsMatchWord() const -> bool
+{
+    return m_matchWord;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTableSearch::SetMatchRegexp(bool value)
+{
+    m_matchRegexp = value;
+    m_matchWord = false;
+
+    if (not m_matchRegexp)
+    {
+        m_useUnicodePreperties = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::IsMatchRegexp() const -> bool
+{
+    return m_matchRegexp;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTableSearch::SetUseUnicodePreperties(bool value)
+{
+    m_useUnicodePreperties = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::IsUseUnicodePreperties() const -> bool
+{
+    return m_useUnicodePreperties;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::MatchIndex() const -> int
+{
+    return searchIndex;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::MatchCount() const -> int
+{
+    return searchList.size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTableSearch::SearchPlaceholder() const -> QString
+{
+    if (m_matchCase && not m_matchWord && not m_matchRegexp)
+    {
+        return tr("Match case");
+    }
+
+    if (not m_matchCase && m_matchWord && not m_matchRegexp)
+    {
+        return tr("Words");
+    }
+
+    if (not m_matchCase && m_matchRegexp)
+    {
+        return tr("Regex");
+    }
+
+    if (m_matchCase && m_matchWord)
+    {
+        return tr("Match case and words");
+    }
+
+    if (m_matchCase && m_matchRegexp)
+    {
+        return tr("Match case and regex");
+    }
+
+    return tr("Search");
 }
