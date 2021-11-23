@@ -831,7 +831,7 @@ public:
           smoothN(0),
           curvetype(0),
           vertlist(),
-          hadlesList(),
+          handlesList(),
           firstEH(),
           lastEH()
     {
@@ -850,7 +850,7 @@ public:
           smoothN(p.smoothN),
           curvetype(p.curvetype),
           vertlist(),
-          hadlesList(),
+          handlesList(),
           firstEH(),
           lastEH()
     {
@@ -892,7 +892,7 @@ public:
 
 private:
     DRW_Polyline &operator=(const DRW_Polyline &) Q_DECL_EQ_DELETE;
-    std::list<duint32>hadlesList; //list of handles, only in 2004+
+    std::list<duint32>handlesList; //list of handles, only in 2004+
     duint32 firstEH;      //handle of first entity, only in pre-2004
     duint32 lastEH;       //handle of last entity, only in pre-2004
 };
