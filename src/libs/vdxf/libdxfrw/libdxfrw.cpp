@@ -54,7 +54,7 @@ dxfRW::dxfRW(const char* name)
       imageDef(),
       currHandle()
 {
-    DRW_DBGSL(DRW_dbg::NONE);
+    DRW_DBGSL(DRW_dbg::Level::None);
 }
 
 dxfRW::~dxfRW(){
@@ -68,13 +68,13 @@ dxfRW::~dxfRW(){
     imageDef.clear();
 }
 
-void dxfRW::setDebug(DRW::DBG_LEVEL lvl){
+void dxfRW::setDebug(DRW::DebugLevel lvl){
     switch (lvl){
-    case DRW::DEBUG:
-        DRW_DBGSL(DRW_dbg::DEBUG);
+    case DRW::DebugLevel::Debug:
+        DRW_DBGSL(DRW_dbg::Level::Debug);
         break;
     default:
-        DRW_DBGSL(DRW_dbg::NONE);
+        DRW_DBGSL(DRW_dbg::Level::None);
     }
 }
 

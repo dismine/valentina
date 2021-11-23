@@ -28,7 +28,7 @@ class dxfRW {
 public:
     explicit dxfRW(const char* name);
     ~dxfRW();
-    static void setDebug(DRW::DBG_LEVEL lvl);
+    static void setDebug(DRW::DebugLevel lvl);
     /// reads the file specified in constructor
     /*!
      * An interface must be provided. It is used by the class to signal various

@@ -59,10 +59,10 @@ DRW_dbg::DRW_dbg() :
     prClass(std::make_unique<print_none>())
 {}
 
-void DRW_dbg::setLevel(LEVEL lvl){
+void DRW_dbg::setLevel(Level lvl){
     level = lvl;
     switch (level){
-    case DEBUG:
+    case Level::Debug:
         prClass = std::make_unique<print_debug>();
         break;
     default:
@@ -70,7 +70,7 @@ void DRW_dbg::setLevel(LEVEL lvl){
     }
 }
 
-DRW_dbg::LEVEL DRW_dbg::getLevel() const{
+DRW_dbg::Level DRW_dbg::getLevel() const{
     return level;
 }
 
