@@ -59,6 +59,7 @@ protected:
     virtual bool readCode(int *code) = 0; //return true if successful (not EOF)
     virtual bool readString(std::string *text) = 0;
     virtual bool readString() = 0;
+    virtual bool readBinary() = 0;
     virtual bool readInt16() = 0;
     virtual bool readInt32() = 0;
     virtual bool readInt64() = 0;
@@ -88,6 +89,7 @@ public:
     virtual bool readCode(int *code) override;
     virtual bool readString(std::string *text) override;
     virtual bool readString() override;
+    virtual bool readBinary() override;
     virtual bool readInt16() override;
     virtual bool readInt32() override;
     virtual bool readInt64() override;
@@ -105,6 +107,7 @@ public:
     virtual bool readCode(int *code) override;
     virtual bool readString(std::string *text) override;
     virtual bool readString() override;
+    virtual bool readBinary() override;
     virtual bool readInt16() override;
     virtual bool readDouble() override;
     virtual bool readInt32() override;
