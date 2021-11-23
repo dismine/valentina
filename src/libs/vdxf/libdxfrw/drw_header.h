@@ -55,7 +55,7 @@ public:
           vportCtrl(),
           vpEntHeaderCtrl()
     {
-        for (std::map<std::string,DRW_Variant*>::const_iterator it=h.vars.begin(); it!=h.vars.end(); ++it)
+        for (auto it=h.vars.begin(); it!=h.vars.end(); ++it)
         {
             this->vars[it->first] = new DRW_Variant( *(it->second) );
         }
@@ -67,7 +67,7 @@ public:
            clearVars();
            this->version = h.version;
            this->comments = h.comments;
-           for (std::map<std::string,DRW_Variant*>::const_iterator it=h.vars.begin(); it!=h.vars.end(); ++it)
+           for (auto it=h.vars.begin(); it!=h.vars.end(); ++it)
            {
                this->vars[it->first] = new DRW_Variant( *(it->second) );
            }
@@ -92,14 +92,16 @@ private:
     bool getCoord(std::string key, DRW_Coord *varCoord);
     void clearVars()
     {
-        for (std::map<std::string,DRW_Variant*>::iterator it=vars.begin(); it!=vars.end(); ++it)
+        for (auto it=vars.begin(); it!=vars.end(); ++it)
+        {
             delete it->second;
+        }
 
         vars.clear();
     }
 
 public:
-    std::map<std::string,DRW_Variant*> vars;
+    std::unordered_map<std::string,DRW_Variant*> vars;
 private:
     std::string comments;
     std::string name;
