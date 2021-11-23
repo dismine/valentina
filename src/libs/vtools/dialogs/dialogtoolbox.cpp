@@ -428,7 +428,7 @@ bool DoublePoints(QListWidget *listWidget, const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DoubleCurves(QListWidget *listWidget)
+auto DoubleCurves(QListWidget *listWidget) -> bool
 {
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
@@ -576,3 +576,60 @@ auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alia
     return {};
 }
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+QString GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails)
+{
+    const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
+    QString name = obj->ObjectName();
+
+    if (node.GetTypeTool() != Tool::NodePoint)
+    {
+        if (node.GetReverse())
+        {
+            name = QStringLiteral("- ") + name;
+        }
+    }
+    else
+    {
+        if (showPassmarkDetails && node.IsPassmark())
+        {
+            switch(node.GetPassmarkLineType())
+            {
+                case PassmarkLineType::OneLine:
+                    name += QLatin1Char('|');
+                    break;
+                case PassmarkLineType::TwoLines:
+                    name += QLatin1String("||");
+                    break;
+                case PassmarkLineType::ThreeLines:
+                    name += QLatin1String("|||");
+                    break;
+                case PassmarkLineType::TMark:
+                    name += QStringLiteral("┴");
+                    break;
+                case PassmarkLineType::VMark:
+                    name += QStringLiteral("⊼");
+                    break;
+                case PassmarkLineType::VMark2:
+                    name += QStringLiteral("⊽");
+                    break;
+                case PassmarkLineType::UMark:
+                    name += QStringLiteral("⋃");
+                    break;
+                case PassmarkLineType::BoxMark:
+                    name += QStringLiteral("⎕");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if (not node.IsCheckUniqueness())
+        {
+            name = QLatin1Char('[') + name + QLatin1Char(']');
+        }
+    }
+
+    return name;
+}

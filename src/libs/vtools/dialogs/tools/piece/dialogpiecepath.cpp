@@ -368,7 +368,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
+        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
     }
     else if (m_showMode && rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionPassmark
              && GetType() == PiecePathType::CustomSeamAllowance
@@ -376,20 +376,20 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
+        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
     }
     else if (selectedAction == actionExcluded)
     {
         rowNode.SetExcluded(not rowNode.IsExcluded());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(data, rowNode, true));
         rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
     }
     else if (rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
+        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
     }
 
     ValidObjects(PathIsValid());
@@ -714,7 +714,7 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
 
             rowNode.SetPassmarkLineType(lineType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
 
             ListChanged();
         }
@@ -768,7 +768,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
 
             rowNode.SetPassmarkAngleType(angleType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
 
             ListChanged();
         }
@@ -1226,7 +1226,7 @@ void DialogPiecePath::InitNodesList()
         const VPieceNode node = path.at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
-            const QString name = GetNodeName(node);
+            const QString name = GetNodeName(data, node);
 
             ui->comboBoxNodes->addItem(name, node.GetId());
         }
@@ -1259,7 +1259,7 @@ void DialogPiecePath::InitPassmarksList()
     {
         if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
         {
-            const QString name = GetNodeName(node);
+            const QString name = GetNodeName(data, node);
 
             ui->comboBoxPassmarks->addItem(name, node.GetId());
         }

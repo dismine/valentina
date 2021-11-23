@@ -782,26 +782,26 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(data, rowNode, true));
     }
     else if (selectedAction == actionExcluded)
     {
         rowNode.SetExcluded(not rowNode.IsExcluded());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(data, rowNode, true));
         rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
     }
     else if (applyAllowed && selectedAction == actionPassmark)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(data, rowNode, true));
     }
     else if (selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(data, rowNode, true));
     }
 
     ValidObjects(MainPathIsValid());
@@ -1618,7 +1618,7 @@ void DialogSeamAllowance::PassmarkLineTypeChanged(int id)
 
             rowNode.SetPassmarkLineType(lineType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, true));
+            rowItem->setText(GetNodeName(data, rowNode, true));
 
             ListChanged();
         }
@@ -2771,7 +2771,7 @@ void DialogSeamAllowance::InitNodesList()
     {
         if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
-            const QString name = GetNodeName(node);
+            const QString name = GetNodeName(data, node);
 
             uiTabPaths->comboBoxNodes->addItem(name, node.GetId());
         }
@@ -2804,7 +2804,7 @@ void DialogSeamAllowance::InitPassmarksList()
     {
         if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
         {
-            const QString name = GetNodeName(node);
+            const QString name = GetNodeName(data, node);
 
             uiTabPassmarks->comboBoxPassmarks->addItem(name, node.GetId());
         }
@@ -3132,11 +3132,11 @@ void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
-    for (auto &node : nodes)
+    for (const auto &node : nodes)
     {
         if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
-            const QString name = GetNodeName(node);
+            const QString name = GetNodeName(data, node);
             box->addItem(name, node.GetId());
         }
     }

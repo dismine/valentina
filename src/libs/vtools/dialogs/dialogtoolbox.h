@@ -90,5 +90,6 @@ void   CurrentCurveLength(vidtype curveId, VContainer *data);
 void   SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar=4);
 QIcon  LineColor(int size, const QString &color);
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
+QString GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails = false);
 
 #endif // DIALOGTOOLBOX_H
