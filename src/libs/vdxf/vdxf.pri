@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/libdxfrw/drw_base.cpp \
     $$PWD/vdxfengine.cpp \
     $$PWD/vdxfpaintdevice.cpp \
     $$PWD/libdxfrw/intern/drw_dbg.cpp \

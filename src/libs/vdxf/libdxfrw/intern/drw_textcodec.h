@@ -3,6 +3,7 @@
 
 #include <string>
 #include <QtGlobal>
+#include "../drw_base.h"
 
 class QTextCodec;
 class QStringList;
@@ -15,8 +16,8 @@ public:
     std::string fromUtf8(const std::string &s);
     std::string toUtf8(const std::string &s);
     int getVersion() const {return version;}
-    void setVersion(const std::string &versionStr, bool dxfFormat);
-    void setVersion(int v, bool dxfFormat);
+    void setVersion(const std::string &v, bool dxfFormat);
+    void setVersion(DRW::Version v, bool dxfFormat);
     void setCodePage(const std::string &c, bool dxfFormat);
     std::string getCodePage() const {return cp;}
 
@@ -28,7 +29,7 @@ private:
 
 private:
     Q_DISABLE_COPY(DRW_TextCodec)
-    int version;
+    DRW::Version version{DRW::UNKNOWNV};
     std::string cp{};
     QTextCodec *conv{nullptr};
 };

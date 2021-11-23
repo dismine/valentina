@@ -17,6 +17,7 @@
 #include <iostream>
 #include <QtGlobal>
 #include <memory>
+#include "../drw_base.h"
 //#include <iomanip>
 
 #define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
@@ -37,6 +38,11 @@ public:
         Debug
     };
     void setLevel(Level lvl);
+    /**
+     * Sets a custom debug printer to use when non-silent output
+     * is required.
+     */
+    void setCustomDebugPrinter(std::unique_ptr<DRW::DebugPrinter> printer);
     Level getLevel() const;
     static DRW_dbg *getInstance();
     void print(const std::string &s);
@@ -57,8 +63,9 @@ private:
     ~DRW_dbg();
     static DRW_dbg *instance;
     Level level{Level::None};
-    std::ios_base::fmtflags flags{std::cerr.flags()};
-    std::unique_ptr<print_none> prClass;
+    DRW::DebugPrinter silentDebug{};
+    std::unique_ptr< DRW::DebugPrinter > debugPrinter;
+    DRW::DebugPrinter* currentPrinter{nullptr};
 };
 
 

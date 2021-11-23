@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include <cstring>
 #include <QString>
 #include <QTextCodec>
 #include <QDebug>
@@ -42,44 +43,78 @@ QMap<QString, QStringList> QtCodecs()
         {"UTF-16", {"UTF-16", "UTF16", "UTF16-BIT"}},
     };
 }
-}
+}  // namespace
 
 DRW_TextCodec::DRW_TextCodec()
     : version(DRW::AC1021)
 {}
 
-void DRW_TextCodec::setVersion(int v, bool dxfFormat){
-    if (v == DRW::AC1009 || v == DRW::AC1006) {
-        version = DRW::AC1009;
-        cp = "ANSI_1252";
-        setCodePage(cp, dxfFormat);
-    } else if (v == DRW::AC1012 || v == DRW::AC1014
-             || v == DRW::AC1015 || v == DRW::AC1018) {
-        version = DRW::AC1015;
-//        if (cp.empty()) { //codepage not set, initialize
+void DRW_TextCodec::setVersion(DRW::Version v, bool dxfFormat){
+    switch (v)
+    {
+        case DRW::UNKNOWNV:
+        case DRW::MC00:
+        case DRW::AC12:
+        case DRW::AC14:
+        case DRW::AC150:
+        case DRW::AC210:
+        case DRW::AC1002:
+        case DRW::AC1003:
+        case DRW::AC1004:
+            // unhandled?
+            break;
+        case DRW::AC1006:
+        case DRW::AC1009:
+        {
+            version = DRW::AC1009;
             cp = "ANSI_1252";
             setCodePage(cp, dxfFormat);
-//        }
-    } else {
-        version = DRW::AC1021;
-        if (dxfFormat)
-            cp = "UTF-8";//RLZ: can be UCS2 or UTF-16 16bits per char
-        else
-            cp = "UTF-16";//RLZ: can be UCS2 or UTF-16 16bits per char
-        setCodePage(cp, dxfFormat);
+            break;
+        }
+        case DRW::AC1012:
+        case DRW::AC1014:
+        case DRW::AC1015:
+        case DRW::AC1018:
+        {
+            version = DRW::AC1015;
+//            if (cp.empty()) { //codepage not set, initialize
+                cp = "ANSI_1252";
+                setCodePage(cp, dxfFormat);
+//            }
+            break;
+        }
+        case DRW::AC1021:
+        case DRW::AC1024:
+        case DRW::AC1027:
+        case DRW::AC1032:
+        {
+            version = DRW::AC1021;
+            if (dxfFormat)
+            {
+                cp = "UTF-8";//RLZ: can be UCS2 or UTF-16 16bits per char
+            }
+            else
+            {
+                cp = "UTF-16";//RLZ: can be UCS2 or UTF-16 16bits per char
+            }
+            setCodePage(cp, dxfFormat);
+            break;
+        }
+        default:
+            break;
     }
 }
 
-void DRW_TextCodec::setVersion(const std::string &versionStr, bool dxfFormat){
-    if (versionStr == "AC1009" || versionStr == "AC1006") {
-        setVersion(DRW::AC1009, dxfFormat);
-    } else if (versionStr == "AC1012" || versionStr == "AC1014"
-             || versionStr == "AC1015" || versionStr == "AC1018") {
-        setVersion(DRW::AC1015, dxfFormat);
-    }
-    else
+void DRW_TextCodec::setVersion(const std::string &v, bool dxfFormat){
+    version = DRW::UNKNOWNV;
+    for (auto dwgVersionString : DRW::dwgVersionStrings)
     {
-        setVersion(DRW::AC1021, dxfFormat);
+        if (std::strcmp( v.c_str(), dwgVersionString.first ) == 0)
+        {
+            version = dwgVersionString.second;
+            setVersion( dwgVersionString.second, dxfFormat);
+            break;
+        }
     }
 }
 
