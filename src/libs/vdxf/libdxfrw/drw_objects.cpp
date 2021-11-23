@@ -588,3 +588,28 @@ void DRW_ImageDef::parseCode(int code, dxfReader *reader){
         break;
     }
 }
+
+void DRW_PlotSettings::parseCode(int code, dxfReader *reader){
+    switch (code) {
+    case 5:
+        handle = static_cast<duint32>(reader->getHandleString());
+        break;
+    case 6:
+        plotViewName = reader->getUtf8String();
+        break;
+    case 40:
+        marginLeft = reader->getDouble();
+        break;
+    case 41:
+        marginBottom = reader->getDouble();
+        break;
+    case 42:
+        marginRight = reader->getDouble();
+        break;
+    case 43:
+        marginTop = reader->getDouble();
+        break;
+    default:
+        break;
+    }
+}

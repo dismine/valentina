@@ -40,6 +40,13 @@ void DRW_Header::addComment(const std::string &c){
 }
 
 void DRW_Header::parseCode(int code, dxfReader *reader){
+    if (nullptr == curr && 9 != code) {
+        DRW_DBG("invalid header code: ");
+        DRW_DBG(code);
+        DRW_DBG("\n");
+        return;
+    }
+
     switch (code) {
     case 9:
         curr = new DRW_Variant();

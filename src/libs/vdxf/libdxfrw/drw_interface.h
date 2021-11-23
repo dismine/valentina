@@ -24,7 +24,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 /**
- * Abstract class (interface) for comunicate dxfReader with the application.
+ * Abstract class (interface) for communicate dxfReader with the application.
  * Inherit your class which takes care of the entities in the
  * processed DXF file from this interface.
  *
@@ -179,6 +179,11 @@ public:
      */
     virtual void addComment(const char *) { }
 
+    /**
+     * Called for PLOTSETTINGS object definition.
+     */
+    virtual void addPlotSettings(const DRW_PlotSettings *) {}
+
     virtual void writeHeader(DRW_Header &) { }
     virtual void writeBlocks() { }
     virtual void writeBlockRecords() { }
@@ -188,6 +193,7 @@ public:
     virtual void writeTextstyles() { }
     virtual void writeVports() { }
     virtual void writeDimstyles() { }
+    virtual void writeObjects() {}
     virtual void writeAppId() { }
 };
 

@@ -125,8 +125,7 @@ void dx_iface::writeHeader(DRW_Header &data){
 
 void dx_iface::writeBlocks(){
     //write each block
-    for (std::list<dx_ifaceBlock*>::iterator it=cData.blocks.begin(); it != cData.blocks.end(); ++it){
-        dx_ifaceBlock* bk = *it;
+    for (auto *bk : cData.blocks){
         dxfW->writeBlock(bk);
         //and write each entity in block
         for (std::list<DRW_Entity*>::const_iterator it=bk->ent.begin(); it!=bk->ent.end(); ++it)
@@ -169,8 +168,13 @@ void dx_iface::writeDimstyles(){
         dxfW->writeDimstyle(&(*it));
 }
 
+void dx_iface::writeObjects()
+{
+    // default implementation for new DRW_Interface method
+}
+
 void dx_iface::writeAppId(){
-    for (std::list<DRW_AppId>::iterator it=cData.appIds.begin(); it != cData.appIds.end(); ++it)
+    for (auto it=cData.appIds.begin(); it != cData.appIds.end(); ++it)
         dxfW->writeAppId(&(*it));
 }
 

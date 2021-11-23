@@ -53,6 +53,7 @@ public:
     void setVersion(const std::string &v, bool dxfFormat){decoder.setVersion(v, dxfFormat);}
     void setCodePage(const std::string &c){decoder.setCodePage(c, true);}
     std::string getCodePage() const { return decoder.getCodePage();}
+    void setIgnoreComments(const bool bValue) {m_bIgnoreComments = bValue;}
 
 protected:
     virtual bool readCode(int *code) = 0; //return true if successful (not EOF)
@@ -74,6 +75,7 @@ protected:
 private:
     Q_DISABLE_COPY(dxfReader)
     DRW_TextCodec decoder;
+    bool m_bIgnoreComments {false};
 };
 
 class dxfReaderBinary : public dxfReader {

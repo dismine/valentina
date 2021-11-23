@@ -17,7 +17,7 @@
 
 DRW_dbg *DRW_dbg::instance{nullptr};
 
-/*********private clases*************/
+/*********private classes*************/
 
 class print_debug : public DRW::DebugPrinter {
 public:
@@ -74,6 +74,14 @@ DRW_dbg::Level DRW_dbg::getLevel() const{
 
 void DRW_dbg::print(const std::string &s){
     currentPrinter->printS(s);
+}
+
+void DRW_dbg::print(signed char i){
+    currentPrinter->printI(i);
+}
+
+void DRW_dbg::print(unsigned char i){
+    currentPrinter->printUI(i);
 }
 
 void DRW_dbg::print(int i){

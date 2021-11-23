@@ -71,9 +71,12 @@ public:
     DRW_ImageDef *writeImage(DRW_Image *ent, const std::string &name);
     bool writeLeader(DRW_Leader *ent);
     bool writeDimension(DRW_Dimension *ent);
-    void setEllipseParts(int parts){elParts = parts;} /*!< set parts munber when convert ellipse to polyline */
+    void setEllipseParts(int parts){elParts = parts;} /*!< set parts number when convert ellipse to polyline */
+    bool writePlotSettings(DRW_PlotSettings *ent);
 
     std::string ErrorString() const;
+    DRW::Version getVersion() const;
+    DRW::error getError() const;
 
 private:
     Q_DISABLE_COPY(dxfRW)
@@ -116,6 +119,7 @@ private:
     bool processImageDef();
     bool processDimension();
     bool processLeader();
+    bool processPlotSettings();
 
 //    bool writeHeader();
     bool writeEntity(DRW_Entity *ent);
@@ -124,9 +128,13 @@ private:
     bool writeObjects();
     bool writeExtData(const std::vector<DRW_Variant*> &ed);
     static std::string toHexStr(int n);//RLZ removeme
+    bool writeAppData(const std::list<std::list<DRW_Variant>> &appData);
+
+    bool setError(const DRW::error lastError);
 
 private:
     DRW::Version version;
+    DRW::error error {DRW::BAD_NONE};
     std::string fileName;
     std::string codePage;
     bool binFile;
@@ -141,7 +149,7 @@ private:
     bool dimstyleStd;
     bool applyExt;
     bool writingBlock;
-    int elParts;  /*!< parts munber when convert ellipse to polyline */
+    int elParts;  /*!< parts number when convert ellipse to polyline */
     std::unordered_map<std::string,int> blockMap;
     std::vector<DRW_ImageDef*> imageDef;  /*!< imageDef list */
 

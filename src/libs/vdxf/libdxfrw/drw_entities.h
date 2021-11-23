@@ -739,7 +739,7 @@ public:
 
     DRW_MText()
         : interlin(1),
-          haveXAxis(false)//if true needed to recalculate angle
+          hasXAxisVec(false)//if true needed to recalculate angle
     {
         eType = DRW::MTEXT;
         alignV = static_cast<VAlign>(TopLeft);
@@ -753,7 +753,7 @@ protected:
 public:
     double interlin;     /*!< width factor, code 44 */
 private:
-    bool haveXAxis;
+    bool hasXAxisVec;
 };
 
 //! Class to handle vertex

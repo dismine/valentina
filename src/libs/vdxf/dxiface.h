@@ -116,6 +116,7 @@ public:
     virtual void writeTextstyles() override;
     virtual void writeVports() override;
     virtual void writeDimstyles() override;
+    virtual void writeObjects() override;
     virtual void writeAppId() override;
 
     void AddEntity(DRW_Entity* e);

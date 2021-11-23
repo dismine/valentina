@@ -607,7 +607,7 @@ void DRW_MText::parseCode(int code, dxfReader *reader){
         text = reader->toUtf8String(text);
         break;
     case 11:
-        haveXAxis = true;
+        hasXAxisVec = true;
         DRW_Text::parseCode(code, reader);
         break;
     case 3:
@@ -681,7 +681,7 @@ void DRW_MText::parseCode(int code, dxfReader *reader){
 }
 
 void DRW_MText::updateAngle(){
-    if (haveXAxis) {
+    if (hasXAxisVec) {
             angle = atan2(secPoint.y, secPoint.x)*180/M_PI;
     }
 }

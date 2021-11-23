@@ -156,7 +156,8 @@ BAD_READ_CLASSES,     /*!< error in classes read process. */
 BAD_READ_TABLES,      /*!< error in tables read process. */
 BAD_READ_BLOCKS,      /*!< error in block read process. */
 BAD_READ_ENTITIES,    /*!< error in entities read process. */
-BAD_READ_OBJECTS      /*!< error in objects read process. */
+BAD_READ_OBJECTS,     /*!< error in objects read process. */
+BAD_READ_SECTION,     /*!< error in sections read process. */
 };
 
 enum class DebugLevel {
@@ -301,7 +302,7 @@ public:
 /*!< convert to unitary vector */
     void unitize(){
         double dist;
-        dist = sqrt(x*x + y*y + z*z);
+        dist = hypot(hypot(x, y), z);
         if (dist > 0.0) {
             x= x/dist;
             y= y/dist;
