@@ -2066,10 +2066,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2158,7 +2154,51 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2648,6 +2688,58 @@
         <source>Move objects. Suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -2784,10 +2876,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2816,19 +2904,59 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Increment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4396,6 +4524,10 @@ Apply settings anyway?</source>
         <source>Edit passmark length</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invalid segment!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5745,6 +5877,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Measurement: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid segment!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8244,6 +8380,18 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically check for updates each time the application starts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -8583,6 +8731,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically check for updates each time the application starts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically check for updates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9121,6 +9281,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point &apos;%1&apos; repeats twice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points &apos;%1&apos; and &apos;%2&apos; have the same coordinates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leave only one copy of curve &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9678,26 +9854,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find Previous</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find Next</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9965,10 +10121,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10124,6 +10276,54 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10786,6 +10986,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t use the native file dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically check for updates each time the application starts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically check for updates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13572,6 +13784,33 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>This spline does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VTableSearch</name>
+    <message>
+        <source>Match case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match case and words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match case and regex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
