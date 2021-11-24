@@ -80,10 +80,13 @@ void   CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePo
                        const VContainer *data, bool &flag);
 int    FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
 int    FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
-bool   FirstPointEqualLast(QListWidget *listWidget, const VContainer *data);
-bool   DoublePoints(QListWidget *listWidget, const VContainer *data);
-bool   DoubleCurves(QListWidget *listWidget, const VContainer *data);
+int    FindNotExcludedPointDown(QListWidget *listWidget, int start);
+int    FindNotExcludedCurveDown(QListWidget *listWidget, int start);
+bool   FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QString &error);
+bool   DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error);
+bool   DoubleCurves(QListWidget *listWidget, const VContainer *data, QString &error);
 bool   EachPointLabelIsUnique(QListWidget *listWidget);
+bool   InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &error);
 QString DialogWarningIcon();
 QFont  NodeFont(QFont font, bool nodeExcluded = false);
 void   CurrentCurveLength(vidtype curveId, VContainer *data);

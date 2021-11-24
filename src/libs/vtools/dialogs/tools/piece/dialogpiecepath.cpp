@@ -1631,22 +1631,27 @@ auto DialogPiecePath::PathIsValid() const -> bool
         return false;
     }
 
-    if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data))
+    QString error;
+    if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(DialogWarningIcon() +
-                               tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"));
+        ui->helpLabel->setText(
+                    QString("%1%2 %3")
+                    .arg(DialogWarningIcon(),
+                         tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"), error));
         return false;
     }
 
-    if (DoublePoints(ui->listWidget, data))
+    error.clear();
+    if (DoublePoints(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(DialogWarningIcon() + tr("You have double points!"));
+        ui->helpLabel->setText(QString("%1%2 %3").arg(DialogWarningIcon(), tr("You have double points!"), error));
         return false;
     }
 
-    if (DoubleCurves(ui->listWidget, data))
+    error.clear();
+    if (DoubleCurves(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(DialogWarningIcon() + tr("The same curve repeats twice!"));
+        ui->helpLabel->setText(QString("%1%2 %3").arg(DialogWarningIcon(), tr("The same curve repeats twice!"), error));
         return false;
     }
 
@@ -1666,6 +1671,13 @@ auto DialogPiecePath::PathIsValid() const -> bool
     if (not m_showMode && ui->comboBoxPiece->currentIndex() == -1)
     {
         ui->helpLabel->setText(DialogWarningIcon() + tr("Please, select a detail to insert into!"));
+        return false;
+    }
+
+    error.clear();
+    if (InvalidSegment(ui->listWidget, data, error))
+    {
+        ui->helpLabel->setText(QString("%1%2 %3").arg(DialogWarningIcon(), tr("Invalid segment!"), error));
         return false;
     }
 

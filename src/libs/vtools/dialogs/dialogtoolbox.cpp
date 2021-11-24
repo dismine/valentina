@@ -64,17 +64,12 @@ namespace
 const int dialogMaxFormulaHeight = 80;
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data) -> bool
+auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data,
+                 QString &error) -> bool
 {
     if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
             && secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
     {
-        // don't ignore the same point twice
-        if (firstNode.GetId() == secondNode.GetId())
-        {
-            return true;
-        }
-
         QSharedPointer<VPointF> firstPoint;
         QSharedPointer<VPointF> secondPoint;
 
@@ -85,6 +80,13 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
         }
         catch(const VExceptionBadId &)
         {
+            return false;
+        }
+
+        // don't ignore the same point twice
+        if (firstNode.GetId() == secondNode.GetId())
+        {
+            error = QObject::tr("Point '%1' repeats twice").arg(firstPoint->name());
             return true;
         }
 
@@ -92,6 +94,7 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
         if (firstPoint->getIdObject() != NULL_ID && secondPoint->getIdObject() != NULL_ID &&
                 firstPoint->getIdObject() == secondPoint->getIdObject())
         {
+            error = QObject::tr("Point '%1' repeats twice").arg(firstPoint->name());
             return true;
         }
 
@@ -101,38 +104,51 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
             return false;
         }
 
-        return firstPoint->toQPointF() == secondPoint->toQPointF();
+        bool sameCoordinates = VFuzzyComparePoints(firstPoint->toQPointF(), secondPoint->toQPointF());
+        if (sameCoordinates)
+        {
+            error = QObject::tr("Points '%1' and '%2' have the same coordinates.")
+                    .arg(firstPoint->name(), secondPoint->name());
+        }
+
+        return sameCoordinates;
     }
 
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data) -> bool
+auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data,
+                 QString &error) -> bool
 {
     if (firstNode.GetTypeTool() != Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
             && secondNode.GetTypeTool() != Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
     {
-        // don't ignore the same curve twice
-        if (firstNode.GetId() == secondNode.GetId())
-        {
-            return true;
-        }
+        QSharedPointer<VGObject> curve1;
+        QSharedPointer<VGObject> curve2;
 
         try
         {
-            // The same curve, but different modeling objects
-            const QSharedPointer<VGObject> curve1 = data->GetGObject(firstNode.GetId());
-            const QSharedPointer<VGObject> curve2 = data->GetGObject(secondNode.GetId());
-
-            if (curve1->getIdObject() == curve2->getIdObject())
-            {
-                return true;
-            }
+            curve1 = data->GetGObject(firstNode.GetId());
+            curve2 = data->GetGObject(secondNode.GetId());
         }
         catch (const VExceptionBadId &)
         {
             return false;
+        }
+
+        // don't ignore the same curve twice
+        if (firstNode.GetId() == secondNode.GetId())
+        {
+            error = QObject::tr("Leave only one copy of curve '%1'").arg(curve1->name());
+            return true;
+        }
+
+        // The same curve, but different modeling objects
+        if (curve1->getIdObject() == curve2->getIdObject())
+        {
+            error = QObject::tr("Leave only one copy of curve '%1'").arg(curve1->name());
+            return true;
         }
     }
 
@@ -422,7 +438,7 @@ int FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FirstPointEqualLast(QListWidget *listWidget, const VContainer *data)
+bool FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QString &error)
 {
     SCASSERT(listWidget != nullptr);
     if (listWidget->count() > 1)
@@ -430,13 +446,13 @@ bool FirstPointEqualLast(QListWidget *listWidget, const VContainer *data)
         const VPieceNode topNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, 0));
         const VPieceNode bottomNode = RowNode(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
 
-        return DoublePoint(topNode, bottomNode, data);
+        return DoublePoint(topNode, bottomNode, data, error);
     }
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DoublePoints(QListWidget *listWidget, const VContainer *data)
+bool DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error)
 {
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
@@ -445,7 +461,7 @@ bool DoublePoints(QListWidget *listWidget, const VContainer *data)
         const VPieceNode firstNode = RowNode(listWidget, firstIndex);
         const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
-        if (DoublePoint(firstNode, secondNode, data))
+        if (DoublePoint(firstNode, secondNode, data, error))
         {
             return true;
         }
@@ -454,7 +470,7 @@ bool DoublePoints(QListWidget *listWidget, const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DoubleCurves(QListWidget *listWidget, const VContainer *data) -> bool
+auto DoubleCurves(QListWidget *listWidget, const VContainer *data, QString &error) -> bool
 {
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
@@ -463,7 +479,7 @@ auto DoubleCurves(QListWidget *listWidget, const VContainer *data) -> bool
         const VPieceNode firstNode = RowNode(listWidget, firstIndex);
         const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
-        if (DoubleCurve(firstNode, secondNode, data))
+        if (DoubleCurve(firstNode, secondNode, data, error))
         {
             return true;
         }
@@ -658,4 +674,161 @@ QString GetNodeName(const VContainer *data, const VPieceNode &node, bool showPas
     }
 
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FindNotExcludedPointDown(QListWidget *listWidget, int start) -> int
+{
+    SCASSERT(listWidget != nullptr);
+
+    int index = -1;
+    if (start < 0 || start >= listWidget->count())
+    {
+        return index;
+    }
+
+    int i = start;
+    int count = 0;
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded() && rowNode.GetTypeTool() == Tool::NodePoint && rowNode.GetId() != NULL_ID)
+        {
+            index = i;
+            break;
+        }
+
+        ++i;
+        if (i >= listWidget->count())
+        {
+            i = 0;
+        }
+
+        ++count;
+    }
+    while (count < listWidget->count());
+
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FindNotExcludedCurveDown(QListWidget *listWidget, int start) -> int
+{
+    SCASSERT(listWidget != nullptr);
+
+    int index = -1;
+    if (start < 0 || start >= listWidget->count())
+    {
+        return index;
+    }
+
+    int i = start;
+    int count = 0;
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded() && rowNode.GetTypeTool() != Tool::NodePoint && rowNode.GetId() != NULL_ID)
+        {
+            index = i;
+            break;
+        }
+
+        ++i;
+        if (i >= listWidget->count())
+        {
+            i = 0;
+        }
+
+        ++count;
+    }
+    while (count < listWidget->count());
+
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &error) -> bool
+{
+    SCASSERT(listWidget != nullptr);
+
+    for (int index=0; index < listWidget->count(); ++index)
+    {
+        int firstCurveIndex = -1;
+        int pointIndex = -1;
+        int secondCurveIndex = -1;
+
+        auto FindPair = [listWidget, &firstCurveIndex, &pointIndex, &secondCurveIndex]( int start)
+        {
+            for (int i=start; i < listWidget->count(); ++i)
+            {
+                firstCurveIndex = FindNotExcludedCurveDown(listWidget, i);
+                if (firstCurveIndex == -1)
+                {
+                    continue;
+                }
+
+                pointIndex = FindNotExcludedPointDown(listWidget, firstCurveIndex+1);
+                if (pointIndex == -1)
+                {
+                    continue;
+                }
+
+                secondCurveIndex = FindNotExcludedCurveDown(listWidget, pointIndex+1);
+                if (secondCurveIndex == -1 || firstCurveIndex == secondCurveIndex)
+                {
+                    continue;
+                }
+
+                return true;
+            }
+
+            return false;
+        };
+
+        if (not FindPair(index))
+        {
+            continue;
+        }
+
+        const VPieceNode firstCurveNode = RowNode(listWidget, firstCurveIndex);
+        const VPieceNode secondCurveNode = RowNode(listWidget, secondCurveIndex);
+
+        QString errorDoubleCurve;
+        if (not DoubleCurve(firstCurveNode, secondCurveNode, data, errorDoubleCurve))
+        {
+            continue;
+        }
+
+        const VPieceNode pointNode = RowNode(listWidget, pointIndex);
+        if (pointNode.GetId() == NULL_ID)
+        {
+            continue;
+        }
+
+        try
+        {
+            const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(firstCurveNode.GetId());
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(pointNode.GetId());
+
+            error = QObject::tr("Point '%1' does not lie on a curve '%2'").arg(point->name(), curve1->name());
+
+            bool validSegment = curve1->IsPointOnCurve(point->toQPointF());
+            if (not validSegment)
+            {
+                return true;
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            continue;
+        }
+    }
+
+    return false;
 }

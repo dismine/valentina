@@ -2698,27 +2698,42 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
         return false;
     }
 
-    if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, data))
+    QString error;
+    if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, data, error))
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("First point cannot be equal to the last point!"));
+        uiTabPaths->helpLabel->setText(
+                    QString("%1%2 %3").arg(DialogWarningIcon(),
+                                           tr("First point cannot be equal to the last point!"), error));
         return false;
     }
 
-    if (DoublePoints(uiTabPaths->listWidgetMainPath, data))
+    error.clear();
+    if (DoublePoints(uiTabPaths->listWidgetMainPath, data, error))
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("You have double points!"));
+        uiTabPaths->helpLabel->setText(QString("%1%2 %3")
+                                       .arg(DialogWarningIcon(), tr("You have double points!"), error));
         return false;
     }
 
-    if (DoubleCurves(uiTabPaths->listWidgetMainPath, data))
+    error.clear();
+    if (DoubleCurves(uiTabPaths->listWidgetMainPath, data, error))
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("The same curve repeats twice!"));
+        uiTabPaths->helpLabel->setText(QString("%1%2 %3")
+                                       .arg(DialogWarningIcon(), tr("The same curve repeats twice!"), error));
         return false;
     }
 
     if (not EachPointLabelIsUnique(uiTabPaths->listWidgetMainPath))
     {
         uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Each point in the path must be unique!"));
+        return false;
+    }
+
+    error.clear();
+    if (InvalidSegment(uiTabPaths->listWidgetMainPath, data, error))
+    {
+        uiTabPaths->helpLabel->setText(QString("%1%2 %3")
+                                       .arg(DialogWarningIcon(), tr("Invalid segment!"), error));
         return false;
     }
 
