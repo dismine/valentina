@@ -2300,12 +2300,13 @@ bool dxfRW::processEntities(bool isblock) {
     if (!reader->readRec(&code)){
         return setError(DRW::BAD_READ_ENTITIES);
     }
-    bool next = true;
+
     if (code == 0) {
         nextentity = reader->getString();
     } else if (!isblock) {
         return setError(DRW::BAD_READ_ENTITIES);  //first record in entities is 0
     }
+
     bool processed {false};
     do {
         if (nextentity == "ENDSEC" || nextentity == "ENDBLK") {
