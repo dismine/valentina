@@ -2684,52 +2684,45 @@ QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSeamAllowance::MainPathIsValid() const
+auto DialogSeamAllowance::MainPathIsValid() const -> bool
 {
-    QString url = DialogWarningIcon();
-    bool valid = true;
-
     if(CreatePiece().MainPathPoints(data).count() < 3)
     {
-        url += tr("You need more points!");
-        uiTabPaths->helpLabel->setText(url);
-        valid = false;
-    }
-    else
-    {
-        if(not MainPathIsClockwise())
-        {
-            url += tr("You have to choose points in a clockwise direction!");
-            uiTabPaths->helpLabel->setText(url);
-            valid = false;
-        }
-        if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, data))
-        {
-            url += tr("First point cannot be equal to the last point!");
-            uiTabPaths->helpLabel->setText(url);
-            valid = false;
-        }
-        else if (DoublePoints(uiTabPaths->listWidgetMainPath, data))
-        {
-            url += tr("You have double points!");
-            uiTabPaths->helpLabel->setText(url);
-            valid = false;
-        }
-        else if (DoubleCurves(uiTabPaths->listWidgetMainPath))
-        {
-            url += tr("The same curve repeats twice!");
-            uiTabPaths->helpLabel->setText(url);
-            valid = false;
-        }
-        else if (not EachPointLabelIsUnique(uiTabPaths->listWidgetMainPath))
-        {
-            url += tr("Each point in the path must be unique!");
-            uiTabPaths->helpLabel->setText(url);
-            valid = false;
-        }
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("You need more points!"));
+        return false;
     }
 
-    return valid;
+    if(not MainPathIsClockwise())
+    {
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("You have to choose points in a clockwise direction!"));
+        return false;
+    }
+
+    if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, data))
+    {
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("First point cannot be equal to the last point!"));
+        return false;
+    }
+
+    if (DoublePoints(uiTabPaths->listWidgetMainPath, data))
+    {
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("You have double points!"));
+        return false;
+    }
+
+    if (DoubleCurves(uiTabPaths->listWidgetMainPath, data))
+    {
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("The same curve repeats twice!"));
+        return false;
+    }
+
+    if (not EachPointLabelIsUnique(uiTabPaths->listWidgetMainPath))
+    {
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Each point in the path must be unique!"));
+        return false;
+    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2972,14 +2965,31 @@ void DialogSeamAllowance::InitMainPathTab()
     connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
             &DialogSeamAllowance::SetMoveControls);
 
-    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
-            [this](){MoveListRowTop(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
-            [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
-            [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
-    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
-            [this](){MoveListRowBottom(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this, [this]()
+    {
+        ValidObjects(MainPathIsValid());
+    });
+
+    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowTop(uiTabPaths->listWidgetMainPath);
+        ValidObjects(MainPathIsValid());
+    });
+    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowUp(uiTabPaths->listWidgetMainPath);
+        ValidObjects(MainPathIsValid());
+    });
+    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowDown(uiTabPaths->listWidgetMainPath);
+        ValidObjects(MainPathIsValid());
+    });
+    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowBottom(uiTabPaths->listWidgetMainPath);
+        ValidObjects(MainPathIsValid());
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

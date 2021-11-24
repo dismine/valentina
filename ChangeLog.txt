@@ -25,6 +25,7 @@
 - [smart-pattern/valentina#153] To add text search bar in History window.
 - Improve for a search bar.
 - Backport fix vulnerability CVE-2021-21900.
+- Improved main path validations.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

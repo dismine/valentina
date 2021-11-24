@@ -1079,10 +1079,31 @@ void DialogPiecePath::InitPathTab()
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogPiecePath::ListChanged);
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogPiecePath::SetMoveControls);
 
-    connect(ui->toolButtonTop, &QToolButton::clicked, this, [this](){MoveListRowTop(ui->listWidget);});
-    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this](){MoveListRowUp(ui->listWidget);});
-    connect(ui->toolButtonDown, &QToolButton::clicked, this, [this](){MoveListRowDown(ui->listWidget);});
-    connect(ui->toolButtonBottom, &QToolButton::clicked, this, [this](){MoveListRowBottom(ui->listWidget);});
+    connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, [this]()
+    {
+        ValidObjects(PathIsValid());
+    });
+
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowTop(ui->listWidget);
+        ValidObjects(PathIsValid());
+    });
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowUp(ui->listWidget);
+        ValidObjects(PathIsValid());
+    });
+    connect(ui->toolButtonDown, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowDown(ui->listWidget);
+        ValidObjects(PathIsValid());
+    });
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this, [this]()
+    {
+        MoveListRowBottom(ui->listWidget);
+        ValidObjects(PathIsValid());
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1602,54 +1623,49 @@ VPiecePath DialogPiecePath::CreatePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogPiecePath::PathIsValid() const
+auto DialogPiecePath::PathIsValid() const -> bool
 {
-    QString url = DialogWarningIcon();
-
     if(CreatePath().PathPoints(data).count() < 2)
     {
-        url += tr("You need more points!");
-        ui->helpLabel->setText(url);
+        ui->helpLabel->setText(DialogWarningIcon() + tr("You need more points!"));
         return false;
     }
-    else
+
+    if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data))
     {
-        if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data))
-        {
-            url += tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!");
-            ui->helpLabel->setText(url);
-            return false;
-        }
-        else if (DoublePoints(ui->listWidget, data))
-        {
-            url += tr("You have double points!");
-            ui->helpLabel->setText(url);
-            return false;
-        }
-        else if (DoubleCurves(ui->listWidget))
-        {
-            url += tr("The same curve repeats twice!");
-            ui->helpLabel->setText(url);
-            return false;
-        }
-        else if (GetType() == PiecePathType::CustomSeamAllowance && not EachPointLabelIsUnique(ui->listWidget))
-        {
-            url += tr("Each point in the <b>custom seam allowance</b> path must be unique!");
-            ui->helpLabel->setText(url);
-            return false;
-        }
+        ui->helpLabel->setText(DialogWarningIcon() +
+                               tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"));
+        return false;
+    }
+
+    if (DoublePoints(ui->listWidget, data))
+    {
+        ui->helpLabel->setText(DialogWarningIcon() + tr("You have double points!"));
+        return false;
+    }
+
+    if (DoubleCurves(ui->listWidget, data))
+    {
+        ui->helpLabel->setText(DialogWarningIcon() + tr("The same curve repeats twice!"));
+        return false;
+    }
+
+    if (GetType() == PiecePathType::CustomSeamAllowance && not EachPointLabelIsUnique(ui->listWidget))
+    {
+        ui->helpLabel->setText(DialogWarningIcon() +
+                               tr("Each point in the <b>custom seam allowance</b> path must be unique!"));
+        return false;
     }
 
     if (not m_showMode && ui->comboBoxPiece->count() <= 0)
     {
-        url += tr("List of details is empty!");
-        ui->helpLabel->setText(url);
+        ui->helpLabel->setText(DialogWarningIcon() + tr("List of details is empty!"));
         return false;
     }
-    else if (not m_showMode && ui->comboBoxPiece->currentIndex() == -1)
+
+    if (not m_showMode && ui->comboBoxPiece->currentIndex() == -1)
     {
-        url += tr("Please, select a detail to insert into!");
-        ui->helpLabel->setText(url);
+        ui->helpLabel->setText(DialogWarningIcon() + tr("Please, select a detail to insert into!"));
         return false;
     }
 

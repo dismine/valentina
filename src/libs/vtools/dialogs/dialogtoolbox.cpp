@@ -64,7 +64,7 @@ namespace
 const int dialogMaxFormulaHeight = 80;
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data)
+auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data) -> bool
 {
     if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
             && secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
@@ -75,30 +75,40 @@ bool DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
             return true;
         }
 
+        QSharedPointer<VPointF> firstPoint;
+        QSharedPointer<VPointF> secondPoint;
+
+        try
+        {
+            firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
+            secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
+        }
+        catch(const VExceptionBadId &)
+        {
+            return true;
+        }
+
+        // The same point, but different modeling objects
+        if (firstPoint->getIdObject() != NULL_ID && secondPoint->getIdObject() != NULL_ID &&
+                firstPoint->getIdObject() == secondPoint->getIdObject())
+        {
+            return true;
+        }
+
         // But ignore the same coordinate if a user wants
         if (not firstNode.IsCheckUniqueness() || not secondNode.IsCheckUniqueness())
         {
             return false;
         }
 
-        try
-        {
-            const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
-            const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
-
-            return firstPoint->toQPointF() == secondPoint->toQPointF();
-        }
-        catch(const VExceptionBadId &)
-        {
-            return true;
-        }
+        return firstPoint->toQPointF() == secondPoint->toQPointF();
     }
 
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode)
+auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data) -> bool
 {
     if (firstNode.GetTypeTool() != Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
             && secondNode.GetTypeTool() != Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
@@ -107,6 +117,22 @@ bool DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode)
         if (firstNode.GetId() == secondNode.GetId())
         {
             return true;
+        }
+
+        try
+        {
+            // The same curve, but different modeling objects
+            const QSharedPointer<VGObject> curve1 = data->GetGObject(firstNode.GetId());
+            const QSharedPointer<VGObject> curve2 = data->GetGObject(secondNode.GetId());
+
+            if (curve1->getIdObject() == curve2->getIdObject())
+            {
+                return true;
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            return false;
         }
     }
 
@@ -428,7 +454,7 @@ bool DoublePoints(QListWidget *listWidget, const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DoubleCurves(QListWidget *listWidget) -> bool
+auto DoubleCurves(QListWidget *listWidget, const VContainer *data) -> bool
 {
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
@@ -437,7 +463,7 @@ auto DoubleCurves(QListWidget *listWidget) -> bool
         const VPieceNode firstNode = RowNode(listWidget, firstIndex);
         const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
-        if (DoubleCurve(firstNode, secondNode))
+        if (DoubleCurve(firstNode, secondNode, data))
         {
             return true;
         }
@@ -446,7 +472,7 @@ auto DoubleCurves(QListWidget *listWidget) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool EachPointLabelIsUnique(QListWidget *listWidget)
+auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 {
     SCASSERT(listWidget != nullptr);
     QSet<quint32> pointLabels;
@@ -455,8 +481,8 @@ bool EachPointLabelIsUnique(QListWidget *listWidget)
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
         SCASSERT(rowItem != nullptr);
-        const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-        if (rowNode.GetTypeTool() == Tool::NodePoint)
+        const auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+        if (rowNode.GetTypeTool() == Tool::NodePoint && not rowNode.IsExcluded())
         {
             ++countPoints;
             pointLabels.insert(rowNode.GetId());

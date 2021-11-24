@@ -82,7 +82,7 @@ int    FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
 int    FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
 bool   FirstPointEqualLast(QListWidget *listWidget, const VContainer *data);
 bool   DoublePoints(QListWidget *listWidget, const VContainer *data);
-bool   DoubleCurves(QListWidget *listWidget);
+bool   DoubleCurves(QListWidget *listWidget, const VContainer *data);
 bool   EachPointLabelIsUnique(QListWidget *listWidget);
 QString DialogWarningIcon();
 QFont  NodeFont(QFont font, bool nodeExcluded = false);
