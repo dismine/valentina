@@ -1838,7 +1838,6 @@ bool dxfRW::writeObjects() {
 //            writer->writeString(330, '0'); handle to DICTIONARY
         }
         writer->writeString(102, "{ACAD_REACTORS");
-        std::map<std::string, std::string>::iterator it;
         for (auto it=id->reactors.begin() ; it != id->reactors.end(); ++it ) {
             writer->writeString(330, (*it).first);
         }
