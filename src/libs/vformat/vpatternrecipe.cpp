@@ -163,7 +163,16 @@ QDomElement VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m)
     SetAttribute(measurement, QStringLiteral("description"), m->GetDescription());
     SetAttribute(measurement, QStringLiteral("fullName"), m->GetGuiText());
     SetAttribute(measurement, QStringLiteral("name"), m->GetName());
-    SetAttribute(measurement, QStringLiteral("formula"), m->GetFormula()); // TODO: localize
+
+    QString formula = m->GetFormula();
+    if (not formula.isEmpty())
+    {
+        SetAttribute(measurement, QStringLiteral("formula"), m->GetFormula());
+    }
+    else
+    {
+        SetAttribute(measurement, QStringLiteral("formula"), *m->GetValue());
+    }
     SetAttribute(measurement, QStringLiteral("value"), *m->GetValue());
 
     return measurement;
