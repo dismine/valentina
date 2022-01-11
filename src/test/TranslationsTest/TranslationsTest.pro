@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += testlib widgets xml printsupport concurrent xmlpatterns
+QT       += testlib widgets xml printsupport concurrent xmlpatterns svg
 
 QT       -= gui
 

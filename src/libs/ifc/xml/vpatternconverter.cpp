@@ -60,8 +60,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.8.13");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.8.13.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.0");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.9.0.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -167,6 +167,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUserDefined, (QLatin1String("userDef
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPlacement, (QLatin1String("placement")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strExtension, (QLatin1String("extension")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strContentType, (QLatin1String("contentType")))
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,7 +248,8 @@ auto VPatternConverter::XSDSchema(unsigned ver) const -> QString
         std::make_pair(FormatVersion(0, 8, 10), QStringLiteral("://schema/pattern/v0.8.10.xsd")),
         std::make_pair(FormatVersion(0, 8, 11), QStringLiteral("://schema/pattern/v0.8.11.xsd")),
         std::make_pair(FormatVersion(0, 8, 12), QStringLiteral("://schema/pattern/v0.8.12.xsd")),
-        std::make_pair(FormatVersion(0, 8, 13), CurrentSchema)
+        std::make_pair(FormatVersion(0, 8, 13), QStringLiteral("://schema/pattern/v0.8.13.xsd")),
+        std::make_pair(FormatVersion(0, 9, 0), CurrentSchema)
     };
 
     if (schemas.contains(ver))
@@ -519,6 +522,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(FormatVersion(0, 8, 13)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 8, 13)):
+            ToV0_9_0();
+            ValidateXML(XSDSchema(FormatVersion(0, 9, 0)));
+            Q_FALLTHROUGH();
+        case (FormatVersion(0, 9, 0)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -536,7 +543,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 8, 13),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 0),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -1235,6 +1242,19 @@ void VPatternConverter::ToV0_8_13()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 8, 13),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.8.13"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_9_0()
+{
+    // TODO. Delete if minimal supported version is 0.9.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 0),
+                      "Time to refactor the code.");
+
+    ConvertImageToV0_9_0();
+
+    SetVersion(QStringLiteral("0.9.0"));
     Save();
 }
 
@@ -2786,6 +2806,61 @@ void VPatternConverter::AddPieceUUIDV0_8_8()
         if (not dom.isNull())
         {
             dom.setAttribute(*strUUID, QUuid::createUuid().toString());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ConvertImageToV0_9_0()
+{
+    // TODO. Delete if minimal supported version is 0.9.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(*strImage);
+    if (not list.isEmpty())
+    {
+        QDomElement img = list.at(0).toElement();
+        if (not img.isNull())
+        {
+            QString extension = img.attribute(*strExtension);
+            img.removeAttribute(*strExtension);
+
+            if (not extension.isEmpty())
+            {
+                QMap<QString, QString> mimeTypes{
+                    {"BMP", "image/bmp"},
+                    {"JPG", "image/jpeg"},
+                    {"PNG", "image/png"}
+                };
+
+                if (mimeTypes.contains(extension))
+                {
+                    img.setAttribute(*strContentType, mimeTypes.value(extension));
+                }
+            }
+
+            const QString content = img.text();
+            if (not content.isEmpty())
+            {
+                auto SplitString = [content]()
+                {
+                    const int n = 80;
+                    QStringList list;
+                    QString tmp(content);
+
+                    while (not tmp.isEmpty())
+                    {
+                        list.append(tmp.left(n));
+                        tmp.remove(0, n);
+                    }
+
+                    return list;
+                };
+
+                QStringList data = SplitString();
+                setTagText(img, data.join("\n"));
+            }
         }
     }
 }

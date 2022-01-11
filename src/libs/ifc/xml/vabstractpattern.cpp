@@ -41,6 +41,7 @@
 #include <QtConcurrentMap>
 #include <QFuture>
 #include <QtConcurrentRun>
+#include <QMimeDatabase>
 
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionobjecterror.h"
@@ -57,6 +58,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vlayout/vtextmanager.h"
+#include "vpatternimage.h"
 
 class QDomElement;
 
@@ -137,7 +139,7 @@ const QString VAbstractPattern::AttrPassmarkLength    = QStringLiteral("passmark
 const QString VAbstractPattern::AttrOpacity           = QStringLiteral("opacity");
 const QString VAbstractPattern::AttrTags              = QStringLiteral("tags");
 
-const QString VAbstractPattern::AttrExtension       = QStringLiteral("extension");
+const QString VAbstractPattern::AttrContentType     = QStringLiteral("contentType");
 
 const QString VAbstractPattern::AttrFormula     = QStringLiteral("formula");
 const QString VAbstractPattern::AttrDescription = QStringLiteral("description");
@@ -1228,44 +1230,32 @@ void VAbstractPattern::SetPassmarkLengthVariable(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPattern::GetImage() const
+auto VAbstractPattern::GetImage() const -> VPatternImage
 {
-    return UniqueTagText(TagImage);
-}
+    VPatternImage image;
 
-//---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPattern::GetImageExtension() const
-{
-    const QString defExt =  QStringLiteral("PNG");
-    const QDomNodeList nodeList = this->elementsByTagName(TagImage);
-    if (nodeList.isEmpty())
+    const QDomNodeList list = elementsByTagName(TagImage);
+    if (not list.isEmpty())
     {
-        return defExt;
-    }
-    else
-    {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
+        QDomElement imgTag = list.at(0).toElement();
+        if (not imgTag.isNull())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                const QString ext = domElement.attribute(AttrExtension, defExt);
-                return ext;
-            }
+            image.SetContentData(imgTag.text().toLatin1(), imgTag.attribute(AttrContentType));
         }
     }
-    return defExt;
+
+    return image;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetImage(const QString &text, const QString &extension)
+auto VAbstractPattern::SetImage(const VPatternImage &image) -> bool
 {
     QDomElement imageElement = CheckTagExists(TagImage);
-    setTagText(imageElement, text);
-    CheckTagExists(TagImage).setAttribute(AttrExtension, extension);
+    setTagText(imageElement, image.ContentData());
+    imageElement.setAttribute(AttrContentType, image.ContentType());
     modified = true;
     emit patternChanged(false);
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

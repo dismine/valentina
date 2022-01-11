@@ -149,11 +149,11 @@ public:
 
 protected:
     bool           setTagText(const QString &tag, const QString &text);
-    bool           setTagText(const QDomElement &domElement, const QString &text);
+    bool           setTagText(QDomElement &domElement, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
-    static void    ValidateVersion(const QString &version);
+    static void ValidateVersion(const QString &version);
 
 private slots:
     void CacheRefreshed();

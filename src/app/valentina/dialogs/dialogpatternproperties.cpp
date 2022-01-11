@@ -36,6 +36,11 @@
 #include <QMessageBox>
 #include <QRadioButton>
 #include <QCompleter>
+#include <QSet>
+#include <QImageReader>
+#include <QMimeType>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
@@ -44,6 +49,7 @@
 #include "dialogknownmaterials.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../qmuparser/qmudef.h"
+#include "../ifc/xml/vpatternimage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
@@ -251,21 +257,6 @@ void DialogPatternProperties::SaveReadOnlyState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QImage DialogPatternProperties::GetImage()
-{
-// we set an image from file.val
-    QImage image;
-    QByteArray byteArray;
-    byteArray.append(doc->GetImage().toUtf8());
-    QByteArray ba = QByteArray::fromBase64(byteArray);
-    QBuffer buffer(&ba);
-    buffer.open(QIODevice::ReadOnly);
-    QString extension = doc->GetImageExtension();
-    image.load(&buffer, extension.toLatin1().data()); // writes image into ba in 'extension' format
-    return image;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ValidatePassmarkLength() const
 {
     const QString text = ui->lineEditPassmarkLength->text();
@@ -318,19 +309,12 @@ void DialogPatternProperties::InitImage()
 
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
-    connect(showImageAction, &QAction::triggered, this, [this]()
-    {
-        QLabel *label = new QLabel(this, Qt::Window);
-        const QImage image = GetImage();
-        label->setPixmap(QPixmap::fromImage(image));
-        label->setGeometry(QRect(QCursor::pos(), image.size()));
-        label->show();
-    });
+    connect(showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
 
-    const QImage image = GetImage();
-    if (not image.isNull())
+    const VPatternImage image = doc->GetImage();
+    if (image.IsValid())
     {
-        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+        ui->imageLabel->setPixmap(image.GetPixmap(ui->imageLabel->width(), ui->imageLabel->height()));
     }
     else
     {
@@ -343,35 +327,46 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ChangeImage()
 {
-    const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), filter, nullptr,
-                                                          VAbstractApplication::VApp()->NativeFileDialog());
+    auto PrepareFilter = []()
+    {
+        const QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
+        const QSet<QString> filterFormats{"bmp", "jpeg", "jpg", "png", "svg", "svgz", "tif", "tiff", "webp"};
+        QStringList sufixes;
+        for (const auto& format : supportedFormats)
+        {
+            if (filterFormats.contains(format))
+            {
+                sufixes.append(QStringLiteral("*.%1").arg(QString(format)));
+            }
+        }
+
+        QStringList filters;
+
+        if (not sufixes.isEmpty())
+        {
+            filters.append(tr("Images") + QStringLiteral(" (%1)").arg(sufixes.join(' ')));
+        }
+
+        filters.append(tr("All files") + QStringLiteral(" (*.*)"));
+
+        return filters.join(QStringLiteral(";;"));
+    };
+
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), PrepareFilter(),
+                                                          nullptr, VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
-        QImage image;
-        if (not image.load(fileName))
+        VPatternImage image = VPatternImage::FromFile(fileName);
+
+        if (not image.IsValid())
         {
+            qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
             return;
         }
-        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
-        QFileInfo f(fileName);
-        QString extension = f.suffix().toUpper();
 
-        if (extension == QLatin1String("JPEG"))
-        {
-            extension = "JPG";
-        }
-        if (extension == QLatin1String("PNG") || extension == QLatin1String("JPG") || extension == QLatin1String("BMP"))
-        {
-            QByteArray byteArray;
-            QBuffer buffer(&byteArray);
-            buffer.open(QIODevice::WriteOnly);
-            image.save(&buffer, extension.toLatin1().data()); //writes the image in 'extension' format inside the buffer
-            QString iconBase64 = QString::fromLatin1(byteArray.toBase64().data());
+        doc->SetImage(image);
+        ui->imageLabel->setPixmap(image.GetPixmap(ui->imageLabel->width(), ui->imageLabel->height()));
 
-            // save our image to file.val
-            doc->SetImage(iconBase64, extension);
-        }
         deleteAction->setEnabled(true);
         saveImageAction->setEnabled(true);
         showImageAction->setEnabled(true);
@@ -381,24 +376,70 @@ void DialogPatternProperties::ChangeImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveImage()
 {
-    QByteArray byteArray;
-    byteArray.append(doc->GetImage().toUtf8());
-    QByteArray ba = QByteArray::fromBase64(byteArray);
-    const QString extension = doc->GetImageExtension().prepend(QChar('.'));
-    QString filter = tr("Images") + QStringLiteral(" (*") + extension + QChar(')');
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter,
+    const VPatternImage image = doc->GetImage();
+
+    if (not image.IsValid())
+    {
+        qCritical() << tr("Unable to save image. Error: %1").arg(image.ErrorString());
+        return;
+    }
+
+    QMimeType mime = image.MimeTypeFromData();
+    QString path = QDir::homePath() + QDir::separator() + tr("untitled");
+
+    QStringList suffixes = mime.suffixes();
+    if (not suffixes.isEmpty())
+    {
+        path += '.' + suffixes.at(0);
+    }
+
+    QString filter = mime.filterString();
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
-        if (not filename.endsWith(extension.toUpper()))
-        {
-            filename.append(extension);
-        }
         QFile file(filename);
         if (file.open(QIODevice::WriteOnly))
         {
-            file.write(ba);
-            file.close();
+            file.write(QByteArray::fromBase64(image.ContentData()));
         }
+        else
+        {
+            qCritical() << tr("Unable to save image. Error: %1").arg(file.errorString());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ShowImage()
+{
+    const VPatternImage image = doc->GetImage();
+
+    if (not image.IsValid())
+    {
+        qCritical() << tr("Unable to show image. Error: %1").arg(image.ErrorString());
+        return;
+    }
+
+    QMimeType mime = image.MimeTypeFromData();
+    QString name = QDir::tempPath() + QDir::separator() + QStringLiteral("image.XXXXXX");
+
+    QStringList suffixes = mime.suffixes();
+    if (not suffixes.isEmpty())
+    {
+        name += '.' + suffixes.at(0);
+    }
+
+    delete m_tmpImage;
+    m_tmpImage = new QTemporaryFile(name, this);
+    if (m_tmpImage->open())
+    {
+        m_tmpImage->write(QByteArray::fromBase64(image.ContentData()));
+        m_tmpImage->flush();
+        QDesktopServices::openUrl(QUrl::fromLocalFile(m_tmpImage->fileName()));
+    }
+    else
+    {
+        qCritical() << tr("Unable to open temp file");
     }
 }

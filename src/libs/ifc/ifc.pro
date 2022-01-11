@@ -8,7 +8,7 @@
 include(../../../common.pri)
 
 # Library work with xml.
-QT       += xml xmlpatterns printsupport concurrent
+QT       += xml xmlpatterns printsupport concurrent svg
 
 # We don't need gui library.
 QT       -= gui

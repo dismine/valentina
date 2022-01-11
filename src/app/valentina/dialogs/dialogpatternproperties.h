@@ -31,6 +31,7 @@
 
 #include <QDialog>
 #include <QMap>
+#include <QPointer>
 
 #include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
@@ -39,6 +40,7 @@ class VPattern;
 class VContainer;
 class QCheckBox;
 class QCompleter;
+class QTemporaryFile;
 
 namespace Ui
 {
@@ -61,6 +63,7 @@ private slots:
     void DescEdited();
     void ChangeImage();
     void SaveImage();
+    void ShowImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -77,12 +80,12 @@ private:
     QCompleter             *m_completer{nullptr};
     QStringList            m_variables{};
     QString                m_oldPassmarkLength{};
+    QPointer<QTemporaryFile> m_tmpImage{};
 
     void         SaveDescription();
     void         SaveReadOnlyState();
 
     void         InitImage();
-    QImage       GetImage();
 
     void ValidatePassmarkLength() const;
 };

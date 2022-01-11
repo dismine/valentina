@@ -891,7 +891,7 @@ auto VDomDocument::GetFormatVersion(const QString &version) -> unsigned
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::setTagText(const QString &tag, const QString &text)
+auto VDomDocument::setTagText(const QString &tag, const QString &text) -> bool
 {
     const QDomNodeList nodeList = this->elementsByTagName(tag);
     if (nodeList.isEmpty())
@@ -900,10 +900,10 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
     }
     else
     {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
+        QDomNode domNode = nodeList.at(0);
+        if (not domNode.isNull() && domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
+            QDomElement domElement = domNode.toElement();
             return setTagText(domElement, text);
         }
     }
@@ -911,17 +911,30 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::setTagText(const QDomElement &domElement, const QString &text)
+auto VDomDocument::setTagText(QDomElement &domElement, const QString &text) -> bool
 {
-    if (domElement.isNull() == false)
+    if (not domElement.isNull())
     {
-        QDomElement parent = domElement.parentNode().toElement();
-        QDomElement newTag = createElement(domElement.tagName());
+        QDomNode oldText = domElement.firstChild();
+        const QDomText newText = createTextNode(text);
 
-        const QDomText newTagText = createTextNode(text);
-        newTag.appendChild(newTagText);
+        if (oldText.isNull())
+        {
+            domElement.appendChild(newText);
+        }
+        else
+        {
+            if (oldText.nodeType() == QDomNode::TextNode)
+            {
+                domElement.replaceChild(newText, oldText);
+            }
+            else
+            {
+                RemoveAllChildren(domElement);
+                domElement.appendChild(newText);
+            }
+        }
 
-        parent.replaceChild(newTag, domElement);
         return true;
     }
     return false;

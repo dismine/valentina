@@ -48,6 +48,7 @@
 class QDomElement;
 class VPiecePath;
 class VPieceNode;
+class VPatternImage;
 
 enum class Document : qint8 { FullLiteParse, LiteParse, LitePPParse, FullParse };
 enum class LabelType : qint8 {NewPatternPiece, NewLabel};
@@ -200,9 +201,8 @@ public:
     QString GetPassmarkLengthVariable() const;
     void    SetPassmarkLengthVariable(const QString &name);
 
-    QString        GetImage() const;
-    QString        GetImageExtension() const;
-    void           SetImage(const QString &text, const QString &extension);
+    VPatternImage  GetImage() const;
+    bool           SetImage(const VPatternImage &image);
     void           DeleteImage();
 
     QString        GetVersion() const;
@@ -319,7 +319,7 @@ public:
     static const QString AttrOpacity;
     static const QString AttrTags;
 
-    static const QString AttrExtension;
+    static const QString AttrContentType;
 
     static const QString AttrFormula;
     static const QString AttrDescription;
