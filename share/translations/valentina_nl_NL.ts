@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nl">
 <context>
+    <name>AddBackgroundImage</name>
+    <message>
+        <source>add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddDet</name>
     <message>
         <source>add detail</source>
@@ -350,6 +357,13 @@
     </message>
 </context>
 <context>
+    <name>DeleteBackgroundImage</name>
+    <message>
+        <source>delete background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
@@ -469,6 +483,25 @@
     <message>
         <source>Check For Updates</source>
         <translation>Controleer op Opwaarderingen</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAddBackgroundImage</name>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Determine should an image built in or added as path to the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in</source>
+        <translation type="unfinished">Ingebouwd</translation>
     </message>
 </context>
 <context>
@@ -2570,10 +2603,6 @@
         <translation>Uiteindelijke maten</translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="vanished">Vind:</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>
@@ -2660,10 +2689,6 @@
     <message>
         <source>Parser error: %1</source>
         <translation>Fout bij opsplitsen: %1</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoek definitieve maat via zoekterm. &lt;/p&gt;&lt;p&gt;Plaats &amp;quot;/r/&amp;quot; aan het begin van de zoekterm om definitieve maat via regex op te zoeken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3270,7 +3295,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Zoek</translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <source>0 results</source>
@@ -3494,14 +3519,6 @@
     <message>
         <source>Unique variable name</source>
         <translation>Unieke variabele naam</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoek vergroten/verkleinen via zoekterm. &lt;/p&gt;&lt;p&gt;Plaats &amp;quot;/r/&amp;quot; aan het begin van de zoekterm om vergroten/verkleinen via regex op te zoeken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoek voorvertoning berekeningen via zoekterm. &lt;/p&gt;&lt;p&gt;Plaats &amp;quot;/r/&amp;quot; aan het begin van de zoekterm om voorvertoning berekeningen via regex op te zoeken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Increment</source>
@@ -3959,7 +3976,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation>Bepaal de opmaak efficiëntie coëfficiënt. De opmaak efficiëntie coëfficiënt is de verhouding van het gebied door de stukken ingenomen ten opzichte van de rechthoek die alle objecten bevat.  Als het aantal inpassingen het verwachte niveau bereikt, wordt het proces gestopt. Als de waarde 0 is, wordt er niet gechecked. </translation>
+        <translation type="vanished">Bepaal de opmaak efficiëntie coëfficiënt. De opmaak efficiëntie coëfficiënt is de verhouding van het gebied door de stukken ingenomen ten opzichte van de rechthoek die alle objecten bevat.  Als het aantal inpassingen het verwachte niveau bereikt, wordt het proces gestopt. Als de waarde 0 is, wordt er niet gechecked. </translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3989,6 +4006,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Deze optie aanzetten om 1-blad oplossingen te verkrijgen.</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4936,11 +4957,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>Afbeeldingen</translation>
+        <translation type="vanished">Afbeeldingen</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation>Sla bestand op</translation>
+        <translation type="vanished">Sla bestand op</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -5028,6 +5049,26 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Passmark length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to show image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open temp file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8032,6 +8073,50 @@ Toch de instellingen aanpassen?</translation>
     </message>
 </context>
 <context>
+    <name>HideAllBackgroundImages</name>
+    <message>
+        <source>hide all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HideBackgroundImage</name>
+    <message>
+        <source>hide a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldAllBackgroundImages</name>
+    <message>
+        <source>hold all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldBackgroundImage</name>
+    <message>
+        <source>hold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
@@ -9737,6 +9822,46 @@ Do you want to save your changes?</source>
         <source>Draw export</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished">naamloos</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Alle bestanden</translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9899,6 +10024,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Proces werd onderbroken ten gevolge van een uitzondering.</translation>
+    </message>
+</context>
+<context>
+    <name>MoveBackgroundImage</name>
+    <message>
+        <source>move background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10251,7 +10383,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Opwaardering</translation>
+        <translation>Opwaardering</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -10606,7 +10738,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Opwaardering</translation>
+        <translation>Opwaardering</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -11236,6 +11368,22 @@ Deze optie wordt actief na een herstart..</translation>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished">Afbeeldingen</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Alle bestanden</translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished">Bevestig verwijdering</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
+        <translation type="unfinished">Wil je dit echt verwijderen?</translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11531,6 +11679,13 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
 </context>
 <context>
+    <name>RenameBackgroundImage</name>
+    <message>
+        <source>rename background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
@@ -11542,6 +11697,20 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <source>rename pattern piece</source>
         <translation>hernoem patroondeel</translation>
+    </message>
+</context>
+<context>
+    <name>ResetBackgroundImage</name>
+    <message>
+        <source>reset background image transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RotateBackgroundImage</name>
+    <message>
+        <source>rotate background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11584,6 +11753,13 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <source>save tool option</source>
         <translation>sla gereedschap optie op</translation>
+    </message>
+</context>
+<context>
+    <name>ScaleBackgroundImage</name>
+    <message>
+        <source>scale background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12330,10 +12506,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>&amp;New</source>
         <translation>&amp;Nieuw</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoek maten bij zoekterm. &lt;/p&gt;&lt;p&gt;Voeg &amp;quot;/r/&amp;quot; voor de zoekterm om maten via regex te zoeken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -13280,7 +13452,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Opwaardering</translation>
+        <translation>Opwaardering</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -13778,11 +13950,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Bevestig verwijdering</translation>
+        <translation type="vanished">Bevestig verwijdering</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation>Wil je dit echt verwijderen?</translation>
+        <translation type="vanished">Wil je dit echt verwijderen?</translation>
     </message>
     <message>
         <source>light salmon</source>
@@ -13874,6 +14046,68 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundImageItem</name>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Zichtbaar</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished">Toon in Finder</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished">Toon in Explorer</translation>
+    </message>
+    <message>
+        <source>Save as …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15156,11 +15390,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
-        <translation>Waar</translation>
+        <translation type="vanished">Waar</translation>
     </message>
     <message>
         <source>False</source>
-        <translation>Niet waar</translation>
+        <translation type="vanished">Niet waar</translation>
     </message>
 </context>
 <context>
@@ -16157,6 +16391,33 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VPatternRecipe</name>
     <message>
         <source>Invalid tag %1</source>
@@ -16360,7 +16621,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Zoek</translation>
+        <translation>Zoek</translation>
     </message>
 </context>
 <context>
@@ -17304,6 +17565,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Point of intersection circle and segment</source>
         <translation>Kruispunt van cirkel en segment</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18994,6 +19267,118 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VWidgetBackgroundImages</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Vorm</translation>
+    </message>
+    <message>
+        <source>Transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <comment>Translate piece</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished">Horizontaal:</translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished">Vertikaal:</translation>
+    </message>
+    <message>
+        <source>Relative translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished">Schaal</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breedte:</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Hoogte:</translation>
+    </message>
+    <message>
+        <source>Scale proportionally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotatie</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Hoek:</translation>
+    </message>
+    <message>
+        <source>Z Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Zichtbaar</translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unhold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide All</source>
+        <translation type="unfinished">Verberg Alles</translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation type="unfinished">Vertoon Alles</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished">Pixels</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimeters</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Inches</translation>
+    </message>
+</context>
+<context>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
@@ -19494,6 +19879,13 @@ Deze wijziging opslaan?</translation>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ZValueMoveBackgroundImage</name>
+    <message>
+        <source>z value move a background image</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>AddBackgroundImage</name>
+    <message>
+        <source>add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddDet</name>
     <message>
         <source>add detail</source>
@@ -350,6 +357,13 @@
     </message>
 </context>
 <context>
+    <name>DeleteBackgroundImage</name>
+    <message>
+        <source>delete background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
@@ -469,6 +483,25 @@
     <message>
         <source>Check For Updates</source>
         <translation>Vérifier les Mises à Jour</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAddBackgroundImage</name>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Determine should an image built in or added as path to the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2570,10 +2603,6 @@
         <translation>Mesures finales</translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="vanished">Trouver:</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Rechercher</translation>
     </message>
@@ -2660,10 +2689,6 @@
     <message>
         <source>Parser error: %1</source>
         <translation>Erreur de l&apos;interpréteur : %1</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Chercher les mesures finales par mot-clé. &lt;/p&gt;&lt;p&gt;Ajouter &amp;quot;/r/&amp;quot; avant la recherche pour rechercher les mesures finales par expression rationnelle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3270,7 +3295,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Rechercher</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>0 results</source>
@@ -3947,10 +3972,6 @@ Appliquer quand même les réglages ?</translation>
         <translation>Efficacité :</translation>
     </message>
     <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Manual priority</source>
         <translation>Priorité manuelle</translation>
     </message>
@@ -3978,6 +3999,10 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Activer cette option pour obtenir des solutions à une feuille.</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4925,11 +4950,11 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>Images</translation>
+        <translation type="vanished">Images</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation>Enregistrer</translation>
+        <translation type="vanished">Enregistrer</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -5018,6 +5043,26 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <source>Passmark length:</source>
         <translation>Longueur du repère de montage :</translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to show image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open temp file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8021,6 +8066,50 @@ Appliquer quand même les réglages ?</translation>
     </message>
 </context>
 <context>
+    <name>HideAllBackgroundImages</name>
+    <message>
+        <source>hide all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HideBackgroundImage</name>
+    <message>
+        <source>hide a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldAllBackgroundImages</name>
+    <message>
+        <source>hold all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldBackgroundImage</name>
+    <message>
+        <source>hold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
@@ -9727,6 +9816,46 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Draw export</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished">sans titre</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Tous les fichiers</translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9889,6 +10018,13 @@ Voulez-vous sauvegarder les changements?</translation>
     <message>
         <source>Process has been stoped because of exception.</source>
         <translation>L&apos;opération a été stoppée en raison d&apos;une exception.</translation>
+    </message>
+</context>
+<context>
+    <name>MoveBackgroundImage</name>
+    <message>
+        <source>move background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10233,7 +10369,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Mise à jour</translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -10586,7 +10722,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Mise à jour</translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -11216,6 +11352,22 @@ This option will take an affect after restart.</source>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished">Images</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Tous les fichiers</translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished">Confirmer la suppression</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
+        <translation type="unfinished">Voulez vous vraiment supprimer?</translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11511,6 +11663,13 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
+    <name>RenameBackgroundImage</name>
+    <message>
+        <source>rename background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
@@ -11522,6 +11681,20 @@ This option will take an affect after restart.</source>
     <message>
         <source>rename pattern piece</source>
         <translation>renommer la pièce de patron</translation>
+    </message>
+</context>
+<context>
+    <name>ResetBackgroundImage</name>
+    <message>
+        <source>reset background image transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RotateBackgroundImage</name>
+    <message>
+        <source>rotate background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11564,6 +11737,13 @@ This option will take an affect after restart.</source>
     <message>
         <source>save tool option</source>
         <translation>options d&apos;outil de Sauvegarde</translation>
+    </message>
+</context>
+<context>
+    <name>ScaleBackgroundImage</name>
+    <message>
+        <source>scale background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13256,7 +13436,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Mise à jour</translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -13749,11 +13929,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Confirmer la suppression</translation>
+        <translation type="vanished">Confirmer la suppression</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation>Voulez vous vraiment supprimer?</translation>
+        <translation type="vanished">Voulez vous vraiment supprimer?</translation>
     </message>
     <message>
         <source>light salmon</source>
@@ -13840,6 +14020,68 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundImageItem</name>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Visible</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished">Révéler dans le finder</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15122,11 +15364,11 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
-        <translation>Vrai</translation>
+        <translation type="vanished">Vrai</translation>
     </message>
     <message>
         <source>False</source>
-        <translation>Faux</translation>
+        <translation type="vanished">Faux</translation>
     </message>
 </context>
 <context>
@@ -16123,6 +16365,33 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VPatternRecipe</name>
     <message>
         <source>Invalid tag %1</source>
@@ -16322,7 +16591,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Rechercher</translation>
+        <translation>Rechercher</translation>
     </message>
 </context>
 <context>
@@ -17253,6 +17522,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18944,6 +19225,118 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VWidgetBackgroundImages</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formulaire</translation>
+    </message>
+    <message>
+        <source>Transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <comment>Translate piece</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished">horizontal :</translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished">vertical :</translation>
+    </message>
+    <message>
+        <source>Relative translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished">Echelle</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Largeur :</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale proportionally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotation</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Angle:</translation>
+    </message>
+    <message>
+        <source>Z Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Visible</translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unhold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished">Points</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimètres</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimètres</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Pouces</translation>
+    </message>
+</context>
+<context>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
@@ -19435,6 +19828,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ZValueMoveBackgroundImage</name>
+    <message>
+        <source>z value move a background image</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

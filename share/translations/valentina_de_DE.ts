@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>AddBackgroundImage</name>
+    <message>
+        <source>add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddDet</name>
     <message>
         <source>add detail</source>
@@ -350,6 +357,13 @@
     </message>
 </context>
 <context>
+    <name>DeleteBackgroundImage</name>
+    <message>
+        <source>delete background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
@@ -469,6 +483,25 @@
     <message>
         <source>Check For Updates</source>
         <translation>Nach Updates suchen</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAddBackgroundImage</name>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Name:</translation>
+    </message>
+    <message>
+        <source>Determine should an image built in or added as path to the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2570,10 +2603,6 @@
         <translation>Endgültige Maße</translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="vanished">Finden:</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Suchen</translation>
     </message>
@@ -2660,10 +2689,6 @@
     <message>
         <source>Parser error: %1</source>
         <translation>Parserfehler: %1</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suche nach endgültigen Maßen mit Ausdruck.&lt;/p&gt;&lt;p&gt; Schreibe &amp;quot;/r/&amp;quot; an den Beginn des Suchausdrucks um das endgültige Maß mit einem RegEx zu suchen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3270,7 +3295,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <source>0 results</source>
@@ -3494,14 +3519,6 @@
     <message>
         <source>Unique variable name</source>
         <translation>Eindeutiger Variablenname</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suche Zunahmen nach Ausdruck.&lt;/p&gt;&lt;p&gt;Schreibe &amp;quot;/r/&amp;quot; an den Beginn des Suchausdrucks um die Zunahme mit einem RegEx zu suchen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suche Preview Berechnungen nach Ausdruck. &lt;/p&gt;&lt;p&gt;Schreibe &amp;quot;/r/&amp;quot; an den Beginn des Suchausdrucks um Preview Berechnungen mit einem RegEx zu suchen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Increment</source>
@@ -3958,7 +3975,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation>Setze den Layout Effizienz-Koeffizienten. Der Layout Effizienz-Koeffizient ist das Verhältnis der Fläche der Schnittteile zum umgebenden Rechteck aller Schnittteile. Wenn die Verschachtelungstiefe den notwendigen Wert erreicht hat endet der Vorgang. Wenn der Wert 0 ist wird keine Prüfung durchgeführt. </translation>
+        <translation type="vanished">Setze den Layout Effizienz-Koeffizienten. Der Layout Effizienz-Koeffizient ist das Verhältnis der Fläche der Schnittteile zum umgebenden Rechteck aller Schnittteile. Wenn die Verschachtelungstiefe den notwendigen Wert erreicht hat endet der Vorgang. Wenn der Wert 0 ist wird keine Prüfung durchgeführt. </translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3987,6 +4004,10 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4935,11 +4956,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>Bilder</translation>
+        <translation type="vanished">Bilder</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation>Datei speichern</translation>
+        <translation type="vanished">Datei speichern</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -5027,6 +5048,26 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Passmark length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to show image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open temp file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6311,7 +6352,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausschließen</translation>
     </message>
     <message>
         <source>Include</source>
@@ -8031,6 +8072,50 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
 </context>
 <context>
+    <name>HideAllBackgroundImages</name>
+    <message>
+        <source>hide all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HideBackgroundImage</name>
+    <message>
+        <source>hide a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldAllBackgroundImages</name>
+    <message>
+        <source>hold all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldBackgroundImage</name>
+    <message>
+        <source>hold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
@@ -9737,6 +9822,46 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Draw export</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Alle Dateien</translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9899,6 +10024,13 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Vorgang wurde wegen eines Fehlers unterbrochen.</translation>
+    </message>
+</context>
+<context>
+    <name>MoveBackgroundImage</name>
+    <message>
+        <source>move background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10251,7 +10383,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Updaten</translation>
+        <translation>Updaten</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -10606,7 +10738,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Updaten</translation>
+        <translation>Updaten</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -11236,6 +11368,22 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished">Bilder</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Alle Dateien</translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished">Löschvorgang bestätigen</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
+        <translation type="unfinished">Möchten Sie wirklich löschen?</translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11531,6 +11679,13 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
 </context>
 <context>
+    <name>RenameBackgroundImage</name>
+    <message>
+        <source>rename background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
@@ -11542,6 +11697,20 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <message>
         <source>rename pattern piece</source>
         <translation>Schnittteil umbenennen</translation>
+    </message>
+</context>
+<context>
+    <name>ResetBackgroundImage</name>
+    <message>
+        <source>reset background image transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RotateBackgroundImage</name>
+    <message>
+        <source>rotate background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11584,6 +11753,13 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <message>
         <source>save tool option</source>
         <translation>Werkzeugoption speichern</translation>
+    </message>
+</context>
+<context>
+    <name>ScaleBackgroundImage</name>
+    <message>
+        <source>scale background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12329,10 +12505,6 @@ Do you want to save your changes?</source>
     <message>
         <source>&amp;New</source>
         <translation>&amp;Neu</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suche nach Maßen mit Ausdruck. &lt;/p&gt;&lt;p&gt;chreibe &amp;quot;/r/&amp;quot; an den Beginn des Suchausdrucks um Maße mit einem RegEx zu suchen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -13279,7 +13451,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Updaten</translation>
+        <translation>Updaten</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -13776,11 +13948,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Löschvorgang bestätigen</translation>
+        <translation type="vanished">Löschvorgang bestätigen</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation>Möchten Sie wirklich löschen?</translation>
+        <translation type="vanished">Möchten Sie wirklich löschen?</translation>
     </message>
     <message>
         <source>light salmon</source>
@@ -13875,6 +14047,68 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VBackgroundImageItem</name>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Sichtbar</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished">Im Suchfenster anzeigen</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished">Im Dateiexplorer anzeigen</translation>
+    </message>
+    <message>
+        <source>Save as …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
@@ -13893,7 +14127,7 @@ Do you want to save your changes?</source>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Material auswählen</translation>
     </message>
 </context>
 <context>
@@ -14248,83 +14482,83 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path to csv file</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zur CSV-Datei</translation>
     </message>
     <message>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer entsprechend der Layoutseitenvorlage (Standard = 0, Exportmodus):</translation>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckerränder ignorieren (Exportmodus). Verwenden sie diese Einstellung nur, wenn sie den vollen Papierplatz benötigen. Bei späterem Druck müssen Sie die Ränder selbst hinzufügen.</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer entsprechend der gekachelten PDF-Seitenvorlage (Standard = 0, Exportmodus mit gekacheltem PDF-Format):</translation>
     </message>
     <message>
         <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung 1 cm verwendet.</translation>
     </message>
     <message>
         <source>The left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Der linke Rand</translation>
     </message>
     <message>
         <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn nicht gesetzt, wird der Standardwert 1 cm verwendet.</translation>
     </message>
     <message>
         <source>The right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Der rechte Rand</translation>
     </message>
     <message>
         <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn nicht gesetzt, wird der Standardwert 1 cm verwendet.</translation>
     </message>
     <message>
         <source>The top margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Der obere Rand</translation>
     </message>
     <message>
         <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn nicht gesetzt, wird der Standardwert 1 cm verwendet.</translation>
     </message>
     <message>
         <source>The bottom margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Der untere Rand</translation>
     </message>
     <message>
         <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stellen Sie die Ausrichtung der gekachelten Seiten auf das Querformat (Exportmodus) ein. Standardwert, wenn nicht Hochformat eingestellt.</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size together.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenformat und explizite Seitengröße können nicht zusammen verwendet werden.</translation>
     </message>
     <message>
         <source>Tiled left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der gekachelte linke Rand muss zusammen mit den Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
         <source>Tiled right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der gekachelte rechte Rand muss zusammen mit Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
         <source>Tiled top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der gekachelte obere Rand muss zusammen mit Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
         <source>Tiled bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der gekachelte untere Rand muss zusammen mit Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
         <source>Page measure units (export mode). Valid values: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maßeinheiten der Seite (Exportmodus). Gültige Werte: %1.</translation>
     </message>
     <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwenden Sie diese Option, um das definierte Material zu überschreiben. Der Wert muss die Form &lt;number&gt;@ &lt;user matrial name&gt;haben. Die Zahl sollte im Bereich von 1 bis %1 liegen. Beispiel: 1@Stoff2. Der Schlüssel kann mehrfach verwendet werden. Hat keine Auswirkung im GUI-Modus.</translation>
     </message>
     <message>
         <source>User material</source>
@@ -14336,11 +14570,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Material des Benutzers &apos;%1&apos;. Trennzeichen fehlt.</translation>
     </message>
     <message>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Material des Benutzers &apos;%1&apos;. Falsche Materialnummer.</translation>
     </message>
     <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
@@ -14531,23 +14765,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigene Maße</translation>
     </message>
     <message>
         <source>multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrgrößen</translation>
     </message>
     <message>
         <source>templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlagen</translation>
     </message>
     <message>
         <source>label templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftungsvorlage</translation>
     </message>
     <message>
         <source>patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittteil</translation>
     </message>
     <message>
         <source>manual layouts</source>
@@ -14578,7 +14812,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cast object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt kann nicht gelesen werden.</translation>
     </message>
 </context>
 <context>
@@ -14659,7 +14893,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Schreiben von vorgegebenem XML.</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
@@ -14667,7 +14901,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not unique id (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht eindeutige ID (%1)</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -14710,15 +14944,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zur Gruppe hinzufügen</translation>
     </message>
     <message>
         <source>Remove from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Aus der Gruppe entfernen</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung anzeigen</translation>
     </message>
     <message>
         <source>Restore label position</source>
@@ -14729,7 +14963,7 @@ Do you want to save your changes?</source>
     <name>VException</name>
     <message>
         <source>Exception: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausnahme: %1</translation>
     </message>
 </context>
 <context>
@@ -14864,7 +15098,7 @@ Do you want to save your changes?</source>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stück %1 hat keine Form.</translation>
     </message>
 </context>
 <context>
@@ -14906,15 +15140,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Layout</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung anzeigen</translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausschließen</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -15153,11 +15387,11 @@ Do you want to save your changes?</source>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
-        <translation>Wahr</translation>
+        <translation type="vanished">Wahr</translation>
     </message>
     <message>
         <source>False</source>
-        <translation>Falsch</translation>
+        <translation type="vanished">Falsch</translation>
     </message>
 </context>
 <context>
@@ -15828,11 +16062,11 @@ Do you want to save your changes?</source>
     <name>VPTileFactory</name>
     <message>
         <source>Grid ( %1 , %2 )</source>
-        <translation type="unfinished"></translation>
+        <translation>Gitter ( %1 , %2 )</translation>
     </message>
     <message>
         <source>Page %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite %1 von %2</translation>
     </message>
     <message>
         <source>cm</source>
@@ -16083,39 +16317,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating operation of rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Erstellung oder Aktualisierung des Rotationsvorgangs</translation>
     </message>
     <message>
         <source>Unknown operation type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Vorgangstyp &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Erstellung oder Aktualisierung beim Spiegel über eine Linie</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Erstellung oder Aktualisierung beim Spiegel über die Achse</translation>
     </message>
     <message>
         <source>Error creating or updating operation of moving</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren der Verschiebung</translation>
     </message>
     <message>
         <source>Error creating or updating point of line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Erstellung oder Aktualisierung des Linienschnittpunkts</translation>
     </message>
     <message>
         <source>Error creating or updating simple elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Erstellung oder Aktualisierung eines elliptischen Bogens</translation>
     </message>
     <message>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter elliptischer Bogentyp &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error creating or updating modeling elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren des elliptischen Bogens</translation>
     </message>
     <message>
         <source>Detail</source>
@@ -16127,11 +16361,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren eines Schnittteil-Pfad</translation>
     </message>
     <message>
         <source>Error creating or updating pin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren des Pin-Punktes</translation>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
@@ -16151,6 +16385,33 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="vanished">Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16199,15 +16460,15 @@ Do you want to save your changes?</source>
     <name>VPoster</name>
     <message>
         <source>Grid ( %1 , %2 )</source>
-        <translation type="unfinished"></translation>
+        <translation>Gitter ( %1 , %2 )</translation>
     </message>
     <message>
         <source>Page %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite %1 von %2</translation>
     </message>
     <message>
         <source>Sheet %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Blatt %1 von %2</translation>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
@@ -16357,11 +16618,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
 </context>
 <context>
     <name>VTextManager</name>
+    <message>
+        <source>Cut %1 on %2%3</source>
+        <translation type="vanished">%1 auf %2%3 kürzen</translation>
+    </message>
     <message>
         <source> on Fold</source>
         <translation type="vanished">im Bruch</translation>
@@ -16410,11 +16675,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Startwinkel</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Endwinkel</translation>
     </message>
     <message>
         <source>Label</source>
@@ -16433,11 +16698,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Startwinkel</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Endwinkel</translation>
     </message>
     <message>
         <source>Label</source>
@@ -16455,7 +16720,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolCurveIntersectAxis</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Berechnen von Punkt &apos;%1&apos;. Es gibt keinen Schnittpunkt mit Kurve &apos;%2&apos; und Achse durch Punkt &apos;%3&apos; mit Winkel %4°</translation>
     </message>
     <message>
         <source>Length</source>
@@ -16486,23 +16751,23 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge</translation>
     </message>
     <message>
         <source>start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Startwinkel</translation>
     </message>
     <message>
         <source>end angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Endwinkel</translation>
     </message>
     <message>
         <source>radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung</translation>
     </message>
 </context>
 <context>
@@ -16513,11 +16778,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung</translation>
     </message>
 </context>
 <context>
@@ -16528,11 +16793,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung</translation>
     </message>
 </context>
 <context>
@@ -16548,6 +16813,30 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>move pattern piece label</source>
         <translation type="vanished">verschiebe Schnittmuster Beschriftung</translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="vanished">Größe der Beschriftung ändern</translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="vanished">Schnittteil-Beschriftung drehen</translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="vanished">Informations-Beschriftung des Schnittteils drehen</translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="vanished">Größe der Informations-Beschriftung des Schnittteils ändern</translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="vanished">Schnittteil-Beschriftung drehen</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="vanished">Im Layout</translation>
     </message>
     <message>
         <source>move grainline</source>
@@ -16581,11 +16870,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Startwinkel</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Endwinkel</translation>
     </message>
     <message>
         <source>Label</source>
@@ -16600,7 +16889,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolFlippingByAxis</name>
     <message>
         <source>Origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ursprungspunkt</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
@@ -16656,7 +16945,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Berechnen von Punkt &apos;%1&apos;. Linien (%2;%3) und (%4;%5) haben keinen Schnittpunkt</translation>
     </message>
 </context>
 <context>
@@ -16675,7 +16964,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Berechnen von Punkt &apos;%1&apos;. Linie (%2;%3) hat keinen Schnittpunkt mit der Achse durch Punkt &apos;%4&apos; und Winkel %5°</translation>
     </message>
 </context>
 <context>
@@ -16697,7 +16986,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolMove</name>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotationswinkel</translation>
     </message>
     <message>
         <source>Length</source>
@@ -16713,7 +17002,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ursprungspunkt der Drehung</translation>
     </message>
     <message>
         <source>move</source>
@@ -16964,7 +17253,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Tool rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeugdrehung</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation type="vanished">Suffix</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -16976,15 +17269,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Tool move</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeugbewegung</translation>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeug über Linie spiegeln</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeug über Achse spiegeln</translation>
+    </message>
+    <message>
+        <source>Axis type</source>
+        <translation type="vanished">Achsentyp</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
@@ -16996,7 +17293,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Position:</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -17004,7 +17301,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Line type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Linientyp:</translation>
     </message>
     <message>
         <source>Line color:</source>
@@ -17052,11 +17349,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point 1 label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt 1 Beschriftung:</translation>
     </message>
     <message>
         <source>Point 2 label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt 2 Beschriftung:</translation>
     </message>
     <message>
         <source>First base point:</source>
@@ -17088,19 +17385,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>First line (first point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Erste Zeile (erster Punkt):</translation>
     </message>
     <message>
         <source>First line (second point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Erste Zeile (zweiter Punkt):</translation>
     </message>
     <message>
         <source>Second line (first point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweite Zeile (erster Punkt):</translation>
     </message>
     <message>
         <source>Second line (second point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweite Zeile (zweiter Punkt):</translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
@@ -17148,11 +17445,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>First circle radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster Kreisradius:</translation>
     </message>
     <message>
         <source>Second circle radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter Kreisradius:</translation>
     </message>
     <message>
         <source>First curve:</source>
@@ -17180,7 +17477,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Circle radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreisradius:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -17188,19 +17485,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>C1: angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: Winkel:</translation>
     </message>
     <message>
         <source>C1: length:</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: Länge:</translation>
     </message>
     <message>
         <source>C2: angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: Winkel:</translation>
     </message>
     <message>
         <source>C2: length:</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: Länge:</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -17265,6 +17562,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Point of intersection circle and segment</source>
         <translation>Punkt am Schnittpunkt von Kreis und Abschnitt</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17345,11 +17654,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolRotation</name>
     <message>
         <source>Origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ursprungspunkt</translation>
     </message>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotationswinkel</translation>
     </message>
     <message>
         <source>rotate</source>
@@ -17368,23 +17677,23 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe der Beschriftung ändern</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittteil-Beschriftung drehen</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations-Beschriftung des Schnittteils drehen</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe der Informations-Beschriftung des Schnittteils ändern</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittteil-Beschriftung drehen</translation>
     </message>
     <message>
         <source>move grainline</source>
@@ -17404,7 +17713,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Layout</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -17416,7 +17725,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>multi deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>mehrfaches Löschen</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -18955,6 +19264,118 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VWidgetBackgroundImages</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+        <source>Transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <comment>Translate piece</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relative translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breite:</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Höhe:</translation>
+    </message>
+    <message>
+        <source>Scale proportionally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Drehung</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Winkel:</translation>
+    </message>
+    <message>
+        <source>Z Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Sichtbar</translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unhold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished">Pixel</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimeter</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Zentimeter</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
@@ -18966,27 +19387,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles auswählen</translation>
     </message>
     <message>
         <source>Select none</source>
-        <translation type="unfinished"></translation>
+        <translation>Nichts auswählen</translation>
     </message>
     <message>
         <source>select all details</source>
-        <translation type="unfinished"></translation>
+        <translation>alle Details auswählen</translation>
     </message>
     <message>
         <source>select none details</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Details auswählen</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl umkehren</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl umkehren</translation>
     </message>
     <message>
         <source>Hide not in layout</source>
@@ -19438,6 +19859,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ZValueMoveBackgroundImage</name>
+    <message>
+        <source>z value move a background image</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

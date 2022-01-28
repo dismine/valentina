@@ -2,17 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pt_BR">
 <context>
+    <name>AddBackgroundImage</name>
+    <message>
+        <source>add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation type="vanished">Adicionar detalhe</translation>
+        <translation type="vanished">adicionar detalhe</translation>
     </message>
 </context>
 <context>
     <name>AddGroup</name>
     <message>
         <source>add group</source>
-        <translation>Adicionar grupo</translation>
+        <translation>adicionar grupo</translation>
     </message>
 </context>
 <context>
@@ -350,6 +357,13 @@
     </message>
 </context>
 <context>
+    <name>DeleteBackgroundImage</name>
+    <message>
+        <source>delete background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
@@ -469,6 +483,25 @@
     <message>
         <source>Check For Updates</source>
         <translation>Checar atualizações</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAddBackgroundImage</name>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Determine should an image built in or added as path to the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in</source>
+        <translation type="unfinished">Embutido</translation>
     </message>
 </context>
 <context>
@@ -2079,11 +2112,11 @@
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades do molde</translation>
     </message>
     <message>
         <source>Size units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades do tamanho</translation>
     </message>
     <message>
         <source>Customer birth date</source>
@@ -2570,10 +2603,6 @@
         <translation>Medidas finais</translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="vanished">Pesquisar:</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Buscar</translation>
     </message>
@@ -2663,27 +2692,27 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pesquisar histórico&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Baixo</translation>
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar Caso &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar palavras &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comparar com expressões regulares &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2691,23 +2720,23 @@
     </message>
     <message>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Anterior&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Próximo %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
 </context>
 <context>
@@ -2826,7 +2855,7 @@
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias inválido</translation>
     </message>
 </context>
 <context>
@@ -2953,7 +2982,7 @@
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias inválido</translation>
     </message>
 </context>
 <context>
@@ -3258,31 +3287,31 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pesquisar histórico&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Baixo</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar Caso &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar palavras &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comparar com expressões regulares &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3290,23 +3319,23 @@
     </message>
     <message>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Anterior&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Próximo %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
 </context>
 <context>
@@ -3501,27 +3530,27 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pesquisar histórico&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Baixo</translation>
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar Caso &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar palavras &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comparar com expressões regulares &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3529,23 +3558,23 @@
     </message>
     <message>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Anterior &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Próximo %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
 </context>
 <context>
@@ -3560,7 +3589,7 @@
     </message>
     <message>
         <source>Insert nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir nós</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -3946,10 +3975,6 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Eficiência:</translation>
     </message>
     <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Manual priority</source>
         <translation>Prioridade manual</translation>
     </message>
@@ -3972,11 +3997,15 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"></translation>
+        <translation> min</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Habilite essa opção para preferir a solução de uma página.</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4356,7 +4385,7 @@ Aplicar configurações de qualquer forma?</translation>
     <name>DialogMeasurementsCSVColumns</name>
     <message>
         <source>Setup columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir colunas</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -4364,7 +4393,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada</translation>
     </message>
     <message>
         <source>Import</source>
@@ -4414,7 +4443,7 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Shift (%1):</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Shift (%1):</translation>
     </message>
     <message>
         <source>Skip</source>
@@ -4434,23 +4463,23 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Shift (%1)*:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift (%1)*:</translation>
     </message>
     <message>
         <source>File path is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Caminho do arquivo está vazio</translation>
     </message>
     <message>
         <source>Not enough columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Colunas insuficientes</translation>
     </message>
     <message>
         <source>Not enough data to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Não existem dados o suficiente para serem importados</translation>
     </message>
     <message>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, selecione números únicos para cada coluna</translation>
     </message>
 </context>
 <context>
@@ -4585,15 +4614,15 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Fórmula de ângulo inválido</translation>
     </message>
     <message>
         <source>Invalid rotation angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Fórmula de rotação de ângulo inválido</translation>
     </message>
     <message>
         <source>Invalid length formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimento da fórmula é inválido</translation>
     </message>
     <message>
         <source>Invalid label</source>
@@ -4601,7 +4630,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias inválido</translation>
     </message>
 </context>
 <context>
@@ -4924,11 +4953,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>Imagens</translation>
+        <translation type="vanished">Imagens</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation>Salvar Arquivo</translation>
+        <translation type="vanished">Salvar Arquivo</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -5017,6 +5046,26 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Passmark length:</source>
         <translation>Tamanho do Pique:</translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to show image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open temp file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5438,15 +5487,15 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Continue o primeiro ponto até o corte do contorno</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Continue o último ponto até o corte do contorno</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
-        <translation type="unfinished"></translation>
+        <translation>O caminho é um corte de contorno. Use para controlar a exportação para DXF-AAMA</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -5514,7 +5563,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Invalid segment!</source>
-        <translation type="unfinished"></translation>
+        <translation>Segmento inválido!</translation>
     </message>
 </context>
 <context>
@@ -6254,7 +6303,7 @@ Aplicar configurações de qualquer forma?</translation>
     <name>DialogPuzzlePreferences</name>
     <message>
         <source>Puzzle preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferências do quebra cabeça</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -6280,15 +6329,15 @@ Aplicar configurações de qualquer forma?</translation>
     <name>DialogRestrictDimension</name>
     <message>
         <source>Restrict dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Restringir dimensão</translation>
     </message>
     <message>
         <source>Dimension A:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensão A:</translation>
     </message>
     <message>
         <source>Restriction</source>
-        <translation type="unfinished"></translation>
+        <translation>Restrição</translation>
     </message>
     <message>
         <source>Min:</source>
@@ -6391,7 +6440,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6427,11 +6476,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Invalid alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias inválido</translation>
     </message>
     <message>
         <source>Invalid angle formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Fórmula de ângulo inválido</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -7011,7 +7060,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Invalid segment!</source>
-        <translation type="unfinished"></translation>
+        <translation>Segmento inválido!</translation>
     </message>
 </context>
 <context>
@@ -8013,6 +8062,50 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Information</source>
         <translation type="vanished">Informação</translation>
+    </message>
+</context>
+<context>
+    <name>HideAllBackgroundImages</name>
+    <message>
+        <source>hide all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HideBackgroundImage</name>
+    <message>
+        <source>hide a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show a background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldAllBackgroundImages</name>
+    <message>
+        <source>hold all background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HoldBackgroundImage</name>
+    <message>
+        <source>hold background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhold background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9492,7 +9585,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de ler configurações de arquivo .INI mal formado.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -9722,6 +9815,46 @@ Você quer salvar suas mudanças?</translation>
         <source>Draw export</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Background images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to add background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save image. No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished">sem título</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Todos os arquivos</translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9883,6 +10016,13 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MoveBackgroundImage</name>
+    <message>
+        <source>move background image</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10236,7 +10376,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Atualizar</translation>
+        <translation>Atualizar</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -10591,7 +10731,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Atualizar</translation>
+        <translation>Atualizar</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -10658,15 +10798,15 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso de superposição de peças</translation>
     </message>
     <message>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso de peças fora dos limites</translation>
     </message>
     <message>
         <source>Sticky edges</source>
-        <translation type="unfinished"></translation>
+        <translation>Bordas grudentas</translation>
     </message>
     <message>
         <source>Follow grainline</source>
@@ -10682,15 +10822,15 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Lado a lado na folha</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar pré visualização de marca d&apos;água</translation>
     </message>
     <message>
         <source>Show watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar marca d&apos;água</translation>
     </message>
     <message>
         <source>default layout settings</source>
@@ -11183,7 +11323,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>girar peças</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
@@ -11220,6 +11360,22 @@ Esta opção terá um efeito após o reinício.</translation>
     <message>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished">Imagens</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished">Todos os arquivos</translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished">Confirmação de exclusão</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
+        <translation type="unfinished">Você realmente deseja excluir?</translation>
     </message>
 </context>
 <context>
@@ -11437,7 +11593,7 @@ Esta opção terá um efeito após o reinício.</translation>
     <name>QtColorPicker</name>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Preto</translation>
     </message>
     <message>
         <source>White</source>
@@ -11445,27 +11601,27 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermelho</translation>
     </message>
     <message>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermelho escuro</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde escuro</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul</translation>
     </message>
     <message>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul escuro</translation>
     </message>
     <message>
         <source>Cyan</source>
@@ -11477,31 +11633,31 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta</translation>
     </message>
     <message>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta escuro</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Amarelo</translation>
     </message>
     <message>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Amarelo escuro</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Cinza</translation>
     </message>
     <message>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Cinza escuro</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Cinza claro</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -11516,6 +11672,13 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
 </context>
 <context>
+    <name>RenameBackgroundImage</name>
+    <message>
+        <source>rename background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
@@ -11527,6 +11690,20 @@ Esta opção terá um efeito após o reinício.</translation>
     <message>
         <source>rename pattern piece</source>
         <translation>renomear peça de modelagem</translation>
+    </message>
+</context>
+<context>
+    <name>ResetBackgroundImage</name>
+    <message>
+        <source>reset background image transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RotateBackgroundImage</name>
+    <message>
+        <source>rotate background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11569,6 +11746,13 @@ Esta opção terá um efeito após o reinício.</translation>
     <message>
         <source>save tool option</source>
         <translation>salvar opções de ferramenta</translation>
+    </message>
+</context>
+<context>
+    <name>ScaleBackgroundImage</name>
+    <message>
+        <source>scale background image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12318,7 +12502,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de ler configurações de arquivo .INI mal formado.</translation>
     </message>
     <message>
         <source>Name</source>
@@ -12432,7 +12616,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Shift (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift (%1):</translation>
     </message>
     <message>
         <source>%1 shift</source>
@@ -12472,27 +12656,27 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pesquisar histórico&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Baixo</translation>
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar Caso &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar palavras &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comparar com expressões regulares &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -12500,23 +12684,23 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Anterior&lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Achar Próximo %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
 </context>
 <context>
@@ -13261,7 +13445,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Atualizar</translation>
+        <translation>Atualizar</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -13755,11 +13939,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Confirmação de exclusão</translation>
+        <translation type="vanished">Confirmação de exclusão</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation>Você realmente deseja excluir?</translation>
+        <translation type="vanished">Você realmente deseja excluir?</translation>
     </message>
     <message>
         <source>light salmon</source>
@@ -13850,6 +14034,68 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundImageItem</name>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Visibilidade</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished">Mostrar no Localizador</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished">Mostrar no Explorador</translation>
+    </message>
+    <message>
+        <source>Save as …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Excluir</translation>
+    </message>
+</context>
+<context>
+    <name>VBackgroundPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15089,11 +15335,11 @@ Deseja salvar suas mudanças?</translation>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
-        <translation>Verdadeiro</translation>
+        <translation type="vanished">Verdadeiro</translation>
     </message>
     <message>
         <source>False</source>
-        <translation>Falso</translation>
+        <translation type="vanished">Falso</translation>
     </message>
 </context>
 <context>
@@ -15122,7 +15368,7 @@ Deseja salvar suas mudanças?</translation>
     <name>VPLayout</name>
     <message>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Folha %1</translation>
     </message>
 </context>
 <context>
@@ -15137,7 +15383,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Peça %1 inválida.</translation>
     </message>
     <message>
         <source>Error in line %1. Seam allowance is empty.</source>
@@ -15291,15 +15537,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Show Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar grade</translation>
     </message>
     <message>
         <source>Column width</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimento da coluna</translation>
     </message>
     <message>
         <source>Row height</source>
-        <translation type="unfinished"></translation>
+        <translation>Altura da linha</translation>
     </message>
     <message>
         <source>Control</source>
@@ -15311,7 +15557,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Sticky edges</source>
-        <translation type="unfinished"></translation>
+        <translation>Bordas grudentas</translation>
     </message>
     <message>
         <source>Export</source>
@@ -15319,23 +15565,23 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Export Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar folha</translation>
     </message>
     <message>
         <source>Tiles properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriedades lado a lado</translation>
     </message>
     <message>
         <source>Tiled Pdf Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportação de PDF Lado a lado</translation>
     </message>
     <message>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Lado a lado na folha</translation>
     </message>
     <message>
         <source>Layout properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriedades de layout</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -15347,15 +15593,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso de superposição de peças</translation>
     </message>
     <message>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso de peças fora dos limites</translation>
     </message>
     <message>
         <source>zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>ampliar</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -15371,11 +15617,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar &amp;Como</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importar Dados de Layout Crus</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -15391,7 +15637,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>About &amp;Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre &amp;Quebra cabeças</translation>
     </message>
     <message>
         <source>Zoom in</source>
@@ -15403,7 +15649,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ampliar 1:1</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -15411,7 +15657,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Ampliar folha</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -15427,11 +15673,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de criar layout.</translation>
     </message>
     <message>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi capaz de extrair dados de arquivo &apos;%1&apos;. %2</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -15451,11 +15697,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>untitled %1.vlt</source>
-        <translation type="unfinished"></translation>
+        <translation>sem título %1.vlt</translation>
     </message>
     <message>
         <source>untitled.vlt</source>
-        <translation type="unfinished"></translation>
+        <translation>sem_título.vlt</translation>
     </message>
     <message>
         <source>read only</source>
@@ -15463,7 +15709,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de ler configurações de arquivo .INI mal formado.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -15471,7 +15717,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de abrir arquivo, arquivo apenas em modo leitura?</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -15479,7 +15725,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivos de layout</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -15491,7 +15737,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>layout</source>
-        <translation type="unfinished"></translation>
+        <translation>layout</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -15511,7 +15757,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Raw Layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivos de layout crus</translation>
     </message>
     <message>
         <source>About Qt</source>
@@ -15519,11 +15765,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Folha</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Layout</translation>
     </message>
     <message>
         <source>Watermark</source>
@@ -15531,16 +15777,16 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Gradation id:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gradação id:</translation>
     </message>
     <message>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformação</translation>
     </message>
     <message>
         <source>Translate</source>
         <comment>Translate piece</comment>
-        <translation type="unfinished"></translation>
+        <translation>Transladar</translation>
     </message>
     <message>
         <source>Horizontal:</source>
@@ -15552,15 +15798,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Relative translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transladação relativa</translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodar</translation>
     </message>
     <message>
         <source>Apply to each piece separately</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar para cada peça separadamente</translation>
     </message>
     <message>
         <source>Unit:</source>
@@ -15600,11 +15846,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar pré visualização de marca d&apos;água</translation>
     </message>
     <message>
         <source>Show watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar marca d&apos;água</translation>
     </message>
     <message>
         <source>Print tiles scheme</source>
@@ -15612,19 +15858,19 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Pieces gap:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo de peças:</translation>
     </message>
     <message>
         <source>Export Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Layout</translation>
     </message>
     <message>
         <source>Undo commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfazer comandos</translation>
     </message>
     <message>
         <source>Add Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Folha</translation>
     </message>
     <message>
         <source>Print</source>
@@ -15636,11 +15882,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Print tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir lado a lado</translation>
     </message>
     <message>
         <source>Print preview tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Pré visualização de impressão lado a lado</translation>
     </message>
     <message>
         <source>Editor</source>
@@ -15664,11 +15910,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Unable to read a layout file. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de ler o arquivo de layout. %1</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Peça %1 inválida.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -15689,7 +15935,8 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Layout has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout foi modificado.
+Você quer salvar as alterações?</translation>
     </message>
     <message>
         <source>Save…</source>
@@ -15713,31 +15960,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou em mover a página ao disco, disco cheio?</translation>
     </message>
     <message>
         <source>The layout is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>O layout é inválido.</translation>
     </message>
     <message>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>O layout é inválido. Peça está fora dos limites. Você quer continuar exportando?</translation>
     </message>
     <message>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout é inválido. Peças em superposição. Você quer continuar exportando?</translation>
     </message>
     <message>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Folha %1</translation>
     </message>
     <message>
         <source>translate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>traduzir peças</translation>
     </message>
     <message>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>girar peças</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
@@ -15757,7 +16004,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unable to get sheet page settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de obter configurações da folha da página</translation>
     </message>
 </context>
 <context>
@@ -15785,42 +16032,42 @@ Do you want to save your changes?</source>
     <name>VPUndoAddSheet</name>
     <message>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>adicionar folha de estilo</translation>
     </message>
 </context>
 <context>
     <name>VPUndoMovePieceOnSheet</name>
     <message>
         <source>move piece on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>movar peça na folha</translation>
     </message>
 </context>
 <context>
     <name>VPUndoOriginMove</name>
     <message>
         <source>move transformation origin</source>
-        <translation type="unfinished"></translation>
+        <translation>mover transformação da origem</translation>
     </message>
 </context>
 <context>
     <name>VPUndoPieceMove</name>
     <message>
         <source>move piece</source>
-        <translation type="unfinished"></translation>
+        <translation>mover peça</translation>
     </message>
 </context>
 <context>
     <name>VPUndoPieceRotate</name>
     <message>
         <source>rotate piece</source>
-        <translation type="unfinished"></translation>
+        <translation>girar peça</translation>
     </message>
 </context>
 <context>
     <name>VPUndoRemoveSheet</name>
     <message>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>adicionar folha</translation>
     </message>
 </context>
 <context>
@@ -16090,6 +16337,33 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPatternImage</name>
+    <message>
+        <source>Unexpected mime type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content type mistmatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VPatternRecipe</name>
     <message>
         <source>Invalid tag %1</source>
@@ -16188,11 +16462,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de abrir arquivo, arquivo apenas em modo leitura?</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou em mover a página ao disco, disco cheio?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
@@ -16212,7 +16486,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>unamed</source>
-        <translation type="unfinished"></translation>
+        <translation>sem nome</translation>
     </message>
     <message>
         <source>File error.
@@ -16220,7 +16494,11 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro do arquivo.
+
+%1
+
+%2</translation>
     </message>
     <message>
         <source>The layout is stale.</source>
@@ -16273,11 +16551,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Words</source>
-        <translation type="unfinished"></translation>
+        <translation>Words</translation>
     </message>
     <message>
         <source>Regex</source>
-        <translation type="unfinished"></translation>
+        <translation>Regex</translation>
     </message>
     <message>
         <source>Match case and words</source>
@@ -16289,7 +16567,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
 </context>
 <context>
@@ -17234,6 +17512,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Point of intersection circle and segment</source>
         <translation>Ponto de interseção circulo e segmento</translation>
     </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -17565,7 +17855,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Thornton&apos;s International System</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sistema Internacional Thornton</translation>
     </message>
     <message>
         <source>ed. R. L. Shep</source>
@@ -18278,6 +18568,46 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Spl_</translation>
     </message>
     <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">CaminhoSpl</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">RaioArco_</translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Angulo1Arco_</translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Angulo2Arco_</translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Angulo1Spl_</translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Angulo2Spl_</translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">CaminhoAngulo1Spl</translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">CaminhoAngulo2Spl</translation>
+    </message>
+    <message>
         <source>sin</source>
         <comment>sine function</comment>
         <translation type="vanished">sen</translation>
@@ -18360,27 +18690,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation type="unfinished"></translation>
+        <translation>exp</translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation type="unfinished"></translation>
+        <translation>rzqd</translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="unfinished"></translation>
+        <translation>sign</translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation type="unfinished"></translation>
+        <translation>rint</translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation type="unfinished"></translation>
+        <translation>abs</translation>
     </message>
     <message>
         <source>min</source>
@@ -18400,12 +18730,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>med</translation>
     </message>
     <message>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
-        <translation type="unfinished"></translation>
+        <translation>fmod</translation>
     </message>
     <message>
         <source>cm</source>
@@ -18445,42 +18775,42 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>CaminhoSpl</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>RaioArco_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angulo1Arco_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angulo2Arco_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angulo1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angulo2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>CaminhoAngulo1Spl</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>CaminhoAngulo2Spl</translation>
     </message>
     <message>
         <source>Seg_</source>
@@ -18495,7 +18825,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>size</source>
@@ -18510,162 +18840,162 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>C1LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C1LengthSpl_</translation>
     </message>
     <message>
         <source>C2LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C2LengthSpl_</translation>
     </message>
     <message>
         <source>C1LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C1LengthSplPath</translation>
     </message>
     <message>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C2LengthSplPath</translation>
     </message>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>CurrentSeamAllowance</translation>
     </message>
     <message>
         <source>degTorad</source>
         <comment>converts degrees to radian</comment>
-        <translation type="unfinished"></translation>
+        <translation>degTorad</translation>
     </message>
     <message>
         <source>radTodeg</source>
         <comment>converts radian to degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>radTodeg</translation>
     </message>
     <message>
         <source>sin</source>
         <comment>sine function working with radians</comment>
-        <translation type="unfinished">sen</translation>
+        <translation>sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function working with radians</comment>
-        <translation type="unfinished">cos</translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function working with radians</comment>
-        <translation type="unfinished">tg</translation>
+        <translation>tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function working with radians</comment>
-        <translation type="unfinished">asen</translation>
+        <translation>asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function working with radians</comment>
-        <translation type="unfinished">acos</translation>
+        <translation>acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function working with radians</comment>
-        <translation type="unfinished">atg</translation>
+        <translation>atan</translation>
     </message>
     <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinD</translation>
     </message>
     <message>
         <source>cosD</source>
         <comment>cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>cosD</translation>
     </message>
     <message>
         <source>tanD</source>
         <comment>tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>tanD</translation>
     </message>
     <message>
         <source>asinD</source>
         <comment>arcus sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>asinD</translation>
     </message>
     <message>
         <source>acosD</source>
         <comment>arcus cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>acosD</translation>
     </message>
     <message>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>atanD</translation>
     </message>
     <message>
         <source>M_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>M_</translation>
     </message>
     <message>
         <source>Increment_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Incremento_</translation>
     </message>
     <message>
         <source>ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ElArc_</translation>
     </message>
     <message>
         <source>Radius1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Raio1ElArc_</translation>
     </message>
     <message>
         <source>Radius2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Raio2ElArc_</translation>
     </message>
     <message>
         <source>Angle1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angulo1ElArc_</translation>
     </message>
     <message>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angulo2ElArc_</translation>
     </message>
     <message>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
-        <translation type="unfinished"></translation>
+        <translation>r2cm</translation>
     </message>
     <message>
         <source>csrCm</source>
         <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
-        <translation type="unfinished"></translation>
+        <translation>csrCm</translation>
     </message>
     <message>
         <source>csrInch</source>
         <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
-        <translation type="unfinished"></translation>
+        <translation>csrInch</translation>
     </message>
     <message>
         <source>RotationElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>RotaçãoElArc_</translation>
     </message>
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation type="unfinished"></translation>
+        <translation>converte graus para radianos</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
-        <translation type="unfinished"></translation>
+        <translation>converte radianos para graus</translation>
     </message>
     <message>
         <source>sine function working with radians</source>
@@ -18700,17 +19030,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>hyperbolic sine function</source>
         <comment>function sinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>função hiperbólica de seno</translation>
     </message>
     <message>
         <source>hyperbolic cosine</source>
         <comment>function cosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hiperbólico coseno</translation>
     </message>
     <message>
         <source>hyperbolic tangens function</source>
         <comment>function tanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>função hiperbólica tangente</translation>
     </message>
     <message>
         <source>hyperbolic arcus sine function</source>
@@ -18735,72 +19065,72 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>cosine function working with degrees</source>
         <comment>function cosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>função coseno trabalhando em graus</translation>
     </message>
     <message>
         <source>tangens function working with degrees</source>
         <comment>function tanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>função tangente trabalhando em graus</translation>
     </message>
     <message>
         <source>arcus sine function working with degrees</source>
         <comment>function asinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>função arco seno trabalhando em graus</translation>
     </message>
     <message>
         <source>arcus cosine function working with degrees</source>
         <comment>function acosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>função arco coseno trabalhando em graus</translation>
     </message>
     <message>
         <source>arcus tangens function working with degrees</source>
         <comment>function atanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>função arco tangente trabalhando em graus</translation>
     </message>
     <message>
         <source>logarithm to the base 2</source>
         <comment>function log2</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo na base 2</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log10</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo na base 10</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo na base 10</translation>
     </message>
     <message>
         <source>logarithm to base e (2.71828...)</source>
         <comment>function ln</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo na base e (2.71828...)</translation>
     </message>
     <message>
         <source>e raised to the power of x</source>
         <comment>function exp</comment>
-        <translation type="unfinished"></translation>
+        <translation>e elevado à potência de x</translation>
     </message>
     <message>
         <source>square root of a value</source>
         <comment>function sqrt</comment>
-        <translation type="unfinished"></translation>
+        <translation>raíz quadrada de um valor</translation>
     </message>
     <message>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
         <comment>function sign</comment>
-        <translation type="unfinished"></translation>
+        <translation>função sign -1 if x&lt;0; 1 if x&gt;0</translation>
     </message>
     <message>
         <source>round to nearest integer</source>
         <comment>function rint</comment>
-        <translation type="unfinished"></translation>
+        <translation>arredondar para o inteiromais próximo</translation>
     </message>
     <message>
         <source>round to up to 1 decimal</source>
         <comment>function r2cm</comment>
-        <translation type="unfinished"></translation>
+        <translation>arredondar para até 1 decimal</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes cm units.</source>
@@ -18815,27 +19145,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>absolute value</source>
         <comment>function abs</comment>
-        <translation type="unfinished"></translation>
+        <translation>valor absoluto</translation>
     </message>
     <message>
         <source>min of all arguments</source>
         <comment>function min</comment>
-        <translation type="unfinished"></translation>
+        <translation>min de todos os argumentos</translation>
     </message>
     <message>
         <source>max of all arguments</source>
         <comment>function max</comment>
-        <translation type="unfinished"></translation>
+        <translation>max de todos os argumentos</translation>
     </message>
     <message>
         <source>sum of all arguments</source>
         <comment>function sum</comment>
-        <translation type="unfinished"></translation>
+        <translation>soma de todos os argumentos</translation>
     </message>
     <message>
         <source>mean value of all arguments</source>
         <comment>function avg</comment>
-        <translation type="unfinished"></translation>
+        <translation>valor mediano de todos os argumentos</translation>
     </message>
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
@@ -18883,6 +19213,118 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VWidgetBackgroundImages</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Forma</translation>
+    </message>
+    <message>
+        <source>Transformation</source>
+        <translation type="unfinished">Transformação</translation>
+    </message>
+    <message>
+        <source>Translate</source>
+        <comment>Translate piece</comment>
+        <translation type="unfinished">Transladar</translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished">Horizontal:</translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished">Vertical:</translation>
+    </message>
+    <message>
+        <source>Relative translation</source>
+        <translation type="unfinished">Transladação relativa</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished">Escala</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Largura:</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Altura:</translation>
+    </message>
+    <message>
+        <source>Scale proportionally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation type="unfinished">Rodar</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotação</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Ângulo:</translation>
+    </message>
+    <message>
+        <source>Z Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Visibilidade</translation>
+    </message>
+    <message>
+        <source>Reset transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Excluir</translation>
+    </message>
+    <message>
+        <source>Hold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unhold All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide All</source>
+        <translation type="unfinished">Ocultar Todos</translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation type="unfinished">Exibir Todos</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished">Píxels</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Polegadas</translation>
+    </message>
+</context>
+<context>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
@@ -18918,7 +19360,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Hide not in layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Não esconder no layout</translation>
     </message>
     <message>
         <source>Piece options</source>
@@ -19308,37 +19750,37 @@ Deseja salvar as alterações?</translation>
     <message>
         <source>Black</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Preto</translation>
     </message>
     <message>
         <source>Red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vermelho</translation>
     </message>
     <message>
         <source>Dark red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vermelho escuro</translation>
     </message>
     <message>
         <source>Green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <source>Dark green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Verde escuro</translation>
     </message>
     <message>
         <source>Blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Azul</translation>
     </message>
     <message>
         <source>Dark blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Azul escuro</translation>
     </message>
     <message>
         <source>Cyan</source>
@@ -19353,36 +19795,43 @@ Deseja salvar as alterações?</translation>
     <message>
         <source>Magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Magenta</translation>
     </message>
     <message>
         <source>Dark magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Magenta escuro</translation>
     </message>
     <message>
         <source>Yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Amarelo</translation>
     </message>
     <message>
         <source>Dark yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Amarelo escuro</translation>
     </message>
     <message>
         <source>Gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cinza</translation>
     </message>
     <message>
         <source>Dark gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cinza escuro</translation>
     </message>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation>Cinza claro</translation>
+    </message>
+</context>
+<context>
+    <name>ZValueMoveBackgroundImage</name>
+    <message>
+        <source>z value move a background image</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
