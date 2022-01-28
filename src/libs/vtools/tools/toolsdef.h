@@ -60,4 +60,6 @@ bool SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
 
 QMap<QString, QIcon> OperationLineStylesPics();
 
+int ConfirmDeletion();
+
 #endif // TOOLSDEF_H

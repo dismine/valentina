@@ -1613,7 +1613,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>168</height>
+         <height>169</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1778,6 +1778,8 @@
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
     <addaction name="actionShowMainPath"/>
+    <addaction name="separator"/>
+    <addaction name="actionAddBackgroundImage"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -2184,6 +2186,15 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetBackgroundImages">
+   <property name="windowTitle">
+    <string>Background images</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -3092,6 +3103,14 @@
   <action name="actionShop">
    <property name="text">
     <string>Shop</string>
+   </property>
+  </action>
+  <action name="actionAddBackgroundImage">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Add background image</string>
    </property>
   </action>
  </widget>

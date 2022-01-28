@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
+    $$PWD/dialogaddbackgroundimage.h \
     $$PWD/dialogs.h \
     $$PWD/dialogincrements.h \
     $$PWD/dialoghistory.h \
@@ -11,6 +12,7 @@ HEADERS += \
     $$PWD/dialoglayoutsettings.h \
     $$PWD/dialoglayoutprogress.h \
     $$PWD/dialogsavelayout.h \
+    $$PWD/vwidgetbackgroundimages.h \
     $$PWD/vwidgetgroups.h \
     $$PWD/vwidgetdetails.h \
     $$PWD/dialogpreferences.h \
@@ -22,6 +24,7 @@ HEADERS += \
     $$PWD/dialogfinalmeasurements.h
 
 SOURCES += \
+    $$PWD/dialogaddbackgroundimage.cpp \
     $$PWD/dialogincrements.cpp \
     $$PWD/dialoghistory.cpp \
     $$PWD/dialogpatternproperties.cpp \
@@ -30,6 +33,7 @@ SOURCES += \
     $$PWD/dialoglayoutsettings.cpp \
     $$PWD/dialoglayoutprogress.cpp \
     $$PWD/dialogsavelayout.cpp \
+    $$PWD/vwidgetbackgroundimages.cpp \
     $$PWD/vwidgetgroups.cpp \
     $$PWD/vwidgetdetails.cpp \
     $$PWD/dialogpreferences.cpp \
@@ -41,6 +45,7 @@ SOURCES += \
     $$PWD/dialogfinalmeasurements.cpp
 
 FORMS += \
+    $$PWD/dialogaddbackgroundimage.ui \
     $$PWD/dialogincrements.ui \
     $$PWD/dialoghistory.ui \
     $$PWD/dialogpatternproperties.ui \
@@ -49,6 +54,7 @@ FORMS += \
     $$PWD/dialoglayoutsettings.ui \
     $$PWD/dialoglayoutprogress.ui \
     $$PWD/dialogsavelayout.ui \
+    $$PWD/vwidgetbackgroundimages.ui \
     $$PWD/vwidgetgroups.ui \
     $$PWD/vwidgetdetails.ui \
     $$PWD/dialogpreferences.ui \

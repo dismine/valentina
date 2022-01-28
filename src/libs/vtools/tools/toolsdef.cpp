@@ -29,16 +29,21 @@
 #include "toolsdef.h"
 
 #include <QBrush>
+#include <QDialogButtonBox>
 #include <QIcon>
+#include <QMessageBox>
 #include <QPainter>
 #include <QPen>
 #include <QPixmap>
 #include <QRegularExpression>
 #include <QVector>
+#include <QStyle>
 
 #include "../vgeometry/vgobject.h"
 #include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpropertyexplorer/checkablemessagebox.h"
+#include "../vmisc/vabstractvalapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> SourceToObjects(const QVector<SourceItem> &source)
@@ -115,4 +120,29 @@ QMap<QString, QIcon> OperationLineStylesPics()
     QMap<QString, QIcon> map = LineStylesPics();
     map.insert(TypeLineDefault, QIcon());
     return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ConfirmDeletion() -> int
+{
+    if (not VAbstractApplication::VApp()->Settings()->GetConfirmItemDelete())
+    {
+        return QMessageBox::Yes;
+    }
+
+    Utils::CheckableMessageBox msgBox(VAbstractValApplication::VApp()->getMainWindow());
+    msgBox.setWindowTitle(QObject::tr("Confirm deletion"));
+    msgBox.setText(QObject::tr("Do you really want to delete?"));
+    msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
+    msgBox.setDefaultButton(QDialogButtonBox::No);
+    msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
+
+    int dialogResult = msgBox.exec();
+
+    if (dialogResult == QDialog::Accepted)
+    {
+        VAbstractApplication::VApp()->Settings()->SetConfirmItemDelete(not msgBox.isChecked());
+    }
+
+    return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
 }

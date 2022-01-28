@@ -20,61 +20,95 @@
 
 #include "vboolproperty.h"
 
+#include <QCheckBox>
+#include <QCoreApplication>
 #include <QFlags>
 #include <QObject>
 
 #include "../vproperty_p.h"
-
-
-QVariant VPE::VBoolProperty::TrueText;
-QVariant VPE::VBoolProperty::FalseText;
 
 VPE::VBoolProperty::VBoolProperty(const QString& name) :
     VProperty(name, QVariant::Bool)
 {
     d_ptr->VariantValue.setValue(false);
     d_ptr->VariantValue.convert(QVariant::Bool);
-
-    // I'm not sure, how Qt handles the translations...
-    if (TrueText.isNull())
-    {
-        TrueText = tr("True");
-    }
-    if (FalseText.isNull())
-    {
-        FalseText = tr("False");
-    }
 }
 
 
 //! Get the data how it should be displayed
-QVariant VPE::VBoolProperty::data (int column, int role) const
+auto VPE::VBoolProperty::data (int column, int role) const -> QVariant
 {
-    if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    auto* tmpEditor = qobject_cast<QCheckBox*>(VProperty::d_ptr->editor);
+
+    if (column == DPC_Data && Qt::DisplayRole == role)
     {
-        return d_ptr->VariantValue.toBool() ? TrueText : FalseText;
+        return tmpEditor->checkState();
     }
-    if (column == DPC_Data && Qt::CheckStateRole == role)
+
+    if (column == DPC_Data && Qt::EditRole == role)
     {
-        return d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked;
+        return VProperty::d_ptr->VariantValue;
     }
-    else
-        return VProperty::data(column, role);
+
+    return VProperty::data(column, role);
 }
 
-bool VPE::VBoolProperty::setData(const QVariant &data, int role)
+auto VPE::VBoolProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                      const QAbstractItemDelegate *delegate) -> QWidget *
 {
-    if (Qt::CheckStateRole == role)
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
+    auto* tmpEditor = new QCheckBox(parent);
+    tmpEditor->setCheckState(d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
+    connect(tmpEditor, &QCheckBox::stateChanged, this, &VBoolProperty::StateChanged);
+
+    VProperty::d_ptr->editor = tmpEditor;
+    return VProperty::d_ptr->editor;
+}
+
+auto VPE::VBoolProperty::setEditorData(QWidget *editor) -> bool
+{
+    if (!editor)
     {
-        d_ptr->VariantValue = (Qt::Checked == static_cast<Qt::CheckState>(data.toInt()));
+        return false;
+    }
+
+    auto* tmpEditor = qobject_cast<QCheckBox*>(editor);
+    if (tmpEditor)
+    {
+        tmpEditor->blockSignals(true);
+        tmpEditor->setCheckState(d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
+        tmpEditor->blockSignals(false);
         return true;
     }
 
     return false;
 }
 
+auto VPE::VBoolProperty::getEditorData(const QWidget *editor) const -> QVariant
+{
+    const auto* tmpEditor = qobject_cast<const QCheckBox*>(editor);
+    if (tmpEditor)
+    {
+        return tmpEditor->checkState() == Qt::Checked ? Qt::Checked : Qt::Unchecked;
+    }
+
+    return {0};
+}
+
+void VPE::VBoolProperty::setValue(const QVariant &value)
+{
+    VProperty::d_ptr->VariantValue = value;
+    VProperty::d_ptr->VariantValue.convert(QVariant::Bool);
+
+    if (VProperty::d_ptr->editor != nullptr)
+    {
+        setEditorData(VProperty::d_ptr->editor);
+    }
+}
+
 //! Returns item flags
-Qt::ItemFlags VPE::VBoolProperty::flags(int column) const
+auto VPE::VBoolProperty::flags(int column) const -> Qt::ItemFlags
 {
     if (column == DPC_Data)
     {
@@ -84,12 +118,18 @@ Qt::ItemFlags VPE::VBoolProperty::flags(int column) const
         return VProperty::flags(column);
 }
 
-QString VPE::VBoolProperty::type() const
+auto VPE::VBoolProperty::type() const -> QString
 {
     return "bool";
 }
 
-VPE::VProperty *VPE::VBoolProperty::clone(bool include_children, VProperty *container) const
+auto VPE::VBoolProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VBoolProperty(getName()));
+}
+
+void VPE::VBoolProperty::StateChanged()
+{
+    auto *event = new UserChangeEvent();
+    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }

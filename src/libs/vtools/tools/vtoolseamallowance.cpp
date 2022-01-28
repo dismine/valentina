@@ -55,6 +55,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vlayout/vlayoutdef.h"
+#include "toolsdef.h"
 
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>
@@ -549,7 +550,7 @@ void VToolSeamAllowance::ConnectOutsideSignals()
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
 
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
-    connect(m_sceneDetails, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
+    connect(m_sceneDetails, &VMainGraphicsScene::ItemByMousePress, this, &VToolSeamAllowance::ResetChildren);
     connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateDetailLabel);
     connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(m_sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolSeamAllowance::retranslateUi);

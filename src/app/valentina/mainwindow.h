@@ -55,6 +55,10 @@ class VWidgetDetails;
 class QToolButton;
 class QProgressBar;
 class WatermarkWindow;
+class Quuid;
+class VBackgroundImageItem;
+class VBackgroundImageControls;
+class VWidgetBackgroundImages;
 
 /**
  * @brief The MainWindow class main windows.
@@ -74,6 +78,8 @@ public slots:
     virtual void UpdateVisibilityGroups() override;
     virtual void UpdateDetailsList() override;
     virtual void ZoomFitBestCurrent() override;
+    void PlaceBackgroundImage(const QPointF &pos, const QString &fileName);
+    void RemoveBackgroundImage(const QUuid &id);
 
 signals:
     void RefreshHistory();
@@ -90,6 +96,7 @@ signals:
     void EnableNodeLabelSelection(bool enable);
     void EnableNodePointSelection(bool enable);
     void EnableDetailSelection(bool enable);
+    void EnableBackgroundImageSelection(bool enable);
 
     void EnableLabelHover(bool enable);
     void EnablePointHover(bool enable);
@@ -101,6 +108,7 @@ signals:
     void EnableNodeLabelHover(bool enable);
     void EnableNodePointHover(bool enable);
     void EnableDetailHover(bool enable);
+    void EnableImageBackgroundHover(bool enable);
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
     virtual void showEvent(QShowEvent *event) override;
@@ -192,6 +200,8 @@ private slots:
     void on_actionCreateManualLayout_triggered();
     void on_actionUpdateManualLayout_triggered();
 
+    void ActionAddBackgroundImage();
+
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);
@@ -225,6 +235,11 @@ private slots:
     void ClearPatternMessages();
 
     void SetDefaultGUILanguage();
+
+    void AddBackgroundImageItem(const QUuid &id);
+    void DeleteBackgroundImageItem(const QUuid &id);
+    void ShowBackgroundImageInExplorer(const QUuid &id);
+    void SaveBackgroundImage(const QUuid &id);
 
 private:
     Q_DISABLE_COPY(MainWindow)
@@ -269,9 +284,6 @@ private:
     /** @brief currentToolBoxIndex save current set of tools. */
     qint32             currentToolBoxIndex;
 
-    bool               isDockToolOptionsVisible{false};
-    bool               isDockGroupsVisible{false};
-
     /** @brief drawMode true if we current draw scene. */
     bool               drawMode;
 
@@ -291,6 +303,7 @@ private:
     VToolOptionsPropertyBrowser *toolOptions;
     VWidgetGroups *groupsWidget;
     VWidgetDetails *detailsWidget;
+    VWidgetBackgroundImages *backgroundImagesWidget{nullptr};
     QSharedPointer<VLockGuard<char>> lock;
 
     QList<QToolButton*> toolButtonPointerList;
@@ -307,6 +320,15 @@ private:
     QSharedPointer<VMeasurements> m{};
 
     QTimer *m_gradation;
+
+    QMap<QUuid, VBackgroundImageItem *> m_backgroundImages{};
+    QMap<QUuid, VBackgroundImageItem *> m_deletedBackgroundImageItems{};
+    VBackgroundImageControls *m_backgroudcontrols{nullptr};
+
+    bool m_groupsActive{false};
+    bool m_toolOptionsActive{false};
+    bool m_patternMessagesActive{false};
+    bool m_backgroundImagesActive{false};
 
     void InitDimensionControls();
     void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, const QPointer<QComboBox> &control);
@@ -422,6 +444,8 @@ private:
     void StoreDimensions();
 
     void ExportDraw(const QString &fileName);
+
+    void NewBackgroundImageItem(const VBackgroundPatternImage &image);
 };
 
 #endif // MAINWINDOW_H

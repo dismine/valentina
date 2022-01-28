@@ -28,6 +28,8 @@
 
 #include "vtooloptionspropertybrowser.h"
 #include "../vtools/tools/drawTools/drawtools.h"
+#include "../vtools/tools/backgroundimage/vbackgroundpixmapitem.h"
+#include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
 #include "../core/vapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
@@ -45,6 +47,12 @@
 #include <QHBoxLayout>
 #include <QDebug>
 #include <QRegularExpression>
+
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrHold, (QLatin1String("hold")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrVisible, (QLatin1String("visible")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
@@ -79,7 +87,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in switch.");
 
     switch (item->type())
     {
@@ -192,6 +200,12 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolEllipticalArc::Type:
             ShowOptionsToolEllipticalArc(item);
             break;
+        case VBackgroundPixmapItem::Type:
+            ShowOptionsBackgroundPixmapItem(item);
+            break;
+        case VBackgroundSVGItem::Type:
+            ShowOptionsBackgroundSVGItem(item);
+            break;
         default:
             break;
     }
@@ -206,7 +220,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in switch.");
 
     switch (currentItem->type())
     {
@@ -316,6 +330,12 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolEllipticalArc::Type:
             UpdateOptionsToolEllipticalArc();
             break;
+        case VBackgroundPixmapItem::Type:
+            UpdateOptionsBackgroundPixmapItem();
+            break;
+        case VBackgroundSVGItem::Type:
+            UpdateOptionsBackgroundSVGItem();
+            break;
         default:
             break;
     }
@@ -351,7 +371,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in switch.");
 
     switch (currentItem->type())
     {
@@ -456,6 +476,12 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
             break;
         case VToolEllipticalArc::Type:
             ChangeDataToolEllipticalArc(prop);
+            break;
+        case VBackgroundPixmapItem::Type:
+            ChangeDataBackgroundPixmapItem(prop);
+            break;
+        case VBackgroundSVGItem::Type:
+            ChangeDataBackgroundSVGItem(prop);
             break;
         default:
             break;
@@ -614,6 +640,14 @@ void VToolOptionsPropertyBrowser::AddPropertyText(const QString &propertyName, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::AddPropertyBool(const QString &propertyName, bool value, const QString &attrName)
+{
+    auto *itemBool = new VPE::VBoolProperty(propertyName);
+    itemBool->setValue(value);
+    AddProperty(itemBool, attrName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &propertyName)
 {
@@ -717,6 +751,66 @@ void VToolOptionsPropertyBrowser::AddPropertyApproximationScale(const QString &p
     auto *aScaleProperty = new VPE::VDoubleProperty(propertyName, settings);
     aScaleProperty->setValue(aScale);
     AddProperty(aScaleProperty, AttrAScale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetName(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        QString name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        if (name == i->name())
+        {
+            return;
+        }
+
+        i->setName(name);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetHold(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        bool hold = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toBool();
+        if (hold == i->IsHold())
+        {
+            return;
+        }
+
+        i->SetHold(hold);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetVisible(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        bool visible = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toBool();
+        if (visible == i->IsVisible())
+        {
+            return;
+        }
+
+        i->SetVisible(visible);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2514,6 +2608,54 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataBackgroundPixmapItem(VPE::VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QString id = propertyToId[property];
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // AttrName
+            SetName<VBackgroundPixmapItem>(property);
+            break;
+        case 65: // AttrHold
+            SetHold<VBackgroundPixmapItem>(property);
+            break;
+        case 66: // AttrVisible
+            SetVisible<VBackgroundPixmapItem>(property);
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataBackgroundSVGItem(VPE::VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QString id = propertyToId[property];
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // AttrName
+            SetName<VBackgroundSVGItem>(property);
+            break;
+        case 65: // AttrHold
+            SetHold<VBackgroundSVGItem>(property);
+            break;
+        case 66: // AttrVisible
+            SetVisible<VBackgroundSVGItem>(property);
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     auto *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -3082,6 +3224,28 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsBackgroundPixmapItem(QGraphicsItem *item)
+{
+    auto *i = qgraphicsitem_cast<VBackgroundPixmapItem *>(item);
+    formView->setTitle(tr("Background image"));
+
+    AddPropertyObjectName(i, tr("Name:"), false);
+    AddPropertyBool(tr("Hold:"), i->IsHold(), *AttrHold);
+    AddPropertyBool(tr("Visible:"), i->IsVisible(), *AttrVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsBackgroundSVGItem(QGraphicsItem *item)
+{
+    auto *i = qgraphicsitem_cast<VBackgroundSVGItem *>(item);
+    formView->setTitle(tr("Background image"));
+
+    AddPropertyObjectName(i, tr("Name:"), false);
+    AddPropertyBool(tr("Hold:"), i->IsHold(), *AttrHold);
+    AddPropertyBool(tr("Visible:"), i->IsVisible(), *AttrVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4029,6 +4193,26 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsBackgroundPixmapItem()
+{
+    auto *i = qgraphicsitem_cast<VBackgroundPixmapItem *>(currentItem);
+
+    idToProperty.value(AttrName)->setValue(i->name());
+    idToProperty.value(*AttrHold)->setValue(i->IsHold());
+    idToProperty.value(*AttrVisible)->setValue(i->IsVisible());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsBackgroundSVGItem()
+{
+    auto *i = qgraphicsitem_cast<VBackgroundSVGItem *>(currentItem);
+
+    idToProperty.value(AttrName)->setValue(i->name());
+    idToProperty.value(*AttrHold)->setValue(i->IsHold());
+    idToProperty.value(*AttrVisible)->setValue(i->IsVisible());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VToolOptionsPropertyBrowser::PropertiesList() const
 {
     static QStringList attr{
@@ -4096,7 +4280,9 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
         AttrNotes,                          /* 61 */
         AttrAlias,                          /* 62 */
         AttrAlias1,                         /* 63 */
-        AttrAlias2                          /* 64 */
+        AttrAlias2,                         /* 64 */
+        *AttrHold,                          /* 65 */
+        *AttrVisible                        /* 66 */
     };
     return attr;
 }

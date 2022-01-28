@@ -67,6 +67,15 @@ private:
     void ShowItemOptions(QGraphicsItem *item);
 
     template<class Tool>
+    void SetName(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetHold(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetVisible(VPE::VProperty *property);
+
+    template<class Tool>
     void SetPointName(VPE::VProperty *property);
 
     template<class Tool>
@@ -183,6 +192,7 @@ private:
     void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
                                     const QString &propertyAttribure);
     void AddPropertyText(const QString &propertyName, const QString &text, const QString &attrName);
+    void AddPropertyBool(const QString &propertyName, bool value, const QString &attrName);
 
     QStringList PropertiesList() const;
 
@@ -220,6 +230,8 @@ private:
     void ChangeDataToolFlippingByLine(VPE::VProperty *property);
     void ChangeDataToolFlippingByAxis(VPE::VProperty *property);
     void ChangeDataToolEllipticalArc(VPE::VProperty *property);
+    void ChangeDataBackgroundPixmapItem(VPE::VProperty *property);
+    void ChangeDataBackgroundSVGItem(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -255,6 +267,8 @@ private:
     void ShowOptionsToolFlippingByLine(QGraphicsItem *item);
     void ShowOptionsToolFlippingByAxis(QGraphicsItem *item);
     void ShowOptionsToolEllipticalArc(QGraphicsItem *item);
+    void ShowOptionsBackgroundPixmapItem(QGraphicsItem *item);
+    void ShowOptionsBackgroundSVGItem(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -290,6 +304,8 @@ private:
     void UpdateOptionsToolFlippingByLine();
     void UpdateOptionsToolFlippingByAxis();
     void UpdateOptionsToolEllipticalArc();
+    void UpdateOptionsBackgroundPixmapItem();
+    void UpdateOptionsBackgroundSVGItem();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

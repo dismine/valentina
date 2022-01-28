@@ -94,5 +94,58 @@
         <file>icon/24x24/close.png</file>
         <file>icon/24x24/close@2x.png</file>
         <file>icon/layout.png</file>
+        <file>icon/32x32/rotate-top-left-hover@2x.png</file>
+        <file>icon/32x32/rotate-top-left-hover.png</file>
+        <file>icon/32x32/rotate-top-left@2x.png</file>
+        <file>icon/32x32/rotate-top-left.png</file>
+        <file>icon/32x32/rotate-top-right-hover@2x.png</file>
+        <file>icon/32x32/rotate-top-right-hover.png</file>
+        <file>icon/32x32/rotate-top-right@2x.png</file>
+        <file>icon/32x32/rotate-top-right.png</file>
+        <file>icon/32x32/rotate-bottom-right-hover@2x.png</file>
+        <file>icon/32x32/rotate-bottom-right-hover.png</file>
+        <file>icon/32x32/rotate-bottom-right@2x.png</file>
+        <file>icon/32x32/rotate-bottom-right.png</file>
+        <file>icon/32x32/rotate-bottom-left-hover@2x.png</file>
+        <file>icon/32x32/rotate-bottom-left-hover.png</file>
+        <file>icon/32x32/rotate-bottom-left@2x.png</file>
+        <file>icon/32x32/rotate-bottom-left.png</file>
+        <file>icon/32x32/expand2-hover@2x.png</file>
+        <file>icon/32x32/expand2-hover.png</file>
+        <file>icon/32x32/expand2@2x.png</file>
+        <file>icon/32x32/expand2.png</file>
+        <file>icon/32x32/expand1-hover@2x.png</file>
+        <file>icon/32x32/expand1-hover.png</file>
+        <file>icon/32x32/expand1@2x.png</file>
+        <file>icon/32x32/expand1.png</file>
+        <file>icon/32x32/double-arrow-vertical-hover@2x.png</file>
+        <file>icon/32x32/double-arrow-vertical-hover.png</file>
+        <file>icon/32x32/double-arrow-vertical@2x.png</file>
+        <file>icon/32x32/double-arrow-vertical.png</file>
+        <file>icon/32x32/double-arrow-horizontal-hover@2x.png</file>
+        <file>icon/32x32/double-arrow-horizontal@2x.png</file>
+        <file>icon/32x32/double-arrow-horizontal-hover.png</file>
+        <file>icon/32x32/double-arrow-horizontal.png</file>
+        <file>icon/svg/broken_path.svg</file>
+        <file>icon/16x16/not_hold_image@2x.png</file>
+        <file>icon/16x16/not_hold_image.png</file>
+        <file>icon/16x16/hold_image@2x.png</file>
+        <file>icon/16x16/hold_image.png</file>
+        <file>icon/32x32/rotate-top-right-disabled@2x.png</file>
+        <file>icon/32x32/rotate-top-right-disabled.png</file>
+        <file>icon/32x32/rotate-top-left-disabled@2x.png</file>
+        <file>icon/32x32/rotate-top-left-disabled.png</file>
+        <file>icon/32x32/rotate-bottom-right-disabled@2x.png</file>
+        <file>icon/32x32/rotate-bottom-right-disabled.png</file>
+        <file>icon/32x32/rotate-bottom-left-disabled@2x.png</file>
+        <file>icon/32x32/rotate-bottom-left-disabled.png</file>
+        <file>icon/32x32/expand2-disabled@2x.png</file>
+        <file>icon/32x32/expand2-disabled.png</file>
+        <file>icon/32x32/expand1-disabled@2x.png</file>
+        <file>icon/32x32/expand1-disabled.png</file>
+        <file>icon/32x32/double-arrow-vertical-disabled@2x.png</file>
+        <file>icon/32x32/double-arrow-vertical-disabled.png</file>
+        <file>icon/32x32/double-arrow-horizontal-disabled@2x.png</file>
+        <file>icon/32x32/double-arrow-horizontal-disabled.png</file>
     </qresource>
 </RCC>

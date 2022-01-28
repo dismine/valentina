@@ -39,34 +39,7 @@
 #include <QSize>
 #include <QFile>
 
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-auto IsMimeTypeImage(const QMimeType &mime) -> bool
-{
-    QStringList aliases = mime.aliases();
-    aliases.prepend(mime.name());
-
-    QRegularExpression rx(QStringLiteral("^image\\/[-\\w]+(\\.[-\\w]+)*([+][-\\w]+)?$"));
-
-    return std::any_of(aliases.begin(), aliases.end(), [rx](const QString &name) { return rx.match(name).hasMatch(); });
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto SplitString(QString str) -> QStringList
-{
-    QStringList list;
-
-    const int n = 80;
-    while (not str.isEmpty())
-    {
-        list.append(str.left(n));
-        str.remove(0, n);
-    }
-
-    return list;
-}
-}  // namespace
+#include "utils.h"
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,19 +113,6 @@ auto VPatternImage::IsValid() const -> bool
     QSet<QString> aliases = mime.aliases().toSet();
     aliases.insert(mime.name());
 
-    QSet<QString> gzipMime {"application/gzip", "application/x-gzip"};
-
-    if (gzipMime.contains(aliases))
-    {
-        QSvgRenderer render(QByteArray::fromBase64(m_contentData));
-        if (render.isValid())
-        {
-            mime = QMimeDatabase().mimeTypeForName(QStringLiteral("image/svg+xml-compressed"));
-            aliases = mime.aliases().toSet();
-            aliases.insert(mime.name());
-        }
-    }
-
     if (not aliases.contains(m_contentType))
     {
         m_errorString = tr("Content type mistmatch.");
@@ -202,7 +162,7 @@ auto VPatternImage::ErrorString() const -> const QString &
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternImage::MimeTypeFromData() const -> QMimeType
 {
-    return QMimeDatabase().mimeTypeForData(QByteArray::fromBase64(m_contentData));
+    return MimeTypeFromByteArray(QByteArray::fromBase64(m_contentData));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

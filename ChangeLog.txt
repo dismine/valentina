@@ -27,6 +27,7 @@
 - Backport fix vulnerability CVE-2021-21900.
 - Improved main path validations.
 - New path validation Invalid segment.
+- [smart-pattern/valentina#43] Background image.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

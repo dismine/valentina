@@ -205,6 +205,10 @@ enum class Tool : ToolVisHolderType
     InsertNode,
     PlaceLabel,
     DuplicateDetail,
+    BackgroundImage,
+    BackgroundImageControls,
+    BackgroundPixmapImage,
+    BackgroundSVGImage,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 

@@ -4,6 +4,18 @@
 HEADERS += \
     $$PWD/addtocalc.h \
     $$PWD/addpatternpiece.h \
+    $$PWD/image/addbackgroundimage.h \
+    $$PWD/image/deletebackgroundimage.h \
+    $$PWD/image/hideallbackgroundimages.h \
+    $$PWD/image/hidebackgroundimage.h \
+    $$PWD/image/holdallbackgroundimages.h \
+    $$PWD/image/holdbackgroundimage.h \
+    $$PWD/image/movebackgroundimage.h \
+    $$PWD/image/renamebackgroundimage.h \
+    $$PWD/image/resetbackgroundimage.h \
+    $$PWD/image/rotatebackgroundimage.h \
+    $$PWD/image/scalebackgroundimage.h \
+    $$PWD/image/zvaluemovebackgroundimage.h \
     $$PWD/movespoint.h \
     $$PWD/movespline.h \
     $$PWD/movesplinepath.h \
@@ -31,6 +43,18 @@ HEADERS += \
 SOURCES += \
     $$PWD/addtocalc.cpp \
     $$PWD/addpatternpiece.cpp \
+    $$PWD/image/addbackgroundimage.cpp \
+    $$PWD/image/deletebackgroundimage.cpp \
+    $$PWD/image/hideallbackgroundimages.cpp \
+    $$PWD/image/hidebackgroundimage.cpp \
+    $$PWD/image/holdallbackgroundimages.cpp \
+    $$PWD/image/holdbackgroundimage.cpp \
+    $$PWD/image/movebackgroundimage.cpp \
+    $$PWD/image/renamebackgroundimage.cpp \
+    $$PWD/image/resetbackgroundimage.cpp \
+    $$PWD/image/rotatebackgroundimage.cpp \
+    $$PWD/image/scalebackgroundimage.cpp \
+    $$PWD/image/zvaluemovebackgroundimage.cpp \
     $$PWD/movespoint.cpp \
     $$PWD/movespline.cpp \
     $$PWD/movesplinepath.cpp \

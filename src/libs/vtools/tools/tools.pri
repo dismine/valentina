@@ -2,7 +2,11 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
+    $$PWD/backgroundimage/vbackgroundimagecontrols.h \
+    $$PWD/backgroundimage/vbackgroundpixmapitem.h \
+    $$PWD/backgroundimage/vbackgroundsvgitem.h \
     $$PWD/toolsdef.h \
+    $$PWD/backgroundimage/vbackgroundimageitem.h \
     $$PWD/vdatatool.h \
     $$PWD/vabstracttool.h \
     $$PWD/tools.h \
@@ -65,7 +69,11 @@ HEADERS += \
     $$PWD/nodeDetails/vtoolplacelabel.h
 
 SOURCES += \
+    $$PWD/backgroundimage/vbackgroundimagecontrols.cpp \
+    $$PWD/backgroundimage/vbackgroundpixmapitem.cpp \
+    $$PWD/backgroundimage/vbackgroundsvgitem.cpp \
     $$PWD/toolsdef.cpp \
+    $$PWD/backgroundimage/vbackgroundimageitem.cpp \
     $$PWD/vdatatool.cpp \
     $$PWD/vabstracttool.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtooltriangle.cpp \

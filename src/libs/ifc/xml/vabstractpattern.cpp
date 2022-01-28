@@ -59,6 +59,7 @@
 #include "../vmisc/compatibility.h"
 #include "../vlayout/vtextmanager.h"
 #include "vpatternimage.h"
+#include "vbackgroundpatternimage.h"
 
 class QDomElement;
 
@@ -102,6 +103,8 @@ const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline"
 const QString VAbstractPattern::TagPath             = QStringLiteral("path");
 const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
 const QString VAbstractPattern::TagNode             = QStringLiteral("node");
+const QString VAbstractPattern::TagBackgroundImages = QStringLiteral("backgroudImages");
+const QString VAbstractPattern::TagBackgroundImage  = QStringLiteral("backgroudImage");
 
 const QString VAbstractPattern::AttrName              = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible           = QStringLiteral("visible");
@@ -138,6 +141,10 @@ const QString VAbstractPattern::AttrManualPassmarkLength = QStringLiteral("manua
 const QString VAbstractPattern::AttrPassmarkLength    = QStringLiteral("passmarkLength");
 const QString VAbstractPattern::AttrOpacity           = QStringLiteral("opacity");
 const QString VAbstractPattern::AttrTags              = QStringLiteral("tags");
+const QString VAbstractPattern::AttrTransform         = QStringLiteral("transform");
+const QString VAbstractPattern::AttrHold              = QStringLiteral("hold");
+const QString VAbstractPattern::AttrZValue            = QStringLiteral("zValue");
+const QString VAbstractPattern::AttrImageId           = QStringLiteral("imageId");
 
 const QString VAbstractPattern::AttrContentType     = QStringLiteral("contentType");
 
@@ -235,7 +242,54 @@ QString PrepareGroupTags(QStringList tags)
 
     return ConvertToList(ConvertToSet<QString>(tags)).join(',');
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToTransfrom(const QString &matrix) -> QTransform
+{
+    QStringList elements = matrix.split(QChar(';'));
+    if (elements.count() == 9)
+    {
+        qreal m11 = elements.at(0).toDouble();
+        qreal m12 = elements.at(1).toDouble();
+        qreal m13 = elements.at(2).toDouble();
+        qreal m21 = elements.at(3).toDouble();
+        qreal m22 = elements.at(4).toDouble();
+        qreal m23 = elements.at(5).toDouble();
+        qreal m31 = elements.at(6).toDouble();
+        qreal m32 = elements.at(7).toDouble();
+        qreal m33 = elements.at(8).toDouble();
+        return {m11, m12, m13, m21, m22, m23, m31, m32, m33};
+    }
+
+    return {};
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+auto NumberToString(T number) -> QString
+{
+    const QLocale locale = QLocale::c();
+    return locale.toString(number, 'g', 12).remove(locale.groupSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TransformToString(const QTransform &m) -> QString
+{
+    QStringList matrix
+    {
+        NumberToString(m.m11()),
+        NumberToString(m.m12()),
+        NumberToString(m.m13()),
+        NumberToString(m.m21()),
+        NumberToString(m.m22()),
+        NumberToString(m.m23()),
+        NumberToString(m.m31()),
+        NumberToString(m.m32()),
+        NumberToString(m.m33())
+    };
+    return matrix.join(QChar(';'));
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
@@ -848,7 +902,7 @@ void VAbstractPattern::SetMPath(const QString &path)
 quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if need to ignore modeling tools.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if need to ignore modeling tools.");
 
     quint32 siblingId = NULL_ID;
 
@@ -882,6 +936,10 @@ quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
                         case Tool::PiecePath:
                         case Tool::InsertNode:
                         case Tool::DuplicateDetail:
+                        case Tool::BackgroundImage:
+                        case Tool::BackgroundImageControls:
+                        case Tool::BackgroundPixmapImage:
+                        case Tool::BackgroundSVGImage:
                             continue;
                         default:
                             siblingId = tool.getId();
@@ -1268,6 +1326,126 @@ void VAbstractPattern::DeleteImage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetBackgroundImages() const -> QVector<VBackgroundPatternImage>
+{
+    QVector<VBackgroundPatternImage> images;
+    const QDomNodeList list = elementsByTagName(TagBackgroundImages);
+    if (list.isEmpty())
+    {
+        return images;
+    }
+
+    QDomElement imagesTag = list.at(0).toElement();
+    if (not imagesTag.isNull())
+    {
+        QDomNode imageNode = imagesTag.firstChild();
+        while (not imageNode.isNull())
+        {
+            const QDomElement imageElement = imageNode.toElement();
+            if (not imageElement.isNull())
+            {
+                images.append(GetBackgroundPatternImage(imageElement));
+            }
+            imageNode = imageNode.nextSibling();
+        }
+    }
+
+    return images;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SaveBackgroundImages(const QVector<VBackgroundPatternImage> &images)
+{
+    QDomElement imagesElement = CheckTagExists(TagBackgroundImages);
+    RemoveAllChildren(imagesElement);
+
+    for (const auto& image : images)
+    {
+        if (not image.Id().isNull())
+        {
+            QDomElement imageElement = createElement(TagBackgroundImage);
+            WriteBackgroundImage(imageElement, image);
+            imagesElement.appendChild(imageElement);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetBackgroundImage(const QUuid &id) const -> VBackgroundPatternImage
+{
+    const QDomElement imageElement = GetBackgroundImageElement(id);
+    if (not imageElement.isNull())
+    {
+        return GetBackgroundPatternImage(imageElement);
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SaveBackgroundImage(const VBackgroundPatternImage &image)
+{
+    QDomElement imageElement = GetBackgroundImageElement(image.Id());
+    if (imageElement.isNull())
+    {
+        QDomElement imageElement = createElement(TagBackgroundImage);
+        WriteBackgroundImage(imageElement, image);
+        QDomElement imagesElement = CheckTagExists(TagBackgroundImages);
+        imagesElement.appendChild(imageElement);
+    }
+    else
+    {
+        WriteBackgroundImage(imageElement, image);
+    }
+
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::DeleteBackgroundImage(const QUuid &id)
+{
+    const QDomNodeList list = elementsByTagName(TagBackgroundImages);
+    if (list.isEmpty())
+    {
+        return;
+    }
+
+    QDomElement imagesTag = list.at(0).toElement();
+    if (not imagesTag.isNull())
+    {
+        QDomNode imageNode = imagesTag.firstChild();
+        while (not imageNode.isNull())
+        {
+            const QDomElement imageElement = imageNode.toElement();
+            if (not imageElement.isNull())
+            {
+                QUuid imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
+                if (imageId == id)
+                {
+                    imagesTag.removeChild(imageElement);
+
+                    if (imagesTag.childNodes().size() == 0)
+                    {
+                        QDomNode parent = imagesTag.parentNode();
+                        if (not parent.isNull())
+                        {
+                            parent.removeChild(imagesTag);
+                        }
+                    }
+
+                    modified = true;
+                    emit patternChanged(false);
+
+                    return;
+                }
+            }
+            imageNode = imageNode.nextSibling();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetVersion() const
 {
     return UniqueTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
@@ -1357,7 +1535,7 @@ void VAbstractPattern::SetActivPP(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
+auto VAbstractPattern::CheckTagExists(const QString &tag) -> QDomElement
 {
     const QDomNodeList list = elementsByTagName(tag);
     QDomElement element;
@@ -1378,7 +1556,8 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             TagPatternLabel, // 10
             TagWatermark, // 11
             TagPatternMaterials, // 12
-            TagFinalMeasurements // 13
+            TagFinalMeasurements, // 13
+            TagBackgroundImages // 14
         };
 
         switch (tags.indexOf(tag))
@@ -1422,9 +1601,12 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 13: // TagFinalMeasurements
                 element = createElement(TagFinalMeasurements);
                 break;
+            case 14: // TagBackgroundImages
+                element = createElement(TagBackgroundImages);
+                break;
             case 0: //TagUnit (Mandatory tag)
             default:
-                return QDomElement();
+                return {};
         }
         InsertTag(tags, element);
         return element;
@@ -1531,7 +1713,7 @@ QVector<VFormulaField> VAbstractPattern::ListPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment a number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagPoint);
@@ -1559,7 +1741,7 @@ QVector<VFormulaField> VAbstractPattern::ListArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagArc);
@@ -1583,7 +1765,7 @@ QVector<VFormulaField> VAbstractPattern::ListElArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagElArc);
@@ -1616,7 +1798,7 @@ QVector<VFormulaField> VAbstractPattern::ListPathPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(AttrPathPoint);
@@ -1654,7 +1836,7 @@ QVector<VFormulaField> VAbstractPattern::ListOperationExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagOperation);
@@ -1676,7 +1858,7 @@ QVector<VFormulaField> VAbstractPattern::ListNodesExpressions(const QDomElement 
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
 
@@ -1700,7 +1882,7 @@ QVector<VFormulaField> VAbstractPattern::ListPathExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagPath);
@@ -1738,7 +1920,7 @@ QVector<VFormulaField> VAbstractPattern::ListPieceExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagDetail);
@@ -1949,6 +2131,96 @@ void VAbstractPattern::SetFMeasurements(QDomElement &element, const QVector<VFin
             element.appendChild(tagFMeasurement);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetBackgroundPatternImage(const QDomElement &element) const -> VBackgroundPatternImage
+{
+    VBackgroundPatternImage image;
+    image.SetId(QUuid(GetParametrEmptyString(element, AttrImageId)));
+    QString path = GetParametrEmptyString(element, AttrPath);
+
+    if (not path.isEmpty())
+    {
+        image.SetFilePath(path);
+    }
+    else
+    {
+        QString contentType = GetParametrEmptyString(element, AttrContentType);
+        QByteArray contentData = element.text().toLatin1();
+        image.SetContentData(contentData, contentType);
+    }
+
+    image.SetName(GetParametrEmptyString(element, AttrName));
+    image.SetHold(GetParametrBool(element, AttrHold, falseStr));
+    image.SetZValue(GetParametrUInt(element, AttrZValue, QChar('0')));
+    image.SetVisible(GetParametrBool(element, AttrVisible, trueStr));
+
+    QString matrix = GetParametrEmptyString(element, AttrTransform);
+    image.SetMatrix(StringToTransfrom(matrix));
+
+    return image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetBackgroundImageElement(const QUuid &id) const -> QDomElement
+{
+    const QDomNodeList list = elementsByTagName(TagBackgroundImages);
+    if (not list.isEmpty())
+    {
+        QDomElement imagesTag = list.at(0).toElement();
+        if (not imagesTag.isNull())
+        {
+            QDomNode imageNode = imagesTag.firstChild();
+            while (not imageNode.isNull())
+            {
+                if (imageNode.isElement())
+                {
+                    const QDomElement imageElement = imageNode.toElement();
+                    if (not imageElement.isNull())
+                    {
+                        QUuid imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
+                        if (imageId == id)
+                        {
+                            return imageElement;
+                        }
+                    }
+                }
+                imageNode = imageNode.nextSibling();
+            }
+        }
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::WriteBackgroundImage(QDomElement &element, const VBackgroundPatternImage &image)
+{
+    SetAttribute(element, AttrImageId, image.Id().toString());
+
+    if (not image.FilePath().isEmpty())
+    {
+        SetAttribute(element, AttrPath, image.FilePath());
+        element.removeAttribute(AttrContentType);
+        setTagText(element, QString());
+    }
+    else
+    {
+        SetAttributeOrRemoveIf<QString>(element, AttrContentType, image.ContentType(),
+                                        [](const QString &contentType) noexcept {return contentType.isEmpty();});
+        setTagText(element, image.ContentData());
+        SetAttributeOrRemoveIf<QString>(element, AttrPath, image.FilePath(),
+                                        [](const QString &path) noexcept {return path.isEmpty();});
+    }
+
+    SetAttributeOrRemoveIf<QString>(element, AttrName, image.Name(),
+                                    [](const QString &name) noexcept {return name.isEmpty();});
+    SetAttribute(element, AttrTransform, TransformToString(image.Matrix()));
+
+    SetAttributeOrRemoveIf<bool>(element, AttrHold, image.Hold(), [](bool hold) noexcept {return not hold;});
+    SetAttributeOrRemoveIf<qreal>(element, AttrZValue, image.ZValue(), [](qreal z) noexcept {return qFuzzyIsNull(z);});
+    SetAttributeOrRemoveIf<bool>(element, AttrVisible, image.Visible(), [](bool visible) noexcept {return visible;});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

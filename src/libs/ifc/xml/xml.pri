@@ -2,7 +2,9 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
+    $$PWD/utils.h \
     $$PWD/vabstractconverter.h \
+    $$PWD/vbackgroundpatternimage.h \
     $$PWD/vdomdocument.h \
     $$PWD/vlayoutconverter.h \
     $$PWD/vpatternconverter.h \
@@ -16,7 +18,9 @@ HEADERS += \
     $$PWD/vwatermarkconverter.h
 
 SOURCES += \
+    $$PWD/utils.cpp \
     $$PWD/vabstractconverter.cpp \
+    $$PWD/vbackgroundpatternimage.cpp \
     $$PWD/vdomdocument.cpp \
     $$PWD/vlayoutconverter.cpp \
     $$PWD/vpatternconverter.cpp \

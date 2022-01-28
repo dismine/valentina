@@ -92,6 +92,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
                           (QLatin1String("dockWidget/toolOptionsActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
                           (QLatin1String("dockWidget/patternMessagesActive")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetBackgroundImagesActive,
+                          (QLatin1String("dockWidget/backgroundImagesActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryHistory, (QLatin1String("searchHistory/history")))
@@ -619,6 +621,24 @@ bool VValentinaSettings::GetDefDockWidgetPatternMessagesActive()
 void VValentinaSettings::SetDockWidgetPatternMessagesActive(bool value)
 {
     setValue(*settingDockWidgetPatternMessagesActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VValentinaSettings::IsDockWidgetBackgroundImagesActive() const
+{
+    return value(*settingDockWidgetBackgroundImagesActive, GetDefDockWidgetBackgroundImagesActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VValentinaSettings::GetDefDockWidgetBackgroundImagesActive()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetDockWidgetBackgroundImagesActive(bool value)
+{
+    setValue(*settingDockWidgetBackgroundImagesActive, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

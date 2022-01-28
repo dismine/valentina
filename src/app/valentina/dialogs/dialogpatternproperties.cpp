@@ -50,6 +50,7 @@
 #include "../vmisc/vvalentinasettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../ifc/xml/vpatternimage.h"
+#include "../ifc/xml/utils.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
@@ -327,33 +328,9 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ChangeImage()
 {
-    auto PrepareFilter = []()
-    {
-        const QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
-        const QSet<QString> filterFormats{"bmp", "jpeg", "jpg", "png", "svg", "svgz", "tif", "tiff", "webp"};
-        QStringList sufixes;
-        for (const auto& format : supportedFormats)
-        {
-            if (filterFormats.contains(format))
-            {
-                sufixes.append(QStringLiteral("*.%1").arg(QString(format)));
-            }
-        }
-
-        QStringList filters;
-
-        if (not sufixes.isEmpty())
-        {
-            filters.append(tr("Images") + QStringLiteral(" (%1)").arg(sufixes.join(' ')));
-        }
-
-        filters.append(tr("All files") + QStringLiteral(" (*.*)"));
-
-        return filters.join(QStringLiteral(";;"));
-    };
-
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), PrepareFilter(),
-                                                          nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(),
+                                                          PrepareImageFilters(), nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
         VPatternImage image = VPatternImage::FromFile(fileName);

@@ -30,15 +30,11 @@
 
 #include <QBrush>
 #include <QDialog>
-#include <QDialogButtonBox>
 #include <QFlags>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsLineItem>
 #include <QHash>
-#include <QIcon>
 #include <QLineF>
-#include <QMessageBox>
-#include <QPainter>
 #include <QPen>
 #include <QPixmap>
 #include <QPoint>
@@ -48,14 +44,13 @@
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
-#include <QStyle>
 #include <QUndoStack>
 #include <QVector>
 #include <new>
 #include <qnumeric.h>
+#include <QMessageBox>
 
 #include "../vgeometry/vpointf.h"
-#include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionundo.h"
@@ -77,6 +72,7 @@
 #include "nodeDetails/nodedetails.h"
 #include "../dialogs/support/dialogundo.h"
 #include "../dialogs/support/dialogeditwrongformula.h"
+#include "toolsdef.h"
 
 template <class T> class QSharedPointer;
 
@@ -244,31 +240,6 @@ void VAbstractTool::PerformDelete()
     DelTool *delTool = new DelTool(doc, m_id);
     connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(delTool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VAbstractTool::ConfirmDeletion()
-{
-    if (false == VAbstractApplication::VApp()->Settings()->GetConfirmItemDelete())
-    {
-        return QMessageBox::Yes;
-    }
-
-    Utils::CheckableMessageBox msgBox(VAbstractValApplication::VApp()->getMainWindow());
-    msgBox.setWindowTitle(tr("Confirm deletion"));
-    msgBox.setText(tr("Do you really want to delete?"));
-    msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
-    msgBox.setDefaultButton(QDialogButtonBox::No);
-    msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
-
-    int dialogResult = msgBox.exec();
-
-    if (dialogResult == QDialog::Accepted)
-    {
-        VAbstractApplication::VApp()->Settings()->SetConfirmItemDelete(not msgBox.isChecked());
-    }
-
-    return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

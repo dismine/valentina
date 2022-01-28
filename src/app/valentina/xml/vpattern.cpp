@@ -4408,7 +4408,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used.");
 
     QRectF rec;
 
@@ -4427,6 +4427,10 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Cut:
                 case Tool::Midpoint:// Same as Tool::AlongLine, but tool will never has such type
                 case Tool::ArcIntersectAxis:// Same as Tool::CurveIntersectAxis, but tool will never has such type
+                case Tool::BackgroundImage:// Not part of active draw
+                case Tool::BackgroundImageControls:// Not part of active draw
+                case Tool::BackgroundPixmapImage:// Not part of active draw
+                case Tool::BackgroundSVGImage:// Not part of active draw
                 case Tool::LAST_ONE_DO_NOT_USE:
                     Q_UNREACHABLE();
                     break;

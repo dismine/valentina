@@ -39,6 +39,7 @@
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>
+#include <QUuid>
 
 #include "../vmisc/def.h"
 #include "vdomdocument.h"
@@ -49,6 +50,7 @@ class QDomElement;
 class VPiecePath;
 class VPieceNode;
 class VPatternImage;
+class VBackgroundPatternImage;
 
 enum class Document : qint8 { FullLiteParse, LiteParse, LitePPParse, FullParse };
 enum class LabelType : qint8 {NewPatternPiece, NewLabel};
@@ -205,6 +207,12 @@ public:
     bool           SetImage(const VPatternImage &image);
     void           DeleteImage();
 
+    auto GetBackgroundImages() const -> QVector<VBackgroundPatternImage>;
+    void SaveBackgroundImages(const QVector<VBackgroundPatternImage> &images);
+    auto GetBackgroundImage(const QUuid &id) const -> VBackgroundPatternImage;
+    void SaveBackgroundImage(const VBackgroundPatternImage &image);
+    void DeleteBackgroundImage(const QUuid &id);
+
     QString        GetVersion() const;
     void           SetVersion();
 
@@ -282,6 +290,8 @@ public:
     static const QString TagPath;
     static const QString TagNodes;
     static const QString TagNode;
+    static const QString TagBackgroundImages;
+    static const QString TagBackgroundImage;
 
     static const QString AttrName;
     static const QString AttrVisible;
@@ -318,6 +328,10 @@ public:
     static const QString AttrPassmarkLength;
     static const QString AttrOpacity;
     static const QString AttrTags;
+    static const QString AttrTransform;
+    static const QString AttrHold;
+    static const QString AttrZValue;
+    static const QString AttrImageId;
 
     static const QString AttrContentType;
 
@@ -377,6 +391,15 @@ signals:
      */
     void           UpdateGroups();
     void           UpdateToolTip();
+
+    void BackgroundImageTransformationChanged(QUuid id);
+    void BackgroundImagesHoldChanged();
+    void BackgroundImageHoldChanged(const QUuid &id);
+    void BackgroundImageVisibilityChanged(const QUuid &id);
+    void BackgroundImagesVisibilityChanged();
+    void BackgroundImageNameChanged(const QUuid &id);
+    void BackgroundImagesZValueChanged();
+    void BackgroundImagePositionChanged(const QUuid &id);
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;
@@ -473,6 +496,10 @@ private:
 
     QVector<VFinalMeasurement> GetFMeasurements(const QDomElement &element) const;
     void                       SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
+
+    auto GetBackgroundPatternImage(const QDomElement &element) const -> VBackgroundPatternImage;
+    auto GetBackgroundImageElement(const QUuid &id) const -> QDomElement;
+    void WriteBackgroundImage(QDomElement &element, const VBackgroundPatternImage &image);
 };
 
 QT_WARNING_POP

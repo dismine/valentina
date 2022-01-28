@@ -67,6 +67,9 @@ public:
     bool          IsNonInteractive() const;
     void          SetNonInteractive(bool nonInteractive);
 
+    void SetAcceptDrop(bool newAcceptDrop);
+    auto AcceptDrop() const -> bool;
+
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SelectedItem(bool selected, quint32 object, quint32 tool);
@@ -110,7 +113,9 @@ signals:
 
     void          MouseLeftPressed();
     void          MouseLeftReleased();
-    void          ItemClicked(QGraphicsItem* pItem);
+    void          ItemByMousePress(QGraphicsItem* pItem);
+    void          ItemByMouseRelease(QGraphicsItem* pItem);
+    void          AddBackgroundImage(const QPointF &pos, const QString &fileName);
 
     /**
      * @brief ChoosedObject send option choosed object.
@@ -165,6 +170,8 @@ private:
 
     /** @brief m_nonInteractive all item on scene in non interactive. */
     bool          m_nonInteractive{false};
+
+    bool m_acceptDrop{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

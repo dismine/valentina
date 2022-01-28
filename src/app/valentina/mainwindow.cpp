@@ -61,6 +61,7 @@
 #include "dialogs/vwidgetgroups.h"
 #include "../vtools/undocommands/undogroup.h"
 #include "dialogs/vwidgetdetails.h"
+#include "dialogs/dialogaddbackgroundimage.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
@@ -71,6 +72,15 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vlayout/dialogs/dialoglayoutscale.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../ifc/xml/vbackgroundpatternimage.h"
+#include "../vtools/tools/backgroundimage/vbackgroundimageitem.h"
+#include "../vtools/tools/backgroundimage/vbackgroundpixmapitem.h"
+#include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
+#include "../vtools/tools/backgroundimage/vbackgroundimagecontrols.h"
+#include "../vtools/undocommands/image/addbackgroundimage.h"
+#include "../vtools/undocommands/image/deletebackgroundimage.h"
+#include "../ifc/xml/utils.h"
+#include "dialogs/vwidgetbackgroundimages.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -104,6 +114,8 @@
 #include <QFuture>
 #include <QtConcurrent>
 #include <QStyleFactory>
+#include <QImageReader>
+#include <QUuid>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -249,6 +261,8 @@ MainWindow::MainWindow(QWidget *parent)
     ToolBarDraws();
     ToolBarStages();
     InitToolButtons();
+
+    connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
 
     m_progressBar->setVisible(false);
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
@@ -495,6 +509,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnableSplinePathHover, sceneDraw, &VMainGraphicsScene::ToggleSplinePathHover);
 
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::MouseMove);
+    connect(sceneDraw, &VMainGraphicsScene::AddBackgroundImage, this, &MainWindow::PlaceBackgroundImage);
 
     sceneDetails = new VMainGraphicsScene(this);
     connect(this, &MainWindow::EnableItemMove, sceneDetails, &VMainGraphicsScene::EnableItemMove);
@@ -662,7 +677,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         dialogTool = new Dialog(pattern, 0, this);
 
         // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if need to extend.");
+        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if need to extend.");
 
         switch(t)
         {
@@ -1362,6 +1377,50 @@ void MainWindow::ZoomFitBestCurrent()
                             transform.m31(), transform.m32(), transform.m33());
         ui->view->setTransform(transform);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileName)
+{
+    DialogAddBackgroundImage dialog(this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        qCritical() << tr("Unable to add background image");
+        return;
+    }
+
+    VBackgroundPatternImage image = VBackgroundPatternImage::FromFile(fileName, dialog.BuiltIn());
+    image.SetName(dialog.Name());
+
+    QTransform m;
+    m.translate(pos.x(), pos.y());
+
+    QTransform imageMatrix = image.Matrix();
+    imageMatrix *= m;
+
+    image.SetMatrix(m);
+
+    if (not image.IsValid())
+    {
+        qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
+        return;
+    }
+
+    auto* addBackgroundImage = new AddBackgroundImage(image, doc);
+    connect(addBackgroundImage, &AddBackgroundImage::AddItem, this, &MainWindow::AddBackgroundImageItem);
+    connect(addBackgroundImage, &AddBackgroundImage::DeleteItem, this, &MainWindow::DeleteBackgroundImageItem);
+    VApplication::VApp()->getUndoStack()->push(addBackgroundImage);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::RemoveBackgroundImage(const QUuid &id)
+{
+    VBackgroundPatternImage image = doc->GetBackgroundImage(id);
+
+    auto* deleteBackgroundImage = new DeleteBackgroundImage(image, doc);
+    connect(deleteBackgroundImage, &DeleteBackgroundImage::AddItem, this, &MainWindow::AddBackgroundImageItem);
+    connect(deleteBackgroundImage, &DeleteBackgroundImage::DeleteItem, this, &MainWindow::DeleteBackgroundImageItem);
+    VApplication::VApp()->getUndoStack()->push(deleteBackgroundImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2302,12 +2361,76 @@ void MainWindow::ExportDraw(const QString &fileName)
     // Restore scale, scrollbars and current active pattern piece
     ui->view->setTransform(viewTransform);
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
-    emit ScaleChanged(ui->view->transform().m11());
+    ScaleChanged(ui->view->transform().m11());
 
     ui->view->verticalScrollBar()->setValue(verticalScrollBarValue);
     ui->view->horizontalScrollBar()->setValue(horizontalScrollBarValue);
 
     doc->ChangeActivPP(doc->GetNameActivPP(), Document::FullParse);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::NewBackgroundImageItem(const VBackgroundPatternImage &image)
+{
+    if (m_backgroudcontrols == nullptr)
+    {
+        m_backgroudcontrols = new VBackgroundImageControls(doc);
+        connect(sceneDraw, &VMainGraphicsScene::ItemByMouseRelease, m_backgroudcontrols,
+                &VBackgroundImageControls::DeactivateControls);
+        sceneDraw->addItem(m_backgroudcontrols);
+    }
+
+    if (m_backgroundImages.contains(image.Id()))
+    {
+        VBackgroundImageItem *item = m_backgroundImages.value(image.Id());
+        if (item != nullptr)
+        {
+            item->SetImage(image);
+        }
+    }
+    else if (m_deletedBackgroundImageItems.contains(image.Id()))
+    {
+        VBackgroundImageItem *item = m_deletedBackgroundImageItems.value(image.Id());
+        if (item != nullptr)
+        {
+            item->SetImage(image);
+            sceneDraw->addItem(item);
+            m_backgroundImages.insert(image.Id(), item);
+        }
+        m_deletedBackgroundImageItems.remove(image.Id());
+    }
+    else
+    {
+        VBackgroundImageItem *item = nullptr;
+        if (image.Type() == PatternImage::Raster)
+        {
+            item = new VBackgroundPixmapItem(image, doc);
+        }
+        else if (image.Type() == PatternImage::Vector || image.Type() == PatternImage::Unknown)
+        {
+            item = new VBackgroundSVGItem(image, doc);
+        }
+
+        if (item != nullptr)
+        {
+            connect(item, &VBackgroundImageItem::UpdateControls, m_backgroudcontrols,
+                    &VBackgroundImageControls::UpdateControls);
+            connect(item, &VBackgroundImageItem::ActivateControls, m_backgroudcontrols,
+                    &VBackgroundImageControls::ActivateControls);
+            connect(item, &VBackgroundImageItem::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
+            connect(this, &MainWindow::EnableBackgroundImageSelection, item, &VBackgroundImageItem::EnableSelection);
+            connect(item, &VBackgroundImageItem::ShowImageInExplorer, this, &MainWindow::ShowBackgroundImageInExplorer);
+            connect(item, &VBackgroundImageItem::SaveImage, this, &MainWindow::SaveBackgroundImage);
+            connect(m_backgroudcontrols, &VBackgroundImageControls::ActiveImageChanged, backgroundImagesWidget,
+                    &VWidgetBackgroundImages::ImageSelected);
+            connect(backgroundImagesWidget, &VWidgetBackgroundImages::SelectImage, m_backgroudcontrols,
+                    &VBackgroundImageControls::ActivateControls);
+            sceneDraw->addItem(item);
+            m_backgroundImages.insert(image.Id(), item);
+        }
+    }
+
+    VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2543,7 +2666,7 @@ void MainWindow::InitToolButtons()
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if all tools were connected.");
 
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
@@ -2622,7 +2745,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     if(not dialogTool.isNull())
@@ -2664,6 +2787,10 @@ void MainWindow::CancelTool()
         case Tool::NodeElArc:
         case Tool::NodeSpline:
         case Tool::NodeSplinePath:
+        case Tool::BackgroundImage:
+        case Tool::BackgroundImageControls:
+        case Tool::BackgroundPixmapImage:
+        case Tool::BackgroundSVGImage:
             Q_UNREACHABLE(); //-V501
             //Nothing to do here because we can't create this tool from main window.
             break;
@@ -2837,6 +2964,7 @@ void  MainWindow::ArrowTool(bool checked)
         emit EnableNodeLabelSelection(true);
         emit EnableNodePointSelection(true);
         emit EnableDetailSelection(true);// Disable when done visualization details
+        emit EnableBackgroundImageSelection(true);
 
         // Hovering
         emit EnableLabelHover(true);
@@ -2849,6 +2977,7 @@ void  MainWindow::ArrowTool(bool checked)
         emit EnableNodeLabelHover(true);
         emit EnableNodePointHover(true);
         emit EnableDetailHover(true);
+        emit EnableImageBackgroundHover(true);
 
         ui->view->AllowRubberBand(true);
         ui->view->viewport()->unsetCursor();
@@ -2967,12 +3096,14 @@ void MainWindow::ActionDraw(bool checked)
         }
 
         ui->dockWidgetLayoutPages->setVisible(false);
-        ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
+        ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
 
         ui->dockWidgetGroups->setWidget(groupsWidget);
         ui->dockWidgetGroups->setWindowTitle(tr("Groups of visibility"));
-        ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
+        ui->dockWidgetGroups->setVisible(m_groupsActive);
         ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
+
+        ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
     }
     else
     {
@@ -3045,10 +3176,11 @@ void MainWindow::ActionDetails(bool checked)
 
         ui->dockWidgetGroups->setWidget(detailsWidget);
         ui->dockWidgetGroups->setWindowTitle(tr("Details"));
-        ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
+        ui->dockWidgetGroups->setVisible(m_groupsActive);
         ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
 
-        ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
+        ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
+        ui->dockWidgetBackgroundImages->setVisible(false);
 
         m_statusLabel->setText(QString());
 
@@ -3159,14 +3291,9 @@ void MainWindow::ActionLayout(bool checked)
         }
 
         ui->dockWidgetLayoutPages->setVisible(true);
-
-        ui->dockWidgetToolOptions->blockSignals(true);
         ui->dockWidgetToolOptions->setVisible(false);
-        ui->dockWidgetToolOptions->blockSignals(false);
-
-        ui->dockWidgetGroups->blockSignals(true);
         ui->dockWidgetGroups->setVisible(false);
-        ui->dockWidgetGroups->blockSignals(false);
+        ui->dockWidgetBackgroundImages->setVisible(false);
 
         ShowPaper(ui->listWidget->currentRow());
 
@@ -3549,6 +3676,18 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ActionAddBackgroundImage()
+{
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Select background image"), QString(),
+                                                          PrepareImageFilters(), nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
+    if (not fileName.isEmpty())
+    {
+        PlaceBackgroundImage(QPointF(), fileName);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -3570,8 +3709,10 @@ void MainWindow::Clear()
     UpdateWindowTitle();
     UpdateVisibilityGroups();
     detailsWidget->UpdateList();
+    backgroundImagesWidget->UpdateImages();
     qCDebug(vMainWindow, "Clearing scenes.");
     sceneDraw->clear();
+    sceneDraw->SetAcceptDrop(false);
     sceneDetails->clear();
     ArrowTool(true);
     comboBoxDraws->clear();
@@ -3603,6 +3744,7 @@ void MainWindow::Clear()
     ui->actionEditCurrent->setEnabled(false);
     ui->actionPreviousPatternPiece->setEnabled(false);
     ui->actionNextPatternPiece->setEnabled(false);
+    ui->actionAddBackgroundImage->setEnabled(false);
     SetEnableTool(false);
     VAbstractValApplication::VApp()->SetPatternUnits(Unit::Cm);
     VAbstractValApplication::VApp()->SetMeasurementsType(MeasurementsType::Unknown);
@@ -3985,6 +4127,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
     ui->actionPreviousPatternPiece->setEnabled(enable && drawStage);
     ui->actionNextPatternPiece->setEnabled(enable && drawStage);
+    ui->actionAddBackgroundImage->setEnabled(enable && drawStage);
     ui->actionIncreaseLabelFont->setEnabled(enable);
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);
@@ -3998,6 +4141,7 @@ void MainWindow::SetEnableWidgets(bool enable)
 
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
     actionDockWidgetGroups->setEnabled(enable && designStage);
+    actionDockWidgetBackgroundImages->setEnabled(enable && drawStage);
 
     undoAction->setEnabled(enable && designStage && VAbstractApplication::VApp()->getUndoStack()->canUndo());
     redoAction->setEnabled(enable && designStage && VAbstractApplication::VApp()->getUndoStack()->canRedo());
@@ -4185,6 +4329,98 @@ void MainWindow::SetDefaultGUILanguage()
                 settings->SetLocale(locale);
                 VAbstractApplication::VApp()->LoadTranslation(locale);
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::AddBackgroundImageItem(const QUuid &id)
+{
+    NewBackgroundImageItem(doc->GetBackgroundImage(id));
+
+    if (backgroundImagesWidget != nullptr)
+    {
+        backgroundImagesWidget->UpdateImages();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::DeleteBackgroundImageItem(const QUuid &id)
+{
+    if (m_backgroundImages.contains(id))
+    {
+        VBackgroundImageItem *item = m_backgroundImages.value(id);
+        emit ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
+        sceneDraw->removeItem(item);
+        if (m_backgroudcontrols != nullptr && m_backgroudcontrols->Id() == id)
+        {
+            m_backgroudcontrols->ActivateControls(QUuid());
+        }
+        m_backgroundImages.remove(id);
+        m_deletedBackgroundImageItems.insert(id, item);
+
+        if (backgroundImagesWidget != nullptr)
+        {
+            backgroundImagesWidget->UpdateImages();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ShowBackgroundImageInExplorer(const QUuid &id)
+{
+    ShowInGraphicalShell(doc->GetBackgroundImage(id).FilePath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SaveBackgroundImage(const QUuid &id)
+{
+    VBackgroundPatternImage image = doc->GetBackgroundImage(id);
+
+    if (not image.IsValid())
+    {
+        qCritical() << tr("Unable to save image. Error: %1").arg(image.ErrorString());
+        return;
+    }
+
+    if (image.ContentData().isEmpty())
+    {
+        qCritical() << tr("Unable to save image. No data.");
+        return;
+    }
+
+    const QByteArray imageData = QByteArray::fromBase64(image.ContentData());
+    QMimeType mime = MimeTypeFromByteArray(imageData);
+    QString path = QDir::homePath() + QDir::separator() + tr("untitled");
+    QStringList filters;
+
+    if (mime.isValid())
+    {
+        QStringList suffixes = mime.suffixes();
+        if (not suffixes.isEmpty())
+        {
+            path += '.' + suffixes.at(0);
+        }
+
+        filters.append(mime.filterString());
+    }
+
+    filters.append(tr("All files") + QStringLiteral(" (*.*)"));
+
+    QString filter = filters.join(QStringLiteral(";;"));
+
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+    if (not filename.isEmpty())
+    {
+        QFile file(filename);
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write(imageData);
+        }
+        else
+        {
+            qCritical() << tr("Unable to save image. Error: %1").arg(file.errorString());
         }
     }
 }
@@ -4396,7 +4632,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QT_WARNING_POP
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -4593,9 +4829,15 @@ void MainWindow::ReadSettings()
         restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), AppVersion());
 
-        ui->dockWidgetGroups->setVisible(settings->IsDockWidgetGroupsActive());
-        ui->dockWidgetToolOptions->setVisible(settings->IsDockWidgetToolOptionsActive());
-        ui->dockWidgetMessages->setVisible(settings->IsDockWidgetPatternMessagesActive());
+        m_groupsActive = settings->IsDockWidgetGroupsActive();
+        m_toolOptionsActive = settings->IsDockWidgetToolOptionsActive();
+        m_patternMessagesActive = settings->IsDockWidgetPatternMessagesActive();
+        m_backgroundImagesActive = settings->IsDockWidgetBackgroundImagesActive();
+
+        ui->dockWidgetGroups->setVisible(m_groupsActive);
+        ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
+        ui->dockWidgetMessages->setVisible(m_patternMessagesActive);
+        ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
 
         // Scene antialiasing
         ui->view->SetAntialiasing(settings->GetGraphicalOutput());
@@ -4608,9 +4850,6 @@ void MainWindow::ReadSettings()
 
         // Tool box scaling
         ToolBoxSizePolicy();
-
-        isDockToolOptionsVisible = ui->dockWidgetToolOptions->isEnabled();
-        isDockGroupsVisible = ui->dockWidgetGroups->isEnabled();
 
         QFont f = ui->plainTextEditPatternMessages->font();
         f.setPointSize(settings->GetPatternMessageFontSize(f.pointSize()));
@@ -4635,9 +4874,10 @@ void MainWindow::WriteSettings()
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(AppVersion()));
 
-    settings->SetDockWidgetGroupsActive(ui->dockWidgetGroups->isEnabled());
-    settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isEnabled());
-    settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isEnabled());
+    settings->SetDockWidgetGroupsActive(ui->dockWidgetGroups->isVisible());
+    settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isVisible());
+    settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isVisible());
+    settings->SetDockWidgetBackgroundImagesActive(actionDockWidgetBackgroundImages->isChecked());
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
@@ -4734,7 +4974,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -4762,6 +5002,10 @@ void MainWindow::LastUsedTool()
         case Tool::NodeElArc:
         case Tool::NodeSpline:
         case Tool::NodeSplinePath:
+        case Tool::BackgroundImage:
+        case Tool::BackgroundImageControls:
+        case Tool::BackgroundPixmapImage:
+        case Tool::BackgroundSVGImage:
             Q_UNREACHABLE(); //-V501
             //Nothing to do here because we can't create this tool from main window.
             break;
@@ -4949,20 +5193,32 @@ void MainWindow::AddDocks()
 
     //Add dock
     actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
-    ui->menuWindow->addAction(actionDockWidgetToolOptions);
     connect(actionDockWidgetToolOptions, &QAction::triggered, this, [this](bool checked)
     {
-        isDockToolOptionsVisible = checked;
+        m_toolOptionsActive = checked;
     });
+    ui->menuWindow->addAction(actionDockWidgetToolOptions);
 
     actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
-    ui->menuWindow->addAction(actionDockWidgetGroups);
     connect(actionDockWidgetGroups, &QAction::triggered, this, [this](bool checked)
     {
-        isDockGroupsVisible = checked;
+        m_groupsActive = checked;
     });
+    ui->menuWindow->addAction(actionDockWidgetGroups);
 
-    ui->menuWindow->addAction(ui->dockWidgetMessages->toggleViewAction());
+    QAction *action = ui->dockWidgetMessages->toggleViewAction();
+    connect(action, &QAction::triggered, this, [this](bool checked)
+    {
+        m_patternMessagesActive = checked;
+    });
+    ui->menuWindow->addAction(action);
+
+    actionDockWidgetBackgroundImages = ui->dockWidgetBackgroundImages->toggleViewAction();
+    connect(actionDockWidgetBackgroundImages, &QAction::triggered, this, [this](bool checked)
+    {
+        m_backgroundImagesActive = checked;
+    });
+    ui->menuWindow->addAction(actionDockWidgetBackgroundImages);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4977,7 +5233,7 @@ void MainWindow::InitDocksContain()
     qCDebug(vMainWindow, "Initialization groups dock.");
     groupsWidget = new VWidgetGroups(doc, this);
     ui->dockWidgetGroups->setWidget(groupsWidget);
-    connect(doc,&VAbstractPattern::UpdateGroups , this, &MainWindow::UpdateVisibilityGroups);
+    connect(doc, &VAbstractPattern::UpdateGroups, this, &MainWindow::UpdateVisibilityGroups);
 
     detailsWidget = new VWidgetDetails(pattern, doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);
@@ -4985,6 +5241,10 @@ void MainWindow::InitDocksContain()
     connect(doc, &VPattern::ShowDetail, detailsWidget, &VWidgetDetails::SelectDetail);
     connect(detailsWidget, &VWidgetDetails::Highlight, sceneDetails, &VMainGraphicsScene::HighlightItem);
     detailsWidget->setVisible(false);
+
+    backgroundImagesWidget = new VWidgetBackgroundImages(doc, this);
+    ui->dockWidgetBackgroundImages->setWidget(backgroundImagesWidget);
+    connect(backgroundImagesWidget, &VWidgetBackgroundImages::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5316,6 +5576,8 @@ MainWindow::~MainWindow()
 
     delete doc;
     delete ui;
+
+    qDeleteAll(m_deletedBackgroundImageItems);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5576,9 +5838,20 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
              * a reference. */
             QTimer::singleShot(100, Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
+
+            QTimer::singleShot(500, Qt::CoarseTimer, this, [this]()
+            {
+                QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
+                for (const auto &image : allImages)
+                {
+                    NewBackgroundImageItem(image);
+                }
+                backgroundImagesWidget->UpdateImages();
+            });
         }
 
         patternReadOnly = doc->IsReadOnly();
+        sceneDraw->SetAcceptDrop(true);
         SetEnableWidgets(true);
         setCurrentFile(fileName);
         qCDebug(vMainWindow, "File loaded.");
@@ -6562,6 +6835,7 @@ void MainWindow::ToolSelectPoint()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(true);
@@ -6571,6 +6845,7 @@ void MainWindow::ToolSelectPoint()
     emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
 
     ui->view->AllowRubberBand(false);
 }
@@ -6600,6 +6875,7 @@ void MainWindow::ToolSelectSpline()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(false);
@@ -6609,6 +6885,7 @@ void MainWindow::ToolSelectSpline()
     emit EnableElArcHover(false);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -6626,6 +6903,7 @@ void MainWindow::ToolSelectSplinePath()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(false);
@@ -6635,6 +6913,7 @@ void MainWindow::ToolSelectSplinePath()
     emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(true);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -6652,6 +6931,7 @@ void MainWindow::ToolSelectArc()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(false);
@@ -6661,6 +6941,7 @@ void MainWindow::ToolSelectArc()
     emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -6678,6 +6959,7 @@ void MainWindow::ToolSelectPointArc()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(true);
@@ -6687,6 +6969,7 @@ void MainWindow::ToolSelectPointArc()
     emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -6704,6 +6987,7 @@ void MainWindow::ToolSelectCurve()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(false);
@@ -6713,6 +6997,7 @@ void MainWindow::ToolSelectCurve()
     emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -6730,6 +7015,7 @@ void MainWindow::ToolSelectAllDrawObjects()
     emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(true);
@@ -6739,6 +7025,7 @@ void MainWindow::ToolSelectAllDrawObjects()
     emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -6756,6 +7043,7 @@ void MainWindow::ToolSelectOperationObjects()
     emit EnableElArcSelection(true);
     emit EnableSplineSelection(true);
     emit EnableSplinePathSelection(true);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
     emit EnableLabelHover(true);
@@ -6765,6 +7053,7 @@ void MainWindow::ToolSelectOperationObjects()
     emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
+    emit EnableImageBackgroundHover(false);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 

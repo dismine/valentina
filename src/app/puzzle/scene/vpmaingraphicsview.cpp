@@ -657,7 +657,7 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
     {
        VMainGraphicsScene *scene = sheet->SceneData()->Scene();
        setScene(scene);
-       connect(scene, &VMainGraphicsScene::ItemClicked, this, &VPMainGraphicsView::on_ItemClicked,
+       connect(scene, &VMainGraphicsScene::ItemByMousePress, this, &VPMainGraphicsView::on_ItemClicked,
                Qt::UniqueConnection);
        connect(scene, &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
                Qt::UniqueConnection);

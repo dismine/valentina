@@ -59,6 +59,28 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="backgroudImages" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="backgroudImage" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="imageId" type="uuid" use="required"/>
+                      <xs:attribute name="contentType" type="contentType"/>
+                      <xs:attribute name="path" type="xs:string"/>
+                      <xs:attribute name="name" type="xs:string"/>
+                      <xs:attribute name="transform" type="Transformation"/>
+                      <xs:attribute name="hold" type="xs:boolean"/>
+                      <xs:attribute name="visible" type="xs:boolean"/>
+                      <xs:attribute name="zValue" type="xs:unsignedInt"/>
+                    </xs:extension>
+                  </xs:simpleContent>      
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> 
         <xs:element name="measurements" type="xs:string"/>
         <xs:element name="increments">
           <xs:complexType>
@@ -778,6 +800,10 @@
       <xs:selector xpath="patternMaterials/material"/>
       <xs:field xpath="@number"/>
     </xs:unique>
+    <xs:unique name="imageId">
+      <xs:selector xpath="backgroudImages/backgroudImage"/>
+      <xs:field xpath="@imageId"/>
+    </xs:unique>
   </xs:element>
   <xs:simpleType name="shortName">
     <xs:restriction base="xs:string">
@@ -1129,4 +1155,9 @@
     <xs:attribute name="alignment" type="alignmentType"/>
     <xs:attribute name="sfIncrement" type="xs:unsignedInt"/>
   </xs:complexType>
+  <xs:simpleType name="Transformation">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([-+]?\d+\.?\d*([eE][-+]?\d+)?;){8,}[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

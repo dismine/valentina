@@ -160,7 +160,6 @@ protected:
     virtual void            RemoveReferens() {}
     virtual void            DeleteToolWithConfirm(bool ask = true);
     virtual void            PerformDelete();
-    static int              ConfirmDeletion();
 
     template<typename T>
     static quint32 CreateNode(VContainer *data, quint32 id);

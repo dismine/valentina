@@ -31,7 +31,6 @@
 #include <QString>
 #include <QCoreApplication>
 
-
 class QPixmap;
 class QMimeType;
 

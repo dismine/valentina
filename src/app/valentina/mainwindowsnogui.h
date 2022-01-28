@@ -107,6 +107,7 @@ protected:
     QAction *redoAction{nullptr};
     QAction *actionDockWidgetToolOptions{nullptr};
     QAction *actionDockWidgetGroups{nullptr};
+    QAction *actionDockWidgetBackgroundImages{nullptr};
 
     bool isNoScaling{false};
     bool isNeedAutosave{false};

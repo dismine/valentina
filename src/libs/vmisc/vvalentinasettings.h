@@ -153,6 +153,10 @@ public:
     static bool GetDefDockWidgetPatternMessagesActive();
     void SetDockWidgetPatternMessagesActive(bool value);
 
+    bool IsDockWidgetBackgroundImagesActive() const;
+    static bool GetDefDockWidgetBackgroundImagesActive();
+    void SetDockWidgetBackgroundImagesActive(bool value);
+
     int GetPatternMessageFontSize(int fontSizeDef) const;
     static int GetDefMinPatternMessageFontSize();
     static int GetDefMaxPatternMessageFontSize();
