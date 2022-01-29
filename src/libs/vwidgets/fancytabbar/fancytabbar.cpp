@@ -604,7 +604,7 @@ int FancyTabBar::CurrentIndex() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTabBar::SetTabToolTip(int index, QString toolTip)
+void FancyTabBar::SetTabToolTip(int index, const QString &toolTip)
 {
     m_attachedTabs[index]->m_toolTip = toolTip;
 }
@@ -628,7 +628,7 @@ QString FancyTabBar::TabText(int index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTabBar::SetTabText(int index, QString text)
+void FancyTabBar::SetTabText(int index, const QString &text)
 {
     m_attachedTabs.at(index)->m_text=text;
     setMaximumWidth(TabSizeHint(false).width());

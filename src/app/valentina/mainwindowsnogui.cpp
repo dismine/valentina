@@ -1373,7 +1373,11 @@ QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QStrin
     {
         qCCritical(vMainNoGUIWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        m->clear();
+        if (not m.isNull())
+        {
+            m->clear();
+        }
+
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);

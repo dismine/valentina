@@ -69,13 +69,13 @@ public:
     void SetCurrentIndex(int index);
     int  CurrentIndex() const;
 
-    void    SetTabToolTip(int index, QString toolTip);
+    void    SetTabToolTip(int index, const QString &toolTip);
     QString TabToolTip(int index) const;
 
     QIcon TabIcon(int index) const;
 
     QString TabText(int index) const;
-    void    SetTabText(int index, QString text);
+    void    SetTabText(int index, const QString &text);
 
     int   Count() const;
     QRect TabRect(int index) const;

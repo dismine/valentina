@@ -85,7 +85,7 @@ signals:
 
 public slots:
     void ActivateControls(const QUuid &id);
-    void DeactivateControls(QGraphicsItem* pItem);
+    void DeactivateControls(QGraphicsItem* item);
     void UpdateControls();
 
 protected:

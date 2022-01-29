@@ -452,7 +452,7 @@ void VBackgroundImageItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
 {
-    const int move = event->modifiers() & Qt::ShiftModifier ? 10 : 1;
+    const int move = (event->modifiers() & Qt::ShiftModifier) ? 10 : 1;
     if (event->key() == Qt::Key_Left)
     {
         TranslateImageOn(-move, 0);

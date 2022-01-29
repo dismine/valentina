@@ -93,6 +93,7 @@ QString compilerString()
     {
         return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
     }
+    return QLatin1String("MSVC <unknown version>");
 #else
     return QStringLiteral("<unknown compiler>");
 #endif

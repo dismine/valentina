@@ -223,7 +223,8 @@ bool VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) c
         {
             if (QFile::exists(tmpUrl.toLocalFile()))
             {
-                tmpFileInfo = QFileInfo(tmpUrl.toLocalFile()); break;
+                tmpFileInfo = QFileInfo(tmpUrl.toLocalFile());
+                break;
             }
         }
 

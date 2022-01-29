@@ -218,16 +218,16 @@ auto VPSheetSceneData::RotationControls() const -> VPGraphicsPieceControls *
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheetSceneData::ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *
 {
-    VPGraphicsPiece *_graphicsPiece = nullptr;
-    for(auto *graphicPiece : m_graphicsPieces)
+    auto _graphicsPiece =
+            std::find_if(m_graphicsPieces.begin(), m_graphicsPieces.end(),
+                         [piece](VPGraphicsPiece *graphicPiece) { return graphicPiece->GetPiece() == piece; });
+
+    if (_graphicsPiece != m_graphicsPieces.end())
     {
-        if(graphicPiece->GetPiece() == piece)
-        {
-            _graphicsPiece = graphicPiece;
-        }
+        return *_graphicsPiece;
     }
 
-    return _graphicsPiece;
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
