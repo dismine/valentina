@@ -2398,39 +2398,51 @@ void MainWindow::NewBackgroundImageItem(const VBackgroundPatternImage &image)
             m_backgroundImages.insert(image.Id(), item);
         }
         m_deletedBackgroundImageItems.remove(image.Id());
+        m_deletedBackgroundImages.remove(image.Id());
     }
     else
     {
-        VBackgroundImageItem *item = nullptr;
-        if (image.Type() == PatternImage::Raster)
-        {
-            item = new VBackgroundPixmapItem(image, doc);
-        }
-        else if (image.Type() == PatternImage::Vector || image.Type() == PatternImage::Unknown)
-        {
-            item = new VBackgroundSVGItem(image, doc);
-        }
-
+        VBackgroundImageItem *item = InitBackgroundImageItem(image);
         if (item != nullptr)
         {
-            connect(item, &VBackgroundImageItem::UpdateControls, m_backgroudcontrols,
-                    &VBackgroundImageControls::UpdateControls);
-            connect(item, &VBackgroundImageItem::ActivateControls, m_backgroudcontrols,
-                    &VBackgroundImageControls::ActivateControls);
-            connect(item, &VBackgroundImageItem::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
-            connect(this, &MainWindow::EnableBackgroundImageSelection, item, &VBackgroundImageItem::EnableSelection);
-            connect(item, &VBackgroundImageItem::ShowImageInExplorer, this, &MainWindow::ShowBackgroundImageInExplorer);
-            connect(item, &VBackgroundImageItem::SaveImage, this, &MainWindow::SaveBackgroundImage);
-            connect(m_backgroudcontrols, &VBackgroundImageControls::ActiveImageChanged, backgroundImagesWidget,
-                    &VWidgetBackgroundImages::ImageSelected);
-            connect(backgroundImagesWidget, &VWidgetBackgroundImages::SelectImage, m_backgroudcontrols,
-                    &VBackgroundImageControls::ActivateControls);
-            sceneDraw->addItem(item);
             m_backgroundImages.insert(image.Id(), item);
+            sceneDraw->addItem(item);
         }
     }
 
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MainWindow::InitBackgroundImageItem(const VBackgroundPatternImage &image) -> VBackgroundImageItem *
+{
+    VBackgroundImageItem *item = nullptr;
+    if (image.Type() == PatternImage::Raster)
+    {
+        item = new VBackgroundPixmapItem(image, doc);
+    }
+    else if (image.Type() == PatternImage::Vector || image.Type() == PatternImage::Unknown)
+    {
+        item = new VBackgroundSVGItem(image, doc);
+    }
+
+    if (item != nullptr)
+    {
+        connect(item, &VBackgroundImageItem::UpdateControls, m_backgroudcontrols,
+                &VBackgroundImageControls::UpdateControls);
+        connect(item, &VBackgroundImageItem::ActivateControls, m_backgroudcontrols,
+                &VBackgroundImageControls::ActivateControls);
+        connect(item, &VBackgroundImageItem::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
+        connect(this, &MainWindow::EnableBackgroundImageSelection, item, &VBackgroundImageItem::EnableSelection);
+        connect(item, &VBackgroundImageItem::ShowImageInExplorer, this, &MainWindow::ShowBackgroundImageInExplorer);
+        connect(item, &VBackgroundImageItem::SaveImage, this, &MainWindow::SaveBackgroundImage);
+        connect(m_backgroudcontrols, &VBackgroundImageControls::ActiveImageChanged, backgroundImagesWidget,
+                &VWidgetBackgroundImages::ImageSelected);
+        connect(backgroundImagesWidget, &VWidgetBackgroundImages::SelectImage, m_backgroudcontrols,
+                &VBackgroundImageControls::ActivateControls);
+    }
+
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3821,6 +3833,7 @@ void MainWindow::FullParseFile()
 
         SetEnabledGUI(true);
         doc->Parse(Document::FullParse);
+        ParseBackgroundImages();
 
         if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
@@ -4358,6 +4371,7 @@ void MainWindow::DeleteBackgroundImageItem(const QUuid &id)
         }
         m_backgroundImages.remove(id);
         m_deletedBackgroundImageItems.insert(id, item);
+        m_deletedBackgroundImages.insert(id, item->Image());
 
         if (backgroundImagesWidget != nullptr)
         {
@@ -4423,6 +4437,39 @@ void MainWindow::SaveBackgroundImage(const QUuid &id)
             qCritical() << tr("Unable to save image. Error: %1").arg(file.errorString());
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ParseBackgroundImages()
+{
+    // No memory leak. Scene should take care of these items
+    m_backgroudcontrols = nullptr; // force creating new controls
+    m_backgroundImages.clear(); // clear dangling pointers
+
+    QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
+    for (const auto &image : allImages)
+    {
+        NewBackgroundImageItem(image);
+    }
+    backgroundImagesWidget->UpdateImages();
+
+    // Undostack rely on m_deletedBackgroundImageItems to prevent crashes
+    QMap<QUuid, VBackgroundImageItem *> deletedBackgroundImageItems;
+    QMap<QUuid, VBackgroundImageItem *>::const_iterator i;
+    for (i = m_deletedBackgroundImageItems.constBegin(); i != m_deletedBackgroundImageItems.constEnd(); ++i)
+    {
+        if (m_deletedBackgroundImages.contains(i.key()))
+        {
+            VBackgroundPatternImage image = m_deletedBackgroundImages.value(i.key());
+            VBackgroundImageItem *item = InitBackgroundImageItem(image);
+            if (item != nullptr)
+            {
+                deletedBackgroundImageItems.insert(image.Id(), item);
+            }
+        }
+    }
+
+    m_deletedBackgroundImageItems = deletedBackgroundImageItems;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5838,16 +5885,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
              * a reference. */
             QTimer::singleShot(100, Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
-
-            QTimer::singleShot(500, Qt::CoarseTimer, this, [this]()
-            {
-                QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
-                for (const auto &image : allImages)
-                {
-                    NewBackgroundImageItem(image);
-                }
-                backgroundImagesWidget->UpdateImages();
-            });
+            QTimer::singleShot(500, Qt::CoarseTimer, this, &MainWindow::ParseBackgroundImages);
         }
 
         patternReadOnly = doc->IsReadOnly();

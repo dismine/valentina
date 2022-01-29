@@ -241,6 +241,8 @@ private slots:
     void ShowBackgroundImageInExplorer(const QUuid &id);
     void SaveBackgroundImage(const QUuid &id);
 
+    void ParseBackgroundImages();
+
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -323,7 +325,8 @@ private:
 
     QMap<QUuid, VBackgroundImageItem *> m_backgroundImages{};
     QMap<QUuid, VBackgroundImageItem *> m_deletedBackgroundImageItems{};
-    VBackgroundImageControls *m_backgroudcontrols{nullptr};
+    VBackgroundImageControls* m_backgroudcontrols{nullptr};
+    QMap<QUuid, VBackgroundPatternImage> m_deletedBackgroundImages{};
 
     bool m_groupsActive{false};
     bool m_toolOptionsActive{false};
@@ -446,6 +449,7 @@ private:
     void ExportDraw(const QString &fileName);
 
     void NewBackgroundImageItem(const VBackgroundPatternImage &image);
+    auto InitBackgroundImageItem(const VBackgroundPatternImage &image) -> VBackgroundImageItem *;
 };
 
 #endif // MAINWINDOW_H
