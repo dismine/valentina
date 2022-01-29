@@ -162,7 +162,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 {
     const QList<QPolygonF> subpaths = path.toSubpathPolygons(matrix);
 
-    for (auto polygon : subpaths)
+    for (const auto& polygon : subpaths)
     {
         if (polygon.isEmpty())
         {
@@ -171,13 +171,13 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
         if (m_version > DRW::AC1009)
         { // Use lwpolyline
-            DRW_LWPolyline *poly = new DRW_LWPolyline();
+            auto *poly = new DRW_LWPolyline();
             poly->layer = '0';
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
 
-            if (polygon.size() > 1 && ConstFirst(polygon) == ConstLast(polygon))
+            if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
             {
                 poly->flags |= 0x1; // closed
             }
@@ -194,12 +194,12 @@ void VDxfEngine::drawPath(const QPainterPath &path)
         }
         else
         { // Use polyline
-            DRW_Polyline *poly = new DRW_Polyline();
+            auto *poly = new DRW_Polyline();
             poly->layer = '0';
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
-            if (polygon.size() > 1 && ConstFirst(polygon) == ConstLast(polygon))
+            if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
             {
                 poly->flags |= 0x1; // closed
             }
@@ -1184,7 +1184,7 @@ P *VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString 
     }
     else
     {
-        if (polygon.size() > 1 && ConstFirst(polygon) == ConstLast(polygon))
+        if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
         {
             poly->flags |= 0x1; // closed
         }
