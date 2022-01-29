@@ -38,6 +38,7 @@
 #include <QBuffer>
 #include <QSize>
 #include <QFile>
+#include <ciso646>
 
 #include "utils.h"
 #include "../vmisc/compatibility.h"

@@ -37,6 +37,7 @@
 #include <QPixmap>
 #include <QBuffer>
 #include <QImageReader>
+#include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) -> VBackgroundPatternImage

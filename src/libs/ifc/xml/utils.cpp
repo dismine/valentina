@@ -34,6 +34,7 @@
 #include <QSet>
 #include <QStringList>
 #include <QSvgRenderer>
+#include <ciso646>
 
 #include "../vmisc/compatibility.h"
 
