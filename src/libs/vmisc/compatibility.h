@@ -39,7 +39,7 @@ class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class Cont>
-inline const T& ConstFirst (const Cont<T> &container)
+inline auto ConstFirst (const Cont<T> &container) -> const T&
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constFirst();
@@ -50,7 +50,7 @@ inline const T& ConstFirst (const Cont<T> &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename C>
-inline const T& ConstFirst (const C &container)
+inline auto ConstFirst (const C &container) -> const T&
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constFirst();
@@ -61,7 +61,7 @@ inline const T& ConstFirst (const C &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class Cont>
-inline const T& ConstLast (const Cont<T> &container)
+inline auto ConstLast (const Cont<T> &container) -> const T&
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constLast();
@@ -72,7 +72,7 @@ inline const T& ConstLast (const Cont<T> &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename C>
-inline const T& ConstLast (const C &container)
+inline auto ConstLast (const C &container) -> const T&
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constLast();
@@ -83,7 +83,7 @@ inline const T& ConstLast (const C &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-inline typename T::IntersectType Intersects(const T &l1, const T &l2, QPointF *intersectionPoint)
+inline auto Intersects(const T &l1, const T &l2, QPointF *intersectionPoint) -> typename T::IntersectType
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return l1.intersects(l2, intersectionPoint);
@@ -94,7 +94,7 @@ inline typename T::IntersectType Intersects(const T &l1, const T &l2, QPointF *i
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C>
-inline QList<T> ConvertToList(const C<T> &container)
+inline auto ConvertToList(const C<T> &container) -> QList<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QList<T>(container.begin(), container.end());
@@ -105,7 +105,7 @@ inline QList<T> ConvertToList(const C<T> &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C>
-inline QSet<T> ConvertToSet(const C<T> &container)
+inline auto ConvertToSet(const C<T> &container) -> QSet<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QSet<T>(container.begin(), container.end());
@@ -116,7 +116,7 @@ inline QSet<T> ConvertToSet(const C<T> &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename C>
-inline QSet<T> ConvertToSet(const C &container)
+inline auto ConvertToSet(const C &container) -> QSet<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QSet<T>(container.begin(), container.end());
@@ -127,7 +127,7 @@ inline QSet<T> ConvertToSet(const C &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C>
-inline QVector<T> ConvertToVector(const C<T> &container)
+inline auto ConvertToVector(const C<T> &container) -> QVector<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QVector<T>(container.begin(), container.end());
@@ -138,7 +138,7 @@ inline QVector<T> ConvertToVector(const C<T> &container)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-inline QVector<T> ConvertToVector(const QSet<T> &container)
+inline auto ConvertToVector(const QSet<T> &container) -> QVector<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QVector<T>(container.begin(), container.end());
@@ -174,8 +174,8 @@ inline void Move(T &vector, int from, int to)
         return;
     }
     typename T::iterator b = vector.begin();
-    from < to ? std::rotate(b + from, b + from + 1, b + to + 1):
-                std::rotate(b + to, b + from, b + from + 1);
+    from < to ? std::rotate(b + from, b + from + 1, b + to + 1)
+              : std::rotate(b + to, b + from, b + from + 1);
 #else
     vector.move(from, to);
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
@@ -185,7 +185,7 @@ inline void Move(T &vector, int from, int to)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-QVector<T> Reverse(const QVector<T> &container)
+auto Reverse(const QVector<T> &container) -> QVector<T>
 {
     if (container.isEmpty())
     {
@@ -203,14 +203,14 @@ QVector<T> Reverse(const QVector<T> &container)
 
 template <typename T, template <typename> class C>
 //---------------------------------------------------------------------------------------------------------------------
-C<T> Reverse(const C<T> &container)
+auto Reverse(const C<T> &container) -> C<T>
 {
     return ConvertToList(Reverse(ConvertToVector(container)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type* = nullptr>
-T Reverse(const T &container)
+auto Reverse(const T &container) -> T
 {
     return Reverse<QString, QList>(container);
 }
@@ -231,7 +231,7 @@ inline void AppendTo(Cont &container, const Input &input)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-inline bool SetIntersects(const QSet<T> &set1, const QSet<T> &set2)
+inline auto SetIntersects(const QSet<T> &set1, const QSet<T> &set2) -> bool
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return set1.intersects(set2);
@@ -244,11 +244,12 @@ inline bool SetIntersects(const QSet<T> &set1, const QSet<T> &set2)
     while (i != e)
     {
         if (biggestSet.contains(*i))
+        {
             return true;
+        }
         ++i;
     }
     return false;
-
 #endif
 }
 
