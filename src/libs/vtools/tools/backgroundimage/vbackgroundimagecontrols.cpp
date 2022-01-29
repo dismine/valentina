@@ -864,14 +864,14 @@ auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) c
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : rectOriginal.bottomRight();
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : rectOriginal.bottomRight();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
 
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : rect.bottomRight();
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomRight();
 
     if (newScalePoint.x() > scaleCenter.x())
     {
@@ -950,13 +950,13 @@ auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : RectBottomPoint(rectOriginal);
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : RectBottomPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : rect.bottomRight();
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomRight();
 
     if (newScalePoint.y() > scaleCenter.y())
     {
@@ -1077,13 +1077,13 @@ auto VBackgroundImageControls::ScaleByTopRight(QGraphicsSceneMouseEvent *event) 
     QPointF newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : rectOriginal.bottomLeft();
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : rectOriginal.bottomLeft();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : rect.bottomLeft();
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomLeft();
 
     if (newScalePoint.x() < scaleCenter.x())
     {
@@ -1163,13 +1163,13 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : RectLeftPoint(rectOriginal);
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : RectLeftPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : RectLeftPoint(rect);
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectLeftPoint(rect);
 
     if (newScalePoint.x() < scaleCenter.x())
     {
@@ -1286,14 +1286,14 @@ auto VBackgroundImageControls::ScaleByBottomRight(QGraphicsSceneMouseEvent *even
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : rectOriginal.topLeft();
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : rectOriginal.topLeft();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
 
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : rect.topLeft();
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.topLeft();
 
     if (newScalePoint.x() < scaleCenter.x())
     {
@@ -1372,13 +1372,13 @@ auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) co
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : RectTopPoint(rectOriginal);
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : RectTopPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : RectTopPoint(rect);
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectTopPoint(rect);
 
     if (newScalePoint.y() < scaleCenter.y())
     {
@@ -1500,13 +1500,13 @@ auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event
     QPointF newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : rectOriginal.topRight();
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : rectOriginal.topRight();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : rect.topRight();
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.topRight();
 
     if (newScalePoint.x() > scaleCenter.x())
     {
@@ -1585,13 +1585,13 @@ auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) cons
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = event->modifiers() & Qt::ShiftModifier ? rectOriginal.center()
-                                                                         : RectRightPoint(rectOriginal);
+    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
+                                                                           : RectRightPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = event->modifiers() & Qt::ShiftModifier ? rect.center() : RectRightPoint(rect);
+    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectRightPoint(rect);
 
     if (newScalePoint.x() > scaleCenter.x())
     {
