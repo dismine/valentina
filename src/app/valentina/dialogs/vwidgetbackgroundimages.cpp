@@ -42,6 +42,7 @@
 #include "../vtools/undocommands/image/scalebackgroundimage.h"
 #include "../vtools/undocommands/image/resetbackgroundimage.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/lambdaconstants.h"
 
 #include <QMenu>
 #include <QPushButton>
@@ -844,7 +845,7 @@ void VWidgetBackgroundImages::InitImageTranslation()
     ui->doubleSpinBoxImageVerticalTranslate->setValue(0);
 
     connect(ui->comboBoxTranslateUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [this, minTranslate, maxTranslate]()
+            [this V_LAMBDA_CONSTANTS(minTranslate, maxTranslate)]()
     {
         const Unit newUnit = CurrentTranslateUnit();
         const qreal oldTranslateX = ui->doubleSpinBoxImageHorizontalTranslate->value();
@@ -891,7 +892,7 @@ void VWidgetBackgroundImages::InitImageTranslation()
     ui->doubleSpinBoxScaleHeight->setValue(100);
 
     connect(ui->comboBoxScaleUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [this, minScale, maxScale]()
+            [this V_LAMBDA_CONSTANTS(minScale, maxScale)]()
     {
         const enum ScaleUnit newUnit = CurrentScaleUnit();
         const qreal oldScaleWidth = ui->doubleSpinBoxScaleWidth->value();

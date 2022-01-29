@@ -61,6 +61,7 @@
 #include "dialogs/dialogsavemanuallayout.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vmisc/lambdaconstants.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -775,8 +776,8 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     ui->comboBoxTranslateUnit->setCurrentIndex(0);
     ui->comboBoxTranslateUnit->blockSignals(false);
 
-    int minTranslate = -1000;
-    int maxTranslate = 1000;
+    const int minTranslate = -1000;
+    const int maxTranslate = 1000;
 
     ui->doubleSpinBoxCurrentPieceBoxPositionX->setMinimum(
                 UnitConvertor(minTranslate, Unit::Cm, m_oldPieceTranslationUnit));
@@ -791,7 +792,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     ui->doubleSpinBoxCurrentPieceBoxPositionY->setValue(0);
 
     connect(ui->comboBoxTranslateUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [this, minTranslate, maxTranslate]()
+            [this V_LAMBDA_CONSTANTS(minTranslate, maxTranslate)]()
     {
         const Unit newUnit = TranslateUnit();
         const qreal oldTranslateX = ui->doubleSpinBoxCurrentPieceBoxPositionX->value();

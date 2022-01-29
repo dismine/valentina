@@ -27,6 +27,7 @@ contains(DEFINES, APPIMAGE) {
 
 HEADERS += \
     $$PWD/compatibility.h \
+    $$PWD/lambdaconstants.h \
     $$PWD/stable.h \
     $$PWD/def.h \
     $$PWD/testpath.h \
