@@ -144,9 +144,9 @@ VToolCutArc* VToolCutArc::Create(VToolCutInitData &initData)
     QPointF point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2);
 
     arc1.SetAliasSuffix(initData.aliasSuffix1);
-    arc1.SetAliasSuffix(initData.aliasSuffix2);
+    arc2.SetAliasSuffix(initData.aliasSuffix2);
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     auto a1 = QSharedPointer<VArc>(new VArc(arc1));
