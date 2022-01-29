@@ -218,10 +218,10 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         return;
     }
 
-    QLineF grainline(grainlinePoints.first(), grainlinePoints.last());
+    QLineF grainline(ConstFirst(grainlinePoints), ConstLast(grainlinePoints));
 
-    QLineF canonical(grainlinePoints.first().x(), grainlinePoints.first().y(),
-                     grainlinePoints.first().x()+100, grainlinePoints.first().y());
+    QLineF canonical(ConstFirst(grainlinePoints).x(), ConstFirst(grainlinePoints).y(),
+                     ConstFirst(grainlinePoints).x()+100, ConstFirst(grainlinePoints).y());
 
     GrainlineType grainlineType = sheet->GrainlineOrientation();
 

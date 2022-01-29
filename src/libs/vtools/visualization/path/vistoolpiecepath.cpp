@@ -30,6 +30,7 @@
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vmisc/compatibility.h"
 
 #include <QGraphicsSceneMouseEvent>
 
@@ -69,7 +70,7 @@ void VisToolPiecePath::RefreshGeometry()
             const QVector<QPointF> points = m_path.PathPoints(Visualization::data);
             if (points.size() > 0)
             {
-                DrawLine(m_line, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
+                DrawLine(m_line, QLineF(ConstLast(points), Visualization::scenePos), supportColor, Qt::DashLine);
             }
         }
     }

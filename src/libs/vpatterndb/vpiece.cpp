@@ -933,7 +933,7 @@ bool VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, cons
         return false;
     }
 
-    point = points.first();
+    point = ConstFirst(points);
     return true;
 }
 

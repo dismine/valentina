@@ -88,12 +88,12 @@ void VisToolPiece::RefreshGeometry()
                 DrawPath(path, m_cachedCurvesPath.at(i), supportColor);
             }
 
-            DrawLine(m_line1, QLineF(m_cachedMainPathPoints.first(), Visualization::scenePos), supportColor,
+            DrawLine(m_line1, QLineF(ConstFirst(m_cachedMainPathPoints), Visualization::scenePos), supportColor,
                      Qt::DashLine);
 
             if (m_cachedMainPathPoints.size() > 1)
             {
-                DrawLine(m_line2, QLineF(m_cachedMainPathPoints.last(), Visualization::scenePos), supportColor,
+                DrawLine(m_line2, QLineF(ConstLast(m_cachedMainPathPoints), Visualization::scenePos), supportColor,
                          Qt::DashLine);
             }
         }

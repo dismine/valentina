@@ -339,11 +339,11 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
                     if (side == PassmarkSide::All || side == PassmarkSide::Right)
                     {
-                        layoutPassmark.baseLine = baseLines.first();
+                        layoutPassmark.baseLine = ConstFirst(baseLines);
                     }
                     else if (side == PassmarkSide::Right)
                     {
-                        layoutPassmark.baseLine = baseLines.last();
+                        layoutPassmark.baseLine = ConstLast(baseLines);
                     }
 
                     const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
@@ -761,7 +761,7 @@ QPointF VLayoutPiece::GetPieceTextPosition() const
 {
     if (d->detailLabel.count() > 2)
     {
-        return d->matrix.map(d->detailLabel.first());
+        return d->matrix.map(ConstFirst(d->detailLabel));
     }
     else
     {
@@ -843,7 +843,7 @@ QPointF VLayoutPiece::GetPatternTextPosition() const
 {
     if (d->patternInfo.count() > 2)
     {
-        return d->matrix.map(d->patternInfo.first());
+        return d->matrix.map(ConstFirst(d->patternInfo));
     }
     else
     {
@@ -1335,7 +1335,7 @@ QPainterPath VLayoutPiece::ContourPath() const
             // Draw seam allowance
             QVector<QPointF>points = GetSeamAllowancePoints();
 
-            if (points.last().toPoint() != points.first().toPoint())
+            if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())
             {
                 points.append(points.at(0));// Should be always closed
             }
@@ -1475,7 +1475,7 @@ qreal VLayoutPiece::BiggestEdge() const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::BoundingRect(QVector<QPointF> points)
 {
-    points.append(points.first());
+    points.append(ConstFirst(points));
     return QPolygonF(points).boundingRect();
 }
 

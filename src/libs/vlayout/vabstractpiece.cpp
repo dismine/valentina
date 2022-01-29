@@ -607,7 +607,7 @@ QVector<VRawSAPoint> AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPoint
         if (success)
         {
             points = temp;
-            px = points.last();
+            px = ConstLast(points);
         }
 
         if (countBefore > 0)
@@ -747,9 +747,9 @@ bool Rollback(QVector<VRawSAPoint> &points, const QLineF &edge)
 
         if (not points.isEmpty())
         {
-            if (points.last().toPoint() != points.first().toPoint())
+            if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())
             {
-                points.append(points.first());// Should be always closed
+                points.append(ConstFirst(points));// Should be always closed
             }
         }
     }
@@ -812,7 +812,7 @@ void RollbackByPointsIntersection(QVector<VRawSAPoint> &ekvPoints, const QVector
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size()-1, bigLine1.p2());
-    bool success = Rollback(temp, QLineF(points.last(), points.at(1)));
+    bool success = Rollback(temp, QLineF(ConstLast(points), points.at(1)));
 
     if (success)
     {
@@ -831,7 +831,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
 {
     if (not ekvPoints.isEmpty())
     {
-        const QLineF edge(points.last(), points.at(1));
+        const QLineF edge(ConstLast(points), points.at(1));
         const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
 
         QPointF px;
@@ -843,7 +843,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         {
             if (ekvPoints.size() > 3)
             {
-                const QLineF edge1(ekvPoints.at(ekvPoints.size()-2), ekvPoints.last());
+                const QLineF edge1(ekvPoints.at(ekvPoints.size()-2), ConstLast(ekvPoints));
                 const QLineF edge2(ekvPoints.at(0), ekvPoints.at(1));
 
                 QPointF crosPoint;
@@ -868,7 +868,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
             if (success)
             {
                 ekvPoints = temp;
-                px = ekvPoints.last();
+                px = ConstLast(ekvPoints);
             }
 
             QLineF seam(px, points.at(1));
@@ -878,15 +878,15 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
 
             if (not ekvPoints.isEmpty())
             {
-                ekvPoints.append(ekvPoints.first());
+                ekvPoints.append(ConstFirst(ekvPoints));
             }
         }
 
         if (not ekvPoints.isEmpty())
         {
-            if (ekvPoints.last().toPoint() != ekvPoints.first().toPoint())
+            if (ConstLast(ekvPoints).toPoint() != ConstFirst(ekvPoints).toPoint())
             {
-                ekvPoints.append(ekvPoints.first());// Should be always closed
+                ekvPoints.append(ConstFirst(ekvPoints));// Should be always closed
             }
         }
     }
@@ -1081,7 +1081,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         return QVector<QPointF>();
     }
 
-    if (points.last().toPoint() != points.first().toPoint())
+    if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())
     {
         points.append(points.at(0));// Should be always closed
     }
@@ -1101,7 +1101,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         {//last point
             if (not ekvPoints.isEmpty())
             {
-                ekvPoints.append(ekvPoints.first());
+                ekvPoints.append(ConstFirst(ekvPoints));
             }
             continue;
         }
@@ -1115,7 +1115,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
         // This check helps to find missed angle types in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7, "Not all types were handled.");
-        switch (points.last().GetAngleType())
+        switch (ConstLast(points).GetAngleType())
         {
             case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
             case PieceNodeAngle::ByFirstEdgeRightAngle:
@@ -1229,7 +1229,7 @@ auto VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<Q
     {
         loopFound = false;
 
-        const bool pathClosed = (points.first() == points.last());
+        const bool pathClosed = (ConstFirst(points) == ConstLast(points));
 
         QVector<VRawSAPoint> ekvPoints;
         ekvPoints.reserve(points.size());

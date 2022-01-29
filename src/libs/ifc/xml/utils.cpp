@@ -35,6 +35,8 @@
 #include <QStringList>
 #include <QSvgRenderer>
 
+#include "../vmisc/compatibility.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 auto IsMimeTypeImage(const QMimeType &mime) -> bool
 {
@@ -66,7 +68,7 @@ auto MimeTypeFromByteArray(const QByteArray &data) -> QMimeType
 {
     QMimeType mime = QMimeDatabase().mimeTypeForData(data);
 
-    QSet<QString> aliases = mime.aliases().toSet();
+    QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
     aliases.insert(mime.name());
 
     QSet<QString> gzipMime {"application/gzip", "application/x-gzip"};

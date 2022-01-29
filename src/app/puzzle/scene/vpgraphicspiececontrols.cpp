@@ -532,7 +532,7 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
             if (pieces.size() == 1)
             {
-                auto *command = new VPUndoPieceRotate(pieces.first(), rotationOrigin, rotateOn, m_rotationSum,
+                auto *command = new VPUndoPieceRotate(ConstFirst(pieces), rotationOrigin, rotateOn, m_rotationSum,
                                                       allowChangeMerge);
                 layout->UndoStack()->push(command);
             }

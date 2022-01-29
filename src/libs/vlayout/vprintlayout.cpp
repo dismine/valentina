@@ -51,6 +51,7 @@
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vmath.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
+#include "../vmisc/compatibility.h"
 
 namespace
 {
@@ -125,10 +126,10 @@ auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode) -> QSh
         const QStringList list = QPrinterInfo::availablePrinterNames();
         if(list.isEmpty())
         {
-            return QSharedPointer<QPrinter>();
+            return {};
         }
 
-        tmpInfo = QPrinterInfo::printerInfo(list.first());
+        tmpInfo = QPrinterInfo::printerInfo(ConstFirst<QString>(list));
     }
 
     auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));

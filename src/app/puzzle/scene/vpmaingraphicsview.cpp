@@ -357,7 +357,7 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
                     QList<VPPiecePtr> pieces = PreparePieces();
                     if (pieces.size() == 1)
                     {
-                        VPPiecePtr p = pieces.first();
+                        const VPPiecePtr &p = ConstFirst(pieces);
 
                         auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
                                                             m_allowChangeMerge);
@@ -555,7 +555,7 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 
     if (pieces.size() == 1)
     {
-        auto *command = new VPUndoPieceRotate(pieces.first(), origin, angle, m_rotationSum, m_allowChangeMerge);
+        auto *command = new VPUndoPieceRotate(ConstFirst(pieces), origin, angle, m_rotationSum, m_allowChangeMerge);
         layout->UndoStack()->push(command);
     }
     else if (pieces.size() > 1)
@@ -589,7 +589,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
         return;
     }
 
-    VPPiecePtr piece = graphicsPieces.first()->GetPiece();
+    VPPiecePtr piece = ConstFirst(graphicsPieces)->GetPiece();
     if (piece.isNull())
     {
         return;
@@ -614,7 +614,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
     QList<VPPiecePtr> pieces = PreparePieces();
     if (pieces.size() == 1)
     {
-        VPPiecePtr p = pieces.first();
+        const VPPiecePtr &p = ConstFirst(pieces);
         auto *command = new VPUndoPieceMove(p, dx, dy, m_allowChangeMerge);
         layout->UndoStack()->push(command);
 

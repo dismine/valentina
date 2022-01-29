@@ -76,7 +76,7 @@ QStringList RecentFiles(const QStringList &paths)
     QVector<QStringList> table;
     table.reserve(paths.size());
 
-    for(auto &path : paths)
+    for(const auto &path : paths)
     {
         table.append(SplitFilePaths(path));
     }
@@ -84,7 +84,7 @@ QStringList RecentFiles(const QStringList &paths)
     auto CreateOptimized = [table](int tableRow)
     {
         QStringList optimized;
-        QStringList path = table.at(tableRow);
+        const QStringList& path = table.at(tableRow);
         for (int count = 1; count <= path.size(); ++count)
         {
             bool isUnique = true;
@@ -113,7 +113,8 @@ QStringList RecentFiles(const QStringList &paths)
 
         if (optimized.size() >= 3)
         {
-            optimized = QStringList({optimized.first(), QStringLiteral("…"), optimized.last()});
+            optimized = QStringList({ConstFirst<QString>(optimized), QStringLiteral("…"),
+                                     ConstLast<QString>(optimized)});
         }
 
         return optimized;

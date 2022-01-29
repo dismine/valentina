@@ -40,6 +40,7 @@
 #include <QFile>
 
 #include "utils.h"
+#include "../vmisc/compatibility.h"
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,7 +111,7 @@ auto VPatternImage::IsValid() const -> bool
     }
 
     QMimeType mime = MimeTypeFromData();
-    QSet<QString> aliases = mime.aliases().toSet();
+    QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
     aliases.insert(mime.name());
 
     if (not aliases.contains(m_contentType))

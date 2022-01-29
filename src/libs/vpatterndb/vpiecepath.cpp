@@ -76,7 +76,7 @@ VSAPoint CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPiec
         if (not points.isEmpty())
         {
             QPointF end; // Last point for this curve show start of next segment
-            node.GetReverse() ? end = points.first() : end = points.last();
+            node.GetReverse() ? end = ConstFirst(points) : end = ConstLast(points);
             if (VAbstractCurve::IsPointOnCurve(curvePoints, end))
             {
                 candidate = VSAPoint(end);
@@ -103,7 +103,7 @@ VSAPoint CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceN
         if (not points.isEmpty())
         {
             QPointF begin;// First point for this curve show finish of previous segment
-            node.GetReverse() ? begin = points.last() : begin = points.first();
+            node.GetReverse() ? begin = ConstLast(points) : begin = ConstFirst(points);
             if (VAbstractCurve::IsPointOnCurve(curvePoints, begin))
             {
                 candidate = VSAPoint(begin);
@@ -155,7 +155,7 @@ qreal FindTipDirection(const QVector<QPointF> &points)
         return 0;
     }
 
-    const QPointF first = points.first();
+    const QPointF &first = ConstFirst(points);
 
     for(int i = 1; i < points.size(); ++i)
     {
@@ -179,7 +179,7 @@ bool IntersectionWithCuttingCountour(const QVector<QPointF> &cuttingPath, const 
         return false;
     }
 
-    const QPointF first = points.first();
+    const QPointF &first = ConstFirst(points);
 
     if (VAbstractCurve::IsPointOnCurve(cuttingPath, first))
     { // Point is already part of a cutting countour
@@ -552,7 +552,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
     }
 
     VSAPoint begin;
-    reverse ? begin = VSAPoint(points.last()) : begin = VSAPoint(points.first());
+    reverse ? begin = VSAPoint(ConstLast(points)) : begin = VSAPoint(ConstFirst(points));
 
     if (nodes.size() > 1)
     {
@@ -583,7 +583,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
     }
 
     VSAPoint end;
-    reverse ? end = VSAPoint(points.first()) : end = VSAPoint(points.last());
+    reverse ? end = VSAPoint(ConstFirst(points)) : end = VSAPoint(ConstLast(points));
 
     if (nodes.size() > 2)
     {

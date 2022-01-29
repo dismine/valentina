@@ -63,14 +63,14 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
 
     if (ekvPoints.size() == 1 || ekvPoints.size() > 2)
     {
-        point = ekvPoints.first();
+        point = ConstFirst(ekvPoints);
     }
     else if (ekvPoints.size() == 2)
     {
         if(passmarkData.passmarkSAPoint.GetAngleType() == PieceNodeAngle::ByFirstEdgeSymmetry ||
                 passmarkData.passmarkSAPoint.GetAngleType() == PieceNodeAngle::ByFirstEdgeRightAngle)
         {
-            point = ekvPoints.first();
+            point = ConstFirst(ekvPoints);
         }
         else
         {
@@ -135,7 +135,7 @@ bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBa
         const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
         if (points.size() == 1)
         {
-            *notch = points.first();
+            *notch = ConstFirst(points);
         }
     }
 
@@ -441,18 +441,18 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
     {
         if (angleType == PassmarkAngleType::Straightforward)
         {
-            passmarksLines += (*create)(lines.first(), seamAllowance);
+            passmarksLines += (*create)(ConstFirst(lines), seamAllowance);
         }
         else
         {
             if (side == PassmarkSide::All || side == PassmarkSide::Left)
             {
-                passmarksLines += (*create)(lines.first(), seamAllowance);
+                passmarksLines += (*create)(ConstFirst(lines), seamAllowance);
             }
 
             if (side == PassmarkSide::All || side == PassmarkSide::Right)
             {
-                passmarksLines += (*create)(lines.last(), seamAllowance);
+                passmarksLines += (*create)(ConstLast(lines), seamAllowance);
             }
         }
     };
@@ -461,18 +461,18 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
     {
         if (angleType == PassmarkAngleType::Straightforward)
         {
-            passmarksLines += (*create)(lines.first());
+            passmarksLines += (*create)(ConstFirst(lines));
         }
         else
         {
             if (side == PassmarkSide::All || side == PassmarkSide::Left)
             {
-                passmarksLines += (*create)(lines.first());
+                passmarksLines += (*create)(ConstFirst(lines));
             }
 
             if (side == PassmarkSide::All || side == PassmarkSide::Right)
             {
-                passmarksLines += (*create)(lines.last());
+                passmarksLines += (*create)(ConstLast(lines));
             }
         }
     };
@@ -519,7 +519,7 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
         switch (lineType)
         {
             case PassmarkLineType::TMark:
-                passmarksLines += CreateTMarkPassmark(lines.first());
+                passmarksLines += CreateTMarkPassmark(ConstFirst(lines));
                 break;
             case PassmarkLineType::OneLine:
             case PassmarkLineType::TwoLines:
@@ -529,7 +529,7 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
             case PassmarkLineType::UMark:
             case PassmarkLineType::BoxMark:
             default:
-                passmarksLines.append(lines.first());
+                passmarksLines.append(ConstFirst(lines));
                 break;
         }
     }
@@ -764,7 +764,7 @@ QLineF VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &s
     QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
     if (not intersections.isEmpty())
     {
-        return QLineF(line.p1(), intersections.last());
+        return QLineF(line.p1(), ConstLast(intersections));
     }
 
     return line;
@@ -924,9 +924,9 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
 
         if (not intersections.isEmpty())
         {
-            if (intersections.last() != m_data.passmarkSAPoint)
+            if (ConstLast(intersections) != m_data.passmarkSAPoint)
             {
-                line = QLineF(intersections.last(), m_data.passmarkSAPoint);
+                line = QLineF(ConstLast(intersections), m_data.passmarkSAPoint);
 
                 bool ok = false;
                 const qreal length = PassmarkLength(m_data, width, ok);

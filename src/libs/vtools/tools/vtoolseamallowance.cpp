@@ -258,7 +258,7 @@ auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToo
     dupDetail.SetUUID(QUuid::createUuid());
 
     const QMap<quint32, quint32> mappedPins = DuplicatePins(initData.detail.GetPins(), initData);
-    dupDetail.SetPins(mappedPins.values().toVector());
+    dupDetail.SetPins(ConvertToVector(mappedPins.values()));
     dupDetail.SetPatternPieceData(FixLabelPins(initData.detail.GetPatternPieceData(), mappedPins));
     dupDetail.SetPatternInfo(FixLabelPins(initData.detail.GetPatternInfo(), mappedPins));
     dupDetail.SetGrainlineGeometry(FixGrainlinePins(initData.detail.GetGrainlineGeometry(), mappedPins));

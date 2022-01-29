@@ -177,7 +177,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
 
-            if (polygon.size() > 1 && polygon.first() == polygon.last())
+            if (polygon.size() > 1 && ConstFirst(polygon) == ConstLast(polygon))
             {
                 poly->flags |= 0x1; // closed
             }
@@ -199,7 +199,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
-            if (polygon.size() > 1 && polygon.first() == polygon.last())
+            if (polygon.size() > 1 && ConstFirst(polygon) == ConstLast(polygon))
             {
                 poly->flags |= 0x1; // closed
             }
@@ -791,7 +791,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
     const QVector<QPointF> grainline = detail.GetMappedGrainline();
     if (grainline.count() > 1)
     {
-        if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), QChar('7')))
+        if (DRW_Entity *e = AAMALine(QLineF(ConstFirst(grainline), ConstLast(grainline)), QChar('7')))
         {
             detailBlock->ent.push_back(e);
         }
@@ -1072,22 +1072,22 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
             }
             else if (passmark.type == PassmarkLineType::VMark || passmark.type == PassmarkLineType::VMark2)
             {
-                QLineF boundaryLine = QLineF(passmark.lines.first().p2(), passmark.lines.last().p2());
+                QLineF boundaryLine(ConstFirst(passmark.lines).p2(), ConstLast(passmark.lines).p2());
                 notch->thickness = FromPixel(boundaryLine.length(), varInsunits); // width
 
                 notch->layer = "4";
             }
             else if (passmark.type == PassmarkLineType::TMark)
             {
-                qreal width = FromPixel(passmark.lines.last().length(), varInsunits);
+                qreal width = FromPixel(ConstLast(passmark.lines).length(), varInsunits);
                 notch->thickness = FromPixel(width, varInsunits);
 
                 notch->layer = "80";
             }
             else if (passmark.type == PassmarkLineType::BoxMark)
             {
-                QPointF start = passmark.lines.first().p1();
-                QPointF end = passmark.lines.last().p2();
+                QPointF start = ConstFirst(passmark.lines).p1();
+                QPointF end = ConstLast(passmark.lines).p2();
 
                 notch->layer = "81";
 
@@ -1095,8 +1095,8 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
             }
             else if (passmark.type == PassmarkLineType::UMark)
             {
-                QPointF start = passmark.lines.first().p1();
-                QPointF end = passmark.lines.last().p2();
+                QPointF start = ConstFirst(passmark.lines).p1();
+                QPointF end = ConstLast(passmark.lines).p2();
 
                 notch->thickness = FromPixel(QLineF(start, end).length(), varInsunits);
 
@@ -1184,7 +1184,7 @@ P *VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString 
     }
     else
     {
-        if (polygon.size() > 1 && polygon.first() == polygon.last())
+        if (polygon.size() > 1 && ConstFirst(polygon) == ConstLast(polygon))
         {
             poly->flags |= 0x1; // closed
         }

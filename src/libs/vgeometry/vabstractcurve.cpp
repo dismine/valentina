@@ -95,8 +95,8 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points
 
     if (begin == end)
     {
-        start = segment.first();
-        finish = segment.last();
+        start = ConstFirst(segment);
+        finish = ConstLast(segment);
     }
 
     bool ok = false;
@@ -157,7 +157,7 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
 {
     if (points.count() >= 2)
     {
-        if (points.first().toPoint() == begin.toPoint())
+        if (ConstFirst(points).toPoint() == begin.toPoint())
         {
             if (ok != nullptr)
             {
@@ -258,7 +258,7 @@ qreal VAbstractCurve::GetLengthByPoint(const QPointF &point) const
         return -1;
     }
 
-    if (points.first().toPoint() == point.toPoint())
+    if (ConstFirst(points).toPoint() == point.toPoint())
     {
         return 0;
     }

@@ -528,7 +528,7 @@ QMap<int, QString> VCommandLine::OptUserMaterials() const
         }
 
         bool ok = false;
-        const int number = parts.first().toInt(&ok);
+        const int number = ConstFirst<QString>(parts).toInt(&ok);
 
         if (not ok or number < 1 or number > userMaterialPlaceholdersQuantity)
         {
@@ -537,7 +537,7 @@ QMap<int, QString> VCommandLine::OptUserMaterials() const
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
-        userMaterials.insert(number, parts.last());
+        userMaterials.insert(number, ConstLast<QString>(parts));
     }
 
     return userMaterials;

@@ -35,6 +35,7 @@
 #include <Qt>
 
 #include "../vmisc/def.h"
+#include "../vmisc/compatibility.h"
 
 const int VTableSearch::MaxHistoryRecords = 10;
 
@@ -161,7 +162,7 @@ auto VTableSearch::FindCurrentMatchIndex() const -> int
         return 0;
     }
 
-    QTableWidgetItem* selectedItem = selectedItems.first();
+    QTableWidgetItem* selectedItem = ConstFirst(selectedItems);
 
     for (int i=0; i<searchList.size(); ++i)
     {

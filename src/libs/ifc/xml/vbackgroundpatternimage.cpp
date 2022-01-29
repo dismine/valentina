@@ -28,6 +28,7 @@
 #include "vbackgroundpatternimage.h"
 
 #include "utils.h"
+#include "../vmisc/compatibility.h"
 
 #include <QMimeType>
 #include <QDebug>
@@ -131,7 +132,7 @@ auto VBackgroundPatternImage::IsValid() const -> bool
         }
 
         QMimeType mime = MimeTypeFromData();
-        QSet<QString> aliases = mime.aliases().toSet();
+        QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
         aliases.insert(mime.name());
 
         if (not aliases.contains(m_contentType))

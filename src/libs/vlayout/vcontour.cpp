@@ -49,7 +49,7 @@ void AppendToContour(QVector<QPointF> &contour, QPointF point)
 {
     if (not contour.isEmpty())
     {
-        if (not VFuzzyComparePoints(contour.last(), point))
+        if (not VFuzzyComparePoints(ConstLast(contour), point))
         {
             contour.append(point);
         }
@@ -68,7 +68,7 @@ QVector<QPointF> OptimizeCombining(const QVector<QPointF> &contour, const QPoint
         return contour;
     }
 
-    QPointF withdrawFirst = contour.last();
+    QPointF withdrawFirst = ConstLast(contour);
     bool optimize = false;
     int count = 0;
     int cutIndex = -1;
@@ -148,7 +148,7 @@ void VContour::CeateEmptySheetContour()
     if (d->globalContour.isEmpty())
     {
         d->globalContour = CutEmptySheetEdge();
-        d->globalContour.append(d->globalContour.first()); // Close path
+        d->globalContour.append(ConstFirst(d->globalContour)); // Close path
 
         ResetAttributes();
     }

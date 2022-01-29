@@ -30,6 +30,7 @@
 #include "ui_dialogmdatabase.h"
 #include "../mapplication.h"
 #include "../vpatterndb/measurements.h"
+#include "../vmisc/compatibility.h"
 
 #include <QKeyEvent>
 #include <QMenu>
@@ -409,7 +410,7 @@ void DialogMDataBase::FilterMeasurements(const QString &search)
     FilterGroup(groupQ, search);
 
     const QList<QTreeWidgetItem *> list = ui->treeWidget->selectedItems();
-    list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(list.first(), 0);
+    list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(ConstFirst(list), 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

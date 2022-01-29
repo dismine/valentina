@@ -695,7 +695,7 @@ VLayoutPaper VLayoutGenerator::MasterPage() const
 {
     if (papers.size() < 2)
     {
-        return papers.first();
+        return ConstFirst(papers);
     }
 
     QList<QList<VLayoutPiece> > nDetails;

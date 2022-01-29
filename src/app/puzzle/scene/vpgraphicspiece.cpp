@@ -416,7 +416,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
         if(!seamLinePoints.isEmpty())
         {
-            m_seamLine.moveTo(seamLinePoints.first());
+            m_seamLine.moveTo(ConstFirst(seamLinePoints));
             for (int i = 1; i < seamLinePoints.size(); i++)
             {
                 m_seamLine.lineTo(seamLinePoints.at(i));
@@ -438,7 +438,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
         if(!cuttingLinepoints.isEmpty())
         {
-            m_cuttingLine.moveTo(cuttingLinepoints.first());
+            m_cuttingLine.moveTo(ConstFirst(cuttingLinepoints));
             for (int i = 1; i < cuttingLinepoints.size(); i++)
             {
                 m_cuttingLine.lineTo(cuttingLinepoints.at(i));
@@ -460,7 +460,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
         if(!grainLinepoints.isEmpty())
         {
-            m_grainline.moveTo(grainLinepoints.first());
+            m_grainline.moveTo(ConstFirst(grainLinepoints));
             for (int i = 1; i < grainLinepoints.size(); i++)
             {
                 m_grainline.lineTo(grainLinepoints.at(i));
@@ -539,7 +539,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 
     if (not m_stickyPoints.isEmpty())
     {
-        m_stickyPath.moveTo(m_stickyPoints.first());
+        m_stickyPath.moveTo(ConstFirst(m_stickyPoints));
         for (int i = 1; i < m_stickyPoints.size(); i++)
         {
             m_stickyPath.lineTo(m_stickyPoints.at(i));
@@ -599,7 +599,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
 
     if (pieces.size() == 1)
     {
-        VPPiecePtr p = pieces.first();
+        const VPPiecePtr &p = ConstFirst(pieces);
         auto *command = new VPUndoPieceMove(piece, newPos.x(), newPos.y(), allowChangeMerge);
         layout->UndoStack()->push(command);
 

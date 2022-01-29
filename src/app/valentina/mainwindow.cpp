@@ -3503,7 +3503,7 @@ void MainWindow::on_actionOpen_triggered()
     else
     {
         //Absolute path to last open file
-        dir = QFileInfo(files.first()).absolutePath();
+        dir = QFileInfo(ConstFirst<QString>(files)).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
@@ -6691,7 +6691,7 @@ void MainWindow::ProcessCMD()
 
         VAbstractValApplication::VApp()->SetUserMaterials(cmd->OptUserMaterials());
 
-        const bool loaded = LoadPattern(args.first(), cmd->OptMeasurePath());
+        const bool loaded = LoadPattern(ConstFirst<QString>(args), cmd->OptMeasurePath());
 
         if (not loaded)
         {

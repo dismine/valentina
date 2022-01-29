@@ -364,7 +364,7 @@ PlaceLabelImg VPlaceLabelItem::LabelShape() const
         QPolygonF shape3(arc.GetPoints());
         if (not shape3.isClosed() && not shape3.isEmpty())
         {
-            shape3 << shape3.first();
+            shape3 << ConstFirst(shape3);
         }
 
         return PlaceLabelImg({t.map(shape1), t.map(shape2), t.map(shape3)});
@@ -378,7 +378,7 @@ PlaceLabelImg VPlaceLabelItem::LabelShape() const
         QPolygonF circle(arc.GetPoints());
         if (not circle.isClosed() && not circle.isEmpty())
         {
-            circle << circle.first();
+            circle << ConstFirst(circle);
         }
 
         return PlaceLabelImg({t.map(circle)});
@@ -428,7 +428,7 @@ QPainterPath VPlaceLabelItem::LabelShapePath(const PlaceLabelImg &shape)
     {
         if (not p.isEmpty())
         {
-            path.moveTo(p.first());
+            path.moveTo(ConstFirst(p));
             path.addPolygon(p);
         }
     }

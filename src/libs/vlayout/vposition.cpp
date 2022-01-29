@@ -297,7 +297,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     }
 
     QVector<QPointF> newGContour = m_data.gContour.UniteWithContour(detail, globalI, detJ, type);
-    newGContour.append(newGContour.first());
+    newGContour.append(ConstFirst(newGContour));
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();
     const QRectF boundingRect = detail.MappedDetailBoundingRect();
     const qreal depthPosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.y() : boundingRect.x();

@@ -37,6 +37,7 @@
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(quint32 idObject, Draw mode)
@@ -361,7 +362,7 @@ VPointF VCubicBezierPath::FirstPoint() const
 {
     if (not d->path.isEmpty())
     {
-        return d->path.first();
+        return ConstFirst(d->path);
     }
     else
     {

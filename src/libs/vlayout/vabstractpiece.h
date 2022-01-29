@@ -222,9 +222,9 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
         }
     }
 
-    if (not buf2.isEmpty() && buf2.first() != buf2.last())
+    if (not buf2.isEmpty() && ConstFirst(buf2) != ConstLast(buf2))
     {
-        buf2.append(buf2.first());
+        buf2.append(ConstFirst(buf2));
     }
 
     buf2 = RemoveDublicates(buf2, false);
@@ -245,7 +245,7 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
     QVector<T> p;
     p.reserve(points.size());
 
-    p.append(points.first());
+    p.append(ConstFirst(points));
 
     for (int i = 0; i < points.size(); ++i)
     {
@@ -266,7 +266,7 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
         {
             // Path can't be closed
             // See issue #686
-            if (VFuzzyComparePoints(p.first(), p.last()))
+            if (VFuzzyComparePoints(ConstFirst(p), ConstLast(p)))
             {
                 p.removeLast();
             }

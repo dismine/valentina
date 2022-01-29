@@ -402,10 +402,11 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
     QGuiApplication::restoreOverrideCursor();
 #endif
 
-    QFile f(params.last());
+    QFile f(ConstLast<QString>(params));
     if (not f.exists())
     {
-        qCritical() << qUtf8Printable(tr("Creating file '%1' failed! %2").arg(params.last(), proc.errorString()));
+        qCritical() << qUtf8Printable(tr("Creating file '%1' failed! %2")
+                                      .arg(ConstLast<QString>(params), proc.errorString()));
     }
 }
 
