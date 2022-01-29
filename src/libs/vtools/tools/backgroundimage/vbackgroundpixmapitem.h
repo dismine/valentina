@@ -41,7 +41,7 @@ enum class ShapeMode
     HeuristicMaskShape
 };
 
-class VBackgroundPixmapItem : public VBackgroundImageItem
+class VBackgroundPixmapItem : public VBackgroundImageItem // clazy:exclude=ctor-missing-parent-argument,missing-qobject-macro
 {
 public:
     VBackgroundPixmapItem(const VBackgroundPatternImage &image, VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
@@ -59,7 +59,7 @@ public:
     auto isObscuredBy(const QGraphicsItem *item) const -> bool override;
     auto opaqueArea() const -> QPainterPath override;
 
-    auto ShapeMode() const -> ShapeMode;
+    auto GetShapeMode() const -> ShapeMode;
     void SetShapeMode(enum ShapeMode mode);
 
 protected:
@@ -70,7 +70,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
-    Q_DISABLE_COPY_MOVE(VBackgroundPixmapItem)
+    Q_DISABLE_COPY_MOVE(VBackgroundPixmapItem) // NOLINT
 
     mutable QPixmap m_pixmap{};
     Qt::TransformationMode m_transformationMode{Qt::SmoothTransformation};
