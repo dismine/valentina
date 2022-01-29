@@ -33,6 +33,7 @@
 #include "core/vcmdexport.h"
 #include "../vmisc/vlockguard.h"
 #include "../vformat/vdimensions.h"
+#include "../ifc/xml/vbackgroundpatternimage.h"
 
 #include <QDoubleSpinBox>
 #include <QPointer>

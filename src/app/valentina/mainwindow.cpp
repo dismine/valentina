@@ -72,7 +72,6 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vlayout/dialogs/dialoglayoutscale.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
-#include "../ifc/xml/vbackgroundpatternimage.h"
 #include "../vtools/tools/backgroundimage/vbackgroundimageitem.h"
 #include "../vtools/tools/backgroundimage/vbackgroundpixmapitem.h"
 #include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
