@@ -80,6 +80,7 @@
 #include "../vtools/undocommands/image/deletebackgroundimage.h"
 #include "../ifc/xml/utils.h"
 #include "dialogs/vwidgetbackgroundimages.h"
+#include "../ifc/xml/vbackgroundpatternimage.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -2385,19 +2386,8 @@ void MainWindow::NewBackgroundImageItem(const VBackgroundPatternImage &image)
         if (item != nullptr)
         {
             item->SetImage(image);
+            item->setVisible(true);
         }
-    }
-    else if (m_deletedBackgroundImageItems.contains(image.Id()))
-    {
-        VBackgroundImageItem *item = m_deletedBackgroundImageItems.value(image.Id());
-        if (item != nullptr)
-        {
-            item->SetImage(image);
-            sceneDraw->addItem(item);
-            m_backgroundImages.insert(image.Id(), item);
-        }
-        m_deletedBackgroundImageItems.remove(image.Id());
-        m_deletedBackgroundImages.remove(image.Id());
     }
     else
     {
@@ -4363,14 +4353,11 @@ void MainWindow::DeleteBackgroundImageItem(const QUuid &id)
     {
         VBackgroundImageItem *item = m_backgroundImages.value(id);
         emit ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
-        sceneDraw->removeItem(item);
+        item->setVisible(false); // Do not remove the item from scene to prevent crashes.
         if (m_backgroudcontrols != nullptr && m_backgroudcontrols->Id() == id)
         {
             m_backgroudcontrols->ActivateControls(QUuid());
         }
-        m_backgroundImages.remove(id);
-        m_deletedBackgroundImageItems.insert(id, item);
-        m_deletedBackgroundImages.insert(id, item->Image());
 
         if (backgroundImagesWidget != nullptr)
         {
@@ -4451,24 +4438,6 @@ void MainWindow::ParseBackgroundImages()
         NewBackgroundImageItem(image);
     }
     backgroundImagesWidget->UpdateImages();
-
-    // Undostack rely on m_deletedBackgroundImageItems to prevent crashes
-    QMap<QUuid, VBackgroundImageItem *> deletedBackgroundImageItems;
-    QMap<QUuid, VBackgroundImageItem *>::const_iterator i;
-    for (i = m_deletedBackgroundImageItems.constBegin(); i != m_deletedBackgroundImageItems.constEnd(); ++i)
-    {
-        if (m_deletedBackgroundImages.contains(i.key()))
-        {
-            VBackgroundPatternImage image = m_deletedBackgroundImages.value(i.key());
-            VBackgroundImageItem *item = InitBackgroundImageItem(image);
-            if (item != nullptr)
-            {
-                deletedBackgroundImageItems.insert(image.Id(), item);
-            }
-        }
-    }
-
-    m_deletedBackgroundImageItems = deletedBackgroundImageItems;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5622,8 +5591,6 @@ MainWindow::~MainWindow()
 
     delete doc;
     delete ui;
-
-    qDeleteAll(m_deletedBackgroundImageItems);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5884,7 +5851,6 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
              * a reference. */
             QTimer::singleShot(100, Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
-            QTimer::singleShot(500, Qt::CoarseTimer, this, &MainWindow::ParseBackgroundImages);
         }
 
         patternReadOnly = doc->IsReadOnly();

@@ -33,7 +33,6 @@
 #include "core/vcmdexport.h"
 #include "../vmisc/vlockguard.h"
 #include "../vformat/vdimensions.h"
-#include "../ifc/xml/vbackgroundpatternimage.h"
 
 #include <QDoubleSpinBox>
 #include <QPointer>
@@ -325,9 +324,7 @@ private:
     QTimer *m_gradation;
 
     QMap<QUuid, VBackgroundImageItem *> m_backgroundImages{};
-    QMap<QUuid, VBackgroundImageItem *> m_deletedBackgroundImageItems{};
     VBackgroundImageControls* m_backgroudcontrols{nullptr};
-    QMap<QUuid, VBackgroundPatternImage> m_deletedBackgroundImages{};
 
     bool m_groupsActive{false};
     bool m_toolOptionsActive{false};

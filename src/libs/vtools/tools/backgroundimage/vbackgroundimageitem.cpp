@@ -541,7 +541,7 @@ void VBackgroundImageItem::keyReleaseEvent(QKeyEvent *event)
         {
             if (ConfirmDeletion() == QMessageBox::Yes)
             {
-                DeleteToolWithConfirm(false);
+                DeleteToolWithConfirm();
                 event->accept();
                 return;
             }
