@@ -103,8 +103,8 @@ private:
     Q_REQUIRED_RESULT auto ImageWidth() const -> qreal;
     Q_REQUIRED_RESULT auto ImageHeight() const -> qreal;
 
-    Q_REQUIRED_RESULT auto WidthScaleUnitConvertor(qreal value, enum ScaleUnit from, enum ScaleUnit to) const -> qreal;
-    Q_REQUIRED_RESULT auto HeightScaleUnitConvertor(qreal value, enum ScaleUnit from, enum ScaleUnit to) const -> qreal;
+    Q_REQUIRED_RESULT auto WidthScaleUnitConvertor(qreal value, ScaleUnit from, ScaleUnit to) const -> qreal;
+    Q_REQUIRED_RESULT auto HeightScaleUnitConvertor(qreal value, ScaleUnit from, ScaleUnit to) const -> qreal;
 
     void SetAbsolutePisition(const QUuid &id);
 };

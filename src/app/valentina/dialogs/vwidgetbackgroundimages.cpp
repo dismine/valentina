@@ -811,9 +811,9 @@ auto VWidgetBackgroundImages::CurrentTranslateUnit() const -> Unit
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VWidgetBackgroundImages::CurrentScaleUnit() const -> enum ScaleUnit
+auto VWidgetBackgroundImages::CurrentScaleUnit() const -> ScaleUnit
 {
-    return static_cast<enum ScaleUnit>(ui->comboBoxScaleUnit->currentData().toInt());
+    return static_cast<ScaleUnit>(ui->comboBoxScaleUnit->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -894,7 +894,7 @@ void VWidgetBackgroundImages::InitImageTranslation()
     connect(ui->comboBoxScaleUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this V_LAMBDA_CONSTANTS(minScale, maxScale)]()
     {
-        const enum ScaleUnit newUnit = CurrentScaleUnit();
+        const ScaleUnit newUnit = CurrentScaleUnit();
         const qreal oldScaleWidth = ui->doubleSpinBoxScaleWidth->value();
         const qreal oldScaleHeight = ui->doubleSpinBoxScaleHeight->value();
 
