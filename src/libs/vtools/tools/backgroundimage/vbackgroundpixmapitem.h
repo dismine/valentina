@@ -60,7 +60,7 @@ public:
     auto opaqueArea() const -> QPainterPath override;
 
     auto GetShapeMode() const -> ShapeMode;
-    void SetShapeMode(enum ShapeMode mode);
+    void SetShapeMode(ShapeMode mode);
 
 protected:
     auto supportsExtension(Extension extension) const -> bool override;
@@ -74,7 +74,7 @@ private:
 
     mutable QPixmap m_pixmap{};
     Qt::TransformationMode m_transformationMode{Qt::SmoothTransformation};
-    enum ShapeMode m_shapeMode{ShapeMode::MaskShape};
+    ShapeMode m_shapeMode{ShapeMode::MaskShape};
     mutable QPainterPath m_shape{};
     mutable bool m_hasShape{false};
 

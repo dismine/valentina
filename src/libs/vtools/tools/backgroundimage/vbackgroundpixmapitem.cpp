@@ -114,13 +114,13 @@ auto VBackgroundPixmapItem::opaqueArea() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VBackgroundPixmapItem::GetShapeMode() const -> enum ShapeMode
+auto VBackgroundPixmapItem::GetShapeMode() const -> ShapeMode
 {
     return m_shapeMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBackgroundPixmapItem::SetShapeMode(enum ShapeMode mode)
+void VBackgroundPixmapItem::SetShapeMode(ShapeMode mode)
 {
     if (m_shapeMode == mode)
     {
