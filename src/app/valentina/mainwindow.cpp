@@ -3679,7 +3679,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionAddBackgroundImage()
 {
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Select background image"), QString(),
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Select background image"), QDir::homePath(),
                                                           PrepareImageFilters(), nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
