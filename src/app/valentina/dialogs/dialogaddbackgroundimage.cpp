@@ -26,14 +26,16 @@
  **
  *************************************************************************/
 #include "dialogaddbackgroundimage.h"
+#include "qfileinfo.h"
 #include "ui_dialogaddbackgroundimage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAddBackgroundImage::DialogAddBackgroundImage(QWidget *parent) :
+DialogAddBackgroundImage::DialogAddBackgroundImage(const QString &fileName, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogAddBackgroundImage)
 {
     ui->setupUi(this);
+    ui->lineEditName->setText(QFileInfo(fileName).baseName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

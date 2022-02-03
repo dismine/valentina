@@ -44,7 +44,7 @@ class DialogAddBackgroundImage : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogAddBackgroundImage(QWidget *parent = nullptr);
+    explicit DialogAddBackgroundImage(const QString &fileName, QWidget *parent = nullptr);
     ~DialogAddBackgroundImage() override;
 
     auto Name() const -> QString;

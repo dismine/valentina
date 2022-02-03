@@ -1382,7 +1382,7 @@ void MainWindow::ZoomFitBestCurrent()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileName)
 {
-    DialogAddBackgroundImage dialog(this);
+    DialogAddBackgroundImage dialog(fileName, this);
     if (dialog.exec() == QDialog::Rejected)
     {
         qCritical() << tr("Unable to add background image");
