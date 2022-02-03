@@ -30,6 +30,7 @@
 - [smart-pattern/valentina#43] Background image.
 - Fix alias for tool Cut Arc.
 - Fix infinite loop in tool cut spline.
+- Added scroll area to layout settings dialog.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

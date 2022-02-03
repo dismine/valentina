@@ -120,7 +120,8 @@ public:
     qreal PageToPixels(qreal value) const;
     static QString MakeGroupsHelp();
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
     QSizeF GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit) const;
 
 public slots:

@@ -516,7 +516,7 @@ QString DialogLayoutSettings::MakeGroupsHelp()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
+    VAbstractLayoutDialog::showEvent( event );
     if ( event->spontaneous() )
     {
         return;
@@ -528,10 +528,26 @@ void DialogLayoutSettings::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
-    setMinimumSize(size());
+    const QSize sz = VAbstractApplication::VApp()->Settings()->GetLayoutSettingsDialogSize();
+    if (not sz.isEmpty())
+    {
+        resize(sz);
+    }
 
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::resizeEvent(QResizeEvent *event)
+{
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized)
+    {
+        VAbstractApplication::VApp()->Settings()->SetLayoutSettingsDialogSize(size());
+    }
+    VAbstractLayoutDialog::resizeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

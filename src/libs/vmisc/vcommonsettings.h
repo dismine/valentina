@@ -157,6 +157,9 @@ public:
     QSize GetFinalMeasurementsDialogSize() const;
     void  SetFinalMeasurementsDialogSize(const QSize& sz);
 
+    QSize GetLayoutSettingsDialogSize() const;
+    void  SetLayoutSettingsDialogSize(const QSize& sz);
+
     bool IsAutomaticallyCheckUpdates() const;
     void SetAutomaticallyCheckUpdates(bool value);
 
