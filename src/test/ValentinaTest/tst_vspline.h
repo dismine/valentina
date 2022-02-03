@@ -49,6 +49,7 @@ private slots:
     void GetSegmentPoints_RotateTool();
     void GetSegmentPoints_issue767();
     void CompareThreeWays();
+    void TestParametrT_data();
     void TestParametrT();
     void TestLengthByPoint_data();
     void TestLengthByPoint();

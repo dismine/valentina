@@ -503,28 +503,38 @@ QString VAbstractCubicBezier::NameForHistory(const QString &toolName) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCubicBezier::GetParmT(qreal length) const
+auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
 {
+    const qreal base = GetRealLength();
     if (length < 0)
     {
         return 0;
     }
-    else if (length > GetLength())
+
+    if (length > base)
     {
-        length = GetLength();
+        length = base;
     }
 
-    const qreal eps = 0.001 * length;
+    constexpr qreal eps = UnitConvertor(0.001, Unit::Mm, Unit::Px);
     qreal parT = 0.5;
     qreal step = parT;
-    qreal splLength = LengthT(parT);
+    qreal splLength = 0;
 
-    while (qAbs(splLength - length) > eps)
+    do
     {
+        splLength = RealLengthByT(parT);
         step /= 2.0;
+
+        if (qFuzzyIsNull(step))
+        {
+            break;
+        }
+
         splLength > length ? parT -= step : parT += step;
-        splLength = LengthT(parT);
     }
+    while (qAbs(splLength - length) > eps);
+
     return parT;
 }
 
@@ -591,7 +601,7 @@ qreal VAbstractCubicBezier::LengthBezier(const QPointF &p1, const QPointF &p2, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCubicBezier::LengthT(qreal t) const
+qreal VAbstractCubicBezier::RealLengthByT(qreal t) const
 {
     if (t < 0 || t > 1)
     {
@@ -622,5 +632,5 @@ qreal VAbstractCubicBezier::LengthT(qreal t) const
     seg123_234.setLength(seg123_234.length () * t);
     const QPointF p1234 = seg123_234.p2();
 
-    return LengthBezier ( static_cast<QPointF>(GetP1()), p12, p123, p1234, GetApproximationScale());
+    return LengthBezier ( static_cast<QPointF>(GetP1()), p12, p123, p1234, maxCurveApproximationScale);
 }

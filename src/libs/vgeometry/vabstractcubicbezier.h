@@ -62,7 +62,7 @@ public:
     virtual QString NameForHistory(const QString &toolName) const override;
 
     qreal GetParmT(qreal length) const;
-    qreal LengthT(qreal t) const;
+    qreal RealLengthByT(qreal t) const;
 
 protected:
     virtual void CreateName() override;
@@ -75,6 +75,7 @@ protected:
 
     virtual QPointF GetControlPoint1() const =0;
     virtual QPointF GetControlPoint2() const =0;
+    virtual auto GetRealLength() const -> qreal =0;
 };
 
 QT_WARNING_POP

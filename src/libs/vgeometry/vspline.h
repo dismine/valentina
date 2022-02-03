@@ -117,6 +117,7 @@ public:
 protected:
     virtual QPointF GetControlPoint1() const override;
     virtual QPointF GetControlPoint2() const override;
+    auto GetRealLength () const -> qreal override;
 private:
     QSharedDataPointer<VSplineData> d;
     QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,

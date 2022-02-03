@@ -611,3 +611,10 @@ QPointF VSpline::GetControlPoint2() const
 {
     return static_cast<QPointF>(GetP3 ());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::GetRealLength() const -> qreal
+{
+    return LengthBezier(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()), static_cast<QPointF>(GetP3()),
+                        static_cast<QPointF>(GetP4()), maxCurveApproximationScale);
+}

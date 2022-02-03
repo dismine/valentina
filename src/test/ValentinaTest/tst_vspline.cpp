@@ -28,6 +28,7 @@
 
 #include "tst_vspline.h"
 #include "../vgeometry/vspline.h"
+#include "def.h"
 
 #include <QtTest>
 
@@ -718,17 +719,55 @@ void TST_VSpline::CompareThreeWays()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestParametrT_data()
+{
+    QTest::addColumn<VSpline>("spl");
+    QTest::addColumn<qreal>("length");
+
+    VPointF p1(30, 39.999874015748034, QStringLiteral("p1"), 15, 30);
+    VPointF p4(2883.86674323853821, 805.33182541168674, QStringLiteral("p4"), 9.9999874015748045, 15);
+
+    VSpline spl(p1, p4, 240.60499999999999, QStringLiteral("240.605"), 260.36399999999998, QStringLiteral("260.364"),
+                6614.8535433070883, QStringLiteral("175.018"), 10695.382677165355, QStringLiteral("282.982"));
+
+    qreal base = spl.GetLength();
+
+    qreal step = 0;
+    do
+    {
+        QTest::newRow(qUtf8Printable(QStringLiteral("Curve 1. Step = %1").arg(step))) << spl << base * step;
+        step += 0.001;
+    }
+    while(step <= 1);
+
+    p1 = VPointF(3476.6410658375944, 334.08136371135333, QStringLiteral("p1"), -141.34148031496062, 109.00951181102363);
+    p4 = VPointF(3483.5141183177025, 333.72231804361377, QStringLiteral("p4"), 48, 102.99930708661418);
+
+    spl = VSpline(p1, p4, 3.1976200000000001, QStringLiteral("3.19762"), 175.24700000000001, QStringLiteral("175.247"),
+                  7.5076913385826796, QStringLiteral("0.198641"), 9.7351181102362219, QStringLiteral("0.257575"));
+
+    base = spl.GetLength();
+
+    step = 0;
+    do
+    {
+        QTest::newRow(qUtf8Printable(QStringLiteral("Curve 2. Step = %1").arg(step))) << spl << base * step;
+        step += 0.001;
+    }
+    while(step <= 1);
+
+    QTest::newRow(qUtf8Printable(QStringLiteral("Curve 2. Bug.").arg(step))) << spl << 4.7813492845686536;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VSpline::TestParametrT()
 {
-    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+    QFETCH(VSpline, spl);
+    QFETCH(qreal, length);
 
-    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+    const qreal resLength = spl.RealLengthByT(spl.GetParmT(length));
 
-    const qreal halfLength = spl.GetLength()/2.0;
-    const qreal resLength = spl.LengthT(spl.GetParmT(halfLength));
-
-    QVERIFY(qAbs(halfLength - resLength) < UnitConvertor(0.5, Unit::Mm, Unit::Px));
+    QVERIFY(qAbs(length - resLength) < UnitConvertor(1, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

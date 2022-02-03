@@ -84,6 +84,7 @@ public:
 protected:
     virtual QPointF GetControlPoint1() const override;
     virtual QPointF GetControlPoint2() const override;
+    auto GetRealLength() const -> qreal override;
 
 private:
     QSharedDataPointer<VCubicBezierData> d;
