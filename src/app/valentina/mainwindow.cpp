@@ -3687,7 +3687,8 @@ void MainWindow::ActionAddBackgroundImage()
                                                           VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
-        PlaceBackgroundImage(QPointF(), fileName);
+        QRect viewportRect(0, 0, ui->view->viewport()->width(), ui->view->viewport()->height());
+        PlaceBackgroundImage(ui->view->mapToScene(viewportRect.center()), fileName);
     }
 }
 
