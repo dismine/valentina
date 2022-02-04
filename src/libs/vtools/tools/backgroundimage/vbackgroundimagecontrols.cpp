@@ -195,6 +195,7 @@ void VBackgroundImageControls::UpdateControls()
 
     prepareGeometryChange();
     m_image = m_doc->GetBackgroundImage(m_id);
+    m_originPos = m_image.BoundingRect().center();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
