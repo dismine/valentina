@@ -63,6 +63,9 @@ public:
     auto IsVisible() const -> bool;
     void SetVisible(bool visible);
 
+    auto GetOpacity() const -> qreal;
+    void SetOpacity(qreal opacity);
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 signals:
@@ -77,6 +80,7 @@ public slots:
     void PositionChanged(QUuid id);
     void ImageTransformationChanged(QUuid id);
     void HoldChanged(QUuid id);
+    void OpacityChanged(const QUuid &id);
     void VisibilityChanged(QUuid id);
     void NameChanged(QUuid id);
     void EnableSelection(bool enable);

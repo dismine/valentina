@@ -44,6 +44,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vlayout/vbank.h"
+#include "qglobal.h"
 
 Q_DECLARE_METATYPE(QMarginsF)
 
@@ -60,6 +61,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("pat
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternKnownMaterials, (QLatin1String("pattern/knownMaterials")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternRememberMaterials, (QLatin1String("pattern/rememberMaterials")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBackgroundImageDefOpacity,
+                          (QLatin1String("pattern/backgroundImageDefOpacity")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, (QLatin1String("layout/width")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, (QLatin1String("layout/sorting")))
@@ -954,6 +957,18 @@ auto VValentinaSettings::GetFinalMeasurementsSearchOptionMatchCase() const -> bo
 void VValentinaSettings::SetFinalMeasurementsSearchOptionMatchCase(bool value)
 {
     setValue(*settingSearchOptionsFinalMeasurementsMatchCase, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VValentinaSettings::GetBackgroundImageDefOpacity() const
+{
+    return value(*settingPatternBackgroundImageDefOpacity, 100).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetBackgroundImageDefOpacity(int value)
+{
+    setValue(*settingPatternBackgroundImageDefOpacity, qBound(0, value, 100));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

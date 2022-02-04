@@ -37,6 +37,7 @@
 #include "../vwidgets/vsimplepoint.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vpropertyexplorer/vproperties.h"
+#include "def.h"
 #include "vformulaproperty.h"
 #include "../vpatterndb/vformula.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -52,6 +53,7 @@ namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrHold, (QLatin1String("hold")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrVisible, (QLatin1String("visible")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrOpacity, (QLatin1String("opacity")))
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -754,6 +756,22 @@ void VToolOptionsPropertyBrowser::AddPropertyApproximationScale(const QString &p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::AddPropertyOpacity(const QString &propertyName, int opacity)
+{
+    QMap<QString, QVariant> settings
+    {
+        {QStringLiteral("Min"), 0},
+        {QStringLiteral("Max"), 100},
+        {QStringLiteral("Step"), 1},
+        {QStringLiteral("Suffix"), QChar('%')}
+    };
+
+    auto *opacityProperty = new VPE::VIntegerProperty(propertyName, settings);
+    opacityProperty->setValue(opacity);
+    AddProperty(opacityProperty, *AttrOpacity);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
 void VToolOptionsPropertyBrowser::SetName(VPE::VProperty *property)
 {
@@ -806,6 +824,26 @@ void VToolOptionsPropertyBrowser::SetVisible(VPE::VProperty *property)
         }
 
         i->SetVisible(visible);
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetOpacity(VPE::VProperty *property)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        const int opacity = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toInt();
+        if (VFuzzyComparePossibleNulls(opacity, i->GetOpacity()))
+        {
+            return;
+        }
+
+        i->SetOpacity(opacity/100.);
     }
     else
     {
@@ -2612,7 +2650,7 @@ void VToolOptionsPropertyBrowser::ChangeDataBackgroundPixmapItem(VPE::VProperty 
 {
     SCASSERT(property != nullptr)
 
-    const QString id = propertyToId[property];
+    const QString id = propertyToId.value(property);
 
     switch (PropertiesList().indexOf(id))
     {
@@ -2625,6 +2663,9 @@ void VToolOptionsPropertyBrowser::ChangeDataBackgroundPixmapItem(VPE::VProperty 
         case 66: // AttrVisible
             SetVisible<VBackgroundPixmapItem>(property);
             break;
+        case 67: // AttrOpacity
+            SetOpacity<VBackgroundPixmapItem>(property);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2636,7 +2677,7 @@ void VToolOptionsPropertyBrowser::ChangeDataBackgroundSVGItem(VPE::VProperty *pr
 {
     SCASSERT(property != nullptr)
 
-    const QString id = propertyToId[property];
+    const QString id = propertyToId.value(property);
 
     switch (PropertiesList().indexOf(id))
     {
@@ -2648,6 +2689,9 @@ void VToolOptionsPropertyBrowser::ChangeDataBackgroundSVGItem(VPE::VProperty *pr
             break;
         case 66: // AttrVisible
             SetVisible<VBackgroundSVGItem>(property);
+            break;
+        case 67: // AttrOpacity
+            SetOpacity<VBackgroundPixmapItem>(property);
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -3235,6 +3279,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsBackgroundPixmapItem(QGraphicsItem 
     AddPropertyObjectName(i, tr("Name:"), false);
     AddPropertyBool(tr("Hold:"), i->IsHold(), *AttrHold);
     AddPropertyBool(tr("Visible:"), i->IsVisible(), *AttrVisible);
+    AddPropertyOpacity(tr("Opacity:"), static_cast<int>(i->GetOpacity()*100));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3246,6 +3291,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsBackgroundSVGItem(QGraphicsItem *it
     AddPropertyObjectName(i, tr("Name:"), false);
     AddPropertyBool(tr("Hold:"), i->IsHold(), *AttrHold);
     AddPropertyBool(tr("Visible:"), i->IsVisible(), *AttrVisible);
+    AddPropertyOpacity(tr("Opacity:"), static_cast<int>(i->GetOpacity()*100));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4200,6 +4246,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsBackgroundPixmapItem()
     idToProperty.value(AttrName)->setValue(i->name());
     idToProperty.value(*AttrHold)->setValue(i->IsHold());
     idToProperty.value(*AttrVisible)->setValue(i->IsVisible());
+    idToProperty.value(*AttrOpacity)->setValue(static_cast<int>(i->GetOpacity()*100));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4210,6 +4257,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsBackgroundSVGItem()
     idToProperty.value(AttrName)->setValue(i->name());
     idToProperty.value(*AttrHold)->setValue(i->IsHold());
     idToProperty.value(*AttrVisible)->setValue(i->IsVisible());
+    idToProperty.value(*AttrOpacity)->setValue(static_cast<int>(i->GetOpacity()*100));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4282,7 +4330,8 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
         AttrAlias1,                         /* 63 */
         AttrAlias2,                         /* 64 */
         *AttrHold,                          /* 65 */
-        *AttrVisible                        /* 66 */
+        *AttrVisible,                       /* 66 */
+        *AttrOpacity                        /* 67 */
     };
     return attr;
 }

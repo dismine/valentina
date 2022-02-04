@@ -1392,6 +1392,9 @@ void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileNam
     VBackgroundPatternImage image = VBackgroundPatternImage::FromFile(fileName, dialog.BuiltIn());
     image.SetName(dialog.Name());
 
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    image.SetOpacity(settings->GetBackgroundImageDefOpacity()/100.);
+
     QTransform m;
     m.translate(pos.x(), pos.y());
 

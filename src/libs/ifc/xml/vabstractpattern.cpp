@@ -52,6 +52,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vtools/tools/vdatatool.h"
+#include "def.h"
 #include "vpatternconverter.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
@@ -60,6 +61,7 @@
 #include "../vlayout/vtextmanager.h"
 #include "vpatternimage.h"
 #include "vbackgroundpatternimage.h"
+#include "vvalentinasettings.h"
 
 class QDomElement;
 
@@ -2156,6 +2158,10 @@ auto VAbstractPattern::GetBackgroundPatternImage(const QDomElement &element) con
     image.SetZValue(GetParametrUInt(element, AttrZValue, QChar('0')));
     image.SetVisible(GetParametrBool(element, AttrVisible, trueStr));
 
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    image.SetOpacity(GetParametrDouble(element, AttrOpacity,
+                                       QString::number(settings->GetBackgroundImageDefOpacity()/100.)));
+
     QString matrix = GetParametrEmptyString(element, AttrTransform);
     image.SetMatrix(StringToTransfrom(matrix));
 
@@ -2221,6 +2227,8 @@ void VAbstractPattern::WriteBackgroundImage(QDomElement &element, const VBackgro
     SetAttributeOrRemoveIf<bool>(element, AttrHold, image.Hold(), [](bool hold) noexcept {return not hold;});
     SetAttributeOrRemoveIf<qreal>(element, AttrZValue, image.ZValue(), [](qreal z) noexcept {return qFuzzyIsNull(z);});
     SetAttributeOrRemoveIf<bool>(element, AttrVisible, image.Visible(), [](bool visible) noexcept {return visible;});
+    SetAttributeOrRemoveIf<qreal>(element, AttrOpacity, image.Opacity(),
+                                  [](qreal o) noexcept {return VFuzzyComparePossibleNulls(o, 1);});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

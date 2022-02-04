@@ -234,6 +234,9 @@ public:
     auto GetFinalMeasurementsSearchOptionMatchCase() const ->bool;
     void SetFinalMeasurementsSearchOptionMatchCase(bool value);
 
+    auto GetBackgroundImageDefOpacity() const -> int;
+    void SetBackgroundImageDefOpacity(int value);
+
 private:
     Q_DISABLE_COPY(VValentinaSettings)
 

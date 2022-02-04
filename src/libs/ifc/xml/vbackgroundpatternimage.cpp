@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "vbackgroundpatternimage.h"
 
+#include "qglobal.h"
 #include "utils.h"
 #include "../vmisc/compatibility.h"
 
@@ -309,4 +310,16 @@ auto VBackgroundPatternImage::Visible() const -> bool
 void VBackgroundPatternImage::SetVisible(bool newVisible)
 {
     m_visible = newVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBackgroundPatternImage::Opacity() const -> qreal
+{
+    return m_opacity;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBackgroundPatternImage::SetOpacity(qreal newOpacity)
+{
+    m_opacity = qBound(0.0, newOpacity, 1.0);
 }

@@ -400,6 +400,7 @@ signals:
     void BackgroundImageNameChanged(const QUuid &id);
     void BackgroundImagesZValueChanged();
     void BackgroundImagePositionChanged(const QUuid &id);
+    void BackgroundImageOpacityChanged(const QUuid &id);
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;

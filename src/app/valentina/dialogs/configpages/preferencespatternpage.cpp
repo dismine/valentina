@@ -112,6 +112,8 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->checkBoxRemeberPatternMaterials->setChecked(settings->IsRememberPatternMaterials());
     m_knownMaterials = settings->GetKnownMaterials();
 
+    ui->spinBoxOpacity->setValue(settings->GetBackgroundImageDefOpacity());
+
     connect(ui->pushButtonKnownMaterials, &QPushButton::clicked, this, &PreferencesPatternPage::ManageKnownMaterials);
 }
 
@@ -174,6 +176,8 @@ QStringList PreferencesPatternPage::Apply()
 
     settings->SetKnownMaterials(m_knownMaterials);
     settings->SetRememberPatternMaterials(ui->checkBoxRemeberPatternMaterials->isChecked());
+
+    settings->SetBackgroundImageDefOpacity(ui->spinBoxOpacity->value());
 
     return preferences;
 }

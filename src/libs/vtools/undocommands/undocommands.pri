@@ -11,6 +11,7 @@ HEADERS += \
     $$PWD/image/holdallbackgroundimages.h \
     $$PWD/image/holdbackgroundimage.h \
     $$PWD/image/movebackgroundimage.h \
+    $$PWD/image/opaquebackgroundimage.h \
     $$PWD/image/renamebackgroundimage.h \
     $$PWD/image/resetbackgroundimage.h \
     $$PWD/image/rotatebackgroundimage.h \
@@ -50,6 +51,7 @@ SOURCES += \
     $$PWD/image/holdallbackgroundimages.cpp \
     $$PWD/image/holdbackgroundimage.cpp \
     $$PWD/image/movebackgroundimage.cpp \
+    $$PWD/image/opaquebackgroundimage.cpp \
     $$PWD/image/renamebackgroundimage.cpp \
     $$PWD/image/resetbackgroundimage.cpp \
     $$PWD/image/rotatebackgroundimage.cpp \

@@ -93,6 +93,9 @@ public:
     auto Visible() const -> bool;
     void SetVisible(bool newVisible);
 
+    auto Opacity() const -> qreal;
+    void SetOpacity(qreal newOpacity);
+
 private:
     QUuid           m_id{QUuid::createUuid()};
     QString         m_contentType{};
@@ -104,6 +107,7 @@ private:
     QTransform      m_matrix{};
     bool            m_hold{false};
     bool            m_visible{true};
+    qreal           m_opacity{1.0};
 };
 
 #endif // VBACKGROUNDPATTERNIMAGE_H

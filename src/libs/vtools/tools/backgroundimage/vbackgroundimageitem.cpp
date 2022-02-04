@@ -38,6 +38,7 @@
 #include "../../undocommands/image/renamebackgroundimage.h"
 #include "../../undocommands/image/hidebackgroundimage.h"
 #include "../../undocommands/image/resetbackgroundimage.h"
+#include "../../undocommands/image/opaquebackgroundimage.h"
 #include "../toolsdef.h"
 
 #include <QUndoStack>
@@ -69,6 +70,7 @@ VBackgroundImageItem::VBackgroundImageItem(const VBackgroundPatternImage &image,
             &VBackgroundImageItem::UpdateVisibilityState);
     connect(doc, &VAbstractPattern::BackgroundImagesZValueChanged, this, &VBackgroundImageItem::ZValueChanged);
     connect(doc, &VAbstractPattern::BackgroundImagePositionChanged, this, &VBackgroundImageItem::PositionChanged);
+    connect(doc, &VAbstractPattern::BackgroundImageOpacityChanged, this, &VBackgroundImageItem::OpacityChanged);
 
     InitImage();
 }
@@ -128,6 +130,18 @@ auto VBackgroundImageItem::IsVisible() const -> bool
 void VBackgroundImageItem::SetVisible(bool visible)
 {
     VAbstractApplication::VApp()->getUndoStack()->push(new HideBackgroundImage(m_image.Id(), not visible, m_doc));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBackgroundImageItem::GetOpacity() const -> qreal
+{
+    return m_image.Opacity();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBackgroundImageItem::SetOpacity(qreal opacity)
+{
+    VAbstractApplication::VApp()->getUndoStack()->push(new OpaqueBackgroundImage(m_image.Id(), opacity, m_doc));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,6 +208,18 @@ void VBackgroundImageItem::HoldChanged(QUuid id)
     }
 
     UpdateHoldState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBackgroundImageItem::OpacityChanged(const QUuid &id)
+{
+    if (m_image.Id() != id)
+    {
+        return;
+    }
+
+    m_image = m_doc->GetBackgroundImage(m_image.Id());
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

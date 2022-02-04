@@ -74,6 +74,7 @@
                       <xs:attribute name="hold" type="xs:boolean"/>
                       <xs:attribute name="visible" type="xs:boolean"/>
                       <xs:attribute name="zValue" type="xs:unsignedInt"/>
+                      <xs:attribute name="opacity" type="xs:double"/>
                     </xs:extension>
                   </xs:simpleContent>      
                 </xs:complexType>

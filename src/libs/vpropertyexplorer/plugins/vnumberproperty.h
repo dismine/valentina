@@ -21,14 +21,11 @@
 #ifndef VNUMBERPROPERTY_H
 #define VNUMBERPROPERTY_H
 
-#include <qcompilerdetection.h>
-#include <stddef.h>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QtGlobal>
 
@@ -44,7 +41,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 //! Class for holding an integer property
 class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
@@ -55,51 +52,55 @@ public:
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate) override;
+    auto createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+                      const QAbstractItemDelegate* delegate) -> QWidget* override;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const override;
+    auto getEditorData(const QWidget* editor) const -> QVariant override;
 
     //! Sets the settings. Available settings:
     //!
     //! key: "Min" - value: Minimum number as integer
     //! key: "Max" - value: Maximum number as integer
-    virtual void setSetting(const QString& key, const QVariant& value) override;
+    //! key: "Step" - value: Increment step
+    //! key: "Suffix" - value: Editor's suffix
+    void setSetting(const QString& key, const QVariant& value) override;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const override;
+    auto getSetting(const QString& key) const -> QVariant override;
 
     //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const override;
+    auto getSettingKeys() const -> QStringList override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
-                                               VProperty* container = nullptr) const override;
+    Q_REQUIRED_RESULT auto clone(bool include_children = true,
+                                 VProperty* container = nullptr) const -> VProperty* override;
 public slots:
     void valueChanged(int i);
-protected:
-    double minValue, maxValue, singleStep;
+private:
+    Q_DISABLE_COPY(VIntegerProperty) // NOLINT
+
+    double m_minValue;
+    double m_maxValue;
+    double m_singleStep;
+    QString m_suffix{};
 
     static const int StandardMin;// = -1000000;
     static const int StandardMax;// = 1000000;
-
-private:
-    Q_DISABLE_COPY(VIntegerProperty)
 };
 
 
 //! Class for holding a double property
-class VPROPERTYEXPLORERSHARED_EXPORT VDoubleProperty : public VIntegerProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VDoubleProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
@@ -110,46 +111,58 @@ public:
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate) override;
+    auto createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+                      const QAbstractItemDelegate* delegate) -> QWidget* override;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const override;
+    auto getEditorData(const QWidget* editor) const -> QVariant override;
 
     //! Sets the settings. Available settings:
     //!
     //! key: "Min" - value: Minimum number as integer
     //! key: "Max" - value: Maximum number as integer
-    virtual void setSetting(const QString& key, const QVariant& value) override;
+    //! key: "Step" - value: Increment step
+    //! key: "Suffix" - value: Editor's suffix
+    //! key: "Precision" - value: Number of decimals after the decimal point
+    void setSetting(const QString& key, const QVariant& value) override;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const override;
+    auto getSetting(const QString& key) const -> QVariant override;
 
     //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const override;
+    auto getSettingKeys() const -> QStringList override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const override;
+    auto clone(bool include_children = true, VProperty* container = nullptr) const -> VProperty* override;
 
-protected:
-    //! Number of decimals after the decimal point
-    int Precision;
-
-    const static double StandardPrecision;// = 5;
+public slots:
+    void valueChanged(int i);
 
 private:
     Q_DISABLE_COPY(VDoubleProperty)
+
+    double m_minValue;
+    double m_maxValue;
+    double m_singleStep;
+    QString m_suffix{};
+
+    //! Number of decimals after the decimal point
+    int m_precision;
+
+    static const int StandardMin;// = -1000000;
+    static const int StandardMax;// = 1000000;
+    const static double StandardPrecision;// = 5;
 };
 
 QT_WARNING_POP
 
-}
+}  // namespace VPE
 
 #endif // VNUMBERPROPERTY_H

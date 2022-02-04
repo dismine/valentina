@@ -67,6 +67,7 @@ void VBackgroundSVGItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     painter->save();
     painter->setTransform(Image().Matrix(), true);
+    painter->setOpacity(Image().Opacity());
 
     renderer->render(painter, QRectF(QPointF(0, 0), renderer->defaultSize()));
 

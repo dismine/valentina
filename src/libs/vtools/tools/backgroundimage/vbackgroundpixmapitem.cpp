@@ -93,6 +93,7 @@ void VBackgroundPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsI
 
     painter->save();
     painter->setTransform(Image().Matrix(), true);
+    painter->setOpacity(Image().Opacity());
 
     painter->drawPixmap(QPointF(), Pixmap());
 
