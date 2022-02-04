@@ -332,7 +332,7 @@ auto VYMeasurementDimension::RangeMin() const -> int
     }
     else
     {
-        const int rangeMinCir = 6;
+        const int rangeMinCir = 1;
         return rangeMinCir;
     }
 }
@@ -360,7 +360,7 @@ auto VYMeasurementDimension::RangeMax() const -> int
     }
     else
     {
-        const int rangeMaxCir = 60;
+        const int rangeMaxCir = 100;
         return rangeMaxCir;
     }
 }
