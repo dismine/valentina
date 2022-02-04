@@ -27,9 +27,9 @@
  *************************************************************************/
 #include "vbackgroundpatternimage.h"
 
-#include "qglobal.h"
 #include "utils.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/defglobal.h"
 
 #include <QMimeType>
 #include <QDebug>
@@ -39,6 +39,7 @@
 #include <QBuffer>
 #include <QImageReader>
 #include <ciso646>
+#include <QSvgRenderer>
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) -> VBackgroundPatternImage
@@ -90,6 +91,7 @@ void VBackgroundPatternImage::SetContentData(const QByteArray &newContentData, c
     m_contentData = newContentData;
     m_contentType = newContentType;
     m_filePath.clear();
+    m_size = QSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,6 +183,7 @@ void VBackgroundPatternImage::SetFilePath(const QString &newFilePath)
     m_filePath = newFilePath;
     m_contentData.clear();
     m_contentType.clear();
+    m_size = QSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,21 +242,66 @@ auto VBackgroundPatternImage::Size() const -> QSize
         return {};
     }
 
-    if (not m_filePath.isEmpty())
+    if (not m_size.isValid())
     {
-        return QImageReader(m_filePath).size();
+        auto ScaleRasterImage = [](QImageReader &imageReader)
+        {
+            const QImage image = imageReader.read();
+            const double ratioX = PrintDPI / (image.dotsPerMeterX() / 100. * 2.54);
+            const double ratioY = PrintDPI / (image.dotsPerMeterY() / 100. * 2.54);
+            const QSize imageSize = image.size();
+            return QSize(qRound(imageSize.width()*ratioX), qRound(imageSize.height()*ratioY));
+        };
+
+        auto ScaleVectorImage = [](const QSvgRenderer &renderer)
+        {
+            const QSize imageSize = renderer.defaultSize();
+            constexpr double ratio = PrintDPI / 90.;
+            return QSize(qRound(imageSize.width()*ratio), qRound(imageSize.height()*ratio));
+        };
+
+        if (not m_filePath.isEmpty())
+        {
+            if (Type() == PatternImage::Raster)
+            {
+                QImageReader imageReader(m_filePath);
+                m_size = ScaleRasterImage(imageReader);
+                return m_size;
+            }
+
+            if (Type() == PatternImage::Vector)
+            {
+                QSvgRenderer renderer;
+                renderer.load(m_filePath);
+                m_size = ScaleVectorImage(renderer);
+                return m_size;
+            }
+        }
+
+        if (not m_contentData.isEmpty())
+        {
+            QByteArray array = QByteArray::fromBase64(m_contentData);
+
+            if (Type() == PatternImage::Raster)
+            {
+                QBuffer buffer(&array);
+                buffer.open(QIODevice::ReadOnly);
+                QImageReader imageReader(&buffer);
+                m_size = ScaleRasterImage(imageReader);
+                return m_size;
+            }
+
+            if (Type() == PatternImage::Vector)
+            {
+                QSvgRenderer renderer;
+                renderer.load(array);
+                m_size = ScaleVectorImage(renderer);
+                return m_size;
+            }
+        }
     }
 
-    if (not m_contentData.isEmpty())
-    {
-        QByteArray array = QByteArray::fromBase64(m_contentData);
-        QBuffer buffer(&array);
-        buffer.open(QIODevice::ReadOnly);
-
-        return QImageReader(&buffer).size();
-    }
-
-    return {};
+    return m_size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -213,11 +213,30 @@ auto VBackgroundPixmapItem::Pixmap() const -> QPixmap
             return m_pixmap;
         }
 
+        // Scale to Valentina resolution
+        auto ScaleImage = [](const QImage &image)
+        {
+            const double ratioX = PrintDPI / (image.dotsPerMeterX() / 100. * 2.54);
+            const double ratioY = PrintDPI / (image.dotsPerMeterY() / 100. * 2.54);
+            const QSize imageSize = image.size();
+            return image.scaled(qRound(imageSize.width()*ratioX),
+                                qRound(imageSize.height()*ratioY),
+                                Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        };
+
         if (not image.FilePath().isEmpty())
         {
             QImageReader imageReader(image.FilePath());
-            m_pixmap = QPixmap::fromImageReader(&imageReader);
-            if (m_pixmap.isNull())
+            QImage image = imageReader.read();
+            if (not image.isNull())
+            {
+                m_pixmap = QPixmap::fromImage(ScaleImage(image));
+                if (m_pixmap.isNull())
+                {
+                    m_pixmap = InvalidImage();
+                }
+            }
+            else
             {
                 m_pixmap = InvalidImage();
             }
@@ -232,8 +251,16 @@ auto VBackgroundPixmapItem::Pixmap() const -> QPixmap
             buffer.open(QIODevice::ReadOnly);
 
             QImageReader imageReader(&buffer);
-            m_pixmap = QPixmap::fromImageReader(&imageReader);
-            if (m_pixmap.isNull())
+            QImage image = imageReader.read();
+            if (not image.isNull())
+            {
+                m_pixmap = QPixmap::fromImage(ScaleImage(image));
+                if (m_pixmap.isNull())
+                {
+                    m_pixmap = InvalidImage();
+                }
+            }
+            else
             {
                 m_pixmap = InvalidImage();
             }

@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vbackgroundsvgitem.h"
+#include <QSize>
 
 #include <QStyleOptionGraphicsItem>
 #include <QSvgRenderer>
@@ -52,7 +53,10 @@ VBackgroundSVGItem::~VBackgroundSVGItem()
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundSVGItem::boundingRect() const -> QRectF
 {
-    return Image().Matrix().mapRect(QRectF(QPointF(0, 0), Renderer()->defaultSize()));
+    QSize size = Renderer()->defaultSize();
+    constexpr double ratio = PrintDPI / 90.;
+    size = QSize(qRound(size.width()*ratio), qRound(size.height()*ratio));
+    return Image().Matrix().mapRect(QRectF(QPointF(0, 0), size));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,6 +72,7 @@ void VBackgroundSVGItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     painter->save();
     painter->setTransform(Image().Matrix(), true);
     painter->setOpacity(Image().Opacity());
+    painter->scale(PrintDPI / 90., PrintDPI / 90.);
 
     renderer->render(painter, QRectF(QPointF(0, 0), renderer->defaultSize()));
 

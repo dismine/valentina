@@ -47,7 +47,7 @@ enum class PatternImage
 
 class VBackgroundPatternImage
 {
-    Q_DECLARE_TR_FUNCTIONS(VBackgroundPatternImage)
+    Q_DECLARE_TR_FUNCTIONS(VBackgroundPatternImage) // NOLINT
 public:
     VBackgroundPatternImage() = default;
 
@@ -79,7 +79,6 @@ public:
     void SetId(const QUuid &newId);
 
     auto Size() const -> QSize;
-    void SetSize(const QSize &newSize);
 
     auto ErrorString() const -> const QString &;
 
@@ -108,6 +107,7 @@ private:
     bool            m_hold{false};
     bool            m_visible{true};
     qreal           m_opacity{1.0};
+    mutable QSize   m_size{};
 };
 
 #endif // VBACKGROUNDPATTERNIMAGE_H
