@@ -72,7 +72,6 @@ VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
     this->m_lineType = initData.typeLine;
     //Line
     RefreshGeometry();
-    this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(m_acceptHoverEvents);
 
