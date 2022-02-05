@@ -92,6 +92,7 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 
         // The same point, but different modeling objects
         if (firstPoint->getIdObject() != NULL_ID && secondPoint->getIdObject() != NULL_ID &&
+                firstPoint->getMode() == Draw::Modeling && secondPoint->getMode() == Draw::Modeling &&
                 firstPoint->getIdObject() == secondPoint->getIdObject())
         {
             error = QObject::tr("Point '%1' repeats twice").arg(firstPoint->name());
