@@ -271,13 +271,18 @@ enum class Vis : ToolVisHolderType
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
-enum class VarType : qint8 { Measurement, Increment, IncrementSeparator, LineLength, CurveLength, CurveCLength,
-                             LineAngle, CurveAngle, ArcRadius, Unknown };
+enum class VarType : qint8 { Measurement, MeasurementSeparator, Increment, IncrementSeparator, LineLength, CurveLength,
+                             CurveCLength, LineAngle, CurveAngle, ArcRadius, Unknown };
 
 enum class IncrementType : qint8 { Increment, Separator };
 
-QString       IncrementTypeToString(IncrementType type);
-IncrementType StringToIncrementType(const QString &value);
+auto IncrementTypeToString(IncrementType type) -> QString;
+auto StringToIncrementType(const QString &value) -> IncrementType;
+
+enum class MeasurementType : qint8 { Measurement, Separator };
+
+auto MeasurementTypeToString(MeasurementType type) -> QString;
+auto StringToMeasurementType(const QString &value) -> MeasurementType;
 
 enum class IMD: qint8 // Individual measurement dimension
 {
@@ -465,6 +470,7 @@ extern const QString strIntersection2OnlyLeft;
 extern const QString strIntersection2OnlyRight;
 extern const QString strTypeIncrement;
 extern const QString strTypeSeparator;
+extern const QString strTypeMeasurement;
 
 extern const QString unitMM;
 extern const QString unitCM;

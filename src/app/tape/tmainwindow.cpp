@@ -1448,6 +1448,36 @@ void TMainWindow::AddKnown()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AddSeparator()
+{
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
+
+    if (ui->tableWidget->currentRow() == -1)
+    {
+        currentRow  = ui->tableWidget->rowCount();
+        m->AddSeparator(name);
+    }
+    else
+    {
+        currentRow  = ui->tableWidget->currentRow()+1;
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+        m->AddSeparatorAfter(nameField->data(Qt::UserRole).toString(), name);
+    }
+
+    m_search->AddRow(currentRow);
+    RefreshData();
+    m_search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->selectRow(currentRow);
+
+    ui->actionExportToCSV->setEnabled(true);
+
+    MeasurementsWereSaved(false);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ImportFromPattern()
 {
     if (m == nullptr)
@@ -1613,6 +1643,9 @@ void TMainWindow::ShowNewMData(bool fresh)
 
         ShowMDiagram(meash->GetName());
 
+        ui->labelFullName->setVisible(meash->GetType() == VarType::Measurement);
+        ui->lineEditFullName->setVisible(meash->GetType() == VarType::Measurement);
+
         // Don't block all signal for QLineEdit. Need for correct handle with clear button.
         disconnect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(true);
@@ -1633,6 +1666,9 @@ void TMainWindow::ShowNewMData(bool fresh)
         connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
 
+        ui->labelMUnits->setVisible(meash->GetType() == VarType::Measurement);
+        ui->comboBoxMUnits->setVisible(meash->GetType() == VarType::Measurement);
+
         ui->comboBoxMUnits->blockSignals(true);
         ui->comboBoxMUnits->setCurrentIndex(
             ui->comboBoxMUnits->findData(static_cast<int>(meash->IsSpecialUnits() ? MUnits::Degrees : MUnits::Table)));
@@ -1640,6 +1676,32 @@ void TMainWindow::ShowNewMData(bool fresh)
 
         if (mType == MeasurementsType::Multisize)
         {
+            ui->labelCalculated->setVisible(meash->GetType() == VarType::Measurement);
+            ui->labelCalculatedValue->setVisible(meash->GetType() == VarType::Measurement);
+
+            ui->labelBaseValue->setVisible(meash->GetType() == VarType::Measurement);
+            ui->doubleSpinBoxBaseValue->setVisible(meash->GetType() == VarType::Measurement);
+
+            ui->labelCorrection->setVisible(meash->GetType() == VarType::Measurement);
+            ui->doubleSpinBoxCorrection->setVisible(meash->GetType() == VarType::Measurement);
+
+            ui->labelShiftA->setVisible(meash->GetType() == VarType::Measurement);
+            ui->doubleSpinBoxShiftA->setVisible(meash->GetType() == VarType::Measurement);
+
+            const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+            if (dimensions.size() > 1)
+            {
+                ui->labelShiftB->setVisible(meash->GetType() == VarType::Measurement);
+                ui->doubleSpinBoxShiftB->setVisible(meash->GetType() == VarType::Measurement);
+            }
+
+            if (dimensions.size() > 2)
+            {
+                ui->labelShiftC->setVisible(meash->GetType() == VarType::Measurement);
+                ui->doubleSpinBoxShiftC->setVisible(meash->GetType() == VarType::Measurement);
+            }
+
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
             ui->doubleSpinBoxCorrection->blockSignals(true);
@@ -1683,6 +1745,17 @@ void TMainWindow::ShowNewMData(bool fresh)
         }
         else
         {
+            ui->labelCalculated->setVisible(meash->GetType() == VarType::Measurement);
+            ui->labelCalculatedValue->setVisible(meash->GetType() == VarType::Measurement);
+
+            ui->labelFormula->setVisible(meash->GetType() == VarType::Measurement);
+            ui->plainTextEditFormula->setVisible(meash->GetType() == VarType::Measurement);
+            ui->pushButtonGrow->setVisible(meash->GetType() == VarType::Measurement);
+            ui->toolButtonExpr->setVisible(meash->GetType() == VarType::Measurement);
+
+            ui->labelDimension->setVisible(meash->GetType() == VarType::Measurement);
+            ui->comboBoxDimension->setVisible(meash->GetType() == VarType::Measurement);
+
             EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue,
                         meash->IsSpecialUnits());
 
@@ -2408,6 +2481,7 @@ void TMainWindow::SetupMenu()
     // Measurements
     connect(ui->actionAddCustom, &QAction::triggered, this, &TMainWindow::AddCustom);
     connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
+    connect(ui->actionAddSeparator, &QAction::triggered, this, &TMainWindow::AddSeparator);
     connect(ui->actionDatabase, &QAction::triggered, MApplication::VApp(), &MApplication::ShowDataBase);
     connect(ui->actionImportFromPattern, &QAction::triggered, this, &TMainWindow::ImportFromPattern);
 
@@ -2564,6 +2638,7 @@ void TMainWindow::InitWindow()
 
     ui->actionAddCustom->setEnabled(true);
     ui->actionAddKnown->setEnabled(true);
+    ui->actionAddSeparator->setEnabled(true);
     ui->actionImportFromPattern->setEnabled(true);
     ui->actionSaveAs->setEnabled(true);
 
@@ -3027,12 +3102,24 @@ QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QTableWidgetItem *TMainWindow::AddSeparatorCell(const QString &text, int row, int column, int aligment, bool ok)
+{
+    QTableWidgetItem *item = AddCell(text, row, column, aligment, ok);
+
+    QFont itemFont = item->font();
+    itemFont.setBold(true);
+    itemFont.setItalic(true);
+    item->setFont(itemFont);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData(bool freshCall)
 {
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
     data->ClearUniqueNames();
-    data->ClearVariables(VarType::Measurement);
+    data->ClearVariables({VarType::Measurement, VarType::MeasurementSeparator});
     m->ReadMeasurements(currentDimensionA, currentDimensionB, currentDimensionC);
 
     RefreshTable(freshCall);
@@ -3057,87 +3144,107 @@ void TMainWindow::RefreshTable(bool freshCall)
         const QSharedPointer<VMeasurement> &meash = iMap.value();
         currentRow++;
 
-        if (mType == MeasurementsType::Individual)
+        if (meash->GetType() == VarType::Measurement)
+        {
+            if (mType == MeasurementsType::Individual)
+            {
+                QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()),
+                                                 currentRow, ColumnName, Qt::AlignVCenter); // name
+                item->setData(Qt::UserRole, meash->GetName());
+
+                if (meash->IsCustom())
+                {
+                    AddCell(meash->GetGuiText(), currentRow, ColumnFullName, Qt::AlignVCenter);
+                }
+                else
+                {
+                    AddCell(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()), currentRow,
+                            ColumnFullName, Qt::AlignVCenter);
+                }
+
+                QString calculatedValue;
+                if (meash->IsSpecialUnits())
+                {
+                    calculatedValue = locale().toString(*meash->GetValue()) + degreeSymbol;
+                }
+                else
+                {
+                    calculatedValue = locale().toString(UnitConvertor(*meash->GetValue(), mUnit, pUnit));
+                }
+
+                AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
+                        meash->IsFormulaOk()); // calculated value
+
+                QString formula =
+                        VTranslateVars::TryFormulaToUser(meash->GetFormula(),
+                                                         VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+
+                AddCell(formula, currentRow, ColumnFormula, Qt::AlignVCenter); // formula
+            }
+            else
+            {
+                QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()),
+                                                 currentRow, 0, Qt::AlignVCenter); // name
+                item->setData(Qt::UserRole, meash->GetName());
+
+                if (meash->IsCustom())
+                {
+                    AddCell(meash->GetGuiText(), currentRow, ColumnFullName, Qt::AlignVCenter);
+                }
+                else
+                {
+                    AddCell(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()), currentRow,
+                            ColumnFullName, Qt::AlignVCenter);
+                }
+
+                QString calculatedValue;
+                if (meash->IsSpecialUnits())
+                {
+                    const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
+                    calculatedValue = locale().toString(value) + degreeSymbol;
+                }
+                else
+                {
+                    const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(),
+                                                      mUnit, pUnit);
+                    calculatedValue = locale().toString(value);
+                }
+
+                AddCell(calculatedValue, currentRow, ColumnCalcValue,
+                        Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
+
+                AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
+                        Qt::AlignHCenter | Qt::AlignVCenter); // base value
+
+                AddCell(locale().toString(meash->GetShiftA()), currentRow, ColumnShiftA,
+                        Qt::AlignHCenter | Qt::AlignVCenter);
+
+                AddCell(locale().toString(meash->GetShiftB()), currentRow, ColumnShiftB,
+                        Qt::AlignHCenter | Qt::AlignVCenter);
+
+                AddCell(locale().toString(meash->GetShiftC()), currentRow, ColumnShiftC,
+                        Qt::AlignHCenter | Qt::AlignVCenter);
+
+                AddCell(locale()
+                        .toString(meash->GetCorrection(currentDimensionA, currentDimensionB, currentDimensionC)),
+                        currentRow, ColumnCorrection, Qt::AlignHCenter | Qt::AlignVCenter);
+            }
+        }
+        else if (meash->GetType() == VarType::MeasurementSeparator)
         {
             QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()),
                                              currentRow, ColumnName, Qt::AlignVCenter); // name
             item->setData(Qt::UserRole, meash->GetName());
+            AddSeparatorCell(meash->GetDescription(), currentRow, ColumnFullName, Qt::AlignVCenter); // description
 
-            if (meash->IsCustom())
+            if (mType == MeasurementsType::Individual)
             {
-                AddCell(meash->GetGuiText(), currentRow, ColumnFullName, Qt::AlignVCenter);
+                ui->tableWidget->setSpan(currentRow, 1, 1, 3);
             }
-            else
+            else if (mType == MeasurementsType::Multisize)
             {
-                AddCell(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName,
-                        Qt::AlignVCenter);
+                ui->tableWidget->setSpan(currentRow, 1, 1, 8);
             }
-
-            QString calculatedValue;
-            if (meash->IsSpecialUnits())
-            {
-                calculatedValue = locale().toString(*meash->GetValue()) + degreeSymbol;
-            }
-            else
-            {
-                calculatedValue = locale().toString(UnitConvertor(*meash->GetValue(), mUnit, pUnit));
-            }
-
-            AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
-                    meash->IsFormulaOk()); // calculated value
-
-            QString formula =
-                    VTranslateVars::TryFormulaToUser(meash->GetFormula(),
-                                                     VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-
-            AddCell(formula, currentRow, ColumnFormula, Qt::AlignVCenter); // formula
-        }
-        else
-        {
-            QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()),
-                                             currentRow, 0, Qt::AlignVCenter); // name
-            item->setData(Qt::UserRole, meash->GetName());
-
-            if (meash->IsCustom())
-            {
-                AddCell(meash->GetGuiText(), currentRow, ColumnFullName, Qt::AlignVCenter);
-            }
-            else
-            {
-                AddCell(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName,
-                        Qt::AlignVCenter);
-            }
-
-            QString calculatedValue;
-            if (meash->IsSpecialUnits())
-            {
-                const qreal value = *data->DataVariables()->value(meash->GetName())->GetValue();
-                calculatedValue = locale().toString(value) + degreeSymbol;
-            }
-            else
-            {
-                const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
-                                                  pUnit);
-                calculatedValue = locale().toString(value);
-            }
-
-            AddCell(calculatedValue, currentRow, ColumnCalcValue,
-                    Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
-
-            AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
-                    Qt::AlignHCenter | Qt::AlignVCenter); // base value
-
-            AddCell(locale().toString(meash->GetShiftA()), currentRow, ColumnShiftA,
-                    Qt::AlignHCenter | Qt::AlignVCenter);
-
-            AddCell(locale().toString(meash->GetShiftB()), currentRow, ColumnShiftB,
-                    Qt::AlignHCenter | Qt::AlignVCenter);
-
-            AddCell(locale().toString(meash->GetShiftC()), currentRow, ColumnShiftC,
-                    Qt::AlignHCenter | Qt::AlignVCenter);
-
-            AddCell(locale().toString(meash->GetCorrection(currentDimensionA, currentDimensionB, currentDimensionC)),
-                    currentRow, ColumnCorrection, Qt::AlignHCenter | Qt::AlignVCenter);
         }
     }
 
@@ -4172,7 +4279,7 @@ QVector<qreal> TMainWindow::DimensionRestrictedValues(int index, const Measureme
 //---------------------------------------------------------------------------------------------------------------------
 QMap<int, QSharedPointer<VMeasurement> > TMainWindow::OrderedMeasurments() const
 {
-    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
+    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurementsWithSeparators();
     QMap<int, QSharedPointer<VMeasurement> > orderedTable;
     QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
     for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)

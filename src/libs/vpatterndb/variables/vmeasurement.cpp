@@ -37,6 +37,15 @@
 #include "vmeasurement_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+VMeasurement::VMeasurement(quint32 index, const QString &name)
+    :VVariable(name),
+     d(new VMeasurementData(index, MeasurementType::Separator))
+{
+    SetType(VarType::MeasurementSeparator);
+    VInternalVariable::SetValue(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for multisize table
  * @param name measurement's name
@@ -183,6 +192,12 @@ int VMeasurement::Index() const
 bool VMeasurement::IsFormulaOk() const
 {
     return d->formulaOk;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+MeasurementType VMeasurement::GetMeasurementType() const
+{
+    return d->varType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

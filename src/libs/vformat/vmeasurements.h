@@ -61,6 +61,8 @@ public:
 
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
+    void AddSeparator(const QString &name);
+    void AddSeparatorAfter(const QString &after, const QString &name);
     void Remove(const QString &name);
     void MoveTop(const QString &name);
     void MoveUp(const QString &name);
@@ -219,7 +221,7 @@ private:
 
     qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;
 
-    QDomElement MakeEmpty(const QString &name, const QString &formula);
+    QDomElement MakeEmpty(const QString &name, const QString &formula, MeasurementType varType);
     QDomElement FindM(const QString &name) const;
     MeasurementsType ReadType() const;
     auto ReadUnits() const -> Unit;

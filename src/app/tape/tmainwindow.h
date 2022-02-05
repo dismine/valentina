@@ -111,6 +111,7 @@ private slots:
 
     void AddCustom();
     void AddKnown();
+    void AddSeparator();
     void ImportFromPattern();
 
     void DimensionABaseChanged();
@@ -210,6 +211,7 @@ private:
     bool MaybeSave();
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
+    QTableWidgetItem* AddSeparatorCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
     void RefreshData(bool freshCall = false);
     void RefreshTable(bool freshCall = false);

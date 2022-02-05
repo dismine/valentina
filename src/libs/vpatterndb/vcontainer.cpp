@@ -393,7 +393,7 @@ void VContainer::ClearForFullParse()
 
     d->pieces->clear();
     d->piecePaths->clear();
-    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 9, "Check that you used all types");
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 10, "Check that you used all types");
     ClearVariables(QVector<VarType>({VarType::Increment,
                                      VarType::IncrementSeparator,
                                      VarType::LineAngle,
@@ -576,6 +576,22 @@ void VContainer::RemoveIncrement(const QString &name)
 const QMap<QString, QSharedPointer<VMeasurement> > VContainer::DataMeasurements() const
 {
     return DataVar<VMeasurement>(VarType::Measurement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, QSharedPointer<VMeasurement> > VContainer::DataMeasurementsWithSeparators() const
+{
+    QMap<QString, QSharedPointer<VMeasurement> > measurements = DataVar<VMeasurement>(VarType::Measurement);
+    QMap<QString, QSharedPointer<VMeasurement> > separators = DataVar<VMeasurement>(VarType::MeasurementSeparator);
+
+    QMap<QString, QSharedPointer<VMeasurement>>::const_iterator i = separators.constBegin();
+    while (i != separators.constEnd())
+    {
+        measurements.insert(i.key(), i.value());
+        ++i;
+    }
+
+    return measurements;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

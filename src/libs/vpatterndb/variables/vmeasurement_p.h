@@ -42,6 +42,11 @@ class VMeasurementData final : public QSharedData
 {
 public:
 
+    explicit VMeasurementData(quint32 index, MeasurementType varType)
+        : index(index),
+          varType(varType)
+    {}
+
     VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base)
         : index(index),
           shiftBase(base),
@@ -80,7 +85,8 @@ public:
           baseC(m.baseC),
           corrections(m.corrections),
           specialUnits(m.specialUnits),
-          dimension(m.dimension)
+          dimension(m.dimension),
+          varType(m.varType)
     {}
 
     virtual  ~VMeasurementData();
@@ -114,6 +120,8 @@ public:
     bool specialUnits{false};
 
     IMD dimension{IMD::N};
+
+    MeasurementType varType{MeasurementType::Measurement};
 
 private:
     Q_DISABLE_ASSIGN(VMeasurementData)

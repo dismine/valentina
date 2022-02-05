@@ -50,6 +50,7 @@ class VMeasurementData;
 class VMeasurement final :public VVariable
 {
 public:
+    VMeasurement(quint32 index, const QString &name);
     VMeasurement(quint32 index, const QString &name, qreal baseA, qreal baseB, qreal baseC, qreal base);
     VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base, const QString &formula,
                  bool ok);
@@ -72,6 +73,8 @@ public:
 
     int     Index() const;
     bool    IsFormulaOk() const;
+
+    MeasurementType GetMeasurementType() const;
 
     virtual bool IsNotUsed() const override;
 

@@ -473,6 +473,7 @@ const QString strIntersection2OnlyLeft  = QStringLiteral("intersection2Left");
 const QString strIntersection2OnlyRight = QStringLiteral("intersection2Right");
 const QString strTypeIncrement          = QStringLiteral("increment");
 const QString strTypeSeparator          = QStringLiteral("separator");
+const QString strTypeMeasurement        = QStringLiteral("measurement");
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkAngleTypeToString(PassmarkAngleType type)
@@ -742,6 +743,39 @@ IncrementType StringToIncrementType(const QString &value)
             break;
     }
     return IncrementType::Increment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MeasurementTypeToString(MeasurementType type)
+{
+    switch(type)
+    {
+        case MeasurementType::Measurement:
+            return strTypeMeasurement;
+        case MeasurementType::Separator:
+            return strTypeSeparator;
+        default:
+            break;
+    }
+
+    return strTypeIncrement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+MeasurementType StringToMeasurementType(const QString &value)
+{
+    const QStringList values { strTypeMeasurement, strTypeSeparator };
+
+    switch(values.indexOf(value))
+    {
+        case 0:
+            return MeasurementType::Measurement;
+        case 1:
+            return MeasurementType::Separator;
+        default:
+            break;
+    }
+    return MeasurementType::Measurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

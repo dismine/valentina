@@ -478,7 +478,7 @@ void VPattern::LiteParseIncrements()
 
         data->ClearUniqueIncrementNames();
 
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 9, "Check that you used all types");
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 10, "Check that you used all types");
         data->ClearVariables(VarType::Increment);
         data->ClearVariables(VarType::IncrementSeparator);
 
@@ -4370,7 +4370,7 @@ void VPattern::PrepareForParse(const Document &parse)
     }
     else if (parse == Document::LiteParse || parse == Document::FullLiteParse)
     {
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 9, "Check that you used all types");
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 10, "Check that you used all types");
         QVector<VarType> types({VarType::LineAngle,
                                 VarType::LineLength,
                                 VarType::CurveLength,

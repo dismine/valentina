@@ -565,7 +565,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         ToolBarOption();
         SetDimensionBases();
-        pattern->ClearVariables(VarType::Measurement);
+        pattern->ClearVariables({VarType::Measurement, VarType::MeasurementSeparator});
         m->StoreNames(false);
         m->ReadMeasurements(m_currentDimensionA, m_currentDimensionB, m_currentDimensionC);
     }
@@ -607,7 +607,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
 
     try
     {
-        pattern->ClearVariables(VarType::Measurement);
+        pattern->ClearVariables({VarType::Measurement, VarType::MeasurementSeparator});
 
         if (not m->Dimensions().isEmpty())
         {

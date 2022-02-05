@@ -200,6 +200,7 @@ public:
     const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
 
     const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurements() const;
+    const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurementsWithSeparators() const;
     const QMap<QString, QSharedPointer<VIncrement> >    DataIncrements() const;
     const QMap<QString, QSharedPointer<VIncrement> >    DataIncrementsWithSeparators() const;
     const QMap<QString, QSharedPointer<VLengthLine> >   DataLengthLines() const;

@@ -87,7 +87,7 @@ VPatternRecipe::VPatternRecipe(VAbstractPattern *pattern, QObject *parent)
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
     recipeElement.appendChild(createComment(FileComment()));
-    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.3.0"));
+    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.3.1"));
 
     recipeElement.appendChild(Prerequisite());
     recipeElement.appendChild(Content());
@@ -135,7 +135,7 @@ QDomElement VPatternRecipe::Measurements()
     QDomElement measurements = createElement(QStringLiteral("measurements"));
 
     VContainer data = m_pattern->GetCompleteData();
-    QList<QSharedPointer<VMeasurement>> patternMeasurements = data.DataMeasurements().values();
+    QList<QSharedPointer<VMeasurement>> patternMeasurements = data.DataMeasurementsWithSeparators().values();
 
     // Resore order
     std::sort(patternMeasurements.begin(), patternMeasurements.end(),
@@ -160,20 +160,28 @@ QDomElement VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m)
      */
     QDomElement measurement = createElement(QStringLiteral("measurement"));
 
-    SetAttribute(measurement, QStringLiteral("description"), m->GetDescription());
-    SetAttribute(measurement, QStringLiteral("fullName"), m->GetGuiText());
     SetAttribute(measurement, QStringLiteral("name"), m->GetName());
+    SetAttribute(measurement, QStringLiteral("description"), m->GetDescription());
 
-    QString formula = m->GetFormula();
-    if (not formula.isEmpty())
+    if (m->GetType() != VarType::MeasurementSeparator)
     {
-        SetAttribute(measurement, QStringLiteral("formula"), m->GetFormula());
+        SetAttribute(measurement, QStringLiteral("fullName"), m->GetGuiText());
+
+        QString formula = m->GetFormula();
+        if (not formula.isEmpty())
+        {
+            SetAttribute(measurement, QStringLiteral("formula"), m->GetFormula());
+        }
+        else
+        {
+            SetAttribute(measurement, QStringLiteral("formula"), *m->GetValue());
+        }
+        SetAttribute(measurement, QStringLiteral("value"), *m->GetValue());
     }
     else
     {
-        SetAttribute(measurement, QStringLiteral("formula"), *m->GetValue());
+        SetAttribute(measurement, QStringLiteral("separator"), true);
     }
-    SetAttribute(measurement, QStringLiteral("value"), *m->GetValue());
 
     return measurement;
 }

@@ -55,6 +55,7 @@
 #include "../vpatterndb/measurements.h"
 #include "../vpatterndb/pmsystems.h"
 #include "../vmisc/projectversion.h"
+#include "def.h"
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
@@ -174,7 +175,7 @@ bool VMeasurements::SaveDocument(const QString &fileName, QString &error)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::AddEmpty(const QString &name, const QString &formula)
 {
-    const QDomElement element = MakeEmpty(name, formula);
+    const QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
     list.at(0).appendChild(element);
@@ -183,7 +184,34 @@ void VMeasurements::AddEmpty(const QString &name, const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::AddEmptyAfter(const QString &after, const QString &name, const QString &formula)
 {
-    const QDomElement element = MakeEmpty(name, formula);
+    const QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
+    const QDomElement sibling = FindM(after);
+
+    const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+
+    if (sibling.isNull())
+    {
+        list.at(0).appendChild(element);
+    }
+    else
+    {
+        list.at(0).insertAfter(element, sibling);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::AddSeparator(const QString &name)
+{
+    const QDomElement element = MakeEmpty(name, QString(), MeasurementType::Separator);
+
+    const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+    list.at(0).appendChild(element);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::AddSeparatorAfter(const QString &after, const QString &name)
+{
+    const QDomElement element = MakeEmpty(name, QString(), MeasurementType::Separator);
     const QDomElement sibling = FindM(after);
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
@@ -307,94 +335,105 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 
         const QString name = GetParametrString(dom, AttrName).simplified();
         const QString description = GetParametrEmptyString(dom, AttrDescription);
-        const QString fullName = GetParametrEmptyString(dom, AttrFullName);
-        const bool specialUnits = GetParametrBool(dom, AttrSpecialUnits, falseStr);
+        const MeasurementType varType = StringToMeasurementType(GetParametrString(dom, AttrType, strTypeMeasurement));
 
         QSharedPointer<VMeasurement> meash;
         QSharedPointer<VMeasurement> tempMeash;
-        if (type == MeasurementsType::Multisize)
+
+        if (varType != MeasurementType::Separator)
         {
-            qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
-            qreal shiftA = GetParametrDouble(dom, AttrShiftA, QChar('0'));
-            qreal shiftB = GetParametrDouble(dom, AttrShiftB, QChar('0'));
-            qreal shiftC = GetParametrDouble(dom, AttrShiftC, QChar('0'));
-            QMap<QString, qreal> corrections = ReadCorrections(dom);
+            const QString fullName = GetParametrEmptyString(dom, AttrFullName);
+            const bool specialUnits = GetParametrBool(dom, AttrSpecialUnits, falseStr);
 
-            qreal convertedBaseA = DimensionABase();
-            qreal convertedBaseB = DimensionBBase();
-            qreal convertedBaseC = DimensionCBase();
-            qreal convertedStepA = DimensionAStep();
-            qreal convertedStepB = DimensionBStep();
-            qreal convertedStepC = DimensionCStep();
-
-            if (not specialUnits)
+            if (type == MeasurementsType::Multisize)
             {
-                base = UnitConvertor(base, Units(), *data->GetPatternUnit());
-                shiftA = UnitConvertor(shiftA, Units(), *data->GetPatternUnit());
-                shiftB = UnitConvertor(shiftB, Units(), *data->GetPatternUnit());
-                shiftC = UnitConvertor(shiftC, Units(), *data->GetPatternUnit());
+                qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
+                qreal shiftA = GetParametrDouble(dom, AttrShiftA, QChar('0'));
+                qreal shiftB = GetParametrDouble(dom, AttrShiftB, QChar('0'));
+                qreal shiftC = GetParametrDouble(dom, AttrShiftC, QChar('0'));
+                QMap<QString, qreal> corrections = ReadCorrections(dom);
 
-                QMutableMapIterator<QString, qreal> iterator(corrections);
-                while (iterator.hasNext())
+                qreal convertedBaseA = DimensionABase();
+                qreal convertedBaseB = DimensionBBase();
+                qreal convertedBaseC = DimensionCBase();
+                qreal convertedStepA = DimensionAStep();
+                qreal convertedStepB = DimensionBStep();
+                qreal convertedStepC = DimensionCStep();
+
+                if (not specialUnits)
                 {
-                    iterator.next();
-                    iterator.setValue(UnitConvertor(iterator.value(), Units(), *data->GetPatternUnit()));
+                    base = UnitConvertor(base, Units(), *data->GetPatternUnit());
+                    shiftA = UnitConvertor(shiftA, Units(), *data->GetPatternUnit());
+                    shiftB = UnitConvertor(shiftB, Units(), *data->GetPatternUnit());
+                    shiftC = UnitConvertor(shiftC, Units(), *data->GetPatternUnit());
+
+                    QMutableMapIterator<QString, qreal> iterator(corrections);
+                    while (iterator.hasNext())
+                    {
+                        iterator.next();
+                        iterator.setValue(UnitConvertor(iterator.value(), Units(), *data->GetPatternUnit()));
+                    }
+
+                    convertedBaseA = UnitConvertor(convertedBaseA, Units(), *data->GetPatternUnit());
+                    convertedBaseB = UnitConvertor(convertedBaseB, Units(), *data->GetPatternUnit());
+                    convertedBaseC = UnitConvertor(convertedBaseC, Units(), *data->GetPatternUnit());
+
+                    convertedStepA = UnitConvertor(convertedStepA, Units(), *data->GetPatternUnit());
+                    convertedStepB = UnitConvertor(convertedStepB, Units(), *data->GetPatternUnit());
+                    convertedStepC = UnitConvertor(convertedStepC, Units(), *data->GetPatternUnit());
                 }
 
-                convertedBaseA = UnitConvertor(convertedBaseA, Units(), *data->GetPatternUnit());
-                convertedBaseB = UnitConvertor(convertedBaseB, Units(), *data->GetPatternUnit());
-                convertedBaseC = UnitConvertor(convertedBaseC, Units(), *data->GetPatternUnit());
+                meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name,
+                                                             convertedBaseA, convertedBaseB, convertedBaseC, base);
+                meash->SetBaseA(baseA);
+                meash->SetBaseB(baseB);
+                meash->SetBaseC(baseC);
 
-                convertedStepA = UnitConvertor(convertedStepA, Units(), *data->GetPatternUnit());
-                convertedStepB = UnitConvertor(convertedStepB, Units(), *data->GetPatternUnit());
-                convertedStepC = UnitConvertor(convertedStepC, Units(), *data->GetPatternUnit());
+                meash->SetShiftA(shiftA);
+                meash->SetShiftB(shiftB);
+                meash->SetShiftC(shiftC);
+
+                meash->SetStepA(convertedStepA);
+                meash->SetStepB(convertedStepB);
+                meash->SetStepC(convertedStepC);
+
+                meash->SetSpecialUnits(specialUnits);
+                meash->SetCorrections(corrections);
+                meash->SetGuiText(fullName);
+                meash->SetDescription(description);
             }
+            else
+            {
+                const IMD dimension =
+                    VMeasurements::StrToIMD(GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
+                const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
+                bool ok = false;
+                qreal value = EvalFormula(tempData.data(), formula, &ok);
 
-            meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name,
-                                                         convertedBaseA, convertedBaseB, convertedBaseC, base);
-            meash->SetBaseA(baseA);
-            meash->SetBaseB(baseB);
-            meash->SetBaseC(baseC);
+                tempMeash = QSharedPointer<VMeasurement>::create(tempData.data(), static_cast<quint32>(i), name, value,
+                                                                 formula, ok);
 
-            meash->SetShiftA(shiftA);
-            meash->SetShiftB(shiftB);
-            meash->SetShiftC(shiftC);
+                if (not specialUnits)
+                {
+                    value = UnitConvertor(value, Units(), *data->GetPatternUnit());
+                }
 
-            meash->SetStepA(convertedStepA);
-            meash->SetStepB(convertedStepB);
-            meash->SetStepC(convertedStepC);
-
-            meash->SetSpecialUnits(specialUnits);
-            meash->SetCorrections(corrections);
-            meash->SetGuiText(fullName);
-            meash->SetDescription(description);
+                meash = QSharedPointer<VMeasurement>::create(data, static_cast<quint32>(i), name, value, formula, ok);
+                meash->SetGuiText(fullName);
+                meash->SetDescription(description);
+                meash->SetSpecialUnits(specialUnits);
+                meash->SetDimension(dimension);
+            }
         }
         else
         {
-            const IMD dimension =
-                VMeasurements::StrToIMD(GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
-            const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
-            bool ok = false;
-            qreal value = EvalFormula(tempData.data(), formula, &ok);
-
-            tempMeash = QSharedPointer<VMeasurement>::create(tempData.data(), static_cast<quint32>(i), name, value,
-                                                             formula, ok);
-
-            if (not specialUnits)
-            {
-                value = UnitConvertor(value, Units(), *data->GetPatternUnit());
-            }
-
-            meash = QSharedPointer<VMeasurement>::create(data, static_cast<quint32>(i), name, value, formula, ok);
-            meash->SetGuiText(fullName);
+            meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name);
             meash->SetDescription(description);
-            meash->SetSpecialUnits(specialUnits);
-            meash->SetDimension(dimension);
         }
 
         if (m_keepNames)
         {
-            if (not tempData.isNull())
+            if (not tempData.isNull() && not tempMeash.isNull())
             {
                 tempData->AddUniqueVariable(tempMeash);
             }
@@ -402,7 +441,7 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
         }
         else
         {
-            if (not tempData.isNull())
+            if (not tempData.isNull() && not tempMeash.isNull())
             {
                 tempData->AddVariable(tempMeash);
             }
@@ -1231,19 +1270,26 @@ qreal VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qrea
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula)
+QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula, MeasurementType varType)
 {
     QDomElement element = createElement(TagMeasurement);
 
     SetAttribute(element, AttrName, name);
 
-    if (type == MeasurementsType::Multisize)
+    if (varType == MeasurementType::Measurement)
     {
-        SetAttribute(element, AttrBase, QChar('0'));
+        if (type == MeasurementsType::Multisize)
+        {
+            SetAttribute(element, AttrBase, QChar('0'));
+        }
+        else
+        {
+            SetAttribute(element, AttrValue, formula.isEmpty() ? QChar('0') : formula);
+        }
     }
     else
     {
-        SetAttribute(element, AttrValue, formula.isEmpty() ? QChar('0') : formula);
+        SetAttribute(element, AttrType, MeasurementTypeToString(varType));
     }
 
     return element;

@@ -128,7 +128,6 @@
             <property name="font">
              <font>
               <pointsize>14</pointsize>
-              <weight>75</weight>
               <italic>false</italic>
               <bold>true</bold>
              </font>
@@ -161,7 +160,6 @@
             <property name="font">
              <font>
               <pointsize>14</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -196,7 +194,6 @@
             <property name="font">
              <font>
               <pointsize>14</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -228,7 +225,6 @@
             <property name="font">
              <font>
               <pointsize>14</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1223,6 +1219,7 @@
    <addaction name="actionSave"/>
    <addaction name="actionAddKnown"/>
    <addaction name="actionAddCustom"/>
+   <addaction name="actionAddSeparator"/>
    <addaction name="actionMeasurementDiagram"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -1616,6 +1613,18 @@
    </property>
    <property name="menuRole">
     <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="actionAddSeparator">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/tapeicon.qrc">
+     <normaloff>:/tapeicon/24x24/separator.png</normaloff>:/tapeicon/24x24/separator.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add separator</string>
    </property>
   </action>
  </widget>
