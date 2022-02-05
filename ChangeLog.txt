@@ -32,6 +32,7 @@
 - Fix infinite loop in tool cut spline.
 - Added scroll area to layout settings dialog.
 - Allow size to have values from 1 to 100 if not a circumference.
+- Fix tool True darts notes.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

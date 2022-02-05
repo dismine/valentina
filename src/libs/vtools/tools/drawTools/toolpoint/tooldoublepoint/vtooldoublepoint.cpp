@@ -109,6 +109,15 @@ void VToolDoublePoint::setNameP2(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::SetNotes(const QString &notes)
+{
+    m_notes = notes;
+
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::GroupVisibility(quint32 object, bool visible)
 {
     if (object == p1id)

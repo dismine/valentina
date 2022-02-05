@@ -61,6 +61,8 @@ public:
     QString nameP2() const;
     void    setNameP2(const QString &name);
 
+    void SetNotes(const QString &notes) override;
+
     virtual void GroupVisibility(quint32 object, bool visible) override;
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
