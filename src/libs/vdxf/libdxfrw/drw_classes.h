@@ -39,7 +39,6 @@ public:
 
     ~DRW_Class() = default;
 
-    void parseCode(int code, dxfReader *reader);
     void write(dxfWriter *writer, DRW::Version ver);
 
 public:
