@@ -39,12 +39,12 @@ void DRW_Header::addComment(const std::string &c){
     comments += c;
 }
 
-void DRW_Header::parseCode(int code, dxfReader *reader){
+bool DRW_Header::parseCode(int code, dxfReader *reader){
     if (nullptr == curr && 9 != code) {
         DRW_DBG("invalid header code: ");
         DRW_DBG(code);
         DRW_DBG("\n");
-        return;
+        return false;
     }
 
     switch (code) {
@@ -108,6 +108,8 @@ void DRW_Header::parseCode(int code, dxfReader *reader){
     default:
         break;
     }
+
+    return true;
 }
 
 void DRW_Header::write(dxfWriter *writer, DRW::Version ver){

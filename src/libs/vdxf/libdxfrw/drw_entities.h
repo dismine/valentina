@@ -1,6 +1,7 @@
 /******************************************************************************
 **  libDXFrw - Library to read/write DXF files (ascii & binary)              **
 **                                                                           **
+**  Copyright (C) 2016-2022 A. Stebich (librecad@mail.lordofbikes.de)        **
 **  Copyright (C) 2011-2015 José F. Soriano, rallazz@gmail.com               **
 **                                                                           **
 **  This library is free software, licensed under the terms of the GNU       **
@@ -183,7 +184,7 @@ public:
     
 protected:
     //parses dxf pair to read entity
-    bool parseCode(int code, dxfReader *reader);
+    virtual bool parseCode(int code, dxfReader *reader);
     //calculates extrusion axis (normal vector)
     void calculateAxis(DRW_Coord extPoint);
     //apply extrusion to @extPoint and return data in @point
@@ -239,10 +240,10 @@ public:
         eType = DRW::POINT;
     }
 
-    virtual void applyExtrusion() override{}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     DRW_Coord basePoint;      /*!<  base point, code 10, 20 & 30 */
@@ -262,7 +263,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader);
 
 public:
     double angle{0};  /*!< angle, code 50 */
@@ -282,10 +283,10 @@ public:
         eType = DRW::LINE;
     }
 
-    virtual void applyExtrusion() override{}
+    void applyExtrusion() override{}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     DRW_Coord secPoint;        /*!< second point, code 11, 21 & 31 */
@@ -330,10 +331,10 @@ public:
         eType = DRW::CIRCLE;
     }
 
-    virtual void applyExtrusion() override;
+    void applyExtrusion() override;
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     double radious;                 /*!< radius, code 40 */
@@ -355,7 +356,7 @@ public:
         eType = DRW::ARC;
     }
 
-    virtual void applyExtrusion() override;
+    void applyExtrusion() override;
 
     //! center point in OCS
     const DRW_Coord & center() const { return basePoint; }
@@ -372,7 +373,7 @@ public:
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     double staangle;            /*!< start angle, code 50 in radians*/
@@ -400,11 +401,11 @@ public:
     }
 
     void toPolyline(DRW_Polyline *pol, int parts = 128);
-    virtual void applyExtrusion() override;
+    void applyExtrusion() override;
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 private:
     void correctAxis();
@@ -431,10 +432,10 @@ public:
         eType = DRW::TRACE;
     }
 
-    virtual void applyExtrusion() override;
+    void applyExtrusion() override;
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     DRW_Coord thirdPoint;        /*!< third point, code 12, 22 & 32 */
@@ -452,10 +453,6 @@ public:
     DRW_Solid() {
         eType = DRW::SOLID;
     }
-
-protected:
-    //! interpret code in dxf reading process or dispatch to inherited class
-    void parseCode(int code, dxfReader *reader);
 
 public:
     //! first corner (2D)
@@ -498,7 +495,7 @@ public:
         eType = DRW::E3DFACE;
     }
 
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
     //! first corner in WCS
     const DRW_Coord & firstCorner() const { return basePoint; }
@@ -513,7 +510,7 @@ public:
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     int invisibleflag;       /*!< invisible edge flag, code 70 */
@@ -536,10 +533,10 @@ public:
         layer = '0';
     }
 
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     UTF8STRING name;             /*!< block name, code 2 */
@@ -570,7 +567,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     UTF8STRING name;         /*!< block name, code 2 */
@@ -624,7 +621,7 @@ public:
     ~DRW_LWPolyline() {
         for(DRW_Vertex2D *item : vertlist) delete item;
     }
-    virtual void applyExtrusion() override;
+    void applyExtrusion() override;
     void addVertex (DRW_Vertex2D v) {
         DRW_Vertex2D *vert = new DRW_Vertex2D();
         vert->x = v.x;
@@ -644,7 +641,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     int vertexnum;            /*!< number of vertex, code 90 */
@@ -699,10 +696,10 @@ public:
         eType = DRW::TEXT;
     }
 
-    virtual void applyExtrusion() override {} //RLZ TODO
+    void applyExtrusion() override {} //RLZ TODO
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     double height;             /*!< height text, code 40 */
@@ -747,7 +744,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
     void updateAngle();    //recalculate angle if 'haveXAxis' is true
 
 public:
@@ -797,7 +794,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     double stawidth;          /*!< Start width, code 40 */
@@ -876,7 +873,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     int flags;               /*!< polyline flag, code 70, default 0 */
@@ -960,10 +957,10 @@ public:
         for(DRW_Coord *item : controllist) delete item;
         for(DRW_Coord *item : fitlist) delete item;
     }
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
 //    double ex;                /*!< normal vector x coordinate, code 210 */
@@ -1074,10 +1071,10 @@ public:
         looplist.push_back(v);
     }
 
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     UTF8STRING name;           /*!< hatch pattern name, code 2 */
@@ -1171,7 +1168,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     duint32 ref;               /*!< Hard reference to imagedef object, code 340 */
@@ -1255,10 +1252,10 @@ public:
     }
     virtual ~DRW_Dimension() = default;
 
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     DRW_Coord getDefPoint() const {return defPoint;}      /*!< Definition point, code 10, 20 & 30 */
@@ -1561,10 +1558,10 @@ public:
         for(DRW_Coord *item : vertexlist) delete item;
     }
 
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     UTF8STRING style;          /*!< Dimension style name, code 3 */
@@ -1623,10 +1620,10 @@ public:
         eType = DRW::VIEWPORT;
     }
 
-    virtual void applyExtrusion() override {}
+    void applyExtrusion() override {}
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     double pswidth;           /*!< Width in paper space units, code 40 */

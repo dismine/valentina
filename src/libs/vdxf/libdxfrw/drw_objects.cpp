@@ -1,6 +1,7 @@
 /******************************************************************************
 **  libDXFrw - Library to read/write DXF files (ascii & binary)              **
 **                                                                           **
+**  Copyright (C) 2016-2022 A. Stebich (librecad@mail.lordofbikes.de)        **
 **  Copyright (C) 2011-2015 José F. Soriano, rallazz@gmail.com               **
 **                                                                           **
 **  This library is free software, licensed under the terms of the GNU       **
@@ -16,13 +17,14 @@
 #include "intern/dxfreader.h"
 #include "intern/dxfwriter.h"
 #include "intern/drw_dbg.h"
+#include "drw_reserve.h"
 
 //! Base class for tables entries
 /*!
 *  Base class for tables entries
 *  @author Rallaz
 */
-void DRW_TableEntry::parseCode(int code, dxfReader *reader){
+bool DRW_TableEntry::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 5:
         handle = static_cast<duint32>(reader->getHandleString());
@@ -101,6 +103,8 @@ void DRW_TableEntry::parseCode(int code, dxfReader *reader){
     default:
         break;
     }
+
+    return true;
 }
 
 //! Class to handle dimstyle entries
@@ -108,7 +112,7 @@ void DRW_TableEntry::parseCode(int code, dxfReader *reader){
 *  Class to handle ldim style symbol table entries
 *  @author Rallaz
 */
-void DRW_Dimstyle::parseCode(int code, dxfReader *reader){
+bool DRW_Dimstyle::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 105:
         handle = static_cast<duint32>(reader->getHandleString());
@@ -321,9 +325,10 @@ void DRW_Dimstyle::parseCode(int code, dxfReader *reader){
         dimblk2 = reader->getUtf8String();
         break;
     default:
-        DRW_TableEntry::parseCode(code, reader);
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }
 
 //! Class to handle line type entries
@@ -331,7 +336,7 @@ void DRW_Dimstyle::parseCode(int code, dxfReader *reader){
 *  Class to handle line type symbol table entries
 *  @author Rallaz
 */
-void DRW_LType::parseCode(int code, dxfReader *reader){
+bool DRW_LType::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 3:
         desc = reader->getUtf8String();
@@ -339,7 +344,9 @@ void DRW_LType::parseCode(int code, dxfReader *reader){
     case 73:
         size = reader->getInt32();
         path.clear();
-        path.reserve(static_cast<size_t>(size));
+        if (!DRW::reserve( path, size)) {
+            return false;
+        }
         break;
     case 40:
         length = reader->getDouble();
@@ -352,9 +359,10 @@ void DRW_LType::parseCode(int code, dxfReader *reader){
         haveShape = reader->getInt32();
         break;*/
     default:
-        DRW_TableEntry::parseCode(code, reader);
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }
 
 //! Update line type
@@ -377,7 +385,7 @@ void DRW_LType::update(){
 *  Class to handle layer symbol table entries
 *  @author Rallaz
 */
-void DRW_Layer::parseCode(int code, dxfReader *reader){
+bool DRW_Layer::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 6:
         lineType = reader->getUtf8String();
@@ -401,9 +409,10 @@ void DRW_Layer::parseCode(int code, dxfReader *reader){
         color24 = reader->getInt32();
         break;
     default:
-        DRW_TableEntry::parseCode(code, reader);
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }
 
 //! Class to handle text style entries
@@ -411,7 +420,7 @@ void DRW_Layer::parseCode(int code, dxfReader *reader){
 *  Class to handle text style symbol table entries
 *  @author Rallaz
 */
-void DRW_Textstyle::parseCode(int code, dxfReader *reader){
+bool DRW_Textstyle::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 3:
         font = reader->getUtf8String();
@@ -438,9 +447,10 @@ void DRW_Textstyle::parseCode(int code, dxfReader *reader){
         fontFamily = reader->getInt32();
         break;
     default:
-        DRW_TableEntry::parseCode(code, reader);
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }
 
 //! Class to handle vport entries
@@ -448,7 +458,7 @@ void DRW_Textstyle::parseCode(int code, dxfReader *reader){
 *  Class to handle vport symbol table entries
 *  @author Rallaz
 */
-void DRW_Vport::parseCode(int code, dxfReader *reader){
+bool DRW_Vport::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 10:
         lowerLeft.x = reader->getDouble();
@@ -550,12 +560,13 @@ void DRW_Vport::parseCode(int code, dxfReader *reader){
         snapIsopair = reader->getInt32();
         break;
     default:
-        DRW_TableEntry::parseCode(code, reader);
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }
 
-void DRW_ImageDef::parseCode(int code, dxfReader *reader){
+bool DRW_ImageDef::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 1:
         fileName = reader->getUtf8String();
@@ -585,11 +596,13 @@ void DRW_ImageDef::parseCode(int code, dxfReader *reader){
         resolution = reader->getInt32();
         break;
     default:
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }
 
-void DRW_PlotSettings::parseCode(int code, dxfReader *reader){
+bool DRW_PlotSettings::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 5:
         handle = static_cast<duint32>(reader->getHandleString());
@@ -610,6 +623,8 @@ void DRW_PlotSettings::parseCode(int code, dxfReader *reader){
         marginTop = reader->getDouble();
         break;
     default:
-        break;
+        return DRW_TableEntry::parseCode(code, reader);
     }
+
+    return true;
 }

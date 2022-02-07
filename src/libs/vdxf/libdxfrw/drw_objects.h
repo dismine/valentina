@@ -1,6 +1,7 @@
 /******************************************************************************
 **  libDXFrw - Library to read/write DXF files (ascii & binary)              **
 **                                                                           **
+**  Copyright (C) 2016-2022 A. Stebich (librecad@mail.lordofbikes.de)        **
 **  Copyright (C) 2011-2015 José F. Soriano, rallazz@gmail.com               **
 **                                                                           **
 **  This library is free software, licensed under the terms of the GNU       **
@@ -90,7 +91,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    virtual bool parseCode(int code, dxfReader *reader);
     void reset()
     {
         flags = 0;
@@ -227,7 +228,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     //V12
@@ -330,7 +331,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
     void update();
 
 public:
@@ -374,7 +375,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     UTF8STRING lineType;            /*!< line type, code 6 */
@@ -442,7 +443,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     double height;          /*!< Fixed text height (0 not set), code 40 */
@@ -511,7 +512,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     DRW_Coord lowerLeft;     /*!< Lower left corner, code 10 & 20 */
@@ -576,7 +577,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
 //    std::string handle;       /*!< entity identifier, code 5 */
@@ -614,7 +615,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader);
+    bool parseCode(int code, dxfReader *reader) override;
 
 public:
     UTF8STRING plotViewName {}; /*!< Plot view name, code 6 */
@@ -641,7 +642,7 @@ public:
     }
 
 protected:
-    void parseCode(int code, dxfReader *reader){DRW_TableEntry::parseCode(code, reader);}
+    bool parseCode(int code, dxfReader *reader){return DRW_TableEntry::parseCode(code, reader);}
 };
 
 namespace DRW {

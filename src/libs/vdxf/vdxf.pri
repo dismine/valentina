@@ -20,6 +20,7 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
+    $$PWD/libdxfrw/drw_reserve.h \
     $$PWD/stable.h \
     $$PWD/vdxfengine.h \
     $$PWD/vdxfpaintdevice.h \
