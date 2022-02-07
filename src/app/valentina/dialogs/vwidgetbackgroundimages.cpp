@@ -502,6 +502,11 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
     QUuid id = item->data(Qt::UserRole).toUuid();
     VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
 
+    if (image.IsNull() || image.Hold())
+    {
+        return;
+    }
+
     const int index = ui->tabWidgetImageTransformation->currentIndex();
     if (ui->tabWidgetImageTransformation->indexOf(ui->tabTranslate) == index)
     { // translate
