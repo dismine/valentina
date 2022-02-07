@@ -48,34 +48,30 @@
 
 const int EMPTY_ANGLE = -1;
 
+namespace
+{
+inline auto TriggerRadius() -> qreal
+{
+    return ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
-      object4Id(NULL_ID),
-      point1(nullptr),
-      point4(nullptr),
-      angle1(EMPTY_ANGLE),
-      angle2(EMPTY_ANGLE),
-      kAsm1(1),
-      kAsm2(1),
-      kCurve(1),
-      isLeftMousePressed(false),
-      p2Selected(false),
-      p3Selected(false),
-      p2(),
-      p3(),
-      controlPoints()
+      m_angle1(EMPTY_ANGLE),
+      m_angle2(EMPTY_ANGLE)
 {
-    point1 = InitPoint(supportColor, this);
-    point4 = InitPoint(supportColor, this); //-V656
+    m_point1 = InitPoint(supportColor, this);
+    m_point4 = InitPoint(supportColor, this); //-V656
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, this);
     controlPoint1->hide();
-    controlPoints.append(controlPoint1);
+    m_controlPoints.append(controlPoint1);
 
     auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, this);
     controlPoint2->hide();
-    controlPoints.append(controlPoint2);
+    m_controlPoints.append(controlPoint2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,88 +83,41 @@ VisToolSpline::~VisToolSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
-    //Radius of point circle, but little bigger. Need handle with hover sizes.
-    const static qreal radius = ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5;
-
     if (object1Id > NULL_ID)
     {
         const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point1, static_cast<QPointF>(*first), supportColor);
+        DrawPoint(m_point1, static_cast<QPointF>(*first), supportColor);
 
         if (mode == Mode::Creation)
         {
-            if (isLeftMousePressed && not p2Selected)
-            {
-                p2 = Visualization::scenePos;
-                controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, p2,
-                                                   static_cast<QPointF>(*first));
-
-                if (not controlPoints[0]->isVisible())
-                {
-                    if (QLineF(static_cast<QPointF>(*first), p2).length() > radius)
-                    {
-                        controlPoints[0]->show();
-                    }
-                    else
-                    {
-                        p2 = static_cast<QPointF>(*first);
-                    }
-                }
-            }
-            else
-            {
-                p2Selected = true;
-            }
+            DragFirstControlPoint(static_cast<QPointF>(*first));
         }
 
-        if (object4Id <= NULL_ID)
+        if (m_object4Id <= NULL_ID)
         {
-            VSpline spline(*first, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
+            VSpline spline(*first, m_p2, Visualization::scenePos, VPointF(Visualization::scenePos));
             spline.SetApproximationScale(m_approximationScale);
             DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
         }
         else
         {
-            const auto second = Visualization::data->GeometricObject<VPointF>(object4Id);
-            DrawPoint(point4, static_cast<QPointF>(*second), supportColor);
+            const auto second = Visualization::data->GeometricObject<VPointF>(m_object4Id);
+            DrawPoint(m_point4, static_cast<QPointF>(*second), supportColor);
 
             if (mode == Mode::Creation)
             {
-                if (isLeftMousePressed && not p3Selected)
-                {
-                    QLineF ctrlLine (static_cast<QPointF>(*second), Visualization::scenePos);
-                    ctrlLine.setAngle(ctrlLine.angle()+180);
-                    p3 = ctrlLine.p2();
-                    controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, p3,
-                                                       static_cast<QPointF>(*second));
-
-                    if (not controlPoints[1]->isVisible())
-                    {
-                        if (QLineF(static_cast<QPointF>(*second), p3).length() > radius)
-                        {
-                            controlPoints[1]->show();
-                        }
-                        else
-                        {
-                            p3 = static_cast<QPointF>(*second);
-                        }
-                    }
-                }
-                else
-                {
-                    p3Selected = true;
-                }
+                DragLastControlPoint(static_cast<QPointF>(*second));
             }
 
-            if (VFuzzyComparePossibleNulls(angle1, EMPTY_ANGLE) || VFuzzyComparePossibleNulls(angle2, EMPTY_ANGLE))
+            if (VFuzzyComparePossibleNulls(m_angle1, EMPTY_ANGLE) || VFuzzyComparePossibleNulls(m_angle2, EMPTY_ANGLE))
             {
-                VSpline spline(*first, p2, p3, *second);
+                VSpline spline(*first, m_p2, m_p3, *second);
                 spline.SetApproximationScale(m_approximationScale);
                 DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
             }
             else
             {
-                VSpline spline(*first, *second, angle1, angle2, kAsm1, kAsm2, kCurve);
+                VSpline spline(*first, *second, m_angle1, m_angle2, m_kAsm1, m_kAsm2, m_kCurve);
                 spline.SetApproximationScale(m_approximationScale);
                 DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
                 Visualization::toolTip = tr("Use <b>%1</b> for sticking angle!")
@@ -180,51 +129,51 @@ void VisToolSpline::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setObject4Id(const quint32 &value)
+void VisToolSpline::SetObject4Id(quint32 value)
 {
-    object4Id = value;
+    m_object4Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetAngle1(const qreal &value)
+void VisToolSpline::SetAngle1(qreal value)
 {
-    angle1 = value;
+    m_angle1 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetAngle2(const qreal &value)
+void VisToolSpline::SetAngle2(qreal value)
 {
-    angle2 = value;
+    m_angle2 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetKAsm1(const qreal &value)
+void VisToolSpline::SetKAsm1(qreal value)
 {
-    kAsm1 = value;
+    m_kAsm1 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetKAsm2(const qreal &value)
+void VisToolSpline::SetKAsm2(qreal value)
 {
-    kAsm2 = value;
+    m_kAsm2 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetKCurve(const qreal &value)
+void VisToolSpline::SetKCurve(qreal value)
 {
-    kCurve = value;
+    m_kCurve = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VisToolSpline::GetP2() const
+auto VisToolSpline::GetP2() const -> QPointF
 {
-    return p2;
+    return m_p2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VisToolSpline::GetP3() const
+auto VisToolSpline::GetP3() const -> QPointF
 {
-    return p3;
+    return m_p3;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,7 +181,7 @@ void VisToolSpline::MouseLeftPressed()
 {
     if (mode == Mode::Creation)
     {
-        isLeftMousePressed = true;
+        m_isLeftMousePressed = true;
     }
 }
 
@@ -241,7 +190,59 @@ void VisToolSpline::MouseLeftReleased()
 {
     if (mode == Mode::Creation)
     {
-        isLeftMousePressed = false;
+        m_isLeftMousePressed = false;
         RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolSpline::DragFirstControlPoint(const QPointF &point)
+{
+    if (m_isLeftMousePressed && not m_p2Selected)
+    {
+        m_p2 = Visualization::scenePos;
+        m_controlPoints.at(0)->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, m_p2, point);
+
+        if (not m_controlPoints.at(0)->isVisible())
+        {
+            if (QLineF(point, m_p2).length() > TriggerRadius())
+            {
+                m_controlPoints.at(0)->show();
+            }
+            else
+            {
+                m_p2 = point;
+            }
+        }
+    }
+    else
+    {
+        m_p2Selected = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolSpline::DragLastControlPoint(const QPointF &point)
+{
+    if (m_isLeftMousePressed && not m_p3Selected)
+    {
+        m_p3 = Visualization::scenePos;
+        m_controlPoints.at(1)->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, m_p3, point);
+
+        if (not m_controlPoints.at(1)->isVisible())
+        {
+            if (QLineF(point, m_p3).length() > TriggerRadius())
+            {
+                m_controlPoints.at(1)->show();
+            }
+            else
+            {
+                m_p3 = point;
+            }
+        }
+    }
+    else
+    {
+        m_p3Selected = true;
     }
 }

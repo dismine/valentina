@@ -41,52 +41,59 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class VControlPointSpline;
 
-class VisToolSpline : public VisPath
+class VisToolSpline : public VisPath // clazy:exclude=ctor-missing-parent-argument
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolSpline();
+    ~VisToolSpline() override;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
 
-    void         setObject4Id(const quint32 &value);
-    void         SetAngle1(const qreal &value);
-    void         SetAngle2(const qreal &value);
-    void         SetKAsm1(const qreal &value);
-    void         SetKAsm2(const qreal &value);
-    void         SetKCurve(const qreal &value);
+    void SetObject4Id(quint32 value);
+    void SetAngle1(qreal value);
+    void SetAngle2(qreal value);
+    void SetKAsm1(qreal value);
+    void SetKAsm2(qreal value);
+    void SetKCurve(qreal value);
 
-    QPointF      GetP2() const;
-    QPointF      GetP3() const;
+    auto GetP2() const -> QPointF;
+    auto GetP3() const -> QPointF;
 
-    virtual int  type() const override {return Type;}
+    auto type() const  -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
 public slots:
     void MouseLeftPressed();
     void MouseLeftReleased();
 
-protected:
-    Q_DISABLE_COPY(VisToolSpline)
-    quint32         object4Id;
-    VScaledEllipse *point1;
-    VScaledEllipse *point4;
-    qreal           angle1;
-    qreal           angle2;
-    qreal           kAsm1;
-    qreal           kAsm2;
-    qreal           kCurve;
+private:
+    Q_DISABLE_COPY_MOVE(VisToolSpline) // NOLINT
+    quint32         m_object4Id{NULL_ID};
+    VScaledEllipse *m_point1{nullptr};
+    VScaledEllipse *m_point4{nullptr};
+    qreal           m_angle1;
+    qreal           m_angle2;
+    qreal           m_kAsm1{1};
+    qreal           m_kAsm2{1};
+    qreal           m_kCurve{1};
 
-    bool isLeftMousePressed;
-    bool p2Selected;
-    bool p3Selected;
+    bool m_isLeftMousePressed{false};
+    bool m_p2Selected{false};
+    bool m_p3Selected{false};
 
-    QPointF p2;
-    QPointF p3;
+    QPointF m_p2{};
+    QPointF m_p3{};
 
-    QVector<VControlPointSpline *> controlPoints;
+    QVector<VControlPointSpline *> m_controlPoints{};
+
+    void DragFirstControlPoint(const QPointF &point);
+    void DragLastControlPoint(const QPointF &point);
 };
 
 #endif // VISTOOLSPLINE_H

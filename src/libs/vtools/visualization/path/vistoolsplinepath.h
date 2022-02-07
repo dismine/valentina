@@ -42,21 +42,25 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class VControlPointSpline;
 
-class VisToolSplinePath : public VisPath
+class VisToolSplinePath : public VisPath // clazy:exclude=ctor-missing-parent-argument
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolSplinePath();
+    ~VisToolSplinePath() override;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
 
-    void         setPath(const VSplinePath &value);
-    VSplinePath  getPath();
+    void SetPath(const VSplinePath &value);
+    auto GetPath() -> VSplinePath;
 
-    virtual int  type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
 signals:
     void PathChanged(const VSplinePath &path);
@@ -65,19 +69,21 @@ public slots:
     void MouseLeftPressed();
     void MouseLeftReleased();
 
-protected:
-    Q_DISABLE_COPY(VisToolSplinePath)
-    QVector<VScaledEllipse *>      points;
-    QVector<VControlPointSpline *> ctrlPoints;
-    VCurvePathItem                *newCurveSegment;
-    VSplinePath                    path;
+private:
+    Q_DISABLE_COPY_MOVE(VisToolSplinePath) // NOLINT
+    QVector<VScaledEllipse *>      m_points{};
+    QVector<VControlPointSpline *> m_ctrlPoints{};
+    VCurvePathItem*                m_newCurveSegment{nullptr};
+    VSplinePath                    m_path{};
 
-    bool isLeftMousePressed;
-    bool pointSelected;
+    bool m_isLeftMousePressed{false};
+    bool m_pointSelected{false};
 
-    QPointF ctrlPoint;
+    QPointF m_ctrlPoint{};
 
-    VScaledEllipse * getPoint(quint32 i);
+    auto GetPoint(quint32 i) -> VScaledEllipse*;
+    void DragControlPoint(int lastPoint, int preLastPoint, const QPointF &pSpl, int size);
+    void NewCurveSegment(const VSpline &spline, const QPointF &pSpl, int size);
     void Creating(const QPointF &pSpl, int size);
 };
 

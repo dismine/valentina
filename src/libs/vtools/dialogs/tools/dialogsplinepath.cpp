@@ -179,7 +179,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
-    visPath->setPath(path);
+    visPath->SetPath(path);
     ui->listWidget->blockSignals(false);
 
     flagError = IsPathValid();
@@ -210,7 +210,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 
         auto visPath = qobject_cast<VisToolSplinePath *>(vis);
         SCASSERT(visPath != nullptr)
-        visPath->setPath(path);
+        visPath->SetPath(path);
 
         if (path.CountPoints() == 1)
         {
@@ -241,7 +241,7 @@ void DialogSplinePath::SaveData()
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
-    visPath->setPath(path);
+    visPath->SetPath(path);
     visPath->SetMode(Mode::Show);
     visPath->RefreshGeometry();
 }

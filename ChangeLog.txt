@@ -34,6 +34,7 @@
 - Allow size to have values from 1 to 100 if not a circumference.
 - Fix tool True darts notes.
 - New measurement type separator.
+- Improve creation by mouse for tool Spline.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.
