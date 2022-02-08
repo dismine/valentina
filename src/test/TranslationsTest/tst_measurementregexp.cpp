@@ -127,7 +127,7 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
     QMultiMap<QString, QString> names;
     for (const auto &originalName : originalNames)
     {
-        names.insertMulti(m_trMs->VarToUser(originalName), originalName);
+        names.insert(m_trMs->VarToUser(originalName), originalName);
     }
 
     QTest::addColumn<QString>("translatedName");
