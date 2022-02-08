@@ -28,7 +28,7 @@ namespace DRW
     auto reserve(std::vector<T> &list, const int size) -> bool
     {
         try {
-            list.reserve( size);
+            list.reserve(static_cast<typename std::vector<T>::size_type>(size));
         }
         catch (const std::exception& e) {
             DRW_DBG( "std::exception : ");

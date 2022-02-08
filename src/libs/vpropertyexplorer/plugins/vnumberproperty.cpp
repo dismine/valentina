@@ -29,7 +29,7 @@
 #include <QWidget>
 
 #include "../vproperty_p.h"
-#include "qstringliteral.h"
+#include <QStringLiteral>
 
 namespace
 {
