@@ -29,7 +29,6 @@
 #include <QWidget>
 
 #include "../vproperty_p.h"
-#include <QStringLiteral>
 
 namespace
 {
