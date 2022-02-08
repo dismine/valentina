@@ -123,13 +123,43 @@ void TST_MeasurementRegExp::TestCheckRegExpNames()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
 {
-    PrepareData();
+    const QStringList originalNames = AllNames();
+    QMultiMap<QString, QString> names;
+    for (const auto &originalName : originalNames)
+    {
+        names.insertMulti(m_trMs->VarToUser(originalName), originalName);
+    }
+
+    QTest::addColumn<QString>("translatedName");
+    QTest::addColumn<QList<QString>>("originalNames");
+
+    QList<QString> keys = names.uniqueKeys();
+    for (const auto &key : keys)
+    {
+        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, key);
+        QTest::newRow(qUtf8Printable(tag)) << key << names.values(key);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::TestCheckIsNamesUnique()
 {
-    CallTestCheckIsNamesUnique();
+    QFETCH(QString, translatedName);
+    QFETCH(QList<QString>, originalNames);
+
+    if (QLocale() == QLocale(QStringLiteral("zh_CN")) || QLocale() == QLocale(QStringLiteral("he_IL")))
+    {
+        const QString message = QStringLiteral("We do not support translation of variables for locale %1")
+                .arg(QLocale().name());
+        QSKIP(qUtf8Printable(message));
+    }
+
+    if (originalNames.size() > 1)
+    {
+        const QString message = QString("Name is not unique. Translated name:'%1' also assosiated with: %2.")
+                .arg(translatedName, originalNames.join(", "));
+        QFAIL(qUtf8Printable(message));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -183,7 +213,7 @@ void TST_MeasurementRegExp::PrepareData()
 
     QTest::addColumn<QString>("originalName");
 
-    for (auto &str : originalNames)
+    for (const auto &str : originalNames)
     {
         const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;

@@ -57,7 +57,6 @@ protected:
 
     void CallTestCheckNoEndLine();
     void CallTestCheckRegExpNames();
-    void CallTestCheckIsNamesUnique();
     void CallTestCheckNoOriginalNamesInTranslation();
     void CallTestForValidCharacters();
 

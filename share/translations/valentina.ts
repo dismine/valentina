@@ -10280,6 +10280,13 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OperationMoveLabel</name>
     <message>
         <source>move point label</source>
@@ -10829,6 +10836,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12975,6 +12994,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18083,6 +18106,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Visible:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

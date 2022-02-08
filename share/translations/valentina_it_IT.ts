@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished">Margini compresi</translation>
+        <translation>Margini compresi</translation>
     </message>
 </context>
 <context>
@@ -3965,10 +3965,6 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Efficiency:</source>
         <translation>Efficienza:</translation>
-    </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="vanished">Imposta coefficiente di efficienza del piazzamento. Il coefficiente di efficienza del piazzamento è la percentuale di area occupata dai pezzi all’interno dell’area delimitata. Se la loro disposizione raggiunge il livello richiesto, il processo si interrompe. Se il valore è impostato su 0 non viene effettuata nessuna verifica. </translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -9841,11 +9837,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">senza titolo</translation>
+        <translation>senza titolo</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Tutti i file</translation>
+        <translation>Tutti i file</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -10059,6 +10055,13 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>move spline path</source>
         <translation>muovi percorso spline</translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10577,6 +10580,18 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     <message>
         <source>scene render</source>
         <translation>Render di scena</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11359,19 +11374,19 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Immagini</translation>
+        <translation>Immagini</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Tutti i file</translation>
+        <translation>Tutti i file</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Conferma cancellazione</translation>
+        <translation>Conferma cancellazione</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Vuoi veramente cancellare?</translation>
+        <translation>Vuoi veramente cancellare?</translation>
     </message>
 </context>
 <context>
@@ -12696,6 +12711,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14040,15 +14059,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visibile</translation>
+        <translation>Visibile</translation>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished">Mostra nella barra di ricerca</translation>
+        <translation>Mostra nella barra di ricerca</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Mostra in Explorer</translation>
+        <translation>Mostra in Explorer</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -14060,7 +14079,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Elimina</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -17476,6 +17495,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -19147,11 +19170,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Larghezza:</translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Altezza:</translation>
+        <translation>Altezza:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -19163,11 +19186,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotazione</translation>
+        <translation>Rotazione</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -19183,7 +19206,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visibile</translation>
+        <translation>Visibile</translation>
     </message>
     <message>
         <source>Reset transformation</source>
@@ -19191,7 +19214,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Elimina</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -19211,19 +19234,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixel</translation>
+        <translation>Pixel</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Millimetri</translation>
+        <translation>Millimetri</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetri</translation>
+        <translation>Centimetri</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pollici</translation>
+        <translation>Pollici</translation>
     </message>
 </context>
 <context>

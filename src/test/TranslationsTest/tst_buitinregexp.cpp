@@ -93,13 +93,36 @@ void TST_BuitInRegExp::TestCheckRegExpNames()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_BuitInRegExp::TestCheckIsNamesUnique_data()
 {
-    PrepareData();
+    const QStringList originalNames = AllNames();
+    QMultiMap<QString, QString> names;
+    for (const auto &originalName : originalNames)
+    {
+        names.insertMulti(m_trMs->VarToUser(originalName), originalName);
+    }
+
+    QTest::addColumn<QString>("translatedName");
+    QTest::addColumn<QList<QString>>("originalNames");
+
+    QList<QString> keys = names.uniqueKeys();
+    for (const auto &key : keys)
+    {
+        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, key);
+        QTest::newRow(qUtf8Printable(tag)) << key << names.values(key);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_BuitInRegExp::TestCheckIsNamesUnique()
 {
-    CallTestCheckIsNamesUnique();
+    QFETCH(QString, translatedName);
+    QFETCH(QList<QString>, originalNames);
+
+    if (originalNames.size() > 1)
+    {
+        const QString message = QString("Name is not unique. Translated name:'%1' also assosiated with: %2.")
+                .arg(translatedName, originalNames.join(", "));
+        QFAIL(qUtf8Printable(message));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

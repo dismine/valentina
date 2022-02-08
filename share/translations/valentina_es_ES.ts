@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished">Integrado</translation>
+        <translation>Integrado</translation>
     </message>
 </context>
 <context>
@@ -3972,10 +3972,6 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Efficiency:</source>
         <translation>Eficiencia:</translation>
-    </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="vanished">Establecer coeficiente de eficiencia del diseño. El coeficiente de eficiencia del diseño es el radio del área ocupada por las piezas al limite rectangular de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación. </translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -9853,11 +9849,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>sin título</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Todos los archivos</translation>
+        <translation>Todos los archivos</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -10071,6 +10067,13 @@ el patrón.</translation>
     <message>
         <source>move spline path</source>
         <translation>mover ruta de spline</translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10589,6 +10592,18 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <source>scene render</source>
         <translation>retratar una escena</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Opacidad:</translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11371,19 +11386,19 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Imágenes</translation>
+        <translation>Imágenes</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Todos los archivos</translation>
+        <translation>Todos los archivos</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Confirmar borrado</translation>
+        <translation>Confirmar borrado</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Realmente quiere borrarlo?</translation>
+        <translation>Realmente quiere borrarlo?</translation>
     </message>
 </context>
 <context>
@@ -12708,6 +12723,10 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14057,15 +14076,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visible</translation>
+        <translation>Visible</translation>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished">Mostrar en el Finder</translation>
+        <translation>Mostrar en el Finder</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Mostrar en el explorador</translation>
+        <translation>Mostrar en el explorador</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -14077,7 +14096,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>
@@ -17579,6 +17598,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Opacidad:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -19271,7 +19294,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario</translation>
     </message>
     <message>
         <source>Transformation</source>
@@ -19284,11 +19307,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished">Horizontal:</translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished">Vertical:</translation>
+        <translation>Vertical:</translation>
     </message>
     <message>
         <source>Relative translation</source>
@@ -19296,15 +19319,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished">Escala</translation>
+        <translation>Escala</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancho:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Altura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -19316,11 +19339,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotación</translation>
+        <translation>Rotación</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -19336,7 +19359,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visible</translation>
+        <translation>Visible</translation>
     </message>
     <message>
         <source>Reset transformation</source>
@@ -19344,7 +19367,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -19356,27 +19379,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished">Ocultar todo</translation>
+        <translation>Ocultar todo</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished">Mostrar Todo</translation>
+        <translation>Mostrar Todo</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Píxeles</translation>
+        <translation>Píxeles</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milímetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centímetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pulgadas</translation>
+        <translation>Pulgadas</translation>
     </message>
 </context>
 <context>

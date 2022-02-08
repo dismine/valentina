@@ -8995,6 +8995,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OperationMoveLabel</name>
     <message>
         <source>move point label</source>
@@ -9405,6 +9412,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11238,6 +11257,10 @@ Do you want to save your changes?</source>
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add separator</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -12508,7 +12531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
 </context>
 <context>
@@ -15634,6 +15657,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -17249,11 +17276,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Înălțime:</translation>
+        <translation>Înălțime:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -17269,7 +17296,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -17293,7 +17320,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -17313,19 +17340,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixeli</translation>
+        <translation>Pixeli</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetrii</translation>
+        <translation>Milimetrii</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetrii</translation>
+        <translation>Centimetrii</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
 </context>
 <context>

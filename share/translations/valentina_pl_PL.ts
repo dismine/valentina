@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nazwa:</translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -8969,11 +8969,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">bez nazwy</translation>
+        <translation>bez nazwy</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Wszystkie pliki</translation>
+        <translation>Wszystkie pliki</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -9114,6 +9114,13 @@ Do you want to save your changes?</source>
     <name>MoveSplinePath</name>
     <message>
         <source>move spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9607,6 +9614,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Przezroczystość:</translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10345,11 +10364,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Obrazy</translation>
+        <translation>Obrazy</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Wszystkie pliki</translation>
+        <translation>Wszystkie pliki</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
@@ -11544,6 +11563,10 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12868,7 +12891,7 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Pokaż w przeglądarce</translation>
+        <translation>Pokaż w przeglądarce</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -12880,7 +12903,7 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Usuń</translation>
+        <translation>Usuń</translation>
     </message>
 </context>
 <context>
@@ -16047,6 +16070,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Przezroczystość:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -17709,11 +17736,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Szerokość:</translation>
+        <translation>Szerokość:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Wysokość:</translation>
+        <translation>Wysokość:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -17729,7 +17756,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Kąt:</translation>
+        <translation>Kąt:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -17753,7 +17780,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Usuń</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -17765,27 +17792,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished">Ukryj wszystko</translation>
+        <translation>Ukryj wszystko</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished">Pokaż wszystko</translation>
+        <translation>Pokaż wszystko</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Piksele</translation>
+        <translation>Piksele</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetry</translation>
+        <translation>Milimetry</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centymetry</translation>
+        <translation>Centymetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Cale</translation>
+        <translation>Cale</translation>
     </message>
 </context>
 <context>

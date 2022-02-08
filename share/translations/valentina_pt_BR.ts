@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished">Embutido</translation>
+        <translation>Embutido</translation>
     </message>
 </context>
 <context>
@@ -9845,11 +9845,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">sem título</translation>
+        <translation>sem título</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Todos os arquivos</translation>
+        <translation>Todos os arquivos</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -10063,6 +10063,13 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>move spline path</source>
         <translation>mova caminho de spline</translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10581,6 +10588,18 @@ Esta opção terá um efeito após o reinício.</translation>
     <message>
         <source>scene render</source>
         <translation>cena renderizada</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Opacidade:</translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11363,19 +11382,19 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Imagens</translation>
+        <translation>Imagens</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Todos os arquivos</translation>
+        <translation>Todos os arquivos</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Confirmação de exclusão</translation>
+        <translation>Confirmação de exclusão</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Você realmente deseja excluir?</translation>
+        <translation>Você realmente deseja excluir?</translation>
     </message>
 </context>
 <context>
@@ -12701,6 +12720,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>F3</source>
         <translation>F3</translation>
+    </message>
+    <message>
+        <source>Add separator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14045,15 +14068,15 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visibilidade</translation>
+        <translation>Visibilidade</translation>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished">Mostrar no Localizador</translation>
+        <translation>Mostrar no Localizador</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Mostrar no Explorador</translation>
+        <translation>Mostrar no Explorador</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -14065,7 +14088,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Excluir</translation>
+        <translation>Excluir</translation>
     </message>
 </context>
 <context>
@@ -17524,6 +17547,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Opacidade:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -19216,40 +19243,40 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Forma</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Transformation</source>
-        <translation type="unfinished">Transformação</translation>
+        <translation>Transformação</translation>
     </message>
     <message>
         <source>Translate</source>
         <comment>Translate piece</comment>
-        <translation type="unfinished">Transladar</translation>
+        <translation>Transladar</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished">Horizontal:</translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished">Vertical:</translation>
+        <translation>Vertical:</translation>
     </message>
     <message>
         <source>Relative translation</source>
-        <translation type="unfinished">Transladação relativa</translation>
+        <translation>Transladação relativa</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished">Escala</translation>
+        <translation>Escala</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largura:</translation>
+        <translation>Largura:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Altura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -19257,15 +19284,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotate</source>
-        <translation type="unfinished">Rodar</translation>
+        <translation>Rodar</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotação</translation>
+        <translation>Rotação</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Ângulo:</translation>
+        <translation>Ângulo:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -19281,7 +19308,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visibilidade</translation>
+        <translation>Visibilidade</translation>
     </message>
     <message>
         <source>Reset transformation</source>
@@ -19289,7 +19316,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Excluir</translation>
+        <translation>Excluir</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -19301,27 +19328,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished">Ocultar Todos</translation>
+        <translation>Ocultar Todos</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished">Exibir Todos</translation>
+        <translation>Exibir Todos</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Píxels</translation>
+        <translation>Píxels</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Polegadas</translation>
+        <translation>Polegadas</translation>
     </message>
 </context>
 <context>

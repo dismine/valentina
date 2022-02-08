@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished">Vestavěno</translation>
+        <translation>Vestavěno</translation>
     </message>
 </context>
 <context>
@@ -3973,10 +3973,6 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Efficiency:</source>
         <translation>Účinnost:</translation>
-    </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="vanished">Nastavte koeficient účinnosti rozvržení. Koeficient účinnosti rozvržení je poměr plochy, kterou zabírají kusy, k ohraničujícímu obdélníku všech kusů. Pokud vnoření dosáhne požadované úrovně, proces se zastaví. Pokud je hodnota 0, nebude provedena žádná kontrola.</translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -9856,11 +9852,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">bez názvu</translation>
+        <translation>bez názvu</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Všechny soubory</translation>
+        <translation>Všechny soubory</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -10074,6 +10070,13 @@ Chcete uložit své změny?</translation>
     <message>
         <source>move spline path</source>
         <translation>Posunout cestu hladké křivky (křivka spline)</translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10592,6 +10595,18 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <source>scene render</source>
         <translation>Vykreslení scény</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Neprůhlednost:</translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11374,19 +11389,19 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Obrázky</translation>
+        <translation>Obrázky</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Všechny soubory</translation>
+        <translation>Všechny soubory</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Potvrdit smazání</translation>
+        <translation>Potvrdit smazání</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Opravdu chcete smazat?</translation>
+        <translation>Opravdu chcete smazat?</translation>
     </message>
 </context>
 <context>
@@ -12712,6 +12727,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>F3</source>
         <translation>F3</translation>
+    </message>
+    <message>
+        <source>Add separator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14060,15 +14079,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Viditelný</translation>
+        <translation>Viditelný</translation>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat ve okně pro hledání</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Ukázat ve správci souborů</translation>
+        <translation>Ukázat ve správci souborů</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -14080,7 +14099,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
 </context>
 <context>
@@ -17582,6 +17601,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished">Neprůhlednost:</translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -19274,7 +19297,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <source>Transformation</source>
@@ -19287,11 +19310,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished">Vodorovná:</translation>
+        <translation>Vodorovná:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished">Svislá:</translation>
+        <translation>Svislá:</translation>
     </message>
     <message>
         <source>Relative translation</source>
@@ -19299,15 +19322,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished">Měřítko</translation>
+        <translation>Měřítko</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Šířka:</translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Výška:</translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -19319,11 +19342,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Úhel:</translation>
+        <translation>Úhel:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -19339,7 +19362,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Viditelný</translation>
+        <translation>Viditelný</translation>
     </message>
     <message>
         <source>Reset transformation</source>
@@ -19347,7 +19370,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -19359,27 +19382,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished">Skrýt vše</translation>
+        <translation>Skrýt vše</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished">Ukázat vše</translation>
+        <translation>Ukázat vše</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixely</translation>
+        <translation>Pixely</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetry</translation>
+        <translation>Milimetry</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetry</translation>
+        <translation>Centimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Palce</translation>
+        <translation>Palce</translation>
     </message>
 </context>
 <context>

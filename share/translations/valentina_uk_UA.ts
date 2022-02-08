@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Імя:</translation>
+        <translation>Імя:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished">Вбудована</translation>
+        <translation>Вбудована</translation>
     </message>
 </context>
 <context>
@@ -9849,11 +9849,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">без імені</translation>
+        <translation>без імені</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Всі файли</translation>
+        <translation>Всі файли</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -10067,6 +10067,13 @@ Do you want to save your changes?</source>
     <message>
         <source>move spline path</source>
         <translation>переміщення складного сплайну</translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10583,6 +10590,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11365,19 +11384,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Зображення</translation>
+        <translation>Зображення</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Всі файли</translation>
+        <translation>Всі файли</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Підтвердіть видалення</translation>
+        <translation>Підтвердіть видалення</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Ви дійсно хочете видалити?</translation>
+        <translation>Ви дійсно хочете видалити?</translation>
     </message>
 </context>
 <context>
@@ -12702,6 +12721,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14054,11 +14077,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished">Показати в програмі Finder</translation>
+        <translation>Показати в програмі Finder</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Показати в Провіднику</translation>
+        <translation>Показати в Провіднику</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -14070,7 +14093,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
@@ -17567,6 +17590,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -19259,7 +19286,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Transformation</source>
@@ -19288,11 +19315,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Висота:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -19304,11 +19331,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Кут:</translation>
+        <translation>Кут:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -19332,7 +19359,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -19352,19 +19379,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Пікселі</translation>
+        <translation>Пікселі</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Міліметри</translation>
+        <translation>Міліметри</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Сантиметри</translation>
+        <translation>Сантиметри</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюйми</translation>
+        <translation>Дюйми</translation>
     </message>
 </context>
 <context>

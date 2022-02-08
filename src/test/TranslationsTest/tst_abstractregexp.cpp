@@ -164,23 +164,6 @@ void TST_AbstractRegExp::CallTestCheckRegExpNames()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_AbstractRegExp::CallTestCheckIsNamesUnique()
-{
-    QFETCH(QString, originalName);
-
-    QSet<QString> names;
-
-    const QString translated = m_trMs->VarToUser(originalName);
-    if (names.contains(translated))
-    {
-        const QString message = QString("Name is not unique. Original name:'%1', translated name:'%2'")
-                .arg(originalName, translated);
-        QFAIL(qUtf8Printable(message));
-    }
-    names.insert(translated);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TST_AbstractRegExp::CallTestCheckNoOriginalNamesInTranslation()
 {
     QFETCH(QString, originalName);
@@ -208,9 +191,10 @@ void TST_AbstractRegExp::CallTestForValidCharacters()
 
     static const QString validNameChars = PrepareValidNameChars();
 
-    if (QLocale() == QLocale(QStringLiteral("zh_CN")))
+    if (QLocale() == QLocale(QStringLiteral("zh_CN")) || QLocale() == QLocale(QStringLiteral("he_IL")))
     {
-        const QString message = QStringLiteral("We do not support translation of variables for locale zh_CN");
+        const QString message = QStringLiteral("We do not support translation of variables for locale %1")
+                .arg(QLocale().name());
         QSKIP(qUtf8Printable(message));
     }
 
@@ -218,8 +202,8 @@ void TST_AbstractRegExp::CallTestForValidCharacters()
     const int pos = FindFirstNotOf(translated, validNameChars);
     if (pos != -1)
     {
-        const QString message = QStringLiteral("Translated string '%1' contains invalid character '%2' at position '%3'.")
-                .arg(translated).arg(translated.at(pos)).arg(pos);
+        const QString message = QStringLiteral("Translated string '%1' contains invalid character '%2' at "
+                                               "position '%3'.").arg(translated).arg(translated.at(pos)).arg(pos);
         QFAIL(qUtf8Printable(message));
     }
 }

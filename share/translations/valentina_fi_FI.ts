@@ -369,7 +369,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -8819,7 +8819,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">nimetön</translation>
+        <translation>nimetön</translation>
     </message>
     <message>
         <source>All files</source>
@@ -8968,6 +8968,13 @@ Haluatko tallentaa muutokset?</translation>
     <name>MoveSplinePath</name>
     <message>
         <source>move spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9445,6 +9452,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10173,11 +10192,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Varmista poistaminen</translation>
+        <translation>Varmista poistaminen</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Haluatko todella poistaa?</translation>
+        <translation>Haluatko todella poistaa?</translation>
     </message>
 </context>
 <context>
@@ -11280,6 +11299,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12590,7 +12613,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -15817,6 +15840,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -17489,11 +17516,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Korkeus:</translation>
+        <translation>Korkeus:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -17533,7 +17560,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -17553,19 +17580,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pikseliä</translation>
+        <translation>Pikseliä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimetriä</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
 </context>
 <context>

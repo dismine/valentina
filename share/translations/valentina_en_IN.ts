@@ -493,7 +493,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished">Built in</translation>
+        <translation>Built in</translation>
     </message>
 </context>
 <context>
@@ -9847,11 +9847,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">untitled</translation>
+        <translation>untitled</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">All files</translation>
+        <translation>All files</translation>
     </message>
     <message>
         <source>Save Image</source>
@@ -10065,6 +10065,13 @@ Do you want to save your changes?</translation>
     <message>
         <source>move spline path</source>
         <translation>move spline path</translation>
+    </message>
+</context>
+<context>
+    <name>OpaqueBackgroundImage</name>
+    <message>
+        <source>change a background image opacity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10581,6 +10588,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>scene render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11363,19 +11382,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Images</translation>
+        <translation>Images</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">All files</translation>
+        <translation>All files</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished">Confirm deletion</translation>
+        <translation>Confirm deletion</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished">Do you really want to delete?</translation>
+        <translation>Do you really want to delete?</translation>
     </message>
 </context>
 <context>
@@ -12700,6 +12719,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14053,11 +14076,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished">Show in Finder</translation>
+        <translation>Show in Finder</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Show in Explorer</translation>
+        <translation>Show in Explorer</translation>
     </message>
     <message>
         <source>Save as …</source>
@@ -14069,7 +14092,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Delete</translation>
+        <translation>Delete</translation>
     </message>
 </context>
 <context>
@@ -17567,6 +17590,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolPointFromArcAndTangent</name>
@@ -19259,7 +19286,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>Transformation</source>
@@ -19288,11 +19315,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Width:</translation>
+        <translation>Width:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Height:</translation>
+        <translation>Height:</translation>
     </message>
     <message>
         <source>Scale proportionally</source>
@@ -19304,11 +19331,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotation</translation>
+        <translation>Rotation</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Z Value</source>
@@ -19332,7 +19359,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Delete</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -19352,19 +19379,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished">Pixels</translation>
+        <translation>Pixels</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Millimiters</translation>
+        <translation>Millimiters</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimeters</translation>
+        <translation>Centimeters</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inches</translation>
+        <translation>Inches</translation>
     </message>
 </context>
 <context>

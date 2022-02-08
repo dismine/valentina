@@ -35,6 +35,7 @@
 - Fix tool True darts notes.
 - New measurement type separator.
 - Improve creation by mouse for tool Spline.
+- Fix incorrect translation of known measurements.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

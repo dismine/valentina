@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_TSTranslation());
 
     const QStringList locales = SupportedLocales();
-    for(auto &locale : locales)
+    for(const auto &locale : locales)
     {
         for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
         {
