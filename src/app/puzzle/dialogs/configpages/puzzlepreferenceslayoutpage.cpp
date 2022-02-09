@@ -117,6 +117,9 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
 
     connect(ui->doubleSpinBoxPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](){m_settingsChanged=true;});
+    ui->doubleSpinBoxPiecesGap->setSuffix(UnitsToStr(m_oldLayoutUnit));
+
+    ui->spinBoxLineWidth->setSuffix(UnitsToStr(Unit::Px));
 
     connect(ui->checkBoxWarningPiecesSuperposition, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
     connect(ui->checkBoxStickyEdges, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
@@ -163,6 +166,8 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
     settings->SetLayoutStickyEdges(ui->checkBoxStickyEdges->isChecked());
     settings->SetLayoutWarningPiecesOutOfBound(ui->checkBoxWarningPiecesOutOfBound->isChecked());
     settings->SetLayoutFollowGrainline(ui->checkBoxFollowGrainline->isChecked());
+
+    settings->SetLayoutLineWidth(ui->spinBoxLineWidth->value());
 
     if (m_settingsChanged)
     {
@@ -260,6 +265,7 @@ void PuzzlePreferencesLayoutPage::ConvertPaperSize()
 
     ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Cm, layoutUnit));
     ui->doubleSpinBoxPiecesGap->setValue(newGap);
+    ui->doubleSpinBoxPiecesGap->setSuffix(UnitsToStr(layoutUnit));
 
     m_settingsChanged = true;
 }
@@ -669,6 +675,8 @@ void PuzzlePreferencesLayoutPage::ReadSettings()
 
     LayoutSheetIgnoreMargins(static_cast<int>(ui->checkBoxLayoutIgnoreFileds->isChecked()));
     LayoutTileIgnoreMargins(static_cast<int>(ui->checkBoxTileIgnoreFileds->isChecked()));
+
+    ui->spinBoxLineWidth->setValue(settings->GetLayoutLineWidth());
 
     m_settingsChanged = false;
 }

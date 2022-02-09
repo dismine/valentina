@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vpsettings.h"
+#include "qglobal.h"
 
 #include <QMarginsF>
 
@@ -52,6 +53,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String("layout/lineWidth")))
+
+int cachedLineWidth = -1;
 }  // namespace
 
 Q_DECLARE_METATYPE(QMarginsF)
@@ -315,4 +319,22 @@ qint8 VPSettings::GetLayoutExportFormat() const
 void VPSettings::SetLayoutExportFormat(qint8 format)
 {
     setValue(*settingLayoutExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutLineWidth() const -> int
+{
+    if (cachedLineWidth == -1)
+    {
+        cachedLineWidth = qvariant_cast<int>(value(*settingLayoutLineWidth, 1));
+    }
+
+    return cachedLineWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutLineWidth(int width)
+{
+    cachedLineWidth = qBound(1, width, 10);
+    setValue(*settingLayoutLineWidth, cachedLineWidth);
 }

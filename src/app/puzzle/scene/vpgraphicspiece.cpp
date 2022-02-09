@@ -45,6 +45,8 @@
 
 #include "../vlayout/vtextmanager.h"
 
+#include "../vpapplication.h"
+
 #include "vlayoutpiecepath.h"
 #include "vplacelabelitem.h"
 
@@ -56,8 +58,6 @@ Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
 
 namespace
 {
-constexpr qreal penWidth = 1;
-
 QColor mainColor = Qt::black;
 QColor errorColor = Qt::red;
 }
@@ -94,7 +94,8 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     shape.addPath(m_placeLabels);
     shape.addPath(m_stickyPath);
 
-    constexpr qreal halfPenWidth = penWidth/2.;
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    const qreal halfPenWidth = settings->GetLayoutLineWidth()/2.;
 
     return shape.boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
 }
@@ -116,7 +117,8 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    QPen pen(PieceColor(), penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    QPen pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter->setPen(pen);
 
     PaintPiece(painter);

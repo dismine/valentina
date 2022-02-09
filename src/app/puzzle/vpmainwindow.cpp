@@ -1873,6 +1873,13 @@ void VPMainWindow::ConnectToPreferences(const QSharedPointer<DialogPuzzlePrefere
     // Must be first
     connect(preferences.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::WindowsLocale);
     connect(preferences.data(), &DialogPuzzlePreferences::UpdateProperties, this, &VPMainWindow::ToolBarStyles);
+    connect(preferences.data(), &DialogPuzzlePreferences::UpdateProperties, this, [this]()
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->RefreshScenePieces();
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

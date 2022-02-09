@@ -140,7 +140,8 @@ void VPLayout::SetTileFactory(VPTileFactory *newTileFactory)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::RefreshScenePieces() const
 {
-    for (const auto& sheet : GetSheets())
+    const QList<VPSheetPtr> sheets = GetSheets();
+    for (const auto& sheet : sheets)
     {
         if (not sheet.isNull())
         {

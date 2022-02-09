@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>616</width>
-    <height>668</height>
+    <height>686</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -294,7 +294,7 @@
        <property name="title">
         <string>Control</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_14">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <widget class="QCheckBox" name="checkBoxWarningPiecesSuperposition">
           <property name="text">
@@ -334,6 +334,27 @@
           </item>
           <item>
            <widget class="QDoubleSpinBox" name="doubleSpinBoxPiecesGap"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Line width:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBoxLineWidth">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>10</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

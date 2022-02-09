@@ -100,6 +100,9 @@ public:
     auto GetLayoutExportFormat() const -> qint8;
     void SetLayoutExportFormat(qint8 format);
 
+    auto GetLayoutLineWidth() const -> int;
+    void SetLayoutLineWidth(int width);
+
 private:
     Q_DISABLE_COPY(VPSettings)
 };
