@@ -91,8 +91,6 @@ private:
     QPointF m_moveStartPoint{};
     QPointF m_rotationStartPoint{};
 
-    QCursor m_rotateCursor{};
-
     bool allowChangeMerge{false};
 
     QVector<QPointF> m_stickyPoints{};

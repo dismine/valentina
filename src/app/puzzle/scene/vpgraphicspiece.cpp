@@ -67,9 +67,6 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
     QGraphicsObject(parent),
     m_piece(piece)
 {
-    QPixmap cursor_pixmap = QIcon("://puzzleicon/svg/cursor_rotate.svg").pixmap(QSize(32,32));
-    m_rotateCursor= QCursor(cursor_pixmap, 16, 16);
-
     // set some infos
     setFlags(ItemIsSelectable | ItemSendsGeometryChanges);
     setAcceptHoverEvents(true);
