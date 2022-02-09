@@ -57,6 +57,8 @@ qreal  ScaleWidth(qreal width, qreal scale);
 
 QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen);
 
+auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath;
+
 void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidth, QPainter *painter,
                                    const QStyleOptionGraphicsItem *option);
 

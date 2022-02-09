@@ -475,25 +475,6 @@ void VPMainGraphicsView::RestoreOrigin() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::on_ItemClicked(QGraphicsItem *item)
-{
-    if (item == nullptr || (item->type() != VPGraphicsPiece::Type &&
-                            item->type() != VPGraphicsPieceControls::Type &&
-                            item->type() != VPGraphicsTransformationOrigin::Type))
-    {
-        VPLayoutPtr layout = m_layout.toStrongRef();
-        if (not layout.isNull())
-        {
-            VPSheetPtr sheet = layout->GetFocusedSheet();
-            if (not sheet.isNull())
-            {
-                sheet->ClearSelection();
-            }
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::on_SceneMouseMove(const QPointF &scenePos)
 {
     emit mouseMove(scenePos);
@@ -657,8 +638,6 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
     {
        VMainGraphicsScene *scene = sheet->SceneData()->Scene();
        setScene(scene);
-       connect(scene, &VMainGraphicsScene::ItemByMousePress, this, &VPMainGraphicsView::on_ItemClicked,
-               Qt::UniqueConnection);
        connect(scene, &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
                Qt::UniqueConnection);
     }

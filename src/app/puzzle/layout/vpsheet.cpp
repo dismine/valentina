@@ -54,7 +54,6 @@ VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheet
     m_scene->addItem(m_graphicsTileGrid);
 
     m_rotationControls = new VPGraphicsPieceControls(layout);
-    m_rotationControls->setVisible(false);
     m_scene->addItem(m_rotationControls);
 
     m_rotationOrigin = new VPGraphicsTransformationOrigin(layout);

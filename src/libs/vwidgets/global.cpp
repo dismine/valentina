@@ -31,12 +31,15 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 
+#include <QBitmap>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 
 const qreal minVisibleFontSize = 5;
+
+extern auto qt_regionToPath(const QRegion &region) -> QPainterPath;
 
 inline qreal DefPointRadiusPixel()
 {
@@ -138,6 +141,21 @@ QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen)
     QPainterPath p = ps.createStroke(path);
     p.addPath(path);
     return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath
+{
+    if (not pixmap.isNull())
+    {
+        QBitmap mask = pixmap.mask();
+        if (not mask.isNull())
+        {
+            return qt_regionToPath(QRegion(mask));
+        }
+    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

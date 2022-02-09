@@ -45,25 +45,8 @@
 #include "../vmisc/vmath.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
-extern auto qt_regionToPath(const QRegion &region) -> QPainterPath;
-
 namespace
 {
-//---------------------------------------------------------------------------------------------------------------------
-auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath
-{
-    if (not pixmap.isNull())
-    {
-        QBitmap mask = pixmap.mask();
-        if (not mask.isNull())
-        {
-            return qt_regionToPath(QRegion(mask));
-        }
-    }
-
-    return {};
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 auto RectTopPoint(const QRectF &rect) -> QPointF
 {
@@ -466,68 +449,21 @@ void VBackgroundImageControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_handleCornerHover = SelectedHandleCorner(event->pos());
-
-    if (m_handleCornerHover != BIHandleCorner::Invalid)
-    {
-        if (not m_image.Hold())
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        }
-        else
-        {
-            setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
-        }
-    }
-    else
-    {
-        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
-    }
+    UpdateCursor(SelectedHandleCorner(event->pos()));
     QGraphicsObject::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_handleCornerHover = SelectedHandleCorner(event->pos());
-    if (m_handleCornerHover != BIHandleCorner::Invalid)
-    {
-        if (not m_image.Hold())
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        }
-        else
-        {
-            setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
-        }
-    }
-    else
-    {
-        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
-    }
+    UpdateCursor(SelectedHandleCorner(event->pos()));
     QGraphicsObject::hoverMoveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_handleCornerHover = BIHandleCorner::Invalid;
-
-    if (SelectedHandleCorner(event->pos()) != BIHandleCorner::Invalid)
-    {
-        if (not m_image.Hold())
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        }
-        else
-        {
-            setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
-        }
-    }
-    else
-    {
-        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
-    }
+    UpdateCursor(BIHandleCorner::Invalid);
     QGraphicsObject::hoverLeaveEvent(event);
 }
 
@@ -1892,5 +1828,27 @@ void VBackgroundImageControls::RotateImage(QGraphicsSceneMouseEvent *event)
         auto *command = new RotateBackgroundImage(m_image.Id(), imageMatrix, m_doc, m_allowChangeMerge);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
         m_allowChangeMerge = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBackgroundImageControls::UpdateCursor(BIHandleCorner corner)
+{
+    m_handleCornerHover = corner;
+
+    if (m_handleCornerHover != BIHandleCorner::Invalid)
+    {
+        if (not m_image.Hold())
+        {
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        }
+        else
+        {
+            setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
+        }
+    }
+    else
+    {
+        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
     }
 }

@@ -34,16 +34,38 @@
 #include "scenedef.h"
 #include "../layout/vpsheet.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class VPLayout;
 class VPGraphicsPiece;
+class QGraphicsView;
+
+enum class VPHandleCorner : int
+{
+    Invalid = 0,
+    TopLeft = 1,
+    TopRight = 2,
+    BottomRight = 3,
+    BottomLeft = 4
+};
+
+enum class VPHandleCornerType
+{
+    TopLeft,
+    TopRight,
+    BottomRight,
+    BottomLeft
+};
 
 class VPGraphicsTransformationOrigin : public QGraphicsObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
 
-    virtual int type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::TransformationOrigin)};
 
 public slots:
@@ -64,7 +86,7 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(VPGraphicsTransformationOrigin)
+    Q_DISABLE_COPY_MOVE(VPGraphicsTransformationOrigin) // NOLINT
 
     bool            m_originVisible{true};
     VPLayoutWeakPtr m_layout{};
@@ -78,11 +100,11 @@ private:
 
 class VPGraphicsPieceControls : public QGraphicsObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
 
-    virtual int type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Handles)};
 
     void SetIgnorePieceTransformation(bool newIgnorePieceTransformation);
@@ -100,39 +122,58 @@ protected:
     auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(VPGraphicsPieceControls)
+    Q_DISABLE_COPY_MOVE(VPGraphicsPieceControls) // NOLINT
+
     QRectF          m_pieceRect{};
     QPointF         m_rotationStartPoint{};
     qreal           m_rotationSum{0};
-    bool            m_controlsVisible{true};
+    bool            m_controlsVisible{false};
     VPLayoutWeakPtr m_layout{};
-    int             m_handleCorner{0};
+    VPHandleCorner  m_handleCorner{VPHandleCorner::Invalid};
     VPTransformationOrigon m_savedOrigin{};
     bool            m_originSaved{false};
     bool            allowChangeMerge{false};
     QList<VPPiecePtr> m_selectedPieces{};
     bool            m_ignorePieceTransformation{false};
 
-    auto TopLeftControl(QPainter *painter = nullptr) const -> QPainterPath;
-    auto TopRightControl(QPainter *painter = nullptr) const -> QPainterPath;
-    auto BottomLeftControl(QPainter *painter = nullptr) const -> QPainterPath;
-    auto BottomRightControl(QPainter *painter = nullptr) const -> QPainterPath;
+    QMap<VPHandleCornerType, QPixmap> m_handlePixmaps{};
+    QMap<VPHandleCornerType, QPixmap> m_handleHoverPixmaps{};
+    QMap<VPHandleCornerType, QPainterPath> m_handlePaths{};
+
+    void InitPixmaps();
+
+    auto TopLeftHandlerPosition() const -> QPointF;
+    auto TopRightHandlerPosition() const -> QPointF;
+    auto BottomRightHandlerPosition() const -> QPointF;
+    auto BottomLeftHandlerPosition() const -> QPointF;
+
+    auto ControllerPath(VPHandleCornerType type, QPointF pos) const -> QPainterPath;
+    auto TopLeftControl() const -> QPainterPath;
+    auto TopRightControl() const -> QPainterPath;
+    auto BottomRightControl() const -> QPainterPath;
+    auto BottomLeftControl() const -> QPainterPath;
 
     auto Handles() const -> QPainterPath;
-    auto Controller(const QTransform &t, QPainter *painter = nullptr) const -> QPainterPath;
     auto ControllersRect() const -> QRectF;
 
-    auto ArrowPath() const -> QPainterPath;
+    auto SelectedHandleCorner(const QPointF &pos) const -> VPHandleCorner;
 
-    auto SelectedHandleCorner(const QPointF &pos) const -> int;
+    auto HandlerPixmap(bool hover, VPHandleCornerType type) const -> QPixmap;
 
     auto SelectedPieces() const -> QList<VPPiecePtr>;
     static auto PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF;
+
+    auto ItemView() -> QGraphicsView *;
+
+    void UpdateCursor(VPHandleCorner corner);
 };
 
 #endif // VPGRAPHICSPIECECONTROLS_H

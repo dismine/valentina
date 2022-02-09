@@ -40,10 +40,10 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <Qt>
+#include <QGraphicsView>
 
 #include "global.h"
 #include "../vmisc/vabstractapplication.h"
-
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -95,11 +95,17 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         emit MouseLeftPressed();
+
+        QTransform deviceTransform;
+        auto *view = qobject_cast<QGraphicsView *>(event->widget());
+        if (view != nullptr)
+        {
+            deviceTransform = view->transform();
+        }
+        emit ItemByMousePress(itemAt(event->scenePos(), deviceTransform));
     }
 
     QGraphicsScene::mousePressEvent(event);
-
-    emit ItemByMousePress(itemAt(event->scenePos(), {}));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,7 +114,14 @@ void VMainGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         emit MouseLeftReleased();
-        emit ItemByMouseRelease(itemAt(event->scenePos(), {}));
+
+        QTransform deviceTransform;
+        auto *view = qobject_cast<QGraphicsView *>(event->widget());
+        if (view != nullptr)
+        {
+            deviceTransform = view->transform();
+        }
+        emit ItemByMouseRelease(itemAt(event->scenePos(), deviceTransform));
     }
     QGraphicsScene::mouseReleaseEvent(event);
 }

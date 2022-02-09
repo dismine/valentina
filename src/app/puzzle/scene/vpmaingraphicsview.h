@@ -88,7 +88,6 @@ protected:
 
 private slots:
     void RestoreOrigin() const;
-    void on_ItemClicked(QGraphicsItem* item);
     void on_SceneMouseMove(const QPointF &scenePos);
 
 private:

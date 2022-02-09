@@ -70,7 +70,7 @@ enum class BIHandleCornerType
 
 class VBackgroundImageControls : public QGraphicsObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VBackgroundImageControls(VAbstractPattern *doc, QGraphicsItem * parent = nullptr);
     ~VBackgroundImageControls() override = default;
@@ -104,7 +104,7 @@ private slots:
     void ScreenChanged();
 
 private:
-    Q_DISABLE_COPY_MOVE(VBackgroundImageControls)
+    Q_DISABLE_COPY_MOVE(VBackgroundImageControls) // NOLINT
 
     QUuid m_id{};
     VAbstractPattern *m_doc;
@@ -180,6 +180,8 @@ private:
 
     void ScaleImage(QGraphicsSceneMouseEvent * event);
     void RotateImage(QGraphicsSceneMouseEvent * event);
+
+    void UpdateCursor(BIHandleCorner corner);
 };
 
 #endif // VBACKGROUNDIMAGECONTROLS_H
