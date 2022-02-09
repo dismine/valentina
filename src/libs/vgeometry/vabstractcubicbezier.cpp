@@ -516,7 +516,7 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
         length = base;
     }
 
-    constexpr qreal eps = UnitConvertor(0.001, Unit::Mm, Unit::Px);
+    Q_DECL_RELAXED_CONSTEXPR qreal eps = ToPixel(0.001, Unit::Mm);
     qreal parT = 0.5;
     qreal step = parT;
     qreal splLength = 0;
