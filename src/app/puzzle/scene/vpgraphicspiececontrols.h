@@ -174,6 +174,9 @@ private:
     auto ItemView() -> QGraphicsView *;
 
     void UpdateCursor(VPHandleCorner corner);
+
+    void PrepareTransformationOrigin(bool shiftPressed);
+    void CorrectRotationSum(const VPLayoutPtr &layout, const VPTransformationOrigon &rotationOrigin, qreal rotateOn);
 };
 
 #endif // VPGRAPHICSPIECECONTROLS_H

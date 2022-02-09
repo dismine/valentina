@@ -433,68 +433,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if((event->modifiers() & Qt::ShiftModifier) && m_handleCorner != VPHandleCorner::Invalid)
-    {
-        if (not m_originSaved)
-        {
-            VPLayoutPtr layout = m_layout.toStrongRef();
-            if (not layout.isNull())
-            {
-                VPSheetPtr sheet = layout->GetFocusedSheet();
-                if (not sheet.isNull())
-                {
-                    m_savedOrigin = sheet->TransformationOrigin();
-                    m_originSaved = true;
-                    m_pieceRect = PiecesBoundingRect(m_selectedPieces);
-
-                    VPTransformationOrigon origin;
-                    origin.custom = true;
-
-                    if (m_handleCorner == VPHandleCorner::TopLeft)
-                    {
-                        origin.origin = m_pieceRect.bottomRight();
-                    }
-                    else if (m_handleCorner == VPHandleCorner::TopRight)
-                    {
-                        origin.origin = m_pieceRect.bottomLeft();
-                    }
-                    else if (m_handleCorner == VPHandleCorner::BottomRight)
-                    {
-                        origin.origin = m_pieceRect.topLeft();
-                    }
-                    else if (m_handleCorner == VPHandleCorner::BottomLeft)
-                    {
-                        origin.origin = m_pieceRect.topRight();
-                    }
-
-                    sheet->SetTransformationOrigin(origin);
-                    emit TransformationOriginChanged();
-                }
-            }
-        }
-    }
-    else
-    {
-        if (m_originSaved)
-        {
-            VPLayoutPtr layout = m_layout.toStrongRef();
-            if (not layout.isNull())
-            {
-                VPSheetPtr sheet = layout->GetFocusedSheet();
-                if (sheet != nullptr)
-                {
-                    if (not m_savedOrigin.custom)
-                    {
-                        m_pieceRect = PiecesBoundingRect(m_selectedPieces);
-                        m_savedOrigin.origin = m_pieceRect.center();
-                    }
-                    sheet->SetTransformationOrigin(m_savedOrigin);
-                    emit TransformationOriginChanged();
-                }
-                m_originSaved = false;
-            }
-        }
-    }
+    PrepareTransformationOrigin(event->modifiers() & Qt::ShiftModifier);
 
     QPointF rotationNewPoint = event->scenePos();
 
@@ -512,42 +451,12 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if (not qFuzzyIsNull(rotateOn))
     {
-        auto PreparePieces = [this]()
-        {
-            QList<VPPiecePtr> pieces;
-            VPLayoutPtr layout = m_layout.toStrongRef();
-            if (not layout.isNull())
-            {
-                VPSheetPtr sheet = layout->GetFocusedSheet();
-                if (not sheet.isNull())
-                {
-                    pieces = sheet->GetSelectedPieces();
-                }
-            }
-
-            return pieces;
-        };
-
-        QList<VPPiecePtr> pieces = PreparePieces();
+        QList<VPPiecePtr> pieces = SelectedPieces();
 
         VPLayoutPtr layout = m_layout.toStrongRef();
         if (not layout.isNull())
         {
-            if (layout->LayoutSettings().GetFollowGrainline() && not rotationOrigin.custom)
-            {
-                if (m_rotationSum > 90 || m_rotationSum < -90)
-                {
-                    m_rotationSum = rotateOn;
-                }
-                else
-                {
-                    m_rotationSum += rotateOn;
-                }
-            }
-            else
-            {
-                m_rotationSum = rotateOn;
-            }
+            CorrectRotationSum(layout, rotationOrigin, rotateOn);
 
             if (pieces.size() == 1)
             {
@@ -875,6 +784,113 @@ void VPGraphicsPieceControls::UpdateCursor(VPHandleCorner corner)
         {
             setCursor(view->viewport()->cursor());
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPieceControls::PrepareTransformationOrigin(bool shiftPressed)
+{
+    if(shiftPressed && m_handleCorner != VPHandleCorner::Invalid)
+    {
+        if (m_originSaved)
+        {
+            return;
+        }
+
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (sheet.isNull())
+        {
+            return;
+        }
+
+        m_savedOrigin = sheet->TransformationOrigin();
+        m_originSaved = true;
+        m_pieceRect = PiecesBoundingRect(m_selectedPieces);
+
+        VPTransformationOrigon origin;
+        origin.custom = true;
+
+        switch (m_handleCorner)
+        {
+            case VPHandleCorner::TopLeft:
+                origin.origin = m_pieceRect.bottomRight();
+                break;
+            case VPHandleCorner::TopRight:
+                origin.origin = m_pieceRect.bottomLeft();
+                break;
+            case VPHandleCorner::BottomRight:
+                origin.origin = m_pieceRect.topLeft();
+                break;
+            case VPHandleCorner::BottomLeft:
+                origin.origin = m_pieceRect.topRight();
+                break;
+            case VPHandleCorner::Invalid:
+            default:
+                break;
+        }
+
+        sheet->SetTransformationOrigin(origin);
+        emit TransformationOriginChanged();
+    }
+    else
+    {
+        if (not m_originSaved)
+        {
+            return;
+        }
+
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (sheet.isNull())
+        {
+            return;
+        }
+
+        if (not m_savedOrigin.custom)
+        {
+            m_pieceRect = PiecesBoundingRect(m_selectedPieces);
+            m_savedOrigin.origin = m_pieceRect.center();
+        }
+        sheet->SetTransformationOrigin(m_savedOrigin);
+        emit TransformationOriginChanged();
+        m_originSaved = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPieceControls::CorrectRotationSum(const VPLayoutPtr &layout,
+                                                 const VPTransformationOrigon &rotationOrigin, qreal rotateOn)
+{
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    if (layout->LayoutSettings().GetFollowGrainline() && not rotationOrigin.custom)
+    {
+        if (m_rotationSum > 90 || m_rotationSum < -90)
+        {
+            m_rotationSum = rotateOn;
+        }
+        else
+        {
+            m_rotationSum += rotateOn;
+        }
+    }
+    else
+    {
+        m_rotationSum = rotateOn;
     }
 }
 
