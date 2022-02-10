@@ -37,7 +37,7 @@
 
 class VPLayoutSettings
 {
-    Q_DECLARE_TR_FUNCTIONS(VPLayoutSettings)
+    Q_DECLARE_TR_FUNCTIONS(VPLayoutSettings) // NOLINT
 public:
     VPLayoutSettings() = default;
 
@@ -312,8 +312,11 @@ public:
     auto GetShowWatermark() const -> bool;
     void SetShowWatermark(bool newShowWatermark);
 
-    bool GetPrintTilesScheme() const;
+    auto GetPrintTilesScheme() const -> bool;
     void SetPrintTilesScheme(bool newPrintTilesScheme);
+
+    auto GetShowTileNumber() const -> bool;
+    void SetShowTileNumber(bool newTileNumbers);
 
 private:
     Unit m_unit{Unit::Cm};
@@ -371,6 +374,8 @@ private:
     QString m_watermarkPath{};
 
     bool m_printTilesScheme{false};
+
+    bool m_showTileNumbers{false};
 };
 
 #endif // VPLAYOUTSETTINGS_H

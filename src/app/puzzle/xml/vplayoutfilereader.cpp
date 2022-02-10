@@ -322,6 +322,7 @@ void VPLayoutFileReader::ReadTiles(const VPLayoutPtr &layout)
     QXmlStreamAttributes attribs = attributes();
     layout->LayoutSettings().SetShowTiles(ReadAttributeBool(attribs, ML::AttrVisible, falseStr));
     layout->LayoutSettings().SetPrintTilesScheme(ReadAttributeBool(attribs, ML::AttrPrintScheme, falseStr));
+    layout->LayoutSettings().SetShowTileNumber(ReadAttributeBool(attribs, ML::AttrTileNumber, falseStr));
 //    attribs.value(ML::AttrMatchingMarks); // TODO
 
     const QStringList tags

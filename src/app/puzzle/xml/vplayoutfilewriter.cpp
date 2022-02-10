@@ -229,13 +229,13 @@ void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
 {
-    Q_UNUSED(layout); // to be removed
-
    writeStartElement(ML::TagTiles);
    SetAttribute(ML::AttrVisible, layout->LayoutSettings().GetShowTiles());
    SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
    SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme, layout->LayoutSettings().GetPrintTilesScheme(),
                                 [](bool print) noexcept {return not print;});
+   SetAttributeOrRemoveIf<bool>(ML::AttrTileNumber, layout->LayoutSettings().GetShowTileNumber(),
+                                [](bool show) noexcept {return not show;});
 
    WriteSize(layout->LayoutSettings().GetTilesSize());
    WriteMargins(layout->LayoutSettings().GetTilesMargins(), layout->LayoutSettings().IgnoreTilesMargins());

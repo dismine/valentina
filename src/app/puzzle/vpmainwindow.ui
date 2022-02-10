@@ -219,7 +219,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="iconSize">
         <size>
@@ -1548,6 +1548,13 @@
                  <widget class="QCheckBox" name="checkBoxPrintTilesScheme">
                   <property name="text">
                    <string>Print tiles scheme</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBoxShowTileNumber">
+                  <property name="text">
+                   <string>Show tile number</string>
                   </property>
                  </widget>
                 </item>

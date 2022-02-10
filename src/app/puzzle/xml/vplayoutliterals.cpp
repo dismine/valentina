@@ -105,6 +105,7 @@ const QString AttrYScale               = QStringLiteral("yScale");
 const QString AttrIgnoreMargins        = QStringLiteral("ignoreMargins");
 const QString AttrShowPreview          = QStringLiteral("showPreview");
 const QString AttrPrintScheme          = QStringLiteral("printScheme");
+const QString AttrTileNumber           = QStringLiteral("tileNumber");
 
 const QString atFrontStr               = QStringLiteral("atFront");
 const QString atRearStr                = QStringLiteral("atRear");

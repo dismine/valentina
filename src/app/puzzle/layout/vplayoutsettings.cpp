@@ -378,7 +378,7 @@ void VPLayoutSettings::SetShowWatermark(bool newShowWatermark)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPLayoutSettings::GetPrintTilesScheme() const
+auto VPLayoutSettings::GetPrintTilesScheme() const -> bool
 {
     return m_printTilesScheme;
 }
@@ -387,4 +387,16 @@ bool VPLayoutSettings::GetPrintTilesScheme() const
 void VPLayoutSettings::SetPrintTilesScheme(bool newPrintTilesScheme)
 {
     m_printTilesScheme = newPrintTilesScheme;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::GetShowTileNumber() const -> bool
+{
+    return m_showTileNumbers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetShowTileNumber(bool newTileNumbers)
+{
+    m_showTileNumbers = newTileNumbers;
 }

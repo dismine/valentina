@@ -1082,6 +1082,16 @@ void VPMainWindow::InitPropertyTabTiles()
             LayoutWasSaved(false);
         }
     });
+
+    connect(ui->checkBoxShowTileNumber, &QCheckBox::toggled, this, [this](bool checked)
+    {
+        if (not m_layout.isNull())
+        {
+            m_layout->LayoutSettings().SetShowTileNumber(checked);
+            LayoutWasSaved(false);
+            m_graphicsView->RefreshLayout();
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1486,6 +1496,7 @@ void VPMainWindow::SetPropertyTabTilesData()
         SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
         SetCheckBoxValue(ui->checkBoxTilesShowWatermark, m_layout->LayoutSettings().GetShowWatermark());
         SetCheckBoxValue(ui->checkBoxPrintTilesScheme, m_layout->LayoutSettings().GetPrintTilesScheme());
+        SetCheckBoxValue(ui->checkBoxShowTileNumber, m_layout->LayoutSettings().GetShowTileNumber());
     }
     else
     {
