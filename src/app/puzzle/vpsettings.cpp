@@ -326,7 +326,7 @@ auto VPSettings::GetLayoutLineWidth() const -> int
 {
     if (cachedLineWidth == -1)
     {
-        cachedLineWidth = qvariant_cast<int>(value(*settingLayoutLineWidth, 1));
+        cachedLineWidth = qvariant_cast<int>(value(*settingLayoutLineWidth, 3));
     }
 
     return cachedLineWidth;
