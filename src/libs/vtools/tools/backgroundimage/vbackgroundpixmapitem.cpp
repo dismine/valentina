@@ -39,7 +39,7 @@ namespace
 {
 auto InvalidImage() -> QPixmap
 {
-    QImageReader imageReader(QStringLiteral("://icon/svg/broken_path.svg"));
+    QImageReader imageReader(VBackgroundPatternImage::brokenImage);
     return std::move(QPixmap::fromImageReader(&imageReader));
 }
 }

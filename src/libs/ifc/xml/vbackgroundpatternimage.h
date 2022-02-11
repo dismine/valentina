@@ -95,6 +95,8 @@ public:
     auto Opacity() const -> qreal;
     void SetOpacity(qreal newOpacity);
 
+    static const QString brokenImage;
+
 private:
     QUuid           m_id{QUuid::createUuid()};
     QString         m_contentType{};
@@ -108,6 +110,9 @@ private:
     bool            m_visible{true};
     qreal           m_opacity{1.0};
     mutable QSize   m_size{};
+
+    auto LinkedImageSize() const -> QSize;
+    auto BuiltInImageSize() const -> QSize;
 };
 
 #endif // VBACKGROUNDPATTERNIMAGE_H

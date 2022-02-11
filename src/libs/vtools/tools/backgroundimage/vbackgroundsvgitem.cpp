@@ -92,8 +92,7 @@ auto VBackgroundSVGItem::Renderer() const -> QSvgRenderer *
 {
     if (Stale())
     {
-        const QString brokenImage = QStringLiteral("://icon/svg/broken_path.svg");
-        m_renderer->load(brokenImage);
+        m_renderer->load(VBackgroundPatternImage::brokenImage);
 
         VBackgroundPatternImage image = Image();
         if (not image.IsValid())
@@ -107,7 +106,7 @@ auto VBackgroundSVGItem::Renderer() const -> QSvgRenderer *
             m_renderer->load(image.FilePath());
             if (not m_renderer->isValid())
             {
-                m_renderer->load(brokenImage);
+                m_renderer->load(VBackgroundPatternImage::brokenImage);
             }
             MakeFresh();
             return m_renderer;
@@ -118,7 +117,7 @@ auto VBackgroundSVGItem::Renderer() const -> QSvgRenderer *
             m_renderer->load(QByteArray::fromBase64(image.ContentData()));
             if (not m_renderer->isValid())
             {
-                m_renderer->load(brokenImage);
+                m_renderer->load(VBackgroundPatternImage::brokenImage);
             }
             MakeFresh();
             return m_renderer;
