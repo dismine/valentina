@@ -357,9 +357,14 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
         }
 
         m_layout->TileFactory()->RefreshTileInfos();
-        m_layoutWatcher->blockSignals(true);
-        m_layout->TileFactory()->RefreshWatermarkData();
-        m_layoutWatcher->blockSignals(false);
+
+        if (path == m_layout->LayoutSettings().WatermarkPath())
+        {
+            m_layoutWatcher->blockSignals(true);
+            m_layout->TileFactory()->RefreshWatermarkData();
+            m_layoutWatcher->blockSignals(false);
+        }
+
         m_graphicsView->RefreshLayout();
 
         if (checkFile.exists())
