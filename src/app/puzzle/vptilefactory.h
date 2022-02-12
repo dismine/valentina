@@ -35,18 +35,22 @@
 #include "layout/vplayout.h"
 #include "../ifc/ifcdef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class QGraphicsScene;
 class VCommonSettings;
 class QPainter;
 
 class VPTileFactory : QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings);
+    VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings, QObject *parent = nullptr);
 
-    virtual ~VPTileFactory() = default;
+    ~VPTileFactory() override = default;
 
     /**
      * @brief drawTile draws the tile of given coordinate (row, col) from the
@@ -99,7 +103,7 @@ public:
                                     const QString &watermarkPath, qreal xScale = 1.0, qreal yScale = 1.0);
 
 private:
-    Q_DISABLE_COPY(VPTileFactory)
+    Q_DISABLE_COPY_MOVE(VPTileFactory) // NOLINT
 
     VPLayoutWeakPtr  m_layout;
     VCommonSettings *m_commonSettings{nullptr};
@@ -116,8 +120,32 @@ private:
 
     VWatermarkData m_watermarkData{};
 
-    void DrawRuler(QPainter *painter);
-    void DrawWatermark(QPainter *painter);
+    void DrawRuler(QPainter *painter) const;
+    void DrawWatermark(QPainter *painter) const;
+
+    auto PenTileInfos() const -> QPen;
+
+    void DrawTilePageContent(QPainter *painter, const VPSheetPtr &sheet, int row, int col, QPrinter *printer) const;
+
+    void DrawTopTriangle(QPainter *painter) const;
+    void DrawLeftTriangle(QPainter *painter) const;
+    void DrawBottomTriangle(QPainter *painter) const;
+    void DrawRightTriangle(QPainter *painter) const;
+
+    void DrawTopLineScissors(QPainter *painter) const;
+    void DrawLeftLineScissors(QPainter *painter) const;
+
+    void DrawTopCuttingLine(QPainter *painter) const;
+    void DrawLeftCuttingLine(QPainter *painter) const;
+    void DrawBottomCuttingLine(QPainter *painter) const;
+    void DrawRightCuttingLine(QPainter *painter) const;
+
+    void DrawSolidTopLine(QPainter *painter, int col, int nbCol) const;
+    void DrawSolidLeftLine(QPainter *painter, int row, int nbRow) const;
+    void DrawSolidBottomLine(QPainter *painter, int col, int nbCol) const;
+    void DrawSolidRightLine(QPainter *painter, int row, int nbRow) const;
+
+    void DrawTextInformation(QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName) const;
 };
 
 #endif // VPTILEFACTORY_H

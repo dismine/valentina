@@ -4,6 +4,7 @@
 
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "layout/vpsheet.h"
+#include "qobject.h"
 #include "scene/vpmaingraphicsview.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vcommonsettings.h"
@@ -11,7 +12,8 @@
 
 namespace
 {
-const QColor tileColor(180, 180, 180);
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, tileColor, (180, 180, 180)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(QBrush, triangleBush, (QColor(200,200,200))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 auto Grayscale(QImage image) -> QImage
@@ -22,7 +24,7 @@ auto Grayscale(QImage image) -> QImage
         int depth = 4;
         for (int jj = 0; jj < image.width(); jj++)
         {
-            QRgb* rgbpixel = reinterpret_cast<QRgb*>(scan + jj * depth);
+            auto* rgbpixel = reinterpret_cast<QRgb*>(scan + jj * depth); // NOLINT
             int gray = qGray(*rgbpixel);
             *rgbpixel = QColor(gray, gray, gray, qAlpha(*rgbpixel)).rgba();
         }
@@ -37,7 +39,7 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
 {
     QPixmap pixmap;
     QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
-    QString imageCacheKey = QString("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
+    QString imageCacheKey = QStringLiteral("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
             .arg(imagePath, QString::number(watermarkData.imageRotation),
                  watermarkData.grayscale ? trueStr : falseStr ).arg(xScale).arg(yScale);
 
@@ -72,10 +74,28 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
     }
     return pixmap;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// ------------- prepare triangles for position marks
+auto TriangleBasic() -> QPainterPath
+{
+    // ------------- prepare triangles for position marks
+    QRectF rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px),
+                              0,
+                              UnitConvertor(1, Unit::Cm, Unit::Px),
+                              UnitConvertor(0.5, Unit::Cm, Unit::Px));
+    QPainterPath triangleBasic;
+    triangleBasic.moveTo(rectBasic.topLeft());
+    triangleBasic.lineTo(rectBasic.topRight());
+    triangleBasic.lineTo(rectBasic.left() + (rectBasic.width() / 2.), rectBasic.bottom());
+    triangleBasic.lineTo(rectBasic.topLeft());
+    return triangleBasic;
+}
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings):
+VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings, QObject *parent):
+    QObject(parent),
     m_layout(layout),
     m_commonSettings(commonSettings)
 {
@@ -127,12 +147,6 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         return;
     }
 
-    QMarginsF sheetMargins;
-    if (not sheet->IgnoreMargins())
-    {
-        sheetMargins = sheet->GetSheetMargins();
-    }
-
     const int nbCol = ColNb(sheet);
     const int nbRow = RowNb(sheet);
 
@@ -141,153 +155,52 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         return;
     }
 
-    QPen penTileInfos = QPen(tileColor, m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap,
-                             Qt::RoundJoin);
-    QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
-                               Qt::RoundJoin);
-
-    painter->setPen(penTileDrawing);
-
-    // paint the content of the page
-    qreal xScale = layout->LayoutSettings().HorizontalScale();
-    qreal yScale = layout->LayoutSettings().VerticalScale();
-    QRectF source = QRectF(sheetMargins.left() + col*(m_drawingAreaWidth - tileStripeWidth) / xScale,
-                           sheetMargins.top() + row*(m_drawingAreaHeight - tileStripeWidth) / yScale,
-                           m_drawingAreaWidth / xScale,
-                           m_drawingAreaHeight / yScale);
-
-    QRectF target = QRectF(0,
-                           0,
-                           m_drawingAreaWidth,
-                           m_drawingAreaHeight);
-    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
-                                        Qt::IgnoreAspectRatio);
-
-    QScopedPointer<QSvgRenderer> svgRenderer(new QSvgRenderer());
-
-    // ------------- prepare triangles for position marks
-    QRectF rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px),
-                         0,
-                         UnitConvertor(1, Unit::Cm, Unit::Px),
-                         UnitConvertor(0.5, Unit::Cm, Unit::Px)
-                         );
-    QPainterPath triangleBasic;
-    triangleBasic.moveTo(rectBasic.topLeft());
-    triangleBasic.lineTo(rectBasic.topRight());
-    triangleBasic.lineTo(rectBasic.left() + (rectBasic.width() / 2), rectBasic.bottom());
-    triangleBasic.lineTo(rectBasic.topLeft());
-
-    QBrush triangleBush = QBrush(QColor(200,200,200));
+    DrawTilePageContent(painter, sheet, row, col, printer);
 
     // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
-    painter->setPen(penTileInfos);
+    painter->setPen(PenTileInfos());
 
     if(row > 0)
     {
         // add top triangle
-        QPainterPath triangleTop =
-                QTransform()
-                .translate(m_drawingAreaWidth/2, 0)
-                .map(triangleBasic);
-        painter->fillPath(triangleTop, triangleBush);
-
-        //  scissors along the top line
-        svgRenderer->load(QStringLiteral("://puzzleicon/svg/icon_scissors_horizontal.svg"));
-        svgRenderer->render(painter, QRectF(m_drawingAreaWidth - tileStripeWidth, 0,
-                                            UnitConvertor(0.95, Unit::Cm, Unit::Px),
-                                            UnitConvertor(0.56, Unit::Cm, Unit::Px)));
-
+        DrawTopTriangle(painter);
+        // scissors along the top line
+        DrawTopLineScissors(painter);
         // dashed top line (for cutting)
-        penTileInfos.setStyle(Qt::DashLine);
-        painter->setPen(penTileInfos);
-        painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth, 0));
+        DrawTopCuttingLine(painter);
     }
     else
     {
         // solid top line stopping at the edge
-        penTileInfos.setStyle(Qt::SolidLine);
-        painter->setPen(penTileInfos);
-
-        if(col < nbCol - 1)
-        {
-            painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth, 0));
-        }
-        else
-        {
-            painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth - tileStripeWidth, 0));
-        }
+        DrawSolidTopLine(painter, col, nbCol);
     }
 
     if(col > 0)
     {
         // add left triangle
-        QPainterPath triangleLeft =
-                QTransform()
-                .translate(0, m_drawingAreaHeight/2)
-                .rotate(-90)
-                .map(triangleBasic);
-        painter->fillPath(triangleLeft, triangleBush);
-
-        //  scissors along the left line
-        svgRenderer->load(QStringLiteral("://puzzleicon/svg/icon_scissors_vertical.svg"));
-        svgRenderer->render(painter, QRectF(0, m_drawingAreaHeight - tileStripeWidth,
-                                            UnitConvertor(0.56, Unit::Cm, Unit::Px),
-                                            UnitConvertor(0.95, Unit::Cm, Unit::Px)));
-
+        DrawLeftTriangle(painter);
+        // scissors along the left line
+        DrawLeftLineScissors(painter);
         // dashed left line (for cutting)
-        penTileInfos.setStyle(Qt::DashLine);
-        painter->setPen(penTileInfos);
-        painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight));
+        DrawLeftCuttingLine(painter);
     }
     else
     {
         // solid left line at the edge
-        penTileInfos.setStyle(Qt::SolidLine);
-        painter->setPen(penTileInfos);
-
-        if(row < nbRow - 1)
-        {
-            painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight));
-        }
-        else
-        {
-            painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight - tileStripeWidth));
-        }
+        DrawSolidLeftLine(painter, row, nbRow);
     }
 
     if(row < nbRow-1)
     {
         // add bottom triangle
-        QPainterPath triangleBottom =
-                QTransform()
-                .translate(m_drawingAreaWidth/2, m_drawingAreaHeight - tileStripeWidth)
-                .rotate(180)
-                .map(triangleBasic);
-
-        painter->fillPath(triangleBottom, triangleBush);
-
+        DrawBottomTriangle(painter);
         // dotted bottom line (for glueing)
-        penTileInfos.setStyle(Qt::DotLine);
-        painter->setPen(penTileInfos);
-        painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
-                          QPointF(m_drawingAreaWidth, m_drawingAreaHeight - tileStripeWidth));
+        DrawBottomCuttingLine(painter);
     }
     else
     {
         // solid bottom line at the edge
-        penTileInfos.setStyle(Qt::SolidLine);
-        painter->setPen(penTileInfos);
-
-        if(col < nbCol - 1)
-        {
-            painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
-                              QPointF(m_drawingAreaWidth, m_drawingAreaHeight - tileStripeWidth));
-        }
-        else
-        {
-            painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
-                              QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight - tileStripeWidth));;
-        }
+        DrawSolidBottomLine(painter, col, nbCol);
     }
 
     DrawRuler(painter);
@@ -296,82 +209,18 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     if(col < nbCol-1)
     {
         // add right triangle
-        QPainterPath triangleRight =
-                QTransform()
-                .translate(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight/2)
-                .rotate(90)
-                .map(triangleBasic);
-        painter->fillPath(triangleRight, triangleBush);
-
+        DrawRightTriangle(painter);
         // dotted right line (for glueing)
-        penTileInfos.setStyle(Qt::DotLine);
-        painter->setPen(penTileInfos);
-        painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
-                          QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight));
+        DrawRightCuttingLine(painter);
     }
     else
     {
         // solid right line at the edge
-        penTileInfos.setStyle(Qt::SolidLine);
-        painter->setPen(penTileInfos);
-
-        if(row < nbRow - 1)
-        {
-            painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
-                              QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight));
-        }
-        else
-        {
-            painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
-                              QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight - tileStripeWidth));
-        }
+        DrawSolidRightLine(painter, row, nbRow);
     }
 
     // prepare the painting for the text information
-    QTextDocument td;
-    td.setPageSize(QSizeF(m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaHeight));
-
-    // paint the grid information
-    const QString grid = tr("Grid ( %1 , %2 )").arg(row+1).arg(col+1);
-    const QString tileColorStr = QString("%1,%2,%3").arg(tileColor.red()).arg(tileColor.green()).arg(tileColor.blue());
-
-    td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
-                       "<tr>"
-                       "<td align='center'>%2</td>"
-                       "</tr>"
-                       "</table>")
-               .arg(tileColorStr, grid));
-    painter->setPen(penTileInfos);
-    painter->save();
-    painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth/1.3));
-    td.drawContents(painter);
-    painter->restore();
-
-    // paint the page information
-    const QString page = tr("Page %1 of %2").arg(row*nbCol+col+1).arg(nbCol*nbRow);
-
-    td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
-
-    QFontMetrics metrix = QFontMetrics(td.defaultFont());
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-    int maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
-#else
-    int maxWidth = metrix.width(QString().fill('z', 50));
-#endif
-    QString clippedSheetName = metrix.elidedText(sheet->GetName(), Qt::ElideMiddle, maxWidth);
-
-    td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
-                       "<tr>"
-                       "<td align='center'>%2 - %3</td>"
-                       "</tr>"
-                       "</table>")
-               .arg(tileColorStr).arg(page).arg(clippedSheetName));
-    painter->save();
-    painter->rotate(-90);
-    painter->translate(QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px),
-                               m_drawingAreaWidth - tileStripeWidth));
-    td.drawContents(painter);
-    painter->restore();
+    DrawTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -431,7 +280,7 @@ auto VPTileFactory::WatermarkData() const -> const VWatermarkData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawRuler(QPainter *painter)
+void VPTileFactory::DrawRuler(QPainter *painter) const
 {
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(layout.isNull())
@@ -439,7 +288,7 @@ void VPTileFactory::DrawRuler(QPainter *painter)
         return;
     }
 
-    QPen rulePen(tileColor, 1, Qt::SolidLine);
+    QPen rulePen(*tileColor, 1, Qt::SolidLine);
 
     painter->save();
     painter->setPen(rulePen);
@@ -488,7 +337,7 @@ void VPTileFactory::DrawRuler(QPainter *painter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawWatermark(QPainter *painter)
+void VPTileFactory::DrawWatermark(QPainter *painter) const
 {
     SCASSERT(painter != nullptr)
 
@@ -517,6 +366,269 @@ void VPTileFactory::DrawWatermark(QPainter *painter)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPTileFactory::PenTileInfos() const -> QPen
+{
+    return {*tileColor, m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap, Qt::RoundJoin};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &sheet, int row, int col,
+                                        QPrinter *printer) const
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(layout.isNull())
+    {
+        return;
+    }
+
+    QMarginsF sheetMargins;
+    if (not sheet->IgnoreMargins())
+    {
+        sheetMargins = sheet->GetSheetMargins();
+    }
+
+    QPen penTileDrawing = QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                               Qt::RoundJoin);
+
+    painter->setPen(penTileDrawing);
+
+    // paint the content of the page
+    const qreal xScale = layout->LayoutSettings().HorizontalScale();
+    const qreal yScale = layout->LayoutSettings().VerticalScale();
+    QRectF source = QRectF(sheetMargins.left() + col*(m_drawingAreaWidth - tileStripeWidth) / xScale,
+                           sheetMargins.top() + row*(m_drawingAreaHeight - tileStripeWidth) / yScale,
+                           m_drawingAreaWidth / xScale,
+                           m_drawingAreaHeight / yScale);
+
+    QRectF target = QRectF(0,
+                           0,
+                           m_drawingAreaWidth,
+                           m_drawingAreaHeight);
+    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
+                                        Qt::IgnoreAspectRatio);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawTopTriangle(QPainter *painter) const
+{
+    QPainterPath triangleTop =
+            QTransform()
+            .translate(m_drawingAreaWidth/2, 0)
+            .map(TriangleBasic());
+    painter->fillPath(triangleTop, *triangleBush);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawLeftTriangle(QPainter *painter) const
+{
+    QPainterPath triangleLeft =
+            QTransform()
+            .translate(0, m_drawingAreaHeight/2)
+            .rotate(-90)
+            .map(TriangleBasic());
+    painter->fillPath(triangleLeft, *triangleBush);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawBottomTriangle(QPainter *painter) const
+{
+    QPainterPath triangleBottom =
+            QTransform()
+            .translate(m_drawingAreaWidth/2, m_drawingAreaHeight - tileStripeWidth)
+            .rotate(180)
+            .map(TriangleBasic());
+    painter->fillPath(triangleBottom, *triangleBush);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawRightTriangle(QPainter *painter) const
+{
+    QPainterPath triangleRight =
+            QTransform()
+            .translate(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight/2)
+            .rotate(90)
+            .map(TriangleBasic());
+    painter->fillPath(triangleRight, *triangleBush);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawTopLineScissors(QPainter *painter) const
+{
+    QSvgRenderer svgRenderer(QStringLiteral("://puzzleicon/svg/icon_scissors_horizontal.svg"));
+    svgRenderer.render(painter, QRectF(m_drawingAreaWidth - tileStripeWidth, 0,
+                                       UnitConvertor(0.95, Unit::Cm, Unit::Px),
+                                       UnitConvertor(0.56, Unit::Cm, Unit::Px)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawLeftLineScissors(QPainter *painter) const
+{
+    QSvgRenderer svgRenderer(QStringLiteral("://puzzleicon/svg/icon_scissors_vertical.svg"));
+    svgRenderer.render(painter, QRectF(0, m_drawingAreaHeight - tileStripeWidth,
+                                        UnitConvertor(0.56, Unit::Cm, Unit::Px),
+                                        UnitConvertor(0.95, Unit::Cm, Unit::Px)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawTopCuttingLine(QPainter *painter) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::DashLine);
+    painter->setPen(penTileInfos);
+    painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawLeftCuttingLine(QPainter *painter) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::DashLine);
+    painter->setPen(penTileInfos);
+    painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawBottomCuttingLine(QPainter *painter) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::DotLine);
+    painter->setPen(penTileInfos);
+    painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
+                      QPointF(m_drawingAreaWidth, m_drawingAreaHeight - tileStripeWidth));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawRightCuttingLine(QPainter *painter) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::DotLine);
+    painter->setPen(penTileInfos);
+    painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
+                      QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawSolidTopLine(QPainter *painter, int col, int nbCol) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::SolidLine);
+    painter->setPen(penTileInfos);
+
+    if(col < nbCol - 1)
+    {
+        painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth, 0));
+    }
+    else
+    {
+        painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth - tileStripeWidth, 0));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawSolidLeftLine(QPainter *painter, int row, int nbRow) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::SolidLine);
+    painter->setPen(penTileInfos);
+
+    if(row < nbRow - 1)
+    {
+        painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight));
+    }
+    else
+    {
+        painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight - tileStripeWidth));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawSolidBottomLine(QPainter *painter, int col, int nbCol) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::SolidLine);
+    painter->setPen(penTileInfos);
+
+    if(col < nbCol - 1)
+    {
+        painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
+                          QPointF(m_drawingAreaWidth, m_drawingAreaHeight - tileStripeWidth));
+    }
+    else
+    {
+        painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
+                          QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight - tileStripeWidth));;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawSolidRightLine(QPainter *painter, int row, int nbRow) const
+{
+    QPen penTileInfos = PenTileInfos();
+    penTileInfos.setStyle(Qt::SolidLine);
+    painter->setPen(penTileInfos);
+
+    if(row < nbRow - 1)
+    {
+        painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
+                          QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight));
+    }
+    else
+    {
+        painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
+                          QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight - tileStripeWidth));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int nbRow, int nbCol,
+                                        const QString &sheetName) const
+{
+    QTextDocument td;
+    td.setPageSize(QSizeF(m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaHeight));
+
+    // paint the grid information
+    const QString grid = tr("Grid ( %1 , %2 )").arg(row + 1).arg(col + 1);
+    const QString tileColorStr = QStringLiteral("%1,%2,%3")
+            .arg(tileColor->red()).arg(tileColor->green()).arg(tileColor->blue());
+
+    td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
+                       "<tr>"
+                       "<td align='center'>%2</td>"
+                       "</tr>"
+                       "</table>")
+               .arg(tileColorStr, grid));
+    painter->setPen(PenTileInfos());
+    painter->save();
+    painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth/1.3));
+    td.drawContents(painter);
+    painter->restore();
+
+    // paint the page information
+    const QString page = tr("Page %1 of %2").arg(row * nbCol + col + 1).arg(nbCol * nbRow);
+
+    td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
+
+    QFontMetrics metrix = QFontMetrics(td.defaultFont());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+    int maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
+#else
+    int maxWidth = metrix.width(QString().fill('z', 50));
+#endif
+    QString clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
+
+    td.setHtml(QStringLiteral("<table width='100%' style='color:rgb(%1);'>"
+                              "<tr>"
+                              "<td align='center'>%2 - %3</td>"
+                              "</tr>"
+                              "</table>").arg(tileColorStr, page, clippedSheetName));
+    painter->save();
+    painter->rotate(-90);
+    painter->translate(QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px),
+                               m_drawingAreaWidth - tileStripeWidth));
+    td.drawContents(painter);
+    painter->restore();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::PaintWatermarkText(QPainter *painter, const QRectF &img, const VWatermarkData &watermarkData,
@@ -568,7 +680,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     auto BrokenImage = [img, watermarkData, watermarkPath, opacity]()
     {
         QPixmap watermark;
-        QString imagePath = QString("puzzle=path%1+opacity%2_broken")
+        QString imagePath = QStringLiteral("puzzle=path%1+opacity%2_broken")
                 .arg(AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
 
         if (not QPixmapCache::find(imagePath, &watermark))
@@ -644,7 +756,8 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     }
 
     QPixmap watermark;
-    if (f.suffix() == "png" || f.suffix() == "jpg" || f.suffix() == "jpeg" || f.suffix() == "bmp")
+    if (f.suffix() == QLatin1String("png") || f.suffix() == QLatin1String("jpg") ||
+            f.suffix() == QLatin1String("jpeg") || f.suffix() == QLatin1String("bmp"))
     {
         QString error;
         watermark = WatermarkImageFromCache(watermarkData, watermarkPath, xScale, yScale, error);
