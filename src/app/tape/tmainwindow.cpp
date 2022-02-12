@@ -2889,6 +2889,7 @@ void TMainWindow::InitDimensionControls()
             if (control == nullptr)
             {
                 control = new QComboBox;
+                control->setSizeAdjustPolicy(QComboBox::AdjustToContents);
             }
 
             InitDimensionGradation(index, dimension, control);
