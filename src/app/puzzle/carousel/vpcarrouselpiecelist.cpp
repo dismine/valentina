@@ -161,12 +161,12 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         if(drag->exec() == Qt::MoveAction)
         {
             m_carrousel->Refresh();
-            piece->SetSelected(true);
+            piece->SetSelected(false);
 
-            VPLayoutPtr layout = piece->Layout();
-            if (not layout.isNull())
+            VPLayoutPtr pieceLayout = piece->Layout();
+            if (not pieceLayout.isNull())
             {
-                emit layout->PieceSelectionChanged(piece);
+                emit pieceLayout->PieceSelectionChanged(piece);
             }
         }
     }
