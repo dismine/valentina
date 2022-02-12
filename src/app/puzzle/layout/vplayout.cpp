@@ -79,9 +79,6 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     layout->LayoutSettings().SetStickyEdges(settings->GetLayoutStickyEdges());
     layout->LayoutSettings().SetPiecesGap(settings->GetLayoutPieceGap());
 
-    // ----- for test purposes, to be removed------------------
-    layout->LayoutSettings().SetTitle(QString("My Test Layout"));
-    layout->LayoutSettings().SetDescription(QString("Description of my Layout"));
     // --------------------------------------------------------
 
     // init the tile factory
