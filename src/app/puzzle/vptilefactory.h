@@ -64,7 +64,9 @@ public:
     /**
      * @brief refreshTileInfos Resfreshes the tile infos (m_drawingAreaHeight, m_drawingAreaWidth)
      */
-    void refreshTileInfos();
+    void RefreshTileInfos();
+
+    void RefreshWatermarkData();
 
     /**
      * @brief RowNb Returns the number of row pages

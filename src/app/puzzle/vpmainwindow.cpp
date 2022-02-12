@@ -301,7 +301,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
     });
     connect(m_layout.data(), &VPLayout::ActiveSheetChanged, this, [this]()
     {
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
         SetPropertyTabSheetData();
     });
@@ -337,32 +337,6 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     connect(m_layoutWatcher, &QFileSystemWatcher::fileChanged, this, [this](const QString &path)
     {
-        if (not curFile.isEmpty() && curFile == path)
-        {
-            QFileInfo checkFile(path);
-            if (not checkFile.exists())
-            {
-                for(int i=0; i<=1000; i=i+10)
-                {
-                    if (checkFile.exists())
-                    {
-                        break;
-                    }
-
-                    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-                }
-            }
-            UpdateWindowTitle();
-
-            if (checkFile.exists())
-            {
-                m_layoutWatcher->addPath(path);
-            }
-        }
-    });
-
-    connect(m_layoutWatcher, &QFileSystemWatcher::fileChanged, this, [this](const QString &path)
-    {
         QFileInfo checkFile(path);
         if (not checkFile.exists())
         {
@@ -376,7 +350,16 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
         }
-        m_layout->TileFactory()->refreshTileInfos();
+
+        if (not curFile.isEmpty() && curFile == path)
+        {
+            UpdateWindowTitle();
+        }
+
+        m_layout->TileFactory()->RefreshTileInfos();
+        m_layoutWatcher->blockSignals(true);
+        m_layout->TileFactory()->RefreshWatermarkData();
+        m_layoutWatcher->blockSignals(false);
         m_graphicsView->RefreshLayout();
 
         if (checkFile.exists())
@@ -492,7 +475,8 @@ auto VPMainWindow::LoadFile(QString path) -> bool
 
     m_carrousel->Refresh();
     m_graphicsView->on_ActiveSheetChanged(m_layout->GetFocusedSheet());
-    m_layout->TileFactory()->refreshTileInfos();
+    m_layout->TileFactory()->RefreshTileInfos();
+    m_layout->TileFactory()->RefreshWatermarkData();
     m_layout->CheckPiecesPositionValidity();
 
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
@@ -943,7 +927,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             {
                 sheet->RemoveUnusedLength();
                 LayoutWasSaved(false);
-                m_layout->TileFactory()->refreshTileInfos();
+                m_layout->TileFactory()->RefreshTileInfos();
                 m_graphicsView->RefreshLayout();
                 m_graphicsView->RefreshPieces();
                 SetPropertyTabSheetData();
@@ -980,7 +964,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             {
                 sheet->SetIgnoreMargins(state != 0);
                 LayoutWasSaved(false);
-                m_layout->TileFactory()->refreshTileInfos();
+                m_layout->TileFactory()->RefreshTileInfos();
                 m_graphicsView->RefreshLayout();
 
                 sheet->ValidatePiecesOutOfBound();
@@ -1045,7 +1029,7 @@ void VPMainWindow::InitPropertyTabTiles()
 
             m_layout->LayoutSettings().SetIgnoreTilesMargins(state != 0);
             LayoutWasSaved(false);
-            m_layout->TileFactory()->refreshTileInfos();
+            m_layout->TileFactory()->RefreshTileInfos();
             m_graphicsView->RefreshLayout();
             VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
         }
@@ -1217,14 +1201,14 @@ void VPMainWindow::InitPropertyTabLayout()
         }
 
         LayoutWasSaved(false);
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
 
         VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
     });
 
     connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            [this](double d)
+            this, [this](double d)
     {
         if (m_layout.isNull())
         {
@@ -1243,7 +1227,7 @@ void VPMainWindow::InitPropertyTabLayout()
         }
 
         LayoutWasSaved(false);
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
 
         VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
@@ -2682,7 +2666,8 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
     SCASSERT(not printer.isNull())
 
     sheet->SceneData()->PrepareForExport();
-    m_layout->TileFactory()->refreshTileInfos();
+    m_layout->TileFactory()->RefreshTileInfos();
+    m_layout->TileFactory()->RefreshWatermarkData();
     sheet->SceneData()->SetTextAsPaths(false);
 
     if (showTilesScheme)
@@ -3097,7 +3082,8 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
     QPainter painter;
     bool firstPage = true;
 
-    m_layout->TileFactory()->refreshTileInfos();
+    m_layout->TileFactory()->RefreshTileInfos();
+    m_layout->TileFactory()->RefreshWatermarkData();
 
     for (int i = 0; i < copyCount; ++i)
     {
@@ -3440,7 +3426,7 @@ void VPMainWindow::on_SheetSizeChanged()
         CorrectMaxMargins();
         LayoutWasSaved(false);
 
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -3465,7 +3451,7 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
         SheetPaperSizeChanged();
         CorrectMaxMargins();
         LayoutWasSaved(false);
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -3526,7 +3512,7 @@ void VPMainWindow::on_TilesSizeChanged()
         CorrectMaxMargins();
         LayoutWasSaved(false);
 
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -3547,7 +3533,7 @@ void VPMainWindow::on_TilesOrientationChanged(bool checked)
         TilePaperSizeChanged();
         CorrectMaxMargins();
         LayoutWasSaved(false);
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 }
@@ -3563,7 +3549,7 @@ void VPMainWindow::on_TilesMarginChanged()
                     ui->doubleSpinBoxTileMarginRight->value(),
                     ui->doubleSpinBoxTileMarginBottom->value());
         LayoutWasSaved(false);
-        m_layout->TileFactory()->refreshTileInfos();
+        m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
     }
 
@@ -4512,7 +4498,7 @@ void VPMainWindow::LoadWatermark()
 
     m_layout->LayoutSettings().SetWatermarkPath(filePath);
     LayoutWasSaved(false);
-    m_layout->TileFactory()->refreshTileInfos();
+    m_layout->TileFactory()->RefreshWatermarkData();
     m_graphicsView->RefreshLayout();
     ui->actionRemoveWatermark->setEnabled(true);
     ui->actionEditCurrentWatermark->setEnabled(true);
@@ -4528,7 +4514,7 @@ void VPMainWindow::RemoveWatermark()
 {
     m_layout->LayoutSettings().SetWatermarkPath(QString());
     LayoutWasSaved(false);
-    m_layout->TileFactory()->refreshTileInfos();
+    m_layout->TileFactory()->RefreshWatermarkData();
     m_graphicsView->RefreshLayout();
     ui->actionRemoveWatermark->setEnabled(false);
     ui->actionEditCurrentWatermark->setEnabled(false);

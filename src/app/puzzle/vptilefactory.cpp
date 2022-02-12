@@ -102,7 +102,7 @@ VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::refreshTileInfos()
+void VPTileFactory::RefreshTileInfos()
 {
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(not layout.isNull())
@@ -125,8 +125,20 @@ void VPTileFactory::refreshTileInfos()
         {
             m_drawingAreaWidth -= tilesMargins.left() + tilesMargins.right();
         }
+    }
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::RefreshWatermarkData()
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if(not layout.isNull())
+    {
         m_watermarkData = layout->WatermarkData();
+    }
+    else
+    {
+        m_watermarkData = VWatermarkData();
     }
 }
 

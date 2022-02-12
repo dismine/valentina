@@ -83,7 +83,8 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 
     // init the tile factory
     auto *tileFactory = new VPTileFactory(layout, settings);
-    tileFactory->refreshTileInfos();
+    tileFactory->RefreshTileInfos();
+    tileFactory->RefreshWatermarkData();
     layout->SetTileFactory(tileFactory);
 
     return layout;
