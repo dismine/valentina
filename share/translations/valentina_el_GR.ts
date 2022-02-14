@@ -1792,7 +1792,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7115,11 +7115,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Ύψος</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7152,11 +7147,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Μέγεθος</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7178,7 +7168,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Όνομα:</translation>
+        <translation>Όνομα:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -13427,10 +13417,6 @@ Do you want to save your changes?</source>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Μέγεθος</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

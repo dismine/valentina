@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7203,11 +7203,6 @@ Aplicar características de todos modos?</translation>
         <translation>Usar circunferencia completa</translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Altura</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation>Valor min:</translation>
     </message>
@@ -7240,27 +7235,8 @@ Aplicar características de todos modos?</translation>
         <translation>El valor base para la columna</translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Talla</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation>Circunferencia</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Cintura</translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Cadera</translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
-        <translation type="vanished">Por favor, proporcione los datos correctos para las dimensiones</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7280,7 +7256,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -11004,7 +10980,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished">Ancho línea:</translation>
+        <translation>Ancho línea:</translation>
     </message>
 </context>
 <context>
@@ -13760,10 +13736,6 @@ Quieres guardar los cambios?</translation>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Talla</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

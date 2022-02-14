@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7204,11 +7204,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Gebruik volledige omtrek</translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Hoogte</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation>Min waarde:</translation>
     </message>
@@ -7241,27 +7236,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Basiswaarde voor de kolom</translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Maat</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation>Omtrek</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Taille</translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Heup</translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
-        <translation type="vanished">Gelieve de juiste gegevens aan te bieden voor de kolom</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7281,7 +7257,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -11003,7 +10979,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished">Lijnbreedte:</translation>
+        <translation>Lijnbreedte:</translation>
     </message>
 </context>
 <context>
@@ -13759,15 +13735,6 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation>Borst halve omtrek</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Maat</translation>
-    </message>
-    <message>
-        <source>Chest circumference</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Borstomtrek</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

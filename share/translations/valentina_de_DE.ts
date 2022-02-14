@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7203,11 +7203,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Höhe</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7240,11 +7235,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Größe</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7266,7 +7256,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -10989,7 +10979,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished">Zeilenbreite:</translation>
+        <translation>Zeilenbreite:</translation>
     </message>
 </context>
 <context>
@@ -13744,10 +13734,6 @@ Do you want to save your changes?</source>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Größe</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

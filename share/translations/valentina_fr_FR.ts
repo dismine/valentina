@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7201,11 +7201,6 @@ Appliquer quand même les réglages ?</translation>
         <translation>Utiliser une circonférence entière</translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Hauteur</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation>Valaur minimale :</translation>
     </message>
@@ -7238,27 +7233,8 @@ Appliquer quand même les réglages ?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Taille</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation>Circonférence</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Taille</translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Hanche</translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
-        <translation type="vanished">Merci de fournir des dimensions correctes</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7278,7 +7254,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -13747,10 +13723,6 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

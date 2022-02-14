@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Název</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7206,11 +7206,6 @@ Přesto použít nastavení?</translation>
         <translation>Použít celý obvod</translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Výška</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation>Nejmenší hodnota:</translation>
     </message>
@@ -7243,23 +7238,8 @@ Přesto použít nastavení?</translation>
         <translation>Základní hodnota pro sloupec</translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Velikost</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation>Obvod</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Pas</translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Kyčel</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7279,7 +7259,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -11003,7 +10983,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished">Šířka čáry:</translation>
+        <translation>Šířka čáry:</translation>
     </message>
 </context>
 <context>
@@ -13759,10 +13739,6 @@ Chcete uložit změny?</translation>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

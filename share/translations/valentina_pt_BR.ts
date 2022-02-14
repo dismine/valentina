@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -7200,11 +7200,6 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Usar circunferência completa</translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Altura</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation>Valor mínimo:</translation>
     </message>
@@ -7237,27 +7232,8 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Valor de base para a coluna</translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Tamanho</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation>Circunferência</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Cintura</translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Quadril</translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
-        <translation type="vanished">Por favor, forneça dados corretos para as dimensões</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7277,7 +7253,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -11000,7 +10976,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished">Espessura da linha:</translation>
+        <translation>Espessura da linha:</translation>
     </message>
 </context>
 <context>
@@ -13756,10 +13732,6 @@ Deseja salvar suas mudanças?</translation>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Tamanho</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

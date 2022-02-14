@@ -1637,7 +1637,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nume</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Custom Name</source>
@@ -6550,11 +6550,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Înălțime</translation>
-    </message>
-    <message>
         <source>Min value:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6585,11 +6580,6 @@ Apply settings anyway?</source>
     <message>
         <source>The base value for the column</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Dimensiune</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -12227,10 +12217,6 @@ Do you want to save your changes?</source>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Dimensiune</translation>
     </message>
     <message>
         <source>Waist full circumference</source>

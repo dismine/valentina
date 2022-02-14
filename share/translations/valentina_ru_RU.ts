@@ -1832,15 +1832,15 @@
     <name>DialogDimensionCustomNames</name>
     <message>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательские имена измерений</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Custom Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательское имя</translation>
     </message>
 </context>
 <context>
@@ -2208,58 +2208,58 @@
     <message>
         <source>Dimension X</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение X</translation>
     </message>
     <message>
         <source>Dimension Y</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение Y</translation>
     </message>
     <message>
         <source>Dimension Z</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение Z</translation>
     </message>
     <message>
         <source>Dimension W</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение W</translation>
     </message>
     <message>
         <source>Dimension X label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения X</translation>
     </message>
     <message>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения Y</translation>
     </message>
     <message>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения Z</translation>
     </message>
     <message>
         <source>Dimension W label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения W</translation>
     </message>
     <message>
         <source>No data for the X dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения X.</translation>
     </message>
     <message>
         <source>No data for the Y dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения Y.</translation>
     </message>
     <message>
         <source>No data for the Z dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения Z.</translation>
     </message>
     <message>
         <source>No data for the W dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения W.</translation>
     </message>
 </context>
 <context>
@@ -7142,42 +7142,42 @@ Apply settings anyway?</source>
     <message>
         <source>Dimension X</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение X</translation>
     </message>
     <message>
         <source>Dimension Y</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение Y</translation>
     </message>
     <message>
         <source>Dimension Z</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение Z</translation>
     </message>
     <message>
         <source>Dimension W</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измерение W</translation>
     </message>
     <message>
         <source>Dimension X label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения X</translation>
     </message>
     <message>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения Y</translation>
     </message>
     <message>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения Z</translation>
     </message>
     <message>
         <source>Dimension W label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним измерения W</translation>
     </message>
 </context>
 <context>
@@ -7204,11 +7204,6 @@ Apply settings anyway?</source>
     <message>
         <source>Use full circumference</source>
         <translation>Использовать полный обхват</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Рост</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -7243,27 +7238,8 @@ Apply settings anyway?</source>
         <translation>Базовое значение колонки</translation>
     </message>
     <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Размер</translation>
-    </message>
-    <message>
         <source>Circumference</source>
         <translation>Обхват</translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Талия</translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Бёдра</translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
-        <translation type="vanished">Пожалуйста, укажите правильные данные для измерений</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7279,19 +7255,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Custom name</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательское имя</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, укажите правильные данные для измерения %1</translation>
     </message>
     <message>
         <source>Please, provide custom name for dimension %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, укажите пользовательское имя для измерения %1</translation>
     </message>
 </context>
 <context>
@@ -10202,7 +10178,7 @@ Do you want to save your changes?</source>
     <name>OpaqueBackgroundImage</name>
     <message>
         <source>change a background image opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>изменение непрозрачности фонового изображения</translation>
     </message>
 </context>
 <context>
@@ -10732,7 +10708,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Opacity value by default</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение непрозрачности по умолчанию</translation>
     </message>
 </context>
 <context>
@@ -11006,7 +10982,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished">Ширина линии:</translation>
+        <translation>Ширина линии:</translation>
     </message>
 </context>
 <context>
@@ -11535,19 +11511,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>No data for the X dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения X.</translation>
     </message>
     <message>
         <source>No data for the Y dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения Y.</translation>
     </message>
     <message>
         <source>No data for the Z dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения Z.</translation>
     </message>
     <message>
         <source>No data for the W dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для измерения W.</translation>
     </message>
 </context>
 <context>
@@ -12876,11 +12852,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить разделитель</translation>
     </message>
     <message>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательские имена измерений</translation>
     </message>
 </context>
 <context>
@@ -13762,15 +13738,6 @@ Do you want to save your changes?</source>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation>Полуобхват груди</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Размер</translation>
-    </message>
-    <message>
-        <source>Chest circumference</source>
-        <comment>dimension</comment>
-        <translation type="vanished">Обхват груди</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -16236,7 +16203,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show tile number</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать номер плитки</translation>
     </message>
 </context>
 <context>
